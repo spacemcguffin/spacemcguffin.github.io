@@ -316,29 +316,6 @@ a:hover {
 .wrapAll {
 	width: 100%.
 }
-.sidebar {
-	float: left;
-	width: 9em;
-	padding: 3px 1.5em 10px 1.3em;
-	position: absolute;
-}
-.sidebar h3 {
-	font-size: 0.75em;
-	color: #4d4d4d;
-	font-weight: normal;
-	margin: 0.5em 0 0 0;
-	padding: 0.25em 0;
-	cursor: default;
-	border: 0;
-	border-bottom: 1px solid #D8D8D8;
-}
-.sidebar li {
-	line-height: 1.125em;
-	margin: 0;
-	padding: 0.25em 0;
-	font-size: 0.8em;
-	word-wrap: break-word;
-}
 div.articleRight {
 	border: 1px solid #c8ccd1;
 	padding: 3px;
@@ -367,7 +344,7 @@ div.articleRightInner {
 	padding: 0.15em 0 0 0.45em;
 }
 .mainsection {
-	margin: 0 0 0 11em;
+	margin: 0 8em 0 8em;
 }
 .headerLinks {
 	text-align: right;
@@ -384,18 +361,14 @@ div.articleRightInner {
 }
 .tabs ul li a {
 	display: block;
-	background: url(img/blue-gradient.png) bottom left repeat-x transparent;
 	font-size: 0.85em;
 	padding: 1em 0.5em 0;
 	line-height: 2em;
 	position: relative;
 	top: 1px;
 	left: 1px;
+	color:#ffffff;
 	border-bottom: 1px solid #A7D7F9;
-}
-.tabs ul li a.active {
-	background: #FFF;
-	border-bottom-color: transparent;
 }
 .tabs ul {
 	display: inline-block;
