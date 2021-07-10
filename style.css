@@ -431,9 +431,14 @@ span.user {
 }
 .contentsHeader {
 font-family: 'Rubik', sans-serif;
-	font-weight: bold;
+	font-weight: 700;
 	text-align: center;
 }
+
+.contentsHeader a, a:visited {
+	font-weight: 400;
+}
+
 .hidePanel, .showPanel {
 	float: right;
 	margin: 0 5px;
