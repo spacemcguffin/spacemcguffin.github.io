@@ -515,21 +515,6 @@ font-family: 'Rubik', sans-serif;
 	font-weight: 400;
 	font-style: normal;
 }
-.categories {
-	border: 1px solid #a2a9b1;
-	background-color: #f8f9fa;
-	padding: 5px;
-	margin-top: 1em;
-	font-size: 1.1em;
-	clear: both;
-}
-.categories a:after {
-	content: " | ";
-	font-weight: bold;
-}
-.categories a:last-child:after {
-	content: "";
-}
 .pagefooter {
 	padding: 1.5em 1.3em 2em;
 	font-size: 75%;
@@ -538,6 +523,7 @@ font-family: 'Rubik', sans-serif;
 .pagefooter a {
 	display: inline-block;
 	margin-right: 1em;
+	color:#fff;
 }
 @media screen and (max-width: 850px) {
 	#searchInput {
@@ -554,7 +540,7 @@ font-family: 'Rubik', sans-serif;
 }
 @media screen and (max-width: 550px) {
 	.mainsection {
-		margin: 0 0 0 5em;
+		margin: 0 0 0 0;
 	}
 	.contentsPanel {
 		width: auto;
