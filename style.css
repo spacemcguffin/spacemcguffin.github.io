@@ -145,6 +145,12 @@ th, td {
   text-align: left;  
   border-bottom: 1px solid #b9bcbc;
 }
+
+th, td, tr:last-child
+{
+   border-bottom: none;
+}
+
 html {
 	font-size: 1em;
 	line-height: 1.5;
