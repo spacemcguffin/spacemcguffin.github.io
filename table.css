@@ -144,7 +144,7 @@ table, th, td {
 
 th, td {
   padding: 8px;
-  text-align: left;  
+  text-align: center;  
   vertical-align: top;
   background: #f8f9fa;
 }
@@ -155,13 +155,13 @@ th {
 	color:#ffffff;
 	font-weight:500;
 }
+
 tr {
   border-bottom: 1px solid #b9bcbc;
 }
 
-tr:last-child
-{
-   border-bottom: none;
+table a, a:visited {
+  text-align:left;
 }
 
 html {
