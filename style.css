@@ -277,9 +277,9 @@ h1, h2, h3, h4, h5, h6 {
 
 div.vtoptitle {
 	font-family: 'Outfit', sans-serif;
-  font-size:22px;
+  font-size:18px;
 	font-weight:500;
-	color:#ffffff;
+	color:#000000;
 	padding-top:0.5em;
 	opacity:0.6;
 }
@@ -334,6 +334,7 @@ body {
 	background-color:#695986;
 	background-image: url("/tile.png");
 	background-repeat: repeat;
+	background-attachment: fixed;
 }
 ul {
 	list-style-type: none;
@@ -423,6 +424,7 @@ div.minititle {
 	background: #F2F2F2;
 	line-height: 1.6;
 	font-size: 0.875em;
+	border: 2px solid #b9bcbc;
 }
 .article p {
 	line-height: 1.6;
