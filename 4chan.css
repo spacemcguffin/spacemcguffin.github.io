@@ -165,14 +165,18 @@ button::-moz-focus-inner {
 }
 
 .posts {
-    border-bottom:1px solid #b7c5d9;
+    border-bottom:1px solid #B7C5D9;
     margin:10px 0;
 }
 
 /* posts */
 
 .post {
-    border-top:1px solid #b7c5d9;
+    border-bottom: 1px solid #B7C5D9;
+    border-right: 1px solid #B7C5D9;
+    background-color: #D6DAF0;
+    max-width: 600px;
+    padding: 5px;
 }
 
 .post-closed .post--content {
@@ -260,56 +264,18 @@ article:nth-of-type(5n + 4) .media {
     max-width:100%;
 }
 
-.answer--question {
-    font-weight:bold;
-}
-
-.quote--quote {
-    font-style:italic;
-}
-
 .post-quote .caption:nth-of-type(n + 2) {
     display:none;
-}
-
-.reply--name {
-    font-weight:bold;
-    text-decoration:none;
-    display:inline;
-}
-
-.reply--name-inactive {
-    text-decoration:line-through;
 }
 
 .reply:first-of-type {
     max-width:750px;
 }
 
-.post-photo .reply:first-of-type,
-.post-video .reply:first-of-type,
-.post-audio .reply:first-of-type,
-.post-photoset .reply:first-of-type {
-    max-width:900px;
-}
-
-.reply {
-    margin:0 0 10px 0;
-    position:relative;
-}
-
-.reply:first-of-type > .reply--name:after {
-    content:':';
-    display:inline;
-}
-
-.reply:not(:first-of-type) {
-    background:#d6daf0;
-    padding:10px;
-    display:table;
-    max-width:500px;
-}
-
 .post > *:last-child {
     margin-bottom:10px;
+    max-width: 600px;
+    line-height: 1.3em;
+    background-color: #D6DAF0;
+    padding: 5px;
 }
