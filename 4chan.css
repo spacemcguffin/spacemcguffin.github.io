@@ -172,12 +172,14 @@ button::-moz-focus-inner {
 /* posts */
 
 .post {
-    border-bottom: 1px solid #B7C5D9;
+border-bottom: 1px solid #B7C5D9;
     border-right: 1px solid #B7C5D9;
     background-color: #D6DAF0;
     max-width: 600px;
     padding: 5px;
     margin-bottom: 1em;
+    width: fit-content;
+    overflow: hidden;
 }
 
 .post-closed .post--content {
