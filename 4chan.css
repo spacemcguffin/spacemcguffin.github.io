@@ -1,0 +1,315 @@
+html {
+    min-height:100%;
+}
+
+body {
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:#edf1ff;
+    color:#000000;
+    font-size:13px;
+    font-family:'Helvetica',sans-serif;
+    word-wrap:break-word;
+}
+
+a {
+    color:#34345c;
+}
+
+a:hover {
+    color:#dd0000;
+}
+
+pre {
+    white-space:pre-wrap;
+}
+
+img {
+    max-width:100%;
+    height:auto;
+}
+
+.lightbox-image {
+    max-width:none;
+}
+
+figure {
+    margin-right:0;
+    margin-left:0;
+}
+
+blockquote,
+blockquote a,
+q {
+    margin-left:0;
+    margin-right:0;
+    padding:0;
+    color:#789922;
+}
+
+blockquote > *:before,
+q:before {
+    content:'>';
+    display:inline;
+}
+
+*:first-child {
+    margin-top:0;
+}
+
+*:last-child {
+    margin-bottom:0;
+}
+
+.reply ul,
+.reply ol {
+    display:table;
+    padding-left:2em;
+}
+
+button {
+    background:none;
+    border:none;
+    padding:0;
+}
+
+button::-moz-focus-inner {
+    border:0;
+    padding:0;
+}
+
+.wrapper {
+    padding:10px;
+    min-height:100%;
+}
+
+.clearfix {
+    overflow:auto;
+    zoom:1;
+}
+
+/* essential tumblr styling */
+
+/* iframe-type */
+
+.media iframe {
+    display:block;
+}
+
+/* image-type */
+
+/* all images */
+
+.photo-row {
+    padding:2px 0;
+    display:flex;
+}
+
+.photo-row:first-child {
+    padding-top:0;
+}
+
+.photo-row:last-child {
+    padding-bottom:0;
+}
+
+.media--image--container {
+    cursor:pointer;
+    padding:0 2px;
+    flex-grow:1;
+    z-index:99;
+    position:relative;
+}
+
+.media--image--container:first-child {
+    padding-left:0;
+}
+
+.media--image--container:last-child {
+    padding-right:0;
+}
+
+.media--image {
+	width:100%;
+	height:100%;
+	object-fit:cover;
+}
+
+
+/* header */
+
+.page--links {
+    text-transform:lowercase;
+}
+
+.page--header {
+    text-align:center;
+    width:84vw;
+    margin:10px auto;
+}
+
+.page--title {
+    margin:10px 0;
+    color:#af0a0f;
+}
+
+.header--banner {
+    border:1px solid black;
+}
+
+.page--description {
+    text-align:left;
+    max-width:400px;
+    margin:0 auto;
+}
+
+.posts {
+    border-bottom:1px solid #b7c5d9;
+    margin:10px 0;
+}
+
+/* posts */
+
+.post {
+    border-top:1px solid #b7c5d9;
+}
+
+.post-closed .post--content {
+    display:none;
+}
+
+.post--header {
+    margin:10px 0;
+}
+
+.post-closed .post--header {
+    opacity:0.5;
+}
+
+.post--button--container {
+    display:inline-block;
+    position:relative;
+    height:1em;
+    width:1em;
+    margin-right:0.2em;
+    margin-bottom:-0.2em;
+    border-radius:3px;
+    border:1px solid #0e0b5d;
+    background:#8993cd;
+    background-repeat:no-repeat;
+
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+}
+
+.post--button {
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    left:0;
+    cursor:pointer;
+}
+
+.post--title {
+    font-weight:bold;
+    color:#0f0c5d;
+}
+
+.post--name {
+    font-weight:bold;
+    color:#117743;
+}
+
+.post--id {
+    text-decoration:none;
+    color:#000000;
+}
+
+.reply img {
+    width:320px;
+}
+
+article:nth-of-type(5n) .media {
+    width:320px;
+}
+
+article:nth-of-type(5n + 1) .media {
+    width:370px;
+}
+
+article:nth-of-type(5n + 2) .media {
+    width:420px;
+}
+
+article:nth-of-type(5n + 4) .media {
+    width:500px;
+}
+
+.media {
+    float:left;
+    margin:0 10px 10px 0;
+    max-width:100%;
+    width:470px;
+}
+
+.media iframe {
+    max-width:100%;
+}
+
+.answer--question {
+    font-weight:bold;
+}
+
+.quote--quote {
+    font-style:italic;
+}
+
+.post-quote .caption:nth-of-type(n + 2) {
+    display:none;
+}
+
+.reply--name {
+    font-weight:bold;
+    text-decoration:none;
+    display:inline;
+}
+
+.reply--name-inactive {
+    text-decoration:line-through;
+}
+
+.reply:first-of-type {
+    max-width:750px;
+}
+
+.post-photo .reply:first-of-type,
+.post-video .reply:first-of-type,
+.post-audio .reply:first-of-type,
+.post-photoset .reply:first-of-type {
+    max-width:900px;
+}
+
+.reply {
+    margin:0 0 10px 0;
+    position:relative;
+}
+
+.reply:first-of-type > .reply--name:after {
+    content:':';
+    display:inline;
+}
+
+.reply:not(:first-of-type) {
+    background:#d6daf0;
+    padding:10px;
+    display:table;
+    max-width:500px;
+}
+
+.post > *:last-child {
+    margin-bottom:10px;
+}
