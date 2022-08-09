@@ -315,8 +315,6 @@ font-weight:400;
 }
 
 .article h2:before {
-position: absolute;
-    content: "";
     border-top: 6px solid #DCEDF3;
     margin: 0 auto;
     top: 50%;
@@ -324,8 +322,8 @@ position: absolute;
     right: 0;
     bottom: 0;
     width: 100%;
-    z-index: -1;
 }
+
 .article h3 {
 	font-family: 'Rubik', sans-serif;
 	font-weight: 500;
