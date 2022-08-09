@@ -270,7 +270,7 @@ textarea {
 		page-break-after: avoid;
 	}
 }
-h1, h3, h4, h5, h6 {
+h1, h4, h5, h6 {
 	color: #212121;
 	background: none;
 	font-weight: normal;
@@ -280,7 +280,7 @@ h1, h3, h4, h5, h6 {
 	padding-bottom: 0.17em;
 }
 
-h2 {
+h2, h3 {
 	color: #212121;
 	background: none;
 	font-weight: normal;
@@ -318,15 +318,17 @@ font-weight:400;
     font-family: 'Rubik', sans-serif;
     border-bottom: 6px solid #DCEDF3;
     line-height: 0em;
-    font-weight: 500;
+    font-weight: 400;
     margin-bottom: 0em;
 }
 
 
 .article h3 {
-	font-family: 'Rubik', sans-serif;
-	font-weight: 500;
-	font-size: 1.25em;
+font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    font-size: 1.25em;
+    border-bottom: dashed 1px #000000;
+    line-height: 1em;
 }
 
 .article h4 {
