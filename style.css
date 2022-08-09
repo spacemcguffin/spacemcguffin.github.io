@@ -270,12 +270,21 @@ textarea {
 		page-break-after: avoid;
 	}
 }
-h1, h2, h3, h4, h5, h6 {
+h1, h3, h4, h5, h6 {
 	color: #212121;
 	background: none;
 	font-weight: normal;
 	margin: 0;
 	overflow: hidden;
+	padding-top: 0.5em;
+	padding-bottom: 0.17em;
+}
+
+h2 {
+	color: #212121;
+	background: none;
+	font-weight: normal;
+	margin: 0;
 	padding-top: 0.5em;
 	padding-bottom: 0.17em;
 }
@@ -304,25 +313,13 @@ color: #173898;
 font-weight:400;
 }
 
-.article h2:before {
-    border-top: 6px solid #DCEDF3;
-    margin: 0 auto;
-    top: 50%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-}
-
 .article h2 {
-	font-size: 1.7em;
-	margin: 0.5em 0 0.5em 0;
-  font-family: 'Rubik', sans-serif;
-	border-top: 6px solid #DCEDF3;
-	    top: 50%;
-	line-height: 1.4em;
-	font-weight:500;
-	padding-bottom: 0em;
+    font-size: 1.5em;
+    font-family: 'Rubik', sans-serif;
+    border-bottom: 6px solid #DCEDF3;
+    line-height: 0em;
+    font-weight: 500;
+    margin-bottom: 0em;
 }
 
 
