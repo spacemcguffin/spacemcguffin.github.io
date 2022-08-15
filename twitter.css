@@ -1,0 +1,108 @@
+html {
+    background: none;
+}
+body {
+    font-size:16px;
+    color:#363636;
+    background: url("img/twitter.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color:#bcd4e0;
+    letter-spacing: 0.00000001em;
+    cursor:auto;
+}
+
+::-webkit-scrollbar-track
+{
+	border-radius: 10px;
+	background-color: #bcd4e0;
+}
+
+::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #bcd4e0;
+}
+
+a {
+    text-decoration: none;
+    color: #239df0;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+.container {
+    max-width:600px;
+    background-color: #fff;
+    margin-top:-10px;
+    margin-bottom: 0px;
+    border: 2px solid #eff3f4;
+}
+
+.profile-desc {
+    position: relative;
+}
+
+.profile-desc div {
+    margin-top: -15px;
+    padding: 0 15px 0 15px;
+}
+
+.profile-desc .header-img {
+    max-width:600px;
+    text-align: center;
+}
+
+.profile-desc .profile-picture {
+    position: absolute;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    left:15px;
+    top:125px;
+    max-width: 132px;
+    margin-bottom: 30px;
+}
+
+.profile-desc .follow {
+    position: absolute;
+    right:15px;
+    top:212px;
+    max-width: 80px;
+}
+
+.tweet {
+    position: relative;
+    max-width: 600px;
+    border: 1px solid #eff3f4;
+    min-height:50px;
+    line-height:27px;
+    padding-right:15px;
+}
+
+.tweet .profile-picture {
+    position: absolute;
+    left: 12px;
+    top:10px;
+    border-radius:50%;
+    border: 6px solid #fff;
+    max-width:50px;
+}
+
+.tweet p, ul, summary, .bodyImg{
+    margin-left: 82px;
+}
+
+.tweet .bodyImg{
+    max-width: 80%;
+}
+
+.grey {
+    color: #677682;
+}
+
+#followers {
+    font-weight: 600;
+}
