@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>windows</title>
+  <link rel="stylesheet" href="win.css">
+</head>
+
+<body>
+    <main>
+    
+    <div class="posts-container">
+    
+{block:Posts}
+<div class="window-border inf-scroll-item">
+<div id="{PostID}" class="window {PostType}">
+<div class="title-bar">
+<div class="icon"></div>
+
+<span class="title">Text post</span>
+
+
+<div class="title-bar-buttons"></div>
+</div>
+<div class="menu-bar"></div>
+
+
+<div class="text-area">
+<h2>{Title}</h2>
+<div class="post-section">
+{Body}
+</div>
+
+
+</div>
+<div class="status-bar">
+<div class="grip"></div>
+16 August, 2022
+</div>
+</div>
+</div>
+
+{/block:Posts}
+    
+
+</div>
+</main>
