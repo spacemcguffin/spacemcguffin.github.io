@@ -1,38 +1,21 @@
 body {
-  background-color: #5d574b;
-  color: #ffffff;
-  font-family: Times New Roman, Times, serif;
-	font-size: 14px;
-	text-align: center;
-	margin: 200px auto auto auto;
-	max-width: 240px;
-	border: 1px solid white;
-	padding: 30px;
-}  
+    background-color: #000000;
+    color: #ffffff;
+    font-family: Times, Times New Roman, serif;
+    font-size: 14px;
+    text-align: left;
+    margin-left: 5em;
+    margin-top: 5em;
+    max-width: 40em;
+    margin-right: 5em;
+    border: 1px solid #000000;
+    padding: 2em;
+    background-image: url(/img/main.png);
+    background-attachment: fixed;
+    background-size: cover;
+}
 
 div {
- text-align: right; 
-}
-
-.left {
- text-align: left; 
-}
-
-a:link {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-a:visited {
-    color: #ffffff;
-}
-
-a:hover {
-    color: #debb62;
-    text-decoration: none;
-    transition: color 0.25s linear;
-}
-
-a:active {
-    color: #ffffff;
+    text-align: right;
+    font-weight: bold;
 }
