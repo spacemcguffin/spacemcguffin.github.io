@@ -1,41 +1,38 @@
-h1 {
-  font-family: Times, Times New Roman, serif;
-	font-size: 26px;
-	font-weight: bold;
-	
-}
-	
 body {
-  background-color: #000000;
+  background-color: #5d574b;
   color: #ffffff;
-  font-family: Times, Times New Roman, serif;
+  font-family: Times New Roman, Times, serif;
 	font-size: 14px;
-	text-align: left;
-	margin-left: 50em;
-	margin-top: 8em;
-	margin-right: 100px;
+	text-align: center;
+	margin: 200px auto auto auto;
+	max-width: 240px;
+	border: 1px solid white;
+	padding: 30px;
+}  
+
+div {
+ text-align: right; 
 }
 
-.main {
-  position: fixed;
-    top: 5em;
-    max-width:500px;
-    left: 10em;
-    display: block;
+.left {
+ text-align: left; 
 }
 
 a:link {
-    color: #ED98D1;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 a:visited {
-    color: lightgrey;
+    color: #ffffff;
 }
 
 a:hover {
-    color: lightgrey;
+    color: #debb62;
+    text-decoration: none;
+    transition: color 0.25s linear;
 }
 
 a:active {
-    color: lightgrey;
+    color: #ffffff;
 }
