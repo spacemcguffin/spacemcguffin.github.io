@@ -1,6 +1,6 @@
 html { 
-font-family: 'Rubik', sans-serif;
-    margin-bottom: 0.8em;
+font-family: 'Figtree', sans-serif;
+	margin-bottom: 0.8em;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
 }
@@ -280,13 +280,24 @@ h1, h4 {
 	padding-bottom: 0.17em;
 }
 
-h2, h3 {
+h2 {
 	color: #212121;
 	background: none;
 	font-weight: normal;
 	margin: 0;
 	padding-top: 0.5em;
 	padding-bottom: 0.17em;
+}
+
+h3 {
+    font-size: 1em;
+    font-family: 'Figtree', sans-serif;
+    border: 2px solid #b8bdce;
+    font-weight: 500;
+    padding-right: 1em;
+    text-align: left;
+    background-color: #b8bdce;
+    font-style: italic;
 }
 
 h5 {
@@ -366,10 +377,14 @@ font-weight:400;
 }
 
 .article h4 {
-	font-family: 'Figtree', sans-serif;
-	font-weight: 500;
-	font-size: 1.2em; 
-  width:75%;
+    font-size: 1em;
+    font-family: 'Figtree', sans-serif;
+    border: 2px solid #b8bdce;
+    font-weight: 500;
+    padding-right: 1em;
+    text-align: left;
+    background-color: #b8bdce;
+    font-style: italic;
 }
 
 .article p.topquote {
@@ -403,6 +418,7 @@ font-weight:400;
 p.siteSub {
 	font-size: 92%;
 }
+
 body {
 	background-color:#899CB7;
 	background-image: url("/img/bluestarsbk.png");
@@ -418,6 +434,7 @@ ul {
 	padding: 0.3em 0 0 0;
 	color:#3a3a3a;
 }
+
 h1 {
 	line-height: 1.4;
 	margin-bottom: 0.25em;
@@ -502,7 +519,7 @@ div.minititle {
 .mainsection {
     margin-left: auto;
     margin-right: auto;
-    width: 65%;
+    width: 60%;
 }
 
 .headerLinks {
@@ -513,13 +530,13 @@ div.minititle {
 .article {
 	padding: 1.25em 2em 2em 2em;
 	background: #FDFDFD;
-	line-height: 1.6;
-	font-size: 0.875em;
+	line-height: 1.5;
+	font-size: 0.9em;
 	border: 1px solid #b9bcbc;
 }
 
 .article p {
-	line-height: 1.6;
+	line-height: 1.5;
 	margin: 1em 0;
 	font-size: 14px;
 	color:#3a3a3a;
