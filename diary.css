@@ -595,12 +595,13 @@ div.minititle {
 	text-align: left;
 }
 .bottombox {
+	font-family: 'Figtree', sans-serif;
 	background: #fdfdfd;
 	border: 1px solid #a2a9b1;
 	clear: both;
 	font-size: 90%;
 	padding: 3px;
-	line-height: 1.7em;
+	line-height: 1.5em;
 	margin: 1em auto 0;
 }
 .bottombox .header {
@@ -615,6 +616,9 @@ div.minititle {
 }
 .bottombox .subtitle {
 	background: #eeeeee;
+}
+.bottombox td, th {
+    border: solid 2px #ffffff;
 }
 .footerbox {
 	clear: both;
