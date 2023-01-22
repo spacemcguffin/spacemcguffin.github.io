@@ -1,23 +1,17 @@
 html {
-	color: cyan;
-	background: black;
-	font-family: 'PixelOperatorMono', monospace;
-	font-size: 18px;
-	line-height: 16px;
-	display: table;
-	margin: auto;
-max-width:500px;}
+color: #000000;
+background: #ffffff;
+font-family: font-family: 'Courier Prime', monospace;
+font-size: 16px;
+line-height: 1em;
+max-width:500px;
+margin:1em;
+}
 
-pre {margin: 0 0; font-family: 'PixelOperatorMono', monospace; font-size: 18px;}
-
-a {color: cyan; font-family: 'PixelOperatorMono', monospace; font-size: 18px;}
-	
-.hcyan {
-	display: inline-block;
-	color: black;
-	background: cyan;
-	font-family: 'PixelOperatorMono', monospace;
-	font-size: 18px;}
+a {
+font-family: 'VT323', monospace;
+color: #456291;
+}
 
 .cursor {
 	-webkit-animation: 1s blink step-end infinite;
@@ -26,14 +20,8 @@ a {color: cyan; font-family: 'PixelOperatorMono', monospace; font-size: 18px;}
 	-o-animation: 1s blink step-end infinite;
 	animation: 1s blink step-end infinite;}
 
-@keyframes "blink" {from, to {color: transparent;}50% {color: cyan}}
-@-moz-keyframes blink {from, to {color: transparent;}50% {color: cyan}}
-@-webkit-keyframes "blink" {from, to {color: transparent;}50% {color: cyan}}
-@-ms-keyframes "blink" {from, to {color: transparent;}50% {color: cyan}}
-@-o-keyframes "blink" {from, to {color: transparent;}50% {color: cyan}}
-
-@font-face {
-  font-family: 'PixelOperatorMono';
-  src: url('/font/PixelOperatorMono.eot?#iefix') format('embedded-opentype'),  url('/font/PixelOperatorMono.woff') format('woff'), url('/font/PixelOperatorMono.ttf')  format('truetype'), url('/font/PixelOperatorMono.svg#PixelOperatorMono') format('svg');
-  font-weight: normal;
-  font-style: normal;}
+@keyframes "blink" {from, to {color: transparent;}50% {color: #000000}}
+@-moz-keyframes blink {from, to {color: transparent;}50% {color: #000000}}
+@-webkit-keyframes "blink" {from, to {color: transparent;}50% {color: #000000}}
+@-ms-keyframes "blink" {from, to {color: transparent;}50% {color: #000000}}
+@-o-keyframes "blink" {from, to {color: transparent;}50% {color: #000000}}
