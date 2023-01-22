@@ -8,9 +8,14 @@ max-width:500px;
 margin:1em;
 }
 
-a {
+a, a:visited {
 font-family: 'VT323', monospace;
 color: #456291;
+}
+
+a:hover {
+font-family: 'VT323', monospace;
+text-decoration:underline;
 }
 
 .cursor {
