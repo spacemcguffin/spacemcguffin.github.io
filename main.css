@@ -5,6 +5,15 @@ body {
   font-family: 'Arial', sans-serif;
   font-size: 0.85em;
   }
+
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
   
 /*Everything goes inside here.*/
 .wrapper {
