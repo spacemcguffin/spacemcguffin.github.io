@@ -15,7 +15,17 @@
 
         ul {
             list-style: none;
-            padding: 0px;
+            padding-left: 1em;
+        }
+        
+        a, a:visited {
+	    color: #456291;
+	    text-decoration: none;
+        }
+
+        a:hover {
+    	color: #000000;
+        font-weight:600;
         }
         
         li:before {
@@ -29,14 +39,16 @@
     </style>
 </head>
 <body>
-    <a href="/">go back home</a>
+    <a href="/">home</a>
     <main>
-        <h1>sitemap (everything on this website)</h1>
+        <h1>sitemap</h1>
         <ul>
             <li class="done"><a href="/">home</a></li>
             <li><a href="/about">about</a></li>
             <li><a href="/gallery">gallery</a></li>
             <li><a href="/">diary archives</a>
+                <ul><li><a href="/2021">2021</li></ul>
+                <ul><li><a href="/2022">2022</li></ul>
                 <ul><li><a href="/2023">2023</li></ul></li>
             <li><a href="/albums">albums</a></li>
             <li><a href="/reports">reports</a></li>
