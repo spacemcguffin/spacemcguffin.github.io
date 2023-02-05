@@ -23,7 +23,7 @@ body {
   margin-bottom: 2em;
   }
   
-.sidebar-img, .footer, .title, .links, .box {
+.sidebar-img, .footer, .title, .links, .box .album {
   margin-top: 25px;
   }
   
@@ -68,6 +68,11 @@ body {
   background-color:#ffffff;
   }
   
+.album {
+  width: 100%;
+  padding: 0.5em 1em;
+  }
+
 /*Goes inside the box class. Not given any style by default, but can be used for stuff like fancy borders.*/
 .inner {
     font-family: 'Figtree', sans-serif;
@@ -76,7 +81,7 @@ body {
 
   
 /*Prevent image overflow.*/
-.box img, .sidebar img {
+.box img, .album img, .sidebar img {
   max-width: 100%;
   height: auto;
   }
@@ -109,7 +114,7 @@ body {
   }
   
 /*Make sure boxes don't spread over multiple columns.*/
-.main .box {
+.main .box .album {
   display: inline-block;
   }
   
