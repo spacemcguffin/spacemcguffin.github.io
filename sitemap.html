@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <title>sitemap</title>
+    <style>
+      
+      body {
+        font-family:'Figtree', sans-serif;
+      }
+
+        ul {
+            list-style: none;
+            padding: 0px;
+        }
+        
+        li:before {
+            content: "\2610";
+            margin-right: 5px;
+        }
+        
+        .done:before {
+            content: "\2611";
+        }
+    </style>
+</head>
+<body>
+    <a href="/">go back home</a>
+    <main>
+        <h1>sitemap (everything on this website)</h1>
+        <ul>
+            <li class="done"><a href="/">home</a></li>
+            <li><a href="/about">about</a></li>
+            <li><a href="/gallery">gallery</a></li>
+            <li><a href="/">diary archives</a>
+                <ul><li><a href="/2023">2023</li></ul></li>
+            <li><a href="/albums">albums</a></li>
+            <li><a href="/reports">reports</a></li>
+            <li><a href="/sitemap">sitemap</a> (you are here)</li>
+        </ul>
+    </main>
+</body>
+</html>
