@@ -60,10 +60,14 @@ body {
   }
   
 /*Basic box code that is used for all content boxes on the page.*/
-.box, .album {
+.box {
     border: 1px solid #000000;
     padding: 0.5em 1em;
     background-color: #ffffff;
+}
+
+.album {
+    padding: 0.5em 1em;
 }
   
 /*Goes inside the box class. Not given any style by default, but can be used for stuff like fancy borders.*/
