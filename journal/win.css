@@ -29,7 +29,7 @@
             width: 100%;
         }
         main .window-border {
-            width: 510px;
+            width: 100%;
             float: left;
         }
         .window {
@@ -170,3 +170,26 @@
             text-shadow: 1px 1px 0px black;
         }
         
+
+
+
+@media screen and (max-width: 1000px) {
+	.mainsection {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;	}
+}
+
+@media screen and (max-width: 700px) {
+	.mainsection {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;	}
+}
+
+@media screen and (max-width: 550px) {
+	.mainsection {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;	}
+}
