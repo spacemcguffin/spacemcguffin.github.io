@@ -1,0 +1,53 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+
+    <title>sitemap</title>
+    <style>
+
+      body {
+        font-family:'Figtree', sans-serif;
+	margin: 2em;
+      }
+
+        ul {
+            list-style: none;
+            padding-left: 1em;
+        }
+
+        a, a:visited {
+	    color: #456291;
+	    text-decoration: none;
+        }
+
+        a:hover {
+    	color: #000000;
+        font-weight:600;
+        }
+
+        li:before {
+            content: "📂";
+            margin-right: 5px;
+        }
+
+        .done:before {
+            content: "📍";
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>sitemap</h1>
+        <ul>
+            <li><a href="/">home</a></li>
+            <li><a href="/about">about</a></li>
+            <li><a href="/diary">diary archive</a>
+							<ul><li><a href="/2021">2021</a> – indigo dreams</li></ul>
+							<ul><li><a href="/2022">2022</a> – eclectic ephemera</li></ul>
+							<ul><li><a href="/2023">2023</a> – nebulous entropy</li></ul></li>
+            <li class="done">sitemap</li>
+        </ul>
+    </main>
+
+</body></html>
