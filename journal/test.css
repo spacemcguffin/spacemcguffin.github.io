@@ -1,0 +1,106 @@
+@font-face {
+	font-family: "Source Serif 4";
+	font-weight: normal;
+	font-style: normal;
+	src: url("SourceSerif4-Regular.ttf.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Source Serif 4";
+	font-weight: normal;
+	font-style: italic;
+	src: url("SourceSerif4-It.ttf.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Source Serif 4 Subhead";
+	font-weight: normal;
+	font-style: normal;
+	src: url("SourceSerif4Subhead-Regular.ttf.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Source Serif 4 Subhead";
+	font-weight: normal;
+	font-style: italic;
+	src: url("SourceSerif4Subhead-It.ttf.woff2") format("woff2");
+}
+
+body {
+	font-family: "Source Serif 4", serif;
+	font-size: 12pt;
+	line-height: 1.33;
+	padding-left: 8px;
+	padding-right: 8px;
+	max-width: 540px;
+	margin-left: auto;
+	margin-right: auto;
+	color: black;
+	font-variant-numeric: oldstyle-nums;
+}
+main {
+
+}
+header {
+	text-align: center;
+}
+footer {
+	font-feature-settings: "smcp";
+	text-align: right;
+}
+h1 {
+	font-feature-settings: "smcp";
+	text-align: center;
+	font-weight: normal;
+	line-height: 0.98;
+}
+h2, h3 {
+	font-style: italic;
+	font-weight: normal;
+}
+h1, h2 {
+	font-family: "Source Serif 4 Subhead";
+}
+article > p {
+	text-align: justify;
+	-webkit-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+	hyphenate-limit-chars: 6 3 3;
+	hyphenate-limit-lines: 2;
+	hyphenate-limit-last: always;
+	hyphenate-limit-zone: 8%;
+}
+article > p:first-of-type::first-line {
+	font-feature-settings: 'smcp';
+}
+img {
+	height: 100%;
+  	width: 100%;
+}
+ul {
+	list-style-type: circle;       
+}
+a {
+	text-decoration: none;
+	color: inherit;           
+	font-feature-settings: "smcp";
+	letter-spacing: 1.2px;
+	border-bottom: 2px dotted black;
+	display: inline;
+}
+.sans, .font-sans, .sans-serif, .sansserif {
+	font-family: sans-serif;
+}         
+tt, xmp, code {
+	font-family: Courier New, monospace;
+}
+blockquote {
+	margin-right: 0;
+}
+@media (prefers-color-scheme: dark) {
+	body {
+		color: white;
+		background-color: black;
+	}
+	a {
+	  border-bottom: 2px dotted white;
+	}
+}
