@@ -136,7 +136,7 @@ optgroup {
 }
 
 table {
-      width: 100%;
+      max-width: 85%;
 }
 table, th, td {
   border-collapse: collapse;
@@ -506,7 +506,8 @@ border: 1px solid #b9bcbc;
 }
 
 div.maintable {
-max-width: -webkit-fill-available;
+width: -webkit-fill-available;
+max-width: 85%;
 font-size: 100%;
 }
 
@@ -515,12 +516,17 @@ border: 2px solid #fdfdfd;
 }
 
 div.maintable1 {
-max-width: -webkit-fill-available;
+width: -webkit-fill-available;
+max-width: 85%;
 font-size: 95%;
 }
 
 div.maintable1 td {
 border: 0px;
+}
+
+.infoboxtable {
+	    width: 100%;
 }
 
 .table 1 {
