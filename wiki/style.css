@@ -309,10 +309,10 @@ h5 {
 }
 
 div.vtoptitle {
-	font-weight:700; 
-	font-size:1em; 
-	color:#ffffff;        
-	padding-top:0.5em;
+    font-weight: 300;
+    font-size: 1.1em;
+    color: #ffffff;
+    padding-top: 0.5em;
 }
 	
 div.pixeltitle {
@@ -387,17 +387,15 @@ font-weight:400;
 
 .article p.notebox {
     font-family: 'Figtree', sans-serif;
-    font-weight:500;
-    font-size: 90%;
-    padding: 0.4em 0.4em 0.4em 0.4em;
-    border: 1px solid #b9bcbc;
-    width: 90%;
-    background: #f8f9fa;
+    font-size: 0.95em;
+    text-align: center;
+    padding: 0.3em 0.3em 0.3em 0.3em;
+    border-top: 2px solid #5A86BF;
+    border-bottom: 2px solid #5A86BF;
+    width: 75%;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.3em;
-    border-radius: 0.5em;
-    margin-bottom: 2em;
+    margin-bottom: 1.8em;
 }
 
 .article p.category {
@@ -515,12 +513,21 @@ border: 2px solid #fdfdfd;
 }
 
 div.maintable1 {
-max-width: 85%;
+max-width: -webkit-fill-available;
 font-size: 95%;
 }
 
 div.maintable1 td {
 border: 0px;
+}
+
+.table 1 {
+    border-collapse: collapse;
+    padding: 0.4em;
+    text-align: left;
+    overflow-wrap: break-word;
+    width: -webkit-fill-available;
+    font-size: 0.95em;
 }
 
 div.minititle {
