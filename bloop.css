@@ -20,6 +20,11 @@ pre {
 footer {
     clear: both;
     margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+nav { 
+  margin-top: 1em; 
 }
 
 /*
@@ -31,46 +36,11 @@ footer {
     a:hover, .active-page {
         color: turquoise;
     }
-*/
 
-.date {
-    color: gray;
-    /* font-size: 0.95em; */
-    /* padding-right: 1em; */
-}
-
-/* .date:before { */
-/*     content: '['; */
-/* } */
-
-.date:after {
-    /* content: ']'; */
-    content: ' â€”';
-}
-
-.extra {
-    /* font-size: 0.9em; */
-    margin: 0;
-    height: 1.25em;
-    /* background: ivory; */
-    padding: 0.1em 0.1em 0.2em;
-    border-bottom: 1px solid #ffea0d;
-}
-
-.summary {
-    /* font-size: 0.9em; */
-    padding-left: 2em;
-}
 
 img {
     max-width: 18em;
     margin-left: 1em;
     margin-bottom: 1em;
     float: right;
-}
-
-blockquote {
-    border-left: 1px solid;
-    padding-left: 1ch;
-    font-style: italic;
 }
