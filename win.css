@@ -7,11 +7,13 @@
         ::selection { background: #3a6993; color:#ffffff; text-shadow: none; }
         body {
             background-color: #3a6993;
-            background-attachment: fixed;
-            background-size: cover;             
             font-family: 'Inter', sans-serif;
             width: 30em;
             margin: 0 auto;
+      background-image: url("/img/starsbk.png");
+	background-repeat: repeat;
+	background-attachment: fixed;
+	background-size: cover;
         }
         a, a:hover {
             text-decoration: none;
