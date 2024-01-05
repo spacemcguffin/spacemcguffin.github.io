@@ -39,15 +39,12 @@ body {
   
 /*Inner text area inside main div, below the header and image.*/
 .text {
-  background:white;
+  font-family: 'Inter',sans-serif;
+  line-height: 1.4em;
+  font-size: 1.1em;
+  background:#fff;
   padding:25px;
   }
-
-p {
-  font-size:2em;
-  color: navy;
-  text-transform: uppercase;
-}
   
 /*Prevent overflow of large images in main text areas.*/
 .text img {
@@ -66,6 +63,10 @@ p {
     text-align: center;
     font-family: 'Onest',sans-serif;
   }  
+
+b {
+    font-weight: 500;
+}
 
 /*Classes for links section.*/
 .links {
