@@ -36,6 +36,33 @@ body {
   padding:0px;
   display:block; /*Prevents extra space after image*/
   }
+
+
+
+
+table {
+      width: 100%;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  padding: 0.5em;
+  text-align: left;  
+}
+
+tr {
+border-bottom: 3px solid #ffffff;
+    background-color: #eeeeee;
+}
+
+tr:last-child
+{
+   border-bottom: none;
+}
+
+
+
+
   
 /*Inner text area inside main div, below the header and image.*/
 .text {
