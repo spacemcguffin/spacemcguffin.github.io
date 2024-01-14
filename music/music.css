@@ -77,10 +77,22 @@ tr:last-child
 .text {
   font-family: 'Inter',sans-serif;
   line-height: 1.4em;
-  font-size: 1.15em;
+  font-size: 1.3em;
   background:#fff;
   padding:25px;
+	text-align:justify;
   }
+
+a, a:visited {
+  color: #5f903e;
+  text-decoration: none;
+}
+
+a:hover {
+  color:#000000;
+  text-decoration: none;
+  border-bottom: 1px solid #000000;
+}
   
 /*Prevent overflow of large images in main text areas.*/
 .text img {
@@ -91,11 +103,10 @@ tr:last-child
 /*Used for the header below the header image.*/
 .sub {
     font-family: 'Onest',sans-serif;
-    font-size: 2.2em;
+    font-size: 2em;
     font-weight: 500;
-    color: white;
+    color: #b0d398;
     background: #1d1c32;
-    padding-top: 3px;
     padding-bottom: 6px;
     text-align: center;
   }  
