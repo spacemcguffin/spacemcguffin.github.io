@@ -1,0 +1,87 @@
+body {
+	font-family: "Source Serif 4", serif;
+	font-size: 1em;
+	line-height: 1.4;
+	padding-left: 8px;
+	padding-right: 8px;
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #000000;
+}
+main {
+}
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+}
+header {
+	text-align: center;
+}
+footer {
+	font-feature-settings: "smcp";
+	text-align: right;
+}
+h1 {
+	text-align: center;
+	line-height: 0.98;
+        font-size: 1.5em;
+        font-weight: 500;
+}
+h2, h3 {
+	font-style: italic;
+	font-weight: normal;
+	
+}
+
+h1, h2 {
+font-family: 'JetBrains Mono', monospace;
+	font-family: "Source Serif 4", serif;
+}
+
+article > p {
+	text-align: justify;
+}
+img {
+	height: 100%;
+  	width: 100%;
+}
+ul {
+	list-style-type: none;   
+	line-height:1.5;
+}
+a, a:visited {
+	text-decoration: none;
+	color: #456291;           
+	display: inline;
+}
+a:hover {
+	color: #000000;           
+	display: inline;
+}
+.sans, .font-sans, .sans-serif, .sansserif {
+	font-family: sans-serif;
+}         
+tt, xmp, code {
+	font-family: Courier New, monospace;
+}
+blockquote {
+	margin-right: 0;
+}
+.censored {
+    color: #000000;
+    background-color: #000000;
+}
+@media (prefers-color-scheme: dark) {
+	body {
+		color: white;
+		background-color: black;
+	}
+	a {
+	  border-bottom: 2px dotted white;
+	}
+}
