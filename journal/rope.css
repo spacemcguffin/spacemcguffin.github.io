@@ -1,0 +1,72 @@
+html {
+  height: 100%;
+  background-image: url(/img/pic.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  overflow-x: hidden;
+  background-attachment: fixed;
+}
+
+body {
+  font-family: "Times New Roman";
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: 100px;
+  letter-spacing: 2px;
+}
+
+h4 {
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.title {
+  padding-bottom: 10px;
+}
+
+.words {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  max-width: 700px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1px 40px 30px 40px;
+  margin-bottom: 100px;
+}
+
+.zoom {
+  transition: transform .2s;
+  font-style: italic;
+}
+
+.zoom:hover {
+  transform: scale(1.2);
+  color: #822323;
+}
+
+/* unvisited link */
+a:link {
+  color: black;
+  text-decoration: none;
+}
+
+/* visited link */
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+/* mouse over link */
+a:hover {
+  color: #822323;
+  text-decoration: none;
+}
+
+/* selected link */
+a:active {
+  color: #822323;
+  text-decoration: none;
+}
