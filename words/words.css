@@ -1,0 +1,111 @@
+body{  
+ font-family: 'Source Serif 4', serif;
+ background-color: white;
+ font-size: 0.8em; 
+ overflow-y: scroll;
+ padding: 1em;
+ text-align: left;
+ width: 60%;
+ line-height: 1.4em;
+}
+
+a {
+ color: red;
+ text-decoration: underline;
+ font-style: italic;
+}
+
+a:visited{
+ color: red;
+ text-decoration: underline;
+ font-style: italic;
+}
+
+a:hover{
+ color: black;
+ text-decoration: underline;
+}
+
+h4 { 
+ font-weight: 600;
+    font-style: italic;
+    color: #456291;
+   }
+
+.words{
+ float: left;
+ width: 65%;
+ padding: 1em;
+}
+
+
+.navi{
+  float: right;
+  width: 15%;
+  padding: 1em;
+  text-align:center;
+}
+
+img {
+  width:100%;
+}
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+ body {
+width:80%;
+}
+.words	{ 
+width: 60%;}
+}
+
+@media screen and (max-width: 850px) {
+ body {
+width:80%;
+}
+.main {
+width:100%;
+margin-left: auto;
+margin-right: auto;}
+.words	{ 
+width: 70%;}
+}
+
+@media screen and (max-width: 700px) {
+ body {
+width:80%;
+}
+.main {
+width:100%;
+margin-left: auto;
+margin-right: auto;}
+.words	{ 
+width: 65%;}
+}
+
+@media screen and (max-width: 550px) {
+ body {
+width:80%;
+}
+.main {
+width:100%;
+margin-left: auto;
+margin-right: auto;}
+.words	{ 
+width: 65%;}
+}
+
+@media screen and (max-width: 300px) {
+ body {
+width:80%;
+}
+.main {
+width:100%;
+margin-left: auto;
+margin-right: auto;}
+.words	{ 
+width: 70%;}
+}
