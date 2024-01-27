@@ -9,6 +9,17 @@ body{
  line-height: 1.4em;
 }
 
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+  color:#000000;
+}
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+  color:#000000;
+}
+
 a {
  color: red;
  text-decoration: underline;
