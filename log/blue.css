@@ -28,6 +28,7 @@ p {
 	text-shadow: none;
   color:#000000;
 }
+
 ::selection {
 	background: #b3d4fc;
 	text-shadow: none;
@@ -82,9 +83,10 @@ tr:last-child
 /*Inner text area inside main div, below the header and image.*/
 .text {
   font-family: 'Inter', sans-serif;
+	color: #444444;
   line-height: 1.6em;
-  background:#fff;
-  padding:25px;
+  background:#ffffff;
+  padding: 1.5em;
   }
   
 /*Prevent overflow of large images in main text areas.*/
@@ -98,10 +100,11 @@ tr:last-child
     font-family: 'Figtree',sans-serif;
     font-size: 1.5em;
     font-weight: 400;
-    color: white;
+    color: #ffffff;
     background: #1d1c32;
-    padding-bottom: 6px;
     text-align: center;
+	  padding-top: 0.3em;
+  	padding-bottom: 0.3em;
   }  
 
 b {
