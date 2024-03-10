@@ -171,7 +171,7 @@ b {
 /* Style the tab */
 .tab {
   overflow: hidden;
-  border: 1px solid #ccc;
+  border-bottom: 2px solid #FF85BA;
   background-color: hsla(0, 0%, 0%, 0.1);
   margin-bottom: 1.8em;
 }
@@ -183,10 +183,12 @@ b {
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 1em;
+  padding: 0.6em;
   transition: 0s;
-  font-size: 0.6em;
+  font-size: 1em;
   font-family: 'Inter', sans-serif;
+	color:#ffffff;
+	font-weight:400;
 }
 
 /* Change background color of buttons on hover */
