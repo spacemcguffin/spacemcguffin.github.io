@@ -225,6 +225,53 @@ b {
 
 
 
+.accordion {
+  background-color: #000000;
+  padding: 0.5em;
+  width: 100%;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  color: #ffbe0b;
+    text-align: left;
+    font-family: "Barlow Condensed", sans-serif;
+    font-style: italic;
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+ .accordion:hover {
+  background-color: #888888;
+  color:#ffffff;
+}
+
+.active {
+  background-color: #000000;
+  color:#ff006e;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #000000;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;  
+  font-family: 'Inter', sans-serif;
+    line-height: 1.6em;
+    font-size: 1em;
+    font-weight: 400;
+    color: #dddddd;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 @media screen and (max-width: 1000px) {
