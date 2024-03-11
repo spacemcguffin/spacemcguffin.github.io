@@ -9,16 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 	
-    <title>words</title>
+    <title>archive</title>
 	
-    <link href="/log/words.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/log/wordsorange.css" rel="stylesheet" type="text/css" media="all">
 	        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 <body>
 <div class="wrapAll clearfix">
 	<div class="main">
     
-<div class="sub">words</div>
+<div class="sub">archive</div>
   
 	  
 <div class="text">
@@ -34,8 +34,30 @@
 
 
 <div id="2021" class="tabcontent">
-	<h2 class="date">3/8/2024 - I miss my friend jackson. How come he had to go get an abusive bf and stop talking to everyone?</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam volutpat elit ante, id rutrum lorem pellentesque sit amet. Phasellus ac convallis neque. Nullam rutrum metus imperdiet dolor imperdiet, ut porttitor neque laoreet. Donec eget velit egestas, porta lectus vel, euismod augue. Morbi non sem pellentesque, elementum felis mollis, tempor tellus. Fusce semper odio id orci placerat, non consequat metus rhoncus. In non facilisis tortor, interdum fermentum dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+
+<button class="accordion">February &nbsp;•&nbsp; bookmarks</button>
+<div class="panel">
+<p>I have two tweets bookmarked: <span style="color:#ffbe0b">everyone should have to write a memoir and file it away somewhere. there aren’t enough memoirs by regular non famous non writer people</span> & <span style="color:#ffbe0b">obviously no one will care about your memoir now but in a couple hundred years the historians will have a field day with it</span>.</p>
+</div>
+
+<button class="accordion">February &nbsp;•&nbsp; lost</button>
+<div class="panel">
+<p>I’ve been alive for 28 years and still have no idea what I’m doing.</p>
+</div>
+	
+<button class="accordion">February &nbsp;•&nbsp; offline</button>
+<div class="panel">
+<p>I deleted everything.
+<br>All 2137 entries. All 20,000 tweets.</p>
+</div>
+
+	
+<button class="accordion">February &nbsp;•&nbsp; unrequired reading</button>
+<div class="panel">
+<p style="color: #ffbe0b;">“Friendship shouldn’t come with required reading.”</p>
+<p>Good to remember that once in a while.</p>
+</div>
+	
 </div>
 
 
@@ -138,6 +160,30 @@ document.getElementById("defaultOpen").click();
 </script>
 
 
+
+
+
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
+</script>
+
+
+
+	
   
 </body>
 </html>
