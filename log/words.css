@@ -229,7 +229,7 @@ b {
   border: none;
   outline: none;
   transition: 0.4s;
-  color: #ff006e;
+  color: #ffbe0b;
     text-align: left;
     font-family: "Barlow Condensed", sans-serif;
     font-style: italic;
@@ -238,7 +238,24 @@ b {
 }
 
  .accordion:hover {
-  color:#ffbe0b;
+  color:#ff006e;
+}
+
+.active {
+  color:#ff006e;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #000000;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;  
+  font-family: 'Inter', sans-serif;
+    line-height: 1.6em;
+    font-size: 1em;
+    font-weight: 400;
+    color: #dddddd;
 }
 
 
