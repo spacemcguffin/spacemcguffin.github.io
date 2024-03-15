@@ -753,6 +753,71 @@ margin-left: 1em;
 
 
 
+
+
+
+
+
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  margin-bottom: 1.8em;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 1em;
+  transition: 0s;
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #c0cbdf;
+	font-weight:500;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 1000px) {
 	.mainsection {
     margin-left: auto;
