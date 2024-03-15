@@ -1,0 +1,295 @@
+body {
+font-size:12px;
+font-family: arial, sans-serif;
+background-color:#000000;
+background-repeat: repeat;
+background-attachment: fixed;
+background-image: url("/log/texture.png");
+background-position: center top;
+  }
+
+.main {
+  margin: 0 auto;
+  margin-top:0.3em;
+  margin-bottom:45px;
+  width: 75%;
+  }
+
+.wrapAll {
+	width: 100%;
+}
+
+::-moz-selection {
+	background: #ffde85;
+	text-shadow: none;
+  color:#000000;
+}
+::selection {
+	background: #ffde85;
+	text-shadow: none;
+  color:#000000;
+}
+
+/*Box to contain header image*/
+.header {
+  padding:0px;
+  overflow-y:auto;
+   }
+
+.header img {
+  width:100%;
+  padding:0px;
+  display:block; /*Prevents extra space after image*/
+  }
+
+
+h2.date {
+    color: #63D5FF;
+    text-align: left;
+    font-family: "Barlow Condensed", sans-serif;
+    font-style: italic;
+    font-size: 1.4em;
+    padding-top: 1em;
+	  font-weight: 500;
+}
+
+
+
+table {
+      width: 100%;
+}
+
+table, th, td {
+  border-collapse: collapse;
+  padding: 0.5em;
+  text-align: left;  
+}
+
+tr {
+border-bottom: 3px solid #ffffff;
+    background-color: #eeeeee;
+}
+
+tr:last-child
+{
+   border-bottom: none;
+}
+
+
+.text h1 {
+    font-family: 'Figtree', sans-serif;
+    font-size: 1.8em;
+    color: #2d2d2d;
+    font-weight: 400;
+}
+
+
+/*Inner text area inside main div, below the header and image.*/
+.text {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6em;
+    font-size: 1.5em;
+    font-weight: 400;
+    color: #dddddd;
+    padding: 1em;
+    background-color: hsla(0, 0%, 0%, 0.8);
+}
+
+/*Prevent overflow of large images in main text areas.*/
+.text img {
+  max-width: 100%;
+  height: auto;
+  }
+
+/*Used for the header below the header image.*/
+.sub {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 6em;
+    font-weight: 800;
+    color: #63D5FF;
+    padding-bottom: 6px;
+    text-align: center;
+  }  
+
+b {
+    font-weight: 500;
+}
+
+/*Classes for links section.*/
+.links {
+  font-family: 'Inter', sans-serif;
+  font-size:1.3em;
+  color:white;
+  padding-top:1px;
+  padding-bottom:5px;
+  text-align:center;
+  }
+
+/*Links are put into a ul list element*/ 
+.links ul {
+  list-style-type: none;
+  margin:0px;
+  padding: 0;
+  }
+
+/*Use li for the individual links*/
+.links li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 3px 10px 3px 10px;
+  margin: 3px 2px 3px 2px;
+  background: #663348;
+  }
+
+.links a {
+  color: #fff;
+  text-decoration:none;
+    font-weight: 400;
+  }
+
+.links li:hover { /*The color link buttons turn when hovered over*/
+  background: #774459;
+  }
+
+.footer {
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 2em;
+    color: #ffffff;
+    padding-top: 1em;
+    text-align: center;
+  }
+
+.footer a {
+  color: #ffffff;
+  text-decoration:none;
+    font-weight: 400;
+  }
+
+.footer a:hover {
+  color: #63D5FF;
+  }
+
+
+
+
+
+
+
+
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border-bottom: 2px solid #ffde85;
+  background-color: hsla(0, 0%, 0%, 0.1);
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.6em;
+  transition: 0s;
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
+	color:#ffffff;
+	font-weight:400;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ffde85;
+  color:#000000;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #63D5FF;
+	font-weight:500;
+	color:#000000;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border: none;
+}
+
+
+
+
+
+
+
+.accordion {
+  background-color: #000000;
+  padding: 0.5em;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: 0.4s;
+  color: #63D5FF;
+    text-align: left;
+    font-family: "Barlow Condensed", sans-serif;
+    font-style: italic;
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+ .accordion:hover {
+  color:#ffde85;
+}
+
+.active {
+  color:#ffde85;
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: #000000;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;  
+  font-family: 'Inter', sans-serif;
+    line-height: 1.6em;
+    font-size: 1em;
+    font-weight: 400;
+    color: #dddddd;
+    border-bottom: 1px solid #ffde85;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+	.main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;	}
+}
+
+@media screen and (max-width: 700px) {
+	.main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;	}
+}
+
+@media screen and (max-width: 550px) {
+	.main {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;	}
+}
