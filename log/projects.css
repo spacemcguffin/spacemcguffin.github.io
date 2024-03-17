@@ -23,9 +23,13 @@ audio:not([controls]) {
 }
 a {
 	background-color: transparent;
+	text-decoration: none;
+
 }
 a:active,a:hover {
 	outline: 0;
+	text-decoration: none;
+	color: #000000;
 }
 abbr[title] {
 	border-bottom: 1px dotted;
@@ -242,7 +246,7 @@ textarea {
 		text-shadow: none !important;
 	}
 	a,a:visited {
-		text-decoration: underline;
+		text-decoration: none;
 	}
 	a[href]:after {
 		content: " (" attr(href) ")";
@@ -313,9 +317,9 @@ h6 {
     line-height: 1.4;
     margin-bottom: 0.25em;
     padding: 0;
-    font-size: 2.5em;
+    font-size: 3em;
     margin-top: 0em;
-    font-weight: 800;
+    font-weight: 300;
     color:#ffffff;
 }
 	
@@ -332,7 +336,7 @@ font-weight:400;
 
 .article h2
     font-size: 0.9em;
-font-family: 'Martian Mono', monospace;
+    font-family: 'Martian Mono', monospace;
     border-bottom: 6px solid #dddddd;
     font-weight: 500;
     padding-right: 1em;
@@ -392,7 +396,6 @@ p.siteSub {
 
 body {
     background-color: #899CB7;
-    background-image: url("/img/starsbk.png");
     background-repeat: repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -426,7 +429,7 @@ a, a:visited {
 	text-decoration: none;
 }
 a:hover {
-	color:#0B4255;
+	color:#000000;
 	text-decoration: underline;
 }
 .wrapAll {
