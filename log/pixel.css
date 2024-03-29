@@ -1,11 +1,5 @@
-@font-face {
-font-family: Pixel Operator;
-src: url('/log/PixelOperator.ttf');
-}
-			
-			
-	html {
-background-color:#efefef;
+html {
+background-color:#F5F5F4;
 }
 
 
@@ -24,7 +18,7 @@ background-color:#efefef;
 
  
 body {
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
   font-size: 1em;
   margin-bottom: 3em;
 }
@@ -41,21 +35,12 @@ h1 {
 }
 
 h2 {
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
     font-size: 1.5em;
     color: #000000;
     font-weight: 300;
 }
 
-.wonk {
-    rotate: -2deg;
-    text-align: center;
-}
-
-.straightwonk {
-    rotate: -2deg;
-    text-align: justify;
-}
 
 img {
   width:100%;
@@ -67,16 +52,6 @@ img {
 
 .title {
     padding-bottom: 0.3em;
-}
-
-.date {
-border-radius: 10px; 
-background-color: #eeeeee;    
-padding-left: 1em;    
-padding-right: 1em; 
-font-size: 1em; 
-width: max-content;
-font-weight: 500;
 }
 
 .pagetop {
@@ -94,26 +69,26 @@ font-weight: 500;
 .words {
 margin-left: auto;
 margin-right: auto;
-max-width: 500px;
+max-width: 550px;
 padding-top: 2em;
 padding-bottom: 2em;
-color: #000000;
+color: #44403c;
 line-height: 1.4em;
-font-family: 'Pixel Operator', sans-serif;
-font-size: 1em;
+font-family: 'Inter', sans-serif;
+font-size: 0.88em;
 border-bottom: 1px solid #aaaaaa;
 }
 
 a, a:visited {
 border-bottom: 1px solid #000080;
 padding-bottom: 2px;
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
 color:#666666;
 text-decoration:none;
 }
 
 a:hover {
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
 font-weight:400;
 color: #000000;
 border-bottom: 1px solid #000080;
@@ -139,7 +114,7 @@ font-size: 1.5em;
 
 .back a {
 font-weight:300;	
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
 color:#000080;
 text-decoration:none;
 border-bottom:none;
@@ -147,7 +122,7 @@ border-bottom:none;
 
 .back a:hover {
 font-weight:300;	
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
 color:#000000;
 }
 
@@ -160,7 +135,7 @@ font-size: 1.3em;
 
 .backbigger a {
 font-weight:300;	
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
 color:#000080;
 text-decoration:none;
 border-bottom:none;
@@ -168,7 +143,7 @@ border-bottom:none;
 
 .backbigger a:hover {
 font-weight:300;	
-font-family: 'Pixel Operator', sans-serif;
+font-family: 'Inter', sans-serif;
 color:#000000;
 }
 
