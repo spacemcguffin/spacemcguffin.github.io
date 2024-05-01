@@ -1,5 +1,9 @@
 html {
 background-color:#F5F5F4;
+background-attachment: fixed;
+background-size: cover;
+background-image: url("/log/forest.png");
+background-position: center top;
 }
 
 
@@ -63,12 +67,12 @@ img {
     font-family: 'DM Serif Display', serif;
     font-style:italic;
     font-size: 2.8em;
-    color: #000000;
+    color: #ffffff;
     font-weight: 400;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 0.5em;
+    margin-top: 1em;
 }
 
 
@@ -113,9 +117,9 @@ color: #44403c;
 
 .back {
 margin-top: 1em;
-color:#44403c;
+color:#ffffff;
 text-align: center;
-font-size: 1.3em;
+font-size: 1.4em;
 }
 
 .back a {
@@ -129,29 +133,10 @@ border-bottom:none;
 .back a:hover {
 font-weight:300;	
 font-family: 'Inter', sans-serif;
-color:#000000;
+color:#ffffff;
 }
 
-.backbigger {
-margin-top: 1em;
-color:#44403c;
-text-align: center;
-font-size: 1.3em;
-}
 
-.backbigger a {
-font-weight:300;	
-font-family: 'Inter', sans-serif;
-color:#c68d76;
-text-decoration:none;
-border-bottom:none;
-}
-
-.backbigger a:hover {
-font-weight:300;	
-font-family: 'Inter', sans-serif;
-color:#000000;
-}
 
 
 @media screen and (max-width: 850px) {
