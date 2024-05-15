@@ -1,14 +1,14 @@
 @font-face {
-font-family: Heroic Condensed Medium;
-src: url("/log/heroic-condensed-medium.tff");
-}
-
-@font-face {
 font-family: Futura Medium;
 src: url("/log/Futura Medium.otf");
 }
 
-
+:root {
+  --highlight-color: #fcda00;
+  --dark-highlight-color: #ec9507;
+  --theme-grey: #cccccc;
+  --heading-gradient: radial-gradient(circle, var(--dark-highlight-color) 5%, var(--highlight-color) 10%, var(--dark-highlight-color) 30%, var(--highlight-color) 70%);
+}
 
 html { 
 background-color:#000000;
