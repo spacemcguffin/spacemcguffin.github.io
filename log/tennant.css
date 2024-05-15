@@ -3,11 +3,6 @@ font-family: Fabriga Bold;
 src: url("/log/fabriga-bold.otff");
 }
 
-@font-face {
-font-family: Defiant Stain;
-src: url("/log/Defiant Stain.ttf");
-}
-
 :root {
   --highlight-color: #fcda00;
   --dark-highlight-color: #ec9507;
@@ -45,7 +40,7 @@ body {
 }
 
 h1 {
-font-family: 'Fabriga Bold', sans-serif;
+font-family: 'Fabriga', sans-serif;
     font-size: 0.8em;
     color: #ffffff;
     font-weight: 200;
@@ -55,7 +50,7 @@ font-family: 'Fabriga Bold', sans-serif;
 }
 
 h2 {
-font-family: 'Fabriga Bold', sans-serif;
+font-family: 'Fabriga', sans-serif;
 font-size: 2.3em;
 color: var(--highlight-color);
 background: var(--heading-gradient);
@@ -66,7 +61,7 @@ font-weight: 600;
 line-height: 1.2em;
 text-transform:uppercase;
 text-align:center;
-letter-spacing: 2px;
+letter-spacing: 1px;
 margin: 0 0 1em 0;
 }
 
@@ -104,14 +99,14 @@ img {
 
 .pagetop {
 
-	    font-family: 'Fabriga Bold', sans-serif;
+	    font-family: 'Fabriga', sans-serif;
     font-size: 2.5em;
 color: #ffffff;
     font-weight: 600;
 	line-height: 1.2em;
 	text-transform:uppercase;
 	  text-align:center;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 	    margin-left: auto;
     margin-right: auto;
     margin-top: 0.5em;
