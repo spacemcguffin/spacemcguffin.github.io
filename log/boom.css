@@ -5,8 +5,11 @@ src: url("/log/heroic-condensed-medium.tff");
 
 
 
-html {
-background-color:#F5F5F4;
+html { 
+background-color:#000000;
+background-attachment: fixed;
+background-size: cover;
+background-image: url("/log/capaldi.png");
 }
 
 
@@ -28,6 +31,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 1em;
   margin-bottom: 3em;
+	font-color:#ffffff;
 }
 
 h1 {
@@ -42,12 +46,11 @@ h1 {
 }
 
 h2 {
-font-family: 'Source Serif 4',serif;
-    font-size: 1.5em;
-    margin-bottom: 1em;
-    color: #000000;
-    font-weight: 600;
-    font-style: italic;
+    font-family: 'Heroic Condensed', sans-serif;
+    font-size: 4em;
+    letter-spacing: -2px
+    color: #ffffff;
+    font-weight: 400;
 }
 
 .wonk {
