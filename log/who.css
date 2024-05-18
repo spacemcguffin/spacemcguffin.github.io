@@ -24,9 +24,17 @@ src: url("/log/Defiant Stain.ttf");
 
 /* Dropdown Button */
 .dropbtn {
-  color: #c68d76;
-  font-size: 0.9em;
-  border: none;
+
+font-family: 'Futura Medium', sans-serif;
+margin-top: 0.5em;
+text-align: center;
+font-size: 0.9em;
+font-weight: 300;
+color: #c68d76;
+text-decoration: none;
+letter-spacing: 1px;
+text-transform: uppercase;	
+border: none;
 }
 
 /* The container <div> - needed to position the dropdown content */
@@ -48,13 +56,13 @@ src: url("/log/Defiant Stain.ttf");
 /* Links inside the dropdown */
 .dropdown-content a {
   color: #000000;
-  padding: 12px 16px;
+  padding: 0.5em
   text-decoration: none;
   display: block;
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {background-color: #000000;}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
