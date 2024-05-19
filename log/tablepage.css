@@ -1,3 +1,31 @@
+@font-face {
+font-family: 'Fabriga';
+src: url("/log/fabriga-bold.otff");
+}
+
+@font-face {
+font-family: 'Futura Medium';
+src: url("/log/Futura Medium.otf");
+}
+
+@font-face {
+font-family: 'Defiant Stain';
+src: url("/log/Defiant Stain.ttf");
+}
+
+@font-face {
+font-family: 'BureauGrotesque-OneThree Regular';
+src: url("/log/BureauGrotesque-OneThree Regular.ttf");
+}
+
+:root {
+  --highlight-color: #fcda00;
+  --dark-highlight-color: #ec9507;
+  --theme-grey: #cccccc;
+  --heading-gradient: radial-gradient(circle, var(--dark-highlight-color) 5%, var(--highlight-color) 10%, var(--dark-highlight-color) 30%, var(--highlight-color) 70%);
+}
+
+
 body {
 font-size:12px;
 font-family: arial, sans-serif;
@@ -94,6 +122,10 @@ tr:last-child
 font-family: 'BureauGrotesque-OneThree Regular', sans-serif;
     font-size: 4em;
     font-weight: 300;
+    color: var(--highlight-color);
+    background: var(--heading-gradient);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
     filter: drop-shadow(0px 4px 3px rgba(0, 0, 0, 0.4));
     color: #ffffff;
     padding-bottom: 0.3em;
