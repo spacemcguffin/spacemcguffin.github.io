@@ -172,6 +172,23 @@ table, th, td {
   padding: 0.4em;
 }
 
+
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 3px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
 #boxep {
   width:100%;
   height: auto;
