@@ -174,18 +174,28 @@ table, th, td {
 
 
 
-.column {
-  float: left;
-  width: 33.33%;
-  padding: 3px;
+
+.container {
+  position: relative;
+  max-width: 300px; /* Maximum width */
+  margin: 0 auto; /* Center it */
 }
 
-/* Clear floats after image containers */
-.row::after {
-  content: "";
-  clear: both;
-  display: table;
+.container .content {
+  position: absolute; /* Position the background text */
+  bottom: 0; /* At the bottom. Use top:0 to append it to the top */
+  background: rgb(0, 0, 0); /* Fallback color */
+  background: rgba(0, 0, 0, 0.5); /* Black background with 0.5 opacity */
+  color: #f1f1f1; /* Grey text */
+  width: 100%; /* Full width */
+  padding: 20px; /* Some padding */
 }
+
+
+
+
+
+
 
 
 
