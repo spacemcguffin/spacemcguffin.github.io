@@ -173,23 +173,25 @@ b {
 
 /* Style the tab */
 .tab {
-border-radius: 50px;
+    border-radius: 50px;
     overflow: hidden;
     background-color: #FFF3DA;
     margin-bottom: 1.8em;
-}
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;}
 
 /* Style the buttons inside the tab */
 .tab button {
-  background-color: #FFF3DA;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 0.8em;
-  transition: 0s;
-  font-size: 1em;
-  font-family: 'Inter', sans-serif;
+background-color: #FFF3DA;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0.8em;
+    transition: 0s;
+    font-size: 1em;
+    font-family: 'Inter', sans-serif;
 }
 
 /* Change background color of buttons on hover */
