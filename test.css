@@ -12,6 +12,18 @@ background-size: cover;
 background-image: url("/log/paleblue.png");
 }
 
+
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+  color:#000000;
+}
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+  color:#000000;
+}
+
 .code {
     font-family: monospace;
 }
