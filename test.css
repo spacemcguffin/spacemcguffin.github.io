@@ -6,11 +6,11 @@ body {
     line-height:1.4em;
     max-width: 560px;
     margin: 0px auto;
-    padding: 16px 8px;
+    padding: 1.5em;
     background-color:#4f688c;
-background-attachment: fixed;
-background-size: cover;
-background-image: url("/log/paleblue.png");
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url("/log/paleblue.png");
 }
 
 
@@ -19,20 +19,16 @@ background-image: url("/log/paleblue.png");
 	text-shadow: none;
   color:#000000;
 }
+
 ::selection {
 	background: #b3d4fc;
 	text-shadow: none;
   color:#000000;
 }
 
-.code {
-    font-family: monospace;
-}
-
 .content {
     padding: 1.5em;
     border: 1px solid black;
-    box-shadow: 8px 8px black;
     background-color:#ffffff;
 }
 
