@@ -23,14 +23,11 @@
 
 <div id="2021" class="tabcontent">
 
-<content>
 <h3>Endless Reflections</h3>
 
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras at orci id arcu maximus accumsan consectetur malesuada lorem. Nulla urna ligula, tempus eget massa id, pulvinar sodales ligula. Morbi dapibus ante non pharetra convallis. Donec ut augue lobortis lectus dapibus imperdiet. Aliquam ut leo vel est interdum commodo. Ut finibus eros sed iaculis lobortis. Praesent placerat elit lacus, id feugiat massa scelerisque vel.</p>
 
 <p>Maecenas eget urna ullamcorper velit commodo dictum eget nec justo. Phasellus sit amet diam tincidunt, porttitor nulla finibus, tempor tellus. Integer consectetur tempor enim, vitae suscipit enim tincidunt dapibus. Fusce enim libero, sollicitudin volutpat consectetur vel, ullamcorper eu magna. Proin mattis, sapien sit amet consectetur laoreet, justo turpis pretium purus, ut volutpat magna nunc sagittis orci. Morbi sit amet diam in massa finibus dignissim. Mauris consectetur venenatis dolor eu convallis. Suspendisse vulputate vehicula odio at sodales. Morbi volutpat tincidunt dolor, id sagittis turpis congue ut. Phasellus vel ultrices ex, quis auctor tellus.</p>
-
-</content>
 
 </div>
 
@@ -71,6 +68,33 @@
 &nbsp;<span style="color:#2F5496">•</span>
 &nbsp;<a href="/">home</a>
 </div>
+
+
+
+
+
+
+    <script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+
+   
      
   </body>
 </html>
