@@ -82,45 +82,55 @@ section {
 
 
 
-/*
-    a {
-        color: #f0b7f0; /* #606590; */
-        /* font-style: italic; */
-    }
 
-    a:hover, .active-page {
-        color: turquoise;
-    }
-*/
 
-.date {
-    color: gray;
-    /* font-size: 0.95em; */
-    /* padding-right: 1em; */
+
+/* Style the tab */
+.tab {
+width: fit-content;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    margin-bottom: 1.8em;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 20px;
 }
 
-/* .date:before { */
-/*     content: '['; */
-/* } */
-
-.date:after {
-    /* content: ']'; */
-    content: ' â€”';
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.8em;
+  transition: 0s;
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
 }
 
-.extra {
-    /* font-size: 0.9em; */
-    margin: 0;
-    height: 1.25em;
-    /* background: ivory; */
-    padding: 0.1em 0.1em 0.2em;
-    border-bottom: 1px solid #ffea0d;
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
 }
 
-.summary {
-    /* font-size: 0.9em; */
-    padding-left: 2em;
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #c0cbdf;
+	font-weight:500;
 }
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border: none;
+}
+
+
+
+
+
+
 
 img {
     max-width: 30em;
@@ -134,8 +144,4 @@ blockquote {
     border-left: 1px solid;
     padding-left: 1ch;
     font-style: italic;
-}
-
-.long-list {
-   padding: 0.5em;
 }
