@@ -6,6 +6,18 @@ html {
   box-sizing: inherit;
 }
 
+::-moz-selection {
+	background: #b3d4fc;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #b3d4fc;
+	text-shadow: none;
+  color:#000000;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     font-weight: normal;
@@ -20,6 +32,22 @@ body {
     background-size: cover;
     background-image: url("/log/paleblue.png");
 }
+
+h2 {
+  font-family: 'Onest', sans-serif;
+    font-weight: 600;
+}
+
+a, a:visited {
+	color: #BF0017;
+	text-decoration: none;
+  font-weight: 400;
+}
+a:hover {
+	color:#774459;
+	text-decoration: underline;
+}
+
 
 .column {
   float: left;
