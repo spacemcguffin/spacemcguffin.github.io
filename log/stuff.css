@@ -186,37 +186,37 @@ b {
 
 
 
-
 /* Style the tab */
 .tab {
-    border-radius: 50px;
+border-radius: 50px;
+width: fit-content;
     overflow: hidden;
     background-color: #f1f1f1;
     margin-bottom: 1.8em;
-    width: fit-content;
     margin-left: auto;
-    margin-right: auto;}
+    margin-right: auto;
+}
 
 /* Style the buttons inside the tab */
 .tab button {
-background-color: #f1f1f1;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 0.8em;
-    transition: 0s;
-    font-family: 'Inter', sans-serif;
+  background-color: inherit;
+  border: none;
+	float: left;
+  outline: none;
+  cursor: pointer;
+  padding: 0.8em;
+  transition: 0s;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #adbdb3;
+  background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #adbdb3;
+  background-color: #c0cbdf;
 	font-weight:500;
 }
 
