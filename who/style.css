@@ -1,5 +1,5 @@
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
-body{line-height:1;font-family:arial}
+body{line-height:1.3em;font-family:'Inter',sans-serif;font-size:0.85em}
 h1{font-size:25px}
 h2{font-size:21px}
 h3{font-size:18px}
@@ -16,16 +16,16 @@ abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
 table{border-collapse:collapse;border-spacing:0}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
 input,select{vertical-align:middle}
-body,html{background-color:#FFF}
+body,html{background-color: #fbfbfb;}
 header{background:#6f9898;padding:10px 30px;margin:auto;position:fixed;left:0;right:0;top:0;z-index:999;height:40px}
 nav{display:inline-block}
 nav ul li a{background:#fff;padding:2px 6px;font-size:14px;text-decoration:none;font-weight:bold;color:#344;border-radius:5px}
 nav ul li a:hover{color:#000}
 nav ul li{display:inline-block;margin:10px}
 nav ul{list-style:none}
-article{border-bottom:2px dotted #998;padding-bottom:20px;margin-bottom:20px}
-article h2{font-weight:normal;margin-bottom:12px}
-footer{background:#344;max-width:1000px;margin:0 -20px;clear:both;text-align:right}
+article{border-bottom:1px solid #cccccc;padding-bottom:1.5em;margin-bottom:1.5em}
+article h2{font-weight:500;margin-bottom:1em;font-size:1.05em;font-family: 'Onest', sans-serif;}
+footer{background:#344;}
 footer p{padding:20px;color:#FFF}
 address{padding:10px 20px 30px 10px}
 aside > div{margin:10px auto;background:#344;min-height:150px;padding:30px 10px;text-align:center;color:#FFF}
@@ -41,19 +41,11 @@ footer a{color:#FFF}
 #header{max-width:1000px;overflow:hidden;height:40px}
 #wrapall,#header{max-width:1100px;margin:0 auto}
 #headerLeft,#headerRight{display:inline-block;vertical-align:middle}
-#headerLeft{text-align:center;width:100px}
+#headerLeft{text-align:center;margin:0.7em;}
 #headerRight{height:40px}
 #sidebar{float:left;position:absolute}
-#page{padding:20px}
-#menuToggle,#mobileMenuToggle{background:#FFF;cursor:pointer;display:inline-block;font-size:40px;width:40px;font-weight:bold;text-align:center;height:40px;line-height:40px;color:#344;border-radius:10px}
-#mobileMenuToggle,#mobileLogo{vertical-align:middle;display:none;font-size:30px}
-#menuToggle:hover{color:#FFF;background:#344}
-.socialButtons{float:right;padding-top:8px}
-.socialButtons a{display:inline-block;cursor:pointer;background:#0570e6;padding:2px;width:33px;text-align:center;height:20px;font-weight:bold;color:#FFF;text-decoration:none;line-height:20px;font-size:20px;border-radius:5px;vertical-align:middle}
-.socialButtons a.linkedin{background:#24568e}
-.socialButtons a.youtube{background:#c00}
-.socialButtons a svg{width:16px;height:16px;fill:#FFF}
-.stick #sidebarContent{position:fixed;z-index:900;bottom:0px}
+#page{padding:2em}
+.stick #sidebarContent{position:fixed;z-index:900;height: -webkit-fill-available;}
 #stick-here{background:red}
 .sidebarToggle #sidebar{display:none}
 .sidebarToggle #main{margin-left:0}
