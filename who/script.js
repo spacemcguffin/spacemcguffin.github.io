@@ -16,14 +16,7 @@ $(document).ready(function () {
 		$('body').removeClass('stick');
         return false;
     });
-	$("#menuToggle").click(function(event) {
-        $("body").toggleClass("sidebarToggle");
-		$("body").removeClass("showMobileMenu");
-    });	
-	$("#mobileMenuToggle").click(function(event) {
-        $("body").toggleClass("showMobileMenu");
-		$("body").removeClass("sidebarToggle");
-    });	
+
 	
 	
 });
