@@ -8,7 +8,8 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 nav ul{list-style:none}
 blockquote,q{quotes:none}
 blockquote:before,blockquote:after,q:before,q:after{content:none}
-a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent}
+a{margin:0;padding:0;font-size:100%;vertical-align:baseline;background:transparent;color:#456291}
+a:hover{color:#000000}
 ins{background-color:#ff9;color:#000;text-decoration:none}
 mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold}
 del{text-decoration:line-through}
@@ -19,13 +20,8 @@ input,select{vertical-align:middle}
 body,html{background-color: #ffffff;}
 header{background:#f9f9f9;padding:10px 30px;margin:auto;position:fixed;left:0;right:0;top:0;z-index:999;height:auto;color:#000000;border-bottom: 1px solid #cccccc;}
 nav{display:inline-block}
-nav ul li a{background:#fff;padding:2px 6px;font-size:14px;text-decoration:none;font-weight:bold;color:#344;border-radius:5px}
-nav ul li a:hover{color:#000}
-nav ul li{display:inline-block;margin:10px}
-nav ul{list-style:none}
 .article{border-bottom:1px solid #cccccc;padding-bottom:1.5em;margin-bottom:1.5em}
 .article h2{font-weight:500;margin-bottom:1em;font-size:1.05em;font-family: 'Onest', sans-serif;}
-.article:hover{background:#c1cad8;}
 footer{background:#fbfbfb;}
 footer p{padding:20px;color:#000000}
 address{padding:10px 20px 30px 10px}
@@ -33,8 +29,8 @@ aside > div{margin:10px auto;background:#f9f9f9;min-height:150px;padding:30px 10
 a#logo{vertical-align:middle;font-size:40px;color:#344;font-weight:bold;display:block;text-decoration:none;text-align:center;line-height:40px;padding:60px 5px}
 body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px solid #999;color:#333}
 #sidebarBackTop{background:#286983;color:#FFF;opacity:0.8;cursor:pointer;display:block;padding:5px}
-#sidebar a.back2Top{text-decoration:none;text-align:center;background:#344;color:#FFF;font-weight:bold;padding:5px;display:block}
-#sidebar a.back2Top:hover{background:#456}
+#sidebar a.back2Top{text-decoration:none;text-align:center;background:#456291;color:#FFF;font-weight:bold;padding:5px;display:block}
+#sidebar a.back2Top:hover{background:#c1cad8}
 #sidebarContent{width:300px;background:#f9f9f9;border-bottom: 1px solid #cccccc;padding:10px}
 footer a{color:#000000}
 #main{margin-left:320px}
