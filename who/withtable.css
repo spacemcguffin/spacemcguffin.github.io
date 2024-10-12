@@ -80,6 +80,18 @@ tr:last-child
 }
 
 
+.hide {
+  display: none;
+}
+    
+.eptitles:hover + .hide {
+  display: block;
+  color: #888888;
+  font-size:0.8em;
+}
+
+
+
 body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px solid #999;color:#333}
 
 #sidebarbutton{background:#286983;color:#FFF;opacity:0.8;cursor:pointer;display:block;padding:5px}
