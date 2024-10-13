@@ -285,7 +285,21 @@ tr:last-child
 body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px solid #999;color:#333}
 
 #sidebarbutton{background:#286983;color:#FFF;opacity:0.8;cursor:pointer;display:block;padding:5px}
-#sidebar a.button{text-decoration:none;text-align:center;background:#466250;color:#FFF;padding:5px;display:block;margin-bottom: 0.5em;width: 80%;margin-left: auto;margin-right: auto;}
+
+#sidebar a.button{
+    text-decoration: none;
+    text-align: center;
+    background: #466250;
+    color: #FFF;
+    padding: 6px;
+    display: block;
+    margin-bottom: 0.5em;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+}
+
 #sidebar a.button:hover{background:#adbdb3;color:#000}
 
 #sidebarBackTop{background:#286983;color:#FFF;opacity:0.8;cursor:pointer;display:block;padding:5px}
@@ -324,7 +338,24 @@ header{}
 #main{margin-left:0}
 .sidebarToggle #sidebar{background:red;display:block}
 .stick #sidebarContent{bottom:auto}
-a#logo{font-size:20px;line-height:20px;padding:10px 5px}
+																		
+a#logo{
+vertical-align: middle;
+    font-size: 2em;
+    color: #7892b1;
+    font-weight: 500;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    line-height: 1em;
+    padding: 0.5em;
+    font-family: 'Bebas Neue';
+}
+
+a#logo:hover {
+    color: #000000;
+}
+																		
 aside > div{min-height:20px;padding:10px}
 .sidebarToggle #menuToggle{background:#344;color:#FFF}
 }
