@@ -45,23 +45,16 @@ b {font-weight: 500;}
 }
 
 
-.hero-image {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("https://thedoctorwhosite.co.uk/content/images/doctorwho/1963-11-23-an-unearthly-child/an-unearthly-child.jpg");
-  height: 50%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-}
-
-.hero-text {
-  text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-    font-family: 'Bebas Neue', Helvetica, sans-serif;
+.hero-blur-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background: #222222;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    transform: rotate(180deg);
 }
 
 
