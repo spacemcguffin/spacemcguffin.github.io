@@ -393,6 +393,38 @@ aside > div{min-height:20px;padding:10px}
 .hero-title-classicwho {
     letter-spacing: -0.5px;
     font-size: 1.6em;
+	  line-height:1.2;
+}
+	
+#sidebarContent {max-width: 20%}
+#headerLeft{text-align:left}
+#headerRight{height:auto;position:absolute;width:auto;top:46px;background:#6f9898;left:0;display:none}
+
+	
+.hero-blur-svg {
+	display: none;
+}
+
+	
+.showMobileMenu #headerRight{display:block}
+nav ul li a{display:block;background:transparent;color:#ffffff;text-align:center;font-size:16px;padding:3px 29px;line-height:25px}
+.showMobileMenu #mobileMenuToggle{background:#344;color:#ffffff}
+nav ul li{display:block;margin:0}
+.socialButtons{display:none}
+header{padding:0 0 0 0}
+#wrapall{}
+#sidebarContent{right:0;background:#6f9898}
+#mobileLogo{display:inline-block;font-size:17px;padding:0 3px 0 10px;font-weight:bold;color:#ffffff;text-decoration:none}
+#mobileMenuToggle{display:inline-block}
+}
+
+
+@media screen and (max-width:400px){
+
+.hero-title-classicwho {
+    letter-spacing: -0.5px;
+    font-size: 1em;
+    line-height:1.2;
 }
 	
 #sidebarContent {max-width: 20%}
