@@ -28,7 +28,7 @@ del{text-decoration:line-through}
 abbr[title],dfn[title]{border-bottom:1px dotted;cursor:help}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
 input,select{vertical-align:middle}
-body,html{background-color: #ffffff;}
+body,html{background-color: #fbfbfb;}
 
 header{
 	color:#000000;
@@ -281,7 +281,14 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
 #sidebar a.back2Top{text-decoration:none;text-align:center;background:#456291;color:#FFF;font-weight:bold;padding:5px;display:block;width: 80%;margin-left: auto;margin-right: auto;}
 #sidebar a.back2Top:hover{background:#c1cad8;color:#000}
 
-#sidebarContent{width:250px;background:#f9f9f9;border: 1px solid #cccccc;padding:10px}
+#sidebarContent{
+    width: 250px;
+    background: #ffffff;
+    padding: 1em;
+    padding-bottom: 2em;
+}
+
+
 footer a{color:#000000}
 #main{margin-left:280px}
 #wrapall{}
@@ -289,10 +296,10 @@ footer a{color:#000000}
 #wrapall,#header{max-width:1000px;}
 #headerLeft,#headerRight{display:inline-block;vertical-align:middle}
 #headerLeft{text-align:center;margin:0.7em;}
-#sidebar{float:left;position:absolute;margin-top: 2em;}
+#sidebar{float:left;position:absolute;}
 #page{padding:2em;}
 #menuToggle{padding: 0.2em;font-size: 1.5em;font-weight: 300;text-transform: uppercase;font-family: 'Onest', sans-serif;letter-spacing: 0.5px;}
-.stick #sidebarContent{position:fixed;z-index:900;height: -webkit-fill-available;}
+.stick #sidebarContent{height: auto;}
 #stick-here{background:red}
 .sidebarToggle #sidebar{display:none}
 .sidebarToggle #main{margin-left:0}
