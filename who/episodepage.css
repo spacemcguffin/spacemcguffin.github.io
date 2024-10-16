@@ -633,7 +633,7 @@ a.shared-tag {
 
     .card-episode {
         grid-template-rows: auto auto;
-        grid-template-columns: 200px auto 200px;
+        grid-template-columns: 200px auto 100px;
         grid-template-rows: auto auto 1fr;
         grid-gap: 12px 15px;
     }
@@ -668,6 +668,7 @@ a.shared-tag {
         order: 4;
         grid-column-start: 2;
         margin-right: 15px;
+			    font-size: 0.95em;
     }
 
 
