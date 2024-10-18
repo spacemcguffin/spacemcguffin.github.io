@@ -502,6 +502,55 @@ footer a{color:#000000}
 
 
 
+.breadcrumb {
+    display: flex;
+    align-items: center;
+}
+
+.hero-breadcrumb {
+    z-index: 3;
+    padding: 15px 30px;
+    margin: 0 -30px;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.hero-breadcrumb > * {
+    opacity: 0.5;
+    transition: 0.2s opacity;
+}
+
+.breadcrumb-icon {
+    width: 20px;
+    height: 20px;
+    padding: 0 4px;
+    fill: #ffffff;
+    flex-shrink: 0;
+}
+
+.breadcrumb-link {
+    font-size: 14px;
+    line-height: 14px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
