@@ -264,6 +264,28 @@ font-size: 2em;
 
 
 
+
+
+.gallery1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 15px;
+}
+
+.gallery1 img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+
+
+
+
+
+
 .quote {
     line-height: 1.2;
     font-size: 1.4em;
