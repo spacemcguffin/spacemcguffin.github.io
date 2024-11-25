@@ -45,8 +45,8 @@ p {
 
 h6 {
     letter-spacing: 1px;
-    font-weight: 400;
-    font-size: 1.3em;
+    font-weight: 300;
+    font-size: 1.6em;
     font-family: 'Geist', sans-serif;
     color: #ffffff;
     margin: 0 0 0 0;
@@ -69,6 +69,7 @@ h6 {
                 overflow: hidden;
                 margin: 0 auto;
                 padding: 1.6em;
+							    background: #456291;
             }
             #links {
                 background: #6699ce;
@@ -82,6 +83,7 @@ h6 {
    		 font-family: 'Geist', sans-serif;
    		 font-size: 1.2em;
   		 font-weight: 400;
+							background: #647fa9;
             }
 
                 #navigation li {
@@ -152,7 +154,7 @@ h6 {
                         display: block;
                     }
             #url {
-                border: 1px solid #6699ce;
+                border: 1px solid #456291;
                 padding: 5px;
             }
             
@@ -165,11 +167,11 @@ h6 {
    
     
             #interests, #details {
-                border: 1px solid #6699ce;
+                border: 1px solid #456291;
                 padding: 2px;
             }
                 #interests h2, #details h2 {
-                    background: #6699ce;
+                    background: #456291;
                     font-size: 11px;
                     color: #FFFFFF;
                     margin: -2px -2px 2px -2px;
@@ -183,18 +185,20 @@ h6 {
                 }
                 .sidebar-label {
                     width: 30%;
-                    background: #afd0ef;
+                    background: #dddddd;
                     border-right: 2px solid #FFFFFF;
                     padding: 2px;
                 }
-                    .sidebar-label span {
-                        color: #062fa5;
-                        font-size: 10px;
-                        font-weight: bold;
-                    }
+
+.sidebar-label span {
+    color: #273c5e;
+    font-size: 0.8em;
+    font-weight: 700;
+}
+
                 .sidebar-content {
                     width: 70%;
-                    background: #d5e7fb;
+                    background: #eeeeee;
                     padding: 2px;
                 }
                     .sidebar-content span {
