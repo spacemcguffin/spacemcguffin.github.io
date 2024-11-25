@@ -9,16 +9,20 @@
             font-weight: normal;
             font-size: 11px;
         }
+
         a, a:visited {
             color: #062fa5;
-            font-weight: bold;
             text-decoration: none;
         }
+
             a:hover {
                 color: #6699ce;
+		border-bottom: 1px solid #456291;
+		text-decoration:none;  
             }
        
-				p {
+				
+p {
     margin: 5px 0 10px 0;
     padding: 0;
     font-family: 'Geist', sans-serif;
@@ -67,12 +71,17 @@ h6 {
             #links {
                 background: #6699ce;
             }
+
             #navigation {
-                margin: 0;
-                padding: 0;
-                list-style-type: none;
-		    text-align: center;
+                 margin: 0;
+  		 padding: 0;
+   		 list-style-type: none;
+   		 text-align: center;
+   		 font-family: 'Geist', sans-serif;
+   		 font-size: 1.2em;
+  		 font-weight: 400;
             }
+
                 #navigation li {
                     display: inline-block;
                     padding: 10px 0 10px 10px;
@@ -82,9 +91,8 @@ h6 {
                     content: '|';
                 }
                     #navigation li a {
-                        font-size: 11px;
-                        color: #FFFFFF;
-                        font-weight: normal;
+                        olor: #FFFFFF;
+                       font-weight: 400;
                     }
                     #navigation li a:hover {
                         color: #000000;
