@@ -98,23 +98,35 @@ h6 {
             width: 300px;
             float: left;
         }   
+
+
             #sidebar div {
-                margin: 20px 0;
+               margin: 1.5em 0;
+  					   font-family: 'Geist', sans-serif;
+               font-weight: 400;
+                font-size: 1.15em;
             }
+
+
             #photo-box {
-                padding-top: 20px;
+                padding-top: 2em;
                 overflow: hidden;
             }
+
                 #photo-box h1 {
-                    font-size: 14px;
+                    margin: 0 0 0 0;
+  								  font-size: 1.8em;
+   									font-family: 'Geist', sans-serif;
+  								  font-weight: 600;
                 }
+
                 #profile-photo, #information {
                     width: 50%;
                     float: left;
                 }
 				
 				#information {
-					padding-left: 10px;
+					padding-left: 0.9em;
 				}
                     #quote, #country {
                         display: block;
@@ -127,9 +139,13 @@ h6 {
                 border: 1px solid #6699ce;
                 padding: 5px;
             }
-                #url h2 {
-                    font-size: 11px;
+            
+					#url h2 {
+    font-size: 0.95em;
+    font-weight: 700;
+    margin: 0 0 0 0;
                 }
+
             #music {
                 position: relative;
                 background: url('https://static.tumblr.com/bpdtqce/eNEnoonrt/musicplayer.png') top left no-repeat;
