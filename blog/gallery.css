@@ -355,8 +355,8 @@ tr:last-child
 
 .diarygrid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1em;
     align-items: self-start;
     padding: 0em;
 }
@@ -388,7 +388,7 @@ tr:last-child
 color: #456291;
     display: block;
     font-weight: 500;
-    font-size: 1.1em;
+        font-size: 1.3em;
 }
 
 .diarygrid li a:hover {
