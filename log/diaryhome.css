@@ -610,6 +610,29 @@ header{padding:0 0 0 0}
 	.hero-breadcrumb {
 	  margin-left: -1em;
 }
+
+.diarygrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+    align-items: self-start;
+}
+
+
+.diarygrid li {
+    display: grid;
+    position: relative;
+}
+
+
+.diarygrid li img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10%;
+    object-fit: cover;
+    aspect-ratio: 5 / 4;
+}
 	
 #sidebarContent {max-width: 20%}
 #headerLeft{text-align:left}
