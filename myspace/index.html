@@ -99,6 +99,23 @@
 
                   <br>
 
+                     <div class="audio-player" id="audio-player">
+    <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+    <div class="audio-info">
+      <div class="title">Farewell 42</div>
+      <div class="artist">spacemcguffin</div>
+      <div class="volume-slider">
+        <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.30" style="background: linear-gradient(to right, rgb(255, 152, 0) 30%, rgb(230, 126, 0) 30%);">
+      </div>
+    </div>
+    <audio id="audioPlayer" style="display:none;">
+      <source src="assets/farewell42.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+   <br>
+
                   <!-- LEW'S INTERESTS -->
                   <section class="blue-section-wrapper">
                      <div class="blue-table-container">
