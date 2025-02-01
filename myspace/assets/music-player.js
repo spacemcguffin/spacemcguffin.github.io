@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
       if (audio && playPauseBtn && volumeControl) {
         clearInterval(waitForAudioPlayer); // Stop checking once elements are available
   
-        // Set the default volume to 30%
-        audio.volume = 0.30;
+        // Set the default volume to 50%
+        audio.volume = 0.50;
   
         // Function to update the slider background dynamically
         function updateSliderBackground(value) {
