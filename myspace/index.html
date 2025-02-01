@@ -41,11 +41,88 @@
       <!-- TABLES CONTAINER -->
       <div class="tables-container">
          <!-- FIRST TABLE -->
-         <div class="table-wrapper">
+<div class="table-wrapper">
                   <br>                                           
-                  <section class="profile-container" id="profile-section"></section>
-                  <div class="contact-container" id="contact-section"></div>
-                  <div class="audio-player" id="audio-player"></div>
+                  <section class="profile-container" id="profile-section">
+    <div class="profile-header">Max Olivo</div>
+    <div class="profile-body">
+      <div class="profile-image">
+        <img src="https://maxolivo.com/images/profile-picture.gif" alt="Max Olivo's profile picture" draggable="false">
+      </div>
+      <div class="profile-text">
+        <div id="slogan"><b>Offline Television enjoyer</b></div>
+        <br>
+        Male <img src="https://maxolivo.com/images/male.gif" alt="Male icon" style="height: 15px;"><br>
+        30 years old<br>
+        Los Angeles, CA, United States<br>
+        <br>
+        <img src="https://maxolivo.com/images/onlinenow.gif" alt="Online Now">
+      </div>
+    </div>
+    <div class="profile-mood">
+      <b>Mood:</b> <span>Silly <img src="/images/mood.gif" style="height: 16px; alt=" mood="" icon"=""></span>
+    </div>
+    <div class="profile-links">
+      <b>View My: 
+        <a href="https://www.instagram.com/maxolivo" target="_blank">Pics</a> | <a href="https://www.youtube.com/@maxolivo" target="_blank">Vids</a>
+      </b>
+    </div>
+  </section>
+                  <div class="contact-container" id="contact-section">
+    <div class="contact-header">
+      <span>&nbsp;&nbsp;Contacting Max</span>
+    </div>
+    <div class="contact-content">
+      <div class="contact-column">
+      <a href="https://www.youtube.com/@maxolivo" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/social-youtube.svg" height="14px" alt="YouTube"> YouTube
+      </a>
+    
+      <a href="https://www.tiktok.com/@maxolivo" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/social-tiktok.svg" height="14px" alt="TikTok"> TikTok
+      </a>
+    
+      <a href="https://www.instagram.com/maxolivo" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/social-instagram.png" height="14px" alt="Instagram"> Instagram
+      </a>
+    
+      <a href="https://www.maxolivo.com/blog/" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/notepad.png" height="14px" alt="Read Blog Posts"> Read Blog Posts
+      </a>
+    </div>
+      <div class="contact-column">
+      <a href="https://www.twitch.com/maxolivo" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/social-twitch.svg" height="14px" alt="Twitch"> Twitch
+      </a>
+    
+      <a href="https://www.twitter.com/maxolivo" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/social-twitter.svg" height="14px" alt="Twitter"> Twitter
+      </a>
+    
+      <a href="https://discord.gg/nc3WPJptrm" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/social-discord.svg" height="14px" alt="Discord"> Discord
+      </a>
+    
+      <a href="https://www.maxolivo.com/contact" target="_blank" class="contact-link">
+        <img src="https://maxolivo.com/images/social-email.png" height="14px" alt="Business Email"> Business Email
+      </a>
+    </div>
+    </div>
+  </div>
+                  <div class="audio-player" id="audio-player">
+    <button id="playPauseBtn"><i class="fas fa-play"></i></button>
+    <div class="audio-info">
+      <div class="title">7 PM (Sunny Weather)</div>
+      <div class="artist">Animal Crossing: New Horizons</div>
+      <div class="volume-slider">
+        <input type="range" id="volumeControl" min="0" max="1" step="0.01" value="0.30" style="background: linear-gradient(to right, rgb(255, 152, 0) 30%, rgb(230, 126, 0) 30%);">
+      </div>
+    </div>
+    <audio id="audioPlayer" style="display:none;">
+      <source src="https://maxolivo.com/audio/sunny-weather.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 
                   <br>
 
@@ -54,7 +131,7 @@
                      <div class="blue-table-container">
                         <div class="blue-header">&nbsp;&nbsp;Max's Interests</div>
                         <table class="blue-content-table">
-                           <tr>
+                           <tbody><tr>
                               <th>General</th>
                               <td>Making Videos, Metal Detecting, Trying New Hobbies, Vinyl Records, Basketball, Concerts, Camping (as an idea)</td>
                            </tr>
@@ -81,7 +158,7 @@
                               <th>Books</th>
                               <td>Lol</td>
                            </tr>
-                        </table>
+                        </tbody></table>
                      </div>
                   </section>
 
@@ -92,7 +169,7 @@
                      <div class="blue-table-container">
                         <div class="blue-header">&nbsp;&nbsp;Max's Details</div>
                         <table class="blue-content-table">
-                           <tr>
+                           <tbody><tr>
                               <th>Status:</th>
                               <td>Single</td>
                            </tr>
@@ -114,7 +191,7 @@
                            </tr>
                            <tr>
                               <th>Ethnicity:</th>
-                              <td>Hispanic / Latino&nbsp;&nbsp;<img src="https://maxolivo.com/images/mx-flag.png" alt="Mexican Flag"></td>
+                              <td>Hispanic / Latino&nbsp;&nbsp;<img src="images/mx-flag.png" alt="Mexican Flag"></td>
                            </tr>
                            <tr>
                               <th>Sign:</th>
@@ -136,7 +213,7 @@
                               <th>Occupation:</th>
                               <td>OfflineTV</td>
                            </tr>
-                        </table>
+                        </tbody></table>
                      </div>
                   </section>
          </div>
