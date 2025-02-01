@@ -4,9 +4,9 @@ html {
 }
 
 body {
-  background-image: url('https://maxolivo.com/images/stars2-BG.gif');
+  background-image: url('img/stars.gif');
   background-color: #000; 
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Tahoma, sans-serif;
   font-size:12px;
 }
 
@@ -68,64 +68,7 @@ a:hover {
   pointer-events: none; /* Disables interactions like dragging */
 }
 
-/* CHRISTMAS SNOW */
-/* Common styles for all snow layers */
-.snow-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 820px;
-  height: 116px; /* Adjust the height of the snow depending if you add any padding-top to the main header */
-  pointer-events: none;
-  background-repeat: repeat;
-}
 
-/* First snow layer animation */
-.snow-layer-1 {
-  z-index: 2;
-  background-image: url('https://maxolivo.com/images/snow.png');
-  animation: snow-layer-1 12s linear infinite;
-}
-
-/* Second snow layer animation */
-.snow-layer-2 {
-  z-index: 1;
-  background-image: url('https://maxolivo.com/images/snow-2.png');
-  animation: snow-layer-2 22s linear infinite;
-}
-
-/* Snow animations */
-@keyframes snow-layer-1 {
-  from {
-      background-position: 0 0;
-  }
-  to {
-      background-position: 300px 300px; /* Diagonal movement */
-  }
-}
-
-@keyframes snow-layer-2 {
-  from {
-      background-position: 0 0;
-  }
-  to {
-      background-position: 400px 400px; /* Slower and diagonal movement */
-  }
-}
-
-/* CHRISTMAS LIGHTS */
-.christmas-lights {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 820px;
-  height: 16px;
-  z-index: 3;
-  background-image: url('https://maxolivo.com/images/christmas-lights.gif');
-  background-repeat: repeat-x;
-  background-size: auto 16px;
-  background-position: top;
-}
 
 /* BLOG SECTION */
 .blog {
@@ -136,9 +79,10 @@ a:hover {
 }
 
 .badges {
-  padding-bottom: 10px;
-  display: flex;
-  gap: 6px; /* Space between items */
+    padding-bottom: 1em;
+    display: flex;
+    gap: 6px;
+    margin-top: 1em;
 }
 
 /* BLUE TITLE SECTIONS */
@@ -550,7 +494,7 @@ footer a:hover {
   cursor: pointer;
 }
 
-/* ---------------- CONTACTING MAX SOCIAL MEDIA ---------------- */
+/* ---------------- CONTACTING LEW SOCIAL MEDIA ---------------- */
 .contact-container {
   width: 300px; /* Matches the width of the profile section */
   border: 2px solid #6799C5;
