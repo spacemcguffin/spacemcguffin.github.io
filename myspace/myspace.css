@@ -328,6 +328,12 @@ a:hover {
     object-fit: cover;
   }
 
+  .profile-image img:hover {
+    filter: none;
+    -webkit-filter: grayscale(100%);
+      opacity:0.8;
+}
+
   .profile-text {
     flex: 1;
     font-size: 12px;
