@@ -560,25 +560,40 @@ footer a:hover {
   height: 14px; /* Consistent icon size */
 }
 
-/* --------------- MEOW :3 ----------------- */
-.cat-container {
+
+
+
+
+
+
+
+
+
+#navigation {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
     text-align: center;
-    margin-top: 20px;
+    font-family: 'Geist', sans-serif;
+    font-size: 1.25em;
+    font-weight: 400;
+    background: #48255c59;
 }
 
-#cat-image {
-    width: 40px;
-    cursor: pointer;
-}
 
-.wiggle {
-    animation: wiggle 1s ease;
-}
 
-@keyframes wiggle {
-    0% { transform: rotate(0deg); }
-    25% { transform: rotate(5deg); }
-    50% { transform: rotate(-5deg); }
-    75% { transform: rotate(5deg); }
-    100% { transform: rotate(0deg); }
-}
+
+                #navigation li {
+                    display: inline-block;
+                    padding: 8px 0 8px 0;
+                }
+
+                    #navigation li a {
+                       color: #ffffff;
+                       font-weight: 400;
+                    }
+                    #navigation li a:hover {
+                        color: #cbb8e6;
+			text-decoration:none;
+			border-bottom: 1px solid #cbb8e6;
+                    }
