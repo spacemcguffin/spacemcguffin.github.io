@@ -254,6 +254,11 @@ a:hover {
   border: none; 
 }
 
+.photo-scroll-container img:hover {
+    filter: none;
+    -webkit-filter: grayscale(100%);
+}
+
 /* TABLES CONTAINER */
 .tables-container {
     display: flex; /* Use flexbox to align tables side by side */
