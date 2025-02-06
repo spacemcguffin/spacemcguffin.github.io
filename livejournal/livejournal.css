@@ -1,0 +1,138 @@
+body{
+background-color: #c5ccc2;
+margin-bottom: 2%;
+color: #5c6358;
+font-family: 'Geist', sans-serif;
+}
+
+#all{
+width: 700px;
+margin: 0 auto;
+}
+
+#header{
+width: 99.8%;
+height: 150px;
+border-top: 1px solid #6e756a;
+border-left: 1px solid #6e756a;
+border-right: 1px solid #6e756a;
+border-bottom: 0px;
+border-radius: 35px 35px 0px 0px;
+background-color: #d2dfcd;
+background-image: url('https://i.imgur.com/nqXa1s6.png');
+background-position: center center;
+background-repeat: repeat;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+#title{
+margin: 0;
+text-align: center;
+color: #FDD33F;
+text-shadow: 0px 0px 1px #000041;
+}
+
+#navbox{
+margin: 0px 0px 20px 0px;
+width: 100%;
+background-image: linear-gradient(to right, #d2dfcd,#e9efe6,#d2dfcd);
+}
+
+#navbox ul{
+margin: 0;
+padding: 10px;
+text-align: center;
+border: 1px solid #6e756a;
+}
+
+#navbox li{
+list-style-type: none;
+display: inline;
+font-size: 19px;
+margin: 10px;
+}
+
+.main{
+width: 100%;
+}
+
+.post{
+width: 100%;
+}
+
+.text{
+width: 84%;
+padding: 25px;
+border: 1px solid #6e756a;
+margin-bottom: 20px;
+background-color: #d2dfcd;
+}
+
+.textborder{
+background-color: #e9efe6;
+border: 1px dashed #6e756a;
+padding: 20px;
+font-size: 15px;
+}
+
+.subheaders{
+margin: 0;
+font-weight: normal;
+font-size: 20px;
+}
+
+.date{
+margin: 0;
+font-size: 13px;
+}
+
+.icon{
+float: right;
+margin-top: 13px;
+margin-left: 10px;
+width: 125px;
+border: 1px solid #6e756a;
+}
+
+a{
+color: #E79D44;
+text-decoration: none;
+}
+
+a:visited{
+color: #E79D44;
+text-decoration: none;
+}
+
+a:hover{
+font-weight: bold;
+}
+
+a:active{
+font-weight: normal;
+}
+
+#credit a{
+color: #fff;
+}
+
+::-webkit-scrollbar{
+width: 6px; 
+}
+    
+::-webkit-scrollbar-track{
+background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb{
+background-color: #E79D44;
+}
+
+#credit{
+font-size: 11px;
+position: fixed;
+bottom: 0;
+right: 0;
+}
