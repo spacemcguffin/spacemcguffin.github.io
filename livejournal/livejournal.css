@@ -11,19 +11,12 @@ margin: 0 auto;
 }
 
 #header{
-height: 135px;
+height: 125px;
 border-top: 2px solid #000000;
 border-left: 2px solid #000000;
 border-right: 2px solid #000000;
-border-bottom: 0px;
 border-radius: 35px 35px 0px 0px;
 background-color: #EFBE53;
-background-image: url('https://i.imgur.com/nqXa1s6.png');
-background-position: center center;
-background-repeat: repeat;
-display: flex;
-align-items: center;
-justify-content: center;
 }
 
 #title{
@@ -35,7 +28,20 @@ font-weight: 500;
     font-family: georgia, sans-serif;
     font-style: italic;
     margin-top: 1.4em;
-    font-style:lowercase;
+    text-transform: lowercase;
+}
+
+#subtitle {
+    font-weight: 500;
+    margin: 0;
+    text-align: center;
+    color: #000000;
+    font-size: 1.1em;
+    font-family: georgia, sans-serif;
+    font-style: italic;
+    margin-top: 1.4em;
+    text-transform: lowercase;
+    letter-spacing: 1px;
 }
 
 #navbox{
@@ -66,11 +72,11 @@ width: 100%;
 }
 
 .text{
-width: 85%;
-padding: 25px;
-border: 2px solid #000000;
-margin-bottom: 20px;
-background-color: #f4e3aa;
+    padding: 1em;
+    border-left: 2px solid #000000;
+    background-color: #F2DD95;
+    border-right: 2px solid #000000;
+    border-top: 2px solid #000000;
 }
 
 .textborder{
@@ -83,7 +89,8 @@ font-family: trebuchet ms, sans-serif;
 }
 
 .textborder p {
-font-size: 0.8em;
+font-size: 0.95em;
+line-height: 1.6;
 }
 
 .subheaders{
@@ -96,20 +103,22 @@ margin: 0.1em 3em 0.5em 0em;
 }
 
 .date{
-text-transform: lowercase;
+    text-transform: lowercase;
     margin: 0;
     font-size: 0.85em;
     margin-top: 0.2em;
     font-family: georgia, sans-serif;
+    letter-spacing: 0.2px;
 }
 
 .icon{
-float: right;
-margin-top: 1em;
-margin-left: 0.5em;
-width: 120px;
-border: 1px solid #000000;
-margin-bottom: 0.5em;
+    float: right;
+    margin-top: 1em;
+    margin-right: 1em;
+    width: 120px;
+    border: 1px solid #000000;
+    margin-bottom: 0.5em;
+    margin-left: 0.8em;
 }
 
 a{
