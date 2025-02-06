@@ -74,15 +74,20 @@ background-color: #f4e3aa;
 }
 
 .textborder{
-background-color: #e9efe6;
+background-color: #F2DD95;
 border: 1px dashed #000000;
 padding: 1em;
-font-size: 0.95em;
+font-size: 0.9em;
 line-height: 1.4;
+font-family: trebuchet ms, sans-serif;
+}
+
+.textborder p {
+font-size: 0.8em;
 }
 
 .subheaders{
-margin: 0.5em 3em 0.5em 0em;
+margin: 0.1em 3em 0.5em 0em;
     font-weight: 400;
     font-size: 1.35em;
     border-bottom: 1px solid #EFBE53;
@@ -91,9 +96,11 @@ margin: 0.5em 3em 0.5em 0em;
 }
 
 .date{
-margin: 0;
-font-size: 0.85em;
-margin-top: 0.2em;
+text-transform: lowercase;
+    margin: 0;
+    font-size: 0.85em;
+    margin-top: 0.2em;
+    font-family: georgia, sans-serif;
 }
 
 .icon{
