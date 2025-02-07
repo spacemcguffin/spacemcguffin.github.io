@@ -254,6 +254,35 @@ background: #FFF3DA;
 
 
 
+.maintable {
+font-size: 1em;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 0.8em;
+    text-align: left;
+    overflow-wrap: break-word;
+    width: -webkit-fill-available;
+    vertical-align: middle;
+}
+
+tr {
+  border-bottom: 1px solid #b9bcbc;
+}
+
+tr:hover {
+    background-color: #EAECF0;
+}
+
+tr:last-child 
+{
+   border-bottom: none;
+}
+
+
+
+
 
 
 ::-webkit-scrollbar{
