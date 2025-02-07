@@ -21,8 +21,15 @@
 <div id="all">
   
 <div id="header">
-  <h1 id="title">Latest Entries</h1>
-  <h1 id="subtitle">the lewniverse</h1>
+  <h1 id="title">timelordwannabe</h1>
+
+  <h1 id="subtitle">
+<div class="tab">
+<button class="tablinks" onclick="openCity(event, 'entries')" id="defaultOpen">Latest Entries</button>
+<button class="tablinks" onclick="openCity(event, 'profile')">Profile</button>
+</div>
+  </h1>
+  
 </div>
   
 <div id="navbox">
@@ -34,12 +41,13 @@
 </ul>
 </div>
 
+  
 <div id="main">
+<div id="entries" class="tabcontent">
 
 <div class="post">
 
   
-
 
 <!-- ENTRY START -->
 <!-- ICON -->
@@ -135,22 +143,55 @@ Your browser does not support the audio element.
 
   
 
+
+
+
+
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<div id="main">
+  <div id="profile" class="tabcontent">
+
+
+<div class="post">
+
+  
+
+
 <!-- ENTRY START -->
 <!-- ICON -->
-<img class="icon" src="/livejournal/img/oldface.png">
+<img class="profileicon" src="/livejournal/img/nosignal.png">
 
 <div class="text">
-<div class="textborder">
+<div class="profiletextborder">
   
-<div class="date">27 February 2021 @ 10:48 pm</div>
-<h2 class="subheaders">Origins</h2> 
+<h2 class="profileheader">from the mind and keyboard of Lewis</h2> 
 
-<p><i>‘timelordwannabe: from the mind and keyboard of Lewis’</i></p>
-
-<li>My old diary was created on 22nd February 2008.</li>
-<li>My first post was on 27th February 2008.</li> 
-<li>The last post was on 9th March 2012.</li> 
-<li>I had 2137 entries in total.</li>
+<li><b style="font-weight: 500;">Created:</b> 22 February 2008</li>
+<li><b style="font-weight: 500;">First post:</b> 27 February 2008</li> 
+<li><b style="font-weight: 500;">Last post:</b> 9 March 2012</li> 
+<li><b style="font-weight: 500;">Total entries:</b> 2137</li>
   
 <p>Where the hell did thirteen whole years go since I started writing a diary?</p>
 
@@ -161,9 +202,7 @@ Your browser does not support the audio element.
 
 
 
-
-
-
+</div></div>
 
 
 
@@ -171,7 +210,31 @@ Your browser does not support the audio element.
   
 
 
+  
 
-</div>
+  <script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+
+  
+
+
+  
 </body>
 </html>
