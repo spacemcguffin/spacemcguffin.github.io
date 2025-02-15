@@ -716,6 +716,8 @@ header{}
 aside > div{min-height:20px;padding:10px}
 .sidebarToggle #menuToggle{background:#344;color:#ffffff}
 }
+
+
 @media screen and (max-width:600px){
 
 .hero-title-classicwho {
@@ -731,6 +733,15 @@ aside > div{min-height:20px;padding:10px}
 	
 .hero-blur-svg {
 	display: none;
+}
+
+
+	.grid {
+    display: grid
+;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.6em;
+    align-items: self-start;
 }
 
 	
