@@ -356,6 +356,7 @@ opacity:0.85;
 
 .grid li span {
     padding-top: 0.4em;
+    font-size: 1.05em;
 }
 
 
@@ -363,7 +364,7 @@ opacity:0.85;
     color: #456291;
     display: block;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1.05em;
 }
 
 .grid li a:hover {
@@ -385,8 +386,8 @@ opacity:0.85;
 
 .grid li small {
     display: block;
-    font-size: 1em;
-    line-height: 1.3;
+    font-size: 0.95em;
+    line-height: 1.6;
     margin-top: 0.2em;
 }
 
@@ -510,7 +511,7 @@ aside > div{background:#ebebeb;min-height:1em;padding:30px 10px;text-align:cente
 
 a#logo {
     vertical-align: middle;
-    font-size: 2em;
+    font-size: 1.8em;
     color: #708eb1;
     font-weight: 500;
     display: block;
@@ -577,12 +578,14 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
 
 #sidebarbutton{background:#286983;color:#ffffff;opacity:0.8;cursor:pointer;display:block;padding:5px;text-decoration:none}
 
-#sidebar a.button{
+#sidebar a.button {
+    font-size: 0.95em;
     text-decoration: none;
     text-align: center;
     background: #466250;
     color: #ffffff;
-    padding: 6px;
+    padding: 5px;
+    font-weight: 400;
     display: block;
     margin-bottom: 0.5em;
     width: 85%;
@@ -599,19 +602,19 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
 
 #sidebar a.back2Top:hover{background:#c1cad8;color:#000;text-decoration:none}
 
-#sidebarContent{
-    width: 220px;
+#sidebarContent {
+    width: 200px;
     background: #fbfbfb;
-    padding: 1em;
+    padding: 0.5em;
     padding-bottom: 2em;
 }
 
 
 footer a{color:#000000}
-#main{margin-left:260px}
+#main{margin-left:220px}
 #wrapall{}
 #header{max-width:1100px;overflow:hidden;}
-#wrapall,#header{max-width:1100px;}
+#wrapall,#header{max-width:1200px;}
 #headerLeft,#headerRight{display:inline-block;vertical-align:middle}
 #headerLeft{text-align:center;margin:0.7em;}
 
