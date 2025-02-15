@@ -329,7 +329,7 @@ font-size: 2em;
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 15px;
+    grid-gap: 0.6em;
     align-items: self-start;
 }
 
@@ -349,10 +349,13 @@ font-size: 2em;
     object-fit: cover;
 }
 
+.grid li img:hover {
+opacity:0.85;
+}
+
 
 .grid li span {
-    display: block;
-    padding-top: 6px;
+    padding-top: 0.4em;
 }
 
 
@@ -738,6 +741,22 @@ header{padding:0 0 0 0}
 #sidebarContent{right:0;background:#6f9898}
 #mobileLogo{display:inline-block;font-size:17px;padding:0 3px 0 10px;font-weight:bold;color:#ffffff;text-decoration:none}
 #mobileMenuToggle{display:inline-block}
+}
+
+
+ @media screen and (max-width:500px){
+   .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.4em;
+        align-items: self-start;
+    }
+
+
+    .grid li:not(:last-child) {
+        margin-bottom: 1em;
+        border-bottom: 1px dashed #888888;
+}
 }
 
 
