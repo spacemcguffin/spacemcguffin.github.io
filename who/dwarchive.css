@@ -329,7 +329,7 @@ font-size: 2em;
 .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 0.6em;
+    grid-gap: 0.8em;
     align-items: self-start;
 }
 
@@ -337,6 +337,8 @@ font-size: 2em;
 .grid li {
     display: grid;
     position: relative;
+    border: 1px solid #c6c6c6;
+    padding: 0.5em;
 }
 
 
