@@ -358,7 +358,7 @@ font-size: 2em;
     position: relative;
     background: #16092D;
     border: 1px solid #16092D;
-    padding: 0.5em;
+    border-radius: 1em;
 }
 
 .grid li:hover {
@@ -370,7 +370,8 @@ font-size: 2em;
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 10px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
     aspect-ratio: 6 / 4;
     object-fit: cover;
 }
@@ -383,7 +384,7 @@ opacity:0.85;
 .grid li span {
     padding-top: 0.4em;
     font-size: 1.05em;
-    margin-bottom: 0.5em;
+    margin: 0.3em 0.7em 0.5em 0.7em;
 }
 
 
