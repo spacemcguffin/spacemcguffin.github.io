@@ -1,5 +1,17 @@
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
-body{line-height:1.3em;font-family:'Inter',sans-serif;font-size:0.9em;color:#3a3a3a}
+
+body{
+	line-height:1.3em;
+	font-family:'Inter',sans-serif;
+	font-size:0.9em;
+	color:#3a3a3a;
+  background-color: #280037;
+    background-image: url("/doctorwho/img/purple.png");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
 h1{font-size:25px}
 h2{font-size:21px}
 h3{font-size:18px}
@@ -342,12 +354,12 @@ font-size: 2em;
 .grid li {
     display: grid;
     position: relative;
-    border: 1px solid #c6c6c6;
+    border: 0px solid #EC7138;
     padding: 0.5em;
 }
 
 .grid li:hover {
-    background: #f0f0f0;
+    border: 0px solid #EC7138;
 }
 
 
@@ -373,7 +385,7 @@ opacity:0.85;
 
 
 .grid li a {
-    color: #456291;
+    color: #ffffff;
     display: block;
     font-weight: 500;
     font-size: 1.05em;
@@ -396,7 +408,7 @@ opacity:0.85;
 
 
 .grid li small {
-    color: #606060;
+    color: #bfbfbf;
     display: block;
     font-size: 0.85em;
     line-height: 1.6;
@@ -405,7 +417,7 @@ opacity:0.85;
 
 
 .grid li b {
-    color: #456291;
+    color: #bfbfbf;
     display: block;
     font-weight: bold;
     font-size: 16px;
