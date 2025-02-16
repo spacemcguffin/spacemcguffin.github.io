@@ -96,10 +96,10 @@ b {font-weight: 500;}
     font-size: 3em;
     font-family: 'Bebas Neue', sans-serif;
     line-height: 1.2;
-    color: #000000;
-    letter-spacing: 1px;
-    background-image: linear-gradient(to left, #456291, #37059300);
+    color: #ffffff;
+    letter-spacing: 1.5px;
     padding: 0.2em;
+    background-image: linear-gradient(to right, #37059300, #16092D);
     border-radius: 0 30px 30px 0;
     margin-bottom: 0.4em;
 }
@@ -354,12 +354,13 @@ font-size: 2em;
 .grid li {
     display: grid;
     position: relative;
+    background: #16092D;
     border: 0px solid #EC7138;
     padding: 0.5em;
 }
 
 .grid li:hover {
-    border: 0px solid #EC7138;
+    border: 2px solid #EC7138;
 }
 
 
@@ -536,7 +537,7 @@ aside > div{background:#ebebeb;min-height:1em;padding:30px 10px;text-align:cente
 a#logo {
     vertical-align: middle;
     font-size: 1.8em;
-    color: #708eb1;
+    color: #97bde8;
     font-weight: 500;
     display: block;
     text-decoration: none;
@@ -547,7 +548,7 @@ a#logo {
 }
 
 a#logo:hover {
-    color: #000000;
+    color: #ffffff;
 }
 
 
@@ -606,8 +607,8 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
     font-size: 0.95em;
     text-decoration: none;
     text-align: center;
-    background: #466250;
-    color: #ffffff;
+    background-image: linear-gradient(to right, #7a2d64, #49125e);
+	  color: #ffffff;
     padding: 5px;
     font-weight: 400;
     display: block;
@@ -618,17 +619,27 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
     border-radius: 6px;
 }
 
-#sidebar a.button:hover{background:#adbdb3;color:#000;text-decoration:none}
+#sidebar a.button:hover{opacity:0.75;color:#000;text-decoration:none}
 
 #sidebarBackTop{background:#286983;color:#FFF;opacity:0.8;cursor:pointer;display:block;padding:5px}
 
-#sidebar a.back2Top{text-decoration:none;text-align:center;background:#456291;color:#ffffff;font-weight:500;padding:6px;border-radius: 6px;display:block;width: 85%;margin-left: auto;margin-right: auto;}
+#sidebar a.back2Top{
+	text-decoration: none;
+    text-align: center;
+    background: #211a5a5e;
+    color: #ffffff;
+    font-weight: 400;
+    padding: 6px;
+    border-radius: 6px;
+    display: block;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;}
 
-#sidebar a.back2Top:hover{background:#c1cad8;color:#000;text-decoration:none}
+#sidebar a.back2Top:hover{opacity:7.5;color:#000;text-decoration:none}
 
 #sidebarContent {
     width: 200px;
-    background: #fbfbfb;
     padding: 0.5em;
     padding-bottom: 2em;
 }
