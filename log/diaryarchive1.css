@@ -91,7 +91,16 @@ color: #ff8303;
 
 nav{display:inline-block}
 b {font-weight: 500;}
-.article{margin-bottom:1.5em;font-size: 1em;}
+
+.article{
+    padding-bottom: 1.5em;
+    margin-bottom: 1.5em;
+    margin-right: auto;
+    padding-bottom: 5em;
+    margin-left: auto;
+    max-width: 700px;
+    padding: 1.5em;
+}
 
 .article h2{
     font-weight: 600;
@@ -105,7 +114,7 @@ b {font-weight: 500;}
 }
 
 .article h3 {    
-    font-size: 2.2em;
+font-size: 2.2em;
     font-family: 'Parkinsans', sans-serif;
     line-height: 1.2;
     color: #ffffff;
@@ -557,7 +566,16 @@ padding: 1em;
 }
 address{padding:10px 20px 30px 10px}
 .article p.date {color:#6A6A6A;margin: 0 0 0 0;font-weight: 600;font-size: 85%;letter-spacing:0.5px;text-transform:uppercase;margin-bottom: 0.2em;}
-.article p {margin-bottom:1em;font-size:1.05em;margin-left: 0.5em;margin-right: 0.5em;line-height: 1.4;}
+
+.article p {
+    margin-bottom: 1em;
+    font-size: 1.05em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    line-height: 1.4;
+    color: #e0e0e0;
+}
+
 aside > div{background:#ebebeb;min-height:1em;padding:30px 10px;text-align:center;color:#000000;font-family: 'Onest', sans-serif;}
 
 a#logo {
@@ -681,7 +699,7 @@ footer a{color:#97BDE8}
 footer a:hover{color:#ffffff}
 
 #main{
-  background: #16092d8f;
+background: #16092d8f;
     border-radius: 1em;}
 
 #wrapall{}
@@ -697,7 +715,12 @@ footer a:hover{color:#ffffff}
   top: 0;				
 				}
 
-#page{padding:2em;}
+#page{    
+	padding: 2em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #menuToggle{padding: 0.2em;font-size: 1.5em;font-weight: 300;text-transform: uppercase;font-family: 'Onest', sans-serif;letter-spacing: 0.5px;}
 .stick #sidebarContent{height: auto;}
 #stick-here{background:red}
