@@ -545,8 +545,16 @@ filter: contrast(0.8);
 
 
 
-footer{background:#fbfbfb;}
-footer p{padding:2em;color:#1F1F1F;font-size: 0.9em;}
+footer{color: #ffffff;}
+
+footer p {
+padding: 1em;
+    color: #ffffff;
+    font-size: 1.05em;
+    background: #16092d7d;
+    border-radius: 1em;
+    text-align: center;
+}
 address{padding:10px 20px 30px 10px}
 .article p.date {color:#6A6A6A;margin: 0 0 0 0;font-weight: 600;font-size: 85%;letter-spacing:0.5px;text-transform:uppercase;margin-bottom: 0.2em;}
 .article p {margin-bottom:1em;font-size:1.05em;margin-left: 0.5em;margin-right: 0.5em;line-height: 1.4;}
@@ -669,7 +677,9 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
 }
 
 
-footer a{color:#000000}
+footer a{color:#97BDE8}
+footer a:hover{color:#ffffff}
+
 #main{margin-left:220px}
 #wrapall{}
 #header{max-width:1100px;overflow:hidden;}
