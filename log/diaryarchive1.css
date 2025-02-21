@@ -173,6 +173,7 @@ font-weight: 400;
     flex: 1;
     flex-wrap: wrap;
    	margin-left: 1em;
+	    align-content: center;
 }
 
 
@@ -648,7 +649,7 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
 #sidebarbutton{background:#286983;color:#ffffff;opacity:0.8;cursor:pointer;display:block;padding:5px;text-decoration:none}
 
 #sidebar a.button {
-    font-size: 0.95em;
+font-size: 0.95em;
     text-decoration: none;
     text-align: center;
     background-image: linear-gradient(to right, #7a2d64, #49125e);
@@ -703,7 +704,7 @@ margin-left: 260px;}
 
 #wrapall{}
 #header{max-width:1100px;overflow:hidden;}
-#wrapall,#header{max-width:1200px;}
+#wrapall,#header{max-width:1100px;}
 #headerLeft,#headerRight{display:inline-block;vertical-align:middle}
 #headerLeft{text-align:center;margin:0.7em;}
 
@@ -767,7 +768,6 @@ margin-left: 260px;}
 .breadcrumb-link:hover {
     font-size: 1em;
     line-height: 14px;
-    color: #ffffff;
     text-decoration: none;
     border-bottom:1px solid #ffffff;
 }
@@ -825,7 +825,13 @@ aside > div{min-height:20px;padding:10px}
 	  line-height:1.2;
 }
 	
-#sidebarContent {max-width: 20%}
+#sidebarContent {
+	width: 220px;
+    padding: 1em;
+    padding-bottom: 2em;
+    padding-top: 2em;
+		}
+	
 #headerLeft{text-align:left}
 #headerRight{height:auto;position:absolute;width:auto;top:46px;background:#6f9898;left:0;display:none}
 
