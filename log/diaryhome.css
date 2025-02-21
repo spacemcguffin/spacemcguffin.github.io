@@ -1,10 +1,22 @@
 html,body,div,span,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,abbr,address,cite,code,del,dfn,em,img,ins,kbd,q,samp,small,strong,sub,sup,var,b,i,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
-body{line-height:1.3em;font-family:'Geist',sans-serif;font-size:0.9em;color:#3a3a3a}
+
+body{
+	line-height:1.3em;
+	font-family:'Inter',sans-serif;
+	font-size:0.9em;
+	color:#3a3a3a;
+  background-color: #280037;
+    background-image: url("/doctorwho/img/purple.png");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+
 h1{font-size:25px}
 h2{font-size:21px}
 h3{font-size:18px}
 
-::-moz-selection {margin-bottom: 0.5em;
+::-moz-selection {
 	background: #cfd8e4;
 	text-shadow: none;
   color:#000000;
@@ -63,38 +75,55 @@ header{
 	color:#000000;
 }
 
-nav{display:inline-block}
-b {font-weight: 500;}
 
-.article {
-    border-bottom: 1px solid #cccccc;
-    padding-bottom: 1.5em;
-    margin-bottom: 1.5em;
-    margin-right: auto;
-    margin-left: auto;
+.checked {
+color: #ff8303;
+    margin-bottom: 0.5em;
 }
 
-.article h2{font-weight:600;margin-bottom:0.5em;margin-top:0.5em;font-size:1.8em;font-family: 'Onest', sans-serif;line-height:1.2;color:#000000}
-
-.article h3 {
-    font-size: 3em;
-    font-family: 'Bebas Neue', sans-serif;
-    line-height: 1.2;
-    color: #000000;
-    letter-spacing: 1px;
-    text-align: center;
+.unchecked {
+    color: #3a3a3a;
     margin-bottom: 0.5em;
+}
+
+
+
+
+nav{display:inline-block}
+b {font-weight: 500;}
+.article{margin-bottom:1.5em;font-size: 1em;}
+
+.article h2{
+    font-weight: 600;
+    margin-bottom: 0.5em;
+    font-size: 1.5em;
+    font-family: 'Parkinsans', sans-serif;
+    line-height: 1.2;
+    color: #ffffff;
+    margin-left: 1em;
+    text-transform: uppercase;
+}
+
+.article h3 {    
+    font-size: 2.2em;
+    font-family: 'Parkinsans', sans-serif;
+    line-height: 1.2;
+    color: #ffffff;
+    padding: 0.25em;
+    background-image: linear-gradient(to right, #37059300, #16092D);
+    border-radius: 0 1em 1em 0;
+    margin-bottom: 0.4em;
+    border-right: 2px solid #ffffff60;
+    border-bottom: 2px solid #ffffff60;
 }
 
 .article h4 {
-    text-transform: uppercase;
-    margin-bottom: 0.5em;
-    font-weight: 600;
-    font-size: 1em;
+    font-weight: 400;
+    font-size: 1.8em;
     color: #7082ad;
-    font-family: 'Figtree';
+    font-family: 'Bebas Neue', sans-serif;
     line-height: 1.2;
-    text-align: center;
+    margin-bottom: 0.5em;
 }
 
 
@@ -110,7 +139,7 @@ font-weight: 400;
 
 
 .hero-large {
-    height: 400px;
+    height: 180px;
 }
 
 
@@ -139,9 +168,9 @@ font-weight: 400;
 
 
 .hero-title-small {
-    border-bottom: 2px solid #b9c6da;
+    border-bottom: 2px solid #8fa0bb;
     font-size: 0.65em;
-    color: #b9c6da;
+    color: #8fa0bb;
     font-family: 'Figtree',sans-serif;
     font-weight: 700;
     text-transform: uppercase;
@@ -153,10 +182,11 @@ font-weight: 400;
 
 
 .hero-title-1 {
-    font-size: 2em;
-    line-height: 1.1;
+    font-size: 1.8em;
+    line-height: 75px;
     display: block;
     font-family: 'Parkinsans', sans-serif;
+    letter-spacing: -1px;
 }
 
 
@@ -169,7 +199,7 @@ font-size: 2em;
 
 
 .hero-title-3 {
-font-weight: 200;
+    font-weight: 200;
     font-size: 0.75em;
     line-height: 2.2;
     margin-top: 0;
@@ -191,13 +221,20 @@ font-weight: 200;
 }
 
 
+.hero-title-classicwho {
+    letter-spacing: -0.5px;
+    font-size: 2.4em;
+    line-height: 65px;
+    display: block;
+    font-weight: 900;
+    font-family: 'Figtree',sans-serif;
+    text-transform: uppercase;
+}
+
 
 .hero-date {
-    margin-top: 0.5em;
     display: flex;
-    opacity: 0.8;
-   	line-height: 1.5;
-	font-family: 'Parkinsans', sans-serif;
+    opacity: 0.6;
 }
 
 
@@ -219,7 +256,8 @@ font-weight: 200;
     right: 0%;
     z-index: 2;
     width: 70%;
-    height: 400px;
+    height: 180px;
+	opacity: 0.8;
 }
 
 
@@ -228,16 +266,22 @@ font-weight: 200;
     top: 0;
     left: 0;
     z-index: 1;
-    background: #000000;
+    background: #420a463d;
     width: 100%;
-    height: 400px;
+    height: 180px;
     overflow: hidden;
-    transform: rotate(180deg);
+    border-bottom: 0.5em solid #00000026;
 }
 
 
 .hero-blur-img {
-opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    filter: blur(20px);
+    width: 140%;
+    left: 0px;
+    opacity: 0.5;
 }
 
 
@@ -260,62 +304,118 @@ opacity: 0.5;
     width: 100%;
     height: auto;
     display: block;
-    aspect-ratio: 5 / 4;
+    border-radius: 6px;
+    aspect-ratio: 4 / 3;
     object-fit: cover;
 }
 
 
 
 
-.diarygrid {
+
+
+.gallery1 {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 15px;
-    align-items: self-start;
 }
 
-
-.diarygrid li {
-    display: grid;
-    position: relative;
-}
-
-
-.diarygrid li img {
+.gallery1 img {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 6px;
     object-fit: cover;
-    aspect-ratio: 5 / 4;
 }
 
 
-tr:hover {
-	background-color:#EAECF0;
+
+
+
+
+
+.quote {
+    line-height: 1.2;
+    font-size: 1.4em;
+    padding-top: 1em;
+    text-align: center;
+    font-weight: 500;
+    margin-left: auto;
+    letter-spacing: -0.3px;
+    color: #437b98de;
+    margin-right: auto;
+    font-family: 'Poppins', sans-serif;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    max-width: 650px;
 }
 
 
-.diarygrid li span {
+
+
+
+
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1em;
+    align-items: self-start;
+    margin-bottom: 3em;
+}
+
+
+.grid li {
+    display: grid;
+    position: relative;
+    background: #16092D;
+    border: 0px solid #16092D;
+    border-radius: 1em;
+}
+
+.grid li:hover {
+    border: 1px solid #EC7138;
+}
+
+
+.grid li img {
+    width: 100%;
+    height: auto;
     display: block;
-    padding-top: 6px;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+}
+
+.grid li img:hover {
+opacity:0.85;
+filter: contrast(0.8);
 }
 
 
-.diarygrid li a {
-color: #456291;
+.grid li span {
+    padding-top: 0.4em;
+    font-size: 1.05em;
+    margin: 0.3em 0.7em 0.5em 0.7em;
+}
+
+
+.grid li a {
+    color: #ffffff;
     display: block;
     font-weight: 500;
     font-size: 1.1em;
+    line-height: 1.3;
 }
 
-.diarygrid li a:hover {
-		opacity: 0.85;
-	  color:#456291;
-	text-decoration: underline;
-	    	border-bottom: none;
+.grid li a:hover {
+	  color:#97bde8;
+  	font-weight:500;
+    border-bottom: none;
 }
 
-.diarygrid li a:before {
+.grid li a:before {
     content: '';
     position: absolute;
     top: 0;
@@ -325,16 +425,100 @@ color: #456291;
 }
 
 
-.diarygrid li small {
+.grid li small {
+    color: #bfbfbf;
     display: block;
-    font-size: 1em;
-    line-height: 1.3;
-    margin-top: 0.3em;
-    margin-bottom: 1em;
+    font-size: 0.85em;
+    line-height: 1.6;
+    margin-top: 0.2em;
+    margin-bottom: 0.5em;
 }
 
 
-.diarygrid li b {
+.grid li b {
+    color: #bfbfbf;
+    display: block;
+    font-weight: 500;
+}
+
+
+.grid li b:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+
+
+
+
+
+.maingrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    align-items: self-start;
+}
+
+
+.maingrid li {
+    display: grid;
+    position: relative;
+    background: #16092D;
+    border: 0px solid black;
+}
+
+
+.maingrid li img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.maingrid li span {
+    display: block;
+    padding-top: 6px;
+}
+
+
+.maingrid li a {
+    color: #456291;
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.maingrid li a:hover {
+		opacity: 0.7;
+	  color:#456291;
+	text-decoration: underline;
+	    	border-bottom: none;
+}
+
+.maingrid li a:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+
+.maingrid li small {
+    display: block;
+    font-size: 1em;
+    line-height: 1.3;
+    margin-top: 0.2em;
+}
+
+
+.maingrid li b {
     color: #456291;
     display: block;
     font-weight: bold;
@@ -342,7 +526,7 @@ color: #456291;
 }
 
 
-.diarygrid li b:before {
+.maingrid li b:before {
     content: '';
     position: absolute;
     top: 0;
@@ -356,28 +540,33 @@ color: #456291;
 
 
 
-footer p{margin-bottom: 4em;color:#000000;font-size: 1em;text-align: center;margin-right: 2em;margin-left: 2em;}
+
+
+
+
+
+footer{background:#fbfbfb;}
+footer p{padding:2em;color:#1F1F1F;font-size: 0.9em;}
 address{padding:10px 20px 30px 10px}
 .article p.date {color:#6A6A6A;margin: 0 0 0 0;font-weight: 600;font-size: 85%;letter-spacing:0.5px;text-transform:uppercase;margin-bottom: 0.2em;}
 .article p {margin-bottom:1em;font-size:1.05em;margin-left: 0.5em;margin-right: 0.5em;line-height: 1.4;}
 aside > div{background:#ebebeb;min-height:1em;padding:30px 10px;text-align:center;color:#000000;font-family: 'Onest', sans-serif;}
 
-a#logo{
-vertical-align: middle;
-    font-size: 2em;
-    margin-bottom: 0.5em;
-    color: #708eb1;
-    font-weight: 500;
+a#logo {
+    font-size: 1.1em;
+    color: #97bde8;
+    font-weight: 600;
     display: block;
     text-decoration: none;
     text-align: center;
     line-height: 1em;
     padding: 0.5em;
-    font-family: 'Bebas Neue',sans-serif;
+    font-family: 'Parkinsans', sans-serif;
+    text-transform: uppercase;
 }
 
 a#logo:hover {
-    color: #000000;
+    color: #ffffff;
 }
 
 
@@ -387,7 +576,7 @@ font-size: 1.05em;
 
 table, th, td {
     border-collapse: collapse;
-    padding: 0.7em;
+    padding: 0.8em;
     text-align: left;
     overflow-wrap: break-word;
     width: -webkit-fill-available;
@@ -398,6 +587,9 @@ tr {
   border-bottom: 1px solid #b9bcbc;
 }
 
+tr:hover {
+    background-color: #EAECF0;
+}
 
 tr:last-child 
 {
@@ -410,6 +602,7 @@ tr:last-child
     flex-wrap: wrap;
     font-size: 0.86em;
     color: #888888;
+    margin-top: 0.4em;
 }
 
 
@@ -428,45 +621,59 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
 
 #sidebarbutton{background:#286983;color:#ffffff;opacity:0.8;cursor:pointer;display:block;padding:5px;text-decoration:none}
 
-#sidebar a.button{
+#sidebar a.button {
+    font-size: 0.95em;
     text-decoration: none;
     text-align: center;
-    background: #755585;
-    background-image: linear-gradient(to right, #ea6990, #f2a541);
+    background-image: linear-gradient(to right, #7a2d64, #49125e);
     color: #ffffff;
-    padding: 6px;
+    padding: 0.3em;
+    font-weight: 400;
     display: block;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.6em;
     width: 85%;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Parkinsans', sans-serif;
     border-radius: 6px;
 }
 
-#sidebar a.button:hover{background-image: linear-gradient(to right, #ea6990, #f2a541);background:#b7a7c0;color:#000;text-decoration:none}
+#sidebar a.button:hover{opacity:0.7;color:#ffffff;text-decoration:none}
 
-#sidebarBackTop{background:#286983;color:#FFF;opacity:0.8;cursor:pointer;display:block;padding:5px}
+#sidebarBackTop{background:#286983;color:#ffffff;opacity:0.8;cursor:pointer;display:block;padding:5px}
 
-#sidebar a.back2Top{text-decoration:none;text-align:center;background:#456291;color:#ffffff;font-weight:500;padding:6px;border-radius: 6px;display:block;width: 85%;margin-left: auto;margin-right: auto;margin-bottom: 0.5em;}
-
-#sidebar a.back2Top:hover{background:#c1cad8;color:#000;text-decoration:none}
-
-#sidebarContent{
-    width: 220px;
-    padding: 1em;
-    padding-bottom: 2em;
-    padding-top: 2em;
-}
-
-
-#main{ 
+#sidebar a.back2Top{
+    text-decoration: none;
+    text-align: center;
+    background: #211a5a5e;
+    color: #ffffff;
+    font-weight: 400;
+    padding: 0.3em;
+    border-radius: 6px;
+    display: block;
+    width: 85%;
     margin-left: auto;
     margin-right: auto;
-    max-width: 1000px;
+    font-family: 'Parkinsans', sans-serif;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+#sidebar a.back2Top:hover{opacity:0.7;color:#ffffff;text-decoration:none}
+
+#sidebarContent {
+    width: 200px;
+    padding: 0.5em;
+    padding-bottom: 2em;
+    padding-top: 1.5em;
 }
 
 
+footer a{color:#000000}
+#main{margin-left:220px}
+#wrapall{}
 #header{max-width:1100px;overflow:hidden;}
+#wrapall,#header{max-width:1200px;}
 #headerLeft,#headerRight{display:inline-block;vertical-align:middle}
 #headerLeft{text-align:center;margin:0.7em;}
 
@@ -477,12 +684,7 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
   top: 0;				
 				}
 
-#page {
-	padding: 2em;
-    margin-left: auto;
-    margin-right: auto;
-}
-
+#page{padding:2em;}
 #menuToggle{padding: 0.2em;font-size: 1.5em;font-weight: 300;text-transform: uppercase;font-family: 'Onest', sans-serif;letter-spacing: 0.5px;}
 .stick #sidebarContent{height: auto;}
 #stick-here{background:red}
@@ -508,12 +710,7 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
     white-space: nowrap;
     overflow-x: auto;
     color: #ffffff;
-    opacity: 0.7;
-    font-family: 'Parkinsans', sans-serif;
-}
-
-.hero-breadcrumb:hover {
-	    opacity: 1;
+    opacity: 0.8;
 }
 
 .breadcrumb-icon {
@@ -536,8 +733,14 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
     line-height: 14px;
     color: #ffffff;
     text-decoration: none;
-    border-bottom:2px solid #ffffff;
+    border-bottom:1px solid #ffffff;
 }
+
+
+
+
+
+
 
 
 
@@ -561,13 +764,23 @@ header{}
 #headerLeft{width:auto}
 #headerRight{width:60%}
 }
+
 @media screen and (max-width:820px){#sidebar{display:none}
 #main{margin-left:0}
 .sidebarToggle #sidebar{background:red;display:block}
 .stick #sidebarContent{bottom:auto}																	
 aside > div{min-height:20px;padding:10px}
 .sidebarToggle #menuToggle{background:#344;color:#ffffff}
+
+   .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.8em;
+        align-items: self-start;
+    }
 }
+
+
 @media screen and (max-width:600px){
 
 .hero-title-classicwho {
@@ -576,8 +789,22 @@ aside > div{min-height:20px;padding:10px}
 	  line-height:1.2;
 }
 	
+#sidebarContent {max-width: 20%}
 #headerLeft{text-align:left}
 #headerRight{height:auto;position:absolute;width:auto;top:46px;background:#6f9898;left:0;display:none}
+
+	
+.hero-blur-svg {
+	opacity: 0.3;
+}
+
+
+	.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.8em;
+    align-items: self-start;
+}
 
 	
 .showMobileMenu #headerRight{display:block}
@@ -586,13 +813,45 @@ nav ul li a{display:block;background:transparent;color:#ffffff;text-align:center
 nav ul li{display:block;margin:0}
 .socialButtons{display:none}
 header{padding:0 0 0 0}
+#wrapall{}
 #sidebarContent{right:0;background:#6f9898}
 #mobileLogo{display:inline-block;font-size:17px;padding:0 3px 0 10px;font-weight:bold;color:#ffffff;text-decoration:none}
 #mobileMenuToggle{display:inline-block}
 }
 
 
-@media screen and (max-width:500px){
+ @media screen and (max-width:500px){
+   .grid {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        grid-gap: 0.4em;
+        align-items: self-start;
+    }
+
+
+    .grid li:not(:last-child) {
+        margin-bottom: 1em;
+}
+
+	 #page {
+    padding: 1.5em;
+}
+
+.grid li span {
+    padding-top: 0.6em;
+    font-size: 1.15em;
+}
+	 
+}
+
+
+@media screen and (max-width:400px){
+
+.hero-title-classicwho {
+    letter-spacing: -0.5px;
+    font-size: 1em;
+    line-height:1.2;
+}
 
 .hero-content {
   margin-left: -1em;
@@ -601,31 +860,16 @@ header{padding:0 0 0 0}
 	.hero-breadcrumb {
 	  margin-left: -1em;
 }
-
-.diarygrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 15px;
-    align-items: self-start;
-}
-
-
-.diarygrid li {
-    display: grid;
-    position: relative;
-}
-
-
-.diarygrid li img {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    aspect-ratio: 5 / 4;
-}
 	
+#sidebarContent {max-width: 20%}
 #headerLeft{text-align:left}
 #headerRight{height:auto;position:absolute;width:auto;top:46px;background:#6f9898;left:0;display:none}
+
+	
+.hero-blur-svg {
+	opacity: 0.3;
+}
+
 
 
 
@@ -638,6 +882,7 @@ nav ul li a{display:block;background:transparent;color:#ffffff;text-align:center
 nav ul li{display:block;margin:0}
 .socialButtons{display:none}
 header{padding:0 0 0 0}
+#wrapall{}
 #sidebarContent{right:0;background:#6f9898}
 #mobileLogo{display:inline-block;font-size:17px;padding:0 3px 0 10px;font-weight:bold;color:#ffffff;text-decoration:none}
 #mobileMenuToggle{display:inline-block}
