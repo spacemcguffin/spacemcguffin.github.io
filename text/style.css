@@ -6,6 +6,21 @@ html, body {
     background-size: cover;
 }
 
+
+
+::-moz-selection {
+	background: #16092D;
+	text-shadow: none;
+  color:#ddddd;
+}
+::selection {
+	background: #16092D;
+	text-shadow: none;
+  color:#dddddd;
+} 
+
+
+
 h2 {
     font-size: 3.5em;
     font-family: 'Onest', sans-serif;
