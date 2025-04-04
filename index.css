@@ -1,21 +1,12 @@
-        body, html, * {
-            box-sizing: border-box;
-            word-wrap:break-word;
-        }
-        body {
-    background-color: #2d5b89;
+html, body {
+    margin: 0em 0.5em 1em 0.5em;
+    padding: 0;
     background-image: url("/img/nebula.png");
     background-attachment: fixed;
-    background-size: cover;    
-    font-family: 'Inter', sans-serif;
-    font-weight: normal;
-    font-size: 0.73em;
-    margin: 2em;
-        }
-
-b {
-	font-weight:600;
+    background-size: cover;
 }
+
+
 
 ::-moz-selection {
 	background: #cfd8e4;
@@ -30,371 +21,52 @@ b {
 
 
 
-        a, a:visited {
-            color: #456291;
-            text-decoration: none;
-        }
-
-            a:hover {
-                color: #456291;
-		border-bottom: 1px solid #456291;
-		text-decoration:none;  
-            }
-
-
-
-#myBtn {
-  display: none;
-  font-family: 'Inter', sans-serif;
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  font-size: 1.1em;
-  border: none;
-  outline: none;
-  background-color: #E3EBF2;
-  color: #487096;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 4px;
-}
-
-#myBtn:hover {
-  background-color: #EEF4F7;
-}
-
-
-       
-				
-p {
-margin: 5px 0 10px 0;
-    padding: 0;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 1.25em;
-    font-weight: 400;
-    color: #203243;
-    line-height: 1.45em;
-        }
-
-        iframe, img, embed, object, video {
-            max-width: 100%;
-        }
-         h1, h2, h3, h4, h5, {
-            margin: 0;
-            padding: 0;
-            font-size: 12px;
-        }
-
-h6 {
-    font-weight: 900;
-    display: block;
-    color: #ffffff;
-    margin: 0 0 0 0;
-    font-size: 4.5em;
+h2 {
+    font-size: 3.5em;
     font-family: 'Onest', sans-serif;
     letter-spacing: 1px;
     transform: rotate(-2deg);
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke: 1px #ecbce9;
     text-align: center;
+    margin: 0.5em;
 }
 
-        /* Structure */
-        footer, .container {
-            position: relative;
-            clear: both;
-        }
-        .container {
-            max-width:600px;
-            margin: 0 auto;
-        }
-
-#maintitle {
-    position: relative;
-    overflow: hidden;
-    margin: 0 auto;
+#about {
+    text-align: left;
+    max-width: 500px;
+    padding: 1em;
+    margin: auto;
+    background: #2a193675;
+    border-radius: 1.5em;
 }
-      
 
-#navigation {
-    margin-bottom: 1.5em;
-    padding: 0;
-    list-style-type: none;
-    text-align: center;
+#about img {
+    max-width: 100%; 
+    height: auto;
+    display: block;
+    margin-bottom: 15px; 
+    border-radius: 1em;
+}
+
+#about p {
     font-family: 'Inter', sans-serif;
-    font-size: 1.3em;
-    font-weight: 400;
-    background: #321f40b8;
-    color: #ffffff69;
-    border-radius: 5em;
+    color: #d2d2d2;
+    font-size: 0.9em;
+    text-align: left;
+    line-height: 1.4;
+    margin: 1em;
+}
+
+#about a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #88b9e4;
 }
 
 
 
-
-                #navigation li {
-                    display: inline-block;
-                    padding: 8px 0 8px 0;
-                }
-
-                    #navigation li a {
-                       color: #ffffff;
-                       font-weight: 300;
-                    }
-                    #navigation li a:hover {
-                        color: #ddcff0;
-			text-decoration:none;
-			border-bottom: 1px solid #cbb8e6;
-                    }
-        #profile {
-background: #eceff1;
-    overflow: hidden;
-    padding: 0 1.2em;
-    border-bottom: 2px solid #c5cfd8;
-        }
-
-#profile img {
-	    vertical-align: middle;
-    border-radius: 100%;
-    float: left;
-    margin-top: 1.5em;
-	height:50px;
-	width:50px;
-	  transition: transform .7s ease-in-out;
-}
-
-#profile img:hover {
-    filter: none;
-	-webkit-filter: grayscale(100%);
-}
-
-
-
-
-        #profilefinal {
-    background: #fbfbfb;
-    overflow: hidden;
-    padding: 0 10px;
-    border-bottom: 1px solid #aaaaaa;
-    border-radius: 0 0 2em 2em;
-        }
-
-#profilefinal img {
-	    vertical-align: middle;
-    border-radius: 100%;
-    float: left;
-    margin-top: 1.5em;
-	height:45px;
-	width:45px;
-	  transition: transform .7s ease-in-out;
-}
-
-#profilefinal img:hover {
-    filter: none;
-	-webkit-filter: grayscale(100%);
-	  transform: rotate(180deg);
-}
-
-        #sidebar {
-            width: 300px;
-            float: left;
-            position: sticky;
-            top: 0;
-        }   
-
-
-        #content {
-	    padding: 1em 1em 1em 1em;
-        }
-            #content div, #content article {
-                    padding-left: 1em;
-            }
-            #extended-network {
-                border: 1px solid #000000;
-                padding: 1.8em;
-                text-align: center;
-            }
-
-                #extended-network span {
-    font-weight: 700;
-    font-size: 1.4em;
-    font-family: 'Inter', sans-serif;
-                }
-
-#blurbs h2 {
-font-weight: 700;
-    color: #487096;
-    font-size: 1.28em;
-    margin: 0.5em 0 0.5em 0.8em;
-    font-family: 'Inter', sans-serif;
-}
-
-#blurbs h3, #blurbs h3 a {
-    color: #456291;
-    margin: 0.3em 0 0.8em 0;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    font-size: 1.25em;
-    margin-left: 1em;
-}
-
-
-audio {
-    height: 3.5em;
-    width: 85%;
-}
-
-
-
-.hero-date-icon {
-    fill: #1d92e1;
-    height: 16px;
-    width: 16px;
-    vertical-align: text-top;
-    margin-right: 0.3em;
-}
-
-
-            #description {
-                padding-bottom:10px;
-            }
-            .post-meta {
-                overflow: hidden;
-                margin-top: 10px;
-            }
-                .note-count, .reblogs {
-                    width: 50%;
-                    float: left;
-                    margin: 0 !important;
-                }
-                .note-count {
-                    text-align: right;
-                }
-                .notes {
-                    margin: 0;
-                    padding: 0;
-                    list-style-type: none;
-                }
-                    .notes li {
-                        margin: 0;
-                        padding: 5px;
-                        font-size: 9px;
-                        border-bottom: 1px solid #e5e5e5;
-                    }
-                    .notes li div {
-                        margin: 0 !important;
-                    }
-			
-			    
-                
-                .post-container, .autopagerize_page_element {
-    			       margin: 0 !important;
-    			} 
-    			
-    			article {
-    				    margin: 0 !important;
-                }
-    			    
-
-			
-			.copyright {
-			    text-align: center;
-			    font-size: 0.95em;
-			    padding: 10px;
-			}
-
-			.copyright p {
-			    color: #ffffff80;
-			    font-weight:300;
-			}
-
-			/* Post Styles */
-			.link a {
-			    font-size: 12px;
-			}
-			.chat ul {
-			    margin: 0;
-			    padding: 0;
-			    list-style-type: none;
-			}
-			    .chat ul li {
-			        padding: 2px;
-			    }
-			    .odd {
-			        background: #e5e5e5;
-			    }
-		    .source {
-		        text-align: right;
-		    }
-		        .source::before {
-		            content: '-';
-		        }
-            blockquote {
-                margin: 0;
-                border-left: 2px solid #ffcc95;
-                padding: 0 10px;
-            }
-            .html_photoset {
-                margin: 0 !important;
-            }
-			.question {
-				background:#e5e5e5;
-				padding: 20px;
-				overflow: hidden;
-			}
-				.question img {
-					float: left;
-					margin-right: 10px;
-				}
-            .like_and_reblog_buttons {
-                margin: 0;
-                padding: 0;
-                list-style-type: none;
-            }
-                .like_and_reblog_buttons li {
-                    display: inline-block;
-                    padding: 0 5px;
-                }
-                .like_button {
-                    margin: 0 !important;
-                    padding: 0;
-                }
-            .tag-container {
-                clear: both;
-                padding: 2px;
-                background: #ffcc95;
-            }
-                .tags {
-                    margin: 0;
-                    padding: 0;
-                    list-style-type: none;
-                }
-                    .tags li {
-                        display: inline-block;
-                        margin-right: 10px;
-                        font-size: 9px;
-                    }
-                    .tags li a {
-                        color: #df7a36;
-                    }
-                    .tags li a:hover {
-                        color: #000000;
-                    }
-            #pagination {
-                clear: both;
-                text-align: center;
-            }
-            #pagination ul li {
-                display: inline-block;
-                margin: 0 10px;
-            }
-
-
-
-@media screen and (max-width:500px){
-
-body {
-	margin: 1em;
+#about a:hover {
+    background: #16092D;
+    color: #ffffff;
 }
