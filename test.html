@@ -11,17 +11,9 @@
     
   </head>
   
- <div class="nebula-bg"></div>
-
   <body>
 
-    <svg style="display: none;">
-  <filter id="noiseFilter">
-    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" result="noise"/>
-    <feColorMatrix type="saturate" values="0"/>
-    <feBlend in="SourceGraphic" in2="noise" mode="screen"/>
-  </filter>
-</svg>
+    <canvas id="space-bg" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
 
 
       <h2>notes</h2>
