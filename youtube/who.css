@@ -12,7 +12,7 @@
   --light-white-color: #f0f0f0;
   --light-gray-color: #e5e5e5;
   --border-color: #ccc;
-  --primary-color: #3b82f6;
+  --primary-color: #003B6F;
   --secondary-color: #404040;
   --overlay-dark-color: rgba(0, 0, 0, 0.6);
 }
@@ -334,8 +334,8 @@ body.sidebar-hidden .main-layout .sidebar {
   right: 10px;
   bottom: 12px;
   color: #fff;
-  font-size: 0.875rem;
-  padding: 0 5px;
+  font-size: 0.82rem;
+  padding: 5px;
   border-radius: 5px;
   background: var(--overlay-dark-color);
 }
@@ -355,7 +355,7 @@ body.sidebar-hidden .main-layout .sidebar {
 .content-wrapper .video-list .video-card .title {
   font-size: 1rem;
   color: var(--black-color);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.375;
   overflow: hidden;
   display: -webkit-box;
@@ -365,6 +365,7 @@ body.sidebar-hidden .main-layout .sidebar {
 
 .content-wrapper .video-list .video-card:hover .title {
   color: var(--primary-color);
+    font-weight: 600;
 }
 
 .content-wrapper .video-list .video-card p {
