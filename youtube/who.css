@@ -355,7 +355,7 @@ body.sidebar-hidden .main-layout .sidebar {
 .content-wrapper .video-list .video-card .title {
   font-size: 1rem;
   color: var(--black-color);
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.375;
   overflow: hidden;
   display: -webkit-box;
@@ -365,7 +365,6 @@ body.sidebar-hidden .main-layout .sidebar {
 
 .content-wrapper .video-list .video-card:hover .title {
   color: var(--primary-color);
-text-decoration: underline; 
 }
 
 .content-wrapper .video-list .video-card p {
@@ -416,16 +415,6 @@ text-decoration: underline;
   width: 100%;
   border-radius: 15px;
   aspect-ratio: 16 / 9;
-}
-
-.video-container .video-player :where(iframe, video, .main-thumbnail) :hover {
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
-}
-
-.video-container .video-player :where(iframe, video, .main-thumbnail) img:hover {
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
 }
 
 
