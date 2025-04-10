@@ -47,6 +47,62 @@ header,
   background: var(--white-color);
 }
 
+
+
+
+
+
+
+
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  border: none;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    color: var(--white-color);
+    background: var(--black-color);
+    pointer-events: none;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background: var(--border-color);
+}
+
+
+/* Style the buttons inside the tab */
+.tab button {
+border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.94rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    color: var(--black-color);
+    padding: 6px 12px;
+    background: var(--light-gray-color);
+}
+
+.tab {
+  overflow: hidden;
+  border: 0px;
+  background-color: #EFBE53;
+}
+
+
+
+
+
+
+
+
+
+
+
 .navbar {
   display: flex;
   gap: 32px;
