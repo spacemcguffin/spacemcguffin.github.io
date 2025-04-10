@@ -5,6 +5,20 @@
   font-family: "Inter", sans-serif;
 }
 
+
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
+
 /* Color variables for light theme */
 :root {
   --white-color: #fff;
