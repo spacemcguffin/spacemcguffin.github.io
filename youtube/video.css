@@ -203,6 +203,16 @@ body.sidebar-hidden .main-layout .sidebar {
 }
 
 
+.article h2 {
+    font-size: 2rem;
+    font-family: 'Onest', sans-serif;
+    text-align: center;
+    margin: 0 0.5em 0.5em 0.5em;
+    font-weight: 700;
+    color: var(--black-color);
+    line-height: 1.2;
+}
+
 
 .article h2 {
 margin: 0.5em 0em 0.5em 0em;
@@ -719,11 +729,7 @@ filter: contrast(0.8);
 
 
 
-.gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 15px;
-}
+
 
 .gallery img {
     width: 100%;
