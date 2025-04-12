@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - www.codingnepalweb.com -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhoTube</title>
+    <!-- Linking Unicons For Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+    <link rel="stylesheet" href="video.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body class="sidebar-hidden">
+    <div class="container">
+      <!-- Header / Navbar -->
+      <header>
+        <nav class="navbar">
+          <div class="nav-section nav-left">
+            <button class="nav-button menu-button">
+              <i class="uil uil-bars"></i>
+            </button>
+            <a href="index.html" class="nav-logo">
+              <img src="images/spacelogo.png" alt="Logo" class="logo-image" style="border-radius: 0%;">
+              <h2 class="logo-text">WhoTube</h2>
+            </a>
+          </div>
+
+          <div class="nav-section">
+            <button class="nav-button search-back-button" id="search-back-button">
+              <i class="uil uil-arrow-left"></i>
+            </button>
+          </div>
+
+          <div class="nav-section nav-center">
+
+
+          <div class="category-list">
+            <a href="#series2"><button class="category-button">Series 2</button></a>
+            <a href="#series3"><button class="category-button">Series 3</button></a>
+            <a href="#series4"><button class="category-button">Series 4</button></a>
+            <a href="#specials"><button class="category-button">Specials</button></a>
+            <a href="#misc"><button class="category-button">Misc.</button></a>
+          </div>
+
+            
+          </div>
+
+          <div class="nav-section nav-right">
+            <button class="nav-button search-button" id="search-button">
+              <i class="uil uil-search"></i>
+            </button>
+            <button class="nav-button theme-button">
+              <i class="uil uil-moon"></i>
+            </button>
+            <img src="images/user.png" alt="User Image" class="user-image" />
+          </div>
+        </nav>
+      </header>
+
+      <!-- Main Layout -->
+      <main class="main-layout">
+        <div class="screen-overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="nav-section nav-left">
+            <button class="nav-button menu-button">
+              <i class="uil uil-bars"></i>
+            </button>
+            <a href="index.html" class="nav-logo">
+              <img src="images/spacelogo.png" alt="Logo" class="logo-image" style="border-radius: 0%;">
+              <h2 class="logo-text">WhoTube</h2>
+            </a>
+          </div>
+
+          <div class="links-container">
+            <ul class="link-section">
+              <li>
+                <a href="index.html" class="link-item"> <i class="uil uil-rocket"></i> Home </a>
+              </li>
+              
+              <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-tv-retro"></i> Classic Series <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="link-item">First Doctor</a></li>
+                  <li><a href="#" class="link-item">Second Doctor</a></li>
+                  <li><a href="#" class="link-item">Third Doctor</a></li>
+                  <li><a href="#" class="link-item">Fourth Doctor</a></li>
+                  <li><a href="#" class="link-item">Fifth Doctor</a></li>
+                  <li><a href="#" class="link-item">Sixth Doctor</a></li>
+                  <li><a href="#" class="link-item">Seventh Doctor</a></li>
+                  <li><a href="#" class="link-item">Eighth Doctor</a></li>
+                     </ul>
+              </div>
+
+
+
+                          <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-desktop"></i> Modern Series <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="link-item">Ninth Doctor</a></li>
+                  <li><a href="#" class="link-item">Tenth Doctor</a></li>
+                  <li><a href="#" class="link-item">Eleventh Doctor</a></li>
+                  <li><a href="#" class="link-item">Twelfth Doctor</a></li>
+                  <li><a href="#" class="link-item">Thirteenth Doctor</a></li>
+                  <li><a href="#" class="link-item">Fourteenth Doctor</a></li>
+                  <li><a href="#" class="link-item">Fifteenth Doctor</a></li>
+                </ul>
+              </div>
+            </ul>
+
+            <div class="section-separator"></div>
+
+            <ul class="link-section">
+              <h4 class="section-title">Elsewhere</h4>
+
+
+             <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-cell"></i> Spin-Offs <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="link-item">SJA</a></li>
+                  <li><a href="#" class="link-item">Torchwood</a></li>
+                  <li><a href="#" class="link-item">Class</a></li>
+                  <li><a href="#" class="link-item">Tales of the TARDIS</a></li>
+                  <li><a href="#" class="link-item">The War Between</a></li>
+                </ul>
+              </div>
+              
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-music"></i>Big Finish</a>
+              </li>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-book-open"></i>Books</a>
+              </li>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-share-alt"></i>Multi-platform</a>
+              </li>
+               <li>
+                <a href="#" class="link-item"> <i class="uil uil-bolt"></i>Animations</a>
+              </li>
+            </ul>
+            <div class="section-separator"></div>
+
+            <ul class="link-section">
+              <h4 class="section-title">Explore</h4>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-fire"></i>Trending</a>
+                </li>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-trash-alt"></i>Rubbish</a>
+              </li>
+
+            </ul>
+
+
+       
+          </div>
+        </aside>
+
+        <div class="content-wrapper">
+
+          <!-- Video List -->
+          <div class="video-list">
+
+
+
+            <a id="series2" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/bornagain.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+                <p class="duration" style="bottom: 10px;right: 90%;border-radius: 100%;font-size: 0.75rem;"><i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i></p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Born Again</h2>
+                  <p class="channel-name">2005 Children in Need Minisode</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+                       <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/christmasinvasion.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+                <p class="duration" style="bottom: 10px;right: 90%;border-radius: 100%;font-size: 0.75rem;"><i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i></p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Christmas Invasion</h2>
+                  <p class="channel-name">2005 Christmas Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+                                   <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/newearth.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+                <p class="duration" style="bottom: 10px;right: 90%;border-radius: 100%;font-size: 0.75rem;"><i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i></p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">New Earth</h2>
+                  <p class="channel-name">Series 2, Episode 1</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+                                   <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/toothandclaw.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Tooth and Claw</h2>
+                  <p class="channel-name">Series 2, Episode 2</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+
+                                             <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/schoolreunion.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">School Reunion</h2>
+                  <p class="channel-name">Series 2, Episode 3</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/girlinthefireplace.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Girl in the Fireplace</h2>
+                  <p class="channel-name">Series 2, Episode 4</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/riseofthecybermen.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Rise of the Cybermen</h2>
+                  <p class="channel-name">Series 2, Episode 5</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/ageofsteel.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Age of Steel</h2>
+                  <p class="channel-name">Series 2, Episode 6</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/idiotslantern.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Idiot’s Lantern</h2>
+                  <p class="channel-name">Series 2, Episode 7</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/impossibleplanet.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Impossible Planet</h2>
+                  <p class="channel-name">Series 2, Episode 8</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/satanpit.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Satan Pit</h2>
+                  <p class="channel-name">Series 2, Episode 9</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/loveandmonsters.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Love & Monsters</h2>
+                  <p class="channel-name">Series 2, Episode 10</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/fearher.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Fear Her</h2>
+                  <p class="channel-name">Series 2, Episode 11</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/armyofghosts.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Army of Ghosts</h2>
+                  <p class="channel-name">Series 2, Episode 12</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                               <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/doomsday.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Doomsday</h2>
+                  <p class="channel-name">Series 2, Episode 13</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                       <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/runawaybride.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Runaway Bride</h2>
+                  <p class="channel-name">2006 Christmas Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+            
+            
+                       <a id="series3" class="video-card" href="watch.html">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/smithandjones.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Smith and Jones</h2>
+                  <p class="channel-name">Series 3, Episode 1</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/shakespearecode.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Shakespeare Code</h2>
+                  <p class="channel-name">Series 3, Episode 2</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/gridlock.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Gridlock</h2>
+                  <p class="channel-name">Series 3, Episode 3</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/daleksinmanhattan.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Daleks in Manhattan</h2>
+                  <p class="channel-name">Series 3, Episode 4</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/evolutionofthedaleks.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Evolution of the Daleks</h2>
+                  <p class="channel-name">Series 3, Episode 5</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/lazarusexperiment.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Lazarus Experiment</h2>
+                  <p class="channel-name">Series 3, Episode 6</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/42.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">42</h2>
+                  <p class="channel-name">Series 3, Episode 7</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/humannature.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Human Nature</h2>
+                  <p class="channel-name">Series 3, Episode 8</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/familyofblood.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Family of Blood</h2>
+                  <p class="channel-name">Series 3, Episode 9</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/blink.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Blink</h2>
+                  <p class="channel-name">Series 3, Episode 10</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/utopia.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Utopia</h2>
+                  <p class="channel-name">Series 3, Episode 11</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/soundofdrums.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Sound of Drums</h2>
+                  <p class="channel-name">Series 3, Episode 12</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/lastofthetimelords.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Last of the Time Lords</h2>
+                  <p class="channel-name">Series 3, Episode 13</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/timecrash.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Time Crash</h2>
+                  <p class="channel-name">2007 Children in Need Minisode</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+                                                           <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/voyageofthedamned.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Voyage of the Damned</h2>
+                  <p class="channel-name">2007 Christmas Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+
+                       <a id="series4" class="video-card" href="watch.html">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/partnersincrime.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Partners in Crime</h2>
+                  <p class="channel-name">Series 4, Episode 1</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/firesofpompeii.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Fires of Pompeii</h2>
+                  <p class="channel-name">Series 4, Episode 2</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/planetoftheood.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Planet of the Ood</h2>
+                  <p class="channel-name">Series 4, Episode 3</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/sontaranstratagem.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Sontaran Stratagem</h2>
+                  <p class="channel-name">Series 4, Episode 4</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/poisonsky.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Poison Sky</h2>
+                  <p class="channel-name">Series 4, Episode 5</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/doctorsdaughter.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Doctor’s Daughter</h2>
+                  <p class="channel-name">Series 4, Episode 6</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/unicornandthewasp.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Unicorn and the Wasp</h2>
+                  <p class="channel-name">Series 4, Episode 7</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/silenceinthelibrary.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Silence in the Library</h2>
+                  <p class="channel-name">Series 4, Episode 8</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/forestofthedead.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Forest of the Dead</h2>
+                  <p class="channel-name">Series 4, Episode 9</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/midnight.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Midnight</h2>
+                  <p class="channel-name">Series 4, Episode 10</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/turnleft.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Turn Left</h2>
+                  <p class="channel-name">Series 4, Episode 11</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/stolenearth.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Stolen Earth</h2>
+                  <p class="channel-name">Series 4, Episode 12</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/journeysend.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Journey’s End</h2>
+                  <p class="channel-name">Series 4, Episode 13</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+           
+
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/nextdoctor.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Next Doctor</h2>
+                  <p class="channel-name">2008 Christmas Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+        
+          
+
+        
+            <a id="specials" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/planetofthedead.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">Planet of the Dead</h2>
+                  <p class="channel-name">2009 Easter Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+                      <a href="watch.html" class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/weddingofsarahjanesmith.png" class="thumbnail" />
+                <p class="duration">2 episodes</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Wedding of Sarah Jane Smith</h2>
+                  <p class="channel-name">SJA Series 3, Episodes 5 & 6</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+
+            <a class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/watersofmars.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Waters of Mars</h2>
+                  <p class="channel-name">2009 Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+
+                                    <a class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/endoftime1.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The End of Time (Part One)</h2>
+                  <p class="channel-name">2009 Christmas Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+                                    <a class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/endoftime2.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The End of Time (Part Two)</h2>
+                  <p class="channel-name">2010 New Year’s Day Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+
+
+
+
+
+                      
+</div>
+          
+<h3 id="misc">Miscellaneous</h3>
+    
+<div class="video-list">    
+
+
+
+                                      <a class="video-card">
+              <div class="thumbnail-container">
+                <img src="/doctorwho/img/ten/dayofthedoctor.png" class="thumbnail" />
+                <p class="duration">1 episode</p>
+              </div>
+              <div class="video-info">
+                <img src="images/user.png" class="icon" />
+                <div class="video-details">
+                  <h2 class="title">The Day of the Doctor</h2>
+                  <p class="channel-name">50th Anniversary Special</p>
+                  <p class="views">
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star checked"></i>
+<i class="fa fa-star unchecked"></i>
+                  </p>
+                </div>
+              </div>
+            </a>
+  
+
+
+            
+
+            
+            
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Linking custom script -->
+    <script src="script.js"></script>
+  </body>
+</html>
