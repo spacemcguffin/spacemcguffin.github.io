@@ -254,6 +254,20 @@ margin: 0.5em 0em 0.5em 0em;
     border-radius: 0 30px 30px 0;
 }
 
+.article h4 {
+    margin: 0.5em 0em 0.5em 0em;
+    color: var(--black-color);
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    margin-top: 0.5em;
+    text-align: center;
+    font-size: 0.95rem;
+    font-family: 'Onest', sans-serif;
+    background-image: linear-gradient(to left, #6e8ec1a1, #ffffff00);
+    padding: 0.2em 0 0.2em 0;
+    border-radius: 0 30px 30px 0;
+}
+
 
 
 .article p {
@@ -639,6 +653,11 @@ margin: 0.5em 0em 0.5em 0em;
     padding: 0.5em;
 }
 
+.article {
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+    border-bottom: 2px solid var(--light-gray-color);
+}
 
 
 
@@ -740,7 +759,13 @@ filter: contrast(0.8);
 
 
 
-
+.article img {
+    margin-bottom: 0.5em;
+    float: right;
+    margin-right: 1em;
+    border-radius: 1rem;
+    object-fit: cover;
+}
 
 
 
