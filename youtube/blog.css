@@ -762,6 +762,20 @@ filter: contrast(0.8);
 
 
 
+.video-container .video-player :where(iframe, video, .main-thumbnail) {
+    width: 100%;
+    border-radius: 15px;
+    aspect-ratio: 16 / 9;
+
+.video-container .video-description {
+    margin-top: 20px;
+    color: var(--black-color);
+    border-radius: 15px;
+    padding: 10px;
+    background-color: var(--light-gray-color);
+
+	
+
 
 .article {
 	padding-top: 1.2rem;
