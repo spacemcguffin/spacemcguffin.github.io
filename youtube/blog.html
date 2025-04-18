@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhoTube</title>
+    <!-- Linking Unicons For Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+    <link rel="stylesheet" href="video.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+  <body class="sidebar-hidden">
+    <div class="container">
+      <!-- Header / Navbar -->
+      <header>
+        <nav class="navbar">
+          <div class="nav-section nav-left">
+            <button class="nav-button menu-button">
+              <i class="uil uil-bars"></i>
+            </button>
+            <a href="index.html" class="nav-logo">
+              <img src="images/spacelogo.png" alt="Logo" class="logo-image" style="border-radius: 0%;">
+              <h2 class="logo-text">lewis.lc</h2>
+            </a>
+          </div>
+
+          <div class="nav-section">
+            <button class="nav-button search-back-button" id="search-back-button">
+              <i class="uil uil-arrow-left"></i>
+            </button>
+          </div>
+
+          <div class="nav-section nav-center">
+
+
+          <div class="category-list">
+            <a href="#series2"><button class="category-button">Series 2</button></a>
+            <a href="#series3"><button class="category-button">Series 3</button></a>
+            <a href="#series4"><button class="category-button">Series 4</button></a>
+            <a href="#specials"><button class="category-button">Specials</button></a>
+            <a href="#misc"><button class="category-button">Misc.</button></a>
+          </div>
+
+            
+          </div>
+
+          <div class="nav-section nav-right">
+            <button class="nav-button search-button" id="search-button">
+              <i class="uil uil-search"></i>
+            </button>
+            <button class="nav-button theme-button">
+              <i class="uil uil-moon"></i>
+            </button>
+            <img src="images/user.png" alt="User Image" class="user-image" />
+          </div>
+        </nav>
+      </header>
+
+      <!-- Main Layout -->
+      <main class="main-layout">
+        <div class="screen-overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="nav-section nav-left">
+            <button class="nav-button menu-button">
+              <i class="uil uil-bars"></i>
+            </button>
+            <a href="index.html" class="nav-logo">
+              <img src="images/spacelogo.png" alt="Logo" class="logo-image" style="border-radius: 0%;">
+              <h2 class="logo-text">WhoTube</h2>
+            </a>
+          </div>
+
+          <div class="links-container">
+            <ul class="link-section">
+              <li>
+                <a href="index.html" class="link-item"> <i class="uil uil-rocket"></i> Home </a>
+              </li>
+              
+              <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-tv-retro"></i> Classic Series <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="link-item">First Doctor</a></li>
+                  <li><a href="#" class="link-item">Second Doctor</a></li>
+                  <li><a href="#" class="link-item">Third Doctor</a></li>
+                  <li><a href="#" class="link-item">Fourth Doctor</a></li>
+                  <li><a href="#" class="link-item">Fifth Doctor</a></li>
+                  <li><a href="#" class="link-item">Sixth Doctor</a></li>
+                  <li><a href="#" class="link-item">Seventh Doctor</a></li>
+                  <li><a href="#" class="link-item">Eighth Doctor</a></li>
+                     </ul>
+              </div>
+
+
+
+                          <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-desktop"></i> Modern Series <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="link-item">Ninth Doctor</a></li>
+                  <li><a href="#" class="link-item">Tenth Doctor</a></li>
+                  <li><a href="#" class="link-item">Eleventh Doctor</a></li>
+                  <li><a href="#" class="link-item">Twelfth Doctor</a></li>
+                  <li><a href="#" class="link-item">Thirteenth Doctor</a></li>
+                  <li><a href="#" class="link-item">Fourteenth Doctor</a></li>
+                  <li><a href="#" class="link-item">Fifteenth Doctor</a></li>
+                </ul>
+              </div>
+            </ul>
+
+            <div class="section-separator"></div>
+
+            <ul class="link-section">
+              <h4 class="section-title">Elsewhere</h4>
+
+
+             <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-cell"></i> Spin-Offs <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="#" class="link-item">SJA</a></li>
+                  <li><a href="#" class="link-item">Torchwood</a></li>
+                  <li><a href="#" class="link-item">Class</a></li>
+                  <li><a href="#" class="link-item">Tales of the TARDIS</a></li>
+                  <li><a href="#" class="link-item">The War Between</a></li>
+                </ul>
+              </div>
+              
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-music"></i>Big Finish</a>
+              </li>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-book-open"></i>Books</a>
+              </li>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-share-alt"></i>Multi-platform</a>
+              </li>
+               <li>
+                <a href="#" class="link-item"> <i class="uil uil-bolt"></i>Animations</a>
+              </li>
+            </ul>
+            <div class="section-separator"></div>
+
+            <ul class="link-section">
+              <h4 class="section-title">Explore</h4>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-fire"></i>Trending</a>
+                </li>
+              <li>
+                <a href="#" class="link-item"> <i class="uil uil-trash-alt"></i>Rubbish</a>
+              </li>
+
+            </ul>
+
+
+       
+          </div>
+        </aside>
+
+        <div class="content-wrapper">
+
+          <!-- Main Page -->
+          
+<div class="videobit">
+  <div class="article">
+
+
+<h1 id="reflecting">Reflecting on 2012</h1>
+    
+<h4>31 December 2012</h4>
+
+<img src="images/joedy.png">
+    
+<p>I find the notion of ‘the best year’ in your life quite silly (every year is extremely different, and every experience enhances your life or affects you somehow) but, in terms of my creative writing portfolio, 2012 has been my most successful year.</p>
+
+<p>I finished my first year of university and levelled up to the second, and I’ve been published twice - once on The Pygmy Giant and once in an actual book! In addition, I also started up my Celebrate Regenerate project which has taken off better than I ever could’ve expected.</p>
+
+<p>Not only that, but I’ve emailed various Doctor Who writers, directors and producers who have said they’d be happy to do interviews for the book. That’ll be happening, hopefully, in January 2013 and <i>if that wasn’t enough</i> I’ve also been given the opportunity to work with Doctor Who Adventures magazine in February 2013 too! Both of these, though happening next year, were planned and arranged this year and therefore contribute to my 2012 portfolio.</p>
+
+</div>
+
+
+
+
+</div>
+
+
+          
+
+      </main>
+    </div>
+
+    <!-- Linking custom script -->
+    <script src="script.js"></script>
+  </body>
+</html>
