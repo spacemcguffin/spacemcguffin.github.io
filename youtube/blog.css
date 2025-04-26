@@ -303,6 +303,28 @@ margin: 1em 0 1em 0px;
 
 
 
+table, th, td {
+    border-collapse: collapse;
+    padding: 0.8em;
+    text-align: left;
+    overflow-wrap: break-word;
+    width: -webkit-fill-available;
+    vertical-align: middle;
+    color: var(--black-color);
+}
+
+tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+
+
+
+
+
+
+
+
 
 
 .sidebar .link-section {
