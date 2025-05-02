@@ -244,13 +244,6 @@ summary::marker {
 }
 
 
-/* Light styling for presentation */
-details {
-  border-block-end: 1px solid #000;
-  margin-block: .5rem;
-  padding-block: .5rem;
-}
-
 summary {
   /* Pin the custom marker to the container */
   position: relative;
@@ -265,7 +258,7 @@ summary {
   &::after {
     /* Custom marker dimensions */
     content: "";
-    border-block-start: 3px solid orangered;
+    border-block-start: 3px solid #ca6dda;
     height: 0;
     width: 1rem;
     
