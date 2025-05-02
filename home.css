@@ -44,6 +44,8 @@
 
 body {
   background: var(--white-color);
+  background-image: url(images/nebula.png);
+  background-attachment: fixed;
 }
 
 .container {
@@ -220,7 +222,7 @@ body.sidebar-hidden .main-layout .sidebar {
 
       details {
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
     color: var(--black-color);
     border-radius: 15px;
