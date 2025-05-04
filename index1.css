@@ -56,11 +56,12 @@ body {
 }
 
 a {
-	color: var(--primary-color);
+	color: #fcc6ffc6;;
 	text-decoration: none;
 }
 
 a:hover {
+	color: #ffffff;
 	text-decoration: none;
 }
 	
@@ -318,17 +319,14 @@ margin: 0.5em 0em 0.5em 0em;
 }
 
 .article h4 {
-margin: 0.5em 0em 0.5em 0em;
-    color: var(--black-color);
+    color: var(--white-color);
     font-weight: 500;
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
+    margin-bottom: 2rem;
     text-align: center;
-    font-size: 0.95rem;
     font-family: 'Onest', sans-serif;
-    background-image: linear-gradient(to left, #6e8ec1a1, #ffffff00);
-    padding: 0.2em 0 0.2em 0;
-    border-radius: 0 30px 30px 0;
+    background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);
+    padding: 0.3rem;
+    border-radius: 30px 0 0 30px;
 }
 
 
