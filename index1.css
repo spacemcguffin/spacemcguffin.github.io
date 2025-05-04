@@ -80,7 +80,7 @@ header,
 .navbar {
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 1rem;
   justify-content: space-between;
   margin-bottom:0.5rem;
 }
@@ -128,8 +128,8 @@ header,
 }
 
 :where(.navbar, .sidebar) .nav-logo .logo-text {
-  color: var(--black-color);
-  font-size: 1.25rem;
+	color: var(--white-color);
+	font-size: 1.25rem;
 }
 
 .navbar .search-back-button {
@@ -137,10 +137,13 @@ header,
 }
 
 .navbar .nav-center {
-  gap: 8px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    font-size: 1.1rem;
+    gap: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: var(--white-color);
+    font-weight: 400;
 }
 
 .navbar .search-form {
