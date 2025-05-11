@@ -1,26 +1,210 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Website About Us Page HTML CSS</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>lewis.lc</title>
+    <!-- Linking Unicons For Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   </head>
-  <body>
-    <section class="about-us">
-      <div class="about">
-        <img src="girl.jpg" class="pic" />
-        <div class="text">
-          <h2>About Us</h2>
-          <h5>Front-end Developer & <span>Designer</span></h5>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita natus ad sed harum itaque ullam enim quas, veniam accusantium, quia animi id eos adipisci iusto molestias asperiores explicabo cum vero atque amet corporis! Soluta illum facere consequuntur magni. Ullam dolorem repudiandae cumque voluptate consequatur consectetur, eos provident necessitatibus reiciendis corrupti!</p>
-          <div class="data">
-            <a href="#" class="hire">Hire Me</a>
+  <body class="sidebar-hidden">
+    <div class="container">
+      <!-- Header / Navbar -->
+      <header>
+        <nav class="navbar">
+          <div class="nav-section nav-left">
+            <button class="nav-button menu-button">
+              <i class="uil uil-bars"></i>
+            </button>
+            <a href="/" class="nav-logo">
+              <img src="images/spacelogo.png" alt="Logo" class="logo-image" style="border-radius: 0%;">
+              <h2 class="logo-text">lewis.lc</h2>
+            </a>
           </div>
-        </div>
-      </div>
-    </section>
+
+          <div class="nav-section">
+            <button class="nav-button search-back-button" id="search-back-button">
+              <i class="uil uil-arrow-left"></i>
+            </button>
+          </div>
+
+          <div class="nav-section nav-center">
+            
+               <h3>Thoughts</h3>
+            
+          </div>
+
+          <div class="nav-section nav-right">
+            <button class="nav-button search-button" id="search-button">
+              <i class="uil uil-search"></i>
+            </button>
+            <button class="nav-button theme-button">
+              <i class="uil uil-moon"></i>
+            </button>
+            <img src="images/user.png" alt="User Image" class="user-image" />
+          </div>
+        </nav>
+      </header>
+
+      <!-- Main Layout -->
+      <main class="main-layout">
+        <div class="screen-overlay"></div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <div class="nav-section nav-left">
+            <button class="nav-button menu-button">
+              <i class="uil uil-bars"></i>
+            </button>
+            <a href="/" class="nav-logo">
+              <img src="images/spacelogo.png" alt="Logo" class="logo-image" style="border-radius: 0%;">
+              <h2 class="logo-text">lewis.lc</h2>
+            </a>
+          </div>
+
+          <div class="links-container">
+            <ul class="link-section">
+
+              <li>
+                <a href="/" class="link-item"> <i class="uil uil-estate"></i> Home </a>
+              </li>
+              
+
+                          <div class="section-separator"></div>
+
+              
+
+            <ul class="link-section">
+              <h4 class="section-title">Miscellaneous</h4>
+
+              <li>
+<a href="/blog/" class="link-item"> <i class="uil uil-comment-dots"></i>Blog Archive</a>
+</li>
+              <li>
+                <a href="/myspace" class="link-item"> <i class="uil uil-users-alt"></i>MySpace</a>
+              </li>
+              <li>
+                <a href="/livejournal" class="link-item"> <i class="uil uil-pen"></i>LiveJournal</a>
+              </li>
+
+            </ul>
+
+
+            <div class="section-separator"></div>
+
+
+
+                                        <ul class="link-section">
+              <h4 class="section-title">Diary</h4>
+
+              
+              <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-book-open"></i> Current Diary <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="/diary/2025" class="link-item">2025</a></li>
+                  <li><a href="/diary/2024" class="link-item">2024</a></li>
+                  <li><a href="/diary/2023" class="link-item">2023</a></li>
+                  <li><a href="/diary/2022" class="link-item">2022</a></li>
+                  <li><a href="/diary/2021" class="link-item">2021</a></li>
+                     </ul>
+              </div>
+
+
+                                          <div class="link-item dropdown">
+                <li class="link-item"><i class="uil uil-archive-alt"></i> Old Diary <i class="dropdown-icon uil uil-angle-down"></i></li>
+                <ul class="dropdown-menu">
+                  <li><a href="/diary/2009" class="link-item">2009</a></li>
+                  <li><a href="/diary/2008" class="link-item">2008</a></li>
+                     </ul>
+              </div>
+
+
+              <li>
+                <a href="/diary" class="link-item"> <i class="uil uil-books"></i> Archive </a>
+              </li>
+
+            </ul>
+
+
+
+       
+          </div>
+        </aside>
+
+        <div class="content-wrapper">
+
+          <!-- Main Page -->
+          
+<div class="videobit">
+
+
+<div class="article">
+
+<h3 id="top">Thoughts</h3>
+
+
+<details>
+<summary>Evermore</summary>
+
+<h4>4 May ‘25</h4>
+
+<p>Discovered <b>Moon Shot</b> earlier –  blasting them through my headphones.</p>
+  
+<li>I’m falling apart.</li>
+<li>Brain broken, head mashed.</li>
+<li>Work is a fucking chore.</li>
+<li>My heart is in pieces. I feel lost, empty and aimless.</li>
+<li>Grateful for Bronwyn.</li>
+
+</details>
+
+  
+<details>
+<summary>Brophie</summary>
+
+<h4>2 May ‘25</h4>
+
+<p>It’s been a long time since I’ve just fully let my guard down, and I can’t do that with just anyone.</p>
+  
+<p>Much needed. More needed. Love these two. Brophie <3 </p>
+
+</details>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+  
+
+
+
+
+</div>
+</div>
+
+
+          
+
+      </main>
+    </div>
+
+    <!-- Linking custom script -->
+    <script src="script.js"></script>
   </body>
 </html>
