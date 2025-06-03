@@ -40,9 +40,17 @@ h4 {
 }
 
   
-a:link {  color: #FF4C4C;}
-a:visited {  color:  #FF4C4C;}
+a:link {  color: #d79b78; font-size: 0.85rem;}
 a:hover {  color:  #ffffff;}
-a:active {  color:  #ff0000;}
 
 
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
