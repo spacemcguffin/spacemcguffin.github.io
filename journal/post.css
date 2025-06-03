@@ -44,6 +44,7 @@ margin-right: auto;
     font-style: italic;
 }
 
+
 h4 {
     background-image: linear-gradient(to left, #5470ae57, #ffffff00);
     border-radius: 0 50px 50px 0;
@@ -57,9 +58,28 @@ h4 {
     line-height: 2;
 }
 
+
+h3 {
+    background-image: linear-gradient(to left, #5470ae57, #ffffff00);
+    border-radius: 0 50px 50px 0;
+    margin: auto;
+    max-width: 400px;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    line-height: 2;
+}
+
   
-a {  color: #d79b78; font-size: 0.85rem; font-weight: 500; text-decoration: none;}
-a:hover {  color:  #ffffff;}
+a {  
+    color: #d79b78;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+  }
+
+a:hover {  
+	color:  #ffffff;
+}
 
 
 ::-moz-selection {
