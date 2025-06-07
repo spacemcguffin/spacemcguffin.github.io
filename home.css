@@ -40,6 +40,11 @@ h4 {
 }
 
 
+.list {
+   column-count: 3;
+}
+
+
 .nav {
     margin-bottom: 2rem;
     text-transform: uppercase;
@@ -91,3 +96,16 @@ a:hover {  color:  #ffffff;}
 	text-shadow: none;
   color:#000000;
 } 
+
+
+
+
+
+
+/* Responsive media code for small devices */
+@media (max-width: 768px) {
+
+	.list {
+   column-count: 1;
+}
+}
