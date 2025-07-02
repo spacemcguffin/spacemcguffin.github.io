@@ -19,6 +19,8 @@
 
 
 
+
+
 /* Color variables for light theme */
 :root {
     --white-color: #fbfbfb;
@@ -296,7 +298,11 @@ margin: 1em 0 1em 0px;
 }
 
 
-
+.article a:hover{
+	color:#456291;
+	border-bottom: 2px solid #456291;
+	text-decoration:none;
+}
 
 
 .article li {
@@ -357,6 +363,11 @@ table, th, td {
 
 tr {
   border-bottom: 1px solid #b9bcbc;
+}
+
+
+tr:hover {
+    background-color: #EAECF0;
 }
 
 
