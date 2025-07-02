@@ -304,7 +304,7 @@ margin: 1em 0 1em 0px;
 
 
 .articleRightInner td, th {
-font-size:0.7rem;
+font-size:0.85rem;
 }
 
 
@@ -390,11 +390,13 @@ tr:last-child {
 }
 
 .bottombox .subtitle {
-	background: #eeeeee;
+	background: var(--white-color);
 }
 
 .bottombox td, th {
-    border: solid 2px #ffffff;
+    border: solid 2px var(--white-color);
+    font-size: 0.9rem;
+    line-height: 1.5em;
 }
 
 
