@@ -3,10 +3,16 @@ font-family: 'Inter', sans-serif;
 	margin-bottom: 0.8em;
 	-ms-text-size-adjust: 100%;
 	-webkit-text-size-adjust: 100%;
+	  scrollbar-color: #a6a6a6 transparent;
 }
+
 body {
-	margin: 0; 
+  margin: 0; 
+  background-image: url("/journal/img/nebula.png");
+  background-attachment: fixed;
+  background-size: cover; 
 }
+
 article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
 	display: block;
 }
