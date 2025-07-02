@@ -181,16 +181,18 @@ header,
 }
 
 .main-layout {
-  display: flex;
-  overflow-y: auto;
-  scrollbar-color: #a6a6a6 transparent;
+    max-width: 100%;
+    margin: auto;
+    display: flex;
+    overflow-y: auto;
+    scrollbar-color: #a6a6a6 transparent;
 }
 
 .main-layout .sidebar {
-  width: 280px;
-  overflow: hidden;
-  padding: 0 11px 0;
-  background: var(--white-color);
+    width: 400px;
+    overflow: hidden;
+    padding: 0 11px 0;
+    background: var(--white-color);
 }
 
 .main-layout .sidebar .nav-left {
@@ -310,7 +312,6 @@ div.articleRightInner {
     font-size: 0.8rem;
     width: auto;
     background: var(--white-color);
-    /* text-align: center; */
     overflow: hidden;
     border: 1px solid #b9bcbc;
     font-size: 0.82rem;
@@ -483,9 +484,9 @@ tr:last-child {
 }
 
 .main-layout .content-wrapper {
-  padding: 0 16px;
-  overflow-x: hidden;
-  width: 100%;
+    padding: 0 3rem;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 .content-wrapper .category-list {
@@ -497,15 +498,16 @@ tr:last-child {
 }
 
 .category-list .category-button {
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
-  font-size: 0.94rem;
-  border-radius: 8px;
-  white-space: nowrap;
-  color: var(--black-color);
-  padding: 6px 12px;
-  background: var(--light-gray-color);
+border: none;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.94rem;
+    border-radius: 8px;
+    white-space: nowrap;
+    color: var(--black-color);
+    padding: 6px 12px;
+    background: var(--light-gray-color);
+    margin: 3px;
 }
 
 .category-list .category-button.active {
