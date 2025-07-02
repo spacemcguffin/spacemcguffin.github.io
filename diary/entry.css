@@ -22,6 +22,8 @@
 /* Color variables for light theme */
 :root {
     --white-color: #fbfbfb;
+    --greybox-color: #dddddd;
+    --lightgreybox-color: #eeeeee;
     --black-color: #3a3a3a;
     --light-white-color: #f0f0f0;
     --light-gray-color: #e5e5e5;
@@ -34,6 +36,8 @@
 /* Color variables for dark theme */
 .dark-mode {
   --white-color: #171717;
+	--greybox-color: #d4d4d4;
+  --lightgreybox-color: #d4d4d4;
   --black-color: #d4d4d4;
   --light-white-color: #333;
   --light-gray-color: #404040;
@@ -369,7 +373,7 @@ tr:last-child {
 
 .bottombox {
 	font-family: 'Inter', sans-serif;
-	background: #fdfdfd;
+	background: #var(--greybox-color);
 	border: 1px solid #a2a9b1;
 	clear: both;
 	font-size: 0.82rem;
