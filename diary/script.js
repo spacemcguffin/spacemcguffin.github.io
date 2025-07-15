@@ -116,20 +116,3 @@ document.querySelectorAll(".link-section .dropdown")?.forEach((dropdown) => {
     }
   });
 });
-
-
-
-
-
-
-
-
-
-$(document).ready(function () {
-	$(".back2Top").click(function(event) {
-        event.preventDefault();
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-		$('#stickThis').height("auto");
-		$('body').removeClass('stick');
-        return false;
-    });
