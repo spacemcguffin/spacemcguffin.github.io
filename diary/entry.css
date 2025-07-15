@@ -202,7 +202,6 @@ header,
 
 .main-layout .sidebar {
     width: 420px;
-    overflow: hidden;
     padding: 0 5px 0;
     background: var(--white-color);
 }
@@ -219,10 +218,6 @@ body.sidebar-hidden .main-layout .sidebar {
 
 .sidebar .links-container {
   padding: 16px 0 32px;
-  overflow-y: auto;
-  height: calc(100vh - 60px);
-  scrollbar-width: thin;
-  scrollbar-color: transparent transparent;
 }
 
 .main-layout:hover,
@@ -499,7 +494,6 @@ tr:last-child {
 
 .main-layout .content-wrapper {
     padding: 0 1rem;
-    overflow-x: hidden;
     width: 100%;
 }
 
