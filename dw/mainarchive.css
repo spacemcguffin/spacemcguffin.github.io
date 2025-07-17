@@ -923,7 +923,6 @@ color: #ff8303;
     height: 100vh;
     transition: 1s ease;
     border-right: 2px solid black;
-    width:95%;
   }
 
   body.sidebar-hidden .main-layout .sidebar {
@@ -944,6 +943,24 @@ color: #ff8303;
     align-items: flex-start;
   }
 }
+
+
+
+/* Responsive media code for smaller devices */
+@media (max-width: 400px) {
+
+  .main-layout .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    height: 100vh;
+    transition: 1s ease;
+    border-right: 2px solid black;
+    width:95%;
+  }
+}
+
 
 
 
