@@ -194,7 +194,6 @@ header,
 }
 
 .main-layout {
-    max-width: 1100px;
     margin: auto;
     display: flex;
     overflow-y: auto;
@@ -220,7 +219,11 @@ body.sidebar-hidden .main-layout .sidebar {
 }
 
 .sidebar .links-container {
-  padding: 16px 0 32px;
+    padding: 16px 0 32px;
+    position: fixed;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+    scrollbar-width: thin;
 }
 
 .main-layout:hover,
