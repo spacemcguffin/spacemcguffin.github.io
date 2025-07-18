@@ -601,6 +601,7 @@ border: none;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    text-transform: uppercase;
 }
 
 .content-wrapper .video-list .video-card:hover .title {
@@ -614,6 +615,21 @@ border: none;
 
 .content-wrapper .video-list .video-card .channel-name {
   margin: 2px 0 4px;
+}
+
+.content-wrapper .video-list .video-card .range {
+    font-weight: 500;
+    font-size: 0.65rem;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.2px;
+}
+
+.content-wrapper .video-list .video-card .starring {
+    margin-top: 0.2rem;
+    font-size: 0.75rem;
+    color: var(--secondary-color);
 }
 
 .video-category {
