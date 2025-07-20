@@ -404,6 +404,42 @@ table, th, td {
 }
 
 
+
+.bottombox {
+	font-family: 'Inter', sans-serif;
+	background: #fdfdfd;
+	border: 1px solid #a2a9b1;
+	clear: both;
+	font-size: 86%;
+	padding: 2px;
+	line-height: 1.6em;
+	margin: 1em auto 0;
+}
+.bottombox .header {
+	background: #456291;
+	padding: 0.25em 1em;
+	line-height: 1.5em;
+	text-align: center;
+	font-weight: 400;
+	color: #ffffff;
+	font-size: 100%;
+	margin-bottom: 3px;
+}
+.bottombox .subtitle {
+	background: #eeeeee;
+}
+.bottombox td, th {
+    border: solid 2px #ffffff;
+}
+.bottomboxtable {
+	    width: 100%;
+	max-width:100%;
+}
+
+
+
+
+
 tr:hover {
     background-color: var(--hoverback-color);
 	  color: var(--hovertext-color);
