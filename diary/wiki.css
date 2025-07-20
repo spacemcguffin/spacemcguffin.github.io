@@ -29,6 +29,7 @@
     --black-color: #3a3a3a;
     --light-white-color: #f0f0f0;
     --light-gray-color: #e5e5e5;
+    --darker-gray-color: #ddddd;
     --border-color: #ccc;
     --primary-color: #4c6e94;
     --secondary-color: #404040;
@@ -44,6 +45,7 @@
 	--black-color: #d4d4d4;
   --light-white-color: #333;
   --light-gray-color: #404040;
+	--darker-gray-color: #2E2F30;
   --border-color: #808080;
   --primary-color: #87aeda;
   --secondary-color: #d4d4d4;
@@ -407,11 +409,10 @@ table, th, td {
 
 .bottombox {
 	font-family: 'Inter', sans-serif;
-	background: #fdfdfd;
 	border: 1px solid #a2a9b1;
 	clear: both;
-	font-size: 86%;
-	padding: 2px;
+	font-size: 0.9rem;
+	padding: 3px;
 	line-height: 1.6em;
 	margin: 1em auto 0;
 }
@@ -426,10 +427,10 @@ table, th, td {
 	margin-bottom: 3px;
 }
 .bottombox .subtitle {
-	background: #eeeeee;
+	background: var(--light-gray-color);
 }
 .bottombox td, th {
-    border: solid 2px #ffffff;
+    border: solid 2px var(--white-color);
 }
 .bottomboxtable {
 	    width: 100%;
