@@ -577,10 +577,12 @@ border: none;
   border-radius: 8px;
   aspect-ratio: 5 / 3;
   background: var(--light-white-color);
+  transition: transform .5s;
 }
 
 .content-wrapper:hover .video-list:hover .video-card:hover .thumbnail:hover {
    opacity: 0.85;
+   transform: scale(1.5);
 }
 
 .content-wrapper .video-list .video-card .duration {
