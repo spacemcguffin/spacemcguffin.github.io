@@ -67,6 +67,10 @@ body {
   overflow: hidden;
   max-height: 100vh;
   flex-direction: column;
+  overflow-y: auto;
+  scrollbar-color: #a6a6a6 var(--white-color);
+
+
 }
 
 a {
@@ -206,6 +210,7 @@ max-width: 1000px;
     scrollbar-color: #a6a6a6 transparent;
     width: -webkit-fill-available;
     background: var(--white-color);
+    margin-bottom: 2rem;
 }
 
 .main-layout .sidebar {
@@ -248,12 +253,10 @@ body.sidebar-hidden .main-layout .sidebar {
 
 
 .article p.category {
-    margin: 0.5rem 0rem 0.5rem 0rem;
+    margin: 1rem 0rem 1rem 0rem;
     font-weight: 500;
     font-size: 0.7rem;
     letter-spacing: 0.2px;
-    padding-bottom: 0.2rem;
-    padding-top: 0.2rem;
     width: fit-content;
     border-radius: 0.5rem;
     text-transform: uppercase;
