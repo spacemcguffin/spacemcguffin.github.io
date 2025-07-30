@@ -1137,7 +1137,22 @@ color: #ff8303;
     padding: 20px 0 20px;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 	}
+ 
+}
 
 
-	 
+
+/* Responsive media code for smaller devices */
+@media (max-width: 400px) {
+
+  .main-layout .sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 20;
+    height: 100vh;
+    transition: 1s ease;
+    border-right: 2px solid black;
+    width:95%;
+  }
 }
