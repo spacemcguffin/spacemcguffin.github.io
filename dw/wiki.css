@@ -477,12 +477,11 @@ tr:last-child {
 
 .contentsPanel {
 	border: 1px solid #a2a9b1;
-	background-color: #f8f9fa;
 	padding: 5px;
         font-size: 0.95em;
 	position: relative;
 	line-height: 1.8em;
-	width: 20em;
+	width: 20rem;
 }
 .contentsHeader {
     font-family: 'Onest', sans-serif;
@@ -490,16 +489,17 @@ tr:last-child {
     margin-left: 0.5em;
     border-bottom: 1px dashed #808080;
     margin-bottom: 0.5em;
+    font-size: 0.9rem;
 }
 
 .contentsPanel a, a:visited {
-	font-style:normal;
+	font-style: normal;
 	font-weight: 400;
-	color:#456291;
+	color: var(--primary-color);
 }
 
 .contentsPanel a:hover {
- 	background-color: #D6E1E1;
+ 	background: var(--border-color);
 	text-decoration: none;
 	color:#000000;
 	padding:1px;
