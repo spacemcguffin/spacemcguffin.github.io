@@ -475,6 +475,107 @@ tr:last-child {
 
 
 
+.contentsPanel {
+	border: 1px solid #a2a9b1;
+	background-color: #f8f9fa;
+	padding: 5px;
+        font-size: 0.95em;
+	position: relative;
+	line-height: 1.8em;
+	width: 20em;
+}
+.contentsHeader {
+    font-family: 'Onest', sans-serif;
+    font-weight: 400;
+    margin-left: 0.5em;
+    border-bottom: 1px dashed #808080;
+    margin-bottom: 0.5em;
+}
+
+.contentsPanel a, a:visited {
+	font-style:normal;
+	font-weight: 400;
+	color:#456291;
+}
+
+.contentsPanel a:hover {
+ 	background-color: #D6E1E1;
+	text-decoration: none;
+	color:#000000;
+	padding:1px;
+}
+
+
+.hidePanel, .showPanel {
+	float: right;
+	margin: 0 5px;
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	color: #456291;
+	top: 4px;
+	font-size:12px;
+}
+.contentsPanel ul li span {
+	display: inline-block;
+	margin-right: 8px;
+	color:#707070;
+}
+.contentsPanel ul li {
+    margin-left: 1em;
+    list-style: none;
+}
+.contentsPanel ul {
+    padding: 0 0 0 0;
+}
+.contentsPanel ul li ul {
+    font-size: 1.05em;
+    margin: 0 0 0 0;
+}
+.contentsPanel ul li ul li {
+}
+.showPanel {
+	display: none;
+}
+.minimizedPanel .showPanel {
+	display: block;
+}
+.minimizedPanel .hidePanel {
+	display: none
+}
+.contentsPanel.minimizedPanel {
+	width: 130px;
+}
+.minimizedPanel .contentsHeader {
+	text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .sidebar .link-section {
     list-style: none;
