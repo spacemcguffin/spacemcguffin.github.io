@@ -352,15 +352,20 @@ margin: 1em 0 1em 0px;
 font-size:0.82rem;
 }
 
+.articleRightInner img {
+	width:100%;
+}
 
 
 div.articleRightInner {
-    width: auto;
+    float: right;
+    width: 18rem;
     background: var(--white-color);
     overflow: hidden;
     border: 1px solid #b9bcbc;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     padding: 3px;
+    margin: 0rem 0rem 1rem 1rem;
 }
 
 div.articletitle {
