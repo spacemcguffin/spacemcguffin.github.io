@@ -67,8 +67,6 @@ body {
   overflow: hidden;
   max-height: 100vh;
   flex-direction: column;
-  overflow-y: auto;
-  scrollbar-color: #a6a6a6 var(--white-color);
 }
 
 a {
@@ -206,6 +204,8 @@ header,
     margin: auto;
     width: -webkit-fill-available;
     background: var(--white-color);
+    overflow-y: auto;
+    scrollbar-color: #a6a6a6 var(--white-color);
 }
 
 .main-layout .sidebar {
