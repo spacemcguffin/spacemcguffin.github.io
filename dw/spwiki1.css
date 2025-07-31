@@ -1082,15 +1082,7 @@ color: #ff8303;
   }
 
   .main-layout .screen-overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 15;
-    width: 100%;
-    height: 100vh;
-    background: var(--overlay-dark-color);
-    transition: 1s ease;
-    max-width: 60%;
+     display: none;
   }
 
   body.sidebar-hidden .main-layout .screen-overlay {
@@ -1180,4 +1172,18 @@ color: #ff8303;
     border-right: 2px solid black;
     width:95%;
   }
+
+
+div.articleRightInner {
+    float: right;
+    max-width: 18rem;
+    background: var(--white-color);
+    overflow: hidden;
+    border: 1px solid #b9bcbc;
+    font-size: 0.8rem;
+    padding: 3px;
+}
+
+
+	
 }
