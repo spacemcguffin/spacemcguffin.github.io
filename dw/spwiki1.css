@@ -592,11 +592,11 @@ tr:last-child {
 
 /* Style the tab */
 .tab {
-  overflow: hidden;
-  border: 0px;
-  background-color: #f8f9fa;
-	width: 85%;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border-bottom: 1px solid #cccccc;
 }
+
 
 /* Style the buttons inside the tab */
 .tab button {
@@ -616,13 +616,13 @@ padding-left:1em;
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #cfd8e4;
+  background-color: var(--light-gray-color);
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #cfd8e4;
-	font-weight:500;
+    background-color: #456291;
+    color: #ffffff;
 }
 
 /* Style the tab content */
