@@ -600,6 +600,9 @@ display:none;
     margin-bottom: 1rem;
     overflow: hidden;
     border-bottom: 1px solid #456291;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: visible;
 }
 
 
@@ -608,10 +611,10 @@ display:none;
     background-color: var(--white-color);
     float: left;
     border: none;
-    width: 50%;
+    width: 100%;
     color: var(--maintitle-color);
     cursor: pointer;
-    padding-top: 0.5rem;
+    padding: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: 0.9rem;
 }
