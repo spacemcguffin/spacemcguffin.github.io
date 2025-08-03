@@ -94,7 +94,7 @@ header,
 .navbar {
   display: flex;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.3rem;
   justify-content: space-between;
   border-bottom: 1px solid var(--border-color);
 }
@@ -109,7 +109,7 @@ header,
 }
 
 :where(.navbar, .sidebar) :where(.logo-image, .user-image) {
-  width: 32px;
+  width: 30px;
   cursor: pointer;
   border-radius: 50%;
 }
@@ -121,6 +121,7 @@ header,
   cursor: pointer;
   background: none;
   border-radius: 50%;
+  margin-right: 1rem;
 }
 
 :where(.navbar, .sidebar) .nav-section .nav-button:hover {
@@ -128,7 +129,7 @@ header,
 }
 
 :where(.navbar, .sidebar) .nav-button i {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   display: flex;
   color: var(--black-color);
   align-items: center;
@@ -144,7 +145,7 @@ header,
 
 :where(.navbar, .sidebar) .nav-logo .logo-text {
     color: var(--black-color);
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     font-family: 'TikTok Sans', sans-serif;
     font-weight: 500;
 }
@@ -832,13 +833,13 @@ display:none;
 border: none;
     cursor: pointer;
     font-weight: 500;
-    font-size: 0.92rem;
+    font-size: 0.85rem;
     border-radius: 100px;
     white-space: nowrap;
     color: var(--black-color);
-    padding: 6px 12px;
+    padding: 5px 10px;
     background: var(--light-gray-color);
-    margin: 3px;
+    margin: 2px;
     font-family: 'Onest', sans-serif;
 }
 
