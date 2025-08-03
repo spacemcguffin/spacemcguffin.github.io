@@ -513,8 +513,9 @@ tr:last-child {
 }
 
 .epnav a:hover {
-  background-color: #var(--light-gray-color);
-  color: #ffffff;
+  background-color: var(--light-gray-color);
+  color: var(--black-color);
+  text-decoration: none;
 }
 
 .epnav a.active {
