@@ -875,6 +875,11 @@ border: none;
   position: relative;
 }
 
+.content-wrapper:hover .video-list:hover .video-card:hover .thumbnail:hover {
+   opacity: 0.85;
+   transform: scale(1.02);
+}
+
 .content-wrapper .video-list .video-card .thumbnail {
   width: 100%;
   object-fit: cover;
@@ -883,13 +888,17 @@ border: none;
   background: var(--light-white-color);
 }
 
+.content-wrapper .video-list .video-card a:hover {
+    text-decoration: none;
+}
+
 .content-wrapper .video-list .video-card .duration {
     position: absolute;
-    left: 10px;
-    top: 12px;
+    left: 3px;
+    top: 6px;
     color: #fff;
-    font-size: 0.8rem;
-    padding: 5px;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.3rem 0.1rem 0.3rem;
     border-radius: 5px;
     background: var(--overlay-dark-color);
 }
