@@ -1052,7 +1052,15 @@ margin: auto;
     -webkit-line-clamp: 2;
 }
 
+.content-wrapper:hover .squarethumblist:hover .video-card:hover .squarethumbnail:hover {
+   opacity: 0.9;
+   transform: scale(1.02);
+   filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3));
+}
 
+.content-wrapper .squarethumblist a:hover {
+	border-bottom: none;
+}
 
 
 
