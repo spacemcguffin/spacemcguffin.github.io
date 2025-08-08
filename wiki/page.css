@@ -861,10 +861,10 @@ border: none;
 }
 
 .content-wrapper .video-list {
-  display: grid;
-  gap: 20px;
-  padding: 20px 0 20px;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    display: grid;
+    gap: 0.3rem;
+    padding: 0 0 0 0;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .content-wrapper .video-list .video-card {
@@ -899,8 +899,8 @@ border: none;
 
 .content-wrapper .video-list .video-card .duration {
     position: absolute;
-    left: 3px;
-    top: 6px;
+    left: 10px;
+    top: 5px;
     color: #fff;
     font-size: 0.75rem;
     padding: 0.1rem 0.3rem 0.1rem 0.3rem;
@@ -921,7 +921,7 @@ border: none;
 }
 
 .content-wrapper .video-list .video-card .title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--primary-color);
     font-weight: 600;
     line-height: 1.35;
@@ -932,7 +932,7 @@ border: none;
 }
 
 .content-wrapper .video-list .video-card .range {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--secondary-color);
     text-transform: uppercase;
     margin-bottom: 0.2rem;
