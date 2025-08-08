@@ -862,8 +862,8 @@ border: none;
 
 .content-wrapper .video-list {
     display: grid;
-    gap: 0.3rem;
-    padding: 0 0 0 0;
+    gap: 10px;
+    padding: 0rem 0rem 0rem 0.5rem;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
@@ -899,8 +899,8 @@ border: none;
 
 .content-wrapper .video-list .video-card .duration {
     position: absolute;
-    left: 10px;
-    top: 5px;
+    left: 2px;
+    top: 6px;
     color: #fff;
     font-size: 0.75rem;
     padding: 0.1rem 0.3rem 0.1rem 0.3rem;
@@ -994,7 +994,9 @@ border: none;
 }
 
 .content-wrapper .video-list .video-card .video-info {
-  padding-top: 5px;
+    padding: 0 1rem 0.5rem 0.5rem;
+    padding-left: 0px;
+    padding-right: 1rem;
 }
 
 .videobit {
