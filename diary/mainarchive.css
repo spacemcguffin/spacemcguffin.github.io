@@ -106,6 +106,13 @@ header,
   width: 32px;
   cursor: pointer;
   border-radius: 50%;
+	transition: transform 0.3s;
+}
+
+.logo-image:hover {
+	   opacity: 0.9;
+   transform: scale(1.02);
+   filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3));
 }
 
 :where(.navbar, .sidebar) .nav-section .nav-button {
@@ -571,7 +578,7 @@ border: none;
   border-radius: 8px;
   aspect-ratio: 5 / 3;
   background: var(--light-white-color);
-  transition: transform .3s;
+  transition: transform 0.3s;
 }
 
 .content-wrapper:hover .video-list:hover .video-card:hover .thumbnail:hover {
