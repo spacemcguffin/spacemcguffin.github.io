@@ -57,57 +57,54 @@ main {
 }
 
 .content {
-      background: #00000088;
+    background: #ffffff88;
     padding: 1rem;
     border-radius: 1rem;
-  width: min(35vw, 500px);
-  position: absolute;
-  top: 50%;
-  left: 3rem;
-  transform: translateY(-50%);
-  font: 400 0.85rem helvetica,sans-serif;
-  color: white;
-  text-shadow: 0 3px 8px rgba(0,0,0,0.5);
-  box-shadow: 2px 2px 2px 0px #000000;
-  opacity: 0;
-  display: none;
+    width: min(35vw, 500px);
+    position: absolute;
+    top: 50%;
+    left: 3rem;
+    transform: translateY(-50%);
+    color: white;
+    box-shadow: 2px 2px 2px 0px #12121252;
+    opacity: 0;
+    display: none;
 
   & .title {
-    font-family: 'Onest', sans-serif;
-    text-transform: none;
-    font-weight: 500;
-    font-size: 1.5rem;
-    text-shadow: 1px 1px 2px #000000;
+        font-family: 'Onest', sans-serif;
+        text-transform: none;
+        font-weight: 600;
+        font-size: 1.5rem;
+        color: #000000;
   }
 
     & .subtitle {
-    font-family: 'Onest', sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    font-size: 0.75rem;
-    margin: 0.2rem 0 0 0;
-    color: #bbbbbb;
-    text-shadow: 1px 1px 2px #000000;
+        font-family: 'Onest', sans-serif;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 0.83rem;
+        margin: 0.2rem 0 0 0;
+        color: #696969;
   }
 
   & .description {
-     font-family: 'Onest', sans-serif;
-     line-height: 1.5;
-     margin: 1rem 0 1.5rem;
-     font-size: 0.85rem;
-     text-shadow: 1px 1px 2px #000000;
+        font-family: 'Onest', sans-serif;
+        line-height: 1.5;
+        margin: 1rem 0 1rem;
+        font-size: 0.9rem;
+        color: #000000;
   }
 
   & button {
-    width: fit-content;
-    background-color: rgb(255 255 255 / 60%);
-    color: #000000;
-    border: 2px solid rgb(0 0 0 / 66%);
-    border-radius: 2rem;
-    padding: 0.6rem;
-    cursor: pointer;
-    font-size:0.85rem;
-    font-family: 'Onest', sans-serif;
+        width: fit-content;
+        background-color: rgb(255 255 255 / 60%);
+        color: #000000;
+        border: 1.5px solid rgb(0 0 0 / 50%);
+        border-radius: 1rem;
+        padding: 0.5rem;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-family: 'Onest', sans-serif;
   }
 }
 
