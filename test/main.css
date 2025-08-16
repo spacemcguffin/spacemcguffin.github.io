@@ -7,6 +7,14 @@
    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3));
 }
 
+:host {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    contain: strict;
+    fill: currentcolor;
+   }
+
 ::-moz-selection {
 	background: #cfd8e4;
 	text-shadow: none;
