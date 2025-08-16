@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
 body {
   height: 100vh;
   display: grid;
