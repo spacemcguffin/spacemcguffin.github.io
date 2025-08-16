@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+
+/* Document Set-Up */
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family: 'Onest', sans-serif;
+  background:black;
+  line-height:1.5;
+}
+
+/* Carousel */
+
+.slider {
+  position:relative;
+  overflow:hidden;
+  height:100vh;
+  width:100vw;
+}
+
+.slide {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  opacity:0;
+  transition: opacity .4s ease-in-out;
+}
+
+.slide.current {
+  opacity:1;
+}
+
+.slide .content {
+  position:absolute;
+  bottom:70px;
+  left:-600px;
+  width:600px;
+  opacity:0;
+  background-color:rgba(255,255,255,.75);
+  padding:2em;
+  color:black;
+  filter: drop-shadow(0px 5px 4px rgba(0, 0, 0, 0.5));
+}
+
+.slide.current .content {
+  opacity:1;
+  transform: translatex(600px);
+  transition:all 0.7s ease-in-out 0.3s;
+}
+
+/* Buttons */
+
+.buttons button#next {
+  position:absolute;
+  top:50%;
+  right:15px;
+}
+
+.buttons button#prev {
+  position:absolute;
+  top:50%;
+  left:15px;
+}
+
+.buttons button {
+  border: 2px solid white;
+  background-color:transparent;
+  color:white;
+  cursor:pointer;
+  padding:13px 15px;
+  border-radius:50%;
+  outline:none;
+}
+
+.buttons button:hover {
+  background-color: rgba(255,255,255,.75);
+  color:#333;
+}
+
+/* Extra Reactive Design for Mobile */
+
+@media(max-width:500px) {
+  
+  .slide .content {
+  bottom: -300px;
+  left:0;
+  width:100%;
+  }
+  
+  .slide.current .content {
+    transform:translateY(-300px);
+  }
+}
+
+/* Background Images for Carousel */
+
+.slide:first-child {
+  background: url("https://lewis.lc/dw/southpark/nsfc.png") no-repeat center center/cover;
+}
+
+.slide:nth-child(2){
+  background: url("https://assets.codepen.io/7582873/mall_interior.jpg") no-repeat center center/cover;
+}
+
+.slide:nth-child(3){
+  background: url("https://assets.codepen.io/7582873/city_shop_interior.jpg") no-repeat center center/cover;
+}
+
+.slide:nth-child(4){
+  background: url("https://assets.codepen.io/7582873/gothic_stained_glass.jpg") no-repeat center center/cover;
+}
+
+.slide:nth-child(5){
+  background: url("https://assets.codepen.io/7582873/window_dome.jpg") no-repeat center center/cover;
+}
+
+.slide:nth-child(6){
+  background: url("https://assets.codepen.io/7582873/hallway_skylight.jpg") no-repeat center center/cover;
+}
