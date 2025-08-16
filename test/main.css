@@ -82,26 +82,27 @@ main {
     font-family: 'Onest', sans-serif;
     text-transform: uppercase;
     font-weight: 400;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     margin: 0.2rem 0 0 0;
     color: #bbbbbb;
   }
 
   & .description {
-    font-family: 'Inter', sans-serif;
-    line-height: 1.6;
-    margin: 1rem 0 1.5rem;
-    font-size: 0.9rem;
+     font-family: 'Inter', sans-serif;
+     line-height: 1.5;
+     margin: 1rem 0 1.5rem;
+     font-size: 0.85rem;
   }
 
   & button {
     width: fit-content;
-    background-color: rgba(0,0,0,0.1);
-    color: #87aeda;
-    border: 1.5px solid #87aeda;
+    background-color: rgb(255 255 255 / 60%);
+    color: #000000;
+    border: 2px solid rgb(0 0 0 / 66%);
     border-radius: 2rem;
     padding: 0.6rem;
     cursor: pointer;
+    font-size:0.85rem;
   }
 }
 
