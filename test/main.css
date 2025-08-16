@@ -3,7 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+   transform: scale(1.02);
+   filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3));
+}
 
 ::-moz-selection {
 	background: #cfd8e4;
@@ -84,6 +86,11 @@ main {
   &:nth-child(28) { left: calc(120%); border: 2px solid black; box-shadow: 2px 2px 2px 2px #00000040; }
   &:nth-child(29) { left: calc(120%); border: 2px solid black; box-shadow: 2px 2px 2px 2px #00000040; }
   &:nth-child(30) { left: calc(120%); border: 2px solid black; box-shadow: 2px 2px 2px 2px #00000040; }
+}
+
+.item:hover {
+   transform: scale(1.02);
+   filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.3));
 }
 
 .content {
