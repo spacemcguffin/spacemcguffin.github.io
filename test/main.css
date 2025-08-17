@@ -208,7 +208,7 @@ main {
 
 @media (width > 650px) and (width < 900px) {
 	.ribbon { 
-		font-size:0.6rem;
+		font-size:0.8rem;
 	}
   .content {
     & .title        { font-size: 1rem; }
@@ -228,6 +228,9 @@ main {
 }
 
 @media (width < 650px) {
+		.ribbon { 
+		font-size:0.7rem;
+	}
   .content {
     & .title        { font-size: 0.9rem; }
     & .subtitle     { font-size: 0.6rem; padding: 0 0 0.5rem 0; }
