@@ -6,6 +6,25 @@
   font-family: 'Mochiy Pop One', sans-serif;
 }
 
+
+html {
+  scrollbar-color: #a6a6a6 transparent;
+}
+
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
+
 body {
   display: flex;
   justify-content: center;
