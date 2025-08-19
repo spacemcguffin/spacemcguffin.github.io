@@ -127,7 +127,15 @@ h1 span {
 
 
 
+a {
+	color: #4c6e94;
+	text-decoration: none;
+}
 
+a:hover {
+	border-bottom: 1px solid #456291;
+	text-decoration:none;
+}
 
 
 
@@ -149,7 +157,7 @@ h1 span {
 
 table, th, td {
   border-collapse: collapse;
-  padding: 0.5em;
+  padding: 0.7rem;
   font-size: 0.95rem;
   text-align: left;  
   overflow-wrap: break-word;
