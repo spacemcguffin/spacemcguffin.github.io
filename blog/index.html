@@ -57,14 +57,427 @@
   <div class="main">
 
     <section id="blogpost" class="sec">
-      
-      <h1><span>I suck at Java.</span></h1>
-      
-    <p>I suck at Java. I have never written production grade Java code. But I have gotten to understand the Java virtual machine (JVM), especially because I was mentored by brilliant people who understand the language and the virtual machine inside out. I think one of my best opportunities back at my previous job was around understanding bottlenecks and tuning a JVM. Tuning a JVM is not something we should do out of ignorance though; the JVM defaults are quite effective when dealing with regular problems. I will not write a guide on how to profile projects or picking flags to tune the JVM, especially when it is something I am not doing on a daily basis, however I wanted to share some advice on getting started with profiling and understanding performance from more than a CPU utilization graph perspective.</p>
 
-<p>I should start by mentioning that utilization of resources is not the same as saturation; if you see a CPU is being used over 80% that is not an indicator of trouble, quite the contrary, however, if you throw in the mix latency concerns and garbage collection, well, your problem (if any) turns interesting.</p>
 
-<p>One of the things I learned when working with cgroups and old JVM versions is that understanding the limits of an application is basically the first and only thing we need to do when fitting a process to its assigned resources. There are interesting reads about JVM ergonomics that will suggest we want to let the virtual machine handle the hairy parts, and it is correct for the most part of it, yet understanding is non trivial when containers are involved. It’s also important to understand the architecture of a program to figure out how and why it solves a problem the way it does.</p>
+      <h1><span>Archive</span></h1>
+      
+
+
+
+
+
+
+
+
+
+
+<div class="maintable">
+<table>
+<tbody>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">January 2025</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">snowfall</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">respawn</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">vibe check</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">false start</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">5</td>
+<td><div class="eptitles">crumbs</div></td>
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">February 2025</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">nostalgia phase</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">origin stories</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">fan indulgence</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">spaced out</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">5</td>
+<td><div class="eptitles">cake and roses</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">6</td>
+<td><div class="eptitles">out of the blue</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">7</td>
+<td><div class="eptitles">she doesn’t know crazy frog</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">8</td>
+<td><div class="eptitles">12,000 days</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">9</td>
+<td><div class="eptitles">escaping the rat race</div></td>
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">March 2025</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">new season</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">dumbledore and barrymore</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">head above water</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">starring david tennant</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">5</td>
+<td><div class="eptitles">tidbits</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">6</td>
+<td><div class="eptitles">contentment</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">7</td>
+<td><div class="eptitles">simplicity</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">8</td>
+<td><div class="eptitles">good vibes</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">9</td>
+<td><div class="eptitles">there goes the pop</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">10</td>
+<td><div class="eptitles">decades apart</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">11</td>
+<td><div class="eptitles">keeping up</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">12</td>
+<td><div class="eptitles">ghibli and the girls</div></td>
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">April 2025</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">fifteen years ago</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">eclipse</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">one star</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">digital footprints</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">5</td>
+<td><div class="eptitles">shit² </div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">6</td>
+<td><div class="eptitles">fading lights</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">7</td>
+<td><div class="eptitles">love for sophie</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">8</td>
+<td><div class="eptitles">well tired</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">9</td>
+<td><div class="eptitles">fireballs</div></td>
+</tr>
+	
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">May 2025</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">brophie</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">evermore</div></td>
+</tr>	
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">angels and demons</div></td>
+</tr>	
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">the world is mine</div></td>
+</tr>	
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">5</td>
+<td><div class="eptitles">love for bron</div></td>
+</tr>	
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">6</td>
+<td><div class="eptitles">blonde and blue</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">7</td>
+<td><div class="eptitles">bron, zoe, susan and the rani</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">8</td>
+<td><div class="eptitles">sanctuary 🌻</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">9</td>
+<td><div class="eptitles">tired, and the rani</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">10</td>
+<td><div class="eptitles">queen of hearts</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">11</td>
+<td><div class="eptitles">clusterfuck</div></td>
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">June 2025</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">on my own</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">shattered</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">autopilot</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">dear bronwyn,</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">5</td>
+<td><div class="eptitles">lone wolf</div></td>
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">July 2025</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">midpoint</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">easy mode</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">shitposting</div></td>
+</tr>
+	
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">moments of calm</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">5</td>
+<td><div class="eptitles">the franchise of death</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">6</td>
+<td><div class="eptitles">day goes dark</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">7</td>
+<td><div class="eptitles">zoe, bron and kim</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">8</td>
+<td><div class="eptitles">beauty and the beast</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">9</td>
+<td><div class="eptitles">forever numb</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">10</td>
+<td><div class="eptitles"><span style="filter: blur(1.3px);">censorship and slop</span></div></td>
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">August 2025</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">1</td>
+<td><div class="eptitles">i made a wiki</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">2</td>
+<td><div class="eptitles">work daze</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">3</td>
+<td><div class="eptitles">slipping away</div></td>
+</tr>
+
+<tr>
+<td style="border-right: 1px solid var(--border-color);text-align:center;">4</td>
+<td><div class="eptitles">present with gem</div></td>
+</tr>
+
+
+	
+</tbody></table></div>
+
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
     </section>
 
   
