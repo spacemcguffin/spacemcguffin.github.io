@@ -124,6 +124,60 @@ h1 span {
   box-shadow: inset 0px -0.5em 0px 0px #8aafec7a;
 }
 
+
+
+
+
+
+
+
+
+:root {
+    --border-color: #cccccc;
+    --hovertext-color: #3a3a3a;
+    --hoverback-color: #eaecf0;
+}
+
+
+.month {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    color: #000000;
+}
+
+
+table, th, td {
+  border-collapse: collapse;
+  padding: 0.5em;
+  font-size: 0.95rem;
+  text-align: left;  
+  overflow-wrap: break-word;
+  width: -webkit-fill-available;
+}
+
+
+
+tr:hover {
+    background-color: var(--hoverback-color);
+	  color: var(--hovertext-color);
+}
+
+
+tr:last-child {
+   border-bottom: none;
+}
+
+
+
+
+
+
+
+
+
+
+
 /* Footer */
 footer {
   margin-top: 6rem;
