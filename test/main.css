@@ -187,6 +187,7 @@ main {
     box-shadow: 2px 2px 2px 0px #12121252;
     opacity: 0;
     display: none;
+}
 
   & .title {
         font-family: 'Onest', sans-serif;
@@ -270,7 +271,12 @@ main {
 	.ribbon { 
 		font-size:0.8rem;
 	}
-  .content {
+
+	.content {
+		padding: 0.8rem;
+	}
+		
+  .content {  
     & .title        { font-size: 1rem; }
     & .subtitle     { font-size: 0.65rem; padding: 0 0 0 0; }
     & .description  { font-size: 0.7rem; }
@@ -295,6 +301,11 @@ main {
     position: absolute;
     bottom: 4rem;
 	}
+
+		.content {
+		padding: 0.8rem;
+	}
+	
   .content {
     & .title        { font-size: 0.9rem; }
     & .subtitle     { font-size: 0.6rem; padding: 0 0 0.5rem 0; }
