@@ -7,7 +7,6 @@ body {
   color: black;
   font-family: 'Inter', sans-serif;
   text-align: center;
-  text-shadow: 1px 1px 1px black;
   margin-top: 1rem;
   margin-bottom: 1rem;
   max-width: 400px;
@@ -68,11 +67,15 @@ h4 {
 
 
 h3 {
-    background-image: linear-gradient(to left, #5470ae57, #ffffff00);
+    background-image: linear-gradient(to left, #e693ad, #ffffff00);
     border-radius: 0 50px 50px 0;
     font-weight: 500;
     margin-bottom: 1rem;
     line-height: 2;
+	color: #d79b78;
+    font-size: 0.85rem;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
 }
 
   
@@ -89,13 +92,13 @@ a:hover {
 
 
 ::-moz-selection {
-	background: #cfd8e4;
+	background: #ffeeee;
 	text-shadow: none;
   color:#000000;
 }
 
 ::selection {
-	background: #cfd8e4;
+	background: #ffeeee;
 	text-shadow: none;
   color:#000000;
 } 
