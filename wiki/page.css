@@ -922,7 +922,7 @@ border: none;
 }
 
 .content-wrapper .video-list .video-card .title {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--primary-color);
     font-weight: 600;
     line-height: 1.35;
@@ -930,14 +930,17 @@ border: none;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    font-family: "Stack Sans Text", sans-serif;
 }
 
 .content-wrapper .video-list .video-card .range {
-    font-size: 0.73rem;
+    font-weight: 200;
+    font-size: 0.75rem;
     color: var(--secondary-color);
     text-transform: uppercase;
     margin-bottom: 0.2rem;
-    letter-spacing: 0.1px;
+    letter-spacing: 0.5px;
+    font-family: "Stack Sans Text", sans-serif;
 }
 
 .content-wrapper .video-list .video-card:hover .title {
