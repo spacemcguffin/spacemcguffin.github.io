@@ -2,6 +2,7 @@ let movies = [
   {
     name: "Twisted Christian",
     des: "Season 28, Episode 1",
+    synopsis: "Cartman is possessed and may be the key to stopping the Antichrist.",
     image: "/wiki/img/episodes/tc.png",
   },
   {
@@ -43,13 +44,16 @@ const createSlide = () => {
   let imgElement = document.createElement("img");
   let content = document.createElement("div");
   let h1 = document.createElement("h1");
+  let h2 = document.createElement("h2");
   let p = document.createElement("p");
 
   // attaching all element
   imgElement.appendChild(document.createTextNode(""));
   h1.appendChild(document.createTextNode(movies[slideIndex].name));
+  h2.appendChild(document.createTextNode(movies[slideIndex].synopsis));
   p.appendChild(document.createTextNode(movies[slideIndex].des));
   content.appendChild(h1);
+  content.appendChild(h2);
   content.appendChild(p);
   slide.appendChild(content);
   slide.appendChild(imgElement);
@@ -63,6 +67,7 @@ const createSlide = () => {
   slide.className = "slider";
   content.className = "slide-content";
   h1.className = "movie-title";
+  h2.className = "movie-synopsis";
   p.className = "movie-des";
 
   sliders.push(slide);
