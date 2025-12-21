@@ -1,8 +1,8 @@
 let movies = [
   {
-    name: "loki",
-    des: "Loki is an American television series created by Michael Waldron for the streaming service Disney.",
-    image: "./images/slider 1.PNG",
+    name: "southpark",
+    des: "South Park has been running for almost 30 years.",
+    image: "/wiki/img/episodes/sotm.png",
   },
   {
     name: "falcon and the winter soldier",
