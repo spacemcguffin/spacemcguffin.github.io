@@ -1,113 +1,307 @@
-@function pxToRem($pixel) {
-  @return $pixel / 16 + rem;
-}
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 
 :root {
-  --black: #1f1f1f;
-  --white: #fff;
+    --clr-small-photo-top-border: rgb(255, 255, 255);
+    --clr-small-photo-bottom-border: .photo-gallery-container;
 }
 
-body {
-  background-color: var(--black);
-  color: var(--white);
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-size: 20px;
-  line-height: 1.5;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-.hero__content {
-  height: 100vh;
-  overflow-x: hidden;
-  width: 100%;
+.photo-gallery-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
 }
 
-.hero__bg {
-  background-image: url("https://assets.codepen.io/204808/hobbiton.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  filter: blur(3px) brightness(1.5); /* initial fog */
-  height: 100vh;
-  width: 100%;
-  will-change: filter;
+.photo-boxes {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+    width: 700px;
+    height: 603px;
+
 }
 
-.hero__title {
-  color: var(--black);
-  filter: blur(10px);
-  font-size: clamp(3.125rem, 17.321vw + -1.357rem, 12.5rem);
-  line-height: clamp(4.688rem, 21.363vw + -0.84rem, 16.25rem);
-  left: 50%;
-  margin: 0;
-  opacity: 0;
-  padding: 0;
-  position: absolute;
-  top: 50vh;
-  transform: translate(-50%, -50%) scale(0.5);
-  z-index: 100;
+.photo-boxes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+
 }
 
-.hero__cover {
-  --overlay-opacity: 1;
+/* photo-1 starts  ******************************************************************/
 
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  perspective: 500px;
-  overflow: hidden;
-  z-index: 2;
-}
-
-.hero__cover {
-  &::after {
-    background: radial-gradient(
-      circle,
-      rgba(0, 0, 0, 0) 20%,
-      rgba(0, 0, 0, 1) 90%
-    );
+.cbox-1:checked~label .big-photo-1::after {
     content: "";
-    inset: 0;
-    opacity: var(--overlay-opacity);
     position: absolute;
-    pointer-events: none;
-  }
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 525px;
+    background-image: url("https://picsum.photos/id/30/700/525");
+    box-sizing: border-box;
+    box-shadow: 0px 0px 10px 2px hsla(0, 99%, 29%, 0.9);
 }
 
-.hero__cover-img {
-  height: 100%;
-  object-fit: cover;
-  width: 100%;
-  pointer-events: none;
+.photo-box-01 {
+    width: 100px;
+    overflow: hidden;
+    order: 2;
+    border-top: 3px solid var(--clr-small-photo-top-border);
 }
 
-.section {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 100px 0;
+.photo-box-01 img {
+    transition: transform 2s ease 0.2s;
 }
 
-.hobbiton {
-  position: relative;
+.photo-box-01:hover img {
+    transform: scale(1.5);
+}
 
-  &::after {
-    background: radial-gradient(
-      circle,
-      rgba(0, 0, 0, 0) 40%,
-      rgba(0, 0, 0, 0.7) 90%
-    );
+.cbox-div {
+    width: 100px;
+    height: 75px;
+}
+
+.cbox-1 {
+    display: none;
+}
+
+/* photo-1 ends  ******************************************************************/
+
+
+/* photo-2 start******************************************************************/
+
+.photo-box-02 {
+    overflow: hidden;
+    order: 2;
+    border-top: 3px solid var(--clr-small-photo-top-border);
+
+}
+
+.photo-box-02:hover img {
+    transform: scale(1.5);
+}
+
+.photo-box-02 img {
+    transition: transform 2s ease 0.2s;
+}
+
+.cbox-2 {
+    display: none;
+}
+
+.cbox-2:checked~label .big-photo-2::after {
     content: "";
-    inset: 0;
-    opacity: var(--overlay-opacity);
     position: absolute;
-    pointer-events: none;
-  }
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 525px;
+    background-image: url("https://picsum.photos/id/48/700/525");
+    box-shadow: 0px 0px 10px 2px hsla(39, 98%, 49%, 0.9);
+
 }
 
-.hobbiton-img {
-  height: 100vh;
-  object-fit: cover;
-  width: 100%;
+
+
+/* photo-2 ends******************************************************************/
+
+
+/* photo-3 start******************************************************************/
+.photo-box-03 {
+    overflow: hidden;
+    order: 2;
+    border-top: 3px solid var(--clr-small-photo-top-border);
+}
+
+.cbox-3 {
+    display: none;
+}
+
+.cbox-3:checked~label .big-photo-3::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 525px;
+    background-image: url("https://picsum.photos/id/58/700/525");
+    box-shadow: 0px 0px 10px 2px hsla(0, 100%, 2%, 0.9);
+
+}
+
+
+.photo-box-03:hover img {
+    transform: scale(1.5);
+}
+
+.photo-box-03 img {
+    transition: transform 2s ease 0.2s;
+}
+
+/* photo-3 ends******************************************************************/
+
+/* photo-4 start******************************************************************/
+.photo-box-04 {
+    overflow: hidden;
+    order: 2;
+    border-top: 3px solid var(--clr-small-photo-top-border);
+
+}
+
+.cbox-4 {
+    display: none;
+}
+
+.cbox-4:checked~label .big-photo-4::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 525px;
+    background-image: url("https://picsum.photos/id/64/700/525");
+    box-shadow: 0px 0px 10px 2px hsla(62, 99%, 28%, 0.9);
+
+}
+
+.photo-box-04:hover img {
+    transform: scale(1.5);
+
+}
+
+.photo-box-04 img {
+    transition: transform 2s ease 0.2s;
+}
+
+/* photo-4 ends******************************************************************/
+
+/* photo-5 start******************************************************************/
+.photo-box-05 {
+    overflow: hidden;
+    order: 2;
+    border-top: 3px solid var(--clr-small-photo-top-border);
+
+}
+
+.cbox-5 {
+    display: none;
+}
+
+.cbox-5:checked~label .big-photo-5::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 525px;
+    background-image: url("https://picsum.photos/id/96/700/525");
+    box-shadow: 0px 0px 10px 2px hsla(0, 100%, 2%, 0.9);
+
+}
+
+.photo-box-05:hover img {
+    transform: scale(1.5);
+
+}
+
+.photo-box-05 img {
+    transition: transform 2s ease 0.2s;
+}
+
+/* photo-5 ends*****************************************************************/
+
+/* photo-6 start******************************************************************/
+.photo-box-06 {
+    order: 2;
+    border-top: 3px solid var(--clr-small-photo-top-border);
+    overflow: hidden;
+
+}
+
+.cbox-6 {
+    display: none;
+}
+
+.cbox-6:checked~label .big-photo-6::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 525px;
+    background-image: url("https://picsum.photos/id/119/700/525");
+    box-shadow: 0px 0px 10px 2px hsla(0, 0%, 31%, 0.9);
+
+}
+
+.photo-box-06:hover img {
+    transform: scale(1.5);
+
+}
+
+.photo-box-06 img {
+    transition: transform 2s ease 0.2s;
+}
+
+/* photo-6 ends*/
+
+/* photo-7 start*/
+.photo-box-07 {
+    order: 2;
+    border-top: 3px solid var(--clr-small-photo-top-border);
+    overflow: hidden;
+}
+
+.cbox-7 {
+    display: none;
+}
+
+.cbox-7:checked~label .big-photo-7::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 700px;
+    height: 525px;
+    background-image: url("https://picsum.photos/id/133/700/525");
+    box-shadow: 0px 0px 10px 2px hsla(59, 100%, 34%, 0.9);
+
+}
+
+.photo-box-07:hover img {
+    transform: scale(1.5);
+
+}
+
+.photo-box-07 img {
+    transition: transform 2s ease 0.2s;
+}
+
+/* photo-7 ends*/
+
+
+.main-photo {
+    width: 708px;
+    height: 525px;
+    /* background-color: bisque; */
+    background-image: url("https://picsum.photos/id/30/700/525");
+
+
+
+}
+
+h6 {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 100;
+
 }
