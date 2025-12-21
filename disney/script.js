@@ -24,6 +24,7 @@ let movies = [
   {
     name: "Conflict of Interest",
     des: "Season 27, Episode 5",
+    des: "Season 27, Episode 5",
     image: "/wiki/img/episodes/coi.png",
   },
 ];
