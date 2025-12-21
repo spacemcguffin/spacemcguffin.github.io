@@ -1,3 +1,4 @@
+
 const carousel = document.querySelector(".carousel");
 let sliders = [];
 
@@ -8,6 +9,36 @@ const createSlide = () => {
     slideIndex = 0;
   }
 
+  // create DOM Elements
+  let slide = document.createElement("div");
+  let imgElement = document.createElement("img");
+  let content = document.createElement("div");
+  let h1 = document.createElement("h1");
+  let h2 = document.createElement("h2");
+  let p = document.createElement("p");
+
+  // attaching all element
+  imgElement.appendChild(document.createTextNode(""));
+  h1.appendChild(document.createTextNode(movies[slideIndex].name));
+  h2.appendChild(document.createTextNode(movies[slideIndex].season));
+  p.appendChild(document.createTextNode(movies[slideIndex].des));
+  content.appendChild(h1);
+  content.appendChild(h2);
+  content.appendChild(p);
+  slide.appendChild(content);
+  slide.appendChild(imgElement);
+  carousel.appendChild(slide);
+
+  // setting up images
+  imgElement.src = movies[slideIndex].image;
+  slideIndex++;
+
+  // setting elements classnames
+  slide.className = "slider";
+  content.className = "slide-content";
+  h1.className = "movie-title";
+  h2.className = "movie-season";
+  p.className = "movie-des";
 
   sliders.push(slide);
 
