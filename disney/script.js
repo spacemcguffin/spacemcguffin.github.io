@@ -1,6 +1,6 @@
 let movies = [
   {
-    name: "Twisted Christian",
+    name: "<a href="https://google.com">Twisted Christian</a>",
     season: "Season 28, Episode 1",
     des: "Cartman is possessed and may be the key to stopping the Antichrist.",
     image: "/wiki/img/episodes/tc.png",
