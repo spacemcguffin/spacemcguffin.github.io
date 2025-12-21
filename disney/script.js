@@ -80,7 +80,7 @@ for (let i = 0; i < 3; i++) {
 
 setInterval(() => {
   createSlide();
-}, 5000);
+}, 10000);
 
 // video cards
 
