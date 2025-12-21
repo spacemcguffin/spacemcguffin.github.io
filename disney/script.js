@@ -2,29 +2,33 @@ let movies = [
   {
     name: "Sermon on the 'Mount",
     des: "Season 27, Episode 1",
+    syn: "When the residents of South Park face their possible demise, Jesus returns to give them an important message.",
     image: "/wiki/img/episodes/sotm.png",
   },
   {
     name: "Got a Nut",
     des: "Season 27, Episode 2",
+    syn: "When the residents of South Park face their possible demise, Jesus returns to give them an important message.",    
     image: "/wiki/img/episodes/gan.png",
   },
   {
     name: "Sickofancy",
     des: "Season 27, Episode 3",
+    syn: "When the residents of South Park face their possible demise, Jesus returns to give them an important message.",    
     image: "/wiki/img/episodes/sickofancy.png",
   },
 
   {
     name: "Wok is Dead",
     des: "Season 27, Episode 4",
+    syn: "When the residents of South Park face their possible demise, Jesus returns to give them an important message.",    
     image: "/wiki/img/episodes/wid.png",
   },
 
   {
     name: "Conflict of Interest",
     des: "Season 27, Episode 5",
-    des: "Season 27, Episode 5",
+    syn: "When the residents of South Park face their possible demise, Jesus returns to give them an important message.",    
     image: "/wiki/img/episodes/coi.png",
   },
 ];
@@ -50,6 +54,7 @@ const createSlide = () => {
   imgElement.appendChild(document.createTextNode(""));
   h1.appendChild(document.createTextNode(movies[slideIndex].name));
   p.appendChild(document.createTextNode(movies[slideIndex].des));
+  p.appendChild(document.createTextNode(movies[slideIndex].syn));
   content.appendChild(h1);
   content.appendChild(p);
   slide.appendChild(content);
@@ -65,6 +70,7 @@ const createSlide = () => {
   content.className = "slide-content";
   h1.className = "movie-title";
   p.className = "movie-des";
+  p.className = "movie-syn";
 
   sliders.push(slide);
 
