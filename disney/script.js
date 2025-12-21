@@ -1,30 +1,30 @@
 let movies = [
   {
-    name: "Sermon on the 'Mount",
-    des: "Season 27, Episode 1",
-    image: "/wiki/img/episodes/sotm.png",
+    name: "Twisted Christian",
+    des: "Season 28, Episode 1",
+    image: "/wiki/img/episodes/tc.png",
   },
   {
-    name: "Got a Nut",
-    des: "Season 27, Episode 2",
-    image: "/wiki/img/episodes/gan.png",
+    name: "The Woman in the Hat",
+    des: "Season 28, Episode 2",
+    image: "/wiki/img/episodes/twith.png",
   },
   {
-    name: "Sickofancy",
-    des: "Season 27, Episode 3",
-    image: "/wiki/img/episodes/sickofancy.png",
-  },
-
-  {
-    name: "Wok is Dead",
-    des: "Season 27, Episode 4",
-    image: "/wiki/img/episodes/wid.png",
+    name: "Sora Not Sorry",
+    des: "Season 28, Episode 3",
+    image: "/wiki/img/episodes/sns.png",
   },
 
   {
-    name: "Conflict of Interest",
-    des: "Season 27, Episode 5",
-    image: "/wiki/img/episodes/coi.png",
+    name: "Turkey Trot",
+    des: "Season 28, Episode 4",
+    image: "/wiki/img/episodes/tt.png",
+  },
+
+  {
+    name: "The Crap Out",
+    des: "Season 28, Episode 5",
+    image: "/wiki/img/episodes/tco.png",
   },
 ];
 
