@@ -49,7 +49,6 @@ const createSlide = () => {
   let content = document.createElement("div");
   let h1 = document.createElement("h1");
   let p = document.createElement("p");
-  let p = document.createElement("p");
 
   // attaching all element
   imgElement.appendChild(document.createTextNode(""));
@@ -57,7 +56,6 @@ const createSlide = () => {
   p.appendChild(document.createTextNode(movies[slideIndex].des));
   p.appendChild(document.createTextNode(movies[slideIndex].syn));
   content.appendChild(h1);
-  content.appendChild(p);
   content.appendChild(p);
   slide.appendChild(content);
   slide.appendChild(imgElement);
