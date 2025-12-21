@@ -1,30 +1,30 @@
 let movies = [
   {
-    name: "southpark",
-    des: "South Park has been running for almost 30 years.",
+    name: "Sermon on the 'Mount",
+    des: "Season 27, Episode 1",
     image: "/wiki/img/episodes/sotm.png",
   },
   {
-    name: "falcon and the winter soldier",
-    des: "Falcon and the Winter Soldier is an American television series created for the streaming platform Disney+.",
-    image: "./images/slider 2.PNG",
+    name: "Got a Nut",
+    des: "Season 27, Episode 2",
+    image: "/wiki/img/episodes/gan.png",
   },
   {
-    name: "WandaVision",
-    des: "WandaVision is an American television series created for the streaming service Disney+",
-    image: "./images/slider 3.PNG",
-  },
-
-  {
-    name: "Raya and the Last Dragon",
-    des: "Raya and the Last Dragon is an animated Disney film released in 2021.",
-    image: "./images/slider 4.PNG",
+    name: "Sickofancy",
+    des: "Season 27, Episode 3",
+    image: "/wiki/img/episodes/sickofancy.png",
   },
 
   {
-    name: "Luca",
-    des: "Luca is a Disney-Pixar animated film released in 2021.",
-    image: "./images/slider 5.PNG",
+    name: "Wok is Dead",
+    des: "Season 27, Episode 4",
+    image: "/wiki/img/episodes/wid.png",
+  },
+
+  {
+    name: "Conflict of Interest",
+    des: "Season 27, Episode 5",
+    image: "/wiki/img/episodes/coi.png",
   },
 ];
 
