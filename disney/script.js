@@ -1,3 +1,35 @@
+let movies = [
+  {
+    name: ",
+    season: "",
+    des: "",
+    image: "",
+  },
+    {
+    name: ",
+    season: "",
+    des: "",
+    image: "",
+  },
+  {
+    name: ",
+    season: "",
+    des: "",
+    image: "",
+  },
+  {
+    name: ",
+    season: "",
+    des: "",
+    image: "",
+  },
+    {
+    name: ",
+    season: "",
+    des: "",
+    image: "",
+  },
+];
 
 const carousel = document.querySelector(".carousel");
 let sliders = [];
