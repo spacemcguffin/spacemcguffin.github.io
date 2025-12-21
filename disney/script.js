@@ -1,31 +1,35 @@
 let movies = [
   {
     name: "Twisted Christian",
-    des: "Season 28, Episode 1",
-    synopsis: "Cartman is possessed and may be the key to stopping the Antichrist.",
+    season: "Season 28, Episode 1",
+    des: "Cartman is possessed and may be the key to stopping the Antichrist.",
     image: "/wiki/img/episodes/tc.png",
   },
   {
     name: "The Woman in the Hat",
-    des: "Season 28, Episode 2",
+    season: "Season 28, Episode 2",
+    des: "The White House deals with a disruptive spirit from the east wing; Stan worries that South Park has become too political.",
     image: "/wiki/img/episodes/twith.png",
   },
   {
     name: "Sora Not Sorry",
-    des: "Season 28, Episode 3",
+    season: "Season 28, Episode 3",
+    des: "Butters' AI revenge plan backfires, igniting an epidemic of fake videos at school that leaves Detective Harris struggling to tell fantasy from reality.",
     image: "/wiki/img/episodes/sns.png",
   },
 
   {
     name: "Turkey Trot",
-    des: "Season 28, Episode 4",
-    image: "/wiki/img/episodes/tt.png",
+    season: "Season 28, Episode 4",
+     des: "The town's annual Turkey Trot turns chaotic when Cartman uses questionable cutting-edge science to win the race.",
+   image: "/wiki/img/episodes/tt.png",
   },
 
   {
     name: "The Crap Out",
-    des: "Season 28, Episode 5",
-    image: "/wiki/img/episodes/tco.png",
+    season: "Season 28, Episode 5",
+     des: "Satan's due, Stan's praying, and only a Christmas miracle can deliver the Antichrist on time.",
+   image: "/wiki/img/episodes/tco.png",
   },
 ];
 
@@ -50,7 +54,7 @@ const createSlide = () => {
   // attaching all element
   imgElement.appendChild(document.createTextNode(""));
   h1.appendChild(document.createTextNode(movies[slideIndex].name));
-  h2.appendChild(document.createTextNode(movies[slideIndex].synopsis));
+  h2.appendChild(document.createTextNode(movies[slideIndex].season));
   p.appendChild(document.createTextNode(movies[slideIndex].des));
   content.appendChild(h1);
   content.appendChild(h2);
@@ -67,7 +71,7 @@ const createSlide = () => {
   slide.className = "slider";
   content.className = "slide-content";
   h1.className = "movie-title";
-  h2.className = "movie-synopsis";
+  h2.className = "movie-season";
   p.className = "movie-des";
 
   sliders.push(slide);
