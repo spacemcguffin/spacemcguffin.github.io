@@ -40,12 +40,32 @@ body {
 
 h1 {
 	font-size:1.2rem;
+	font-weight:400;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
 }
 
 a, a:visited {
 	color: #0084D1;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 8px;
+    text-decoration-color: #f5b041;
+	font-weight: 500;
 }
 
 a:hover {
 	color: #000000;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 8px;
+    text-decoration-color: #000000;
+	font-weight: 500;
 }
