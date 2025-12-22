@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+@import url(https://fonts.bunny.net/css?family=bayon:400);
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  font-family: 'Momo Trust Display', sans-serif;
+  font-family: 'Bayon', 'Momo Trust Display', sans-serif;
 }
 
 
@@ -31,9 +32,20 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 80vh;
-  background: #252839;
-  background-image: url(/images/nebula.png);
+  background: #FFEDDB;
     background-attachment: fixed;
     background-size: cover;
+	font-color: #000000;
+}
+
+h1 {
+	font-size:1.2rem;
+}
+
+a, a:visited {
+	color: #0084D1;
+}
+
+a:hover {
+	color: #000000;
 }
