@@ -169,7 +169,7 @@ for (let i = 0; i < 3; i++) {
 
 setInterval(() => {
   createSlide();
-}, 4000);
+}, 5000);
 
 
 // cards sliders
