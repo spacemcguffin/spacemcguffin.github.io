@@ -80,22 +80,22 @@ $(function() {
 
 let movies = [
   {
-    name: "Twisted Christian",
-    season: "Season 28, Episode 1",
-    des: "Cartman is possessed and may be the key to stopping the Antichrist.",
-    image: "/wiki/img/episodes/tc.png",
+    name: "Destination: Daleks",
+    season: "Season 21 Minisode",
+    des: "The Doctor and Tegan recieve a distress signal from an old friend, as old enemies lie in wait.",
+    image: "/dw/img/dd0.png",
   },
   {
-    name: "The Woman in the Hat",
-    season: "Season 28, Episode 2",
-    des: "The White House deals with a disruptive spirit from the east wing; Stan worries that South Park has become too political.",
-    image: "/wiki/img/episodes/twith.png",
+    name: "The Final Battle",
+    season: "Season 15 Minisode",
+    des: "On the final day of the Time War, Leela receives an important message.",
+    image: "/dw/img/tfb4.png",
   },
   {
-    name: "Sora Not Sorry",
-    season: "Season 28, Episode 3",
-    des: "Butters' AI revenge plan backfires, igniting an epidemic of fake videos at school that leaves Detective Harris struggling to tell fantasy from reality.",
-    image: "/wiki/img/episodes/sns.png",
+    name: "Risen",
+    season: "Season 17 Minisode",
+    des: "The long darkness has ended, the eternity of waiting is over, and the resurrection of Davros has come.",
+    image: "/dw/img/risen3.png",
   },
 
   {
@@ -169,7 +169,7 @@ for (let i = 0; i < 3; i++) {
 
 setInterval(() => {
   createSlide();
-}, 5000);
+}, 4000);
 
 
 // cards sliders
