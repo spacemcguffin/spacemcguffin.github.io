@@ -92,24 +92,24 @@ let movies = [
     image: "/dw/img/tfb4.png",
   },
   {
-    name: "Risen",
+    name: "The Resurrection of Davros",
     season: "Season 17 Minisode",
     des: "The long darkness has ended, the eternity of waiting is over, and the resurrection of Davros has come.",
     image: "/dw/img/risen3.png",
   },
 
   {
-    name: "Turkey Trot",
-    season: "Season 28, Episode 4",
-     des: "The town's annual Turkey Trot turns chaotic when Cartman uses questionable cutting-edge science to win the race.",
-   image: "/wiki/img/episodes/tt.png",
+    name: "Skaro’s Lament",
+    season: "Minisode",
+     des: "Hell breaks loose on Skaro.",
+    image: "/dw/img/davros.png",
   },
 
   {
-    name: "The Crap Out",
-    season: "Season 28, Episode 5",
-     des: "Satan's due, Stan's praying, and only a Christmas miracle can deliver the Antichrist on time.",
-   image: "/wiki/img/episodes/tco.png",
+    name: "Skaro's Lament",
+    season: "Minisode",
+     des: "Hell breaks loose on Skaro.",
+    image: "/dw/img/davros.png",
   },
 ];
 
