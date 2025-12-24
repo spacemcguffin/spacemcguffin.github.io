@@ -79,21 +79,23 @@ $(function() {
 
 
 let movies = [
-  {
-    name: "Destination: Daleks",
-    season: "Season 21 Minisode",
-    des: "The Doctor and Tegan recieve a distress signal from an old friend, as old enemies lie in wait.",
-    image: "/dw/img/dd0.png",
-  },
-  {
+	  {
     name: "The Final Battle",
-    season: "Season 15 Minisode",
+    season: "Minisode",
     des: "On the final day of the Time War, Leela receives an important message.",
     image: "/dw/img/tfb4.png",
   },
+	
   {
-    name: "The Resurrection of Davros",
-    season: "Season 17 Minisode",
+    name: "Daleks Are Forever",
+    season: "Minisode",
+    des: "The Doctor and Tegan recieve a distress signal from an old friend, as old enemies lie in wait.",
+    image: "/dw/img/dd0.png",
+  },
+	
+  {
+    name: "Live and Let Davros",
+    season: "Minisode",
     des: "The long darkness has ended, the eternity of waiting is over, and the resurrection of Davros has come.",
     image: "/dw/img/risen3.png",
   },
@@ -105,12 +107,7 @@ let movies = [
     image: "/dw/img/davros.png",
   },
 
-  {
-    name: "Skaro's Lament",
-    season: "Minisode",
-     des: "Hell breaks loose on Skaro.",
-    image: "/dw/img/davros.png",
-  },
+
 ];
 
 const carousel = document.querySelector(".carousel");
