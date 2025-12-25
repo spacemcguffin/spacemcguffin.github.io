@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>microblog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --text: darkslategrey;
+            --bg: #f2f2f2;
+            --accent1: #c4e2c4;
+            --accent2: #a0d0a0;
+            --border: darkslategrey;
+        }
+
+        body {
+            font-family: monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        *::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        *::-webkit-scrollbar-track {
+            background: #f0f0f0;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            background: var(--accent2);
+            border: 1px solid var(--border);
+        }
+
+        *::-webkit-scrollbar-thumb:hover {
+            background: var(--accent1);
+        }
+
+        .wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0;
+        }
+
+        header {
+            background-image: url('https://files.catbox.moe/otduzw.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100px;
+            border: 2px solid var(--border);
+            padding: 25px 20px 15px 20px;
+            margin: 20px;
+            box-shadow: 6px 6px 0 var(--border);
+        }
+
+        .tagline {
+            font-size: 20px;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            background-color: darkslategrey;
+            color: #f2f2f2;
+            padding: 10px;
+        }
+
+        nav {
+            background: var(--accent2);
+            color: var(--text);
+            padding: 0;
+            margin: 0 20px 20px 20px;
+            border: 2px solid var(--border);
+            box-shadow: 6px 6px 0 var(--border);
+            position: relative;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: nowrap;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav > ul > li {
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: bold;
+            padding: 14px 12px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        nav > ul > li > a {
+            border-right: 2px solid var(--border);
+        }
+
+        nav > ul > li:last-child > a {
+            border-right: 2px solid var(--border);
+        }
+
+        nav a:hover {
+            background: var(--accent1);
+        }
+
+        nav ul ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 2px solid var(--border);
+            box-shadow: 4px 4px 0 var(--border);
+            min-width: 200px;
+            z-index: 100;
+        }
+
+        nav ul li:hover > ul {
+            display: block;
+        }
+
+        nav ul ul li {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        nav ul ul li:last-child {
+            border-bottom: none;
+        }
+
+        nav ul ul a {
+            padding: 12px 16px;
+            border-right: none;
+            font-size: 12px;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+
+        nav ul ul a:hover {
+            background: var(--accent1);
+        }
+
+        main {
+            padding: 0 20px 40px 20px;
+        }
+
+        .page-title {
+            background: var(--text);
+            color: var(--bg);
+            padding: 15px 20px;
+            border: 2px solid #f2f2f2;
+            box-shadow: 6px 6px 0 var(--border);
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .intro-box {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            box-shadow: 6px 6px 0 var(--border);
+            font-size: 14px;
+        }
+
+        .filter-bar {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            box-shadow: 4px 4px 0 var(--border);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-label {
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .filter-tag {
+            display: inline-block;
+            background: var(--accent1);
+            border: 2px solid var(--border);
+            padding: 5px 12px;
+            font-size: 12px;
+            text-decoration: none;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--accent2);
+            transform: translate(-1px, -1px);
+            box-shadow: 2px 2px 0 var(--border);
+        }
+
+        .post {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 0;
+            margin-bottom: 20px;
+            box-shadow: 6px 6px 0 var(--border);
+        }
+
+        .post-header {
+            background: var(--accent2);
+            padding: 12px 20px;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .post-date {
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .post-time {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .post-tag {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 3px 8px;
+            font-size: 11px;
+            text-transform: lowercase;
+        }
+
+        .post-content {
+            padding: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .post-content p {
+            margin-bottom: 12px;
+        }
+
+        .post-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .post-content a {
+            color: var(--text);
+            text-decoration: underline;
+            text-decoration-color: var(--accent2);
+            font-weight: bold;
+        }
+
+        .post-content a:hover {
+            background: var(--accent1);
+        }
+
+        .post-content blockquote {
+            border-left: 3px solid var(--accent2);
+            padding-left: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .post-image {
+            margin-top: 15px;
+            border: 2px solid var(--border);
+        }
+
+        .post-image img {
+            width: 100%;
+            display: block;
+        }
+
+        .post-footer {
+            padding: 12px 20px;
+            border-top: 1px solid #e0e0e0;
+            font-size: 12px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .post-footer a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .post-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .mood-indicator {
+            display: inline-block;
+            font-size: 18px;
+            margin-right: 8px;
+        }
+
+        .month-divider {
+            background: var(--text);
+            color: var(--bg);
+            padding: 10px 20px;
+            border: 2px solid var(--border);
+            box-shadow: 4px 4px 0 var(--border);
+            margin: 30px 0 20px 0;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .pagination a {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 10px 20px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: bold;
+            box-shadow: 3px 3px 0 var(--border);
+            transition: all 0.2s;
+        }
+
+        .pagination a:hover {
+            background: var(--accent1);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 var(--border);
+        }
+
+        .pagination a.active {
+            background: var(--accent2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 13px;
+            border-top: 2px solid var(--border);
+            margin: 0 20px;
+        }
+
+        footer a {
+            margin: 0 10px;
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        footer a:hover {
+            background: var(--accent1);
+        }
+
+        ::selection {
+            background: var(--accent2);
+            color: white;
+        }
+
+        @media (max-width: 850px) {
+            nav ul {
+                flex-direction: column;
+                flex-wrap: wrap;
+            }
+            
+            nav > ul > li > a {
+                border-right: none;
+                border-bottom: 2px solid var(--border);
+                white-space: normal;
+            }
+            
+            nav > ul > li:last-child > a {
+                border-bottom: none;
+            }
+            
+            nav ul ul {
+                position: static;
+                box-shadow: none;
+                border: none;
+                border-top: 1px solid #e0e0e0;
+                background: #fafafa;
+            }
+            
+            nav ul li:hover > ul {
+                display: block;
+            }
+            
+            nav ul ul a {
+                padding-left: 32px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            header, nav, main, footer {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-bar {
+                padding: 12px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="header-placeholder"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header-placeholder').innerHTML = data;
+                });
+        </script>
+
+        <main>
+            <div class="page-title">microblog</div>
+
+            <div class="intro-box">
+                <p>I like to complain and ramble, so this is where I do it. Please exercise caution; <b>some entries may contain topics such as trauma, depression, self-loathing, and various -phobias and -isms.</b></p>
+            </div>
+            
+              <div class="month-divider">december 2025</div>
+              
+               <div class="post">
+                <div class="post-header">
+                    <div>
+                        <span class="post-date">December 24, 2024</span>
+                        <span class="post-time">2:59 PM</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>I am home from university for winter break. The flight was terrible.</p>
+                    <p>Is the DOJ genuinely this stupid. Are they not aware of how easy it is to unredact shoddily-censored text in a PDF.</p>
+                </div>
+                </div>
+
+ <div class="post">
+                <div class="post-header">
+                    <div>
+                        <span class="post-date">December 20, 2024</span>
+                        <span class="post-time">12:47 PM</span>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>Sick as a dog and I couldn't take my mechanics final as a result. However, Jake Paul got the brakes beaten out of him in his heavyweight fight against Anthony Joshua--God is good!!</p>
+                </div>
+                </div>
+           
+
+
+            <div class="post">
+                <div class="post-header">
+                    <div>
+                        <span class="post-date">December 16, 2024</span>
+                        <span class="post-time">12:27 AM</span>
+                    </div>
+                    
+                </div>
+                <div class="post-content">
+                    <p>Finals season has made me feel so incredibly stupid. No matter how long or how intensely I study, the exam environment causes me to completely blank out and I make so many mistakes. I don't think I failed any finals (yet) but my GPA is genuinely pathetic. I am at least a tiny bit reassured by the fact that this is just an engineering undergrad canon event.</p>
+                    <p>I am excited for winter break. I'm going to spend every waking hour drawing, writing, and coding for this site and my characters. Speaking of, I'm planning to order custom keychains and stickers of my OCs, Dio/Dillon and Lys. I'm going to put them everywhere so when people notice, they'll ask, and I get to start info-dumping about them >:D</p>
+                </div>
+                </div>
+
+        
+<br>
+            <footer>
+                <p>wriorango // est. 2024</p>
+                <p>
+                    <a href="index.html">← back to home</a>
+                </p>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
