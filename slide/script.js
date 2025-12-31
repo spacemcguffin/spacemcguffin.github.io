@@ -4,9 +4,9 @@ new Swiper(".wrapper", {
 
   // Autoplay
   autoplay: {
-    delay: 5000,
+    delay: 4000,
     disableOnInteraction: false,
-    pauseOnMouseEnter: true,
+    pauseOnMouseEnter: false,
   },
 
   // Pagination bullets
@@ -35,3 +35,4 @@ new Swiper(".wrapper", {
     },
   },
 });
+
