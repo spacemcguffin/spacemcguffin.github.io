@@ -31,10 +31,11 @@ new Swiper(".wrapper", {
       slidesPerView: 2,
     },
     1024: {
-      slidesPerView: 4,
+      slidesPerView: 3,
     },
   },
 });
+
 
 
 
