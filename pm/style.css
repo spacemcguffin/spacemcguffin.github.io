@@ -31,7 +31,6 @@ body {
 }
 
 .wrapper .card {
-  background: #fbfbfb;
   display: flex;
   height: auto;
   flex-direction: column;
@@ -76,11 +75,11 @@ a:hover {
 }
 
 .card .card-image img {
-  width: 100%;
-  padding: 10px;
-  border-radius: 22px;
-  object-fit: cover;
-  aspect-ratio: 4 / 3;
+    width: 100%;
+    padding: 10px;
+    border-radius: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
 }
 
 .card .card-image .card-tag {
@@ -106,16 +105,16 @@ a:hover {
 }
 
 .card .card-content .card-title {
-    color: #111111;
+    color: #ffffff;
     font-family: 'Stack Sans Text', sans-serif;
     text-decoration: underline;
     text-decoration-style: wavy;
     text-underline-offset: 8px;
     text-decoration-color: #f5b041;
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-align: center;
     line-height: 1.2;
-    margin-bottom: 20px;
 }
 
 .card .card-content .card-text {
