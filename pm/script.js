@@ -4,7 +4,7 @@ new Swiper(".wrapper", {
 
   // Autoplay
   autoplay: {
-    delay: 1000,
+    delay: 0000,
     disableOnInteraction: false,
     pauseOnMouseEnter: false,
   },
