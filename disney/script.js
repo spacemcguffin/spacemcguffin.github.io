@@ -95,7 +95,7 @@ for (let i = 0; i < 3; i++) {
 
 setInterval(() => {
   createSlide();
-}, 5000);
+}, 4000);
 
 
 // cards sliders
