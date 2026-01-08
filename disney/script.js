@@ -5,38 +5,7 @@ let movies = [
     des: "Anything is possible with the power of imagination!",
     image: "/wiki/img/episodes/bic.png",
   },
-  {
-    name: "Twisted Christian",
-    season: "Season 28, Episode 1",
-    des: "Cartman is possessed and may be the key to stopping the Antichrist.",
-    image: "/wiki/img/episodes/tc.png",
-  },
-  {
-    name: "The Woman in the Hat",
-    season: "Season 28, Episode 2",
-    des: "The White House deals with a disruptive spirit from the east wing; Stan worries that South Park has become too political.",
-    image: "/wiki/img/episodes/twith.png",
-  },
-  {
-    name: "Sora Not Sorry",
-    season: "Season 28, Episode 3",
-    des: "Butters' AI revenge plan backfires, igniting an epidemic of fake videos at school that leaves Detective Harris struggling to tell fantasy from reality.",
-    image: "/wiki/img/episodes/sns.png",
-  },
 
-  {
-    name: "Turkey Trot",
-    season: "Season 28, Episode 4",
-     des: "The town's annual Turkey Trot turns chaotic when Cartman uses questionable cutting-edge science to win the race.",
-   image: "/wiki/img/episodes/tt.png",
-  },
-
-  {
-    name: "The Crap Out",
-    season: "Season 28, Episode 5",
-     des: "Satan's due, Stan's praying, and only a Christmas miracle can deliver the Antichrist on time.",
-   image: "/wiki/img/episodes/tco.png",
-  },
 ];
 
 const carousel = document.querySelector(".carousel");
