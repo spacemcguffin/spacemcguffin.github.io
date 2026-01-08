@@ -1,5 +1,11 @@
 let movies = [
   {
+    name: "Born in Chaos",
+    season: "Fortnite Minisode",
+    des: "Anything is possible with the power of imagination!",
+    image: "/wiki/img/episodes/bic.png",
+  },
+  {
     name: "Twisted Christian",
     season: "Season 28, Episode 1",
     des: "Cartman is possessed and may be the key to stopping the Antichrist.",
