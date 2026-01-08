@@ -41,7 +41,6 @@ body {
 .nav-items a {
   text-decoration: none;
   margin-left: 20px;
-  text-transform: capitalize;
   color: #fff;
   opacity: 0.9;
 }
@@ -59,7 +58,6 @@ body {
   height: 30px;
   color: #fff;
   width: 250px;
-  text-transform: capitalize;
   font-size: 16px;
   font-weight: 500px;
   transition: 0.5s;
@@ -108,6 +106,26 @@ body {
   font-weight: 700px;
   text-decoration: none;
 }
+
+
+
+
+
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
+
+
+
 
 .carousel-container {
   position: relative;
@@ -169,16 +187,15 @@ body {
 }
 
 .slide-content h2 {
-    letter-spacing: 0.5px;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     font-weight: 400;
     padding-left: 30px;
-    text-transform: uppercase;
     margin-top: 0.3rem;
-    opacity: 0.6;
+    opacity: 0.8;
     line-height: 1.2;
-    font-family: 'Onest', sans-serif;
+    font-family: 'Inter', sans-serif;
     text-shadow: -6px 6px black;
+    text-transform: none;
 }
 
 .slide-content p {
@@ -205,7 +222,6 @@ body {
   margin-left: 50px;
   margin-top: 20px;
   cursor: pointer;
-  text-transform: capitalize;
 }
 
 .slide-content button:hover {
@@ -215,7 +231,6 @@ body {
 
 .moive-title {
   padding-left: 50px;
-  text-transform: capitalize;
   margin-top: 40px;
   position: absolute;
   bottom: 20px; /* Adjust this value to position the text where you want it */
@@ -275,7 +290,6 @@ body {
 .watchlist-btn {
   position: relative;
   width: 100%;
-  text-transform: capitalize;
   background: none;
   border: none;
   font-weight: 500;
@@ -381,9 +395,8 @@ body {
 
 .card {
     position: relative;
-    min-width: 200px;
-    height: 200px;
-    width: 200px;
+    min-width: 260px;
+    height: 180px;
     border-radius: 5px;
     overflow: hidden;
     background-color: #030b17;
@@ -448,7 +461,6 @@ body {
 .watchlist-btn {
   position: relative;
   width: 100%;
-  text-transform: capitalize;
   background: none;
   border: none;
   font-weight: 500;
