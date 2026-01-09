@@ -80,31 +80,31 @@ $(function() {
 
 let movies = [
 	  {
-    name: "The Final Battle",
-    season: "Minisode",
-    des: "On the final day of the Time War, Leela receives an important message.",
-    image: "/dw/img/tfb4.png",
+    name: "The Pilot",
+    season: "Unbroadcast",
+    des: "The pilot episode.",
+    image: "episodes/thepilot.png",
   },
 	
   {
-    name: "Daleks Are Forever",
-    season: "Minisode",
-    des: "The Doctor and Tegan recieve a distress signal from an old friend, as old enemies lie in wait.",
-    image: "/dw/img/dd0.png",
+    name: "An Unearthly Child",
+    season: "Serial 1",
+    des: "The journey of a lifetime is about to begin...",
+    image: "episodes/unearthlychild.png",
   },
 	
   {
-    name: "Live and Let Davros",
-    season: "Minisode",
-    des: "The long darkness has ended, the eternity of waiting is over, and the resurrection of Davros has come.",
-    image: "/dw/img/risen3.png",
+    name: "The Daleks",
+    season: "Serial 2",
+    des: "The Doctor, Susan, Ian and Barbara discover the Daleks for the first time.",
+    image: "episodes/thedaleks.png",
   },
 
   {
-    name: "Skaro’s Lament",
-    season: "Minisode",
-     des: "Hell breaks loose on Skaro.",
-    image: "/dw/img/davros.png",
+    name: "The Edge of Destruction",
+    season: "Serial 3",
+     des: "Hell breaks loose in the TARDIS",
+    image: "episodes/edgeofdestruction.png",
   },
 
 
