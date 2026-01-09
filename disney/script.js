@@ -11,6 +11,12 @@ let movies = [
     des: "Anything is possible with the power of imagination!",
     image: "/wiki/img/episodes/bic1.png",
   },
+  {
+    name: "Born in Chaos",
+    season: "Fortnite Minisode",
+    des: "Anything is possible with the power of imagination!",
+    image: "/wiki/img/episodes/bic2.png",
+  },
 
 ];
 
