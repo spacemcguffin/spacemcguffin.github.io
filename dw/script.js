@@ -83,7 +83,7 @@ let movies = [
     name: "The Pilot",
     season: "Unbroadcast",
     des: "The pilot episode.",
-    image: "episodes/thepilot.png",
+    image: "episodes/pilot.png",
   },
 	
   {
