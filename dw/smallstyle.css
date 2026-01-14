@@ -67,12 +67,12 @@ nav{display:inline-block}
 b {font-weight: 500;}
 .article{border-bottom:1px solid #cccccc;padding-bottom:1.5em;margin-bottom:1.5em;font-size: 0.9rem;margin-right: 2rem;}
 
-.article h2{
-font-weight: 600;
+.article h2 {
+    font-weight: 500;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
-    font-size: 1.8em;
-    font-family: 'Onest', sans-serif;
+    font-size: 1.4rem;
+    font-family: 'Stack Sans Text', sans-serif;
     line-height: 1.2;
     color: #000000;
     background-image: linear-gradient(to left, #456291, #37059300);
@@ -164,6 +164,7 @@ font-size: 2rem;
 
 
 .hero-title-3 {
+    font-weight: 400;
     font-size: 0.95rem;
     opacity: 0.8;
     font-family: "Poppins", sans-serif;
@@ -629,6 +630,16 @@ header{padding:0 0 0 0}
 
 
 @media screen and (max-width:400px){
+
+	#page {
+    padding: 1rem 3rem 3rem 3rem;
+}
+
+	.article {
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 1.5em;
+    margin: 1rem;
+    font-size: 0.9rem;
 
 
     .hero-title-1 {
