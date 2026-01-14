@@ -600,13 +600,6 @@ aside > div{min-height:20px;padding:10px}
 
 @media screen and (max-width:600px){
 
-.hero-title-classicwho {
-    letter-spacing: -0.5px;
-    font-size: 1.6em;
-	  line-height:1.2;
-}
-
-
 	.article {
     border-bottom: 1px solid #cccccc;
     padding-bottom: 1.5em;
@@ -617,6 +610,52 @@ aside > div{min-height:20px;padding:10px}
 #page {
     padding: 1rem;
 }
+
+
+	    .hero-title-1 {
+        font-size: 1.6rem;
+        display: block;
+        font-family: "Stack Sans Text", sans-serif;
+        color: #ffffff;
+        font-weight: 500;
+	}
+
+
+	.hero-large {
+    height: 200px;
+}
+
+
+.hero-blur-svg {
+    height: 200px;
+    filter: blur(3px);
+}
+
+.hero-blur-background {
+    height: 200px;
+}
+
+	
+
+		.hero-date {
+    display: none;
+		}
+
+
+	.breadcrumb-link {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+	.hero-wrapper {
+    margin-left: 0;
+}
+
+
+	
 	
 #sidebarContent {max-width: 20%}
 #headerLeft{text-align:left}
@@ -684,10 +723,18 @@ header{padding:0 0 0 0}
     display: none;
 		}
 
-	.hero-breadcrumb {
-	  margin-left: -1em;
+
+	.breadcrumb-link {
+    font-size: 0.8rem;
+    line-height: 1.6;
+    color: #ffffff;
+    text-decoration: none;
 }
-		
+
+
+	.hero-wrapper {
+    margin-left: 0;
+}
 	
 #sidebarContent {max-width: 20%}
 #headerLeft{text-align:left}
