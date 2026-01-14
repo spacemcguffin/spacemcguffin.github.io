@@ -599,6 +599,7 @@ header{}
 aside > div{min-height:20px;padding:10px}
 .sidebarToggle #menuToggle{background:#344;color:#ffffff}
 }
+
 @media screen and (max-width:600px){
 
 .hero-title-classicwho {
@@ -628,30 +629,40 @@ header{padding:0 0 0 0}
 
 @media screen and (max-width:400px){
 
-.hero-title-classicwho {
-    letter-spacing: -0.5px;
-    font-size: 1em;
-    line-height:1.2;
+
+    .hero-title-1 {
+        font-size: 1.6rem;
+        display: block;
+        font-family: "Stack Sans Text", sans-serif;
+        color: #ffffff;
+        font-weight: 500;
+	}
+
+
+	.hero-large {
+    height: 150px;
 }
 
-	.hero-title-1 {
-    font-size: 1.5rem;
-    line-height: 75px;
-    display: block;
-    font-family: "Momo Trust Display", sans-serif;
-    letter-spacing: -1px;
-    text-transform: uppercase;
-    color: #ffffff;
-    font-weight: 400;
+
+.hero-blur-svg {
+    height: 150px;
+    filter: blur(3px);
 }
 
-.hero-content {
-  margin-left: -1em;
+.hero-blur-background {
+    height: 150px;
 }
+
+	
+
+		.hero-date {
+    display: none;
+		}
 
 	.hero-breadcrumb {
 	  margin-left: -1em;
 }
+		
 	
 #sidebarContent {max-width: 20%}
 #headerLeft{text-align:left}
