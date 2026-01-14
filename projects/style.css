@@ -37,11 +37,15 @@ body {
   border-radius: 20px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease;
+  filter: grayscale(30%);
 }
 
 .wrapper .card:hover {
   transform: translateY(-10px);
+  filter: grayscale(0%);
+	transition: transform 0.5s;
 }
+
 
 
 
