@@ -13,7 +13,12 @@ h3{font-size:18px}
 	background: #cfd8e4;
 	text-shadow: none;
   color:#000000;
-} 
+}
+
+sup {
+    vertical-align: super;
+    font-size: smaller;
+}
 
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
 nav ul{list-style:none}
@@ -62,21 +67,6 @@ body,html{background-color: #fbfbfb;}
 header{
 	color:#000000;
 }
-
-
-
-
-
-.quote {
-    padding: 0.5rem;
-    margin: 0.5rem 1rem 0rem 1rem;
-    width: fit-content;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    font-style: italic;
-    color: var(--black-color);
-}
-
 
 
 
@@ -301,23 +291,6 @@ position: absolute;
 
 
 
-.quote {
-    line-height: 1.2;
-    font-size: 1.4em;
-    padding-top: 1em;
-    text-align: center;
-    font-weight: 500;
-    margin-left: auto;
-    letter-spacing: -0.3px;
-    color: #437b98de;
-    margin-right: auto;
-    font-family: 'Poppins', sans-serif;
-    padding-left: 1.5em;
-    padding-right: 1.5em;
-    max-width: 650px;quot
-}
-
-
 
 
 
@@ -415,12 +388,13 @@ footer p{padding:2em;color:#1F1F1F;font-size: 0.9em;}
 address{padding:10px 20px 30px 10px}
 .article p.date {color:#6A6A6A;margin: 0 0 0 0;font-weight: 600;font-size: 85%;letter-spacing:0.5px;text-transform:uppercase;margin-bottom: 0.2em;}
 
-.article p {margin-bottom: 1rem;
-    font-size: 0.95rem;
+.article p {
+    margin-bottom: 1rem;
+    font-size: 0.94rem;
     margin-right: 0.5rem;
-    line-height: 1.5;
+    line-height: 1.6;
     font-family: 'Inter', sans-serif;
-		   }
+}
 
 aside > div{background:#ebebeb;min-height:1em;padding:30px 10px;text-align:center;color:#000000;font-family: 'Onest', sans-serif;}
 
@@ -541,12 +515,12 @@ tr:last-child
   z-index: 1000;
   padding: 8px;
   min-width: 200px;
-  max-width: 380px;
+  max-width: 420px;
   background-color: #f8f8f8;
   color: #3a3a3a;
   border: 1px solid #456291;
   content: attr(data-tooltip);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1.4;
 }
 
