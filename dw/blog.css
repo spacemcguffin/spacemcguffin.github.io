@@ -815,7 +815,8 @@ header{}
 #headerLeft{width:auto}
 #headerRight{width:60%}
 }
-@media screen and (max-width:820px){#sidebar{display:none}
+@media screen and (max-width:750px){
+	#sidebar{display:none}
 #main{margin-left:0}
 .sidebarToggle #sidebar{background:red;display:block}
 .stick #sidebarContent{bottom:auto}																	
