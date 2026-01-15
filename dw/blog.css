@@ -815,6 +815,27 @@ header{}
 #headerLeft{width:auto}
 #headerRight{width:60%}
 }
+
+
+
+@media screen and (max-width:850px){
+
+	#sidebarContent {
+    width: 12rem;
+}
+
+#sidebar a.button {
+    font-size: 0.75rem;
+}
+
+#main {
+    margin-left: 12rem;
+}
+}
+
+
+
+
 @media screen and (max-width:750px){
 	#sidebar{display:none}
 #main{margin-left:0}
