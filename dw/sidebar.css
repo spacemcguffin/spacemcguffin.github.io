@@ -886,9 +886,12 @@ div.articletitle {
 
 div.articleRightInner img {
     width: 100%;
+    transition: 0.5s;
 }
 
- 
+div.articleRightInner img:hover {
+     transform: scale(1.1);
+}
 
 
 
