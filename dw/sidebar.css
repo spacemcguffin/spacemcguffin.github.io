@@ -463,6 +463,92 @@ position: absolute;
 
 
 
+.contentsPanel {
+	border: 1px solid #a2a9b1;
+	padding: 5px;
+        font-size: 1rem;
+	position: relative;
+	line-height: 1.8em;
+	width: 16rem;
+}
+.contentsHeader {
+text-align: center;
+    font-family: 'Onest', sans-serif;
+    font-size: 0.85rem;
+    color: #ffffff;
+    background: #456291;
+    margin-bottom: 0.3rem;
+}
+
+.contentsPanel a, a:visited {
+	font-style: normal;
+	font-weight: 400;
+	color: var(--primary-color);
+	text-decoration: none;
+}
+
+
+
+
+.hidePanel, .showPanel {
+	float: right;
+	margin: 0 5px;
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	color: #456291;
+	top: 4px;
+	font-size:12px;
+}
+.contentsPanel ul li span {
+	display: inline-block;
+	margin-right: 8px;
+	color: var(--black-color);
+}
+.contentsPanel ul li {
+    margin-left: 0.5rem;
+    list-style: none;
+    font-size: 0.88rem;
+    line-height: 1.65;
+}
+.contentsPanel ul {
+    padding: 0 0 0 0;
+}
+.contentsPanel ul li ul {
+    font-size: 1.05em;
+    margin: 0 0 0 0;
+}
+.contentsPanel ul li ul li {
+}
+.showPanel {
+display:none;
+}
+.minimizedPanel .showPanel {
+	display: block;
+}
+.minimizedPanel .hidePanel {
+	display: none
+}
+.contentsPanel.minimizedPanel {
+	width: 130px;
+}
+.minimizedPanel .contentsHeader {
+	text-align: left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
