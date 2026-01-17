@@ -9,6 +9,21 @@ body {
   font-size: 0.8rem;
 }
 
+
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
+
 a:link, a:visited {
     color: #003399; /* Default link color */
     text-decoration: none; /* No underline by default */
