@@ -133,11 +133,16 @@ b {font-weight: 500;}
 
 .article h2 {
     font-weight: 400;
-    font-size: 1.3rem;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+    text-decoration-color: #b9bcbc;
+    font-size: 1.2rem;
     font-family: 'Stack Sans Text', sans-serif;
     line-height: 1.2;
     color: #000000;
-	padding: 0.3rem 0px 0.6rem 0;
+    padding: 0px 1rem 1.3rem 0;
 }
 
 .article h3 {
