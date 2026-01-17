@@ -63,7 +63,7 @@ a:hover {
     text-align: center;
     font-weight: 600;
     font-size: 1.2em;
-    font-family: 'Geist', sans-serif;
+    font-family: 'Inter', sans-serif;
     margin-bottom: 1em;
     letter-spacing: 0.3px;
                 }
@@ -693,18 +693,24 @@ Comment Wall
 
 
 .myspace-url-box {
+    font-family: 'Inter', sans-serif;
     border: 1px solid #6699cc;
-    height: 30px;
-    margin-bottom: 24px;
+    height: 35px;
+    margin-bottom: 1rem;
+    width: 296px;
+    padding: 2px;
+    margin-top: 1rem;
 }
 
+.myspace-url-box h3 {
+    font-size: 0.75rem;
+    padding-left: 2px;
+    margin: 2px 0px 2px 0px;
+}
 
 .myspace-url-box p {
     padding-left: 6px;
+    margin: 0 0 0 0;
+    font-size: 0.8rem;
 }
 
-
-.myspace-url-box h3 {
-    font-size: 0.7rem;
-    padding-left: 2px;
-}
