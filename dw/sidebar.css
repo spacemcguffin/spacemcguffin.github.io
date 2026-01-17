@@ -546,7 +546,8 @@ display:none;
 
 /* Style the tab */
 .tab {
-    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     overflow: hidden;
     border-bottom: 1px solid #456291;
     display: flex;
@@ -557,11 +558,11 @@ display:none;
 
 /* Style the buttons inside the tab */
 .tab button {
-    background-color: var(--white-color);
+    background-color: #FBFBFB;
     float: left;
     border: none;
     width: 100%;
-    color: var(--maintitle-color);
+    color: #456291;
     cursor: pointer;
     padding: 0.5rem;
     padding-bottom: 0.5rem;
@@ -571,7 +572,7 @@ display:none;
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: var(--light-gray-color);
+  background-color: #E5E5E5;
 }
 
 /* Create an active/current tablink class */
