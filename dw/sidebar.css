@@ -824,6 +824,30 @@ footer a{color:#000000}
 
 
 
+.hero-wrapper {
+    position: relative;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+	  margin-left: 2rem;
+    margin-right: 2rem;
+    border-bottom: 1px solid #aaaaaa;
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 6;
+    max-width: 700px;
+    color: #ffffff;
+    flex: 1;
+    display: flex;
+    line-height: 24px;
+    align-content: center;
+    flex-wrap: wrap;
+   	margin-left: 1em;
+}
+
 
 
 
