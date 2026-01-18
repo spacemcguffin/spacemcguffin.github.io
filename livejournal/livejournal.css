@@ -212,6 +212,14 @@ audio {
     border-radius: 100%;
 }
 
+.profileicon img {
+		transition: transform 0.3s ease;
+}
+
+.profileicon img:hover {
+     transform: rotate(-3deg);
+}
+
 a{
 color: #660000;
 text-decoration: none;
