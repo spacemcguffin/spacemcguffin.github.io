@@ -381,13 +381,13 @@ blockquote {
   padding-bottom: 5px; /* space for scrollbar */
 }
 
-.pincon-album {
-  display: inline-block;    /* horizontal layout of albums */
-  width: 90px;
-  margin-right: 20px;
-  text-align: center;
-  vertical-align: top;
-  box-sizing: border-box;
+.pin.pincon-album {
+    display: inline-block;
+    width: 100px;
+    margin-right: 15px;
+    text-align: center;
+    vertical-align: top;
+    box-sizing: border-box;
 }
 
 .pincon-album a {
@@ -397,8 +397,8 @@ blockquote {
 }
 
 .pincon-album-img {
-  width: 90px;
-  height: 90px;
+  width: 100px;
+  height: 100px;
   padding: 1px;
   margin-bottom: 5px;
   border: 1px solid #bbb;
