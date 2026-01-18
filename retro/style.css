@@ -55,7 +55,7 @@ header {
 
 .ticker-content {
   display: inline-block;
-  animation: scroll-left 20s linear infinite;
+  animation: scroll-left 30s linear infinite;
 }
 
 @keyframes scroll-left {
@@ -67,10 +67,12 @@ header {
   margin-right: 40px;
   text-decoration: none;
   color: #0033cc;
+  font-size: 0.75rem;
 }
 
 .ticker-content a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+	color: #000;
 }
 
 .ticker-tag {
@@ -78,7 +80,7 @@ header {
   padding: 2px 6px;
   margin-right: 6px;
   border-radius: 3px;
-  font-size: 1rem;
+  font-size: 0.72rem;
   color: #fff;
   text-transform: uppercase;
 }
