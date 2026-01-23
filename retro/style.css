@@ -198,6 +198,8 @@ header {
 .section ul.nav-links li a:hover,
 .section ul.contact-links li a:hover {
   color: #203878;
+	text-decoration: line-through;
+	cursor: crosshair;
 }
 
 .section li {
@@ -415,7 +417,7 @@ blockquote {
 
 .pincon-album-img:hover {
       opacity:0.8;
-	  cursor: pointer;
+	  cursor: crosshair;
 }
 
 .pincon-album h4 {
