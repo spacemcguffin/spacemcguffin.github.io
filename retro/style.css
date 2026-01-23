@@ -12,6 +12,21 @@ body {
     background-attachment: fixed;
 }
 
+
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
+
 .page-container {
   max-width: 900px;
   margin: 0 auto;
