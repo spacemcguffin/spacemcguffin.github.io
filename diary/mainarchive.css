@@ -36,6 +36,7 @@
     --secondary-color: #404040;
     --overlay-dark-color: rgba(0, 0, 0, 0.6);
     --maintitle-color: #000000;
+    --pink-color: #8D3D63;
 }
 
 /* Color variables for dark theme */
@@ -50,6 +51,7 @@
   --primary-color: #87aeda;
   --secondary-color: #d4d4d4;
     --maintitle-color: #87AEDC;
+	--pink-color: #CE85A8;
 }
 
 body {
@@ -422,6 +424,7 @@ table, th, td {
     line-height: 1.6;
     margin-top: 0.2rem;
     font-style: italic;
+	color: var(--pink-color);
 }
 
 
