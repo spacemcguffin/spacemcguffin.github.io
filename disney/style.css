@@ -587,11 +587,11 @@ body {
 
 @media screen and (max-width: 768px) {
   .nav-links {
-    display: none;
+    font-size: 0.85rem;
   }
 
   .right-container {
-    margin-left: 0;
+   display:none;
   }
 
   .search-box {
@@ -679,11 +679,11 @@ min-width: 200px;
 
 @media screen and (max-width: 500px) {
   .carousel-container {
-    height: 250px;
+    height: 80px;
   }
 
   .carousel {
-    width: 100%;
+    display:none;
   }
 
   .slider {
@@ -715,27 +715,36 @@ min-width: 200px;
   }
 
   .movies-list {
-    height: 150px;
+    height: 125px;
   }
 
   .card-container {
-    width: 100%;
-    padding-left: 0;
+        width: 100%;
+        padding-left: 0;
+        height: 120px;
   }
 
   .card {
-    min-width: 100px;
-    width: 100px;
-    height: 150px;
-    margin-right: 5px;
+        min-width: 180px;
+        height: 100px;
+        margin-left: 5px;
   }
 
+	.title {
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    opacity: 0.9;
+    font-weight: 400;
+    padding-left: 4%;
+    text-transform: none;
+    font-size: 1rem;
+
   .name {
-    font-size: 12px;
+    font-size: 0.7rem;
   }
 
   .des {
-    font-size: 10px;
+    font-size: font-size: 0.65rem;
   }
 
   .rating {
