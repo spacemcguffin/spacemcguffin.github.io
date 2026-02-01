@@ -1552,6 +1552,12 @@ color: #ff8303;
     grid-gap: 0.8em;
     align-items: self-start;
        }
+
+		    .galleryfooter {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+		}
+	
 }
 
  @media screen and (max-width:500px){
@@ -1568,6 +1574,11 @@ color: #ff8303;
     padding: 20px 0 20px;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 	}
+
+	 	    .galleryfooter {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+		}
  
 }
 
