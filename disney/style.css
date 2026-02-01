@@ -412,10 +412,24 @@ body {
 
 .card:hover {
   transform: scale(1.1);
-	border: 2px solid #ffffff;
 }
 
+.card:hover .card-body {
+  opacity: 1;
+}
 
+.card-body {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgba(4, 8, 15, 0), #192133 90%);
+  padding: 10px;
+  transition: 0.5s;
+}
 
 .name {
     color: #fff;
