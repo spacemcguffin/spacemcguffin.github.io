@@ -476,11 +476,13 @@ div.sidebarimage {
     object-fit: cover;
     transition: 0.5s;
     aspect-ratio: 1 / 1;
+	filter: grayscale(0.3);
 }
 
 .galleryfooter img:hover {
     transform: scale(1.05);
     cursor:cell;
+	filter: grayscale(0);
 }
 
 
@@ -1590,8 +1592,11 @@ color: #ff8303;
 }
 
    .article h1 {
-	   font-size: 1.8rem;
-	   font-weight:700;
+	   font-size: 2rem;
+   }
+
+	   h1 {
+	   font-size: 1.5rem;
    }
 
 
