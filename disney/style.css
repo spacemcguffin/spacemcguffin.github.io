@@ -678,8 +678,9 @@ min-width: 200px;
 }
 
 @media screen and (max-width: 500px) {
-  .carousel-container {
-    height: 80px;
+    .carousel-container {
+        height: 55px;
+        margin-top: 0;
   }
 
   .carousel {
@@ -718,6 +719,10 @@ min-width: 200px;
     height: 125px;
   }
 
+	.navbar {
+    height: 55px;
+	}
+
   .card-container {
         width: 100%;
         padding-left: 0;
@@ -737,7 +742,7 @@ min-width: 200px;
     font-weight: 400;
     padding-left: 4%;
     text-transform: none;
-    font-size: 1rem;
+    font-size: 0.9rem;
 
   .name {
     font-size: 0.7rem;
