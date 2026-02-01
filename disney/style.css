@@ -40,7 +40,7 @@ body {
 
 .nav-items a {
   text-decoration: none;
-  margin-left: 20px;
+	line-height: 1.8;
   color: #fff;
   opacity: 0.9;
 }
@@ -142,11 +142,11 @@ body {
   position: absolute;
   width: 100%;
   transform: scaleX(0);
-  height: 2px;
+  height: 5px;
   bottom: 0;
   left: 0;
   background-color: #0087ca;
-  transition: transform 0.25s ease-out;
+  transition: transform 0.3s ease-out;
 }
 
 .hover-underline-animation:hover::after {
@@ -154,7 +154,7 @@ body {
 }
 
 .hover-underline-animation.left::after {
-  transform-origin: bottom right;
+  transform-origin: bottom left;
 }
 
 .hover-underline-animation.left:hover::after {
