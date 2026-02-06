@@ -40,16 +40,16 @@ section {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 25px;
-  padding: 30px 0;
+  padding: 1rem;
   width: min(1200px, 100%);
 }
 
 .recipe-container h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: center;
-  color: #dda3b6;
-  margin: 20px 0 40px;
+    font-size: 2rem;
+    font-weight: 600;
+    text-align: center;
+    color: #dda3b6;
+    margin: 0rem 1rem 1rem 1rem;
 }
 
 .swiper {
@@ -108,7 +108,7 @@ section {
 .post-author {
   width: fit-content;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 400;
   opacity: 0.6;
   color: var(--clr-text);
 }
@@ -132,10 +132,10 @@ section {
   padding: 8px;
   border-radius: 8px;
   background: rgba(172, 172, 172, 0.2);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 2px 2px 10px 2px hsl(0, 0%, 0%, 0.25);
-  transition: opacity 0.25s, scale 0.25s;
+  transition: opacity 0.5s, scale 0.5s;
   transform-origin: bottom right;
 }
 
