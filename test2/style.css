@@ -55,11 +55,16 @@ section {
 }
 
 .recipe-container h1 {
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 600;
     text-align: center;
-    color: #dda3b6;
-    margin: 0.5rem 1rem 1.5rem 1rem;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-underline-offset: 8px;
+    text-decoration-thickness: 2.5px;
+    text-decoration-color: #f5b041;
+    color: #ffffff;
+    margin: 1.5rem 1rem 2rem 1rem;
 }
 
 .swiper {
@@ -217,6 +222,38 @@ section {
   opacity: 1;
   transform: scale(1.2);
 }
+
+
+
+
+.navseason {
+	font-size: 1rem;
+}
+
+.navseason a {
+    color: #feb0ff;
+    text-decoration: none;
+    font-weight: 500;
+    font-family: 'Onest', sans-serif;
+    opacity: 0.6;
+}
+
+.navseason a:hover {
+    color: #feb0ff;
+    text-decoration: none;
+    font-weight: 500;
+    font-family: 'Onest', sans-serif;
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+
 
 /* MEDIA QUERIES */
 
