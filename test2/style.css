@@ -15,12 +15,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(13,12,12,1);
-  background: radial-gradient(
-    circle,
-    rgba(115, 12, 50, 1) 5%,
-    rgba(13, 12, 12, 1) 60%
-  );
+    background-color: #2A2F4A;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url(/images/nebula.png);
+    background-position: center top;
   min-height: 100vh;
 }
 
