@@ -1494,7 +1494,41 @@ color: #ff8303;
 }
 
  @media screen and (max-width:500px){
-	.grid {
+  .main-layout .sidebar {
+     display:none;
+  }
+
+	
+
+.main-layout .content-wrapper {
+    padding: 0rem 2rem 0rem 2rem;
+    margin: auto;
+}
+
+   .article h1 {
+	   font-size: 2rem;
+   }
+
+	div.articleRightInner {
+    float: right;
+    width: 100%;
+    background: var(--white-color);
+    overflow: hidden;
+    border: 1px solid #b9bcbc;
+    font-size: 0.6rem;
+    padding: 3px;
+    margin: 0rem 0rem 1rem 1rem;
+
+	   h1 {
+	   font-size: 1.5rem;
+   }
+
+
+div.articleRightInner {
+    width: 100%;
+}
+		
+		.grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.8em;
