@@ -871,7 +871,6 @@ display:none;
     align-items: center;
     font-size: 0.85rem;
     padding: 0.3rem;
-    margin-bottom: 0.2rem;
     border-radius: 8px;
     text-decoration: none;
     gap: 0.2rem;
@@ -889,10 +888,16 @@ display:none;
 }
 
 .sidebar .link-section .section-title {
-  color: var(--black-color);
-  font-weight: 600;
-  font-size: 0.93rem;
-  margin: 16px 0 8px 8px;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--black-color);
+    font-weight: 500;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+    margin-top: 0.3rem;
+    background: var(--light-white-color);
+    padding: 0.3rem;
+    border-radius: 15px;
 }
 
 .sidebar .section-separator {
@@ -1421,7 +1426,6 @@ color: #ff8303;
   body.show-mobile-search .navbar .nav-center {
     display: flex;
     align-items: center;
-    justify-content: center; 
   }
 
   .main-layout .screen-overlay {
