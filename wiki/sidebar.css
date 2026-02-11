@@ -496,9 +496,8 @@ div.sidebarimage {
 
 .galleryfooter {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 15px;
-    margin: 2rem 1.5rem 1rem 1.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.8rem;
 }
 
 
@@ -506,17 +505,17 @@ div.sidebarimage {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 100%;
+    border-radius: 10px;
     object-fit: cover;
-    transition: 0.5s;
-    aspect-ratio: 1 / 1;
-	filter: grayscale(0.3);
+    transition: 0.3s;
+    border: 2px solid;
+    border-color: var(--episodebar-border-color);
+    padding: 2px;
 }
 
 .galleryfooter img:hover {
     transform: scale(1.05);
     cursor:cell;
-	filter: grayscale(0);
 }
 
 
