@@ -1517,18 +1517,14 @@ color: #ff8303;
 @media (max-width: 400px) {
 
   .main-layout .sidebar {
-    border-right: 1px solid black;
-    width: 200px;
-    padding: 0px 1rem 0;
-    background: var(--white-color);
-    border-left: 1px solid black;
+     display:none;
   }
 
 	
 
-	.main-layout .content-wrapper {
-    padding: 0rem 1rem 0rem 1rem;
-    width: 100%;
+.main-layout .content-wrapper {
+    padding: 0rem 2rem 0rem 2rem;
+    margin: auto;
 }
 
    .article h1 {
