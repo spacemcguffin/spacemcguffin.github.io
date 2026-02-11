@@ -470,7 +470,7 @@ div.sidebarimage {
 
 .gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 15px;
     margin: 0.5rem 1rem 0.5rem 0;
 }
@@ -480,7 +480,7 @@ div.sidebarimage {
     height: auto;
     display: block;
     object-fit: cover;
-    transition: 0.5s;
+    transition: 0.3s;
     aspect-ratio: 16 / 9;
     border-radius: 6px;
 }
@@ -1328,11 +1328,6 @@ height: 2px;
 
 .article img {
     margin-bottom: 0.5em;
-    border-radius: 1rem;
-    object-fit: cover;
-	margin: 0.5rem;
-	aspect-ratio: 16 / 9;
-	transition: 0.5s;
 }
 
 
