@@ -250,10 +250,11 @@ header,
 }
 
 .main-layout .sidebar {
-    width: 320px;
+    border-right: 1px solid black;
+    width: 200px;
     padding: 0px 1rem 0;
     background: var(--white-color);
-    float: right;
+    border-left: 1px solid black;
 }
 
 .main-layout .sidebar .nav-left {
@@ -944,6 +945,7 @@ display:none;
     padding: 0rem 2rem 0rem 2rem;
     margin: auto;
     max-width: 950px;
+    margin-left: 250px;
 }
 
 .content-wrapper .category-list {
