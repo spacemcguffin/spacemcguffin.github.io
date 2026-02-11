@@ -270,14 +270,15 @@ body.sidebar-hidden .main-layout .sidebar {
 }
 
 .sidebar .links-container {
-    position: fixed;
+position: fixed;
     overflow-y: auto;
     height: calc(100vh - 60px);
     scrollbar-width: thin;
-    width: 250px;
-    border-right: 1px solid black;
+    width: 210px;
+    border-right: 1px solid;
     background: var(--white-color);
-	padding: 10px
+    padding: 10px 10px 10px 0px;
+    border-color: var(--episodebar-border-color);
 }
 
 .main-layout:hover,
@@ -946,7 +947,7 @@ display:none;
     padding: 0rem 2rem 0rem 2rem;
     margin: auto;
     max-width: 950px;
-    margin-left: 250px;
+    margin-left: 220px;
 }
 
 .content-wrapper .category-list {
