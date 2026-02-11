@@ -163,15 +163,13 @@ header,
 :where(.navbar, .sidebar) .nav-logo {
   display: flex;
   gap: 8px;
-  width: 150px;
 }
 
 :where(.navbar, .sidebar) .nav-logo .logo-text {
-    color: var(--eptitle-color);
-    font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
+    color: var(--black-color);
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
 }
 
 .navbar .search-back-button {
