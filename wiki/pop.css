@@ -538,7 +538,8 @@ div.sidebarimage {
   background: var(--light-white-color);
   width: 260px;
   padding:10px;
-  border: 1px solid #ccc;
+  border: 1px solid;
+  border-color: var(--episodebar-border-color);
 }
 
 [data-hover-wrapper] {
