@@ -487,14 +487,6 @@ div.sidebarimage {
 
 
 
-
-
-
-
-
-
-
-
 .galleryfooter {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -535,6 +527,34 @@ div.sidebarimage {
 
 
 
+
+
+
+
+
+
+.hover-content {
+  padding: 10px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  background-color: #fff;
+  width: 240px;
+}
+
+[data-hover-wrapper] {
+  transition: opacity .3s, transform .3s;
+}
+
+.hover-content > img {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.hover-content > p {
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.4;
+}
 
 
 
