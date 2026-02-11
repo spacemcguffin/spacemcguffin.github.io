@@ -167,10 +167,10 @@ header,
 }
 
 :where(.navbar, .sidebar) .nav-logo .logo-text {
-    color: var(--black-color);
+    color: var(--eptitle-color);
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
 }
 
@@ -179,10 +179,7 @@ header,
 }
 
 .navbar .nav-center {
-  gap: 8px;
-  width: 100%;
-  display: flex;
-  margin-left: 1rem;
+ display: none;
 }
 
 .navbar .search-form {
