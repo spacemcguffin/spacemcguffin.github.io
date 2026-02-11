@@ -32,13 +32,14 @@
     --light-gray-color: #e5e5e5;
     --darker-gray-color: #dddddd;
     --border-color: #cccccc;
+    --tool-color: #ffffff;
     --primary-color: #456291;
     --secondary-color: #404040;
     --overlay-dark-color: rgba(0, 0, 0, 0.6);
     --maintitle-color: #3a3a3a;
     --eptitle-color: #000000;
     --wiki-background-image: url("img/spday.png");
-	--episodebar-border-color: #cccccc;
+	  --episodebar-border-color: #cccccc;
 }
 
 /* Color variables for dark theme */
@@ -51,6 +52,7 @@
   --light-gray-color: #e5e5e5;
   --darker-gray-color: #202530;
   --border-color: #808080;
+  --tool-color: #1b212d;
   --primary-color: #87aeda;
   --secondary-color: #d4d4d4;
   --maintitle-color: #87AEDC;
@@ -535,7 +537,7 @@ div.sidebarimage {
   box-shadow: 0 2px 20px rgba(0,0,0,0.4);
   box-sizing: border-box;
   color: var(--black-color);
-  background: var(--light-white-color);
+  background: var(--tool-color);
   width: 260px;
   padding:10px;
   border: 1px solid;
