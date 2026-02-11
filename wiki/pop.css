@@ -28,9 +28,9 @@
     --hovertext-color: #3a3a3a;
     --hoverback-color: #eaecf0;
     --black-color: #3a3a3a;
-    --light-white-color: #f0f0f0;
+    --light-white-color: #1b212d;
     --light-gray-color: #e5e5e5;
-    --darker-gray-color: #dddddd;
+    --darker-gray-color: #202530;
     --border-color: #cccccc;
     --primary-color: #456291;
     --secondary-color: #404040;
@@ -38,23 +38,25 @@
     --maintitle-color: #3a3a3a;
     --eptitle-color: #000000;
     --wiki-background-image: url("img/spday.png");
+	--episodebar-border-color: #cccccc;
 }
 
 /* Color variables for dark theme */
 .dark-mode {
   --white-color: #0c111b;
-	--hovertext-color: #2e2f30;
+  --hovertext-color: #2e2f30;
   --hoverback-color: #2e2f30;
-	--black-color: #d4d4d4;
+  --black-color: #d4d4d4;
   --light-white-color: #272727;
   --light-gray-color: #404040;
-	--darker-gray-color: #2E2F30;
+  --darker-gray-color: #2E2F30;
   --border-color: #808080;
   --primary-color: #87aeda;
   --secondary-color: #d4d4d4;
   --maintitle-color: #87AEDC;
   --eptitle-color: #87AEDC;
   --wiki-background-image: url("img/spnight.png");
+  --episodebar-border-color: #3e4c6a;
 }
 
 body {
@@ -228,7 +230,8 @@ header,
     padding: 0.2rem;
     font-size: 1rem;
     background: var(--light-white-color);
-    border: 1px solid #b9bcbc;
+    border: 1px solid;
+	border-color: var(--episodebar-border-color);
     margin-top: 1rem;
 }
 
