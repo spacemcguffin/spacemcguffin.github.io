@@ -1429,16 +1429,13 @@ color: #ff8303;
   }
 
 
-.sidebar .links-container {
-    position: fixed;
-    overflow-y: auto;
-    height: calc(100vh - 60px);
-    scrollbar-width: thin;
-    width: 150px;
-    border-right: 1px solid;
-    background: var(--white-color);
-    padding: 10px 10px 10px 0px;
-    border-color: var(--episodebar-border-color);
+    .sidebar .links-container {
+        position: fixed;
+        overflow-y: auto;
+        height: calc(100vh - 60px);
+        scrollbar-width: thin;
+        width: 180px;
+		}
 	
   body.sidebar-hidden .main-layout .screen-overlay {
     opacity: 0;
@@ -1448,6 +1445,11 @@ color: #ff8303;
   .main-layout .sidebar {
   }
 
+.main-layout .content-wrapper {
+    padding: 0rem 2rem 0rem 2rem;
+    margin: auto;
+    margin-left: 190px;
+}
 
 
   .main-layout .sidebar .nav-left {
@@ -1532,6 +1534,16 @@ color: #ff8303;
    .article h1 {
 	   font-size: 2rem;
    }
+
+	div.articleRightInner {
+    float: right;
+    width: 100%;
+    background: var(--white-color);
+    overflow: hidden;
+    border: 1px solid #b9bcbc;
+    font-size: 0.6rem;
+    padding: 3px;
+    margin: 0rem 0rem 1rem 1rem;
 
 	   h1 {
 	   font-size: 1.5rem;
