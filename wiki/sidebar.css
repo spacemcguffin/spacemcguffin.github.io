@@ -1517,15 +1517,14 @@ color: #ff8303;
 @media (max-width: 400px) {
 
   .main-layout .sidebar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 20;
-    height: 100vh;
-    transition: 1s ease;
-    border-right: 2px solid black;
-    width:95%;
+    border-right: 1px solid black;
+    width: 200px;
+    padding: 0px 1rem 0;
+    background: var(--white-color);
+    border-left: 1px solid black;
   }
+
+	
 
 	.main-layout .content-wrapper {
     padding: 0rem 1rem 0rem 1rem;
