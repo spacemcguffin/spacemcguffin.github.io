@@ -1404,7 +1404,7 @@ color: #ff8303;
 }
 
 /* Responsive media code for small devices */
-@media (max-width: 768px) {
+@media (max-width: 750px) {
 
   .navbar {
     gap: 1rem;
@@ -1428,25 +1428,27 @@ color: #ff8303;
      display: none;
   }
 
+
+.sidebar .links-container {
+    position: fixed;
+    overflow-y: auto;
+    height: calc(100vh - 60px);
+    scrollbar-width: thin;
+    width: 150px;
+    border-right: 1px solid;
+    background: var(--white-color);
+    padding: 10px 10px 10px 0px;
+    border-color: var(--episodebar-border-color);
+	
   body.sidebar-hidden .main-layout .screen-overlay {
     opacity: 0;
     pointer-events: none;
   }
 
   .main-layout .sidebar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 20;
-    height: 100vh;
-    transition: 1s ease;
-    border-right: 2px solid black;
-    width: 260px;
   }
 
-  body.sidebar-hidden .main-layout .sidebar {
-    left: -280px;
-  }
+
 
   .main-layout .sidebar .nav-left {
     display: none;
