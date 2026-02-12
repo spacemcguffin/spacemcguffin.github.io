@@ -150,7 +150,7 @@ header,
 :where(.navbar, .sidebar) .nav-logo .logo-text {
     color: var(--black-color);
     font-size: 1.1rem;
-    font-family: "Stack Sans Text", sans-serif;
+    font-family: 'Inter';
     font-weight: 400;
 }
 
@@ -476,14 +476,14 @@ tr:last-child {
     cursor: pointer;
     color: var(--black-color);
     align-items: center;
-    font-size: 0.96rem;
+    font-size: 0.9rem;
     padding: 6px 12px;
     margin-bottom: 4px;
     border-radius: 8px;
     text-decoration: none;
     gap: 5px;
-    font-family: 'Figtree', sans-serif;
-    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
 }
 
 .sidebar .link-section .link-item:hover {
@@ -561,17 +561,16 @@ tr:last-child {
 }
 
 .category-list .category-button {
-border: none;
+    border: none;
     cursor: pointer;
-    font-weight: 400;
-    font-size: 0.9rem;
+    font-weight: 500;
+    font-size: 0.88rem;
     border-radius: 100px;
     white-space: nowrap;
     color: var(--black-color);
     padding: 6px 12px;
     background: var(--light-gray-color);
-    margin: 3px;
-    font-family: "Stack Sans Text", sans-serif;
+    font-family: 'Inter', sans-serif;
 }
 
 .category-list .category-button.active {
