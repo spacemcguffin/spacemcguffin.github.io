@@ -410,7 +410,7 @@ div.articleRightInner {
     width: 18rem;
     background: var(--white-color);
     overflow: hidden;
-    border: 1px solid #b9bcbc;
+    border: 1px solid #456291;
     font-size: 0.8rem;
     padding: 3px;
     margin: 0rem 0rem 1rem 1rem;
@@ -1344,7 +1344,8 @@ table, th, td {
 }
 
 tr {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid;
+    border-color: var(--episodebar-border-color);
 }
 
 
