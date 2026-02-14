@@ -115,7 +115,7 @@ b {font-weight: 500;}
     color: #ffffff;
     padding: 0.4rem;
     background-image: linear-gradient(to right, #37059300, #0c111bb0);
-    border-radius: 0 1rem 1rem 0;
+    border-radius: 0 2rem 2rem 0;
     margin-bottom: 1.5rem;
     border-right: 2px solid #5982aa60;
     border-bottom: 2px solid #5982aa60;
@@ -362,11 +362,11 @@ font-size: 2em;
 
 
 .grid {
-    display: grid;
+display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1em;
+    grid-gap: 1.2rem;
     align-items: self-start;
-    margin-bottom: 3em;
+    margin-bottom: 3rem;
 }
 
 .grid li {
@@ -386,8 +386,8 @@ font-size: 2em;
     width: 100%;
     height: auto;
     display: block;
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
     aspect-ratio: 16 / 9;
     object-fit: cover;
 }
