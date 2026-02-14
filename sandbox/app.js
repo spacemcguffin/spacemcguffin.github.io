@@ -77,7 +77,7 @@ const stories = [
     summary: "A tour shuttle becomes a pressure-cooker paranoia chamber.",
     notes: ["Psychological horror", "Incredible tension and performances"],
   },
-    {
+  {
     id: "an-uneearthly-child",
     title: "An Unearthly Child",
     doctor: "First",
@@ -388,6 +388,34 @@ function cardTemplate(s) {
 }
 
 
+function seasonLabel(season) {
+  if (season === "Specials") return "Specials";
+  if (season === null || season === undefined || season === "") return "Unsorted";
+  return `Season ${season}`;
+}
+
+function seasonSortKey(season) {
+  if (typeof season === "number") return season;
+  if (season === "Specials") return 9998;
+  return 9999;
+}
+
+function groupBySeason(items) {
+  const map = new Map();
+
+  for (const s of items) {
+    const key = s.season ?? "Unsorted";
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(s);
+  }
+
+  const keys = Array.from(map.keys()).sort((a, b) => seasonSortKey(a) - seasonSortKey(b));
+  return keys.map((k) => ({ season: k, items: map.get(k) }));
+}
+
+
+
+
 
 
 
@@ -562,7 +590,6 @@ function trapFocus(e) {
 function handleHashChange() {
   const id = getStoryIdFromHash();
 
-  // No story hash -> close if open
   if (!id) {
     if (els.modal.getAttribute("aria-hidden") === "false") {
       suppressHashWrite = true;
@@ -573,59 +600,22 @@ function handleHashChange() {
   }
 
   // Ensure filtered is current
-
-
-
-function seasonLabel(season) {
-  if (season === "Specials") return "Specials";
-  if (season === null || season === undefined || season === "") return "Unsorted";
-  return `Season ${season}`;
-}
-
-function seasonSortKey(season) {
-  if (typeof season === "number") return season;
-  if (season === "Specials") return 9998;
-  return 9999;
-}
-
-function groupBySeason(items) {
-  const map = new Map();
-
-  for (const s of items) {
-    const key = s.season ?? "Unsorted";
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(s);
-  }
-
-  const keys = Array.from(map.keys()).sort(
-    (a, b) => seasonSortKey(a) - seasonSortKey(b)
-  );
-
-  return keys.map((k) => ({ season: k, items: map.get(k) }));
-}
-
-
-
-
-
-
-  
   render();
 
-  // If the story is filtered out, we can still open it by using the full list
-  // but UX-wise it's nicer to open it if present; otherwise fall back to global index.
   let idx = filteredIndexById(id);
 
   if (idx === -1) {
     const s = storyById(id);
-    if (!s) return; // invalid id
-    // Open using global list by temporarily swapping filtered
+    if (!s) return;
+
     const prevFiltered = filtered;
     filtered = stories.slice();
     idx = filteredIndexById(id);
+
     suppressHashWrite = true;
     openModal(idx, { updateHash: false });
     suppressHashWrite = false;
+
     filtered = prevFiltered;
     return;
   }
@@ -670,7 +660,25 @@ els.clear.addEventListener("click", () => {
   closeIfOpen();
 });
 
+
+
+
+function populateDoctorOptions() {
+  const doctors = Array.from(new Set(stories.map(s => s.doctor))).sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: "base" })
+  );
+
+  els.doctor.innerHTML =
+    `<option value="">All</option>` +
+    doctors.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join("");
+ }
+
+
+
+
+
 // Init
 initTheme();
+populateDoctorOptions();
 render();
-handleHashChange(); // open modal if URL already has #story=...
+handleHashChange();
