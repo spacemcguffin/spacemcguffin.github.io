@@ -632,8 +632,27 @@ function populateDoctorOptions() {
 }
 
 
+
+
+
 window.addEventListener("scroll", () => {
   document.body.classList.toggle("scrolled", window.scrollY > 8);
+});
+
+
+
+
+
+
+document.querySelector("#featuredBtn")?.addEventListener("click", () => {
+  const idx = filtered.findIndex(s => s.id === "day-of-the-doctor");
+  if (idx !== -1) openModal(idx, { updateHash: true });
+});
+
+document.querySelector("#randomBtn")?.addEventListener("click", () => {
+  if (!filtered.length) return;
+  const idx = Math.floor(Math.random() * filtered.length);
+  openModal(idx, { updateHash: true });
 });
 
 
