@@ -407,36 +407,21 @@ let renderRAF = 0;
 function render() {
   if (renderRAF) cancelAnimationFrame(renderRAF);
 
-  const base = applyFilters(stories, getFilters());
-  const groups = groupBySeason(base);
-
-  // Flatten in displayed order for modal prev/next
-  filtered = groups.flatMap(g => g.items);
+  filtered = applyFilters(stories, getFilters());
   els.count.textContent = filtered.length;
 
   // Fade out
   els.grid.style.opacity = "0";
 
   window.setTimeout(() => {
-    // Render grouped sections
-    els.grid.innerHTML = groups.map(g => `
-      <section class="season">
-        <header class="season__header">
-          <h2 class="season__title">${seasonLabel(g.season)}</h2>
-          <span class="season__count">${g.items.length} stor${g.items.length === 1 ? "y" : "ies"}</span>
-        </header>
-        <div class="grid season__grid">
-          ${g.items.map(cardTemplate).join("")}
-        </div>
-      </section>
-    `).join("");
+    els.grid.innerHTML = filtered.map(cardTemplate).join("");
 
     const cards = Array.from(els.grid.querySelectorAll(".card"));
 
     // Enter state
     cards.forEach(c => c.classList.add("is-enter"));
 
-    // Events (index matches flattened `filtered`)
+    // Wire up events
     cards.forEach((card, i) => {
       card.addEventListener("click", () => openModal(i, { updateHash: true }));
       card.addEventListener("keydown", (e) => {
