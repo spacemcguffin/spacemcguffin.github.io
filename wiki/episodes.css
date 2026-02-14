@@ -1223,21 +1223,22 @@ margin: auto;
     border-color: var(--episodebar-border-color);
     border-radius: 0.5rem;
     margin-bottom: 0.5rem;
+	transition: transform .5s;
 }
 
 .grid li:hover {
     border: 1px solid;
     border-color: var(--hoverbox-color);
+    transform: scale(1.05);
 }
-
 
 .grid li img {
     width: 100%;
     height: auto;
     display: block;
-    border-top-left-radius: 1em;
-    border-top-right-radius: 1em;
-    aspect-ratio: 4 / 3;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    aspect-ratio: 16 / 9;
     object-fit: cover;
 }
 
@@ -1248,18 +1249,19 @@ filter: contrast(0.8);
 
 
 .grid li span {
-    padding-top: 0.4em;
-    font-size: 1.05em;
-    margin: 0.3em 0.7em 0.5em 0.7em;
+    padding-top: 0.3rem;
+    font-size: 0.95rem;
+    margin: 0.2rem 0.7rem 0.3rem 0.7rem;
 }
 
 
 .grid li a {
-    color: #ffffff;
+    color: var(--eptitle-color);
     display: block;
     font-weight: 500;
-    font-size: 1.1em;
+    font-size: 1.05rem;
     line-height: 1.3;
+    max-width: 90%;
 }
 
 .grid li a:hover {
