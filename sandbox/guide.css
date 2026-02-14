@@ -57,6 +57,11 @@ body::after{
   opacity: 0.35;
 }
 
+body::after{
+  will-change: transform;
+}
+
+
 /* glow (above stars, still behind content) */
 body::before{
   content: "";
@@ -77,26 +82,12 @@ body::before{
 }
 
 
-main{
-  padding-top: 80px; 
-}
-
 main,
 footer{
   position: relative;
   z-index: 10;
 }
 
-
-
-.topbar{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  isolation: isolate;
-}
 
 
 
@@ -111,22 +102,26 @@ body::after{
 
 
 
-
 .wrap{
   width: min(var(--max), calc(100% - 40px));
   margin: 0 auto;
 }
 
+
 .topbar{
   position: sticky;
   top: 0;
-  z-index: 9999;        
-  isolation: isolate;   
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  isolation: isolate;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   background: color-mix(in oklab, var(--bg) 80%, transparent);
   border-bottom: 1px solid var(--line);
 }
+
+
 
 .topbar__inner{
   display: flex;
