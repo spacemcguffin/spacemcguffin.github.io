@@ -139,6 +139,12 @@ body::after{
   padding: 12px 0;
 }
 
+
+.topbar{ transition: box-shadow .2s ease, background .2s ease; }
+body.scrolled .topbar{ box-shadow: 0 12px 40px rgba(0,0,0,.45); }
+
+
+
 .brand{
   display: inline-flex;
   align-items: center;
