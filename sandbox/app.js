@@ -371,22 +371,52 @@ function cardTemplate(s) {
 
 
 // ---------- Render ----------
+
+
+let renderRAF = 0;
+
 function render() {
+  // cancel any pending animation frame if user types fast
+  if (renderRAF) cancelAnimationFrame(renderRAF);
+
   filtered = applyFilters(stories, getFilters());
-
   els.count.textContent = filtered.length;
-  els.grid.innerHTML = filtered.map(cardTemplate).join("");
 
-  els.grid.querySelectorAll(".card").forEach((card, i) => {
-    card.addEventListener("click", () => openModal(i, { updateHash: true }));
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        openModal(i, { updateHash: true });
-      }
+  // Fade the grid out quickly
+  els.grid.style.opacity = "0";
+
+  // Wait for fade-out then swap content
+  window.setTimeout(() => {
+    els.grid.innerHTML = filtered.map(cardTemplate).join("");
+
+    const cards = Array.from(els.grid.querySelectorAll(".card"));
+
+    // Set initial enter state for all cards
+    cards.forEach(c => c.classList.add("is-enter"));
+
+    // Hook up events (same as before)
+    cards.forEach((card, i) => {
+      card.addEventListener("click", () => openModal(i, { updateHash: true }));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(i, { updateHash: true });
+        }
+      });
     });
-  });
+
+    // Next frame: fade grid back in + stagger card entrance
+    renderRAF = requestAnimationFrame(() => {
+      els.grid.style.opacity = "1";
+
+      cards.forEach((card, idx) => {
+        const delay = Math.min(idx * 18, 180); // cap the stagger
+        setTimeout(() => card.classList.remove("is-enter"), delay);
+      });
+    });
+  }, 140); // should match the .grid opacity transition length
 }
+
 
 
 
