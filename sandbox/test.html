@@ -87,6 +87,7 @@
   <div class="modal" id="modal" aria-hidden="true">
     <div class="modal__backdrop" data-close></div>
 
+
     <div
       class="modal__dialog"
       role="dialog"
@@ -95,17 +96,33 @@
       aria-describedby="modalDesc"
       tabindex="-1"
     >
-      <div class="modal__header">
-        <div class="modal__titles">
-          <h2 class="modal__title" id="modalTitle">Title</h2>
-          <p class="modal__desc" id="modalDesc">Subtitle</p>
-        </div>
 
-        <button class="iconbtn" id="closeBtn" aria-label="Close">✕</button>
+      
+
+<div class="modal__content">
+
+  <!-- Cinematic Hero -->
+  <div class="modal__hero" id="modalHero">
+    <div class="modal__hero-overlay"></div>
+
+    <button class="modal__close iconbtn" id="closeBtn" aria-label="Close">✕</button>
+
+
+    <div class="modal__hero-content">
+      <h2 class="modal__hero-title" id="modalTitle">Title</h2>
+      <p class="modal__hero-desc" id="modalDesc">Subtitle</p>
+
+      <div class="modal__actions">
+        <button class="btn btn--primary">▶ Play</button>
+        <button class="btn btn--ghost">＋ My List</button>
       </div>
+    </div>
+  </div>
 
-      <div class="modal__content">
-        <div class="modal__media" id="modalMedia"></div>
+  <div class="modal__meta" id="modalMeta"></div>
+
+  <div class="modal__text">
+
 
         <div class="modal__meta" id="modalMeta"></div>
 
