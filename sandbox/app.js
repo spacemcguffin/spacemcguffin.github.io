@@ -456,9 +456,9 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   els.title.textContent = s.title;
   els.desc.textContent = `${s.doctor} Doctor • ${s.era} • ${s.year} • ${s.eps} ep${s.eps === 1 ? "" : "s"}`;
 
-  els.media.innerHTML = s.image
-    ? `<img src="${escapeHtml(s.image)}" alt="" />`
-    : `<span>${escapeHtml(s.title)}</span>`;
+const hero = document.getElementById("modalHero");
+hero.style.backgroundImage = `url("${s.image}")`;
+
 
   els.meta.innerHTML = `
     <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
