@@ -393,88 +393,60 @@ function cardTemplate(s) {
 
 // ---------- Render ----------
 
-
-
-function seasonLabel(season) {
-  if (season === "Specials") return "Specials";
-  if (season === null || season === undefined || season === "") return "Unsorted";
-  return `Season ${season}`;
-}
-
-function seasonSortKey(season) {
-  // Put numbered seasons first, then Specials, then Unsorted
-  if (typeof season === "number") return season;
-  if (season === "Specials") return 9998;
-  return 9999;
-}
-
-function groupBySeason(items) {
-  const map = new Map();
-
-  for (const s of items) {
-    const key = s.season ?? "Unsorted";
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(s);
-  }
-
-  // Sort groups by season number ascending
-  const keys = Array.from(map.keys()).sort((a, b) => seasonSortKey(a) - seasonSortKey(b));
-
-  return keys.map((k) => ({ season: k, items: map.get(k) }));
-}
-
-
-
 let renderRAF = 0;
 
 function render() {
-  filtered = applyFilters(stories, getFilters());
+  if (renderRAF) cancelAnimationFrame(renderRAF);
+
+  const base = applyFilters(stories, getFilters());
+  const groups = groupBySeason(base);
+
+  // Flatten in displayed order for modal prev/next
+  filtered = groups.flatMap(g => g.items);
   els.count.textContent = filtered.length;
 
-  const groups = groupBySeason(filtered);
+  // Fade out
+  els.grid.style.opacity = "0";
 
-  els.grid.innerHTML = groups.map(g => `
-    <section class="season">
-      <header class="season__header">
-        <h2 class="season__title">${seasonLabel(g.season)}</h2>
-        <span class="season__count">${g.items.length} stor${g.items.length === 1 ? "y" : "ies"}</span>
-      </header>
+  window.setTimeout(() => {
+    // Render grouped sections
+    els.grid.innerHTML = groups.map(g => `
+      <section class="season">
+        <header class="season__header">
+          <h2 class="season__title">${seasonLabel(g.season)}</h2>
+          <span class="season__count">${g.items.length} stor${g.items.length === 1 ? "y" : "ies"}</span>
+        </header>
+        <div class="grid season__grid">
+          ${g.items.map(cardTemplate).join("")}
+        </div>
+      </section>
+    `).join("");
 
-      <div class="grid season__grid">
-        ${g.items.map(cardTemplate).join("")}
-      </div>
-    </section>
-  `).join("");
+    const cards = Array.from(els.grid.querySelectorAll(".card"));
 
-  // IMPORTANT:
-  // We still want modal navigation to follow the same order the user sees.
-  // So set filtered = flattened groups in displayed order:
-  filtered = groups.flatMap(g => g.items);
+    // Enter state
+    cards.forEach(c => c.classList.add("is-enter"));
 
-  // Wire up cards in the SAME order as filtered
-  const cards = Array.from(els.grid.querySelectorAll(".card"));
-  cards.forEach((card, i) => {
-    card.addEventListener("click", () => openModal(i, { updateHash: true }));
-    card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        openModal(i, { updateHash: true });
-      }
+    // Events (index matches flattened `filtered`)
+    cards.forEach((card, i) => {
+      card.addEventListener("click", () => openModal(i, { updateHash: true }));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openModal(i, { updateHash: true });
+        }
+      });
     });
-  });
-}
 
-
-    // Next frame: fade grid back in + stagger card entrance
+    // Animate in
     renderRAF = requestAnimationFrame(() => {
       els.grid.style.opacity = "1";
-
       cards.forEach((card, idx) => {
-        const delay = Math.min(idx * 18, 180); // cap the stagger
+        const delay = Math.min(idx * 18, 180);
         setTimeout(() => card.classList.remove("is-enter"), delay);
       });
     });
-  }, 140); // should match the .grid opacity transition length
+  }, 140);
 }
 
 
