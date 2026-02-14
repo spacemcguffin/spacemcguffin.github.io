@@ -234,9 +234,21 @@ body::after{
   color: var(--text);
   outline: none;
 }
+
 .field__input:focus{
   border-color: color-mix(in oklab, var(--accent) 55%, var(--line));
   box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 20%, transparent);
+}
+
+select.field__input{
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  color: var(--text);
+}
+
+select.field__input option,
+select.field__input optgroup{
+  background: var(--bg);
+  color: var(--text);
 }
 
 .field--button{
