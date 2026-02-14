@@ -35,7 +35,7 @@
     --darker-gray-color: #dddddd;
     --border-color: #cccccc;
     --tool-color: #ffffff;
-    --primary-color: #456291;
+    --primary-color: #395481;
     --secondary-color: #404040;
     --overlay-dark-color: rgba(0, 0, 0, 0.6);
     --maintitle-color: #3a3a3a;
@@ -1229,7 +1229,7 @@ margin: auto;
 .grid li:hover {
     border: 1px solid;
     border-color: var(--hoverbox-color);
-    transform: scale(1.05);
+    transform: scale(1.03);
 }
 
 .grid li img {
@@ -1256,7 +1256,8 @@ filter: contrast(0.8);
 
 
 .grid li a {
-    color: var(--eptitle-color);
+    font-family: 'Inter', sans-serif;
+    color: var(--primary-color);
     display: block;
     font-weight: 500;
     font-size: 1rem;
