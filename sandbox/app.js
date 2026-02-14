@@ -2,7 +2,7 @@ const stories = [
   {
     id: "daleks",
     title: "The Daleks",
-    doctor: "First",
+    doctor: "1st",
     era: "Classic",
     season: 1,
     year: 1963,
@@ -15,7 +15,7 @@ const stories = [
   {
     id: "web-planet",
     title: "The Web Planet",
-    doctor: "First",
+    doctor: "1st Doctor",
     era: "Classic",
     season: 2,
     year: 1965,
@@ -28,7 +28,7 @@ const stories = [
   {
     id: "tomb-cybermen",
     title: "The Tomb of the Cybermen",
-    doctor: "Second",
+    doctor: "2nd Doctor",
     era: "Classic",
     season: 5,
     year: 1967,
@@ -41,7 +41,7 @@ const stories = [
   {
     id: "spearhead",
     title: "Spearhead from Space",
-    doctor: "Third",
+    doctor: "3rd Doctor",
     era: "Classic",
     season: 7,
     year: 1970,
@@ -54,7 +54,7 @@ const stories = [
   {
     id: "blink",
     title: "Blink",
-    doctor: "Tenth",
+    doctor: "10th Doctor",
     era: "Modern",
     year: 2007,
     season: 3,
@@ -67,7 +67,7 @@ const stories = [
   {
     id: "midnight",
     title: "Midnight",
-    doctor: "Tenth",
+    doctor: "10th Doctor",
     era: "Modern",
     year: 2008,
     season: 4,
@@ -80,7 +80,7 @@ const stories = [
   {
     id: "an-uneearthly-child",
     title: "An Unearthly Child",
-    doctor: "First",
+    doctor: "1st Doctor",
     era: "Classic",
     year: 1963,
     season: 1,
@@ -93,7 +93,7 @@ const stories = [
   {
     id: "the-aztecs",
     title: "The Aztecs",
-    doctor: "First",
+    doctor: "1st Doctor",
     era: "Classic",
     year: 1964,
     season: 1,
@@ -106,7 +106,7 @@ const stories = [
   {
     id: "the-war-games",
     title: "The War Games",
-    doctor: "Second",
+    doctor: "2nd Doctor",
     era: "Classic",
     year: 1969,
     season: 6,
@@ -119,7 +119,7 @@ const stories = [
   {
     id: "genesis-of-the-daleks",
     title: "Genesis of the Daleks",
-    doctor: "Fourth",
+    doctor: "4th Doctor",
     era: "Classic",
     year: 1975,
     season: 12,
@@ -132,7 +132,7 @@ const stories = [
   {
     id: "city-of-death",
     title: "City of Death",
-    doctor: "Fourth",
+    doctor: "4th Doctor",
     era: "Classic",
     year: 1979,
     season: 17,
@@ -145,7 +145,7 @@ const stories = [
   {
     id: "earthshock",
     title: "Earthshock",
-    doctor: "Fifth",
+    doctor: "5th Doctor",
     era: "Classic",
     year: 1982,
     season: 19,
@@ -158,7 +158,7 @@ const stories = [
   {
     id: "remembrance-of-the-daleks",
     title: "Remembrance of the Daleks",
-    doctor: "Seventh",
+    doctor: "7th Doctor",
     era: "Classic",
     year: 1988,
     season: 25,
@@ -171,7 +171,7 @@ const stories = [
   {
     id: "rose",
     title: "Rose",
-    doctor: "Ninth",
+    doctor: "9th Doctor",
     era: "Modern",
     year: 2005,
     season: 1,
@@ -184,7 +184,7 @@ const stories = [
   {
     id: "the-empty-child",
     title: "The Empty Child",
-    doctor: "Ninth",
+    doctor: "9th Doctor",
     era: "Modern",
     year: 2005,
     season: 1,
@@ -197,7 +197,7 @@ const stories = [
   {
     id: "the-girl-in-the-fireplace",
     title: "The Girl in the Fireplace",
-    doctor: "Tenth",
+    doctor: "10th Doctor",
     era: "Modern",
     year: 2006,
     season: 2,
@@ -210,7 +210,7 @@ const stories = [
   {
     id: "human-nature",
     title: "Human Nature / The Family of Blood",
-    doctor: "Tenth",
+    doctor: "10th Doctor",
     era: "Modern",
     year: 2007,
     season: 3,
@@ -223,7 +223,7 @@ const stories = [
   {
     id: "the-eleventh-hour",
     title: "The Eleventh Hour",
-    doctor: "Eleventh",
+    doctor: "11th Doctor",
     era: "Modern",
     year: 2010,
     season: 5,
@@ -236,7 +236,7 @@ const stories = [
   {
     id: "day-of-the-doctor",
     title: "The Day of the Doctor",
-    doctor: "War",
+    doctor: "War Doctor",
     era: "Modern",
     year: 2013,
     season: 7,
@@ -249,7 +249,7 @@ const stories = [
   {
     id: "heaven-sent",
     title: "Heaven Sent",
-    doctor: "Twelfth",
+    doctor: "12th Doctor",
     era: "Modern",
     year: 2015,
     season: 9,
@@ -262,7 +262,7 @@ const stories = [
   {
     id: "the-woman-who-fell-to-earth",
     title: "The Woman Who Fell to Earth",
-    doctor: "Thirteenth",
+    doctor: "13th Doctor",
     era: "Modern",
     year: 2018,
     season: 11,
