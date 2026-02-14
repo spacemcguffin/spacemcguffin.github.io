@@ -410,3 +410,41 @@ body{
   .modal__content{ grid-template-columns: 1fr; }
 }
 
+
+
+
+
+
+
+
+
+
+/* Card + modal images */
+.card__media{
+  padding: 0;
+}
+.card__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.modal__media{
+  padding: 0;
+}
+.modal__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Optional: subtle top fade for readability if you ever overlay text */
+.modal__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
