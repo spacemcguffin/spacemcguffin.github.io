@@ -388,26 +388,7 @@ function cardTemplate(s) {
 }
 
 
-function seasonLabel(season) {
-  if (season === "Specials") return "Specials";
-  if (season === null || season === undefined || season === "") return "Unsorted";
-  return `Season ${season}`;
-}
 
-function seasonSortKey(season) {
-  if (typeof season === "number") return season;
-  if (season === "Specials") return 9998;
-  return 9999;
-}
-
-function groupBySeason(items) {
-  const map = new Map();
-
-  for (const s of items) {
-    const key = s.season ?? "Unsorted";
-    if (!map.has(key)) map.set(key, []);
-    map.get(key).push(s);
-  }
 
   const keys = Array.from(map.keys()).sort((a, b) => seasonSortKey(a) - seasonSortKey(b));
   return keys.map((k) => ({ season: k, items: map.get(k) }));
