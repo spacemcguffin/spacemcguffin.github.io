@@ -33,11 +33,6 @@
 
 
 html{ height: auto; }
-
-html{
-  transition: background .25s ease, color .25s ease;
-}
-
 body{ min-height: 100vh; }
 
 
@@ -436,16 +431,6 @@ select.field__input optgroup{
   box-shadow: var(--shadow);
 }
 
-.modal__dialog{
-  transform: scale(.95);
-  opacity: 0;
-  transition: .18s ease;
-}
-
-.modal[aria-hidden="false"] .modal__dialog{
-  transform: scale(1);
-  opacity: 1;
-}
 
 
 .modal__header{
