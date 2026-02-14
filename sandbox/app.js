@@ -259,6 +259,7 @@ const els = {
   q: document.querySelector("#q"),
   doctor: document.querySelector("#doctor"),
   era: document.querySelector("#era"),
+  sort: document.querySelector("#sort"),
   clear: document.querySelector("#clearBtn"),
   theme: document.querySelector("#themeBtn"),
 
@@ -299,6 +300,7 @@ function getFilters() {
     q: els.q.value.trim().toLowerCase(),
     doctor: els.doctor.value,
     era: els.era.value,
+    sort: els.sort.value,
   };
 }
 
@@ -368,7 +370,8 @@ function cardTemplate(s) {
 
 // ---------- Render ----------
 function render() {
-  filtered = applyFilters(stories, getFilters());
+const f = getFilters();
+filtered = sortItems(applyFilters(stories, f), f.sort);
   els.count.textContent = filtered.length;
 
   els.grid.innerHTML = filtered.map(cardTemplate).join("");
