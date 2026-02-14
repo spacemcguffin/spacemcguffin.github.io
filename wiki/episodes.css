@@ -1223,6 +1223,7 @@ margin: auto;
     border: 1px solid;
     border-color: var(--episodebar-border-color);
 	transition: transform .5s;
+	border-radius: 0.8rem;
 }
 
 .grid li:hover {
@@ -1234,6 +1235,8 @@ margin: auto;
 .grid li img {
     width: 100%;
     display: block;
+	border-top-left-radius: 0.8rem;
+	border-top-right-radius: 0.8rem;
 }
 
 
