@@ -34,18 +34,32 @@
 
 
 
-      <section class="featured">
-  <div class="featured__bg"></div>
+      
+<section class="featured" id="featured">
+  <div class="featured__bg" aria-hidden="true"></div>
+  <div class="featured__noise" aria-hidden="true"></div>
+  <div class="featured__vignette" aria-hidden="true"></div>
+
   <div class="featured__content">
-    <div class="featured__kicker">Featured</div>
-    <h1 class="featured__title">The Day of the Doctor</h1>
-    <p class="featured__desc">The Doctors unite to save Gallifrey.</p>
+    <div class="featured__meta">
+      <span class="chip">FEATURED</span>
+      <span class="chip chip--muted" id="featuredMeta">Modern • 2013 • 1 ep</span>
+      <span class="chip chip--accent" id="featuredDoctor">War Doctor</span>
+    </div>
+
+    <h1 class="featured__title" id="featuredTitle">The Day of the Doctor</h1>
+    <p class="featured__desc" id="featuredDesc">The Doctors unite to save Gallifrey.</p>
+
     <div class="featured__actions">
-      <button class="btn" id="featuredBtn">Details</button>
-      <button class="btn btn--ghost" id="randomBtn">Random</button>
+      <button class="btn btn--play" id="featuredBtn" type="button">▶ Details</button>
+      <button class="btn btn--ghost" id="randomBtn" type="button">Shuffle</button>
+      <button class="btn btn--ghost" id="addBtn" type="button">＋ My List</button>
     </div>
   </div>
 </section>
+
+
+      
 
       
 
