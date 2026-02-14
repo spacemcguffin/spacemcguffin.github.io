@@ -1,126 +1,392 @@
-/* Base page styling */
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: #f6f6f6;
-    color: #202122;
-    line-height: 1.6;
+/* =========================================================
+   Wikipedia-style layout (sidebar + content)
+   - Works best with a wrapper like:
+     <div class="mw-page">
+       <aside class="mw-sidebar">...</aside>
+       <main class="mw-content">...</main>
+     </div>
+   ========================================================= */
+
+/* ---- Base / tokens ---- */
+:root{
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --text: #202122;
+  --muted: #54595d;
+  --link: #0645ad;
+  --link-visited: #0b0080;
+  --border: #a2a9b1;
+  --border-soft: #c8ccd1;
+  --sidebar-bg: #f8f9fa;
+  --heading: #000000;
+  --code-bg: #f8f9fa;
+  --shadow: 0 1px 0 rgba(0,0,0,.03);
+
+  --content-max: 960px;
+  --sidebar-w: 220px;
+
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --font-serif: "Linux Libertine", "Georgia", "Times New Roman", serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-/* Main content container */
-.page-container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px 30px;
-    background: white;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+/* Optional dark mode (toggle by adding .theme-dark on <html> or <body>) */
+.theme-dark{
+  --bg: #101418;
+  --surface: #151a20;
+  --text: #e7e7e7;
+  --muted: #b0b6bd;
+  --link: #7ab7ff;
+  --link-visited: #c28fff;
+  --border: #3a424a;
+  --border-soft: #2a3138;
+  --sidebar-bg: #12171d;
+  --heading: #ffffff;
+  --code-bg: #0f141a;
+  --shadow: 0 1px 0 rgba(255,255,255,.04);
 }
 
-/* Headings */
-h1, h2, h3, h4 {
-    font-weight: normal;
-    color: #000;
-    margin-top: 1.2em;
-    margin-bottom: 0.4em;
+/* ---- Global resets ---- */
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+body{
+  margin:0;
+  font-family:var(--font);
+  line-height:1.6;
+  color:var(--text);
+  background:var(--bg);
 }
 
-h1 {
-    font-size: 2em;
-    border-bottom: 1px solid #a2a9b1;
-    padding-bottom: 0.3em;
+/* Links like Wikipedia */
+a{ color:var(--link); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+a:visited{ color:var(--link-visited); }
+a.new, a.redlink{ color:#ba0000; } /* optional "red links" */
+small, .mw-muted{ color:var(--muted); }
+
+/* ---- Page layout ---- */
+.mw-page{
+  display:grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  min-height:100vh;
 }
 
-h2 {
-    font-size: 1.5em;
-    border-bottom: 1px solid #a2a9b1;
-    padding-bottom: 0.2em;
+/* ---- Sidebar ---- */
+.mw-sidebar{
+  background:var(--sidebar-bg);
+  border-right:1px solid var(--border-soft);
+  padding:16px 12px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow:auto;
 }
 
-/* Links */
-a {
-    color: #0645ad;
-    text-decoration: none;
+.mw-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:8px 6px 14px;
+  border-bottom:1px solid var(--border-soft);
+  margin-bottom:14px;
 }
 
-a:hover {
-    text-decoration: underline;
+.mw-logo img{
+  width:38px;
+  height:38px;
+  display:block;
 }
 
-/* Paragraph spacing */
-p {
-    margin: 0.5em 0;
+.mw-logo .mw-site-title{
+  font-weight:700;
+  font-size:14px;
+  line-height:1.2;
+}
+.mw-logo .mw-site-subtitle{
+  font-size:12px;
+  color:var(--muted);
 }
 
-/* Table of contents */
-.toc {
-    border: 1px solid #a2a9b1;
-    background: #f8f9fa;
-    padding: 10px 15px;
-    display: inline-block;
-    font-size: 0.95em;
-    margin: 1em 0;
+.mw-side-section{
+  margin:14px 0 18px;
+}
+.mw-side-heading{
+  font-size:12px;
+  font-weight:700;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.02em;
+  margin:0 0 8px;
 }
 
-.toc-title {
-    font-weight: bold;
-    margin-bottom: 0.5em;
+.mw-side-nav{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.mw-side-nav li{ margin:6px 0; }
+.mw-side-nav a{
+  display:block;
+  padding:4px 6px;
+  border-radius:3px;
+  color:var(--text);
+}
+.mw-side-nav a:hover{
+  background:rgba(0,0,0,.04);
+  text-decoration:none;
+}
+.theme-dark .mw-side-nav a:hover{
+  background:rgba(255,255,255,.06);
 }
 
-.toc ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
+.mw-side-search{
+  margin:10px 0 4px;
+}
+.mw-side-search input{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:2px;
+  padding:7px 8px;
+  background:var(--surface);
+  color:var(--text);
+  outline:none;
+}
+.mw-side-search input:focus{
+  border-color:var(--link);
+  box-shadow:0 0 0 3px rgba(6,69,173,.15);
+}
+.theme-dark .mw-side-search input:focus{
+  box-shadow:0 0 0 3px rgba(122,183,255,.18);
 }
 
-.toc li {
-    margin: 2px 0;
+/* ---- Main content ---- */
+.mw-content{
+  padding:18px 20px 64px;
+  min-width:0;
 }
 
-/* Infobox */
-.infobox {
-    float: right;
-    width: 260px;
-    margin: 0 0 1em 1.5em;
-    border: 1px solid #a2a9b1;
-    background: #f8f9fa;
-    font-size: 0.9em;
+/* Optional "page" frame like Wikipedia */
+.mw-article{
+  max-width:var(--content-max);
+  background:var(--surface);
+  border:1px solid var(--border-soft);
+  box-shadow:var(--shadow);
+  padding:18px 22px 30px;
 }
 
-.infobox th {
-    background: #eaecf0;
-    text-align: center;
-    font-weight: bold;
-    padding: 6px;
+/* Header / title */
+.mw-title{
+  font-family:var(--font-serif);
+  font-weight:400;
+  font-size:32px;
+  line-height:1.2;
+  color:var(--heading);
+  margin:0 0 6px;
+  border-bottom:1px solid var(--border-soft);
+  padding-bottom:10px;
 }
 
-.infobox td {
-    padding: 6px 8px;
-    border-top: 1px solid #a2a9b1;
+.mw-subtitle{
+  margin:8px 0 18px;
+  color:var(--muted);
+  font-size:13px;
 }
 
-/* Images */
-img {
-    max-width: 100%;
-    height: auto;
+/* TOC like Wikipedia */
+.mw-toc{
+  display:inline-block;
+  background:var(--sidebar-bg);
+  border:1px solid var(--border-soft);
+  padding:10px 12px;
+  font-size:13px;
+  margin:10px 0 18px;
+}
+.mw-toc .mw-toc-title{
+  text-align:center;
+  font-weight:700;
+  margin:0 0 6px;
+}
+.mw-toc ol{
+  margin:0;
+  padding-left:20px;
+}
+.mw-toc li{ margin:4px 0; }
+.mw-toc a{ color:var(--link); }
+
+/* Headings like Wikipedia */
+.mw-article h2,
+.mw-article h3,
+.mw-article h4{
+  font-family:var(--font-serif);
+  font-weight:400;
+  color:var(--heading);
+  margin:26px 0 10px;
+  line-height:1.25;
+}
+.mw-article h2{
+  font-size:22px;
+  border-bottom:1px solid var(--border-soft);
+  padding-bottom:6px;
+}
+.mw-article h3{ font-size:18px; }
+.mw-article h4{ font-size:16px; }
+
+/* Paragraphs + lists */
+.mw-article p{ margin:0 0 14px; }
+.mw-article ul, .mw-article ol{ margin:0 0 14px 22px; }
+.mw-article li{ margin:6px 0; }
+
+/* Infobox (right floated) */
+.mw-infobox{
+  float:right;
+  width:260px;
+  margin:0 0 14px 18px;
+  background:var(--sidebar-bg);
+  border:1px solid var(--border);
+  font-size:13px;
+}
+.mw-infobox caption{
+  font-weight:700;
+  padding:8px 10px;
+  text-align:center;
+}
+.mw-infobox th,
+.mw-infobox td{
+  padding:6px 8px;
+  border-top:1px solid var(--border-soft);
+  vertical-align:top;
+}
+.mw-infobox th{
+  width:40%;
+  text-align:left;
+  color:var(--muted);
+  font-weight:600;
 }
 
-/* Lists */
-ul {
-    margin: 0.5em 0 0.5em 1.5em;
+/* References / citations */
+.mw-ref{
+  font-size:11px;
+  vertical-align:super;
+  line-height:0;
+}
+.mw-ref a{ text-decoration:none; }
+.mw-reflist{
+  font-size:13px;
+  border-top:1px solid var(--border-soft);
+  margin-top:22px;
+  padding-top:12px;
+}
+.mw-reflist ol{ margin-left:20px; }
+
+/* Tables (wikitable-ish) */
+.mw-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+  margin:12px 0 18px;
+}
+.mw-table th, .mw-table td{
+  border:1px solid var(--border);
+  padding:7px 9px;
+  vertical-align:top;
+}
+.mw-table th{
+  background:var(--sidebar-bg);
+  font-weight:700;
+}
+.mw-table tbody tr:hover{
+  background:rgba(0,0,0,.03);
+}
+.theme-dark .mw-table tbody tr:hover{
+  background:rgba(255,255,255,.05);
 }
 
-/* Footer / references */
-.references {
-    font-size: 0.9em;
-    border-top: 1px solid #a2a9b1;
-    margin-top: 2em;
-    padding-top: 1em;
-    color: #54595d;
+/* Code */
+code, pre{
+  font-family:var(--mono);
+}
+code{
+  background:var(--code-bg);
+  border:1px solid var(--border-soft);
+  padding:1px 5px;
+  border-radius:3px;
+}
+pre{
+  background:var(--code-bg);
+  border:1px solid var(--border-soft);
+  padding:12px;
+  overflow:auto;
+  border-radius:6px;
 }
 
-/* Clear floats */
-.clearfix::after {
-    content: "";
-    display: block;
-    clear: both;
+/* Blockquotes */
+blockquote{
+  margin:14px 0;
+  padding:8px 14px;
+  border-left:4px solid var(--border);
+  color:var(--muted);
+  background:rgba(0,0,0,.02);
+}
+.theme-dark blockquote{ background:rgba(255,255,255,.03); }
+
+/* ---- Responsive: collapse sidebar ---- */
+.mw-sidebar-toggle{
+  display:none;
+  position:fixed;
+  top:12px;
+  left:12px;
+  z-index:1001;
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--text);
+  border-radius:6px;
+  padding:8px 10px;
+  cursor:pointer;
+  box-shadow:var(--shadow);
+}
+
+/* Add .mw-sidebar--open on .mw-sidebar and .mw-page--overlay on .mw-page via JS */
+@media (max-width: 980px){
+  .mw-page{
+    grid-template-columns: 1fr;
+  }
+  .mw-sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:min(86vw, 320px);
+    transform:translateX(-105%);
+    transition:transform .2s ease;
+    z-index:1000;
+    height:100vh;
+  }
+  .mw-sidebar.mw-sidebar--open{
+    transform:translateX(0);
+  }
+  .mw-sidebar-toggle{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  .mw-page.mw-page--overlay::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    z-index:999;
+  }
+  .mw-content{ padding:16px 14px 64px; }
+  .mw-article{ padding:16px 16px 26px; }
+  .mw-infobox{
+    float:none;
+    width:100%;
+    margin:0 0 14px 0;
+  }
+}
+
+/* Print-ish */
+@media print{
+  .mw-sidebar, .mw-sidebar-toggle{ display:none !important; }
+  .mw-page{ grid-template-columns:1fr; }
+  .mw-article{ border:none; box-shadow:none; }
 }
