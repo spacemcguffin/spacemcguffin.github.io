@@ -297,10 +297,10 @@ function escapeHtml(str) {
 
 function getFilters() {
   return {
-    q: els.q.value.trim().toLowerCase(),
-    doctor: els.doctor.value,
-    era: els.era.value,
-    sort: els.sort.value,
+    q: els.q?.value?.trim().toLowerCase() || "",
+    doctor: els.doctor?.value || "",
+    era: els.era?.value || "",
+    sort: els.sort?.value || "title-asc",
   };
 }
 
