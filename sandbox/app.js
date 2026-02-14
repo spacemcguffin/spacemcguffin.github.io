@@ -291,7 +291,6 @@ const els = {
 
   title: document.querySelector("#modalTitle"),
   desc: document.querySelector("#modalDesc"),
-  media: document.querySelector("#modalMedia"),
   meta: document.querySelector("#modalMeta"),
   summary: document.querySelector("#modalSummary"),
   notes: document.querySelector("#modalNotes"),
@@ -457,7 +456,7 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   els.desc.textContent = `${s.doctor} Doctor • ${s.era} • ${s.year} • ${s.eps} ep${s.eps === 1 ? "" : "s"}`;
 
 const hero = document.getElementById("modalHero");
-hero.style.backgroundImage = `url("${s.image}")`;
+if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
 
 
   els.meta.innerHTML = `
