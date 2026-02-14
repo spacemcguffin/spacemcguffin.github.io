@@ -147,56 +147,140 @@ body.scrolled .topbar{ box-shadow: 0 12px 40px rgba(0,0,0,.45); }
 
 
 
+
+
+
+
+
 .featured{
   position: relative;
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: 26px;
   overflow: hidden;
-  min-height: 320px;
   margin: 18px 0 18px;
+  min-height: clamp(320px, 45vh, 520px);
   box-shadow: var(--shadow);
+  isolation: isolate;
 }
 
 .featured__bg{
   position:absolute;
+  inset:-2px;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.35) 45%, rgba(0,0,0,.10) 70%),
+    radial-gradient(900px 420px at 80% 35%, rgba(167,139,250,.22), transparent 58%),
+    radial-gradient(900px 420px at 20% 70%, rgba(125,211,252,.18), transparent 55%),
+    url("https://picsum.photos/seed/featured/1600/900") center/cover;
+  transform: scale(1.03);
+  filter: saturate(1.08) contrast(1.05);
+  will-change: transform;
+  animation: heroFloat 18s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+  0%, 100% { transform: scale(1.03) translateY(0px); }
+  50%      { transform: scale(1.06) translateY(-6px); }
+}
+
+/* subtle film grain */
+.featured__noise{
+  position:absolute;
+  inset:0;
+  opacity:.14;
+  mix-blend-mode: overlay;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.05), rgba(255,255,255,.05) 1px, transparent 1px, transparent 3px);
+}
+
+/* vignette + bottom fade into page */
+.featured__vignette{
+  position:absolute;
   inset:0;
   background:
-    linear-gradient(to right, rgba(0,0,0,.75), rgba(0,0,0,.2)),
-    radial-gradient(900px 400px at 80% 40%, rgba(167,139,250,.22), transparent 55%),
-    url("https://picsum.photos/seed/featured/1600/900") center/cover;
-  transform: scale(1.02);
-  filter: saturate(1.05);
+    radial-gradient(120% 90% at 40% 40%, transparent 35%, rgba(0,0,0,.55) 100%),
+    linear-gradient(to top, var(--bg) 0%, rgba(0,0,0,0) 48%);
+  pointer-events:none;
 }
 
+/* content */
 .featured__content{
   position: relative;
-  z-index: 1;
-  padding: 26px;
-  max-width: 640px;
+  z-index: 2;
+  padding: clamp(18px, 3vw, 30px);
+  max-width: 680px;
 }
 
-.featured__kicker{
-  display:inline-block;
+.featured__meta{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  margin-bottom: 12px;
+}
+
+.chip{
   font-size: 12px;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  background: rgba(0,0,0,.25);
-  padding: 6px 10px;
+  padding: 7px 10px;
   border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,.30);
+  color: var(--text);
   backdrop-filter: blur(10px);
 }
 
-.featured__title{
-  margin: 10px 0 6px;
-  font-size: clamp(28px, 4vw, 44px);
-  letter-spacing: -0.02em;
+.chip--muted{ color: var(--muted); background: rgba(0,0,0,.22); }
+.chip--accent{
+  letter-spacing: .04em;
+  text-transform: none;
+  background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.18));
+  border-color: color-mix(in oklab, var(--accent) 28%, var(--line));
 }
 
-.featured__desc{ margin: 0 0 14px; color: var(--muted); }
+.featured__title{
+  margin: 0 0 8px;
+  font-size: clamp(30px, 4.2vw, 52px);
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  text-shadow: 0 12px 40px rgba(0,0,0,.55);
+}
 
-.featured__actions{ display:flex; gap:10px; flex-wrap: wrap; }
+.featured__desc{
+  margin: 0 0 16px;
+  color: color-mix(in oklab, var(--muted) 92%, white 8%);
+  font-size: 15px;
+  max-width: 60ch;
+  text-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+
+.featured__actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.btn--play{
+  background: linear-gradient(135deg, rgba(125,211,252,.30), rgba(167,139,250,.24));
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--line));
+}
+
+@media (max-width: 720px){
+  .featured__bg{
+    background:
+      linear-gradient(0deg, rgba(0,0,0,.80) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.05) 80%),
+      radial-gradient(900px 420px at 70% 20%, rgba(167,139,250,.20), transparent 58%),
+      radial-gradient(900px 420px at 20% 75%, rgba(125,211,252,.16), transparent 55%),
+      url("https://picsum.photos/seed/featured/1600/900") center/cover;
+  }
+  .featured__content{ max-width: none; }
+}
+
+
+
+
+
 
 
 
