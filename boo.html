@@ -1,173 +1,276 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Wikipedia Style Page</title>
-  <!-- Link your CSS file here -->
-<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="boo.css" />
-</head>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bill Gates — The Jmail Encyclopedia (Look-alike Template)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
-  <!-- Mobile toggle button -->
-  <button class="mw-sidebar-toggle" id="sidebarToggle" aria-controls="sidebar" aria-expanded="false">
-    ☰ Menu
-  </button>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
 
-  <div class="mw-page" id="page">
-    <!-- Sidebar -->
-    <aside class="mw-sidebar" id="sidebar">
-      <div class="mw-logo">
-        <!-- Replace with your logo -->
-        <img src="tardis-icon.png" alt="Site logo" />
-        <div>
-          <div class="mw-site-title">My Wiki</div>
-          <div class="mw-site-subtitle">Encyclopedia-style page</div>
-        </div>
-      </div>
+    <!-- Top Bar -->
+    <header class="topbar" role="banner">
+      <div class="topbar__inner">
+        <a class="brand" href="#">
+          <span class="brand__mark" aria-hidden="true">J</span>
+          <span class="brand__text">The Jmail Encyclopedia</span>
+        </a>
 
-      <div class="mw-side-search">
-        <input type="search" placeholder="Search" aria-label="Search" />
-      </div>
+        <form class="search" role="search">
+          <label class="sr-only" for="q">Search</label>
+          <input id="q" name="q" type="search" placeholder="Search" autocomplete="off" />
+          <button type="submit" aria-label="Search">
+            <span aria-hidden="true">🔎</span>
+          </button>
+        </form>
 
-      <section class="mw-side-section">
-        <h2 class="mw-side-heading">Navigation</h2>
-        <ul class="mw-side-nav">
-          <li><a href="#">Main page</a></li>
-          <li><a href="#">Contents</a></li>
-          <li><a href="#">Current events</a></li>
-          <li><a href="#">Random article</a></li>
-        </ul>
-      </section>
-
-      <section class="mw-side-section">
-        <h2 class="mw-side-heading">Tools</h2>
-        <ul class="mw-side-nav">
-          <li><a href="#">What links here</a></li>
-          <li><a href="#">Related changes</a></li>
-          <li><a href="#">Special pages</a></li>
-          <li><a href="#">Printable version</a></li>
-        </ul>
-      </section>
-    </aside>
-
-    <!-- Main content -->
-    <main class="mw-content">
-      <article class="mw-article">
-        <header>
-          <h1 class="mw-title">Example Article Title</h1>
-          <p class="mw-subtitle">From My Wiki, the free encyclopedia</p>
-        </header>
-
-        <!-- Table of contents -->
-        <nav class="mw-toc" aria-label="Contents">
-          <div class="mw-toc-title">Contents</div>
-          <ol>
-            <li><a href="#section-1">Section 1</a></li>
-            <li><a href="#section-2">Section 2</a></li>
-            <li><a href="#section-3">Section 3</a></li>
-          </ol>
+        <nav class="topbar__actions" aria-label="Account">
+          <a href="#" class="link">Donate</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href="#" class="link">Create account</a>
+          <a href="#" class="link">Log in</a>
+          <button class="theme-toggle" type="button" id="themeToggle" aria-pressed="false">
+            Dark
+          </button>
         </nav>
+      </div>
+    </header>
 
-        <!-- Infobox -->
-        <table class="mw-infobox" role="presentation">
-          <caption>Infobox</caption>
-          <tbody>
-            <tr>
-              <th scope="row">Created</th>
-              <td>2026</td>
-            </tr>
-            <tr>
-              <th scope="row">Type</th>
-              <td>Demo page</td>
-            </tr>
-            <tr>
-              <th scope="row">Website</th>
-              <td><a href="#">example.com</a></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="layout">
+      <!-- Sidebar -->
+      <aside class="sidebar" aria-label="Sidebar">
+        <div class="sidebar__section">
+          <h2 class="sidebar__heading">Navigation</h2>
+          <ul class="sidebar__list">
+            <li><a href="#" class="link">Main page</a></li>
+            <li><a href="#" class="link">Jmail inbox</a></li>
+            <li><a href="#" class="link">Search emails</a></li>
+          </ul>
+        </div>
 
-        <p>
-          This is an example paragraph to show the Wikipedia-like typography and spacing.
-          Here’s a citation<sup class="mw-ref"><a href="#ref-1">[1]</a></sup>.
+        <div class="sidebar__section">
+          <h2 class="sidebar__heading">Jmail apps</h2>
+          <ul class="sidebar__list">
+            <li><a href="#" class="link">Jacebook</a></li>
+            <li><a href="#" class="link">Jotify</a></li>
+            <li><a href="#" class="link">Jeddit</a></li>
+            <li><a href="#" class="link">Jamazon</a></li>
+            <li><a href="#" class="link">JPhotos</a></li>
+            <li><a href="#" class="link">JDrive</a></li>
+            <li><a href="#" class="link">JFlights</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar__section">
+          <h2 class="sidebar__heading">Tools</h2>
+          <ul class="sidebar__list">
+            <li><a href="#" class="link">About</a></li>
+          </ul>
+        </div>
+
+        <p class="sidebar__note">
+          Content is generated by AI from publicly released documents. This is a look-alike template for layout
+          only.
         </p>
+      </aside>
 
-        <h2 id="section-1">Section 1</h2>
-        <p>
-          More article text goes here. You can add lists, images, tables, and references.
-        </p>
+      <!-- Main -->
+      <main id="content" class="content" role="main">
+        <div class="page-tools">
+          <nav class="breadcrumbs" aria-label="Site">
+            <a class="link" href="#">About</a>
+            <span class="sep" aria-hidden="true">·</span>
+            <a class="link" href="#">Donate</a>
+            <span class="sep" aria-hidden="true">·</span>
+            <a class="link" href="#">The Jmail Encyclopedia</a>
+            <span class="sep" aria-hidden="true">·</span>
+            <a class="link" href="#">Jmail inbox</a>
+          </nav>
+        </div>
 
-        <h3 id="section-2">Section 2</h3>
-        <ul>
-          <li>Bullet point one</li>
-          <li>Bullet point two</li>
-          <li>Bullet point three</li>
-        </ul>
+        <article class="article">
+          <header class="article__header">
+            <h1 class="title">Bill Gates</h1>
+            <p class="subtitle">From The Jmail Encyclopedia</p>
 
-        <h2 id="section-3">Section 3</h2>
-        <table class="mw-table">
-          <thead>
-            <tr>
-              <th>Column A</th>
-              <th>Column B</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Row 1</td>
-              <td>Value</td>
-            </tr>
-            <tr>
-              <td>Row 2</td>
-              <td>Value</td>
-            </tr>
-          </tbody>
-        </table>
+            <div class="notice" role="note">
+              <strong>Note:</strong> This article is a demo template. Replace the text with your own content.
+              <a class="link" href="#">View original emails</a>
+            </div>
+          </header>
 
-        <h2 id="references">References</h2>
-        <section class="mw-reflist">
-          <ol>
-            <li id="ref-1">Example reference item.</li>
-          </ol>
-        </section>
-      </article>
-    </main>
-  </div>
+          <div class="article-grid">
+            <!-- Main column -->
+            <div class="article-main">
+              <p class="lead">
+                <strong>William Henry Gates III</strong> is the co-founder of a major software company and a
+                prominent philanthropist. This template shows a Wikipedia-style layout with an infobox,
+                contents box, and sectioned article body.
+              </p>
 
-  <!-- Tiny JS for mobile sidebar open/close -->
-  <script>
-    const toggle = document.getElementById('sidebarToggle');
-    const sidebar = document.getElementById('sidebar');
-    const page = document.getElementById('page');
+              <div class="toc" aria-label="Contents">
+                <div class="toc__head">
+                  <strong>Contents</strong>
+                  <button class="toc__toggle" type="button" id="tocToggle" aria-expanded="true">
+                    hide
+                  </button>
+                </div>
+                <ol class="toc__list" id="tocList">
+                  <li><a class="link" href="#background">1 Background</a></li>
+                  <li><a class="link" href="#correspondence">2 Correspondence</a></li>
+                  <li><a class="link" href="#connections">3 Connections</a></li>
+                  <li><a class="link" href="#references">4 Document references</a></li>
+                  <li><a class="link" href="#visits">5 Visits</a></li>
+                </ol>
+              </div>
 
-    function setOpen(isOpen) {
-      sidebar.classList.toggle('mw-sidebar--open', isOpen);
-      page.classList.toggle('mw-page--overlay', isOpen);
-      toggle.setAttribute('aria-expanded', String(isOpen));
-    }
+              <section id="background" class="section">
+                <h2>Background</h2>
+                <p>
+                  Use this section for biographical context. Keep paragraphs short, use clear headings, and
+                  link out to relevant sources.
+                </p>
+                <p>
+                  You can add images, quotes, or small callout boxes if you want—Wikipedia’s “boxy” style is
+                  mainly borders + muted backgrounds.
+                </p>
+              </section>
 
-    toggle.addEventListener('click', () => {
-      const open = sidebar.classList.contains('mw-sidebar--open');
-      setOpen(!open);
-    });
+              <section id="correspondence" class="section">
+                <h2>Correspondence</h2>
+                <h3>Topic heading</h3>
+                <p>
+                  Summarize key themes here. If you want “data” blocks, use a definition list or a small table.
+                </p>
 
-    // Close when clicking the overlay
-    page.addEventListener('click', (e) => {
-      if (page.classList.contains('mw-page--overlay') && e.target === page) {
-        setOpen(false);
+                <div class="mini-table-wrap" role="region" aria-label="Example table" tabindex="0">
+                  <table class="mini-table">
+                    <thead>
+                      <tr>
+                        <th>Year</th>
+                        <th>Emails</th>
+                        <th>Notes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>2014</td>
+                        <td>123</td>
+                        <td>Sample row</td>
+                      </tr>
+                      <tr>
+                        <td>2018</td>
+                        <td>45</td>
+                        <td>Sample row</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section id="connections" class="section">
+                <h2>Connections</h2>
+                <ul>
+                  <li><a class="link" href="#">Example Person A</a> — relationship summary</li>
+                  <li><a class="link" href="#">Example Person B</a> — relationship summary</li>
+                  <li><a class="link" href="#">Example Person C</a> — relationship summary</li>
+                </ul>
+              </section>
+
+              <section id="references" class="section">
+                <h2>Document references</h2>
+                <ol class="refs">
+                  <li><a class="link" href="#">Reference link one</a></li>
+                  <li><a class="link" href="#">Reference link two</a></li>
+                  <li><a class="link" href="#">Reference link three</a></li>
+                </ol>
+              </section>
+
+              <section id="visits" class="section">
+                <h2>Visits</h2>
+                <p>
+                  Add a bullet list, timeline, or table here. Keep it consistent: thin borders, light background,
+                  minimal shadows.
+                </p>
+              </section>
+
+              <footer class="article__footer">
+                <a class="link" href="#">← Back to main page</a>
+                <span class="sep" aria-hidden="true">·</span>
+                <a class="link" href="#">View all emails</a>
+              </footer>
+            </div>
+
+            <!-- Infobox column -->
+            <aside class="infobox" aria-label="Article summary">
+              <div class="infobox__title">Bill Gates</div>
+
+              <dl class="stats">
+                <div class="stats__row">
+                  <dt>Emails</dt>
+                  <dd>706</dd>
+                </div>
+                <div class="stats__row">
+                  <dt>Threads</dt>
+                  <dd>536</dd>
+                </div>
+                <div class="stats__row">
+                  <dt>Active</dt>
+                  <dd>Oct 1993 – Mar 2019</dd>
+                </div>
+              </dl>
+
+              <div class="infobox__block">
+                <div class="infobox__label">Top contacts</div>
+                <p class="infobox__text">
+                  <a class="link" href="#">Jeffrey Epstein</a>, <a class="link" href="#">Larry Cohen</a>,
+                  <a class="link" href="#">Boris Nikolic</a>, <a class="link" href="#">Lowell Wood</a>
+                </p>
+              </div>
+
+              <div class="infobox__block">
+                <div class="infobox__label">Source</div>
+                <ul class="infobox__links">
+                  <li><a class="link" href="#">View emails</a></li>
+                  <li><a class="link" href="#">View on Wikipedia</a></li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </article>
+      </main>
+    </div>
+
+    <script>
+      // Theme toggle (stores preference)
+      const root = document.documentElement;
+      const btn = document.getElementById("themeToggle");
+      const saved = localStorage.getItem("theme");
+      if (saved) {
+        root.setAttribute("data-theme", saved);
+        btn.setAttribute("aria-pressed", saved === "dark" ? "true" : "false");
+        btn.textContent = saved === "dark" ? "Light" : "Dark";
       }
-    });
 
-    // Close on Escape
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') setOpen(false);
-    });
-  </script>
-</body>
+      btn.addEventListener("click", () => {
+        const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        btn.setAttribute("aria-pressed", next === "dark" ? "true" : "false");
+        btn.textContent = next === "dark" ? "Light" : "Dark";
+      });
+
+      // TOC toggle
+      const tocBtn = document.getElementById("tocToggle");
+      const tocList = document.getElementById("tocList");
+      tocBtn.addEventListener("click", () => {
+        const open = tocBtn.getAttribute("aria-expanded") === "true";
+        tocBtn.setAttribute("aria-expanded", String(!open));
+        tocBtn.textContent = open ? "show" : "hide";
+        tocList.style.display = open ? "none" : "block";
+      });
+    </script>
+  </body>
 </html>
