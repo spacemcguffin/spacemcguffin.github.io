@@ -668,15 +668,19 @@ body > section{max-width:1000px;margin:auto;padding:30px 0px;border-bottom:1px s
 
 
 #sidebarContent {
-    width: 200px;
-    padding: 0.5em;
-    padding-bottom: 2em;
-    padding-top: 1.5em;
+    width: 180px;
+    padding: 0.5rem;
+    padding-bottom: 2rem;
+    padding-top: 1.5rem;
 }
 
 
 footer a{color:#000000}
-#main{margin-left:220px}
+
+#main{
+	margin-left:200px;
+	 }
+
 #wrapall{}
 #header{max-width:1100px;overflow:hidden;}
 #wrapall,#header{max-width:1200px;}
@@ -687,10 +691,16 @@ footer a{color:#000000}
 	float:left;
   position: -webkit-sticky;
   position: sticky;
-  top: 0;				
-				}
+  top: 0;	
+}
 
-#page{padding:2em;}
+
+
+#page{
+    padding: 1rem;
+}
+
+
 #menuToggle{padding: 0.2em;font-size: 1.5em;font-weight: 300;text-transform: uppercase;font-family: 'Onest', sans-serif;letter-spacing: 0.5px;}
 .stick #sidebarContent{height: auto;}
 #stick-here{background:red}
