@@ -259,7 +259,6 @@ const els = {
   q: document.querySelector("#q"),
   doctor: document.querySelector("#doctor"),
   era: document.querySelector("#era"),
-  sort: document.querySelector("#sort"),
   clear: document.querySelector("#clearBtn"),
   theme: document.querySelector("#themeBtn"),
 
@@ -297,10 +296,9 @@ function escapeHtml(str) {
 
 function getFilters() {
   return {
-    q: els.q?.value?.trim().toLowerCase() || "",
-    doctor: els.doctor?.value || "",
-    era: els.era?.value || "",
-    sort: els.sort?.value || "title-asc",
+    q: els.q.value.trim().toLowerCase(),
+    doctor: els.doctor.value,
+    era: els.era.value,
   };
 }
 
@@ -368,46 +366,15 @@ function cardTemplate(s) {
   `;
 }
 
+
+
+
+
 // ---------- Render ----------
-function sortItems(items, sortKey) {
-  const arr = items.slice();
-  const byText = (a, b) => a.localeCompare(b, undefined, { sensitivity: "base" });
-
-  arr.sort((A, B) => {
-    switch (sortKey) {
-      case "title-asc":
-        return byText(A.title, B.title);
-      case "title-desc":
-        return byText(B.title, A.title);
-
-      case "year-asc":
-        return (A.year ?? 0) - (B.year ?? 0) || byText(A.title, B.title);
-      case "year-desc":
-        return (B.year ?? 0) - (A.year ?? 0) || byText(A.title, B.title);
-
-      case "eps-asc":
-        return (A.eps ?? 0) - (B.eps ?? 0) || byText(A.title, B.title);
-      case "eps-desc":
-        return (B.eps ?? 0) - (A.eps ?? 0) || byText(A.title, B.title);
-
-      default:
-        return byText(A.title, B.title);
-    }
-  });
-
-  return arr;
-}
-
-
-
-
-
-
 function render() {
-const f = getFilters();
-filtered = sortItems(applyFilters(stories, f), f.sort);
-  els.count.textContent = filtered.length;
+  filtered = applyFilters(stories, getFilters());
 
+  els.count.textContent = filtered.length;
   els.grid.innerHTML = filtered.map(cardTemplate).join("");
 
   els.grid.querySelectorAll(".card").forEach((card, i) => {
@@ -420,6 +387,14 @@ filtered = sortItems(applyFilters(stories, f), f.sort);
     });
   });
 }
+
+
+
+
+
+
+
+
 
 // ---------- Modal ----------
 function openModal(index, { updateHash } = { updateHash: true }) {
