@@ -145,6 +145,67 @@ body.scrolled .topbar{ box-shadow: 0 12px 40px rgba(0,0,0,.45); }
 
 
 
+
+
+.featured{
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+  min-height: 320px;
+  margin: 18px 0 18px;
+  box-shadow: var(--shadow);
+}
+
+.featured__bg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to right, rgba(0,0,0,.75), rgba(0,0,0,.2)),
+    radial-gradient(900px 400px at 80% 40%, rgba(167,139,250,.22), transparent 55%),
+    url("https://picsum.photos/seed/featured/1600/900") center/cover;
+  transform: scale(1.02);
+  filter: saturate(1.05);
+}
+
+.featured__content{
+  position: relative;
+  z-index: 1;
+  padding: 26px;
+  max-width: 640px;
+}
+
+.featured__kicker{
+  display:inline-block;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  background: rgba(0,0,0,.25);
+  padding: 6px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+}
+
+.featured__title{
+  margin: 10px 0 6px;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -0.02em;
+}
+
+.featured__desc{ margin: 0 0 14px; color: var(--muted); }
+
+.featured__actions{ display:flex; gap:10px; flex-wrap: wrap; }
+
+
+
+
+
+
+
+
+
 .brand{
   display: inline-flex;
   align-items: center;
