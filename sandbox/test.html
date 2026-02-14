@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stories • My Guide</title>
+  <link rel="stylesheet" href="guide.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="#">
+        <span class="brand__mark">⧉</span>
+        <span class="brand__text">My Guide</span>
+      </a>
+
+      <nav class="nav">
+        <a class="nav__link is-active" href="#">Stories</a>
+        <a class="nav__link" href="#">Doctors</a>
+        <a class="nav__link" href="#">Seasons</a>
+        <a class="nav__link" href="#">About</a>
+      </nav>
+
+      <button class="iconbtn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">☾</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <h1 class="hero__title">Stories</h1>
+      <p class="hero__sub">Browse, search, and filter your collection.</p>
+
+      <div class="controls">
+        <div class="field">
+          <label class="field__label" for="q">Search</label>
+          <input id="q" class="field__input" type="search" placeholder="e.g. Daleks, UNIT, The…" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="doctor">Doctor</label>
+          <select id="doctor" class="field__input">
+            <option value="">All</option>
+            <option>First</option>
+            <option>Second</option>
+            <option>Third</option>
+            <option>Tenth</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="era">Era</label>
+          <select id="era" class="field__input">
+            <option value="">All</option>
+            <option>Classic</option>
+            <option>Modern</option>
+          </select>
+        </div>
+
+        <div class="field field--button">
+          <button class="btn" id="clearBtn" type="button">Clear</button>
+        </div>
+      </div>
+    </section>
+
+    <section aria-live="polite">
+      <div class="meta"><span id="count">0</span> stories</div>
+      <div class="grid" id="grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <p>Built with ❤️ • Replace this footer with your own links.</p>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__backdrop" data-close></div>
+
+    <div
+      class="modal__dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+      aria-describedby="modalDesc"
+      tabindex="-1"
+    >
+      <div class="modal__header">
+        <div class="modal__titles">
+          <h2 class="modal__title" id="modalTitle">Title</h2>
+          <p class="modal__desc" id="modalDesc">Subtitle</p>
+        </div>
+
+        <button class="iconbtn" id="closeBtn" aria-label="Close">✕</button>
+      </div>
+
+      <div class="modal__content">
+        <div class="modal__media" id="modalMedia"></div>
+
+        <div class="modal__meta" id="modalMeta"></div>
+
+        <div class="modal__text">
+          <h3>Summary</h3>
+          <p id="modalSummary"></p>
+
+          <h3>Notes</h3>
+          <ul id="modalNotes"></ul>
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button class="btn btn--ghost" id="prevBtn" type="button">← Prev</button>
+        <button class="btn" id="nextBtn" type="button">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
