@@ -390,14 +390,6 @@ function cardTemplate(s) {
 
 
 
-  const keys = Array.from(map.keys()).sort((a, b) => seasonSortKey(a) - seasonSortKey(b));
-  return keys.map((k) => ({ season: k, items: map.get(k) }));
-}
-
-
-
-
-
 
 
 // ---------- Render ----------
@@ -637,7 +629,8 @@ function populateDoctorOptions() {
   els.doctor.innerHTML =
     `<option value="">All</option>` +
     doctors.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join("");
- }
+}
+
 
 
 
