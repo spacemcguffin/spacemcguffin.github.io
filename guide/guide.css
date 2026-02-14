@@ -393,6 +393,22 @@ filter: contrast(0.8);
 		  transform: scale(1.05);
 }
 
+.card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.card li img:hover {
+opacity:0.85;
+filter: contrast(0.8);
+		  transform: scale(1.05);
+}
+
 
 .grid li span {
     padding-top: 0.4em;
