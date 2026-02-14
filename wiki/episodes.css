@@ -1466,22 +1466,9 @@ color: #ff8303;
     }
 }
 
-@media screen and (max-width:600px){
-	.grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 0.8em;
-    align-items: self-start;
-       }
 
-		    .galleryfooter {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-		}
-	
-}
 
- @media screen and (max-width:500px){
+ @media screen and (max-width:550px){
   .main-layout .sidebar {
      display:none;
   }
