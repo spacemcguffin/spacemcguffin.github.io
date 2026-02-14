@@ -369,6 +369,40 @@ function cardTemplate(s) {
 }
 
 // ---------- Render ----------
+function sortItems(items, sortKey) {
+  const arr = items.slice();
+  const byText = (a, b) => a.localeCompare(b, undefined, { sensitivity: "base" });
+
+  arr.sort((A, B) => {
+    switch (sortKey) {
+      case "title-asc":
+        return byText(A.title, B.title);
+      case "title-desc":
+        return byText(B.title, A.title);
+
+      case "year-asc":
+        return (A.year ?? 0) - (B.year ?? 0) || byText(A.title, B.title);
+      case "year-desc":
+        return (B.year ?? 0) - (A.year ?? 0) || byText(A.title, B.title);
+
+      case "eps-asc":
+        return (A.eps ?? 0) - (B.eps ?? 0) || byText(A.title, B.title);
+      case "eps-desc":
+        return (B.eps ?? 0) - (A.eps ?? 0) || byText(A.title, B.title);
+
+      default:
+        return byText(A.title, B.title);
+    }
+  });
+
+  return arr;
+}
+
+
+
+
+
+
 function render() {
 const f = getFilters();
 filtered = sortItems(applyFilters(stories, f), f.sort);
