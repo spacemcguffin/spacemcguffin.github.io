@@ -76,20 +76,26 @@ body::before{
   opacity: 0.9;
 }
 
-/* make sure your actual site sits above both layers */
-.topbar,
+
+main{
+  padding-top: 80px; 
+}
+
 main,
 footer{
   position: relative;
   z-index: 10;
 }
 
-/* extra safety for sticky header stacking */
+
+
 .topbar{
-  position: sticky;   
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 9999;
-  isolation: isolate; 
+  isolation: isolate;
 }
 
 
