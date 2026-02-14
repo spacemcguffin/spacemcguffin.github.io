@@ -642,7 +642,6 @@ window.addEventListener("scroll", () => {
 
 
 
-
 document.querySelector("#featuredBtn")?.addEventListener("click", () => {
   const idx = filtered.findIndex(s => s.id === "day-of-the-doctor");
   if (idx !== -1) openModal(idx, { updateHash: true });
