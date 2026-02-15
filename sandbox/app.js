@@ -345,7 +345,6 @@ const els = {
   count: document.querySelector("#count"),
   q: document.querySelector("#q"),
   doctor: document.querySelector("#doctor"),
-  era: document.querySelector("#era"),
   clear: document.querySelector("#clearBtn"),
   theme: document.querySelector("#themeBtn"),
 
@@ -394,16 +393,16 @@ function applyFilters(items, f) {
       !f.q ||
       s.title.toLowerCase().includes(f.q) ||
       s.doctor.toLowerCase().includes(f.q) ||
-      s.era.toLowerCase().includes(f.q) ||
       String(s.year).includes(f.q) ||
       String(s.code).toLowerCase().includes(f.q);
 
-    const matchesDoctor = !f.doctor || s.doctor === f.doctor;
-    const matchesEra = !f.era || s.era === f.era;
+    const matchesDoctor =
+      !f.doctor || s.doctor === f.doctor;
 
-    return matchesQ && matchesDoctor && matchesEra;
+    return matchesQ && matchesDoctor;
   });
 }
+
 
 function storyById(id) {
   return stories.find((s) => s.id === id) || null;
