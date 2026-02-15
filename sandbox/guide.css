@@ -1131,13 +1131,13 @@ select.field__input optgroup{
 
 
 
-
-/* Light mode hero text readability */
-[data-theme="light"] .modal__hero-title,
-[data-theme="light"] .modal__hero-desc {
-  color: rgba(0,0,0,.92);
-  text-shadow:
-    0 2px 6px rgba(255,255,255,.8),
-    0 10px 30px rgba(255,255,255,.6);
+[data-theme="light"] .modal__hero-overlay{
+  background:
+    linear-gradient(
+      to top,
+      rgba(255,255,255,.85) 0%,
+      rgba(255,255,255,.45) 50%,
+      rgba(255,255,255,.05) 100%
+    );
 }
 
