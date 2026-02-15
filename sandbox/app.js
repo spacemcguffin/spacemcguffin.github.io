@@ -683,7 +683,21 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   `;
 
 const hero = document.getElementById("modalHero");
-if (hero) hero.style.setProperty("--hero-img", s.image ? `url("${s.image}")` : "none");
+const hero = document.getElementById("modalHero");
+
+if (hero && s.image) {
+  const img = new Image();
+  img.onload = () => {
+    const isWide = img.naturalWidth / img.naturalHeight > 1.4;
+
+    hero.style.setProperty("--hero-img", `url("${s.image}")`);
+    hero.classList.toggle("hero--cover", isWide);
+  };
+  img.src = s.image;
+} else if (hero) {
+  hero.style.setProperty("--hero-img", "none");
+  hero.classList.remove("hero--cover");
+}
 
 
   els.meta.innerHTML = `
