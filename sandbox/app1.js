@@ -202,8 +202,9 @@ function closeModal(){
 
 // ====== RENDER ======
 function storyCard(s){
-  const tags = (s.tags || []).slice(0,3).map(t => `<span class="tag">${escapeHTML(t)}</span>`).join("");
-  const poster = s.poster ? `<img src="${s.poster}" alt="" loading="lazy">` : "";
+  const poster = s.poster
+    ? `<img src="${s.poster}" alt="" loading="lazy">`
+    : "";
 
   const line = [
     formatDoctors(storyDoctorsArray(s)),
@@ -211,16 +212,18 @@ function storyCard(s){
   ].filter(Boolean).join(" • ");
 
   return `
-    <div class="card" role="button" tabindex="0" data-id="${escapeHTML(s.id)}" aria-label="${escapeHTML(s.title)}">
+    <div class="card" role="button" tabindex="0" 
+         data-id="${escapeHTML(s.id)}" 
+         aria-label="${escapeHTML(s.title)}">
       <div class="poster">${poster}</div>
       <div class="meta">
         <div class="name">${escapeHTML(s.title)}</div>
         <div class="line">${escapeHTML(line)}</div>
-        <div class="tagrow">${tags}</div>
       </div>
     </div>
   `;
 }
+
 
 function render(){
   const grid = $("grid");
