@@ -3,6 +3,7 @@ const stories = [
   id: "unearthly-child",
   title: "An Unearthly Child",
   doctor: "1st",
+  serialno: "1",
   season: 1,
   episodes: 4,
   code: "A",
@@ -14,6 +15,7 @@ const stories = [
   id: "the-daleks",
   title: "The Daleks",
   doctor: "1st",
+  serialno: "3",
   season: 1,
   episodes: 7,
   code: "B",
@@ -25,6 +27,7 @@ const stories = [
   id: "edge-of-destruction",
   title: "The Edge of Destruction",
   doctor: "1st",
+  serialno: "3",
   season: 1,
   episodes: 2,
   code: "C",
@@ -389,7 +392,7 @@ function cardTemplate(s) {
       <div class="card__media">${img}</div>
       <div class="card__body">
         <h3 class="card__title">${escapeHtml(s.title)}</h3>
-        <p class="card__sub">${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
+        <p class="card__sub">Serial ${s.serialno} • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
         <div class="badges">
           <span class="badge badge--accent">${escapeHtml(s.doctor)} Doctor</span>
         </div>
