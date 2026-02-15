@@ -1689,31 +1689,9 @@ select.field__input:disabled{
   padding-right: 42px;
 }
 
-.field::after{
-  content: "";
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  width: 18px;
-  height: 18px;
-  pointer-events: none;
 
-  background-repeat: no-repeat;
-  background-size: 18px 18px;
-  opacity: .7;
 
-  transition: opacity .2s ease, transform .2s ease;
-}
 
-/* DARK MODE CHEVRON */
-[data-theme="dark"] .field::after{
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
-
-/* LIGHT MODE CHEVRON */
-[data-theme="light"] .field::after{
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
 
 /* Slight animation */
 .field select:focus + *{
@@ -1775,6 +1753,49 @@ select.field__input:disabled{
 .field:has(select.field__input:focus)::after{
   opacity: 1;
   transform: translateY(-50%) rotate(180deg);
+}
+
+
+
+
+
+
+
+
+
+/* Chevron only for select dropdowns (NOT search input) */
+.field{
+  position: relative;
+}
+
+/* Only fields that contain a select get the chevron */
+.field:has(select.field__input)::after{
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: calc(50% + 10px);
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  opacity: .75;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+}
+
+/* Add spacing for chevron */
+.field select.field__input{
+  padding-right: 46px;
+}
+
+/* Dark mode chevron */
+[data-theme="dark"] .field:has(select.field__input)::after{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Light mode chevron */
+[data-theme="light"] .field:has(select.field__input)::after{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 
 
