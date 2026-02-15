@@ -321,6 +321,7 @@ const stories = [
   }
 ];
 
+// ---------- Elements ----------
 const els = {
   grid: document.querySelector("#grid"),
   count: document.querySelector("#count"),
@@ -335,7 +336,6 @@ const els = {
   prev: document.querySelector("#prevBtn"),
   next: document.querySelector("#nextBtn"),
 
-  // footer duplicates (optional)
   prev2: document.querySelector("#prevBtn2"),
   next2: document.querySelector("#nextBtn2"),
 
@@ -351,7 +351,7 @@ let activeIndex = -1;
 let lastFocused = null;
 let suppressHashWrite = false;
 
-// --- Multi-select doctor filter state ---
+// Multi-select doctor filter
 const selectedDoctors = new Set();
 
 // ---------- Utils ----------
@@ -375,8 +375,8 @@ function syncDoctorDropdownUI() {
   if (!els.doctor) return;
   if (selectedDoctors.size === 1) {
     els.doctor.value = Array.from(selectedDoctors)[0];
-  } else if (selectedDoctors.size > 1) {
-    els.doctor.value = "";
+  } else {
+    els.doctor.value = ""; // All
   }
 }
 
@@ -403,8 +403,7 @@ function doctorPillsHTML(s, { clickable = true } = {}) {
       <button type="button"
         class="badge badge--doctor ${on ? "is-on" : ""}"
         data-doctor="${escapeHtml(d)}"
-        aria-pressed="${on ? "true" : "false"}"
-        aria-label="${on ? "Remove" : "Add"} ${escapeHtml(d)} Doctor filter">
+        aria-pressed="${on ? "true" : "false"}">
         ${escapeHtml(d)}
       </button>
     `;
@@ -415,7 +414,7 @@ function getFilters() {
   return {
     q: els.q.value.trim(),
     doctor: els.doctor.value,
-    doctors: Array.from(selectedDoctors)
+    doctors: Array.from(selectedDoctors),
   };
 }
 
@@ -427,7 +426,7 @@ function parseQuery(raw) {
   return { mode: "all", term: q.toLowerCase() };
 }
 
-// --- Search haystack includes tags + all doctors (tags never shown) ---
+// Search haystack includes tags + all doctors
 function storySearchHaystack(s) {
   const parts = [
     s.title,
@@ -436,11 +435,10 @@ function storySearchHaystack(s) {
     s.serialno,
     s.season,
     s.episodes,
-    ...(Array.isArray(s.tags) ? s.tags : [])
+    ...(Array.isArray(s.tags) ? s.tags : []),
   ];
 
   return parts
-    .flatMap(v => Array.isArray(v) ? v : [v])
     .filter(v => v !== undefined && v !== null && String(v).trim() !== "")
     .join(" ")
     .toLowerCase();
@@ -469,7 +467,6 @@ function buildTagIndex(items) {
       if (!seen.has(key)) seen.set(key, orig);
     });
   });
-
   return Array.from(seen.values()).sort((a, b) =>
     a.localeCompare(b, undefined, { sensitivity: "base" })
   );
@@ -481,6 +478,7 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
 
   const parent = input.closest(".ac") || input.parentElement;
   if (!parent) return;
+  parent.classList.add("ac"); // ensure styling attaches
 
   const panel = document.createElement("div");
   panel.className = "ac__panel";
@@ -521,11 +519,9 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
   function choose(idx) {
     const tag = current[idx];
     if (!tag) return;
-
     input.value = (fillMode === "plain") ? tag : `tag:${tag}`;
     close();
     input.focus();
-
     render();
     closeIfOpen();
   }
@@ -557,7 +553,6 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
   function update() {
     tags = buildTagIndex(stories);
     const term = getTerm(input.value);
-
     if (!term) { close(); return; }
 
     const list = tags
@@ -615,12 +610,8 @@ function applyFilters(items, f) {
 }
 
 // ---------- Hash routing ----------
-function storyById(id) {
-  return stories.find((s) => s.id === id) || null;
-}
-function filteredIndexById(id) {
-  return filtered.findIndex((s) => s.id === id);
-}
+function storyById(id) { return stories.find((s) => s.id === id) || null; }
+function filteredIndexById(id) { return filtered.findIndex((s) => s.id === id); }
 function getStoryIdFromHash() {
   const hash = window.location.hash || "";
   const m = hash.match(/story=([^&]+)/);
@@ -658,7 +649,6 @@ function cardTemplate(s) {
 
 // ---------- Render ----------
 let renderRAF = 0;
-
 function render() {
   if (renderRAF) cancelAnimationFrame(renderRAF);
 
@@ -671,7 +661,6 @@ function render() {
     els.grid.innerHTML = filtered.map(cardTemplate).join("");
 
     const cards = Array.from(els.grid.querySelectorAll(".card"));
-
     cards.forEach((card, i) => {
       card.addEventListener("click", () => openModal(i, { updateHash: true }));
       card.addEventListener("keydown", (e) => {
@@ -682,9 +671,7 @@ function render() {
       });
     });
 
-    renderRAF = requestAnimationFrame(() => {
-      els.grid.style.opacity = "1";
-    });
+    renderRAF = requestAnimationFrame(() => { els.grid.style.opacity = "1"; });
   }, 120);
 }
 
@@ -725,17 +712,32 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   if (els.next2) els.next2.disabled = !canStep;
 
   els.modal.setAttribute("aria-hidden", "false");
+  els.modal.offsetHeight; // force reflow so transition triggers
+  els.modal.classList.add("is-open");
   document.body.style.overflow = "hidden";
-  els.dialog.focus();
+
+  setTimeout(() => els.dialog.focus(), 20);
 
   if (updateHash) setStoryHash(s.id);
 }
 
 function closeModal({ clearHash } = { clearHash: true }) {
-  els.modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
-  if (clearHash) setStoryHash("");
-  if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+  els.modal.classList.remove("is-open");
+
+  const finish = () => {
+    els.modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if (clearHash) setStoryHash("");
+    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
+    els.modal.removeEventListener("transitionend", onEnd);
+  };
+
+  const onEnd = (e) => {
+    if (e.target === els.modal) finish();
+  };
+
+  els.modal.addEventListener("transitionend", onEnd);
+  setTimeout(finish, 320);
 }
 
 function step(delta) {
@@ -744,6 +746,7 @@ function step(delta) {
   openModal(nextIndex, { updateHash: true });
 }
 
+// Backdrop + close buttons use [data-close]
 els.modal.addEventListener("click", (e) => {
   if (e.target && e.target.matches("[data-close]")) closeModal({ clearHash: true });
 });
@@ -795,7 +798,6 @@ function handleHashChange() {
   render();
 
   let idx = filteredIndexById(id);
-
   if (idx === -1) {
     const s = storyById(id);
     if (!s) return;
@@ -822,21 +824,12 @@ window.addEventListener("hashchange", handleHashChange);
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
-
-  const btn = document.getElementById("themeBtn");
-  if (btn) btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+  els.theme?.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
 }
 function initTheme() {
   const saved = localStorage.getItem("theme");
   setTheme(saved || "dark");
 }
-document.addEventListener("DOMContentLoaded", () => {
-  initTheme();
-  els.theme?.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme") || "dark";
-    setTheme(current === "dark" ? "light" : "dark");
-  });
-});
 
 // ---------- Controls ----------
 function closeIfOpen() {
@@ -845,7 +838,6 @@ function closeIfOpen() {
 
 els.q.addEventListener("input", () => { render(); closeIfOpen(); });
 
-// Dropdown = single-select, also clears multi-select when "All"
 els.doctor.addEventListener("change", () => {
   const v = els.doctor.value;
   selectedDoctors.clear();
@@ -866,7 +858,6 @@ els.clear.addEventListener("click", () => {
 els.grid.addEventListener("click", (e) => {
   const btn = e.target.closest(".badge--doctor[data-doctor]");
   if (!btn) return;
-
   e.preventDefault();
   e.stopPropagation();
   toggleDoctor(btn.getAttribute("data-doctor"));
@@ -876,7 +867,6 @@ els.grid.addEventListener("click", (e) => {
 els.dialog.addEventListener("click", (e) => {
   const btn = e.target.closest(".badge--doctor[data-doctor]");
   if (!btn) return;
-
   e.preventDefault();
   closeModal({ clearHash: true });
   toggleDoctor(btn.getAttribute("data-doctor"));
@@ -907,6 +897,12 @@ document.querySelector("#randomBtn")?.addEventListener("click", () => {
 });
 
 // Init
+initTheme();
+els.theme?.addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  setTheme(current === "dark" ? "light" : "dark");
+});
+
 populateDoctorOptions();
 initTagAutocomplete({ maxItems: 10, fillMode: "plain" });
 render();
