@@ -1568,3 +1568,125 @@ select.field__input optgroup{
 
 
 
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   Prestige Dropdowns (select)
+   =========================== */
+
+/* keep your existing input look, but upgrade select */
+select.field__input{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  cursor: pointer;
+  padding-right: 46px; /* space for chevron */
+  line-height: 1.1;
+
+  /* “glass” surface */
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--panel) 92%, transparent),
+      color-mix(in oklab, var(--panel2) 92%, transparent)
+    );
+  border: 1px solid color-mix(in oklab, var(--line) 88%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.10),
+    0 10px 26px rgba(0,0,0,.18);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    background .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    transform .22s ease;
+}
+
+/* custom chevron */
+select.field__input{
+  background-image:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--panel) 92%, transparent),
+      color-mix(in oklab, var(--panel2) 92%, transparent)
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23cbd5e1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat, no-repeat;
+  background-position: 0 0, right 14px center;
+  background-size: auto, 18px 18px;
+}
+
+/* hover: slightly brighter + crisp edge */
+select.field__input:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in oklab, var(--accent) 26%, var(--line));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.12),
+    0 14px 34px rgba(0,0,0,.22);
+}
+
+/* focus: premium ring */
+select.field__input:focus{
+  outline: none;
+  border-color: color-mix(in oklab, var(--accent) 55%, var(--line));
+  box-shadow:
+    0 0 0 4px color-mix(in oklab, var(--accent) 18%, transparent),
+    0 16px 40px rgba(0,0,0,.22);
+}
+
+/* active: subtle press */
+select.field__input:active{
+  transform: translateY(0px);
+}
+
+/* option styling (limited by browser, but helps) */
+select.field__input option,
+select.field__input optgroup{
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Light mode: “faded blue glass” + darker chevron */
+[data-theme="light"] select.field__input{
+  background:
+    linear-gradient(to bottom, rgba(255,255,255,.82), rgba(255,255,255,.62));
+  border-color: rgba(2, 6, 23, .12);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 10px 24px rgba(2,6,23,.10);
+}
+
+[data-theme="light"] select.field__input{
+  background-image:
+    linear-gradient(to bottom, rgba(255,255,255,.82), rgba(255,255,255,.62)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Light mode focus ring slightly calmer */
+[data-theme="light"] select.field__input:focus{
+  box-shadow:
+    0 0 0 4px rgba(59,130,246,.18),
+    0 14px 34px rgba(2,6,23,.12);
+}
+
+/* Disabled keeps the luxury vibe */
+select.field__input:disabled{
+  opacity: .65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+
