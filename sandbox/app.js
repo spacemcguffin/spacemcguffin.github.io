@@ -342,7 +342,6 @@ function applyFilters(items, f) {
       !f.q ||
       s.title.toLowerCase().includes(f.q) ||
       s.doctor.toLowerCase().includes(f.q) ||
-      String(s.year).includes(f.q) ||
       String(s.code).toLowerCase().includes(f.q);
 
     const matchesDoctor =
@@ -390,10 +389,9 @@ function cardTemplate(s) {
       <div class="card__media">${img}</div>
       <div class="card__body">
         <h3 class="card__title">${escapeHtml(s.title)}</h3>
-        <p class="card__sub">${escapeHtml(s.era)} • ${s.year} • ${s.episodes} ep${s.episodes === 1 ? "" : "s"}</p>
+        <p class="card__sub">${s.episodes} ep${s.episodes === 1 ? "" : "s"}</p>
         <div class="badges">
           <span class="badge badge--accent">${escapeHtml(s.doctor)} Doctor</span>
-          <span class="badge">${escapeHtml(s.era)}</span>
         </div>
       </div>
     </article>
@@ -528,7 +526,7 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   lastFocused = document.activeElement;
 
   els.title.textContent = s.title;
-  els.desc.textContent = `${s.doctor} Doctor • ${s.era} • ${s.year} • ${s.episodes} ep${s.episodes === 1 ? "" : "s"}`;
+  els.desc.textContent = `${s.doctor} Doctor • ${s.episodes} ep${s.episodes === 1 ? "" : "s"}`;
 
 const hero = document.getElementById("modalHero");
 if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
@@ -537,8 +535,6 @@ if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
   els.meta.innerHTML = `
     <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
     <div class="kv"><span>Doctor</span><strong>${escapeHtml(s.doctor)}</strong></div>
-    <div class="kv"><span>Era</span><strong>${escapeHtml(s.era)}</strong></div>
-    <div class="kv"><span>Year</span><strong>${s.year}</strong></div>
     <div class="kv"><span>Episodes</span><strong>${s.episodes}</strong></div>
   `;
 
