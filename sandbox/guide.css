@@ -1056,3 +1056,51 @@ select.field__input optgroup{
   border-color: rgba(2,6,23,.10);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+   Refined Grid Hover Behaviour
+   =============================== */
+
+/* smooth baseline transition for all cards */
+.grid .card{
+  transition:
+    transform .28s cubic-bezier(.22,.61,.36,1),
+    box-shadow .28s ease,
+    filter .35s ease,
+    opacity .35s ease;
+}
+
+/* When hovering anywhere in grid */
+.grid:hover .card{
+  filter: blur(2px);
+  opacity: .55;
+  transform: scale(.98);
+}
+
+/* The hovered card overrides */
+.grid .card:hover{
+  filter: none;
+  opacity: 1;
+  transform: translateY(-6px) scale(1.02);
+  z-index: 5;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.45),
+    0 0 0 1px var(--accent);
+}
+
+
