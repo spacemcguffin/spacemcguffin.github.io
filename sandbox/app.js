@@ -2,7 +2,7 @@ const stories = [
   {
     id: "unearthly-child",
     title: "An Unearthly Child",
-    doctor: "1st",
+    doctors: ["1st"],
     serialno: "1",
     season: 1,
     episodes: 4,
@@ -15,7 +15,7 @@ const stories = [
   {
     id: "the-daleks",
     title: "The Daleks",
-    doctor: "1st",
+    doctors: ["1st"],
     serialno: "2",
     season: 1,
     episodes: 7,
@@ -28,7 +28,7 @@ const stories = [
   {
     id: "edge-of-destruction",
     title: "The Edge of Destruction",
-    doctor: "1st",
+    doctors: ["1st"],
     serialno: "3",
     season: 1,
     episodes: 2,
@@ -41,7 +41,7 @@ const stories = [
   {
     id: "marco-polo",
     title: "Marco Polo",
-    doctor: "1st",
+    doctors: ["1st"],
     serialno: "4",
     season: 7,
     episodes: 7,
@@ -54,7 +54,7 @@ const stories = [
   {
     id: "keys-of-marinus",
     title: "The Keys of Marinus",
-    doctor: "1st",
+    doctors: ["1st"],
     serialno: "5",
     season: 1,
     episodes: 6,
@@ -67,7 +67,7 @@ const stories = [
   {
     id: "the-aztecs",
     title: "The Aztecs",
-    doctor: "1st",
+    doctors: ["1st"],
     serialno: "6",
     season: 1,
     episodes: 4,
@@ -80,7 +80,7 @@ const stories = [
   {
     id: "the-sensorites",
     title: "The Sensorites",
-    doctor: "1st",
+    doctors: ["1st"],
     season: 1,
     serialno: "7",
     episodes: 6,
@@ -93,7 +93,7 @@ const stories = [
   {
     id: "reign-of-terror",
     title: "The Reign of Terror",
-    doctor: "1st",
+    doctors: ["1st"],
     season: 1,
     serialno: "8",
     episodes: 6,
@@ -106,7 +106,7 @@ const stories = [
   {
     id: "tenth-planet",
     title: "The Tenth Planet",
-    doctor: "1st",
+    doctors: ["1st"],
     season: 4,
     episodes: 4,
     code: "DD",
@@ -119,7 +119,7 @@ const stories = [
   {
     id: "tomb-of-the-cybermen",
     title: "The Tomb of the Cybermen",
-    doctor: "2nd",
+    doctors: ["2nd"],
     season: 5,
     episodes: 4,
     code: "QQ",
@@ -131,7 +131,7 @@ const stories = [
   {
     id: "spearhead-from-space",
     title: "Spearhead from Space",
-    doctor: "3rd",
+    doctors: ["3rd"],
     season: 7,
     episodes: 4,
     code: "AAA",
@@ -143,7 +143,7 @@ const stories = [
   {
     id: "blink",
     title: "Blink",
-    doctor: "10th",
+    doctors: ["10th"],
     season: 3,
     episodes: 1,
     code: "3.10",
@@ -155,7 +155,7 @@ const stories = [
   {
     id: "midnight",
     title: "Midnight",
-    doctor: "10th",
+    doctors: ["10th"],
     season: 4,
     episodes: 1,
     code: "4.10",
@@ -167,7 +167,7 @@ const stories = [
   {
     id: "war-games",
     title: "The War Games",
-    doctor: "2nd",
+    doctors: ["2nd"],
     season: 6,
     episodes: 10,
     code: "ZZ",
@@ -179,7 +179,7 @@ const stories = [
   {
     id: "genesis-of-the-daleks",
     title: "Genesis of the Daleks",
-    doctor: "4th",
+    doctors: ["4th"],
     season: 12,
     episodes: 6,
     code: "4E",
@@ -191,7 +191,7 @@ const stories = [
   {
     id: "city-of-death",
     title: "City of Death",
-    doctor: "4th",
+    doctors: ["4th"],
     season: 17,
     episodes: 4,
     code: "5H",
@@ -203,7 +203,7 @@ const stories = [
   {
     id: "earthshock",
     title: "Earthshock",
-    doctor: "5th",
+    doctors: ["5th"],
     season: 19,
     episodes: 4,
     code: "6H",
@@ -215,7 +215,7 @@ const stories = [
   {
     id: "remembrance-of-the-daleks",
     title: "Remembrance of the Daleks",
-    doctor: "7th",
+    doctors: ["7th"],
     season: 25,
     episodes: 4,
     code: "7J",
@@ -227,7 +227,7 @@ const stories = [
   {
     id: "rose",
     title: "Rose",
-    doctor: "9th",
+    doctors: ["9th"],
     season: 1,
     episodes: 1,
     code: "1.01",
@@ -239,7 +239,7 @@ const stories = [
   {
     id: "the-empty-child",
     title: "The Empty Child",
-    doctor: "9th",
+    doctors: ["9th"],
     season: 1,
     episodes: 2,
     code: "1.09",
@@ -251,7 +251,7 @@ const stories = [
   {
     id: "girl-in-the-fireplace",
     title: "The Girl in the Fireplace",
-    doctor: "10th",
+    doctors: ["10th"],
     season: 2,
     episodes: 1,
     code: "2.04",
@@ -263,7 +263,7 @@ const stories = [
   {
     id: "human-nature",
     title: "Human Nature / The Family of Blood",
-    doctor: "10th",
+    doctors: ["10th"],
     season: 3,
     episodes: 2,
     code: "3.08",
@@ -275,7 +275,7 @@ const stories = [
   {
     id: "eleventh-hour",
     title: "The Eleventh Hour",
-    doctor: "11th",
+    doctors: ["11th"],
     season: 5,
     episodes: 1,
     code: "5.01",
@@ -287,7 +287,7 @@ const stories = [
   {
     id: "day-of-the-doctor",
     title: "The Day of the Doctor",
-    doctor: "War",
+    doctors: ["10th", "11th", "War"],
     season: 7,
     episodes: 1,
     code: "50th",
@@ -299,7 +299,7 @@ const stories = [
   {
     id: "heaven-sent",
     title: "Heaven Sent",
-    doctor: "12th",
+    doctors: ["12th"],
     season: 9,
     episodes: 1,
     code: "9.11",
@@ -311,7 +311,7 @@ const stories = [
   {
     id: "woman-who-fell-to-earth",
     title: "The Woman Who Fell to Earth",
-    doctor: "13th",
+    doctors: ["13th"],
     season: 11,
     episodes: 1,
     code: "11.01",
