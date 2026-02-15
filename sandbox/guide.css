@@ -694,32 +694,52 @@ select.field__input optgroup{
   to { transform: translateY(0); }
 }
 
-/* HERO */
 
+
+/* HERO  */
 .modal__hero{
-  background-size: contain;          /* show whole image */
+  position: relative;
+  min-height: clamp(260px, 52vh, 520px);
+  overflow: hidden;
+
+  /* foreground image (the “real” one) */
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   background-color: color-mix(in oklab, var(--bg) 85%, #000 15%);
 }
 
-
-
+/* blurred fill behind the contained image */
 .modal__hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background-image: inherit;
-  background-size: cover;           /* fill the hero */
+  z-index: 0;
+
+  /* copy the hero background (includes the image) */
+  background: inherit;
+  background-size: cover;
   background-position: center;
+
   filter: blur(22px) saturate(1.1);
   transform: scale(1.08);
   opacity: .55;
 }
 
+/* your overlay sits above the blur */
+.modal__hero-overlay{
+  position:absolute;
+  inset:0;
+  z-index: 1;
+}
 
+/* your text sits above overlay */
+.modal__hero-content{
+  position:absolute;
+  inset:auto 0 0 0;
+  z-index: 2;
+}
 
-.modal__hero-overlay{ position:absolute; inset:0; z-index:1; }
 
 
 
@@ -744,10 +764,14 @@ select.field__input optgroup{
 }
 
 .modal__hero-desc{
-  margin: 8px 0 14px;
-  color: color-mix(in oklab, var(--muted) 88%, white 12%);
-  max-width: 70ch;
-  text-shadow: 0 10px 30px rgba(0,0,0,.55);
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.25);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] .modal__hero-desc{
+  background: rgba(255,255,255,.35);
 }
 
 .modal__actions{
