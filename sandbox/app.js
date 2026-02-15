@@ -980,6 +980,6 @@ document.querySelector("#randomBtn")?.addEventListener("click", () => {
 // Init
 initTheme();
 populateDoctorOptions();
-initTagAutocomplete({ maxItems: 10, fillMode: "tag" }); // <-- NEW
+initTagAutocomplete({ maxItems: 10, fillMode: "plain" });
 render();
 handleHashChange();
