@@ -1658,22 +1658,8 @@ select.field__input optgroup{
 }
 
 /* Light mode: “faded blue glass” + darker chevron */
-[data-theme="light"] select.field__input{
-  background:
-    linear-gradient(to bottom, rgba(255,255,255,.82), rgba(255,255,255,.62));
-  border-color: rgba(2, 6, 23, .12);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    0 10px 24px rgba(2,6,23,.10);
-}
 
-[data-theme="light"] select.field__input{
-  background-image:
-    linear-gradient(to bottom, rgba(255,255,255,.82), rgba(255,255,255,.62)),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-}
 
-/* Light mode focus ring slightly calmer */
 [data-theme="light"] select.field__input:focus{
   box-shadow:
     0 0 0 4px rgba(59,130,246,.18),
@@ -1733,5 +1719,63 @@ select.field__input:disabled{
 .field select:focus + *{
   transform: rotate(180deg);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Dropdown chevron (single source of truth) ===== */
+.field{
+  position: relative;
+}
+
+/* only add chevron to fields that actually contain a select */
+.field:has(select.field__input)::after{
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: calc(50% + 10px);   /* accounts for label above */
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  opacity: .75;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+}
+
+/* give space so text doesn't hit chevron */
+.field select.field__input{
+  padding-right: 46px;
+}
+
+/* dark chevron */
+[data-theme="dark"] .field:has(select.field__input)::after{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* light chevron */
+[data-theme="light"] .field:has(select.field__input)::after{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* focus/hover polish */
+.field:has(select.field__input:hover)::after{ opacity: .95; }
+.field:has(select.field__input:focus)::after{
+  opacity: 1;
+  transform: translateY(-50%) rotate(180deg);
+}
+
 
 
