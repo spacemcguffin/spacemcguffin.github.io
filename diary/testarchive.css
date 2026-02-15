@@ -956,8 +956,13 @@ table, th, td { width: 100% !important; }                /* overrides -webkit-fi
 
 /* 6) Collapse to single column earlier (prevents “too wide” on tablets) */
 @media (max-width: 980px){
-  .archive-two{ grid-template-columns: 1fr; }
   .month-index{ width: 100%; }
+}
+
+@media (max-width: 980px) {
+    .archive-two {
+        grid-template-columns: 100%;
+    }
 }
 
 /* 7) Phones: force 1-column cards so nothing squishes */
