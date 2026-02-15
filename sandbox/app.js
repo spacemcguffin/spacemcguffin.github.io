@@ -651,11 +651,19 @@ window.addEventListener("hashchange", handleHashChange);
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
+  // no textContent changes — this toggle is purely CSS-driven
 }
+
 function initTheme() {
   const saved = localStorage.getItem("theme");
   setTheme(saved || "dark");
 }
+
+document.querySelector("#themeBtn").addEventListener("click", () => {
+  const current = document.documentElement.getAttribute("data-theme") || "dark";
+  setTheme(current === "dark" ? "light" : "dark");
+});
+
 els.theme.addEventListener("click", () => {
   const current = document.documentElement.getAttribute("data-theme") || "dark";
   setTheme(current === "dark" ? "light" : "dark");
