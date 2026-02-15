@@ -361,6 +361,24 @@ function escapeHtml(str) {
     .replaceAll("'", "&#039;");
 }
 
+// ✅ Multi-doctor helpers (supports doctors:[] AND legacy doctor:"")
+function getDoctorList(s) {
+  if (Array.isArray(s.doctors) && s.doctors.length) return s.doctors;
+  if (s.doctor) return [s.doctor];
+  return [];
+}
+
+function doctorLabel(s) {
+  const ds = getDoctorList(s);
+  if (!ds.length) return "—";
+  return ds.length === 1 ? ds[0] : ds.join(" + ");
+}
+
+function hasDoctor(s, selected) {
+  if (!selected) return true;
+  return getDoctorList(s).includes(selected);
+}
+
 function getFilters() {
   return {
     q: els.q.value.trim(), // keep raw; we parse it
@@ -376,11 +394,11 @@ function parseQuery(raw) {
   return { mode: "all", term: q.toLowerCase() };
 }
 
-// --- Build a searchable “haystack” including tags (NOT rendered anywhere) ---
+// --- Build a searchable “haystack” including tags + ALL doctors (NOT rendered anywhere) ---
 function storySearchHaystack(s) {
   const parts = [
     s.title,
-    s.doctor,
+    ...getDoctorList(s), // ✅ include all doctors
     s.code,
     s.serialno,
     s.season,
@@ -432,7 +450,7 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
   const input = els.q;
   if (!input) return;
 
-  const parent = input.parentElement;
+  const parent = input.closest(".field") || input.parentElement; // ✅ anchors nicely
   if (!parent) return;
 
   if (!parent.classList.contains("ac")) parent.classList.add("ac");
@@ -446,10 +464,6 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
   let open = false;
   let active = -1;
   let current = [];
-
-  function isTagMode(raw) {
-    return /^tag:/i.test(String(raw || "").trim());
-  }
 
   function getTerm(raw) {
     const q = String(raw || "").trim();
@@ -481,16 +495,11 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
     const tag = current[idx];
     if (!tag) return;
 
-    if (fillMode === "plain") {
-      input.value = tag;
-    } else {
-      input.value = `tag:${tag}`;
-    }
+    input.value = (fillMode === "plain") ? tag : `tag:${tag}`;
 
     close();
     input.focus();
 
-    // Trigger your existing filtering
     render();
     closeIfOpen();
   }
@@ -530,11 +539,9 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
   }
 
   function update() {
-    // Refresh tag list if stories change later
     tags = buildTagIndex(stories);
 
     const term = getTerm(input.value);
-
     if (!term) {
       close();
       return;
@@ -547,8 +554,7 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
     renderList(list);
   }
 
-  // Events
-  input.addEventListener("input", () => update());
+  input.addEventListener("input", update);
 
   input.addEventListener("keydown", (e) => {
     if (!open) {
@@ -563,11 +569,7 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
       return;
     }
 
-    if (e.key === "Escape") {
-      e.preventDefault();
-      close();
-      return;
-    }
+    if (e.key === "Escape") { e.preventDefault(); close(); return; }
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
@@ -588,11 +590,9 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
         e.preventDefault();
         choose(active);
       }
-      return;
     }
   });
 
-  // Close on click outside
   document.addEventListener("mousedown", (e) => {
     if (!open) return;
     if (panel.contains(e.target)) return;
@@ -600,22 +600,17 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
     close();
   });
 
-  // Close on blur (delay lets mousedown choose)
   input.addEventListener("blur", () => setTimeout(close, 80));
-
-  // Clear closes suggestions
   els.clear?.addEventListener("click", () => close());
 
-  return {
-    refresh() { tags = buildTagIndex(stories); },
-    close
-  };
+  return { refresh() { tags = buildTagIndex(stories); }, close };
 }
 
+// ✅ Apply filters: query + doctor (multi) + tags
 function applyFilters(items, f) {
   return items.filter((s) => {
     const matchesQ = matchesQuery(s, f.q);
-    const matchesDoctor = !f.doctor || s.doctor === f.doctor;
+    const matchesDoctor = hasDoctor(s, f.doctor); // ✅ multi-doctor aware
     return matchesQ && matchesDoctor;
   });
 }
@@ -659,7 +654,7 @@ function cardTemplate(s) {
         <h3 class="card__title">${escapeHtml(s.title)}</h3>
         <p class="card__sub">Serial ${escapeHtml(s.serialno ?? "—")} • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
         <div class="badges">
-          <span class="badge badge--accent">${escapeHtml(s.doctor)} Doctor</span>
+          <span class="badge badge--accent">${escapeHtml(doctorLabel(s))} Doctor</span>
         </div>
       </div>
     </article>
@@ -780,14 +775,14 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   lastFocused = document.activeElement;
 
   els.title.textContent = s.title;
-  els.desc.textContent = `${s.doctor} Doctor • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}`;
+  els.desc.textContent = `${doctorLabel(s)} Doctor • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}`;
 
   const hero = document.getElementById("modalHero");
   if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
 
   els.meta.innerHTML = `
     <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
-    <div class="kv"><span>Doctor</span><strong>${escapeHtml(s.doctor)}</strong></div>
+    <div class="kv"><span>Doctor</span><strong>${escapeHtml(doctorLabel(s))}</strong></div>
     <div class="kv"><span>Episodes</span><strong>${s.episodes}</strong></div>
   `;
 
@@ -952,10 +947,11 @@ els.clear.addEventListener("click", () => {
   closeIfOpen();
 });
 
+// ✅ Doctor dropdown now built from doctors:[]
 function populateDoctorOptions() {
-  const doctors = Array.from(new Set(stories.map(s => s.doctor))).sort((a, b) =>
-    a.localeCompare(b, undefined, { sensitivity: "base" })
-  );
+  const doctors = Array.from(new Set(
+    stories.flatMap(s => getDoctorList(s))
+  )).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
 
   els.doctor.innerHTML =
     `<option value="">All</option>` +
