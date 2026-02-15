@@ -2,170 +2,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700;800&display=swap");
 
-
-
-
-
-
-
-
-
-/* ===========================
-   1) Remove top gap above navbar
-   =========================== */
-
-/* Browser default is usually body { margin: 8px } */
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-/* If you use full-bleed sections, this helps avoid accidental overflow gaps */
-body {
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Tighten navbar layout */
-.navbar{
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-  padding: 14px 24px;          /* tweak */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Your logo class has a leading space in HTML: class=" brand-logo"
-   Browsers still treat it as "brand-logo", so this is fine */
-.brand-logo{
-  display: block;              /* removes inline-img baseline gap */
-  height: 34px;                /* tweak */
-  width: auto;
-}
-
-/* Optional: remove extra spacing that can come from list defaults */
-.nav-links{
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  gap: 18px;                   /* nicer than inline margin-left */
-  align-items: center;
-}
-
-/* Optional: your <p> wrappers can add vertical spacing */
-.nav-items p{
-  margin: 0;
-}
-
-/* ===========================
-   2) Premium prev/next buttons
-   =========================== */
-
-.movies-list{
-  position: relative;          /* lets buttons overlay the row */
-}
-
-/* Premium “glass pill” buttons */
-.pre-btn, .nxt-btn{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-
-  display: grid;
-  place-items: center;
-
-  border: 1px solid rgba(255,255,255,.18);
-  background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  box-shadow:
-    0 18px 45px rgba(0,0,0,.40),
-    inset 0 1px 0 rgba(255,255,255,.10);
-
-  cursor: pointer;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* Positioning */
-.pre-btn{ left: 10px; }
-.nxt-btn{ right: 10px; }
-
-/* Hover / active */
-.pre-btn:hover, .nxt-btn:hover{
-  transform: translateY(-50%) translateY(-2px) scale(1.04);
-  border-color: rgba(255,255,255,.28);
-  box-shadow:
-    0 22px 60px rgba(0,0,0,.50),
-    inset 0 1px 0 rgba(255,255,255,.12);
-}
-
-.pre-btn:active, .nxt-btn:active{
-  transform: translateY(-50%) scale(.98);
-}
-
-/* Focus ring */
-.pre-btn:focus-visible, .nxt-btn:focus-visible{
-  outline: none;
-  box-shadow:
-    0 0 0 3px rgba(255,255,255,.18),
-    0 18px 45px rgba(0,0,0,.40),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-/* Arrow icon polish */
-.pre-btn img, .nxt-btn img{
-  width: 18px;
-  height: 18px;
-  display: block;
-  opacity: .95;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
-  transition: transform .18s ease, opacity .18s ease;
-}
-
-.pre-btn:hover img, .nxt-btn:hover img{
-  transform: scale(1.08);
-  opacity: 1;
-}
-
-/* Optional: make the edges fade a bit so overlay buttons feel intentional */
-.movies-list::before,
-.movies-list::after{
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 60px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.movies-list::before{
-  left: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,0));
-}
-
-.movies-list::after{
-  right: 0;
-  background: linear-gradient(270deg, rgba(0,0,0,.45), rgba(0,0,0,0));
-}
-
-
-
-
-
 /* =========================================================
-   Lewflix — Clean / Fixed CSS
-   Works with your current HTML class names.
+   Lewflix — Clean / Fixed CSS (single source of truth)
+   - Seamless background (no stops/starts)
+   - No top gap above navbar
+   - Premium prev/next buttons
    ========================================================= */
 
 :root{
@@ -188,21 +29,37 @@ body {
   --radius: 16px;
 }
 
+/* =========================
+   Reset / Base
+   ========================= */
+
 *{ margin:0; padding:0; box-sizing:border-box; }
 
-html, body{ height:100%; }
+html, body{
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
 
 body{
+  min-height: 100vh;
   width: 100%;
+  overflow-x: hidden;
+
+  /* Seamless background for full scroll */
   background:
     radial-gradient(900px 500px at 15% -10%, rgba(31,128,224,.18), transparent 60%),
     radial-gradient(700px 400px at 85% 0%, rgba(112,145,183,.12), transparent 60%),
-    var(--bg);
+    linear-gradient(180deg, #05060d 0%, #0b1020 45%, #070712 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed; /* stable while scrolling (remove if you hate it on mobile) */
+
   color: var(--text);
   font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  position: relative;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  position: relative;
 }
 
 /* Selection */
@@ -219,27 +76,38 @@ body{
   position: sticky;
   top: 0;
   left: 0;
-  padding: 0 4%;
   z-index: 10;
+
+  padding: 0 4%;
 
   display:flex;
   align-items:center;
+  justify-content: space-between;
 
   background: rgba(12,17,27,.72);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
+/* Fix img baseline spacing */
 .brand-logo{
-  height: 120%;
+  display:block;
+  height: 34px;
+  width: auto;
 }
 
 .nav-links{
-  margin-left: 12px;
-  display:flex;
-  gap: 1.3rem;
   list-style:none;
+  display:flex;
+  align-items:center;
+  gap: 1.3rem;
+  margin: 0;
+  padding: 0;
 }
+
+/* Your HTML wraps links in <p> — ensure no extra spacing */
+.nav-items p{ margin:0; }
 
 .nav-items a{
   text-decoration:none;
@@ -276,56 +144,6 @@ body{
   transform: scaleX(1);
 }
 
-/* Search / buttons (kept for later if you enable them) */
-.search-box{
-  border:none;
-  border-bottom: 1px solid #aaa;
-  background: transparent;
-  outline:none;
-  height:30px;
-  color:#fff;
-  width:250px;
-  font-size:16px;
-  font-weight: 500;
-  transition:.35s ease;
-}
-
-.search-box::placeholder{ color:#aaa; }
-.search-box:focus{ width:400px; border-color: var(--accent); }
-
-.search-btn{
-  position:absolute;
-  right:0; top:0;
-  height:30px; width:30px;
-  border:none;
-  background:none;
-  outline:none;
-  cursor:pointer;
-}
-
-.Subscribe{
-  background: var(--accent);
-  height:30px;
-  padding:0 20px;
-  color:#fff;
-  border-radius: 8px;
-  border:none;
-  outline:none;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 12px;
-  margin: 0 10px;
-}
-
-.login-btn{
-  color:#fff;
-  opacity:.9;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: 700;
-  text-decoration:none;
-}
-
 /* =========================================================
    Carousel / Hero
    ========================================================= */
@@ -336,7 +154,6 @@ body{
   height: 350px;
   padding: 20px 0;
   overflow-x: hidden;
-  margin-top: 0; /* no longer needed, body already has padding-top */
 }
 
 .carousel{
@@ -402,7 +219,6 @@ body{
   opacity: .75;
   line-height: 1.2;
   text-shadow: -6px 6px black;
-  text-transform: none;
 }
 
 .slide-content p{
@@ -413,7 +229,6 @@ body{
   opacity: .75;
   line-height: 1.5;
   text-shadow: -6px 6px black;
-  text-transform: none;
   width: 80%;
 }
 
@@ -445,7 +260,6 @@ body{
   color:#fff;
   opacity: .92;
   font-weight: 500;
-  text-transform: none;
   font-size: 1.3rem;
   margin: 26px auto 10px;
   padding: 0 4%;
@@ -456,16 +270,13 @@ body{
    Rails (movies-list + card-container + cards)
    ========================================================= */
 
-.movies-list-container{ width:100%; margin-top: 20px; }
-
 .movies-list{
   width: 100%;
   height: 180px;
   position: relative;
   margin: 10px auto 20px;
   overflow: hidden;
-  scroll-behavior: smooth;
-  padding-left: 0;
+  padding: 0;
   max-width: var(--maxW);
 }
 
@@ -560,50 +371,93 @@ body{
   font-size: .75rem;
 }
 
-.rating{
-  color:#fff;
-  opacity: .8;
-  font-weight: 500;
-  font-size: 12px;
+/* =========================================================
+   Premium rail buttons (your .pre-btn / .nxt-btn)
+   ========================================================= */
+
+.movies-list{ position: relative; }
+
+/* Optional edge fade so overlays feel intentional */
+.movies-list::before,
+.movies-list::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+.movies-list::before{
+  left: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,0));
+}
+.movies-list::after{
+  right: 0;
+  background: linear-gradient(270deg, rgba(0,0,0,.45), rgba(0,0,0,0));
 }
 
-/* Rail buttons */
-.pre-btn,
-.nxt-btn{
-  position:absolute;
+.pre-btn, .nxt-btn{
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  z-index: 3;
-  border: 1px solid rgba(255,255,255,.12);
-  cursor:pointer;
-  outline:none;
-  border-radius: 14px;
-  backdrop-filter: blur(8px);
+  z-index: 5;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255,255,255,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.10);
+
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.pre-btn{
-  left: 8px;
-  background: linear-gradient(to right, rgba(12,17,27,.92), rgba(12,17,27,0));
+.pre-btn{ left: 10px; }
+.nxt-btn{ right: 10px; }
+
+.pre-btn:hover, .nxt-btn:hover{
+  transform: translateY(-50%) translateY(-2px) scale(1.04);
+  border-color: rgba(255,255,255,.28);
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.50),
+    inset 0 1px 0 rgba(255,255,255,.12);
 }
 
-.nxt-btn{
-  right: 8px;
-  background: linear-gradient(to left, rgba(12,17,27,.92), rgba(12,17,27,0));
+.pre-btn:active, .nxt-btn:active{
+  transform: translateY(-50%) scale(.98);
 }
 
-.pre-btn img,
-.nxt-btn img{
-  width: 15px;
-  height: 20px;
-  opacity: .9;
+.pre-btn:focus-visible, .nxt-btn:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.18),
+    0 18px 45px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.10);
 }
 
-@media (hover:hover){
-  .pre-btn img, .nxt-btn img{ opacity: 0; }
-  .movies-list:hover .pre-btn img,
-  .movies-list:hover .nxt-btn img{ opacity: 1; }
+.pre-btn img, .nxt-btn img{
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: .95;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+  transition: transform .18s ease, opacity .18s ease;
+}
+.pre-btn:hover img, .nxt-btn:hover img{
+  transform: scale(1.08);
+  opacity: 1;
 }
 
 /* =========================================================
@@ -641,10 +495,9 @@ body{
 
 .card-video{ position:absolute; display:none; }
 .video-card:hover .card-video{ display:block; }
-.video-card:hover .card-body{ opacity: 1; }
 
 /* =========================================================
-   Modal (your existing styles, cleaned)
+   Modal (cleaned)
    ========================================================= */
 
 .modal{ position:fixed; inset:0; display:none; z-index:2000; }
@@ -691,13 +544,11 @@ body{
 
 @media screen and (max-width: 768px){
   :root{ --navH: 55px; }
-  body{ padding-top: var(--navH); }
 
   .nav-links{ font-size: .9rem; }
   .right-container{ display:none; }
 
   .carousel-container{ height: 220px; }
-  .carousel{ display:flex; }
   .slider{ margin-right: 10px; }
   .slider img{ width: 60%; }
 
@@ -713,19 +564,15 @@ body{
   }
 
   .movies-list{ height: 150px; }
-  .card-container{ padding-left: 0; height: 150px; }
+  .card-container{ height: 150px; }
 
   .card{ min-width: 220px; height: 120px; }
   .name{ font-size: .95rem; }
   .des{ font-size: .7rem; }
-
-  .pre-btn, .nxt-btn{ width: 44px; height: 44px; }
-  .pre-btn img, .nxt-btn img{ width: 10px; height: 15px; }
 }
 
 @media screen and (max-width: 500px){
   :root{ --navH: 55px; }
-  body{ padding-top: var(--navH); }
 
   .navbar{
     height: var(--navH);
@@ -734,10 +581,9 @@ body{
   }
 
   .carousel-container{ height: 180px; }
-  .carousel{ display:flex; }
 
   .movies-list{ height: 125px; }
-  .card-container{ width: 100%; height: 120px; padding-left: 0; }
+  .card-container{ height: 120px; }
 
   .card{ min-width: 180px; height: 100px; }
   .name{ font-size: .82rem; }
