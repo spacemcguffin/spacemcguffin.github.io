@@ -88,7 +88,7 @@ const stories = [
   image: "/sandbox/img/1/thesensorites.png",
   summary: "A strange alien presence threatens a human expedition.",
   notes: ["Atmospheric early alien story"],
-  tags: ["aliens", "telepathy", "base-under-siege"]
+  tags: ["aliens", "telepathy", "base under siege"]
 },
 {
   id: "reign-of-terror",
@@ -125,8 +125,8 @@ const stories = [
   code: "QQ",
   image: "/wiki/img/episodes/sickofancy.png",
   summary: "An archaeological expedition wakes a sleeping Cyber fleet.",
-  notes: ["A classic base-under-siege feel", "Cybermen at their creepiest"],
-  tags: ["cybermen", "tomb", "archaeology", "base-under-siege"]
+  notes: ["A classic base under siege feel", "Cybermen at their creepiest"],
+  tags: ["cybermen", "tomb", "archaeology", "base under siege"]
 },
 {
   id: "spearhead-from-space",
@@ -150,7 +150,7 @@ const stories = [
   image: "https://picsum.photos/seed/blink/1200/675",
   summary: "A timey-wimey thriller featuring the Weeping Angels.",
   notes: ["Perfect standalone", "Infamous quotes everywhere"],
-  tags: ["weeping angels", "timey-wimey", "thriller", "standalone"]
+  tags: ["weeping angels", "timey wimey", "thriller", "standalone"]
 },
 {
   id: "midnight",
