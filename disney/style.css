@@ -599,3 +599,84 @@ body{
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior: auto !important; }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   Hero carousel prev/next buttons
+   ========================================================= */
+
+.carousel-container{ position: relative; }
+
+.carousel-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255,255,255,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.06));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 18px 46px rgba(0,0,0,.55),
+    0 3px 10px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.12);
+
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.carousel-btn:hover{
+  transform: translateY(-50%) translateY(-2px) scale(1.04);
+  border-color: rgba(255,255,255,.28);
+  box-shadow:
+    0 26px 68px rgba(0,0,0,.62),
+    0 6px 16px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+.carousel-btn:active{
+  transform: translateY(-50%) scale(.98);
+}
+
+.carousel-btn--prev{ left: 14px; }
+.carousel-btn--next{ right: 14px; }
+
+.carousel-btn svg{
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: .95;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+}
+
+/* Optional: hide hero buttons on small screens since you already hide the carousel */
+@media screen and (max-width: 500px){
+  .carousel-btn{ display: none !important; }
+}
