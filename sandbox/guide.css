@@ -177,7 +177,46 @@ select.field__input{
   color: rgba(0,0,0,.8);
 }
 
-.meta{ margin: 8px 0 14px; color: var(--muted); display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.meta{
+  margin: 8px 0 14px;
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+  color: var(--muted);
+}
+
+.meta__chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: color-mix(in oklab, var(--panel2) 70%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+
+.meta__label{
+  font-size: 12px;
+  letter-spacing: .02em;
+  opacity: .9;
+}
+
+.meta__count{
+  font-size: 13px;
+  font-weight: 750;
+  color: var(--text);
+}
+
+[data-theme="light"] .meta__chip{
+  background: rgba(255,255,255,.65);
+  border-color: rgba(2,6,23,.10);
+  box-shadow: 0 10px 22px rgba(2,6,23,.10);
+}
+
 .meta__sep{ opacity:.6; }
 
 .grid{
@@ -236,7 +275,7 @@ select.field__input{
 .card__title{ margin:0; font-size:15px; letter-spacing:-0.01em; }
 .card__sub{ margin:4px 0 10px; color:var(--muted); font-size:13px; }
 
-.badges{ display:flex; flex-wrap:wrap; gap:6px; }
+.badges{ display:flex; flex-wrap:wrap; gap:6px; font-size: 12px;}
 .badge{
   font-size: 12px;
   padding: 6px 8px;
