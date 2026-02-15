@@ -587,7 +587,9 @@ body{
     white-space: nowrap;
   }
 
-  .carousel-container{ height: 180px; }
+  .carousel-container{
+    display: none !important;
+  }
 
   .movies-list{ height: 125px; }
   .card-container{ height: 120px; }
