@@ -200,6 +200,9 @@ function closeModal(){
   $("modalOverlay").setAttribute("aria-hidden", "true");
 }
 
+
+
+
 // ====== RENDER ======
 function storyCard(s){
   const poster = s.poster
@@ -212,17 +215,23 @@ function storyCard(s){
   ].filter(Boolean).join(" • ");
 
   return `
-    <div class="card" role="button" tabindex="0" 
-         data-id="${escapeHTML(s.id)}" 
+    <div class="card" role="button" tabindex="0"
+         data-id="${escapeHTML(s.id)}"
          aria-label="${escapeHTML(s.title)}">
-      <div class="poster">${poster}</div>
+
+      <div class="poster large">${poster}</div>
+
       <div class="meta">
         <div class="name">${escapeHTML(s.title)}</div>
         <div class="line">${escapeHTML(line)}</div>
       </div>
+
     </div>
   `;
 }
+
+
+
 
 
 function render(){
