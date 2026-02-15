@@ -1098,3 +1098,48 @@ select.field__input optgroup{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+/* ===== Subtle card parallax tilt ===== */
+.card{
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.card__media img{
+  transform: translateZ(0); /* keeps image crisp in 3D */
+}
+
+/* optional: a soft moving sheen */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  transition: opacity .25s ease;
+  background: radial-gradient(
+    600px 400px at var(--mx, 50%) var(--my, 50%),
+    rgba(255,255,255,.14),
+    transparent 55%
+  );
+}
+
+.grid:hover .card::after{ opacity: .6; }
+.grid .card:hover::after{ opacity: .95; }
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .card{ transition: none !important; }
+  .card::after{ display:none; }
+}
+
+
