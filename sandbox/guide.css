@@ -591,7 +591,7 @@ select.field__input optgroup{
   display: grid;
   place-items: end center;
   padding: 18px;
-  background: rgba(0,0,0,.72);
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
@@ -607,12 +607,12 @@ select.field__input optgroup{
   overflow: hidden;
   border-radius: 24px;
   border: 1px solid var(--line);
-  background: color-mix(in oklab, var(--bg) 80%, transparent);
+  background: var(--bg);
   box-shadow: 0 28px 80px rgba(0,0,0,.65);
   isolation: isolate;              
   clip-path: inset(0 round 24px); 
   display: grid;
-  grid-template-rows: auto 1fr; /* hero then scroll area */
+  grid-template-rows: auto 1fr;
 }
 
 .modal__scroll{
@@ -650,10 +650,16 @@ select.field__input optgroup{
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(900px 480px at 70% 20%, rgba(167,139,250,.18), transparent 55%),
-    radial-gradient(900px 480px at 25% 75%, rgba(125,211,252,.14), transparent 55%),
-    linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.45) 55%, rgba(0,0,0,.12) 100%);
+    radial-gradient(900px 480px at 70% 20%, color-mix(in oklab, var(--accent2) 25%, transparent), transparent 55%),
+    radial-gradient(900px 480px at 25% 75%, color-mix(in oklab, var(--accent) 25%, transparent), transparent 55%),
+    linear-gradient(
+      to top,
+      color-mix(in oklab, var(--bg) 95%, transparent) 0%,
+      color-mix(in oklab, var(--bg) 65%, transparent) 55%,
+      color-mix(in oklab, var(--bg) 20%, transparent) 100%
+    );
 }
+
 
 /* Close button */
 .modal__close{
@@ -733,16 +739,21 @@ select.field__input optgroup{
   gap: 10px;
   padding: 12px 14px;
   border-top: 1px solid var(--line);
-  background: color-mix(in oklab, var(--bg) 86%, transparent);
+  background: var(--bg);
   backdrop-filter: blur(10px);
 }
 
 /* Buttons */
 .btn--primary{
-  background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.80));
-  color: rgba(0,0,0,.92);
-  border-color: rgba(255,255,255,.25);
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 85%, white 15%),
+    color-mix(in oklab, var(--accent2) 85%, white 15%)
+  );
+  color: white;
+  border-color: color-mix(in oklab, var(--accent) 40%, var(--line));
 }
+
 .btn--primary:hover{ filter: brightness(1.04); }
 
 .btn--ghost{
