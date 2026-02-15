@@ -1888,3 +1888,29 @@ select.field__input:disabled{
   opacity: 0.7;
   font-size: 12px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== Fix: autocomplete panel needs an actual surface in dark mode ===== */
+[data-theme="dark"] .ac__panel{
+  background: rgba(12, 16, 22, 0.96); /* solid-ish dark surface */
+  border-color: rgba(255,255,255,0.12);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.55);
+}
+
+/* If you want it to match your glass panels a bit more */
+[data-theme="dark"] .ac__item:hover,
+[data-theme="dark"] .ac__item[aria-selected="true"]{
+  background: rgba(255,255,255,0.08);
+}
