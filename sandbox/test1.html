@@ -1,109 +1,111 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Doctor Who • Stories</title>
-
-  <!-- Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Doctor Who Story Guide</title>
   <link rel="stylesheet" href="test1.css" />
 </head>
+<body>
 
-<body data-theme="dark">
   <header class="topbar">
-    <div class="topbar-inner">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>
-          <h1>Doctor Who <span class="sub">Stories</span></h1>
-        </div>
-      </div>
+    <div class="wrap topbar__inner">
+      <a class="brand" href="#">
+        <span class="brand__mark">🌀</span>
+        <span>Story Guide</span>
+      </a>
 
-      <div class="spacer"></div>
+      <nav class="nav" aria-label="Top navigation">
+        <a class="nav__link is-active" href="#top">Stories</a>
+      </nav>
 
-      <button class="iconbtn" id="themeBtn" type="button" aria-label="Toggle theme">
-        <span id="themeIcon">🌙</span>
-        <span class="hint">Theme</span>
+      <!-- Theme toggle -->
+      <button id="themeBtn" class="theme-toggle" aria-pressed="true" aria-label="Toggle theme">
+        <span class="theme-toggle__track">
+          <span class="theme-toggle__thumb"></span>
+        </span>
       </button>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="layout">
-      <!-- Filters -->
-      <aside class="sidebar panel" aria-label="Filters">
-        <div class="hd">
-          <h2>Filters</h2>
-          <span class="muted">Doctor only</span>
+  <main class="wrap" id="top">
+    <section class="hero">
+      <h1 class="hero__title">Doctor Who — Story Guide</h1>
+      <p class="hero__sub">Search titles, codes, seasons, and hidden tags. Filter by Doctor(s).</p>
+
+      <div class="controls">
+        <div class="field ac">
+          <label class="field__label" for="q">Search</label>
+          <input id="q" class="field__input" placeholder='Try "daleks" or "tag:series 7"' autocomplete="off" />
+          <!-- autocomplete panel injected by JS -->
         </div>
 
-        <div class="bd">
-          <div class="field">
-            <label for="q">Search</label>
-            <input class="input" id="q" placeholder="Search title or villains…" />
-          </div>
-
-          <div class="accordion">
-            <!-- Collapsed by default -->
-            <details>
-              <summary>
-                <span>Doctor</span>
-                <span class="chev" aria-hidden="true">▾</span>
-              </summary>
-              <div class="accBody">
-                <div class="chips" id="chipsDoctor"></div>
-              </div>
-            </details>
-          </div>
-
-          <div class="btnrow">
-            <button class="btn" id="clearFiltersBtn" type="button">Clear</button>
-            <button class="btn primary" id="showAllBtn" type="button">Show all</button>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Results -->
-      <section>
-        <div class="mainhead">
-          <div class="title">
-            <h2>Stories</h2>
-            <p id="resultCount" class="muted">Loading…</p>
-          </div>
+        <div class="field">
+          <label class="field__label" for="doctor">Search by Doctor</label>
+          <select id="doctor" class="field__input">
+            <option value="">All</option>
+          </select>
         </div>
 
-        <div class="grid" id="grid"></div>
-        <div id="empty" class="empty" style="display:none;">No matches. Try clearing filters.</div>
-      </section>
-    </div>
+        <div class="field field--button">
+          <button id="clearBtn" class="btn" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div class="meta">
+        Showing <strong id="count">0</strong> stories
+        <span class="meta__sep">•</span>
+        <button id="featuredBtn" class="btn btn--play" type="button">Featured</button>
+        <button id="randomBtn" class="btn" type="button">Random</button>
+      </div>
+    </section>
+
+    <section class="grid" id="grid" aria-live="polite"></section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap">Built for your sandbox — tags are searchable but never displayed.</div>
+  </footer>
+
   <!-- Modal -->
-  <div class="modalOverlay" id="modalOverlay" aria-hidden="true"></div>
+  <div id="modal" class="modal" aria-hidden="true" data-close>
+    <div class="modal__backdrop" data-close></div>
 
-  <div class="modal" id="modal" role="dialog" aria-modal="true"
-       aria-labelledby="modalTitle" aria-describedby="modalMeta" aria-hidden="true">
-    <div class="modalCard">
-      <div class="modalTop">
-        <div class="modalPoster" id="modalPoster"></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Story details" tabindex="-1">
+      <div class="modal__scroll">
+        <section class="modal__hero" id="modalHero">
+          <div class="modal__hero-overlay"></div>
 
-        <div class="modalHead">
-          <div class="modalTitleRow">
-            <h3 id="modalTitle">Title</h3>
-            <button class="iconbtn" id="modalClose" type="button" aria-label="Close">✕</button>
+          <button id="closeBtn" class="iconbtn modal__close" type="button" aria-label="Close">✕</button>
+
+          <div class="modal__hero-content">
+            <h2 id="modalTitle" class="modal__hero-title">—</h2>
+            <div id="modalDesc" class="modal__hero-desc">—</div>
+
+            <div class="modal__actions">
+              <button id="prevBtn" class="btn btn--ghost" type="button">← Prev</button>
+              <button id="nextBtn" class="btn btn--primary" type="button">Next →</button>
+            </div>
           </div>
-          <div class="modalMeta" id="modalMeta">Meta</div>
-        </div>
+        </section>
+
+        <section class="modal__content">
+          <div id="modalMeta" class="modal__meta"></div>
+
+          <div class="modal__text">
+            <h3>Summary</h3>
+            <p id="modalSummary">—</p>
+
+            <h3>Notes</h3>
+            <ul id="modalNotes"><li>—</li></ul>
+          </div>
+        </section>
       </div>
 
-      <div class="modalBody">
-        <p class="modalSummary" id="modalSummary"></p>
-        <div class="modalGrid" id="modalGrid"></div>
-      </div>
+      <footer class="modal__footer">
+        <button class="btn btn--ghost" type="button" id="prevBtn2">← Prev</button>
+        <button class="btn btn--primary" type="button" id="nextBtn2">Next →</button>
+      </footer>
     </div>
   </div>
 
