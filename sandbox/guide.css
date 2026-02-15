@@ -942,3 +942,117 @@ select.field__input optgroup{
   transform: scale(.96);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===========================
+   Subtle Classy Modal Polish
+   (paste at END of guide.css)
+   =========================== */
+
+/* 1) Overlay: lighter in light mode, deeper in dark mode */
+.modal{
+  background: color-mix(in oklab, var(--bg) 72%, transparent);
+}
+
+[data-theme="light"] .modal{
+  background: rgba(15, 23, 42, 0.18); /* soft slate tint instead of black */
+}
+
+/* 2) Dialog: true surface + elegant shadow */
+.modal__dialog{
+  background: var(--bg);
+  border: 1px solid color-mix(in oklab, var(--line) 90%, transparent);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.35),
+    0 1px 0 rgba(255,255,255,.06) inset;
+}
+
+/* Light mode shadow should be softer + more "paper" */
+[data-theme="light"] .modal__dialog{
+  box-shadow:
+    0 28px 70px rgba(2, 6, 23, 0.18),
+    0 1px 0 rgba(255,255,255,.85) inset;
+}
+
+/* 3) Hero overlay: theme-aware (no hard-coded black) */
+.modal__hero-overlay{
+  background:
+    radial-gradient(900px 520px at 70% 20%, color-mix(in oklab, var(--accent2) 18%, transparent), transparent 60%),
+    radial-gradient(900px 520px at 25% 75%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 62%),
+    linear-gradient(
+      to top,
+      color-mix(in oklab, var(--bg) 96%, transparent) 0%,
+      color-mix(in oklab, var(--bg) 68%, transparent) 55%,
+      color-mix(in oklab, var(--bg) 18%, transparent) 100%
+    );
+}
+
+/* 4) Typography + spacing: slightly calmer, more premium */
+.modal__hero-title{
+  letter-spacing: -0.02em;
+}
+.modal__hero-desc{
+  line-height: 1.5;
+  opacity: 0.92;
+}
+
+/* 5) Panels inside modal: crisp, consistent in light mode */
+.modal__meta,
+.modal__text{
+  background: var(--panel);
+  border-color: var(--line);
+}
+
+[data-theme="light"] .modal__meta,
+[data-theme="light"] .modal__text{
+  background: rgba(255,255,255,.72);
+  border-color: rgba(2,6,23,.10);
+}
+
+/* 6) Footer: blend with dialog surface, not translucent mush */
+.modal__footer{
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+}
+
+/* 7) Buttons: subtle “pill” feel; primary stays tasteful */
+.btn--primary{
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--accent) 80%, white 20%),
+    color-mix(in oklab, var(--accent2) 78%, white 22%)
+  );
+  color: white;
+  border-color: color-mix(in oklab, var(--accent) 22%, var(--line));
+  box-shadow: 0 10px 26px rgba(0,0,0,.18);
+}
+
+[data-theme="light"] .btn--primary{
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.14);
+}
+
+/* 8) Close button: slightly clearer contrast in light mode */
+[data-theme="light"] .modal__close{
+  background: rgba(255,255,255,.70);
+  border-color: rgba(2,6,23,.10);
+}
+
