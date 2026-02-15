@@ -115,7 +115,6 @@ const stories = [
     notes: ["First Cybermen story", "First regeneration"],
     tags: ["season 4"]
   },
-
   {
     id: "tomb-of-the-cybermen",
     title: "The Tomb of the Cybermen",
@@ -336,6 +335,10 @@ const els = {
   prev: document.querySelector("#prevBtn"),
   next: document.querySelector("#nextBtn"),
 
+  // footer duplicates (optional)
+  prev2: document.querySelector("#prevBtn2"),
+  next2: document.querySelector("#nextBtn2"),
+
   title: document.querySelector("#modalTitle"),
   desc: document.querySelector("#modalDesc"),
   meta: document.querySelector("#modalMeta"),
@@ -346,10 +349,10 @@ const els = {
 let filtered = [];
 let activeIndex = -1;
 let lastFocused = null;
-
-// When we open a modal via click, we want the back button to close it (hash change).
-// When we are *responding* to a hash change, avoid re-writing the hash.
 let suppressHashWrite = false;
+
+// --- Multi-select doctor filter state ---
+const selectedDoctors = new Set();
 
 // ---------- Utils ----------
 function escapeHtml(str) {
@@ -361,28 +364,58 @@ function escapeHtml(str) {
     .replaceAll("'", "&#039;");
 }
 
-// ✅ Multi-doctor helpers (supports doctors:[] AND legacy doctor:"")
+// Supports doctors:[] AND legacy doctor:""
 function getDoctorList(s) {
   if (Array.isArray(s.doctors) && s.doctors.length) return s.doctors;
   if (s.doctor) return [s.doctor];
   return [];
 }
 
-function doctorLabel(s) {
-  const ds = getDoctorList(s);
-  if (!ds.length) return "—";
-  return ds.length === 1 ? ds[0] : ds.join(" + ");
+function syncDoctorDropdownUI() {
+  if (!els.doctor) return;
+  if (selectedDoctors.size === 1) {
+    els.doctor.value = Array.from(selectedDoctors)[0];
+  } else if (selectedDoctors.size > 1) {
+    els.doctor.value = "";
+  }
 }
 
-function hasDoctor(s, selected) {
-  if (!selected) return true;
-  return getDoctorList(s).includes(selected);
+function toggleDoctor(d) {
+  if (!d) return;
+  if (selectedDoctors.has(d)) selectedDoctors.delete(d);
+  else selectedDoctors.add(d);
+
+  syncDoctorDropdownUI();
+  render();
+  closeIfOpen();
+}
+
+// Doctor pills HTML (buttons)
+function doctorPillsHTML(s, { clickable = true } = {}) {
+  const ds = getDoctorList(s);
+  if (!ds.length) return `<span class="badge">—</span>`;
+
+  return ds.map((d) => {
+    const on = selectedDoctors.has(d);
+    if (!clickable) return `<span class="badge">${escapeHtml(d)}</span>`;
+
+    return `
+      <button type="button"
+        class="badge badge--doctor ${on ? "is-on" : ""}"
+        data-doctor="${escapeHtml(d)}"
+        aria-pressed="${on ? "true" : "false"}"
+        aria-label="${on ? "Remove" : "Add"} ${escapeHtml(d)} Doctor filter">
+        ${escapeHtml(d)}
+      </button>
+    `;
+  }).join("");
 }
 
 function getFilters() {
   return {
-    q: els.q.value.trim(), // keep raw; we parse it
-    doctor: els.doctor.value
+    q: els.q.value.trim(),
+    doctor: els.doctor.value,
+    doctors: Array.from(selectedDoctors)
   };
 }
 
@@ -394,11 +427,11 @@ function parseQuery(raw) {
   return { mode: "all", term: q.toLowerCase() };
 }
 
-// --- Build a searchable “haystack” including tags + ALL doctors (NOT rendered anywhere) ---
+// --- Search haystack includes tags + all doctors (tags never shown) ---
 function storySearchHaystack(s) {
   const parts = [
     s.title,
-    ...getDoctorList(s), // ✅ include all doctors
+    ...getDoctorList(s),
     s.code,
     s.serialno,
     s.season,
@@ -413,7 +446,6 @@ function storySearchHaystack(s) {
     .toLowerCase();
 }
 
-// --- Unified matcher ---
 function matchesQuery(s, rawQuery) {
   const { mode, term } = parseQuery(rawQuery);
   if (!term) return true;
@@ -426,9 +458,9 @@ function matchesQuery(s, rawQuery) {
   return storySearchHaystack(s).includes(term);
 }
 
-// ---------- Tag autocomplete (hidden tags, visible suggestions UI) ----------
+// ---------- Tag autocomplete ----------
 function buildTagIndex(items) {
-  const seen = new Map(); // lower -> original
+  const seen = new Map();
   items.forEach(s => {
     (Array.isArray(s.tags) ? s.tags : []).forEach(t => {
       const orig = String(t).trim();
@@ -443,17 +475,12 @@ function buildTagIndex(items) {
   );
 }
 
-function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
-  // fillMode:
-  // - "tag"  => clicking suggestion fills `tag:<tag>`
-  // - "plain"=> fills just `<tag>` (still searchable via haystack)
+function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
   const input = els.q;
   if (!input) return;
 
-  const parent = input.closest(".field") || input.parentElement; // ✅ anchors nicely
+  const parent = input.closest(".ac") || input.parentElement;
   if (!parent) return;
-
-  if (!parent.classList.contains("ac")) parent.classList.add("ac");
 
   const panel = document.createElement("div");
   panel.className = "ac__panel";
@@ -496,7 +523,6 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
     if (!tag) return;
 
     input.value = (fillMode === "plain") ? tag : `tag:${tag}`;
-
     close();
     input.focus();
 
@@ -509,10 +535,7 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
     current = list;
     active = -1;
 
-    if (!list.length) {
-      close();
-      return;
-    }
+    if (!list.length) { close(); return; }
 
     list.forEach((tag, i) => {
       const btn = document.createElement("button");
@@ -520,18 +543,11 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
       btn.className = "ac__item";
       btn.setAttribute("role", "option");
       btn.setAttribute("aria-selected", "false");
-
       btn.innerHTML = `
         <span class="ac__tag">${escapeHtml(tag)}</span>
         <span class="ac__hint">${fillMode === "tag" ? "tag search" : "search"}</span>
       `;
-
-      // Use mousedown so it beats input blur
-      btn.addEventListener("mousedown", (e) => {
-        e.preventDefault();
-        choose(i);
-      });
-
+      btn.addEventListener("mousedown", (e) => { e.preventDefault(); choose(i); });
       panel.appendChild(btn);
     });
 
@@ -540,12 +556,9 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
 
   function update() {
     tags = buildTagIndex(stories);
-
     const term = getTerm(input.value);
-    if (!term) {
-      close();
-      return;
-    }
+
+    if (!term) { close(); return; }
 
     const list = tags
       .filter(t => t.toLowerCase().includes(term))
@@ -570,27 +583,9 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
     }
 
     if (e.key === "Escape") { e.preventDefault(); close(); return; }
-
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      active = Math.min(active + 1, current.length - 1);
-      highlight(active);
-      return;
-    }
-
-    if (e.key === "ArrowUp") {
-      e.preventDefault();
-      active = Math.max(active - 1, 0);
-      highlight(active);
-      return;
-    }
-
-    if (e.key === "Enter") {
-      if (active >= 0) {
-        e.preventDefault();
-        choose(active);
-      }
-    }
+    if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, current.length - 1); highlight(active); return; }
+    if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); highlight(active); return; }
+    if (e.key === "Enter" && active >= 0) { e.preventDefault(); choose(active); }
   });
 
   document.addEventListener("mousedown", (e) => {
@@ -602,38 +597,38 @@ function initTagAutocomplete({ maxItems = 8, fillMode = "tag" } = {}) {
 
   input.addEventListener("blur", () => setTimeout(close, 80));
   els.clear?.addEventListener("click", () => close());
-
-  return { refresh() { tags = buildTagIndex(stories); }, close };
 }
 
-// ✅ Apply filters: query + doctor (multi) + tags
+// ---------- Filtering ----------
 function applyFilters(items, f) {
   return items.filter((s) => {
     const matchesQ = matchesQuery(s, f.q);
-    const matchesDoctor = hasDoctor(s, f.doctor); // ✅ multi-doctor aware
+
+    const storyDoctors = getDoctorList(s);
+    const matchesDoctor =
+      (f.doctors && f.doctors.length)
+        ? f.doctors.some(d => storyDoctors.includes(d))
+        : (!f.doctor || storyDoctors.includes(f.doctor));
+
     return matchesQ && matchesDoctor;
   });
 }
 
+// ---------- Hash routing ----------
 function storyById(id) {
   return stories.find((s) => s.id === id) || null;
 }
-
 function filteredIndexById(id) {
   return filtered.findIndex((s) => s.id === id);
 }
-
-// Hash format: #story=blink
 function getStoryIdFromHash() {
   const hash = window.location.hash || "";
   const m = hash.match(/story=([^&]+)/);
   return m ? decodeURIComponent(m[1]) : "";
 }
-
 function setStoryHash(id) {
   if (suppressHashWrite) return;
   if (!id) {
-    // remove hash without jumping
     history.pushState("", document.title, window.location.pathname + window.location.search);
     return;
   }
@@ -654,7 +649,7 @@ function cardTemplate(s) {
         <h3 class="card__title">${escapeHtml(s.title)}</h3>
         <p class="card__sub">Serial ${escapeHtml(s.serialno ?? "—")} • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
         <div class="badges">
-          <span class="badge badge--accent">${escapeHtml(doctorLabel(s))} Doctor</span>
+          ${doctorPillsHTML(s, { clickable: true })}
         </div>
       </div>
     </article>
@@ -670,7 +665,6 @@ function render() {
   filtered = applyFilters(stories, getFilters());
   els.count.textContent = filtered.length;
 
-  // Fade out
   els.grid.style.opacity = "0";
 
   window.setTimeout(() => {
@@ -678,10 +672,6 @@ function render() {
 
     const cards = Array.from(els.grid.querySelectorAll(".card"));
 
-    // Enter state
-    cards.forEach(c => c.classList.add("is-enter"));
-
-    // Wire up events
     cards.forEach((card, i) => {
       card.addEventListener("click", () => openModal(i, { updateHash: true }));
       card.addEventListener("keydown", (e) => {
@@ -692,78 +682,11 @@ function render() {
       });
     });
 
-    // Animate in
     renderRAF = requestAnimationFrame(() => {
       els.grid.style.opacity = "1";
-      cards.forEach((card, idx) => {
-        const delay = Math.min(idx * 18, 180);
-        setTimeout(() => card.classList.remove("is-enter"), delay);
-      });
     });
-  }, 140);
+  }, 120);
 }
-
-// ===== Subtle parallax tilt on cards =====
-function enableCardTilt() {
-  // Skip on touch + reduced motion
-  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-  if (prefersReduced || isTouch) return;
-
-  const MAX_TILT = 6;   // degrees (keep small!)
-  const SCALE = 1.02;   // subtle
-  const PERSPECTIVE = 800;
-
-  const cards = Array.from(document.querySelectorAll(".card"));
-
-  cards.forEach((card) => {
-    let raf = 0;
-
-    function onMove(e) {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const px = x / rect.width;   // 0..1
-      const py = y / rect.height;  // 0..1
-
-      // tilt: top = tilt down a bit, left = tilt right a bit (feels natural)
-      const tiltY = (px - 0.5) * (MAX_TILT * 2);
-      const tiltX = (0.5 - py) * (MAX_TILT * 2);
-
-      // for sheen position
-      card.style.setProperty("--mx", `${(px * 100).toFixed(2)}%`);
-      card.style.setProperty("--my", `${(py * 100).toFixed(2)}%`);
-
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        card.style.transform =
-          `perspective(${PERSPECTIVE}px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale(${SCALE})`;
-      });
-    }
-
-    function onLeave() {
-      if (raf) cancelAnimationFrame(raf);
-      card.style.transform = "";
-      card.style.removeProperty("--mx");
-      card.style.removeProperty("--my");
-    }
-
-    card.addEventListener("mousemove", onMove);
-    card.addEventListener("mouseleave", onLeave);
-  });
-}
-
-// Call once, and again after each render (because you rebuild the grid)
-enableCardTilt();
-
-// Hook into your render so new cards get tilt too
-const _render = render;
-render = function () {
-  _render();
-  // wait for DOM update (your render uses a timeout)
-  setTimeout(enableCardTilt, 200);
-};
 
 // ---------- Modal ----------
 function openModal(index, { updateHash } = { updateHash: true }) {
@@ -775,28 +698,34 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   lastFocused = document.activeElement;
 
   els.title.textContent = s.title;
-  els.desc.textContent = `${doctorLabel(s)} Doctor • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}`;
+
+  // Doctors as clickable pills + episode count
+  els.desc.innerHTML = `
+    <span class="modal__doctors">${doctorPillsHTML(s, { clickable: true })}</span>
+    <span class="modal__sep"> • </span>
+    <span>${s.episodes} episode${s.episodes === 1 ? "" : "s"}</span>
+  `;
 
   const hero = document.getElementById("modalHero");
   if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
 
   els.meta.innerHTML = `
     <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
-    <div class="kv"><span>Doctor</span><strong>${escapeHtml(doctorLabel(s))}</strong></div>
+    <div class="kv"><span>Doctor</span><strong>${doctorPillsHTML(s, { clickable: true })}</strong></div>
     <div class="kv"><span>Episodes</span><strong>${s.episodes}</strong></div>
   `;
 
   els.summary.textContent = s.summary || "—";
   els.notes.innerHTML = (s.notes || []).map((n) => `<li>${escapeHtml(n)}</li>`).join("") || "<li>—</li>";
 
-  els.prev.disabled = filtered.length < 2;
-  els.next.disabled = filtered.length < 2;
+  const canStep = filtered.length >= 2;
+  els.prev.disabled = !canStep;
+  els.next.disabled = !canStep;
+  if (els.prev2) els.prev2.disabled = !canStep;
+  if (els.next2) els.next2.disabled = !canStep;
 
-  // show
   els.modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
-
-  // Focus the dialog for trapFocus to work cleanly
   els.dialog.focus();
 
   if (updateHash) setStoryHash(s.id);
@@ -805,9 +734,7 @@ function openModal(index, { updateHash } = { updateHash: true }) {
 function closeModal({ clearHash } = { clearHash: true }) {
   els.modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
-
   if (clearHash) setStoryHash("");
-
   if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
 }
 
@@ -817,25 +744,21 @@ function step(delta) {
   openModal(nextIndex, { updateHash: true });
 }
 
-// Click outside to close
 els.modal.addEventListener("click", (e) => {
   if (e.target && e.target.matches("[data-close]")) closeModal({ clearHash: true });
 });
 
-// Buttons
 els.close.addEventListener("click", () => closeModal({ clearHash: true }));
 els.prev.addEventListener("click", () => step(-1));
 els.next.addEventListener("click", () => step(1));
+els.prev2?.addEventListener("click", () => step(-1));
+els.next2?.addEventListener("click", () => step(1));
 
-// Keyboard: ESC close, arrows navigate, trap focus
 document.addEventListener("keydown", (e) => {
   const open = els.modal.getAttribute("aria-hidden") === "false";
   if (!open) return;
 
-  if (e.key === "Escape") {
-    e.preventDefault();
-    closeModal({ clearHash: true });
-  }
+  if (e.key === "Escape") { e.preventDefault(); closeModal({ clearHash: true }); }
   if (e.key === "ArrowLeft") step(-1);
   if (e.key === "ArrowRight") step(1);
 
@@ -853,16 +776,10 @@ function trapFocus(e) {
   const last = list[list.length - 1];
   const active = document.activeElement;
 
-  if (e.shiftKey && active === first) {
-    e.preventDefault();
-    last.focus();
-  } else if (!e.shiftKey && active === last) {
-    e.preventDefault();
-    first.focus();
-  }
+  if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
 }
 
-// ---------- Hash routing (share + back button) ----------
 function handleHashChange() {
   const id = getStoryIdFromHash();
 
@@ -875,7 +792,6 @@ function handleHashChange() {
     return;
   }
 
-  // Ensure filtered is current
   render();
 
   let idx = filteredIndexById(id);
@@ -900,7 +816,6 @@ function handleHashChange() {
   openModal(idx, { updateHash: false });
   suppressHashWrite = false;
 }
-
 window.addEventListener("hashchange", handleHashChange);
 
 // ---------- Theme ----------
@@ -911,22 +826,13 @@ function setTheme(theme) {
   const btn = document.getElementById("themeBtn");
   if (btn) btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
 }
-
 function initTheme() {
   const saved = localStorage.getItem("theme");
   setTheme(saved || "dark");
 }
-
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
-
-  const btn = document.getElementById("themeBtn");
-  if (!btn) {
-    console.warn("themeBtn not found");
-    return;
-  }
-
-  btn.addEventListener("click", () => {
+  els.theme?.addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme") || "dark";
     setTheme(current === "dark" ? "light" : "dark");
   });
@@ -938,20 +844,47 @@ function closeIfOpen() {
 }
 
 els.q.addEventListener("input", () => { render(); closeIfOpen(); });
-els.doctor.addEventListener("change", () => { render(); closeIfOpen(); });
 
-els.clear.addEventListener("click", () => {
-  els.q.value = "";
-  els.doctor.value = "";
+// Dropdown = single-select, also clears multi-select when "All"
+els.doctor.addEventListener("change", () => {
+  const v = els.doctor.value;
+  selectedDoctors.clear();
+  if (v) selectedDoctors.add(v);
   render();
   closeIfOpen();
 });
 
-// ✅ Doctor dropdown now built from doctors:[]
+els.clear.addEventListener("click", () => {
+  els.q.value = "";
+  els.doctor.value = "";
+  selectedDoctors.clear();
+  render();
+  closeIfOpen();
+});
+
+// Clicking a doctor pill on cards toggles multi-select WITHOUT opening modal
+els.grid.addEventListener("click", (e) => {
+  const btn = e.target.closest(".badge--doctor[data-doctor]");
+  if (!btn) return;
+
+  e.preventDefault();
+  e.stopPropagation();
+  toggleDoctor(btn.getAttribute("data-doctor"));
+});
+
+// Clicking a doctor pill in modal toggles and closes (so you see filtered grid)
+els.dialog.addEventListener("click", (e) => {
+  const btn = e.target.closest(".badge--doctor[data-doctor]");
+  if (!btn) return;
+
+  e.preventDefault();
+  closeModal({ clearHash: true });
+  toggleDoctor(btn.getAttribute("data-doctor"));
+});
+
 function populateDoctorOptions() {
-  const doctors = Array.from(new Set(
-    stories.flatMap(s => getDoctorList(s))
-  )).sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+  const doctors = Array.from(new Set(stories.flatMap(s => getDoctorList(s))))
+    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
 
   els.doctor.innerHTML =
     `<option value="">All</option>` +
@@ -974,7 +907,6 @@ document.querySelector("#randomBtn")?.addEventListener("click", () => {
 });
 
 // Init
-initTheme();
 populateDoctorOptions();
 initTagAutocomplete({ maxItems: 10, fillMode: "plain" });
 render();
