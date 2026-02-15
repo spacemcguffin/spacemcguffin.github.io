@@ -341,7 +341,7 @@ body{
   z-index:2;
   background: linear-gradient(to bottom, rgb(4 8 15 / 0%), #20415b 100%);
   padding: 12px;
-  transition: opacity .2s ease;
+  transition: opacity .4s ease;
 }
 
 .card:hover .card-body{ opacity: 1; }
@@ -602,3 +602,34 @@ body{
 @media (prefers-reduced-motion: reduce){
   *{ transition: none !important; scroll-behavior: auto !important; }
 }
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   FIX: hero text cutting off on small screens
+   ========================= */
+
+@media (max-width: 820px){
+  .carousel-container{ height: auto; padding: 14px 0 6px; }
+
+  .carousel{ width: 94%; }
+
+  .slider{
+    height: auto;              /* allow content to grow */
+    min-height: 320px;         /* keeps it “hero-ish” */
+  }
+
+  /* Stop squeezing text vs image */
+  .slide-content{
+    position: relative;        /* no absolute overlay */
+    width: 100%;
+    height: auto;
+    padding: 18px 16px 16px;
+
