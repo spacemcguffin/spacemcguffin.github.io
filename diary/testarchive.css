@@ -520,33 +520,115 @@ tr:last-child {
   gap: 12px;
 }
 
+
+
+
 .entry-card{
+  position: relative;
+  overflow: hidden;
+
   display: grid;
   grid-template-columns: 50px 1fr;
   align-items: center;
+
   padding: 12px 14px;
   border-radius: 14px;
+
   background: rgba(255,255,255,.03);
   border: 1px solid var(--border-color, rgba(255,255,255,.10));
-  transition: transform .18s ease, background .18s ease;
+
+  /* no jump, smooth scale */
+  transform: translateZ(0);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
+  will-change: transform;
 }
 
-.entry-card:hover{
-  transform: translateY(-3px);
-  background: rgba(255,255,255,.06);
+
+
+/* sheen layer */
+.entry-card::before{
+  content: "";
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(
+    120deg,
+    transparent 20%,
+    rgba(255,255,255,.18) 35%,
+    rgba(255,255,255,.06) 50%,
+    transparent 65%
+  );
+  transform: translateX(-60%) rotate(6deg);
+  opacity: 0;
+  transition: transform .55s ease, opacity .25s ease;
+  pointer-events: none;
 }
+
+
+
+/* subtle glass highlight */
+.entry-card::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 80% at 10% 0%,
+    rgba(255,255,255,.10),
+    transparent 55%
+  );
+  opacity: .35;
+  pointer-events: none;
+}
+
+/* hover: scale + sheen sweep */
+.entry-card:hover{
+  transform: scale(1.02);
+  background: rgba(255,255,255,.055);
+  border-color: rgba(76, 110, 148, .35);
+  box-shadow: 0 10px 24px rgba(0,0,0,.10);
+}
+
+.dark-mode .entry-card:hover{
+  border-color: rgba(135, 174, 218, .35);
+  box-shadow: 0 10px 26px rgba(0,0,0,.35);
+}
+
+.entry-card:hover::before{
+  opacity: 1;
+  transform: translateX(60%) rotate(6deg);
+}
+
+/* accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .entry-card,
+  .entry-card::before{
+    transition: none !important;
+  }
+  .entry-card:hover{
+    transform: none;
+  }
+}
+
+
+
+
+
+
+
+
 
 .entry-card .day{
   text-align: center;
-  font-weight: 700;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   padding-right: 10px;
   opacity: .85;
+  font-size:0.96rem;
 }
 
 .entry-card .title{
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
+  font-size:0.96rem;
 }
 
 
