@@ -1,3 +1,5 @@
+// Lewflix / Disney — script.js (copy-paste full file)
+
 let movies = [
   {
     name: "Twisted Christian",
@@ -41,7 +43,6 @@ const carousel = document.querySelector(".carousel");
 let sliders = [];
 let slideIndex = 0;
 
-// Create a slide and keep the rail moving smoothly
 const createSlide = () => {
   if (!carousel) return;
 
@@ -84,19 +85,15 @@ const createSlide = () => {
     old?.remove();
   }
 
-  // Smoothly shift the row left by one slide width + gap
-  // Your CSS gap is effectively margin-right: 30px on .slider
+  // Smooth shift left by one slide width + gap (30px)
   if (sliders.length >= 2) {
     const shiftCount = sliders.length - 2;
     const margin = `calc(-${100 * shiftCount}% - ${30 * shiftCount}px)`;
 
-    // Animate the margin change to feel premium
     const first = sliders[0];
-    if (!prefersReducedMotion) {
-      first.style.transition = "margin-left 650ms cubic-bezier(.2,.9,.2,1)";
-    } else {
-      first.style.transition = "none";
-    }
+    first.style.transition = prefersReducedMotion
+      ? "none"
+      : "margin-left 650ms cubic-bezier(.2,.9,.2,1)";
     first.style.marginLeft = margin;
   }
 };
@@ -108,7 +105,11 @@ for (let i = 0; i < 3; i++) createSlide();
 setInterval(() => createSlide(), 5000);
 
 /* =========================
-   CARD RAILS (premium)
+   CARD RAILS
+   - Smooth button scroll
+   - Hide arrows if rail doesn't overflow
+   - Disable arrows at ends (when visible)
+   - NO wheel-hijack scrolling
    ========================= */
 
 const cardContainers = document.querySelectorAll(".card-container");
@@ -119,8 +120,32 @@ function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 
+function needsHorizontalScroll(container) {
+  return container.scrollWidth > container.clientWidth + 2;
+}
+
+function updateRailArrows(container, preBtn, nxtBtn) {
+  const show = needsHorizontalScroll(container);
+
+  if (!show) {
+    preBtn.style.display = "none";
+    nxtBtn.style.display = "none";
+    return;
+  }
+
+  // Use grid because your CSS uses display:grid for centering
+  preBtn.style.display = "grid";
+  nxtBtn.style.display = "grid";
+}
+
 function updateRailButtons(container, preBtn, nxtBtn) {
   if (!container || !preBtn || !nxtBtn) return;
+
+  // If the rail doesn't need scrolling, hide arrows and stop here
+  if (!needsHorizontalScroll(container)) {
+    updateRailArrows(container, preBtn, nxtBtn);
+    return;
+  }
 
   const maxScroll = container.scrollWidth - container.clientWidth;
   const x = container.scrollLeft;
@@ -131,7 +156,6 @@ function updateRailButtons(container, preBtn, nxtBtn) {
   preBtn.disabled = atStart;
   nxtBtn.disabled = atEnd;
 
-  // Optional: make disabled state feel intentional (pairs with your premium CSS nicely)
   preBtn.style.opacity = atStart ? "0.45" : "1";
   nxtBtn.style.opacity = atEnd ? "0.45" : "1";
   preBtn.style.pointerEvents = atStart ? "none" : "auto";
@@ -139,7 +163,7 @@ function updateRailButtons(container, preBtn, nxtBtn) {
 }
 
 function scrollByStep(container, dir = 1) {
-  const step = Math.round(container.clientWidth * 0.9); // premium “page” feel
+  const step = Math.round(container.clientWidth * 0.9);
   const target = clamp(container.scrollLeft + step * dir, 0, container.scrollWidth);
 
   container.scrollTo({
@@ -148,21 +172,29 @@ function scrollByStep(container, dir = 1) {
   });
 }
 
-// Hook up each rail to its matching buttons
-preBtns.forEach((preBtn, index) => {
-  const container = cardContainers[index];
-  const nxtBtn = nxtBtns[index];
-  if (!container || !nxtBtn) return;
+// Setup each rail (paired by index, matching your HTML structure)
+cardContainers.forEach((container, i) => {
+  const preBtn = preBtns[i];
+  const nxtBtn = nxtBtns[i];
+  if (!container || !preBtn || !nxtBtn) return;
 
-  // initial state
+  // Initial visibility + state
+  updateRailArrows(container, preBtn, nxtBtn);
   updateRailButtons(container, preBtn, nxtBtn);
 
   preBtn.addEventListener("click", () => scrollByStep(container, -1));
   nxtBtn.addEventListener("click", () => scrollByStep(container, 1));
 
-  // update state as user scrolls (drag, wheel, touch)
-  container.addEventListener("scroll", () => {
-    updateRailButtons(container, preBtn, nxtBtn);
-  }, { passive: true });
+  // Update state as user scrolls (drag, touch, trackpad horizontal)
+  container.addEventListener(
+    "scroll",
+    () => updateRailButtons(container, preBtn, nxtBtn),
+    { passive: true }
+  );
 
+  // Re-check if the rail needs arrows when layout changes (responsive)
+  window.addEventListener("resize", () => {
+    updateRailArrows(container, preBtn, nxtBtn);
+    updateRailButtons(container, preBtn, nxtBtn);
+  });
 });
