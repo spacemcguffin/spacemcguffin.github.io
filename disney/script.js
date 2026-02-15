@@ -165,12 +165,4 @@ preBtns.forEach((preBtn, index) => {
     updateRailButtons(container, preBtn, nxtBtn);
   }, { passive: true });
 
-  // Optional: shift+wheel or trackpad wheel makes horizontal scroll feel natural
-  container.addEventListener("wheel", (e) => {
-    // If user is scrolling vertically, translate some of it to horizontal
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      container.scrollLeft += e.deltaY;
-      e.preventDefault();
-    }
-  }, { passive: false });
 });
