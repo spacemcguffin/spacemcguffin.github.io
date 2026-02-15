@@ -84,19 +84,13 @@
   </footer>
 
   <!-- Modal -->
-<!-- Modal -->
 <div class="modal" id="modal" aria-hidden="true">
   <div class="modal__backdrop" data-close></div>
 
-  <div
-    class="modal__dialog"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="modalTitle"
-    aria-describedby="modalDesc"
-    tabindex="-1"
-  >
-    <!-- Cinematic Hero (acts like the header now) -->
+  <div class="modal__dialog" role="dialog" aria-modal="true"
+       aria-labelledby="modalTitle" aria-describedby="modalDesc" tabindex="-1">
+
+    <!-- Hero (does NOT scroll) -->
     <div class="modal__hero" id="modalHero">
       <div class="modal__hero-overlay"></div>
 
@@ -113,25 +107,29 @@
       </div>
     </div>
 
-    <!-- Body content -->
-    <div class="modal__content">
-      <div class="modal__meta" id="modalMeta"></div>
+    <!-- Scroll area (THIS scrolls) -->
+    <div class="modal__scroll">
+      <div class="modal__content">
+        <div class="modal__meta" id="modalMeta"></div>
 
-      <div class="modal__text">
-        <h3>Summary</h3>
-        <p id="modalSummary"></p>
+        <div class="modal__text">
+          <h3>Summary</h3>
+          <p id="modalSummary"></p>
 
-        <h3>Notes</h3>
-        <ul id="modalNotes"></ul>
+          <h3>Notes</h3>
+          <ul id="modalNotes"></ul>
+        </div>
+      </div>
+
+      <div class="modal__footer">
+        <button class="btn btn--ghost" id="prevBtn" type="button">← Prev</button>
+        <button class="btn" id="nextBtn" type="button">Next →</button>
       </div>
     </div>
 
-    <div class="modal__footer">
-      <button class="btn btn--ghost" id="prevBtn" type="button">← Prev</button>
-      <button class="btn" id="nextBtn" type="button">Next →</button>
-    </div>
   </div>
 </div>
+
 
 
 
