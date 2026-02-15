@@ -128,7 +128,11 @@ button, input { font: inherit; color:inherit; }
   border-bottom:1px solid var(--border);
   display:flex; align-items:center; justify-content:space-between; gap:12px;
 }
-.panel .hd h2{ margin:0; font-size:13px; letter-spacing:.2px; }
+
+.panel .hd h2{
+  font-size: 12px;
+  letter-spacing: .15px;
+}
 
 .panel .bd{
   padding: 12px;
@@ -142,15 +146,16 @@ button, input { font: inherit; color:inherit; }
 }
 
 .field{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
-label{ font-size:12px; color: var(--muted); }
+label{ font-size:11px; color: var(--muted); }
 
 .input{
   width:100%;
-  padding:10px 12px;
+  padding: 9px 10px;
   border-radius:12px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.04);
   outline:none;
+  font-size: 12px;
 }
 [data-theme="light"] .input{ background: rgba(10,10,20,.03); }
 .input:focus{ box-shadow: var(--ring); }
@@ -158,27 +163,28 @@ label{ font-size:12px; color: var(--muted); }
 .chips{ display:flex; flex-wrap:wrap; gap:8px; }
 .chip{
   display:inline-flex; gap:8px; align-items:center;
-  padding:8px 10px;
+  font-size: 12px;
+  padding: 6px 9px;
   border-radius:999px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.04);
   cursor:pointer;
   transition: transform .12s ease, background .12s ease;
   user-select:none;
-  font-size:13px;
 }
 .chip:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
 .chip[data-on="true"]{
   background: linear-gradient(135deg, rgba(139,92,246,.22), rgba(34,211,238,.12));
   border-color: rgba(139,92,246,.35);
 }
-.chip .dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.30); }
+.chip .dot{ width:9px; height:9px; border-radius:999px; background: rgba(255,255,255,.30); }
 .chip[data-on="true"] .dot{ background: linear-gradient(135deg, var(--accent), var(--accent2)); }
 
 .btnrow{ display:flex; gap:10px; margin-top:12px; }
 .btn{
   flex:1;
-  padding:10px 12px;
+  font-size: 12px;
+  padding: 9px 10px;
   border-radius:12px;
   border:1px solid var(--border);
   background: var(--panel);
@@ -203,7 +209,8 @@ label{ font-size:12px; color: var(--muted); }
   list-style: none;
   cursor: pointer;
   user-select: none;
-  padding: 10px 12px;
+  font-size: 12px;
+  padding: 9px 10px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -420,4 +427,64 @@ body.modal-open .modal{ opacity: 1; pointer-events: auto; transform: translateY(
   .modalTop{ grid-template-columns: 96px 1fr; }
   .modalPoster{ width: 96px; height: 96px; border-radius: 16px; }
   .modalGrid{ grid-template-columns: 1fr; }
+}
+
+
+
+
+
+
+
+
+
+/* ===== Light-mode modal polish ===== */
+[data-theme="light"] .modalOverlay{
+  background: rgba(10,10,20,.35);
+  backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] .modalCard{
+  background: #ffffff;
+  border-color: rgba(10,10,20,.12);
+  box-shadow: 0 22px 55px rgba(10,10,20,.18);
+}
+
+[data-theme="light"] .modalTop{
+  border-bottom-color: rgba(10,10,20,.10);
+  background: linear-gradient(180deg, rgba(10,10,20,.02), rgba(10,10,20,.00));
+}
+
+[data-theme="light"] #modalTitle{
+  color: rgba(10,10,20,.92);
+}
+
+[data-theme="light"] .modalMeta{
+  color: rgba(10,10,20,.62);
+}
+
+[data-theme="light"] .modalSummary{
+  color: rgba(10,10,20,.86);
+}
+
+/* Make modal grid cards crisp */
+[data-theme="light"] .modalItem{
+  background: rgba(10,10,20,.03);
+  border-color: rgba(10,10,20,.10);
+}
+
+[data-theme="light"] .modalItem .k{
+  color: rgba(10,10,20,.55);
+}
+[data-theme="light"] .modalItem .v{
+  color: rgba(10,10,20,.90);
+}
+
+/* Close button looks better on white */
+[data-theme="light"] .modalTitleRow .iconbtn{
+  background: rgba(10,10,20,.04);
+  border-color: rgba(10,10,20,.12);
+  box-shadow: none;
+}
+[data-theme="light"] .modalTitleRow .iconbtn:hover{
+  background: rgba(10,10,20,.07);
 }
