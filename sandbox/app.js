@@ -2,7 +2,7 @@ const stories = [
   {
     id: "unearthly-child",
     title: "An Unearthly Child",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     serialno: "1",
     season: 1,
     episodes: 4,
@@ -15,7 +15,7 @@ const stories = [
   {
     id: "the-daleks",
     title: "The Daleks",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     serialno: "2",
     season: 1,
     episodes: 7,
@@ -28,7 +28,7 @@ const stories = [
   {
     id: "edge-of-destruction",
     title: "The Edge of Destruction",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     serialno: "3",
     season: 1,
     episodes: 2,
@@ -41,7 +41,7 @@ const stories = [
   {
     id: "marco-polo",
     title: "Marco Polo",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     serialno: "4",
     season: 7,
     episodes: 7,
@@ -54,7 +54,7 @@ const stories = [
   {
     id: "keys-of-marinus",
     title: "The Keys of Marinus",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     serialno: "5",
     season: 1,
     episodes: 6,
@@ -67,7 +67,7 @@ const stories = [
   {
     id: "the-aztecs",
     title: "The Aztecs",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     serialno: "6",
     season: 1,
     episodes: 4,
@@ -80,7 +80,7 @@ const stories = [
   {
     id: "the-sensorites",
     title: "The Sensorites",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     season: 1,
     serialno: "7",
     episodes: 6,
@@ -93,7 +93,7 @@ const stories = [
   {
     id: "reign-of-terror",
     title: "The Reign of Terror",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     season: 1,
     serialno: "8",
     episodes: 6,
@@ -106,7 +106,7 @@ const stories = [
   {
     id: "tenth-planet",
     title: "The Tenth Planet",
-    doctors: ["1st"],
+    doctors: ["1st Doctor"],
     season: 4,
     episodes: 4,
     code: "DD",
@@ -118,7 +118,7 @@ const stories = [
   {
     id: "tomb-of-the-cybermen",
     title: "The Tomb of the Cybermen",
-    doctors: ["2nd"],
+    doctors: ["2nd Doctor"],
     season: 5,
     episodes: 4,
     code: "QQ",
@@ -130,7 +130,7 @@ const stories = [
   {
     id: "spearhead-from-space",
     title: "Spearhead from Space",
-    doctors: ["3rd"],
+    doctors: ["3rd Doctor"],
     season: 7,
     episodes: 4,
     code: "AAA",
@@ -142,7 +142,7 @@ const stories = [
   {
     id: "blink",
     title: "Blink",
-    doctors: ["10th"],
+    doctors: ["10th Doctor"],
     season: 3,
     episodes: 1,
     code: "3.10",
@@ -154,7 +154,7 @@ const stories = [
   {
     id: "midnight",
     title: "Midnight",
-    doctors: ["10th"],
+    doctors: ["10th Doctor"],
     season: 4,
     episodes: 1,
     code: "4.10",
@@ -166,7 +166,7 @@ const stories = [
   {
     id: "war-games",
     title: "The War Games",
-    doctors: ["2nd"],
+    doctors: ["2nd Doctor"],
     season: 6,
     episodes: 10,
     code: "ZZ",
@@ -178,7 +178,7 @@ const stories = [
   {
     id: "genesis-of-the-daleks",
     title: "Genesis of the Daleks",
-    doctors: ["4th"],
+    doctors: ["4th Doctor"],
     season: 12,
     episodes: 6,
     code: "4E",
@@ -188,21 +188,9 @@ const stories = [
     tags: ["season 12"]
   },
   {
-    id: "city-of-death",
-    title: "City of Death",
-    doctors: ["4th"],
-    season: 17,
-    episodes: 4,
-    code: "5H",
-    image: "https://picsum.photos/seed/cityofdeath/1200/675",
-    summary: "Time travel, art theft, and Parisian charm.",
-    notes: ["Douglas Adams script", "Witty and stylish"],
-    tags: ["season 17"]
-  },
-  {
     id: "earthshock",
     title: "Earthshock",
-    doctors: ["5th"],
+    doctors: ["5th Doctor"],
     season: 19,
     episodes: 4,
     code: "6H",
@@ -214,7 +202,7 @@ const stories = [
   {
     id: "remembrance-of-the-daleks",
     title: "Remembrance of the Daleks",
-    doctors: ["7th"],
+    doctors: ["7th Doctor"],
     season: 25,
     episodes: 4,
     code: "7J",
@@ -226,7 +214,7 @@ const stories = [
   {
     id: "rose",
     title: "Rose",
-    doctors: ["9th"],
+    doctors: ["9th Doctor"],
     season: 1,
     episodes: 1,
     code: "1.01",
@@ -236,21 +224,9 @@ const stories = [
     tags: ["series 1"]
   },
   {
-    id: "the-empty-child",
-    title: "The Empty Child",
-    doctors: ["9th"],
-    season: 1,
-    episodes: 2,
-    code: "1.09",
-    image: "https://picsum.photos/seed/emptychild/1200/675",
-    summary: "A gas-mask child haunts wartime London.",
-    notes: ["Creepy as hell", "Captain Jack debut"],
-    tags: ["series 1"]
-  },
-  {
     id: "girl-in-the-fireplace",
     title: "The Girl in the Fireplace",
-    doctors: ["10th"],
+    doctors: ["10th Doctor"],
     season: 2,
     episodes: 1,
     code: "2.04",
@@ -262,7 +238,7 @@ const stories = [
   {
     id: "human-nature",
     title: "Human Nature / The Family of Blood",
-    doctors: ["10th"],
+    doctors: ["10th Doctor"],
     season: 3,
     episodes: 2,
     code: "3.08",
@@ -274,7 +250,7 @@ const stories = [
   {
     id: "eleventh-hour",
     title: "The Eleventh Hour",
-    doctors: ["11th"],
+    doctors: ["11th Doctor"],
     season: 5,
     episodes: 1,
     code: "5.01",
@@ -286,7 +262,7 @@ const stories = [
   {
     id: "day-of-the-doctor",
     title: "The Day of the Doctor",
-    doctors: ["10th", "11th", "War"],
+    doctors: ["10th Doctor", "11th Doctor", "War Doctor"],
     season: 7,
     episodes: 1,
     code: "50th",
@@ -298,7 +274,7 @@ const stories = [
   {
     id: "heaven-sent",
     title: "Heaven Sent",
-    doctors: ["12th"],
+    doctors: ["12th Doctor"],
     season: 9,
     episodes: 1,
     code: "9.11",
@@ -310,7 +286,7 @@ const stories = [
   {
     id: "woman-who-fell-to-earth",
     title: "The Woman Who Fell to Earth",
-    doctors: ["13th"],
+    doctors: ["13th Doctor"],
     season: 11,
     episodes: 1,
     code: "11.01",
