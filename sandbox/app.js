@@ -683,7 +683,7 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   `;
 
   const hero = document.getElementById("modalHero");
-  if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
+  if (hero) hero.style.setProperty("--hero-img", s.image ? `url("${s.image}")` : "none");
 
   els.meta.innerHTML = `
     <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
