@@ -8,9 +8,10 @@ const stories = [
     episodes: 4,
     code: "A",
     image: "/sandbox/img/1/unearthlychild.png",
-    summary: "Two schoolteachers follow a strange pupil home and uncover a time machine hidden in a junkyard.",
+    summary:
+      "Two schoolteachers follow a strange pupil home and uncover a time machine hidden in a junkyard.",
     notes: ["First Doctor Who story", "Introduces the TARDIS"],
-    tags: ["season 1"]
+    tags: ["season 1"],
   },
   {
     id: "the-daleks",
@@ -23,7 +24,7 @@ const stories = [
     image: "/sandbox/img/1/thedaleks.png",
     summary: "The Doctor and companions encounter the Daleks on the planet Skaro.",
     notes: ["First Dalek story", "Established the show’s popularity"],
-    tags: ["season 1"]
+    tags: ["season 1"],
   },
   {
     id: "edge-of-destruction",
@@ -36,7 +37,7 @@ const stories = [
     image: "/sandbox/img/1/edgeofdestruction.png",
     summary: "Strange forces aboard the TARDIS turn the crew against each other.",
     notes: ["Early TARDIS paranoia story"],
-    tags: ["season 2"]
+    tags: ["season 2"],
   },
   {
     id: "marco-polo",
@@ -49,7 +50,7 @@ const stories = [
     image: "/sandbox/img/1/marcopolo.png",
     summary: "The Doctor and companions journey with Marco Polo across Asia.",
     notes: ["Classic historical adventure"],
-    tags: ["season 2"]
+    tags: ["season 2"],
   },
   {
     id: "keys-of-marinus",
@@ -62,7 +63,7 @@ const stories = [
     image: "/sandbox/img/1/keysofmarinus.png",
     summary: "A quest across Marinus to recover the Keys of Conscience.",
     notes: ["Quest story structure"],
-    tags: ["season 3"]
+    tags: ["season 3"],
   },
   {
     id: "the-aztecs",
@@ -75,7 +76,7 @@ const stories = [
     image: "/sandbox/img/1/theaztecs.png",
     summary: "Barbara is mistaken for a goddess in 15th-century Mexico.",
     notes: ["Classic historical story"],
-    tags: ["season 4"]
+    tags: ["season 4"],
   },
   {
     id: "the-sensorites",
@@ -88,7 +89,7 @@ const stories = [
     image: "/sandbox/img/1/thesensorites.png",
     summary: "A strange alien presence threatens a human expedition.",
     notes: ["Atmospheric early alien story"],
-    tags: ["season 5"]
+    tags: ["season 5"],
   },
   {
     id: "reign-of-terror",
@@ -101,7 +102,7 @@ const stories = [
     image: "/sandbox/img/1/thereignofterror.png",
     summary: "The TARDIS crew are caught up in the French Revolution.",
     notes: ["Historical adventure"],
-    tags: ["season 5"]
+    tags: ["season 5"],
   },
   {
     id: "tenth-planet",
@@ -113,7 +114,7 @@ const stories = [
     image: "/sandbox/img/1/tenthplanet.png",
     summary: "The Cybermen debut as Earth's twin planet Mondas appears in the sky.",
     notes: ["First Cybermen story", "First regeneration"],
-    tags: ["season 4"]
+    tags: ["season 4"],
   },
   {
     id: "tomb-of-the-cybermen",
@@ -125,7 +126,7 @@ const stories = [
     image: "/wiki/img/episodes/sickofancy.png",
     summary: "An archaeological expedition wakes a sleeping Cyber fleet.",
     notes: ["A classic base under siege feel", "Cybermen at their creepiest"],
-    tags: ["season 5"]
+    tags: ["season 5"],
   },
   {
     id: "spearhead-from-space",
@@ -137,7 +138,7 @@ const stories = [
     image: "https://picsum.photos/seed/spearhead/1200/675",
     summary: "UNIT investigates Auton activity as the Doctor regenerates.",
     notes: ["First Third Doctor story", "Strong action + mystery"],
-    tags: ["season 7"]
+    tags: ["season 7"],
   },
   {
     id: "blink",
@@ -149,7 +150,7 @@ const stories = [
     image: "https://picsum.photos/seed/blink/1200/675",
     summary: "A timey-wimey thriller featuring the Weeping Angels.",
     notes: ["Perfect standalone", "Infamous quotes everywhere"],
-    tags: ["series 3"]
+    tags: ["series 3"],
   },
   {
     id: "midnight",
@@ -161,7 +162,7 @@ const stories = [
     image: "https://picsum.photos/seed/midnight/1200/675",
     summary: "A tour shuttle becomes a pressure-cooker paranoia chamber.",
     notes: ["Psychological horror", "Incredible tension and performances"],
-    tags: ["series 4"]
+    tags: ["series 4"],
   },
   {
     id: "war-games",
@@ -173,7 +174,7 @@ const stories = [
     image: "https://picsum.photos/seed/wargames/1200/675",
     summary: "The Second Doctor faces the Time Lords for the first time.",
     notes: ["Epic 10-part finale", "First Time Lord appearance"],
-    tags: ["season 6"]
+    tags: ["season 6"],
   },
   {
     id: "genesis-of-the-daleks",
@@ -185,7 +186,7 @@ const stories = [
     image: "https://picsum.photos/seed/genesis/1200/675",
     summary: "The Doctor is sent to Skaro to prevent the Daleks’ creation.",
     notes: ["Davros debut", "Moral dilemma masterpiece"],
-    tags: ["season 12"]
+    tags: ["season 12"],
   },
   {
     id: "earthshock",
@@ -197,7 +198,7 @@ const stories = [
     image: "https://picsum.photos/seed/earthshock/1200/675",
     summary: "A shocking Cyberman return story.",
     notes: ["Huge twist ending", "Fan-favourite Fifth Doctor story"],
-    tags: ["season 19"]
+    tags: ["season 19"],
   },
   {
     id: "remembrance-of-the-daleks",
@@ -209,7 +210,7 @@ const stories = [
     image: "https://picsum.photos/seed/remembrance/1200/675",
     summary: "The Doctor manipulates events in 1963 London.",
     notes: ["Dalek civil war", "Darker Seventh Doctor tone"],
-    tags: ["season 25"]
+    tags: ["season 25"],
   },
   {
     id: "rose",
@@ -221,7 +222,7 @@ const stories = [
     image: "https://picsum.photos/seed/rose/1200/675",
     summary: "The Doctor meets Rose Tyler.",
     notes: ["Modern revival begins", "Autons return"],
-    tags: ["series 1"]
+    tags: ["series 1"],
   },
   {
     id: "girl-in-the-fireplace",
@@ -233,7 +234,7 @@ const stories = [
     image: "https://picsum.photos/seed/fireplace/1200/675",
     summary: "The Doctor meets Madame de Pompadour.",
     notes: ["Emotional time romance", "Moffat time mechanics"],
-    tags: ["series 2"]
+    tags: ["series 2"],
   },
   {
     id: "human-nature",
@@ -245,7 +246,7 @@ const stories = [
     image: "https://picsum.photos/seed/humannature/1200/675",
     summary: "The Doctor becomes human to escape pursuit.",
     notes: ["Dark emotional arc", "Brilliant performance"],
-    tags: ["series 3"]
+    tags: ["series 3"],
   },
   {
     id: "eleventh-hour",
@@ -257,7 +258,7 @@ const stories = [
     image: "https://picsum.photos/seed/eleventhhour/1200/675",
     summary: "The Eleventh Doctor crashes into Amelia Pond’s life.",
     notes: ["New Doctor energy", "Crack in the wall"],
-    tags: ["series 5"]
+    tags: ["series 5"],
   },
   {
     id: "day-of-the-doctor",
@@ -269,7 +270,7 @@ const stories = [
     image: "https://picsum.photos/seed/daydoctor/1200/675",
     summary: "The Doctors unite to save Gallifrey.",
     notes: ["50th Anniversary special", "Multi-Doctor chaos"],
-    tags: ["series 7", "multi-doctor", "specials"]
+    tags: ["series 7", "multi-doctor", "specials"],
   },
   {
     id: "heaven-sent",
@@ -281,7 +282,7 @@ const stories = [
     image: "https://picsum.photos/seed/heavensent/1200/675",
     summary: "The Doctor trapped alone inside a confession dial.",
     notes: ["One-man masterpiece", "Grief + endurance"],
-    tags: ["series 9"]
+    tags: ["series 9"],
   },
   {
     id: "woman-who-fell-to-earth",
@@ -293,8 +294,8 @@ const stories = [
     image: "https://picsum.photos/seed/womanfell/1200/675",
     summary: "The Thirteenth Doctor’s debut adventure.",
     notes: ["New era reset", "Sheffield setting"],
-    tags: ["series 11"]
-  }
+    tags: ["series 11"],
+  },
 ];
 
 const els = {
@@ -371,11 +372,12 @@ function doctorPillsHTML(s, { clickable = true } = {}) {
   const ds = getDoctorList(s);
   if (!ds.length) return `<span class="badge">—</span>`;
 
-  return ds.map((d) => {
-    const on = selectedDoctors.has(d);
-    if (!clickable) return `<span class="badge">${escapeHtml(d)}</span>`;
+  return ds
+    .map((d) => {
+      const on = selectedDoctors.has(d);
+      if (!clickable) return `<span class="badge">${escapeHtml(d)}</span>`;
 
-    return `
+      return `
       <button type="button"
         class="badge badge--doctor ${on ? "is-on" : ""}"
         data-doctor="${escapeHtml(d)}"
@@ -384,14 +386,15 @@ function doctorPillsHTML(s, { clickable = true } = {}) {
         ${escapeHtml(d)}
       </button>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 function getFilters() {
   return {
-    q: els.q.value.trim(),
-    doctor: els.doctor.value,
-    doctors: Array.from(selectedDoctors)
+    q: els.q?.value?.trim() ?? "",
+    doctor: els.doctor?.value ?? "",
+    doctors: Array.from(selectedDoctors),
   };
 }
 
@@ -412,12 +415,12 @@ function storySearchHaystack(s) {
     s.serialno,
     s.season,
     s.episodes,
-    ...(Array.isArray(s.tags) ? s.tags : [])
+    ...(Array.isArray(s.tags) ? s.tags : []),
   ];
 
   return parts
-    .flatMap(v => Array.isArray(v) ? v : [v])
-    .filter(v => v !== undefined && v !== null && String(v).trim() !== "")
+    .flatMap((v) => (Array.isArray(v) ? v : [v]))
+    .filter((v) => v !== undefined && v !== null && String(v).trim() !== "")
     .join(" ")
     .toLowerCase();
 }
@@ -427,8 +430,9 @@ function matchesQuery(s, rawQuery) {
   if (!term) return true;
 
   if (mode === "tag") {
-    return (Array.isArray(s.tags) ? s.tags : [])
-      .some(t => String(t).toLowerCase().includes(term));
+    return (Array.isArray(s.tags) ? s.tags : []).some((t) =>
+      String(t).toLowerCase().includes(term)
+    );
   }
 
   return storySearchHaystack(s).includes(term);
@@ -437,8 +441,8 @@ function matchesQuery(s, rawQuery) {
 // ---------- Tag autocomplete ----------
 function buildTagIndex(items) {
   const seen = new Map();
-  items.forEach(s => {
-    (Array.isArray(s.tags) ? s.tags : []).forEach(t => {
+  items.forEach((s) => {
+    (Array.isArray(s.tags) ? s.tags : []).forEach((t) => {
       const orig = String(t).trim();
       if (!orig) return;
       const key = orig.toLowerCase();
@@ -491,14 +495,16 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
 
   function highlight(idx) {
     const items = Array.from(panel.querySelectorAll(".ac__item"));
-    items.forEach((el, i) => el.setAttribute("aria-selected", i === idx ? "true" : "false"));
+    items.forEach((el, i) =>
+      el.setAttribute("aria-selected", i === idx ? "true" : "false")
+    );
   }
 
   function choose(idx) {
     const tag = current[idx];
     if (!tag) return;
 
-    input.value = (fillMode === "plain") ? tag : `tag:${tag}`;
+    input.value = fillMode === "plain" ? tag : `tag:${tag}`;
     close();
     input.focus();
 
@@ -511,7 +517,10 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
     current = list;
     active = -1;
 
-    if (!list.length) { close(); return; }
+    if (!list.length) {
+      close();
+      return;
+    }
 
     list.forEach((tag, i) => {
       const btn = document.createElement("button");
@@ -523,7 +532,10 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
         <span class="ac__tag">${escapeHtml(tag)}</span>
         <span class="ac__hint">${fillMode === "tag" ? "tag search" : "search"}</span>
       `;
-      btn.addEventListener("mousedown", (e) => { e.preventDefault(); choose(i); });
+      btn.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        choose(i);
+      });
       panel.appendChild(btn);
     });
 
@@ -534,10 +546,13 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
     tags = buildTagIndex(stories);
     const term = getTerm(input.value);
 
-    if (!term) { close(); return; }
+    if (!term) {
+      close();
+      return;
+    }
 
     const list = tags
-      .filter(t => t.toLowerCase().includes(term))
+      .filter((t) => t.toLowerCase().includes(term))
       .slice(0, maxItems);
 
     renderList(list);
@@ -558,10 +573,27 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
       return;
     }
 
-    if (e.key === "Escape") { e.preventDefault(); close(); return; }
-    if (e.key === "ArrowDown") { e.preventDefault(); active = Math.min(active + 1, current.length - 1); highlight(active); return; }
-    if (e.key === "ArrowUp") { e.preventDefault(); active = Math.max(active - 1, 0); highlight(active); return; }
-    if (e.key === "Enter" && active >= 0) { e.preventDefault(); choose(active); }
+    if (e.key === "Escape") {
+      e.preventDefault();
+      close();
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      active = Math.min(active + 1, current.length - 1);
+      highlight(active);
+      return;
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      active = Math.max(active - 1, 0);
+      highlight(active);
+      return;
+    }
+    if (e.key === "Enter" && active >= 0) {
+      e.preventDefault();
+      choose(active);
+    }
   });
 
   document.addEventListener("mousedown", (e) => {
@@ -571,7 +603,7 @@ function initTagAutocomplete({ maxItems = 10, fillMode = "plain" } = {}) {
     close();
   });
 
-  input.addEventListener("blur", () => setTimeout(close, 80));
+  input.addEventListener("blur", () => setTimeout(() => close(), 80));
   els.clear?.addEventListener("click", () => close());
 }
 
@@ -582,9 +614,9 @@ function applyFilters(items, f) {
 
     const storyDoctors = getDoctorList(s);
     const matchesDoctor =
-      (f.doctors && f.doctors.length)
-        ? f.doctors.some(d => storyDoctors.includes(d))
-        : (!f.doctor || storyDoctors.includes(f.doctor));
+      f.doctors && f.doctors.length
+        ? f.doctors.some((d) => storyDoctors.includes(d))
+        : !f.doctor || storyDoctors.includes(f.doctor);
 
     return matchesQ && matchesDoctor;
   });
@@ -618,12 +650,15 @@ function cardTemplate(s) {
     : `<span>${escapeHtml(s.title.split(" ")[0])}</span>`;
 
   return `
-    <article class="card" tabindex="0" role="button" data-id="${escapeHtml(s.id)}"
-      aria-label="Open ${escapeHtml(s.title)}">
+    <article class="card" tabindex="0" role="button" data-id="${escapeHtml(
+      s.id
+    )}" aria-label="Open ${escapeHtml(s.title)}">
       <div class="card__media">${img}</div>
       <div class="card__body">
         <h3 class="card__title">${escapeHtml(s.title)}</h3>
-        <p class="card__sub">Serial ${escapeHtml(s.serialno ?? "—")} • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
+        <p class="card__sub">Serial ${escapeHtml(
+          s.serialno ?? "—"
+        )} • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
         <div class="badges">
           ${doctorPillsHTML(s, { clickable: true })}
         </div>
@@ -636,10 +671,12 @@ function cardTemplate(s) {
 let renderRAF = 0;
 
 function render() {
+  if (!els.grid || !els.count) return;
+
   if (renderRAF) cancelAnimationFrame(renderRAF);
 
   filtered = applyFilters(stories, getFilters());
-  els.count.textContent = filtered.length;
+  els.count.textContent = String(filtered.length);
 
   els.grid.style.opacity = "0";
 
@@ -647,7 +684,6 @@ function render() {
     els.grid.innerHTML = filtered.map(cardTemplate).join("");
 
     const cards = Array.from(els.grid.querySelectorAll(".card"));
-
     cards.forEach((card, i) => {
       card.addEventListener("click", () => openModal(i, { updateHash: true }));
       card.addEventListener("keydown", (e) => {
@@ -665,63 +701,70 @@ function render() {
 }
 
 // ---------- Modal ----------
+let heroToken = 0;
+
 function openModal(index, { updateHash } = { updateHash: true }) {
-  if (!filtered.length) return;
+  if (!filtered.length || !els.modal || !els.dialog) return;
 
   activeIndex = Math.max(0, Math.min(index, filtered.length - 1));
   const s = filtered[activeIndex];
 
   lastFocused = document.activeElement;
 
-  els.title.textContent = s.title;
+  if (els.title) els.title.textContent = s.title;
 
-  // Doctors as clickable pills + episode count
-  els.desc.innerHTML = `
-    <span class="modal__doctors">${doctorPillsHTML(s, { clickable: true })}</span>
-    <span class="modal__sep"> • </span>
-    <span>${s.episodes} episode${s.episodes === 1 ? "" : "s"}</span>
-  `;
-
-const hero = document.getElementById("modalHero");
-
-if (hero) {
-  // default: no image, contain mode
-  hero.style.setProperty("--hero-img", s.image ? `url("${s.image}")` : "none");
-  hero.classList.remove("is-wide");
-
-  if (s.image) {
-    const img = new Image();
-    img.onload = () => {
-      const isWide = (img.naturalWidth / img.naturalHeight) >= 1.45; // tweak
-      hero.classList.toggle("is-wide", isWide);
-    };
-    img.src = s.image;
+  if (els.desc) {
+    els.desc.innerHTML = `
+      <span class="modal__doctors">${doctorPillsHTML(s, { clickable: true })}</span>
+      <span class="modal__sep"> • </span>
+      <span>${s.episodes} episode${s.episodes === 1 ? "" : "s"}</span>
+    `;
   }
-}
 
+  // --- HERO IMAGE (contain by default, cover if wide) ---
+  const hero = document.getElementById("modalHero");
+  if (hero) {
+    hero.style.setProperty("--hero-img", s.image ? `url("${s.image}")` : "none");
+    hero.classList.remove("is-wide");
 
-  
-} else if (hero) {
-  hero.style.setProperty("--hero-img", "none");
-  hero.classList.remove("hero--cover");
-}
+    const token = ++heroToken;
 
+    if (s.image) {
+      const img = new Image();
+      img.onload = () => {
+        if (token !== heroToken) return; // ignore old loads
+        const ratio = img.naturalWidth / img.naturalHeight;
+        const isWide = ratio >= 1.45; // tweak threshold
+        hero.classList.toggle("is-wide", isWide);
+      };
+      img.src = s.image;
+    }
+  }
 
-  els.meta.innerHTML = `
-    <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
-    <div class="kv"><span>Doctor</span><strong>${doctorPillsHTML(s, { clickable: true })}</strong></div>
-    <div class="kv"><span>Episodes</span><strong>${s.episodes}</strong></div>
-  `;
+  if (els.meta) {
+    els.meta.innerHTML = `
+      <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
+      <div class="kv"><span>Doctor</span><strong>${doctorPillsHTML(
+        s,
+        { clickable: true }
+      )}</strong></div>
+      <div class="kv"><span>Episodes</span><strong>${s.episodes}</strong></div>
+    `;
+  }
 
-  els.summary.textContent = s.summary || "—";
-  els.notes.innerHTML = (s.notes || []).map((n) => `<li>${escapeHtml(n)}</li>`).join("") || "<li>—</li>";
+  if (els.summary) els.summary.textContent = s.summary || "—";
+  if (els.notes)
+    els.notes.innerHTML =
+      (s.notes || []).map((n) => `<li>${escapeHtml(n)}</li>`).join("") || "<li>—</li>";
 
   const canStep = filtered.length >= 2;
-  els.prev.disabled = !canStep;
-  els.next.disabled = !canStep;
+  if (els.prev) els.prev.disabled = !canStep;
+  if (els.next) els.next.disabled = !canStep;
   if (els.prev2) els.prev2.disabled = !canStep;
   if (els.next2) els.next2.disabled = !canStep;
 
+  // Your CSS uses .modal.is-open
+  els.modal.classList.add("is-open");
   els.modal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
   els.dialog.focus();
@@ -730,6 +773,9 @@ if (hero) {
 }
 
 function closeModal({ clearHash } = { clearHash: true }) {
+  if (!els.modal) return;
+
+  els.modal.classList.remove("is-open");
   els.modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
   if (clearHash) setStoryHash("");
@@ -742,21 +788,24 @@ function step(delta) {
   openModal(nextIndex, { updateHash: true });
 }
 
-els.modal.addEventListener("click", (e) => {
+els.modal?.addEventListener("click", (e) => {
   if (e.target && e.target.matches("[data-close]")) closeModal({ clearHash: true });
 });
 
-els.close.addEventListener("click", () => closeModal({ clearHash: true }));
-els.prev.addEventListener("click", () => step(-1));
-els.next.addEventListener("click", () => step(1));
+els.close?.addEventListener("click", () => closeModal({ clearHash: true }));
+els.prev?.addEventListener("click", () => step(-1));
+els.next?.addEventListener("click", () => step(1));
 els.prev2?.addEventListener("click", () => step(-1));
 els.next2?.addEventListener("click", () => step(1));
 
 document.addEventListener("keydown", (e) => {
-  const open = els.modal.getAttribute("aria-hidden") === "false";
+  const open = els.modal?.getAttribute("aria-hidden") === "false";
   if (!open) return;
 
-  if (e.key === "Escape") { e.preventDefault(); closeModal({ clearHash: true }); }
+  if (e.key === "Escape") {
+    e.preventDefault();
+    closeModal({ clearHash: true });
+  }
   if (e.key === "ArrowLeft") step(-1);
   if (e.key === "ArrowRight") step(1);
 
@@ -764,6 +813,8 @@ document.addEventListener("keydown", (e) => {
 });
 
 function trapFocus(e) {
+  if (!els.dialog) return;
+
   const focusables = els.dialog.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
   );
@@ -774,15 +825,20 @@ function trapFocus(e) {
   const last = list[list.length - 1];
   const active = document.activeElement;
 
-  if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
-  else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+  if (e.shiftKey && active === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && active === last) {
+    e.preventDefault();
+    first.focus();
+  }
 }
 
 function handleHashChange() {
   const id = getStoryIdFromHash();
 
   if (!id) {
-    if (els.modal.getAttribute("aria-hidden") === "false") {
+    if (els.modal?.getAttribute("aria-hidden") === "false") {
       suppressHashWrite = true;
       closeModal({ clearHash: false });
       suppressHashWrite = false;
@@ -828,6 +884,7 @@ function initTheme() {
   const saved = localStorage.getItem("theme");
   setTheme(saved || "dark");
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   els.theme?.addEventListener("click", () => {
@@ -838,13 +895,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ---------- Controls ----------
 function closeIfOpen() {
-  if (els.modal.getAttribute("aria-hidden") === "false") closeModal({ clearHash: true });
+  if (els.modal?.getAttribute("aria-hidden") === "false") closeModal({ clearHash: true });
 }
 
-els.q.addEventListener("input", () => { render(); closeIfOpen(); });
+els.q?.addEventListener("input", () => {
+  render();
+  closeIfOpen();
+});
 
 // Dropdown = single-select, also clears multi-select when "All"
-els.doctor.addEventListener("change", () => {
+els.doctor?.addEventListener("change", () => {
   const v = els.doctor.value;
   selectedDoctors.clear();
   if (v) selectedDoctors.add(v);
@@ -852,16 +912,16 @@ els.doctor.addEventListener("change", () => {
   closeIfOpen();
 });
 
-els.clear.addEventListener("click", () => {
-  els.q.value = "";
-  els.doctor.value = "";
+els.clear?.addEventListener("click", () => {
+  if (els.q) els.q.value = "";
+  if (els.doctor) els.doctor.value = "";
   selectedDoctors.clear();
   render();
   closeIfOpen();
 });
 
 // Clicking a doctor pill on cards toggles multi-select WITHOUT opening modal
-els.grid.addEventListener("click", (e) => {
+els.grid?.addEventListener("click", (e) => {
   const btn = e.target.closest(".badge--doctor[data-doctor]");
   if (!btn) return;
 
@@ -871,7 +931,7 @@ els.grid.addEventListener("click", (e) => {
 });
 
 // Clicking a doctor pill in modal toggles and closes (so you see filtered grid)
-els.dialog.addEventListener("click", (e) => {
+els.dialog?.addEventListener("click", (e) => {
   const btn = e.target.closest(".badge--doctor[data-doctor]");
   if (!btn) return;
 
@@ -881,12 +941,15 @@ els.dialog.addEventListener("click", (e) => {
 });
 
 function populateDoctorOptions() {
-  const doctors = Array.from(new Set(stories.flatMap(s => getDoctorList(s))))
-    .sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
+  if (!els.doctor) return;
+
+  const doctors = Array.from(new Set(stories.flatMap((s) => getDoctorList(s)))).sort((a, b) =>
+    a.localeCompare(b, undefined, { sensitivity: "base" })
+  );
 
   els.doctor.innerHTML =
     `<option value="">All</option>` +
-    doctors.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join("");
+    doctors.map((d) => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join("");
 }
 
 window.addEventListener("scroll", () => {
@@ -894,7 +957,7 @@ window.addEventListener("scroll", () => {
 });
 
 document.querySelector("#featuredBtn")?.addEventListener("click", () => {
-  const idx = filtered.findIndex(s => s.id === "day-of-the-doctor");
+  const idx = filtered.findIndex((s) => s.id === "day-of-the-doctor");
   if (idx !== -1) openModal(idx, { updateHash: true });
 });
 
