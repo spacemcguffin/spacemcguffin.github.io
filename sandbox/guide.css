@@ -900,3 +900,30 @@ select.field__input optgroup{
   .modal__hero-title{ font-size:22px; }
   .modal__actions .btn{ padding:9px 12px; font-size:14px; }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Modal OPEN state: work with aria-hidden OR .is-open --- */
+.modal[aria-hidden="true"]{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal[aria-hidden="false"]{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal[aria-hidden="false"] .modal__dialog{
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
