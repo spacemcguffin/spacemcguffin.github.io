@@ -2,6 +2,167 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Onest:wght@400;600;700;800&display=swap");
 
+
+
+
+
+
+
+
+
+/* ===========================
+   1) Remove top gap above navbar
+   =========================== */
+
+/* Browser default is usually body { margin: 8px } */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* If you use full-bleed sections, this helps avoid accidental overflow gaps */
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Tighten navbar layout */
+.navbar{
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 14px 24px;          /* tweak */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Your logo class has a leading space in HTML: class=" brand-logo"
+   Browsers still treat it as "brand-logo", so this is fine */
+.brand-logo{
+  display: block;              /* removes inline-img baseline gap */
+  height: 34px;                /* tweak */
+  width: auto;
+}
+
+/* Optional: remove extra spacing that can come from list defaults */
+.nav-links{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 18px;                   /* nicer than inline margin-left */
+  align-items: center;
+}
+
+/* Optional: your <p> wrappers can add vertical spacing */
+.nav-items p{
+  margin: 0;
+}
+
+/* ===========================
+   2) Premium prev/next buttons
+   =========================== */
+
+.movies-list{
+  position: relative;          /* lets buttons overlay the row */
+}
+
+/* Premium “glass pill” buttons */
+.pre-btn, .nxt-btn{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255,255,255,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.07));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.10);
+
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Positioning */
+.pre-btn{ left: 10px; }
+.nxt-btn{ right: 10px; }
+
+/* Hover / active */
+.pre-btn:hover, .nxt-btn:hover{
+  transform: translateY(-50%) translateY(-2px) scale(1.04);
+  border-color: rgba(255,255,255,.28);
+  box-shadow:
+    0 22px 60px rgba(0,0,0,.50),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+.pre-btn:active, .nxt-btn:active{
+  transform: translateY(-50%) scale(.98);
+}
+
+/* Focus ring */
+.pre-btn:focus-visible, .nxt-btn:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.18),
+    0 18px 45px rgba(0,0,0,.40),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+/* Arrow icon polish */
+.pre-btn img, .nxt-btn img{
+  width: 18px;
+  height: 18px;
+  display: block;
+  opacity: .95;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+.pre-btn:hover img, .nxt-btn:hover img{
+  transform: scale(1.08);
+  opacity: 1;
+}
+
+/* Optional: make the edges fade a bit so overlay buttons feel intentional */
+.movies-list::before,
+.movies-list::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 60px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.movies-list::before{
+  left: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,0));
+}
+
+.movies-list::after{
+  right: 0;
+  background: linear-gradient(270deg, rgba(0,0,0,.45), rgba(0,0,0,0));
+}
+
+
+
+
+
 /* =========================================================
    Lewflix — Clean / Fixed CSS
    Works with your current HTML class names.
