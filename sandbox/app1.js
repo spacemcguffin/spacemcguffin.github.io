@@ -215,20 +215,21 @@ function storyCard(s){
   ].filter(Boolean).join(" • ");
 
   return `
-    <div class="card" role="button" tabindex="0"
+    <div class="card tile" role="button" tabindex="0"
          data-id="${escapeHTML(s.id)}"
          aria-label="${escapeHTML(s.title)}">
-
-      <div class="poster large">${poster}</div>
-
-      <div class="meta">
-        <div class="name">${escapeHTML(s.title)}</div>
-        <div class="line">${escapeHTML(line)}</div>
+      <div class="tileMedia">
+        ${poster}
+        <div class="tileShade"></div>
+        <div class="tileInfo">
+          <div class="tileTitle">${escapeHTML(s.title)}</div>
+          <div class="tileMeta">${escapeHTML(line)}</div>
+        </div>
       </div>
-
     </div>
   `;
 }
+
 
 
 
