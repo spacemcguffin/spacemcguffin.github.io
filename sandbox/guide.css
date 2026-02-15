@@ -532,7 +532,7 @@ body.scrolled .topbar{ box-shadow: 0 12px 40px rgba(0,0,0,.45); }
   overflow:hidden;
 
   /* Foreground image: show whole image */
-  background-image: var(--hero-url, none); /* optional, JS can ignore this */
+background-image: var(--hero-img, none);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
