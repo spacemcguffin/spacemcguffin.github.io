@@ -1389,83 +1389,90 @@ select.field__input optgroup{
 
 
 
-/* ===== Glass Theme Toggle ===== */
-
+/* ===== Glass Slider Toggle ===== */
 .theme-toggle{
-  border-radius: 999px;
-  padding: 6px;
-  display: inline-flex;
-  align-items: center;
+  width: 68px;
+  height: 36px;
+  border: 0;
+  background: transparent;
   cursor: pointer;
-  transition:
-    background .25s ease,
-    border-color .25s ease,
-    box-shadow .25s ease,
-    transform .15s ease,
-    backdrop-filter .25s ease;
+  display: inline-grid;
+  place-items: center;
+}
+
+/* Track */
+.theme-toggle__track{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,.15);
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.15),
+    0 4px 20px rgba(0,0,0,.25);
+
+  transition: background .3s ease, border-color .3s ease;
+}
+
+/* Thumb */
+.theme-toggle__thumb{
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-}
 
-/* --- DARK MODE (white glass) --- */
-[data-theme="dark"] .theme-toggle{
   background: rgba(255,255,255,.85);
-  border: 1px solid rgba(255,255,255,.35);
   box-shadow:
-    0 6px 18px rgba(0,0,0,.55),
-    inset 0 1px 0 rgba(255,255,255,.6);
+    0 4px 12px rgba(0,0,0,.35),
+    inset 0 1px 1px rgba(255,255,255,.4);
+
+  transition: transform .35s cubic-bezier(.2,.8,.2,1),
+              background .3s ease;
 }
 
-/* --- LIGHT MODE (black glass) --- */
-[data-theme="light"] .theme-toggle{
-  background: rgba(0,0,0,.85);
-  border: 1px solid rgba(0,0,0,.4);
-  box-shadow:
-    0 6px 18px rgba(0,0,0,.2),
-    inset 0 1px 0 rgba(255,255,255,.15);
-  color: #fff;
-}
-
-/* Hover lift */
-.theme-toggle:hover{
-  transform: translateY(-1px);
-}
-
-
-
-
-
-
-
-
-.theme-toggle__track{
-  width: 58px;
-  height: 28px;
-  border-radius: 999px;
-  position: relative;
-}
-
-.theme-toggle__thumb{
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  position: absolute;
-  top: 3px;
-  left: 3px;
-  transition: transform .35s cubic-bezier(.4,0,.2,1);
-}
-
-/* Dark mode → black thumb on white glass */
+/* DARK MODE */
 [data-theme="dark"] .theme-toggle__thumb{
-  background: #000;
-  transform: translateX(30px);
+  transform: translateX(32px);
+  background: rgba(0,0,0,.85);
 }
 
-/* Light mode → white thumb on black glass */
-[data-theme="light"] .theme-toggle__thumb{
-  background: #fff;
+[data-theme="dark"] .theme-toggle__track{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.18);
 }
+
+/* LIGHT MODE */
+[data-theme="light"] .theme-toggle__thumb{
+  transform: translateX(0);
+  background: rgba(255,255,255,.95);
+}
+
+[data-theme="light"] .theme-toggle__track{
+  background: rgba(0,0,0,.06);
+  border-color: rgba(0,0,0,.15);
+}
+
+/* Hover polish */
+.theme-toggle:hover .theme-toggle__track{
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,.2),
+    0 6px 24px rgba(0,0,0,.3);
+}
+
+.theme-toggle:active .theme-toggle__thumb{
+  transform: translateX(var(--toggle-x, 0)) scale(.96);
+}
+
 
 
 
