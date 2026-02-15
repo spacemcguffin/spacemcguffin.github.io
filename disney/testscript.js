@@ -1,9 +1,5 @@
 /* =========================================================
    Lewflix script.js (fresh)
-   - Rail buttons scroll the row smoothly
-   - Click card => modal
-   - Scroll lock is done correctly (no stuck scrollbar)
-   - Adds search box to navbar (auto-injects if missing)
    ========================================================= */
 
 (() => {
