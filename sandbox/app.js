@@ -526,7 +526,7 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   lastFocused = document.activeElement;
 
   els.title.textContent = s.title;
-  els.desc.textContent = `${s.doctor} Doctor • ${s.episodes} ep${s.episodes === 1 ? "" : "s"}`;
+  els.desc.textContent = `${s.doctor} Doctor • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}`;
 
 const hero = document.getElementById("modalHero");
 if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
