@@ -651,7 +651,6 @@ window.addEventListener("hashchange", handleHashChange);
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
-  els.theme.textContent = theme === "light" ? "☾" : "☀";
 }
 function initTheme() {
   const saved = localStorage.getItem("theme");
