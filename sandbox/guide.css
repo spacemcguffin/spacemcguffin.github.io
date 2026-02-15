@@ -831,3 +831,103 @@ select.field__input optgroup{
 }
 
 
+
+
+
+
+
+
+.card{
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform .25s cubic-bezier(.2,.8,.2,1),
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(125,211,252,.6),
+    rgba(167,139,250,.6),
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity:0;
+  transition: opacity .3s ease;
+  pointer-events:none;
+}
+
+.card:hover{
+  transform: perspective(800px) translateY(-6px) rotateX(3deg);
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.45),
+    0 0 30px rgba(125,211,252,.25);
+}
+
+.card:hover::before{
+  opacity:1;
+}
+
+
+
+.card__media img{
+  transition: transform .4s ease, filter .4s ease;
+}
+
+.card:hover .card__media img{
+  transform: scale(1.08);
+  filter: saturate(1.15) contrast(1.05);
+}
+
+
+
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    120deg,
+    transparent 30%,
+    rgba(255,255,255,.12),
+    transparent 70%
+  );
+  transform: translateX(-120%);
+  transition: transform .6s ease;
+  pointer-events:none;
+}
+
+.card:hover::after{
+  transform: translateX(120%);
+}
+
+
+
+
+.card:hover .badge--accent{
+  background: linear-gradient(
+    135deg,
+    rgba(125,211,252,.35),
+    rgba(167,139,250,.3)
+  );
+  color: white;
+}
+
+
+
+.grid:hover .card:not(:hover){
+  filter: brightness(.6) saturate(.8);
+  transform: scale(.96);
+}
+
