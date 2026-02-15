@@ -382,10 +382,10 @@ function escapeHtml(str) {
 function getFilters() {
   return {
     q: els.q.value.trim().toLowerCase(),
-    doctor: els.doctor.value,
-    era: els.era?.value || ""
+    doctor: els.doctor.value
   };
 }
+
 
 
 function applyFilters(items, f) {
@@ -765,15 +765,14 @@ function closeIfOpen() {
 
 els.q.addEventListener("input", () => { render(); closeIfOpen(); });
 els.doctor.addEventListener("change", () => { render(); closeIfOpen(); });
-els.era.addEventListener("change", () => { render(); closeIfOpen(); });
 
 els.clear.addEventListener("click", () => {
   els.q.value = "";
   els.doctor.value = "";
-  els.era.value = "";
   render();
   closeIfOpen();
 });
+
 
 
 
