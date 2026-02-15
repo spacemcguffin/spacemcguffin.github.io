@@ -729,4 +729,4 @@ document.querySelector("#randomBtn")?.addEventListener("click", () => {
 initTheme();
 populateDoctorOptions();
 render();
-handleHashChange();
+handleHashChange(); 
