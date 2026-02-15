@@ -1,52 +1,65 @@
 /* archive-transform.js
-   Converts the existing .maintable table into collapsible month blocks + entry grid cards.
-   Text-only. No links. No external deps.
+   Converts .maintable table into collapsible month blocks + entry-grid cards.
+   No links. Text only.
 */
-
 (function () {
   "use strict";
+
+  const CONFIG = {
+    openFirstMonth: true,
+    removeSourceTable: true, // set false if you want to keep the table hidden for debugging
+  };
 
   function textOf(el) {
     return (el?.textContent || "").replace(/\s+/g, " ").trim();
   }
 
-  function pad2(n) {
-    const s = String(n).trim();
+  function pad2(value) {
+    const s = String(value || "").trim();
     if (!s) return "";
-    // If it's already 2+ chars (e.g. "10"), keep it.
     if (s.length >= 2) return s;
     return "0" + s;
   }
 
-  function buildArchiveFromTable(table, { openFirstMonth = true } = {}) {
-    const rows = Array.from(table.querySelectorAll("tbody tr, tr"));
+  function isMonthRow(tds) {
+    if (tds.length !== 1) return false;
+    const cell = tds[0];
+    const colspan = cell.getAttribute("colspan");
+    const colSpanNum = cell.colSpan || 0;
+
+    // Your markup uses colspan="2"
+    const hasColspan2 = colspan === "2" || colSpanNum === 2;
+
+    // Must contain .month or look like "January 2025"
+    const label = textOf(cell.querySelector(".month")) || textOf(cell);
+    const looksLikeMonth = /\b(20\d{2})\b/.test(label) && /[A-Za-z]/.test(label);
+
+    return hasColspan2 && looksLikeMonth;
+  }
+
+  function buildArchive(table) {
+    const rows = Array.from(table.querySelectorAll("tr"));
     const archive = document.createElement("div");
     archive.className = "archive";
 
     let currentDetails = null;
     let currentGrid = null;
-    let monthIndex = 0;
+    let monthCount = 0;
 
     for (const tr of rows) {
-      const tds = Array.from(tr.children).filter((n) => n.tagName === "TD" || n.tagName === "TH");
+      const tds = Array.from(tr.children).filter(
+        (n) => n.tagName === "TD" || n.tagName === "TH"
+      );
       if (!tds.length) continue;
 
-      // Month header row: usually <td colspan="2"><div class="month">January 2025</div></td>
-      const isMonthHeader =
-        tds.length === 1 &&
-        (tds[0].getAttribute("colspan") === "2" || tds[0].colSpan === 2) &&
-        (tds[0].querySelector(".month") || textOf(tds[0]).match(/\b(20\d{2})\b/));
-
-      if (isMonthHeader) {
+      // Month header
+      if (isMonthRow(tds)) {
         const monthLabel = textOf(tds[0].querySelector(".month")) || textOf(tds[0]);
-        if (!monthLabel) continue;
+        monthCount++;
 
         currentDetails = document.createElement("details");
         currentDetails.className = "month-block";
-        monthIndex += 1;
-
-        // open first month (optional)
-        if (openFirstMonth && monthIndex === 1) currentDetails.open = true;
+        if (CONFIG.openFirstMonth && monthCount === 1) currentDetails.open = true;
 
         const summary = document.createElement("summary");
         summary.className = "month-head";
@@ -68,25 +81,19 @@
         currentDetails.appendChild(summary);
         currentDetails.appendChild(currentGrid);
         archive.appendChild(currentDetails);
-
         continue;
       }
 
-      // Entry row: day in first cell, title in second cell (or .eptitles)
-      // Expect 2 columns, but be tolerant.
-      const dayCell = tds[0];
-      const titleCell = tds[1] || null;
-
-      const dayRaw = textOf(dayCell);
+      // Entry row: first cell is day, second is title
+      const dayRaw = textOf(tds[0]);
       const titleRaw =
-        textOf(titleCell?.querySelector(".eptitles")) ||
-        textOf(titleCell) ||
-        (tds.length >= 2 ? textOf(tds[1]) : "");
+        textOf(tds[1]?.querySelector(".eptitles")) ||
+        textOf(tds[1]) ||
+        "";
 
-      // Skip rows that don't look like entries
       if (!dayRaw || !titleRaw) continue;
 
-      // If we haven't seen a month header yet, create a fallback
+      // If an entry appears before any month header, create a fallback month section
       if (!currentDetails || !currentGrid) {
         currentDetails = document.createElement("details");
         currentDetails.className = "month-block";
@@ -130,9 +137,8 @@
       currentGrid.appendChild(card);
     }
 
-    // Update counts
-    const monthBlocks = archive.querySelectorAll(".month-block");
-    monthBlocks.forEach((details) => {
+    // Update counts per month
+    archive.querySelectorAll(".month-block").forEach((details) => {
       const grid = details.querySelector(".entry-grid");
       const countEl = details.querySelector(".month-head .count");
       const count = grid ? grid.children.length : 0;
@@ -146,21 +152,32 @@
     const wrapper = document.querySelector(".maintable");
     if (!wrapper) return;
 
+    // Prevent double transforms
+    if (wrapper.dataset.transformed === "1") return;
+
     const table = wrapper.querySelector("table");
     if (!table) return;
 
-    // Build new archive layout
-    const archive = buildArchiveFromTable(table, { openFirstMonth: true });
+    // Hide source while converting (prevents table flash)
+    wrapper.style.visibility = "hidden";
 
-    // Replace table with archive
-    wrapper.innerHTML = "";
-    wrapper.appendChild(archive);
+    const archive = buildArchive(table);
 
-    // Optional: add a class to body so you can target styles if needed
+    if (CONFIG.removeSourceTable) {
+      wrapper.innerHTML = "";
+      wrapper.appendChild(archive);
+      wrapper.classList.add("maintable--transformed");
+    } else {
+      // Keep table but hide it
+      table.style.display = "none";
+      wrapper.appendChild(archive);
+    }
+
+    wrapper.dataset.transformed = "1";
+    wrapper.style.visibility = "";
     document.body.classList.add("archive-enhanced");
   }
 
-  // Run after DOM is ready
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", init);
   } else {
