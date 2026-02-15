@@ -1,95 +1,99 @@
+<!-- index.html -->
 <!doctype html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Doctor Who Story Guide</title>
+  <title>Doctor Who Episode Guide</title>
   <link rel="stylesheet" href="test1.css" />
 </head>
 <body>
-
   <header class="topbar">
     <div class="wrap topbar__inner">
       <a class="brand" href="#">
-        <span class="brand__mark">🌀</span>
-        <span>Story Guide</span>
+        <span class="brand__mark">⧗</span>
+        <span>Episode Guide</span>
       </a>
 
-      <nav class="nav" aria-label="Top navigation">
-        <a class="nav__link is-active" href="#top">Stories</a>
+      <nav class="nav" aria-label="Sections">
+        <a class="nav__link is-active" href="#grid">Stories</a>
+        <a class="nav__link" href="#about">About</a>
       </nav>
 
-      <!-- Theme toggle -->
-      <button id="themeBtn" class="theme-toggle" aria-pressed="true" aria-label="Toggle theme">
-        <span class="theme-toggle__track">
-          <span class="theme-toggle__thumb"></span>
+      <!-- theme toggle (needs inner track/thumb to match your CSS) -->
+      <button id="themeBtn" class="theme-toggle" type="button" aria-pressed="true" aria-label="Toggle theme">
+        <span class="theme-toggle__track" aria-hidden="true">
+          <span class="theme-toggle__thumb" aria-hidden="true"></span>
         </span>
       </button>
+
+      <button id="clearBtn" class="iconbtn" type="button" aria-label="Clear filters">✕</button>
     </div>
   </header>
 
-  <main class="wrap" id="top">
+  <main class="wrap">
     <section class="hero">
-      <h1 class="hero__title">Doctor Who — Story Guide</h1>
-      <p class="hero__sub">Search titles, codes, seasons, and hidden tags. Filter by Doctor(s).</p>
+      <h1 class="hero__title">Doctor Who Stories</h1>
+      <p class="hero__sub">Search includes titles, codes, doctors, seasons, and hidden tags.</p>
 
       <div class="controls">
         <div class="field ac">
           <label class="field__label" for="q">Search</label>
-          <input id="q" class="field__input" placeholder='Try "daleks" or "tag:series 7"' autocomplete="off" />
-          <!-- autocomplete panel injected by JS -->
+          <input id="q" class="field__input" placeholder="Search… (try: tag:series 7)" autocomplete="off" />
+          <!-- autocomplete panel injected here -->
         </div>
 
         <div class="field">
-          <label class="field__label" for="doctor">Search by Doctor</label>
+          <label class="field__label" for="doctor">Doctor</label>
           <select id="doctor" class="field__input">
             <option value="">All</option>
           </select>
         </div>
 
         <div class="field field--button">
-          <button id="clearBtn" class="btn" type="button">Clear</button>
+          <button id="randomBtn" class="btn" type="button">Random</button>
         </div>
       </div>
 
       <div class="meta">
-        Showing <strong id="count">0</strong> stories
+        <span><strong id="count">0</strong> results</span>
         <span class="meta__sep">•</span>
-        <button id="featuredBtn" class="btn btn--play" type="button">Featured</button>
-        <button id="randomBtn" class="btn" type="button">Random</button>
+        <button id="featuredBtn" class="btn btn--ghost" type="button">Featured</button>
       </div>
     </section>
 
-    <section class="grid" id="grid" aria-live="polite"></section>
+    <section>
+      <div id="grid" class="grid" aria-live="polite"></div>
+    </section>
   </main>
 
-  <footer class="footer">
-    <div class="wrap">Built for your sandbox — tags are searchable but never displayed.</div>
+  <footer id="about" class="wrap footer">
+    <p>Built for your Doctor Who guide. Add seasons, tags, and images any time.</p>
   </footer>
 
   <!-- Modal -->
-  <div id="modal" class="modal" aria-hidden="true" data-close>
+  <div id="modal" class="modal" aria-hidden="true">
     <div class="modal__backdrop" data-close></div>
 
-    <div class="modal__dialog" role="dialog" aria-modal="true" aria-label="Story details" tabindex="-1">
+    <div class="modal__dialog" role="dialog" aria-modal="true" tabindex="-1">
       <div class="modal__scroll">
-        <section class="modal__hero" id="modalHero">
+        <div id="modalHero" class="modal__hero">
           <div class="modal__hero-overlay"></div>
 
-          <button id="closeBtn" class="iconbtn modal__close" type="button" aria-label="Close">✕</button>
+          <button id="closeBtn" class="iconbtn modal__close" type="button" data-close aria-label="Close">✕</button>
 
           <div class="modal__hero-content">
-            <h2 id="modalTitle" class="modal__hero-title">—</h2>
-            <div id="modalDesc" class="modal__hero-desc">—</div>
+            <h2 id="modalTitle" class="modal__hero-title">Title</h2>
+            <div id="modalDesc" class="modal__hero-desc"></div>
 
             <div class="modal__actions">
-              <button id="prevBtn" class="btn btn--ghost" type="button">← Prev</button>
-              <button id="nextBtn" class="btn btn--primary" type="button">Next →</button>
+              <button id="prevBtn" class="btn btn--ghost" type="button">Prev</button>
+              <button id="nextBtn" class="btn btn--primary" type="button">Next</button>
             </div>
           </div>
-        </section>
+        </div>
 
-        <section class="modal__content">
+        <div class="modal__content">
           <div id="modalMeta" class="modal__meta"></div>
 
           <div class="modal__text">
@@ -99,13 +103,13 @@
             <h3>Notes</h3>
             <ul id="modalNotes"><li>—</li></ul>
           </div>
-        </section>
+        </div>
       </div>
 
-      <footer class="modal__footer">
-        <button class="btn btn--ghost" type="button" id="prevBtn2">← Prev</button>
-        <button class="btn btn--primary" type="button" id="nextBtn2">Next →</button>
-      </footer>
+      <div class="modal__footer">
+        <button id="prevBtn2" class="btn btn--ghost" type="button">Prev</button>
+        <button id="nextBtn2" class="btn btn--ghost" type="button">Next</button>
+      </div>
     </div>
   </div>
 
