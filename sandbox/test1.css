@@ -19,7 +19,7 @@
   --ring: 0 0 0 3px rgba(139,92,246,.25);
 
   --maxw:1220px;
-  --sidew:260px;
+  --sidew:260px;        /* reduced sidebar width */
   --topbarH:64px;
 }
 
@@ -124,19 +124,16 @@ button, input { font: inherit; color:inherit; }
   overflow:hidden;
 }
 .panel .hd{
-  padding:14px 14px 10px;
+  padding:12px 12px 10px;
   border-bottom:1px solid var(--border);
   display:flex; align-items:center; justify-content:space-between; gap:12px;
 }
-
 .panel .hd h2{
+  margin:0;
   font-size: 12px;
-  letter-spacing: .15px;
+  letter-spacing:.15px;
 }
-
-.panel .bd{
-  padding: 12px;
-}
+.panel .bd{ padding:12px; }
 
 .sidebar{
   position: sticky;
@@ -145,50 +142,54 @@ button, input { font: inherit; color:inherit; }
   opacity: .95;
 }
 
-.field{ display:flex; flex-direction:column; gap:8px; margin-bottom:12px; }
+.field{ display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
 label{ font-size:11px; color: var(--muted); }
 
 .input{
   width:100%;
-  padding: 9px 10px;
+  padding:9px 10px;
   border-radius:12px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.04);
   outline:none;
-  font-size: 12px;
+  font-size:12px;
 }
 [data-theme="light"] .input{ background: rgba(10,10,20,.03); }
 .input:focus{ box-shadow: var(--ring); }
 
 .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+
 .chip{
   display:inline-flex; gap:8px; align-items:center;
-  font-size: 12px;
-  padding: 6px 9px;
+  padding:6px 9px;
   border-radius:999px;
   border:1px solid var(--border);
   background: rgba(255,255,255,.04);
   cursor:pointer;
   transition: transform .12s ease, background .12s ease;
   user-select:none;
+  font-size:12px;
 }
 .chip:hover{ transform: translateY(-1px); background: rgba(255,255,255,.06); }
 .chip[data-on="true"]{
   background: linear-gradient(135deg, rgba(139,92,246,.22), rgba(34,211,238,.12));
   border-color: rgba(139,92,246,.35);
 }
-.chip .dot{ width:9px; height:9px; border-radius:999px; background: rgba(255,255,255,.30); }
+.chip .dot{
+  width:9px; height:9px; border-radius:999px;
+  background: rgba(255,255,255,.30);
+}
 .chip[data-on="true"] .dot{ background: linear-gradient(135deg, var(--accent), var(--accent2)); }
 
-.btnrow{ display:flex; gap:10px; margin-top:12px; }
+.btnrow{ display:flex; gap:10px; margin-top:10px; }
 .btn{
   flex:1;
-  font-size: 12px;
-  padding: 9px 10px;
+  padding:9px 10px;
   border-radius:12px;
   border:1px solid var(--border);
   background: var(--panel);
   cursor:pointer;
+  font-size:12px;
 }
 .btn.primary{
   background: linear-gradient(135deg, rgba(139,92,246,.85), rgba(34,211,238,.60));
@@ -209,17 +210,17 @@ label{ font-size:11px; color: var(--muted); }
   list-style: none;
   cursor: pointer;
   user-select: none;
-  font-size: 12px;
   padding: 9px 10px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:12px;
+  font-size:12px;
 }
 .accordion summary::-webkit-details-marker{ display:none; }
 .accordion .chev{ opacity:.7; transition: transform .15s ease; }
 .accordion details[open] .chev{ transform: rotate(180deg); }
-.accBody{ padding: 10px 12px 12px; border-top: 1px solid var(--border); }
+.accBody{ padding: 10px 10px 12px; border-top: 1px solid var(--border); }
 
 /* ===== Results header ===== */
 .mainhead{ margin-bottom: 12px; }
@@ -273,6 +274,7 @@ label{ font-size:11px; color: var(--muted); }
   transform: scale(1.10);
 }
 
+/* Stronger shade for readability */
 .tileShade{
   position:absolute;
   inset:0;
@@ -284,6 +286,15 @@ label{ font-size:11px; color: var(--muted); }
       rgba(0,0,0,0.88) 100%
     );
   pointer-events:none;
+}
+[data-theme="light"] .tileShade{
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.00) 30%,
+      rgba(10,10,20,0.12) 70%,
+      rgba(10,10,20,0.35) 100%
+    );
 }
 
 .tileInfo{
@@ -305,6 +316,10 @@ label{ font-size:11px; color: var(--muted); }
   text-shadow:
     0 2px 6px rgba(0,0,0,.6),
     0 8px 20px rgba(0,0,0,.55);
+  display:-webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
 }
 
 .tileMeta{
@@ -312,6 +327,24 @@ label{ font-size:11px; color: var(--muted); }
   font-weight: 500;
   color: rgba(255,255,255,.92);
   text-shadow: 0 4px 12px rgba(0,0,0,.6);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+[data-theme="light"] .tileMeta{
+  color: rgba(10,10,20,.82);
+  text-shadow: none;
+}
+[data-theme="light"] .tileTitle{
+  color: rgba(10,10,20,.92);
+  text-shadow: none;
+}
+
+.card.tile:hover .tileTitle{
+  text-shadow:
+    0 0 12px rgba(139,92,246,.55),
+    0 6px 18px rgba(0,0,0,.65);
 }
 
 .card.tile:focus{
@@ -319,16 +352,6 @@ label{ font-size:11px; color: var(--muted); }
   box-shadow: 0 22px 50px rgba(0,0,0,.55), var(--ring);
   border-color: rgba(139,92,246,.45);
 }
-
-
-.card.tile:hover .tileTitle{
-  color: #ffffff;
-  text-shadow:
-    0 0 12px rgba(139,92,246,.55),
-    0 6px 18px rgba(0,0,0,.65);
-}
-
-
 
 /* ===== Empty state ===== */
 .empty{
@@ -341,7 +364,7 @@ label{ font-size:11px; color: var(--muted); }
   margin-top:14px;
 }
 
-/* ===== Modal ===== */
+/* ===== Modal base ===== */
 .modalOverlay{
   position: fixed;
   inset: 0;
@@ -372,42 +395,167 @@ label{ font-size:11px; color: var(--muted); }
   box-shadow: var(--shadow);
   overflow: hidden;
 }
+
+/* ===== Streaming-style modal header poster (full-width) ===== */
 .modalTop{
   display: grid;
-  grid-template-columns: 150px 1fr;
-  gap: 14px;
-  padding: 14px;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 0;
   border-bottom: 1px solid var(--border);
+  position: relative;
 }
+
 .modalPoster{
-  width: 150px;
-  height: 150px;
-  border-radius: 18px;
-  border: 1px solid var(--border);
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  border: 0;
+  position: relative;
   background:
     radial-gradient(26px 26px at 30% 25%, rgba(255,255,255,.18), transparent 60%),
     linear-gradient(135deg, rgba(139,92,246,.55), rgba(34,211,238,.35));
   overflow: hidden;
 }
-.modalPoster img{ width:100%; height:100%; object-fit:cover; display:block; }
-.modalHead{ display:flex; flex-direction:column; gap: 10px; min-width:0; }
-.modalTitleRow{ display:flex; align-items:flex-start; justify-content:space-between; gap: 12px; }
-#modalTitle{ margin: 2px 0 0; font-size: 18px; letter-spacing: .2px; line-height: 1.2; }
-.modalMeta{ color: var(--muted); font-size: 13px; }
-.modalBody{ padding: 14px; }
-.modalSummary{ margin: 0 0 12px; color: rgba(255,255,255,.86); }
-[data-theme="light"] .modalSummary{ color: rgba(10,10,20,.86); }
+.modalPoster img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+}
+.modalPoster::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,0.00) 35%,
+    rgba(0,0,0,0.55) 75%,
+    rgba(0,0,0,0.85) 100%
+  );
+  pointer-events:none;
+}
 
-.modalGrid{ display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+/* Title/meta overlay on poster */
+.modalHead{
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 2;
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
+  min-width:0;
+}
+
+.modalTitleRow{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+
+#modalTitle{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: .2px;
+  line-height: 1.15;
+  text-shadow:
+    0 2px 8px rgba(0,0,0,.60),
+    0 10px 24px rgba(0,0,0,.55);
+}
+
+.modalMeta{
+  color: rgba(255,255,255,.90);
+  font-size: 13px;
+  font-weight: 500;
+  text-shadow: 0 4px 12px rgba(0,0,0,.60);
+}
+
+/* Close button floats nicely on poster */
+.modalTitleRow .iconbtn{
+  background: rgba(0,0,0,.35);
+  border-color: rgba(255,255,255,.18);
+  box-shadow: none;
+}
+.modalTitleRow .iconbtn:hover{
+  background: rgba(0,0,0,.45);
+}
+
+.modalBody{
+  padding: 14px 16px 16px;
+}
+
+.modalSummary{
+  margin: 0 0 12px;
+  color: rgba(255,255,255,.86);
+}
+
+/* Modal grid */
+.modalGrid{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
 .modalItem{
   border: 1px solid var(--border);
   border-radius: 16px;
   background: rgba(255,255,255,.04);
   padding: 10px 12px;
 }
-[data-theme="light"] .modalItem{ background: rgba(10,10,20,.03); }
 .modalItem .k{ display:block; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
 .modalItem .v{ display:block; font-size: 14px; }
+
+/* ===== Light-mode modal polish ===== */
+[data-theme="light"] .modalOverlay{
+  background: rgba(10,10,20,.35);
+  backdrop-filter: blur(8px);
+}
+[data-theme="light"] .modalCard{
+  background: #ffffff;
+  border-color: rgba(10,10,20,.12);
+  box-shadow: 0 22px 55px rgba(10,10,20,.18);
+}
+[data-theme="light"] .modalPoster::after{
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.00) 35%,
+    rgba(10,10,20,0.10) 70%,
+    rgba(10,10,20,0.30) 100%
+  );
+}
+[data-theme="light"] #modalTitle{
+  color: rgba(10,10,20,.92);
+  text-shadow: none;
+}
+[data-theme="light"] .modalMeta{
+  color: rgba(10,10,20,.78);
+  text-shadow: none;
+}
+[data-theme="light"] .modalSummary{
+  color: rgba(10,10,20,.86);
+}
+[data-theme="light"] .modalItem{
+  background: rgba(10,10,20,.03);
+  border-color: rgba(10,10,20,.10);
+}
+[data-theme="light"] .modalItem .k{
+  color: rgba(10,10,20,.55);
+}
+[data-theme="light"] .modalItem .v{
+  color: rgba(10,10,20,.90);
+}
+[data-theme="light"] .modalTitleRow .iconbtn{
+  background: rgba(255,255,255,.65);
+  border-color: rgba(10,10,20,.12);
+}
+[data-theme="light"] .modalTitleRow .iconbtn:hover{
+  background: rgba(255,255,255,.85);
+}
 
 body.modal-open{ overflow: hidden; }
 body.modal-open .modalOverlay{ opacity: 1; pointer-events: auto; }
@@ -424,67 +572,11 @@ body.modal-open .modal{ opacity: 1; pointer-events: auto; transform: translateY(
 }
 @media (max-width: 640px){
   .grid{ grid-template-columns: 1fr; }
-  .modalTop{ grid-template-columns: 96px 1fr; }
-  .modalPoster{ width: 96px; height: 96px; border-radius: 16px; }
+  .modalHead{
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+  }
+  #modalTitle{ font-size: 18px; }
   .modalGrid{ grid-template-columns: 1fr; }
-}
-
-
-
-
-
-
-
-
-
-/* ===== Light-mode modal polish ===== */
-[data-theme="light"] .modalOverlay{
-  background: rgba(10,10,20,.35);
-  backdrop-filter: blur(8px);
-}
-
-[data-theme="light"] .modalCard{
-  background: #ffffff;
-  border-color: rgba(10,10,20,.12);
-  box-shadow: 0 22px 55px rgba(10,10,20,.18);
-}
-
-[data-theme="light"] .modalTop{
-  border-bottom-color: rgba(10,10,20,.10);
-  background: linear-gradient(180deg, rgba(10,10,20,.02), rgba(10,10,20,.00));
-}
-
-[data-theme="light"] #modalTitle{
-  color: rgba(10,10,20,.92);
-}
-
-[data-theme="light"] .modalMeta{
-  color: rgba(10,10,20,.62);
-}
-
-[data-theme="light"] .modalSummary{
-  color: rgba(10,10,20,.86);
-}
-
-/* Make modal grid cards crisp */
-[data-theme="light"] .modalItem{
-  background: rgba(10,10,20,.03);
-  border-color: rgba(10,10,20,.10);
-}
-
-[data-theme="light"] .modalItem .k{
-  color: rgba(10,10,20,.55);
-}
-[data-theme="light"] .modalItem .v{
-  color: rgba(10,10,20,.90);
-}
-
-/* Close button looks better on white */
-[data-theme="light"] .modalTitleRow .iconbtn{
-  background: rgba(10,10,20,.04);
-  border-color: rgba(10,10,20,.12);
-  box-shadow: none;
-}
-[data-theme="light"] .modalTitleRow .iconbtn:hover{
-  background: rgba(10,10,20,.07);
 }
