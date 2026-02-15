@@ -743,25 +743,83 @@ select.field__input optgroup{
   backdrop-filter: blur(10px);
 }
 
-/* Buttons */
-.btn--primary{
-  background: linear-gradient(
-    135deg,
-    color-mix(in oklab, var(--accent) 85%, white 15%),
-    color-mix(in oklab, var(--accent2) 85%, white 15%)
-  );
+/* ===== Prestige Modal Buttons ===== */
+
+.modal__actions .btn{
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 500;
+  letter-spacing: .02em;
+  backdrop-filter: blur(10px);
+  transition: 
+    background .25s ease,
+    transform .18s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+
+
+.modal__actions .btn--primary{
+  background: rgba(255,255,255,.92);
+  color: #0b0f14;
+  border: 1px solid rgba(255,255,255,.4);
+  box-shadow: 0 8px 30px rgba(0,0,0,.25);
+}
+
+.modal__actions .btn--primary:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 40px rgba(0,0,0,.35);
+}
+
+
+
+
+
+.modal__actions .btn--ghost{
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+.modal__actions .btn--ghost:hover{
+  background: rgba(255,255,255,.14);
+  border-color: rgba(255,255,255,.25);
+  transform: translateY(-2px);
+}
+
+
+
+
+
+
+
+[data-theme="light"] .modal__actions .btn--primary{
+  background: #111;
   color: white;
-  border-color: color-mix(in oklab, var(--accent) 40%, var(--line));
+  border-color: #111;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
 }
 
-.btn--primary:hover{ filter: brightness(1.04); }
+[data-theme="light"] .modal__actions .btn--primary:hover{
+  background: #000;
+}
 
-.btn--ghost{
-  background: var(--panel);
+[data-theme="light"] .modal__actions .btn--ghost{
+  background: rgba(0,0,0,.05);
+  border: 1px solid rgba(0,0,0,.12);
+  color: rgba(0,0,0,.8);
 }
-.btn--ghost:hover{
-  background: var(--panel2);
+
+[data-theme="light"] .modal__actions .btn--ghost:hover{
+  background: rgba(0,0,0,.08);
 }
+
+
+
+
+
+
 
 @media (max-width: 720px){
   .modal{ padding: 10px; place-items: end center; }
