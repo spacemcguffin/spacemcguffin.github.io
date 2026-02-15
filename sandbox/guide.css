@@ -1387,3 +1387,86 @@ select.field__input optgroup{
 
 
 
+
+
+/* ===== Theme Toggle (Prestige) ===== */
+
+.theme-toggle{
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.theme-toggle__track{
+  width: 60px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--panel2), var(--panel));
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  transition: background .3s ease, border-color .3s ease;
+}
+
+.theme-toggle__thumb{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: grid;
+  place-items: center;
+  position: relative;
+  transform: translateX(0);
+  transition: transform .35s cubic-bezier(.4,.0,.2,1),
+              background .3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+.theme-toggle__icon{
+  position: absolute;
+  font-size: 12px;
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+/* Light mode state */
+[data-theme="light"] .theme-toggle__thumb{
+  transform: translateX(28px);
+}
+
+/* Icon visibility */
+.theme-toggle__icon--sun{
+  opacity: 0;
+  transform: scale(.7);
+}
+
+.theme-toggle__icon--moon{
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-theme="light"] .theme-toggle__icon--sun{
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-theme="light"] .theme-toggle__icon--moon{
+  opacity: 0;
+  transform: scale(.7);
+}
+
+/* Subtle glow shift */
+[data-theme="dark"] .theme-toggle__thumb{
+  box-shadow: 0 0 12px rgba(125,211,252,.6);
+}
+
+[data-theme="light"] .theme-toggle__thumb{
+  box-shadow: 0 0 12px rgba(255,180,0,.4);
+}
+
+
+
+
+
+
