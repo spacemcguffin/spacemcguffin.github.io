@@ -1,13 +1,11 @@
-/* archive-transform.js
-   Converts .maintable table into collapsible month blocks + entry-grid cards.
-   No links. Text only.
+/* archive-transform.js (Two-column Month Index + Entries panel)
+   Reads .maintable table and replaces it with a wiki-ish two-column archive.
 */
 (function () {
   "use strict";
 
   const CONFIG = {
-    openFirstMonth: true,
-    removeSourceTable: true, // set false if you want to keep the table hidden for debugging
+    openMonth: "first", // "first" or "last"
   };
 
   function textOf(el) {
@@ -17,8 +15,7 @@
   function pad2(value) {
     const s = String(value || "").trim();
     if (!s) return "";
-    if (s.length >= 2) return s;
-    return "0" + s;
+    return s.length >= 2 ? s : "0" + s;
   }
 
   function isMonthRow(tds) {
@@ -26,25 +23,18 @@
     const cell = tds[0];
     const colspan = cell.getAttribute("colspan");
     const colSpanNum = cell.colSpan || 0;
-
-    // Your markup uses colspan="2"
     const hasColspan2 = colspan === "2" || colSpanNum === 2;
 
-    // Must contain .month or look like "January 2025"
     const label = textOf(cell.querySelector(".month")) || textOf(cell);
     const looksLikeMonth = /\b(20\d{2})\b/.test(label) && /[A-Za-z]/.test(label);
 
     return hasColspan2 && looksLikeMonth;
   }
 
-  function buildArchive(table) {
+  function parseTable(table) {
     const rows = Array.from(table.querySelectorAll("tr"));
-    const archive = document.createElement("div");
-    archive.className = "archive";
-
-    let currentDetails = null;
-    let currentGrid = null;
-    let monthCount = 0;
+    const months = [];
+    let current = null;
 
     for (const tr of rows) {
       const tds = Array.from(tr.children).filter(
@@ -52,39 +42,13 @@
       );
       if (!tds.length) continue;
 
-      // Month header
       if (isMonthRow(tds)) {
-        const monthLabel = textOf(tds[0].querySelector(".month")) || textOf(tds[0]);
-        monthCount++;
-
-        currentDetails = document.createElement("details");
-        currentDetails.className = "month-block";
-        if (CONFIG.openFirstMonth && monthCount === 1) currentDetails.open = true;
-
-        const summary = document.createElement("summary");
-        summary.className = "month-head";
-
-        const labelSpan = document.createElement("span");
-        labelSpan.className = "label";
-        labelSpan.textContent = monthLabel;
-
-        const countSpan = document.createElement("span");
-        countSpan.className = "count";
-        countSpan.textContent = "0 entries";
-
-        summary.appendChild(labelSpan);
-        summary.appendChild(countSpan);
-
-        currentGrid = document.createElement("div");
-        currentGrid.className = "entry-grid";
-
-        currentDetails.appendChild(summary);
-        currentDetails.appendChild(currentGrid);
-        archive.appendChild(currentDetails);
+        const label = textOf(tds[0].querySelector(".month")) || textOf(tds[0]);
+        current = { label, entries: [] };
+        months.push(current);
         continue;
       }
 
-      // Entry row: first cell is day, second is title
       const dayRaw = textOf(tds[0]);
       const titleRaw =
         textOf(tds[1]?.querySelector(".eptitles")) ||
@@ -93,89 +57,174 @@
 
       if (!dayRaw || !titleRaw) continue;
 
-      // If an entry appears before any month header, create a fallback month section
-      if (!currentDetails || !currentGrid) {
-        currentDetails = document.createElement("details");
-        currentDetails.className = "month-block";
-        currentDetails.open = true;
-
-        const summary = document.createElement("summary");
-        summary.className = "month-head";
-
-        const labelSpan = document.createElement("span");
-        labelSpan.className = "label";
-        labelSpan.textContent = "Entries";
-
-        const countSpan = document.createElement("span");
-        countSpan.className = "count";
-        countSpan.textContent = "0 entries";
-
-        summary.appendChild(labelSpan);
-        summary.appendChild(countSpan);
-
-        currentGrid = document.createElement("div");
-        currentGrid.className = "entry-grid";
-
-        currentDetails.appendChild(summary);
-        currentDetails.appendChild(currentGrid);
-        archive.appendChild(currentDetails);
+      if (!current) {
+        current = { label: "Entries", entries: [] };
+        months.push(current);
       }
 
-      const card = document.createElement("div");
-      card.className = "entry-card";
-
-      const day = document.createElement("span");
-      day.className = "day";
-      day.textContent = pad2(dayRaw);
-
-      const title = document.createElement("span");
-      title.className = "title";
-      title.textContent = titleRaw;
-
-      card.appendChild(day);
-      card.appendChild(title);
-      currentGrid.appendChild(card);
+      current.entries.push({ day: pad2(dayRaw), title: titleRaw });
     }
 
-    // Update counts per month
-    archive.querySelectorAll(".month-block").forEach((details) => {
-      const grid = details.querySelector(".entry-grid");
-      const countEl = details.querySelector(".month-head .count");
-      const count = grid ? grid.children.length : 0;
-      if (countEl) countEl.textContent = `${count} ${count === 1 ? "entry" : "entries"}`;
+    // Drop empty months if any
+    return months.filter((m) => m.entries.length > 0);
+  }
+
+  function slugifyMonth(label) {
+    return label
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "");
+  }
+
+  function buildUI(months) {
+    const root = document.createElement("div");
+    root.className = "archive-two";
+
+    // Left index
+    const index = document.createElement("aside");
+    index.className = "month-index";
+
+    const indexTitle = document.createElement("h3");
+    indexTitle.textContent = "Months";
+    index.appendChild(indexTitle);
+
+    const ul = document.createElement("ul");
+    ul.className = "month-list";
+    index.appendChild(ul);
+
+    // Right panel
+    const panel = document.createElement("section");
+    panel.className = "month-panel";
+
+    const panelHead = document.createElement("div");
+    panelHead.className = "month-panel-head";
+
+    const panelTitle = document.createElement("div");
+    panelTitle.className = "title";
+
+    const panelMeta = document.createElement("div");
+    panelMeta.className = "meta";
+
+    panelHead.appendChild(panelTitle);
+    panelHead.appendChild(panelMeta);
+
+    const grid = document.createElement("div");
+    grid.className = "entry-grid";
+
+    panel.appendChild(panelHead);
+    panel.appendChild(grid);
+
+    // State
+    const byId = new Map();
+    const monthIds = months.map((m) => {
+      const id = slugifyMonth(m.label);
+      byId.set(id, m);
+      return id;
     });
 
-    return archive;
+    function renderMonth(id, { setHash = true } = {}) {
+      const m = byId.get(id) || months[0];
+      const currentId = byId.has(id) ? id : monthIds[0];
+
+      // Update buttons
+      ul.querySelectorAll(".month-btn").forEach((btn) => {
+        btn.setAttribute("aria-current", btn.dataset.monthId === currentId ? "true" : "false");
+      });
+
+      // Update panel
+      panelTitle.textContent = m.label;
+      panelMeta.textContent = `${m.entries.length} ${m.entries.length === 1 ? "entry" : "entries"}`;
+
+      grid.innerHTML = "";
+      for (const e of m.entries) {
+        const card = document.createElement("div");
+        card.className = "entry-card";
+
+        const day = document.createElement("span");
+        day.className = "day";
+        day.textContent = e.day;
+
+        const title = document.createElement("span");
+        title.className = "title";
+        title.textContent = e.title;
+
+        card.appendChild(day);
+        card.appendChild(title);
+        grid.appendChild(card);
+      }
+
+      if (setHash) {
+        history.replaceState(null, "", `#${currentId}`);
+      }
+    }
+
+    // Build month buttons
+    for (const m of months) {
+      const id = slugifyMonth(m.label);
+
+      const li = document.createElement("li");
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "month-btn";
+      btn.dataset.monthId = id;
+
+      const labelSpan = document.createElement("span");
+      labelSpan.textContent = m.label;
+
+      const countSpan = document.createElement("span");
+      countSpan.className = "count";
+      countSpan.textContent = String(m.entries.length);
+
+      btn.appendChild(labelSpan);
+      btn.appendChild(countSpan);
+
+      btn.addEventListener("click", () => renderMonth(id));
+
+      li.appendChild(btn);
+      ul.appendChild(li);
+    }
+
+    // Initial month: hash > config
+    const hashId = (location.hash || "").replace("#", "");
+    let initialId = monthIds[0];
+
+    if (hashId && byId.has(hashId)) {
+      initialId = hashId;
+    } else if (CONFIG.openMonth === "last") {
+      initialId = monthIds[monthIds.length - 1] || monthIds[0];
+    }
+
+    // Ensure first render also marks active button
+    requestAnimationFrame(() => renderMonth(initialId, { setHash: !!initialId }));
+
+    // Respond to back/forward hash changes
+    window.addEventListener("hashchange", () => {
+      const hid = (location.hash || "").replace("#", "");
+      if (hid && byId.has(hid)) renderMonth(hid, { setHash: false });
+    });
+
+    root.appendChild(index);
+    root.appendChild(panel);
+    return root;
   }
 
   function init() {
     const wrapper = document.querySelector(".maintable");
-    if (!wrapper) return;
-
-    // Prevent double transforms
-    if (wrapper.dataset.transformed === "1") return;
+    if (!wrapper || wrapper.dataset.transformed === "1") return;
 
     const table = wrapper.querySelector("table");
     if (!table) return;
 
-    // Hide source while converting (prevents table flash)
     wrapper.style.visibility = "hidden";
 
-    const archive = buildArchive(table);
+    const months = parseTable(table);
+    const ui = buildUI(months);
 
-    if (CONFIG.removeSourceTable) {
-      wrapper.innerHTML = "";
-      wrapper.appendChild(archive);
-      wrapper.classList.add("maintable--transformed");
-    } else {
-      // Keep table but hide it
-      table.style.display = "none";
-      wrapper.appendChild(archive);
-    }
-
+    wrapper.innerHTML = "";
+    wrapper.appendChild(ui);
     wrapper.dataset.transformed = "1";
     wrapper.style.visibility = "";
-    document.body.classList.add("archive-enhanced");
   }
 
   if (document.readyState === "loading") {
