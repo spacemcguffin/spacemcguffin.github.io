@@ -288,7 +288,6 @@ body.sidebar-hidden .main-layout .sidebar {
 }
 
 .article li {
-  margin: 0 0 0 1rem;
   color: var(--black-color);
   line-height: 1.6;
   font-weight: 400;
@@ -491,12 +490,7 @@ tr:last-child { border-bottom: none; }
 }
 
 .month-index h3{
-  font-family: "Onest", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin: 6px 8px 10px;
-  color: var(--black-color);
-  opacity: 0.85;
+   display: none;
 }
 
 /* Scrollable month list */
@@ -522,19 +516,20 @@ tr:last-child { border-bottom: none; }
 }
 
 .month-btn{
-  width: 100%;
-  border: 1px solid transparent;
-  background: transparent;
-  color: var(--black-color);
-  border-radius: 12px;
-  padding: 10px 10px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  text-align: left;
-  font-family: "Inter", sans-serif;
-  font-size: 0.92rem;
+    line-height: 1.3;
+    width: 100%;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--black-color);
+    border-radius: 12px;
+    padding: 0.3rem 0.3rem 0.3rem 0.3rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: left;
+    font-family: "Inter", sans-serif;
+    font-size: 0.88rem;
 }
 
 .month-btn:hover{ background: var(--hoverback-color); }
@@ -577,14 +572,13 @@ tr:last-child { border-bottom: none; }
 }
 
 .month-panel-head .title{
-  font-family: "Figtree", "Inter", sans-serif;
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 0.95rem;
+    font-family: "Onest", "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
 .month-panel-head .meta{
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   opacity: 0.7;
 }
 
@@ -631,10 +625,8 @@ tr:last-child { border-bottom: none; }
 .entry-card .day{
   text-align: center;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
   opacity: .85;
   padding-right: 10px;
-  border-right: 1px solid var(--border-color);
   font-size: 0.95rem;
 }
 
@@ -652,7 +644,6 @@ tr:last-child { border-bottom: none; }
 
 /* Mobile: month list becomes horizontal row */
 @media (max-width: 980px){
-  .archive-two{ grid-template-columns: 1fr; }
 
   .month-index{
     position: relative;
@@ -668,7 +659,6 @@ tr:last-child { border-bottom: none; }
     display: flex;
     gap: 8px;
     padding: 6px 4px;
-    scrollbar-width: none;
   }
 
   .month-list::-webkit-scrollbar{ display:none; }
@@ -951,10 +941,6 @@ table, th, td { width: 100% !important; }                /* overrides -webkit-fi
   min-width: 0;
 }
 
-/* 3) Make the two-column grid flexible, not rigid */
-.archive-two{
-  grid-template-columns: minmax(160px, 220px) minmax(0, 1fr);
-}
 
 /* 4) Make entry grid scale down nicely before it collapses */
 .entry-grid{
