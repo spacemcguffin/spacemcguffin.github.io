@@ -1102,6 +1102,27 @@ select.field__input optgroup{
 
 
 
+/* ===== Light mode: soften cinematic hero overlay ===== */
+
+[data-theme="light"] .modal__hero-overlay{
+  background:
+    radial-gradient(
+      900px 480px at 70% 20%,
+      rgba(109,40,217,.10),   /* softer purple glow */
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 480px at 25% 75%,
+      rgba(2,132,199,.08),    /* softer blue glow */
+      transparent 60%
+    ),
+    linear-gradient(
+      to top,
+      rgba(255,255,255,.65) 0%,   /* was heavy dark */
+      rgba(255,255,255,.35) 55%,
+      rgba(255,255,255,.05) 100%
+    );
+}
 
 
 
