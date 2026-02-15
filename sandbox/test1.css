@@ -19,7 +19,7 @@
   --ring: 0 0 0 3px rgba(139,92,246,.25);
 
   --maxw:1220px;
-  --sidew:260px;        /* reduced sidebar width */
+  --sidew:260px;
   --topbarH:64px;
 }
 
@@ -226,131 +226,87 @@ label{ font-size:11px; color: var(--muted); }
 .mainhead{ margin-bottom: 12px; }
 .title h2{ margin:0; font-size:18px; letter-spacing:.2px; }
 
-/* ===== Streaming-style tiles ===== */
+/* ===== Cards (match screenshot) ===== */
 .grid{
   display:grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap:16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap:22px;
 }
 
-.card.tile{
-  border-radius: 22px;
+.card.serial{
+  border-radius: 28px;
   overflow:hidden;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,.04);
-  box-shadow: var(--shadow2);
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.35));
+  box-shadow: 0 18px 40px rgba(0,0,0,.45);
   cursor:pointer;
-  transform: translateZ(0);
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  backdrop-filter: blur(6px);
 }
-
-.card.tile:hover{
+.card.serial:hover{
   transform: translateY(-6px);
-  box-shadow: 0 22px 50px rgba(0,0,0,.55);
+  box-shadow: 0 28px 60px rgba(0,0,0,.60);
   border-color: rgba(139,92,246,.35);
 }
 
-.tileMedia{
-  position: relative;
-  width: 100%;
+.serialImage{
+  width:100%;
   aspect-ratio: 16 / 9;
-  background:
-    radial-gradient(26px 26px at 30% 25%, rgba(255,255,255,.18), transparent 60%),
-    linear-gradient(135deg, rgba(139,92,246,.55), rgba(34,211,238,.35));
-  overflow: hidden;
+  overflow:hidden;
+  background:#111;
 }
-
-.tileMedia img{
+.serialImage img{
   width:100%;
   height:100%;
-  object-fit: cover;
+  object-fit:cover;
   display:block;
-  transform: scale(1.02);
+  transform: scale(1.01);
   transition: transform .35s ease;
 }
-
-.card.tile:hover .tileMedia img{
-  transform: scale(1.10);
+.card.serial:hover .serialImage img{
+  transform: scale(1.06);
 }
 
-/* Stronger shade for readability */
-.tileShade{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(0,0,0,0.00) 30%,
-      rgba(0,0,0,0.65) 65%,
-      rgba(0,0,0,0.88) 100%
-    );
-  pointer-events:none;
+.serialInfo{
+  padding:18px 20px 20px;
+  background: linear-gradient(180deg, rgba(8,12,20,.85), rgba(5,8,14,.95));
 }
-[data-theme="light"] .tileShade{
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.00) 30%,
-      rgba(10,10,20,0.12) 70%,
-      rgba(10,10,20,0.35) 100%
-    );
+.serialTitle{
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  margin-bottom: 6px;
+  line-height: 1.2;
 }
-
-.tileInfo{
-  position:absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;
-  display:flex;
-  flex-direction:column;
-  gap: 6px;
+.serialMeta{
+  font-size: 14px;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 14px;
 }
-
-.tileTitle{
-  font-weight: 900;
-  font-size: 16px;
-  letter-spacing: .3px;
-  line-height: 1.15;
-  color: #ffffff;
-  text-shadow:
-    0 2px 6px rgba(0,0,0,.6),
-    0 8px 20px rgba(0,0,0,.55);
-  display:-webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow:hidden;
-}
-
-.tileMeta{
+.serialPill{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(139,92,246,.45);
+  background: rgba(139,92,246,.12);
   font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,.92);
-  text-shadow: 0 4px 12px rgba(0,0,0,.6);
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  font-weight: 600;
+  color: rgba(255,255,255,.90);
 }
 
-[data-theme="light"] .tileMeta{
-  color: rgba(10,10,20,.82);
-  text-shadow: none;
+[data-theme="light"] .card.serial{
+  background: #ffffff;
+  border-color: rgba(10,10,20,.08);
+  box-shadow: 0 18px 40px rgba(10,10,20,.10);
 }
-[data-theme="light"] .tileTitle{
-  color: rgba(10,10,20,.92);
-  text-shadow: none;
+[data-theme="light"] .serialInfo{
+  background: linear-gradient(180deg, rgba(246,247,251,.95), rgba(240,242,248,.98));
 }
-
-.card.tile:hover .tileTitle{
-  text-shadow:
-    0 0 12px rgba(139,92,246,.55),
-    0 6px 18px rgba(0,0,0,.65);
-}
-
-.card.tile:focus{
-  outline:none;
-  box-shadow: 0 22px 50px rgba(0,0,0,.55), var(--ring);
-  border-color: rgba(139,92,246,.45);
+[data-theme="light"] .serialTitle{ color: rgba(10,10,20,.92); }
+[data-theme="light"] .serialMeta{ color: rgba(10,10,20,.60); }
+[data-theme="light"] .serialPill{
+  border-color: rgba(139,92,246,.35);
+  background: rgba(139,92,246,.08);
+  color: rgba(10,10,20,.85);
 }
 
 /* ===== Empty state ===== */
@@ -396,7 +352,7 @@ label{ font-size:11px; color: var(--muted); }
   overflow: hidden;
 }
 
-/* ===== Streaming-style modal header poster (full-width) ===== */
+/* ===== Streaming-style modal header poster ===== */
 .modalTop{
   display: grid;
   grid-template-columns: 1fr;
@@ -438,7 +394,6 @@ label{ font-size:11px; color: var(--muted); }
   pointer-events:none;
 }
 
-/* Title/meta overlay on poster */
 .modalHead{
   position: absolute;
   left: 16px;
@@ -476,7 +431,6 @@ label{ font-size:11px; color: var(--muted); }
   text-shadow: 0 4px 12px rgba(0,0,0,.60);
 }
 
-/* Close button floats nicely on poster */
 .modalTitleRow .iconbtn{
   background: rgba(0,0,0,.35);
   border-color: rgba(255,255,255,.18);
@@ -495,7 +449,6 @@ label{ font-size:11px; color: var(--muted); }
   color: rgba(255,255,255,.86);
 }
 
-/* Modal grid */
 .modalGrid{
   display:grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -563,12 +516,11 @@ body.modal-open .modal{ opacity: 1; pointer-events: auto; transform: translateY(
 
 /* ===== Responsive ===== */
 @media (max-width: 1100px){
-  .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 980px){
   .layout{ grid-template-columns: 1fr; }
   .sidebar{ position: relative; top: 0; }
-  .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 640px){
   .grid{ grid-template-columns: 1fr; }
