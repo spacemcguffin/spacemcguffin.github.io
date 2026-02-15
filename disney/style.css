@@ -284,18 +284,14 @@ body{
   width: 100%;
   padding: 10px 6px 14px;
   margin: 0 auto;
-  height: 180px;
-
+  height: 170px;
   display:flex;
   align-items:center;
   gap: 14px;
-
   overflow-x:auto;
   overflow-y: visible;
   scroll-behavior:smooth;
-
   scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
 }
 
 .card-container::-webkit-scrollbar{ display:none; }
@@ -340,7 +336,7 @@ body{
   z-index:2;
   background: linear-gradient(to bottom, rgb(4 8 15 / 0%), #20415b 100%);
   padding: 12px;
-  transition: opacity .2s ease;
+  transition: opacity .4s ease;
 }
 
 .card:hover .card-body{ opacity: 1; }
