@@ -1141,3 +1141,113 @@ select.field__input optgroup{
     );
 }
 
+
+
+
+
+
+/* Prestige light mode hero treatment */
+[data-theme="light"] .modal__hero-overlay{
+
+  background:
+    radial-gradient(1000px 500px at 75% 15%, rgba(0,0,0,.08), transparent 60%),
+    linear-gradient(
+      to top,
+      rgba(255,255,255,.92) 0%,
+      rgba(255,255,255,.55) 45%,
+      rgba(255,255,255,.08) 100%
+    );
+}
+
+
+
+
+
+
+
+
+
+
+.modal__hero-title{
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+[data-theme="light"] .modal__hero-title{
+  color: rgba(0,0,0,.92);
+}
+
+[data-theme="dark"] .modal__hero-title{
+  color: rgba(255,255,255,.96);
+}
+
+
+
+
+
+.modal__hero-title{
+  text-transform: none;
+  font-feature-settings: "ss01";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal__hero{
+  transform: scale(1.02);
+  transition: transform .6s ease;
+}
+
+.modal[aria-hidden="false"] .modal__hero{
+  transform: scale(1);
+}
+
+
+
+
+
+
+
+
+
+
+
+.btn--primary{
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+[data-theme="light"] .btn--primary{
+  background: rgba(0,0,0,.92);
+  color: white;
+  border: none;
+}
+
+[data-theme="light"] .btn--primary:hover{
+  background: rgba(0,0,0,.82);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
