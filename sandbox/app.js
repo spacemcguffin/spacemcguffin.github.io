@@ -682,8 +682,9 @@ function openModal(index, { updateHash } = { updateHash: true }) {
     <span>${s.episodes} episode${s.episodes === 1 ? "" : "s"}</span>
   `;
 
-  const hero = document.getElementById("modalHero");
-  if (hero) hero.style.setProperty("--hero-img", s.image ? `url("${s.image}")` : "none");
+const hero = document.getElementById("modalHero");
+if (hero) hero.style.setProperty("--hero-img", s.image ? `url("${s.image}")` : "none");
+
 
   els.meta.innerHTML = `
     <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
