@@ -389,7 +389,7 @@ function cardTemplate(s) {
       <div class="card__media">${img}</div>
       <div class="card__body">
         <h3 class="card__title">${escapeHtml(s.title)}</h3>
-        <p class="card__sub">${s.episodes} ep${s.episodes === 1 ? "" : "s"}</p>
+        <p class="card__sub">${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
         <div class="badges">
           <span class="badge badge--accent">${escapeHtml(s.doctor)} Doctor</span>
         </div>
