@@ -602,24 +602,30 @@ select.field__input optgroup{
 }
 
 .modal__dialog{
-  position: relative;
   width: min(980px, 100%);
-  max-height: min(92vh, 980px);
+  height: min(92vh, 980px);
   overflow: hidden;
   border-radius: 24px;
   border: 1px solid var(--line);
   background: color-mix(in oklab, var(--bg) 80%, transparent);
   box-shadow: 0 28px 80px rgba(0,0,0,.65);
-  transform: translateY(14px);
-  animation: modalPop .25s ease forwards;
+
+  display: grid;
+  grid-template-rows: auto 1fr; /* hero then scroll area */
 }
 
 .modal__scroll{
-  max-height: min(92vh, 980px);
-  overflow: auto;            /* scrollbar lives here */
+  overflow: auto;
   overscroll-behavior: contain;
-  border-radius: inherit;    /* helps in some browsers */
+  scrollbar-gutter: stable both-edges;
 }
+
+/* hero stays visible, scroll area gets the remainder */
+.modal__hero{
+  flex: 0 0 auto;
+}
+
+
 
 /* optional: make footer stick to bottom of scroll area */
 .modal__footer{
