@@ -1,4 +1,5 @@
 // Lewflix / Disney — script.js (copy-paste full file)
+// Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows
 
 let movies = [
   {
@@ -97,6 +98,64 @@ const createSlide = () => {
     first.style.marginLeft = margin;
   }
 };
+
+/* =========================
+   HERO CAROUSEL BUTTONS (NEW)
+   ========================= */
+
+(function addHeroCarouselControls() {
+  const container = document.querySelector(".carousel-container");
+  const carouselEl = document.querySelector(".carousel");
+  if (!container || !carouselEl) return;
+
+  // If carousel is hidden on small screens, don't inject buttons (optional safeguard)
+  // You already hide .carousel-container at max-width: 500px.
+  // If you later remove that rule, buttons will appear automatically.
+  if (container.querySelector(".carousel-btn")) return;
+
+  const prev = document.createElement("button");
+  const next = document.createElement("button");
+
+  prev.className = "carousel-btn carousel-btn--prev";
+  next.className = "carousel-btn carousel-btn--next";
+  prev.type = "button";
+  next.type = "button";
+  prev.setAttribute("aria-label", "Previous slide");
+  next.setAttribute("aria-label", "Next slide");
+
+  prev.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M15 18l-6-6 6-6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+  next.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M9 6l6 6-6 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>`;
+
+  container.appendChild(prev);
+  container.appendChild(next);
+
+  function goNext() {
+    createSlide();
+  }
+
+  // Rewind the index by 2 because createSlide() increments it once
+  function goPrev() {
+    slideIndex = (slideIndex - 2 + movies.length) % movies.length;
+    createSlide();
+  }
+
+  prev.addEventListener("click", goPrev);
+  next.addEventListener("click", goNext);
+
+  // Optional: keyboard support when buttons focused
+  prev.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") goPrev();
+  });
+  next.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") goNext();
+  });
+})();
 
 // Seed slides
 for (let i = 0; i < 3; i++) createSlide();
