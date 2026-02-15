@@ -1,3 +1,4 @@
+/* styles.css */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
 :root{
@@ -69,7 +70,6 @@ body::before{
 }
 
 main, footer, header{ position:relative; z-index:10; }
-
 .wrap{ width:min(var(--max), calc(100% - 40px)); margin:0 auto; }
 
 .topbar{
@@ -210,7 +210,6 @@ select.field__input{
     0 25px 60px rgba(0,0,0,.45),
     0 0 30px rgba(125,211,252,.25);
 }
-
 .grid:hover .card{ filter: blur(1.5px); opacity:.6; }
 .grid .card:hover{ filter:none; opacity:1; }
 
@@ -270,8 +269,7 @@ select.field__input{
 
 .footer{ border-top:1px solid var(--line); padding:16px 0 40px; color:var(--muted); }
 
-/* Modal */
-.modal[aria-hidden="true"]{ display:none; }
+/* ===== Modal open/close animation (IMPORTANT: no display:none) ===== */
 .modal{
   position:fixed; inset:0; z-index:10000;
   display:grid; place-items:end center;
@@ -279,8 +277,20 @@ select.field__input{
   background: color-mix(in oklab, var(--bg) 72%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition: opacity .22s ease, visibility 0s linear .22s;
 }
 [data-theme="light"] .modal{ background: rgba(15,23,42,0.18); }
+
+.modal__backdrop{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition: opacity .22s ease;
+}
 
 .modal__dialog{
   width: min(980px, 100%);
@@ -296,6 +306,13 @@ select.field__input{
   grid-template-rows: 1fr auto;
   isolation:isolate;
   clip-path: inset(0 round 24px);
+
+  transform: translateY(18px) scale(.985);
+  opacity: 0;
+  transition:
+    transform .28s cubic-bezier(.2,.9,.2,1),
+    opacity .22s ease;
+  will-change: transform, opacity;
 }
 [data-theme="light"] .modal__dialog{
   box-shadow:
@@ -303,16 +320,16 @@ select.field__input{
     0 1px 0 rgba(255,255,255,.85) inset;
 }
 
-.modal__scroll{
-  overflow:auto;
-  scrollbar-gutter: stable both-edges;
-}
+.modal__scroll{ overflow:auto; scrollbar-gutter: stable both-edges; }
 
 .modal__hero{
   position:relative;
   min-height: clamp(260px, 52vh, 520px);
   background-size:cover;
   background-position:center;
+
+  transform: scale(1.02);
+  transition: transform .55s ease;
 }
 .modal__hero-overlay{
   position:absolute; inset:0;
@@ -361,7 +378,6 @@ select.field__input{
   gap:10px;
   flex-wrap:wrap;
 }
-.modal__doctors{ display:flex; flex-wrap:wrap; gap:6px; }
 .modal__sep{ opacity:.7; }
 
 .modal__actions{ display:flex; gap:10px; flex-wrap:wrap; }
@@ -414,6 +430,22 @@ select.field__input{
   backdrop-filter: blur(10px);
 }
 
+/* OPEN STATE */
+.modal.is-open{
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition: opacity .22s ease;
+}
+.modal.is-open .modal__backdrop{ opacity: 1; }
+.modal.is-open .modal__dialog{ transform: translateY(0) scale(1); opacity: 1; }
+.modal.is-open .modal__hero{ transform: scale(1); }
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .modal, .modal__backdrop, .modal__dialog, .modal__hero{ transition: none !important; }
+}
+
 /* Theme toggle */
 #themeBtn.theme-toggle{
   all: unset;
@@ -462,9 +494,8 @@ select.field__input{
   background: rgba(255,255,255,.96);
 }
 
-/* ===== Tag autocomplete (FIXED dark background) ===== */
+/* ===== Tag autocomplete (solid background in dark) ===== */
 .ac{ position: relative; }
-
 .ac__panel{
   position:absolute;
   top: calc(100% + 8px);
@@ -475,17 +506,14 @@ select.field__input{
   box-shadow: 0 16px 40px rgba(0,0,0,0.35);
   display:none;
 
-  /* ✅ FIX: solid-ish background in dark mode (not transparent) */
   background: color-mix(in oklab, var(--bg) 88%, #000 12%);
   border: 1px solid rgba(255,255,255,0.12);
 }
-
 [data-theme="light"] .ac__panel{
   border: 1px solid rgba(0,0,0,0.10);
   background: rgba(255,255,255,0.96);
   box-shadow: 0 16px 40px rgba(0,0,0,0.12);
 }
-
 .ac__item{
   width:100%;
   display:flex;
@@ -502,7 +530,6 @@ select.field__input{
 .ac__item[aria-selected="true"]{ background: rgba(255,255,255,0.07); }
 [data-theme="light"] .ac__item:hover,
 [data-theme="light"] .ac__item[aria-selected="true"]{ background: rgba(0,0,0,0.06); }
-
 .ac__tag{ font-weight: 650; }
 .ac__hint{ opacity:.7; font-size:12px; }
 
