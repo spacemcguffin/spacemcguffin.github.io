@@ -1,5 +1,5 @@
 const stories = [
-  {
+  { 
     id: "unearthly-child",
     title: "An Unearthly Child",
     doctors: ["1st"],
