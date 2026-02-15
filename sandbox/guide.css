@@ -609,7 +609,8 @@ select.field__input optgroup{
   border: 1px solid var(--line);
   background: color-mix(in oklab, var(--bg) 80%, transparent);
   box-shadow: 0 28px 80px rgba(0,0,0,.65);
-
+  isolation: isolate;              
+  clip-path: inset(0 round 24px); 
   display: grid;
   grid-template-rows: auto 1fr; /* hero then scroll area */
 }
@@ -618,12 +619,10 @@ select.field__input optgroup{
   overflow: auto;
   overscroll-behavior: contain;
   scrollbar-gutter: stable both-edges;
+  border-radius: inherit;
+  background: transparent;
 }
 
-/* hero stays visible, scroll area gets the remainder */
-.modal__hero{
-  flex: 0 0 auto;
-}
 
 
 
@@ -797,4 +796,38 @@ select.field__input optgroup{
   inset:0;
   pointer-events:none;
 }
+
+
+
+
+/* === Fix: keep modal scrollbar inside rounded corners === */
+.modal__dialog{
+  border-radius: 24px;
+  overflow: hidden;            
+  isolation: isolate;          
+  clip-path: inset(0 round 24px);
+}
+
+.modal__scroll{
+  overflow: auto;              
+  max-height: 100%;
+  border-radius: inherit;     
+}
+
+/* optional: nicer scrollbar (won’t affect radius) */
+.modal__scroll::-webkit-scrollbar{ width: 12px; }
+.modal__scroll::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.18);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+
+@media (max-width: 720px){
+  .modal__dialog{
+    border-radius: 20px;
+    clip-path: inset(0 round 20px);
+  }
+}
+
 
