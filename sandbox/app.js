@@ -382,10 +382,10 @@ function escapeHtml(str) {
 function getFilters() {
   return {
     q: els.q.value.trim().toLowerCase(),
-    doctor: els.doctor.value,
-    era: els.era.value,
+    doctor: els.doctor.value
   };
 }
+
 
 function applyFilters(items, f) {
   return items.filter((s) => {
