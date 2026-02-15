@@ -545,21 +545,36 @@ body{
    Responsive
    ========================================================= */
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 750px){
   :root{ --navH: 55px; }
 
   .nav-links{ font-size: .9rem; }
   .right-container{ display:none; }
 
   .carousel-container{ height: 220px; }
-  .slider{ margin-right: 10px; }
-  .slider img{ width: 60%; }
+  .slider img{ width: 50%; }
 
-  .slide-content{ width: 100%; }
-  .slide-content h1{
-    font-size: 1.6rem;
-    margin-top: 20px;
-  }
+     .slide-content {
+        width: 65%;
+    }
+
+    .slide-content h1 {
+        font-size: 1.2rem;
+        margin-top: 20px;
+        font-weight: 600;
+    }
+
+ .slide-content h2 {
+    font-size: .8rem;
+    font-weight: 400;
+    width: 80%;
+}
+
+
+ .slide-content p {
+    font-size: .88rem;
+    font-weight: 400;
+}
 
   .title{
     font-size: 1rem;
