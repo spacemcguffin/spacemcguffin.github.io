@@ -10,7 +10,7 @@ const stories = [
     image: "/sandbox/img/1/unearthlychild.png",
     summary: "Two schoolteachers follow a strange pupil home and uncover a time machine hidden in a junkyard.",
     notes: ["First Doctor Who story", "Introduces the TARDIS"],
-    tags: ["season 1"]
+    tags: ["season 1"] 
   },
   {
     id: "the-daleks",
