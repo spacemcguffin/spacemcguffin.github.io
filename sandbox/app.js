@@ -438,6 +438,67 @@ function render() {
 
 
 
+// ===== Subtle parallax tilt on cards =====
+function enableCardTilt() {
+  // Skip on touch + reduced motion
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  if (prefersReduced || isTouch) return;
+
+  const MAX_TILT = 6;   // degrees (keep small!)
+  const SCALE = 1.02;   // subtle
+  const PERSPECTIVE = 800;
+
+  const cards = Array.from(document.querySelectorAll(".card"));
+
+  cards.forEach((card) => {
+    let raf = 0;
+
+    function onMove(e) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const px = x / rect.width;   // 0..1
+      const py = y / rect.height;  // 0..1
+
+      // tilt: top = tilt down a bit, left = tilt right a bit (feels natural)
+      const tiltY = (px - 0.5) * (MAX_TILT * 2);
+      const tiltX = (0.5 - py) * (MAX_TILT * 2);
+
+      // for sheen position
+      card.style.setProperty("--mx", `${(px * 100).toFixed(2)}%`);
+      card.style.setProperty("--my", `${(py * 100).toFixed(2)}%`);
+
+      if (raf) cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        card.style.transform =
+          `perspective(${PERSPECTIVE}px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) scale(${SCALE})`;
+      });
+    }
+
+    function onLeave() {
+      if (raf) cancelAnimationFrame(raf);
+      card.style.transform = "";
+      card.style.removeProperty("--mx");
+      card.style.removeProperty("--my");
+    }
+
+    card.addEventListener("mousemove", onMove);
+    card.addEventListener("mouseleave", onLeave);
+  });
+}
+
+// Call once, and again after each render (because you rebuild the grid)
+enableCardTilt();
+
+// Hook into your render so new cards get tilt too
+const _render = render;
+render = function () {
+  _render();
+  // wait for DOM update (your render uses a timeout)
+  setTimeout(enableCardTilt, 200);
+};
 
 
 
