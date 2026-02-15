@@ -647,11 +647,22 @@ function handleHashChange() {
 window.addEventListener("hashchange", handleHashChange);
 
 
+
+
+
+
+
+
+
+
 // ---------- Theme ----------
+
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
-  // no textContent changes — this toggle is purely CSS-driven
+
+  const btn = document.getElementById("themeBtn");
+  if (btn) btn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
 }
 
 function initTheme() {
@@ -659,15 +670,27 @@ function initTheme() {
   setTheme(saved || "dark");
 }
 
-document.querySelector("#themeBtn").addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme") || "dark";
-  setTheme(current === "dark" ? "light" : "dark");
+document.addEventListener("DOMContentLoaded", () => {
+  initTheme();
+
+  const btn = document.getElementById("themeBtn");
+  if (!btn) {
+    console.warn("themeBtn not found");
+    return;
+  }
+
+  btn.addEventListener("click", () => {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    setTheme(current === "dark" ? "light" : "dark");
+  });
 });
 
-els.theme.addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme") || "dark";
-  setTheme(current === "dark" ? "light" : "dark");
-});
+
+
+
+
+
+
 
 // ---------- Controls ----------
 function closeIfOpen() {
