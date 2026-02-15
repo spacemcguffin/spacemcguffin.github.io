@@ -10,6 +10,7 @@ const stories = [
   image: "/sandbox/img/1/unearthlychild.png",
   summary: "Two schoolteachers follow a strange pupil home and uncover a time machine hidden in a junkyard.",
   notes: ["First Doctor Who story", "Introduces the TARDIS"],
+  tags: ["debut", "totter’s lane", "school", "ian", "barbara", "cavemen"]
 },
 {
   id: "the-daleks",
@@ -22,8 +23,9 @@ const stories = [
   image: "/sandbox/img/1/thedaleks.png",
   summary: "The Doctor and companions encounter the Daleks on the planet Skaro.",
   notes: ["First Dalek story", "Established the show’s popularity"],
+  tags: ["daleks", "skaro", "thals", "radiation", "iconic"]
 },
-  {
+{
   id: "edge-of-destruction",
   title: "The Edge of Destruction",
   doctor: "1st",
@@ -32,10 +34,11 @@ const stories = [
   episodes: 2,
   code: "C",
   image: "/sandbox/img/1/edgeofdestruction.png",
-  summary: "The Doctor and companions encounter the Daleks on the planet Skaro.",
-  notes: ["First Dalek story", "Established the show’s popularity"],
+  summary: "Strange forces aboard the TARDIS turn the crew against each other.",
+  notes: ["Early TARDIS paranoia story"],
+  tags: ["tardis", "paranoia", "claustrophobic"]
 },
-  {
+{
   id: "marco-polo",
   title: "Marco Polo",
   doctor: "1st",
@@ -44,10 +47,11 @@ const stories = [
   episodes: 7,
   code: "D",
   image: "/sandbox/img/1/marcopolo.png",
-  summary: "The Doctor and companions encounter the Daleks on the planet Skaro.",
-  notes: ["First Dalek story", "Established the show’s popularity"],
+  summary: "The Doctor and companions journey with Marco Polo across Asia.",
+  notes: ["Classic historical adventure"],
+  tags: ["historical", "marco polo", "travel", "silk road"]
 },
-  {
+{
   id: "keys-of-marinus",
   title: "The Keys of Marinus",
   doctor: "1st",
@@ -56,8 +60,9 @@ const stories = [
   episodes: 6,
   code: "E",
   image: "/sandbox/img/1/keysofmarinus.png",
-  summary: "The Doctor and companions encounter the Daleks on the planet Skaro.",
-  notes: ["First Dalek story", "Established the show’s popularity"],
+  summary: "A quest across Marinus to recover the Keys of Conscience.",
+  notes: ["Quest story structure"],
+  tags: ["quest", "marinus", "conscience"]
 },
 {
   id: "the-aztecs",
@@ -70,8 +75,9 @@ const stories = [
   image: "/sandbox/img/1/theaztecs.png",
   summary: "Barbara is mistaken for a goddess in 15th-century Mexico.",
   notes: ["Classic historical story"],
+  tags: ["historical", "aztecs", "barbara", "mexico"]
 },
-  {
+{
   id: "the-sensorites",
   title: "The Sensorites",
   doctor: "1st",
@@ -80,10 +86,11 @@ const stories = [
   episodes: 6,
   code: "G",
   image: "/sandbox/img/1/thesensorites.png",
-  summary: "Barbara is mistaken for a goddess in 15th-century Mexico.",
-  notes: ["Classic historical story"],
+  summary: "A strange alien presence threatens a human expedition.",
+  notes: ["Atmospheric early alien story"],
+  tags: ["aliens", "telepathy", "base-under-siege"]
 },
-  {
+{
   id: "reign-of-terror",
   title: "The Reign of Terror",
   doctor: "1st",
@@ -92,8 +99,9 @@ const stories = [
   episodes: 6,
   code: "H",
   image: "/sandbox/img/1/thereignofterror.png",
-  summary: "Barbara is mistaken for a goddess in 15th-century Mexico.",
-  notes: ["Classic historical story"],
+  summary: "The TARDIS crew are caught up in the French Revolution.",
+  notes: ["Historical adventure"],
+  tags: ["historical", "french revolution", "politics"]
 },
 {
   id: "tenth-planet",
@@ -105,195 +113,213 @@ const stories = [
   image: "/sandbox/img/1/tenthplanet.png",
   summary: "The Cybermen debut as Earth's twin planet Mondas appears in the sky.",
   notes: ["First Cybermen story", "First regeneration"],
+  tags: ["cybermen", "mondas", "regeneration", "debut"]
 },
 
-  {
-    id: "tomb-of-the-cybermen",
-    title: "The Tomb of the Cybermen",
-    doctor: "2nd",
-    season: 5,
-    episodes: 4,
-    code: "QQ",
-    image: "/wiki/img/episodes/sickofancy.png",
-    summary: "An archaeological expedition wakes a sleeping Cyber fleet.",
-    notes: ["A classic base-under-siege feel", "Cybermen at their creepiest"],
-  },
-  {
-    id: "spearhead-from-space",
-    title: "Spearhead from Space",
-    doctor: "3rd",
-    season: 7,
-    episodes: 4,
-    code: "AAA",
-    image: "https://picsum.photos/seed/spearhead/1200/675",
-    summary: "UNIT investigates Auton activity as the Doctor regenerates.",
-    notes: ["First Third Doctor story", "Strong action + mystery"],
-  },
-  {
-    id: "blink",
-    title: "Blink",
-    doctor: "10th",
-    season: 3,
-    episodes: 1,
-    code: "3.10",
-    image: "https://picsum.photos/seed/blink/1200/675",
-    summary: "A timey-wimey thriller featuring the Weeping Angels.",
-    notes: ["Perfect standalone", "Infamous quotes everywhere"],
-  },
-  {
-    id: "midnight",
-    title: "Midnight",
-    doctor: "10th",
-    season: 4,
-    episodes: 1,
-    code: "4.10",
-    image: "https://picsum.photos/seed/midnight/1200/675",
-    summary: "A tour shuttle becomes a pressure-cooker paranoia chamber.",
-    notes: ["Psychological horror", "Incredible tension and performances"],
-  },
-  {
-    id: "war-games",
-    title: "The War Games",
-    doctor: "2nd",
-    season: 6,
-    episodes: 10,
-    code: "ZZ",
-    image: "https://picsum.photos/seed/wargames/1200/675",
-    summary: "The Second Doctor faces the Time Lords for the first time.",
-    notes: ["Epic 10-part finale", "First Time Lord appearance"],
-  },
-  {
-    id: "genesis-of-the-daleks",
-    title: "Genesis of the Daleks",
-    doctor: "4th",
-    season: 12,
-    episodes: 6,
-    code: "4E",
-    image: "https://picsum.photos/seed/genesis/1200/675",
-    summary: "The Doctor is sent to Skaro to prevent the Daleks’ creation.",
-    notes: ["Davros debut", "Moral dilemma masterpiece"],
-  },
-  {
-    id: "city-of-death",
-    title: "City of Death",
-    doctor: "4th",
-    season: 17,
-    episodes: 4,
-    code: "5H",
-    image: "https://picsum.photos/seed/cityofdeath/1200/675",
-    summary: "Time travel, art theft, and Parisian charm.",
-    notes: ["Douglas Adams script", "Witty and stylish"],
-  },
-  {
-    id: "earthshock",
-    title: "Earthshock",
-    doctor: "5th",
-    season: 19,
-    episodes: 4,
-    code: "6H",
-    image: "https://picsum.photos/seed/earthshock/1200/675",
-    summary: "A shocking Cyberman return story.",
-    notes: ["Huge twist ending", "Fan-favourite Fifth Doctor story"],
-  },
-  {
-    id: "remembrance-of-the-daleks",
-    title: "Remembrance of the Daleks",
-    doctor: "7th",
-    season: 25,
-    episodes: 4,
-    code: "7J",
-    image: "https://picsum.photos/seed/remembrance/1200/675",
-    summary: "The Doctor manipulates events in 1963 London.",
-    notes: ["Dalek civil war", "Darker Seventh Doctor tone"],
-  },
-  {
-    id: "rose",
-    title: "Rose",
-    doctor: "9th",
-    season: 1,
-    episodes: 1,
-    code: "1.01",
-    image: "https://picsum.photos/seed/rose/1200/675",
-    summary: "The Doctor meets Rose Tyler.",
-    notes: ["Modern revival begins", "Autons return"],
-  },
-  {
-    id: "the-empty-child",
-    title: "The Empty Child",
-    doctor: "9th",
-    season: 1,
-    episodes: 2,
-    code: "1.09",
-    image: "https://picsum.photos/seed/emptychild/1200/675",
-    summary: "A gas-mask child haunts wartime London.",
-    notes: ["Creepy as hell", "Captain Jack debut"],
-  },
-  {
-    id: "girl-in-the-fireplace",
-    title: "The Girl in the Fireplace",
-    doctor: "10th",
-    season: 2,
-    episodes: 1,
-    code: "2.04",
-    image: "https://picsum.photos/seed/fireplace/1200/675",
-    summary: "The Doctor meets Madame de Pompadour.",
-    notes: ["Emotional time romance", "Moffat time mechanics"],
-  },
-  {
-    id: "human-nature",
-    title: "Human Nature / The Family of Blood",
-    doctor: "10th",
-    season: 3,
-    episodes: 2,
-    code: "3.08",
-    image: "https://picsum.photos/seed/humannature/1200/675",
-    summary: "The Doctor becomes human to escape pursuit.",
-    notes: ["Dark emotional arc", "Brilliant performance"],
-  },
-  {
-    id: "eleventh-hour",
-    title: "The Eleventh Hour",
-    doctor: "11th",
-    season: 5,
-    episodes: 1,
-    code: "5.01",
-    image: "https://picsum.photos/seed/eleventhhour/1200/675",
-    summary: "The Eleventh Doctor crashes into Amelia Pond’s life.",
-    notes: ["New Doctor energy", "Crack in the wall"],
-  },
-  {
-    id: "day-of-the-doctor",
-    title: "The Day of the Doctor",
-    doctor: "War",
-    season: 7,
-    episodes: 1,
-    code: "50th",
-    image: "https://picsum.photos/seed/daydoctor/1200/675",
-    summary: "The Doctors unite to save Gallifrey.",
-    notes: ["50th Anniversary special", "Multi-Doctor chaos"],
-  },
-  {
-    id: "heaven-sent",
-    title: "Heaven Sent",
-    doctor: "12th",
-    season: 9,
-    episodes: 1,
-    code: "9.11",
-    image: "https://picsum.photos/seed/heavensent/1200/675",
-    summary: "The Doctor trapped alone inside a confession dial.",
-    notes: ["One-man masterpiece", "Grief + endurance"],
-  },
-  {
-    id: "woman-who-fell-to-earth",
-    title: "The Woman Who Fell to Earth",
-    doctor: "13th",
-    season: 11,
-    episodes: 1,
-    code: "11.01",
-    image: "https://picsum.photos/seed/womanfell/1200/675",
-    summary: "The Thirteenth Doctor’s debut adventure.",
-    notes: ["New era reset", "Sheffield setting"],
-  }
+{
+  id: "tomb-of-the-cybermen",
+  title: "The Tomb of the Cybermen",
+  doctor: "2nd",
+  season: 5,
+  episodes: 4,
+  code: "QQ",
+  image: "/wiki/img/episodes/sickofancy.png",
+  summary: "An archaeological expedition wakes a sleeping Cyber fleet.",
+  notes: ["A classic base-under-siege feel", "Cybermen at their creepiest"],
+  tags: ["cybermen", "tomb", "archaeology", "base-under-siege"]
+},
+{
+  id: "spearhead-from-space",
+  title: "Spearhead from Space",
+  doctor: "3rd",
+  season: 7,
+  episodes: 4,
+  code: "AAA",
+  image: "https://picsum.photos/seed/spearhead/1200/675",
+  summary: "UNIT investigates Auton activity as the Doctor regenerates.",
+  notes: ["First Third Doctor story", "Strong action + mystery"],
+  tags: ["unit", "autons", "regeneration", "debut"]
+},
+{
+  id: "blink",
+  title: "Blink",
+  doctor: "10th",
+  season: 3,
+  episodes: 1,
+  code: "3.10",
+  image: "https://picsum.photos/seed/blink/1200/675",
+  summary: "A timey-wimey thriller featuring the Weeping Angels.",
+  notes: ["Perfect standalone", "Infamous quotes everywhere"],
+  tags: ["weeping angels", "timey-wimey", "thriller", "standalone"]
+},
+{
+  id: "midnight",
+  title: "Midnight",
+  doctor: "10th",
+  season: 4,
+  episodes: 1,
+  code: "4.10",
+  image: "https://picsum.photos/seed/midnight/1200/675",
+  summary: "A tour shuttle becomes a pressure-cooker paranoia chamber.",
+  notes: ["Psychological horror", "Incredible tension and performances"],
+  tags: ["psychological", "horror", "bottle episode", "paranoia"]
+},
+{
+  id: "war-games",
+  title: "The War Games",
+  doctor: "2nd",
+  season: 6,
+  episodes: 10,
+  code: "ZZ",
+  image: "https://picsum.photos/seed/wargames/1200/675",
+  summary: "The Second Doctor faces the Time Lords for the first time.",
+  notes: ["Epic 10-part finale", "First Time Lord appearance"],
+  tags: ["time lords", "trial", "finale", "epic"]
+},
+{
+  id: "genesis-of-the-daleks",
+  title: "Genesis of the Daleks",
+  doctor: "4th",
+  season: 12,
+  episodes: 6,
+  code: "4E",
+  image: "https://picsum.photos/seed/genesis/1200/675",
+  summary: "The Doctor is sent to Skaro to prevent the Daleks’ creation.",
+  notes: ["Davros debut", "Moral dilemma masterpiece"],
+  tags: ["daleks", "davros", "skaro", "moral dilemma"]
+},
+{
+  id: "city-of-death",
+  title: "City of Death",
+  doctor: "4th",
+  season: 17,
+  episodes: 4,
+  code: "5H",
+  image: "https://picsum.photos/seed/cityofdeath/1200/675",
+  summary: "Time travel, art theft, and Parisian charm.",
+  notes: ["Douglas Adams script", "Witty and stylish"],
+  tags: ["douglas adams", "paris", "art", "comedy"]
+},
+{
+  id: "earthshock",
+  title: "Earthshock",
+  doctor: "5th",
+  season: 19,
+  episodes: 4,
+  code: "6H",
+  image: "https://picsum.photos/seed/earthshock/1200/675",
+  summary: "A shocking Cyberman return story.",
+  notes: ["Huge twist ending", "Fan-favourite Fifth Doctor story"],
+  tags: ["cybermen", "twist", "classic", "shock"]
+},
+{
+  id: "remembrance-of-the-daleks",
+  title: "Remembrance of the Daleks",
+  doctor: "7th",
+  season: 25,
+  episodes: 4,
+  code: "7J",
+  image: "https://picsum.photos/seed/remembrance/1200/675",
+  summary: "The Doctor manipulates events in 1963 London.",
+  notes: ["Dalek civil war", "Darker Seventh Doctor tone"],
+  tags: ["daleks", "1963", "darker", "manipulation"]
+},
+{
+  id: "rose",
+  title: "Rose",
+  doctor: "9th",
+  season: 1,
+  episodes: 1,
+  code: "1.01",
+  image: "https://picsum.photos/seed/rose/1200/675",
+  summary: "The Doctor meets Rose Tyler.",
+  notes: ["Modern revival begins", "Autons return"],
+  tags: ["debut", "revival", "autons", "rose tyler"]
+},
+{
+  id: "the-empty-child",
+  title: "The Empty Child",
+  doctor: "9th",
+  season: 1,
+  episodes: 2,
+  code: "1.09",
+  image: "https://picsum.photos/seed/emptychild/1200/675",
+  summary: "A gas-mask child haunts wartime London.",
+  notes: ["Creepy as hell", "Captain Jack debut"],
+  tags: ["wartime", "gas mask", "horror", "captain jack"]
+},
+{
+  id: "girl-in-the-fireplace",
+  title: "The Girl in the Fireplace",
+  doctor: "10th",
+  season: 2,
+  episodes: 1,
+  code: "2.04",
+  image: "https://picsum.photos/seed/fireplace/1200/675",
+  summary: "The Doctor meets Madame de Pompadour.",
+  notes: ["Emotional time romance", "Moffat time mechanics"],
+  tags: ["romance", "time travel", "moffat", "pompadour"]
+},
+{
+  id: "human-nature",
+  title: "Human Nature / The Family of Blood",
+  doctor: "10th",
+  season: 3,
+  episodes: 2,
+  code: "3.08",
+  image: "https://picsum.photos/seed/humannature/1200/675",
+  summary: "The Doctor becomes human to escape pursuit.",
+  notes: ["Dark emotional arc", "Brilliant performance"],
+  tags: ["family of blood", "john smith", "dark", "emotional"]
+},
+{
+  id: "eleventh-hour",
+  title: "The Eleventh Hour",
+  doctor: "11th",
+  season: 5,
+  episodes: 1,
+  code: "5.01",
+  image: "https://picsum.photos/seed/eleventhhour/1200/675",
+  summary: "The Eleventh Doctor crashes into Amelia Pond’s life.",
+  notes: ["New Doctor energy", "Crack in the wall"],
+  tags: ["debut", "amelia pond", "crack", "new era"]
+},
+{
+  id: "day-of-the-doctor",
+  title: "The Day of the Doctor",
+  doctor: "War",
+  season: 7,
+  episodes: 1,
+  code: "50th",
+  image: "https://picsum.photos/seed/daydoctor/1200/675",
+  summary: "The Doctors unite to save Gallifrey.",
+  notes: ["50th Anniversary special", "Multi-Doctor chaos"],
+  tags: ["anniversary", "multi-doctor", "gallifrey", "time war"]
+},
+{
+  id: "heaven-sent",
+  title: "Heaven Sent",
+  doctor: "12th",
+  season: 9,
+  episodes: 1,
+  code: "9.11",
+  image: "https://picsum.photos/seed/heavensent/1200/675",
+  summary: "The Doctor trapped alone inside a confession dial.",
+  notes: ["One-man masterpiece", "Grief + endurance"],
+  tags: ["confession dial", "grief", "loop", "masterpiece"]
+},
+{
+  id: "woman-who-fell-to-earth",
+  title: "The Woman Who Fell to Earth",
+  doctor: "13th",
+  season: 11,
+  episodes: 1,
+  code: "11.01",
+  image: "https://picsum.photos/seed/womanfell/1200/675",
+  summary: "The Thirteenth Doctor’s debut adventure.",
+  notes: ["New era reset", "Sheffield setting"],
+  tags: ["debut", "sheffield", "new era"]
+}
 ];
 
 const els = {
@@ -337,20 +363,54 @@ function escapeHtml(str) {
 
 function getFilters() {
   return {
-    q: els.q.value.trim().toLowerCase(),
+    q: els.q.value.trim(), // keep raw; we parse it
     doctor: els.doctor.value
   };
 }
 
+// --- NEW: query parsing (supports tag:xxx) ---
+function parseQuery(raw) {
+  const q = String(raw || "").trim();
+  const m = q.match(/^tag:(.+)$/i);
+  if (m) return { mode: "tag", term: m[1].trim().toLowerCase() };
+  return { mode: "all", term: q.toLowerCase() };
+}
 
+// --- NEW: build a searchable “haystack” including tags (NOT rendered anywhere) ---
+function storySearchHaystack(s) {
+  const parts = [
+    s.title,
+    s.doctor,
+    s.code,
+    s.serialno,
+    s.season,
+    s.episodes,
+    ...(Array.isArray(s.tags) ? s.tags : [])
+  ];
+
+  return parts
+    .flatMap(v => Array.isArray(v) ? v : [v])
+    .filter(v => v !== undefined && v !== null && String(v).trim() !== "")
+    .join(" ")
+    .toLowerCase();
+}
+
+// --- NEW: unified matcher ---
+function matchesQuery(s, rawQuery) {
+  const { mode, term } = parseQuery(rawQuery);
+  if (!term) return true;
+
+  if (mode === "tag") {
+    return (Array.isArray(s.tags) ? s.tags : [])
+      .some(t => String(t).toLowerCase().includes(term));
+  }
+
+  return storySearchHaystack(s).includes(term);
+}
 
 function applyFilters(items, f) {
   return items.filter((s) => {
-    const matchesQ =
-      !f.q ||
-      s.title.toLowerCase().includes(f.q) ||
-      s.doctor.toLowerCase().includes(f.q) ||
-      String(s.code).toLowerCase().includes(f.q);
+    const matchesQ = matchesQuery(s, f.q);
 
     const matchesDoctor =
       !f.doctor || s.doctor === f.doctor;
@@ -358,7 +418,6 @@ function applyFilters(items, f) {
     return matchesQ && matchesDoctor;
   });
 }
-
 
 function storyById(id) {
   return stories.find((s) => s.id === id) || null;
@@ -397,7 +456,7 @@ function cardTemplate(s) {
       <div class="card__media">${img}</div>
       <div class="card__body">
         <h3 class="card__title">${escapeHtml(s.title)}</h3>
-        <p class="card__sub">Serial ${s.serialno} • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
+        <p class="card__sub">Serial ${escapeHtml(s.serialno ?? "—")} • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}</p>
         <div class="badges">
           <span class="badge badge--accent">${escapeHtml(s.doctor)} Doctor</span>
         </div>
@@ -406,13 +465,7 @@ function cardTemplate(s) {
   `;
 }
 
-
-
-
-
-
 // ---------- Render ----------
-
 let renderRAF = 0;
 
 function render() {
@@ -453,10 +506,6 @@ function render() {
     });
   }, 140);
 }
-
-
-
-
 
 // ===== Subtle parallax tilt on cards =====
 function enableCardTilt() {
@@ -520,10 +569,6 @@ render = function () {
   setTimeout(enableCardTilt, 200);
 };
 
-
-
-
-
 // ---------- Modal ----------
 function openModal(index, { updateHash } = { updateHash: true }) {
   if (!filtered.length) return;
@@ -536,9 +581,8 @@ function openModal(index, { updateHash } = { updateHash: true }) {
   els.title.textContent = s.title;
   els.desc.textContent = `${s.doctor} Doctor • ${s.episodes} episode${s.episodes === 1 ? "" : "s"}`;
 
-const hero = document.getElementById("modalHero");
-if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
-
+  const hero = document.getElementById("modalHero");
+  if (hero) hero.style.backgroundImage = s.image ? `url("${s.image}")` : "";
 
   els.meta.innerHTML = `
     <div class="kv"><span>Code</span><strong>${escapeHtml(s.code)}</strong></div>
@@ -622,7 +666,6 @@ function trapFocus(e) {
   }
 }
 
-
 // ---------- Hash routing (share + back button) ----------
 function handleHashChange() {
   const id = getStoryIdFromHash();
@@ -664,17 +707,7 @@ function handleHashChange() {
 
 window.addEventListener("hashchange", handleHashChange);
 
-
-
-
-
-
-
-
-
-
 // ---------- Theme ----------
-
 function setTheme(theme) {
   document.documentElement.setAttribute("data-theme", theme);
   localStorage.setItem("theme", theme);
@@ -703,13 +736,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-
-
-
-
-
-
 // ---------- Controls ----------
 function closeIfOpen() {
   if (els.modal.getAttribute("aria-hidden") === "false") closeModal({ clearHash: true });
@@ -725,10 +751,6 @@ els.clear.addEventListener("click", () => {
   closeIfOpen();
 });
 
-
-
-
-
 function populateDoctorOptions() {
   const doctors = Array.from(new Set(stories.map(s => s.doctor))).sort((a, b) =>
     a.localeCompare(b, undefined, { sensitivity: "base" })
@@ -739,17 +761,9 @@ function populateDoctorOptions() {
     doctors.map(d => `<option value="${escapeHtml(d)}">${escapeHtml(d)}</option>`).join("");
 }
 
-
-
-
-
 window.addEventListener("scroll", () => {
   document.body.classList.toggle("scrolled", window.scrollY > 8);
 });
-
-
-
-
 
 document.querySelector("#featuredBtn")?.addEventListener("click", () => {
   const idx = filtered.findIndex(s => s.id === "day-of-the-doctor");
@@ -762,11 +776,8 @@ document.querySelector("#randomBtn")?.addEventListener("click", () => {
   openModal(idx, { updateHash: true });
 });
 
-
-
-
 // Init
 initTheme();
 populateDoctorOptions();
 render();
-handleHashChange(); 
+handleHashChange();
