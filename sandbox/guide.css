@@ -1818,3 +1818,72 @@ select.field__input:disabled{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Tag autocomplete (invisible tags, visible suggestions UI) */
+.ac {
+  position: relative;
+}
+
+.ac__panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  border: 1px solid rgba(255,255,255,0.10);
+  background: var(--panel, rgba(20,20,24,0.95));
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+  display: none;
+}
+
+[data-theme="light"] .ac__panel {
+  border: 1px solid rgba(0,0,0,0.10);
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.12);
+}
+
+.ac__item {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ac__item:hover,
+.ac__item[aria-selected="true"] {
+  background: rgba(255,255,255,0.07);
+}
+
+[data-theme="light"] .ac__item:hover,
+[data-theme="light"] .ac__item[aria-selected="true"] {
+  background: rgba(0,0,0,0.06);
+}
+
+.ac__tag {
+  font-weight: 650;
+}
+
+.ac__hint {
+  opacity: 0.7;
+  font-size: 12px;
+}
