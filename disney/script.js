@@ -157,11 +157,12 @@ const createSlide = () => {
   });
 })();
 
-// Seed slides
+// Seed initial slides (so carousel has content)
 for (let i = 0; i < 3; i++) createSlide();
 
-// Auto-advance
-setInterval(() => createSlide(), 5000);
+// No auto-advance.
+// Carousel now moves ONLY when clicking prev/next buttons.
+
 
 /* =========================
    CARD RAILS
