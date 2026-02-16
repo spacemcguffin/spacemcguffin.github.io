@@ -86,17 +86,18 @@ const createSlide = () => {
     old?.remove();
   }
 
-  // Smooth shift left by one slide width + gap (30px)
-  if (sliders.length >= 2) {
-    const shiftCount = sliders.length - 2;
-    const margin = `calc(-${100 * shiftCount}% - ${30 * shiftCount}px)`;
+// Only shift AFTER initial seeding
+if (sliders.length > 3) {
+  const shiftCount = sliders.length - 3;
+  const margin = `calc(-${100 * shiftCount}% - ${30 * shiftCount}px)`;
 
-    const first = sliders[0];
-    first.style.transition = prefersReducedMotion
-      ? "none"
-      : "margin-left 650ms cubic-bezier(.2,.9,.2,1)";
-    first.style.marginLeft = margin;
-  }
+  const first = sliders[0];
+  first.style.transition = prefersReducedMotion
+    ? "none"
+    : "margin-left 650ms cubic-bezier(.2,.9,.2,1)";
+  first.style.marginLeft = margin;
+}
+
 };
 
 /* =========================
