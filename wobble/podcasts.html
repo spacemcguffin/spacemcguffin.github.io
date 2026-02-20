@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Podcasts — Starfield Journal</title>
   <meta name="description" content="Podcast archive page with sidebar widgets and pagination." />
-
-  <!-- Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -54,8 +52,7 @@
 
     </header>
 
-<section class="postsGrid" id="list" aria-label="Podcast posts">
-
+<section class="postsGrid" id="postsGrid">
 
 
 
@@ -190,10 +187,12 @@
 
 </section>
 
-<nav class="pager pager--center" aria-label="Posts navigation">
-  <a class="pager__btn" href="#">← Newer posts</a>
-  <a class="pager__btn pager__btn--primary" href="#">Older posts →</a>
-</nav>
+<div class="loadMoreWrap">
+  <button class="btn btn--ghost" id="loadMoreBtn" type="button">
+    Load more
+  </button>
+  <div class="loadMoreHint" id="loadMoreHint" aria-live="polite"></div>
+</div>
 
     </section>
 
