@@ -27,34 +27,76 @@
 
   if (!grid || !btn) return;
 
-  const cards = Array.from(grid.querySelectorAll(".bbbCard"));
+  const allCards = Array.from(grid.querySelectorAll(".bbbCard"));
+  const filterBtns = Array.from(document.querySelectorAll("[data-filter]"));
 
-  // How many to show initially + each click
   const STEP = 9;
-
   let shown = 0;
+  let activeFilter = "all";
 
-  function update() {
-    // Show next batch
-    shown = Math.min(cards.length, shown + STEP);
-
-    cards.forEach((card, i) => {
-      card.style.display = i < shown ? "" : "none";
-    });
-
-    // Update hint + button state
-    if (hint) hint.textContent = `Showing ${shown} of ${cards.length}`;
-
-    const done = shown >= cards.length;
-    btn.disabled = done;
-    btn.textContent = done ? "All loaded" : "Load more";
-    btn.style.opacity = done ? "0.6" : "1";
-    btn.style.cursor = done ? "not-allowed" : "pointer";
+  function matchesFilter(card) {
+    if (activeFilter === "all") return true;
+    const cat = (card.dataset.category || "").toLowerCase().trim();
+    return cat === activeFilter;
   }
 
-  // Initial state
-  shown = 0;
-  update();
+  function apply() {
+    const matching = allCards.filter(matchesFilter);
 
-  btn.addEventListener("click", update);
+    // reveal in batches
+    shown = Math.min(matching.length, shown);
+
+    let visibleCount = 0;
+
+    for (const card of allCards) {
+      // hide non-matching completely
+      if (!matchesFilter(card)) {
+        card.style.display = "none";
+        continue;
+      }
+
+      // matching: show only up to shown
+      const shouldShow = visibleCount < shown;
+      card.style.display = shouldShow ? "" : "none";
+      visibleCount++;
+    }
+
+    // Update hint + button state
+    if (hint) {
+      hint.textContent = `Showing ${Math.min(shown, matching.length)} of ${matching.length}`;
+    }
+
+    const done = shown >= matching.length;
+    btn.disabled = done || matching.length === 0;
+    btn.textContent = matching.length === 0 ? "No posts" : (done ? "All loaded" : "Load more");
+    btn.style.opacity = (done || matching.length === 0) ? "0.6" : "1";
+    btn.style.cursor = (done || matching.length === 0) ? "not-allowed" : "pointer";
+  }
+
+  function loadMore() {
+    const matching = allCards.filter(matchesFilter);
+    shown = Math.min(matching.length, shown + STEP);
+    apply();
+  }
+
+  // Init: start with STEP visible
+  shown = STEP;
+  apply();
+
+  btn.addEventListener("click", loadMore);
+
+  // Filter buttons
+  filterBtns.forEach(b => {
+    b.addEventListener("click", () => {
+      activeFilter = (b.dataset.filter || "all").toLowerCase();
+
+      // reset batch when changing filter
+      shown = STEP;
+
+      // active button styling
+      filterBtns.forEach(x => x.classList.toggle("is-active", x === b));
+
+      apply();
+    });
+  });
 })();
