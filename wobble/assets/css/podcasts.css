@@ -659,3 +659,31 @@ a{ color:inherit; text-decoration:none; }
   from{ opacity:0; transform: translateY(6px); }
   to{ opacity:1; transform: translateY(0); }
 }
+
+
+
+
+
+
+
+
+
+
+/* When hovering the grid */
+.postsGrid:hover .bbbCard{
+  filter: blur(3px);
+  opacity: .55;
+  transform: scale(.98);
+  transition: 
+    filter .25s ease,
+    opacity .25s ease,
+    transform .25s ease;
+}
+
+/* Keep hovered card sharp */
+.postsGrid .bbbCard:hover{
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1.02);
+  z-index: 5;
+}
