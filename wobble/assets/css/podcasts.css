@@ -407,7 +407,7 @@ a{ color:inherit; text-decoration:none; }
 
 .bbbCard:hover .shine{
   opacity:1;
-  animation: shineMove .9s ease;
+  animation: shineMove .45s cubic-bezier(.4,0,.2,1);
 }
 
 @keyframes shineMove{
