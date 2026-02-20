@@ -448,9 +448,11 @@ a{ color:inherit; text-decoration:none; }
 /* Category label */
 .bbbCard__cat{
     font-size: 12px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, .68);
-    letter-spacing: .5px;
+    color: #f5bb32;
+    font-weight: 600;
+    opacity: 0.9;
 }
 
 /* Title (ellipsis like the real archive) */
@@ -840,7 +842,7 @@ a{ color:inherit; text-decoration:none; }
 /* optional: prev/next */
 .articleNav{
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin: 18px 0 28px;
 }
