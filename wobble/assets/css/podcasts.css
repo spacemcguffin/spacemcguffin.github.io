@@ -555,3 +555,13 @@ a{ color:inherit; text-decoration:none; }
   color: rgba(255,255,255,.60);
   font-size: 13px;
 }
+
+
+.bbbCard{
+  animation: fadeUp .18s ease both;
+}
+
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(6px); }
+  to{ opacity:1; transform: translateY(0); }
+}
