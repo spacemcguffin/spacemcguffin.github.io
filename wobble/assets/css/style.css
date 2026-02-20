@@ -108,13 +108,13 @@ a{ color:inherit; text-decoration:none; }
 .iconbtn:hover{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); transform: translateY(-1px); }
 
 .topbar{
-  position:sticky;
-  top:0;
-  z-index:50;
-  height:var(--topbarH);
-  backdrop-filter: blur(14px);
-  background: rgba(6,7,19,.55);
-  border-bottom: 1px solid rgba(255,255,255,.08);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--topbarH);
+    backdrop-filter: blur(14px);
+    background: rgb(28 30 58 / 55%);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
 }
 .topbar__inner{
   height:var(--topbarH);
