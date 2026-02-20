@@ -106,22 +106,3 @@
 
 
 
-
-
-
-
-(() => {
-  const btn = document.getElementById("backToTop");
-  if (!btn) return;
-
-  const toggle = () => {
-    btn.classList.toggle("is-visible", window.scrollY > 200);
-  };
-
-  toggle(); // run once on load
-  window.addEventListener("scroll", toggle);
-
-  btn.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-})();
