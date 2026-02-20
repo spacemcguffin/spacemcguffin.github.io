@@ -603,7 +603,7 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .bbbPill{
-  display:inline-flex;
+  display:none;
   align-items:center;
   height: 26px;
   padding: 0 10px;
@@ -616,9 +616,16 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .bbbDate{
-  color: rgba(255,255,255,.62);
-  font-size: 12px;
-  white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    height: 26px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .04);
+    color: rgba(255, 255, 255, .62);
+    font-size: 12px;
+    white-space: nowrap;
 }
 
 
