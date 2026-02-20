@@ -115,7 +115,7 @@
   if (!btn) return;
 
   const toggle = () => {
-    const show = window.scrollY > 500;
+    const show = window.scrollY > 50;
     btn.classList.toggle("is-visible", show);
   };
 
