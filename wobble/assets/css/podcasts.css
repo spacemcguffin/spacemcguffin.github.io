@@ -444,10 +444,10 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .bbbCard__img{
-  height: 160px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .bbbCard__top{
@@ -537,4 +537,21 @@ a{ color:inherit; text-decoration:none; }
     gap: 6px;
   }
   .nav.is-open{ display:flex; }
+}
+
+
+
+
+
+
+.loadMoreWrap{
+  display:grid;
+  place-items:center;
+  gap: 10px;
+  margin: 18px 0 30px;
+}
+
+.loadMoreHint{
+  color: rgba(255,255,255,.60);
+  font-size: 13px;
 }
