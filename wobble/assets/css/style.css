@@ -299,6 +299,77 @@ a{ color:inherit; text-decoration:none; }
 
 
 
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  margin: 10px 0 14px;
+}
+
+.controls__label{
+  font-size: 12px;
+  letter-spacing:.18em;
+  text-transform: uppercase;
+  color: var(--muted2);
+  margin-right: 10px;
+}
+
+.controls__group{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap:wrap;
+}
+
+/* segmented control */
+.seg{
+  display:flex;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.seg__btn{
+  height: 34px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: rgba(255,255,255,.78);
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .15s ease, color .15s ease;
+}
+
+.seg__btn:hover{
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.10);
+  color: rgba(255,255,255,.90);
+  transform: translateY(-1px);
+}
+
+.seg__btn.is-active{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.16);
+  color: rgba(255,255,255,.92);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Grid of post cards */
 
 
@@ -893,4 +964,12 @@ margin-bottom: 10px;
 
 @media (max-width: 980px){
   .articleNav{ grid-template-columns: 1fr; }
+}
+
+
+
+
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; transition: none !important; }
 }
