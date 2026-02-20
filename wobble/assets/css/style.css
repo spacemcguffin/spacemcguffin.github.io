@@ -828,6 +828,26 @@ a{ color:inherit; text-decoration:none; }
   color: rgba(255,255,255,.86);
 }
 .articleBody p{ margin: 0 0 14px; }
+
+
+.articleBody p.lead{
+    font-size: 1.3rem;
+    border-inline-start: 2px solid #ff66a8;
+    padding-inline-start: 0.8rem;
+    background: linear-gradient(90deg, #ff66a8, #66a6ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    line-height: 1.4;
+    margin-block-end: var(--space-s);
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.01em;
+    color: white;
+    font-weight: 500;
+    margin-top: 6px;
+}
+
+
+
 .articleBody h2, .articleBody h3{
   margin: 18px 0 10px;
   letter-spacing: -.01em;
