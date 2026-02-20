@@ -376,6 +376,58 @@ a{ color:inherit; text-decoration:none; }
     inset 0 1px 0 rgba(255,255,255,.12);
 }
 
+
+
+
+
+
+
+.bbbCard .shine{
+  position:absolute;
+  inset:-2px;
+  pointer-events:none;
+  opacity:0;
+}
+
+.bbbCard .shine::before{
+  content:"";
+  position:absolute;
+  top:-40%;
+  left:-60%;
+  width:60%;
+  height:180%;
+  transform: rotate(20deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,.14),
+    transparent
+  );
+}
+
+.bbbCard:hover .shine{
+  opacity:1;
+  animation: shineMove .9s ease;
+}
+
+@keyframes shineMove{
+  from{ transform: translateX(0); }
+  to{ transform: translateX(220%); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ensure content sits above the pseudo layers */
 .bbbCard > *{
   position: relative;
