@@ -40,48 +40,83 @@
     return cat === activeFilter;
   }
 
-  function apply() {
-    const matching = allCards.filter(matchesFilter);
 
-    // reveal in batches
-    shown = Math.min(matching.length, shown);
 
-    let visibleCount = 0;
 
-    for (const card of allCards) {
-      // hide non-matching completely
-      if (!matchesFilter(card)) {
-        card.style.display = "none";
-        continue;
-      }
 
-      // matching: show only up to shown
-      const shouldShow = visibleCount < shown;
-      card.style.display = shouldShow ? "" : "none";
-      visibleCount++;
+
+
+function apply(animate = true) {
+  const matching = allCards.filter(matchesFilter);
+
+  // reveal in batches
+  shown = Math.min(matching.length, shown);
+
+  // snapshot what was visible BEFORE we change anything
+  const wasVisible = new Map();
+  for (const c of allCards) wasVisible.set(c, c.style.display !== "none");
+
+  // apply visibility
+  let visibleCount = 0;
+  for (const card of allCards) {
+    // hide non-matching completely
+    if (!matchesFilter(card)) {
+      card.style.display = "none";
+      card.classList.remove("is-revealing");
+      card.style.removeProperty("--delay");
+      continue;
     }
 
-    // Update hint + button state
-    if (hint) {
-      hint.textContent = `Showing ${Math.min(shown, matching.length)} of ${matching.length}`;
+    // matching: show only up to shown
+    const shouldShow = visibleCount < shown;
+    card.style.display = shouldShow ? "" : "none";
+
+    if (!shouldShow) {
+      card.classList.remove("is-revealing");
+      card.style.removeProperty("--delay");
     }
 
-    const done = shown >= matching.length;
-    btn.disabled = done || matching.length === 0;
-    btn.textContent = matching.length === 0 ? "No posts" : (done ? "All loaded" : "Load more");
-    btn.style.opacity = (done || matching.length === 0) ? "0.6" : "1";
-    btn.style.cursor = (done || matching.length === 0) ? "not-allowed" : "pointer";
+    visibleCount++;
   }
+
+  // animate only newly revealed matching cards
+  if (animate) {
+    const nowVisibleMatching = matching.filter(c => c.style.display !== "none");
+    const newlyShown = nowVisibleMatching.filter(c => !wasVisible.get(c));
+
+    newlyShown.forEach((card, idx) => {
+      card.classList.remove("is-revealing");
+      card.style.setProperty("--delay", `${idx * 35}ms`); // stagger
+      void card.offsetWidth; // restart animation
+      card.classList.add("is-revealing");
+    });
+  }
+
+  // Update hint + button state
+  if (hint) {
+    hint.textContent = `Showing ${Math.min(shown, matching.length)} of ${matching.length}`;
+  }
+
+  const done = shown >= matching.length;
+  btn.disabled = done || matching.length === 0;
+  btn.textContent = matching.length === 0 ? "No posts" : (done ? "All loaded" : "Load more");
+  btn.style.opacity = (done || matching.length === 0) ? "0.6" : "1";
+  btn.style.cursor = (done || matching.length === 0) ? "not-allowed" : "pointer";
+}
+
+
+
+  
 
   function loadMore() {
     const matching = allCards.filter(matchesFilter);
     shown = Math.min(matching.length, shown + STEP);
-    apply();
+    apply(true);
   }
 
   // Init: start with STEP visible
   shown = STEP;
-  apply();
+  apply(false);
 
   btn.addEventListener("click", loadMore);
 
