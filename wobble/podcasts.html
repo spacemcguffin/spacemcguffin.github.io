@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Podcasts — Starfield Journal</title>
+  <meta name="description" content="Podcast archive page with sidebar widgets and pagination." />
+
+  <!-- Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/assets/css/podcasts.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="brand__mark" aria-hidden="true">⬣</span>
+        <span class="brand__text">
+          <span class="brand__title">Starfield Journal</span>
+          <span class="brand__tag">news • reviews • podcast</span>
+        </span>
+      </a>
+
+      <button class="iconbtn topbar__menuBtn" data-menu-btn aria-label="Open menu">☰</button>
+
+      <nav class="nav" data-nav>
+        <a class="nav__link is-active" href="podcasts.html">Podcasts</a>
+        <a class="nav__link" href="articles.html">Articles</a>
+        <a class="nav__link" href="team.html">The Crew</a>
+        <a class="nav__link" href="shop.html">Shop</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <header class="archiveHead">
+      <div class="archiveHead__left">
+        <div class="kicker">Category</div>
+        <h1 class="archiveHead__title">Podcasts</h1>
+        <p class="archiveHead__desc">
+          Listen to our entire podcast library plus our bonus Round Table episodes. Looking for review scores?
+          Jump to the Compendium.
+        </p>
+        <div class="archiveHead__actions">
+          <a class="btn btn--primary" href="#">Open Compendium</a>
+          <a class="btn btn--ghost" href="#list">Browse Episodes</a>
+        </div>
+      </div>
+
+      <div class="archiveHead__right">
+        <div class="heroTile">
+          <div class="heroTile__bg" style="background-image:url('https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?auto=format&fit=crop&w=2000&q=70');"></div>
+          <div class="heroTile__veil"></div>
+          <div class="heroTile__content">
+            <div class="pill">Weekly</div>
+            <div class="heroTile__title">Doctor Who chat, reviews, news</div>
+            <div class="heroTile__meta">New episodes • Bonus roundtables</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="layout" id="list">
+
+      <!-- MAIN LIST -->
+      <section class="posts">
+        <!-- Post item -->
+        <article class="postCard">
+          <a class="postCard__thumb" href="post.html" aria-label="Open episode">
+            <span class="postCard__thumbBg"
+              style="background-image:url('https://images.unsplash.com/photo-1462332420958-a05d1e002413?auto=format&fit=crop&w=1400&q=70');"></span>
+          </a>
+
+          <div class="postCard__body">
+            <div class="postCard__meta">
+              <span class="badge">Podcast</span>
+              <span class="dot">•</span>
+              <time datetime="2024-09-13">September 13th, 2024</time>
+            </div>
+
+            <h2 class="postCard__title">
+              <a href="post.html">Power Surge or Dalek Purge? Our Review of The Power of the Doctor (Plus News & Merch)</a>
+            </h2>
+
+            <p class="postCard__excerpt">
+              A weekly dispatch with the latest Who news, a few merch picks, and our main review.
+            </p>
+
+            <div class="postCard__by">
+              <span class="avatar" aria-hidden="true">G</span>
+              <span>Garry</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="postCard">
+          <a class="postCard__thumb" href="post.html" aria-label="Open episode">
+            <span class="postCard__thumbBg"
+              style="background-image:url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1400&q=70');"></span>
+          </a>
+          <div class="postCard__body">
+            <div class="postCard__meta">
+              <span class="badge badge--alt">Roundtable</span>
+              <span class="dot">•</span>
+              <time datetime="2024-08-28">August 28th, 2024</time>
+            </div>
+            <h2 class="postCard__title">
+              <a href="post.html">The Round Table: What Makes a Great Regeneration Story?</a>
+            </h2>
+            <p class="postCard__excerpt">Writing team chat: pacing, stakes, companions, and the “big moment”.</p>
+            <div class="postCard__by">
+              <span class="avatar" aria-hidden="true">A</span>
+              <span>Adam</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="postCard">
+          <a class="postCard__thumb" href="post.html" aria-label="Open episode">
+            <span class="postCard__thumbBg"
+              style="background-image:url('https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1400&q=70');"></span>
+          </a>
+          <div class="postCard__body">
+            <div class="postCard__meta">
+              <span class="badge">Podcast</span>
+              <span class="dot">•</span>
+              <time datetime="2024-08-16">August 16th, 2024</time>
+            </div>
+            <h2 class="postCard__title">
+              <a href="post.html">News, Theories & A Classic Review: Paradise Towers</a>
+            </h2>
+            <p class="postCard__excerpt">Ice hot or lukewarm? We go full classic this week.</p>
+            <div class="postCard__by">
+              <span class="avatar" aria-hidden="true">G</span>
+              <span>Garry</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pagination -->
+        <nav class="pager" aria-label="Posts navigation">
+          <a class="pager__btn" href="#">← Newer posts</a>
+          <a class="pager__btn pager__btn--primary" href="#">Older posts →</a>
+        </nav>
+      </section>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+
+        <section class="widget">
+          <div class="widget__title">The Socials</div>
+          <p class="widget__text">Stay up to date with show news, our review episodes, and plenty of Who chat.</p>
+          <div class="widget__row">
+            <a class="chip" href="#">Instagram</a>
+            <a class="chip" href="#">YouTube</a>
+            <a class="chip" href="#">Discord</a>
+            <a class="chip" href="#">RSS</a>
+          </div>
+        </section>
+
+        <section class="widget">
+          <div class="widget__title">About the show</div>
+          <p class="widget__text">
+            A weekly Doctor Who podcast bringing you news, reviews, commentaries and general chat from your hosts.
+          </p>
+          <a class="btn btn--ghost" href="#">Read more</a>
+        </section>
+
+        <section class="widget">
+          <div class="widget__title">Search the TARDIS</div>
+          <form class="search" onsubmit="return false;">
+            <input class="search__input" type="search" placeholder="Search for…" />
+            <button class="btn btn--primary" type="button">Search</button>
+          </form>
+        </section>
+
+        <section class="widget">
+          <div class="widget__title">Donate</div>
+          <p class="widget__text">If you enjoy the show and fancy supporting us, you can help keep the lights on.</p>
+          <a class="btn btn--primary" href="#">Donate</a>
+        </section>
+
+        <section class="widget widget--fine">
+          <div class="widget__title">What do you think?</div>
+          <p class="widget__text">
+            We love hearing from you. Send an email or leave a review in your podcast app of choice.
+          </p>
+        </section>
+
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <div class="footer__fine">© <span data-year></span> Starfield Journal.</div>
+    </footer>
+
+  </main>
+
+  <script src="podcasts.js"></script>
+</body>
+</html>
