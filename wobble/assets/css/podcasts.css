@@ -553,8 +553,8 @@ a{ color:inherit; text-decoration:none; }
   transition: transform .6s ease, filter .6s ease;
 }
 
-.bbbCard__img:hover {
-    transform: scale(1.08);
+.bbbCard:hover .bbbCard__img{
+    transform: scale(1.06);
   filter: saturate(1.15) contrast(1.05);
 }
 
