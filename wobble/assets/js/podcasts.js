@@ -100,3 +100,31 @@
     });
   });
 })();
+
+
+
+
+
+
+
+
+
+
+(() => {
+  const btn = document.getElementById("backToTop");
+  if (!btn) return;
+
+  const toggle = () => {
+    const show = window.scrollY > 500;
+    btn.classList.toggle("is-visible", show);
+  };
+
+  window.addEventListener("scroll", toggle);
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+})();
