@@ -1040,6 +1040,12 @@ margin-bottom: 10px;
   .articleNav{ grid-template-columns: 1fr; }
 }
 
+@media (max-width: 400px){
+  .archiveHead__title {
+	font-size: 2.3rem;
+    text-wrap: balance;
+  }
+}
 
 
 
