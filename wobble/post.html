@@ -3,15 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Article — Wobble</title>
+  <title>Podcasts — Starfield Journal</title>
   <meta name="description" content="Wobble article template using the same style as /wobble/podcasts." />
 
-  <!-- Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Use the SAME stylesheet as podcasts -->
   <link rel="stylesheet" href="/wobble/assets/css/style.css">
 </head>
 <body>
@@ -22,16 +20,18 @@
       <a class="brand" href="/wobble/podcasts" aria-label="Home">
         <span class="brand__mark" aria-hidden="true">⬣</span>
         <span class="brand__text">
-          <span class="brand__title">Wobble</span>
-          <span class="brand__tag">podcasts • articles • archive</span>
+          <span class="brand__title">Starfield Journal</span>
+          <span class="brand__tag">news • reviews • podcast</span>
         </span>
       </a>
 
       <button class="iconbtn topbar__menuBtn" data-menu-btn aria-label="Open menu">☰</button>
 
       <nav class="nav" data-nav>
-        <a class="nav__link" href="/wobble/podcasts">Podcasts</a>
-        <a class="nav__link is-active" href="/wobble/article.html">Articles</a>
+        <a class="nav__link" href="#">Podcasts</a>
+        <a class="nav__link is-active" href="#">Articles</a>
+        <a class="nav__link is-active" href="#">The Crew</a>
+        <a class="nav__link is-active" href="#">Shop</a>
       </nav>
     </div>
   </header>
@@ -52,20 +52,6 @@
           <a class="btn btn--ghost" href="/wobble/podcasts">Back to podcasts</a>
         </div>
       </div>
-
-      <div class="archiveHead__right">
-        <div class="heroTile">
-          <div class="heroTile__bg" style="background-image:url('/wiki/img/episodes/tco.png');"></div>
-          <div class="heroTile__veil"></div>
-          <div class="heroTile__content">
-            <div class="pill">News</div>
-            <div class="heroTile__title">Long-term audio future</div>
-            <div class="heroTile__meta">
-              Updated • <time datetime="2026-02-20">20 Feb 2026</time>
-            </div>
-          </div>
-        </div>
-      </div>
     </header>
 
     <!-- Article panel (glass) -->
@@ -81,28 +67,11 @@
           <span class="articleRead" data-readtime>— min read</span>
         </div>
 
-        <h2 class="articleTitle">Big Finish License Extended To 2035</h2>
 
-        <p class="articleDek">
-          This layout is designed to drop into your existing Wobble design system: Inter, glass cards, shine sweep,
-          and the same spacing language as the podcasts grid.
-        </p>
-
-        <div class="articleAuthor">
-          <span class="bbbAvatar" aria-hidden="true">L</span>
-          <div>
-            <div class="articleByline">Lewis</div>
-            <div class="articleBylineSub">Writing • Editing</div>
-          </div>
-        </div>
       </header>
 
       <figure class="articleHero">
-        <img
-          src="https://images.unsplash.com/photo-1462332420958-a05d1e002413?auto=format&fit=crop&w=2400&q=70"
-          alt="Galaxy"
-          loading="lazy"
-        />
+        <img src="/wiki/img/episodes/sotm.png"loading="lazy"/>
       </figure>
 
       <div class="articleBody" data-article>
@@ -128,20 +97,8 @@
 
         <hr>
 
-        <div class="articleTags">
-          <a class="tag" href="#">Big Finish</a>
-          <a class="tag" href="#">Audio</a>
-          <a class="tag" href="#">News</a>
-        </div>
 
-        <div class="articleShare">
-          <div class="kicker">Share</div>
-          <div class="shareRow">
-            <a class="btn btn--ghost" href="#" rel="noopener">X</a>
-            <a class="btn btn--ghost" href="#" rel="noopener">Bluesky</a>
-            <a class="btn btn--ghost" href="#" rel="noopener">Facebook</a>
-          </div>
-        </div>
+
       </div>
     </article>
 
