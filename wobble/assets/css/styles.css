@@ -337,7 +337,20 @@ img{ max-width:100%; display:block; }
 }
 .card__body{ padding: 14px 14px 16px; }
 .card__kicker{ color: var(--muted2); font-size: 12px; letter-spacing:.16em; text-transform: uppercase; }
-.card__title{ margin: 8px 0 8px; font-size: 18px; letter-spacing:-.02em; line-height:1.2; }
+
+
+.card__title{ 
+  margin: 8px 0 8px; 
+  font-size: 18px; 
+  letter-spacing:-.02em; 
+  line-height:1.2;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;   /* number of lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;}
+
+
+
 .card__meta{ color: var(--muted); font-size: 13px; display:flex; gap:8px; align-items:center; }
 .card__desc{ margin: 10px 0 0; color: rgba(255,255,255,.80); font-size: 14px; }
 
