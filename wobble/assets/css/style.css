@@ -991,6 +991,7 @@ margin-bottom: 10px;
   bottom: 24px;
   width: 48px;
   height: 48px;
+  z-index: 9999
 
   display: grid;
   place-items: center;
@@ -1017,7 +1018,6 @@ margin-bottom: 10px;
     transform .25s ease,
     background .15s ease,
     border-color .15s ease;
-  z-index: 100;
 }
 
 .backToTop:hover{
