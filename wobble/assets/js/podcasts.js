@@ -115,16 +115,13 @@
   if (!btn) return;
 
   const toggle = () => {
-    const show = window.scrollY > 50;
-    btn.classList.toggle("is-visible", show);
+    btn.classList.toggle("is-visible", window.scrollY > 200);
   };
 
+  toggle(); // run once on load
   window.addEventListener("scroll", toggle);
 
   btn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 })();
