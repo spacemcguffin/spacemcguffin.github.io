@@ -1007,3 +1007,23 @@ margin-bottom: 10px;
 }
 
 
+
+
+
+
+
+/* Smooth reveal animation for newly shown cards */
+.bbbCard.is-revealing{
+  animation: cardReveal .28s cubic-bezier(.2,.8,.2,1) both;
+  animation-delay: var(--delay, 0ms);
+}
+
+@keyframes cardReveal{
+  from{ opacity: 0; transform: translateY(10px) scale(.99); }
+  to{ opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .bbbCard.is-revealing{ animation: none !important; }
+}
