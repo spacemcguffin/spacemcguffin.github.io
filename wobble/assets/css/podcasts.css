@@ -421,6 +421,50 @@ a{ color:inherit; text-decoration:none; }
   white-space: nowrap;
 }
 
+
+
+
+
+
+.bbbCard{
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(255,255,255,.03);
+  box-shadow: var(--shadow2);
+  display:flex;
+  flex-direction:column;
+  transition: transform .16s ease, border-color .16s ease, background .16s ease;
+}
+
+.bbbCard:hover{
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.05);
+}
+
+.bbbCard__img{
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.bbbCard__top{
+  padding: 14px 14px 0;
+}
+
+.bbbCard__bottom{
+  margin-top: auto;
+  padding: 14px;
+  display:flex;
+  justify-content: space-between;
+  align-items:center;
+}
+
+
+
+
 /* Responsive */
 @media (max-width: 980px){
   .postsGrid{ grid-template-columns: repeat(2, 1fr); }
