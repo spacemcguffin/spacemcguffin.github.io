@@ -170,31 +170,100 @@ img{ max-width: 100%;}
 
 /* THEME ROW */
 .theme-row{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px var(--pad) 0;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding: 12px var(--pad) 0;
 }
 
+/* ===== Nicer “Switch to Scene Mode” button (spliced in) ===== */
 .tinybtn{
-  font-size: 12px;
-  padding: 6px 10px;
-  border: 1px solid rgba(0,0,0,.25);
-  background: rgba(255,255,255,.75);
-  cursor: pointer;
-  border-radius: 3px;
+  --btn-bg: rgba(255,255,255,.82);
+  --btn-bd: rgba(0,0,0,.22);
+  --btn-tx: #111;
+
+  appearance: none;
+  border: 1px solid var(--btn-bd);
+  background: linear-gradient(to bottom, var(--btn-bg), rgba(255,255,255,.62));
+  color: var(--btn-tx);
+
+  padding: 8px 12px;
+  border-radius: 10px;
+
   font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .2px;
+
+  cursor: pointer;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.65) inset,
+    0 10px 22px rgba(0,0,0,.10);
+  transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, filter .12s ease;
+  position: relative;
+  user-select: none;
 }
 
-body.scene .tinybtn{
-  border: 1px solid rgba(255,255,255,.22);
-  background: rgba(255,255,255,.08);
-  color: rgba(255,255,255,.92);
+/* cute “sparkle” dot */
+.tinybtn::before{
+  content:"";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  display:inline-block;
+  margin-right: 8px;
+  background: radial-gradient(circle at 30% 30%, #fff, #ffd37a 55%, #ff8a00 100%);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+  vertical-align: middle;
 }
+
+.tinybtn:hover{
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.65) inset,
+    0 14px 28px rgba(0,0,0,.14);
+  filter: saturate(1.05);
+}
+
+.tinybtn:active{
+  transform: translateY(0px);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.45) inset,
+    0 8px 18px rgba(0,0,0,.12);
+}
+
+/* keyboard focus (upgrade from the generic dashed outline) */
+.tinybtn:focus-visible{
+  outline: none;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.65) inset,
+    0 14px 28px rgba(0,0,0,.14),
+    0 0 0 3px rgba(204,0,0,.25);
+}
+
+/* Scene mode version of the button (looks “emo”) */
+body.scene .tinybtn{
+  --btn-bg: rgba(255,255,255,.08);
+  --btn-bd: rgba(255,255,255,.20);
+  --btn-tx: rgba(255,255,255,.92);
+
+  background: linear-gradient(to bottom, rgba(255,255,255,.10), rgba(255,255,255,.06));
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.08) inset,
+    0 14px 28px rgba(0,0,0,.45);
+}
+
+/* swap the dot to neon pink in scene mode */
+body.scene .tinybtn::before{
+  background: radial-gradient(circle at 30% 30%, #fff, #ff8bd6 55%, #ff2ea6 100%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,.18), 0 0 14px rgba(255,46,166,.25);
+}
+/* ===== end button splice ===== */
 
 .theme-hint{
   font-size: 12px;
   color: var(--hint);
+  opacity: .9;
 }
 
 /* TABLES */
