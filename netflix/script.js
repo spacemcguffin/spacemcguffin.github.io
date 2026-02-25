@@ -2,14 +2,13 @@
 // Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows
 
 let movies = [
- 
-{
-  id: "twisted-christian",
-  name: "Twisted Christian",
-  season: "Season 28, Episode 1",
-  des: "Cartman is possessed and may be the key to stopping the Antichrist.",
-  image: "/wiki/img/episodes/tc.png",
-},
+  {
+    id: "twisted-christian",
+    name: "Twisted Christian",
+    season: "Season 28, Episode 1",
+    des: "Cartman is possessed and may be the key to stopping the Antichrist.",
+    image: "/wiki/img/episodes/tc.png",
+  },
   {
     name: "The Woman in the Hat",
     season: "Season 28, Episode 2",
@@ -35,6 +34,21 @@ let movies = [
     image: "/wiki/img/episodes/tco.png",
   },
 ];
+
+// ===== Ensure every episode has a stable id (so modals can find them) =====
+function slugify(str) {
+  return String(str || "")
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+movies.forEach((m, idx) => {
+  if (!m) return;
+  if (!m.id) m.id = slugify(m.name || m.title || `episode-${idx + 1}`);
+});
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -88,18 +102,17 @@ const createSlide = () => {
     old?.remove();
   }
 
-// Only shift AFTER initial seeding
-if (sliders.length > 3) {
-  const shiftCount = sliders.length - 3;
-  const margin = `calc(-${100 * shiftCount}% - ${30 * shiftCount}px)`;
+  // Only shift AFTER initial seeding
+  if (sliders.length > 3) {
+    const shiftCount = sliders.length - 3;
+    const margin = `calc(-${100 * shiftCount}% - ${30 * shiftCount}px)`;
 
-  const first = sliders[0];
-  first.style.transition = prefersReducedMotion
-    ? "none"
-    : "margin-left 650ms cubic-bezier(.2,.9,.2,1)";
-  first.style.marginLeft = margin;
-}
-
+    const first = sliders[0];
+    first.style.transition = prefersReducedMotion
+      ? "none"
+      : "margin-left 650ms cubic-bezier(.2,.9,.2,1)";
+    first.style.marginLeft = margin;
+  }
 };
 
 /* =========================
@@ -111,9 +124,6 @@ if (sliders.length > 3) {
   const carouselEl = document.querySelector(".carousel");
   if (!container || !carouselEl) return;
 
-  // If carousel is hidden on small screens, don't inject buttons (optional safeguard)
-  // You already hide .carousel-container at max-width: 500px.
-  // If you later remove that rule, buttons will appear automatically.
   if (container.querySelector(".carousel-btn")) return;
 
   const prev = document.createElement("button");
@@ -151,7 +161,6 @@ if (sliders.length > 3) {
   prev.addEventListener("click", goPrev);
   next.addEventListener("click", goNext);
 
-  // Optional: keyboard support when buttons focused
   prev.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") goPrev();
   });
@@ -165,7 +174,6 @@ for (let i = 0; i < 3; i++) createSlide();
 
 // No auto-advance.
 // Carousel now moves ONLY when clicking prev/next buttons.
-
 
 /* =========================
    CARD RAILS
@@ -204,7 +212,6 @@ function updateRailArrows(container, preBtn, nxtBtn) {
 function updateRailButtons(container, preBtn, nxtBtn) {
   if (!container || !preBtn || !nxtBtn) return;
 
-  // If the rail doesn't need scrolling, hide arrows and stop here
   if (!needsHorizontalScroll(container)) {
     updateRailArrows(container, preBtn, nxtBtn);
     return;
@@ -241,23 +248,298 @@ cardContainers.forEach((container, i) => {
   const nxtBtn = nxtBtns[i];
   if (!container || !preBtn || !nxtBtn) return;
 
-  // Initial visibility + state
   updateRailArrows(container, preBtn, nxtBtn);
   updateRailButtons(container, preBtn, nxtBtn);
 
   preBtn.addEventListener("click", () => scrollByStep(container, -1));
   nxtBtn.addEventListener("click", () => scrollByStep(container, 1));
 
-  // Update state as user scrolls (drag, touch, trackpad horizontal)
   container.addEventListener(
     "scroll",
     () => updateRailButtons(container, preBtn, nxtBtn),
     { passive: true }
   );
 
-  // Re-check if the rail needs arrows when layout changes (responsive)
   window.addEventListener("resize", () => {
     updateRailArrows(container, preBtn, nxtBtn);
     updateRailButtons(container, preBtn, nxtBtn);
   });
 });
+
+/* =========================
+   EPISODE MODAL POPUPS (NEW)
+   - Click a card to open a modal
+   - ESC / backdrop click / close button to close
+   ========================= */
+
+(function episodeModal() {
+  // Build lookup tables
+  const byId = new Map(movies.map((m) => [m.id, m]));
+  const byName = new Map(movies.map((m) => [slugify(m.name), m]));
+
+  // Inject modal + minimal CSS (so it works even if you forget to add styles)
+  if (!document.getElementById("lfxModal")) {
+    const style = document.createElement("style");
+    style.textContent = `
+      .lfx-modal{position:fixed;inset:0;display:none;z-index:9999}
+      .lfx-modal.is-open{display:block}
+      .lfx-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.65)}
+      .lfx-modal__panel{position:relative;width:min(920px,calc(100vw - 28px));margin:6vh auto;border-radius:16px;overflow:hidden;background:rgba(18,18,22,.96);color:#fff;outline:none;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+      .lfx-modal__close{position:absolute;top:10px;right:12px;width:40px;height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer}
+      .lfx-modal__hero{height:260px;background:#0b0b10}
+      .lfx-modal__img{width:100%;height:100%;object-fit:cover}
+      .lfx-modal__body{padding:18px 18px 20px}
+      .lfx-modal__title{margin:0 0 6px;font-size:22px}
+      .lfx-modal__meta{opacity:.75;font-size:13px;margin-bottom:12px}
+      .lfx-modal__desc{margin:0;line-height:1.5;opacity:.92}
+      .lfx-modalOpen{overflow:hidden}
+    `;
+    document.head.appendChild(style);
+
+    const modalMarkup = `
+      <div class="lfx-modal" id="lfxModal" aria-hidden="true">
+        <div class="lfx-modal__backdrop" data-close></div>
+        <div class="lfx-modal__panel" role="dialog" aria-modal="true" aria-labelledby="lfxModalTitle" tabindex="-1">
+          <button class="lfx-modal__close" type="button" aria-label="Close" data-close>×</button>
+          <div class="lfx-modal__hero">
+            <img class="lfx-modal__img" alt="" />
+          </div>
+          <div class="lfx-modal__body">
+            <h2 id="lfxModalTitle" class="lfx-modal__title"></h2>
+            <div class="lfx-modal__meta"></div>
+            <p class="lfx-modal__desc"></p>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalMarkup);
+  }
+
+  const modal = document.getElementById("lfxModal");
+  const panel = modal.querySelector(".lfx-modal__panel");
+  const titleEl = modal.querySelector(".lfx-modal__title");
+  const metaEl = modal.querySelector(".lfx-modal__meta");
+  const descEl = modal.querySelector(".lfx-modal__desc");
+  const imgEl = modal.querySelector(".lfx-modal__img");
+
+  let lastFocus = null;
+
+  function openModal(ep) {
+    if (!ep) return;
+
+    lastFocus = document.activeElement;
+
+    titleEl.textContent = ep.name || "Episode";
+    metaEl.textContent = ep.season || "";
+    descEl.textContent = ep.des || "";
+
+    if (ep.image) {
+      imgEl.src = ep.image;
+      imgEl.style.display = "";
+    } else {
+      imgEl.removeAttribute("src");
+      imgEl.style.display = "none";
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("lfx-modalOpen");
+    panel.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("lfx-modalOpen");
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+  }
+
+  // Try to resolve which episode a clicked card represents
+  function resolveEpisodeFromCard(cardEl) {
+    if (!cardEl) return null;
+
+    // Best: explicit id on element
+    const explicitId =
+      cardEl.getAttribute("data-episode-id") ||
+      cardEl.getAttribute("data-id") ||
+      cardEl.dataset.episodeId ||
+      cardEl.dataset.id;
+
+    if (explicitId && byId.has(explicitId)) return byId.get(explicitId);
+
+    // Next: use image alt
+    const img = cardEl.querySelector("img");
+    const alt = img?.getAttribute("alt");
+    if (alt) {
+      const byAlt = byName.get(slugify(alt)) || byName.get(slugify(alt.replace(/^watch\s+/i, "")));
+      if (byAlt) return byAlt;
+    }
+
+    // Next: use any heading text inside card
+    const heading = cardEl.querySelector("h3, h2, h4, .name, .title");
+    const text = heading?.textContent?.trim();
+    if (text) {
+      const byText = byName.get(slugify(text));
+      if (byText) return byText;
+    }
+
+    return null;
+  }
+
+  // Click-to-open: support common card class names
+  document.addEventListener("click", (e) => {
+    // Close buttons/backdrop
+    if (modal.classList.contains("is-open") && e.target.closest("[data-close]")) {
+      closeModal();
+      return;
+    }
+
+    const card =
+      e.target.closest("[data-episode-id]") ||
+      e.target.closest(".card") ||
+      e.target.closest(".movie-card") ||
+      e.target.closest(".episode-card");
+
+    if (!card) return;
+
+    const ep = resolveEpisodeFromCard(card);
+    if (ep) openModal(ep);
+  });
+
+  // ESC to close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+})();
+
+
+
+
+/* =========================
+   EPISODE MODAL POPUPS (for .card)
+   ========================= */
+
+(function episodeModal() {
+  // Ensure every episode has an id (so lookups always work)
+  const slugify = (str) =>
+    String(str || "")
+      .toLowerCase()
+      .trim()
+      .replace(/['"]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+  movies.forEach((m, i) => {
+    if (!m.id) m.id = slugify(m.name || `episode-${i + 1}`);
+  });
+
+  const byId = new Map(movies.map((m) => [m.id, m]));
+  const byName = new Map(movies.map((m) => [slugify(m.name), m]));
+
+  // Inject modal + lightweight CSS once
+  if (!document.getElementById("lfxModal")) {
+    const style = document.createElement("style");
+    style.textContent = `
+      .lfx-modal{position:fixed;inset:0;display:none;z-index:9999}
+      .lfx-modal.is-open{display:block}
+      .lfx-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.65)}
+      .lfx-modal__panel{position:relative;width:min(920px,calc(100vw - 28px));margin:6vh auto;border-radius:16px;overflow:hidden;background:rgba(18,18,22,.96);color:#fff;outline:none;box-shadow:0 20px 60px rgba(0,0,0,.55)}
+      .lfx-modal__close{position:absolute;top:10px;right:12px;width:40px;height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer}
+      .lfx-modal__hero{height:260px;background:#0b0b10}
+      .lfx-modal__img{width:100%;height:100%;object-fit:cover}
+      .lfx-modal__body{padding:18px 18px 20px}
+      .lfx-modal__title{margin:0 0 6px;font-size:22px}
+      .lfx-modal__meta{opacity:.75;font-size:13px;margin-bottom:12px}
+      .lfx-modal__desc{margin:0;line-height:1.5;opacity:.92}
+      .lfx-modalOpen{overflow:hidden}
+    `;
+    document.head.appendChild(style);
+
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `
+      <div class="lfx-modal" id="lfxModal" aria-hidden="true">
+        <div class="lfx-modal__backdrop" data-close></div>
+        <div class="lfx-modal__panel" role="dialog" aria-modal="true" aria-labelledby="lfxModalTitle" tabindex="-1">
+          <button class="lfx-modal__close" type="button" aria-label="Close" data-close>×</button>
+          <div class="lfx-modal__hero">
+            <img class="lfx-modal__img" alt="" />
+          </div>
+          <div class="lfx-modal__body">
+            <h2 id="lfxModalTitle" class="lfx-modal__title"></h2>
+            <div class="lfx-modal__meta"></div>
+            <p class="lfx-modal__desc"></p>
+          </div>
+        </div>
+      </div>`
+    );
+  }
+
+  const modal = document.getElementById("lfxModal");
+  const panel = modal.querySelector(".lfx-modal__panel");
+  const titleEl = modal.querySelector(".lfx-modal__title");
+  const metaEl = modal.querySelector(".lfx-modal__meta");
+  const descEl = modal.querySelector(".lfx-modal__desc");
+  const imgEl = modal.querySelector(".lfx-modal__img");
+
+  let lastFocus = null;
+
+  function openModal(ep) {
+    lastFocus = document.activeElement;
+
+    titleEl.textContent = ep.name || "Episode";
+    metaEl.textContent = ep.season || "";
+    descEl.textContent = ep.des || "";
+
+    if (ep.image) {
+      imgEl.src = ep.image;
+      imgEl.style.display = "";
+    } else {
+      imgEl.removeAttribute("src");
+      imgEl.style.display = "none";
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.documentElement.classList.add("lfx-modalOpen");
+    panel.focus();
+  }
+
+  function closeModal() {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.documentElement.classList.remove("lfx-modalOpen");
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+  }
+
+  // Close on backdrop / close button
+  document.addEventListener("click", (e) => {
+    if (modal.classList.contains("is-open") && e.target.closest("[data-close]")) {
+      closeModal();
+    }
+  });
+
+  // ESC to close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  });
+
+  // Click any .card to open
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+
+    // Best match: use the card image alt text to find the episode
+    const alt = card.querySelector("img")?.getAttribute("alt") || "";
+    const epFromAlt = byName.get(slugify(alt));
+
+    // Fallback: try a heading inside card (if you have one)
+    const titleText =
+      card.querySelector("h3, h2, h4, .title, .name")?.textContent?.trim() || "";
+    const epFromText = byName.get(slugify(titleText));
+
+    const ep = epFromAlt || epFromText;
+
+    if (ep) openModal(ep);
+  });
+})();
