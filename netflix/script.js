@@ -257,15 +257,13 @@ cardContainers.forEach((container, i) => {
 /* =========================
    EPISODE MODAL POPUPS (SINGLE CLEAN VERSION)
    - Click a .card to open
-   - Shows Season heading + Episode label
-   - Uses movies[] description if available
-   - Hero actions + Prev/Next modal navigation + Keyboard arrows
+   - Navigation ONLY within the current .movies-list rail
    ========================= */
 
 (function episodeModal() {
   const byName = new Map(movies.map((m) => [String(m.name || "").trim(), m]));
 
-  // Inject modal once (CSS is in your style.css now)
+  // Inject modal once (CSS is in your style.css)
   if (!document.getElementById("lfxModal")) {
     document.body.insertAdjacentHTML(
       "beforeend",
@@ -306,11 +304,15 @@ cardContainers.forEach((container, i) => {
   const metaEl = modal.querySelector(".lfx-modal__meta");
   const descEl = modal.querySelector(".lfx-modal__desc");
   const imgEl = modal.querySelector(".lfx-modal__img");
-
   const prevBtn = modal.querySelector('[data-nav="prev"]');
   const nextBtn = modal.querySelector('[data-nav="next"]');
 
   let lastFocus = null;
+
+  // CURRENT rail context
+  let currentRail = null;
+  let episodeList = [];
+  let currentIndex = -1;
 
   // Find nearest <h1 class="title"> above this rail
   function findSectionHeading(card) {
@@ -324,9 +326,10 @@ cardContainers.forEach((container, i) => {
     return "";
   }
 
-  // Build a DOM-ordered list of every episode card on the page
-  function buildEpisodeList() {
-    const cards = Array.from(document.querySelectorAll(".card"));
+  // Build list ONLY from a specific rail
+  function buildEpisodeListFromRail(railEl) {
+    if (!railEl) return [];
+    const cards = Array.from(railEl.querySelectorAll(".card"));
     return cards
       .map((card) => {
         const title = card.querySelector(".name")?.textContent?.trim() || "";
@@ -334,20 +337,14 @@ cardContainers.forEach((container, i) => {
         const section = findSectionHeading(card);
         const img = card.querySelector(".card-img")?.getAttribute("src") || "";
 
+        // long description if in movies[]
         const match = byName.get(title);
-        const desc = match?.des || ""; // blank if not in movies[]
+        const desc = match?.des || "";
 
         const meta = [section, epLabel].filter(Boolean).join(" • ");
         return { title, meta, desc, img };
       })
       .filter((x) => x.title);
-  }
-
-  let episodeList = buildEpisodeList();
-  let currentIndex = -1;
-
-  function refreshEpisodeList() {
-    episodeList = buildEpisodeList();
   }
 
   function setNavState() {
@@ -374,16 +371,27 @@ cardContainers.forEach((container, i) => {
     setNavState();
   }
 
-  function openModalFromEpisode(ep) {
+  function openModalFromCard(card) {
     lastFocus = document.activeElement;
 
-    refreshEpisodeList();
+    currentRail = card.closest(".movies-list");
+    episodeList = buildEpisodeListFromRail(currentRail);
 
-    // Find index by title+meta (most reliable), then title-only
-    currentIndex = episodeList.findIndex((x) => x.title === ep.title && x.meta === ep.meta);
-    if (currentIndex < 0) currentIndex = episodeList.findIndex((x) => x.title === ep.title);
+    const title = card.querySelector(".name")?.textContent?.trim() || "";
+    const epLabel = card.querySelector(".des")?.textContent?.trim() || "";
+    const section = findSectionHeading(card);
+    const img = card.querySelector(".card-img")?.getAttribute("src") || "";
 
-    renderEpisode(episodeList[currentIndex] || ep);
+    const match = byName.get(title);
+    const desc = match?.des || "";
+
+    const meta = [section, epLabel].filter(Boolean).join(" • ");
+
+    // locate index within THIS rail list
+    currentIndex = episodeList.findIndex((x) => x.title === title && x.meta === meta);
+    if (currentIndex < 0) currentIndex = episodeList.findIndex((x) => x.title === title);
+
+    renderEpisode(episodeList[currentIndex] || { title, meta, desc, img });
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
@@ -420,6 +428,7 @@ cardContainers.forEach((container, i) => {
   // Click prev/next buttons
   document.addEventListener("click", (e) => {
     if (!modal.classList.contains("is-open")) return;
+
     const nav = e.target.closest("[data-nav]");
     if (!nav) return;
 
@@ -457,18 +466,7 @@ cardContainers.forEach((container, i) => {
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".card");
     if (!card) return;
-
-    const title = card.querySelector(".name")?.textContent?.trim() || "";
-    const epLabel = card.querySelector(".des")?.textContent?.trim() || "";
-    const section = findSectionHeading(card);
-    const img = card.querySelector(".card-img")?.getAttribute("src") || "";
-
-    const match = byName.get(title);
-    const desc = match?.des || "";
-
-    const meta = [section, epLabel].filter(Boolean).join(" • ");
-
-    openModalFromEpisode({ title, meta, desc, img });
+    openModalFromCard(card);
   });
 
   // Action buttons (demo handlers)
