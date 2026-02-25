@@ -17,12 +17,12 @@
 
   <title>South Park</title>
   <meta name="description" content="">
+  <link rel="stylesheet" href="guide.css">
 
-  <!-- (optional) keep your existing css if you have it -->
-  <!-- <link rel="stylesheet" href="guide.css"> -->
-    <link rel="stylesheet" href="guide.css">
-  
-  <!-- ✅ Dark mode + sticky chips + 3-col max grid + inline stars + search hide class -->
+  <!-- ✅ important: if script.js touches the DOM, defer it -->
+  <script src="script.js" defer></script>
+
+  <!-- ✅ Spliced: dark-mode polish + sticky chips + search + 3-col max grid + inline stars -->
   <style>
     :root{
       --bg0:#070712;
@@ -45,11 +45,11 @@
       color: var(--text);
     }
 
-    /* Sticky chips bar */
+    /* Sticky chips + search bar */
     .guide-sticky{
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 999; /* above hero bits */
       background: rgba(7,7,18,.72);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
@@ -128,10 +128,10 @@
       overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
     }
 
-    /* ✅ Search hide class (bulletproof even if [hidden] is overridden elsewhere) */
+    /* Bulletproof hide for search filtering */
     [data-episode].is-hidden{ display:none !important; }
 
-    /* ✅ Grid: max 3 cards per row */
+    /* Grid: max 3 cards per row */
     ul.grid{
       list-style:none;
       padding-left:0;
@@ -149,14 +149,13 @@
       ul.grid{ grid-template-columns: 1fr; }
     }
 
+    /* Card polish (won't break your existing markup) */
     li.card{
       border-radius: var(--radius);
       overflow:hidden;
       border: 1px solid var(--border);
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
       box-shadow: var(--shadow2);
-      display:grid;
-      grid-template-rows: auto 1fr;
       transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
     }
     li.card:hover{
@@ -166,6 +165,7 @@
     }
     li.card img{
       width:100%;
+      height:auto;
       aspect-ratio:16/9;
       object-fit:cover;
       display:block;
@@ -178,7 +178,6 @@
       padding: 12px 12px 14px;
       color: var(--text);
     }
-
     .card-title{
       color: var(--text);
       text-decoration:none;
@@ -194,7 +193,7 @@
       color: var(--muted);
     }
 
-    /* ✅ Force stars inline */
+    /* Stars side-by-side even if guide.css messes with <i> */
     li.card i.fa-star,
     li.card span i{
       display:inline-block !important;
@@ -207,88 +206,477 @@
 
 <body>
 
-  <!-- NOTE: You kept your hero and layout as-is in your paste; keep it here exactly -->
-  <!-- ... your hero/header markup ... -->
+<header class="hero hero-large" id="top">
+  <div class="hero-wrapper wrapper">
 
-  <!-- Sticky chips + search -->
-  <div class="guide-sticky" role="region" aria-label="Browse and search">
-    <div class="inner">
-      <div class="guide-tools">
-        <label class="guide-search">
-          <span class="sr-only">Search episodes</span>
-          <i class="uil uil-search" aria-hidden="true"></i>
-          <input id="episodeSearch" type="search" placeholder="Search episodes… (e.g. Obesity, S28, Episode 3)">
-        </label>
-        <button class="guide-btn" id="clearSearch" type="button" aria-label="Clear search">Clear</button>
-      </div>
+    <div class="breadcrumb hero-breadcrumb">
+      <a class="breadcrumb-link" href="/">Home</a>
+      <svg class="breadcrumb-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
 
-      <nav class="chips" aria-label="Browse">
-        <a class="chip" href="#s26" data-chip>Season 26</a>
-        <a class="chip" href="#s26specials" data-chip>Specials</a>
-        <a class="chip" href="#s27" data-chip>Season 27</a>
-        <a class="chip" href="#s28" data-chip>Season 28</a>
-        <a class="chip" href="#top">Back to top <i class="uil uil-arrow-up" aria-hidden="true"></i></a>
-      </nav>
+      <a class="breadcrumb-link" href="#">Guides</a>
+
+      <svg class="breadcrumb-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"></path></svg>
+
+      <a class="breadcrumb-link" href="#">South Park</a>
     </div>
+
+    <div class="hero-content">
+      <div>
+        <h1>
+          <strong class="hero-title-1">South Park</strong>
+        </h1>
+
+        <p class="hero-date">
+          <span class="hero-date-group">
+            <svg viewBox="0 0 20 20" height="24" width="24" xmlns="http://www.w3.org/2000/svg" class="hero-date-icon"><path d="M19.432,7.157c-0.312-1.113-1.624-1.858-3.496-2.17c0.279,0.331,0.532,0.685,0.754,1.06c1.043,0.299,1.748,0.764,1.911,1.344c0.095,0.335,0.014,0.729-0.24,1.169c-0.274,0.476-0.768,1.007-1.455,1.542c0-0.034,0.005-0.067,0.005-0.101c0-3.816-3.094-6.91-6.91-6.91c-3.816,0-6.91,3.094-6.91,6.91c0,1.169,0.293,2.268,0.805,3.232c-1.366-0.277-2.303-0.805-2.495-1.487c-0.094-0.336-0.013-0.729,0.241-1.169c0.138-0.239,0.35-0.496,0.595-0.756c0.011-0.449,0.055-0.89,0.138-1.317c-1.398,1.144-2.112,2.386-1.805,3.476c0.338,1.205,1.845,1.98,3.968,2.24C5.8,15.854,7.774,16.91,10,16.91c3.389,0,6.201-2.44,6.791-5.659C18.735,9.951,19.795,8.448,19.432,7.157 M10,16.047c-1.651,0-3.147-0.664-4.238-1.738c0.147,0.005,0.295,0.008,0.447,0.008c1.502,0,3.195-0.212,4.941-0.658c1.734-0.443,3.297-1.064,4.595-1.776C14.952,14.299,12.682,16.047,10,16.047 M15.998,10.733c-1.27,0.797-2.973,1.554-5.062,2.088c-1.616,0.414-3.251,0.632-4.727,0.632c-0.427,0-0.827-0.025-1.213-0.061C4.338,12.425,3.954,11.258,3.954,10c0-3.339,2.707-6.046,6.046-6.046c3.34,0,6.047,2.708,6.047,6.046C16.047,10.249,16.027,10.492,15.998,10.733"></path></svg>
+            <span>Seasons 1 - 28</span>
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <svg class="hero-blur-svg">
+      <defs>
+        <linearGradient id="fadeGrad" y2="0" x2="1">
+          <stop offset="0" stop-color="white" stop-opacity="0"></stop>
+          <stop offset="0.5" stop-color="white" stop-opacity="1"></stop>
+          <stop offset="1" stop-color="white" stop-opacity="0"></stop>
+        </linearGradient>
+
+        <mask id="fade" maskContentUnits="objectBoundingBox">
+          <rect width="1" height="1" fill="url(#fadeGrad)"></rect>
+        </mask>
+      </defs>
+
+      <image width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xlink:href="/wiki/img/episodes/tsw1.png" mask="url(#fade)"></image>
+    </svg>
   </div>
 
-  <!-- your wrap / sidebar / main content stays exactly as you pasted -->
-  <!-- ... your content markup ... -->
+  <div class="hero-blur-background"></div>
+</header>
 
-  <!-- ✅ Search + chip highlighting (spliced + fixed to use class hide) -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const input = document.getElementById('episodeSearch');
-      const clear = document.getElementById('clearSearch');
-      const cards = Array.from(document.querySelectorAll('[data-episode]'));
+<!-- ✅ Spliced: sticky chips + search -->
+<div class="guide-sticky" role="region" aria-label="Browse and search">
+  <div class="inner">
+    <div class="guide-tools">
+      <label class="guide-search">
+        <span class="sr-only">Search episodes</span>
+        <i class="uil uil-search" aria-hidden="true"></i>
+        <input id="episodeSearch" type="search" placeholder="Search episodes… (e.g. Obesity, S28, Episode 3)">
+      </label>
+      <button class="guide-btn" id="clearSearch" type="button" aria-label="Clear search">Clear</button>
+    </div>
 
-      if (!input || !clear || cards.length === 0) return;
+    <nav class="chips" aria-label="Browse">
+      <a class="chip" href="#s26" data-chip>Season 26</a>
+      <a class="chip" href="#s26specials" data-chip>Specials</a>
+      <a class="chip" href="#s27" data-chip>Season 27</a>
+      <a class="chip" href="#s28" data-chip>Season 28</a>
+      <a class="chip" href="#top">Back to top <i class="uil uil-arrow-up" aria-hidden="true"></i></a>
+    </nav>
+  </div>
+</div>
 
-      // Build searchable text (title + small + full text fallback)
-      cards.forEach((card) => {
-        const title = card.querySelector('.card-title')?.textContent || '';
-        const meta  = card.querySelector('small')?.textContent || '';
-        const extra = card.textContent || '';
-        card.dataset.search = (card.dataset.search || `${title} ${meta} ${extra}`).replace(/\s+/g, ' ').trim();
-      });
+<div id="wrapall">
 
-      function applyFilter() {
-        const term = input.value.trim().toLowerCase();
-        cards.forEach((card) => {
-          const hay = (card.dataset.search || '').toLowerCase();
-          const match = !term || hay.includes(term);
-          card.classList.toggle('is-hidden', !match);
-        });
-      }
+  <div id="sidebar">
+    <div id="stickThis" style="height: 270.729px;">
+      <div id="sidebarContent">
 
-      input.addEventListener('input', applyFilter);
-      clear.addEventListener('click', () => {
-        input.value = '';
-        applyFilter();
-        input.focus();
-      });
+        <center><a id="logo">Browse</a></center>
 
-      // Chip highlight
-      const chips = Array.from(document.querySelectorAll('[data-chip]'));
-      const sections = chips
-        .map(a => document.querySelector(a.getAttribute('href')))
-        .filter(Boolean);
+        <aside>
+          <a class="button" href="#s26">Season 26</a>
+          <a class="button" href="#s26specials">Specials</a>
+          <a class="button" href="#s27">Season 27</a>
+          <a class="button" href="#s28">Season 28</a>
 
-      if (chips.length && sections.length) {
-        const obs = new IntersectionObserver((entries) => {
-          const visible = entries
-            .filter(e => e.isIntersecting)
-            .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-          if (!visible) return;
+          <a class="button" href="#top" style="background-image: linear-gradient(to right, #acb5c152, #243e6070);">
+            <i class="uil uil-arrow-up"></i> Back to Top <i class="uil uil-arrow-up"></i>
+          </a>
+        </aside>
 
-          const id = '#' + visible.target.id;
-          chips.forEach(c => c.classList.toggle('is-active', c.getAttribute('href') === id));
-        }, { rootMargin: "-35% 0px -60% 0px", threshold: [0.1, 0.25, 0.5] });
+      </div>
+    </div>
+    <div id="stick-here"></div>
+  </div>
 
-        sections.forEach(sec => obs.observe(sec));
-      }
+  <div id="main">
+
+    <section id="page">
+      <main>
+        <div class="article">
+
+          <h3 id="s26">Season 26</h3>
+
+          <ul class="grid">
+
+            <li class="card" data-episode data-search="cupid ye season 26 episode 1 s26 e1">
+              <img src="/wiki/img/episodes/cy.png" alt="Cupid Ye poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Cupid Ye</a>
+                <small>Season 26, Episode 1</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="the worldwide privacy tour season 26 episode 2 s26 e2">
+              <img src="/wiki/img/episodes/wwpt.png" alt="The Worldwide Privacy Tour poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <small>Episode 2</small>
+                <a href="#" class="card-title">The Worldwide Privacy Tour</a>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="japanese toilet season 26 episode 3 s26 e3">
+              <img src="/wiki/img/episodes/jt.png" alt="Japanese Toilet poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Japanese Toilet</a>
+                <small>Season 26, Episode 3</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="deep learning season 26 episode 4 s26 e4">
+              <img src="/wiki/img/episodes/dl.png" alt="Deep Learning poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Deep Learning</a>
+                <small>Season 26, Episode 4</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="dikinbaus hot dogs season 26 episode 5 s26 e5">
+              <img src="/wiki/img/episodes/dh.png" alt="DikinBaus Hot Dogs poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">DikinBaus Hot Dogs</a>
+                <small>Season 26, Episode 5</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="spring break season 26 episode 6 s26 e6">
+              <img src="/wiki/img/episodes/sb.png" alt="Spring Break poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Spring Break</a>
+                <small>Season 26, Episode 6</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+          </ul>
+
+          <h3 id="s26specials">Specials</h3>
+
+          <ul class="grid">
+
+            <li class="card" data-episode data-search="joining the panderverse 2023 special 1">
+              <img src="/wiki/img/episodes/jtp.png" alt="Joining the Panderverse poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Joining the Panderverse</a>
+                <small>2023 Special #1</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="not suitable for children 2023 special 2">
+              <img src="/wiki/img/episodes/nsfc.png" alt="Not Suitable for Children poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Not Suitable for Children</a>
+                <small>2023 Special #2</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="the end of obesity 2024 special">
+              <img src="/wiki/img/episodes/teoo.png" alt="The End of Obesity poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">The End of Obesity</a>
+                <small>2024 Special</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+          </ul>
+
+          <h3 id="s27">Season 27</h3>
+
+          <ul class="grid">
+
+            <li class="card" data-episode data-search="sermon on the mount season 27 episode 1 s27 e1">
+              <img src="/wiki/img/episodes/sotm.png" alt="Sermon on the 'Mount poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Sermon on the 'Mount</a>
+                <small>Season 27, Episode 1</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="got a nut season 27 episode 2 s27 e2">
+              <img src="/wiki/img/episodes/gan.png" alt="Got a Nut poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Got a Nut</a>
+                <small>Season 27, Episode 2</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="sickofancy season 27 episode 3 s27 e3">
+              <img src="/wiki/img/episodes/sickofancy.png" alt="Sickofancy poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Sickofancy</a>
+                <small>Season 27, Episode 3</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="wok is dead season 27 episode 4 s27 e4">
+              <img src="/wiki/img/episodes/wid.png" alt="Wok is Dead poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Wok is Dead</a>
+                <small>Season 27, Episode 4</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="conflict of interest season 27 episode 5 s27 e5">
+              <img src="/wiki/img/episodes/coi.png" alt="Conflict of Interest poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Conflict of Interest</a>
+                <small>Season 27, Episode 5</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+          </ul>
+
+          <h3 id="s28">Season 28</h3>
+
+          <ul class="grid">
+
+            <li class="card" data-episode data-search="twisted christian season 28 episode 1 s28 e1">
+              <img src="/wiki/img/episodes/tc.png" alt="Twisted Christian poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Twisted Christian</a>
+                <small>Season 28, Episode 1</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="the woman in the hat season 28 episode 2 s28 e2">
+              <img src="/wiki/img/episodes/twith.png" alt="The Woman in the Hat poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">The Woman in the Hat</a>
+                <small>Season 28, Episode 2</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="sora not sorry season 28 episode 3 s28 e3">
+              <img src="/wiki/img/episodes/sns.png" alt="Sora Not Sorry poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Sora Not Sorry</a>
+                <small>Season 28, Episode 3</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="turkey trot season 28 episode 4 s28 e4">
+              <img src="/wiki/img/episodes/tt.png" alt="Turkey Trot poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">Turkey Trot</a>
+                <small>Season 28, Episode 4</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+            <li class="card" data-episode data-search="the crap out season 28 episode 5 s28 e5">
+              <img src="/wiki/img/episodes/tco.png" alt="The Crap Out poster" loading="lazy" decoding="async">
+              <span>
+                <i class="fa fa-check" style="font-size: 1.3em; float: right; color: #008000; padding: 0; opacity: 0.8;"></i>
+                <a href="#" class="card-title">The Crap Out</a>
+                <small>Season 28, Episode 5</small>
+
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star checked"></i>
+                <i class="fa fa-star unchecked"></i>
+              </span>
+            </li>
+
+          </ul>
+
+        </div>
+      </main>
+    </section>
+
+  </div>
+</div>
+
+<!-- ✅ Spliced: working search + chip highlight -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('episodeSearch');
+    const clear = document.getElementById('clearSearch');
+    const cards = Array.from(document.querySelectorAll('[data-episode]'));
+
+    if (!input || !clear || cards.length === 0) return;
+
+    // Build searchable text (title + small + full text fallback)
+    cards.forEach((card) => {
+      const title = card.querySelector('.card-title')?.textContent || '';
+      const meta  = card.querySelector('small')?.textContent || '';
+      const extra = card.textContent || '';
+      card.dataset.search = (card.dataset.search || `${title} ${meta} ${extra}`).replace(/\s+/g, ' ').trim();
     });
-  </script>
+
+    function applyFilter() {
+      const term = input.value.trim().toLowerCase();
+      cards.forEach((card) => {
+        const hay = (card.dataset.search || '').toLowerCase();
+        const match = !term || hay.includes(term);
+        card.classList.toggle('is-hidden', !match);
+      });
+    }
+
+    input.addEventListener('input', applyFilter);
+    clear.addEventListener('click', () => {
+      input.value = '';
+      applyFilter();
+      input.focus();
+    });
+
+    // Chip highlight
+    const chips = Array.from(document.querySelectorAll('[data-chip]'));
+    const sections = chips
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    if (chips.length && sections.length) {
+      const obs = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+
+        const id = '#' + visible.target.id;
+        chips.forEach(c => c.classList.toggle('is-active', c.getAttribute('href') === id));
+      }, { rootMargin: "-35% 0px -60% 0px", threshold: [0.1, 0.25, 0.5] });
+
+      sections.forEach(sec => obs.observe(sec));
+    }
+  });
+</script>
 
 </body>
 </html>
