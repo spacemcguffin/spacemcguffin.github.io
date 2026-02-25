@@ -282,6 +282,12 @@ cardContainers.forEach((container, i) => {
             <!-- Close button on image -->
             <button class="lfx-modal__close" type="button" aria-label="Close" data-close>×</button>
 
+
+            <button class="lfx-nav lfx-nav--prev" type="button" aria-label="Previous episode" data-nav="prev">‹</button>
+<button class="lfx-nav lfx-nav--next" type="button" aria-label="Next episode" data-nav="next">›</button>
+
+
+
             <!-- Action buttons on image -->
             <div class="lfx-modal__actions" aria-label="Actions">
               <button class="lfx-action lfx-action--primary" type="button" data-action="watch">
