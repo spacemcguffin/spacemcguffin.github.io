@@ -2,6 +2,22 @@
 // Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows
 
 let movies = [
+
+  
+  // Ensure every movie has a stable id (slug)
+const slugify = (s) =>
+  String(s || "")
+    .toLowerCase()
+    .trim()
+    .replace(/['"]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+
+movies = movies.map((m) => ({
+  ...m,
+  id: m.id || slugify(m.name),
+}));
 {
   id: "twisted-christian",
   name: "Twisted Christian",
