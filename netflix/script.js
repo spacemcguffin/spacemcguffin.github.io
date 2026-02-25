@@ -270,16 +270,120 @@ cardContainers.forEach((container, i) => {
     style.textContent = `
       .lfx-modal{position:fixed;inset:0;display:none;z-index:9999}
       .lfx-modal.is-open{display:block}
-      .lfx-modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.65)}
-      .lfx-modal__panel{position:relative;width:min(920px,calc(100vw - 28px));margin:6vh auto;border-radius:16px;overflow:hidden;background:rgba(18,18,22,.96);color:#fff;outline:none;box-shadow:0 20px 60px rgba(0,0,0,.55)}
-      .lfx-modal__close{position:absolute;top:10px;right:12px;width:40px;height:40px;border:0;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer}
-      .lfx-modal__hero{height:260px;background:#0b0b10}
-      .lfx-modal__img{width:100%;height:100%;object-fit:cover}
-      .lfx-modal__body{padding:18px 18px 20px}
-      .lfx-modal__title{margin:0 0 6px;font-size:22px}
-      .lfx-modal__meta{opacity:.75;font-size:13px;margin-bottom:12px}
-      .lfx-modal__desc{margin:0;line-height:1.5;opacity:.92}
+
+      /* Glassy backdrop */
+      .lfx-modal__backdrop{
+        position:absolute;inset:0;
+        background: rgba(0,0,0,.55);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      /* Panel */
+      .lfx-modal__panel{
+        position:relative;
+        width:min(980px,calc(100vw - 28px));
+        margin:6vh auto;
+        border-radius:22px;
+        overflow:hidden;
+
+        /* glass */
+        background: linear-gradient(
+          180deg,
+          rgba(255,255,255,.14),
+          rgba(255,255,255,.08)
+        );
+        border: 1px solid rgba(255,255,255,.18);
+        backdrop-filter: blur(18px) saturate(1.25);
+        -webkit-backdrop-filter: blur(18px) saturate(1.25);
+
+        color:#fff;
+        outline:none;
+        box-shadow:
+          0 24px 70px rgba(0,0,0,.55),
+          0 0 0 1px rgba(255,255,255,.06) inset;
+      }
+
+      /* Close button (glass pill) */
+      .lfx-modal__close{
+        position:absolute; top:12px; right:12px;
+        width:42px; height:42px;
+        border:1px solid rgba(255,255,255,.22);
+        border-radius:999px;
+        background: rgba(10,10,14,.25);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color:#fff;
+        font-size:22px;
+        cursor:pointer;
+        display:grid;
+        place-items:center;
+        transition: transform .12s ease, background .12s ease;
+      }
+      .lfx-modal__close:hover{ transform: scale(1.04); background: rgba(255,255,255,.12); }
+      .lfx-modal__close:active{ transform: scale(.98); }
+
+      /* Hero with soft gradient overlay */
+      .lfx-modal__hero{
+        height:300px;
+        background: rgba(0,0,0,.35);
+        position:relative;
+      }
+      .lfx-modal__img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.02)}
+      .lfx-modal__hero::after{
+        content:"";
+        position:absolute; inset:0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0,0,0,.20),
+          rgba(0,0,0,.55) 70%,
+          rgba(0,0,0,.70)
+        );
+        pointer-events:none;
+      }
+
+      /* Content */
+      .lfx-modal__body{
+        position:relative;
+        padding:18px 18px 22px;
+      }
+
+      .lfx-modal__title{
+        margin:0 0 6px;
+        font-size:24px;
+        letter-spacing:.2px;
+      }
+
+      .lfx-modal__meta{
+        opacity:.78;
+        font-size:13px;
+        margin-bottom:12px;
+      }
+
+      .lfx-modal__desc{
+        margin:0;
+        line-height:1.55;
+        opacity:.92;
+      }
+
+      /* Optional: subtle divider shine */
+      .lfx-modal__body::before{
+        content:"";
+        position:absolute; left:18px; right:18px; top:0;
+        height:1px;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+        opacity:.7;
+      }
+
+      /* Lock scroll when open */
       .lfx-modalOpen{overflow:hidden}
+
+      /* Mobile sizing */
+      @media (max-width: 520px){
+        .lfx-modal__panel{ margin: 10vh auto; border-radius: 18px; }
+        .lfx-modal__hero{ height: 220px; }
+        .lfx-modal__title{ font-size: 20px; }
+      }
     `;
     document.head.appendChild(style);
 
