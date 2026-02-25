@@ -1,8 +1,7 @@
 // Lewflix / Disney — script.js (copy-paste full file)
 // Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows
 
-let movies = [
-
+window.movies = [
   
   // Ensure every movie has a stable id (slug)
 const slugify = (s) =>
