@@ -283,9 +283,7 @@ cardContainers.forEach((container, i) => {
             <div class="lfx-modal__actions" aria-label="Actions">
               <button class="lfx-action lfx-action--primary" type="button" data-action="watch">Watch</button>
               <button class="lfx-action" type="button" data-action="trailer">Trailer</button>
-              <button class="lfx-action" type="button" data-action="add">+ My List</button>
-              <button class="lfx-action" type="button" data-action="like">♥ Like</button>
-            </div>
+              </div>
           </div>
 
           <div class="lfx-modal__body">
@@ -485,15 +483,6 @@ cardContainers.forEach((container, i) => {
       console.log("Trailer:", currentTitle);
       return;
     }
-    if (action === "add") {
-      btn.textContent = "✓ Added";
-      btn.disabled = true;
-      return;
-    }
-    if (action === "like") {
-      btn.textContent = "♥ Liked";
-      btn.disabled = true;
-      return;
-    }
+
   });
 })();
