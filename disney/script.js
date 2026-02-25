@@ -2,12 +2,19 @@
 // Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows
 
 let movies = [
-  {
-    name: "Twisted Christian",
-    season: "Season 28, Episode 1",
-    des: "Cartman is possessed and may be the key to stopping the Antichrist.",
-    image: "/wiki/img/episodes/tc.png",
-  },
+{
+  id: "twisted-christian",
+  name: "Twisted Christian",
+  season: 28,
+  episode: 1,
+  year: 2026,
+  runtime: "24m",
+  des: "Cartman is possessed and may be the key to stopping the Antichrist.",
+  image: "/wiki/img/episodes/tc.png",
+  backdrop: "/wiki/img/spnight.png",   
+  tags: ["Comedy", "Satire", "Supernatural"],
+  characters: ["Cartman", "Stan", "Kyle", "Butters"]
+},
   {
     name: "The Woman in the Hat",
     season: "Season 28, Episode 2",
