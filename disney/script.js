@@ -1,34 +1,14 @@
 // Lewflix / Disney — script.js (copy-paste full file)
 // Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows
 
-window.movies = [
-  
-  // Ensure every movie has a stable id (slug)
-const slugify = (s) =>
-  String(s || "")
-    .toLowerCase()
-    .trim()
-    .replace(/['"]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+let movies = [
 
-
-movies = movies.map((m) => ({
-  ...m,
-  id: m.id || slugify(m.name),
-}));
 {
   id: "twisted-christian",
   name: "Twisted Christian",
-  season: 28,
-  episode: 1,
-  year: 2026,
-  runtime: "24m",
+  season: "Season 28, Episode 1",
   des: "Cartman is possessed and may be the key to stopping the Antichrist.",
   image: "/wiki/img/episodes/tc.png",
-  backdrop: "/wiki/img/spnight.png",   
-  tags: ["Comedy", "Satire", "Supernatural"],
-  characters: ["Cartman", "Stan", "Kyle", "Butters"]
 },
   {
     name: "The Woman in the Hat",
