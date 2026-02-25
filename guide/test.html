@@ -201,6 +201,54 @@
       line-height: 1;
       margin: 0 3px 0 0;
     }
+
+
+
+
+
+
+
+    /* === Search mode layout === */
+.results-wrap{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 14px 0 6px;
+}
+.results-title{
+  margin: 6px 0 10px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* hidden by default (only shown while searching) */
+#searchResults{ display: none; }
+
+/* when searching: hide normal headings + normal grids */
+body.is-searching .article > h3,
+body.is-searching .article > ul.grid{
+  display: none !important;
+}
+
+/* when searching: show the results grid */
+body.is-searching #searchResults{
+  display: grid !important;
+}
+
+/* optional: a subtle empty state */
+#noResults{
+  display:none;
+  padding: 18px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.04);
+  color: var(--muted);
+}
+body.is-searching #noResults.is-show{
+  display:block;
+}
+
+
+    
   </style>
 </head>
 
@@ -305,7 +353,23 @@
 
     <section id="page">
       <main>
-        <div class="article">
+        
+      <div class="article">
+
+
+
+        <div class="results-wrap">
+  <div class="results-title" id="resultsTitle" aria-live="polite"></div>
+
+  <!-- this becomes the ONLY grid visible during search -->
+  <ul class="grid" id="searchResults" aria-label="Search results"></ul>
+
+  <div id="noResults">No matches. Try a different search.</div>
+</div>
+
+
+
+        
 
           <h3 id="s26">Season 26</h3>
 
@@ -628,39 +692,74 @@
   document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('episodeSearch');
     const clear = document.getElementById('clearSearch');
+
     const cards = Array.from(document.querySelectorAll('[data-episode]'));
+    const resultsGrid = document.getElementById('searchResults');
+    const resultsTitle = document.getElementById('resultsTitle');
+    const noResults = document.getElementById('noResults');
 
-    if (!input || !clear || cards.length === 0) return;
+    if (!input || !clear || !resultsGrid || !resultsTitle || !noResults || cards.length === 0) return;
 
-    // Build searchable text (title + small + full text fallback)
+    // Build searchable text (title + meta + full text fallback)
     cards.forEach((card) => {
       const title = card.querySelector('.card-title')?.textContent || '';
       const meta  = card.querySelector('small')?.textContent || '';
       const extra = card.textContent || '';
-      card.dataset.search = (card.dataset.search || `${title} ${meta} ${extra}`).replace(/\s+/g, ' ').trim();
+      card.dataset.search = (card.dataset.search || `${title} ${meta} ${extra}`)
+        .replace(/\s+/g, ' ')
+        .trim();
     });
+
+    function setSearching(on) {
+      document.body.classList.toggle('is-searching', on);
+      if (!on) {
+        // restore original cards to their original lists
+        cards.forEach(card => card.classList.remove('is-hidden'));
+        resultsGrid.innerHTML = '';
+        resultsTitle.textContent = '';
+        noResults.classList.remove('is-show');
+      }
+    }
 
     function applyFilter() {
       const term = input.value.trim().toLowerCase();
+      const searching = term.length > 0;
+
+      setSearching(searching);
+      if (!searching) return;
+
+      // Clear results grid and rebuild with matches (same card nodes, moved)
+      resultsGrid.innerHTML = '';
+
+      let count = 0;
       cards.forEach((card) => {
         const hay = (card.dataset.search || '').toLowerCase();
-        const match = !term || hay.includes(term);
-        card.classList.toggle('is-hidden', !match);
+        const match = hay.includes(term);
+
+        if (match) {
+          // Move the original card node into the results grid
+          resultsGrid.appendChild(card);
+          card.classList.remove('is-hidden');
+          count++;
+        } else {
+          card.classList.add('is-hidden');
+        }
       });
+
+      resultsTitle.textContent = `${count} result${count === 1 ? '' : 's'} for “${input.value.trim()}”`;
+      noResults.classList.toggle('is-show', count === 0);
     }
 
     input.addEventListener('input', applyFilter);
     clear.addEventListener('click', () => {
       input.value = '';
-      applyFilter();
+      setSearching(false);
       input.focus();
     });
 
-    // Chip highlight
+    // Chip highlight (optional)
     const chips = Array.from(document.querySelectorAll('[data-chip]'));
-    const sections = chips
-      .map(a => document.querySelector(a.getAttribute('href')))
-      .filter(Boolean);
+    const sections = chips.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
 
     if (chips.length && sections.length) {
       const obs = new IntersectionObserver((entries) => {
