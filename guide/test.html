@@ -20,8 +20,9 @@
   <link rel="stylesheet" href="guide.css">
 
   <!-- your existing script include -->
-  <script src="script.js"></script>
+<script src="script.js" defer></script>
 
+  
   <!-- ADDED: page-only enhancements (sticky chips + search + grid polish) -->
 <!-- ✅ Drop this into your page (replace the ADDED <style> block I gave you before) -->
 <style>
@@ -641,53 +642,61 @@ ul.grid{
   </div>
 
   <!-- ADDED: search + active chip highlighting -->
-  <script>
-    // Build search text automatically if you forget to set data-search on new cards:
-    document.querySelectorAll('[data-episode]').forEach((card) => {
-      if (!card.dataset.search) {
-        const t = card.querySelector('.card-title')?.textContent || '';
-        const s = card.querySelector('small')?.textContent || '';
-        card.dataset.search = (t + ' ' + s).trim();
-      }
-    });
-
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('episodeSearch');
     const clear = document.getElementById('clearSearch');
     const cards = Array.from(document.querySelectorAll('[data-episode]'));
 
+    if (!input || !clear || cards.length === 0) {
+      console.warn('Search init failed:', { input: !!input, clear: !!clear, cards: cards.length });
+      return;
+    }
+
+    // Build searchable text (title + small + full text fallback)
+    cards.forEach((card) => {
+      const title = card.querySelector('.card-title')?.textContent || '';
+      const meta  = card.querySelector('small')?.textContent || '';
+      const extra = card.textContent || '';
+      card.dataset.search = (card.dataset.search || `${title} ${meta} ${extra}`).replace(/\s+/g, ' ').trim();
+    });
+
     function applyFilter() {
-      const term = (input.value || '').trim().toLowerCase();
-      cards.forEach(card => {
+      const term = input.value.trim().toLowerCase();
+      cards.forEach((card) => {
         const hay = (card.dataset.search || '').toLowerCase();
-        card.hidden = !!term && !hay.includes(term);
+        card.hidden = term.length > 0 && !hay.includes(term);
       });
     }
 
-    input?.addEventListener('input', applyFilter);
-    clear?.addEventListener('click', () => {
+    input.addEventListener('input', applyFilter);
+    clear.addEventListener('click', () => {
       input.value = '';
       applyFilter();
       input.focus();
     });
 
-    // Highlight active chip based on scroll position (simple + lightweight)
+    // Chip highlight (optional, safe)
     const chips = Array.from(document.querySelectorAll('[data-chip]'));
     const sections = chips
       .map(a => document.querySelector(a.getAttribute('href')))
       .filter(Boolean);
 
-    const obs = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (!visible) return;
+    if (chips.length && sections.length) {
+      const obs = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
 
-      const id = '#' + visible.target.id;
-      chips.forEach(c => c.classList.toggle('is-active', c.getAttribute('href') === id));
-    }, { rootMargin: "-35% 0px -60% 0px", threshold: [0.1, 0.25, 0.5] });
+        const id = '#' + visible.target.id;
+        chips.forEach(c => c.classList.toggle('is-active', c.getAttribute('href') === id));
+      }, { rootMargin: "-35% 0px -60% 0px", threshold: [0.1, 0.25, 0.5] });
 
-    sections.forEach(sec => obs.observe(sec));
-  </script>
+      sections.forEach(sec => obs.observe(sec));
+    }
+  });
+</script>
 
 </body>
 </html>
