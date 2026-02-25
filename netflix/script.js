@@ -259,6 +259,7 @@ cardContainers.forEach((container, i) => {
    - Click a .card to open
    - Shows Season heading + Episode label
    - Uses movies[] description if available
+   - Glassmorphism + hero actions
    ========================= */
 
 (function episodeModal() {
@@ -287,43 +288,17 @@ cardContainers.forEach((container, i) => {
         border-radius:22px;
         overflow:hidden;
 
-        /* glass */
-        background: linear-gradient(
-          180deg,
-          rgba(255,255,255,.14),
-          rgba(255,255,255,.08)
-        );
+        background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.08));
         border: 1px solid rgba(255,255,255,.18);
         backdrop-filter: blur(18px) saturate(1.25);
         -webkit-backdrop-filter: blur(18px) saturate(1.25);
 
         color:#fff;
         outline:none;
-        box-shadow:
-          0 24px 70px rgba(0,0,0,.55),
-          0 0 0 1px rgba(255,255,255,.06) inset;
+        box-shadow: 0 24px 70px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06) inset;
       }
 
-      /* Close button (glass pill) */
-      .lfx-modal__close{
-        position:absolute; top:12px; right:12px;
-        width:42px; height:42px;
-        border:1px solid rgba(255,255,255,.22);
-        border-radius:999px;
-        background: rgba(10,10,14,.25);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        color:#fff;
-        font-size:22px;
-        cursor:pointer;
-        display:grid;
-        place-items:center;
-        transition: transform .12s ease, background .12s ease;
-      }
-      .lfx-modal__close:hover{ transform: scale(1.04); background: rgba(255,255,255,.12); }
-      .lfx-modal__close:active{ transform: scale(.98); }
-
-      /* Hero with soft gradient overlay */
+      /* Hero */
       .lfx-modal__hero{
         height:300px;
         background: rgba(0,0,0,.35);
@@ -333,40 +308,102 @@ cardContainers.forEach((container, i) => {
       .lfx-modal__hero::after{
         content:"";
         position:absolute; inset:0;
-        background: linear-gradient(
-          to bottom,
-          rgba(0,0,0,.20),
-          rgba(0,0,0,.55) 70%,
-          rgba(0,0,0,.70)
+        background: linear-gradient(to bottom,
+          rgba(0,0,0,.18),
+          rgba(0,0,0,.45) 60%,
+          rgba(0,0,0,.72)
         );
         pointer-events:none;
       }
 
-      /* Content */
+      /* Close button (X) sits on image top-right */
+      .lfx-modal__close{
+        position:absolute;
+        top:12px; right:12px;
+        z-index:3;
+
+        width:42px; height:42px;
+        border:1px solid rgba(255,255,255,.22);
+        border-radius:999px;
+        background: rgba(10,10,14,.30);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color:#fff;
+        font-size:22px;
+        cursor:pointer;
+
+        display:grid;
+        place-items:center;
+        transition: transform .12s ease, background .12s ease;
+      }
+      .lfx-modal__close:hover{ transform: scale(1.04); background: rgba(255,255,255,.12); }
+      .lfx-modal__close:active{ transform: scale(.98); }
+
+      /* Action buttons row over image (above titles) */
+      .lfx-modal__actions{
+        position:absolute;
+        left:14px;
+        right:14px;
+        bottom:14px;
+        z-index:3;
+
+        display:flex;
+        gap:10px;
+        align-items:center;
+        flex-wrap:wrap;
+      }
+
+      .lfx-action{
+        border:1px solid rgba(255,255,255,.18);
+        background: rgba(255,255,255,.10);
+        color:#fff;
+        border-radius:999px;
+        padding:8px 12px;
+        font-size:12.5px;
+        letter-spacing:.2px;
+        cursor:pointer;
+
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+
+        transition: transform .12s ease, background .12s ease, border-color .12s ease;
+        user-select:none;
+      }
+      .lfx-action:hover{
+        transform: translateY(-1px);
+        background: rgba(255,255,255,.16);
+        border-color: rgba(255,255,255,.26);
+      }
+      .lfx-action:active{ transform: translateY(0px); }
+
+      .lfx-action--primary{
+        background: rgba(255,255,255,.92);
+        color:#0b0b10;
+        border-color: rgba(255,255,255,.55);
+      }
+      .lfx-action--primary:hover{
+        background: rgba(255,255,255,1);
+      }
+
+      .lfx-action__dot{
+        width:7px;height:7px;border-radius:999px;
+        background: currentColor;
+        opacity:.8;
+      }
+
+      /* Body */
       .lfx-modal__body{
         position:relative;
         padding:18px 18px 22px;
       }
+      .lfx-modal__title{ margin:0 0 6px; font-size:24px; letter-spacing:.2px; }
+      .lfx-modal__meta{ opacity:.78; font-size:13px; margin-bottom:12px; }
+      .lfx-modal__desc{ margin:0; line-height:1.55; opacity:.92; }
 
-      .lfx-modal__title{
-        margin:0 0 6px;
-        font-size:24px;
-        letter-spacing:.2px;
-      }
-
-      .lfx-modal__meta{
-        opacity:.78;
-        font-size:13px;
-        margin-bottom:12px;
-      }
-
-      .lfx-modal__desc{
-        margin:0;
-        line-height:1.55;
-        opacity:.92;
-      }
-
-      /* Optional: subtle divider shine */
       .lfx-modal__body::before{
         content:"";
         position:absolute; left:18px; right:18px; top:0;
@@ -375,14 +412,14 @@ cardContainers.forEach((container, i) => {
         opacity:.7;
       }
 
-      /* Lock scroll when open */
       .lfx-modalOpen{overflow:hidden}
 
-      /* Mobile sizing */
       @media (max-width: 520px){
         .lfx-modal__panel{ margin: 10vh auto; border-radius: 18px; }
         .lfx-modal__hero{ height: 220px; }
         .lfx-modal__title{ font-size: 20px; }
+        .lfx-modal__actions{ left:10px; right:10px; bottom:10px; gap:8px; }
+        .lfx-action{ padding:7px 10px; font-size:12px; }
       }
     `;
     document.head.appendChild(style);
@@ -392,11 +429,31 @@ cardContainers.forEach((container, i) => {
       `
       <div class="lfx-modal" id="lfxModal" aria-hidden="true">
         <div class="lfx-modal__backdrop" data-close></div>
+
         <div class="lfx-modal__panel" role="dialog" aria-modal="true" aria-labelledby="lfxModalTitle" tabindex="-1">
-          <button class="lfx-modal__close" type="button" aria-label="Close" data-close>×</button>
           <div class="lfx-modal__hero">
             <img class="lfx-modal__img" alt="" />
+
+            <!-- Close button on image -->
+            <button class="lfx-modal__close" type="button" aria-label="Close" data-close>×</button>
+
+            <!-- Action buttons on image -->
+            <div class="lfx-modal__actions" aria-label="Actions">
+              <button class="lfx-action lfx-action--primary" type="button" data-action="watch">
+                <span class="lfx-action__dot" aria-hidden="true"></span> Watch
+              </button>
+              <button class="lfx-action" type="button" data-action="trailer">
+                Trailer
+              </button>
+              <button class="lfx-action" type="button" data-action="add">
+                + My List
+              </button>
+              <button class="lfx-action" type="button" data-action="like">
+                ♥ Like
+              </button>
+            </div>
           </div>
+
           <div class="lfx-modal__body">
             <h2 id="lfxModalTitle" class="lfx-modal__title"></h2>
             <div class="lfx-modal__meta"></div>
@@ -479,10 +536,43 @@ cardContainers.forEach((container, i) => {
     const img = card.querySelector(".card-img")?.getAttribute("src") || "";
 
     const match = byName.get(title);
-    const desc = match?.des || ""; // will be blank for seasons not in movies[]
+    const desc = match?.des || ""; // blank for seasons not in movies[]
 
     const meta = [section, epLabel].filter(Boolean).join(" • ");
-
     openModal({ title, meta, desc, img });
+  });
+
+  // Action buttons (demo handlers)
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".lfx-action");
+    if (!btn || !modal.classList.contains("is-open")) return;
+
+    const action = btn.getAttribute("data-action");
+    const currentTitle = titleEl.textContent.trim();
+
+    if (action === "watch") {
+      // Placeholder: swap this for your real player page / route
+      console.log("Watch:", currentTitle);
+      // Example redirect:
+      // window.location.href = `/watch.html?title=${encodeURIComponent(currentTitle)}`;
+      return;
+    }
+
+    if (action === "trailer") {
+      console.log("Trailer:", currentTitle);
+      return;
+    }
+
+    if (action === "add") {
+      btn.textContent = "✓ Added";
+      btn.disabled = true;
+      return;
+    }
+
+    if (action === "like") {
+      btn.textContent = "♥ Liked";
+      btn.disabled = true;
+      return;
+    }
   });
 })();
