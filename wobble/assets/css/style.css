@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Podcasty";
+  src: url("/wobble/assets/fonts/podcasty.woff2") format("woff2"),
+       url("/wobble/assets/fonts/podcasty.woff2") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 :root{
   --bg0:#070814;
   --bg1:#0b1020;
@@ -591,6 +601,7 @@ a{ color:inherit; text-decoration:none; }
   -webkit-line-clamp: 2; /* 2 lines like their archive */
   -webkit-box-orient: vertical;
   overflow: hidden;
+  font-family: "Podcasty", "Inter", sans-serif;
 }
 
 
