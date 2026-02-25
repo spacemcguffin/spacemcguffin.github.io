@@ -165,3 +165,48 @@
     });
   }
 })();
+
+
+
+
+
+
+
+
+
+
+
+(() => {
+  const hero = document.getElementById("latestHero");
+  const heroLink = document.getElementById("latestHeroLink");
+  const heroTitle = document.getElementById("latestHeroTitle");
+  const heroSub = document.getElementById("latestHeroSub");
+
+  if (!hero || !heroLink || !heroTitle || !heroSub) return;
+
+  // Find the first anchor that looks like a podcast entry.
+  // (Your list shows text like: "Podcast Ep10: ... Episode 10 10 February 2026")
+  const candidates = Array.from(document.querySelectorAll("a"))
+    .map(a => ({ a, t: (a.textContent || "").replace(/\s+/g, " ").trim() }))
+    .filter(x =>
+      /Podcast\s+Ep\d+/i.test(x.t) && /Episode\s+\d+/i.test(x.t)
+    );
+
+  const first = candidates[0];
+  if (!first) return; // no podcast link found
+
+  // Basic parsing: split into a title chunk and a trailing date chunk if present
+  // Example: "Podcast Ep10: Critters and Shitters Episode 10 10 February 2026"
+  const text = first.t;
+  const dateMatch = text.match(/(\d{1,2}\s+[A-Za-z]+\s+\d{4})\s*$/);
+  const dateStr = dateMatch ? dateMatch[1] : "";
+
+  // Remove trailing date from display title
+  const displayTitle = dateStr ? text.replace(dateStr, "").trim() : text;
+
+  heroLink.href = first.a.href;
+  heroTitle.textContent = displayTitle;
+  heroSub.textContent = dateStr ? `Released ${dateStr}` : `From your latest uploads`;
+
+  hero.hidden = false;
+})();
