@@ -883,29 +883,23 @@ body{
 
 /* Prev/Next nav buttons on the hero image */
 .lfx-nav{
-  position:absolute;
-  top:50%;
-  transform: translateY(-50%);
-  z-index:3;
-
-  width:46px;
-  height:46px;
-
-  border:1px solid rgba(255,255,255,.22);
-  border-radius:999px;
-  background: rgba(10,10,14,.26);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  color:#fff;
-  font-size:28px;
-  line-height:1;
-  cursor:pointer;
-
-  display:grid;
-  place-items:center;
-
-  transition: transform .12s ease, background .12s ease, opacity .12s ease;
+position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255, 255, 255, .22);
+    border-radius: 999px;
+    background: rgba(10, 10, 14, .26);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    color: #fff;
+    font-size: 38px;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    transition: transform .12s ease, background .12s ease, opacity .12s ease;
 }
 .lfx-nav:hover{
   transform: translateY(-50%) scale(1.04);
