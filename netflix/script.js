@@ -1,5 +1,5 @@
 // Lewflix / Disney — script.js (copy-paste full file)
-// Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows + episode modals
+// Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows + episode modals + modal navigation
 
 let movies = [
   {
@@ -259,16 +259,14 @@ cardContainers.forEach((container, i) => {
    - Click a .card to open
    - Shows Season heading + Episode label
    - Uses movies[] description if available
-   - Glassmorphism + hero actions
+   - Hero actions + Prev/Next modal navigation + Keyboard arrows
    ========================= */
 
 (function episodeModal() {
   const byName = new Map(movies.map((m) => [String(m.name || "").trim(), m]));
 
-  // Inject modal + styles once
+  // Inject modal once (CSS is in your style.css now)
   if (!document.getElementById("lfxModal")) {
-
-
     document.body.insertAdjacentHTML(
       "beforeend",
       `
@@ -279,29 +277,16 @@ cardContainers.forEach((container, i) => {
           <div class="lfx-modal__hero">
             <img class="lfx-modal__img" alt="" />
 
-            <!-- Close button on image -->
             <button class="lfx-modal__close" type="button" aria-label="Close" data-close>×</button>
 
-
             <button class="lfx-nav lfx-nav--prev" type="button" aria-label="Previous episode" data-nav="prev">‹</button>
-<button class="lfx-nav lfx-nav--next" type="button" aria-label="Next episode" data-nav="next">›</button>
+            <button class="lfx-nav lfx-nav--next" type="button" aria-label="Next episode" data-nav="next">›</button>
 
-
-
-            <!-- Action buttons on image -->
             <div class="lfx-modal__actions" aria-label="Actions">
-              <button class="lfx-action lfx-action--primary" type="button" data-action="watch">
-                <span class="lfx-action__dot" aria-hidden="true"></span> Watch
-              </button>
-              <button class="lfx-action" type="button" data-action="trailer">
-                Trailer
-              </button>
-              <button class="lfx-action" type="button" data-action="add">
-                + My List
-              </button>
-              <button class="lfx-action" type="button" data-action="like">
-                ♥ Like
-              </button>
+              <button class="lfx-action lfx-action--primary" type="button" data-action="watch">Watch</button>
+              <button class="lfx-action" type="button" data-action="trailer">Trailer</button>
+              <button class="lfx-action" type="button" data-action="add">+ My List</button>
+              <button class="lfx-action" type="button" data-action="like">♥ Like</button>
             </div>
           </div>
 
@@ -322,22 +307,83 @@ cardContainers.forEach((container, i) => {
   const descEl = modal.querySelector(".lfx-modal__desc");
   const imgEl = modal.querySelector(".lfx-modal__img");
 
+  const prevBtn = modal.querySelector('[data-nav="prev"]');
+  const nextBtn = modal.querySelector('[data-nav="next"]');
+
   let lastFocus = null;
 
-  function openModal({ title, meta, desc, img }) {
-    lastFocus = document.activeElement;
+  // Find nearest <h1 class="title"> above this rail
+  function findSectionHeading(card) {
+    const rail = card.closest(".movies-list");
+    if (!rail) return "";
+    let el = rail.previousElementSibling;
+    while (el) {
+      if (el.matches?.("h1.title")) return el.textContent.trim();
+      el = el.previousElementSibling;
+    }
+    return "";
+  }
 
-    titleEl.textContent = title || "Episode";
-    metaEl.textContent = meta || "";
-    descEl.textContent = desc || "";
+  // Build a DOM-ordered list of every episode card on the page
+  function buildEpisodeList() {
+    const cards = Array.from(document.querySelectorAll(".card"));
+    return cards
+      .map((card) => {
+        const title = card.querySelector(".name")?.textContent?.trim() || "";
+        const epLabel = card.querySelector(".des")?.textContent?.trim() || "";
+        const section = findSectionHeading(card);
+        const img = card.querySelector(".card-img")?.getAttribute("src") || "";
 
-    if (img) {
-      imgEl.src = img;
+        const match = byName.get(title);
+        const desc = match?.des || ""; // blank if not in movies[]
+
+        const meta = [section, epLabel].filter(Boolean).join(" • ");
+        return { title, meta, desc, img };
+      })
+      .filter((x) => x.title);
+  }
+
+  let episodeList = buildEpisodeList();
+  let currentIndex = -1;
+
+  function refreshEpisodeList() {
+    episodeList = buildEpisodeList();
+  }
+
+  function setNavState() {
+    if (!prevBtn || !nextBtn) return;
+    prevBtn.disabled = currentIndex <= 0;
+    nextBtn.disabled = currentIndex < 0 || currentIndex >= episodeList.length - 1;
+  }
+
+  function renderEpisode(ep) {
+    if (!ep) return;
+
+    titleEl.textContent = ep.title || "Episode";
+    metaEl.textContent = ep.meta || "";
+    descEl.textContent = ep.desc || "";
+
+    if (ep.img) {
+      imgEl.src = ep.img;
       imgEl.style.display = "";
     } else {
       imgEl.removeAttribute("src");
       imgEl.style.display = "none";
     }
+
+    setNavState();
+  }
+
+  function openModalFromEpisode(ep) {
+    lastFocus = document.activeElement;
+
+    refreshEpisodeList();
+
+    // Find index by title+meta (most reliable), then title-only
+    currentIndex = episodeList.findIndex((x) => x.title === ep.title && x.meta === ep.meta);
+    if (currentIndex < 0) currentIndex = episodeList.findIndex((x) => x.title === ep.title);
+
+    renderEpisode(episodeList[currentIndex] || ep);
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
@@ -352,6 +398,18 @@ cardContainers.forEach((container, i) => {
     if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
   }
 
+  function navigate(dir) {
+    if (!modal.classList.contains("is-open")) return;
+    if (!episodeList.length) return;
+    if (currentIndex < 0) return;
+
+    const next = currentIndex + dir;
+    if (next < 0 || next >= episodeList.length) return;
+
+    currentIndex = next;
+    renderEpisode(episodeList[currentIndex]);
+  }
+
   // Close on backdrop / close button
   document.addEventListener("click", (e) => {
     if (modal.classList.contains("is-open") && e.target.closest("[data-close]")) {
@@ -359,22 +417,41 @@ cardContainers.forEach((container, i) => {
     }
   });
 
-  // ESC to close
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+  // Click prev/next buttons
+  document.addEventListener("click", (e) => {
+    if (!modal.classList.contains("is-open")) return;
+    const nav = e.target.closest("[data-nav]");
+    if (!nav) return;
+
+    e.preventDefault();
+    if (nav.getAttribute("data-nav") === "prev") navigate(-1);
+    if (nav.getAttribute("data-nav") === "next") navigate(1);
   });
 
-  // Find nearest <h1 class="title"> above this rail
-  function findSectionHeading(card) {
-    const rail = card.closest(".movies-list");
-    if (!rail) return "";
-    let el = rail.previousElementSibling;
-    while (el) {
-      if (el.matches?.("h1.title")) return el.textContent.trim();
-      el = el.previousElementSibling;
+  // ESC + keyboard arrows
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("is-open")) return;
+
+    if (e.key === "Escape") {
+      closeModal();
+      return;
     }
-    return "";
-  }
+
+    const t = e.target;
+    const typing =
+      t &&
+      (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable);
+    if (typing) return;
+
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      navigate(-1);
+    }
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      navigate(1);
+    }
+  });
 
   // Open when clicking a card
   document.addEventListener("click", (e) => {
@@ -383,14 +460,15 @@ cardContainers.forEach((container, i) => {
 
     const title = card.querySelector(".name")?.textContent?.trim() || "";
     const epLabel = card.querySelector(".des")?.textContent?.trim() || "";
-    const section = findSectionHeading(card); // "Season 28" / "Specials" etc
+    const section = findSectionHeading(card);
     const img = card.querySelector(".card-img")?.getAttribute("src") || "";
 
     const match = byName.get(title);
-    const desc = match?.des || ""; // blank for seasons not in movies[]
+    const desc = match?.des || "";
 
     const meta = [section, epLabel].filter(Boolean).join(" • ");
-    openModal({ title, meta, desc, img });
+
+    openModalFromEpisode({ title, meta, desc, img });
   });
 
   // Action buttons (demo handlers)
@@ -402,24 +480,18 @@ cardContainers.forEach((container, i) => {
     const currentTitle = titleEl.textContent.trim();
 
     if (action === "watch") {
-      // Placeholder: swap this for your real player page / route
       console.log("Watch:", currentTitle);
-      // Example redirect:
-      // window.location.href = `/watch.html?title=${encodeURIComponent(currentTitle)}`;
       return;
     }
-
     if (action === "trailer") {
       console.log("Trailer:", currentTitle);
       return;
     }
-
     if (action === "add") {
       btn.textContent = "✓ Added";
       btn.disabled = true;
       return;
     }
-
     if (action === "like") {
       btn.textContent = "♥ Liked";
       btn.disabled = true;
