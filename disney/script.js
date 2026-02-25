@@ -2,7 +2,7 @@
 // Includes: hero carousel + NEW hero prev/next buttons + rails with auto-hide arrows
 
 let movies = [
-
+ 
 {
   id: "twisted-christian",
   name: "Twisted Christian",
