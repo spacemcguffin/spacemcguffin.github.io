@@ -281,7 +281,7 @@ cardContainers.forEach((container, i) => {
             <button class="lfx-nav lfx-nav--next" type="button" aria-label="Next episode" data-nav="next">›</button>
 
             <div class="lfx-modal__actions" aria-label="Actions">
-              <button class="lfx-action lfx-action--primary" type="button" data-action="watch">Watch</button>
+              <button class="lfx-action lfx-action--primary" type="button" data-action="wiki">Wiki</button>
               <button class="lfx-action" type="button" data-action="trailer">Trailer</button>
               </div>
           </div>
@@ -475,10 +475,30 @@ cardContainers.forEach((container, i) => {
     const action = btn.getAttribute("data-action");
     const currentTitle = titleEl.textContent.trim();
 
-    if (action === "watch") {
-      console.log("Watch:", currentTitle);
-      return;
+
+    if (action === "wiki") {
+
+  // Find the card currently open
+  const currentTitle = titleEl.textContent.trim();
+
+  // Find the matching card in the current rail
+  const cards = document.querySelectorAll(".card");
+
+  for (const card of cards) {
+    const name = card.querySelector(".name")?.textContent?.trim();
+    if (name === currentTitle) {
+      const wikiLink = card.getAttribute("data-wiki");
+      if (wikiLink) {
+        window.location.href = wikiLink;
+      }
+      break;
     }
+  }
+
+  return;
+}
+
+
     if (action === "trailer") {
       console.log("Trailer:", currentTitle);
       return;
