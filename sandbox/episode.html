@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Episode Title · Your Podcast Site</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="wrap">
+        <nav class="nav" aria-label="Primary">
+          <button class="nav__toggle" type="button" data-nav-toggle aria-expanded="false">
+            Menu <span class="nav__icon" aria-hidden="true">▾</span>
+          </button>
+          <ul class="nav__list" data-nav-list>
+            <li><a class="nav__link" href="index.html">Home</a></li>
+            <li><a class="nav__link" href="#">Podcast A</a></li>
+            <li><a class="nav__link" href="#">Podcast B</a></li>
+            <li><a class="nav__link" href="#">Podcast C</a></li>
+          </ul>
+        </nav>
+
+        <div class="brand brand--compact">
+          <img class="brand__logo" src="assets/logo-placeholder.png" alt="Site logo" />
+          <p class="brand__tagline">A flashcast about a thing you love.</p>
+        </div>
+      </div>
+    </header>
+
+    <main id="content" class="wrap">
+      <article class="single">
+        <header class="single__header">
+          <p class="post__eyebrow">Series X, Episode Y · First broadcast on …</p>
+          <h1 class="single__title">Episode Title</h1>
+          <p class="post__meta">Posted on …</p>
+        </header>
+
+        <div class="single__body">
+          <p>Add your full post write-up here.</p>
+          <p>You can include links, blockquotes, headings, etc.</p>
+
+          <blockquote>Use blockquotes for “pull quote” moments.</blockquote>
+
+          <h2>Links</h2>
+          <ul>
+            <li><a href="#">Related link</a></li>
+            <li><a href="#">Another link</a></li>
+          </ul>
+        </div>
+
+        <div class="single__audio">
+          <div class="post__actions">
+            <span class="post__recorded">Recorded on …</span>
+            <a class="btn" href="#" download>Download</a>
+            <span class="muted">(xx.x MB)</span>
+          </div>
+
+          <div class="post__subs">
+            <span class="muted">Subscribe:</span>
+            <a href="#">Apple Podcasts</a><span class="dot">·</span>
+            <a href="#">Google Podcasts</a><span class="dot">·</span>
+            <a href="#">Overcast</a><span class="dot">·</span>
+            <a href="#">Spotify</a>
+          </div>
+
+          <div class="post__tags">
+            <a class="tag" href="#">Series</a>
+            <a class="tag" href="#">Specials</a>
+          </div>
+        </div>
+
+        <nav class="post-nav" aria-label="Episode navigation">
+          <a class="post-nav__prev" href="#">← Previous</a>
+          <a class="post-nav__next" href="#">Next →</a>
+        </nav>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p class="muted">© <span data-year></span> Your Site.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
