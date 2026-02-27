@@ -178,7 +178,7 @@
 
 (() => {
   const modal = document.getElementById("lfxModal");
-  if (!modal) return console.warn("Missing #lfxModal");
+  if (!modal) return console.warn("Missing #lfxModal (is your script running before the HTML?)");
 
   const img = document.getElementById("lfxModalImg");
   const kicker = document.getElementById("lfxModalKicker");
@@ -218,7 +218,7 @@
 
   const getVisibleCards = () =>
     Array.from(document.querySelectorAll(".bbbCard"))
-      .filter((c) => c.style.display !== "none" && c.offsetParent !== null);
+      .filter((c) => getComputedStyle(c).display !== "none");
 
   const fillFromCard = (card) => {
     const titleText = card.querySelector(".bbbCard__title")?.textContent?.trim() || "Untitled";
@@ -242,7 +242,6 @@
     if (p1) meta.appendChild(p1);
     if (p2) meta.appendChild(p2);
 
-    // Optional: add data-desc="" to cards later
     desc.textContent = card.dataset.desc || "";
 
     if (imgSrc) {
@@ -256,8 +255,6 @@
     }
 
     link.href = href;
-
-    // scroll content back to top each time
     content.scrollTop = 0;
   };
 
@@ -265,9 +262,7 @@
     cards = getVisibleCards();
     if (!cards.length) return;
 
-    // wrap
     activeIndex = (index + cards.length) % cards.length;
-
     lastFocus = document.activeElement;
 
     fillFromCard(cards[activeIndex]);
@@ -276,7 +271,6 @@
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
 
-    // enable/disable nav buttons if only 1 card
     const many = cards.length > 1;
     if (prevBtn) prevBtn.style.display = many ? "" : "none";
     if (nextBtn) nextBtn.style.display = many ? "" : "none";
@@ -301,18 +295,11 @@
     openAt(activeIndex + dir);
   };
 
-  // Click-to-open cards
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".bbbCard");
     if (!card) return;
 
-    // allow new-tab etc.
-    if (
-      e.button !== 0 ||
-      e.metaKey || e.ctrlKey ||
-      e.shiftKey || e.altKey
-    ) return;
-
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
 
     cards = getVisibleCards();
@@ -320,17 +307,14 @@
     openAt(idx >= 0 ? idx : 0);
   });
 
-  // Close clicks
   modal.addEventListener("click", (e) => {
     if (e.target.matches("[data-close], .lfxModal__backdrop, .modal-backdrop")) closeModal();
-    if (e.target.matches("[data-prev]")) go(-1);
-    if (e.target.matches("[data-next]")) go(1);
+    if (e.target.closest("[data-prev]")) go(-1);
+    if (e.target.closest("[data-next]")) go(1);
   });
 
-  // Keyboard
   document.addEventListener("keydown", (e) => {
     if (!modal.classList.contains("is-open")) return;
-
     if (e.key === "Escape") closeModal();
     if (e.key === "ArrowLeft") go(-1);
     if (e.key === "ArrowRight") go(1);
