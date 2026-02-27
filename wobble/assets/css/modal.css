@@ -1083,9 +1083,8 @@ margin-bottom: 10px;
 
 
 
-
 /* =========================
-   Lewflix-style modal
+   Lewflix-style HERO modal
 ========================= */
 
 .lfxModal{
@@ -1110,7 +1109,7 @@ margin-bottom: 10px;
 .lfxModal__card{
   position: relative;
   width: min(920px, 100%);
-  max-height: min(86vh, 860px);   /* keeps modal within viewport */
+  max-height: min(86vh, 860px);
   border-radius: 22px;
   border: 1px solid rgba(255,255,255,.12);
   background:
@@ -1122,6 +1121,7 @@ margin-bottom: 10px;
   animation: lfxPop .18s ease-out both;
 }
 
+/* Close button */
 .lfxModal__close{
   position: absolute;
   top: 10px;
@@ -1135,25 +1135,41 @@ margin-bottom: 10px;
   font-size: 26px;
   line-height: 1;
   cursor: pointer;
+  z-index: 4;
 }
+.lfxModal__close:hover{ background: rgba(255,255,255,.10); }
 
-.lfxModal__close:hover{
-  background: rgba(255,255,255,.10);
-}
-
-.lfxModal__grid{
+/* Prev/Next buttons */
+.lfxModal__nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  font-size: 28px;
+  line-height: 1;
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 0;
+  place-items: center;
+  cursor: pointer;
+  z-index: 4;
+}
+.lfxModal__nav:hover{ background: rgba(255,255,255,.10); }
+.lfxModal__nav--prev{ left: 12px; }
+.lfxModal__nav--next{ right: 12px; }
+
+@media (max-width: 600px){
+  .lfxModal__nav{
+    width: 40px; height: 40px;
+    border-radius: 14px;
+    font-size: 26px;
+  }
 }
 
-.lfxModal__media{
-  background: rgba(255,255,255,.04);
-  border-right: 1px solid rgba(255,255,255,.10);
-  min-height: 260px;
-}
-
-/* Hero image area */
+/* Hero image */
 .lfxModal__hero{
   height: clamp(190px, 32vh, 320px);
   background: rgba(255,255,255,.04);
@@ -1167,10 +1183,15 @@ margin-bottom: 10px;
   display: block;
 }
 
+/* Scrollable content area */
 .lfxModal__content{
-  padding: 22px 22px 20px;
+  padding: 18px 22px 20px;
+  overflow: auto;
+  max-height: calc(min(86vh, 860px) - clamp(190px, 32vh, 320px));
+  scrollbar-width: thin;
 }
 
+/* Text styles */
 .lfxModal__kicker{
   font-size: 12px;
   letter-spacing: .12em;
@@ -1241,21 +1262,7 @@ margin-bottom: 10px;
   background: rgba(255,255,255,.06);
 }
 
-.lfxBtn:hover{
-  filter: brightness(1.05);
-}
-
-@media (max-width: 720px){
-  .lfxModal__grid{
-    grid-template-columns: 1fr;
-  }
-  .lfxModal__media{
-    border-right: 0;
-    border-bottom: 1px solid rgba(255,255,255,.10);
-    height: 220px;
-    min-height: 220px;
-  }
-}
+.lfxBtn:hover{ filter: brightness(1.05); }
 
 @keyframes lfxFade{
   from{ opacity: 0; }
@@ -1265,54 +1272,4 @@ margin-bottom: 10px;
 @keyframes lfxPop{
   from{ opacity: 0; transform: translateY(10px) scale(.985); }
   to{ opacity: 1; transform: translateY(0) scale(1); }
-}
-
-
-
-
-
-/* Content scroll area */
-.lfxModal__content{
-  padding: 18px 22px 20px;
-  overflow: auto;
-  max-height: calc(min(86vh, 860px) - clamp(190px, 32vh, 320px));
-}
-
-/* make scrolling feel nice */
-.lfxModal__content{
-  scrollbar-width: thin;
-}
-
-/* Nav arrows */
-.lfxModal__nav{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: rgba(255,255,255,.92);
-  font-size: 28px;
-  line-height: 1;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  z-index: 3;
-}
-
-.lfxModal__nav:hover{ background: rgba(255,255,255,.10); }
-
-.lfxModal__nav--prev{ left: 12px; }
-.lfxModal__nav--next{ right: 12px; }
-
-/* On small screens, keep arrows but reduce size */
-@media (max-width: 600px){
-  .lfxModal__nav{
-    width: 40px; height: 40px;
-    border-radius: 14px;
-    font-size: 26px;
-  }
-  .lfxModal__content{ padding: 16px; }
 }
