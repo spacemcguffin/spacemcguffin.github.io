@@ -1107,13 +1107,14 @@ margin-bottom: 10px;
 }
 
 .lfxModal__card{
-  position: relative;
-  width: min(1180px, 100%);
-  border-radius: 22px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(10,12,22,.72);
-  box-shadow: 0 30px 90px rgba(0,0,0,.70);
+    position: relative;
+    width: min(980px, calc(100vw - 28px));
+    margin: 6vh auto;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .10);
+    background: rgba(10, 12, 22, .72);
+    box-shadow: 0 30px 90px rgba(0, 0, 0, .70);;
 }
 
 /* Close button */
@@ -1136,20 +1137,20 @@ margin-bottom: 10px;
 
 /* Prev/Next arrows */
 .lfxModal__nav{
-  position: absolute;
-  top: 42%;
-  transform: translateY(-50%);
-  width: 56px;
-  height: 56px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: rgba(20,20,20,.45);
-  color: rgba(255,255,255,.92);
-  font-size: 34px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  z-index: 6;
+    position: absolute;
+    top: 38%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, .12);
+    background: rgba(20, 20, 20, .45);
+    color: rgba(255, 255, 255, .92);
+    font-size: 36px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 6;
 }
 .lfxModal__nav:hover{ background: rgba(35,35,35,.55); }
 .lfxModal__nav--prev{ left: 14px; }
@@ -1157,9 +1158,9 @@ margin-bottom: 10px;
 
 /* HERO */
 .lfxHero{
-  position: relative;
-  height: clamp(260px, 52vh, 520px);
-  background: rgba(255,255,255,.05);
+    position: relative;
+    height: 300px;
+    background: rgba(255, 255, 255, .05);
 }
 .lfxHero__img{
   width: 100%;
@@ -1220,12 +1221,12 @@ margin-bottom: 10px;
 
 /* Title + meta + desc */
 .lfxTitle{
-  margin: 0 0 6px;
-  font-size: clamp(30px, 4vw, 52px);
-  letter-spacing: -.03em;
-  line-height: 1.05;
-  color: rgba(255,255,255,.95);
-  font-family: "Podcasty", "Inter", sans-serif;
+    margin: 0 0 10px;
+    font-size: 45px;
+    letter-spacing: -.02em;
+    line-height: 1.05;
+    color: rgba(255, 255, 255, .95);
+    font-family: "Podcasty", "Inter", sans-serif;
 }
 .lfxMeta{
   display: flex;
