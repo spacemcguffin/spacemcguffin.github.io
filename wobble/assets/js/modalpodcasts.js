@@ -283,4 +283,41 @@
 })();
 
 
+(() => {
+  const modal = document.getElementById("lfxModal") || document.getElementById("modal");
+  if (!modal) {
+    console.warn("Modal element not found (#lfxModal or #modal).");
+    return;
+  }
 
+  const open = () => {
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  };
+
+  const close = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  };
+
+  // Close clicks (backdrop / buttons)
+  modal.addEventListener("click", (e) => {
+    if (e.target.matches("[data-close], .modal-backdrop, .lfxModal__backdrop")) close();
+  });
+
+  // ESC closes
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+  });
+
+  // ✅ Click-to-open (event delegation)
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".bbbCard"); // <-- CHANGE THIS if your cards use a different class
+    if (!card) return;
+
+    e.preventDefault(); // ✅ stops navigation so modal can open
+    open();
+  });
+})();
