@@ -177,43 +177,102 @@
 
 
 (() => {
-  const modal =
-    document.getElementById("lfxModal") ||
-    document.querySelector(".lfxModal") ||
-    document.getElementById("modal");
+  const modal = document.getElementById("lfxModal");
+  if (!modal) return console.warn("Missing #lfxModal");
 
-  if (!modal) return console.warn("Modal not found");
+  // Modal fields (must exist)
+  const img = document.getElementById("lfxModalImg");
+  const kicker = document.getElementById("lfxModalKicker");
+  const title = document.getElementById("lfxModalTitle");
+  const meta = document.getElementById("lfxModalMeta");
+  const desc = document.getElementById("lfxModalDesc");
+  const link = document.getElementById("lfxModalLink");
 
-  const closeSelectors = "[data-close], .lfxModal__backdrop, .modal-backdrop";
+  const required = { img, kicker, title, meta, desc, link };
+  for (const [k, el] of Object.entries(required)) {
+    if (!el) {
+      console.warn(`Missing modal element: #lfxModal${k[0].toUpperCase() + k.slice(1)}`);
+      return;
+    }
+  }
 
-  const open = () => {
+  let lastFocus = null;
+
+  // Extract url("...") from style="background-image: url(...)"
+  const getBgImageUrl = (el) => {
+    if (!el) return "";
+    const bg = getComputedStyle(el).backgroundImage; // e.g. url("...")
+    if (!bg || bg === "none") return "";
+    const m = bg.match(/url\(["']?(.*?)["']?\)/i);
+    return m ? m[1] : "";
+  };
+
+  const pill = (text) => {
+    if (!text) return null;
+    const span = document.createElement("span");
+    span.className = "pill";
+    span.textContent = text;
+    return span;
+  };
+
+  const openModal = ({ kickerText, titleText, typeText, dateText, descText, imgSrc, href }) => {
+    lastFocus = document.activeElement;
+
+    kicker.textContent = kickerText || "";
+    title.textContent = titleText || "";
+    desc.textContent = descText || "";
+
+    meta.innerHTML = "";
+    const p1 = pill(typeText);
+    const p2 = pill(dateText);
+    if (p1) meta.appendChild(p1);
+    if (p2) meta.appendChild(p2);
+
+    if (imgSrc) {
+      img.src = imgSrc;
+      img.alt = titleText || "Artwork";
+      img.style.display = "";
+    } else {
+      img.removeAttribute("src");
+      img.alt = "";
+      img.style.display = "none";
+    }
+
+    link.href = href || "#";
+
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+
+    const closeBtn = modal.querySelector("[data-close]");
+    closeBtn && closeBtn.focus();
   };
 
-  const close = () => {
+  const closeModal = () => {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+
+    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
+    lastFocus = null;
   };
 
-  // Close on backdrop / close button
+  // Close: backdrop or any [data-close]
   modal.addEventListener("click", (e) => {
-    if (e.target.matches(closeSelectors)) close();
+    if (e.target.matches("[data-close], .lfxModal__backdrop, .modal-backdrop")) closeModal();
   });
 
-  // ESC closes
+  // ESC close
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) close();
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
   });
 
-  // Open on card click
+  // Open on card click (event delegation)
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".bbbCard");
     if (!card) return;
 
-    // allow normal link behaviors (new tab, middle click, etc.)
+    // allow opening link in new tab etc.
     if (
       e.button !== 0 ||
       e.metaKey || e.ctrlKey ||
@@ -221,6 +280,26 @@
     ) return;
 
     e.preventDefault();
-    open();
+
+    const titleText =
+      card.querySelector(".bbbCard__title")?.textContent?.trim() || "Untitled";
+
+    const typeText =
+      card.querySelector(".bbbPill")?.textContent?.trim() ||
+      card.querySelector(".bbbCard__cat")?.textContent?.trim() ||
+      "";
+
+    const dateText =
+      card.querySelector("time.bbbDate")?.textContent?.trim() ||
+      card.querySelector("time")?.textContent?.trim() ||
+      "";
+
+    const kickerText = "Podcast"; // or set card.dataset.category etc.
+    const descText = card.dataset.desc || ""; // optional (add later)
+
+    const imgSrc = getBgImageUrl(card.querySelector(".bbbCard__img"));
+    const href = card.getAttribute("href") || "#";
+
+    openModal({ kickerText, titleText, typeText, dateText, descText, imgSrc, href });
   });
 })();
