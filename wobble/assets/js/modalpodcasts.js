@@ -180,34 +180,35 @@
   const modal = document.getElementById("lfxModal");
   if (!modal) return console.warn("Missing #lfxModal");
 
-  // Modal fields (must exist)
   const img = document.getElementById("lfxModalImg");
   const kicker = document.getElementById("lfxModalKicker");
   const title = document.getElementById("lfxModalTitle");
   const meta = document.getElementById("lfxModalMeta");
   const desc = document.getElementById("lfxModalDesc");
   const link = document.getElementById("lfxModalLink");
+  const content = modal.querySelector(".lfxModal__content");
 
-  const required = { img, kicker, title, meta, desc, link };
-  for (const [k, el] of Object.entries(required)) {
-    if (!el) {
-      console.warn(`Missing modal element: #lfxModal${k[0].toUpperCase() + k.slice(1)}`);
-      return;
-    }
+  const prevBtn = modal.querySelector("[data-prev]");
+  const nextBtn = modal.querySelector("[data-next]");
+
+  if (!img || !kicker || !title || !meta || !desc || !link || !content) {
+    console.warn("Modal fields missing (check your IDs / markup).");
+    return;
   }
 
   let lastFocus = null;
+  let cards = [];
+  let activeIndex = -1;
 
-  // Extract url("...") from style="background-image: url(...)"
   const getBgImageUrl = (el) => {
     if (!el) return "";
-    const bg = getComputedStyle(el).backgroundImage; // e.g. url("...")
+    const bg = getComputedStyle(el).backgroundImage;
     if (!bg || bg === "none") return "";
     const m = bg.match(/url\(["']?(.*?)["']?\)/i);
     return m ? m[1] : "";
   };
 
-  const pill = (text) => {
+  const buildPill = (text) => {
     if (!text) return null;
     const span = document.createElement("span");
     span.className = "pill";
@@ -215,22 +216,38 @@
     return span;
   };
 
-  const openModal = ({ kickerText, titleText, typeText, dateText, descText, imgSrc, href }) => {
-    lastFocus = document.activeElement;
+  const getVisibleCards = () =>
+    Array.from(document.querySelectorAll(".bbbCard"))
+      .filter((c) => c.style.display !== "none" && c.offsetParent !== null);
 
-    kicker.textContent = kickerText || "";
-    title.textContent = titleText || "";
-    desc.textContent = descText || "";
+  const fillFromCard = (card) => {
+    const titleText = card.querySelector(".bbbCard__title")?.textContent?.trim() || "Untitled";
+    const typeText =
+      card.querySelector(".bbbPill")?.textContent?.trim() ||
+      card.querySelector(".bbbCard__cat")?.textContent?.trim() ||
+      "";
+    const dateText =
+      card.querySelector("time.bbbDate")?.textContent?.trim() ||
+      card.querySelector("time")?.textContent?.trim() ||
+      "";
+    const imgSrc = getBgImageUrl(card.querySelector(".bbbCard__img"));
+    const href = card.getAttribute("href") || "#";
+
+    kicker.textContent = (card.dataset.category || "Post").toUpperCase();
+    title.textContent = titleText;
 
     meta.innerHTML = "";
-    const p1 = pill(typeText);
-    const p2 = pill(dateText);
+    const p1 = buildPill(typeText);
+    const p2 = buildPill(dateText);
     if (p1) meta.appendChild(p1);
     if (p2) meta.appendChild(p2);
 
+    // Optional: add data-desc="" to cards later
+    desc.textContent = card.dataset.desc || "";
+
     if (imgSrc) {
       img.src = imgSrc;
-      img.alt = titleText || "Artwork";
+      img.alt = titleText;
       img.style.display = "";
     } else {
       img.removeAttribute("src");
@@ -238,11 +255,31 @@
       img.style.display = "none";
     }
 
-    link.href = href || "#";
+    link.href = href;
+
+    // scroll content back to top each time
+    content.scrollTop = 0;
+  };
+
+  const openAt = (index) => {
+    cards = getVisibleCards();
+    if (!cards.length) return;
+
+    // wrap
+    activeIndex = (index + cards.length) % cards.length;
+
+    lastFocus = document.activeElement;
+
+    fillFromCard(cards[activeIndex]);
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+
+    // enable/disable nav buttons if only 1 card
+    const many = cards.length > 1;
+    if (prevBtn) prevBtn.style.display = many ? "" : "none";
+    if (nextBtn) nextBtn.style.display = many ? "" : "none";
 
     const closeBtn = modal.querySelector("[data-close]");
     closeBtn && closeBtn.focus();
@@ -257,22 +294,19 @@
     lastFocus = null;
   };
 
-  // Close: backdrop or any [data-close]
-  modal.addEventListener("click", (e) => {
-    if (e.target.matches("[data-close], .lfxModal__backdrop, .modal-backdrop")) closeModal();
-  });
+  const go = (dir) => {
+    if (!modal.classList.contains("is-open")) return;
+    cards = getVisibleCards();
+    if (cards.length <= 1) return;
+    openAt(activeIndex + dir);
+  };
 
-  // ESC close
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-  });
-
-  // Open on card click (event delegation)
+  // Click-to-open cards
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".bbbCard");
     if (!card) return;
 
-    // allow opening link in new tab etc.
+    // allow new-tab etc.
     if (
       e.button !== 0 ||
       e.metaKey || e.ctrlKey ||
@@ -281,25 +315,24 @@
 
     e.preventDefault();
 
-    const titleText =
-      card.querySelector(".bbbCard__title")?.textContent?.trim() || "Untitled";
+    cards = getVisibleCards();
+    const idx = cards.indexOf(card);
+    openAt(idx >= 0 ? idx : 0);
+  });
 
-    const typeText =
-      card.querySelector(".bbbPill")?.textContent?.trim() ||
-      card.querySelector(".bbbCard__cat")?.textContent?.trim() ||
-      "";
+  // Close clicks
+  modal.addEventListener("click", (e) => {
+    if (e.target.matches("[data-close], .lfxModal__backdrop, .modal-backdrop")) closeModal();
+    if (e.target.matches("[data-prev]")) go(-1);
+    if (e.target.matches("[data-next]")) go(1);
+  });
 
-    const dateText =
-      card.querySelector("time.bbbDate")?.textContent?.trim() ||
-      card.querySelector("time")?.textContent?.trim() ||
-      "";
+  // Keyboard
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("is-open")) return;
 
-    const kickerText = "Podcast"; // or set card.dataset.category etc.
-    const descText = card.dataset.desc || ""; // optional (add later)
-
-    const imgSrc = getBgImageUrl(card.querySelector(".bbbCard__img"));
-    const href = card.getAttribute("href") || "#";
-
-    openModal({ kickerText, titleText, typeText, dateText, descText, imgSrc, href });
+    if (e.key === "Escape") closeModal();
+    if (e.key === "ArrowLeft") go(-1);
+    if (e.key === "ArrowRight") go(1);
   });
 })();
