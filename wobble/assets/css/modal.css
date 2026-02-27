@@ -1110,15 +1110,15 @@ margin-bottom: 10px;
 .lfxModal__card{
   position: relative;
   width: min(920px, 100%);
+  max-height: min(86vh, 860px);   /* keeps modal within viewport */
   border-radius: 22px;
   border: 1px solid rgba(255,255,255,.12);
   background:
     radial-gradient(1200px 400px at 10% -10%, rgba(139,92,246,.18), transparent 60%),
     radial-gradient(900px 350px at 110% 10%, rgba(34,211,238,.14), transparent 55%),
-    rgba(10,12,22,.88);
+    rgba(10,12,22,.92);
   box-shadow: 0 30px 90px rgba(0,0,0,.65);
   overflow: hidden;
-  transform-origin: center;
   animation: lfxPop .18s ease-out both;
 }
 
@@ -1151,6 +1151,13 @@ margin-bottom: 10px;
   background: rgba(255,255,255,.04);
   border-right: 1px solid rgba(255,255,255,.10);
   min-height: 260px;
+}
+
+/* Hero image area */
+.lfxModal__hero{
+  height: clamp(190px, 32vh, 320px);
+  background: rgba(255,255,255,.04);
+  border-bottom: 1px solid rgba(255,255,255,.10);
 }
 
 .lfxModal__img{
@@ -1258,4 +1265,54 @@ margin-bottom: 10px;
 @keyframes lfxPop{
   from{ opacity: 0; transform: translateY(10px) scale(.985); }
   to{ opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+
+
+
+/* Content scroll area */
+.lfxModal__content{
+  padding: 18px 22px 20px;
+  overflow: auto;
+  max-height: calc(min(86vh, 860px) - clamp(190px, 32vh, 320px));
+}
+
+/* make scrolling feel nice */
+.lfxModal__content{
+  scrollbar-width: thin;
+}
+
+/* Nav arrows */
+.lfxModal__nav{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.92);
+  font-size: 28px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.lfxModal__nav:hover{ background: rgba(255,255,255,.10); }
+
+.lfxModal__nav--prev{ left: 12px; }
+.lfxModal__nav--next{ right: 12px; }
+
+/* On small screens, keep arrows but reduce size */
+@media (max-width: 600px){
+  .lfxModal__nav{
+    width: 40px; height: 40px;
+    border-radius: 14px;
+    font-size: 26px;
+  }
+  .lfxModal__content{ padding: 16px; }
 }
