@@ -176,119 +176,15 @@
 
 
 
-// Lewflix-style modal wiring for wobble/test2
 (() => {
-  const modal = document.getElementById("lfxModal");
-  if (!modal) return;
+  const modal =
+    document.getElementById("lfxModal") ||
+    document.querySelector(".lfxModal") ||
+    document.getElementById("modal");
 
-  const img = document.getElementById("lfxModalImg");
-  const kicker = document.getElementById("lfxModalKicker");
-  const title = document.getElementById("lfxModalTitle");
-  const meta = document.getElementById("lfxModalMeta");
-  const desc = document.getElementById("lfxModalDesc");
-  const link = document.getElementById("lfxModalLink");
+  if (!modal) return console.warn("Modal not found");
 
-  let lastFocus = null;
-
-  const openModal = (data) => {
-    lastFocus = document.activeElement;
-
-    // Fill content
-    const {
-      kickerText = "",
-      titleText = "",
-      dateText = "",
-      typeText = "",
-      descText = "",
-      imgSrc = "",
-      href = "#"
-    } = data;
-
-    kicker.textContent = kickerText;
-    title.textContent = titleText;
-    desc.textContent = descText;
-
-    // Meta pills
-    meta.innerHTML = "";
-    const addPill = (t) => {
-      if (!t) return;
-      const span = document.createElement("span");
-      span.className = "pill";
-      span.textContent = t;
-      meta.appendChild(span);
-    };
-    addPill(typeText);
-    addPill(dateText);
-
-    // Image + link
-    if (imgSrc) {
-      img.src = imgSrc;
-      img.alt = titleText || "Artwork";
-      img.style.display = "";
-    } else {
-      img.removeAttribute("src");
-      img.alt = "";
-      img.style.display = "none";
-    }
-    link.href = href || "#";
-
-    // Show
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.documentElement.classList.add("modal-open");
-    document.body.style.overflow = "hidden";
-
-    // Focus close button
-    const closeBtn = modal.querySelector("[data-close]");
-    closeBtn && closeBtn.focus();
-  };
-
-  const closeModal = () => {
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.documentElement.classList.remove("modal-open");
-    document.body.style.overflow = "";
-
-    if (lastFocus && typeof lastFocus.focus === "function") lastFocus.focus();
-    lastFocus = null;
-  };
-
-  // Close handlers
-  modal.addEventListener("click", (e) => {
-    if (e.target.matches("[data-close]")) closeModal();
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
-  });
-
-  // Click-to-open: adapt selector to your card class
-  document.addEventListener("click", (e) => {
-    const card = e.target.closest(".bbbCard"); // <-- change if needed
-    if (!card) return;
-
-    // Optional: if your cards are links, stop navigation so modal can open
-    e.preventDefault();
-
-    openModal({
-      kickerText: card.dataset.kicker || "Pull to Open",
-      titleText: card.dataset.title || card.querySelector("h2,h3")?.textContent?.trim() || "Untitled",
-      typeText: card.dataset.type || card.querySelector("[data-type]")?.textContent?.trim() || "",
-      dateText: card.dataset.date || card.querySelector("time")?.textContent?.trim() || "",
-      descText: card.dataset.desc || card.querySelector("p")?.textContent?.trim() || "",
-      imgSrc: card.dataset.img || card.querySelector("img")?.getAttribute("src") || "",
-      href: card.getAttribute("href") || card.dataset.href || "#"
-    });
-  });
-})();
-
-
-(() => {
-  const modal = document.getElementById("lfxModal") || document.getElementById("modal");
-  if (!modal) {
-    console.warn("Modal element not found (#lfxModal or #modal).");
-    return;
-  }
+  const closeSelectors = "[data-close], .lfxModal__backdrop, .modal-backdrop";
 
   const open = () => {
     modal.classList.add("is-open");
@@ -302,9 +198,9 @@
     document.body.style.overflow = "";
   };
 
-  // Close clicks (backdrop / buttons)
+  // Close on backdrop / close button
   modal.addEventListener("click", (e) => {
-    if (e.target.matches("[data-close], .modal-backdrop, .lfxModal__backdrop")) close();
+    if (e.target.matches(closeSelectors)) close();
   });
 
   // ESC closes
@@ -312,12 +208,19 @@
     if (e.key === "Escape" && modal.classList.contains("is-open")) close();
   });
 
-  // ✅ Click-to-open (event delegation)
+  // Open on card click
   document.addEventListener("click", (e) => {
-    const card = e.target.closest(".bbbCard"); // <-- CHANGE THIS if your cards use a different class
+    const card = e.target.closest(".bbbCard");
     if (!card) return;
 
-    e.preventDefault(); // ✅ stops navigation so modal can open
+    // allow normal link behaviors (new tab, middle click, etc.)
+    if (
+      e.button !== 0 ||
+      e.metaKey || e.ctrlKey ||
+      e.shiftKey || e.altKey
+    ) return;
+
+    e.preventDefault();
     open();
   });
 })();
