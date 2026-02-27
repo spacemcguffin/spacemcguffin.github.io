@@ -181,17 +181,26 @@
   if (!modal) return console.warn("Missing #lfxModal (is your script running before the HTML?)");
 
   const img = document.getElementById("lfxModalImg");
-  const kicker = document.getElementById("lfxModalKicker");
   const title = document.getElementById("lfxModalTitle");
   const meta = document.getElementById("lfxModalMeta");
   const desc = document.getElementById("lfxModalDesc");
   const link = document.getElementById("lfxModalLink");
-  const content = modal.querySelector(".lfxModal__content");
+
+  // OPTIONAL elements (don’t require)
+  const kicker = document.getElementById("lfxModalKicker"); // may not exist in your new layout
+  const content =
+    modal.querySelector(".lfxInfo__inner") ||  // Netflix-like layout
+    modal.querySelector(".lfxModal__content"); // your older layout
 
   const prevBtn = modal.querySelector("[data-prev]");
   const nextBtn = modal.querySelector("[data-next]");
 
-  if (!img || !kicker || !title || !meta || !desc || !link || !content) {
+  // Optional Wiki/Trailer buttons (Netflix-like layout)
+  const wikiBtn = document.getElementById("lfxWikiBtn");
+  const trailerBtn = document.getElementById("lfxTrailerBtn");
+
+  // Required fields
+  if (!img || !title || !meta || !desc || !link || !content) {
     console.warn("Modal fields missing (check your IDs / markup).");
     return;
   }
@@ -216,34 +225,47 @@
     return span;
   };
 
+  // only visible cards (respects your filters + load-more)
   const getVisibleCards = () =>
     Array.from(document.querySelectorAll(".bbbCard"))
       .filter((c) => getComputedStyle(c).display !== "none");
 
   const fillFromCard = (card) => {
-    const titleText = card.querySelector(".bbbCard__title")?.textContent?.trim() || "Untitled";
+    const titleText =
+      card.dataset.title ||
+      card.querySelector(".bbbCard__title")?.textContent?.trim() ||
+      "Untitled";
+
     const typeText =
       card.querySelector(".bbbPill")?.textContent?.trim() ||
       card.querySelector(".bbbCard__cat")?.textContent?.trim() ||
-      "";
+      (card.dataset.category || "");
+
     const dateText =
       card.querySelector("time.bbbDate")?.textContent?.trim() ||
       card.querySelector("time")?.textContent?.trim() ||
       "";
-    const imgSrc = getBgImageUrl(card.querySelector(".bbbCard__img"));
+
+    const imgSrc =
+      card.dataset.img ||
+      getBgImageUrl(card.querySelector(".bbbCard__img"));
+
     const href = card.getAttribute("href") || "#";
 
-    kicker.textContent = (card.dataset.category || "Post").toUpperCase();
+    if (kicker) kicker.textContent = (card.dataset.category || "Post").toUpperCase();
     title.textContent = titleText;
 
+    // Meta pills
     meta.innerHTML = "";
     const p1 = buildPill(typeText);
     const p2 = buildPill(dateText);
     if (p1) meta.appendChild(p1);
     if (p2) meta.appendChild(p2);
 
+    // Description optional
     desc.textContent = card.dataset.desc || "";
 
+    // Image
     if (imgSrc) {
       img.src = imgSrc;
       img.alt = titleText;
@@ -254,7 +276,22 @@
       img.style.display = "none";
     }
 
+    // Primary link
     link.href = href;
+
+    // Optional: Wiki/Trailer buttons
+    if (wikiBtn) {
+      const w = card.dataset.wiki;
+      wikiBtn.href = w || "#";
+      wikiBtn.style.display = w ? "" : "none";
+    }
+    if (trailerBtn) {
+      const t = card.dataset.trailer;
+      trailerBtn.href = t || "#";
+      trailerBtn.style.display = t ? "" : "none";
+    }
+
+    // Scroll info panel back to top
     content.scrollTop = 0;
   };
 
@@ -295,6 +332,7 @@
     openAt(activeIndex + dir);
   };
 
+  // Open on card click (normal left click only)
   document.addEventListener("click", (e) => {
     const card = e.target.closest(".bbbCard");
     if (!card) return;
@@ -307,12 +345,14 @@
     openAt(idx >= 0 ? idx : 0);
   });
 
+  // Close + nav clicks
   modal.addEventListener("click", (e) => {
     if (e.target.matches("[data-close], .lfxModal__backdrop, .modal-backdrop")) closeModal();
     if (e.target.closest("[data-prev]")) go(-1);
     if (e.target.closest("[data-next]")) go(1);
   });
 
+  // Keyboard
   document.addEventListener("keydown", (e) => {
     if (!modal.classList.contains("is-open")) return;
     if (e.key === "Escape") closeModal();
