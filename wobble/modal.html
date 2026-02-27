@@ -341,33 +341,35 @@
 
 
 
-<!-- Lewflix-style modal (add once) -->
 <div class="lfxModal" id="lfxModal" aria-hidden="true">
   <div class="lfxModal__backdrop" data-close></div>
 
   <div class="lfxModal__card" role="dialog" aria-modal="true" aria-labelledby="lfxModalTitle">
     <button class="lfxModal__close" type="button" aria-label="Close" data-close>×</button>
 
-    <div class="lfxModal__grid">
-      <div class="lfxModal__media">
-        <img class="lfxModal__img" id="lfxModalImg" alt="" />
-      </div>
+    <!-- NEW: Prev/Next -->
+    <button class="lfxModal__nav lfxModal__nav--prev" type="button" aria-label="Previous" data-prev>‹</button>
+    <button class="lfxModal__nav lfxModal__nav--next" type="button" aria-label="Next" data-next>›</button>
 
-      <div class="lfxModal__content">
-        <h2 class="lfxModal__title" id="lfxModalTitle"></h2>
+    <!-- HERO IMAGE -->
+    <div class="lfxModal__hero">
+      <img class="lfxModal__img" id="lfxModalImg" alt="" />
+    </div>
 
-        <div class="lfxModal__meta" id="lfxModalMeta"></div>
-        <p class="lfxModal__desc" id="lfxModalDesc"></p>
+    <!-- SCROLL AREA -->
+    <div class="lfxModal__content">
+      <h2 class="lfxModal__title" id="lfxModalTitle"></h2>
 
-        <div class="lfxModal__actions">
-          <a class="lfxBtn lfxBtn--primary" id="lfxModalLink" href="#">Open</a>
-          <button class="lfxBtn lfxBtn--ghost" type="button" data-close>Close</button>
-        </div>
+      <div class="lfxModal__meta" id="lfxModalMeta"></div>
+      <p class="lfxModal__desc" id="lfxModalDesc"></p>
+
+      <div class="lfxModal__actions">
+        <a class="lfxBtn lfxBtn--primary" id="lfxModalLink" href="#">Open</a>
+        <button class="lfxBtn lfxBtn--ghost" type="button" data-close>Close</button>
       </div>
     </div>
   </div>
 </div>
-
 
 
 
