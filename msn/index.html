@@ -774,7 +774,7 @@
       setTimeout(() => {
         shutdownTitle.textContent = 'Signing out…';
         shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
-      }, 2000);
+      }, 1500);
 
       setTimeout(() => {
         signedIn = false;
@@ -784,7 +784,7 @@
         shutdownSpinner.style.display = 'none';
         shutdownTitle.textContent = 'You are signed out';
         shutdownSub.textContent = 'Sign in to view and search contents.';
-      }, 400);
+      }, 3000);
     }
 
     function endShutdown(){
