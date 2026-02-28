@@ -39,6 +39,23 @@
       --footerH: 54px;
     }
 
+
+
+    ::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
+    
+
     *{ box-sizing:border-box; }
     body{
       margin:0;
@@ -76,10 +93,9 @@
       -webkit-overflow-scrolling: touch;
 
       /* Reserve room for the fixed footer inside the window */
-      padding-bottom: calc(var(--footerH) + 10px);
+      padding-bottom: calc(var(--footerH) + 2px);
 
       /* Scrollbar integration */
-      padding-right: 10px;
       margin-right: -10px;
       scrollbar-gutter: stable;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
@@ -136,11 +152,11 @@
       text-overflow:ellipsis;
     }
     .msn-bubble{
-      width:16px;height:16px;border-radius:4px;
-      background:
-        radial-gradient(circle at 35% 35%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
-        linear-gradient(135deg, #9ae6b4, #60a5fa);
-      border: 1px solid rgba(255,255,255,.35);
+    width: 10px;
+    height: 10px;
+    border-radius: 100px;
+    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 55%), linear-gradient(135deg, #9ae6b4, #60a5fa);
+    border: 1px solid rgba(255, 255, 255, .35);
     }
     .titlebar__btns{ display:flex; gap:6px; }
     .tb-btn{
@@ -166,23 +182,58 @@
     .tb-icon.close::before{ transform: rotate(45deg); }
     .tb-icon.close::after{ transform: rotate(-45deg); }
 
+
+    /* ===== Subtle XP Shine ===== */
+.titlebar{
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gloss band */
+.titlebar::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:55%;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,.35),
+    rgba(255,255,255,.12) 60%,
+    rgba(255,255,255,0)
+  );
+  pointer-events:none;
+}
+
+
+
+    
+
     /* Toolbar */
-    .toolbar{ padding: 10px; display:flex; align-items:center; gap:10px; }
-    .avatar{
-      width:42px;height:42px;border-radius:10px;
-      background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,.2));
-      border:1px solid rgba(95,126,166,.55);
-      box-shadow: 0 8px 20px rgba(0,0,0,.12);
-      display:grid; place-items:center;
-      font-weight:900;
-      color:#1e4b8d;
-      letter-spacing:.3px;
+    .toolbar{ 
+      padding: 10px 10px 0px 10px;
+      display:flex; 
+      align-items:center; 
+      gap:10px; }
+    
+    .avatar img{
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .2));
+    border: 1px solid rgba(95, 126, 166, .55);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    color: #1e4b8d;
+    letter-spacing: .3px;
     }
     .me{ flex:1; min-width:0; }
     .me__name{
       font-weight:700;
-      font-size: 14px;
-      line-height:1.1;
+      font-size: 13px;
+      line-height:1.3;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -196,28 +247,56 @@
       gap:6px;
     }
     .pill{
-      font-size:11px;
-      padding: 2px 8px;
-      border-radius:999px;
-      border:1px solid rgba(95,126,166,.35);
-      background: rgba(255,255,255,.55);
-      font-weight:700;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(95, 126, 166, .35);
+    background: rgba(255, 255, 255, .55);
+    font-weight: 600;
     }
 
-    /* Search */
-    .search{ padding: 0 10px 10px; }
+    /* Search (NOW STICKY INSIDE .msn-body) */
+    .search{
+      position: sticky;
+      top: 0;
+      z-index: 6;
+
+      padding: 10px;
+      /* remove old bottom-only padding so it doesn’t leave a gap */
+      padding-bottom: 10px;
+
+      background: linear-gradient(180deg, rgba(217,230,247,.98), rgba(217,230,247,.86));
+      border-bottom: 1px solid rgba(95,126,166,.35);
+      backdrop-filter: blur(8px);
+    }
     .search input{
       width:100%;
       height: 34px;
       border-radius: 10px;
       border: 1px solid rgba(95,126,166,.55);
-      background: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.92);
       padding: 0 10px;
       outline:none;
       font-family: var(--font);
       font-size: 12px;
     }
     .search input:focus{ box-shadow: var(--ring); }
+
+
+
+    /* ===== Soft Scroll Shadow ===== */
+.search{
+  transition: box-shadow .18s ease;
+}
+
+.msn-body.is-scrolled .search{
+  box-shadow:
+    0 6px 10px rgba(0,0,0,.06),
+    0 1px 0 rgba(95,126,166,.25);
+}
+
+
+    
 
     /* Contacts */
     .panel{ background: var(--panel); border-top: 1px solid rgba(95,126,166,.55); padding: 10px; }
@@ -232,12 +311,12 @@
       width:100%;
       text-align:left;
       padding: 8px 10px;
-      font-weight:700;
-      font-size:12px;
+      font-weight:600;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
       color:#1b3a63;
       background: linear-gradient(180deg, rgba(217,230,247,.9), rgba(217,230,247,.55));
       border:0;
-      border-bottom: 1px solid rgba(138,166,200,.55);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -345,14 +424,111 @@
     .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
     .btn--danger{ border-color: rgba(239,68,68,.55); }
 
-    .is-signed-out .panel{ opacity:.55; filter: grayscale(.1); pointer-events:none; }
-    .is-signed-out .search input{ background: rgba(255,255,255,.6); }
 
-    @media (max-width: 380px){
+
+
+
+
+
+
+
+
+
+    /* =========================
+   DRAMATIC SIGNED OUT MODE
+========================= */
+
+.is-signed-out .msn-body{
+  filter: grayscale(.6) brightness(.9);
+  transition: filter .25s ease;
+}
+
+/* Dim entire window interior */
+.is-signed-out .toolbar,
+.is-signed-out .panel{
+  opacity: .45;
+}
+
+/* Avatar becomes clearly offline */
+.is-signed-out .avatar{
+  background: linear-gradient(
+    135deg,
+    rgba(180,180,180,.7),
+    rgba(150,150,150,.5)
+  );
+  box-shadow: none;
+  color: #777;
+}
+
+/* Make sticky search look inactive */
+.is-signed-out .search{
+  opacity: .5;
+}
+
+/* Add subtle frosted overlay */
+.is-signed-out .msn-window::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: rgba(255,255,255,.25);
+  backdrop-filter: blur(2px);
+  pointer-events:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+    @media (max-width: 400px){
       .titlebar__left{ font-size: 12px; }
-      .avatar{ width:38px;height:38px; }
       .btn{ padding:0 10px; }
       :root{ --winH: 560px; }
+
+      .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .2));
+    border: 1px solid rgba(95, 126, 166, .55);
+    display: grid;
+    place-items: center;
+    font-weight: 900;
+    color: #1e4b8d;
+    letter-spacing: .3px;
+      }
+
+      .panel {
+    margin-right: 10px;
+      }
+
+      .search {
+    margin-right: 10px;
+}
+
+      .toolbar {
+    padding: 10px 10px 0px 10px;
+      }
+
+      
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -378,7 +554,7 @@
 
     <div class="msn-body">
       <div class="toolbar">
-        <div class="avatar" aria-hidden="true">LM</div>
+        <div class="avatar" aria-hidden="true"><img src="/wiki/img/fractalavatar.png"></div>
         <div class="me">
           <div class="me__name" id="meName">Lewis (Online)</div>
           <div class="me__status">
@@ -389,7 +565,7 @@
       </div>
 
       <div class="search">
-        <input id="search" type="search" placeholder="Search contacts…" autocomplete="off" />
+        <input id="search" type="search" placeholder="Search contents..." autocomplete="off" />
       </div>
 
       <section class="panel" aria-label="Contact list">
@@ -563,7 +739,7 @@
         setDot(meDot, 'online');
 
         input.disabled = false;
-        input.placeholder = 'Search contacts…';
+        input.placeholder = 'Search contents...';
       } else {
         signBtn.textContent = 'Sign in';
         footStatus.textContent = 'Status: Offline';
@@ -575,7 +751,7 @@
 
         input.disabled = true;
         input.value = '';
-        input.placeholder = 'Sign in to search…';
+        input.placeholder = 'Sign in to search...';
 
         contacts.forEach(a => a.style.display = '');
         groups.forEach(g => g.style.display = '');
