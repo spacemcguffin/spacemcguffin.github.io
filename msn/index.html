@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>About — MSN Log</title>
+<title>About — MSN Chat</title>
 <style>
   :root{
     --win-bg:#e9eef7;
@@ -18,9 +18,10 @@
     --text:#0b1020;
     --muted: rgba(11,16,32,.65);
 
-    --name-me:#0b57d0;
-    --name-them:#0f7b2b;
-    --name-system:#7a2ea8;
+    /* “MSN name colours” */
+    --me:#0b57d0;
+    --them:#0f7b2b;
+    --sys:#7a2ea8;
 
     --shadow: 0 18px 50px rgba(0,0,0,.18);
     --radius: 10px;
@@ -29,8 +30,11 @@
     --online:#24c26a;
     --busy:#e53935;
     --away:#f6a100;
-    --brb:#f6a100;
     --offline:#9aa7bd;
+
+    /* Placeholder DPs (embedded SVGs injected via JS) */
+    --dp-me: none;
+    --dp-them: none;
   }
 
   *{box-sizing:border-box}
@@ -50,8 +54,8 @@
 
   /* Fixed window height (no page-long expansion) */
   .msn{
-    width: min(980px, 100%);
-    height: min(86vh, 740px);
+    width: min(1020px, 100%);
+    height: min(86vh, 760px);
     border: 1px solid var(--frame2);
     border-radius: 12px;
     box-shadow: var(--shadow);
@@ -59,6 +63,7 @@
     background: var(--win-bg);
     display:flex;
     flex-direction:column;
+    position:relative;
   }
 
   .titlebar{
@@ -108,25 +113,6 @@
     border-bottom: 1px solid var(--border);
     flex: 0 0 auto;
   }
-  .toolPill{
-    font-size: 12px;
-    padding: 5px 8px;
-    border: 1px solid var(--border);
-    background: #fff;
-    border-radius: 999px;
-    box-shadow: 0 1px 0 rgba(0,0,0,.05);
-    display:flex; align-items:center; gap:6px;
-  }
-  .sep{ flex:1; }
-  .toolLink{
-    font-size: 12px;
-    color: #123a7a;
-    text-decoration: underline;
-    cursor:pointer;
-    background:transparent;
-    border:0;
-    padding:0;
-  }
 
   /* Fake status dropdown */
   .statusWrap{
@@ -162,16 +148,36 @@
     pointer-events:none;
   }
 
+  .toolPill{
+    font-size: 12px;
+    padding: 5px 8px;
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 999px;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    display:flex; align-items:center; gap:6px;
+  }
+  .sep{ flex:1; }
+  .toolLink{
+    font-size: 12px;
+    color: #123a7a;
+    text-decoration: underline;
+    cursor:pointer;
+    background:transparent;
+    border:0;
+    padding:0;
+  }
+
   /* Layout */
   .main{
     flex: 1 1 auto;
     min-height: 0;
     display:grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 300px 1fr;
     gap: 10px;
     padding: 10px;
   }
-  @media (max-width: 860px){
+  @media (max-width: 900px){
     .main{ grid-template-columns: 1fr; }
   }
 
@@ -191,10 +197,9 @@
     align-items:center;
   }
 
-  /* Royalty-free placeholder “display pictures” via embedded SVGs */
   .dp{
-    width: 58px;
-    height: 58px;
+    width: 62px;
+    height: 62px;
     border-radius: 12px;
     border: 1px solid rgba(0,0,0,.12);
     box-shadow: inset 0 0 0 2px rgba(255,255,255,.65);
@@ -208,14 +213,14 @@
   .pMeta{min-width:0;}
   .pName{font-weight:700; font-size: 14px; line-height:1.1;}
   .pStatus{font-size: 12px; color: var(--muted); margin-top:4px;}
-
   .side hr{border:0; border-top:1px solid var(--border); margin:0;}
+
   .sideList{
     padding: 10px 12px 12px;
     font-size: 12px;
     color: var(--muted);
     display:grid;
-    gap: 8px;
+    gap: 10px;
   }
   .badge{
     display:inline-flex;
@@ -228,6 +233,24 @@
     width: fit-content;
     color: #1a2a4a;
   }
+
+  .quickRow{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top: 2px;
+  }
+  .qbtn{
+    font-size: 12px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor:pointer;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+  }
+  .qbtn:hover{ background:#f6f9ff; }
+  .qbtn:active{ transform: translateY(1px); }
 
   .chat{
     background: var(--panel);
@@ -288,28 +311,47 @@
       );
   }
 
-  /* Old-school MSN transcript style */
+  /* MSN-like transcript lines */
   .line{
     font-size: 13px;
     line-height: 1.35;
     margin: 5px 0;
     word-wrap:break-word;
   }
-  .who{font-weight:700;}
-  .who.me{ color: var(--name-me); }
-  .who.them{ color: var(--name-them); }
-  .who.sys{ color: var(--name-system); }
+  .name{
+    font-weight:700;
+  }
+  .name.me{ color: var(--me); }
+  .name.them{ color: var(--them); }
+  .name.sys{ color: var(--sys); }
   .time{
     font-size: 12px;
     opacity:.7;
     margin-left: 6px;
   }
-  .msgText{ color: var(--text); }
-  .sysText{ color: var(--muted); }
+  .say{ opacity:.85; }
+  .msg{ color: var(--text); }
+  .sysMsg{ color: var(--muted); }
 
   .linky{
     color:#0b57d0;
     text-decoration: underline;
+  }
+
+  /* Emoticons (tiny MSN-ish) */
+  .em{
+    display:inline-grid;
+    place-items:center;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: linear-gradient(#fff, #f2f2f2);
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    font-size: 12px;
+    line-height: 1;
+    vertical-align: -3px;
+    margin: 0 1px;
   }
 
   /* Typing indicator */
@@ -334,6 +376,7 @@
     50%{ transform: translateY(-3px); opacity:1 }
   }
 
+  /* Composer + “MSN controls” */
   .composer{
     flex: 0 0 auto;
     border-top: 1px solid var(--border);
@@ -375,10 +418,54 @@
   }
   .send:hover{ background: linear-gradient(#ffffff, #e7efff); }
 
-  .hint{
-    font-size: 11.5px;
+  .controls{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    margin-top: 8px;
+    flex-wrap:wrap;
+  }
+  .ctrl{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    padding: 6px 8px;
+    border: 1px solid var(--border);
+    background:#fff;
+    border-radius: 12px;
+  }
+  .ctrl label{
+    font-size: 12px;
     color: var(--muted);
-    margin-top: 6px;
+  }
+  .color{
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.12);
+    padding:0;
+    background:transparent;
+    cursor:pointer;
+  }
+
+  /* Nudge animation */
+  @keyframes nudge {
+    0%,100%{ transform: translateX(0) }
+    10%{ transform: translateX(-8px) }
+    20%{ transform: translateX(8px) }
+    30%{ transform: translateX(-6px) }
+    40%{ transform: translateX(6px) }
+    50%{ transform: translateX(-4px) }
+    60%{ transform: translateX(4px) }
+    70%{ transform: translateX(-2px) }
+    80%{ transform: translateX(2px) }
+  }
+  .is-nudged{ animation: nudge .45s ease-in-out; }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce){
+    .is-nudged{ animation: none; }
+    .dots i{ animation: none; }
   }
 </style>
 </head>
@@ -410,28 +497,45 @@
       <span class="statusCaret" aria-hidden="true">▾</span>
     </div>
 
-    <div class="toolPill">Mood: <span id="mood">archiving the internet</span></div>
+    <div class="toolPill">Mood: <span id="mood">nostalgia mode</span></div>
     <div class="sep"></div>
     <button class="toolLink" type="button" id="jumpTop">Jump to top</button>
+    <button class="toolLink" type="button" id="clear">Clear</button>
   </div>
 
   <div class="main">
     <aside class="side">
       <div class="profile">
-        <div class="dp dp--me" id="dpMe" aria-hidden="true"></div>
+        <div class="dp dp--me" aria-hidden="true"></div>
         <div class="pMeta">
           <div class="pName">Lewis</div>
           <div class="pStatus">Status: <span id="statusText">Available</span></div>
         </div>
       </div>
       <hr />
+      <div class="profile" style="padding-top:10px;">
+        <div class="dp dp--them" aria-hidden="true"></div>
+        <div class="pMeta">
+          <div class="pName">The Website</div>
+          <div class="pStatus">Type <b>/tour</b> for links</div>
+        </div>
+      </div>
+      <hr />
+
       <div class="sideList">
         <div class="badge">🗂️ Diary</div>
         <div class="badge">🧷 MySpace</div>
         <div class="badge">📓 LiveJournal</div>
-        <div class="badge">📼 Retro experiments</div>
+        <div class="badge">📼 Retro</div>
+
+        <div class="quickRow">
+          <button class="qbtn" type="button" id="btnNudge">Nudge</button>
+          <button class="qbtn" type="button" id="btnBuzz">BUZZ</button>
+          <button class="qbtn" type="button" id="btnTour">/tour</button>
+        </div>
+
         <div style="opacity:.85; line-height:1.35;">
-          Tip: type <b>/tour</b> or <b>/help</b> below.
+          Emoticons: <b>:)</b> <b>:D</b> <b>;)</b> <b>&lt;3</b> <b>:(</b> <b>:P</b>
         </div>
       </div>
     </aside>
@@ -446,49 +550,49 @@
       </div>
 
       <div class="log" id="log" aria-live="polite">
-        <!-- Seed transcript -->
+        <!-- Seed transcript (about page content) -->
         <div class="line">
-          <span class="who sys">System</span><span class="time">(<span data-seedtime>00:01</span>)</span>:
-          <span class="sysText">You are now viewing the About chat log.</span>
+          <span class="name sys">System</span><span class="time">(00:01)</span> <span class="say">says:</span>
+          <span class="sysMsg">You are now viewing the About chat log.</span>
         </div>
 
         <div class="line">
-          <span class="who them">Website</span><span class="time">(00:01)</span>:
-          <span class="msgText">hey — i’m a personal site built like a set of little “throwback” worlds.</span>
+          <span class="name them">The Website</span><span class="time">(00:01)</span> <span class="say">says:</span>
+          <span class="msg">hey — i’m a personal site built like a set of nostalgic “worlds”.</span>
         </div>
 
         <div class="line">
-          <span class="who me">Lewis</span><span class="time">(00:02)</span>:
-          <span class="msgText">what’s on here?</span>
+          <span class="name me">Lewis</span><span class="time">(00:02)</span> <span class="say">says:</span>
+          <span class="msg">what’s on here? :)</span>
         </div>
 
         <div class="line">
-          <span class="who them">Website</span><span class="time">(00:02)</span>:
-          <span class="msgText">four main portals, all deliberately nostalgic:</span>
+          <span class="name them">The Website</span><span class="time">(00:03)</span> <span class="say">says:</span>
+          <span class="msg">four portals — the only links i’ll give you:</span>
         </div>
 
         <div class="line">
-          <span class="who them">Website</span><span class="time">(00:03)</span>:
-          <span class="msgText">
-            • <a class="linky" href="https://lewis.lc/diary">Diary</a><br>
-            • <a class="linky" href="https://lewis.lc/myspace">MySpace</a><br>
-            • <a class="linky" href="https://lewis.lc/livejournal">LiveJournal</a><br>
-            • <a class="linky" href="https://lewis.lc/retro">Retro</a>
+          <span class="name them">The Website</span><span class="time">(00:03)</span> <span class="say">says:</span>
+          <span class="msg">
+            • <a class="linky" href="https://lewis.lc/diary">lewis.lc/diary</a><br>
+            • <a class="linky" href="https://lewis.lc/myspace">lewis.lc/myspace</a><br>
+            • <a class="linky" href="https://lewis.lc/livejournal">lewis.lc/livejournal</a><br>
+            • <a class="linky" href="https://lewis.lc/retro">lewis.lc/retro</a>
           </span>
         </div>
 
         <div class="line">
-          <span class="who me">Lewis</span><span class="time">(00:04)</span>:
-          <span class="msgText">so it’s like… an internet scrapbook?</span>
+          <span class="name me">Lewis</span><span class="time">(00:04)</span> <span class="say">says:</span>
+          <span class="msg">so it’s an internet scrapbook + UI playground?</span>
         </div>
 
         <div class="line">
-          <span class="who them">Website</span><span class="time">(00:04)</span>:
-          <span class="msgText">exactly. part archive, part cosplay, part UI experiment.</span>
+          <span class="name them">The Website</span><span class="time">(00:04)</span> <span class="say">says:</span>
+          <span class="msg">exactly. part archive. part cosplay. part “what if 2007 never ended”. :D</span>
         </div>
 
         <div class="typingRow" id="typingRow">
-          <span class="who them">Website</span> is typing
+          <span class="name them">The Website</span> is typing
           <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
       </div>
@@ -498,7 +602,20 @@
           <div class="inputWrap">
             <textarea id="input" placeholder="Type a message… (Enter to send, Shift+Enter for newline)"></textarea>
           </div>
-          <div class="hint">Try: <b>/tour</b>, <b>/help</b>, or type “diary”, “myspace”, “livejournal”, “retro”.</div>
+
+          <div class="controls">
+            <div class="ctrl">
+              <label for="fontColor">Font colour</label>
+              <input class="color" id="fontColor" type="color" value="#0b57d0" />
+            </div>
+            <div class="ctrl" style="border-style:dashed;">
+              <span style="font-size:12px;color:var(--muted)">Try:</span>
+              <b style="font-size:12px">/tour</b>
+              <b style="font-size:12px">/help</b>
+              <b style="font-size:12px">diary</b>
+              <b style="font-size:12px">retro</b>
+            </div>
+          </div>
         </div>
         <button class="send" type="submit">Send</button>
       </form>
@@ -507,7 +624,7 @@
 </div>
 
 <script>
-  // ----- Only allowed links (locked) -----
+  // ----- Only allowed links (hard-locked) -----
   const LINKS = {
     diary: "https://lewis.lc/diary",
     myspace: "https://lewis.lc/myspace",
@@ -515,8 +632,7 @@
     retro: "https://lewis.lc/retro"
   };
 
-  // ----- Royalty-free placeholder DPs: embedded SVG data-URIs (no external assets) -----
-  // These are original geometric SVGs (safe to use).
+  // ----- Royalty-free placeholder DPs: embedded SVG data-URIs (original graphics) -----
   const svgToDataUri = (svg) => `url("data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}")`;
 
   const dpMeSVG = `
@@ -531,7 +647,7 @@
       </filter>
     </defs>
     <rect width="160" height="160" rx="26" fill="url(#g)"/>
-    <circle cx="82" cy="64" r="34" fill="#ffffff" opacity=".9" filter="url(#s)"/>
+    <circle cx="82" cy="64" r="34" fill="#ffffff" opacity=".92" filter="url(#s)"/>
     <rect x="34" y="104" width="92" height="44" rx="22" fill="#ffffff" opacity=".85" filter="url(#s)"/>
     <circle cx="70" cy="62" r="6" fill="#0b1020" opacity=".55"/>
     <circle cx="94" cy="62" r="6" fill="#0b1020" opacity=".55"/>
@@ -562,15 +678,22 @@
 
   document.documentElement.style.setProperty("--dp-me", svgToDataUri(dpMeSVG));
   document.documentElement.style.setProperty("--dp-them", svgToDataUri(dpThemSVG));
+  document.getElementById("dpThemTiny").style.backgroundImage = svgToDataUri(dpThemSVG);
 
-  const dpThemTiny = document.getElementById("dpThemTiny");
-  dpThemTiny.style.backgroundImage = svgToDataUri(dpThemSVG);
-
-  // ----- Time / stamping -----
+  // ----- Date stamp -----
   const dateStamp = document.getElementById("dateStamp");
   dateStamp.textContent = new Date().toLocaleString(undefined, {
     weekday: "short", year: "numeric", month: "short", day: "numeric"
   });
+
+  // ----- Helpers -----
+  const log = document.getElementById("log");
+  const form = document.getElementById("form");
+  const input = document.getElementById("input");
+  const typingRow = document.getElementById("typingRow");
+  const app = document.getElementById("app");
+
+  const fontColor = document.getElementById("fontColor");
 
   const pad2 = (n) => String(n).padStart(2,"0");
   const timeNow = () => {
@@ -578,34 +701,10 @@
     return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
   };
 
-  // ----- DOM helpers -----
-  const log = document.getElementById("log");
-  const form = document.getElementById("form");
-  const input = document.getElementById("input");
-  const typingRow = document.getElementById("typingRow");
-
   const escapeHTML = (str) =>
     str.replace(/[&<>"']/g, (m) => ({
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
     }[m]));
-
-  function addLine({ who="me", text="", isSystem=false }){
-    const div = document.createElement("div");
-    div.className = "line";
-
-    const whoClass = isSystem ? "sys" : (who === "me" ? "me" : "them");
-    const whoLabel = isSystem ? "System" : (who === "me" ? "Lewis" : "Website");
-
-    // text can include allowed links only; we build links ourselves when needed.
-    div.innerHTML = `
-      <span class="who ${whoClass}">${whoLabel}</span><span class="time">(${timeNow()})</span>:
-      <span class="${isSystem ? "sysText" : "msgText"}">${text}</span>
-    `;
-
-    // insert before typing indicator
-    log.insertBefore(div, typingRow);
-    log.scrollTop = log.scrollHeight;
-  }
 
   function setTyping(on){
     typingRow.classList.toggle("is-on", !!on);
@@ -614,24 +713,81 @@
 
   function linkHTML(key){
     const url = LINKS[key];
-    // hard-lock: only generate anchors for the 4 approved URLs
     return `<a class="linky" href="${url}">${url.replace("https://","")}</a>`;
   }
 
-  // ----- Fake “About bot” replies (no extra links) -----
+  // Convert emoticon text into tiny “MSN-ish” inline badges
+  // You can extend this table to add custom emoticons.
+  const EMOTES = [
+    { re: /(^|\s):\)/g,  html: '$1<span class="em" title=":)">🙂</span>' },
+    { re: /(^|\s):D/g,   html: '$1<span class="em" title=":D">😄</span>' },
+    { re: /(^|\s);\)/g,  html: '$1<span class="em" title=";)">😉</span>' },
+    { re: /(^|\s):\(/g,  html: '$1<span class="em" title=":(">🙁</span>' },
+    { re: /(^|\s):P/gi,  html: '$1<span class="em" title=":P">😛</span>' },
+    { re: /<3/g,         html: '<span class="em" title="<3">❤️</span>' },
+    { re: /:\|/g,        html: '<span class="em" title=":|">😐</span>' }
+  ];
+
+  // Hard-lock outgoing links: turn any URL into plain text unless it matches your 4 allowed URLs.
+  function sanitizeAndFormat(text){
+    // escape first
+    let out = escapeHTML(text);
+
+    // convert newlines
+    out = out.replace(/\n/g, "<br>");
+
+    // link lock:
+    // - detect http(s) URLs
+    // - only keep them clickable if exactly matches allowed list
+    const urlRe = /(https?:\/\/[^\s<]+)/g;
+    out = out.replace(urlRe, (m) => {
+      const ok = Object.values(LINKS).includes(m);
+      return ok ? `<a class="linky" href="${m}">${m.replace("https://","")}</a>` : m;
+    });
+
+    // emoticons
+    EMOTES.forEach(({re, html}) => out = out.replace(re, html));
+    return out;
+  }
+
+  function addLine({ who="me", html="", isSystem=false }){
+    const div = document.createElement("div");
+    div.className = "line";
+
+    const whoClass = isSystem ? "sys" : (who === "me" ? "me" : "them");
+    const whoLabel = isSystem ? "System" : (who === "me" ? "Lewis" : "The Website");
+
+    // Allow your chosen outgoing font colour like MSN (only for your messages)
+    const msgStyle = (who === "me" && !isSystem) ? `style="color:${fontColor.value}"` : "";
+
+    div.innerHTML = `
+      <span class="name ${whoClass}" ${who === "me" && !isSystem ? `style="color:${fontColor.value}"` : ""}>${whoLabel}</span>
+      <span class="time">(${timeNow()})</span>
+      <span class="say">says:</span>
+      <span class="${isSystem ? "sysMsg" : "msg"}" ${msgStyle}>${html}</span>
+    `;
+
+    log.insertBefore(div, typingRow);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  // Nudge / Buzz
+  function nudge(){
+    app.classList.remove("is-nudged");
+    void app.offsetWidth;
+    app.classList.add("is-nudged");
+  }
+
+  // “Bot” replies (kept to your 4 links only)
   function replyTo(userText){
     const t = userText.trim().toLowerCase();
 
-    // Commands
     if (t === "/help"){
-      addLine({ who:"them", text:
-        escapeHTML("commands: /tour, /about, /why, /links")
-      });
+      addLine({ who:"them", html: sanitizeAndFormat("commands: /tour, /about, /why, /emotes") });
       return;
     }
-
-    if (t === "/tour" || t === "/links"){
-      addLine({ who:"them", text:
+    if (t === "/tour"){
+      addLine({ who:"them", html:
         `pick a portal:<br>
          • ${linkHTML("diary")}<br>
          • ${linkHTML("myspace")}<br>
@@ -640,61 +796,44 @@
       });
       return;
     }
-
     if (t === "/about"){
-      addLine({ who:"them", text:
-        escapeHTML("i’m a nostalgia-forward personal site: diary-style posts, faux-social profiles, and retro UI experiments.")
-      });
+      addLine({ who:"them", html: sanitizeAndFormat("a nostalgia-forward personal site: diary-style pages, faux-social profiles, and retro UI experiments.") });
       return;
     }
-
     if (t === "/why"){
-      addLine({ who:"them", text:
-        escapeHTML("because the old web had personality. this is a scrapbook + a playground for UI ideas.")
-      });
+      addLine({ who:"them", html: sanitizeAndFormat("because the old web had personality. this is a scrapbook + a UI playground.") });
+      return;
+    }
+    if (t === "/emotes"){
+      addLine({ who:"them", html: sanitizeAndFormat("emotes supported: :)  :D  ;)  :(  :P  <3  :|  (add more in the EMOTES array)") });
       return;
     }
 
-    // Keyword routing
-    if (t.includes("diary")){
-      addLine({ who:"them", text: `diary portal → ${linkHTML("diary")}` });
-      return;
+    // keyword routing
+    if (t.includes("diary"))       { addLine({ who:"them", html: `diary → ${linkHTML("diary")}` }); return; }
+    if (t.includes("myspace"))     { addLine({ who:"them", html: `myspace → ${linkHTML("myspace")}` }); return; }
+    if (t.includes("livejournal") || t.includes("lj")) {
+      addLine({ who:"them", html: `livejournal → ${linkHTML("livejournal")}` }); return;
     }
-    if (t.includes("myspace")){
-      addLine({ who:"them", text: `myspace portal → ${linkHTML("myspace")}` });
-      return;
-    }
-    if (t.includes("livejournal") || t.includes("lj")){
-      addLine({ who:"them", text: `livejournal portal → ${linkHTML("livejournal")}` });
-      return;
-    }
-    if (t.includes("retro")){
-      addLine({ who:"them", text: `retro portal → ${linkHTML("retro")}` });
-      return;
-    }
+    if (t.includes("retro"))       { addLine({ who:"them", html: `retro → ${linkHTML("retro")}` }); return; }
 
-    // Default
-    addLine({ who:"them", text:
-      escapeHTML("try /tour for links, or ask: “what’s on retro?” / “show diary”.")
-    });
+    addLine({ who:"them", html: sanitizeAndFormat("try /tour for links, or ask about diary/myspace/livejournal/retro.") });
   }
 
-  // ----- Send behaviour -----
+  // Send
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = input.value.trim();
     if (!text) return;
 
-    // user line (escaped)
-    addLine({ who:"me", text: escapeHTML(text).replace(/\n/g,"<br>") });
+    addLine({ who:"me", html: sanitizeAndFormat(text) });
     input.value = "";
 
-    // bot typing indicator then reply
     setTyping(true);
     setTimeout(() => {
       setTyping(false);
       replyTo(text);
-    }, 650);
+    }, 700);
   });
 
   input.addEventListener("keydown", (e) => {
@@ -704,12 +843,36 @@
     }
   });
 
-  // ----- Jump to top -----
-  document.getElementById("jumpTop").addEventListener("click", () => {
-    log.scrollTop = 0;
+  // Toolbar buttons
+  document.getElementById("jumpTop").addEventListener("click", () => log.scrollTop = 0);
+
+  document.getElementById("clear").addEventListener("click", () => {
+    // Remove all transcript lines except typing row
+    [...log.querySelectorAll(".line")].forEach(n => n.remove());
+    addLine({ who:"sys", isSystem:true, html: "Chat cleared." });
   });
 
-  // ----- Fake status dropdown behaviour -----
+  document.getElementById("btnNudge").addEventListener("click", () => {
+    addLine({ who:"me", html: sanitizeAndFormat("*nudge*") });
+    nudge();
+    setTyping(true);
+    setTimeout(() => { setTyping(false); addLine({ who:"them", html: sanitizeAndFormat("OI!! 😭") }); }, 600);
+  });
+
+  document.getElementById("btnBuzz").addEventListener("click", () => {
+    addLine({ who:"me", html: sanitizeAndFormat("BUZZ!!!") });
+    nudge(); setTimeout(nudge, 120);
+    setTyping(true);
+    setTimeout(() => { setTyping(false); addLine({ who:"them", html: sanitizeAndFormat("stoppppp :(") }); }, 650);
+  });
+
+  document.getElementById("btnTour").addEventListener("click", () => {
+    addLine({ who:"me", html: sanitizeAndFormat("/tour") });
+    setTyping(true);
+    setTimeout(() => { setTyping(false); replyTo("/tour"); }, 450);
+  });
+
+  // Status dropdown behaviour
   const statusSel = document.getElementById("statusSel");
   const statusDot = document.getElementById("statusDot");
   const statusText = document.getElementById("statusText");
@@ -718,19 +881,27 @@
     available: { label:"Available", color:"var(--online)", glow:"rgba(36,194,106,.18)" },
     busy:      { label:"Busy", color:"var(--busy)", glow:"rgba(229,57,53,.18)" },
     away:      { label:"Away", color:"var(--away)", glow:"rgba(246,161,0,.18)" },
-    brb:       { label:"Be Right Back", color:"var(--brb)", glow:"rgba(246,161,0,.18)" },
+    brb:       { label:"Be Right Back", color:"var(--away)", glow:"rgba(246,161,0,.18)" },
     offline:   { label:"Offline", color:"var(--offline)", glow:"rgba(154,167,189,.18)" }
   };
 
   function applyStatus(key){
     const s = STATUS[key] || STATUS.available;
     statusText.textContent = s.label;
-    statusDot.style.background = `calc(0*1) + ${s.color}`.replace("calc(0*1) + ",""); // harmless trick to keep var() usable
+    // keep CSS var colour working:
+    statusDot.style.background = s.color.includes("var(") ? getComputedStyle(document.documentElement).getPropertyValue(s.color.match(/--[^)]+/)[0]).trim() : s.color;
     statusDot.style.boxShadow = `0 0 0 2px ${s.glow}`;
-    addLine({ who:"sys", isSystem:true, text: `Status set to “${s.label}”.` });
+    addLine({ who:"sys", isSystem:true, html: sanitizeAndFormat(`Status set to "${s.label}".`) });
   }
-
   statusSel.addEventListener("change", () => applyStatus(statusSel.value));
+
+  // Seed: ensure “old-school” emoticons render in the initial transcript too
+  [...log.querySelectorAll(".msg")].forEach(el => {
+    el.innerHTML = sanitizeAndFormat(el.textContent);
+  });
+
+  // Optional: start scrolled to bottom like MSN
+  log.scrollTop = log.scrollHeight;
 </script>
 
 </body>
