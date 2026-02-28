@@ -800,12 +800,12 @@
       shutdownSpinner.style.display = '';
 
       shutdownTitle.textContent = 'Signing in…';
-      shutdownSub.textContent = 'Checking your credentials.';
+      shutdownSub.textContent = 'Signing in as Lewis…';
 
       setTimeout(() => {
         shutdownTitle.textContent = 'Loading…';
-        shutdownSub.textContent = 'Retrieving the content list and status.';
-      }, 1100);
+        shutdownSub.textContent = 'Verifying password and connecting.';
+      }, 1500);
 
       setTimeout(() => {
         // complete sign-in
@@ -814,7 +814,7 @@
         win.classList.remove('is-signing-in');
         overlay.setAttribute('aria-hidden', 'true');
         renderSignState();
-      }, 2400);
+      }, 300);
     }
 
     signBtn.addEventListener('click', () => {
