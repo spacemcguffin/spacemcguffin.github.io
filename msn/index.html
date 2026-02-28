@@ -509,13 +509,9 @@
     }
 
     /* Signed out = hide spinner… */
-    .is-signed-out .shutdown-card .spinner{
-      display: none;
-    }
-    /* …but if we're signing in, show it again */
-    .is-signing-in.is-signed-out .shutdown-card .spinner{
-      display: block;
-    }
+    .is-signed-out .shutdown-card .spinner{ display:none; }
+    /* …but while signing in, show it */
+    .is-signing-in.is-signed-out .shutdown-card .spinner{ display:block; }
   </style>
 </head>
 
@@ -720,6 +716,8 @@
     const shutdownSub = document.getElementById('shutdownSub');
     const shutdownSpinner = document.getElementById('shutdownSpinner');
 
+    const displayName = "Lewis"; // used for the “Signing in as …” line
+
     let signedIn = true;
 
     function setDot(el, state){
@@ -735,7 +733,7 @@
         footStatus.textContent = 'Status: Online';
         setDot(footDot, 'online');
 
-        meName.textContent = 'Lewis (Online)';
+        meName.textContent = `${displayName} (Online)`;
         mePill.textContent = 'Signed in';
         setDot(meDot, 'online');
 
@@ -748,7 +746,7 @@
         footStatus.textContent = 'Status: Offline';
         setDot(footDot, 'offline');
 
-        meName.textContent = 'Lewis (Offline)';
+        meName.textContent = `${displayName} (Offline)`;
         mePill.textContent = 'Signed out';
         setDot(meDot, 'offline');
 
@@ -763,7 +761,6 @@
     }
 
     function beginShutdown(){
-      // ensure we’re not in sign-in mode
       win.classList.remove('is-signing-in');
 
       win.classList.add('is-shutting-down');
@@ -791,30 +788,37 @@
     }
 
     function endShutdown(){
-      // show a signing-in screen while still signed out
+      // Signing in screen (while still signed out)
       win.classList.add('is-signing-in');
       win.classList.add('is-shutting-down');
       overlay.setAttribute('aria-hidden', 'false');
 
-      // make sure spinner is visible while signed out
       shutdownSpinner.style.display = '';
 
+      // Step 1: show name
       shutdownTitle.textContent = 'Signing in…';
-      shutdownSub.textContent = 'Signing in as Lewis…';
+      shutdownSub.textContent = `Signing in as ${displayName}…`;
 
+      // Step 2
       setTimeout(() => {
-        shutdownTitle.textContent = 'Loading…';
+        shutdownTitle.textContent = 'Authenticating…';
         shutdownSub.textContent = 'Verifying password and connecting.';
-      }, 1500);
+      }, 1000);
 
+      // Step 3
       setTimeout(() => {
-        // complete sign-in
+        shutdownTitle.textContent = 'Loading content…';
+        shutdownSub.textContent = 'Retrieving the content list and status.';
+      }, 2000);
+
+      // Finish
+      setTimeout(() => {
         signedIn = true;
         win.classList.remove('is-shutting-down');
         win.classList.remove('is-signing-in');
         overlay.setAttribute('aria-hidden', 'true');
         renderSignState();
-      }, 300);
+      }, 3200);
     }
 
     signBtn.addEventListener('click', () => {
