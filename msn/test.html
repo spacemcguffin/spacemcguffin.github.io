@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MSN Contacts</title>
+  <style>
+    :root{
+      --win-bg:#d9e6f7;
+      --panel:#ffffff;
+      --border:#8aa6c8;
+      --border-dark:#5f7ea6;
+      --title1:#2b63b6;
+      --title2:#1e4b8d;
+      --text:#10243e;
+      --muted:#4b607a;
+      --online:#22c55e;
+      --away:#f59e0b;
+      --busy:#ef4444;
+      --offline:#9aa7b6;
+      --shadow: 0 18px 45px rgba(0,0,0,.25);
+      --radius: 12px;
+      --font: Tahoma, "Segoe UI", Verdana, Arial, sans-serif;
+      --ring: 0 0 0 3px rgba(43,99,182,.18);
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, #ffffff 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 100% 10%, #ffffff 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, #bcd2ef 0%, #9bb8df 100%);
+      color: var(--text);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding: 28px 14px;
+    }
+
+    .msn-window{
+      width:min(420px, 100%);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--win-bg);
+      overflow:hidden;
+    }
+
+    /* Titlebar */
+    .titlebar{
+      height: 36px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 10px;
+      background: linear-gradient(180deg, var(--title1), var(--title2));
+      color:#fff;
+      user-select:none;
+    }
+    .titlebar__left{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size: 13px;
+      font-weight:700;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .msn-bubble{
+      width:16px;height:16px;border-radius:4px;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255,255,255,.9), rgba(255,255,255,0) 55%),
+        linear-gradient(135deg, #9ae6b4, #60a5fa);
+      border: 1px solid rgba(255,255,255,.35);
+    }
+    .titlebar__btns{ display:flex; gap:6px; }
+    .tb-btn{
+      width: 22px; height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.14);
+      display:grid; place-items:center;
+      cursor:pointer;
+    }
+    .tb-btn:active{ transform: translateY(1px); }
+    .tb-icon{ width:10px;height:10px; position:relative; }
+    .tb-icon.min::before{
+      content:""; position:absolute; left:0; right:0; bottom:0;
+      height:2px; background:#fff; opacity:.9;
+    }
+    .tb-icon.max{ border:2px solid #fff; opacity:.85; }
+    .tb-icon.close::before,
+    .tb-icon.close::after{
+      content:""; position:absolute; left:4px; top:-1px;
+      width:2px; height:12px; background:#fff;
+    }
+    .tb-icon.close::before{ transform: rotate(45deg); }
+    .tb-icon.close::after{ transform: rotate(-45deg); }
+
+    /* Toolbar */
+    .toolbar{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px;
+    }
+    .avatar{
+      width:42px;height:42px;border-radius:10px;
+      background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,.2));
+      border:1px solid rgba(95,126,166,.55);
+      box-shadow: 0 8px 20px rgba(0,0,0,.12);
+      display:grid; place-items:center;
+      font-weight:800;
+      color:#1e4b8d;
+    }
+    .me{ flex:1; min-width:0; }
+    .me__name{
+      font-weight:800;
+      font-size: 14px;
+      line-height:1.1;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .me__status{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .pill{
+      font-size:11px;
+      padding: 2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(95,126,166,.35);
+      background: rgba(255,255,255,.55);
+    }
+
+    /* Search */
+    .search{ padding: 0 10px 10px; }
+    .search input{
+      width:100%;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(95,126,166,.55);
+      background: rgba(255,255,255,.9);
+      padding: 0 10px;
+      outline:none;
+      font-family: var(--font);
+      font-size: 12px;
+    }
+    .search input:focus{ box-shadow: var(--ring); }
+
+    /* Contacts panel */
+    .panel{
+      background: var(--panel);
+      border-top: 1px solid rgba(95,126,166,.55);
+      padding: 10px;
+    }
+
+    .group{
+      border: 1px solid rgba(138,166,200,.6);
+      border-radius: 12px;
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
+      margin-bottom: 10px;
+    }
+
+    /* Clickable group header (collapsible) */
+    .group__head{
+      width:100%;
+      text-align:left;
+      padding: 8px 10px;
+      font-weight:800;
+      font-size:12px;
+      color:#1b3a63;
+      background: linear-gradient(180deg, rgba(217,230,247,.9), rgba(217,230,247,.55));
+      border:0;
+      border-bottom: 1px solid rgba(138,166,200,.55);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .group__head:focus-visible{ outline:none; box-shadow: var(--ring); }
+
+    .group__left{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+    }
+    .caret{
+      width:10px;height:10px;
+      display:inline-block;
+      transform: rotate(90deg); /* open state */
+      transition: transform .12s ease;
+      opacity:.85;
+    }
+    .caret::before{
+      content:"";
+      display:block;
+      width:0;height:0;
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+      border-left:6px solid rgba(27,58,99,.9);
+    }
+    .group[data-collapsed="true"] .caret{ transform: rotate(0deg); }
+
+    .count{
+      font-weight:700;
+      color: rgba(27,58,99,.75);
+      flex:0 0 auto;
+    }
+
+    .group__body{ }
+    .group[data-collapsed="true"] .group__body{ display:none; }
+
+    .contact{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 10px;
+      text-decoration:none;
+      color: inherit;
+      border-bottom: 1px solid rgba(138,166,200,.35);
+    }
+    .contact:last-child{ border-bottom:0; }
+    .contact:hover{ background: rgba(43,99,182,.08); }
+
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.18);
+      flex:0 0 auto;
+    }
+    .dot.online{ background: var(--online); }
+    .dot.away{ background: var(--away); }
+    .dot.busy{ background: var(--busy); }
+    .dot.offline{ background: var(--offline); }
+
+    .contact__main{ min-width:0; flex:1; }
+    .contact__name{
+      font-weight:800;
+      font-size: 13px;
+      line-height:1.15;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .contact__blurb{
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .chev{ color: rgba(16,36,62,.45); font-weight:900; flex:0 0 auto; }
+
+    /* Footer: MSN-style sign in/out bar */
+    .footerbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding: 10px;
+      border-top: 1px solid rgba(95,126,166,.35);
+      background: rgba(255,255,255,.45);
+    }
+    .footerbar__left{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      min-width:0;
+    }
+    .footerbar__status{
+      font-size: 12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .btn{
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border:1px solid rgba(95,126,166,.5);
+      background: rgba(255,255,255,.75);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 800;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .btn:hover{ background: rgba(255,255,255,.95); }
+    .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
+
+    .btn--danger{
+      border-color: rgba(239,68,68,.55);
+    }
+
+    /* Signed out state */
+    .is-signed-out .panel{
+      opacity:.55;
+      filter: grayscale(.1);
+      pointer-events:none;
+    }
+    .is-signed-out .search input{
+      background: rgba(255,255,255,.6);
+    }
+
+    @media (max-width: 380px){
+      .titlebar__left{ font-size: 12px; }
+      .avatar{ width:38px;height:38px; }
+      .btn{ padding:0 10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="msn-window" id="msnWin" role="application" aria-label="MSN Contacts">
+
+    <div class="titlebar">
+      <div class="titlebar__left">
+        <span class="msn-bubble" aria-hidden="true"></span>
+        <span>MSN Messenger — Contacts</span>
+      </div>
+      <div class="titlebar__btns" aria-hidden="true">
+        <div class="tb-btn"><span class="tb-icon min"></span></div>
+        <div class="tb-btn"><span class="tb-icon max"></span></div>
+        <div class="tb-btn"><span class="tb-icon close"></span></div>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <div class="avatar" aria-hidden="true">LM</div>
+      <div class="me">
+        <div class="me__name" id="meName">Lewis (Online)</div>
+        <div class="me__status">
+          <span class="dot online" id="meDot" aria-hidden="true"></span>
+          <span class="pill" id="mePill">Signed in</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="search">
+      <input id="search" type="search" placeholder="Search contacts…" autocomplete="off" />
+    </div>
+
+    <section class="panel" aria-label="Contact list">
+      <!-- Group 1 -->
+      <div class="group" data-group>
+        <button class="group__head" type="button" aria-expanded="true">
+          <span class="group__left">
+            <span class="caret" aria-hidden="true"></span>
+            <span>Wobble</span>
+          </span>
+          <span class="count" data-count></span>
+        </button>
+
+        <div class="group__body">
+          <a class="contact" href="/wobble/podcasts">
+            <span class="dot online" aria-hidden="true"></span>
+            <span class="contact__main">
+              <div class="contact__name">Podcasts</div>
+              <div class="contact__blurb">Archive + latest episode</div>
+            </span>
+            <span class="chev" aria-hidden="true">›</span>
+          </a>
+
+          <a class="contact" href="/wobble/">
+            <span class="dot away" aria-hidden="true"></span>
+            <span class="contact__main">
+              <div class="contact__name">Home</div>
+              <div class="contact__blurb">Landing page</div>
+            </span>
+            <span class="chev" aria-hidden="true">›</span>
+          </a>
+
+          <a class="contact" href="/wobble/test2#grid">
+            <span class="dot online" aria-hidden="true"></span>
+            <span class="contact__main">
+              <div class="contact__name">Card Grid</div>
+              <div class="contact__blurb">Jump to the grid section</div>
+            </span>
+            <span class="chev" aria-hidden="true">›</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group 2 -->
+      <div class="group" data-group>
+        <button class="group__head" type="button" aria-expanded="true">
+          <span class="group__left">
+            <span class="caret" aria-hidden="true"></span>
+            <span>Lewflix</span>
+          </span>
+          <span class="count" data-count></span>
+        </button>
+
+        <div class="group__body">
+          <a class="contact" href="/netflix/">
+            <span class="dot online" aria-hidden="true"></span>
+            <span class="contact__main">
+              <div class="contact__name">Netflix-style page</div>
+              <div class="contact__blurb">Hero + rails + modals</div>
+            </span>
+            <span class="chev" aria-hidden="true">›</span>
+          </a>
+
+          <a class="contact" href="/disney/test">
+            <span class="dot busy" aria-hidden="true"></span>
+            <span class="contact__main">
+              <div class="contact__name">Disney test</div>
+              <div class="contact__blurb">Modal experiments</div>
+            </span>
+            <span class="chev" aria-hidden="true">›</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Group 3 -->
+      <div class="group" data-group>
+        <button class="group__head" type="button" aria-expanded="true">
+          <span class="group__left">
+            <span class="caret" aria-hidden="true"></span>
+            <span>Extras</span>
+          </span>
+          <span class="count" data-count></span>
+        </button>
+
+        <div class="group__body">
+          <a class="contact" href="/retro/">
+            <span class="dot offline" aria-hidden="true"></span>
+            <span class="contact__main">
+              <div class="contact__name">Retro</div>
+              <div class="contact__blurb">Old-school vibe</div>
+            </span>
+            <span class="chev" aria-hidden="true">›</span>
+          </a>
+
+          <a class="contact" href="/slide/">
+            <span class="dot away" aria-hidden="true"></span>
+            <span class="contact__main">
+              <div class="contact__name">Episode list</div>
+              <div class="contact__blurb">Listing UI</div>
+            </span>
+            <span class="chev" aria-hidden="true">›</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footerbar: sign in/out -->
+    <div class="footerbar">
+      <div class="footerbar__left">
+        <span class="dot online" id="footDot" aria-hidden="true"></span>
+        <div class="footerbar__status" id="footStatus">Status: Online</div>
+      </div>
+
+      <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
+    </div>
+  </main>
+
+  <script>
+    // ===== Collapsible groups (click header) =====
+    document.querySelectorAll('.group').forEach(group => {
+      const head = group.querySelector('.group__head');
+      const body = group.querySelector('.group__body');
+      if (!head || !body) return;
+
+      // default open
+      group.dataset.collapsed = "false";
+
+      head.addEventListener('click', () => {
+        const collapsed = group.dataset.collapsed === "true";
+        group.dataset.collapsed = collapsed ? "false" : "true";
+        head.setAttribute('aria-expanded', collapsed ? "true" : "false");
+      });
+    });
+
+    // ===== Search filter (matches name + blurb) =====
+    const input = document.getElementById('search');
+    const contacts = Array.from(document.querySelectorAll('.contact'));
+    const groups = Array.from(document.querySelectorAll('[data-group]'));
+
+    function updateCounts(){
+      groups.forEach(g => {
+        // count only visible contacts (and only in visible group body)
+        const visible = Array.from(g.querySelectorAll('.contact'))
+          .filter(a => a.style.display !== 'none').length;
+
+        const countEl = g.querySelector('[data-count]');
+        if (countEl) countEl.textContent = `(${visible})`;
+
+        // if search hides all contacts, hide the whole group (MSN-ish)
+        g.style.display = visible ? '' : 'none';
+      });
+    }
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      contacts.forEach(a => {
+        const text = a.innerText.toLowerCase();
+        a.style.display = (!q || text.includes(q)) ? '' : 'none';
+      });
+      updateCounts();
+    });
+
+    updateCounts();
+
+    // ===== Sign in/out footer bar =====
+    const win = document.getElementById('msnWin');
+    const signBtn = document.getElementById('signBtn');
+    const footStatus = document.getElementById('footStatus');
+    const footDot = document.getElementById('footDot');
+
+    const meName = document.getElementById('meName');
+    const mePill = document.getElementById('mePill');
+    const meDot  = document.getElementById('meDot');
+
+    let signedIn = true;
+
+    function setDot(el, state){
+      el.classList.remove('online','away','busy','offline');
+      el.classList.add(state);
+    }
+
+    function renderSignState(){
+      win.classList.toggle('is-signed-out', !signedIn);
+
+      if (signedIn){
+        signBtn.textContent = 'Sign out';
+        footStatus.textContent = 'Status: Online';
+        setDot(footDot, 'online');
+
+        meName.textContent = 'Lewis (Online)';
+        mePill.textContent = 'Signed in';
+        setDot(meDot, 'online');
+
+        input.disabled = false;
+        input.placeholder = 'Search contacts…';
+      } else {
+        signBtn.textContent = 'Sign in';
+        footStatus.textContent = 'Status: Offline';
+        setDot(footDot, 'offline');
+
+        meName.textContent = 'Lewis (Offline)';
+        mePill.textContent = 'Signed out';
+        setDot(meDot, 'offline');
+
+        input.disabled = true;
+        input.value = '';
+        input.placeholder = 'Sign in to search…';
+
+        // show all contacts/groups when signed out
+        contacts.forEach(a => a.style.display = '');
+        groups.forEach(g => g.style.display = '');
+        updateCounts();
+      }
+    }
+
+    signBtn.addEventListener('click', () => {
+      signedIn = !signedIn;
+      renderSignState();
+    });
+
+    renderSignState();
+  </script>
+</body>
+</html>
