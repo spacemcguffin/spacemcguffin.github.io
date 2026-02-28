@@ -4,6 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MSN Contacts</title>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --win-bg:#d9e6f7;
@@ -20,7 +26,20 @@
       --offline:#9aa7b6;
       --shadow: 0 18px 45px rgba(0,0,0,.25);
       --radius: 12px;
-      --font: Tahoma, "Segoe UI", Verdana, Arial, sans-serif;
+      --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --ring: 0 0 0 3px rgba(43,99,182,.18);
+
+      --winH: 620px;
+
+      --sb-track: rgba(255,255,255,.45);
+      --sb-thumb: rgba(95,126,166,.55);
+      --sb-thumbHover: rgba(95,126,166,.75);
+
+      --footerH: 54px;
+
+      /* Sticky search sizing */
+      --stickyPad: 10px;
+      --stickyGap: 10px;
     }
 
     *{ box-sizing:border-box; }
@@ -38,15 +57,58 @@
       padding: 28px 14px;
     }
 
-    /* Window */
     .msn-window{
       width:min(420px, 100%);
+      height: min(var(--winH), calc(100vh - 56px));
       border: 1px solid var(--border-dark);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       background: var(--win-bg);
       overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      position:relative; /* for fixed footer */
     }
+
+    /* Scroll region */
+    .msn-body{
+      flex:1;
+      min-height:0;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+
+      padding-bottom: calc(var(--footerH) + 10px);
+
+      /* scrollbar integration */
+      padding-right: 10px;
+      margin-right: -10px;
+      scrollbar-gutter: stable;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+    }
+
+    /* Firefox */
+    .msn-body{ scrollbar-width: thin; scrollbar-color: var(--sb-thumb) var(--sb-track); }
+
+    /* WebKit */
+    .msn-body::-webkit-scrollbar{ width: 12px; }
+    .msn-body::-webkit-scrollbar-track{
+      background: var(--sb-track);
+      border-left: 1px solid rgba(95,126,166,.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .msn-body::-webkit-scrollbar-thumb{
+      background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.08)),
+                  var(--sb-thumb);
+      border: 1px solid rgba(95,126,166,.45);
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
+    }
+    .msn-body::-webkit-scrollbar-thumb:hover{
+      background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.10)),
+                  var(--sb-thumbHover);
+    }
+    .msn-body::-webkit-scrollbar-thumb:active{ background: var(--sb-thumbHover); }
+    .msn-body::-webkit-scrollbar-corner{ background: transparent; }
 
     /* Titlebar */
     .titlebar{
@@ -54,17 +116,18 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding: 0 10px 0 10px;
+      padding: 0 10px;
       background: linear-gradient(180deg, var(--title1), var(--title2));
       color:#fff;
       user-select:none;
+      flex:0 0 auto;
     }
     .titlebar__left{
       display:flex;
       align-items:center;
       gap:8px;
       font-size: 13px;
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.2px;
       white-space:nowrap;
       overflow:hidden;
@@ -77,9 +140,7 @@
         linear-gradient(135deg, #9ae6b4, #60a5fa);
       border: 1px solid rgba(255,255,255,.35);
     }
-    .titlebar__btns{
-      display:flex; gap:6px;
-    }
+    .titlebar__btns{ display:flex; gap:6px; }
     .tb-btn{
       width: 22px; height: 18px;
       border-radius: 4px;
@@ -89,9 +150,7 @@
       cursor:pointer;
     }
     .tb-btn:active{ transform: translateY(1px); }
-    .tb-icon{
-      width:10px;height:10px; position:relative;
-    }
+    .tb-icon{ width:10px;height:10px; position:relative; }
     .tb-icon.min::before{
       content:""; position:absolute; left:0; right:0; bottom:0;
       height:2px; background:#fff; opacity:.9;
@@ -106,27 +165,20 @@
     .tb-icon.close::after{ transform: rotate(-45deg); }
 
     /* Toolbar */
-    .toolbar{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px;
-    }
+    .toolbar{ padding: 10px; display:flex; align-items:center; gap:10px; }
     .avatar{
       width:42px;height:42px;border-radius:10px;
       background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,.2));
       border:1px solid rgba(95,126,166,.55);
       box-shadow: 0 8px 20px rgba(0,0,0,.12);
       display:grid; place-items:center;
-      font-weight:800;
+      font-weight:900;
       color:#1e4b8d;
+      letter-spacing:.3px;
     }
-    .me{
-      flex:1;
-      min-width:0;
-    }
+    .me{ flex:1; min-width:0; }
     .me__name{
-      font-weight:800;
+      font-weight:900;
       font-size: 14px;
       line-height:1.1;
       white-space:nowrap;
@@ -147,34 +199,55 @@
       border-radius:999px;
       border:1px solid rgba(95,126,166,.35);
       background: rgba(255,255,255,.55);
+      font-weight:700;
     }
 
-    /* Search */
-    .search{
-      padding: 0 10px 10px;
+    /* Sticky Search bar (inside scroll area) */
+    .sticky-search{
+      position: sticky;
+      top: 0;
+      z-index: 6;
+      padding: var(--stickyPad);
+      padding-bottom: var(--stickyGap);
+      background: linear-gradient(180deg, rgba(217,230,247,.98), rgba(217,230,247,.86));
+      border-bottom: 1px solid rgba(95,126,166,.35);
+      backdrop-filter: blur(8px);
     }
-    .search input{
+    .sticky-search__row{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .sticky-search input{
       width:100%;
       height: 34px;
       border-radius: 10px;
       border: 1px solid rgba(95,126,166,.55);
-      background: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.92);
       padding: 0 10px;
       outline:none;
       font-family: var(--font);
       font-size: 12px;
     }
-    .search input:focus{
-      box-shadow: 0 0 0 3px rgba(43,99,182,.18);
-    }
+    .sticky-search input:focus{ box-shadow: var(--ring); }
 
-    /* Contacts panel */
-    .panel{
-      background: var(--panel);
-      border-top: 1px solid rgba(95,126,166,.55);
-      padding: 10px;
+    .clear-btn{
+      height:34px;
+      padding:0 10px;
+      border-radius: 10px;
+      border:1px solid rgba(95,126,166,.5);
+      background: rgba(255,255,255,.75);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 900;
+      cursor:pointer;
+      white-space:nowrap;
     }
+    .clear-btn:hover{ background: rgba(255,255,255,.95); }
+    .clear-btn:focus-visible{ outline:none; box-shadow: var(--ring); }
 
+    /* Contacts */
+    .panel{ background: var(--panel); border-top: 1px solid rgba(95,126,166,.55); padding: 10px; }
     .group{
       border: 1px solid rgba(138,166,200,.6);
       border-radius: 12px;
@@ -183,35 +256,50 @@
       margin-bottom: 10px;
     }
     .group__head{
+      width:100%;
+      text-align:left;
       padding: 8px 10px;
-      font-weight:800;
+      font-weight:900;
       font-size:12px;
       color:#1b3a63;
       background: linear-gradient(180deg, rgba(217,230,247,.9), rgba(217,230,247,.55));
+      border:0;
       border-bottom: 1px solid rgba(138,166,200,.55);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
+      cursor:pointer;
+      user-select:none;
     }
-    .count{
-      font-weight:700;
-      color: rgba(27,58,99,.75);
+    .group__head:focus-visible{ outline:none; box-shadow: var(--ring); }
+    .group__left{ display:flex; align-items:center; gap:8px; min-width:0; }
+    .caret{
+      width:10px;height:10px; display:inline-block;
+      transform: rotate(90deg);
+      transition: transform .18s ease;
+      opacity:.85;
+      flex:0 0 auto;
     }
+    .caret::before{
+      content:""; display:block; width:0;height:0;
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+      border-left:6px solid rgba(27,58,99,.9);
+    }
+    .group[data-collapsed="true"] .caret{ transform: rotate(0deg); }
+    .count{ font-weight:800; color: rgba(27,58,99,.75); flex:0 0 auto; }
+    .group__body{ overflow:hidden; height:auto; transition: height .22s ease; }
 
     .contact{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px;
       padding: 8px 10px;
       text-decoration:none;
       color: inherit;
       border-bottom: 1px solid rgba(138,166,200,.35);
     }
     .contact:last-child{ border-bottom:0; }
-    .contact:hover{
-      background: rgba(43,99,182,.08);
-    }
+    .contact:hover{ background: rgba(43,99,182,.08); }
 
     .dot{
       width:10px;height:10px;border-radius:50%;
@@ -223,64 +311,94 @@
     .dot.busy{ background: var(--busy); }
     .dot.offline{ background: var(--offline); }
 
-    .contact__main{
-      min-width:0;
-      flex:1;
-    }
+    .contact__main{ min-width:0; flex:1; }
     .contact__name{
-      font-weight:800;
+      font-weight:900;
       font-size: 13px;
       line-height:1.15;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .contact__blurb{
+
+    /* Status message: only show when group is expanded */
+    .contact__status{
+      display:none;
+      margin-top: 2px;
       font-size: 11px;
       color: var(--muted);
-      margin-top: 2px;
+      font-weight:600;
+      opacity:.9;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
-    .chev{
-      color: rgba(16,36,62,.45);
-      font-weight:900;
-      flex:0 0 auto;
-    }
+    .group[data-collapsed="false"] .contact__status{ display:block; }
 
-    /* Footer */
-    .footer{
-      display:flex;
-      gap:8px;
+    /* Keep one-line look when collapsed (status hidden, tighter spacing) */
+    .group[data-collapsed="true"] .contact{ padding-top: 7px; padding-bottom: 7px; }
+
+    .chev{ color: rgba(16,36,62,.45); font-weight:900; flex:0 0 auto; }
+
+    /* Fixed footer */
+    .footerbar{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height: var(--footerH);
       padding: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
       border-top: 1px solid rgba(95,126,166,.35);
-      background: rgba(255,255,255,.45);
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(8px);
+      z-index: 10;
     }
-    .fbtn{
-      flex:1;
+    .footerbar__left{ display:flex; align-items:center; gap:8px; min-width:0; }
+    .footerbar__status{
+      font-size: 12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-weight:700;
+    }
+    .btn{
       height: 34px;
+      padding: 0 12px;
       border-radius: 10px;
       border:1px solid rgba(95,126,166,.5);
       background: rgba(255,255,255,.75);
       font-family: var(--font);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       cursor:pointer;
+      flex:0 0 auto;
     }
-    .fbtn:hover{ background: rgba(255,255,255,.95); }
+    .btn:hover{ background: rgba(255,255,255,.95); }
+    .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
+    .btn--danger{ border-color: rgba(239,68,68,.55); }
 
-    /* Mobile tweaks */
+    .is-signed-out .panel{ opacity:.55; filter: grayscale(.1); pointer-events:none; }
+    .is-signed-out .sticky-search input{ background: rgba(255,255,255,.65); }
+
     @media (max-width: 380px){
       .titlebar__left{ font-size: 12px; }
       .avatar{ width:38px;height:38px; }
+      .btn{ padding:0 10px; }
+      :root{ --winH: 560px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .group__body{ transition:none; }
+      .caret{ transition:none; }
     }
   </style>
 </head>
 
 <body>
-  <main class="msn-window" role="application" aria-label="MSN Contacts">
-
+  <main class="msn-window" id="msnWin" role="application" aria-label="MSN Contacts">
     <div class="titlebar">
       <div class="titlebar__left">
         <span class="msn-bubble" aria-hidden="true"></span>
@@ -293,121 +411,170 @@
       </div>
     </div>
 
-    <div class="toolbar">
-      <div class="avatar" aria-hidden="true">LM</div>
-      <div class="me">
-        <div class="me__name">Lewis (Online)</div>
-        <div class="me__status">
-          <span class="dot online" aria-hidden="true"></span>
-          <span class="pill">Listening to: PM</span>
+    <div class="msn-body">
+      <div class="toolbar">
+        <div class="avatar" aria-hidden="true">LM</div>
+        <div class="me">
+          <div class="me__name" id="meName">Lewis (Online)</div>
+          <div class="me__status">
+            <span class="dot online" id="meDot" aria-hidden="true"></span>
+            <span class="pill" id="mePill">Signed in</span>
+          </div>
         </div>
       </div>
+
+      <!-- Sticky search INSIDE the scroll area -->
+      <div class="sticky-search" role="search">
+        <div class="sticky-search__row">
+          <input id="search" type="search" placeholder="Search contacts…" autocomplete="off" />
+          <button class="clear-btn" id="clearBtn" type="button" aria-label="Clear search">Clear</button>
+        </div>
+      </div>
+
+      <section class="panel" aria-label="Contact list">
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left"><span class="caret" aria-hidden="true"></span><span>Wobble</span></span>
+            <span class="count" data-count></span>
+          </button>
+          <div class="group__body">
+            <a class="contact" href="/wobble/podcasts">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Podcasts</div>
+                <div class="contact__status">listening to: PM — “new ep soon”</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/wobble/">
+              <span class="dot away" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Home</div>
+                <div class="contact__status">brb — tweaking the landing page</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/wobble/test2#grid">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Card Grid</div>
+                <div class="contact__status">at work — polishing modal animations</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left"><span class="caret" aria-hidden="true"></span><span>Lewflix</span></span>
+            <span class="count" data-count></span>
+          </button>
+          <div class="group__body">
+            <a class="contact" href="/netflix/">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Netflix-style page</div>
+                <div class="contact__status">watching: rails + hero carousel tweaks</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/disney/test">
+              <span class="dot busy" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Disney test</div>
+                <div class="contact__status">busy — modal experiments (do not disturb)</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left"><span class="caret" aria-hidden="true"></span><span>Extras</span></span>
+            <span class="count" data-count></span>
+          </button>
+          <div class="group__body">
+            <a class="contact" href="/retro/">
+              <span class="dot offline" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Retro</div>
+                <div class="contact__status">offline — nostalgia mode</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/slide/">
+              <span class="dot away" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Episode list</div>
+                <div class="contact__status">afk — designing sticky headers</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+      </section>
     </div>
 
-    <div class="search">
-      <input id="search" type="search" placeholder="Search contacts…" autocomplete="off" />
-    </div>
-
-    <section class="panel" aria-label="Contact list">
-
-      <!-- Group 1 -->
-      <div class="group" data-group>
-        <div class="group__head">
-          <span>Wobble</span>
-          <span class="count" data-count></span>
-        </div>
-
-        <a class="contact" href="/wobble/podcasts">
-          <span class="dot online" aria-hidden="true"></span>
-          <span class="contact__main">
-            <div class="contact__name">Podcasts</div>
-            <div class="contact__blurb">Archive + latest episode</div>
-          </span>
-          <span class="chev" aria-hidden="true">›</span>
-        </a>
-
-        <a class="contact" href="/wobble/">
-          <span class="dot away" aria-hidden="true"></span>
-          <span class="contact__main">
-            <div class="contact__name">Home</div>
-            <div class="contact__blurb">Landing page</div>
-          </span>
-          <span class="chev" aria-hidden="true">›</span>
-        </a>
-
-        <a class="contact" href="/wobble/test2#grid">
-          <span class="dot online" aria-hidden="true"></span>
-          <span class="contact__main">
-            <div class="contact__name">Card Grid</div>
-            <div class="contact__blurb">Jump to the grid section</div>
-          </span>
-          <span class="chev" aria-hidden="true">›</span>
-        </a>
+    <div class="footerbar">
+      <div class="footerbar__left">
+        <span class="dot online" id="footDot" aria-hidden="true"></span>
+        <div class="footerbar__status" id="footStatus">Status: Online</div>
       </div>
-
-      <!-- Group 2 -->
-      <div class="group" data-group>
-        <div class="group__head">
-          <span>Lewflix</span>
-          <span class="count" data-count></span>
-        </div>
-
-        <a class="contact" href="/netflix/">
-          <span class="dot online" aria-hidden="true"></span>
-          <span class="contact__main">
-            <div class="contact__name">Netflix-style page</div>
-            <div class="contact__blurb">Hero + rails + modals</div>
-          </span>
-          <span class="chev" aria-hidden="true">›</span>
-        </a>
-
-        <a class="contact" href="/disney/test">
-          <span class="dot busy" aria-hidden="true"></span>
-          <span class="contact__main">
-            <div class="contact__name">Disney test</div>
-            <div class="contact__blurb">Modal experiments</div>
-          </span>
-          <span class="chev" aria-hidden="true">›</span>
-        </a>
-      </div>
-
-      <!-- Group 3 -->
-      <div class="group" data-group>
-        <div class="group__head">
-          <span>Extras</span>
-          <span class="count" data-count></span>
-        </div>
-
-        <a class="contact" href="/retro/">
-          <span class="dot offline" aria-hidden="true"></span>
-          <span class="contact__main">
-            <div class="contact__name">Retro</div>
-            <div class="contact__blurb">Old-school vibe</div>
-          </span>
-          <span class="chev" aria-hidden="true">›</span>
-        </a>
-
-        <a class="contact" href="/slide/">
-          <span class="dot away" aria-hidden="true"></span>
-          <span class="contact__main">
-            <div class="contact__name">Episode list</div>
-            <div class="contact__blurb">Listing UI</div>
-          </span>
-          <span class="chev" aria-hidden="true">›</span>
-        </a>
-      </div>
-
-    </section>
-
-    <div class="footer">
-      <button class="fbtn" type="button" onclick="alert('This is just for looks 🙂')">Add Contact</button>
-      <button class="fbtn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'})">To Top</button>
+      <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
     </div>
   </main>
 
   <script>
-    // Search filter (matches name + blurb)
+    // Smooth collapsible (height animation)
+    function animateCollapse(body, shouldOpen) {
+      const start = body.getBoundingClientRect().height;
+
+      if (shouldOpen) {
+        body.style.height = start + "px";
+        body.style.display = "block";
+        body.offsetHeight;
+        const end = body.scrollHeight;
+        body.style.height = end + "px";
+        const done = () => {
+          body.style.height = "auto";
+          body.removeEventListener("transitionend", done);
+        };
+        body.addEventListener("transitionend", done);
+      } else {
+        body.style.height = start + "px";
+        body.offsetHeight;
+        body.style.height = "0px";
+        const done = () => body.removeEventListener("transitionend", done);
+        body.addEventListener("transitionend", done);
+      }
+    }
+
+    document.querySelectorAll('.group').forEach(group => {
+      const head = group.querySelector('.group__head');
+      const body = group.querySelector('.group__body');
+      if (!head || !body) return;
+
+      group.dataset.collapsed = "false";
+      body.style.height = "auto";
+
+      head.addEventListener('click', () => {
+        const collapsed = group.dataset.collapsed === "true";
+        const nextCollapsed = !collapsed;
+        group.dataset.collapsed = nextCollapsed ? "true" : "false";
+        head.setAttribute('aria-expanded', nextCollapsed ? "false" : "true");
+        animateCollapse(body, !nextCollapsed);
+      });
+    });
+
+    // Search filter (matches name + status text)
     const input = document.getElementById('search');
+    const clearBtn = document.getElementById('clearBtn');
     const contacts = Array.from(document.querySelectorAll('.contact'));
     const groups = Array.from(document.querySelectorAll('[data-group]'));
 
@@ -416,22 +583,90 @@
         const visible = Array.from(g.querySelectorAll('.contact'))
           .filter(a => a.style.display !== 'none').length;
         const countEl = g.querySelector('[data-count]');
-        if (countEl) countEl.textContent = visible ? `(${visible})` : '(0)';
+        if (countEl) countEl.textContent = `(${visible})`;
         g.style.display = visible ? '' : 'none';
       });
     }
 
-    input.addEventListener('input', () => {
+    function applySearch(){
       const q = input.value.trim().toLowerCase();
       contacts.forEach(a => {
         const text = a.innerText.toLowerCase();
         a.style.display = (!q || text.includes(q)) ? '' : 'none';
       });
       updateCounts();
+      clearBtn.disabled = !input.value.trim();
+      clearBtn.style.opacity = clearBtn.disabled ? .6 : 1;
+    }
+
+    input.addEventListener('input', applySearch);
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      applySearch();
+      input.focus();
     });
 
-    // Initial counts
-    updateCounts();
+    applySearch();
+
+    // Sign in/out
+    const win = document.getElementById('msnWin');
+    const signBtn = document.getElementById('signBtn');
+    const footStatus = document.getElementById('footStatus');
+    const footDot = document.getElementById('footDot');
+    const meName = document.getElementById('meName');
+    const mePill = document.getElementById('mePill');
+    const meDot  = document.getElementById('meDot');
+
+    let signedIn = true;
+
+    function setDot(el, state){
+      el.classList.remove('online','away','busy','offline');
+      el.classList.add(state);
+    }
+
+    function renderSignState(){
+      win.classList.toggle('is-signed-out', !signedIn);
+
+      if (signedIn){
+        signBtn.textContent = 'Sign out';
+        footStatus.textContent = 'Status: Online';
+        setDot(footDot, 'online');
+
+        meName.textContent = 'Lewis (Online)';
+        mePill.textContent = 'Signed in';
+        setDot(meDot, 'online');
+
+        input.disabled = false;
+        input.placeholder = 'Search contacts…';
+        applySearch();
+      } else {
+        signBtn.textContent = 'Sign in';
+        footStatus.textContent = 'Status: Offline';
+        setDot(footDot, 'offline');
+
+        meName.textContent = 'Lewis (Offline)';
+        mePill.textContent = 'Signed out';
+        setDot(meDot, 'offline');
+
+        input.disabled = true;
+        input.value = '';
+        input.placeholder = 'Sign in to search…';
+
+        contacts.forEach(a => a.style.display = '');
+        groups.forEach(g => g.style.display = '');
+        updateCounts();
+
+        clearBtn.disabled = true;
+        clearBtn.style.opacity = .6;
+      }
+    }
+
+    signBtn.addEventListener('click', () => {
+      signedIn = !signedIn;
+      renderSignState();
+    });
+
+    renderSignState();
   </script>
 </body>
 </html>
