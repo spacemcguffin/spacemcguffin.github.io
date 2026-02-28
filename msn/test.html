@@ -35,7 +35,6 @@
       --sb-thumb: rgba(95,126,166,.55);
       --sb-thumbHover: rgba(95,126,166,.75);
 
-      /* Footer height (used to reserve space in scroll area) */
       --footerH: 54px;
     }
 
@@ -57,7 +56,6 @@
       padding: 28px 14px;
     }
 
-    /* Window */
     .msn-window{
       width:min(420px, 100%);
       height: min(var(--winH), calc(100vh - 56px));
@@ -71,7 +69,6 @@
       position:relative;
     }
 
-    /* Scroll region */
     .msn-body{
       flex:1;
       min-height:0;
@@ -86,10 +83,7 @@
     }
 
     /* Firefox */
-    .msn-body{
-      scrollbar-width: thin;
-      scrollbar-color: var(--sb-thumb) var(--sb-track);
-    }
+    .msn-body{ scrollbar-width: thin; scrollbar-color: var(--sb-thumb) var(--sb-track); }
 
     /* WebKit */
     .msn-body::-webkit-scrollbar{ width: 12px; }
@@ -112,7 +106,6 @@
     .msn-body::-webkit-scrollbar-thumb:active{ background: var(--sb-thumbHover); }
     .msn-body::-webkit-scrollbar-corner{ background: transparent; }
 
-    /* Titlebar */
     .titlebar{
       flex:0 0 auto;
       height: 36px;
@@ -124,9 +117,8 @@
       color:#fff;
       user-select:none;
 
-      /* XP shine support */
-      position:relative;
-      overflow:hidden;
+      position: relative;
+      overflow: hidden;
     }
     .titlebar__left{
       display:flex;
@@ -188,7 +180,6 @@
     }
 
 
-    /* Toolbar */
     .toolbar{
       padding: 10px 10px 0px 10px;
       display:flex;
@@ -236,17 +227,14 @@
       font-weight: 600;
     }
 
-    /* Search (sticky) */
     .search{
       position: sticky;
       top: 0;
       z-index: 6;
       padding: 10px;
-      padding-bottom: 10px;
       background: linear-gradient(180deg, rgba(217,230,247,.98), rgba(217,230,247,.86));
       border-bottom: 1px solid rgba(95,126,166,.35);
       backdrop-filter: blur(8px);
-
       transition: box-shadow .18s ease, opacity .25s ease, filter .25s ease;
     }
     .search input{
@@ -262,14 +250,13 @@
     }
     .search input:focus{ box-shadow: var(--ring); }
 
-    /* ===== Soft Scroll Shadow ===== */
+    /* Soft scroll shadow */
     .msn-body.is-scrolled .search{
       box-shadow:
         0 6px 10px rgba(0,0,0,.06),
         0 1px 0 rgba(95,126,166,.25);
     }
 
-    /* Contacts */
     .panel{
       background: var(--panel);
       border-top: 1px solid rgba(95,126,166,.55);
@@ -359,7 +346,6 @@
     }
     .chev{ color: rgba(16,36,62,.45); font-weight:900; flex:0 0 auto; }
 
-    /* Footerbar fixed inside window */
     .footerbar{
       position:absolute;
       left:0; right:0; bottom:0;
@@ -421,8 +407,18 @@
 
     /* =========================
        FULL MSN SHUTDOWN MODE
+       (NO FLICKER)
     ========================= */
 
+    /* Rendering hints to avoid shimmer */
+    .shutdown-overlay,
+    .toolbar,
+    .search,
+    .panel{
+      will-change: opacity, transform;
+    }
+
+    /* Smooth transitions */
     .msn-body,
     .toolbar,
     .search,
@@ -430,11 +426,13 @@
       transition: opacity .25s ease, filter .25s ease, transform .25s ease;
     }
 
+    /* Lock interaction while shutting down/signed out */
     .is-shutting-down .msn-body,
     .is-signed-out .msn-body{
       pointer-events: none;
     }
 
+    /* Signed out base */
     .is-signed-out .msn-body{
       filter: grayscale(.75) brightness(.88);
     }
@@ -443,17 +441,19 @@
     .is-signed-out .search{
       opacity: .42;
     }
-
-    /* Avatar off (works with your <img>) */
     .is-signed-out .avatar img{
       filter: grayscale(.9) brightness(.85);
       opacity: .75;
       box-shadow: none;
     }
+    .is-signed-out .footerbar{
+      filter: grayscale(.55) brightness(.92);
+    }
 
+    /* Overlay */
     .shutdown-overlay{
       position: absolute;
-      inset: 36px 0 var(--footerH) 0; /* below titlebar, above footer */
+      inset: 36px 0 var(--footerH) 0;
       display: grid;
       place-items: center;
       padding: 18px;
@@ -465,7 +465,6 @@
       transition: opacity .22s ease, transform .22s ease;
       z-index: 50;
     }
-
     .shutdown-card{
       width: min(320px, 92%);
       border-radius: 14px;
@@ -486,7 +485,6 @@
       color: rgba(16,36,62,.70);
       margin: 0 0 10px;
     }
-
     .spinner{
       width: 26px; height: 26px;
       border-radius: 999px;
@@ -497,29 +495,21 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    @keyframes flicker {
-      0%{ opacity: 1; }
-      10%{ opacity: .65; }
-      20%{ opacity: 1; }
-      30%{ opacity: .6; }
-      40%{ opacity: 1; }
-      100%{ opacity: 1; }
-    }
-
+    /* During shutting down: smooth dim (no flicker) */
     .is-shutting-down .toolbar,
     .is-shutting-down .search,
     .is-shutting-down .panel{
-      opacity: .25;
-      filter: grayscale(.6) brightness(.9);
-      animation: flicker .55s ease both;
+      opacity: .18;
+      filter: grayscale(.55) brightness(.92);
     }
 
+    /* Show overlay during shutting down / signed out */
     .is-shutting-down .shutdown-overlay{
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
+      background: rgba(240,245,255,.48);
     }
-
     .is-signed-out .shutdown-overlay{
       opacity: 1;
       transform: translateY(0);
@@ -527,10 +517,6 @@
     }
     .is-signed-out .shutdown-card .spinner{
       display: none;
-    }
-
-    .is-signed-out .footerbar{
-      filter: grayscale(.55) brightness(.92);
     }
   </style>
 </head>
@@ -630,7 +616,7 @@
       </section>
     </div>
 
-    <!-- Shutdown overlay (between body + footer) -->
+    <!-- Shutdown overlay -->
     <div class="shutdown-overlay" id="shutdownOverlay" aria-hidden="true">
       <div class="shutdown-card" role="status" aria-live="polite">
         <div class="spinner" id="shutdownSpinner" aria-hidden="true"></div>
@@ -649,7 +635,7 @@
   </main>
 
   <script>
-    // Smooth collapsible (height animation)
+    // Collapsible groups (smooth height animation)
     function animateCollapse(body, shouldOpen) {
       const start = body.getBoundingClientRect().height;
 
@@ -758,7 +744,6 @@
         input.disabled = false;
         input.placeholder = 'Search contents...';
 
-        // Tiny tweak: ensure overlay hides when signed in
         overlay.setAttribute('aria-hidden', 'true');
       } else {
         signBtn.textContent = 'Sign in';
