@@ -69,30 +69,6 @@
       position:relative;
     }
 
-    /* =========================
-       MSN NUDGE (spliced in)
-    ========================= */
-    @keyframes msnNudge {
-      0%   { transform: translateX(0); }
-      10%  { transform: translateX(-8px); }
-      20%  { transform: translateX(8px); }
-      30%  { transform: translateX(-6px); }
-      40%  { transform: translateX(6px); }
-      50%  { transform: translateX(-4px); }
-      60%  { transform: translateX(4px); }
-      70%  { transform: translateX(-2px); }
-      80%  { transform: translateX(2px); }
-      90%  { transform: translateX(-1px); }
-      100% { transform: translateX(0); }
-    }
-    .msn-window.msn-nudge{
-      animation: msnNudge .45s linear;
-    }
-    /* Respect accessibility settings */
-    @media (prefers-reduced-motion: reduce){
-      .msn-window.msn-nudge{ animation: none !important; }
-    }
-
     .msn-body{
       flex:1;
       min-height:0;
@@ -409,17 +385,6 @@
     .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
     .btn--danger{ border-color: rgba(239,68,68,.55); }
 
-    /* Nudge button sits next to Sign out */
-    .footerbar__right{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex:0 0 auto;
-    }
-    .btn--nudge{
-      border-color: rgba(43,99,182,.50);
-    }
-
     @media (max-width: 400px){
       .titlebar__left{ font-size: 12px; }
       .btn{ padding:0 10px; }
@@ -659,12 +624,7 @@
         <span class="dot online" id="footDot" aria-hidden="true"></span>
         <div class="footerbar__status" id="footStatus">Status: Online</div>
       </div>
-
-      <!-- Nudge + Sign in/out -->
-      <div class="footerbar__right">
-        <button class="btn btn--nudge" id="nudgeBtn" type="button" title="Nudge">Nudge</button>
-        <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
-      </div>
+      <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
     </div>
   </main>
 
@@ -867,28 +827,6 @@
     });
 
     renderSignState();
-
-    // =========================
-    // MSN Nudge (spliced in)
-    // =========================
-    const nudgeBtn = document.getElementById('nudgeBtn');
-
-    function doNudge(){
-      // optional: block nudge while overlay is active
-      if (win.classList.contains('is-shutting-down')) return;
-
-      win.classList.remove('msn-nudge');
-      void win.offsetWidth; // force reflow so it can retrigger
-      win.classList.add('msn-nudge');
-    }
-
-    nudgeBtn.addEventListener('click', doNudge);
-
-    // optional: double-click a contact to nudge (feels very MSN)
-    // contacts.forEach(a => a.addEventListener('dblclick', (e) => {
-    //   e.preventDefault();
-    //   doNudge();
-    // }));
   </script>
 </body>
 </html>
