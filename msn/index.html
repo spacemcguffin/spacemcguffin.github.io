@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MSN Chat — Lewis.lc</title>
+<style>
+  :root{
+    --win-bg:#e9eef7;
+    --frame:#b9c7e6;
+    --frame2:#8aa4d6;
+    --title1:#2f5fb8;
+    --title2:#1f4ea4;
+    --text:#0b1020;
+
+    --panel:#ffffff;
+    --panel2:#f5f7ff;
+    --border:#c9d6ef;
+
+    --me:#0b57d0;
+    --them:#0f7b2b;
+
+    --bubble-me:#e8f0ff;
+    --bubble-them:#ecfff1;
+
+    --shadow: 0 18px 50px rgba(0,0,0,.18);
+    --radius: 10px;
+    --font: "Tahoma", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:var(--font);
+    color:var(--text);
+    background:
+      radial-gradient(900px 600px at 20% 10%, #ffffff 0%, rgba(255,255,255,.0) 55%),
+      radial-gradient(900px 600px at 80% 20%, #dbe8ff 0%, rgba(219,232,255,0) 60%),
+      linear-gradient(#d7e3ff, #f3f6ff);
+    padding: 18px;
+  }
+
+  /* App frame */
+  .msn{
+    max-width: 980px;
+    margin: 0 auto;
+    border: 1px solid var(--frame2);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    background: var(--win-bg);
+  }
+
+  /* Title bar */
+  .titlebar{
+    height: 38px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 0 10px;
+    color:#fff;
+    background: linear-gradient(var(--title1), var(--title2));
+    user-select:none;
+  }
+  .titlebar__left{
+    display:flex; align-items:center; gap:10px;
+    min-width:0;
+  }
+  .msnIcon{
+    width:18px; height:18px; border-radius:4px;
+    background:
+      radial-gradient(circle at 30% 30%, #7dff8f 0 35%, transparent 36%),
+      radial-gradient(circle at 70% 35%, #5dd6ff 0 35%, transparent 36%),
+      radial-gradient(circle at 45% 75%, #ffd84c 0 40%, transparent 41%),
+      #0a2f6f;
+    border: 1px solid rgba(255,255,255,.35);
+    flex:0 0 auto;
+  }
+  .titlebar__title{
+    font-size: 12.5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    opacity:.95;
+  }
+  .windowBtns{
+    display:flex; gap:6px;
+  }
+  .btnWin{
+    width: 36px; height: 22px;
+    border-radius: 4px;
+    background: rgba(255,255,255,.14);
+    border: 1px solid rgba(255,255,255,.25);
+    display:grid; place-items:center;
+    cursor:pointer;
+  }
+  .btnWin:hover{ background: rgba(255,255,255,.22); }
+  .btnWin.close:hover{ background: rgba(255,70,70,.85); border-color: rgba(255,255,255,.4); }
+
+  /* Toolbar */
+  .toolbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding: 8px 10px;
+    background: linear-gradient(#f9fbff, #e9f0ff);
+    border-bottom: 1px solid var(--border);
+  }
+  .toolPill{
+    font-size: 12px;
+    padding: 5px 8px;
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 999px;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    display:flex; align-items:center; gap:6px;
+  }
+  .dot{ width:8px; height:8px; border-radius:50%; background:#24c26a; box-shadow: 0 0 0 2px rgba(36,194,106,.18); }
+  .sep{ flex:1; }
+
+  /* Main layout */
+  .main{
+    display:grid;
+    grid-template-columns: 260px 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+  @media (max-width: 860px){
+    .main{ grid-template-columns: 1fr; }
+  }
+
+  /* Contact card (left) */
+  .side{
+    background: linear-gradient(#fff, var(--panel2));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+  }
+  .profile{
+    padding: 12px;
+    display:flex;
+    gap: 10px;
+    align-items:center;
+  }
+  .avatar{
+    width: 54px; height: 54px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.12);
+    background:
+      radial-gradient(circle at 30% 30%, #fff 0 20%, rgba(255,255,255,0) 21%),
+      linear-gradient(135deg, #b9ffcc, #b2d8ff);
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.65);
+    flex:0 0 auto;
+  }
+  .pMeta{ min-width:0; }
+  .pName{ font-weight:700; font-size: 14px; line-height:1.1; }
+  .pStatus{ font-size: 12px; opacity:.85; margin-top:3px; display:flex; align-items:center; gap:6px; }
+  .music{
+    padding: 0 12px 12px;
+    font-size: 12px;
+    opacity:.9;
+  }
+  .music b{ font-weight:700; }
+  .side hr{
+    border:0;
+    border-top:1px solid var(--border);
+    margin:0;
+  }
+  .quick{
+    padding: 10px 12px 12px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .qbtn{
+    font-size: 12px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    cursor:pointer;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+  }
+  .qbtn:hover{ background:#f6f9ff; }
+  .qbtn:active{ transform: translateY(1px); }
+
+  /* Chat panel (right) */
+  .chat{
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    min-height: 520px;
+  }
+
+  .chatHeader{
+    padding: 10px 12px;
+    background: linear-gradient(#ffffff, #f2f7ff);
+    border-bottom: 1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 10px;
+  }
+  .chatHeader__who{
+    display:flex; align-items:center; gap:10px;
+    min-width:0;
+  }
+  .tinyAvatar{
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: linear-gradient(135deg, #ffd7e8, #d7e9ff);
+    flex:0 0 auto;
+  }
+  .chatTitle{
+    font-size: 12.5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .stamp{
+    font-size: 11.5px;
+    opacity:.7;
+    white-space:nowrap;
+  }
+
+  .log{
+    padding: 12px;
+    overflow:auto;
+    flex:1;
+    background:
+      linear-gradient(#ffffff, #ffffff) padding-box,
+      repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.02) 0px,
+        rgba(0,0,0,0.02) 1px,
+        transparent 1px,
+        transparent 26px
+      );
+  }
+
+  .system{
+    font-size: 12px;
+    opacity:.75;
+    margin: 6px 0 10px;
+  }
+
+  .msg{
+    display:flex;
+    gap:10px;
+    margin: 10px 0;
+    align-items:flex-end;
+  }
+  .msg.me{ justify-content:flex-end; }
+  .msg .name{
+    font-weight:700;
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+  .msg.me .name{ color: var(--me); text-align:right; }
+  .msg.them .name{ color: var(--them); }
+
+  .bubble{
+    max-width: min(520px, 78%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 9px 10px;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+    font-size: 13px;
+    line-height: 1.25;
+    position:relative;
+    word-wrap:break-word;
+  }
+  .me .bubble{ background: var(--bubble-me); }
+  .them .bubble{ background: var(--bubble-them); }
+
+  .bubble .meta{
+    margin-top: 6px;
+    font-size: 11px;
+    opacity:.65;
+    display:flex;
+    justify-content:flex-end;
+    gap: 8px;
+  }
+
+  .typing{
+    display:none;
+    font-size: 12px;
+    opacity:.8;
+    margin: 8px 0 0;
+  }
+  .typing.is-on{ display:block; }
+  .dots{
+    display:inline-flex; gap:3px; margin-left:6px; vertical-align:middle;
+  }
+  .dots i{
+    width:4px; height:4px; border-radius:50%;
+    background: rgba(0,0,0,.5);
+    display:inline-block;
+    animation: bop 1.1s infinite ease-in-out;
+  }
+  .dots i:nth-child(2){ animation-delay:.15s }
+  .dots i:nth-child(3){ animation-delay:.3s }
+  @keyframes bop{ 0%,100%{ transform: translateY(0); opacity:.45 } 50%{ transform: translateY(-3px); opacity:1 } }
+
+  /* Composer */
+  .composer{
+    border-top: 1px solid var(--border);
+    background: linear-gradient(#f9fbff, #eef4ff);
+    padding: 10px;
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items:end;
+  }
+  .inputWrap{
+    background:#fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,.04);
+  }
+  textarea{
+    width:100%;
+    border:0;
+    outline:0;
+    resize:none;
+    min-height: 48px;
+    max-height: 130px;
+    font-family: var(--font);
+    font-size: 13px;
+    line-height:1.25;
+  }
+  .actions{
+    display:flex;
+    gap: 8px;
+    align-items:center;
+  }
+  .send{
+    height: 42px;
+    padding: 0 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: linear-gradient(#ffffff, #f1f4ff);
+    cursor:pointer;
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
+    font-weight:700;
+    font-size: 12.5px;
+  }
+  .send:hover{ background: linear-gradient(#ffffff, #e7efff); }
+  .send:active{ transform: translateY(1px); }
+
+  .iconBtn{
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,.12);
+    background: #fff;
+    cursor:pointer;
+    display:grid; place-items:center;
+  }
+  .iconBtn:hover{ background:#f6f9ff; }
+  .iconBtn:active{ transform: translateY(1px); }
+
+  /* Nudge shake */
+  @keyframes nudge {
+    0%,100%{ transform: translateX(0) }
+    10%{ transform: translateX(-8px) }
+    20%{ transform: translateX(8px) }
+    30%{ transform: translateX(-6px) }
+    40%{ transform: translateX(6px) }
+    50%{ transform: translateX(-4px) }
+    60%{ transform: translateX(4px) }
+    70%{ transform: translateX(-2px) }
+    80%{ transform: translateX(2px) }
+  }
+  .is-nudged{ animation: nudge .45s ease-in-out; }
+
+  /* Tiny “MSN-ish” emoji look */
+  .em{ font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif; }
+
+</style>
+</head>
+<body>
+
+<div class="msn" id="app">
+  <div class="titlebar">
+    <div class="titlebar__left">
+      <div class="msnIcon" aria-hidden="true"></div>
+      <div class="titlebar__title">Conversation with <b id="whoTitle">Alex</b> — Windows Live Messenger</div>
+    </div>
+    <div class="windowBtns" aria-hidden="true">
+      <div class="btnWin" title="Minimize">—</div>
+      <div class="btnWin" title="Maximize">▢</div>
+      <div class="btnWin close" title="Close">✕</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="toolPill"><span class="dot"></span> Online</div>
+    <div class="toolPill">⚡ <span id="mood">feeling nostalgic</span></div>
+    <div class="sep"></div>
+    <div class="toolPill">🔒 End-to-end? (lol)</div>
+  </div>
+
+  <div class="main">
+    <!-- Left -->
+    <aside class="side">
+      <div class="profile">
+        <div class="avatar" aria-hidden="true"></div>
+        <div class="pMeta">
+          <div class="pName" id="whoSide">Alex</div>
+          <div class="pStatus"><span class="dot"></span> Available</div>
+        </div>
+      </div>
+      <div class="music">🎵 <b>Listening to:</b> <span id="song">The Sound of Dial-Up</span></div>
+      <hr />
+      <div class="quick">
+        <button class="qbtn" type="button" id="btnNudge">Nudge</button>
+        <button class="qbtn" type="button" id="btnBuzz">Buzz</button>
+        <button class="qbtn" type="button" id="btnClear">Clear chat</button>
+        <button class="qbtn" type="button" id="btnFake">Add demo msg</button>
+      </div>
+    </aside>
+
+    <!-- Right -->
+    <section class="chat">
+      <div class="chatHeader">
+        <div class="chatHeader__who">
+          <div class="tinyAvatar" aria-hidden="true"></div>
+          <div class="chatTitle">To: <b id="whoHeader">Alex</b> • <span class="stamp" id="dateStamp"></span></div>
+        </div>
+        <div class="stamp">Type “/nudge” to shake</div>
+      </div>
+
+      <div class="log" id="log" aria-live="polite">
+        <div class="system">You are now chatting with <b>Alex</b>.</div>
+
+        <div class="msg them">
+          <div>
+            <div class="name">Alex says:</div>
+            <div class="bubble">
+              omg MSN vibes 😭 <span class="em">✨</span>
+              <div class="meta"><span>00:01</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="msg me">
+          <div>
+            <div class="name">You say:</div>
+            <div class="bubble">
+              I’m rebuilding my site like it’s 2007.
+              <div class="meta"><span>00:02</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="typing" id="typing">Alex is typing<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
+      </div>
+
+      <form class="composer" id="form">
+        <div class="inputWrap">
+          <textarea id="input" placeholder="Type a message… (Enter to send, Shift+Enter for newline)"></textarea>
+        </div>
+        <div class="actions">
+          <button class="iconBtn" type="button" id="btnEmoji" title="Insert emoji">😊</button>
+          <button class="send" type="submit">Send</button>
+        </div>
+      </form>
+    </section>
+  </div>
+</div>
+
+<script>
+  const log = document.getElementById("log");
+  const form = document.getElementById("form");
+  const input = document.getElementById("input");
+  const typing = document.getElementById("typing");
+  const app = document.getElementById("app");
+
+  const dateStamp = document.getElementById("dateStamp");
+  dateStamp.textContent = new Date().toLocaleString(undefined, {
+    weekday: "short", year: "numeric", month: "short", day: "numeric"
+  });
+
+  const pad2 = (n) => String(n).padStart(2,"0");
+  const timeNow = () => {
+    const d = new Date();
+    return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+  };
+
+  function addMessage({ who="me", text="", nameLabel="" }){
+    const wrap = document.createElement("div");
+    wrap.className = `msg ${who}`;
+
+    const name = (nameLabel || (who === "me" ? "You say:" : "Alex says:"));
+    wrap.innerHTML = `
+      <div>
+        <div class="name">${name}</div>
+        <div class="bubble">
+          ${escapeHTML(text).replace(/\n/g,"<br>")}
+          <div class="meta"><span>${timeNow()}</span></div>
+        </div>
+      </div>
+    `;
+
+    // Insert above typing indicator if present
+    const typingNode = typing;
+    log.insertBefore(wrap, typingNode);
+
+    // Scroll to bottom
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function escapeHTML(str){
+    return str.replace(/[&<>"']/g, (m) => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
+  }
+
+  function setTyping(on){
+    typing.classList.toggle("is-on", !!on);
+    if (on) log.scrollTop = log.scrollHeight;
+  }
+
+  function nudge(){
+    app.classList.remove("is-nudged");
+    // force reflow
+    void app.offsetWidth;
+    app.classList.add("is-nudged");
+  }
+
+  // Demo: fake reply
+  function fakeReply(){
+    setTyping(true);
+    setTimeout(() => {
+      setTyping(false);
+      addMessage({ who:"them", text:"send me the link when it's live 😂" });
+    }, 850);
+  }
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+
+    if (text === "/nudge"){
+      addMessage({ who:"me", text:"*nudge*" });
+      nudge();
+      input.value = "";
+      fakeReply();
+      return;
+    }
+
+    addMessage({ who:"me", text });
+    input.value = "";
+    fakeReply();
+  });
+
+  // Enter to send (Shift+Enter newline)
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey){
+      e.preventDefault();
+      form.requestSubmit();
+    }
+  });
+
+  document.getElementById("btnNudge").addEventListener("click", () => {
+    addMessage({ who:"me", text:"*nudge*" });
+    nudge();
+    fakeReply();
+  });
+
+  document.getElementById("btnBuzz").addEventListener("click", () => {
+    addMessage({ who:"me", text:"BUZZ!!!" });
+    nudge();
+    setTimeout(nudge, 120);
+    fakeReply();
+  });
+
+  document.getElementById("btnClear").addEventListener("click", () => {
+    // remove all messages except system + typing
+    [...log.querySelectorAll(".msg")].forEach(n => n.remove());
+    log.scrollTop = log.scrollHeight;
+  });
+
+  document.getElementById("btnFake").addEventListener("click", () => {
+    addMessage({ who:"them", text:"remember custom emoticons? :D" });
+  });
+
+  document.getElementById("btnEmoji").addEventListener("click", () => {
+    input.value += (input.value && !input.value.endsWith(" ") ? " " : "") + "😀";
+    input.focus();
+  });
+</script>
+</body>
+</html>
