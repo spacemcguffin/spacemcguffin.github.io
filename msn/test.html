@@ -764,24 +764,33 @@
       }
     }
 
-    function beginShutdown(){
-      win.classList.add('is-shutting-down');
-      overlay.setAttribute('aria-hidden', 'false');
+function beginShutdown(){
+  win.classList.add('is-shutting-down');
+  overlay.setAttribute('aria-hidden', 'false');
 
-      shutdownSpinner.style.display = '';
-      shutdownTitle.textContent = 'Signing out...';
-      shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
+  shutdownSpinner.style.display = '';
 
-      window.setTimeout(() => {
-        signedIn = false;
-        win.classList.remove('is-shutting-down');
-        renderSignState();
+  // STEP 1 — Disconnecting
+  shutdownTitle.textContent = 'Disconnecting…';
+  shutdownSub.textContent = 'Closing conversations and syncing status.';
 
-        shutdownSpinner.style.display = 'none';
-        shutdownTitle.textContent = 'You are signed out';
-        shutdownSub.textContent = 'Sign in to view and search contents.';
-      }, 1000);
-    }
+  // After 1.2s → STEP 2
+  setTimeout(() => {
+    shutdownTitle.textContent = 'Signing out…';
+    shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
+  }, 1500);
+
+  // After total 2.4s → Finish
+  setTimeout(() => {
+    signedIn = false;
+    win.classList.remove('is-shutting-down');
+    renderSignState();
+
+    shutdownSpinner.style.display = 'none';
+    shutdownTitle.textContent = 'You are signed out';
+    shutdownSub.textContent = 'Sign in to view and search contents.';
+  }, 3000);
+}
 
     function endShutdown(){
       signedIn = true;
