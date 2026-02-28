@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MSN Contacts</title>
+  <title>lewis.lc</title>
 
   <!-- Inter font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -520,7 +520,7 @@
     <div class="titlebar">
       <div class="titlebar__left">
         <span class="msn-bubble" aria-hidden="true"></span>
-        <span>MSN Messenger — Contacts</span>
+        <span>lewis.lc — MSN Messenger</span>
       </div>
       <div class="titlebar__btns" aria-hidden="true">
         <div class="tb-btn"><span class="tb-icon min"></span></div>
@@ -643,205 +643,221 @@
     </div>
   </main>
 
-  <script>
-    // Collapsible groups (smooth height animation)
-    function animateCollapse(body, shouldOpen) {
-      const start = body.getBoundingClientRect().height;
 
-      if (shouldOpen) {
-        body.style.height = start + "px";
-        body.style.display = "block";
-        body.offsetHeight;
-        const end = body.scrollHeight;
-        body.style.height = end + "px";
-        const done = () => {
-          body.style.height = "auto";
-          body.removeEventListener("transitionend", done);
-        };
-        body.addEventListener("transitionend", done);
-      } else {
-        body.style.height = start + "px";
-        body.offsetHeight;
-        body.style.height = "0px";
-        const done = () => body.removeEventListener("transitionend", done);
-        body.addEventListener("transitionend", done);
-      }
+  
+<script>
+  // Collapsible groups (smooth height animation)
+  function animateCollapse(body, shouldOpen) {
+    const start = body.getBoundingClientRect().height;
+
+    if (shouldOpen) {
+      body.style.height = start + "px";
+      body.style.display = "block";
+      body.offsetHeight;
+      const end = body.scrollHeight;
+      body.style.height = end + "px";
+      const done = () => {
+        body.style.height = "auto";
+        body.removeEventListener("transitionend", done);
+      };
+      body.addEventListener("transitionend", done);
+    } else {
+      body.style.height = start + "px";
+      body.offsetHeight;
+      body.style.height = "0px";
+      const done = () => body.removeEventListener("transitionend", done);
+      body.addEventListener("transitionend", done);
     }
+  }
 
-    document.querySelectorAll('.group').forEach(group => {
-      const head = group.querySelector('.group__head');
-      const body = group.querySelector('.group__body');
-      if (!head || !body) return;
+  // ===== Collapsible groups init (DEFAULT: collapse "Currently Unavailable" + "Offline") =====
+  document.querySelectorAll('.group').forEach(group => {
+    const head = group.querySelector('.group__head');
+    const body = group.querySelector('.group__body');
+    if (!head || !body) return;
 
-      group.dataset.collapsed = "false";
-      body.style.height = "auto";
+    const title = (head.innerText || '').toLowerCase();
 
-      head.addEventListener('click', () => {
-        const collapsed = group.dataset.collapsed === "true";
-        const nextCollapsed = !collapsed;
-        group.dataset.collapsed = nextCollapsed ? "true" : "false";
-        head.setAttribute('aria-expanded', nextCollapsed ? "false" : "true");
-        animateCollapse(body, !nextCollapsed);
-      });
+    // Choose which ones start collapsed
+    const startCollapsed =
+      title.includes('currently unavailable') ||
+      title.includes('offline');
+
+    group.dataset.collapsed = startCollapsed ? "true" : "false";
+    head.setAttribute('aria-expanded', startCollapsed ? "false" : "true");
+
+    // IMPORTANT: set initial height with NO animation
+    body.style.height = startCollapsed ? "0px" : "auto";
+
+    head.addEventListener('click', () => {
+      const collapsed = group.dataset.collapsed === "true";
+      const nextCollapsed = !collapsed;
+      group.dataset.collapsed = nextCollapsed ? "true" : "false";
+      head.setAttribute('aria-expanded', nextCollapsed ? "false" : "true");
+      animateCollapse(body, !nextCollapsed);
     });
+  });
 
-    // Soft shadow under sticky search when scrolling
-    const scrollArea = document.querySelector('.msn-body');
-    scrollArea.addEventListener('scroll', () => {
-      if (scrollArea.scrollTop > 2) scrollArea.classList.add('is-scrolled');
-      else scrollArea.classList.remove('is-scrolled');
+  // Soft shadow under sticky search when scrolling
+  const scrollArea = document.querySelector('.msn-body');
+  scrollArea.addEventListener('scroll', () => {
+    if (scrollArea.scrollTop > 2) scrollArea.classList.add('is-scrolled');
+    else scrollArea.classList.remove('is-scrolled');
+  });
+
+  // Search filter
+  const input = document.getElementById('search');
+  const contacts = Array.from(document.querySelectorAll('.contact'));
+  const groups = Array.from(document.querySelectorAll('[data-group]'));
+
+  function updateCounts(){
+    groups.forEach(g => {
+      const visible = Array.from(g.querySelectorAll('.contact'))
+        .filter(a => a.style.display !== 'none').length;
+      const countEl = g.querySelector('[data-count]');
+      if (countEl) countEl.textContent = `(${visible})`;
+      g.style.display = visible ? '' : 'none';
     });
+  }
 
-    // Search filter
-    const input = document.getElementById('search');
-    const contacts = Array.from(document.querySelectorAll('.contact'));
-    const groups = Array.from(document.querySelectorAll('[data-group]'));
-
-    function updateCounts(){
-      groups.forEach(g => {
-        const visible = Array.from(g.querySelectorAll('.contact'))
-          .filter(a => a.style.display !== 'none').length;
-        const countEl = g.querySelector('[data-count]');
-        if (countEl) countEl.textContent = `(${visible})`;
-        g.style.display = visible ? '' : 'none';
-      });
-    }
-
-    input.addEventListener('input', () => {
-      const q = input.value.trim().toLowerCase();
-      contacts.forEach(a => {
-        const text = a.innerText.toLowerCase();
-        a.style.display = (!q || text.includes(q)) ? '' : 'none';
-      });
-      updateCounts();
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    contacts.forEach(a => {
+      const text = a.innerText.toLowerCase();
+      a.style.display = (!q || text.includes(q)) ? '' : 'none';
     });
     updateCounts();
+  });
+  updateCounts();
 
-    // Sign in/out + shutdown overlay
-    const win = document.getElementById('msnWin');
-    const signBtn = document.getElementById('signBtn');
-    const footStatus = document.getElementById('footStatus');
-    const footDot = document.getElementById('footDot');
-    const meName = document.getElementById('meName');
-    const mePill = document.getElementById('mePill');
-    const meDot  = document.getElementById('meDot');
+  // Sign in/out + shutdown overlay
+  const win = document.getElementById('msnWin');
+  const signBtn = document.getElementById('signBtn');
+  const footStatus = document.getElementById('footStatus');
+  const footDot = document.getElementById('footDot');
+  const meName = document.getElementById('meName');
+  const mePill = document.getElementById('mePill');
+  const meDot  = document.getElementById('meDot');
 
-    const overlay = document.getElementById('shutdownOverlay');
-    const shutdownTitle = document.getElementById('shutdownTitle');
-    const shutdownSub = document.getElementById('shutdownSub');
-    const shutdownSpinner = document.getElementById('shutdownSpinner');
+  const overlay = document.getElementById('shutdownOverlay');
+  const shutdownTitle = document.getElementById('shutdownTitle');
+  const shutdownSub = document.getElementById('shutdownSub');
+  const shutdownSpinner = document.getElementById('shutdownSpinner');
 
-    const displayName = "Lewis"; // used for the “Signing in as …” line
+  const displayName = "Lewis"; // used for the “Signing in as …” line
 
-    let signedIn = true;
+  let signedIn = true;
 
-    function setDot(el, state){
-      el.classList.remove('online','away','busy','offline');
-      el.classList.add(state);
+  function setDot(el, state){
+    el.classList.remove('online','away','busy','offline');
+    el.classList.add(state);
+  }
+
+  function renderSignState(){
+    win.classList.toggle('is-signed-out', !signedIn);
+
+    if (signedIn){
+      signBtn.textContent = 'Sign out';
+      footStatus.textContent = 'Status: Online';
+      setDot(footDot, 'online');
+
+      meName.textContent = `${displayName} (Online)`;
+      mePill.textContent = 'Signed in';
+      setDot(meDot, 'online');
+
+      input.disabled = false;
+      input.placeholder = 'Search contents...';
+
+      overlay.setAttribute('aria-hidden', 'true');
+    } else {
+      signBtn.textContent = 'Sign in';
+      footStatus.textContent = 'Status: Offline';
+      setDot(footDot, 'offline');
+
+      meName.textContent = `${displayName} (Offline)`;
+      mePill.textContent = 'Signed out';
+      setDot(meDot, 'offline');
+
+      input.disabled = true;
+      input.value = '';
+      input.placeholder = 'Sign in to search...';
+
+      contacts.forEach(a => a.style.display = '');
+      groups.forEach(g => g.style.display = '');
+      updateCounts();
     }
+  }
 
-    function renderSignState(){
-      win.classList.toggle('is-signed-out', !signedIn);
+  function beginShutdown(){
+    win.classList.remove('is-signing-in');
 
-      if (signedIn){
-        signBtn.textContent = 'Sign out';
-        footStatus.textContent = 'Status: Online';
-        setDot(footDot, 'online');
+    win.classList.add('is-shutting-down');
+    overlay.setAttribute('aria-hidden', 'false');
 
-        meName.textContent = `${displayName} (Online)`;
-        mePill.textContent = 'Signed in';
-        setDot(meDot, 'online');
+    shutdownSpinner.style.display = '';
 
-        input.disabled = false;
-        input.placeholder = 'Search contents...';
+    shutdownTitle.textContent = 'Disconnecting…';
+    shutdownSub.textContent = 'Closing conversations and syncing status.';
 
-        overlay.setAttribute('aria-hidden', 'true');
-      } else {
-        signBtn.textContent = 'Sign in';
-        footStatus.textContent = 'Status: Offline';
-        setDot(footDot, 'offline');
+    setTimeout(() => {
+      shutdownTitle.textContent = 'Signing out…';
+      shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
+    }, 1500);
 
-        meName.textContent = `${displayName} (Offline)`;
-        mePill.textContent = 'Signed out';
-        setDot(meDot, 'offline');
+    setTimeout(() => {
+      signedIn = false;
+      win.classList.remove('is-shutting-down');
+      renderSignState();
 
-        input.disabled = true;
-        input.value = '';
-        input.placeholder = 'Sign in to search...';
+      shutdownSpinner.style.display = 'none';
+      shutdownTitle.textContent = 'You are signed out';
+      shutdownSub.textContent = 'Sign in to view and search contents.';
+    }, 3000);
+  }
 
-        contacts.forEach(a => a.style.display = '');
-        groups.forEach(g => g.style.display = '');
-        updateCounts();
-      }
-    }
+  function endShutdown(){
+    // Signing in screen (while still signed out)
+    win.classList.add('is-signing-in');
+    win.classList.add('is-shutting-down');
+    overlay.setAttribute('aria-hidden', 'false');
 
-    function beginShutdown(){
+    shutdownSpinner.style.display = '';
+
+    // Step 1: show name
+    shutdownTitle.textContent = 'Signing in…';
+    shutdownSub.textContent = `Signing in as ${displayName}…`;
+
+    // Step 2
+    setTimeout(() => {
+      shutdownTitle.textContent = 'Authenticating…';
+      shutdownSub.textContent = 'Verifying password and connecting.';
+    }, 1000);
+
+    // Step 3
+    setTimeout(() => {
+      shutdownTitle.textContent = 'Loading content…';
+      shutdownSub.textContent = 'Retrieving the content list and status.';
+    }, 2000);
+
+    // Finish
+    setTimeout(() => {
+      signedIn = true;
+      win.classList.remove('is-shutting-down');
       win.classList.remove('is-signing-in');
+      overlay.setAttribute('aria-hidden', 'true');
+      renderSignState();
+    }, 3200);
+  }
 
-      win.classList.add('is-shutting-down');
-      overlay.setAttribute('aria-hidden', 'false');
+  signBtn.addEventListener('click', () => {
+    if (signedIn) beginShutdown();
+    else endShutdown();
+  });
 
-      shutdownSpinner.style.display = '';
+  renderSignState();
+</script>
 
-      shutdownTitle.textContent = 'Disconnecting…';
-      shutdownSub.textContent = 'Closing conversations and syncing status.';
 
-      setTimeout(() => {
-        shutdownTitle.textContent = 'Signing out…';
-        shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
-      }, 1500);
-
-      setTimeout(() => {
-        signedIn = false;
-        win.classList.remove('is-shutting-down');
-        renderSignState();
-
-        shutdownSpinner.style.display = 'none';
-        shutdownTitle.textContent = 'You are signed out';
-        shutdownSub.textContent = 'Sign in to view and search contents.';
-      }, 3000);
-    }
-
-    function endShutdown(){
-      // Signing in screen (while still signed out)
-      win.classList.add('is-signing-in');
-      win.classList.add('is-shutting-down');
-      overlay.setAttribute('aria-hidden', 'false');
-
-      shutdownSpinner.style.display = '';
-
-      // Step 1: show name
-      shutdownTitle.textContent = 'Signing in…';
-      shutdownSub.textContent = `Signing in as ${displayName}…`;
-
-      // Step 2
-      setTimeout(() => {
-        shutdownTitle.textContent = 'Authenticating…';
-        shutdownSub.textContent = 'Verifying password and connecting.';
-      }, 1000);
-
-      // Step 3
-      setTimeout(() => {
-        shutdownTitle.textContent = 'Loading content…';
-        shutdownSub.textContent = 'Retrieving the content list and status.';
-      }, 2000);
-
-      // Finish
-      setTimeout(() => {
-        signedIn = true;
-        win.classList.remove('is-shutting-down');
-        win.classList.remove('is-signing-in');
-        overlay.setAttribute('aria-hidden', 'true');
-        renderSignState();
-      }, 3200);
-    }
-
-    signBtn.addEventListener('click', () => {
-      if (signedIn) beginShutdown();
-      else endShutdown();
-    });
-
-    renderSignState();
-  </script>
+  
 </body>
 </html>
