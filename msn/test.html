@@ -475,13 +475,13 @@
       text-align: center;
     }
     .shutdown-title{
-      font-weight: 800;
+      font-weight: 700;
       font-size: 13px;
       color: #1b3a63;
       margin: 4px 0 6px;
     }
     .shutdown-sub{
-      font-size: 12px;
+      font-size: 13px;
       color: rgba(16,36,62,.70);
       margin: 0 0 10px;
     }
@@ -769,7 +769,7 @@
       overlay.setAttribute('aria-hidden', 'false');
 
       shutdownSpinner.style.display = '';
-      shutdownTitle.textContent = 'Signing out…';
+      shutdownTitle.textContent = 'Signing out...';
       shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
 
       window.setTimeout(() => {
@@ -779,8 +779,8 @@
 
         shutdownSpinner.style.display = 'none';
         shutdownTitle.textContent = 'You are signed out';
-        shutdownSub.textContent = 'Sign in to view and search contacts.';
-      }, 650);
+        shutdownSub.textContent = 'Sign in to view and search contents.';
+      }, 1000);
     }
 
     function endShutdown(){
