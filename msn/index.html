@@ -189,17 +189,6 @@
   pointer-events:none;
 }
 
-/* Thin top highlight line */
-.titlebar::after{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:1px;
-  background: rgba(255,255,255,.65);
-  pointer-events:none;
-}
 
 
     
@@ -419,10 +408,16 @@
     .is-signed-out .search input{ background: rgba(255,255,255,.6); }
 
     @media (max-width: 380px){
-      .titlebar__left{ font-size: 12px; }
+      .titlebar__left{ font-size: 11px; }
       .avatar{ width:38px;height:38px; }
       .btn{ padding:0 10px; }
       :root{ --winH: 560px; }
+
+      .panel {
+    margin-right: 10px;
+      }
+
+      
     }
 
     @media (prefers-reduced-motion: reduce){
