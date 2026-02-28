@@ -31,10 +31,12 @@
 
       --winH: 620px;
 
-      /* Scrollbar theming */
       --sb-track: rgba(255,255,255,.45);
       --sb-thumb: rgba(95,126,166,.55);
       --sb-thumbHover: rgba(95,126,166,.75);
+
+      /* Footer height (used to reserve space in scroll area) */
+      --footerH: 54px;
     }
 
     *{ box-sizing:border-box; }
@@ -63,19 +65,23 @@
       overflow:hidden;
       display:flex;
       flex-direction:column;
+      position:relative; /* anchor footer absolute */
     }
 
-    /* Scroll region (everything except titlebar) */
+    /* Scroll region (everything except titlebar + fixed footer) */
     .msn-body{
       flex:1;
       min-height:0;
       overflow:auto;
       -webkit-overflow-scrolling: touch;
 
-      /* Make scrollbar feel "integrated" */
-      padding-right: 10px;          /* space so content doesn't collide with bar */
-      margin-right: -10px;          /* keep overall width same */
-      scrollbar-gutter: stable;     /* reserve gutter when possible */
+      /* Reserve room for the fixed footer inside the window */
+      padding-bottom: calc(var(--footerH) + 10px);
+
+      /* Scrollbar integration */
+      padding-right: 10px;
+      margin-right: -10px;
+      scrollbar-gutter: stable;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
     }
 
@@ -85,10 +91,8 @@
       scrollbar-color: var(--sb-thumb) var(--sb-track);
     }
 
-    /* WebKit (Chrome/Edge/Safari) */
-    .msn-body::-webkit-scrollbar{
-      width: 12px;
-    }
+    /* WebKit */
+    .msn-body::-webkit-scrollbar{ width: 12px; }
     .msn-body::-webkit-scrollbar-track{
       background: var(--sb-track);
       border-left: 1px solid rgba(95,126,166,.35);
@@ -105,12 +109,8 @@
       background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.10)),
                   var(--sb-thumbHover);
     }
-    .msn-body::-webkit-scrollbar-thumb:active{
-      background: var(--sb-thumbHover);
-    }
-    .msn-body::-webkit-scrollbar-corner{
-      background: transparent;
-    }
+    .msn-body::-webkit-scrollbar-thumb:active{ background: var(--sb-thumbHover); }
+    .msn-body::-webkit-scrollbar-corner{ background: transparent; }
 
     /* Titlebar */
     .titlebar{
@@ -167,12 +167,7 @@
     .tb-icon.close::after{ transform: rotate(-45deg); }
 
     /* Toolbar */
-    .toolbar{
-      padding: 10px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
+    .toolbar{ padding: 10px; display:flex; align-items:center; gap:10px; }
     .avatar{
       width:42px;height:42px;border-radius:10px;
       background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(255,255,255,.2));
@@ -185,7 +180,7 @@
     }
     .me{ flex:1; min-width:0; }
     .me__name{
-      font-weight:900;
+      font-weight:700;
       font-size: 14px;
       line-height:1.1;
       white-space:nowrap;
@@ -224,13 +219,8 @@
     }
     .search input:focus{ box-shadow: var(--ring); }
 
-    /* Contacts panel */
-    .panel{
-      background: var(--panel);
-      border-top: 1px solid rgba(95,126,166,.55);
-      padding: 10px;
-    }
-
+    /* Contacts */
+    .panel{ background: var(--panel); border-top: 1px solid rgba(95,126,166,.55); padding: 10px; }
     .group{
       border: 1px solid rgba(138,166,200,.6);
       border-radius: 12px;
@@ -238,12 +228,11 @@
       background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
       margin-bottom: 10px;
     }
-
     .group__head{
       width:100%;
       text-align:left;
       padding: 8px 10px;
-      font-weight:900;
+      font-weight:700;
       font-size:12px;
       color:#1b3a63;
       background: linear-gradient(180deg, rgba(217,230,247,.9), rgba(217,230,247,.55));
@@ -257,48 +246,26 @@
       user-select:none;
     }
     .group__head:focus-visible{ outline:none; box-shadow: var(--ring); }
-
-    .group__left{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      min-width:0;
-    }
-
+    .group__left{ display:flex; align-items:center; gap:8px; min-width:0; }
     .caret{
-      width:10px;height:10px;
-      display:inline-block;
+      width:10px;height:10px; display:inline-block;
       transform: rotate(90deg);
       transition: transform .18s ease;
       opacity:.85;
       flex:0 0 auto;
     }
     .caret::before{
-      content:"";
-      display:block;
-      width:0;height:0;
+      content:""; display:block; width:0;height:0;
       border-top:5px solid transparent;
       border-bottom:5px solid transparent;
       border-left:6px solid rgba(27,58,99,.9);
     }
     .group[data-collapsed="true"] .caret{ transform: rotate(0deg); }
-
-    .count{
-      font-weight:800;
-      color: rgba(27,58,99,.75);
-      flex:0 0 auto;
-    }
-
-    .group__body{
-      overflow:hidden;
-      height:auto;
-      transition: height .22s ease;
-    }
+    .count{ font-weight:800; color: rgba(27,58,99,.75); flex:0 0 auto; }
+    .group__body{ overflow:hidden; height:auto; transition: height .22s ease; }
 
     .contact{
-      display:flex;
-      align-items:center;
-      gap:10px;
+      display:flex; align-items:center; gap:10px;
       padding: 8px 10px;
       text-decoration:none;
       color: inherit;
@@ -319,7 +286,7 @@
 
     .contact__main{ min-width:0; flex:1; }
     .contact__name{
-      font-weight:900;
+      font-weight:700;
       font-size: 13px;
       line-height:1.15;
       white-space:nowrap;
@@ -338,22 +305,22 @@
     }
     .chev{ color: rgba(16,36,62,.45); font-weight:900; flex:0 0 auto; }
 
-    /* Footerbar */
+    /* Footerbar FIXED to bottom of the MSN window */
     .footerbar{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height: var(--footerH);
       padding: 10px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
       border-top: 1px solid rgba(95,126,166,.35);
-      background: rgba(255,255,255,.45);
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(8px);
+      z-index: 10;
     }
-    .footerbar__left{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      min-width:0;
-    }
+    .footerbar__left{ display:flex; align-items:center; gap:8px; min-width:0; }
     .footerbar__status{
       font-size: 12px;
       color: var(--muted);
@@ -370,7 +337,7 @@
       background: rgba(255,255,255,.75);
       font-family: var(--font);
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 700;
       cursor:pointer;
       flex:0 0 auto;
     }
@@ -378,11 +345,7 @@
     .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
     .btn--danger{ border-color: rgba(239,68,68,.55); }
 
-    .is-signed-out .panel{
-      opacity:.55;
-      filter: grayscale(.1);
-      pointer-events:none;
-    }
+    .is-signed-out .panel{ opacity:.55; filter: grayscale(.1); pointer-events:none; }
     .is-signed-out .search input{ background: rgba(255,255,255,.6); }
 
     @media (max-width: 380px){
@@ -492,14 +455,15 @@
           </div>
         </div>
       </section>
+    </div>
 
-      <div class="footerbar">
-        <div class="footerbar__left">
-          <span class="dot online" id="footDot" aria-hidden="true"></span>
-          <div class="footerbar__status" id="footStatus">Status: Online</div>
-        </div>
-        <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
+    <!-- fixed inside the window -->
+    <div class="footerbar">
+      <div class="footerbar__left">
+        <span class="dot online" id="footDot" aria-hidden="true"></span>
+        <div class="footerbar__status" id="footStatus">Status: Online</div>
       </div>
+      <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
     </div>
   </main>
 
@@ -514,7 +478,6 @@
         body.offsetHeight;
         const end = body.scrollHeight;
         body.style.height = end + "px";
-
         const done = () => {
           body.style.height = "auto";
           body.removeEventListener("transitionend", done);
