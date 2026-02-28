@@ -4,950 +4,340 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>About — MSN Chat</title>
+
 <style>
-  :root{
-    --win-bg:#e9eef7;
-    --frame2:#8aa4d6;
-    --title1:#2f5fb8;
-    --title2:#1f4ea4;
+:root{
+  --title1:#2f5fb8;
+  --title2:#1f4ea4;
+  --frame:#8aa4d6;
+  --border:#c9d6ef;
+  --bg:#e9eef7;
+  --panel:#ffffff;
 
-    --panel:#ffffff;
-    --panel2:#f5f7ff;
-    --border:#c9d6ef;
+  --me:#0b57d0;
+  --them:#0f7b2b;
+  --sys:#7a2ea8;
 
-    --text:#0b1020;
-    --muted: rgba(11,16,32,.65);
+  --online:#24c26a;
+  --busy:#e53935;
+  --away:#f6a100;
+  --offline:#9aa7bd;
 
-    /* “MSN name colours” */
-    --me:#0b57d0;
-    --them:#0f7b2b;
-    --sys:#7a2ea8;
+  --font:"Tahoma","Segoe UI",system-ui,sans-serif;
+}
 
-    --shadow: 0 18px 50px rgba(0,0,0,.18);
-    --radius: 10px;
-    --font: "Tahoma", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  background:linear-gradient(#d7e3ff,#f3f6ff);
+  display:grid;
+  place-items:center;
+  padding:12px;
+}
 
-    --online:#24c26a;
-    --busy:#e53935;
-    --away:#f6a100;
-    --offline:#9aa7bd;
+/* Window */
+.msn{
+  width:min(900px,100%);
+  height:min(90vh,760px);
+  background:var(--bg);
+  border:1px solid var(--frame);
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-shadow:0 18px 50px rgba(0,0,0,.18);
+}
 
-    /* Placeholder DPs (embedded SVGs injected via JS) */
-    --dp-me: none;
-    --dp-them: none;
-  }
+/* Titlebar */
+.titlebar{
+  height:38px;
+  background:linear-gradient(var(--title1),var(--title2));
+  color:#fff;
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+  font-size:13px;
+  flex:0 0 auto;
+}
 
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family:var(--font);
-    color:var(--text);
-    background:
-      radial-gradient(900px 600px at 20% 10%, #ffffff 0%, rgba(255,255,255,.0) 55%),
-      radial-gradient(900px 600px at 80% 20%, #dbe8ff 0%, rgba(219,232,255,0) 60%),
-      linear-gradient(#d7e3ff, #f3f6ff);
-    padding: 18px;
-    display:grid;
-    place-items:center;
-  }
+/* Toolbar */
+.toolbar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:8px 12px;
+  background:#f5f8ff;
+  border-bottom:1px solid var(--border);
+  flex:0 0 auto;
+}
 
-  /* Fixed window height (no page-long expansion) */
+.statusWrap{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  background:#fff;
+  border:1px solid var(--border);
+  padding:4px 8px;
+  border-radius:999px;
+}
+
+.dot{
+  width:9px;height:9px;border-radius:50%;
+  background:var(--online);
+  box-shadow:0 0 0 2px rgba(36,194,106,.2);
+}
+
+.statusSel{
+  border:0;
+  outline:0;
+  background:transparent;
+  font-family:var(--font);
+  font-size:12px;
+  cursor:pointer;
+}
+
+/* Chat */
+.chat{
+  display:flex;
+  flex-direction:column;
+  flex:1 1 auto;
+  min-height:0;
+  background:var(--panel);
+}
+
+.chatHeader{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(#fff,#eef4ff);
+  flex:0 0 auto;
+}
+
+.dp{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,#ffd7e8,#d7e9ff);
+  border:1px solid rgba(0,0,0,.15);
+}
+
+.log{
+  flex:1 1 auto;
+  min-height:0;
+  overflow:auto;
+  padding:12px;
+  font-size:13px;
+  line-height:1.4;
+}
+
+/* MSN style transcript */
+.line{margin:6px 0;}
+.name{font-weight:700;}
+.name.me{color:var(--me);}
+.name.them{color:var(--them);}
+.name.sys{color:var(--sys);}
+.time{opacity:.6;font-size:12px;margin-left:6px;}
+.say{opacity:.8;}
+.msg{color:#0b1020;}
+.sysMsg{color:#666;}
+
+.linky{color:#0b57d0;text-decoration:underline;}
+
+.em{
+  display:inline-grid;
+  place-items:center;
+  width:18px;height:18px;
+  border-radius:5px;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.15);
+  font-size:12px;
+  margin:0 1px;
+  vertical-align:-3px;
+}
+
+/* Typing */
+.typing{display:none;font-size:12px;color:#666;margin-top:4px;}
+.typing.on{display:block;}
+
+/* Composer */
+.composer{
+  border-top:1px solid var(--border);
+  background:#f9fbff;
+  padding:10px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  flex:0 0 auto;
+}
+
+textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:8px;
+  resize:none;
+  height:55px;
+  font-family:var(--font);
+}
+
+.send{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:0 14px;
+  cursor:pointer;
+  background:#fff;
+}
+
+.controls{
+  margin-top:6px;
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  font-size:12px;
+}
+
+/* Mobile */
+@media (max-width:700px){
+  body{padding:8px;place-items:stretch;}
   .msn{
-    width: min(1020px, 100%);
-    height: min(86vh, 760px);
-    border: 1px solid var(--frame2);
-    border-radius: 12px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    background: var(--win-bg);
-    display:flex;
-    flex-direction:column;
-    position:relative;
-  }
-
-  .titlebar{
-    height: 38px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 0 10px;
-    color:#fff;
-    background: linear-gradient(var(--title1), var(--title2));
-    user-select:none;
-    flex: 0 0 auto;
-  }
-  .titlebar__left{display:flex; align-items:center; gap:10px; min-width:0;}
-  .msnIcon{
-    width:18px; height:18px; border-radius:4px;
-    background:
-      radial-gradient(circle at 30% 30%, #7dff8f 0 35%, transparent 36%),
-      radial-gradient(circle at 70% 35%, #5dd6ff 0 35%, transparent 36%),
-      radial-gradient(circle at 45% 75%, #ffd84c 0 40%, transparent 41%),
-      #0a2f6f;
-    border: 1px solid rgba(255,255,255,.35);
-    flex:0 0 auto;
-  }
-  .titlebar__title{
-    font-size: 12.5px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    opacity:.95;
-  }
-  .windowBtns{display:flex; gap:6px;}
-  .btnWin{
-    width: 36px; height: 22px;
-    border-radius: 4px;
-    background: rgba(255,255,255,.14);
-    border: 1px solid rgba(255,255,255,.25);
-    display:grid; place-items:center;
-  }
-
-  .toolbar{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    padding: 8px 10px;
-    background: linear-gradient(#f9fbff, #e9f0ff);
-    border-bottom: 1px solid var(--border);
-    flex: 0 0 auto;
-  }
-
-  /* Fake status dropdown */
-  .statusWrap{
-    display:flex; align-items:center; gap:8px;
-    padding: 4px 8px;
-    border: 1px solid var(--border);
-    background:#fff;
-    border-radius: 999px;
-    box-shadow: 0 1px 0 rgba(0,0,0,.05);
-  }
-  .dot{
-    width:9px; height:9px; border-radius:50%;
-    background: var(--online);
-    box-shadow: 0 0 0 2px rgba(36,194,106,.18);
-    flex:0 0 auto;
-  }
-  .statusSel{
-    border:0;
-    outline:0;
-    font-family: var(--font);
-    font-size: 12px;
-    background: transparent;
-    padding-right: 16px;
-    appearance:none;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    cursor:pointer;
-  }
-  .statusCaret{
-    margin-left:-14px;
-    font-size: 10px;
-    opacity:.75;
-    pointer-events:none;
-  }
-
-  .toolPill{
-    font-size: 12px;
-    padding: 5px 8px;
-    border: 1px solid var(--border);
-    background: #fff;
-    border-radius: 999px;
-    box-shadow: 0 1px 0 rgba(0,0,0,.05);
-    display:flex; align-items:center; gap:6px;
-  }
-  .sep{ flex:1; }
-  .toolLink{
-    font-size: 12px;
-    color: #123a7a;
-    text-decoration: underline;
-    cursor:pointer;
-    background:transparent;
-    border:0;
-    padding:0;
-  }
-
-  /* Layout */
-  .main{
-    flex: 1 1 auto;
-    min-height: 0;
-    display:grid;
-    grid-template-columns: 300px 1fr;
-    gap: 10px;
-    padding: 10px;
-  }
-  @media (max-width: 900px){
-    .main{ grid-template-columns: 1fr; }
-  }
-
-  .side{
-    background: linear-gradient(#fff, var(--panel2));
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    min-height:0;
-  }
-  .profile{
-    padding:12px;
-    display:flex;
-    gap:10px;
-    align-items:center;
-  }
-
-  .dp{
-    width: 62px;
-    height: 62px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,.12);
-    box-shadow: inset 0 0 0 2px rgba(255,255,255,.65);
-    background-size: cover;
-    background-position: center;
-    flex:0 0 auto;
-  }
-  .dp--me{ background-image: var(--dp-me); }
-  .dp--them{ background-image: var(--dp-them); }
-
-  .pMeta{min-width:0;}
-  .pName{font-weight:700; font-size: 14px; line-height:1.1;}
-  .pStatus{font-size: 12px; color: var(--muted); margin-top:4px;}
-  .side hr{border:0; border-top:1px solid var(--border); margin:0;}
-
-  .sideList{
-    padding: 10px 12px 12px;
-    font-size: 12px;
-    color: var(--muted);
-    display:grid;
-    gap: 10px;
-  }
-  .badge{
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding: 6px 8px;
-    border: 1px solid var(--border);
-    background:#fff;
-    border-radius: 10px;
-    width: fit-content;
-    color: #1a2a4a;
-  }
-
-  .quickRow{
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
-    margin-top: 2px;
-  }
-  .qbtn{
-    font-size: 12px;
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid var(--border);
-    background: #fff;
-    cursor:pointer;
-    box-shadow: 0 1px 0 rgba(0,0,0,.05);
-  }
-  .qbtn:hover{ background:#f6f9ff; }
-  .qbtn:active{ transform: translateY(1px); }
-
-  .chat{
-    background: var(--panel);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    min-height:0;
-  }
-  .chatHeader{
-    padding: 10px 12px;
-    background: linear-gradient(#ffffff, #f2f7ff);
-    border-bottom: 1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 10px;
-    flex: 0 0 auto;
-  }
-  .chatHeader__left{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    min-width:0;
-  }
-  .dpTiny{
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    border: 1px solid rgba(0,0,0,.12);
-    background-size: cover;
-    background-position: center;
-    flex:0 0 auto;
-  }
-  .chatTitle{
-    font-size: 12.5px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .stamp{font-size: 11.5px; opacity:.7; white-space:nowrap;}
-
-  /* Internal scroll region */
-  .log{
-    flex: 1 1 auto;
-    min-height: 0;
-    padding: 12px 12px 8px;
-    overflow:auto;
-    background:
-      linear-gradient(#ffffff, #ffffff) padding-box,
-      repeating-linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.02) 0px,
-        rgba(0,0,0,0.02) 1px,
-        transparent 1px,
-        transparent 26px
-      );
-  }
-
-  /* MSN-like transcript lines */
-  .line{
-    font-size: 13px;
-    line-height: 1.35;
-    margin: 5px 0;
-    word-wrap:break-word;
-  }
-  .name{
-    font-weight:700;
-  }
-  .name.me{ color: var(--me); }
-  .name.them{ color: var(--them); }
-  .name.sys{ color: var(--sys); }
-  .time{
-    font-size: 12px;
-    opacity:.7;
-    margin-left: 6px;
-  }
-  .say{ opacity:.85; }
-  .msg{ color: var(--text); }
-  .sysMsg{ color: var(--muted); }
-
-  .linky{
-    color:#0b57d0;
-    text-decoration: underline;
-  }
-
-  /* Emoticons (tiny MSN-ish) */
-  .em{
-    display:inline-grid;
-    place-items:center;
-    width: 18px;
-    height: 18px;
-    border-radius: 5px;
-    border: 1px solid rgba(0,0,0,.12);
-    background: linear-gradient(#fff, #f2f2f2);
-    box-shadow: 0 1px 0 rgba(0,0,0,.05);
-    font-size: 12px;
-    line-height: 1;
-    vertical-align: -3px;
-    margin: 0 1px;
-  }
-
-  /* Typing indicator */
-  .typingRow{
-    display:none;
-    margin: 8px 0 2px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-  .typingRow.is-on{ display:block; }
-  .dots{ display:inline-flex; gap:3px; margin-left:6px; vertical-align:middle; }
-  .dots i{
-    width:4px; height:4px; border-radius:50%;
-    background: rgba(0,0,0,.45);
-    display:inline-block;
-    animation: bop 1.1s infinite ease-in-out;
-  }
-  .dots i:nth-child(2){ animation-delay:.15s }
-  .dots i:nth-child(3){ animation-delay:.3s }
-  @keyframes bop{
-    0%,100%{ transform: translateY(0); opacity:.45 }
-    50%{ transform: translateY(-3px); opacity:1 }
-  }
-
-  /* Composer + “MSN controls” */
-  .composer{
-    flex: 0 0 auto;
-    border-top: 1px solid var(--border);
-    background: linear-gradient(#f9fbff, #eef4ff);
-    padding: 10px;
-    display:grid;
-    grid-template-columns: 1fr auto;
-    gap: 10px;
-    align-items:end;
-  }
-  .inputWrap{
-    background:#fff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 8px;
-    box-shadow: inset 0 1px 0 rgba(0,0,0,.04);
-  }
-  textarea{
     width:100%;
-    border:0;
-    outline:0;
-    resize:none;
-    height: 56px;
-    max-height: 130px;
-    font-family: var(--font);
-    font-size: 13px;
-    line-height:1.25;
-  }
-  .send{
-    height: 42px;
-    padding: 0 14px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,.12);
-    background: linear-gradient(#ffffff, #f1f4ff);
-    cursor:pointer;
-    box-shadow: 0 8px 18px rgba(0,0,0,.12);
-    font-weight:700;
-    font-size: 12.5px;
-  }
-  .send:hover{ background: linear-gradient(#ffffff, #e7efff); }
-
-  .controls{
-    display:flex;
-    align-items:center;
-    gap: 10px;
-    margin-top: 8px;
-    flex-wrap:wrap;
-  }
-  .ctrl{
-    display:flex;
-    align-items:center;
-    gap: 8px;
-    padding: 6px 8px;
-    border: 1px solid var(--border);
-    background:#fff;
-    border-radius: 12px;
-  }
-  .ctrl label{
-    font-size: 12px;
-    color: var(--muted);
-  }
-  .color{
-    width: 26px;
-    height: 26px;
-    border-radius: 8px;
-    border: 1px solid rgba(0,0,0,.12);
-    padding:0;
-    background:transparent;
-    cursor:pointer;
-  }
-
-  /* Nudge animation */
-  @keyframes nudge {
-    0%,100%{ transform: translateX(0) }
-    10%{ transform: translateX(-8px) }
-    20%{ transform: translateX(8px) }
-    30%{ transform: translateX(-6px) }
-    40%{ transform: translateX(6px) }
-    50%{ transform: translateX(-4px) }
-    60%{ transform: translateX(4px) }
-    70%{ transform: translateX(-2px) }
-    80%{ transform: translateX(2px) }
-  }
-  .is-nudged{ animation: nudge .45s ease-in-out; }
-
-  /* Reduce motion */
-  @media (prefers-reduced-motion: reduce){
-    .is-nudged{ animation: none; }
-    .dots i{ animation: none; }
-  }
-
-  /* ===== Mobile: hide sidebar so chat stays big ===== */
-@media (max-width: 900px){
-  body{
-    padding: 10px;
-    place-items: stretch;          /* window fills screen width */
-  }
-
-  .msn{
-    width: 100%;
-    height: calc(100dvh - 20px);   /* full-height window on phones */
-    max-height: none;
-    border-radius: 10px;
-  }
-
-  .main{
-    grid-template-columns: 1fr;    /* single column */
-    grid-template-rows: 1fr;       /* chat gets all remaining height */
-    min-height: 0;
-  }
-
-  .side{ display:none; }          /* hide sidebar */
-
-  .chat, .log{ min-height: 0; }   /* keep internal scrolling working */
-}
-
-/* Fallback if dvh isn't supported */
-@supports not (height: 100dvh){
-  @media (max-width: 900px){
-    .msn{ height: calc(100vh - 20px); }
-  }
-}
-
-
-
-
-
-  @media (max-width: 900px){
-  .chatHeader{
-    gap: 8px;
-    padding: 10px;
-  }
-  .chatTitle{
-    font-size: 12px;
+    height:calc(100dvh - 16px);
+    border-radius:10px;
   }
 }
 </style>
 </head>
+
 <body>
 
 <div class="msn" id="app">
-  <div class="titlebar">
-    <div class="titlebar__left">
-      <div class="msnIcon" aria-hidden="true"></div>
-      <div class="titlebar__title">About this site — Windows Live Messenger</div>
-    </div>
-    <div class="windowBtns" aria-hidden="true">
-      <div class="btnWin">—</div>
-      <div class="btnWin">▢</div>
-      <div class="btnWin">✕</div>
-    </div>
-  </div>
+  <div class="titlebar">About this site — Windows Live Messenger</div>
 
   <div class="toolbar">
-    <div class="statusWrap" title="Fake status">
-      <span class="dot" id="statusDot" aria-hidden="true"></span>
-      <select class="statusSel" id="statusSel" aria-label="Status">
-        <option value="available" selected>Available</option>
+    <div class="statusWrap">
+      <span class="dot" id="statusDot"></span>
+      <select class="statusSel" id="statusSel">
+        <option value="available">Available</option>
         <option value="busy">Busy</option>
         <option value="away">Away</option>
-        <option value="brb">Be Right Back</option>
         <option value="offline">Offline</option>
       </select>
-      <span class="statusCaret" aria-hidden="true">▾</span>
     </div>
-
-    <div class="toolPill">Mood: <span id="mood">nostalgia mode</span></div>
-    <div class="sep"></div>
-    <button class="toolLink" type="button" id="jumpTop">Jump to top</button>
-    <button class="toolLink" type="button" id="clear">Clear</button>
+    <button onclick="nudge()">Nudge</button>
+    <span style="margin-left:auto;font-size:12px;">Only 4 links allowed.</span>
   </div>
 
-  <div class="main">
-    <aside class="side">
-      <div class="profile">
-        <div class="dp dp--me" aria-hidden="true"></div>
-        <div class="pMeta">
-          <div class="pName">Lewis</div>
-          <div class="pStatus">Status: <span id="statusText">Available</span></div>
-        </div>
-      </div>
-      <hr />
-      <div class="profile" style="padding-top:10px;">
-        <div class="dp dp--them" aria-hidden="true"></div>
-        <div class="pMeta">
-          <div class="pName">The Website</div>
-          <div class="pStatus">Type <b>/tour</b> for links</div>
-        </div>
-      </div>
-      <hr />
+  <div class="chat">
+    <div class="chatHeader">
+      <div class="dp"></div>
+      <strong>Conversation with The Website</strong>
+    </div>
 
-      <div class="sideList">
-        <div class="badge">🗂️ Diary</div>
-        <div class="badge">🧷 MySpace</div>
-        <div class="badge">📓 LiveJournal</div>
-        <div class="badge">📼 Retro</div>
-
-        <div class="quickRow">
-          <button class="qbtn" type="button" id="btnNudge">Nudge</button>
-          <button class="qbtn" type="button" id="btnBuzz">BUZZ</button>
-          <button class="qbtn" type="button" id="btnTour">/tour</button>
-        </div>
-
-        <div style="opacity:.85; line-height:1.35;">
-          Emoticons: <b>:)</b> <b>:D</b> <b>;)</b> <b>&lt;3</b> <b>:(</b> <b>:P</b>
-        </div>
-      </div>
-    </aside>
-
-    <section class="chat">
-      <div class="chatHeader">
-        <div class="chatHeader__left">
-          <div class="dpTiny" id="dpThemTiny" aria-hidden="true"></div>
-          <div class="chatTitle">Conversation with: <b>The Website</b></div>
-        </div>
-        <div class="stamp" id="dateStamp"></div>
+    <div class="log" id="log">
+      <div class="line">
+        <span class="name sys">System</span>
+        <span class="time">(00:01)</span> says:
+        <span class="sysMsg">You are now viewing the About log.</span>
       </div>
 
-      <div class="log" id="log" aria-live="polite">
-        <!-- Seed transcript (about page content) -->
-        <div class="line">
-          <span class="name sys">System</span><span class="time">(00:01)</span> <span class="say">says:</span>
-          <span class="sysMsg">You are now viewing the About chat log.</span>
-        </div>
-
-        <div class="line">
-          <span class="name them">The Website</span><span class="time">(00:01)</span> <span class="say">says:</span>
-          <span class="msg">hey — i’m a personal site built like a set of nostalgic “worlds”.</span>
-        </div>
-
-        <div class="line">
-          <span class="name me">Lewis</span><span class="time">(00:02)</span> <span class="say">says:</span>
-          <span class="msg">what’s on here? :)</span>
-        </div>
-
-        <div class="line">
-          <span class="name them">The Website</span><span class="time">(00:03)</span> <span class="say">says:</span>
-          <span class="msg">four portals — the only links i’ll give you:</span>
-        </div>
-
-        <div class="line">
-          <span class="name them">The Website</span><span class="time">(00:03)</span> <span class="say">says:</span>
-          <span class="msg">
-            • <a class="linky" href="https://lewis.lc/diary">lewis.lc/diary</a><br>
-            • <a class="linky" href="https://lewis.lc/myspace">lewis.lc/myspace</a><br>
-            • <a class="linky" href="https://lewis.lc/livejournal">lewis.lc/livejournal</a><br>
-            • <a class="linky" href="https://lewis.lc/retro">lewis.lc/retro</a>
-          </span>
-        </div>
-
-        <div class="line">
-          <span class="name me">Lewis</span><span class="time">(00:04)</span> <span class="say">says:</span>
-          <span class="msg">so it’s an internet scrapbook + UI playground?</span>
-        </div>
-
-        <div class="line">
-          <span class="name them">The Website</span><span class="time">(00:04)</span> <span class="say">says:</span>
-          <span class="msg">exactly. part archive. part cosplay. part “what if 2007 never ended”. :D</span>
-        </div>
-
-        <div class="typingRow" id="typingRow">
-          <span class="name them">The Website</span> is typing
-          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-        </div>
+      <div class="line">
+        <span class="name them">The Website</span>
+        <span class="time">(00:02)</span> says:
+        <span class="msg">
+          four portals only:<br>
+          • <a class="linky" href="https://lewis.lc/diary">lewis.lc/diary</a><br>
+          • <a class="linky" href="https://lewis.lc/myspace">lewis.lc/myspace</a><br>
+          • <a class="linky" href="https://lewis.lc/livejournal">lewis.lc/livejournal</a><br>
+          • <a class="linky" href="https://lewis.lc/retro">lewis.lc/retro</a>
+        </span>
       </div>
 
-      <form class="composer" id="form">
-        <div>
-          <div class="inputWrap">
-            <textarea id="input" placeholder="Type a message… (Enter to send, Shift+Enter for newline)"></textarea>
-          </div>
+      <div class="typing" id="typing">The Website is typing…</div>
+    </div>
 
-          <div class="controls">
-            <div class="ctrl">
-              <label for="fontColor">Font colour</label>
-              <input class="color" id="fontColor" type="color" value="#0b57d0" />
-            </div>
-            <div class="ctrl" style="border-style:dashed;">
-              <span style="font-size:12px;color:var(--muted)">Try:</span>
-              <b style="font-size:12px">/tour</b>
-              <b style="font-size:12px">/help</b>
-              <b style="font-size:12px">diary</b>
-              <b style="font-size:12px">retro</b>
-            </div>
-          </div>
+    <form class="composer" id="form">
+      <div>
+        <textarea id="input" placeholder="Type a message..."></textarea>
+        <div class="controls">
+          <label>Font colour:</label>
+          <input type="color" id="color" value="#0b57d0">
+          <span>Emotes: :) :D ;) :( <3</span>
         </div>
-        <button class="send" type="submit">Send</button>
-      </form>
-    </section>
+      </div>
+      <button class="send">Send</button>
+    </form>
   </div>
 </div>
 
 <script>
-  // ----- Only allowed links (hard-locked) -----
-  const LINKS = {
-    diary: "https://lewis.lc/diary",
-    myspace: "https://lewis.lc/myspace",
-    livejournal: "https://lewis.lc/livejournal",
-    retro: "https://lewis.lc/retro"
-  };
+const LINKS = [
+  "https://lewis.lc/diary",
+  "https://lewis.lc/myspace",
+  "https://lewis.lc/livejournal",
+  "https://lewis.lc/retro"
+];
 
-  // ----- Royalty-free placeholder DPs: embedded SVG data-URIs (original graphics) -----
-  const svgToDataUri = (svg) => `url("data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}")`;
+const log = document.getElementById("log");
+const form = document.getElementById("form");
+const input = document.getElementById("input");
+const typing = document.getElementById("typing");
+const colorPicker = document.getElementById("color");
 
-  const dpMeSVG = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
-    <defs>
-      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#b9ffcc"/>
-        <stop offset="1" stop-color="#b2d8ff"/>
-      </linearGradient>
-      <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".15"/>
-      </filter>
-    </defs>
-    <rect width="160" height="160" rx="26" fill="url(#g)"/>
-    <circle cx="82" cy="64" r="34" fill="#ffffff" opacity=".92" filter="url(#s)"/>
-    <rect x="34" y="104" width="92" height="44" rx="22" fill="#ffffff" opacity=".85" filter="url(#s)"/>
-    <circle cx="70" cy="62" r="6" fill="#0b1020" opacity=".55"/>
-    <circle cx="94" cy="62" r="6" fill="#0b1020" opacity=".55"/>
-    <path d="M70 78 Q82 90 94 78" fill="none" stroke="#0b1020" stroke-opacity=".45" stroke-width="6" stroke-linecap="round"/>
-    <path d="M24 30 L64 18 L84 42 L44 56 Z" fill="#ffffff" opacity=".33"/>
-  </svg>`;
+function timeNow(){
+  const d=new Date();
+  return d.getHours().toString().padStart(2,"0")+":"+d.getMinutes().toString().padStart(2,"0");
+}
 
-  const dpThemSVG = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
-    <defs>
-      <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffd7e8"/>
-        <stop offset="1" stop-color="#d7e9ff"/>
-      </linearGradient>
-      <filter id="s2" x="-20%" y="-20%" width="140%" height="140%">
-        <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".15"/>
-      </filter>
-    </defs>
-    <rect width="160" height="160" rx="26" fill="url(#g2)"/>
-    <path d="M20 104 C44 72, 86 68, 140 104 L140 150 L20 150 Z" fill="#ffffff" opacity=".86" filter="url(#s2)"/>
-    <circle cx="78" cy="66" r="36" fill="#ffffff" opacity=".92" filter="url(#s2)"/>
-    <path d="M56 58 C64 46, 90 46, 100 58" fill="none" stroke="#0b1020" stroke-opacity=".35" stroke-width="8" stroke-linecap="round"/>
-    <circle cx="66" cy="70" r="6" fill="#0b1020" opacity=".5"/>
-    <circle cx="92" cy="70" r="6" fill="#0b1020" opacity=".5"/>
-    <path d="M64 88 Q78 98 92 88" fill="none" stroke="#0b1020" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/>
-    <path d="M120 22 L150 44 L132 62 L104 40 Z" fill="#ffffff" opacity=".28"/>
-  </svg>`;
+function emotes(text){
+  return text
+    .replace(/:\)/g,'<span class="em">🙂</span>')
+    .replace(/:D/g,'<span class="em">😄</span>')
+    .replace(/;\)/g,'<span class="em">😉</span>')
+    .replace(/:\(/g,'<span class="em">🙁</span>')
+    .replace(/<3/g,'<span class="em">❤️</span>');
+}
 
-  document.documentElement.style.setProperty("--dp-me", svgToDataUri(dpMeSVG));
-  document.documentElement.style.setProperty("--dp-them", svgToDataUri(dpThemSVG));
-  document.getElementById("dpThemTiny").style.backgroundImage = svgToDataUri(dpThemSVG);
+function sanitize(text){
+  let escaped=text.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+  return emotes(escaped);
+}
 
-  // ----- Date stamp -----
-  const dateStamp = document.getElementById("dateStamp");
-  dateStamp.textContent = new Date().toLocaleString(undefined, {
-    weekday: "short", year: "numeric", month: "short", day: "numeric"
-  });
+function addLine(who,html){
+  const div=document.createElement("div");
+  div.className="line";
+  const nameClass = who==="me"?"me":"them";
+  div.innerHTML=`
+    <span class="name ${nameClass}" style="color:${who==="me"?colorPicker.value:""}">
+      ${who==="me"?"Lewis":"The Website"}
+    </span>
+    <span class="time">(${timeNow()})</span> says:
+    <span class="msg" style="color:${who==="me"?colorPicker.value:""}">${html}</span>
+  `;
+  log.insertBefore(div,typing);
+  log.scrollTop=log.scrollHeight;
+}
 
-  // ----- Helpers -----
-  const log = document.getElementById("log");
-  const form = document.getElementById("form");
-  const input = document.getElementById("input");
-  const typingRow = document.getElementById("typingRow");
-  const app = document.getElementById("app");
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  const text=input.value.trim();
+  if(!text) return;
+  addLine("me",sanitize(text));
+  input.value="";
+  typing.classList.add("on");
+  setTimeout(()=>{
+    typing.classList.remove("on");
+    addLine("them","Try typing 'diary' or '/tour'.");
+  },600);
+});
 
-  const fontColor = document.getElementById("fontColor");
-
-  const pad2 = (n) => String(n).padStart(2,"0");
-  const timeNow = () => {
-    const d = new Date();
-    return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
-  };
-
-  const escapeHTML = (str) =>
-    str.replace(/[&<>"']/g, (m) => ({
-      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-    }[m]));
-
-  function setTyping(on){
-    typingRow.classList.toggle("is-on", !!on);
-    if (on) log.scrollTop = log.scrollHeight;
-  }
-
-  function linkHTML(key){
-    const url = LINKS[key];
-    return `<a class="linky" href="${url}">${url.replace("https://","")}</a>`;
-  }
-
-  // Convert emoticon text into tiny “MSN-ish” inline badges
-  // You can extend this table to add custom emoticons.
-  const EMOTES = [
-    { re: /(^|\s):\)/g,  html: '$1<span class="em" title=":)">🙂</span>' },
-    { re: /(^|\s):D/g,   html: '$1<span class="em" title=":D">😄</span>' },
-    { re: /(^|\s);\)/g,  html: '$1<span class="em" title=";)">😉</span>' },
-    { re: /(^|\s):\(/g,  html: '$1<span class="em" title=":(">🙁</span>' },
-    { re: /(^|\s):P/gi,  html: '$1<span class="em" title=":P">😛</span>' },
-    { re: /<3/g,         html: '<span class="em" title="<3">❤️</span>' },
-    { re: /:\|/g,        html: '<span class="em" title=":|">😐</span>' }
-  ];
-
-  // Hard-lock outgoing links: turn any URL into plain text unless it matches your 4 allowed URLs.
-  function sanitizeAndFormat(text){
-    // escape first
-    let out = escapeHTML(text);
-
-    // convert newlines
-    out = out.replace(/\n/g, "<br>");
-
-    // link lock:
-    // - detect http(s) URLs
-    // - only keep them clickable if exactly matches allowed list
-    const urlRe = /(https?:\/\/[^\s<]+)/g;
-    out = out.replace(urlRe, (m) => {
-      const ok = Object.values(LINKS).includes(m);
-      return ok ? `<a class="linky" href="${m}">${m.replace("https://","")}</a>` : m;
-    });
-
-    // emoticons
-    EMOTES.forEach(({re, html}) => out = out.replace(re, html));
-    return out;
-  }
-
-  function addLine({ who="me", html="", isSystem=false }){
-    const div = document.createElement("div");
-    div.className = "line";
-
-    const whoClass = isSystem ? "sys" : (who === "me" ? "me" : "them");
-    const whoLabel = isSystem ? "System" : (who === "me" ? "Lewis" : "The Website");
-
-    // Allow your chosen outgoing font colour like MSN (only for your messages)
-    const msgStyle = (who === "me" && !isSystem) ? `style="color:${fontColor.value}"` : "";
-
-    div.innerHTML = `
-      <span class="name ${whoClass}" ${who === "me" && !isSystem ? `style="color:${fontColor.value}"` : ""}>${whoLabel}</span>
-      <span class="time">(${timeNow()})</span>
-      <span class="say">says:</span>
-      <span class="${isSystem ? "sysMsg" : "msg"}" ${msgStyle}>${html}</span>
-    `;
-
-    log.insertBefore(div, typingRow);
-    log.scrollTop = log.scrollHeight;
-  }
-
-  // Nudge / Buzz
-  function nudge(){
-    app.classList.remove("is-nudged");
-    void app.offsetWidth;
-    app.classList.add("is-nudged");
-  }
-
-  // “Bot” replies (kept to your 4 links only)
-  function replyTo(userText){
-    const t = userText.trim().toLowerCase();
-
-    if (t === "/help"){
-      addLine({ who:"them", html: sanitizeAndFormat("commands: /tour, /about, /why, /emotes") });
-      return;
-    }
-    if (t === "/tour"){
-      addLine({ who:"them", html:
-        `pick a portal:<br>
-         • ${linkHTML("diary")}<br>
-         • ${linkHTML("myspace")}<br>
-         • ${linkHTML("livejournal")}<br>
-         • ${linkHTML("retro")}`
-      });
-      return;
-    }
-    if (t === "/about"){
-      addLine({ who:"them", html: sanitizeAndFormat("a nostalgia-forward personal site: diary-style pages, faux-social profiles, and retro UI experiments.") });
-      return;
-    }
-    if (t === "/why"){
-      addLine({ who:"them", html: sanitizeAndFormat("because the old web had personality. this is a scrapbook + a UI playground.") });
-      return;
-    }
-    if (t === "/emotes"){
-      addLine({ who:"them", html: sanitizeAndFormat("emotes supported: :)  :D  ;)  :(  :P  <3  :|  (add more in the EMOTES array)") });
-      return;
-    }
-
-    // keyword routing
-    if (t.includes("diary"))       { addLine({ who:"them", html: `diary → ${linkHTML("diary")}` }); return; }
-    if (t.includes("myspace"))     { addLine({ who:"them", html: `myspace → ${linkHTML("myspace")}` }); return; }
-    if (t.includes("livejournal") || t.includes("lj")) {
-      addLine({ who:"them", html: `livejournal → ${linkHTML("livejournal")}` }); return;
-    }
-    if (t.includes("retro"))       { addLine({ who:"them", html: `retro → ${linkHTML("retro")}` }); return; }
-
-    addLine({ who:"them", html: sanitizeAndFormat("try /tour for links, or ask about diary/myspace/livejournal/retro.") });
-  }
-
-  // Send
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const text = input.value.trim();
-    if (!text) return;
-
-    addLine({ who:"me", html: sanitizeAndFormat(text) });
-    input.value = "";
-
-    setTyping(true);
-    setTimeout(() => {
-      setTyping(false);
-      replyTo(text);
-    }, 700);
-  });
-
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !e.shiftKey){
-      e.preventDefault();
-      form.requestSubmit();
-    }
-  });
-
-  // Toolbar buttons
-  document.getElementById("jumpTop").addEventListener("click", () => log.scrollTop = 0);
-
-  document.getElementById("clear").addEventListener("click", () => {
-    // Remove all transcript lines except typing row
-    [...log.querySelectorAll(".line")].forEach(n => n.remove());
-    addLine({ who:"sys", isSystem:true, html: "Chat cleared." });
-  });
-
-  document.getElementById("btnNudge").addEventListener("click", () => {
-    addLine({ who:"me", html: sanitizeAndFormat("*nudge*") });
-    nudge();
-    setTyping(true);
-    setTimeout(() => { setTyping(false); addLine({ who:"them", html: sanitizeAndFormat("OI!! 😭") }); }, 600);
-  });
-
-  document.getElementById("btnBuzz").addEventListener("click", () => {
-    addLine({ who:"me", html: sanitizeAndFormat("BUZZ!!!") });
-    nudge(); setTimeout(nudge, 120);
-    setTyping(true);
-    setTimeout(() => { setTyping(false); addLine({ who:"them", html: sanitizeAndFormat("stoppppp :(") }); }, 650);
-  });
-
-  document.getElementById("btnTour").addEventListener("click", () => {
-    addLine({ who:"me", html: sanitizeAndFormat("/tour") });
-    setTyping(true);
-    setTimeout(() => { setTyping(false); replyTo("/tour"); }, 450);
-  });
-
-  // Status dropdown behaviour
-  const statusSel = document.getElementById("statusSel");
-  const statusDot = document.getElementById("statusDot");
-  const statusText = document.getElementById("statusText");
-
-  const STATUS = {
-    available: { label:"Available", color:"var(--online)", glow:"rgba(36,194,106,.18)" },
-    busy:      { label:"Busy", color:"var(--busy)", glow:"rgba(229,57,53,.18)" },
-    away:      { label:"Away", color:"var(--away)", glow:"rgba(246,161,0,.18)" },
-    brb:       { label:"Be Right Back", color:"var(--away)", glow:"rgba(246,161,0,.18)" },
-    offline:   { label:"Offline", color:"var(--offline)", glow:"rgba(154,167,189,.18)" }
-  };
-
-  function applyStatus(key){
-    const s = STATUS[key] || STATUS.available;
-    statusText.textContent = s.label;
-    // keep CSS var colour working:
-    statusDot.style.background = s.color.includes("var(") ? getComputedStyle(document.documentElement).getPropertyValue(s.color.match(/--[^)]+/)[0]).trim() : s.color;
-    statusDot.style.boxShadow = `0 0 0 2px ${s.glow}`;
-    addLine({ who:"sys", isSystem:true, html: sanitizeAndFormat(`Status set to "${s.label}".`) });
-  }
-  statusSel.addEventListener("change", () => applyStatus(statusSel.value));
-
-  // Seed: ensure “old-school” emoticons render in the initial transcript too
-  [...log.querySelectorAll(".msg")].forEach(el => {
-    el.innerHTML = sanitizeAndFormat(el.textContent);
-  });
-
-  // Optional: start scrolled to bottom like MSN
-  log.scrollTop = log.scrollHeight;
+function nudge(){
+  const app=document.getElementById("app");
+  app.style.animation="nudge .4s";
+  setTimeout(()=>app.style.animation="",400);
+}
 </script>
 
 </body>
