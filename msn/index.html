@@ -467,6 +467,52 @@
     .is-nudged{ animation: none; }
     .dots i{ animation: none; }
   }
+
+  /* ===== Mobile: hide sidebar so chat stays big ===== */
+@media (max-width: 900px){
+  body{
+    padding: 10px;
+    place-items: stretch;          /* window fills screen width */
+  }
+
+  .msn{
+    width: 100%;
+    height: calc(100dvh - 20px);   /* full-height window on phones */
+    max-height: none;
+    border-radius: 10px;
+  }
+
+  .main{
+    grid-template-columns: 1fr;    /* single column */
+    grid-template-rows: 1fr;       /* chat gets all remaining height */
+    min-height: 0;
+  }
+
+  .side{ display:none; }          /* hide sidebar */
+
+  .chat, .log{ min-height: 0; }   /* keep internal scrolling working */
+}
+
+/* Fallback if dvh isn't supported */
+@supports not (height: 100dvh){
+  @media (max-width: 900px){
+    .msn{ height: calc(100vh - 20px); }
+  }
+}
+
+
+
+
+
+  @media (max-width: 900px){
+  .chatHeader{
+    gap: 8px;
+    padding: 10px;
+  }
+  .chatTitle{
+    font-size: 12px;
+  }
+}
 </style>
 </head>
 <body>
