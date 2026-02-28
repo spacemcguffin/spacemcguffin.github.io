@@ -425,6 +425,25 @@
     .btn--danger{ border-color: rgba(239,68,68,.55); }
 
     .is-signed-out .panel{ opacity:.55; filter: grayscale(.1); pointer-events:none; }
+
+
+.is-signed-out .toolbar{
+  opacity: .55;
+  filter: grayscale(.2);
+}
+
+/* Make avatar look clearly inactive */
+.is-signed-out .avatar{
+  background: linear-gradient(
+    135deg,
+    rgba(200,200,200,.6),
+    rgba(180,180,180,.4)
+  );
+}
+
+
+
+	  
     .is-signed-out .search input{ background: rgba(255,255,255,.6); }
 
     @media (max-width: 400px){
