@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MSN Contacts</title>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --win-bg:#d9e6f7;
+      --panel:#ffffff;
+      --border:#8aa6c8;
+      --border-dark:#5f7ea6;
+      --title1:#2b63b6;
+      --title2:#1e4b8d;
+      --text:#10243e;
+      --muted:#4b607a;
+      --online:#22c55e;
+      --away:#f59e0b;
+      --busy:#ef4444;
+      --offline:#9aa7b6;
+      --shadow: 0 18px 45px rgba(0,0,0,.25);
+      --radius: 12px;
+      --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      --ring: 0 0 0 3px rgba(43,99,182,.18);
+
+      --winH: 620px;
+
+      --sb-track: rgba(255,255,255,.45);
+      --sb-thumb: rgba(95,126,166,.55);
+      --sb-thumbHover: rgba(95,126,166,.75);
+
+      --footerH: 54px;
+    }
+
+    ::-moz-selection { background:#cfd8e4; text-shadow:none; color:#000; }
+    ::selection      { background:#cfd8e4; text-shadow:none; color:#000; }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      background:
+        radial-gradient(1200px 700px at 20% -10%, #ffffff 0%, rgba(255,255,255,0) 60%),
+        radial-gradient(900px 600px at 100% 10%, #ffffff 0%, rgba(255,255,255,0) 55%),
+        linear-gradient(180deg, #bcd2ef 0%, #9bb8df 100%);
+      color: var(--text);
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      padding: 28px 14px;
+    }
+
+    .msn-window{
+      width:min(420px, 100%);
+      height: min(var(--winH), calc(100vh - 56px));
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      background: var(--win-bg);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+    }
+
+    /* =========================
+       MSN NUDGE (spliced in)
+    ========================= */
+    @keyframes msnNudge {
+      0%   { transform: translateX(0); }
+      10%  { transform: translateX(-8px); }
+      20%  { transform: translateX(8px); }
+      30%  { transform: translateX(-6px); }
+      40%  { transform: translateX(6px); }
+      50%  { transform: translateX(-4px); }
+      60%  { transform: translateX(4px); }
+      70%  { transform: translateX(-2px); }
+      80%  { transform: translateX(2px); }
+      90%  { transform: translateX(-1px); }
+      100% { transform: translateX(0); }
+    }
+    .msn-window.msn-nudge{
+      animation: msnNudge .45s linear;
+    }
+    /* Respect accessibility settings */
+    @media (prefers-reduced-motion: reduce){
+      .msn-window.msn-nudge{ animation: none !important; }
+    }
+
+    .msn-body{
+      flex:1;
+      min-height:0;
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
+
+      padding-bottom: calc(var(--footerH) + 2px);
+
+      margin-right: -10px;
+      scrollbar-gutter: stable;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
+    }
+
+    /* Firefox */
+    .msn-body{ scrollbar-width: thin; scrollbar-color: var(--sb-thumb) var(--sb-track); }
+
+    /* WebKit */
+    .msn-body::-webkit-scrollbar{ width: 12px; }
+    .msn-body::-webkit-scrollbar-track{
+      background: var(--sb-track);
+      border-left: 1px solid rgba(95,126,166,.35);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .msn-body::-webkit-scrollbar-thumb{
+      background: linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.08)),
+                  var(--sb-thumb);
+      border: 1px solid rgba(95,126,166,.45);
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.25);
+    }
+    .msn-body::-webkit-scrollbar-thumb:hover{
+      background: linear-gradient(180deg, rgba(255,255,255,.62), rgba(255,255,255,.10)),
+                  var(--sb-thumbHover);
+    }
+    .msn-body::-webkit-scrollbar-thumb:active{ background: var(--sb-thumbHover); }
+    .msn-body::-webkit-scrollbar-corner{ background: transparent; }
+
+    .titlebar{
+      flex:0 0 auto;
+      height: 36px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 10px;
+      background: linear-gradient(180deg, var(--title1), var(--title2));
+      color:#fff;
+      user-select:none;
+
+      position: relative;
+      overflow: hidden;
+    }
+    .titlebar__left{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size: 13px;
+      font-weight:600;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .msn-bubble{
+      width: 10px;
+      height: 10px;
+      border-radius: 100px;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 55%),
+        linear-gradient(135deg, #9ae6b4, #60a5fa);
+      border: 1px solid rgba(255, 255, 255, .35);
+    }
+    .titlebar__btns{ display:flex; gap:6px; }
+    .tb-btn{
+      width: 22px; height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,.35);
+      background: rgba(255,255,255,.14);
+      display:grid; place-items:center;
+      cursor:pointer;
+    }
+    .tb-btn:active{ transform: translateY(1px); }
+    .tb-icon{ width:10px;height:10px; position:relative; }
+    .tb-icon.min::before{
+      content:""; position:absolute; left:0; right:0; bottom:0;
+      height:2px; background:#fff; opacity:.9;
+    }
+    .tb-icon.max{ border:2px solid #fff; opacity:.85; }
+    .tb-icon.close::before,
+    .tb-icon.close::after{
+      content:""; position:absolute; left:4px; top:-1px;
+      width:2px; height:12px; background:#fff;
+    }
+    .tb-icon.close::before{ transform: rotate(45deg); }
+    .tb-icon.close::after{ transform: rotate(-45deg); }
+
+    /* ===== Subtle XP Shine ===== */
+    .titlebar::before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:55%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.12) 60%,
+        rgba(255,255,255,0)
+      );
+      pointer-events:none;
+    }
+
+    .toolbar{
+      padding: 10px 10px 0px 10px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .avatar{
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      flex:0 0 auto;
+    }
+    .avatar img{
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .2));
+      border: 1px solid rgba(95, 126, 166, .55);
+      display:block;
+      box-shadow: 0 5px 10px rgba(0,0,0,.12);
+    }
+    .me{ flex:1; min-width:0; }
+    .me__name{
+      font-weight:700;
+      font-size: 13px;
+      line-height:1.3;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .me__status{
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+    .pill{
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(95, 126, 166, .35);
+      background: rgba(255, 255, 255, .55);
+      font-weight: 600;
+    }
+
+    .search{
+      position: sticky;
+      top: 0;
+      z-index: 6;
+      padding: 10px;
+      background: linear-gradient(180deg, rgba(217,230,247,.98), rgba(217,230,247,.86));
+      border-bottom: 1px solid rgba(95,126,166,.35);
+      backdrop-filter: blur(8px);
+      transition: box-shadow .18s ease, opacity .25s ease, filter .25s ease;
+    }
+    .search input{
+      width:100%;
+      height: 34px;
+      border-radius: 10px;
+      border: 1px solid rgba(95,126,166,.55);
+      background: rgba(255,255,255,.92);
+      padding: 0 10px;
+      outline:none;
+      font-family: var(--font);
+      font-size: 12px;
+    }
+    .search input:focus{ box-shadow: var(--ring); }
+
+    /* Soft scroll shadow */
+    .msn-body.is-scrolled .search{
+      box-shadow:
+        0 6px 10px rgba(0,0,0,.06),
+        0 1px 0 rgba(95,126,166,.25);
+    }
+
+    .panel{
+      background: var(--panel);
+      border-top: 1px solid rgba(95,126,166,.55);
+      padding: 10px;
+    }
+    .group{
+      border: 1px solid rgba(138,166,200,.6);
+      border-radius: 12px;
+      overflow:hidden;
+      background: linear-gradient(180deg, rgba(255,255,255,.85), rgba(255,255,255,.65));
+      margin-bottom: 10px;
+    }
+    .group__head{
+      width:100%;
+      text-align:left;
+      padding: 8px 10px;
+      font-weight:600;
+      font-size: 13px;
+      font-family: 'Inter', sans-serif;
+      color:#1b3a63;
+      background: linear-gradient(180deg, rgba(217,230,247,.9), rgba(217,230,247,.55));
+      border:0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .group__head:focus-visible{ outline:none; box-shadow: var(--ring); }
+    .group__left{ display:flex; align-items:center; gap:8px; min-width:0; }
+    .caret{
+      width:10px;height:10px; display:inline-block;
+      transform: rotate(90deg);
+      transition: transform .18s ease;
+      opacity:.85;
+      flex:0 0 auto;
+    }
+    .caret::before{
+      content:""; display:block; width:0;height:0;
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+      border-left:6px solid rgba(27,58,99,.9);
+    }
+    .group[data-collapsed="true"] .caret{ transform: rotate(0deg); }
+    .count{ font-weight:700; color: rgba(27,58,99,.75); flex:0 0 auto; }
+    .group__body{ overflow:hidden; height:auto; transition: height .22s ease; }
+
+    .contact{
+      display:flex; align-items:center; gap:10px;
+      padding: 8px 10px;
+      text-decoration:none;
+      color: inherit;
+      border-bottom: 1px solid rgba(138,166,200,.35);
+    }
+    .contact:last-child{ border-bottom:0; }
+    .contact:hover{ background: rgba(43,99,182,.08); }
+
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.18);
+      flex:0 0 auto;
+    }
+    .dot.online{ background: var(--online); }
+    .dot.away{ background: var(--away); }
+    .dot.busy{ background: var(--busy); }
+    .dot.offline{ background: var(--offline); }
+
+    .contact__main{ min-width:0; flex:1; }
+    .contact__name{
+      font-weight:600;
+      font-size: 13px;
+      line-height:1.15;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .contact__blurb{
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-weight:600;
+      opacity:.9;
+    }
+    .chev{ color: rgba(16,36,62,.45); font-weight:900; flex:0 0 auto; }
+
+    .footerbar{
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height: var(--footerH);
+      padding: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      border-top: 1px solid rgba(95,126,166,.35);
+      background: rgba(255,255,255,.65);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+      transition: filter .25s ease, opacity .25s ease;
+    }
+    .footerbar__left{ display:flex; align-items:center; gap:8px; min-width:0; }
+    .footerbar__status{
+      font-size: 12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      font-weight:700;
+    }
+    .btn{
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border:1px solid rgba(95,126,166,.5);
+      background: rgba(255,255,255,.75);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 700;
+      cursor:pointer;
+      flex:0 0 auto;
+    }
+    .btn:hover{ background: rgba(255,255,255,.95); }
+    .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
+    .btn--danger{ border-color: rgba(239,68,68,.55); }
+
+    /* Nudge button sits next to Sign out */
+    .footerbar__right{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex:0 0 auto;
+    }
+    .btn--nudge{
+      border-color: rgba(43,99,182,.50);
+    }
+
+    @media (max-width: 400px){
+      .titlebar__left{ font-size: 12px; }
+      .btn{ padding:0 10px; }
+      :root{ --winH: 560px; }
+
+      .avatar{ width:38px;height:38px; }
+      .avatar img{ width:38px;height:38px; border-radius:10px; }
+
+      .panel { margin-right: 10px; }
+      .search { margin-right: 10px; }
+      .toolbar { padding: 10px 10px 0px 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .group__body{ transition:none; }
+      .caret{ transition:none; }
+      .spinner{ animation:none; }
+    }
+
+    /* =========================
+       FULL MSN SHUTDOWN MODE
+       (NO FLICKER)
+    ========================= */
+
+    .shutdown-overlay,
+    .toolbar,
+    .search,
+    .panel{
+      will-change: opacity, transform;
+    }
+
+    .msn-body,
+    .toolbar,
+    .search,
+    .panel{
+      transition: opacity .25s ease, filter .25s ease, transform .25s ease;
+    }
+
+    .is-shutting-down .msn-body,
+    .is-signed-out .msn-body{
+      pointer-events: none;
+    }
+
+    .is-signed-out .msn-body{
+      filter: grayscale(.75) brightness(.88);
+    }
+    .is-signed-out .toolbar,
+    .is-signed-out .panel,
+    .is-signed-out .search{
+      opacity: .42;
+    }
+    .is-signed-out .avatar img{
+      filter: grayscale(.9) brightness(.85);
+      opacity: .75;
+      box-shadow: none;
+    }
+    .is-signed-out .footerbar{
+      filter: grayscale(.55) brightness(.92);
+    }
+
+    .shutdown-overlay{
+      position: absolute;
+      inset: 36px 0 var(--footerH) 0;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(240,245,255,.40);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: translateY(6px);
+      pointer-events: none;
+      transition: opacity .22s ease, transform .22s ease;
+      z-index: 50;
+    }
+    .shutdown-card{
+      width: min(320px, 92%);
+      border-radius: 14px;
+      border: 1px solid rgba(95,126,166,.45);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+      box-shadow: 0 18px 45px rgba(0,0,0,.18);
+      padding: 14px 14px 12px;
+      text-align: center;
+    }
+    .shutdown-title{
+      font-weight: 700;
+      font-size: 13px;
+      color: #1b3a63;
+      margin: 4px 0 6px;
+    }
+    .shutdown-sub{
+      font-size: 13px;
+      color: rgba(16,36,62,.70);
+      margin: 0 0 10px;
+    }
+    .spinner{
+      width: 26px; height: 26px;
+      border-radius: 999px;
+      border: 3px solid rgba(95,126,166,.25);
+      border-top-color: rgba(43,99,182,.85);
+      margin: 0 auto 10px;
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .is-shutting-down .toolbar,
+    .is-shutting-down .search,
+    .is-shutting-down .panel{
+      opacity: .18;
+      filter: grayscale(.55) brightness(.92);
+    }
+
+    .is-shutting-down .shutdown-overlay{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      background: rgba(240,245,255,.48);
+    }
+    .is-signed-out .shutdown-overlay{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: none;
+    }
+
+    /* Signed out = hide spinner… */
+    .is-signed-out .shutdown-card .spinner{ display:none; }
+    /* …but while signing in, show it */
+    .is-signing-in.is-signed-out .shutdown-card .spinner{ display:block; }
+  </style>
+</head>
+
+<body>
+  <main class="msn-window" id="msnWin" role="application" aria-label="MSN Contacts">
+    <div class="titlebar">
+      <div class="titlebar__left">
+        <span class="msn-bubble" aria-hidden="true"></span>
+        <span>MSN Messenger — Contacts</span>
+      </div>
+      <div class="titlebar__btns" aria-hidden="true">
+        <div class="tb-btn"><span class="tb-icon min"></span></div>
+        <div class="tb-btn"><span class="tb-icon max"></span></div>
+        <div class="tb-btn"><span class="tb-icon close"></span></div>
+      </div>
+    </div>
+
+    <div class="msn-body">
+      <div class="toolbar">
+        <div class="avatar" aria-hidden="true"><img src="/wiki/img/fractalavatar.png" alt=""></div>
+        <div class="me">
+          <div class="me__name" id="meName">Lewis (Online)</div>
+          <div class="me__status">
+            <span class="dot online" id="meDot" aria-hidden="true"></span>
+            <span class="pill" id="mePill">Signed in</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="search">
+        <input id="search" type="search" placeholder="Search contents..." autocomplete="off" />
+      </div>
+
+      <section class="panel" aria-label="Contact list">
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left"><span class="caret" aria-hidden="true"></span><span>Wobble</span></span>
+            <span class="count" data-count></span>
+          </button>
+          <div class="group__body">
+            <a class="contact" href="/wobble/podcasts">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main"><div class="contact__name">Podcasts</div><div class="contact__blurb">Archive + latest episode</div></span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+            <a class="contact" href="/wobble/">
+              <span class="dot away" aria-hidden="true"></span>
+              <span class="contact__main"><div class="contact__name">Home</div><div class="contact__blurb">Landing page</div></span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+            <a class="contact" href="/wobble/test2#grid">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main"><div class="contact__name">Card Grid</div><div class="contact__blurb">Jump to the grid section</div></span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left"><span class="caret" aria-hidden="true"></span><span>Lewflix</span></span>
+            <span class="count" data-count></span>
+          </button>
+          <div class="group__body">
+            <a class="contact" href="/netflix/">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main"><div class="contact__name">Netflix-style page</div><div class="contact__blurb">Hero + rails + modals</div></span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+            <a class="contact" href="/disney/test">
+              <span class="dot busy" aria-hidden="true"></span>
+              <span class="contact__main"><div class="contact__name">Disney test</div><div class="contact__blurb">Modal experiments</div></span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left"><span class="caret" aria-hidden="true"></span><span>Extras</span></span>
+            <span class="count" data-count></span>
+          </button>
+          <div class="group__body">
+            <a class="contact" href="/retro/">
+              <span class="dot offline" aria-hidden="true"></span>
+              <span class="contact__main"><div class="contact__name">Retro</div><div class="contact__blurb">Old-school vibe</div></span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+            <a class="contact" href="/slide/">
+              <span class="dot away" aria-hidden="true"></span>
+              <span class="contact__main"><div class="contact__name">Episode list</div><div class="contact__blurb">Listing UI</div></span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Shutdown overlay -->
+    <div class="shutdown-overlay" id="shutdownOverlay" aria-hidden="true">
+      <div class="shutdown-card" role="status" aria-live="polite">
+        <div class="spinner" id="shutdownSpinner" aria-hidden="true"></div>
+        <div class="shutdown-title" id="shutdownTitle">Signing out...</div>
+        <div class="shutdown-sub" id="shutdownSub">Disconnecting from MSN Messenger.</div>
+      </div>
+    </div>
+
+    <div class="footerbar">
+      <div class="footerbar__left">
+        <span class="dot online" id="footDot" aria-hidden="true"></span>
+        <div class="footerbar__status" id="footStatus">Status: Online</div>
+      </div>
+
+      <!-- Nudge + Sign in/out -->
+      <div class="footerbar__right">
+        <button class="btn btn--nudge" id="nudgeBtn" type="button" title="Nudge">Nudge</button>
+        <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Collapsible groups (smooth height animation)
+    function animateCollapse(body, shouldOpen) {
+      const start = body.getBoundingClientRect().height;
+
+      if (shouldOpen) {
+        body.style.height = start + "px";
+        body.style.display = "block";
+        body.offsetHeight;
+        const end = body.scrollHeight;
+        body.style.height = end + "px";
+        const done = () => {
+          body.style.height = "auto";
+          body.removeEventListener("transitionend", done);
+        };
+        body.addEventListener("transitionend", done);
+      } else {
+        body.style.height = start + "px";
+        body.offsetHeight;
+        body.style.height = "0px";
+        const done = () => body.removeEventListener("transitionend", done);
+        body.addEventListener("transitionend", done);
+      }
+    }
+
+    document.querySelectorAll('.group').forEach(group => {
+      const head = group.querySelector('.group__head');
+      const body = group.querySelector('.group__body');
+      if (!head || !body) return;
+
+      group.dataset.collapsed = "false";
+      body.style.height = "auto";
+
+      head.addEventListener('click', () => {
+        const collapsed = group.dataset.collapsed === "true";
+        const nextCollapsed = !collapsed;
+        group.dataset.collapsed = nextCollapsed ? "true" : "false";
+        head.setAttribute('aria-expanded', nextCollapsed ? "false" : "true");
+        animateCollapse(body, !nextCollapsed);
+      });
+    });
+
+    // Soft shadow under sticky search when scrolling
+    const scrollArea = document.querySelector('.msn-body');
+    scrollArea.addEventListener('scroll', () => {
+      if (scrollArea.scrollTop > 2) scrollArea.classList.add('is-scrolled');
+      else scrollArea.classList.remove('is-scrolled');
+    });
+
+    // Search filter
+    const input = document.getElementById('search');
+    const contacts = Array.from(document.querySelectorAll('.contact'));
+    const groups = Array.from(document.querySelectorAll('[data-group]'));
+
+    function updateCounts(){
+      groups.forEach(g => {
+        const visible = Array.from(g.querySelectorAll('.contact'))
+          .filter(a => a.style.display !== 'none').length;
+        const countEl = g.querySelector('[data-count]');
+        if (countEl) countEl.textContent = `(${visible})`;
+        g.style.display = visible ? '' : 'none';
+      });
+    }
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      contacts.forEach(a => {
+        const text = a.innerText.toLowerCase();
+        a.style.display = (!q || text.includes(q)) ? '' : 'none';
+      });
+      updateCounts();
+    });
+    updateCounts();
+
+    // Sign in/out + shutdown overlay
+    const win = document.getElementById('msnWin');
+    const signBtn = document.getElementById('signBtn');
+    const footStatus = document.getElementById('footStatus');
+    const footDot = document.getElementById('footDot');
+    const meName = document.getElementById('meName');
+    const mePill = document.getElementById('mePill');
+    const meDot  = document.getElementById('meDot');
+
+    const overlay = document.getElementById('shutdownOverlay');
+    const shutdownTitle = document.getElementById('shutdownTitle');
+    const shutdownSub = document.getElementById('shutdownSub');
+    const shutdownSpinner = document.getElementById('shutdownSpinner');
+
+    const displayName = "Lewis"; // used for the “Signing in as …” line
+
+    let signedIn = true;
+
+    function setDot(el, state){
+      el.classList.remove('online','away','busy','offline');
+      el.classList.add(state);
+    }
+
+    function renderSignState(){
+      win.classList.toggle('is-signed-out', !signedIn);
+
+      if (signedIn){
+        signBtn.textContent = 'Sign out';
+        footStatus.textContent = 'Status: Online';
+        setDot(footDot, 'online');
+
+        meName.textContent = `${displayName} (Online)`;
+        mePill.textContent = 'Signed in';
+        setDot(meDot, 'online');
+
+        input.disabled = false;
+        input.placeholder = 'Search contents...';
+
+        overlay.setAttribute('aria-hidden', 'true');
+      } else {
+        signBtn.textContent = 'Sign in';
+        footStatus.textContent = 'Status: Offline';
+        setDot(footDot, 'offline');
+
+        meName.textContent = `${displayName} (Offline)`;
+        mePill.textContent = 'Signed out';
+        setDot(meDot, 'offline');
+
+        input.disabled = true;
+        input.value = '';
+        input.placeholder = 'Sign in to search...';
+
+        contacts.forEach(a => a.style.display = '');
+        groups.forEach(g => g.style.display = '');
+        updateCounts();
+      }
+    }
+
+    function beginShutdown(){
+      win.classList.remove('is-signing-in');
+
+      win.classList.add('is-shutting-down');
+      overlay.setAttribute('aria-hidden', 'false');
+
+      shutdownSpinner.style.display = '';
+
+      shutdownTitle.textContent = 'Disconnecting…';
+      shutdownSub.textContent = 'Closing conversations and syncing status.';
+
+      setTimeout(() => {
+        shutdownTitle.textContent = 'Signing out…';
+        shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
+      }, 1500);
+
+      setTimeout(() => {
+        signedIn = false;
+        win.classList.remove('is-shutting-down');
+        renderSignState();
+
+        shutdownSpinner.style.display = 'none';
+        shutdownTitle.textContent = 'You are signed out';
+        shutdownSub.textContent = 'Sign in to view and search contents.';
+      }, 3000);
+    }
+
+    function endShutdown(){
+      // Signing in screen (while still signed out)
+      win.classList.add('is-signing-in');
+      win.classList.add('is-shutting-down');
+      overlay.setAttribute('aria-hidden', 'false');
+
+      shutdownSpinner.style.display = '';
+
+      // Step 1: show name
+      shutdownTitle.textContent = 'Signing in…';
+      shutdownSub.textContent = `Signing in as ${displayName}…`;
+
+      // Step 2
+      setTimeout(() => {
+        shutdownTitle.textContent = 'Authenticating…';
+        shutdownSub.textContent = 'Verifying password and connecting.';
+      }, 1000);
+
+      // Step 3
+      setTimeout(() => {
+        shutdownTitle.textContent = 'Loading content…';
+        shutdownSub.textContent = 'Retrieving the content list and status.';
+      }, 2000);
+
+      // Finish
+      setTimeout(() => {
+        signedIn = true;
+        win.classList.remove('is-shutting-down');
+        win.classList.remove('is-signing-in');
+        overlay.setAttribute('aria-hidden', 'true');
+        renderSignState();
+      }, 3200);
+    }
+
+    signBtn.addEventListener('click', () => {
+      if (signedIn) beginShutdown();
+      else endShutdown();
+    });
+
+    renderSignState();
+
+    // =========================
+    // MSN Nudge (spliced in)
+    // =========================
+    const nudgeBtn = document.getElementById('nudgeBtn');
+
+    function doNudge(){
+      // optional: block nudge while overlay is active
+      if (win.classList.contains('is-shutting-down')) return;
+
+      win.classList.remove('msn-nudge');
+      void win.offsetWidth; // force reflow so it can retrigger
+      win.classList.add('msn-nudge');
+    }
+
+    nudgeBtn.addEventListener('click', doNudge);
+
+    // optional: double-click a contact to nudge (feels very MSN)
+    // contacts.forEach(a => a.addEventListener('dblclick', (e) => {
+    //   e.preventDefault();
+    //   doNudge();
+    // }));
+  </script>
+</body>
+</html>
