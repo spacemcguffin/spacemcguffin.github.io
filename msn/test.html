@@ -8,7 +8,7 @@
   <!-- Inter font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
   <style>
     :root{
@@ -39,22 +39,8 @@
       --footerH: 54px;
     }
 
-
-
-    ::-moz-selection {
-	background: #cfd8e4;
-	text-shadow: none;
-  color:#000000;
-}
-
-::selection {
-	background: #cfd8e4;
-	text-shadow: none;
-  color:#000000;
-} 
-
-
-    
+    ::-moz-selection { background:#cfd8e4; text-shadow:none; color:#000; }
+    ::selection      { background:#cfd8e4; text-shadow:none; color:#000; }
 
     *{ box-sizing:border-box; }
     body{
@@ -82,20 +68,18 @@
       overflow:hidden;
       display:flex;
       flex-direction:column;
-      position:relative; /* anchor footer absolute */
+      position:relative;
     }
 
-    /* Scroll region (everything except titlebar + fixed footer) */
+    /* Scroll region */
     .msn-body{
       flex:1;
       min-height:0;
       overflow:auto;
       -webkit-overflow-scrolling: touch;
 
-      /* Reserve room for the fixed footer inside the window */
       padding-bottom: calc(var(--footerH) + 2px);
 
-      /* Scrollbar integration */
       margin-right: -10px;
       scrollbar-gutter: stable;
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0));
@@ -139,6 +123,10 @@
       background: linear-gradient(180deg, var(--title1), var(--title2));
       color:#fff;
       user-select:none;
+
+      /* XP shine support */
+      position:relative;
+      overflow:hidden;
     }
     .titlebar__left{
       display:flex;
@@ -152,11 +140,13 @@
       text-overflow:ellipsis;
     }
     .msn-bubble{
-    width: 10px;
-    height: 10px;
-    border-radius: 100px;
-    background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 55%), linear-gradient(135deg, #9ae6b4, #60a5fa);
-    border: 1px solid rgba(255, 255, 255, .35);
+      width: 10px;
+      height: 10px;
+      border-radius: 100px;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(255, 255, 255, .9), rgba(255, 255, 255, 0) 55%),
+        linear-gradient(135deg, #9ae6b4, #60a5fa);
+      border: 1px solid rgba(255, 255, 255, .35);
     }
     .titlebar__btns{ display:flex; gap:6px; }
     .tb-btn{
@@ -182,52 +172,50 @@
     .tb-icon.close::before{ transform: rotate(45deg); }
     .tb-icon.close::after{ transform: rotate(-45deg); }
 
-
     /* ===== Subtle XP Shine ===== */
-.titlebar{
-  position: relative;
-  overflow: hidden;
-}
-
-/* Gloss band */
-.titlebar::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:55%;
-  background: linear-gradient(
-    to bottom,
-    rgba(255,255,255,.35),
-    rgba(255,255,255,.12) 60%,
-    rgba(255,255,255,0)
-  );
-  pointer-events:none;
-}
-
-
-
-    
+    .titlebar::before{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:55%;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.12) 60%,
+        rgba(255,255,255,0)
+      );
+      pointer-events:none;
+    }
+    .titlebar::after{
+      content:"";
+      position:absolute;
+      top:0; left:0; right:0;
+      height:1px;
+      background: rgba(255,255,255,.65);
+      pointer-events:none;
+    }
 
     /* Toolbar */
-    .toolbar{ 
+    .toolbar{
       padding: 10px 10px 0px 10px;
-      display:flex; 
-      align-items:center; 
-      gap:10px; }
-    
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .avatar{
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      flex:0 0 auto;
+    }
     .avatar img{
-    width: 42px;
-    height: 42px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .2));
-    border: 1px solid rgba(95, 126, 166, .55);
-    display: grid;
-    place-items: center;
-    font-weight: 900;
-    color: #1e4b8d;
-    letter-spacing: .3px;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .2));
+      border: 1px solid rgba(95, 126, 166, .55);
+      display:block;
+      box-shadow: 0 5px 10px rgba(0,0,0,.12);
     }
     .me{ flex:1; min-width:0; }
     .me__name{
@@ -247,27 +235,26 @@
       gap:6px;
     }
     .pill{
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 999px;
-    border: 1px solid rgba(95, 126, 166, .35);
-    background: rgba(255, 255, 255, .55);
-    font-weight: 600;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(95, 126, 166, .35);
+      background: rgba(255, 255, 255, .55);
+      font-weight: 600;
     }
 
-    /* Search (NOW STICKY INSIDE .msn-body) */
+    /* Search (sticky) */
     .search{
       position: sticky;
       top: 0;
       z-index: 6;
-
       padding: 10px;
-      /* remove old bottom-only padding so it doesn’t leave a gap */
       padding-bottom: 10px;
-
       background: linear-gradient(180deg, rgba(217,230,247,.98), rgba(217,230,247,.86));
       border-bottom: 1px solid rgba(95,126,166,.35);
       backdrop-filter: blur(8px);
+
+      transition: box-shadow .18s ease, opacity .25s ease, filter .25s ease;
     }
     .search input{
       width:100%;
@@ -282,24 +269,19 @@
     }
     .search input:focus{ box-shadow: var(--ring); }
 
-
-
     /* ===== Soft Scroll Shadow ===== */
-.search{
-  transition: box-shadow .18s ease;
-}
-
-.msn-body.is-scrolled .search{
-  box-shadow:
-    0 6px 10px rgba(0,0,0,.06),
-    0 1px 0 rgba(95,126,166,.25);
-}
-
-
-    
+    .msn-body.is-scrolled .search{
+      box-shadow:
+        0 6px 10px rgba(0,0,0,.06),
+        0 1px 0 rgba(95,126,166,.25);
+    }
 
     /* Contacts */
-    .panel{ background: var(--panel); border-top: 1px solid rgba(95,126,166,.55); padding: 10px; }
+    .panel{
+      background: var(--panel);
+      border-top: 1px solid rgba(95,126,166,.55);
+      padding: 10px;
+    }
     .group{
       border: 1px solid rgba(138,166,200,.6);
       border-radius: 12px;
@@ -384,7 +366,7 @@
     }
     .chev{ color: rgba(16,36,62,.45); font-weight:900; flex:0 0 auto; }
 
-    /* Footerbar FIXED to bottom of the MSN window */
+    /* Footerbar fixed inside window */
     .footerbar{
       position:absolute;
       left:0; right:0; bottom:0;
@@ -398,6 +380,7 @@
       background: rgba(255,255,255,.65);
       backdrop-filter: blur(8px);
       z-index: 10;
+      transition: filter .25s ease, opacity .25s ease;
     }
     .footerbar__left{ display:flex; align-items:center; gap:8px; min-width:0; }
     .footerbar__status{
@@ -424,116 +407,137 @@
     .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
     .btn--danger{ border-color: rgba(239,68,68,.55); }
 
-
-
-
-
-
-
-
-
-
-
-    /* =========================
-   DRAMATIC SIGNED OUT MODE
-========================= */
-
-.is-signed-out .msn-body{
-  filter: grayscale(.6) brightness(.9);
-  transition: filter .25s ease;
-}
-
-/* Dim entire window interior */
-.is-signed-out .toolbar,
-.is-signed-out .panel{
-  opacity: .45;
-}
-
-/* Avatar becomes clearly offline */
-.is-signed-out .avatar{
-  background: linear-gradient(
-    135deg,
-    rgba(180,180,180,.7),
-    rgba(150,150,150,.5)
-  );
-  box-shadow: none;
-  color: #777;
-}
-
-/* Make sticky search look inactive */
-.is-signed-out .search{
-  opacity: .5;
-}
-
-/* Add subtle frosted overlay */
-.is-signed-out .msn-window::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: rgba(255,255,255,.25);
-  backdrop-filter: blur(2px);
-  pointer-events:none;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
     @media (max-width: 400px){
       .titlebar__left{ font-size: 12px; }
       .btn{ padding:0 10px; }
       :root{ --winH: 560px; }
 
-      .avatar {
-    width: 38px;
-    height: 38px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, .8), rgba(255, 255, 255, .2));
-    border: 1px solid rgba(95, 126, 166, .55);
-    display: grid;
-    place-items: center;
-    font-weight: 900;
-    color: #1e4b8d;
-    letter-spacing: .3px;
-      }
+      .avatar{ width:38px;height:38px; }
+      .avatar img{ width:38px;height:38px; border-radius:10px; }
 
-      .panel {
-    margin-right: 10px;
-      }
-
-      .search {
-    margin-right: 10px;
-}
-
-      .toolbar {
-    padding: 10px 10px 0px 10px;
-      }
-
-      
+      .panel { margin-right: 10px; }
+      .search { margin-right: 10px; }
+      .toolbar { padding: 10px 10px 0px 10px; }
     }
 
     @media (prefers-reduced-motion: reduce){
       .group__body{ transition:none; }
       .caret{ transition:none; }
+      .spinner{ animation:none; }
+    }
+
+    /* =========================
+       FULL MSN SHUTDOWN MODE
+    ========================= */
+
+    .msn-body,
+    .toolbar,
+    .search,
+    .panel{
+      transition: opacity .25s ease, filter .25s ease, transform .25s ease;
+    }
+
+    .is-shutting-down .msn-body,
+    .is-signed-out .msn-body{
+      pointer-events: none;
+    }
+
+    .is-signed-out .msn-body{
+      filter: grayscale(.75) brightness(.88);
+    }
+    .is-signed-out .toolbar,
+    .is-signed-out .panel,
+    .is-signed-out .search{
+      opacity: .42;
+    }
+
+    /* Avatar off (works with your <img>) */
+    .is-signed-out .avatar img{
+      filter: grayscale(.9) brightness(.85);
+      opacity: .75;
+      box-shadow: none;
+    }
+
+    .shutdown-overlay{
+      position: absolute;
+      inset: 36px 0 var(--footerH) 0; /* below titlebar, above footer */
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: rgba(240,245,255,.40);
+      backdrop-filter: blur(6px);
+      opacity: 0;
+      transform: translateY(6px);
+      pointer-events: none;
+      transition: opacity .22s ease, transform .22s ease;
+      z-index: 50;
+    }
+
+    .shutdown-card{
+      width: min(320px, 92%);
+      border-radius: 14px;
+      border: 1px solid rgba(95,126,166,.45);
+      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
+      box-shadow: 0 18px 45px rgba(0,0,0,.18);
+      padding: 14px 14px 12px;
+      text-align: center;
+    }
+    .shutdown-title{
+      font-weight: 800;
+      font-size: 13px;
+      color: #1b3a63;
+      margin: 4px 0 6px;
+    }
+    .shutdown-sub{
+      font-size: 12px;
+      color: rgba(16,36,62,.70);
+      margin: 0 0 10px;
+    }
+
+    .spinner{
+      width: 26px; height: 26px;
+      border-radius: 999px;
+      border: 3px solid rgba(95,126,166,.25);
+      border-top-color: rgba(43,99,182,.85);
+      margin: 0 auto 10px;
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @keyframes flicker {
+      0%{ opacity: 1; }
+      10%{ opacity: .65; }
+      20%{ opacity: 1; }
+      30%{ opacity: .6; }
+      40%{ opacity: 1; }
+      100%{ opacity: 1; }
+    }
+
+    .is-shutting-down .toolbar,
+    .is-shutting-down .search,
+    .is-shutting-down .panel{
+      opacity: .25;
+      filter: grayscale(.6) brightness(.9);
+      animation: flicker .55s ease both;
+    }
+
+    .is-shutting-down .shutdown-overlay{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .is-signed-out .shutdown-overlay{
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: none;
+    }
+    .is-signed-out .shutdown-card .spinner{
+      display: none;
+    }
+
+    .is-signed-out .footerbar{
+      filter: grayscale(.55) brightness(.92);
     }
   </style>
 </head>
@@ -554,7 +558,7 @@
 
     <div class="msn-body">
       <div class="toolbar">
-        <div class="avatar" aria-hidden="true"><img src="/wiki/img/fractalavatar.png"></div>
+        <div class="avatar" aria-hidden="true"><img src="/wiki/img/fractalavatar.png" alt=""></div>
         <div class="me">
           <div class="me__name" id="meName">Lewis (Online)</div>
           <div class="me__status">
@@ -633,7 +637,15 @@
       </section>
     </div>
 
-    <!-- fixed inside the window -->
+    <!-- Shutdown overlay (between body + footer) -->
+    <div class="shutdown-overlay" id="shutdownOverlay" aria-hidden="true">
+      <div class="shutdown-card" role="status" aria-live="polite">
+        <div class="spinner" id="shutdownSpinner" aria-hidden="true"></div>
+        <div class="shutdown-title" id="shutdownTitle">Signing out...</div>
+        <div class="shutdown-sub" id="shutdownSub">Disconnecting from MSN Messenger.</div>
+      </div>
+    </div>
+
     <div class="footerbar">
       <div class="footerbar__left">
         <span class="dot online" id="footDot" aria-hidden="true"></span>
@@ -685,6 +697,13 @@
       });
     });
 
+    // Soft shadow under sticky search when scrolling
+    const scrollArea = document.querySelector('.msn-body');
+    scrollArea.addEventListener('scroll', () => {
+      if (scrollArea.scrollTop > 2) scrollArea.classList.add('is-scrolled');
+      else scrollArea.classList.remove('is-scrolled');
+    });
+
     // Search filter
     const input = document.getElementById('search');
     const contacts = Array.from(document.querySelectorAll('.contact'));
@@ -710,7 +729,7 @@
     });
     updateCounts();
 
-    // Sign in/out
+    // Sign in/out + shutdown overlay
     const win = document.getElementById('msnWin');
     const signBtn = document.getElementById('signBtn');
     const footStatus = document.getElementById('footStatus');
@@ -718,6 +737,11 @@
     const meName = document.getElementById('meName');
     const mePill = document.getElementById('mePill');
     const meDot  = document.getElementById('meDot');
+
+    const overlay = document.getElementById('shutdownOverlay');
+    const shutdownTitle = document.getElementById('shutdownTitle');
+    const shutdownSub = document.getElementById('shutdownSub');
+    const shutdownSpinner = document.getElementById('shutdownSpinner');
 
     let signedIn = true;
 
@@ -740,6 +764,9 @@
 
         input.disabled = false;
         input.placeholder = 'Search contents...';
+
+        // Tiny tweak: ensure overlay hides when signed in
+        overlay.setAttribute('aria-hidden', 'true');
       } else {
         signBtn.textContent = 'Sign in';
         footStatus.textContent = 'Status: Offline';
@@ -759,9 +786,35 @@
       }
     }
 
-    signBtn.addEventListener('click', () => {
-      signedIn = !signedIn;
+    function beginShutdown(){
+      win.classList.add('is-shutting-down');
+      overlay.setAttribute('aria-hidden', 'false');
+
+      shutdownSpinner.style.display = '';
+      shutdownTitle.textContent = 'Signing out…';
+      shutdownSub.textContent = 'Disconnecting from MSN Messenger.';
+
+      window.setTimeout(() => {
+        signedIn = false;
+        win.classList.remove('is-shutting-down');
+        renderSignState();
+
+        shutdownSpinner.style.display = 'none';
+        shutdownTitle.textContent = 'You are signed out';
+        shutdownSub.textContent = 'Sign in to view and search contacts.';
+      }, 650);
+    }
+
+    function endShutdown(){
+      signedIn = true;
+      win.classList.remove('is-shutting-down');
+      overlay.setAttribute('aria-hidden', 'true');
       renderSignState();
+    }
+
+    signBtn.addEventListener('click', () => {
+      if (signedIn) beginShutdown();
+      else endShutdown();
     });
 
     renderSignState();
