@@ -4,6 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MSN Contacts</title>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --win-bg:#d9e6f7;
@@ -20,8 +26,11 @@
       --offline:#9aa7b6;
       --shadow: 0 18px 45px rgba(0,0,0,.25);
       --radius: 12px;
-      --font: Tahoma, "Segoe UI", Verdana, Arial, sans-serif;
+      --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       --ring: 0 0 0 3px rgba(43,99,182,.18);
+
+      /* Fixed window height */
+      --winH: 620px; /* tweak this */
     }
 
     *{ box-sizing:border-box; }
@@ -39,17 +48,31 @@
       padding: 28px 14px;
     }
 
+    /* Window shell is fixed height */
     .msn-window{
       width:min(420px, 100%);
+      height: min(var(--winH), calc(100vh - 56px));
       border: 1px solid var(--border-dark);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       background: var(--win-bg);
       overflow:hidden;
+
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* Inner scroll area (everything except titlebar) */
+    .msn-body{
+      flex:1;
+      min-height:0; /* critical for scroll in flex children */
+      overflow:auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Titlebar */
     .titlebar{
+      flex:0 0 auto;
       height: 36px;
       display:flex;
       align-items:center;
@@ -64,7 +87,7 @@
       align-items:center;
       gap:8px;
       font-size: 13px;
-      font-weight:700;
+      font-weight:800;
       letter-spacing:.2px;
       white-space:nowrap;
       overflow:hidden;
@@ -103,10 +126,10 @@
 
     /* Toolbar */
     .toolbar{
+      padding: 10px;
       display:flex;
       align-items:center;
       gap:10px;
-      padding: 10px;
     }
     .avatar{
       width:42px;height:42px;border-radius:10px;
@@ -114,12 +137,13 @@
       border:1px solid rgba(95,126,166,.55);
       box-shadow: 0 8px 20px rgba(0,0,0,.12);
       display:grid; place-items:center;
-      font-weight:800;
+      font-weight:900;
       color:#1e4b8d;
+      letter-spacing:.3px;
     }
     .me{ flex:1; min-width:0; }
     .me__name{
-      font-weight:800;
+      font-weight:900;
       font-size: 14px;
       line-height:1.1;
       white-space:nowrap;
@@ -140,6 +164,7 @@
       border-radius:999px;
       border:1px solid rgba(95,126,166,.35);
       background: rgba(255,255,255,.55);
+      font-weight:700;
     }
 
     /* Search */
@@ -177,7 +202,7 @@
       width:100%;
       text-align:left;
       padding: 8px 10px;
-      font-weight:800;
+      font-weight:900;
       font-size:12px;
       color:#1b3a63;
       background: linear-gradient(180deg, rgba(217,230,247,.9), rgba(217,230,247,.55));
@@ -198,12 +223,14 @@
       gap:8px;
       min-width:0;
     }
+
     .caret{
       width:10px;height:10px;
       display:inline-block;
-      transform: rotate(90deg); /* open state */
-      transition: transform .12s ease;
+      transform: rotate(90deg); /* open */
+      transition: transform .18s ease;
       opacity:.85;
+      flex:0 0 auto;
     }
     .caret::before{
       content:"";
@@ -216,13 +243,17 @@
     .group[data-collapsed="true"] .caret{ transform: rotate(0deg); }
 
     .count{
-      font-weight:700;
+      font-weight:800;
       color: rgba(27,58,99,.75);
       flex:0 0 auto;
     }
 
-    .group__body{ }
-    .group[data-collapsed="true"] .group__body{ display:none; }
+    /* Smooth collapse: animate height */
+    .group__body{
+      overflow:hidden;
+      height: auto;
+      transition: height .22s ease;
+    }
 
     .contact{
       display:flex;
@@ -248,7 +279,7 @@
 
     .contact__main{ min-width:0; flex:1; }
     .contact__name{
-      font-weight:800;
+      font-weight:900;
       font-size: 13px;
       line-height:1.15;
       white-space:nowrap;
@@ -262,16 +293,18 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      font-weight:600;
+      opacity:.9;
     }
     .chev{ color: rgba(16,36,62,.45); font-weight:900; flex:0 0 auto; }
 
-    /* Footer: MSN-style sign in/out bar */
+    /* Footerbar: sign in/out */
     .footerbar{
+      padding: 10px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:10px;
-      padding: 10px;
       border-top: 1px solid rgba(95,126,166,.35);
       background: rgba(255,255,255,.45);
     }
@@ -287,6 +320,7 @@
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
+      font-weight:700;
     }
     .btn{
       height: 34px;
@@ -296,16 +330,13 @@
       background: rgba(255,255,255,.75);
       font-family: var(--font);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
       cursor:pointer;
       flex:0 0 auto;
     }
     .btn:hover{ background: rgba(255,255,255,.95); }
     .btn:focus-visible{ outline:none; box-shadow: var(--ring); }
-
-    .btn--danger{
-      border-color: rgba(239,68,68,.55);
-    }
+    .btn--danger{ border-color: rgba(239,68,68,.55); }
 
     /* Signed out state */
     .is-signed-out .panel{
@@ -321,13 +352,19 @@
       .titlebar__left{ font-size: 12px; }
       .avatar{ width:38px;height:38px; }
       .btn{ padding:0 10px; }
+      :root{ --winH: 560px; }
+    }
+
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .group__body{ transition:none; }
+      .caret{ transition:none; }
     }
   </style>
 </head>
 
 <body>
   <main class="msn-window" id="msnWin" role="application" aria-label="MSN Contacts">
-
     <div class="titlebar">
       <div class="titlebar__left">
         <span class="msn-bubble" aria-hidden="true"></span>
@@ -340,150 +377,196 @@
       </div>
     </div>
 
-    <div class="toolbar">
-      <div class="avatar" aria-hidden="true">LM</div>
-      <div class="me">
-        <div class="me__name" id="meName">Lewis (Online)</div>
-        <div class="me__status">
-          <span class="dot online" id="meDot" aria-hidden="true"></span>
-          <span class="pill" id="mePill">Signed in</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="search">
-      <input id="search" type="search" placeholder="Search contacts…" autocomplete="off" />
-    </div>
-
-    <section class="panel" aria-label="Contact list">
-      <!-- Group 1 -->
-      <div class="group" data-group>
-        <button class="group__head" type="button" aria-expanded="true">
-          <span class="group__left">
-            <span class="caret" aria-hidden="true"></span>
-            <span>Wobble</span>
-          </span>
-          <span class="count" data-count></span>
-        </button>
-
-        <div class="group__body">
-          <a class="contact" href="/wobble/podcasts">
-            <span class="dot online" aria-hidden="true"></span>
-            <span class="contact__main">
-              <div class="contact__name">Podcasts</div>
-              <div class="contact__blurb">Archive + latest episode</div>
-            </span>
-            <span class="chev" aria-hidden="true">›</span>
-          </a>
-
-          <a class="contact" href="/wobble/">
-            <span class="dot away" aria-hidden="true"></span>
-            <span class="contact__main">
-              <div class="contact__name">Home</div>
-              <div class="contact__blurb">Landing page</div>
-            </span>
-            <span class="chev" aria-hidden="true">›</span>
-          </a>
-
-          <a class="contact" href="/wobble/test2#grid">
-            <span class="dot online" aria-hidden="true"></span>
-            <span class="contact__main">
-              <div class="contact__name">Card Grid</div>
-              <div class="contact__blurb">Jump to the grid section</div>
-            </span>
-            <span class="chev" aria-hidden="true">›</span>
-          </a>
+    <!-- Everything below is scrollable -->
+    <div class="msn-body">
+      <div class="toolbar">
+        <div class="avatar" aria-hidden="true">LM</div>
+        <div class="me">
+          <div class="me__name" id="meName">Lewis (Online)</div>
+          <div class="me__status">
+            <span class="dot online" id="meDot" aria-hidden="true"></span>
+            <span class="pill" id="mePill">Signed in</span>
+          </div>
         </div>
       </div>
 
-      <!-- Group 2 -->
-      <div class="group" data-group>
-        <button class="group__head" type="button" aria-expanded="true">
-          <span class="group__left">
-            <span class="caret" aria-hidden="true"></span>
-            <span>Lewflix</span>
-          </span>
-          <span class="count" data-count></span>
-        </button>
+      <div class="search">
+        <input id="search" type="search" placeholder="Search contacts…" autocomplete="off" />
+      </div>
 
-        <div class="group__body">
-          <a class="contact" href="/netflix/">
-            <span class="dot online" aria-hidden="true"></span>
-            <span class="contact__main">
-              <div class="contact__name">Netflix-style page</div>
-              <div class="contact__blurb">Hero + rails + modals</div>
+      <section class="panel" aria-label="Contact list">
+        <!-- Group 1 -->
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left">
+              <span class="caret" aria-hidden="true"></span>
+              <span>Wobble</span>
             </span>
-            <span class="chev" aria-hidden="true">›</span>
-          </a>
+            <span class="count" data-count></span>
+          </button>
 
-          <a class="contact" href="/disney/test">
-            <span class="dot busy" aria-hidden="true"></span>
-            <span class="contact__main">
-              <div class="contact__name">Disney test</div>
-              <div class="contact__blurb">Modal experiments</div>
-            </span>
-            <span class="chev" aria-hidden="true">›</span>
-          </a>
+          <div class="group__body">
+            <a class="contact" href="/wobble/podcasts">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Podcasts</div>
+                <div class="contact__blurb">Archive + latest episode</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/wobble/">
+              <span class="dot away" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Home</div>
+                <div class="contact__blurb">Landing page</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/wobble/test2#grid">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Card Grid</div>
+                <div class="contact__blurb">Jump to the grid section</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
         </div>
-      </div>
 
-      <!-- Group 3 -->
-      <div class="group" data-group>
-        <button class="group__head" type="button" aria-expanded="true">
-          <span class="group__left">
-            <span class="caret" aria-hidden="true"></span>
-            <span>Extras</span>
-          </span>
-          <span class="count" data-count></span>
-        </button>
-
-        <div class="group__body">
-          <a class="contact" href="/retro/">
-            <span class="dot offline" aria-hidden="true"></span>
-            <span class="contact__main">
-              <div class="contact__name">Retro</div>
-              <div class="contact__blurb">Old-school vibe</div>
+        <!-- Group 2 -->
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left">
+              <span class="caret" aria-hidden="true"></span>
+              <span>Lewflix</span>
             </span>
-            <span class="chev" aria-hidden="true">›</span>
-          </a>
+            <span class="count" data-count></span>
+          </button>
 
-          <a class="contact" href="/slide/">
-            <span class="dot away" aria-hidden="true"></span>
-            <span class="contact__main">
-              <div class="contact__name">Episode list</div>
-              <div class="contact__blurb">Listing UI</div>
-            </span>
-            <span class="chev" aria-hidden="true">›</span>
-          </a>
+          <div class="group__body">
+            <a class="contact" href="/netflix/">
+              <span class="dot online" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Netflix-style page</div>
+                <div class="contact__blurb">Hero + rails + modals</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/disney/test">
+              <span class="dot busy" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Disney test</div>
+                <div class="contact__blurb">Modal experiments</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- Footerbar: sign in/out -->
-    <div class="footerbar">
-      <div class="footerbar__left">
-        <span class="dot online" id="footDot" aria-hidden="true"></span>
-        <div class="footerbar__status" id="footStatus">Status: Online</div>
-      </div>
+        <!-- Group 3 -->
+        <div class="group" data-group>
+          <button class="group__head" type="button" aria-expanded="true">
+            <span class="group__left">
+              <span class="caret" aria-hidden="true"></span>
+              <span>Extras</span>
+            </span>
+            <span class="count" data-count></span>
+          </button>
 
-      <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
+          <div class="group__body">
+            <a class="contact" href="/retro/">
+              <span class="dot offline" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Retro</div>
+                <div class="contact__blurb">Old-school vibe</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+
+            <a class="contact" href="/slide/">
+              <span class="dot away" aria-hidden="true"></span>
+              <span class="contact__main">
+                <div class="contact__name">Episode list</div>
+                <div class="contact__blurb">Listing UI</div>
+              </span>
+              <span class="chev" aria-hidden="true">›</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <div class="footerbar">
+        <div class="footerbar__left">
+          <span class="dot online" id="footDot" aria-hidden="true"></span>
+          <div class="footerbar__status" id="footStatus">Status: Online</div>
+        </div>
+        <button class="btn btn--danger" id="signBtn" type="button">Sign out</button>
+      </div>
     </div>
   </main>
 
   <script>
-    // ===== Collapsible groups (click header) =====
+    // ===== Smooth collapsible groups (height animation) =====
+    function animateCollapse(body, shouldOpen) {
+      // body is the .group__body element
+      const start = body.getBoundingClientRect().height;
+
+      if (shouldOpen) {
+        // from current height (likely 0) -> scrollHeight
+        body.style.height = start + "px";
+        body.style.display = "block";
+
+        // force reflow
+        body.offsetHeight;
+
+        const end = body.scrollHeight;
+        body.style.height = end + "px";
+
+        const done = () => {
+          body.style.height = "auto"; // allow natural height
+          body.removeEventListener("transitionend", done);
+        };
+        body.addEventListener("transitionend", done);
+      } else {
+        // from current height -> 0
+        const end = 0;
+        body.style.height = start + "px";
+
+        // force reflow
+        body.offsetHeight;
+
+        body.style.height = end + "px";
+
+        const done = () => {
+          body.removeEventListener("transitionend", done);
+        };
+        body.addEventListener("transitionend", done);
+      }
+    }
+
     document.querySelectorAll('.group').forEach(group => {
       const head = group.querySelector('.group__head');
       const body = group.querySelector('.group__body');
       if (!head || !body) return;
 
-      // default open
+      // init open
       group.dataset.collapsed = "false";
+      body.style.height = "auto";
 
       head.addEventListener('click', () => {
         const collapsed = group.dataset.collapsed === "true";
-        group.dataset.collapsed = collapsed ? "false" : "true";
-        head.setAttribute('aria-expanded', collapsed ? "true" : "false");
+        const nextCollapsed = !collapsed;
+
+        group.dataset.collapsed = nextCollapsed ? "true" : "false";
+        head.setAttribute('aria-expanded', nextCollapsed ? "false" : "true");
+
+        // animate
+        animateCollapse(body, !nextCollapsed);
+
+        // after collapse, leave it at 0 height (don't display:none, keeps animation smooth)
       });
     });
 
@@ -494,14 +577,12 @@
 
     function updateCounts(){
       groups.forEach(g => {
-        // count only visible contacts (and only in visible group body)
         const visible = Array.from(g.querySelectorAll('.contact'))
           .filter(a => a.style.display !== 'none').length;
 
         const countEl = g.querySelector('[data-count]');
         if (countEl) countEl.textContent = `(${visible})`;
 
-        // if search hides all contacts, hide the whole group (MSN-ish)
         g.style.display = visible ? '' : 'none';
       });
     }
@@ -517,7 +598,7 @@
 
     updateCounts();
 
-    // ===== Sign in/out footer bar =====
+    // ===== Sign in/out =====
     const win = document.getElementById('msnWin');
     const signBtn = document.getElementById('signBtn');
     const footStatus = document.getElementById('footStatus');
