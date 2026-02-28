@@ -7,7 +7,6 @@
 <style>
   :root{
     --win-bg:#e9eef7;
-    --frame:#b9c7e6;
     --frame2:#8aa4d6;
     --title1:#2f5fb8;
     --title2:#1f4ea4;
@@ -19,15 +18,19 @@
     --text:#0b1020;
     --muted: rgba(11,16,32,.65);
 
-    --me:#0b57d0;
-    --them:#0f7b2b;
-
-    --bubble-me:#e8f0ff;
-    --bubble-them:#ecfff1;
+    --name-me:#0b57d0;
+    --name-them:#0f7b2b;
+    --name-system:#7a2ea8;
 
     --shadow: 0 18px 50px rgba(0,0,0,.18);
     --radius: 10px;
     --font: "Tahoma", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+
+    --online:#24c26a;
+    --busy:#e53935;
+    --away:#f6a100;
+    --brb:#f6a100;
+    --offline:#9aa7bd;
   }
 
   *{box-sizing:border-box}
@@ -45,7 +48,7 @@
     place-items:center;
   }
 
-  /* Fixed window height (prevents infinite page growth) */
+  /* Fixed window height (no page-long expansion) */
   .msn{
     width: min(980px, 100%);
     height: min(86vh, 740px);
@@ -114,7 +117,6 @@
     box-shadow: 0 1px 0 rgba(0,0,0,.05);
     display:flex; align-items:center; gap:6px;
   }
-  .dot{ width:8px; height:8px; border-radius:50%; background:#24c26a; box-shadow: 0 0 0 2px rgba(36,194,106,.18); }
   .sep{ flex:1; }
   .toolLink{
     font-size: 12px;
@@ -126,12 +128,46 @@
     padding:0;
   }
 
-  /* Main content must also be constrained */
+  /* Fake status dropdown */
+  .statusWrap{
+    display:flex; align-items:center; gap:8px;
+    padding: 4px 8px;
+    border: 1px solid var(--border);
+    background:#fff;
+    border-radius: 999px;
+    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+  }
+  .dot{
+    width:9px; height:9px; border-radius:50%;
+    background: var(--online);
+    box-shadow: 0 0 0 2px rgba(36,194,106,.18);
+    flex:0 0 auto;
+  }
+  .statusSel{
+    border:0;
+    outline:0;
+    font-family: var(--font);
+    font-size: 12px;
+    background: transparent;
+    padding-right: 16px;
+    appearance:none;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    cursor:pointer;
+  }
+  .statusCaret{
+    margin-left:-14px;
+    font-size: 10px;
+    opacity:.75;
+    pointer-events:none;
+  }
+
+  /* Layout */
   .main{
     flex: 1 1 auto;
-    min-height: 0;          /* IMPORTANT for nested scroll */
+    min-height: 0;
     display:grid;
-    grid-template-columns: 270px 1fr;
+    grid-template-columns: 280px 1fr;
     gap: 10px;
     padding: 10px;
   }
@@ -148,17 +184,31 @@
     flex-direction:column;
     min-height:0;
   }
-  .profile{padding:12px; display:flex; gap:10px; align-items:center;}
-  .avatar{
-    width: 54px; height: 54px; border-radius: 12px;
+  .profile{
+    padding:12px;
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+
+  /* Royalty-free placeholder “display pictures” via embedded SVGs */
+  .dp{
+    width: 58px;
+    height: 58px;
+    border-radius: 12px;
     border: 1px solid rgba(0,0,0,.12);
-    background: linear-gradient(135deg, #b9ffcc, #b2d8ff);
     box-shadow: inset 0 0 0 2px rgba(255,255,255,.65);
+    background-size: cover;
+    background-position: center;
     flex:0 0 auto;
   }
+  .dp--me{ background-image: var(--dp-me); }
+  .dp--them{ background-image: var(--dp-them); }
+
   .pMeta{min-width:0;}
   .pName{font-weight:700; font-size: 14px; line-height:1.1;}
   .pStatus{font-size: 12px; color: var(--muted); margin-top:4px;}
+
   .side hr{border:0; border-top:1px solid var(--border); margin:0;}
   .sideList{
     padding: 10px 12px 12px;
@@ -186,9 +236,8 @@
     overflow:hidden;
     display:flex;
     flex-direction:column;
-    min-height:0;           /* IMPORTANT for nested scroll */
+    min-height:0;
   }
-
   .chatHeader{
     padding: 10px 12px;
     background: linear-gradient(#ffffff, #f2f7ff);
@@ -199,14 +248,34 @@
     gap: 10px;
     flex: 0 0 auto;
   }
-  .chatTitle{font-size: 12.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .chatHeader__left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+  }
+  .dpTiny{
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,.12);
+    background-size: cover;
+    background-position: center;
+    flex:0 0 auto;
+  }
+  .chatTitle{
+    font-size: 12.5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
   .stamp{font-size: 11.5px; opacity:.7; white-space:nowrap;}
 
-  /* THIS is the internal scroll region */
+  /* Internal scroll region */
   .log{
     flex: 1 1 auto;
-    min-height: 0;          /* IMPORTANT for scroll in flex children */
-    padding: 12px;
+    min-height: 0;
+    padding: 12px 12px 8px;
     overflow:auto;
     background:
       linear-gradient(#ffffff, #ffffff) padding-box,
@@ -219,43 +288,50 @@
       );
   }
 
-  .system{font-size: 12px; color: var(--muted); margin: 6px 0 10px;}
-  .msg{display:flex; gap:10px; margin: 10px 0; align-items:flex-end;}
-  .msg.me{justify-content:flex-end;}
-  .msg .name{font-weight:700; font-size: 12px; margin-bottom: 4px;}
-  .msg.me .name{color: var(--me); text-align:right;}
-  .msg.them .name{color: var(--them);}
-  .bubble{
-    max-width: min(560px, 86%);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 9px 10px;
-    box-shadow: 0 1px 0 rgba(0,0,0,.05);
+  /* Old-school MSN transcript style */
+  .line{
     font-size: 13px;
-    line-height: 1.25;
+    line-height: 1.35;
+    margin: 5px 0;
     word-wrap:break-word;
   }
-  .me .bubble{background: var(--bubble-me);}
-  .them .bubble{background: var(--bubble-them);}
-  .bubble .meta{
-    margin-top: 6px;
-    font-size: 11px;
-    opacity:.65;
-    display:flex;
-    justify-content:flex-end;
-    gap: 8px;
+  .who{font-weight:700;}
+  .who.me{ color: var(--name-me); }
+  .who.them{ color: var(--name-them); }
+  .who.sys{ color: var(--name-system); }
+  .time{
+    font-size: 12px;
+    opacity:.7;
+    margin-left: 6px;
   }
+  .msgText{ color: var(--text); }
+  .sysText{ color: var(--muted); }
+
   .linky{
     color:#0b57d0;
     text-decoration: underline;
   }
-  .kbd{
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Typing indicator */
+  .typingRow{
+    display:none;
+    margin: 8px 0 2px;
     font-size: 12px;
-    background: rgba(0,0,0,.06);
-    border: 1px solid rgba(0,0,0,.08);
-    padding: 1px 6px;
-    border-radius: 8px;
+    color: var(--muted);
+  }
+  .typingRow.is-on{ display:block; }
+  .dots{ display:inline-flex; gap:3px; margin-left:6px; vertical-align:middle; }
+  .dots i{
+    width:4px; height:4px; border-radius:50%;
+    background: rgba(0,0,0,.45);
+    display:inline-block;
+    animation: bop 1.1s infinite ease-in-out;
+  }
+  .dots i:nth-child(2){ animation-delay:.15s }
+  .dots i:nth-child(3){ animation-delay:.3s }
+  @keyframes bop{
+    0%,100%{ transform: translateY(0); opacity:.45 }
+    50%{ transform: translateY(-3px); opacity:1 }
   }
 
   .composer{
@@ -298,6 +374,12 @@
     font-size: 12.5px;
   }
   .send:hover{ background: linear-gradient(#ffffff, #e7efff); }
+
+  .hint{
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
 </style>
 </head>
 <body>
@@ -316,8 +398,19 @@
   </div>
 
   <div class="toolbar">
-    <div class="toolPill"><span class="dot"></span> Online</div>
-    <div class="toolPill">Mood: <span id="mood">building weird web stuff</span></div>
+    <div class="statusWrap" title="Fake status">
+      <span class="dot" id="statusDot" aria-hidden="true"></span>
+      <select class="statusSel" id="statusSel" aria-label="Status">
+        <option value="available" selected>Available</option>
+        <option value="busy">Busy</option>
+        <option value="away">Away</option>
+        <option value="brb">Be Right Back</option>
+        <option value="offline">Offline</option>
+      </select>
+      <span class="statusCaret" aria-hidden="true">▾</span>
+    </div>
+
+    <div class="toolPill">Mood: <span id="mood">archiving the internet</span></div>
     <div class="sep"></div>
     <button class="toolLink" type="button" id="jumpTop">Jump to top</button>
   </div>
@@ -325,107 +418,87 @@
   <div class="main">
     <aside class="side">
       <div class="profile">
-        <div class="avatar" aria-hidden="true"></div>
+        <div class="dp dp--me" id="dpMe" aria-hidden="true"></div>
         <div class="pMeta">
           <div class="pName">Lewis</div>
-          <div class="pStatus">Status: tinkering • posting • archiving</div>
+          <div class="pStatus">Status: <span id="statusText">Available</span></div>
         </div>
       </div>
       <hr />
       <div class="sideList">
-        <div class="badge">🗂️ Archive-style pages</div>
-        <div class="badge">🎧 Podcast posts</div>
-        <div class="badge">📺 Episode guides</div>
-        <div class="badge">🧪 Experiments & mock UIs</div>
+        <div class="badge">🗂️ Diary</div>
+        <div class="badge">🧷 MySpace</div>
+        <div class="badge">📓 LiveJournal</div>
+        <div class="badge">📼 Retro experiments</div>
         <div style="opacity:.85; line-height:1.35;">
-          Tip: try typing <span class="kbd">/help</span> below.
+          Tip: type <b>/tour</b> or <b>/help</b> below.
         </div>
       </div>
     </aside>
 
     <section class="chat">
       <div class="chatHeader">
-        <div class="chatTitle">Conversation with: <b>The Website</b></div>
+        <div class="chatHeader__left">
+          <div class="dpTiny" id="dpThemTiny" aria-hidden="true"></div>
+          <div class="chatTitle">Conversation with: <b>The Website</b></div>
+        </div>
         <div class="stamp" id="dateStamp"></div>
       </div>
 
-      <div class="log" id="log">
-        <div class="system">You are now viewing the About chat log.</div>
-
-        <!-- Seed “About” content -->
-        <div class="msg them">
-          <div>
-            <div class="name">Website says:</div>
-            <div class="bubble">
-              hi. i’m a personal site built like a collection of little “worlds” — pages that each commit to a vibe.
-              <div class="meta"><span>00:01</span></div>
-            </div>
-          </div>
+      <div class="log" id="log" aria-live="polite">
+        <!-- Seed transcript -->
+        <div class="line">
+          <span class="who sys">System</span><span class="time">(<span data-seedtime>00:01</span>)</span>:
+          <span class="sysText">You are now viewing the About chat log.</span>
         </div>
 
-        <div class="msg me">
-          <div>
-            <div class="name">Lewis says:</div>
-            <div class="bubble">
-              what kind of worlds?
-              <div class="meta"><span>00:01</span></div>
-            </div>
-          </div>
+        <div class="line">
+          <span class="who them">Website</span><span class="time">(00:01)</span>:
+          <span class="msgText">hey — i’m a personal site built like a set of little “throwback” worlds.</span>
         </div>
 
-        <div class="msg them">
-          <div>
-            <div class="name">Website says:</div>
-            <div class="bubble">
-              • a podcast hub<br>
-              • episode/serial guides (with filters + modals)<br>
-              • retro experiments (MSN, VHS, “streaming” UI mockups)<br>
-              • an archive of posts / projects
-              <div class="meta"><span>00:02</span></div>
-            </div>
-          </div>
+        <div class="line">
+          <span class="who me">Lewis</span><span class="time">(00:02)</span>:
+          <span class="msgText">what’s on here?</span>
         </div>
 
-        <div class="msg me">
-          <div>
-            <div class="name">Lewis says:</div>
-            <div class="bubble">
-              what’s the point of it all?
-              <div class="meta"><span>00:03</span></div>
-            </div>
-          </div>
+        <div class="line">
+          <span class="who them">Website</span><span class="time">(00:02)</span>:
+          <span class="msgText">four main portals, all deliberately nostalgic:</span>
         </div>
 
-        <div class="msg them">
-          <div>
-            <div class="name">Website says:</div>
-            <div class="bubble">
-              i’m basically a scrapbook + playground.<br><br>
-              sometimes i post finished things. mostly i ship fun prototypes and refine them over time.
-              <div class="meta"><span>00:03</span></div>
-            </div>
-          </div>
+        <div class="line">
+          <span class="who them">Website</span><span class="time">(00:03)</span>:
+          <span class="msgText">
+            • <a class="linky" href="https://lewis.lc/diary">Diary</a><br>
+            • <a class="linky" href="https://lewis.lc/myspace">MySpace</a><br>
+            • <a class="linky" href="https://lewis.lc/livejournal">LiveJournal</a><br>
+            • <a class="linky" href="https://lewis.lc/retro">Retro</a>
+          </span>
         </div>
 
-        <div class="msg them">
-          <div>
-            <div class="name">Website says:</div>
-            <div class="bubble">
-              if you want a quick tour, start here:<br>
-              <a class="linky" href="/wobble/podcasts">/wobble/podcasts</a> •
-              <a class="linky" href="/sandbox/test">/sandbox/test</a> •
-              <a class="linky" href="/retro/">/retro/</a>
-              <div class="meta"><span>00:04</span></div>
-            </div>
-          </div>
+        <div class="line">
+          <span class="who me">Lewis</span><span class="time">(00:04)</span>:
+          <span class="msgText">so it’s like… an internet scrapbook?</span>
         </div>
 
-        <div class="system" style="margin-top:14px;">(Type below to add more “about” lines, or use /help.)</div>
+        <div class="line">
+          <span class="who them">Website</span><span class="time">(00:04)</span>:
+          <span class="msgText">exactly. part archive, part cosplay, part UI experiment.</span>
+        </div>
+
+        <div class="typingRow" id="typingRow">
+          <span class="who them">Website</span> is typing
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        </div>
       </div>
 
       <form class="composer" id="form">
-        <div class="inputWrap">
-          <textarea id="input" placeholder="Type a message… (Enter to send)"></textarea>
+        <div>
+          <div class="inputWrap">
+            <textarea id="input" placeholder="Type a message… (Enter to send, Shift+Enter for newline)"></textarea>
+          </div>
+          <div class="hint">Try: <b>/tour</b>, <b>/help</b>, or type “diary”, “myspace”, “livejournal”, “retro”.</div>
         </div>
         <button class="send" type="submit">Send</button>
       </form>
@@ -434,9 +507,66 @@
 </div>
 
 <script>
-  const log = document.getElementById("log");
-  const form = document.getElementById("form");
-  const input = document.getElementById("input");
+  // ----- Only allowed links (locked) -----
+  const LINKS = {
+    diary: "https://lewis.lc/diary",
+    myspace: "https://lewis.lc/myspace",
+    livejournal: "https://lewis.lc/livejournal",
+    retro: "https://lewis.lc/retro"
+  };
+
+  // ----- Royalty-free placeholder DPs: embedded SVG data-URIs (no external assets) -----
+  // These are original geometric SVGs (safe to use).
+  const svgToDataUri = (svg) => `url("data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}")`;
+
+  const dpMeSVG = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
+    <defs>
+      <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#b9ffcc"/>
+        <stop offset="1" stop-color="#b2d8ff"/>
+      </linearGradient>
+      <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".15"/>
+      </filter>
+    </defs>
+    <rect width="160" height="160" rx="26" fill="url(#g)"/>
+    <circle cx="82" cy="64" r="34" fill="#ffffff" opacity=".9" filter="url(#s)"/>
+    <rect x="34" y="104" width="92" height="44" rx="22" fill="#ffffff" opacity=".85" filter="url(#s)"/>
+    <circle cx="70" cy="62" r="6" fill="#0b1020" opacity=".55"/>
+    <circle cx="94" cy="62" r="6" fill="#0b1020" opacity=".55"/>
+    <path d="M70 78 Q82 90 94 78" fill="none" stroke="#0b1020" stroke-opacity=".45" stroke-width="6" stroke-linecap="round"/>
+    <path d="M24 30 L64 18 L84 42 L44 56 Z" fill="#ffffff" opacity=".33"/>
+  </svg>`;
+
+  const dpThemSVG = `
+  <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
+    <defs>
+      <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffd7e8"/>
+        <stop offset="1" stop-color="#d7e9ff"/>
+      </linearGradient>
+      <filter id="s2" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="6" stdDeviation="7" flood-color="#000" flood-opacity=".15"/>
+      </filter>
+    </defs>
+    <rect width="160" height="160" rx="26" fill="url(#g2)"/>
+    <path d="M20 104 C44 72, 86 68, 140 104 L140 150 L20 150 Z" fill="#ffffff" opacity=".86" filter="url(#s2)"/>
+    <circle cx="78" cy="66" r="36" fill="#ffffff" opacity=".92" filter="url(#s2)"/>
+    <path d="M56 58 C64 46, 90 46, 100 58" fill="none" stroke="#0b1020" stroke-opacity=".35" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="66" cy="70" r="6" fill="#0b1020" opacity=".5"/>
+    <circle cx="92" cy="70" r="6" fill="#0b1020" opacity=".5"/>
+    <path d="M64 88 Q78 98 92 88" fill="none" stroke="#0b1020" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/>
+    <path d="M120 22 L150 44 L132 62 L104 40 Z" fill="#ffffff" opacity=".28"/>
+  </svg>`;
+
+  document.documentElement.style.setProperty("--dp-me", svgToDataUri(dpMeSVG));
+  document.documentElement.style.setProperty("--dp-them", svgToDataUri(dpThemSVG));
+
+  const dpThemTiny = document.getElementById("dpThemTiny");
+  dpThemTiny.style.backgroundImage = svgToDataUri(dpThemSVG);
+
+  // ----- Time / stamping -----
   const dateStamp = document.getElementById("dateStamp");
   dateStamp.textContent = new Date().toLocaleString(undefined, {
     weekday: "short", year: "numeric", month: "short", day: "numeric"
@@ -448,105 +578,123 @@
     return `${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
   };
 
-  function escapeHTML(str){
-    return str.replace(/[&<>"']/g, (m) => ({
+  // ----- DOM helpers -----
+  const log = document.getElementById("log");
+  const form = document.getElementById("form");
+  const input = document.getElementById("input");
+  const typingRow = document.getElementById("typingRow");
+
+  const escapeHTML = (str) =>
+    str.replace(/[&<>"']/g, (m) => ({
       "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
     }[m]));
-  }
 
-  function addMessage({ who="me", text="", nameLabel="" }){
-    const wrap = document.createElement("div");
-    wrap.className = `msg ${who}`;
-    const name = (nameLabel || (who === "me" ? "Lewis says:" : "Website says:"));
+  function addLine({ who="me", text="", isSystem=false }){
+    const div = document.createElement("div");
+    div.className = "line";
 
-    wrap.innerHTML = `
-      <div>
-        <div class="name">${name}</div>
-        <div class="bubble">
-          ${escapeHTML(text).replace(/\n/g,"<br>")}
-          <div class="meta"><span>${timeNow()}</span></div>
-        </div>
-      </div>
+    const whoClass = isSystem ? "sys" : (who === "me" ? "me" : "them");
+    const whoLabel = isSystem ? "System" : (who === "me" ? "Lewis" : "Website");
+
+    // text can include allowed links only; we build links ourselves when needed.
+    div.innerHTML = `
+      <span class="who ${whoClass}">${whoLabel}</span><span class="time">(${timeNow()})</span>:
+      <span class="${isSystem ? "sysText" : "msgText"}">${text}</span>
     `;
-    log.appendChild(wrap);
+
+    // insert before typing indicator
+    log.insertBefore(div, typingRow);
     log.scrollTop = log.scrollHeight;
   }
 
-  function systemLine(text){
-    const d = document.createElement("div");
-    d.className = "system";
-    d.textContent = text;
-    log.appendChild(d);
-    log.scrollTop = log.scrollHeight;
+  function setTyping(on){
+    typingRow.classList.toggle("is-on", !!on);
+    if (on) log.scrollTop = log.scrollHeight;
   }
 
-  function botReply(userText){
+  function linkHTML(key){
+    const url = LINKS[key];
+    // hard-lock: only generate anchors for the 4 approved URLs
+    return `<a class="linky" href="${url}">${url.replace("https://","")}</a>`;
+  }
+
+  // ----- Fake “About bot” replies (no extra links) -----
+  function replyTo(userText){
     const t = userText.trim().toLowerCase();
 
+    // Commands
     if (t === "/help"){
-      addMessage({ who:"them", text:
-`commands:
-• /tour — quick links
-• /stack — what I’m built with
-• /about — one-liner
-• /contact — how to reach me`
+      addLine({ who:"them", text:
+        escapeHTML("commands: /tour, /about, /why, /links")
       });
       return;
     }
 
-    if (t === "/tour"){
-      addMessage({ who:"them", text:
-`quick tour:
-• /wobble/podcasts — podcast archive
-• /sandbox/test — episode guide UI
-• /retro/ — experiments + throwbacks`
-      });
-      return;
-    }
-
-    if (t === "/stack"){
-      addMessage({ who:"them", text:
-`stack:
-• static HTML/CSS/JS
-• handcrafted UI components
-• lots of themed pages + experiments
-(no frameworks required 😅)`
+    if (t === "/tour" || t === "/links"){
+      addLine({ who:"them", text:
+        `pick a portal:<br>
+         • ${linkHTML("diary")}<br>
+         • ${linkHTML("myspace")}<br>
+         • ${linkHTML("livejournal")}<br>
+         • ${linkHTML("retro")}`
       });
       return;
     }
 
     if (t === "/about"){
-      addMessage({ who:"them", text:
-`about:
-a personal site that mixes archives, media guides, and UI experiments.`
+      addLine({ who:"them", text:
+        escapeHTML("i’m a nostalgia-forward personal site: diary-style posts, faux-social profiles, and retro UI experiments.")
       });
       return;
     }
 
-    if (t === "/contact"){
-      addMessage({ who:"them", text:
-`contact:
-link me to a contact page, or add an email/social handle here.`
+    if (t === "/why"){
+      addLine({ who:"them", text:
+        escapeHTML("because the old web had personality. this is a scrapbook + a playground for UI ideas.")
       });
       return;
     }
 
-    // Default “about page” style response
-    addMessage({ who:"them", text:
-`noted. if you want, you can hardcode this chat log as your about page text — 
-or keep it interactive for fun. try /tour.` });
+    // Keyword routing
+    if (t.includes("diary")){
+      addLine({ who:"them", text: `diary portal → ${linkHTML("diary")}` });
+      return;
+    }
+    if (t.includes("myspace")){
+      addLine({ who:"them", text: `myspace portal → ${linkHTML("myspace")}` });
+      return;
+    }
+    if (t.includes("livejournal") || t.includes("lj")){
+      addLine({ who:"them", text: `livejournal portal → ${linkHTML("livejournal")}` });
+      return;
+    }
+    if (t.includes("retro")){
+      addLine({ who:"them", text: `retro portal → ${linkHTML("retro")}` });
+      return;
+    }
+
+    // Default
+    addLine({ who:"them", text:
+      escapeHTML("try /tour for links, or ask: “what’s on retro?” / “show diary”.")
+    });
   }
 
+  // ----- Send behaviour -----
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = input.value.trim();
     if (!text) return;
 
-    addMessage({ who:"me", text });
+    // user line (escaped)
+    addLine({ who:"me", text: escapeHTML(text).replace(/\n/g,"<br>") });
     input.value = "";
 
-    // "Fake" response
-    setTimeout(() => botReply(text), 300);
+    // bot typing indicator then reply
+    setTyping(true);
+    setTimeout(() => {
+      setTyping(false);
+      replyTo(text);
+    }, 650);
   });
 
   input.addEventListener("keydown", (e) => {
@@ -556,9 +704,33 @@ or keep it interactive for fun. try /tour.` });
     }
   });
 
+  // ----- Jump to top -----
   document.getElementById("jumpTop").addEventListener("click", () => {
     log.scrollTop = 0;
   });
+
+  // ----- Fake status dropdown behaviour -----
+  const statusSel = document.getElementById("statusSel");
+  const statusDot = document.getElementById("statusDot");
+  const statusText = document.getElementById("statusText");
+
+  const STATUS = {
+    available: { label:"Available", color:"var(--online)", glow:"rgba(36,194,106,.18)" },
+    busy:      { label:"Busy", color:"var(--busy)", glow:"rgba(229,57,53,.18)" },
+    away:      { label:"Away", color:"var(--away)", glow:"rgba(246,161,0,.18)" },
+    brb:       { label:"Be Right Back", color:"var(--brb)", glow:"rgba(246,161,0,.18)" },
+    offline:   { label:"Offline", color:"var(--offline)", glow:"rgba(154,167,189,.18)" }
+  };
+
+  function applyStatus(key){
+    const s = STATUS[key] || STATUS.available;
+    statusText.textContent = s.label;
+    statusDot.style.background = `calc(0*1) + ${s.color}`.replace("calc(0*1) + ",""); // harmless trick to keep var() usable
+    statusDot.style.boxShadow = `0 0 0 2px ${s.glow}`;
+    addLine({ who:"sys", isSystem:true, text: `Status set to “${s.label}”.` });
+  }
+
+  statusSel.addEventListener("change", () => applyStatus(statusSel.value));
 </script>
 
 </body>
