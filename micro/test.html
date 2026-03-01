@@ -272,10 +272,51 @@ h1{
   white-space:pre-wrap;
 }
 
+/* ===== Media (auto aspect) ===== */
+.media{
+  margin-top:10px;
+  display:grid;
+  gap:8px;
+}
+.media.cols-1{ grid-template-columns:1fr; }
+.media.cols-2{ grid-template-columns:repeat(2,1fr); }
+.media.cols-3{ grid-template-columns:repeat(2,1fr); }
+.media.cols-4{ grid-template-columns:repeat(2,1fr); }
+
+/* For 3 images, make first one full-width */
+.media.cols-3 .media__item:first-child{
+  grid-column:1 / -1;
+}
+
+.media__item{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  cursor:pointer;
+
+  /* auto-detected aspect ratio via --ar */
+  aspect-ratio: var(--ar, 16/10);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+}
+
+.media__item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1);
+  transition:transform .25s ease;
+}
+.media__item:hover img{ transform:scale(1.03); }
+
 .tags{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
+  margin-top:10px;
 }
 
 .tagBtn{
@@ -310,6 +351,54 @@ h1{
   font-size:13px;
   color: var(--muted);
 }
+
+/* ===== Lightbox ===== */
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background: rgba(0,0,0,.65);
+}
+.lightbox.open{ display:flex; }
+
+.lightbox__inner{
+  max-width:min(980px, 96vw);
+  max-height:86vh;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 30px 90px rgba(0,0,0,.6);
+  background: rgba(10,12,18,.35);
+  backdrop-filter: blur(10px);
+}
+
+.lightbox__inner img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#000;
+}
+
+.lightbox__close{
+  position:fixed;
+  top: calc(var(--topbarH) + 14px);
+  right: 16px;
+  z-index:1000;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.35);
+  color: rgba(255,255,255,.92);
+  padding:0 14px;
+  font-size:13px;
+  cursor:pointer;
+  backdrop-filter: blur(10px);
+}
 </style>
 </head>
 
@@ -323,13 +412,13 @@ h1{
     </div>
 
     <div class="topbar__right">
-      <select id="sortSelect" class="sortSelect">
+      <select id="sortSelect" class="sortSelect" aria-label="Sort">
         <option value="new">Newest first</option>
         <option value="old">Oldest first</option>
       </select>
 
-      <button id="themeToggle" class="themeBtn">Dark</button>
-      <button id="backToTop" class="themeBtn backToTop">↑ Top</button>
+      <button id="themeToggle" class="themeBtn" type="button">Dark</button>
+      <button id="backToTop" class="themeBtn backToTop" type="button">↑ Top</button>
     </div>
   </div>
 </header>
@@ -347,7 +436,7 @@ h1{
     <select id="tag" class="select">
       <option value="">All tags</option>
     </select>
-    <button id="clear" class="btn">Clear</button>
+    <button id="clear" class="btn" type="button">Clear</button>
   </div>
 </section>
 
@@ -355,10 +444,18 @@ h1{
 
 <div class="footerRow">
   <span id="counter" class="counter">Showing 0 of 0 posts</span>
-  <button id="more" class="btn">Load more</button>
+  <button id="more" class="btn" type="button">Load more</button>
 </div>
 
 </main>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button id="lbClose" class="lightbox__close" type="button">Close</button>
+  <div class="lightbox__inner">
+    <img id="lbImg" alt="">
+  </div>
+</div>
 
 <script>
 const posts=[
@@ -367,7 +464,10 @@ const posts=[
     name:"Lewis",
     avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
     text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
+    tags:["web","notes"],
+    media:[
+      "https://lewis.lc/wiki/img/episodes/twith.png"
+    ]
   },
   {
     date:"2026-02-28T18:10:00Z",
@@ -376,721 +476,48 @@ const posts=[
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
+
   {
-    date:"2026-03-01T12:40:00Z",
+    date:"2026-03-01T20:15:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"Tiny rule for myself: if a thought fits in one breath, it belongs here.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-03-02T09:05:00Z",
     name:"Lewis",
     avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
+    text:"Moodboard grab from Lewflix. The glass look really works with bold thumbnails.",
+    tags:["web","design"],
+    media:[
+      "https://lewis.lc/wiki/img/episodes/twith.png",
+      "https://lewis.lc/wiki/img/episodes/sns.png"
+    ]
   },
   {
-    date:"2026-02-28T18:10:00Z",
+    date:"2026-03-02T13:45:00Z",
     name:"Lewis",
     avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
+    text:"Testing mixed media layouts — single image posts should feel calm, not ‘gallery’.",
+    tags:["notes","layout"],
+    media:"https://lewis.lc/wiki/img/episodes/tt.png"
   },
+
+  /* === New example post (4 images) === */
   {
-    date:"2026-03-01T12:40:00Z",
+    date:"2026-03-02T18:30:00Z",
     name:"Lewis",
     avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-03-01T12:40:00Z",
-    name:"Lewis",
-    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
-    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
-    tags:["web","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  
+    text:"Four-card layout test from Lewflix. Mixed thumbnails, still balanced.",
+    tags:["web","design","lewflix"],
+    media:[
+      "https://lewis.lc/wiki/img/episodes/tc.png",
+      "https://lewis.lc/wiki/img/episodes/twith.png",
+      "https://lewis.lc/wiki/img/episodes/sns.png",
+      "https://lewis.lc/wiki/img/episodes/tco.png"
+    ]
+  }
 ];
 
 const PAGE_SIZE=10;
@@ -1106,6 +533,25 @@ const sortSelect=document.getElementById("sortSelect");
 const counter=document.getElementById("counter");
 const backToTop=document.getElementById("backToTop");
 const pageHeader=document.getElementById("pageHeader");
+
+/* Lightbox */
+const lightbox=document.getElementById("lightbox");
+const lbImg=document.getElementById("lbImg");
+const lbClose=document.getElementById("lbClose");
+
+function openLightbox(src){
+  lbImg.src = src;
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden","false");
+}
+function closeLightbox(){
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden","true");
+  lbImg.src = "";
+}
+lbClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", (e)=>{ if(e.target === lightbox) closeLightbox(); });
+window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeLightbox(); });
 
 /* Populate tags */
 function populateTags(){
@@ -1133,7 +579,6 @@ applyTheme(localStorage.getItem("theme")||"light");
 
 /* Back to top: show only after passing header section */
 let headerTriggerY = 0;
-
 function computeHeaderTrigger(){
   const rect = pageHeader.getBoundingClientRect();
   headerTriggerY = window.scrollY + rect.bottom - 8;
@@ -1147,10 +592,7 @@ function updateBackToTop(){
 }
 window.addEventListener("resize", () => { computeHeaderTrigger(); updateBackToTop(); });
 window.addEventListener("scroll", updateBackToTop);
-
-backToTop.onclick=()=>{
-  window.scrollTo({top:0,behavior:"smooth"});
-};
+backToTop.onclick=()=> window.scrollTo({top:0,behavior:"smooth"});
 
 /* Utilities */
 function initials(name=""){
@@ -1181,6 +623,44 @@ function getSorted(){
   );
 }
 
+/* Media rendering */
+function renderMedia(p){
+  const arr = Array.isArray(p.media) ? p.media : (p.media ? [p.media] : []);
+  if(!arr.length) return "";
+  const n = Math.min(arr.length, 4);
+  const cls = n===1 ? "cols-1" : n===2 ? "cols-2" : n===3 ? "cols-3" : "cols-4";
+  return `
+    <div class="media ${cls}" data-count="${n}">
+      ${arr.slice(0,4).map(src=>`
+        <div class="media__item" role="button" tabindex="0" data-media="${src}">
+          <img src="${src}" alt="" loading="lazy">
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* Auto-detect aspect ratio for media images */
+function applyMediaAspectRatios(){
+  const imgs = feed.querySelectorAll(".media__item img");
+  imgs.forEach(img=>{
+    if(img.dataset.arDone) return;
+    img.dataset.arDone = "1";
+
+    const apply = ()=>{
+      const w = img.naturalWidth || 0;
+      const h = img.naturalHeight || 0;
+      if(w && h){
+        const ar = (w / h);
+        img.parentElement.style.setProperty("--ar", ar.toFixed(4));
+      }
+    };
+
+    if(img.complete) apply();
+    else img.addEventListener("load", apply, { once:true });
+  });
+}
+
 /* Render */
 function render(reset=false){
   if(reset) visible=PAGE_SIZE;
@@ -1191,8 +671,7 @@ function render(reset=false){
     const tag=(tagSelect.value||"").toLowerCase();
     const text=(p.text||"").toLowerCase();
     const tags=(p.tags||[]).map(t=>String(t).toLowerCase());
-    return (!query||text.includes(query)) &&
-           (!tag||tags.includes(tag));
+    return (!query||text.includes(query)) && (!tag||tags.includes(tag));
   });
 
   const total=filtered.length;
@@ -1210,6 +689,7 @@ function render(reset=false){
           <div class="post__time">· ${relativeTime(p.date)}</div>
         </div>
         <div class="post__text">${p.text}</div>
+        ${renderMedia(p)}
         ${(p.tags||[]).length?`
           <div class="tags">
             ${p.tags.map(t=>`<button class="tagBtn" type="button" data-tag="${t}">#${t}</button>`).join("")}
@@ -1226,21 +706,29 @@ function render(reset=false){
 
   computeHeaderTrigger();
   updateBackToTop();
+  applyMediaAspectRatios();
 }
 
 /* Events */
-feed.onclick=e=>{
+feed.addEventListener("click",(e)=>{
   const t=e.target?.dataset?.tag;
-  if(t){ tagSelect.value=String(t).toLowerCase(); render(true); }
-};
-sortSelect.onchange=e=>{
-  currentSort=e.target.value;
-  render(true);
-};
+  if(t){ tagSelect.value=String(t).toLowerCase(); render(true); return; }
+
+  const media = e.target?.closest?.("[data-media]")?.dataset?.media;
+  if(media) openLightbox(media);
+});
+
+feed.addEventListener("keydown",(e)=>{
+  if(e.key !== "Enter") return;
+  const media = e.target?.dataset?.media;
+  if(media) openLightbox(media);
+});
+
+sortSelect.onchange=e=>{ currentSort=e.target.value; render(true); };
 q.oninput=()=>render(true);
 tagSelect.onchange=()=>render(true);
-more.onclick=()=>{visible+=PAGE_SIZE; render();};
-clear.onclick=()=>{q.value="";tagSelect.value="";render(true);};
+more.onclick=()=>{ visible+=PAGE_SIZE; render(); };
+clear.onclick=()=>{ q.value=""; tagSelect.value=""; render(true); };
 
 /* Init */
 render(true);
