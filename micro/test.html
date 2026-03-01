@@ -50,6 +50,7 @@ body{
   -webkit-font-smoothing: antialiased;
 }
 
+/* ===== Top Bar ===== */
 .topbar{
   position:fixed;
   top:0; left:0; right:0;
@@ -108,9 +109,23 @@ body{
   cursor:pointer;
 }
 
-.topInset{ height: var(--topbarH); }
+/* Back to top pill */
+.backToTop{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
 
-/* Layout */
+.backToTop.visible{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.topInset{
+  height: var(--topbarH);
+}
+
+/* ===== Layout ===== */
 .layout{
   max-width:var(--maxw);
   margin:0 auto;
@@ -244,7 +259,6 @@ h1{
   color:var(--muted);
 }
 
-/* Footer */
 .footerRow{
   display:flex;
   justify-content:center;
@@ -277,11 +291,12 @@ h1{
       </select>
 
       <button id="themeToggle" class="themeBtn">Dark</button>
+      <button id="backToTop" class="themeBtn backToTop">↑ Top</button>
     </div>
   </div>
 </header>
 
-<div class="topInset" aria-hidden="true"></div>
+<div class="topInset"></div>
 
 <main class="layout">
 
@@ -638,6 +653,42 @@ const posts=[
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+
   
 ];
 
@@ -652,8 +703,9 @@ const more=document.getElementById("more");
 const clear=document.getElementById("clear");
 const sortSelect=document.getElementById("sortSelect");
 const counter=document.getElementById("counter");
+const backToTop=document.getElementById("backToTop");
 
-/* Populate tag dropdown */
+/* Populate tags */
 function populateTags(){
   const tagSet=new Set();
   posts.forEach(p=>(p.tags||[]).forEach(t=>tagSet.add(String(t).toLowerCase())));
@@ -677,7 +729,19 @@ themeBtn.onclick=()=>{
 };
 applyTheme(localStorage.getItem("theme")||"light");
 
-/* Utils */
+/* Back to top */
+window.addEventListener("scroll",()=>{
+  if(window.scrollY>300){
+    backToTop.classList.add("visible");
+  } else {
+    backToTop.classList.remove("visible");
+  }
+});
+backToTop.onclick=()=>{
+  window.scrollTo({top:0,behavior:"smooth"});
+};
+
+/* Utilities */
 function initials(name=""){return name.split(" ").filter(Boolean).map(n=>n[0]).join("").slice(0,2).toUpperCase();}
 function avatar(p){
   if(p.avatar) return `<img src="${p.avatar}" alt="">`;
@@ -691,14 +755,9 @@ function relativeTime(iso){
   if(diff<60) return Math.floor(diff)+"s";
   if(diff<3600) return Math.floor(diff/60)+"m";
   if(diff<86400) return Math.floor(diff/3600)+"h";
-
-  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  const that=new Date(d.getFullYear(),d.getMonth(),d.getDate());
-  const dayDiff=Math.round((today-that)/86400000);
-
-  if(dayDiff===1) return "Yesterday";
-  if(dayDiff<7) return dayDiff+"d";
-  if(dayDiff<30) return Math.floor(dayDiff/7)+"w";
+  const days=Math.floor(diff/86400);
+  if(days===1) return "Yesterday";
+  if(days<7) return days+"d";
   return d.toLocaleDateString(undefined,{month:"short",day:"numeric"});
 }
 function getSorted(){
@@ -723,9 +782,9 @@ function render(reset=false){
            (!tag||tags.includes(tag));
   });
 
-  const total = filtered.length;
-  const shown = Math.min(visible, total);
-  counter.textContent = `Showing ${shown} of ${total} posts`;
+  const total=filtered.length;
+  const shown=Math.min(visible,total);
+  counter.textContent=`Showing ${shown} of ${total} posts`;
 
   const slice=filtered.slice(0,visible);
 
@@ -740,13 +799,13 @@ function render(reset=false){
         <div class="post__text">${p.text}</div>
         ${(p.tags||[]).length?`
           <div class="tags">
-            ${p.tags.map(t=>`<button class="tagBtn" type="button" data-tag="${t}">#${t}</button>`).join("")}
+            ${p.tags.map(t=>`<button class="tagBtn" data-tag="${t}">#${t}</button>`).join("")}
           </div>`:""}
       </div>
     </article>
   `).join(""):`<div class="empty">No posts found.</div>`;
 
-  more.style.display = total > visible ? "block" : "none";
+  more.style.display=total>visible?"block":"none";
 
   feed.classList.remove("isAnimating");
   void feed.offsetWidth;
@@ -765,7 +824,7 @@ sortSelect.onchange=e=>{
 q.oninput=()=>render(true);
 tagSelect.onchange=()=>render(true);
 more.onclick=()=>{visible+=PAGE_SIZE; render();};
-clear.onclick=()=>{q.value=""; tagSelect.value=""; render(true);};
+clear.onclick=()=>{q.value="";tagSelect.value="";render(true);};
 
 render(true);
 </script>
