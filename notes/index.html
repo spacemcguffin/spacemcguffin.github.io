@@ -53,21 +53,6 @@
   --shadow2: 0 10px 30px rgba(0,0,0,.45);
 }
 
-
-  ::-moz-selection {
-	background: #cfd8e4;
-	text-shadow: none;
-  color:#000000;
-}
-
-::selection {
-	background: #cfd8e4;
-	text-shadow: none;
-  color:#000000;
-} 
-
-  
-
 *{box-sizing:border-box;}
 
 body{
@@ -328,7 +313,7 @@ h1{
 
   position:relative;
 
-  /* IMPORTANT: allow tooltips to escape card */
+  /* allow tooltips to escape card */
   overflow: visible;
 }
 
@@ -339,8 +324,8 @@ h1{
 }
 
 .post__avatar{
-  width:42px;
-  height:42px;
+  width:38px;
+  height:38px;
   border-radius:999px;
   background: var(--avatarBg);
   display:flex;
@@ -432,14 +417,12 @@ h1{
   border-radius: 10px;
 }
 
-/* === Dark-mode tooltip polish (less transparent + cleaner glass) === */
+/* === Dark-mode tooltip polish === */
 :root[data-theme="dark"] .post__time::after{
   background: rgba(10,12,18,.88);
   border: 1px solid rgba(255,255,255,.14);
   color: rgba(255,255,255,.92);
   box-shadow: 0 22px 55px rgba(0,0,0,.65);
-
-  /* slightly less blur than the page glass so it stays crisp */
   backdrop-filter: blur(10px) saturate(140%);
   -webkit-backdrop-filter: blur(10px) saturate(140%);
 }
@@ -447,7 +430,6 @@ h1{
   background: rgba(10,12,18,.88);
   border-left: 1px solid rgba(255,255,255,.14);
   border-top: 1px solid rgba(255,255,255,.14);
-
   backdrop-filter: blur(10px) saturate(140%);
   -webkit-backdrop-filter: blur(10px) saturate(140%);
 }
@@ -809,27 +791,49 @@ h1{
 </div>
 
 <script>
+/* === 4 EXAMPLE POSTS === */
 const posts=[
-
   {
-    date:"2026-03-01T20:52:00Z",
+    date:"2026-03-02T18:30:00Z",
     name:"Lewis",
-    avatar:"/wiki/img/fractalavatar.png",
-    avatarText:"LC",
-    text:"Just created this mini Twitter-esque page for notes, thoughts, updates, and whatever else springs to mind.",
-    tags:["updates"],
+    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
+    text:"Four-card layout test.\nFeels balanced even when the thumbnails are chaotic.",
+    tags:["web","design","lewflix"],
+    media:[
+      "https://lewis.lc/wiki/img/episodes/tc.png",
+      "https://lewis.lc/wiki/img/episodes/twith.png",
+      "https://lewis.lc/wiki/img/episodes/sns.png",
+      "https://lewis.lc/wiki/img/episodes/tco.png"
+    ]
   },
-
-	  {
-    date:"2012-03-02T20:52:00Z",
+  {
+    date:"2026-03-01T20:15:00Z",
     name:"Lewis",
-    avatar:"/wiki/img/fractalavatar.png",
-    avatarText:"LC",
-    text:"Living in student flats is often quite shit due to cuntish people making shitloads of noise, and generally being arseholes. The guy in the room above me, especially.\n\nBut tonight, as I’m feeling the lowest I’ve felt for a long time, all I can hear is someone playing the guitar and I love it. It’s keeping me sane. I just want to go and hug whoever it is and say thanks.",
-    tags:["blog"],
+    avatarText:"LM",
+    text:"Tiny rule: if a thought fits in one breath, it belongs here.",
+    tags:["writing","notes"]
   },
-
-
+  {
+    date:"2026-03-01T12:40:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
+    text:"Building a minimal self-hosted microblog.\nFeels calm. Feels permanent.",
+    tags:["web","notes"],
+    media:[
+      "https://lewis.lc/wiki/img/episodes/twith.png"
+    ]
+  },
+  {
+    date:"2026-02-10T09:10:00Z",
+    name:"Lewis Maddox",
+    avatarText:"LM",
+    text:"Old post test: date should show the year once it stops being relative time.",
+    tags:["notes","meta"],
+    media:[
+      "https://lewis.lc/wiki/img/episodes/tt.png",
+      "https://lewis.lc/wiki/img/episodes/sns.png"
+    ]
+  }
 ];
 
 /* Add stable IDs once */
@@ -887,9 +891,9 @@ function buildTrack(){
   const nextI = idxWrap(galleryIndex + 1, total);
 
   const slides = [
-    { src: gallery[prevI],  i: prevI },
-    { src: gallery[galleryIndex], i: galleryIndex },
-    { src: gallery[nextI],  i: nextI }
+    { src: gallery[prevI] },
+    { src: gallery[galleryIndex] },
+    { src: gallery[nextI] }
   ];
 
   slides.forEach(s=>{
@@ -1066,7 +1070,7 @@ function relativeTime(iso){
   const days=Math.floor(diff/86400);
   if(days===1) return "Yesterday";
   if(days<7) return days+"d";
-  return d.toLocaleDateString(undefined,{month:"short",day:"numeric"});
+  return d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
 }
 
 /* Full date/time for tooltip */
@@ -1161,7 +1165,10 @@ function render(reset=false){
         </div>
         <div class="post__text">${p.text}</div>
         ${renderMedia(p)}
-
+        ${(p.tags||[]).length?`
+          <div class="tags">
+            ${p.tags.map(t=>`<button class="tagBtn" type="button" data-tag="${t}">#${t}</button>`).join("")}
+          </div>`:""}
       </div>
     </article>
   `).join("") : `<div class="empty">No posts found.</div>`;
