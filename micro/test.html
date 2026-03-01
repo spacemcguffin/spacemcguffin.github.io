@@ -132,7 +132,6 @@ body{
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
 
-/* FIX: dropdown option menu text in dark mode */
 :root[data-theme="dark"] select option{
   background-color: #0b1020;
   color: rgba(255,255,255,.92);
@@ -177,11 +176,16 @@ h1{
   color:var(--muted);
 }
 
+/* ===== Controls ===== */
 .controls{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
   margin-top:14px;
+
+  /* Fix A */
+  position:relative;
+  isolation:isolate;
 }
 
 .input,.select{
@@ -195,6 +199,10 @@ h1{
 
   backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  /* Fix A */
+  background-clip: padding-box;
+  overflow:hidden;
 }
 
 .btn{
@@ -209,25 +217,74 @@ h1{
 
   backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  /* Fix A */
+  background-clip: padding-box;
+  overflow:hidden;
 }
 
-/* Feed */
-.feed{ margin-top:10px; }
+/* Fix C: consistent select + custom arrow */
+.select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
 
-.feed.isAnimating{
-  animation: fade .18s ease-out both;
-}
-@keyframes fade{
-  from{opacity:0; transform:translateY(4px);}
-  to{opacity:1; transform:translateY(0);}
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 52%,
+    calc(100% - 12px) 52%;
+  background-size:6px 6px, 6px 6px;
+  background-repeat:no-repeat;
+  padding-right:34px;
 }
 
+/* ===== Feed ===== */
+.feed{ margin-top:14px; position:relative; }
+
+/* subtle background glow behind cards */
+.feed::before{
+  content:"";
+  position:absolute;
+  inset:-40px -20px;
+  z-index:-1;
+  background:
+    radial-gradient(600px 300px at 20% 0%, rgba(120,160,255,.15), transparent 60%),
+    radial-gradient(500px 400px at 80% 10%, rgba(180,120,255,.15), transparent 60%);
+  pointer-events:none;
+}
+
+/* ===== POSTS AS SOFT FLOATING GLASS CARDS ===== */
 .post{
   display:grid;
   grid-template-columns:46px 1fr;
   gap:12px;
-  padding:18px 0;
-  border-bottom:1px solid var(--border);
+
+  padding:14px 14px;
+  margin: 12px 0;
+
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  background: var(--panel2);
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.35);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  position:relative;
+  overflow:hidden;
+}
+
+/* keep hover calm: no lift, no sheen */
+:root[data-theme="dark"] .post{
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
 }
 
 .post__avatar{
@@ -241,6 +298,7 @@ h1{
   font-weight:600;
   font-size:13px;
   overflow:hidden;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
 }
 
 .post__avatar img{
@@ -253,6 +311,7 @@ h1{
   display:flex;
   gap:8px;
   align-items:center;
+  flex-wrap:wrap;
 }
 
 .post__name{
@@ -266,13 +325,13 @@ h1{
 }
 
 .post__text{
-  margin:6px 0 8px;
+  margin:6px 0 10px;
   line-height:1.6;
   font-size:15px;
   white-space:pre-wrap;
 }
 
-/* ===== Media (auto aspect) ===== */
+/* ===== Media ===== */
 .media{
   margin-top:10px;
   display:grid;
@@ -283,7 +342,6 @@ h1{
 .media.cols-3{ grid-template-columns:repeat(2,1fr); }
 .media.cols-4{ grid-template-columns:repeat(2,1fr); }
 
-/* For 3 images, make first one full-width */
 .media.cols-3 .media__item:first-child{
   grid-column:1 / -1;
 }
@@ -291,15 +349,33 @@ h1{
 .media__item{
   border-radius:14px;
   overflow:hidden;
-  border:1px solid var(--border);
-  background: var(--panel2);
-  cursor:pointer;
 
-  /* auto-detected aspect ratio via --ar */
+  border:1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.35);
+
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.5);
+
+  cursor:pointer;
   aspect-ratio: var(--ar, 16/10);
+
+  transition: transform .2s ease;
 
   backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+}
+
+.media__item:hover{
+  transform: scale(1.02);
+}
+
+:root[data-theme="dark"] .media__item{
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 .media__item img{
@@ -330,12 +406,9 @@ h1{
 
   backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
-}
 
-.empty{
-  padding:30px 0;
-  text-align:center;
-  color:var(--muted);
+  background-clip: padding-box;
+  overflow:hidden;
 }
 
 .footerRow{
@@ -350,6 +423,12 @@ h1{
 .counter{
   font-size:13px;
   color: var(--muted);
+}
+
+.empty{
+  padding:30px 0;
+  text-align:center;
+  color:var(--muted);
 }
 
 /* ===== Lightbox ===== */
@@ -471,16 +550,15 @@ const posts=[
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
+    name:"Lewis Maddox",
+    avatarText:"LM",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
-
   {
     date:"2026-03-01T20:15:00Z",
     name:"Lewis",
-    avatarText:"LC",
+    avatarText:"LM",
     text:"Tiny rule for myself: if a thought fits in one breath, it belongs here.",
     tags:["writing","notes"]
   },
@@ -497,14 +575,12 @@ const posts=[
   },
   {
     date:"2026-03-02T13:45:00Z",
-    name:"Lewis",
-    avatarText:"LC",
+    name:"Lewis Maddox",
+    avatarText:"LM",
     text:"Testing mixed media layouts — single image posts should feel calm, not ‘gallery’.",
     tags:["notes","layout"],
     media:"https://lewis.lc/wiki/img/episodes/tt.png"
   },
-
-  /* === New example post (4 images) === */
   {
     date:"2026-03-02T18:30:00Z",
     name:"Lewis",
@@ -700,10 +776,6 @@ function render(reset=false){
 
   more.style.display = total > visible ? "block" : "none";
 
-  feed.classList.remove("isAnimating");
-  void feed.offsetWidth;
-  feed.classList.add("isAnimating");
-
   computeHeaderTrigger();
   updateBackToTop();
   applyMediaAspectRatios();
@@ -712,8 +784,11 @@ function render(reset=false){
 /* Events */
 feed.addEventListener("click",(e)=>{
   const t=e.target?.dataset?.tag;
-  if(t){ tagSelect.value=String(t).toLowerCase(); render(true); return; }
-
+  if(t){
+    tagSelect.value=String(t).toLowerCase();
+    render(true);
+    return;
+  }
   const media = e.target?.closest?.("[data-media]")?.dataset?.media;
   if(media) openLightbox(media);
 });
