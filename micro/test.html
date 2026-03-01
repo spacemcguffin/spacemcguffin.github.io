@@ -51,13 +51,11 @@ body{
 }
 
 .topbar{
-  /* CHANGED: fixed overlay */
   position:fixed;
   top:0; left:0; right:0;
   height:var(--topbarH);
   z-index:100;
 
-  /* translucent so content scrolls behind */
   background: color-mix(in srgb, var(--panel) 82%, transparent);
   border-bottom:1px solid color-mix(in srgb, var(--border) 85%, transparent);
   backdrop-filter: blur(10px);
@@ -110,7 +108,12 @@ body{
   cursor:pointer;
 }
 
-/* Layout (no top padding intentionally — content goes behind topbar) */
+/* ✅ NEW: spacer so header isn't hidden under fixed bar */
+.topInset{
+  height: var(--topbarH);
+}
+
+/* Layout */
 .layout{
   max-width:var(--maxw);
   margin:0 auto;
@@ -274,6 +277,9 @@ h1{
   </div>
 </header>
 
+<!-- ✅ NEW: spacer so page content starts below the fixed bar -->
+<div class="topInset" aria-hidden="true"></div>
+
 <main class="layout">
 
 <div class="timelineHead">
@@ -308,158 +314,222 @@ const posts=[
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis Christian",
-    avatarText:"LM",
+    name:"Lewis",
+    avatarText:"LC",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
-  },  
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  
 ];
 
 const PAGE_SIZE=10;
