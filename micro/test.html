@@ -11,33 +11,46 @@
 
 <style>
 :root{
-  --bg: #f5f5f7;
-  --panel: #ffffff;
-  --border: #e6e6e8;
-  --text: #111111;
-  --muted: #6e6e73;
-  --muted2: #9b9ba1;
+  --bg0:#f3f4f8;
+  --bg1:#e9ecf6;
 
-  --avatarBg: #e2e2e5;
-  --tagBg: rgba(0,0,0,.04);
-  --tagBorder: rgba(0,0,0,.10);
+  --panel: rgba(255,255,255,.62);
+  --panel2: rgba(255,255,255,.42);
+  --border: rgba(0,0,0,.10);
+
+  --text:#111111;
+  --muted: rgba(17,17,17,.62);
+  --muted2: rgba(17,17,17,.45);
+
+  --avatarBg: rgba(0,0,0,.06);
+
+  --glassBlur: 14px;
+  --glassSat: 140%;
+
+  --shadow2: 0 10px 30px rgba(0,0,0,.08);
 
   --maxw: 720px;
   --topbarH: 56px;
 }
 
 :root[data-theme="dark"]{
-  --bg: #0f1220;
-  --panel: #151a2f;
-  --border: rgba(255,255,255,.08);
+  --bg0:#070814;
+  --bg1:#0b1020;
+
+  --panel: rgba(255,255,255,.06);
+  --panel2: rgba(255,255,255,.10);
+  --border: rgba(255,255,255,.10);
 
   --text: rgba(255,255,255,.92);
   --muted: rgba(255,255,255,.65);
   --muted2: rgba(255,255,255,.45);
 
-  --avatarBg: rgba(255,255,255,.08);
-  --tagBg: rgba(255,255,255,.05);
-  --tagBorder: rgba(255,255,255,.10);
+  --avatarBg: rgba(255,255,255,.10);
+
+  --glassBlur: 16px;
+  --glassSat: 155%;
+
+  --shadow2: 0 10px 30px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box;}
@@ -45,9 +58,14 @@
 body{
   margin:0;
   font-family:'Inter', system-ui, sans-serif;
-  background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  background:
+    radial-gradient(1200px 700px at 15% 0%, color-mix(in srgb, var(--bg1) 80%, transparent), transparent 60%),
+    radial-gradient(900px 600px at 85% 10%, color-mix(in srgb, var(--bg0) 85%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
 }
 
 /* ===== Top Bar ===== */
@@ -57,10 +75,12 @@ body{
   height:var(--topbarH);
   z-index:100;
 
-  background: color-mix(in srgb, var(--panel) 82%, transparent);
-  border-bottom:1px solid color-mix(in srgb, var(--border) 85%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow2);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 
   display:flex;
   align-items:center;
@@ -102,14 +122,26 @@ body{
   height:34px;
   border-radius:999px;
   border:1px solid var(--border);
-  background: var(--panel);
+  background: var(--panel2);
   color: var(--text);
   padding:0 14px;
   font-size:13px;
   cursor:pointer;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
 
-/* Back to top pill */
+/* FIX: dropdown option menu text in dark mode */
+:root[data-theme="dark"] select option{
+  background-color: #0b1020;
+  color: rgba(255,255,255,.92);
+}
+:root:not([data-theme="dark"]) select option{
+  background-color: #ffffff;
+  color: #111111;
+}
+
 .backToTop{
   opacity:0;
   pointer-events:none;
@@ -156,23 +188,30 @@ h1{
   height:38px;
   border-radius:10px;
   border:1px solid var(--border);
-  background: var(--panel);
+  background: var(--panel2);
   color: var(--text);
   padding:0 12px;
   font-size:14px;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
 
 .btn{
   height:38px;
   border-radius:999px;
   border:1px solid var(--border);
-  background: var(--panel);
+  background: var(--panel2);
   color: var(--text);
   padding:0 14px;
   font-size:14px;
   cursor:pointer;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
 
+/* Feed */
 .feed{ margin-top:10px; }
 
 .feed.isAnimating{
@@ -241,12 +280,15 @@ h1{
 
 .tagBtn{
   font-size:12px;
-  border:1px solid var(--tagBorder);
-  background: var(--tagBg);
+  border:1px solid var(--border);
+  background: var(--panel2);
   color: var(--muted);
   padding:5px 10px;
   border-radius:999px;
   cursor:pointer;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
 
 .empty{
@@ -296,7 +338,6 @@ h1{
 
 <main class="layout">
 
-<!-- ✅ give the header section an id so we can measure it -->
 <section id="pageHeader" class="timelineHead">
   <h1>Notes</h1>
   <div class="subtitle">Short-form writing, minimal and chronological.</div>
@@ -330,355 +371,11 @@ const posts=[
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
+    name:"Lewis Maddox",
+    avatarText:"LM",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-  
+  }
 ];
 
 const PAGE_SIZE=10;
@@ -723,9 +420,8 @@ applyTheme(localStorage.getItem("theme")||"light");
 let headerTriggerY = 0;
 
 function computeHeaderTrigger(){
-  // show after the header has fully scrolled under the fixed bar
   const rect = pageHeader.getBoundingClientRect();
-  headerTriggerY = window.scrollY + rect.bottom - 8; // small buffer
+  headerTriggerY = window.scrollY + rect.bottom - 8;
 }
 function updateBackToTop(){
   if(window.scrollY > headerTriggerY){
@@ -742,7 +438,9 @@ backToTop.onclick=()=>{
 };
 
 /* Utilities */
-function initials(name=""){return name.split(" ").filter(Boolean).map(n=>n[0]).join("").slice(0,2).toUpperCase();}
+function initials(name=""){
+  return name.split(" ").filter(Boolean).map(n=>n[0]).join("").slice(0,2).toUpperCase();
+}
 function avatar(p){
   if(p.avatar) return `<img src="${p.avatar}" alt="">`;
   if(p.avatarText) return p.avatarText;
@@ -788,7 +486,7 @@ function render(reset=false){
 
   const slice=filtered.slice(0,visible);
 
-  feed.innerHTML=slice.length?slice.map(p=>`
+  feed.innerHTML = slice.length ? slice.map(p=>`
     <article class="post">
       <div class="post__avatar">${avatar(p)}</div>
       <div>
@@ -799,19 +497,18 @@ function render(reset=false){
         <div class="post__text">${p.text}</div>
         ${(p.tags||[]).length?`
           <div class="tags">
-            ${p.tags.map(t=>`<button class="tagBtn" data-tag="${t}">#${t}</button>`).join("")}
+            ${p.tags.map(t=>`<button class="tagBtn" type="button" data-tag="${t}">#${t}</button>`).join("")}
           </div>`:""}
       </div>
     </article>
-  `).join(""):`<div class="empty">No posts found.</div>`;
+  `).join("") : `<div class="empty">No posts found.</div>`;
 
-  more.style.display=total>visible?"block":"none";
+  more.style.display = total > visible ? "block" : "none";
 
   feed.classList.remove("isAnimating");
   void feed.offsetWidth;
   feed.classList.add("isAnimating");
 
-  // header height/position can change (e.g. tag dropdown filled, responsive wrap)
   computeHeaderTrigger();
   updateBackToTop();
 }
