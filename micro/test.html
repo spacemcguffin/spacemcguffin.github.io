@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -117,7 +117,6 @@ body{
   gap:10px;
 }
 
-.sortSelect,
 .themeBtn{
   height:34px;
   border-radius:999px;
@@ -146,7 +145,7 @@ body{
 /* Make disabled "heading" options readable */
 select option:disabled{
   font-weight:600;
-  opacity:1; /* browsers like to fade disabled options too much */
+  opacity:1;
 }
 :root[data-theme="dark"] select option:disabled{
   color: rgba(255,255,255,.65);
@@ -379,7 +378,7 @@ h1{
   overflow:hidden;
 }
 
-/* ===== Pill hover/click polish (spliced in) ===== */
+/* ===== Pill hover/click polish ===== */
 .tagBtn{
   position:relative;
   transform: translateZ(0);
@@ -401,7 +400,6 @@ h1{
   transition: opacity .18s ease;
   background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.55), transparent 65%);
 }
-
 :root[data-theme="dark"] .tagBtn::before{
   background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.14), transparent 65%);
 }
@@ -414,13 +412,11 @@ h1{
     0 10px 20px rgba(0,0,0,.10),
     inset 0 1px 0 rgba(255,255,255,.35);
 }
-
 :root[data-theme="dark"] .tagBtn:hover{
   box-shadow:
     0 12px 24px rgba(0,0,0,.45),
     inset 0 1px 0 rgba(255,255,255,.06);
 }
-
 .tagBtn:hover::before{ opacity:1; }
 
 .tagBtn:active{
@@ -439,7 +435,6 @@ h1{
   .tagBtn{ transition:none; }
   .tagBtn::before{ transition:none; }
 }
-/* ===== end pill polish ===== */
 
 .footerRow{
   display:flex;
@@ -598,11 +593,6 @@ h1{
     </div>
 
     <div class="topbar__right">
-      <select id="sortSelect" class="sortSelect" aria-label="Sort">
-        <option value="new">Newest first</option>
-        <option value="old">Oldest first</option>
-      </select>
-
       <button id="themeToggle" class="themeBtn" type="button">Dark</button>
       <button id="backToTop" class="themeBtn backToTop" type="button">↑ Top</button>
     </div>
@@ -624,8 +614,16 @@ h1{
       <option value="">All tags</option>
     </select>
 
-    <select id="period" class="select" aria-label="Filter by month or year">
-      <option value="">All time</option>
+    <!-- Wobble-style View dropdown (sort + ranges) -->
+    <select id="view" class="select" aria-label="View">
+      <option value="all">All time</option>
+      <option value="" disabled>── Sort ──</option>
+      <option value="sort:new">Newest first</option>
+      <option value="sort:old">Oldest first</option>
+      <option value="" disabled>── Date range ──</option>
+      <option value="range:30">Last 30 days</option>
+      <option value="range:90">Last 90 days</option>
+      <option value="range:365">Last 365 days</option>
     </select>
 
     <button id="clear" class="btn" type="button">Clear</button>
@@ -732,10 +730,9 @@ let currentSort="new";
 const feed=document.getElementById("feed");
 const q=document.getElementById("q");
 const tagSelect=document.getElementById("tag");
-const periodSelect=document.getElementById("period");
+const viewSelect=document.getElementById("view");
 const more=document.getElementById("more");
 const clear=document.getElementById("clear");
-const sortSelect=document.getElementById("sortSelect");
 const counter=document.getElementById("counter");
 const backToTop=document.getElementById("backToTop");
 const pageHeader=document.getElementById("pageHeader");
@@ -843,11 +840,8 @@ function slideTo(dir){ // dir: -1 prev, +1 next
 
   const onDone = () => {
     galleryIndex = idxWrap(galleryIndex + dir, total);
-
-    // rebuild buffer instantly and re-center
     buildTrack();
     updateCaption();
-
     animating = false;
   };
 
@@ -865,7 +859,6 @@ lightbox.addEventListener("click", (e)=>{ if(e.target === lightbox) closeLightbo
 
 window.addEventListener("keydown", (e)=>{
   if(!lightbox.classList.contains("open")) return;
-
   if(e.key === "Escape") closeLightbox();
   if(e.key === "ArrowLeft") prevImg();
   if(e.key === "ArrowRight") nextImg();
@@ -879,46 +872,39 @@ function populateTags(){
   tagSelect.innerHTML='<option value="">All tags</option>'+
     sortedTags.map(t=>`<option value="${t}">#${t}</option>`).join("");
 }
-
-/* Month/Year dropdown (NO optgroup — uses disabled divider options instead) */
-function fmtMonthYear(key){
-  const [y,m] = key.split("-");
-  const d = new Date(Number(y), Number(m)-1, 1);
-  return d.toLocaleDateString(undefined,{month:"short",year:"numeric"});
-}
-function populatePeriods(){
-  const years=new Set();
-  const months=new Set();
-
-  posts.forEach(p=>{
-    const d = new Date(p.date);
-    if(isNaN(d)) return;
-    const y = d.getFullYear();
-    const m = String(d.getMonth()+1).padStart(2,"0");
-    years.add(String(y));
-    months.add(`${y}-${m}`);
-  });
-
-  const yearList=[...years].sort((a,b)=>Number(b)-Number(a));
-  const monthList=[...months].sort((a,b)=> b.localeCompare(a)); // newest month first
-
-  let html = `<option value="">All time</option>`;
-
-  if(yearList.length){
-    html += `<option value="" disabled>── Years ──</option>`;
-    html += yearList.map(y=>`<option value="y:${y}">${y}</option>`).join("");
-  }
-
-  if(monthList.length){
-    html += `<option value="" disabled>── Months ──</option>`;
-    html += monthList.map(k=>`<option value="m:${k}">${fmtMonthYear(k)}</option>`).join("");
-  }
-
-  periodSelect.innerHTML = html;
-}
-
 populateTags();
-populatePeriods();
+
+/* Sort + range (from View dropdown) */
+function applyViewSelection(){
+  const val = (viewSelect.value || "all").trim();
+  if(val.startsWith("sort:")){
+    currentSort = val.split(":")[1] === "old" ? "old" : "new";
+  }
+}
+
+function matchesView(post){
+  const val = (viewSelect.value || "all").trim();
+  if(!val || val === "all") return true;
+
+  const d = new Date(post.date);
+  if(isNaN(d)) return false;
+
+  if(val.startsWith("range:")){
+    const days = Number(val.split(":")[1] || 0);
+    if(!days) return true;
+    const now = new Date();
+    const cutoff = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+    return d >= cutoff;
+  }
+
+  // sort:* doesn't filter posts
+  return true;
+}
+
+viewSelect.onchange = () => {
+  applyViewSelection();
+  render(true);
+};
 
 /* Theme */
 const root=document.documentElement;
@@ -977,27 +963,6 @@ function getSorted(){
   );
 }
 
-/* Period matching */
-function matchesPeriod(post){
-  const val = (periodSelect.value||"").trim();
-  if(!val) return true;
-
-  const d = new Date(post.date);
-  if(isNaN(d)) return false;
-
-  if(val.startsWith("y:")){
-    const y = val.slice(2);
-    return String(d.getFullYear()) === y;
-  }
-  if(val.startsWith("m:")){
-    const key = val.slice(2);
-    const y = d.getFullYear();
-    const m = String(d.getMonth()+1).padStart(2,"0");
-    return `${y}-${m}` === key;
-  }
-  return true;
-}
-
 /* Media rendering (adds postid + index for gallery nav) */
 function renderMedia(p){
   const arr = Array.isArray(p.media) ? p.media : (p.media ? [p.media] : []);
@@ -1048,8 +1013,8 @@ function render(reset=false){
     const tags=(p.tags||[]).map(t=>String(t).toLowerCase());
     const tagOk = (!tag||tags.includes(tag));
     const qOk = (!query||text.includes(query));
-    const periodOk = matchesPeriod(p);
-    return qOk && tagOk && periodOk;
+    const viewOk = matchesView(p);
+    return qOk && tagOk && viewOk;
   });
 
   const total=filtered.length;
@@ -1110,19 +1075,20 @@ feed.addEventListener("keydown",(e)=>{
   }
 });
 
-sortSelect.onchange=e=>{ currentSort=e.target.value; render(true); };
 q.oninput=()=>render(true);
 tagSelect.onchange=()=>render(true);
-periodSelect.onchange=()=>render(true);
 more.onclick=()=>{ visible+=PAGE_SIZE; render(); };
+
 clear.onclick=()=>{
   q.value="";
   tagSelect.value="";
-  periodSelect.value="";
+  viewSelect.value="all";
+  currentSort="new";
   render(true);
 };
 
 /* Init */
+applyViewSelection();
 render(true);
 computeHeaderTrigger();
 updateBackToTop();
