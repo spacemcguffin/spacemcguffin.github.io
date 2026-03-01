@@ -132,6 +132,7 @@ body{
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
 
+/* Dropdown menu colours */
 :root[data-theme="dark"] select option{
   background-color: #0b1020;
   color: rgba(255,255,255,.92);
@@ -139,6 +140,20 @@ body{
 :root:not([data-theme="dark"]) select option{
   background-color: #ffffff;
   color: #111111;
+}
+
+/* Make disabled "heading" options readable */
+select option:disabled{
+  font-weight:600;
+  opacity:1; /* browsers like to fade disabled options too much */
+}
+:root[data-theme="dark"] select option:disabled{
+  color: rgba(255,255,255,.65);
+  background-color:#0b1020;
+}
+:root:not([data-theme="dark"]) select option:disabled{
+  color: rgba(0,0,0,.55);
+  background-color:#ffffff;
 }
 
 .backToTop{
@@ -182,8 +197,6 @@ h1{
   gap:8px;
   flex-wrap:wrap;
   margin-top:14px;
-
-  /* Fix A */
   position:relative;
   isolation:isolate;
 }
@@ -200,7 +213,6 @@ h1{
   backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 
-  /* Fix A */
   background-clip: padding-box;
   overflow:hidden;
 }
@@ -218,7 +230,6 @@ h1{
   backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 
-  /* Fix A */
   background-clip: padding-box;
   overflow:hidden;
 }
@@ -242,8 +253,6 @@ h1{
 
 /* ===== Feed ===== */
 .feed{ margin-top:14px; position:relative; }
-
-/* subtle background glow behind cards */
 .feed::before{
   content:"";
   position:absolute;
@@ -255,7 +264,7 @@ h1{
   pointer-events:none;
 }
 
-/* ===== POSTS AS SOFT FLOATING GLASS CARDS ===== */
+/* ===== Posts ===== */
 .post{
   display:grid;
   grid-template-columns:46px 1fr;
@@ -280,7 +289,6 @@ h1{
   overflow:hidden;
 }
 
-/* keep hover calm: no lift, no sheen */
 :root[data-theme="dark"] .post{
   box-shadow:
     0 18px 45px rgba(0,0,0,.45),
@@ -300,29 +308,11 @@ h1{
   overflow:hidden;
   border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
 }
+.post__avatar img{ width:100%; height:100%; object-fit:cover; }
 
-.post__avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.post__top{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-.post__name{
-  font-weight:600;
-  font-size:14px;
-}
-
-.post__time{
-  font-size:13px;
-  color:var(--muted2);
-}
+.post__top{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.post__name{ font-weight:600; font-size:14px; }
+.post__time{ font-size:13px; color:var(--muted2); }
 
 .post__text{
   margin:6px 0 10px;
@@ -332,19 +322,12 @@ h1{
 }
 
 /* ===== Media ===== */
-.media{
-  margin-top:10px;
-  display:grid;
-  gap:8px;
-}
+.media{ margin-top:10px; display:grid; gap:8px; }
 .media.cols-1{ grid-template-columns:1fr; }
 .media.cols-2{ grid-template-columns:repeat(2,1fr); }
 .media.cols-3{ grid-template-columns:repeat(2,1fr); }
 .media.cols-4{ grid-template-columns:repeat(2,1fr); }
-
-.media.cols-3 .media__item:first-child{
-  grid-column:1 / -1;
-}
+.media.cols-3 .media__item:first-child{ grid-column:1 / -1; }
 
 .media__item{
   border-radius:14px;
@@ -365,10 +348,7 @@ h1{
   backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
-
-.media__item:hover{
-  transform: scale(1.02);
-}
+.media__item:hover{ transform: scale(1.02); }
 
 :root[data-theme="dark"] .media__item{
   border:1px solid rgba(255,255,255,.08);
@@ -388,12 +368,7 @@ h1{
 }
 .media__item:hover img{ transform:scale(1.03); }
 
-.tags{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
+.tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
 
 .tagBtn{
   font-size:12px;
@@ -420,10 +395,7 @@ h1{
   flex-wrap:wrap;
 }
 
-.counter{
-  font-size:13px;
-  color: var(--muted);
-}
+.counter{ font-size:13px; color: var(--muted); }
 
 .empty{
   padding:30px 0;
@@ -512,9 +484,15 @@ h1{
 
   <div class="controls">
     <input id="q" class="input" type="search" placeholder="Search…" />
-    <select id="tag" class="select">
+
+    <select id="tag" class="select" aria-label="Filter by tag">
       <option value="">All tags</option>
     </select>
+
+    <select id="period" class="select" aria-label="Filter by month or year">
+      <option value="">All time</option>
+    </select>
+
     <button id="clear" class="btn" type="button">Clear</button>
   </div>
 </section>
@@ -603,6 +581,7 @@ let currentSort="new";
 const feed=document.getElementById("feed");
 const q=document.getElementById("q");
 const tagSelect=document.getElementById("tag");
+const periodSelect=document.getElementById("period");
 const more=document.getElementById("more");
 const clear=document.getElementById("clear");
 const sortSelect=document.getElementById("sortSelect");
@@ -637,7 +616,46 @@ function populateTags(){
   tagSelect.innerHTML='<option value="">All tags</option>'+
     sortedTags.map(t=>`<option value="${t}">#${t}</option>`).join("");
 }
+
+/* Month/Year dropdown (NO optgroup — uses disabled divider options instead) */
+function fmtMonthYear(key){
+  const [y,m] = key.split("-");
+  const d = new Date(Number(y), Number(m)-1, 1);
+  return d.toLocaleDateString(undefined,{month:"short",year:"numeric"});
+}
+function populatePeriods(){
+  const years=new Set();
+  const months=new Set();
+
+  posts.forEach(p=>{
+    const d = new Date(p.date);
+    if(isNaN(d)) return;
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,"0");
+    years.add(String(y));
+    months.add(`${y}-${m}`);
+  });
+
+  const yearList=[...years].sort((a,b)=>Number(b)-Number(a));
+  const monthList=[...months].sort((a,b)=> b.localeCompare(a)); // newest month first
+
+  let html = `<option value="">All time</option>`;
+
+  if(yearList.length){
+    html += `<option value="" disabled>── Years ──</option>`;
+    html += yearList.map(y=>`<option value="y:${y}">${y}</option>`).join("");
+  }
+
+  if(monthList.length){
+    html += `<option value="" disabled>── Months ──</option>`;
+    html += monthList.map(k=>`<option value="m:${k}">${fmtMonthYear(k)}</option>`).join("");
+  }
+
+  periodSelect.innerHTML = html;
+}
+
 populateTags();
+populatePeriods();
 
 /* Theme */
 const root=document.documentElement;
@@ -653,18 +671,15 @@ themeBtn.onclick=()=>{
 };
 applyTheme(localStorage.getItem("theme")||"light");
 
-/* Back to top: show only after passing header section */
+/* Back to top */
 let headerTriggerY = 0;
 function computeHeaderTrigger(){
   const rect = pageHeader.getBoundingClientRect();
   headerTriggerY = window.scrollY + rect.bottom - 8;
 }
 function updateBackToTop(){
-  if(window.scrollY > headerTriggerY){
-    backToTop.classList.add("visible");
-  } else {
-    backToTop.classList.remove("visible");
-  }
+  if(window.scrollY > headerTriggerY) backToTop.classList.add("visible");
+  else backToTop.classList.remove("visible");
 }
 window.addEventListener("resize", () => { computeHeaderTrigger(); updateBackToTop(); });
 window.addEventListener("scroll", updateBackToTop);
@@ -699,6 +714,27 @@ function getSorted(){
   );
 }
 
+/* Period matching */
+function matchesPeriod(post){
+  const val = (periodSelect.value||"").trim();
+  if(!val) return true;
+
+  const d = new Date(post.date);
+  if(isNaN(d)) return false;
+
+  if(val.startsWith("y:")){
+    const y = val.slice(2);
+    return String(d.getFullYear()) === y;
+  }
+  if(val.startsWith("m:")){
+    const key = val.slice(2);
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,"0");
+    return `${y}-${m}` === key;
+  }
+  return true;
+}
+
 /* Media rendering */
 function renderMedia(p){
   const arr = Array.isArray(p.media) ? p.media : (p.media ? [p.media] : []);
@@ -727,8 +763,7 @@ function applyMediaAspectRatios(){
       const w = img.naturalWidth || 0;
       const h = img.naturalHeight || 0;
       if(w && h){
-        const ar = (w / h);
-        img.parentElement.style.setProperty("--ar", ar.toFixed(4));
+        img.parentElement.style.setProperty("--ar", (w/h).toFixed(4));
       }
     };
 
@@ -747,7 +782,10 @@ function render(reset=false){
     const tag=(tagSelect.value||"").toLowerCase();
     const text=(p.text||"").toLowerCase();
     const tags=(p.tags||[]).map(t=>String(t).toLowerCase());
-    return (!query||text.includes(query)) && (!tag||tags.includes(tag));
+    const tagOk = (!tag||tags.includes(tag));
+    const qOk = (!query||text.includes(query));
+    const periodOk = matchesPeriod(p);
+    return qOk && tagOk && periodOk;
   });
 
   const total=filtered.length;
@@ -792,7 +830,6 @@ feed.addEventListener("click",(e)=>{
   const media = e.target?.closest?.("[data-media]")?.dataset?.media;
   if(media) openLightbox(media);
 });
-
 feed.addEventListener("keydown",(e)=>{
   if(e.key !== "Enter") return;
   const media = e.target?.dataset?.media;
@@ -802,8 +839,14 @@ feed.addEventListener("keydown",(e)=>{
 sortSelect.onchange=e=>{ currentSort=e.target.value; render(true); };
 q.oninput=()=>render(true);
 tagSelect.onchange=()=>render(true);
+periodSelect.onchange=()=>render(true);
 more.onclick=()=>{ visible+=PAGE_SIZE; render(); };
-clear.onclick=()=>{ q.value=""; tagSelect.value=""; render(true); };
+clear.onclick=()=>{
+  q.value="";
+  tagSelect.value="";
+  periodSelect.value="";
+  render(true);
+};
 
 /* Init */
 render(true);
