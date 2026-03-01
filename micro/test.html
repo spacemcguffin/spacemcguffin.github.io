@@ -379,6 +379,68 @@ h1{
   overflow:hidden;
 }
 
+/* ===== Pill hover/click polish (spliced in) ===== */
+.tagBtn{
+  position:relative;
+  transform: translateZ(0);
+  transition:
+    transform .16s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    background-color .18s ease;
+}
+
+.tagBtn::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:999px;
+  pointer-events:none;
+  opacity:0;
+  transition: opacity .18s ease;
+  background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.55), transparent 65%);
+}
+
+:root[data-theme="dark"] .tagBtn::before{
+  background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.14), transparent 65%);
+}
+
+.tagBtn:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--border) 55%, var(--text) 25%);
+  color: var(--text);
+  box-shadow:
+    0 10px 20px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+:root[data-theme="dark"] .tagBtn:hover{
+  box-shadow:
+    0 12px 24px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.tagBtn:hover::before{ opacity:1; }
+
+.tagBtn:active{
+  transform: translateY(0px) scale(.98);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.10),
+    inset 0 2px 8px rgba(0,0,0,.12);
+}
+
+.tagBtn:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--text) 30%, transparent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tagBtn{ transition:none; }
+  .tagBtn::before{ transition:none; }
+}
+/* ===== end pill polish ===== */
+
 .footerRow{
   display:flex;
   justify-content:center;
