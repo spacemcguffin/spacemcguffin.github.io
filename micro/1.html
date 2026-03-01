@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Notes</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg0:#f3f4f8;
+  --bg1:#e9ecf6;
+
+  --panel: rgba(255,255,255,.62);
+  --panel2: rgba(255,255,255,.42);
+  --border: rgba(0,0,0,.10);
+
+  --text:#111111;
+  --muted: rgba(17,17,17,.62);
+  --muted2: rgba(17,17,17,.45);
+
+  --avatarBg: rgba(0,0,0,.06);
+
+  --glassBlur: 14px;
+  --glassSat: 140%;
+
+  --shadow2: 0 10px 30px rgba(0,0,0,.08);
+
+  --maxw: 720px;
+  --topbarH: 56px;
+}
+
+:root[data-theme="dark"]{
+  --bg0:#070814;
+  --bg1:#0b1020;
+
+  --panel: rgba(255,255,255,.06);
+  --panel2: rgba(255,255,255,.10);
+  --border: rgba(255,255,255,.10);
+
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.65);
+  --muted2: rgba(255,255,255,.45);
+
+  --avatarBg: rgba(255,255,255,.10);
+
+  --glassBlur: 16px;
+  --glassSat: 155%;
+
+  --shadow2: 0 10px 30px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  font-family:'Inter', system-ui, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  background:
+    radial-gradient(1200px 700px at 15% 0%, color-mix(in srgb, var(--bg1) 80%, transparent), transparent 60%),
+    radial-gradient(900px 600px at 85% 10%, color-mix(in srgb, var(--bg0) 85%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+/* ===== Top Bar ===== */
+.topbar{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:var(--topbarH);
+  z-index:100;
+
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow2);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  display:flex;
+  align-items:center;
+}
+
+.wrap{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 16px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.brand{
+  font-weight:600;
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.brand__dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background: var(--text);
+}
+
+.topbar__right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.sortSelect,
+.themeBtn{
+  height:34px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  padding:0 14px;
+  font-size:13px;
+  cursor:pointer;
+  font-family: 'Inter', sans-serif;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+}
+
+/* ===== Posts ===== */
+
+.post{
+  display:grid;
+  grid-template-columns:46px 1fr;
+  gap:12px;
+  padding:14px 14px;
+  margin: 12px 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--panel2);
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.35);
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  position:relative;
+  overflow:hidden;
+}
+
+.post__avatar{
+  width:38px;
+  height:38px;
+  border-radius:999px;
+  background: var(--avatarBg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  font-size:13px;
+  overflow:hidden;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+.post__avatar img{ width:100%; height:100%; object-fit:cover; }
+
+.post__top{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.post__name{ font-weight:600; font-size:14px; }
+.post__time{ font-size:13px; color:var(--muted2); }
+
+.post__text{
+  margin:6px 0 10px;
+  line-height:1.6;
+  font-size:15px;
+  white-space:pre-wrap;
+}
+
+.tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+
+/* ===== Pill hover/click polish ===== */
+
+.tagBtn{
+  position:relative;
+  font-size:12px;
+  font-family: 'Inter', sans-serif;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  color: var(--muted);
+  padding:5px 10px;
+  border-radius:999px;
+  cursor:pointer;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  transform: translateZ(0);
+  transition:
+    transform .16s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    background-color .18s ease;
+}
+
+/* sheen */
+.tagBtn::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:999px;
+  pointer-events:none;
+  opacity:0;
+  transition: opacity .18s ease;
+  background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.55), transparent 65%);
+}
+
+:root[data-theme="dark"] .tagBtn::before{
+  background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.14), transparent 65%);
+}
+
+/* hover */
+.tagBtn:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--border) 55%, var(--text) 25%);
+  color: var(--text);
+  box-shadow:
+    0 10px 20px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.35);
+}
+
+:root[data-theme="dark"] .tagBtn:hover{
+  box-shadow:
+    0 12px 24px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.tagBtn:hover::before{ opacity:1; }
+
+/* pressed */
+.tagBtn:active{
+  transform: translateY(0px) scale(.98);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.10),
+    inset 0 2px 8px rgba(0,0,0,.12);
+}
+
+.tagBtn:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--text) 30%, transparent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tagBtn{ transition:none; }
+  .tagBtn::before{ transition:none; }
+}
+</style>
+</head>
+<body>
+
+<!-- your HTML structure remains exactly the same -->
+
+<script>
+/* your entire existing JS remains exactly the same */
+</script>
+
+</body>
+</html>
