@@ -23,6 +23,7 @@
   --tagBorder: rgba(0,0,0,.10);
 
   --maxw: 720px;
+  --topbarH: 56px;
 }
 
 :root[data-theme="dark"]{
@@ -50,11 +51,18 @@ body{
 }
 
 .topbar{
-  position:sticky;
-  top:0;
-  height:56px;
-  background:var(--panel);
-  border-bottom:1px solid var(--border);
+  /* CHANGED: fixed overlay */
+  position:fixed;
+  top:0; left:0; right:0;
+  height:var(--topbarH);
+  z-index:100;
+
+  /* translucent so content scrolls behind */
+  background: color-mix(in srgb, var(--panel) 82%, transparent);
+  border-bottom:1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
   display:flex;
   align-items:center;
 }
@@ -102,6 +110,7 @@ body{
   cursor:pointer;
 }
 
+/* Layout (no top padding intentionally — content goes behind topbar) */
 .layout{
   max-width:var(--maxw);
   margin:0 auto;
@@ -299,25 +308,158 @@ const posts=[
   },
   {
     date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
+    name:"Lewis Christian",
+    avatarText:"LM",
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
-    {
-    date:"2026-02-28T17:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms. Just reverse chronological order.",
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
-      {
-    date:"2026-02-25T13:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"I love both Hartnell and Troughton.",
-    tags:["doctor who"]
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
   },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis Christian",
+    avatarText:"LM",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },  
 ];
 
 const PAGE_SIZE=10;
@@ -334,8 +476,8 @@ const sortSelect=document.getElementById("sortSelect");
 /* Populate tag dropdown */
 function populateTags(){
   const tagSet=new Set();
-  posts.forEach(p=>(p.tags||[]).forEach(t=>tagSet.add(t.toLowerCase())));
-  const sortedTags=[...tagSet].sort();
+  posts.forEach(p=>(p.tags||[]).forEach(t=>tagSet.add(String(t).toLowerCase())));
+  const sortedTags=[...tagSet].filter(Boolean).sort();
   tagSelect.innerHTML='<option value="">All tags</option>'+
     sortedTags.map(t=>`<option value="${t}">#${t}</option>`).join("");
 }
@@ -356,21 +498,27 @@ themeBtn.onclick=()=>{
 applyTheme(localStorage.getItem("theme")||"light");
 
 /* Utils */
-function initials(name=""){return name.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase();}
+function initials(name=""){return name.split(" ").filter(Boolean).map(n=>n[0]).join("").slice(0,2).toUpperCase();}
 function avatar(p){
-  if(p.avatar) return `<img src="${p.avatar}">`;
+  if(p.avatar) return `<img src="${p.avatar}" alt="">`;
   if(p.avatarText) return p.avatarText;
   return initials(p.name);
 }
 function relativeTime(iso){
   const now=new Date(), d=new Date(iso);
   const diff=(now-d)/1000;
+  if(diff<15) return "now";
   if(diff<60) return Math.floor(diff)+"s";
   if(diff<3600) return Math.floor(diff/60)+"m";
   if(diff<86400) return Math.floor(diff/3600)+"h";
-  const days=Math.floor(diff/86400);
-  if(days===1) return "Yesterday";
-  if(days<7) return days+"d";
+
+  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const that=new Date(d.getFullYear(),d.getMonth(),d.getDate());
+  const dayDiff=Math.round((today-that)/86400000);
+
+  if(dayDiff===1) return "Yesterday";
+  if(dayDiff<7) return dayDiff+"d";
+  if(dayDiff<30) return Math.floor(dayDiff/7)+"w";
   return d.toLocaleDateString(undefined,{month:"short",day:"numeric"});
 }
 function getSorted(){
@@ -384,16 +532,19 @@ function getSorted(){
 /* Render */
 function render(reset=false){
   if(reset) visible=PAGE_SIZE;
+
   const sorted=getSorted();
   const filtered=sorted.filter(p=>{
-    const query=q.value.toLowerCase();
-    const tag=tagSelect.value.toLowerCase();
-    const text=p.text.toLowerCase();
-    const tags=(p.tags||[]).map(t=>t.toLowerCase());
+    const query=(q.value||"").toLowerCase();
+    const tag=(tagSelect.value||"").toLowerCase();
+    const text=(p.text||"").toLowerCase();
+    const tags=(p.tags||[]).map(t=>String(t).toLowerCase());
     return (!query||text.includes(query)) &&
            (!tag||tags.includes(tag));
   });
+
   const slice=filtered.slice(0,visible);
+
   feed.innerHTML=slice.length?slice.map(p=>`
     <article class="post">
       <div class="post__avatar">${avatar(p)}</div>
@@ -405,7 +556,7 @@ function render(reset=false){
         <div class="post__text">${p.text}</div>
         ${(p.tags||[]).length?`
           <div class="tags">
-            ${p.tags.map(t=>`<button class="tagBtn" data-tag="${t}">#${t}</button>`).join("")}
+            ${p.tags.map(t=>`<button class="tagBtn" type="button" data-tag="${t}">#${t}</button>`).join("")}
           </div>`:""}
       </div>
     </article>
@@ -420,10 +571,8 @@ function render(reset=false){
 
 /* Events */
 feed.onclick=e=>{
-  if(e.target.dataset.tag){
-    tagSelect.value=e.target.dataset.tag.toLowerCase();
-    render(true);
-  }
+  const t=e.target?.dataset?.tag;
+  if(t){ tagSelect.value=String(t).toLowerCase(); render(true); }
 };
 sortSelect.onchange=e=>{
   currentSort=e.target.value;
@@ -431,8 +580,8 @@ sortSelect.onchange=e=>{
 };
 q.oninput=()=>render(true);
 tagSelect.onchange=()=>render(true);
-more.onclick=()=>{visible+=PAGE_SIZE;render();};
-clear.onclick=()=>{q.value="";tagSelect.value="";render(true);};
+more.onclick=()=>{visible+=PAGE_SIZE; render();};
+clear.onclick=()=>{q.value=""; tagSelect.value=""; render(true);};
 
 render(true);
 </script>
