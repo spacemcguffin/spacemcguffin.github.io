@@ -108,10 +108,7 @@ body{
   cursor:pointer;
 }
 
-/* ✅ NEW: spacer so header isn't hidden under fixed bar */
-.topInset{
-  height: var(--topbarH);
-}
+.topInset{ height: var(--topbarH); }
 
 /* Layout */
 .layout{
@@ -164,9 +161,7 @@ h1{
   cursor:pointer;
 }
 
-.feed{
-  margin-top:10px;
-}
+.feed{ margin-top:10px; }
 
 .feed.isAnimating{
   animation: fade .18s ease-out both;
@@ -249,10 +244,19 @@ h1{
   color:var(--muted);
 }
 
+/* Footer */
 .footerRow{
   display:flex;
   justify-content:center;
+  align-items:center;
+  gap:12px;
   margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.counter{
+  font-size:13px;
+  color: var(--muted);
 }
 </style>
 </head>
@@ -277,7 +281,6 @@ h1{
   </div>
 </header>
 
-<!-- ✅ NEW: spacer so page content starts below the fixed bar -->
 <div class="topInset" aria-hidden="true"></div>
 
 <main class="layout">
@@ -298,6 +301,7 @@ h1{
 <div id="feed" class="feed"></div>
 
 <div class="footerRow">
+  <span id="counter" class="counter">Showing 0 of 0 posts</span>
   <button id="more" class="btn">Load more</button>
 </div>
 
@@ -529,6 +533,111 @@ const posts=[
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
+  {
+    date:"2026-02-28T18:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"No algorithms.\nJust reverse chronological order.",
+    tags:["writing","notes"]
+  },
   
 ];
 
@@ -542,6 +651,7 @@ const tagSelect=document.getElementById("tag");
 const more=document.getElementById("more");
 const clear=document.getElementById("clear");
 const sortSelect=document.getElementById("sortSelect");
+const counter=document.getElementById("counter");
 
 /* Populate tag dropdown */
 function populateTags(){
@@ -613,6 +723,10 @@ function render(reset=false){
            (!tag||tags.includes(tag));
   });
 
+  const total = filtered.length;
+  const shown = Math.min(visible, total);
+  counter.textContent = `Showing ${shown} of ${total} posts`;
+
   const slice=filtered.slice(0,visible);
 
   feed.innerHTML=slice.length?slice.map(p=>`
@@ -632,7 +746,7 @@ function render(reset=false){
     </article>
   `).join(""):`<div class="empty">No posts found.</div>`;
 
-  more.style.display=filtered.length>visible?"block":"none";
+  more.style.display = total > visible ? "block" : "none";
 
   feed.classList.remove("isAnimating");
   void feed.offsetWidth;
