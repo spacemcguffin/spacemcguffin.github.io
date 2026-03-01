@@ -115,15 +115,12 @@ body{
   pointer-events:none;
   transition:opacity .2s ease;
 }
-
 .backToTop.visible{
   opacity:1;
   pointer-events:auto;
 }
 
-.topInset{
-  height: var(--topbarH);
-}
+.topInset{ height: var(--topbarH); }
 
 /* ===== Layout ===== */
 .layout{
@@ -181,7 +178,6 @@ h1{
 .feed.isAnimating{
   animation: fade .18s ease-out both;
 }
-
 @keyframes fade{
   from{opacity:0; transform:translateY(4px);}
   to{opacity:1; transform:translateY(0);}
@@ -296,11 +292,12 @@ h1{
   </div>
 </header>
 
-<div class="topInset"></div>
+<div class="topInset" aria-hidden="true"></div>
 
 <main class="layout">
 
-<div class="timelineHead">
+<!-- ✅ give the header section an id so we can measure it -->
+<section id="pageHeader" class="timelineHead">
   <h1>Notes</h1>
   <div class="subtitle">Short-form writing, minimal and chronological.</div>
 
@@ -311,7 +308,7 @@ h1{
     </select>
     <button id="clear" class="btn">Clear</button>
   </div>
-</div>
+</section>
 
 <div id="feed" class="feed"></div>
 
@@ -681,14 +678,6 @@ const posts=[
     text:"No algorithms.\nJust reverse chronological order.",
     tags:["writing","notes"]
   },
-  {
-    date:"2026-02-28T18:10:00Z",
-    name:"Lewis",
-    avatarText:"LC",
-    text:"No algorithms.\nJust reverse chronological order.",
-    tags:["writing","notes"]
-  },
-
   
 ];
 
@@ -704,6 +693,7 @@ const clear=document.getElementById("clear");
 const sortSelect=document.getElementById("sortSelect");
 const counter=document.getElementById("counter");
 const backToTop=document.getElementById("backToTop");
+const pageHeader=document.getElementById("pageHeader");
 
 /* Populate tags */
 function populateTags(){
@@ -729,14 +719,24 @@ themeBtn.onclick=()=>{
 };
 applyTheme(localStorage.getItem("theme")||"light");
 
-/* Back to top */
-window.addEventListener("scroll",()=>{
-  if(window.scrollY>300){
+/* Back to top: show only after passing header section */
+let headerTriggerY = 0;
+
+function computeHeaderTrigger(){
+  // show after the header has fully scrolled under the fixed bar
+  const rect = pageHeader.getBoundingClientRect();
+  headerTriggerY = window.scrollY + rect.bottom - 8; // small buffer
+}
+function updateBackToTop(){
+  if(window.scrollY > headerTriggerY){
     backToTop.classList.add("visible");
   } else {
     backToTop.classList.remove("visible");
   }
-});
+}
+window.addEventListener("resize", () => { computeHeaderTrigger(); updateBackToTop(); });
+window.addEventListener("scroll", updateBackToTop);
+
 backToTop.onclick=()=>{
   window.scrollTo({top:0,behavior:"smooth"});
 };
@@ -810,6 +810,10 @@ function render(reset=false){
   feed.classList.remove("isAnimating");
   void feed.offsetWidth;
   feed.classList.add("isAnimating");
+
+  // header height/position can change (e.g. tag dropdown filled, responsive wrap)
+  computeHeaderTrigger();
+  updateBackToTop();
 }
 
 /* Events */
@@ -826,7 +830,10 @@ tagSelect.onchange=()=>render(true);
 more.onclick=()=>{visible+=PAGE_SIZE; render();};
 clear.onclick=()=>{q.value="";tagSelect.value="";render(true);};
 
+/* Init */
 render(true);
+computeHeaderTrigger();
+updateBackToTop();
 </script>
 
 </body>
