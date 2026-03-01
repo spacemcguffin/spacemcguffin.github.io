@@ -132,7 +132,7 @@ body{
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 }
 
-/* Home pill (matches themeBtn) */
+/* Home pill */
 .homePill{
   display:inline-flex;
   align-items:center;
@@ -312,7 +312,9 @@ h1{
   -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
 
   position:relative;
-  overflow:hidden;
+
+  /* IMPORTANT: allow tooltips to escape card */
+  overflow: visible;
 }
 
 :root[data-theme="dark"] .post{
@@ -338,7 +340,107 @@ h1{
 
 .post__top{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
 .post__name{ font-weight:600; font-size:14px; }
-.post__time{ font-size:13px; color:var(--muted2); }
+
+/* ---- Time + custom tooltip ---- */
+.post__time{
+  font-size:13px;
+  color:var(--muted2);
+  position:relative;
+  cursor:help;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* Tooltip bubble */
+.post__time::after{
+  content: attr(data-tip);
+  position:absolute;
+  left:50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(6px);
+  opacity:0;
+  pointer-events:none;
+
+  padding:8px 10px;
+  border-radius:12px;
+  font-size:12px;
+  line-height:1.25;
+  white-space:nowrap;
+
+  color: var(--text);
+  background: var(--panel);
+  border:1px solid var(--border);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  transition: opacity .16s ease, transform .16s ease;
+  z-index:20;
+}
+
+/* Tooltip pointer */
+.post__time::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom: calc(100% + 3px);
+  width:10px;
+  height:10px;
+  transform: translateX(-50%) rotate(45deg);
+  opacity:0;
+  pointer-events:none;
+
+  background: var(--panel);
+  border-left:1px solid var(--border);
+  border-top:1px solid var(--border);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  transition: opacity .16s ease, transform .16s ease;
+  z-index:19;
+}
+
+.post__time:hover::after,
+.post__time:hover::before,
+.post__time:focus-visible::after,
+.post__time:focus-visible::before{
+  opacity:1;
+  transform: translateX(-50%) translateY(0px);
+}
+
+.post__time:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--text) 30%, transparent);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* === Dark-mode tooltip polish (less transparent + cleaner glass) === */
+:root[data-theme="dark"] .post__time::after{
+  background: rgba(10,12,18,.88);
+  border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.92);
+  box-shadow: 0 22px 55px rgba(0,0,0,.65);
+
+  /* slightly less blur than the page glass so it stays crisp */
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+:root[data-theme="dark"] .post__time::before{
+  background: rgba(10,12,18,.88);
+  border-left: 1px solid rgba(255,255,255,.14);
+  border-top: 1px solid rgba(255,255,255,.14);
+
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .post__time::after, .post__time::before{ transition:none; }
+}
 
 .post__text{
   margin:6px 0 10px;
@@ -628,9 +730,7 @@ h1{
     </div>
 
     <div class="topbar__right">
-      <!-- Home pill (added) -->
       <a class="homePill" href="/" aria-label="Home">Home</a>
-
       <button id="themeToggle" class="themeBtn" type="button">Dark</button>
       <button id="backToTop" class="themeBtn backToTop" type="button">↑ Top</button>
     </div>
@@ -652,7 +752,6 @@ h1{
       <option value="">All tags</option>
     </select>
 
-    <!-- Wobble-style View dropdown (sort + ranges) -->
     <select id="view" class="select" aria-label="View">
       <option value="all">All time</option>
       <option value="" disabled>── Sort ──</option>
@@ -700,10 +799,12 @@ const posts=[
   {
     date:"2026-03-01T20:52:00Z",
     name:"Lewis",
+    avatar:"/wiki/img/fractalavatar.png",
     avatarText:"LC",
     text:"Just created this mini Twitter-esque page for notes, thoughts, updates, and whatever else springs to mind.",
     tags:["updates"],
-  },
+  },,
+
 
 ];
 
@@ -774,10 +875,9 @@ function buildTrack(){
     lbTrack.appendChild(div);
   });
 
-  // start centered on current (middle slide)
   lbTrack.style.transition = "none";
   lbTrack.style.transform = "translate3d(-100%,0,0)";
-  lbTrack.getBoundingClientRect(); // force reflow
+  lbTrack.getBoundingClientRect();
   lbTrack.style.transition = "";
 }
 
@@ -818,13 +918,12 @@ function closeLightbox(){
   animating = false;
 }
 
-function slideTo(dir){ // dir: -1 prev, +1 next
+function slideTo(dir){
   const total = gallery.length;
   if(total <= 1 || animating) return;
 
   animating = true;
 
-  // animate to show prev (0%) or next (200%) relative to buffer
   lbTrack.style.transform = dir === 1
     ? "translate3d(-200%,0,0)"
     : "translate3d(0%,0,0)";
@@ -888,7 +987,6 @@ function matchesView(post){
     return d >= cutoff;
   }
 
-  // sort:* doesn't filter posts
   return true;
 }
 
@@ -946,6 +1044,21 @@ function relativeTime(iso){
   if(days<7) return days+"d";
   return d.toLocaleDateString(undefined,{month:"short",day:"numeric"});
 }
+
+/* Full date/time for tooltip */
+function fullDateTime(iso){
+  const d = new Date(iso);
+  if(isNaN(d)) return String(iso || "");
+  return d.toLocaleString(undefined,{
+    weekday:"long",
+    year:"numeric",
+    month:"long",
+    day:"numeric",
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+}
+
 function getSorted(){
   return [...posts].sort((a,b)=>
     currentSort==="new"
@@ -954,7 +1067,7 @@ function getSorted(){
   );
 }
 
-/* Media rendering (adds postid + index for gallery nav) */
+/* Media rendering */
 function renderMedia(p){
   const arr = Array.isArray(p.media) ? p.media : (p.media ? [p.media] : []);
   if(!arr.length) return "";
@@ -1020,7 +1133,7 @@ function render(reset=false){
       <div>
         <div class="post__top">
           <div class="post__name">${p.name}</div>
-          <div class="post__time">· ${relativeTime(p.date)}</div>
+          <time class="post__time" datetime="${p.date}" data-tip="${fullDateTime(p.date)}" tabindex="0">· ${relativeTime(p.date)}</time>
         </div>
         <div class="post__text">${p.text}</div>
         ${renderMedia(p)}
