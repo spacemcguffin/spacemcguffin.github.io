@@ -1152,10 +1152,7 @@ function render(reset=false){
         </div>
         <div class="post__text">${p.text}</div>
         ${renderMedia(p)}
-        ${(p.tags||[]).length?`
-          <div class="tags">
-            ${p.tags.map(t=>`<button class="tagBtn" type="button" data-tag="${t}">#${t}</button>`).join("")}
-          </div>`:""}
+
       </div>
     </article>
   `).join("") : `<div class="empty">No posts found.</div>`;
