@@ -8,7 +8,6 @@
   <!-- Icons / Fonts -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,7 +44,7 @@
       --topbarH: 74px;
     }
 
-    /* LIGHT THEME OVERRIDES (default is dark like /wobble/test) */
+    /* LIGHT THEME OVERRIDES */
     body.light-mode{
       --bg0:#f7f8fc;
       --bg1:#eef1f8;
@@ -111,7 +110,7 @@
     }
 
     /* =========================
-       TOP BAR
+       TOP BAR + PROGRESS
        ========================= */
     header{
       position: sticky;
@@ -131,6 +130,28 @@
       border-bottom: 1px solid rgba(12,18,34,.10);
     }
 
+    /* Tiny progress bar under topbar */
+    .topProgress{
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 3px;
+      pointer-events: none;
+      background: rgba(255,255,255,.08);
+    }
+    body.light-mode .topProgress{
+      background: rgba(12,18,34,.08);
+    }
+    .topProgress__fill{
+      width: 0%;
+      height: 100%;
+      transform-origin: left center;
+      background: linear-gradient(90deg, rgba(139,92,246,.9), rgba(34,211,238,.9));
+      box-shadow: 0 0 18px rgba(139,92,246,.35);
+      border-radius: 999px;
+    }
+
     .navbar{
       width: min(var(--maxw), calc(100% - 28px));
       margin: 0 auto;
@@ -138,14 +159,15 @@
       align-items:center;
       justify-content: space-between;
       gap: 14px;
+      position: relative;
+      z-index: 1;
     }
 
     .nav-logo{ display:flex; align-items:center; gap:10px; }
     .logo-image{ width: 34px; height:34px; border-radius:999px; }
     .logo-text{ font-size:14px; font-weight:800; letter-spacing:.2px; }
 
-    /* ===== FIX: remove “strange shading” by moving the shadow to a single container,
-       and keeping buttons clean (no stacked shadows / gradients fighting). ===== */
+    /* Category list container: single shadow */
     .category-list{
       display:flex;
       gap: 8px;
@@ -180,8 +202,9 @@
       cursor: pointer;
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
       white-space: nowrap;
-      box-shadow: none; /* IMPORTANT: no extra stacked shadow */
+      box-shadow: none;
       background-clip: padding-box;
+      font-family: "Inter", sans-serif;
     }
     body.light-mode .category-button{
       background: rgba(255,255,255,.70);
@@ -282,6 +305,7 @@
       border-radius: 999px;
       border: 1px solid var(--border);
       color: var(--text);
+      font-family: "Inter", sans-serif;
     }
     body.light-mode .section-title{
       background: rgba(12,18,34,.06);
@@ -306,6 +330,7 @@
       font-size: 14px;
       border: 1px solid transparent;
       cursor: pointer;
+      font-family: "Inter", sans-serif;
     }
     a.link-item{ cursor:pointer; }
     .link-item:hover{
@@ -379,6 +404,7 @@
       vertical-align: middle;
       color: var(--text);
       font-size: 14px;
+      font-family: "Inter", sans-serif;
     }
     tr{ border-bottom: 1px solid rgba(255,255,255,.12); }
     body.light-mode tr{ border-bottom-color: rgba(12,18,34,.14); }
@@ -389,9 +415,10 @@
       line-height: 1.15;
       margin: 8px 0 10px;
       font-weight: 950;
+      font-family: "Inter", sans-serif;
     }
 
-    /* ===== Tabs: full-width, auto-resize if you add more ===== */
+    /* Tabs: full-width, auto-resize if you add more */
     .tab{
       display:flex;
       gap: 10px;
@@ -400,8 +427,8 @@
       width: 100%;
     }
     .tab button{
-      flex: 1 1 0;          /* equal-width pills */
-      min-width: 170px;     /* auto-wrap if many tabs */
+      flex: 1 1 0;
+      min-width: 170px;
       width: auto;
 
       background: rgba(255,255,255,.06);
@@ -414,8 +441,9 @@
       font-weight: 900;
       border: 1px solid var(--border);
       transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      box-shadow: none;     /* cleaner */
+      box-shadow: none;
       background-clip: padding-box;
+      font-family: "Inter", sans-serif;
     }
     body.light-mode .tab button{ background: rgba(255,255,255,.70); }
 
@@ -439,28 +467,23 @@
     .article h3{
       margin: 18px 0 10px;
       font-weight: 900;
-      font-family: "Onest", sans-serif;
       font-size: 20px;
       scroll-margin-top: calc(var(--topbarH) + 18px);
+      font-family: "Inter", sans-serif;
     }
     .article h4{
       margin: 14px 0 10px;
       font-weight: 900;
-      font-family: "Onest", sans-serif;
       font-size: 16px;
       scroll-margin-top: calc(var(--topbarH) + 18px);
+      font-family: "Inter", sans-serif;
     }
     .article p{
       margin: 12px 0;
       line-height: 1.65;
       font-size: 14px;
       color: var(--muted);
-    }
-    .article li{
-      margin: 0 0 0 1rem;
-      line-height: 1.65;
-      font-size: 14px;
-      color: var(--muted);
+      font-family: "Inter", sans-serif;
     }
 
     /* Infobox */
@@ -493,6 +516,7 @@
       border-radius: 12px;
       border: 1px solid rgba(139,92,246,.25);
       margin-bottom: 8px;
+      font-family: "Inter", sans-serif;
     }
 
     .quote{
@@ -506,10 +530,20 @@
       background: rgba(255,255,255,.06);
       border: 1px solid var(--border);
       border-radius: 14px;
+      font-family: "Inter", sans-serif;
     }
     body.light-mode .quote{
       background: rgba(255,255,255,.70);
     }
+
+    /* =========================
+       GALLERY UPGRADES (ALL 5)
+       1) Lightbox
+       2) Next/Prev arrows
+       3) Swipe on mobile
+       4) Captions
+       5) Counter + hover overlay
+       ========================= */
 
     .gallery{
       display:grid;
@@ -517,67 +551,216 @@
       gap: 12px;
       margin: 10px 0 0;
     }
-    .gallery img{
+
+    .gItem{
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      cursor: zoom-in;
+      user-select: none;
+    }
+
+    .gItem img{
       width:100%;
       display:block;
       object-fit: cover;
       aspect-ratio: 16 / 9;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      transition: transform .2s ease, opacity .2s ease;
+      transition: transform .22s ease, opacity .22s ease;
     }
-    .gallery img:hover{ transform: scale(1.02); opacity: .92; }
 
-    .galleryfooter{
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-gap: 0.8rem;
-      margin: 12px 0 2rem;
+    .gItem:hover img{
+      transform: scale(1.03);
+      opacity: .94;
     }
-    .galleryfooter img{
+
+    .gOverlay{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      padding: 10px;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.55));
+      opacity: 0;
+      transition: opacity .18s ease;
+      pointer-events:none;
+      color: #fff;
+      gap: 10px;
+    }
+    .gItem:hover .gOverlay{ opacity: 1; }
+
+    .gOverlay .gLeft{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .gOverlay .gLeft i{ font-size: 16px; opacity:.95; }
+
+    .gCaption{
+      font-size: 12.5px;
+      line-height: 1.25;
+      opacity: .92;
+      max-width: 80%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Lightbox modal */
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .lightbox.open{ display:flex; }
+
+    .lbPanel{
+      width: min(980px, 100%);
+      border-radius: 18px;
+      background: rgba(10,12,26,.68);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 20px 80px rgba(0,0,0,.65);
+      overflow:hidden;
+      position: relative;
+      touch-action: pan-y;
+    }
+    body.light-mode .lbPanel{
+      background: rgba(255,255,255,.78);
+      border-color: rgba(12,18,34,.12);
+      box-shadow: 0 20px 70px rgba(0,0,0,.22);
+    }
+
+    .lbMedia{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: rgba(255,255,255,.03);
+    }
+
+    .lbImg{
       width: 100%;
       height: auto;
-      display: block;
-      border-radius: 14px;
-      object-fit: cover;
-      transition: 0.2s;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.06);
-      padding: 2px;
-    }
-    .galleryfooter img:hover{
-      transform: scale(1.03);
-      cursor: pointer;
-      opacity: .92;
+      display:block;
+      max-height: min(72vh, 720px);
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
-    /* Hover tooltip */
-    .hover-content{
-      box-shadow: 0 12px 40px rgba(0,0,0,0.55);
-      color: rgba(255,255,255,.92);
-      background: rgba(15, 18, 40, .92);
-      width: 260px;
-      padding: 10px;
+    .lbBar{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      color: var(--text);
+      font-family: "Inter", sans-serif;
+    }
+    body.light-mode .lbBar{ border-top-color: rgba(12,18,34,.12); }
+
+    .lbMeta{
+      min-width: 0;
+      display:flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .lbCount{
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      font-weight: 800;
+    }
+    .lbCaption{
+      font-size: 13.5px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 72ch;
+    }
+
+    .lbActions{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .lbBtn{
+      height: 40px;
+      width: 40px;
+      border-radius: 999px;
       border: 1px solid rgba(255,255,255,.14);
-      border-radius: 14px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
     }
-    body.light-mode .hover-content{
-      color: rgba(12,18,34,.92);
-      background: rgba(255,255,255,.92);
+    body.light-mode .lbBtn{
       border-color: rgba(12,18,34,.12);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+      background: rgba(255,255,255,.70);
     }
-    .hover-content > p{
-      font-size: 13px;
-      margin: 0;
-      line-height: 1.5;
-      color: inherit;
-      background: transparent;
+    .lbBtn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.20);
     }
-    [data-hover-wrapper]{ transition: opacity .15s, transform .15s; }
+    body.light-mode .lbBtn:hover{
+      background: rgba(255,255,255,.92);
+      border-color: rgba(12,18,34,.20);
+    }
+    .lbBtn i{ font-size: 18px; }
+
+    /* Side arrows (next/prev) */
+    .lbArrow{
+      position:absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 44px;
+      width: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.28);
+      color: #fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, opacity .15s ease;
+      opacity: .92;
+    }
+    .lbArrow:hover{
+      transform: translateY(-50%) scale(1.04);
+      background: rgba(0,0,0,.40);
+      opacity: 1;
+    }
+    .lbPrev{ left: 10px; }
+    .lbNext{ right: 10px; }
+    .lbArrow i{ font-size: 22px; }
+
+    @media (max-width: 640px){
+      .lbPrev{ left: 8px; }
+      .lbNext{ right: 8px; }
+      .lbArrow{ height: 40px; width: 40px; }
+      .lbCaption{ max-width: 40ch; }
+    }
 
     /* Bottom box */
     .bottombox{
@@ -621,6 +804,7 @@
       pointer-events: none;
       transform: translateY(10px);
       transition: opacity .18s ease, transform .18s ease, background .15s ease, border-color .15s ease;
+      font-family: "Inter", sans-serif;
     }
     body.light-mode .backTop{ background: rgba(255,255,255,.70); }
     .backTop.isOn{
@@ -629,16 +813,60 @@
       transform: translateY(0);
     }
 
+    /* =========================
+       TOOLTIP (desktop hover + mobile press/hold)
+       ========================= */
+    [data-hover-wrapper]{
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none; /* prevents flicker on hover */
+      opacity: 0;
+      transform: translateY(6px) scale(.98);
+      transition: opacity .12s ease, transform .12s ease;
+      will-change: transform, opacity, left, top;
+    }
+    [data-hover-wrapper].isOn{
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .hover-content{
+      width: min(320px, calc(100vw - 20px));
+      padding: 10px 12px;
+      border-radius: 14px;
+
+      color: var(--text);
+      background: rgba(10,12,26,.90);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 55px rgba(0,0,0,.55);
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-family: "Inter", sans-serif;
+    }
+    body.light-mode .hover-content{
+      background: rgba(255,255,255,.90);
+      border-color: rgba(12,18,34,.14);
+      box-shadow: 0 18px 45px rgba(0,0,0,.16);
+      color: rgba(12,18,34,.92);
+    }
+    .hover-content p{
+      margin: 0;
+      font-size: 13.5px;
+      line-height: 1.45;
+      color: inherit;
+      font-family: "Inter", sans-serif;
+    }
+    .hover-content b{ font-weight: 900; }
+
     /* Responsive */
     @media (max-width: 980px){
       main.main-layout{ grid-template-columns: 1fr; }
       .links-container{ position: relative; top: auto; max-height: none; }
       .articleRightInner{ float:none; width: 100%; margin: 0 0 14px; }
-      .galleryfooter{ grid-template-columns: repeat(3, 1fr); }
     }
     @media (max-width: 600px){
       .gallery{ grid-template-columns: repeat(2, 1fr); }
-      .galleryfooter{ grid-template-columns: repeat(2, 1fr); }
       .tab button{ min-width: 140px; }
     }
   </style>
@@ -672,6 +900,11 @@
           </button>
         </div>
       </nav>
+
+      <!-- Progress bar -->
+      <div class="topProgress" aria-hidden="true">
+        <div class="topProgress__fill" id="topProgressFill"></div>
+      </div>
     </header>
 
     <!-- Main Layout -->
@@ -750,7 +983,8 @@
           </div>
         </nav>
 
-        <div class="article">
+        <div class="article" id="article">
+
           <h1 id="top">The Crap Out</h1>
 
           <div class="tab">
@@ -832,7 +1066,6 @@
               <span style="font-size:14px; font-weight:900;"> ― Stan</span>
             </div>
 
-            <!-- FULL PLOT TEXT (restored) -->
             <p>At South Park Elementary, Stan is seeing the school counsellor
               <sup>
                 <a href="#"
@@ -853,20 +1086,39 @@
             <div class="section-separator"></div>
 
             <h3 id="gallery">Gallery</h3>
-            <div class="gallery">
-              <img src="/wiki/img/episodes/sotm.png" alt="">
-              <img src="/wiki/img/episodes/gan.png" alt="">
-              <img src="/wiki/img/episodes/sickofancy.png" alt="">
+
+            <div class="gallery" id="galleryGrid">
+              <div class="gItem" data-src="/wiki/img/episodes/sotm.png" data-caption="SOTM">
+                <img src="/wiki/img/episodes/sotm.png" alt="SOTM">
+                <div class="gOverlay">
+                  <div class="gLeft"><i class="uil uil-search"></i> View</div>
+                  <div class="gCaption">SOTM</div>
+                </div>
+              </div>
+
+              <div class="gItem" data-src="/wiki/img/episodes/gan.png" data-caption="GAN">
+                <img src="/wiki/img/episodes/gan.png" alt="GAN">
+                <div class="gOverlay">
+                  <div class="gLeft"><i class="uil uil-search"></i> View</div>
+                  <div class="gCaption">GAN</div>
+                </div>
+              </div>
+
+              <div class="gItem" data-src="/wiki/img/episodes/sickofancy.png" data-caption="Sickofancy">
+                <img src="/wiki/img/episodes/sickofancy.png" alt="Sickofancy">
+                <div class="gOverlay">
+                  <div class="gLeft"><i class="uil uil-search"></i> View</div>
+                  <div class="gCaption">Sickofancy</div>
+                </div>
+              </div>
             </div>
 
             <div class="section-separator"></div>
 
-            <!-- Bottom episode box (restored) -->
             <div class="bottombox">
               <div class="subtitle linklist">
                 <table class="bottomboxtable">
                   <tbody>
-
                     <tr>
                       <td colspan="3" style="background: linear-gradient(135deg, rgba(139,92,246,.26), rgba(34,211,238,.16)); color:#fff; font-weight:900; font-size:.82rem; letter-spacing:.2px;">
                         <center>Season 28</center>
@@ -984,7 +1236,7 @@
 
           </div><!-- /tab1 -->
 
-          <!-- TAB 2 (restored from your big file) -->
+          <!-- TAB 2 -->
           <div id="tab2" class="tabcontent">
 
             <h3 id="appearances">Appearances</h3>
@@ -1047,7 +1299,6 @@
                     <td style="text-align:center; background-color: rgba(255,255,255,.06);">10</td>
                     <td><div class="eptitles"><a href="#">Equilibrium</a></div></td>
                   </tr>
-
                 </tbody>
               </table>
             </div>
@@ -1064,14 +1315,14 @@
 
             <div class="section-separator"></div>
 
-            <center><h1 style="margin: 0; font-size: 22px;">Other Episodes</h1></center>
+            <center><h1 style="margin: 0; font-size: 22px; font-family: Inter, sans-serif;">Other Episodes</h1></center>
 
-            <div class="galleryfooter">
-              <img src="/wiki/img/episodes/sotm.png" alt="">
-              <img src="/wiki/img/episodes/gan.png" alt="">
-              <img src="/wiki/img/episodes/sickofancy.png" alt="">
-              <img src="/wiki/img/episodes/wid.png" alt="">
-              <img src="/wiki/img/episodes/coi.png" alt="">
+            <div class="gallery" id="otherEpisodesGrid" style="grid-template-columns: repeat(4, 1fr); margin-top: 12px;">
+              <div class="gItem" data-src="/wiki/img/episodes/sotm.png" data-caption="SOTM"><img src="/wiki/img/episodes/sotm.png" alt="SOTM"><div class="gOverlay"><div class="gLeft"><i class="uil uil-search"></i> View</div><div class="gCaption">SOTM</div></div></div>
+              <div class="gItem" data-src="/wiki/img/episodes/gan.png" data-caption="GAN"><img src="/wiki/img/episodes/gan.png" alt="GAN"><div class="gOverlay"><div class="gLeft"><i class="uil uil-search"></i> View</div><div class="gCaption">GAN</div></div></div>
+              <div class="gItem" data-src="/wiki/img/episodes/sickofancy.png" data-caption="Sickofancy"><img src="/wiki/img/episodes/sickofancy.png" alt="Sickofancy"><div class="gOverlay"><div class="gLeft"><i class="uil uil-search"></i> View</div><div class="gCaption">Sickofancy</div></div></div>
+              <div class="gItem" data-src="/wiki/img/episodes/wid.png" data-caption="WID"><img src="/wiki/img/episodes/wid.png" alt="WID"><div class="gOverlay"><div class="gLeft"><i class="uil uil-search"></i> View</div><div class="gCaption">WID</div></div></div>
+              <div class="gItem" data-src="/wiki/img/episodes/coi.png" data-caption="COI"><img src="/wiki/img/episodes/coi.png" alt="COI"><div class="gOverlay"><div class="gLeft"><i class="uil uil-search"></i> View</div><div class="gCaption">COI</div></div></div>
             </div>
 
           </div><!-- /tab2 -->
@@ -1083,67 +1334,29 @@
 
   <a class="backTop" id="backTop" href="#top">Back to top</a>
 
-  <!-- Hover tooltip (your original, with guard so it only runs on links that have data-hover-content) -->
-  <script>
-    const links = document.getElementsByTagName("a");
-    [...links].forEach(link => {
-      link.addEventListener("mouseover", handleMouseOver);
-      link.addEventListener("mousemove", handleMouseMove);
-      link.addEventListener("mouseleave", handleMouseLeave);
-    });
+  <!-- LIGHTBOX (single instance) -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lbPanel" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="lbArrow lbPrev" id="lbPrev" title="Previous" aria-label="Previous image"><i class="uil uil-angle-left-b"></i></button>
+      <button class="lbArrow lbNext" id="lbNext" title="Next" aria-label="Next image"><i class="uil uil-angle-right-b"></i></button>
 
-    function handlePosition(e) {
-      const ID = e.target.getAttribute("data-hover-id");
-      const wrapper = document.getElementById(ID);
-      if (!wrapper) return "";
+      <div class="lbMedia" id="lbMedia">
+        <img class="lbImg" id="lbImg" alt="">
+      </div>
 
-      let top = "";
-      if (!(e.target.getBoundingClientRect().top + wrapper.offsetHeight > innerHeight)) {
-        top = `${e.clientY + e.target.offsetHeight}px`;
-      } else {
-        top = `${e.clientY - (wrapper.offsetHeight + e.target.offsetHeight)}px`;
-      }
-      return `position: fixed; left: ${e.clientX - wrapper.offsetWidth / 2}px; top:${top}`;
-    }
+      <div class="lbBar">
+        <div class="lbMeta">
+          <div class="lbCount" id="lbCount">1 / 1</div>
+          <div class="lbCaption" id="lbCaption"></div>
+        </div>
+        <div class="lbActions">
+          <button class="lbBtn" id="lbClose" title="Close" aria-label="Close"><i class="uil uil-multiply"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    function handleMouseOver(e) {
-      const hoverContent = e.target.getAttribute("data-hover-content");
-      if (!hoverContent) return;
-
-      const ID = Math.random().toString(36).substr(2, 9);
-      const wrapper = document.createElement("DIV");
-      e.target.setAttribute("data-hover-id", ID);
-      wrapper.setAttribute("data-hover-wrapper", "");
-      wrapper.setAttribute("id", ID);
-      wrapper.setAttribute("style", "opacity: 0; transform: scale(.8)");
-      wrapper.innerHTML = hoverContent;
-      document.body.append(wrapper);
-      wrapper.setAttribute("style", handlePosition(e));
-    }
-
-    function handleMouseLeave(e) {
-      const ID = e.target.getAttribute("data-hover-id");
-      const el = ID ? document.getElementById(ID) : null;
-      if (!el) return;
-      el.style.opacity = 0;
-      el.style.transform = "scale(.8)";
-      setTimeout(() => el.remove(), 150);
-    }
-
-    function handleMouseMove(e) {
-      const ID = e.target.getAttribute("data-hover-id");
-      const wrapper = ID ? document.getElementById(ID) : null;
-      if (!wrapper) return;
-      wrapper.setAttribute("style", handlePosition(e));
-    }
-
-    window.addEventListener('scroll', () => {
-      const wrapper = document.querySelector('[data-hover-wrapper]');
-      if (wrapper) wrapper.remove();
-    });
-  </script>
-
-  <!-- Tabs (unchanged logic) -->
+  <!-- Tabs -->
   <script>
     function openCity(evt, cityName) {
       var i, tabcontent, tablinks;
@@ -1165,7 +1378,6 @@
     toggleBackTop();
   </script>
 
-  <!-- Dropdowns + Theme toggle + Scrollspy -->
   <script>
     // ---------- DROPDOWNS ----------
     function setMenuHeight(dropdown, open) {
@@ -1295,10 +1507,6 @@
         navLinks.forEach(x => x.btn.classList.toggle('active', x.id === id));
       }
 
-      navLinks.forEach(x => {
-        x.a.addEventListener('click', () => setActive(x.id));
-      });
-
       let current = null;
       const topbar = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbarH')) || 74;
 
@@ -1346,6 +1554,317 @@
       } else {
         init();
       }
+    })();
+
+    // ---------- ARTICLE PROGRESS BAR ----------
+    (function(){
+      const fill = document.getElementById('topProgressFill');
+      const article = document.getElementById('article');
+      if (!fill || !article) return;
+
+      const topbar = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--topbarH')) || 74;
+
+      function clamp01(n){ return Math.max(0, Math.min(1, n)); }
+
+      function update(){
+        const rect = article.getBoundingClientRect();
+        const articleTop = rect.top + window.scrollY;
+        const articleHeight = article.offsetHeight;
+
+        const start = articleTop - topbar;
+        const end = articleTop + articleHeight - window.innerHeight;
+        const denom = Math.max(1, end - start);
+        const p = clamp01((window.scrollY - start) / denom);
+
+        fill.style.width = (p * 100).toFixed(2) + '%';
+      }
+
+      update();
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+    })();
+
+    // ---------- LIGHTBOX (gallery upgrades) ----------
+    (function(){
+      const lightbox = document.getElementById('lightbox');
+      const imgEl = document.getElementById('lbImg');
+      const captionEl = document.getElementById('lbCaption');
+      const countEl = document.getElementById('lbCount');
+      const btnClose = document.getElementById('lbClose');
+      const btnPrev = document.getElementById('lbPrev');
+      const btnNext = document.getElementById('lbNext');
+      const panel = lightbox ? lightbox.querySelector('.lbPanel') : null;
+
+      if (!lightbox || !imgEl || !captionEl || !countEl || !btnClose || !btnPrev || !btnNext || !panel) return;
+
+      const items = Array.from(document.querySelectorAll('.gItem'));
+      if (!items.length) return;
+
+      let index = 0;
+      let lastFocus = null;
+
+      const getCaption = (el) => {
+        const c = el.getAttribute('data-caption');
+        if (c && c.trim()) return c.trim();
+        const img = el.querySelector('img');
+        return (img && img.alt) ? img.alt : '';
+      };
+
+      const show = (i) => {
+        index = (i + items.length) % items.length;
+        const el = items[index];
+        const src = el.getAttribute('data-src') || (el.querySelector('img') ? el.querySelector('img').src : '');
+        const cap = getCaption(el);
+
+        imgEl.src = src;
+        imgEl.alt = cap || 'Image';
+        captionEl.textContent = cap || '';
+        countEl.textContent = `${index + 1} / ${items.length}`;
+      };
+
+      const open = (i) => {
+        lastFocus = document.activeElement;
+        show(i);
+        lightbox.classList.add('open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        btnClose.focus({ preventScroll: true });
+      };
+
+      const close = () => {
+        lightbox.classList.remove('open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
+      };
+
+      const prev = () => show(index - 1);
+      const next = () => show(index + 1);
+
+      items.forEach((el, i) => {
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('role', 'button');
+        el.setAttribute('aria-label', 'Open image');
+        el.addEventListener('click', () => open(i));
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(i);
+          }
+        });
+      });
+
+      btnClose.addEventListener('click', close);
+      btnPrev.addEventListener('click', prev);
+      btnNext.addEventListener('click', next);
+
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) close();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+
+      // Swipe on touch devices
+      let startX = 0, startY = 0, tracking = false;
+
+      const onStart = (e) => {
+        if (!lightbox.classList.contains('open')) return;
+        const t = e.touches ? e.touches[0] : e;
+        startX = t.clientX;
+        startY = t.clientY;
+        tracking = true;
+      };
+
+      const onMove = (e) => {
+        if (!tracking) return;
+        const t = e.touches ? e.touches[0] : e;
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+        if (Math.abs(dx) > Math.abs(dy) && e.cancelable) e.preventDefault();
+      };
+
+      const onEnd = (e) => {
+        if (!tracking) return;
+        tracking = false;
+        const t = (e.changedTouches && e.changedTouches[0]) ? e.changedTouches[0] : e;
+        const dx = t.clientX - startX;
+        const dy = t.clientY - startY;
+
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) {
+          if (dx < 0) next();
+          else prev();
+        }
+      };
+
+      panel.addEventListener('touchstart', onStart, { passive: true });
+      panel.addEventListener('touchmove', onMove, { passive: false });
+      panel.addEventListener('touchend', onEnd, { passive: true });
+    })();
+
+    // ---------- TOOLTIP (desktop hover + mobile press/hold) ----------
+    (function(){
+      const targets = Array.from(document.querySelectorAll('[data-hover-content]'));
+      if (!targets.length) return;
+
+      const TOOLTIP_PAD = 10;
+      const HOLD_MS = 420;
+
+      let activeId = null;
+      let holdTimer = null;
+      let holdTriggered = false;
+      let lastTouch = null; // {x,y}
+
+      const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+
+      function removeTooltip(){
+        const w = document.querySelector('[data-hover-wrapper]');
+        if (w) w.remove();
+        activeId = null;
+      }
+
+      function computePosition(clientX, clientY, wrapper){
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        let left = clientX - (wrapper.offsetWidth / 2);
+        left = clamp(left, TOOLTIP_PAD, vw - wrapper.offsetWidth - TOOLTIP_PAD);
+
+        const belowTop = clientY + 16;
+        const aboveTop = clientY - wrapper.offsetHeight - 16;
+        const top = (belowTop + wrapper.offsetHeight <= vh - TOOLTIP_PAD)
+          ? belowTop
+          : clamp(aboveTop, TOOLTIP_PAD, vh - wrapper.offsetHeight - TOOLTIP_PAD);
+
+        wrapper.style.left = left + "px";
+        wrapper.style.top = top + "px";
+      }
+
+      function showTooltipFor(el, clientX, clientY){
+        const html = el.getAttribute('data-hover-content');
+        if (!html) return;
+
+        removeTooltip();
+
+        const id = "tt_" + Math.random().toString(36).slice(2, 9);
+        const wrapper = document.createElement('div');
+        wrapper.id = id;
+        wrapper.setAttribute('data-hover-wrapper', '');
+        wrapper.innerHTML = html;
+
+        document.body.appendChild(wrapper);
+
+        // position after layout
+        computePosition(clientX, clientY, wrapper);
+        requestAnimationFrame(() => wrapper.classList.add('isOn'));
+
+        activeId = id;
+        el.setAttribute('data-hover-id', id);
+      }
+
+      function moveTooltipTo(el, clientX, clientY){
+        const id = el.getAttribute('data-hover-id') || activeId;
+        if (!id) return;
+        const wrapper = document.getElementById(id);
+        if (!wrapper) return;
+        computePosition(clientX, clientY, wrapper);
+      }
+
+      function hideTooltipFor(el){
+        const id = el.getAttribute('data-hover-id') || activeId;
+        if (!id) { removeTooltip(); return; }
+        const wrapper = document.getElementById(id);
+        if (!wrapper) { removeTooltip(); return; }
+
+        wrapper.classList.remove('isOn');
+        setTimeout(() => { if (wrapper && wrapper.parentNode) wrapper.remove(); }, 130);
+        el.removeAttribute('data-hover-id');
+        activeId = null;
+      }
+
+      // Desktop hover
+      targets.forEach(el => {
+        el.addEventListener('mouseenter', (e) => {
+          if (e.pointerType === 'touch') return;
+          showTooltipFor(el, e.clientX, e.clientY);
+        });
+        el.addEventListener('mousemove', (e) => {
+          if (e.pointerType === 'touch') return;
+          moveTooltipTo(el, e.clientX, e.clientY);
+        });
+        el.addEventListener('mouseleave', (e) => {
+          if (e.pointerType === 'touch') return;
+          hideTooltipFor(el);
+        });
+      });
+
+      // Mobile: press/hold to show; release keeps it until you tap elsewhere or scroll.
+      targets.forEach(el => {
+        el.addEventListener('touchstart', (e) => {
+          if (!e.touches || !e.touches[0]) return;
+
+          holdTriggered = false;
+          const t = e.touches[0];
+          lastTouch = { x: t.clientX, y: t.clientY };
+
+          // if another tooltip is open, close it first (so long-press feels predictable)
+          removeTooltip();
+
+          clearTimeout(holdTimer);
+          holdTimer = setTimeout(() => {
+            holdTriggered = true;
+            // show tooltip at finger position
+            showTooltipFor(el, lastTouch.x, lastTouch.y);
+          }, HOLD_MS);
+        }, { passive: true });
+
+        el.addEventListener('touchmove', (e) => {
+          if (!e.touches || !e.touches[0]) return;
+          const t = e.touches[0];
+
+          // update lastTouch for a better final position
+          lastTouch = { x: t.clientX, y: t.clientY };
+
+          // if user is scrolling/dragging, cancel hold
+          clearTimeout(holdTimer);
+
+          // if tooltip already open, keep it tracking finger lightly
+          if (holdTriggered) {
+            // prevent tiny scroll-jitters moving tooltip off screen
+            const id = el.getAttribute('data-hover-id') || activeId;
+            const wrapper = id ? document.getElementById(id) : null;
+            if (wrapper) computePosition(lastTouch.x, lastTouch.y, wrapper);
+          }
+        }, { passive: true });
+
+        el.addEventListener('touchend', () => {
+          clearTimeout(holdTimer);
+          // If long-press did NOT trigger, let normal tap happen (links still work).
+          // If long-press DID trigger, we keep tooltip open; tap elsewhere to close.
+        }, { passive: true });
+
+        el.addEventListener('touchcancel', () => {
+          clearTimeout(holdTimer);
+        }, { passive: true });
+      });
+
+      // Tap anywhere else closes tooltip (nice for mobile)
+      document.addEventListener('touchstart', (e) => {
+        const hitTarget = e.target.closest('[data-hover-content]');
+        const hitTooltip = e.target.closest('[data-hover-wrapper], .hover-content');
+        if (hitTarget || hitTooltip) return;
+        removeTooltip();
+      }, { passive: true });
+
+      // Also close on scroll (prevents “stuck” tooltip)
+      window.addEventListener('scroll', removeTooltip, { passive: true });
+
+      // Optional: close on resize/orientation change
+      window.addEventListener('resize', removeTooltip);
     })();
   </script>
 </body>
