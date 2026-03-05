@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Crap Out</title>
 
-  <!-- Linking Unicons For Icons -->
+  <!-- Unicons -->
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -85,6 +85,9 @@
       background-repeat:no-repeat;
       background-attachment: fixed;
       color: var(--black-color);
+
+      /* IMPORTANT: main scrollbar on the page */
+      overflow-y: auto;
     }
 
     /* ===== Modern glass helpers ===== */
@@ -120,7 +123,11 @@
     a{ color: var(--primary-color); text-decoration:none; }
     a:hover{ text-decoration:none; }
 
-    .container{ display:flex; overflow:hidden; max-height:100vh; flex-direction:column; }
+    .container{
+      display:flex;
+      flex-direction:column;
+      min-height: 100vh;
+    }
 
     /* ===== Header / Navbar ===== */
     header{
@@ -136,14 +143,11 @@
       gap: 10px;
       padding: .35rem .4rem;
       border-bottom: 1px solid var(--episodebar-border-color);
-
-      /* glass */
       border-radius: 0 0 var(--r-xl) var(--r-xl);
     }
-
     .navbar.glass{ border-bottom-color: var(--glass-border); }
 
-    /* tiny progress bar under the topbar */
+    /* progress bar under the topbar */
     .progressWrap{
       height: 3px;
       width: 100%;
@@ -199,10 +203,9 @@
       font-family: "Onest", sans-serif;
     }
 
-    .navbar .search-back-button{ display:none; }
     .navbar .nav-center{ display:flex; align-items:center; justify-content:center; flex: 1; }
 
-    /* ===== Top pills (Synopsis / Plot / Gallery) ===== */
+    /* ===== Top pills ===== */
     .category-list{
       display:flex;
       gap: 10px;
@@ -258,21 +261,35 @@
     .main-layout{
       margin:auto;
       width: -webkit-fill-available;
-      overflow-y:auto;
-      scrollbar-color:#a6a6a6 transparent;
-      max-width: 1150px;
 
-      /* glass "page surface" */
+      /* IMPORTANT: remove inner scroll; let body scroll */
+      overflow: visible;
+
+      max-width: 1150px;
       border-radius: var(--r-xl);
       margin-top: 10px;
       margin-bottom: 18px;
-    }
-
-    .main-layout.glass{
       border: 1px solid var(--glass-border);
     }
 
-    .main-layout:hover{ scrollbar-color:#a6a6a6 transparent; }
+    /* Light-mode readability booster behind content (NO dark-mode edits) */
+    body:not(.dark-mode) .main-layout{
+      background: rgba(255,255,255,.58); /* extra white veil */
+      backdrop-filter: blur(12px) saturate(140%);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+    }
+    body:not(.dark-mode) .main-layout::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      pointer-events:none;
+      border-radius: inherit;
+      background: radial-gradient(800px 400px at 50% 0%, rgba(255,255,255,.55), transparent 60%);
+      opacity: .85;
+    }
+    .main-layout{
+      position: relative; /* for ::after */
+    }
 
     /* Sidebar */
     .main-layout .sidebar{ padding: 0 0 0 .6rem; }
@@ -285,9 +302,14 @@
       width: 210px;
       padding: 12px 10px 12px 10px;
       border-right: 1px solid var(--glass-border);
-
       border-radius: var(--r-xl);
       margin-top: 8px;
+      background: var(--glass-bg-soft);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+      z-index: 20;
     }
 
     /* Sidebar links */
@@ -321,7 +343,8 @@
       text-decoration:none;
       gap: .45rem;
       margin-bottom: .28rem;
-      transition: background .15s ease, transform .15s ease;
+      transition: background .15s ease, transform .15s ease, border-color .15s ease;
+      border: 1px solid transparent;
     }
     .sidebar .link-section .link-item:hover{
       background: rgba(255,255,255,.10);
@@ -331,7 +354,7 @@
 
     .sidebar .link-section .link-item.is-active{
       background: rgba(69,98,145,.14);
-      border: 1px solid rgba(69,98,145,.22);
+      border-color: rgba(69,98,145,.22);
     }
     .dark-mode .sidebar .link-section .link-item.is-active{
       background: rgba(135,174,218,.12);
@@ -345,9 +368,9 @@
     }
     .dark-mode .sidebar .section-separator{ background: rgba(255,255,255,.10); }
 
-    /* Dropdown Styling */
+    /* Dropdown */
     .sidebar .link-section .dropdown{ display:block; padding:0; }
-    .sidebar .link-section .link-item.dropdown:hover{ background: unset; transform:none; }
+    .sidebar .link-section .link-item.dropdown:hover{ background: unset; transform:none; border-color: transparent; }
     .sidebar .link-section .dropdown .dropdown-icon{
       margin-left:auto;
       pointer-events:none;
@@ -368,7 +391,7 @@
 
     .sidebar .link-section .dropdown.open > .link-item{
       background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.10);
     }
     .dark-mode .sidebar .link-section .dropdown.open > .link-item{
       background: rgba(255,255,255,.05);
@@ -377,9 +400,11 @@
 
     /* Content */
     .main-layout .content-wrapper{
-      padding: 0 2rem;
+      padding: 0 2rem 2rem;
       margin: auto;
       margin-left: 220px;
+      position: relative;
+      z-index: 2; /* above the light-mode ::after veil */
     }
 
     /* Episode bar */
@@ -390,8 +415,11 @@
       font-size: 1rem;
       margin-top: 1rem;
       border: 1px solid var(--glass-border);
+      background: var(--glass-bg-soft);
+      box-shadow: 0 8px 30px rgba(0,0,0,.10);
+      backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
     }
-    .episodenavigation td{ padding: .2rem; }
 
     /* Article typography */
     .article h1{
@@ -417,11 +445,14 @@
       background: rgba(255,255,255,.10);
       border: 1px solid rgba(255,255,255,.14);
       width: fit-content;
+      scroll-margin-top: 100px; /* avoids sticky header overlap */
     }
     .dark-mode .article h3{
       background: rgba(255,255,255,.06);
       border-color: rgba(255,255,255,.10);
     }
+
+    #top{ scroll-margin-top: 110px; }
 
     .article h4{
       margin: .9rem 0 .4rem;
@@ -458,6 +489,10 @@
       margin: 0 0 1rem 1rem;
       border-radius: var(--r-xl);
       border: 1px solid var(--glass-border);
+      background: var(--glass-bg-soft);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
     }
 
     div.articleRightInner img{
@@ -502,7 +537,7 @@
     .dark-mode tr{ border-bottom-color: rgba(255,255,255,.10); }
     tr:hover{ color: var(--hovertext-color); }
 
-    /* Tabs (General / Trivia) – full width + auto resize */
+    /* Tabs */
     .tab{
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -510,6 +545,11 @@
       margin: .35rem 0 .6rem;
       padding: 10px;
       border-radius: var(--r-xl);
+      background: var(--glass-bg-soft);
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+      backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+      -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
     }
     .tab button{
       width: 100%;
@@ -569,18 +609,23 @@
       grid-gap: 1rem;
       margin: .5rem 0 .5rem 0;
     }
-    .gallery img{
+    .gallery img,
+    .galleryfooter img{
       width:100%;
       height:auto;
       display:block;
       object-fit: cover;
-      transition: .35s;
-      aspect-ratio: 16 / 9;
       border-radius: 14px;
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
+      transition: .25s;
+      cursor: zoom-in;
+      user-select:none;
+      -webkit-user-drag:none;
     }
-    .gallery img:hover{ transform: scale(1.03); }
+    .gallery img{ aspect-ratio: 16 / 9; }
+    .gallery img:hover,
+    .galleryfooter img:hover{ transform: scale(1.03); }
 
     .galleryfooter{
       display:grid;
@@ -588,18 +633,6 @@
       grid-gap: .8rem;
       margin-bottom: 2rem;
     }
-    .galleryfooter img{
-      width:100%;
-      height:auto;
-      display:block;
-      border-radius: 14px;
-      object-fit: cover;
-      transition: .25s;
-      border: 1px solid rgba(255,255,255,.14);
-      padding: 2px;
-      background: rgba(255,255,255,.06);
-    }
-    .galleryfooter img:hover{ transform: scale(1.03); cursor: cell; }
 
     /* Hover tooltip */
     .hover-content{
@@ -637,6 +670,7 @@
       border-radius: var(--r-xl);
       border: 1px solid rgba(255,255,255,.14);
       overflow:hidden;
+      background: rgba(255,255,255,.06);
     }
     .bottombox .subtitle td, .bottombox .subtitle th{
       border: solid 2px transparent;
@@ -647,12 +681,125 @@
       background: rgba(255,255,255,.06);
     }
 
+    /* ===== Lightbox ===== */
+    .lightboxOverlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: none;
+      z-index: 9999;
+      padding: 18px;
+    }
+    .lightboxOverlay.is-open{ display: grid; place-items: center; }
+
+    .lightboxPanel{
+      width: min(1100px, 96vw);
+      height: min(82vh, 820px);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 10px;
+    }
+
+    .lightboxTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      color: rgba(255,255,255,.92);
+      font-size: .9rem;
+    }
+
+    .lbBtn{
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.95);
+      border-radius: 999px;
+      height: 42px;
+      min-width: 42px;
+      padding: 0 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .lbBtn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.26);
+    }
+    .lbBtn:focus-visible{ outline:none; box-shadow: 0 0 0 3px rgba(255,255,255,.18); }
+
+    .lightboxStage{
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      display: grid;
+      place-items: center;
+      min-height: 240px;
+    }
+
+    .lightboxImg{
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display:block;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+
+    .lightboxNav{
+      position: absolute;
+      inset: 0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 10px;
+      pointer-events:none;
+    }
+    .lightboxNav .lbBtn{
+      pointer-events: auto;
+      background: rgba(0,0,0,.28);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .lightboxBottom{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 10px;
+      color: rgba(255,255,255,.75);
+      font-size: .85rem;
+    }
+
+    .lightboxDots{
+      display:flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content:center;
+    }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.22);
+      border: 1px solid rgba(255,255,255,.18);
+      cursor:pointer;
+    }
+    .dot.is-active{ background: rgba(255,255,255,.85); }
+
     /* ===== Responsive ===== */
     @media (max-width: 750px){
       .navbar{ gap: .6rem; border-radius: 0 0 18px 18px; }
-      .navbar .nav-center{ display:none; } /* keep it clean on small screens */
+      .navbar .nav-center{ display:none; } /* keep clean */
       .sidebar .links-container{ width: 180px; }
-      .main-layout .content-wrapper{ margin-left: 190px; padding: 0 1.2rem; }
+      .main-layout .content-wrapper{ margin-left: 190px; padding: 0 1.2rem 2rem; }
+      .lightboxPanel{ height: min(80vh, 760px); }
     }
 
     @media (max-width: 600px){
@@ -662,11 +809,10 @@
 
     @media (max-width: 550px){
       .main-layout .sidebar{ display:none; }
-      .main-layout .content-wrapper{ margin-left:0; padding: 0 1.1rem; }
+      .main-layout .content-wrapper{ margin-left:0; padding: 0 1.1rem 2rem; }
       div.articleRightInner{ float:none; width:100%; margin: 0 0 1rem 0; }
       .article h1{ font-size: 1.55rem; }
     }
-
   </style>
 </head>
 
@@ -705,11 +851,9 @@
 
     <!-- Main Layout -->
     <main class="main-layout glass glassSoft hairline">
-      <div class="screen-overlay"></div>
-
       <!-- Sidebar -->
       <aside class="sidebar">
-        <div class="links-container glass glassSoft hairline">
+        <div class="links-container hairline">
           <ul class="link-section">
             <div class="section-title">Contents</div>
 
@@ -762,7 +906,7 @@
 
       <div class="content-wrapper">
 
-        <nav class="episodebar glass glassSoft hairline">
+        <nav class="episodebar">
           <div class="episodenavigation">
             <table><tbody>
               <tr>
@@ -782,14 +926,14 @@
         <div class="article">
           <h1 id="top">The Crap Out</h1>
 
-          <div class="tab glassSoft hairline">
+          <div class="tab">
             <button class="tablinks" onclick="openCity(event, 'tab1')" id="defaultOpen">General</button>
             <button class="tablinks" onclick="openCity(event, 'tab2')">Trivia</button>
           </div>
 
           <div id="tab1" class="tabcontent">
 
-            <div class="articleRightInner glass glassSoft hairline">
+            <div class="articleRightInner">
               <div class="articletitlemain">The Crap Out</div>
               <img src="/wiki/img/episodes/tco.png" alt="The Crap Out">
 
@@ -860,21 +1004,16 @@
             <p>At South Park Elementary, Stan is seeing the school counsellor
               <sup><a href="#" data-hover-content="<div class='hover-content'><p>In this episode, the counsellor is Jesus Christ, following the sacking of Mr Mackey in the previous season.</p></div>">[1]</a></sup>
               and talking about how tough the last few months have been, mentioning ICE raids, his dad's company going out of business, and losing their home and moving in with his grandfather at Shady Acres and admits he isn't able to cope with all of the change around them. Jesus Christ, having fully embraced the 'Power Christian' lifestyle now, strums an electric guitar and questions what has changed so much. Stan points out people aren't so kind and giving anymore, and admits he is considering sharing the Saudi Arabian money he won in the Turkey Trot race because he feels like that's what everyone needs, comparing it to a Christmas miracle. Jesus calls this "socialist bullshit" and Stan expresses frustration at how Jesus has changed, reminding him he doesn't want to live in an old folks' home anymore and needs some Christmas magic. Peggy Rockbottom then enters the counsellor's office with Pinot Grigio to which Jesus protests what took her so long and tells her to shut up, while she explains to him and Stan she is only late because she went to sing to the needy for charity work. Jesus tells Stan at this time of year, everyone wishes things were better, but that nothing miraculous will happen to anyone.</p>
-
             <p>At the White House, Satan is decorating the nursey and crib with Christmas decorations while singing to himself about the incoming arrival of his new baby, listening to a Fox News special report on the baby's upcoming arrival, with the report mentioning that no one is aware how the baby will be born, but that the "crap out" is coming. Satan's decorations include a 'Baby's First Christmas' and Labubu ornaments. but when singing a verse about the baby's dad, Satan realizes Donald Trump, the baby's father, is not present, and questions Dan Scavino and Pam Bondi about his whereabouts, explaining they planned to spend the day singing and decorating together. Scavino informs him Trump had to fly to Colorado on an "urgent matter", insisting it is "high-level classified" and that even they don't have the security clearance to know what's going on, to Satan's anger. After he leaves, Scavino dismisses Satan's concern as pregnancy hormones while Bondi admits she does find it strange that Trump hasn't informed her why he visited Colorado, and Scavino suggests as Trump claimed only he and the Vice President were allowed to know, it must be a covert military operation. Trump and Vance, however, are on Main Street South Park across from the Park County Police Station, dressed as Santa Claus and an elf and pretending to collect donations for the Salvation Army charity organization for Christmas. Vance explains to Trump that Peter Thiel is being held at the station and confirms only Thiel can prevent the unholy birth. Mr. Mackey apologizes for not donating to the Salvation Army, recounting how he lost his job due to a lack of government funding for schools, as well as his health care, and the high cost of tariffs. Trump expresses no concern and wishes him a merry Christmas. As he leaves, Vance warns Trump they need to hurry before the "crap out" can take place, and they synchronize watches to enact 'Operation Kill My Own Baby'.</p>
-
             <p>At the Park County Police Station, Trump and Vance arrive in their disguises, wishing everyone a merry Christmas and happy holidays and confronting Detective Harris, claiming they are Salvation Army members with food for the prisoners, justifying it as the time of year to give to the needy, including a cake. Pete Hegseth begins to protest they don't need any cake because the President will be coming for them before Peter Thiel, noticing the ruse, elbows him. Harris tells Mitch Murphy to let them in. Meanwhile outside the The Cheesecake Factory, Stan and the Christmas Critters are walking together as the Critters sing a song about the upcoming crap out. Stan stops and points out they told him Satan was in Washington DC, but they let him know that Satan is on his way to South Park and he needs to just get on board with the crap out. Foxy explains that nothing will stop the Anti-Christ's arrival, except for Peter Thiel. Stan recognizes Thiel as the man who gave a presentation at the school, and the Critters express surprise he has met him and horror that Thiel is already in South Park, asking Stan what he intends to do about this, with Squirrely asking if he might kill and eat him. Stan claims he won't be onboard with the crap out unless it makes "a little bit" of sense, and Beary assures him they will make sure it "all lines up perfectly" for him and the Critters celebrate.</p>
-
             <p>At Hell's Pass Hospital, the Critters, Towelie and Stan gather around Satan in his hospital bed waiting for the baby to be born when a doctor comes in and explains they will just need another quick ultrasound and will then move Satan to the operating room. Satan warns him there are evil forces at work and they may need to hurry. Back at the Police Station, Jesus uses his electric guitar to break through the Police Station's main hall and let Trump and Vance in, then to free Peter Thiel and Pete Hegseth from the jail. They greet Trump, who gladly says he's gotten "another Christians dipshit" to help him get what he wants. Thiel warns him there is very little time to stop the Anti-Christ's arrival, and Vance speaks up to say that he doesn't care if his asshole is now filled with genital warts, he still loves Trump. Back at the hospital though, Satan is telling the critters he can't believe how terrible Trump turned out to be, admitting he falls for the worst kinds of guys and calling himself stupid, as the Critters reassure him to save his strength and tell him he's not stupid, pushing Stan to help reassure him. Trump admits he knew how terrible Trump was and how terrible he treated everyone but looked the other way in hopes of a Christmas miracle, his little baby, the only thing in his life that could stull turn out good. Satan worries he will never be free if Trump has Jesus on his side, and the Critters are concerned if he can be stopped, but believe Stan can help them stop him.</p>
-
             <p>As the confrontation ends, the doctor comes into the hallway and says he is sorry to interrupt but informs everyone he has really bad news, explaining that according to the ultrasound, at some point when "nobody was watching", the baby hung itself and took it's own life, saying it can all be seen in a video, noting the baby managed to get "a hold of some bed sheets, there's a couple minutes missing from the ultrasound but it's definitely a suicide". Trump is overjoyed with this outcome, and Vance refers to it as a miracle, but Beary is disappointed there will not be a crap out after all. Fox News then reports that the unborn child of Satan and President Trump has indeed "taken the easy way out" by committing suicide and "lacked mental toughness", with Sean Hannity showing the ultrasound of the baby initially appearing fine, "a few minutes missing" represented by a black screen, and then the baby inside the womb having already hung itself, a small chair visible, and refers to it as "just something babies do sometimes, while the Fox and Friends hosts urge viewers who know a fetus contemplating suicide to call up Fox News as much as they can. The anchor mentions a funeral will be held for the unborn child at the White House.</p>
-
             <p>Back at Shady Acres, one of the employees calls out for Christmas mail and letters from home, finding one for Stan and offering it to him. Stan notices on the envelope it is from Jesus and opens it, and Jesus tells him he owes him an apology and a thank you, noting that Stan asked for a Christmas miracle and that Jesus didn't listen, telling him to go to an address, which Stan recognizes with surprise, saying "no way" before running through the town and coming back to the old Marsh Residence, with 'Merry Christmas Stan' written in holiday lights. Stan finds a key from Jesus and opens the house, seeing a Christmas tree already set up and the same familiar furniture including his old living room couch, a photo of his family, and heads up to his room to see his old toy box, bed and more all in place. After leaving, he looks up to the stars and says "thank you" to Jesus, who appears in the stars and promises he will be up there, watching everybody, telling Stan to be good and never give up on the things he commits to, before being joined by Peggy Rockbottom, who praises Jesus and begins singing the same song she sang to the seniors earlier about getting punched in the face, and Stan sings along happily as he heads back into his home.</p>
 
             <div class="section-separator"></div>
 
             <h3 id="gallery">Gallery</h3>
-            <div class="gallery">
+            <div class="gallery" data-lightbox="main-gallery">
               <img src="/wiki/img/episodes/sotm.png" alt="">
               <img src="/wiki/img/episodes/gan.png" alt="">
               <img src="/wiki/img/episodes/sickofancy.png" alt="">
@@ -882,7 +1021,7 @@
 
             <div class="section-separator"></div>
 
-            <div class="bottombox glassSoft hairline">
+            <div class="bottombox">
               <div class="subtitle linklist">
                 <table class="bottomboxtable">
                   <tbody>
@@ -891,7 +1030,6 @@
                         <center>Season 28</center>
                       </td>
                     </tr>
-
                     <tr>
                       <td style="background-color:var(--darker-gray-color);text-align:center;font-weight:700;font-size:.83rem;width:6rem;">Episodes</td>
                       <td colspan="2">
@@ -904,7 +1042,6 @@
                         </div>
                       </td>
                     </tr>
-
                     <tr>
                       <td colspan="3" style="background-color:#456291;color:#fff;font-weight:700;font-size:.84rem;letter-spacing:.2px;">
                         <center>Season 27</center>
@@ -922,7 +1059,6 @@
                         </div>
                       </td>
                     </tr>
-
                     <tr>
                       <td colspan="3" style="background-color:#456291;color:#fff;font-weight:700;font-size:.84rem;letter-spacing:.2px;">
                         <center>Season 26</center>
@@ -951,7 +1087,6 @@
                         </div>
                       </td>
                     </tr>
-
                     <tr>
                       <td colspan="3" style="background-color:#456291;color:#fff;font-weight:700;font-size:.84rem;letter-spacing:.2px;">
                         <center>Seasons</center>
@@ -991,7 +1126,6 @@
                         </div>
                       </td>
                     </tr>
-
                   </tbody>
                 </table>
               </div>
@@ -1070,14 +1204,13 @@
 
             <center><h1 style="margin-top:1rem;font-family:'Onest',sans-serif;">Other Episodes</h1></center>
 
-            <div class="galleryfooter">
+            <div class="galleryfooter" data-lightbox="other-episodes">
               <img src="/wiki/img/episodes/sotm.png" alt="">
               <img src="/wiki/img/episodes/gan.png" alt="">
               <img src="/wiki/img/episodes/sickofancy.png" alt="">
               <img src="/wiki/img/episodes/wid.png" alt="">
               <img src="/wiki/img/episodes/coi.png" alt="">
             </div>
-
           </div><!-- /tab2 -->
 
         </div><!-- /article -->
@@ -1085,8 +1218,32 @@
     </main>
   </div>
 
+  <!-- Lightbox markup -->
+  <div class="lightboxOverlay" id="lightbox" aria-hidden="true">
+    <div class="lightboxPanel" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <div class="lightboxTop">
+        <div id="lbCounter">1 / 1</div>
+        <div style="display:flex; gap:10px;">
+          <button class="lbBtn" id="lbClose" aria-label="Close"><i class="uil uil-multiply"></i></button>
+        </div>
+      </div>
+
+      <div class="lightboxStage" id="lbStage">
+        <img class="lightboxImg" id="lbImg" alt="">
+        <div class="lightboxNav">
+          <button class="lbBtn" id="lbPrev" aria-label="Previous"><i class="uil uil-angle-left-b"></i></button>
+          <button class="lbBtn" id="lbNext" aria-label="Next"><i class="uil uil-angle-right-b"></i></button>
+        </div>
+      </div>
+
+      <div class="lightboxBottom">
+        <div class="lightboxDots" id="lbDots"></div>
+      </div>
+    </div>
+  </div>
+
   <script>
-    /* ===== Tabs (unchanged behaviour) ===== */
+    /* ===== Tabs ===== */
     function openCity(evt, cityName) {
       var i, tabcontent, tablinks;
       tabcontent = document.getElementsByClassName("tabcontent");
@@ -1107,18 +1264,9 @@
       themeIcon.className = isDark ? 'uil uil-sun' : 'uil uil-moon';
       localStorage.setItem('wikiTheme', isDark ? 'dark' : 'light');
     }
-
     const saved = localStorage.getItem('wikiTheme');
-    if(saved){
-      applyTheme(saved === 'dark');
-    } else {
-      // default: light (do nothing)
-      applyTheme(false);
-    }
-
-    themeToggle.addEventListener('click', () => {
-      applyTheme(!document.body.classList.contains('dark-mode'));
-    });
+    applyTheme(saved === 'dark');
+    themeToggle.addEventListener('click', () => applyTheme(!document.body.classList.contains('dark-mode')));
 
     /* ===== Dropdowns (sidebar) ===== */
     document.querySelectorAll('[data-dropdown]').forEach(drop => {
@@ -1129,7 +1277,6 @@
         drop.classList.toggle('open', open);
         if(!menu) return;
         if(open){
-          // measure items height
           const h = items.reduce((acc, li) => acc + li.getBoundingClientRect().height, 0);
           menu.style.height = (h + 4) + 'px';
         } else {
@@ -1137,30 +1284,24 @@
         }
       }
       setOpen(false);
-      header.addEventListener('click', (e) => {
-        e.preventDefault();
-        setOpen(!drop.classList.contains('open'));
-      });
-      window.addEventListener('resize', () => {
-        if(drop.classList.contains('open')) setOpen(true);
-      });
+      header.addEventListener('click', (e) => { e.preventDefault(); setOpen(!drop.classList.contains('open')); });
+      window.addEventListener('resize', () => { if(drop.classList.contains('open')) setOpen(true); });
     });
 
-    /* ===== Scroll progress bar ===== */
+    /* ===== Scroll progress bar (window scroll) ===== */
     const progressBar = document.getElementById('progressBar');
-    const scroller = document.querySelector('.main-layout');
 
     function updateProgress(){
-      const el = scroller;
-      const max = el.scrollHeight - el.clientHeight;
-      const pct = max > 0 ? (el.scrollTop / max) * 100 : 0;
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
       progressBar.style.width = pct.toFixed(2) + '%';
     }
-    scroller.addEventListener('scroll', updateProgress);
+    window.addEventListener('scroll', updateProgress, {passive:true});
     window.addEventListener('resize', updateProgress);
     updateProgress();
 
-    /* ===== Scrollspy for top pills + sidebar links ===== */
+    /* ===== Scrollspy (window as root) ===== */
     const spyTargets = ['#top','#synopsis','#plot','#gallery']
       .map(sel => document.querySelector(sel))
       .filter(Boolean);
@@ -1172,28 +1313,23 @@
       pillButtons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-scrollspy') === idSel));
       sideLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('data-scrollspy-link') === idSel));
     }
-
-    // default
     setActive('#top');
 
     const io = new IntersectionObserver((entries) => {
-      // pick the most visible intersecting section
       const visible = entries
         .filter(e => e.isIntersecting)
         .sort((a,b) => (b.intersectionRatio - a.intersectionRatio))[0];
-
       if(visible && visible.target && visible.target.id){
         setActive('#' + visible.target.id);
       }
     }, {
-      root: scroller,           // important: use the scroll container
+      root: null,
       threshold: [0.12, 0.22, 0.35, 0.5, 0.75],
-      rootMargin: "-10% 0px -70% 0px"
+      rootMargin: "-18% 0px -70% 0px"
     });
-
     spyTargets.forEach(t => io.observe(t));
 
-    /* ===== Tooltips (desktop hover + mobile tap/hold) ===== */
+    /* ===== Tooltips (desktop hover + mobile tap) ===== */
     const links = document.getElementsByTagName("a");
     let activeTooltipId = null;
 
@@ -1204,11 +1340,9 @@
       link.addEventListener("mousemove", handleMouseMove);
       link.addEventListener("mouseleave", handleMouseLeave);
 
-      // mobile / touch
       link.addEventListener("pointerdown", (e) => {
         if(e.pointerType !== 'touch') return;
         e.preventDefault();
-        // toggle
         if(activeTooltipId && link.getAttribute('data-hover-id') === activeTooltipId){
           handleMouseLeave(e);
         } else {
@@ -1222,7 +1356,6 @@
       if(e.pointerType !== 'touch') return;
       const wrapper = document.querySelector('[data-hover-wrapper]');
       if(!wrapper) return;
-      // if tap is outside tooltip + outside a tooltip link -> close
       const isTooltipLink = e.target && e.target.closest && e.target.closest('a[data-hover-content]');
       if(wrapper.contains(e.target) || isTooltipLink) return;
       wrapper.remove();
@@ -1241,8 +1374,6 @@
       let top;
       const wantsBelow = !(e.target.getBoundingClientRect().top + rect.height > innerHeight);
       top = wantsBelow ? (e.clientY + 18) : (e.clientY - (rect.height + 18));
-
-      // keep within viewport
       top = Math.max(12, Math.min(top, window.innerHeight - rect.height - 12));
 
       return `position: fixed; left:${left}px; top:${top}px; z-index:9999;`;
@@ -1286,12 +1417,120 @@
       wrapper.setAttribute("style", handlePosition(e));
     }
 
-    // close tooltip when scrolling main container
-    scroller.addEventListener('scroll', () => {
+    window.addEventListener('scroll', () => {
       const wrapper = document.querySelector('[data-hover-wrapper]');
       if(wrapper) wrapper.remove();
       activeTooltipId = null;
+    }, {passive:true});
+
+    /* ===== Lightbox (click any gallery image) ===== */
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+    const lbCounter = document.getElementById('lbCounter');
+    const lbDots = document.getElementById('lbDots');
+
+    let lbGroup = [];
+    let lbIndex = 0;
+    let lastFocus = null;
+
+    function buildDots(){
+      lbDots.innerHTML = '';
+      if(lbGroup.length <= 1) return;
+      lbGroup.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'dot' + (i === lbIndex ? ' is-active' : '');
+        d.type = 'button';
+        d.setAttribute('aria-label', `Go to image ${i+1}`);
+        d.addEventListener('click', () => { lbIndex = i; renderLightbox(); });
+        lbDots.appendChild(d);
+      });
+    }
+
+    function renderLightbox(){
+      const item = lbGroup[lbIndex];
+      lbImg.src = item.src;
+      lbImg.alt = item.alt || '';
+      lbCounter.textContent = `${lbIndex + 1} / ${lbGroup.length}`;
+
+      const many = lbGroup.length > 1;
+      lbPrev.style.visibility = many ? 'visible' : 'hidden';
+      lbNext.style.visibility = many ? 'visible' : 'hidden';
+      buildDots();
+    }
+
+    function openLightbox(groupEls, startIndex){
+      lastFocus = document.activeElement;
+      lbGroup = groupEls.map(img => ({ src: img.getAttribute('data-full') || img.src, alt: img.alt || '' }));
+      lbIndex = Math.max(0, Math.min(startIndex, lbGroup.length - 1));
+
+      lb.classList.add('is-open');
+      lb.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden'; // prevent background scroll while open
+
+      renderLightbox();
+      lbClose.focus({preventScroll:true});
+    }
+
+    function closeLightbox(){
+      lb.classList.remove('is-open');
+      lb.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+    }
+
+    function prevLightbox(){
+      if(lbGroup.length <= 1) return;
+      lbIndex = (lbIndex - 1 + lbGroup.length) % lbGroup.length;
+      renderLightbox();
+    }
+
+    function nextLightbox(){
+      if(lbGroup.length <= 1) return;
+      lbIndex = (lbIndex + 1) % lbGroup.length;
+      renderLightbox();
+    }
+
+    // attach click handlers per gallery group (so nav stays within that group)
+    document.querySelectorAll('[data-lightbox]').forEach(g => {
+      const imgs = Array.from(g.querySelectorAll('img'));
+      imgs.forEach((img, idx) => {
+        img.addEventListener('click', () => openLightbox(imgs, idx));
+      });
     });
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbPrev.addEventListener('click', prevLightbox);
+    lbNext.addEventListener('click', nextLightbox);
+
+    // click outside panel closes
+    lb.addEventListener('click', (e) => {
+      if(e.target === lb) closeLightbox();
+    });
+
+    // keyboard
+    document.addEventListener('keydown', (e) => {
+      if(!lb.classList.contains('is-open')) return;
+      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'ArrowLeft') prevLightbox();
+      if(e.key === 'ArrowRight') nextLightbox();
+    });
+
+    // basic swipe on image (touch)
+    let touchX = null;
+    lbImg.addEventListener('pointerdown', (e) => {
+      if(e.pointerType !== 'touch') return;
+      touchX = e.clientX;
+    }, {passive:true});
+    lbImg.addEventListener('pointerup', (e) => {
+      if(e.pointerType !== 'touch' || touchX === null) return;
+      const dx = e.clientX - touchX;
+      touchX = null;
+      if(Math.abs(dx) < 30) return;
+      if(dx > 0) prevLightbox(); else nextLightbox();
+    }, {passive:true});
   </script>
 </body>
 </html>
