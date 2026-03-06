@@ -222,7 +222,6 @@
     .carousel-container{
       position:relative;
       width:100%;
-      min-height:390px;
       border-radius:var(--radius-lg);
       overflow:hidden;
       border:1px solid rgba(130,183,255,.18);
@@ -231,17 +230,6 @@
       isolation:isolate;
     }
 
-    .carousel-container::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:
-        radial-gradient(580px 240px at 14% 18%, rgba(97,231,255,.12), transparent 60%),
-        radial-gradient(540px 260px at 82% 20%, rgba(157,123,255,.11), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
-      pointer-events:none;
-      z-index:1;
-    }
 
     .carousel-track{
       position:relative;
@@ -1146,8 +1134,6 @@
 
   <div class="hero-shell">
     <div class="carousel-container">
-      <button class="hero-nav hero-nav--prev" id="heroPrev" aria-label="Previous featured title">‹</button>
-      <button class="hero-nav hero-nav--next" id="heroNext" aria-label="Next featured title">›</button>
 
       <div class="carousel-track" id="heroTrack">
 
