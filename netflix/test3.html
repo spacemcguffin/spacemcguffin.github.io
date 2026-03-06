@@ -217,7 +217,8 @@
       max-width:var(--maxW);
       margin:22px auto 4px;
       padding:0 var(--sectionPad);
-            min-height:390px;
+      height:350px;
+      max-height:350px;
     }
 
     .carousel-container{
@@ -229,14 +230,16 @@
       background:linear-gradient(135deg, rgba(10,16,35,.78), rgba(16,23,52,.64));
       box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.04), inset 0 0 0 1px rgba(97,231,255,.03);
       isolation:isolate;
-            min-height:390px;
+      height:350px;
+      max-height:350px;
     }
 
 
     .carousel-track{
       position:relative;
       width:100%;
-      min-height:390px;
+      height:350px;
+      max-height:350px;
     }
 
     .hero-slide{
@@ -258,7 +261,6 @@
       width:100%;
       height:100%;
       object-fit:cover;
-      transform:scale(1.03);
       filter:saturate(1.08) contrast(1.04);
     }
 
@@ -302,7 +304,6 @@
       gap:8px;
       padding:8px 12px;
       border-radius:999px;
-      background:rgba(8,13,31,.55);
       border:1px solid rgba(130,183,255,.18);
       color:var(--text);
       font-size:.82rem;
@@ -342,7 +343,7 @@
       box-shadow:var(--glow-blue);
       color:var(--muted);
       font-size:.84rem;
-      font-weight:700;
+      font-weight:500;
       backdrop-filter:blur(10px);
       -webkit-backdrop-filter:blur(10px);
     }
