@@ -195,6 +195,8 @@
     .category-list::-webkit-scrollbar{ display:none; }
 
     .pill-link{ display:block; }
+    .pill-link .category-button{ pointer-events:none; } /* avoids nested <a><button> click weirdness */
+
     .category-button{
       border:none;
       cursor:pointer;
@@ -256,7 +258,7 @@
 
     .sidebar{
       position: fixed;
-      left: calc(50% - 575px);
+      left: max(14px, calc(50% - (1150px / 2)));
       top: calc(var(--header-h) + 10px);
       width: var(--sidebar-w);
       height: calc(100vh - (var(--header-h) + 22px));
@@ -360,9 +362,15 @@
       border-left:2px solid rgba(255,255,255,.10);
     }
     .dropdown.open .dropdown-menu{ display:block; }
+
+    /* dropdown open state more obvious */
     .dropdown.open > .dropdown-toggle{
-      background: rgba(255,255,255,.08);
-      border-color: rgba(255,255,255,.10);
+      background: rgba(69,98,145,.12);
+      border: 1px solid rgba(69,98,145,.20);
+    }
+    body.dark-mode .dropdown.open > .dropdown-toggle{
+      background: rgba(135,174,218,.10);
+      border: 1px solid rgba(135,174,218,.20);
     }
 
     .main-layout .content-wrapper{
@@ -396,11 +404,11 @@
     }
 
     .article h3{
-    margin: .8rem 0 .6rem;
-    color: var(--black-color);
-    font-weight: 500;
-    font-family: 'Onest', sans-serif;
-    line-height: 1.1;
+      margin: .8rem 0 .6rem;
+      color: var(--black-color);
+      font-weight: 500;
+      font-family: 'Onest', sans-serif;
+      line-height: 1.1;
     }
 
     #top, #synopsis, #plot, #gallery { scroll-margin-top: 110px; }
@@ -411,6 +419,18 @@
       font-weight:400;
       font-size:0.92rem;
       color:var(--black-color);
+    }
+
+    /* Light mode: "paper" readability layer behind article text (no dark mode change) */
+    body:not(.dark-mode) .article{
+      background: rgba(255,255,255,.38);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--r-xl);
+      padding: 1rem 1rem .75rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+    body:not(.dark-mode) div.articleRightInner{
+      background: rgba(255,255,255,.62);
     }
 
     .article a:hover{ border-bottom:1px solid var(--primary-color); }
@@ -542,7 +562,6 @@
       background: rgba(255,255,255,.08);
     }
 
-
     .bottombox .subtitle td, .bottombox .subtitle th{
       border: solid 1px var(--darker-gray-color);
       padding:.35rem .5rem;
@@ -608,6 +627,7 @@
       max-height:100%;
       object-fit:contain;
       display:block;
+      touch-action: pan-y;
     }
 
     .lightboxNav{
@@ -670,6 +690,7 @@
       .main-layout .content-wrapper{ margin-left:0; padding:0 1.1rem 2rem; }
       div.articleRightInner{ float:none; width:100%; margin:0 0 1rem 0; }
       .article h1{ font-size:1.55rem; }
+      body:not(.dark-mode) .article{ padding:.9rem .9rem .6rem; }
     }
   </style>
 </head>
@@ -1142,6 +1163,11 @@
       const hoverContent = e.target.getAttribute("data-hover-content");
       if(!hoverContent) return;
 
+      // close any existing tooltip first
+      const existing = document.querySelector('[data-hover-wrapper]');
+      if(existing) existing.remove();
+      activeTooltipId = null;
+
       const ID = Math.random().toString(36).substr(2, 9);
       const wrapper = document.createElement("DIV");
 
@@ -1193,6 +1219,24 @@
     let lbIndex = 0;
     let lastFocus = null;
 
+    let scrollLockY = 0;
+    function lockScroll(){
+      scrollLockY = window.scrollY || 0;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollLockY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
+      document.body.style.width = '100%';
+    }
+    function unlockScroll(){
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.width = '';
+      window.scrollTo(0, scrollLockY);
+    }
+
     function buildDots(){
       lbDots.innerHTML = '';
       if(lbGroup.length <= 1) return;
@@ -1224,7 +1268,7 @@
 
       lb.classList.add('is-open');
       lb.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
+      lockScroll();
       renderLightbox();
       lbClose.focus({preventScroll:true});
     }
@@ -1232,7 +1276,7 @@
     function closeLightbox(){
       lb.classList.remove('is-open');
       lb.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
+      unlockScroll();
       if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
     }
 
