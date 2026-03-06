@@ -339,9 +339,10 @@ body{
        background:
         linear-gradient(180deg, rgba(2,5,14,.5) 0%, rgba(2,5,14,.18) 34%, rgba(2,5,14,.38) 56%, rgba(2,5,14,.5) 100%),
         radial-gradient(110% 100% at 50% 100%, rgba(2,5,14,.08), rgba(2,5,14,.5));
+ backdrop-filter: blur(0.5px);
 }
 
-.card:hover .card-body{ opacity: 1; backdrop-filter: blur(0.5px); }
+.card:hover .card-body{ opacity: 1;}
 
 .name{
     color: #fff;
