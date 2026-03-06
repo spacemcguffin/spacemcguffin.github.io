@@ -547,6 +547,61 @@
 
  
   <script src="script.js"></script>
+
+
+  <script>
+  (function(){
+    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+    const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
+    const heroPrev = document.getElementById('heroPrev');
+    const heroNext = document.getElementById('heroNext');
+    const heroTrack = document.getElementById('heroTrack');
+
+    let heroIndex = 0;
+    let heroTimer = null;
+    const heroInterval = 5000;
+
+    function setHeroSlide(index){
+      heroIndex = (index + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, i) => slide.classList.toggle('is-active', i === heroIndex));
+      heroDots.forEach((dot, i) => dot.classList.toggle('is-active', i === heroIndex));
+    }
+
+    function nextHero(){ setHeroSlide(heroIndex + 1); }
+    function prevHeroSlide(){ setHeroSlide(heroIndex - 1); }
+
+    function startHeroAutoplay(){
+      stopHeroAutoplay();
+      heroTimer = setInterval(nextHero, heroInterval);
+    }
+
+    function stopHeroAutoplay(){
+      if(heroTimer){
+        clearInterval(heroTimer);
+        heroTimer = null;
+      }
+    }
+
+    heroPrev.addEventListener('click', () => {
+      prevHeroSlide();
+      startHeroAutoplay();
+    });
+
+    heroNext.addEventListener('click', () => {
+      nextHero();
+      startHeroAutoplay();
+    });
+
+    heroDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        setHeroSlide(index);
+        startHeroAutoplay();
+      });
+    });
+
+</script>
+
+  
 </body>
 
 </html>
