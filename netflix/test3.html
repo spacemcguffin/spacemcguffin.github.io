@@ -217,6 +217,7 @@
       max-width:var(--maxW);
       margin:22px auto 4px;
       padding:0 var(--sectionPad);
+            min-height:390px;
     }
 
     .carousel-container{
@@ -228,6 +229,7 @@
       background:linear-gradient(135deg, rgba(10,16,35,.78), rgba(16,23,52,.64));
       box-shadow:var(--shadow-lg), inset 0 1px 0 rgba(255,255,255,.04), inset 0 0 0 1px rgba(97,231,255,.03);
       isolation:isolate;
+            min-height:390px;
     }
 
 
@@ -1131,6 +1133,9 @@
   <div class="hero-shell">
     <div class="carousel-container">
 
+      <button class="hero-nav hero-nav--prev" id="heroPrev" aria-label="Previous featured title">‹</button>
+      <button class="hero-nav hero-nav--next" id="heroNext" aria-label="Next featured title">›</button>
+      
       <div class="carousel-track" id="heroTrack">
 
         <article class="hero-slide is-active" data-index="0" data-link="/wiki/twisted-christian.html">
