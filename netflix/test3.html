@@ -296,8 +296,8 @@
 
     .profile-pill__name{
       margin-top:3px;
-      font-size:.9rem;
-      font-weight:700;
+      font-size:.8rem;
+      font-weight:600;
       color:#fff;
       white-space:nowrap;
     }
@@ -428,7 +428,6 @@
       padding:.42rem .78rem;
       border-radius:999px;
       border:1px solid rgba(130,183,255,.18);
-      background:rgba(255,255,255,.05);
       box-shadow:var(--glow-blue);
       color:var(--muted);
       font-size:.84rem;
@@ -1108,6 +1107,7 @@
         min-height:38px;
         padding:4px 7px 4px 4px;
         gap:8px;
+        width:120px;
       }
 
       .profile-pill__avatar{
@@ -1169,6 +1169,7 @@
       .profile-pill{
         padding:4px;
         min-height:36px;
+        width: min-content;
       }
 
       .profile-pill__text{
@@ -1300,8 +1301,12 @@
       <li class="nav-items"><p><a href="#movie">Movie</a></p></li>
     </ul>
     <div class="right-container">
-      <div class="profile-pill" aria-label="Lewflix profile">
-        <div class="profile-pill__avatar" aria-hidden="true">LM</div>
+      <div class="profile-pill" aria-label="profile">
+        
+        <div class="profile-pill__avatar" aria-hidden="true">
+          <img src="/wiki/img/fractalavatar.png" style="border-radius: 100%;">
+        </div>
+        
         <div class="profile-pill__text">
           <span class="profile-pill__label">Profile</span>
           <span class="profile-pill__name">Lewis</span>
@@ -1768,11 +1773,10 @@
       <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
       <div class="card-container">
         <div class="card">
-          <img src="/wiki/img/episodes/blau.png" class="card-img" alt="Bigger, Longer and Uncut">
+          <img src="/wiki/img/episodes/blau.png" class="card-img" alt="Bigger, Longer & Uncut">
           <span class="card-shimmer" aria-hidden="true"></span>
           <div class="card-body">
-            <div class="card-top"><h6 class="des">1999</h6></div>
-            <div class="card-bottom"><h2 class="name">Bigger, Longer and Uncut</h2></div>
+            <div class="card-bottom"><h2 class="name">Bigger, Longer & Uncut</h2></div>
           </div>
         </div>
       </div>
@@ -1816,212 +1820,237 @@
     </div>
   </div>
 
-  <script>
-    (function(){
-      const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
-      const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
-      const heroPrev = document.getElementById('heroPrev');
-      const heroNext = document.getElementById('heroNext');
-      const heroTrack = document.getElementById('heroTrack');
+<script>
+  (function(){
+    const heroSlides = Array.from(document.querySelectorAll('.hero-slide'));
+    const heroDots = Array.from(document.querySelectorAll('.hero-dot'));
+    const heroPrev = document.getElementById('heroPrev');
+    const heroNext = document.getElementById('heroNext');
+    const heroTrack = document.getElementById('heroTrack');
 
-      let heroIndex = 0;
-      let heroTimer = null;
-      const heroInterval = 5000;
+    let heroIndex = 0;
+    let heroTimer = null;
+    const heroInterval = 5000;
 
-      function setHeroSlide(index){
-        heroIndex = (index + heroSlides.length) % heroSlides.length;
-        heroSlides.forEach((slide, i) => slide.classList.toggle('is-active', i === heroIndex));
-        heroDots.forEach((dot, i) => dot.classList.toggle('is-active', i === heroIndex));
+    function setHeroSlide(index){
+      heroIndex = (index + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach((slide, i) => slide.classList.toggle('is-active', i === heroIndex));
+      heroDots.forEach((dot, i) => dot.classList.toggle('is-active', i === heroIndex));
+    }
+
+    function nextHero(){ setHeroSlide(heroIndex + 1); }
+    function prevHeroSlide(){ setHeroSlide(heroIndex - 1); }
+
+    function startHeroAutoplay(){
+      stopHeroAutoplay();
+      heroTimer = setInterval(nextHero, heroInterval);
+    }
+
+    function stopHeroAutoplay(){
+      if(heroTimer){
+        clearInterval(heroTimer);
+        heroTimer = null;
       }
+    }
 
-      function nextHero(){ setHeroSlide(heroIndex + 1); }
-      function prevHeroSlide(){ setHeroSlide(heroIndex - 1); }
-
-      function startHeroAutoplay(){
-        stopHeroAutoplay();
-        heroTimer = setInterval(nextHero, heroInterval);
-      }
-
-      function stopHeroAutoplay(){
-        if(heroTimer){
-          clearInterval(heroTimer);
-          heroTimer = null;
-        }
-      }
-
-      heroPrev.addEventListener('click', () => {
-        prevHeroSlide();
-        startHeroAutoplay();
-      });
-
-      heroNext.addEventListener('click', () => {
-        nextHero();
-        startHeroAutoplay();
-      });
-
-      heroDots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-          setHeroSlide(index);
-          startHeroAutoplay();
-        });
-      });
-
-      heroTrack.addEventListener('mouseenter', stopHeroAutoplay);
-      heroTrack.addEventListener('mouseleave', startHeroAutoplay);
-      heroTrack.addEventListener('focusin', stopHeroAutoplay);
-      heroTrack.addEventListener('focusout', startHeroAutoplay);
-
-      setHeroSlide(0);
+    heroPrev.addEventListener('click', () => {
+      prevHeroSlide();
       startHeroAutoplay();
+    });
 
-      const railLists = document.querySelectorAll('.movies-list');
+    heroNext.addEventListener('click', () => {
+      nextHero();
+      startHeroAutoplay();
+    });
 
-      function updateRailButtons(rail){
-        const container = rail.querySelector('.card-container');
-        const prev = rail.querySelector('.pre-btn');
-        const next = rail.querySelector('.nxt-btn');
-        if (!container || !prev || !next) return;
+    heroDots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        setHeroSlide(index);
+        startHeroAutoplay();
+      });
+    });
 
-        const needsScroll = container.scrollWidth > container.clientWidth + 4;
-        rail.classList.toggle('no-scroll', !needsScroll);
+    heroTrack.addEventListener('mouseenter', stopHeroAutoplay);
+    heroTrack.addEventListener('mouseleave', startHeroAutoplay);
+    heroTrack.addEventListener('focusin', stopHeroAutoplay);
+    heroTrack.addEventListener('focusout', startHeroAutoplay);
 
-        prev.disabled = !needsScroll;
-        next.disabled = !needsScroll;
-      }
+    setHeroSlide(0);
+    startHeroAutoplay();
 
-      railLists.forEach((rail) => {
-        const container = rail.querySelector('.card-container');
-        const prev = rail.querySelector('.pre-btn');
-        const next = rail.querySelector('.nxt-btn');
+    const railLists = document.querySelectorAll('.movies-list');
 
-        if (!container || !prev || !next) return;
+    function updateRailButtons(rail){
+      const container = rail.querySelector('.card-container');
+      const prev = rail.querySelector('.pre-btn');
+      const next = rail.querySelector('.nxt-btn');
+      if (!container || !prev || !next) return;
 
-        const getStep = () => {
-          const card = container.querySelector('.card');
-          if (!card) return 300;
-          const styles = window.getComputedStyle(container);
-          const gap = parseFloat(styles.columnGap || styles.gap || 0);
-          return card.getBoundingClientRect().width + gap;
-        };
+      const needsScroll = container.scrollWidth > container.clientWidth + 4;
+      rail.classList.toggle('no-scroll', !needsScroll);
 
-        prev.addEventListener('click', () => {
-          container.scrollBy({ left: -getStep() * 1.35, behavior: 'smooth' });
-        });
+      prev.disabled = !needsScroll;
+      next.disabled = !needsScroll;
+    }
 
-        next.addEventListener('click', () => {
-          container.scrollBy({ left: getStep() * 1.35, behavior: 'smooth' });
-        });
+    railLists.forEach((rail) => {
+      const container = rail.querySelector('.card-container');
+      const prev = rail.querySelector('.pre-btn');
+      const next = rail.querySelector('.nxt-btn');
 
-        updateRailButtons(rail);
+      if (!container || !prev || !next) return;
+
+      const getStep = () => {
+        const card = container.querySelector('.card');
+        if (!card) return 300;
+        const styles = window.getComputedStyle(container);
+        const gap = parseFloat(styles.columnGap || styles.gap || 0);
+        return card.getBoundingClientRect().width + gap;
+      };
+
+      prev.addEventListener('click', () => {
+        container.scrollBy({ left: -getStep() * 1.35, behavior: 'smooth' });
       });
 
-      window.addEventListener('resize', () => {
-        railLists.forEach(updateRailButtons);
+      next.addEventListener('click', () => {
+        container.scrollBy({ left: getStep() * 1.35, behavior: 'smooth' });
       });
 
-      const modal = document.getElementById('lfxModal');
-      const modalImg = document.getElementById('lfxImg');
-      const modalTitle = document.getElementById('lfxTitle');
-      const modalMetaA = document.getElementById('lfxMetaA');
-      const modalMetaB = document.getElementById('lfxMetaB');
-      const modalDesc = document.getElementById('lfxDesc');
-      const openWikiBtn = document.getElementById('lfxOpenWiki');
-      const closeBtn = document.getElementById('lfxClose');
-      const closeBtnSecondary = document.getElementById('lfxCloseSecondary');
-      const backdrop = modal.querySelector('.lfx-modal__backdrop');
-      const prevBtn = document.getElementById('lfxPrev');
-      const nextBtn = document.getElementById('lfxNext');
+      updateRailButtons(rail);
+    });
 
-      const cards = Array.from(document.querySelectorAll('.card'));
-      let activeIndex = -1;
+    window.addEventListener('resize', () => {
+      railLists.forEach(updateRailButtons);
+    });
 
-      function deriveMeta(card){
-        const badge = card.querySelector('.des')?.textContent?.trim() || 'Lewflix Item';
-        const sectionTitle = card.closest('.section')?.querySelector('.title')?.textContent?.trim() || 'Collection';
-        return { badge, sectionTitle };
-      }
+    const modal = document.getElementById('lfxModal');
+    const modalImg = document.getElementById('lfxImg');
+    const modalTitle = document.getElementById('lfxTitle');
+    const modalMetaA = document.getElementById('lfxMetaA');
+    const modalMetaB = document.getElementById('lfxMetaB');
+    const modalDesc = document.getElementById('lfxDesc');
+    const openWikiBtn = document.getElementById('lfxOpenWiki');
+    const closeBtn = document.getElementById('lfxClose');
+    const closeBtnSecondary = document.getElementById('lfxCloseSecondary');
+    const backdrop = modal.querySelector('.lfx-modal__backdrop');
+    const prevBtn = document.getElementById('lfxPrev');
+    const nextBtn = document.getElementById('lfxNext');
 
-      function openModal(index){
-        const card = cards[index];
-        if (!card) return;
+    let activeRailCards = [];
+    let activeRail = null;
+    let activeIndex = -1;
 
-        activeIndex = index;
+    function deriveMeta(card){
+      const badge = card.querySelector('.des')?.textContent?.trim() || 'Lewflix Item';
+      const sectionTitle = card.closest('.section')?.querySelector('.title')?.textContent?.trim() || 'Collection';
+      return { badge, sectionTitle };
+    }
 
-        const img = card.querySelector('.card-img');
-        const title = card.querySelector('.name')?.textContent?.trim() || 'Untitled';
-        const wiki = card.dataset.wiki || '';
-        const { badge, sectionTitle } = deriveMeta(card);
+    function setModalButtons(){
+      prevBtn.disabled = activeIndex <= 0;
+      nextBtn.disabled = activeIndex >= activeRailCards.length - 1;
+    }
 
-        modalImg.src = img?.src || '';
-        modalImg.alt = img?.alt || title;
-        modalTitle.textContent = title;
-        modalMetaA.textContent = badge;
-        modalMetaB.textContent = sectionTitle;
-        modalDesc.textContent = wiki
-          ? 'This title has a linked wiki page. Use the button below to open it, or continue browsing items within the current Lewflix archive.'
-          : 'This title does not currently have a linked wiki page, but you can still browse through the archive with the next and previous buttons.';
-        openWikiBtn.style.display = wiki ? 'inline-flex' : 'none';
-        openWikiBtn.onclick = () => {
-          if (wiki) window.location.href = wiki;
-        };
+    function openModal(index, railCards, rail){
+      const card = railCards[index];
+      if (!card) return;
 
-        prevBtn.disabled = activeIndex <= 0;
-        nextBtn.disabled = activeIndex >= cards.length - 1;
+      activeRailCards = railCards;
+      activeRail = rail;
+      activeIndex = index;
 
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('lfx-modalOpen');
-      }
+      const img = card.querySelector('.card-img');
+      const title = card.querySelector('.name')?.textContent?.trim() || 'Untitled';
+      const wiki = card.dataset.wiki || '';
+      const { badge, sectionTitle } = deriveMeta(card);
 
-      function closeModal(){
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('lfx-modalOpen');
-      }
+      modalImg.src = img?.src || '';
+      modalImg.alt = img?.alt || title;
+      modalTitle.textContent = title;
+      modalMetaA.textContent = badge;
+      modalMetaB.textContent = sectionTitle;
+      modalDesc.textContent = wiki
+        ? 'This title has a linked wiki page. Use the button below to open it, or continue browsing items within this row.'
+        : 'This title does not currently have a linked wiki page, but you can still browse through the rest of this row.';
 
-      cards.forEach((card, index) => {
-        card.addEventListener('click', () => openModal(index));
+      openWikiBtn.style.display = wiki ? 'inline-flex' : 'none';
+      openWikiBtn.onclick = () => {
+        if (wiki) window.location.href = wiki;
+      };
+
+      setModalButtons();
+
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('lfx-modalOpen');
+    }
+
+    function closeModal(){
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lfx-modalOpen');
+      activeRailCards = [];
+      activeRail = null;
+      activeIndex = -1;
+    }
+
+    document.querySelectorAll('.card-container').forEach((container) => {
+      const railCards = Array.from(container.querySelectorAll('.card'));
+      const rail = container.closest('.movies-list');
+
+      railCards.forEach((card, index) => {
+        card.addEventListener('click', () => openModal(index, railCards, rail));
         card.setAttribute('tabindex', '0');
 
         card.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            openModal(index);
+            openModal(index, railCards, rail);
           }
         });
       });
+    });
 
-      prevBtn.addEventListener('click', () => {
-        if (activeIndex > 0) openModal(activeIndex - 1);
-      });
+    prevBtn.addEventListener('click', () => {
+      if (activeIndex > 0) {
+        openModal(activeIndex - 1, activeRailCards, activeRail);
+      }
+    });
 
-      nextBtn.addEventListener('click', () => {
-        if (activeIndex < cards.length - 1) openModal(activeIndex + 1);
-      });
+    nextBtn.addEventListener('click', () => {
+      if (activeIndex < activeRailCards.length - 1) {
+        openModal(activeIndex + 1, activeRailCards, activeRail);
+      }
+    });
 
-      closeBtn.addEventListener('click', closeModal);
-      closeBtnSecondary.addEventListener('click', closeModal);
-      backdrop.addEventListener('click', closeModal);
+    closeBtn.addEventListener('click', closeModal);
+    closeBtnSecondary.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
 
-      document.addEventListener('keydown', (e) => {
-        if (modal.classList.contains('is-open')) {
-          if (e.key === 'Escape') closeModal();
-          if (e.key === 'ArrowLeft' && activeIndex > 0) openModal(activeIndex - 1);
-          if (e.key === 'ArrowRight' && activeIndex < cards.length - 1) openModal(activeIndex + 1);
-          return;
+    document.addEventListener('keydown', (e) => {
+      if (modal.classList.contains('is-open')) {
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft' && activeIndex > 0) {
+          openModal(activeIndex - 1, activeRailCards, activeRail);
         }
-
-        if (e.key === 'ArrowLeft') {
-          prevHeroSlide();
-          startHeroAutoplay();
+        if (e.key === 'ArrowRight' && activeIndex < activeRailCards.length - 1) {
+          openModal(activeIndex + 1, activeRailCards, activeRail);
         }
+        return;
+      }
 
-        if (e.key === 'ArrowRight') {
-          nextHero();
-          startHeroAutoplay();
-        }
-      });
-    })();
-  </script>
+      if (e.key === 'ArrowLeft') {
+        prevHeroSlide();
+        startHeroAutoplay();
+      }
+
+      if (e.key === 'ArrowRight') {
+        nextHero();
+        startHeroAutoplay();
+      }
+    });
+  })();
+</script>
+  
 </body>
 </html>
