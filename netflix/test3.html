@@ -512,15 +512,6 @@
       pointer-events:none;
     }
 
-    .movies-list::before{
-      left:0;
-      background:linear-gradient(90deg, rgba(5,8,22,1), rgba(5,8,22,0));
-    }
-
-    .movies-list::after{
-      right:0;
-      background:linear-gradient(270deg, rgba(5,8,22,1), rgba(5,8,22,0));
-    }
 
     .movies-list.no-scroll::before,
     .movies-list.no-scroll::after{
@@ -652,39 +643,35 @@
     }
 
     .name{
-      font-family:"Onest", sans-serif;
-      font-size:1.04rem;
-      font-weight:700;
-      line-height:1.18;
-      letter-spacing:-.02em;
-      text-shadow:0 10px 24px rgba(0,0,0,.72), 0 2px 8px rgba(0,0,0,.85);
-      text-wrap:balance;
-      max-width:96%;
-      padding:.38rem .55rem;
-      border-radius:10px;
-      background:linear-gradient(180deg, rgba(3,7,18,.84), rgba(3,7,18,.64));
-      border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 8px 22px rgba(0,0,0,.34);
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
+    font-family: "Onest", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.18;
+    text-wrap: balance;
+    max-width: 96%;
+    padding: .38rem .55rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .34);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     }
 
-    .des{
-      width:fit-content;
-      border-radius:999px;
-      padding:.38rem .68rem;
-      border:1px solid rgba(130,183,255,.24);
-      background:linear-gradient(180deg, rgba(3,7,18,.92), rgba(7,15,36,.78));
-      color:#f2f7ff;
-      font-size:.72rem;
-      font-weight:800;
-      letter-spacing:.04em;
-      text-transform:uppercase;
-      box-shadow:0 10px 24px rgba(0,0,0,.34), 0 0 16px rgba(97,231,255,.08);
-      text-shadow:0 1px 4px rgba(0,0,0,.8);
-      backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
-    }
+ .des {
+    width: fit-content;
+    border-radius: 999px;
+    padding: .38rem .68rem;
+    border: 1px solid rgba(130, 183, 255, .24);
+    color: #f2f7ff;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .34), 0 0 16px rgba(97, 231, 255, .08);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .8);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
 
     .pre-btn,
     .nxt-btn{
@@ -1177,10 +1164,6 @@
             <p class="hero-desc">
               Start the neon Lewflix lineup with the first episode of Season 28, now framed as a full-width featured banner with glowing glass controls.
             </p>
-            <div class="hero-actions">
-              <a class="hero-btn hero-btn--primary" href="/wiki/twisted-christian.html">Open Wiki</a>
-              <a class="hero-btn hero-btn--secondary" href="#season-28">Browse Season 28</a>
-            </div>
           </div>
         </article>
 
@@ -1197,10 +1180,6 @@
             <p class="hero-desc">
               The hero area now cycles through selected titles automatically, with manual arrows and dots so it feels like a proper streaming front page.
             </p>
-            <div class="hero-actions">
-              <a class="hero-btn hero-btn--primary" href="/wiki/the-woman-in-the-hat.html">Open Wiki</a>
-              <a class="hero-btn hero-btn--secondary" href="#season-28">Browse Season 28</a>
-            </div>
           </div>
         </article>
 
@@ -1217,10 +1196,6 @@
             <p class="hero-desc">
               Bright cyan and violet bloom effects help the hero feel closer to your newer Wobble / neon styling, rather than the older Disney-inspired look.
             </p>
-            <div class="hero-actions">
-              <a class="hero-btn hero-btn--primary" href="/wiki/sora-not-sorry.html">Open Wiki</a>
-              <a class="hero-btn hero-btn--secondary" href="#season-28">Browse Season 28</a>
-            </div>
           </div>
         </article>
 
@@ -1237,14 +1212,15 @@
             <p class="hero-desc">
               The featured area supports direct links, auto-rotation, and dot navigation, while still keeping the rest of your page structure intact underneath.
             </p>
-            <div class="hero-actions">
-              <a class="hero-btn hero-btn--primary" href="/wiki/the-crap-out.html">Open Wiki</a>
-              <a class="hero-btn hero-btn--secondary" href="#season-28">Browse Season 28</a>
-            </div>
           </div>
         </article>
 
       </div>
+
+
+
+
+      
 
       <div class="hero-dots" id="heroDots" aria-label="Hero slide navigation">
         <button class="hero-dot is-active" data-slide="0" aria-label="Go to slide 1"></button>
