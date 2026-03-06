@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lewflix</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-0:#050816;
+      --bg-1:#080d1f;
+      --bg-2:#0c1330;
+      --bg-3:#0a1026;
+
+      --text:#eef4ff;
+      --muted:rgba(232,241,255,.70);
+      --soft:rgba(232,241,255,.54);
+
+      --line:rgba(130,183,255,.18);
+      --line-strong:rgba(130,183,255,.34);
+
+      --glass:rgba(10,16,35,.58);
+      --glass-2:rgba(13,20,43,.72);
+      --glass-3:rgba(255,255,255,.06);
+
+      --cyan:#61e7ff;
+      --blue:#5ca8ff;
+      --violet:#9d7bff;
+      --pink:#ff63c3;
+
+      --glow-cyan:0 0 0 1px rgba(97,231,255,.18), 0 0 22px rgba(97,231,255,.14), 0 0 60px rgba(97,231,255,.08);
+      --glow-blue:0 0 0 1px rgba(92,168,255,.18), 0 0 26px rgba(92,168,255,.16), 0 0 74px rgba(92,168,255,.10);
+      --glow-pink:0 0 0 1px rgba(255,99,195,.14), 0 0 22px rgba(255,99,195,.10), 0 0 60px rgba(255,99,195,.06);
+
+      --shadow-lg:0 22px 70px rgba(0,0,0,.48);
+      --shadow-md:0 14px 40px rgba(0,0,0,.34);
+      --shadow-sm:0 8px 24px rgba(0,0,0,.25);
+
+      --radius-xs:10px;
+      --radius-sm:14px;
+      --radius-md:18px;
+      --radius-lg:24px;
+
+      --navH:74px;
+      --maxW:1280px;
+      --sectionPad:clamp(18px, 3vw, 34px);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    html, body{
+      min-height:100%;
+    }
+
+    body{
+      min-height:100vh;
+      overflow-x:hidden;
+      color:var(--text);
+      font-family:"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1000px 540px at -8% -12%, rgba(97,231,255,.16), transparent 58%),
+        radial-gradient(900px 480px at 108% -10%, rgba(157,123,255,.16), transparent 52%),
+        radial-gradient(700px 460px at 50% 0%, rgba(92,168,255,.12), transparent 58%),
+        linear-gradient(180deg, #050816 0%, #070b19 26%, #090f23 56%, #060915 100%);
+      background-attachment: fixed;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+      position:relative;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(circle at center, black 38%, transparent 100%);
+      opacity:.28;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.035), transparent 18%, transparent 82%, rgba(255,255,255,.02));
+      mix-blend-mode:screen;
+      opacity:.5;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    ::selection{
+      background:rgba(97,231,255,.28);
+      color:#fff;
+    }
+
+    /* ===== Navbar ===== */
+
+    .navbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      height:var(--navH);
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:0 clamp(16px, 3vw, 34px);
+      background:
+        linear-gradient(180deg, rgba(8,13,31,.82), rgba(8,13,31,.66));
+      backdrop-filter: blur(18px) saturate(1.15);
+      -webkit-backdrop-filter: blur(18px) saturate(1.15);
+      border-bottom:1px solid rgba(130,183,255,.16);
+      box-shadow:
+        0 10px 34px rgba(0,0,0,.26),
+        inset 0 -1px 0 rgba(255,255,255,.04);
+    }
+
+    .navbar::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:-1px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(97,231,255,.6), rgba(157,123,255,.55), transparent);
+      opacity:.7;
+    }
+
+    .brand-logo{
+      width:92px;
+      height:auto;
+      filter:
+        drop-shadow(0 0 10px rgba(97,231,255,.22))
+        drop-shadow(0 0 24px rgba(157,123,255,.12));
+      flex:0 0 auto;
+    }
+
+    .nav-links{
+      list-style:none;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:0;
+      padding:0;
+    }
+
+    .nav-items p{
+      margin:0;
+    }
+
+    .nav-items a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:40px;
+      padding:0 15px;
+      border-radius:999px;
+      color:var(--text);
+      font-size:.95rem;
+      font-weight:600;
+      letter-spacing:.01em;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(130,183,255,.10);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+      transition:
+        transform .18s ease,
+        border-color .18s ease,
+        background .18s ease,
+        box-shadow .18s ease,
+        color .18s ease;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .nav-items a::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.16) 50%, transparent 100%);
+      transform:translateX(-130%);
+      transition:transform .55s ease;
+      pointer-events:none;
+    }
+
+    .nav-items a:hover{
+      transform:translateY(-1px);
+      border-color:rgba(97,231,255,.34);
+      background:rgba(97,231,255,.07);
+      box-shadow:var(--glow-cyan);
+      color:#fff;
+    }
+
+    .nav-items a:hover::before{
+      transform:translateX(130%);
+    }
+
+    .right-container{
+      display:none;
+    }
+
+    /* ===== Hero ===== */
+
+    .hero-shell{
+      max-width:var(--maxW);
+      margin:22px auto 4px;
+      padding:0 var(--sectionPad);
+    }
+
+    .carousel-container{
+      position:relative;
+      width:100%;
+      min-height:350px;
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      border:1px solid rgba(130,183,255,.18);
+      background:
+        linear-gradient(135deg, rgba(10,16,35,.78), rgba(16,23,52,.64));
+      box-shadow:
+        var(--shadow-lg),
+        inset 0 1px 0 rgba(255,255,255,.04),
+        inset 0 0 0 1px rgba(97,231,255,.03);
+      isolation:isolate;
+    }
+
+    .carousel-container::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(580px 240px at 14% 18%, rgba(97,231,255,.12), transparent 60%),
+        radial-gradient(540px 260px at 82% 20%, rgba(157,123,255,.11), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .carousel{
+      position:relative;
+      z-index:1;
+      width:100%;
+      min-height:350px;
+      display:flex;
+      align-items:stretch;
+    }
+
+    .carousel:empty::before{
+      content:"LEWFLIX";
+      position:absolute;
+      left:28px;
+      top:30px;
+      font-family:"Onest", sans-serif;
+      font-size:clamp(2rem, 5vw, 4rem);
+      font-weight:800;
+      letter-spacing:.06em;
+      color:#fff;
+      text-shadow:
+        0 0 14px rgba(97,231,255,.35),
+        0 0 34px rgba(157,123,255,.22);
+      opacity:.96;
+    }
+
+    .carousel:empty::after{
+      content:"Your neon streaming archive";
+      position:absolute;
+      left:31px;
+      top:96px;
+      color:var(--muted);
+      font-size:clamp(.95rem, 2vw, 1.05rem);
+      letter-spacing:.02em;
+      opacity:.95;
+    }
+
+    .carousel-container .hero-empty-art{
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:0;
+    }
+
+    .carousel-container .hero-empty-art::before,
+    .carousel-container .hero-empty-art::after{
+      content:"";
+      position:absolute;
+      border-radius:999px;
+      filter:blur(10px);
+      opacity:.75;
+    }
+
+    .carousel-container .hero-empty-art::before{
+      width:420px;
+      height:420px;
+      right:-120px;
+      top:-50px;
+      background:radial-gradient(circle, rgba(97,231,255,.26), rgba(97,231,255,.02) 62%, transparent 72%);
+    }
+
+    .carousel-container .hero-empty-art::after{
+      width:480px;
+      height:480px;
+      right:120px;
+      bottom:-180px;
+      background:radial-gradient(circle, rgba(157,123,255,.22), rgba(157,123,255,.02) 60%, transparent 72%);
+    }
+
+    .hero-copy{
+      position:absolute;
+      left:28px;
+      bottom:28px;
+      max-width:580px;
+      z-index:2;
+    }
+
+    .hero-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:rgba(8,13,31,.55);
+      border:1px solid rgba(130,183,255,.18);
+      color:var(--text);
+      font-size:.82rem;
+      font-weight:700;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      box-shadow:var(--glow-blue);
+    }
+
+    .hero-copy h1{
+      margin-top:14px;
+      font-family:"Onest", sans-serif;
+      font-size:clamp(2.1rem, 4.8vw, 4.2rem);
+      line-height:.98;
+      font-weight:800;
+      letter-spacing:-.03em;
+      text-wrap:balance;
+      text-shadow:
+        0 8px 24px rgba(0,0,0,.42),
+        0 0 18px rgba(97,231,255,.16);
+    }
+
+    .hero-copy p{
+      margin-top:12px;
+      max-width:52ch;
+      color:var(--muted);
+      line-height:1.62;
+      font-size:1rem;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:20px;
+    }
+
+    .hero-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:46px;
+      padding:0 18px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.95rem;
+      letter-spacing:.01em;
+      border:1px solid transparent;
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .hero-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .hero-btn--primary{
+      color:#06101a;
+      background:linear-gradient(135deg, #73ecff, #78b5ff);
+      box-shadow:
+        0 10px 26px rgba(97,231,255,.22),
+        0 0 28px rgba(97,231,255,.18);
+    }
+
+    .hero-btn--secondary{
+      color:#fff;
+      background:rgba(255,255,255,.06);
+      border-color:rgba(130,183,255,.18);
+      box-shadow:var(--glow-blue);
+    }
+
+    /* ===== Sections ===== */
+
+    .section{
+      max-width:var(--maxW);
+      margin:0 auto;
+      padding:0 var(--sectionPad);
+    }
+
+    .title{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#fff;
+      font-family:"Onest", sans-serif;
+      font-size:clamp(1.2rem, 2.2vw, 1.5rem);
+      font-weight:700;
+      letter-spacing:-.02em;
+      margin:28px auto 12px;
+    }
+
+    .title::before{
+      content:"";
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:linear-gradient(135deg, var(--cyan), var(--violet));
+      box-shadow:
+        0 0 16px rgba(97,231,255,.65),
+        0 0 30px rgba(157,123,255,.36);
+      flex:0 0 auto;
+    }
+
+    .movies-list{
+      position:relative;
+      width:100%;
+      margin:0 auto 14px;
+      overflow:hidden;
+      border-radius:var(--radius-lg);
+      padding:6px 0 10px;
+    }
+
+    .movies-list::before,
+    .movies-list::after{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:0;
+      width:72px;
+      z-index:4;
+      pointer-events:none;
+    }
+
+    .movies-list::before{
+      left:0;
+      background:linear-gradient(90deg, rgba(5,8,22,1), rgba(5,8,22,0));
+    }
+
+    .movies-list::after{
+      right:0;
+      background:linear-gradient(270deg, rgba(5,8,22,1), rgba(5,8,22,0));
+    }
+
+    .card-container{
+      position:relative;
+      width:100%;
+      display:flex;
+      align-items:stretch;
+      gap:18px;
+      overflow-x:auto;
+      overflow-y:hidden;
+      scroll-behavior:smooth;
+      scrollbar-width:none;
+      padding:8px 8px 14px;
+      scroll-snap-type:x proximity;
+    }
+
+    .card-container::-webkit-scrollbar{
+      display:none;
+    }
+
+    .card{
+      position:relative;
+      min-width:270px;
+      width:270px;
+      height:152px;
+      flex:0 0 auto;
+      border-radius:20px;
+      overflow:hidden;
+      scroll-snap-align:start;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+      border:1px solid rgba(130,183,255,.16);
+      box-shadow:
+        0 14px 34px rgba(0,0,0,.26),
+        inset 0 1px 0 rgba(255,255,255,.05);
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease,
+        filter .2s ease;
+      cursor:pointer;
+      isolation:isolate;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, rgba(97,231,255,.08), transparent 35%, transparent 70%, rgba(157,123,255,.08)),
+        linear-gradient(180deg, rgba(255,255,255,.02), transparent 40%);
+      opacity:.9;
+      pointer-events:none;
+      z-index:1;
+    }
+
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:inherit;
+      padding:1px;
+      background:linear-gradient(135deg, rgba(97,231,255,.34), rgba(255,255,255,.04), rgba(157,123,255,.28));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;
+              mask-composite:exclude;
+      opacity:.62;
+      pointer-events:none;
+      z-index:4;
+    }
+
+    .card:hover{
+      transform:translateY(-6px) scale(1.02);
+      border-color:rgba(97,231,255,.28);
+      box-shadow:
+        0 18px 44px rgba(0,0,0,.34),
+        0 0 30px rgba(97,231,255,.10),
+        0 0 60px rgba(157,123,255,.08),
+        inset 0 1px 0 rgba(255,255,255,.06);
+      filter:saturate(1.05);
+    }
+
+    .card-img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      position:relative;
+      z-index:0;
+      transform:scale(1.001);
+    }
+
+    .card-body{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      padding:14px;
+      background:
+        linear-gradient(180deg, rgba(4,7,18,.04) 0%, rgba(4,7,18,.08) 24%, rgba(4,7,18,.54) 70%, rgba(4,7,18,.9) 100%);
+      opacity:1;
+    }
+
+    .name{
+      font-family:"Onest", sans-serif;
+      font-size:1.04rem;
+      font-weight:700;
+      line-height:1.2;
+      letter-spacing:-.02em;
+      text-shadow:0 8px 20px rgba(0,0,0,.45);
+      text-wrap:balance;
+      max-width:90%;
+    }
+
+    .des{
+      margin-top:8px;
+      width:fit-content;
+      border-radius:999px;
+      padding:.34rem .62rem;
+      border:1px solid rgba(130,183,255,.20);
+      background:rgba(8,13,31,.48);
+      color:var(--soft);
+      font-size:.74rem;
+      font-weight:700;
+      letter-spacing:.03em;
+      box-shadow:var(--glow-blue);
+    }
+
+    /* ===== Rail buttons ===== */
+
+    .pre-btn,
+    .nxt-btn{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:7;
+      width:46px;
+      height:46px;
+      border:none;
+      border-radius:999px;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+      backdrop-filter:blur(16px) saturate(1.15);
+      -webkit-backdrop-filter:blur(16px) saturate(1.15);
+      border:1px solid rgba(130,183,255,.24);
+      box-shadow:
+        0 14px 36px rgba(0,0,0,.34),
+        0 0 0 1px rgba(255,255,255,.04) inset,
+        0 0 24px rgba(97,231,255,.08);
+      transition:
+        transform .18s ease,
+        border-color .18s ease,
+        box-shadow .18s ease,
+        background .18s ease,
+        opacity .18s ease;
+    }
+
+    .pre-btn{ left:10px; }
+    .nxt-btn{ right:10px; }
+
+    .pre-btn:hover,
+    .nxt-btn:hover{
+      transform:translateY(-50%) scale(1.05);
+      border-color:rgba(97,231,255,.38);
+      box-shadow:
+        0 16px 42px rgba(0,0,0,.38),
+        0 0 26px rgba(97,231,255,.16),
+        0 0 56px rgba(157,123,255,.08);
+      background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.07));
+    }
+
+    .pre-btn:active,
+    .nxt-btn:active{
+      transform:translateY(-50%) scale(.98);
+    }
+
+    .pre-btn img,
+    .nxt-btn img{
+      width:14px;
+      height:18px;
+      object-fit:contain;
+      filter:
+        brightness(0) invert(1)
+        drop-shadow(0 0 10px rgba(97,231,255,.18));
+      opacity:.98;
+      pointer-events:none;
+    }
+
+    /* ===== Footer ===== */
+
+    .last-footer-texts{
+      max-width:var(--maxW);
+      margin:26px auto 0;
+      padding:18px var(--sectionPad) 32px !important;
+      text-align:center;
+    }
+
+    .last-footer-texts h3{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(130,183,255,.12);
+      color:var(--muted) !important;
+      box-shadow:var(--glow-blue);
+      font-size:.82rem !important;
+      font-weight:500 !important;
+      letter-spacing:.03em;
+    }
+
+    /* ===== Modal ===== */
+
+    .lfx-modal{
+      position:fixed;
+      inset:0;
+      z-index:9999;
+      display:none;
+    }
+
+    .lfx-modal.is-open{
+      display:block;
+    }
+
+    .lfx-modal__backdrop{
+      position:absolute;
+      inset:0;
+      background:rgba(3,6,16,.72);
+      backdrop-filter:blur(14px) saturate(1.1);
+      -webkit-backdrop-filter:blur(14px) saturate(1.1);
+    }
+
+    .lfx-modal__panel{
+      position:relative;
+      width:min(980px, calc(100vw - 28px));
+      margin:5vh auto;
+      border-radius:26px;
+      overflow:hidden;
+      background:
+        linear-gradient(180deg, rgba(13,20,43,.82), rgba(8,12,28,.90));
+      border:1px solid rgba(130,183,255,.18);
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.54),
+        0 0 38px rgba(97,231,255,.08),
+        inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .lfx-modal__hero{
+      position:relative;
+      height:330px;
+      background:#080c1b;
+      overflow:hidden;
+    }
+
+    .lfx-modal__img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .lfx-modal__hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(6,10,24,.18), rgba(6,10,24,.28) 35%, rgba(6,10,24,.84) 100%);
+      pointer-events:none;
+    }
+
+    .lfx-modal__close{
+      position:absolute;
+      top:14px;
+      right:14px;
+      z-index:4;
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:1px solid rgba(130,183,255,.22);
+      background:rgba(8,13,31,.5);
+      color:#fff;
+      font-size:22px;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      box-shadow:var(--glow-blue);
+      transition:transform .16s ease, background .16s ease, border-color .16s ease;
+    }
+
+    .lfx-modal__close:hover{
+      transform:scale(1.04);
+      background:rgba(97,231,255,.12);
+      border-color:rgba(97,231,255,.34);
+    }
+
+    .lfx-nav{
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:4;
+      width:46px;
+      height:46px;
+      border-radius:999px;
+      border:1px solid rgba(130,183,255,.22);
+      background:rgba(8,13,31,.42);
+      color:#fff;
+      font-size:34px;
+      line-height:1;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      box-shadow:var(--glow-blue);
+      transition:transform .16s ease, background .16s ease, border-color .16s ease, opacity .16s ease;
+    }
+
+    .lfx-nav:hover{
+      transform:translateY(-50%) scale(1.04);
+      background:rgba(97,231,255,.12);
+      border-color:rgba(97,231,255,.34);
+    }
+
+    .lfx-nav[disabled]{
+      opacity:.35;
+      pointer-events:none;
+    }
+
+    .lfx-nav--prev{ left:14px; }
+    .lfx-nav--next{ right:14px; }
+
+    .lfx-modal__body{
+      position:relative;
+      padding:22px 22px 24px;
+      background:
+        radial-gradient(420px 120px at 0% 0%, rgba(97,231,255,.08), transparent 65%),
+        radial-gradient(320px 140px at 100% 0%, rgba(157,123,255,.08), transparent 65%);
+    }
+
+    .lfx-modal__body::before{
+      content:"";
+      position:absolute;
+      left:22px;
+      right:22px;
+      top:0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(97,231,255,.42), rgba(157,123,255,.35), transparent);
+      opacity:.7;
+    }
+
+    .lfx-modal__title{
+      font-family:"Onest", sans-serif;
+      font-size:clamp(1.7rem, 4vw, 2.35rem);
+      line-height:1.04;
+      font-weight:800;
+      letter-spacing:-.03em;
+      margin:0 0 8px;
+      text-wrap:balance;
+      text-shadow:0 0 18px rgba(97,231,255,.08);
+    }
+
+    .lfx-modal__meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:14px;
+    }
+
+    .lfx-chip{
+      display:inline-flex;
+      align-items:center;
+      padding:.38rem .7rem;
+      border-radius:999px;
+      border:1px solid rgba(130,183,255,.18);
+      background:rgba(255,255,255,.04);
+      box-shadow:var(--glow-blue);
+      font-weight:600;
+    }
+
+    .lfx-modal__desc{
+      margin:0;
+      color:var(--text);
+      opacity:.92;
+      line-height:1.68;
+      max-width:74ch;
+    }
+
+    .lfx-modal__actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    .lfx-action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 16px;
+      border-radius:999px;
+      border:1px solid rgba(130,183,255,.20);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      font-family:"Inter", sans-serif;
+      font-size:.92rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .lfx-action:hover{
+      transform:translateY(-1px);
+      background:rgba(97,231,255,.1);
+      border-color:rgba(97,231,255,.32);
+      box-shadow:var(--glow-cyan);
+    }
+
+    .lfx-action--primary{
+      color:#06101a;
+      border-color:transparent;
+      background:linear-gradient(135deg, #73ecff, #78b5ff);
+      box-shadow:
+        0 10px 26px rgba(97,231,255,.22),
+        0 0 28px rgba(97,231,255,.18);
+    }
+
+    .lfx-modalOpen{
+      overflow:hidden;
+    }
+
+    /* ===== Responsive ===== */
+
+    @media (max-width:900px){
+      .card{
+        min-width:240px;
+        width:240px;
+        height:138px;
+      }
+
+      .carousel-container{
+        min-height:300px;
+      }
+
+      .carousel{
+        min-height:300px;
+      }
+
+      .hero-copy{
+        left:20px;
+        right:20px;
+        bottom:20px;
+      }
+    }
+
+    @media (max-width:700px){
+      :root{
+        --navH:62px;
+      }
+
+      .navbar{
+        gap:12px;
+        padding:0 14px;
+      }
+
+      .nav-links{
+        gap:8px;
+        overflow-x:auto;
+        flex-wrap:nowrap;
+        scrollbar-width:none;
+      }
+
+      .nav-links::-webkit-scrollbar{
+        display:none;
+      }
+
+      .nav-items a{
+        min-height:36px;
+        padding:0 13px;
+        font-size:.88rem;
+      }
+
+      .carousel-container{
+        min-height:280px;
+      }
+
+      .carousel{
+        min-height:280px;
+      }
+
+      .hero-copy h1{
+        font-size:2rem;
+      }
+
+      .hero-copy p{
+        font-size:.95rem;
+      }
+
+      .movies-list::before,
+      .movies-list::after{
+        width:44px;
+      }
+
+      .pre-btn,
+      .nxt-btn{
+        width:40px;
+        height:40px;
+      }
+    }
+
+    @media (max-width:560px){
+      .hero-shell{
+        margin-top:14px;
+      }
+
+      .carousel-container{
+        min-height:250px;
+      }
+
+      .carousel{
+        min-height:250px;
+      }
+
+      .hero-copy{
+        bottom:18px;
+        left:16px;
+        right:16px;
+      }
+
+      .hero-copy h1{
+        font-size:1.7rem;
+      }
+
+      .hero-copy p{
+        font-size:.9rem;
+        line-height:1.5;
+      }
+
+      .hero-actions{
+        gap:10px;
+      }
+
+      .hero-btn{
+        min-height:42px;
+        padding:0 15px;
+        font-size:.88rem;
+      }
+
+      .title{
+        margin-top:22px;
+        margin-bottom:10px;
+      }
+
+      .card{
+        min-width:200px;
+        width:200px;
+        height:112px;
+        border-radius:18px;
+      }
+
+      .name{
+        font-size:.9rem;
+      }
+
+      .des{
+        font-size:.67rem;
+        padding:.28rem .56rem;
+      }
+
+      .lfx-modal__panel{
+        width:min(980px, calc(100vw - 18px));
+        margin:7vh auto;
+        border-radius:20px;
+      }
+
+      .lfx-modal__hero{
+        height:220px;
+      }
+
+      .lfx-modal__body{
+        padding:18px 16px 20px;
+      }
+
+      .lfx-modal__body::before{
+        left:16px;
+        right:16px;
+      }
+
+      .lfx-nav{
+        width:40px;
+        height:40px;
+        font-size:28px;
+      }
+
+      .lfx-nav--prev{ left:10px; }
+      .lfx-nav--next{ right:10px; }
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      *{
+        transition:none !important;
+        animation:none !important;
+        scroll-behavior:auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <img src="/disney/images/lewflix.png" class="brand-logo" alt="Lewflix">
+    <ul class="nav-links">
+      <li class="nav-items"><p><a href="#">Episodes</a></p></li>
+      <li class="nav-items"><p><a href="#">Specials</a></p></li>
+      <li class="nav-items"><p><a href="#">Movie</a></p></li>
+      <li class="nav-items"><p><a href="#">Games</a></p></li>
+    </ul>
+    <div class="right-container"></div>
+  </nav>
+
+  <div class="hero-shell">
+    <div class="carousel-container">
+      <div class="hero-empty-art" aria-hidden="true"></div>
+
+      <div class="carousel">
+        <!-- keep empty if you want a branded neon hero only -->
+      </div>
+
+      <div class="hero-copy">
+        <div class="hero-kicker">Streaming archive</div>
+        <h1>South Park,<br>but make it neon.</h1>
+        <p>
+          A glowing Lewflix library with premium glass cards, neon depth, and streamlined rails that feel closer to your newer Wobble aesthetic.
+        </p>
+        <div class="hero-actions">
+          <a href="#season-28" class="hero-btn hero-btn--primary">Start Watching</a>
+          <a href="#specials-2023" class="hero-btn hero-btn--secondary">Browse Specials</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" id="season-28">
+    <h1 class="title">Season 28</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card" data-wiki="/wiki/twisted-christian.html">
+          <img src="/wiki/img/episodes/tc.png" class="card-img" alt="Twisted Christian">
+          <div class="card-body">
+            <h2 class="name">Twisted Christian</h2>
+            <h6 class="des">Episode 1</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/the-woman-in-the-hat.html">
+          <img src="/wiki/img/episodes/twith.png" class="card-img" alt="The Woman in the Hat">
+          <div class="card-body">
+            <h2 class="name">The Woman in the Hat</h2>
+            <h6 class="des">Episode 2</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/sora-not-sorry.html">
+          <img src="/wiki/img/episodes/sns.png" class="card-img" alt="Sora Not Sorry">
+          <div class="card-body">
+            <h2 class="name">Sora Not Sorry</h2>
+            <h6 class="des">Episode 3</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/turkey-trot.html">
+          <img src="/wiki/img/episodes/tt.png" class="card-img" alt="Turkey Trot">
+          <div class="card-body">
+            <h2 class="name">Turkey Trot</h2>
+            <h6 class="des">Episode 4</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/the-crap-out.html">
+          <img src="/wiki/img/episodes/tco.png" class="card-img" alt="The Crap Out">
+          <div class="card-body">
+            <h2 class="name">The Crap Out</h2>
+            <h6 class="des">Episode 5</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h1 class="title">Season 27</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card" data-wiki="/wiki/sermon-on-the-mount.html">
+          <img src="/wiki/img/episodes/sotm.png" class="card-img" alt="Sermon on the Mount">
+          <div class="card-body">
+            <h2 class="name">Sermon on the 'Mount</h2>
+            <h6 class="des">Episode 1</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/got-a-nut.html">
+          <img src="/wiki/img/episodes/gan.png" class="card-img" alt="Got a Nut">
+          <div class="card-body">
+            <h2 class="name">Got a Nut</h2>
+            <h6 class="des">Episode 2</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/sickofancy.html">
+          <img src="/wiki/img/episodes/sickofancy.png" class="card-img" alt="Sickofancy">
+          <div class="card-body">
+            <h2 class="name">Sickofancy</h2>
+            <h6 class="des">Episode 3</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/wok-is-dead.png">
+          <img src="/wiki/img/episodes/wid.png" class="card-img" alt="Wok is Dead">
+          <div class="card-body">
+            <h2 class="name">Wok is Dead</h2>
+            <h6 class="des">Episode 4</h6>
+          </div>
+        </div>
+
+        <div class="card" data-wiki="/wiki/conflict-of-interest.html">
+          <img src="/wiki/img/episodes/coi.png" class="card-img" alt="Conflict of Interest">
+          <div class="card-body">
+            <h2 class="name">Conflict of Interest</h2>
+            <h6 class="des">Episode 5</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="specials-2023">
+    <h1 class="title">Specials</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card">
+          <img src="/wiki/img/episodes/jtp.png" class="card-img" alt="Joining the Panderverse">
+          <div class="card-body">
+            <h2 class="name">Joining the Panderverse</h2>
+            <h6 class="des">2023 Special #1</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/nsfc.png" class="card-img" alt="Not Suitable for Children">
+          <div class="card-body">
+            <h2 class="name">Not Suitable for Children</h2>
+            <h6 class="des">2024 Special #2</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/teoo.png" class="card-img" alt="The End of Obesity">
+          <div class="card-body">
+            <h2 class="name">The End of Obesity</h2>
+            <h6 class="des">2024 Special</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h1 class="title">Season 26</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card">
+          <img src="/wiki/img/episodes/cy.png" class="card-img" alt="Cupid Ye">
+          <div class="card-body">
+            <h2 class="name">Cupid Ye</h2>
+            <h6 class="des">Episode 1</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/wwpt.png" class="card-img" alt="The Worldwide Privacy Tour">
+          <div class="card-body">
+            <h2 class="name">The Worldwide Privacy Tour</h2>
+            <h6 class="des">Episode 2</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/jt.png" class="card-img" alt="Japanese Toilet">
+          <div class="card-body">
+            <h2 class="name">Japanese Toilet</h2>
+            <h6 class="des">Episode 3</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/dl.png" class="card-img" alt="Deep Learning">
+          <div class="card-body">
+            <h2 class="name">Deep Learning</h2>
+            <h6 class="des">Episode 4</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/dh.png" class="card-img" alt="DikinBaus Hot Dogs">
+          <div class="card-body">
+            <h2 class="name">DikinBaus Hot Dogs</h2>
+            <h6 class="des">Episode 5</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/sb.png" class="card-img" alt="Spring Break">
+          <div class="card-body">
+            <h2 class="name">Spring Break</h2>
+            <h6 class="des">Episode 6</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h1 class="title">Specials</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card">
+          <img src="/wiki/img/episodes/tsw1.png" class="card-img" alt="The Streaming Wars Part One">
+          <div class="card-body">
+            <h2 class="name">The Streaming Wars - Part One</h2>
+            <h6 class="des">2022 Special #1</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/tsw2.png" class="card-img" alt="The Streaming Wars Part Two">
+          <div class="card-body">
+            <h2 class="name">The Streaming Wars - Part Two</h2>
+            <h6 class="des">2022 Special #2</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h1 class="title">Season 25</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card">
+          <img src="/wiki/img/episodes/pd.png" class="card-img" alt="Pajama Day">
+          <div class="card-body">
+            <h2 class="name">Pajama Day</h2>
+            <h6 class="des">Episode 1</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/tbf.png" class="card-img" alt="The Big Fix">
+          <div class="card-body">
+            <h2 class="name">The Big Fix</h2>
+            <h6 class="des">Episode 2</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/cp.png" class="card-img" alt="City People">
+          <div class="card-body">
+            <h2 class="name">City People</h2>
+            <h6 class="des">Episode 3</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/bttcw.png" class="card-img" alt="Back to the Cold War">
+          <div class="card-body">
+            <h2 class="name">Back to the Cold War</h2>
+            <h6 class="des">Episode 4</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/hmthm.png" class="card-img" alt="Help, My Teenager Hates Me">
+          <div class="card-body">
+            <h2 class="name">Help, My Teenager Hates Me!</h2>
+            <h6 class="des">Episode 5</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/cwspds.png" class="card-img" alt="Credigree Weed St. Patrick's Day Special">
+          <div class="card-body">
+            <h2 class="name">Credigree Weed St. Patrick's Day Special</h2>
+            <h6 class="des">Episode 6</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h1 class="title">Specials</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card">
+          <img src="/wiki/img/episodes/pc.png" class="card-img" alt="Post COVID">
+          <div class="card-body">
+            <h2 class="name">Post COVID</h2>
+            <h6 class="des">2021 Special #1</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/pctroc.png" class="card-img" alt="Post COVID The Return of COVID">
+          <div class="card-body">
+            <h2 class="name">Post COVID: The Return of COVID</h2>
+            <h6 class="des">2021 Special #2</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h1 class="title">Season 24</h1>
+    <div class="movies-list">
+      <button class="pre-btn" aria-label="Scroll left"><img src="/disney/images/pre.png" alt=""></button>
+      <button class="nxt-btn" aria-label="Scroll right"><img src="/disney/images/nxt.png" alt=""></button>
+
+      <div class="card-container">
+        <div class="card">
+          <img src="/wiki/img/episodes/tps.png" class="card-img" alt="The Pandemic Special">
+          <div class="card-body">
+            <h2 class="name">The Pandemic Special</h2>
+            <h6 class="des">Episode 1</h6>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="/wiki/img/episodes/spvs.png" class="card-img" alt="South ParQ Vaccination Special">
+          <div class="card-body">
+            <h2 class="name">South ParQ Vaccination Special</h2>
+            <h6 class="des">Episode 2</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="last-footer-texts" style="text-align:center;color:#fff;padding:1rem;">
+    <h3 style="opacity:0.8;font-weight:400;font-size:0.85rem;font-family:'Inter',sans-serif;margin-left:1rem;margin-right:1rem;">
+      © 2026 Lewflix
+    </h3>
+  </div>
+
+  <!-- Modal -->
+  <div class="lfx-modal" id="lfxModal" aria-hidden="true">
+    <div class="lfx-modal__backdrop"></div>
+
+    <div class="lfx-modal__panel" role="dialog" aria-modal="true" aria-labelledby="lfxTitle">
+      <div class="lfx-modal__hero">
+        <img class="lfx-modal__img" id="lfxImg" src="" alt="">
+        <button class="lfx-modal__close" id="lfxClose" aria-label="Close">×</button>
+        <button class="lfx-nav lfx-nav--prev" id="lfxPrev" aria-label="Previous item">‹</button>
+        <button class="lfx-nav lfx-nav--next" id="lfxNext" aria-label="Next item">›</button>
+      </div>
+
+      <div class="lfx-modal__body">
+        <h2 class="lfx-modal__title" id="lfxTitle">Title</h2>
+
+        <div class="lfx-modal__meta">
+          <span class="lfx-chip" id="lfxMetaA">Episode</span>
+          <span class="lfx-chip" id="lfxMetaB">Lewflix</span>
+        </div>
+
+        <p class="lfx-modal__desc" id="lfxDesc">
+          Open this item in your wiki page, or browse through the rest of the rail with the next and previous buttons.
+        </p>
+
+        <div class="lfx-modal__actions">
+          <button class="lfx-action lfx-action--primary" id="lfxOpenWiki">Open Wiki Page</button>
+          <button class="lfx-action" id="lfxCloseSecondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const railLists = document.querySelectorAll('.movies-list');
+
+      railLists.forEach((rail) => {
+        const container = rail.querySelector('.card-container');
+        const prev = rail.querySelector('.pre-btn');
+        const next = rail.querySelector('.nxt-btn');
+
+        if (!container || !prev || !next) return;
+
+        const getStep = () => {
+          const card = container.querySelector('.card');
+          if (!card) return 300;
+          const styles = window.getComputedStyle(container);
+          const gap = parseFloat(styles.columnGap || styles.gap || 0);
+          return card.getBoundingClientRect().width + gap;
+        };
+
+        prev.addEventListener('click', () => {
+          container.scrollBy({ left: -getStep() * 1.35, behavior: 'smooth' });
+        });
+
+        next.addEventListener('click', () => {
+          container.scrollBy({ left: getStep() * 1.35, behavior: 'smooth' });
+        });
+      });
+
+      const modal = document.getElementById('lfxModal');
+      const modalImg = document.getElementById('lfxImg');
+      const modalTitle = document.getElementById('lfxTitle');
+      const modalMetaA = document.getElementById('lfxMetaA');
+      const modalMetaB = document.getElementById('lfxMetaB');
+      const modalDesc = document.getElementById('lfxDesc');
+      const openWikiBtn = document.getElementById('lfxOpenWiki');
+      const closeBtn = document.getElementById('lfxClose');
+      const closeBtnSecondary = document.getElementById('lfxCloseSecondary');
+      const backdrop = modal.querySelector('.lfx-modal__backdrop');
+      const prevBtn = document.getElementById('lfxPrev');
+      const nextBtn = document.getElementById('lfxNext');
+
+      const cards = Array.from(document.querySelectorAll('.card'));
+      let activeIndex = -1;
+
+      function deriveMeta(card){
+        const badge = card.querySelector('.des')?.textContent?.trim() || 'Lewflix Item';
+        const sectionTitle = card.closest('.section')?.querySelector('.title')?.textContent?.trim() || 'Collection';
+        return { badge, sectionTitle };
+      }
+
+      function openModal(index){
+        const card = cards[index];
+        if (!card) return;
+
+        activeIndex = index;
+
+        const img = card.querySelector('.card-img');
+        const title = card.querySelector('.name')?.textContent?.trim() || 'Untitled';
+        const wiki = card.dataset.wiki || '';
+        const { badge, sectionTitle } = deriveMeta(card);
+
+        modalImg.src = img?.src || '';
+        modalImg.alt = img?.alt || title;
+        modalTitle.textContent = title;
+        modalMetaA.textContent = badge;
+        modalMetaB.textContent = sectionTitle;
+        modalDesc.textContent = wiki
+          ? 'This title has a linked wiki page. Use the button below to open it, or continue browsing items within the current Lewflix archive.'
+          : 'This title does not currently have a linked wiki page, but you can still browse through the archive with the next and previous buttons.';
+        openWikiBtn.style.display = wiki ? 'inline-flex' : 'none';
+        openWikiBtn.onclick = () => {
+          if (wiki) window.location.href = wiki;
+        };
+
+        prevBtn.disabled = activeIndex <= 0;
+        nextBtn.disabled = activeIndex >= cards.length - 1;
+
+        modal.classList.add('is-open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lfx-modalOpen');
+      }
+
+      function closeModal(){
+        modal.classList.remove('is-open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lfx-modalOpen');
+      }
+
+      cards.forEach((card, index) => {
+        card.addEventListener('click', () => openModal(index));
+        card.setAttribute('tabindex', '0');
+
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal(index);
+          }
+        });
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (activeIndex > 0) openModal(activeIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (activeIndex < cards.length - 1) openModal(activeIndex + 1);
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+      closeBtnSecondary.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+
+      document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('is-open')) return;
+
+        if (e.key === 'Escape') closeModal();
+        if (e.key === 'ArrowLeft' && activeIndex > 0) openModal(activeIndex - 1);
+        if (e.key === 'ArrowRight' && activeIndex < cards.length - 1) openModal(activeIndex + 1);
+      });
+    })();
+  </script>
+</body>
+</html>
