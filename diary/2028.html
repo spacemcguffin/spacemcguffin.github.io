@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2026 Diary</title>
+  <title>2028 Diary</title>
 
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -585,29 +585,14 @@
     }
 
     .article {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        var(--glass-bg);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border: 1px solid var(--border-color);
-      border-radius: 28px;
-      padding: clamp(18px, 2vw, 28px);
-      box-shadow: var(--panel-shadow);
-      position: relative;
-      overflow: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 28px;
+    padding: clamp(18px, 2vw, 28px);
+    box-shadow: var(--panel-shadow);
+    position: relative;
+    overflow: hidden;
     }
 
-    .article::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), transparent 28%),
-        radial-gradient(circle at top right, rgba(255,111,216,0.06), transparent 22%);
-      z-index: 0;
-    }
 
     .article > * {
       position: relative;
