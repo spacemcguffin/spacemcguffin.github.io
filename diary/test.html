@@ -303,15 +303,10 @@
     }
 
     .category-list .category-button.active {
-      color: #fff;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
-        linear-gradient(135deg, var(--neon-blue), #4f8eff);
-      pointer-events: none;
-      border-color: rgba(255,255,255,0.20);
-      box-shadow:
-        0 0 20px rgba(102,168,255,0.30),
-        0 0 40px rgba(102,168,255,0.12);
+    color: #eef5ff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)), rgba(102, 168, 255, 0.18);
+    border-color: rgba(102, 168, 255, 0.18);
+    box-shadow: 0 0 12px rgba(102, 168, 255, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
     .dark-mode .category-list .category-button.active {
@@ -756,7 +751,7 @@
     }
 
     .eptitles {
-      font-family: "Stack Sans Text", sans-serif;
+      font-family: "Inter", sans-serif;
       font-size: 1rem;
       line-height: 1.35;
       color: var(--black-color);
@@ -829,6 +824,21 @@
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+
+      .navbar .nav-center {
+        margin-left: 0;
+        width: auto;
+        flex: 1;
+      }
+
+      body.show-mobile-search .navbar {
+        justify-content: space-between;
+      }
+
+      body.show-mobile-search .navbar .category-list {
+        width: 100%;
+        overflow-x: auto;
       }
 
       .main-layout .screen-overlay {
@@ -1008,7 +1018,7 @@
                 </button>
 
                 <ul class="dropdown-menu">
-                  <li><a href="/diary/2026" class="link-item active-link">2026</a></li>
+                  <li><a href="/diary/2026" class="link-item">2026</a></li>
                   <li><a href="/diary/2025" class="link-item">2025</a></li>
                   <li><a href="/diary/2024" class="link-item">2024</a></li>
                   <li><a href="/diary/2023" class="link-item">2023</a></li>
@@ -1160,6 +1170,8 @@
     const dropdownToggles = document.querySelectorAll(".dropdown-toggle");
     const themeButton = document.querySelector(".theme-button");
     const themeIcon = themeButton ? themeButton.querySelector("i") : null;
+    const searchButton = document.getElementById("search-button");
+    const searchBackButton = document.getElementById("search-back-button");
 
     function closeSidebar() {
       body.classList.add("sidebar-hidden");
@@ -1199,11 +1211,53 @@
       syncThemeIcon();
     }
 
-    window.addEventListener("resize", () => {
+    if (searchButton) {
+      searchButton.addEventListener("click", () => {
+        body.classList.add("show-mobile-search");
+      });
+    }
+
+    if (searchBackButton) {
+      searchBackButton.addEventListener("click", () => {
+        body.classList.remove("show-mobile-search");
+      });
+    }
+
+    function setActiveYearFromURL() {
+      const yearLinks = document.querySelectorAll('.dropdown-menu .link-item');
+      const path = window.location.pathname.replace(/\/+$/, "");
+      const match = path.match(/\/diary\/(\d{4})$/);
+
+      yearLinks.forEach(link => link.classList.remove("active-link"));
+
+      if (match) {
+        const currentYear = match[1];
+        const activeLink = Array.from(yearLinks).find(link => {
+          const href = (link.getAttribute("href") || "").replace(/\/+$/, "");
+          return href.endsWith("/" + currentYear);
+        });
+
+        if (activeLink) {
+          activeLink.classList.add("active-link");
+
+          const parentDropdown = activeLink.closest(".dropdown");
+          if (parentDropdown) {
+            parentDropdown.classList.add("open");
+          }
+        }
+      }
+    }
+
+    function handleResize() {
       if (window.innerWidth > 768) {
+        body.classList.remove("show-mobile-search");
         body.classList.add("sidebar-hidden");
       }
-    });
+    }
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    setActiveYearFromURL();
   </script>
 </body>
 </html>
