@@ -240,7 +240,6 @@ a{ color:inherit; text-decoration:none; }
 }
 
 .archiveHead__desc{ margin:0; color: rgba(255,255,255,.82); max-width: 70ch; }
-
 .archiveHead__actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 14px; }
 
 .readmoretitle{
@@ -767,6 +766,10 @@ a{ color:inherit; text-decoration:none; }
   white-space: nowrap;
 }
 
+.bbbCard__media{
+  position:relative;
+}
+
 .bbbCard__img{
   aspect-ratio: 16 / 9;
   background-size: cover;
@@ -778,6 +781,56 @@ a{ color:inherit; text-decoration:none; }
 .bbbCard:hover .bbbCard__img{
   transform: scale(1.05);
   filter: saturate(1.15) contrast(1.05);
+}
+
+.bbbCard__featured{
+  position:absolute;
+  top:12px;
+  left:12px;
+  z-index:3;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  height:30px;
+  padding:0 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(135deg, rgba(255,209,102,.22), rgba(255,102,196,.16));
+  color:rgba(255,255,255,.96);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.28),
+    0 0 18px rgba(255,209,102,.16),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+.bbbCard__featured svg{
+  width:13px;
+  height:13px;
+  flex:0 0 auto;
+  stroke:currentColor;
+  opacity:.95;
+}
+
+.bbbCard__featured.is-cyan{
+  background:linear-gradient(135deg, rgba(0,234,255,.18), rgba(139,92,246,.16));
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.28),
+    0 0 18px rgba(0,234,255,.14),
+    inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+.bbbCard__featured.is-pink{
+  background:linear-gradient(135deg, rgba(255,61,187,.22), rgba(139,92,246,.16));
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.28),
+    0 0 18px rgba(255,61,187,.14),
+    inset 0 1px 0 rgba(255,255,255,.14);
 }
 
 .bbbCard__top {
@@ -1131,7 +1184,16 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="article">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/krismarshall.png');"></div>
+
+        <div class="bbbCard__media">
+          <span class="bbbCard__featured is-pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3 2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 15.23 7.2 17.76l.92-5.34-3.88-3.78 5.36-.78L12 3z"/>
+            </svg>
+            Featured
+          </span>
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/krismarshall.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1172,7 +1234,16 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="article">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/articlelogo.png');"></div>
+
+        <div class="bbbCard__media">
+          <span class="bbbCard__featured is-pink">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3 2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 15.23 7.2 17.76l.92-5.34-3.88-3.78 5.36-.78L12 3z"/>
+            </svg>
+            Featured
+          </span>
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/articlelogo.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1213,7 +1284,16 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="podcast">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/mcgann4k.png');"></div>
+
+        <div class="bbbCard__media">
+          <span class="bbbCard__featured is-cyan">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m12 3 2.4 4.86 5.36.78-3.88 3.78.92 5.34L12 15.23 7.2 17.76l.92-5.34-3.88-3.78 5.36-.78L12 3z"/>
+            </svg>
+            Featured
+          </span>
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/mcgann4k.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1254,7 +1334,9 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="podcast">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/cyberfacepalm.png');"></div>
+        <div class="bbbCard__media">
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/cyberfacepalm.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1273,7 +1355,9 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="podcast">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/koquillion.png');"></div>
+        <div class="bbbCard__media">
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/koquillion.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1314,7 +1398,9 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="podcast">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/angelgrunge.png');"></div>
+        <div class="bbbCard__media">
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/angelgrunge.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1333,7 +1419,9 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="podcast">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/rtdmarvellous.png');"></div>
+        <div class="bbbCard__media">
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/rtdmarvellous.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1374,7 +1462,9 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="article">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/podlogo.png');"></div>
+        <div class="bbbCard__media">
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/podlogo.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
@@ -1393,7 +1483,9 @@ a{ color:inherit; text-decoration:none; }
 
       <a class="bbbCard" href="post.html" data-category="article">
         <span class="shine" aria-hidden="true"></span>
-        <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/articlelogo.png');"></div>
+        <div class="bbbCard__media">
+          <div class="bbbCard__img" style="background-image:url('/wobble/assets/img/articlelogo.png');"></div>
+        </div>
 
         <div class="bbbCard__top">
           <div class="bbbCard__cat">
