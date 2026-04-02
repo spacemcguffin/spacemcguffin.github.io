@@ -20,7 +20,23 @@
       color: #3a3a3a;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; 
+        scroll-behavior: smooth;
+      }
+
+
+    ::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+    
 
     .page-wrap {
       max-width: 46em;
@@ -213,7 +229,7 @@
     </nav>
 
     <header class="page-header">
-      <h1>2025 Diary</h1>
+      <h1 id="top">2025 Diary</h1>
     </header>
 
     <ul class="timeline">
@@ -373,6 +389,16 @@
             <div class="timeline-entry"><span class="timeline-day">7</span><span class="timeline-title">lift my spirit</span></div>
             <div class="timeline-entry"><span class="timeline-day">8</span><span class="timeline-title">final words</span></div>
           </div>
+        </div>
+      </li>
+
+
+            <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <a href="#top">
+          <p class="timeline-event-thumbnail">Back to Top</p>
+          </a>
         </div>
       </li>
 
