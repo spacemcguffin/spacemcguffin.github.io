@@ -49,7 +49,6 @@
       list-style: none;
       margin: 0;
       padding: 0;
-      max-width: 46em;
       position: relative;
     }
 
@@ -72,7 +71,6 @@
       transition:
         opacity 0.95s cubic-bezier(.22,1,.36,1),
         transform 0.95s cubic-bezier(.22,1,.36,1);
-      will-change: opacity, transform;
     }
 
     .timeline-event.is-visible {
@@ -90,13 +88,7 @@
       background: black;
       outline: 10px solid white;
       transform: rotate(45deg);
-      transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-    }
-
-    .timeline-event-copy p {
-      margin: 0 0 0.5rem;
+      transition: 0.2s ease;
     }
 
     .timeline-event-thumbnail {
@@ -107,9 +99,6 @@
       background: black;
       color: white;
       font-size: 0.9rem;
-      transition:
-        box-shadow 0.3s ease,
-        background 0.3s ease;
     }
 
     .timeline-event:hover .timeline-event-icon {
@@ -120,6 +109,8 @@
     .timeline-event:hover .timeline-event-thumbnail {
       box-shadow: inset 20em 0 0 0 rgb(168, 50, 121);
     }
+
+    /* ===== FIXED ALIGNMENT ===== */
 
     .timeline-list {
       display: grid;
@@ -135,11 +126,11 @@
     }
 
     .timeline-day {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 2rem;
-      padding: 0.2rem 0.45rem;
+      height: 2rem;
+      padding: 0 0.45rem;
       border: 1px solid #ddd;
       border-radius: 10px;
       font-size: 0.88rem;
@@ -150,9 +141,11 @@
     }
 
     .timeline-title {
-      padding-top: 0.06rem;
+      padding-top: 0.2rem;
+      line-height: 1.4;
     }
 
+    /* mobile */
     @media (max-width: 700px) {
       .timeline::before {
         left: 1rem;
@@ -172,16 +165,8 @@
       }
 
       .timeline-day {
-        min-height: 1.85rem;
+        height: 1.85rem;
         font-size: 0.82rem;
-      }
-
-      .page-header h1 {
-        font-size: 1.55rem;
-      }
-
-      .page-header p {
-        font-size: 0.98rem;
       }
     }
 
@@ -197,12 +182,14 @@
 
 <body>
   <div class="page-wrap">
+
     <header class="page-header">
       <h1>2026 Diary</h1>
       <p>too far gone</p>
     </header>
 
     <ul class="timeline">
+
       <li class="timeline-event">
         <span class="timeline-event-icon"></span>
         <div class="timeline-event-copy">
@@ -259,6 +246,7 @@
           </div>
         </div>
       </li>
+
     </ul>
   </div>
 
@@ -282,5 +270,6 @@
       observer.observe(event);
     });
   </script>
+
 </body>
 </html>
