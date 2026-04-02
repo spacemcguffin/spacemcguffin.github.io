@@ -20,11 +20,21 @@
       color: #3a3a3a;
     }
 
-    * { box-sizing: border-box; scroll-behavior: smooth; }
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    ::-moz-selection {
+      background: #cfd8e4;
+      text-shadow: none;
+      color: #000000;
+    }
 
     ::selection {
       background: #cfd8e4;
-      color:#000;
+      text-shadow: none;
+      color: #000000;
     }
 
     .page-wrap {
@@ -68,12 +78,18 @@
 
     .page-header h1 {
       font-size: 2rem;
-      margin: 0;
+      line-height: 1.1;
+      margin: 0 0 0.2rem;
       font-weight: 700;
       font-family: 'Onest', sans-serif;
     }
 
-    /* --- TIMELINE --- */
+    .page-header p {
+      margin: 0;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #555;
+    }
 
     .timeline {
       list-style: none;
@@ -82,7 +98,6 @@
       position: relative;
     }
 
-    /* REMOVE old full-height line */
     .timeline::before {
       display: none;
     }
@@ -91,9 +106,18 @@
       position: relative;
       margin-bottom: 2.5rem;
       padding-left: 3.5rem;
+      opacity: 0;
+      transform: translateY(12px);
+      transition:
+        opacity 0.7s cubic-bezier(.22,1,.36,1),
+        transform 0.7s cubic-bezier(.22,1,.36,1);
     }
 
-    /* NEW per-event line */
+    .timeline-event.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .timeline-event::before {
       content: "";
       position: absolute;
@@ -103,9 +127,15 @@
       width: 2px;
       margin-left: -1px;
       background: black;
+      transform: scaleY(0);
+      transform-origin: top center;
+      transition: transform 0.85s cubic-bezier(.22,1,.36,1);
     }
 
-    /* STOP line after last item */
+    .timeline-event.is-visible::before {
+      transform: scaleY(1);
+    }
+
     .timeline-event:last-child::before {
       display: none;
     }
@@ -119,8 +149,17 @@
       margin-left: -0.5rem;
       background: #4b6a9b;
       outline: 10px solid white;
-      transform: rotate(45deg);
-      transition: 0.2s ease;
+      transform: rotate(45deg) scale(0.85);
+      opacity: 0;
+      transition:
+        transform 0.45s cubic-bezier(.22,1,.36,1),
+        opacity 0.45s ease,
+        background 0.2s ease;
+    }
+
+    .timeline-event.is-visible .timeline-event-icon {
+      transform: rotate(45deg) scale(1);
+      opacity: 1;
     }
 
     .timeline-event-thumbnail {
@@ -134,12 +173,12 @@
       color: white;
       font-size: 0.9rem;
       line-height: 1;
-      transition: 0.3s ease;
       text-decoration: none;
+      transition: 0.3s ease;
     }
 
     .timeline-event:hover .timeline-event-icon {
-      transform: rotate(-45deg);
+      transform: rotate(-45deg) scale(1);
       background: #2c3862;
     }
 
@@ -150,12 +189,14 @@
     .timeline-list {
       display: grid;
       gap: 0.45rem;
+      margin-top: 0.15rem;
     }
 
     .timeline-entry {
       display: grid;
       grid-template-columns: 2.5rem 1fr;
       gap: 0.85rem;
+      align-items: start;
     }
 
     .timeline-day {
@@ -163,25 +204,72 @@
       align-items: center;
       justify-content: center;
       height: 2rem;
+      padding: 0 0.45rem;
       border: 1px solid #ddd;
       border-radius: 15px;
       font-size: 0.88rem;
       font-weight: 700;
+      line-height: 1;
+      color: #3a3a3a;
       background: #fafafa;
+      font-variant-numeric: tabular-nums;
     }
 
     .timeline-title {
       padding-top: 0.2rem;
+      line-height: 1.4;
       font-size: 0.95rem;
     }
 
-    @media (max-width: 700px) {
-      .timeline-event { padding-left: 2.8rem; }
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
 
-      .timeline-event::before { left: 1rem; }
+      .timeline-event,
+      .timeline-event::before,
+      .timeline-event-icon {
+        transition: none;
+      }
+
+      .timeline-event {
+        opacity: 1;
+        transform: none;
+      }
+
+      .timeline-event::before {
+        transform: scaleY(1);
+      }
+
+      .timeline-event-icon {
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .timeline-event {
+        padding-left: 2.8rem;
+      }
+
+      .timeline-event::before {
+        left: 1rem;
+      }
 
       .timeline-event-icon {
         left: 1rem;
+        top: 0.53rem;
+      }
+
+      .timeline-entry {
+        grid-template-columns: 2.2rem 1fr;
+        gap: 0.7rem;
+      }
+
+      .timeline-day,
+      .timeline-event-thumbnail {
+        height: 1.85rem;
+        font-size: 0.82rem;
       }
     }
   </style>
@@ -202,7 +290,163 @@
 
     <ul class="timeline">
 
-      <!-- your timeline content unchanged -->
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">January 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">snowfall</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">respawn</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">vibe check</span></div>
+            <div class="timeline-entry"><span class="timeline-day">4</span><span class="timeline-title">false start</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">February 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">spaced out</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">crazy frog</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">12,000 days</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">March 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">new season</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">head above water</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">contentment</span></div>
+            <div class="timeline-entry"><span class="timeline-day">4</span><span class="timeline-title">and breathe</span></div>
+            <div class="timeline-entry"><span class="timeline-day">5</span><span class="timeline-title">decades apart</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">April 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">fifteen years ago</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">eclipse</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">fading lights</span></div>
+            <div class="timeline-entry"><span class="timeline-day">4</span><span class="timeline-title">love for sophie</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">May 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">brophie</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">five shots</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">angels and demons</span></div>
+            <div class="timeline-entry"><span class="timeline-day">4</span><span class="timeline-title">the world is mine</span></div>
+            <div class="timeline-entry"><span class="timeline-day">5</span><span class="timeline-title">love for bron</span></div>
+            <div class="timeline-entry"><span class="timeline-day">6</span><span class="timeline-title">blonde and blue</span></div>
+            <div class="timeline-entry"><span class="timeline-day">7</span><span class="timeline-title">reunion</span></div>
+            <div class="timeline-entry"><span class="timeline-day">8</span><span class="timeline-title">sanctuary</span></div>
+            <div class="timeline-entry"><span class="timeline-day">9</span><span class="timeline-title">the end is nigh</span></div>
+            <div class="timeline-entry"><span class="timeline-day">10</span><span class="timeline-title">queen of hearts</span></div>
+            <div class="timeline-entry"><span class="timeline-day">11</span><span class="timeline-title">clusterfuck</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">June 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">shattered</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">dear bronwyn</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">lone wolf</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">July 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">midpoint</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">moments of calm</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">day goes dark</span></div>
+            <div class="timeline-entry"><span class="timeline-day">4</span><span class="timeline-title">beauty and the beast</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">August 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">autumn ready</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">work daze</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">slipping away</span></div>
+            <div class="timeline-entry"><span class="timeline-day">4</span><span class="timeline-title">seasons of change</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">September 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">in between the rain</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">October 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">heart to hearts</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">November 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">wake me up when december ends</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">weight of the world</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">December 2025</p>
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">1</span><span class="timeline-title">so long, and thanks for all the fish</span></div>
+            <div class="timeline-entry"><span class="timeline-day">2</span><span class="timeline-title">that’s a wrap</span></div>
+            <div class="timeline-entry"><span class="timeline-day">3</span><span class="timeline-title">shitmas</span></div>
+            <div class="timeline-entry"><span class="timeline-day">4</span><span class="timeline-title">zoe and gem</span></div>
+            <div class="timeline-entry"><span class="timeline-day">5</span><span class="timeline-title">just another day</span></div>
+            <div class="timeline-entry"><span class="timeline-day">6</span><span class="timeline-title">SOS</span></div>
+            <div class="timeline-entry"><span class="timeline-day">7</span><span class="timeline-title">lift my spirit</span></div>
+            <div class="timeline-entry"><span class="timeline-day">8</span><span class="timeline-title">final words</span></div>
+          </div>
+        </div>
+      </li>
 
       <li class="timeline-event">
         <span class="timeline-event-icon"></span>
@@ -213,5 +457,23 @@
 
     </ul>
   </div>
+
+  <script>
+    const timelineEvents = document.querySelectorAll('.timeline-event');
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.18,
+      rootMargin: '0px 0px -8% 0px'
+    });
+
+    timelineEvents.forEach(event => observer.observe(event));
+  </script>
 </body>
 </html>
