@@ -25,8 +25,7 @@
       margin: 0 auto;
     }
 
-    /* ===== YEAR NAV ===== */
-
+    /* YEAR NAV */
     .year-nav {
       display: flex;
       gap: 0.5rem;
@@ -57,8 +56,7 @@
       font-weight: 600;
     }
 
-    /* ===== HEADER ===== */
-
+    /* HEADER */
     .page-header {
       margin: 0 0 2rem;
     }
@@ -77,8 +75,7 @@
       color: #555;
     }
 
-    /* ===== TIMELINE ===== */
-
+    /* TIMELINE */
     .timeline {
       list-style: none;
       margin: 0;
@@ -148,8 +145,7 @@
       box-shadow: inset 20em 0 0 0 rgb(168, 50, 121);
     }
 
-    /* ===== ENTRIES ===== */
-
+    /* ENTRIES */
     .timeline-list {
       display: grid;
       gap: 0.45rem;
@@ -177,7 +173,6 @@
       color: #111;
       background: #fafafa;
       font-variant-numeric: tabular-nums;
-      font-feature-settings: "tnum" 1;
     }
 
     .timeline-title {
@@ -185,11 +180,9 @@
       line-height: 1.4;
     }
 
-    /* ===== MOBILE ===== */
-
+    /* MOBILE */
     @media (max-width: 700px) {
       .timeline::before { left: 1rem; }
-
       .timeline-event { padding-left: 2.8rem; }
 
       .timeline-event-icon {
@@ -208,40 +201,29 @@
         font-size: 0.82rem;
       }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      .timeline-event {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-    }
-
   </style>
 </head>
 
 <body>
   <div class="page-wrap">
 
-    <!-- YEAR SWITCHER -->
     <nav class="year-nav">
       <a href="/diary/2024">2024</a>
       <a href="/diary/2025">2025</a>
-      <a href="/diary/2026" aria-current="page">2026</a>
+      <a href="/diary/2026">2026</a>
     </nav>
 
-    <!-- HEADER -->
     <header class="page-header">
-      <h1>2026 Diary</h1>
-      <p>too far gone</p>
+      <h1 id="diary-title">2026 Diary</h1>
+      <p id="diary-subtitle">too far gone</p>
     </header>
 
-    <!-- TIMELINE -->
     <ul class="timeline">
 
+      <!-- JAN -->
       <li class="timeline-event">
         <span class="timeline-event-icon"></span>
-        <div class="timeline-event-copy">
+        <div>
           <p class="timeline-event-thumbnail">January</p>
 
           <div class="timeline-list">
@@ -257,28 +239,84 @@
         </div>
       </li>
 
-    </ul>
+      <!-- FEB -->
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">February</p>
 
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">01</span><span class="timeline-title">farewell 42</span></div>
+            <div class="timeline-entry"><span class="timeline-day">02</span><span class="timeline-title">hello 33</span></div>
+            <div class="timeline-entry"><span class="timeline-day">03</span><span class="timeline-title">pandora’s box</span></div>
+            <div class="timeline-entry"><span class="timeline-day">04</span><span class="timeline-title">triggers</span></div>
+            <div class="timeline-entry"><span class="timeline-day">05</span><span class="timeline-title">A&E</span></div>
+          </div>
+        </div>
+      </li>
+
+      <!-- MARCH -->
+      <li class="timeline-event">
+        <span class="timeline-event-icon"></span>
+        <div>
+          <p class="timeline-event-thumbnail">March 2026</p>
+
+          <div class="timeline-list">
+            <div class="timeline-entry"><span class="timeline-day">01</span><span class="timeline-title">never mind the paradox</span></div>
+            <div class="timeline-entry"><span class="timeline-day">02</span><span class="timeline-title">memes and nukes</span></div>
+            <div class="timeline-entry"><span class="timeline-day">03</span><span class="timeline-title">wobbly sets</span></div>
+            <div class="timeline-entry"><span class="timeline-day">04</span><span class="timeline-title">lewis & charlotte</span></div>
+            <div class="timeline-entry"><span class="timeline-day">05</span><span class="timeline-title">super, sonic, mania</span></div>
+            <div class="timeline-entry"><span class="timeline-day">06</span><span class="timeline-title">devvo returns</span></div>
+            <div class="timeline-entry"><span class="timeline-day">07</span><span class="timeline-title">thanks for the memories</span></div>
+            <div class="timeline-entry"><span class="timeline-day">08</span><span class="timeline-title">heart and hartnell</span></div>
+            <div class="timeline-entry"><span class="timeline-day">09</span><span class="timeline-title">day of the daleks</span></div>
+            <div class="timeline-entry"><span class="timeline-day">10</span><span class="timeline-title">mullet and the myrka</span></div>
+            <div class="timeline-entry"><span class="timeline-day">11</span><span class="timeline-title">waiting for bill</span></div>
+            <div class="timeline-entry"><span class="timeline-day">12</span><span class="timeline-title">alex, alice and amy</span></div>
+            <div class="timeline-entry"><span class="timeline-day">13</span><span class="timeline-title">back to hogwarts</span></div>
+            <div class="timeline-entry"><span class="timeline-day">14</span><span class="timeline-title">all the things she said</span></div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
   </div>
 
   <script>
-    const timelineEvents = document.querySelectorAll('.timeline-event');
+    const path = window.location.pathname;
+    const yearMatch = path.match(/(20\d{2})/);
+    const currentYear = yearMatch ? yearMatch[1] : "2026";
+
+    document.querySelectorAll('.year-nav a').forEach(link => {
+      if (link.href.includes(currentYear)) {
+        link.setAttribute('aria-current', 'page');
+      }
+    });
+
+    document.getElementById('diary-title').textContent = `${currentYear} Diary`;
+
+    const subtitles = {
+      "2024": "early days",
+      "2025": "figuring things out",
+      "2026": "too far gone"
+    };
+
+    document.getElementById('diary-subtitle').textContent =
+      subtitles[currentYear] || "";
 
     const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
           obs.unobserve(entry.target);
         }
       });
-    }, {
-      threshold: 0.16,
-      rootMargin: "0px 0px -24px 0px"
-    });
+    }, { threshold: 0.16 });
 
-    timelineEvents.forEach((event, index) => {
-      event.style.transitionDelay = `${index * 55}ms`;
-      observer.observe(event);
+    document.querySelectorAll('.timeline-event').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 55}ms`;
+      observer.observe(el);
     });
   </script>
 
