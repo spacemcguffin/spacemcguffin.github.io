@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lewis.lc</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      font-weight: 300;
+      line-height: 1.5;
+      margin: 0;
+      padding: 2rem 1rem;
+      background: #fff;
+      color: #111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      list-style: none;
+      margin: 3rem auto;
+      padding: 0;
+      max-width: 46em;
+      position: relative;
+    }
+
+    /* vertical line */
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 1.5rem;
+      width: 2px;
+      background: black;
+    }
+
+    /* event */
+    .timeline-event {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 3.5rem;
+    }
+
+    /* diamond icon */
+    .timeline-event-icon {
+      position: absolute;
+      top: 0.4rem;
+      left: 1.5rem;
+      width: 1rem;
+      height: 1rem;
+      margin-left: -0.5rem;
+      background: black;
+      outline: 10px solid white;
+      transform: rotate(45deg);
+      transition: 0.2s ease;
+    }
+
+    /* content */
+    .timeline-event-copy h3 {
+      font-size: 1.6em;
+      margin: 0 0 0.2em;
+      font-weight: 700;
+    }
+
+    .timeline-event-copy h4 {
+      font-size: 1.1em;
+      margin: 0 0 1em;
+      font-style: italic;
+      color: #555;
+    }
+
+    .timeline-event-copy p {
+      margin: 0 0 0.5rem;
+    }
+
+    .timeline-event-copy strong {
+      font-weight: 700;
+    }
+
+    /* month pill */
+    .timeline-event-thumbnail {
+      display: inline-block;
+      margin-bottom: 1em;
+      padding: 0.3em 1em;
+      border-radius: 20px;
+      background: black;
+      color: white;
+      font-size: 0.9rem;
+      transition: 0.3s ease;
+    }
+
+    /* hover */
+    .timeline-event:hover .timeline-event-icon {
+      transform: rotate(-45deg);
+      background: rgb(168, 50, 121);
+    }
+
+    .timeline-event:hover .timeline-event-thumbnail {
+      box-shadow: inset 20em 0 0 0 rgb(168, 50, 121);
+    }
+
+    /* mobile */
+    @media (max-width: 700px) {
+      .timeline::before {
+        left: 1rem;
+      }
+
+      .timeline-event {
+        padding-left: 2.8rem;
+      }
+
+      .timeline-event-icon {
+        left: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<ul class="timeline">
+
+  <li class="timeline-event">
+    <span class="timeline-event-icon"></span>
+    <div class="timeline-event-copy">
+      <h3>2026 Diary</h3>
+      <h4>too far gone</h4>
+      <p class="timeline-event-thumbnail">January</p>
+      <p><strong>01:</strong> everything changes in the end</p>
+      <p><strong>02:</strong> the light of day</p>
+      <p><strong>03:</strong> chilled out</p>
+      <p><strong>04:</strong> trying to change</p>
+      <p><strong>05:</strong> i’ve been playing pretend</p>
+      <p><strong>06:</strong> dead names</p>
+      <p><strong>07:</strong> a walk in the park</p>
+      <p><strong>08:</strong> love for kim</p>
+    </div>
+  </li>
+
+  <li class="timeline-event">
+    <span class="timeline-event-icon"></span>
+    <div class="timeline-event-copy">
+      <p class="timeline-event-thumbnail">February</p>
+      <p><strong>01:</strong> farewell 42</p>
+      <p><strong>02:</strong> hello 33</p>
+      <p><strong>03:</strong> pandora’s box</p>
+      <p><strong>04:</strong> triggers</p>
+      <p><strong>05:</strong> A&amp;E</p>
+    </div>
+  </li>
+
+  <li class="timeline-event">
+    <span class="timeline-event-icon"></span>
+    <div class="timeline-event-copy">
+      <p class="timeline-event-thumbnail">March 2026</p>
+      <p><strong>01:</strong> never mind the paradox</p>
+      <p><strong>02:</strong> memes and nukes</p>
+      <p><strong>03:</strong> wobbly sets</p>
+      <p><strong>04:</strong> lewis &amp; charlotte</p>
+      <p><strong>05:</strong> super, sonic, mania</p>
+      <p><strong>06:</strong> devvo returns</p>
+      <p><strong>07:</strong> thanks for the memories</p>
+      <p><strong>08:</strong> heart and hartnell</p>
+      <p><strong>09:</strong> day of the daleks</p>
+      <p><strong>10:</strong> mullet and the myrka</p>
+      <p><strong>11:</strong> waiting for bill</p>
+      <p><strong>12:</strong> alex, alice and amy</p>
+      <p><strong>13:</strong> back to hogwarts</p>
+      <p><strong>14:</strong> all the things she said</p>
+    </div>
+  </li>
+
+</ul>
+
+</body>
+</html>
