@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lewis.lc</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet" />
 
   <style>
     body {
@@ -84,13 +84,6 @@
       font-family: 'Onest', sans-serif;
     }
 
-    .page-header p {
-      margin: 0;
-      font-size: 1.05rem;
-      font-style: italic;
-      color: #555;
-    }
-
     .timeline {
       list-style: none;
       margin: 0;
@@ -130,12 +123,20 @@
       width: 1rem;
       height: 1rem;
       margin-left: -0.5rem;
-      background: #4b6a9b;
-      outline: 10px solid white;
-      transform: rotate(45deg);
+      background: #fff;
+      border: 2px solid #4b6a9b;
+      border-radius: 50%;
+      outline: 8px solid #fff;
       transition:
-        transform 0.2s ease,
-        background 0.2s ease;
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .timeline-event:hover .timeline-event-icon {
+      background: #2c3862;
+      border-color: #2c3862;
+      transform: scale(1.05);
     }
 
     .timeline-event-thumbnail {
@@ -153,13 +154,13 @@
       transition: 0.3s ease;
     }
 
-    .timeline-event:hover .timeline-event-icon {
-      transform: rotate(-45deg);
-      background: #2c3862;
-    }
-
     .timeline-event:hover .timeline-event-thumbnail {
       box-shadow: inset 20em 0 0 0 #2c3862;
+    }
+
+    .timeline-event--backtotop::before,
+    .timeline-event--backtotop .timeline-event-icon {
+      display: none;
     }
 
     .timeline-list {
@@ -204,7 +205,8 @@
 
       .timeline-event,
       .timeline-event::before,
-      .timeline-event-icon {
+      .timeline-event-icon,
+      .timeline-event-thumbnail {
         transition: none;
       }
     }
@@ -410,10 +412,10 @@
         </div>
       </li>
 
-      <li class="timeline-event">
-        <span class="timeline-event-icon" style="background: #b78abd;"></span>
+      <li class="timeline-event timeline-event--backtotop">
+        <span class="timeline-event-icon"></span>
         <div>
-          <a href="#top" style="background: #b78abd;" class="timeline-event-thumbnail">Back to Top</a>
+          <a href="#top" class="timeline-event-thumbnail">Back to Top</a>
         </div>
       </li>
 
