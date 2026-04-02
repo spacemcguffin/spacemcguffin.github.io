@@ -379,21 +379,7 @@
     </ul>
   </div>
 
-  <script>
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.16 });
 
-    document.querySelectorAll('.timeline-event').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 55}ms`;
-      observer.observe(el);
-    });
-  </script>
 
 </body>
 </html>
