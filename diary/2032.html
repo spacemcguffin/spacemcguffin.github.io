@@ -106,16 +106,6 @@
       position: relative;
       margin-bottom: 2.5rem;
       padding-left: 3.5rem;
-      opacity: 0;
-      transform: translateY(12px);
-      transition:
-        opacity 0.7s cubic-bezier(.22,1,.36,1),
-        transform 0.7s cubic-bezier(.22,1,.36,1);
-    }
-
-    .timeline-event.is-visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .timeline-event::before {
@@ -127,13 +117,6 @@
       width: 2px;
       margin-left: -1px;
       background: black;
-      transform: scaleY(0);
-      transform-origin: top center;
-      transition: transform 0.85s cubic-bezier(.22,1,.36,1);
-    }
-
-    .timeline-event.is-visible::before {
-      transform: scaleY(1);
     }
 
     .timeline-event:last-child::before {
@@ -149,17 +132,10 @@
       margin-left: -0.5rem;
       background: #4b6a9b;
       outline: 10px solid white;
-      transform: rotate(45deg) scale(0.85);
-      opacity: 0;
+      transform: rotate(45deg);
       transition:
-        transform 0.45s cubic-bezier(.22,1,.36,1),
-        opacity 0.45s ease,
+        transform 0.2s ease,
         background 0.2s ease;
-    }
-
-    .timeline-event.is-visible .timeline-event-icon {
-      transform: rotate(45deg) scale(1);
-      opacity: 1;
     }
 
     .timeline-event-thumbnail {
@@ -178,7 +154,7 @@
     }
 
     .timeline-event:hover .timeline-event-icon {
-      transform: rotate(-45deg) scale(1);
+      transform: rotate(-45deg);
       background: #2c3862;
     }
 
@@ -230,20 +206,6 @@
       .timeline-event::before,
       .timeline-event-icon {
         transition: none;
-      }
-
-      .timeline-event {
-        opacity: 1;
-        transform: none;
-      }
-
-      .timeline-event::before {
-        transform: scaleY(1);
-      }
-
-      .timeline-event-icon {
-        opacity: 1;
-        transform: rotate(45deg) scale(1);
       }
     }
 
@@ -457,23 +419,5 @@
 
     </ul>
   </div>
-
-  <script>
-    const timelineEvents = document.querySelectorAll('.timeline-event');
-
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.18,
-      rootMargin: '0px 0px -8% 0px'
-    });
-
-    timelineEvents.forEach(event => observer.observe(event));
-  </script>
 </body>
 </html>
