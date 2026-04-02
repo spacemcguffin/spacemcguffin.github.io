@@ -412,9 +412,9 @@
     }
 
     .sidebar-header__title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--black-color);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--black-color);
     }
 
     .sidebar-header__sub {
@@ -601,17 +601,17 @@
     }
 
     .article h1 {
-    color: var(--black-color);
-    font-size: clamp(1.8rem, 3vw, 1rem);
-    font-family: 'Figtree', 'Onest', sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin: 0.4rem 0 1.3rem 0;
-    font-style: normal;
-    line-height: 1;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    text-shadow: none;
+      color: var(--black-color);
+      font-size: clamp(1.8rem, 3vw, 1rem);
+      font-family: 'Figtree', 'Onest', sans-serif;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin: 0.4rem 0 1.3rem 0;
+      font-style: normal;
+      line-height: 1;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      text-shadow: none;
     }
 
     .article h1::after {
@@ -702,25 +702,24 @@
     }
 
     .day-cell {
-    width: 10%;
-    text-align: center;
-    font-family: 'Figtree', 'Inter', sans-serif;
-    position: relative;
-    min-width: 68px;
-    font-size: 14px;
+      width: 10%;
+      text-align: center;
+      font-family: 'Figtree', 'Inter', sans-serif;
+      position: relative;
+      min-width: 68px;
+      font-size: 14px;
     }
 
     .day-cell span {
-    display: inline-grid;
-    place-items: center;
-    min-width: 2rem;
-    height: 2rem;
-    padding: 0 0.4rem;
-    border-radius: 999px;
-    border: 1px solid rgba(78, 127, 218, 0.20);
-    background: linear-gradient(135deg, rgba(44, 82, 160, 0.14), rgba(74, 118, 196, 0.10));
+      display: inline-grid;
+      place-items: center;
+      min-width: 2rem;
+      height: 2rem;
+      padding: 0 0.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(78, 127, 218, 0.20);
+      background: linear-gradient(135deg, rgba(44, 82, 160, 0.14), rgba(74, 118, 196, 0.10));
     }
-
 
     .eptitles {
       font-family: "Inter", sans-serif;
@@ -729,7 +728,6 @@
       color: var(--black-color);
       transition: color .25s ease, text-shadow .25s ease, transform .25s ease;
     }
-
 
     #boxep {
       width: 100%;
@@ -967,7 +965,7 @@
   </style>
 </head>
 
-<body class="sidebar-hidden dark-mode">
+<body>
   <div class="container">
     <header>
       <nav class="navbar">
@@ -1290,6 +1288,8 @@
     function handleResize() {
       if (window.innerWidth > 768) {
         body.classList.remove("show-mobile-search");
+        body.classList.remove("sidebar-hidden");
+      } else {
         body.classList.add("sidebar-hidden");
       }
     }
