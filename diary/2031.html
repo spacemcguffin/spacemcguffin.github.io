@@ -99,6 +99,9 @@
       background: black;
       color: white;
       font-size: 0.9rem;
+      transition:
+        box-shadow 0.3s ease,
+        background 0.3s ease;
     }
 
     .timeline-event:hover .timeline-event-icon {
@@ -109,8 +112,6 @@
     .timeline-event:hover .timeline-event-thumbnail {
       box-shadow: inset 20em 0 0 0 rgb(168, 50, 121);
     }
-
-    /* ===== FIXED ALIGNMENT ===== */
 
     .timeline-list {
       display: grid;
@@ -138,6 +139,8 @@
       line-height: 1;
       color: #111;
       background: #fafafa;
+      font-variant-numeric: tabular-nums;
+      font-feature-settings: "tnum" 1;
     }
 
     .timeline-title {
@@ -145,7 +148,6 @@
       line-height: 1.4;
     }
 
-    /* mobile */
     @media (max-width: 700px) {
       .timeline::before {
         left: 1rem;
