@@ -207,17 +207,20 @@
 <body>
   <div class="page-wrap">
 
+    <!-- YEAR NAV -->
     <nav class="year-nav">
       <a href="/diary/2024">2024</a>
       <a href="/diary/2025">2025</a>
-      <a href="/diary/2026">2026</a>
+      <a href="/diary/2026" aria-current="page">2026</a>
     </nav>
 
+    <!-- HEADER -->
     <header class="page-header">
-      <h1 id="diary-title">2026 Diary</h1>
-      <p id="diary-subtitle">too far gone</p>
+      <h1>2026 Diary</h1>
+      <p>too far gone</p>
     </header>
 
+    <!-- TIMELINE -->
     <ul class="timeline">
 
       <!-- JAN -->
@@ -284,27 +287,6 @@
   </div>
 
   <script>
-    const path = window.location.pathname;
-    const yearMatch = path.match(/(20\d{2})/);
-    const currentYear = yearMatch ? yearMatch[1] : "2026";
-
-    document.querySelectorAll('.year-nav a').forEach(link => {
-      if (link.href.includes(currentYear)) {
-        link.setAttribute('aria-current', 'page');
-      }
-    });
-
-    document.getElementById('diary-title').textContent = `${currentYear} Diary`;
-
-    const subtitles = {
-      "2024": "early days",
-      "2025": "figuring things out",
-      "2026": "too far gone"
-    };
-
-    document.getElementById('diary-subtitle').textContent =
-      subtitles[currentYear] || "";
-
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
