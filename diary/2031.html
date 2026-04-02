@@ -22,7 +22,6 @@
       box-sizing: border-box;
     }
 
-    /* TIMELINE */
     .timeline {
       list-style: none;
       margin: 3rem auto;
@@ -31,7 +30,6 @@
       position: relative;
     }
 
-    /* vertical line */
     .timeline::before {
       content: "";
       position: absolute;
@@ -42,14 +40,23 @@
       background: black;
     }
 
-    /* event */
     .timeline-event {
       position: relative;
       margin-bottom: 2.5rem;
       padding-left: 3.5rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition:
+        opacity 0.95s cubic-bezier(.22,1,.36,1),
+        transform 0.95s cubic-bezier(.22,1,.36,1);
+      will-change: opacity, transform;
     }
 
-    /* diamond icon */
+    .timeline-event.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .timeline-event-icon {
       position: absolute;
       top: 0.4rem;
@@ -60,10 +67,11 @@
       background: black;
       outline: 10px solid white;
       transform: rotate(45deg);
-      transition: 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        background 0.2s ease;
     }
 
-    /* content */
     .timeline-event-copy h3 {
       font-size: 1.6em;
       margin: 0 0 0.2em;
@@ -85,7 +93,6 @@
       font-weight: 700;
     }
 
-    /* month pill */
     .timeline-event-thumbnail {
       display: inline-block;
       margin-bottom: 1em;
@@ -94,10 +101,11 @@
       background: black;
       color: white;
       font-size: 0.9rem;
-      transition: 0.3s ease;
+      transition:
+        box-shadow 0.3s ease,
+        background 0.3s ease;
     }
 
-    /* hover */
     .timeline-event:hover .timeline-event-icon {
       transform: rotate(-45deg);
       background: rgb(168, 50, 121);
@@ -107,7 +115,39 @@
       box-shadow: inset 20em 0 0 0 rgb(168, 50, 121);
     }
 
-    /* mobile */
+    /* diary rows */
+    .timeline-list {
+      display: grid;
+      gap: 0.45rem;
+      margin-top: 0.15rem;
+    }
+
+    .timeline-entry {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 0.85rem;
+      align-items: start;
+    }
+
+    .timeline-day {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 2rem;
+      padding: 0.2rem 0.45rem;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      line-height: 1;
+      color: #111;
+      background: #fafafa;
+    }
+
+    .timeline-title {
+      padding-top: 0.06rem;
+    }
+
     @media (max-width: 700px) {
       .timeline::before {
         left: 1rem;
@@ -119,6 +159,24 @@
 
       .timeline-event-icon {
         left: 1rem;
+      }
+
+      .timeline-entry {
+        grid-template-columns: 2.2rem 1fr;
+        gap: 0.7rem;
+      }
+
+      .timeline-day {
+        min-height: 1.85rem;
+        font-size: 0.82rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .timeline-event {
+        opacity: 1;
+        transform: none;
+        transition: none;
       }
     }
   </style>
@@ -134,14 +192,17 @@
       <h3>2026 Diary</h3>
       <h4>too far gone</h4>
       <p class="timeline-event-thumbnail">January</p>
-      <p><strong>01:</strong> everything changes in the end</p>
-      <p><strong>02:</strong> the light of day</p>
-      <p><strong>03:</strong> chilled out</p>
-      <p><strong>04:</strong> trying to change</p>
-      <p><strong>05:</strong> i’ve been playing pretend</p>
-      <p><strong>06:</strong> dead names</p>
-      <p><strong>07:</strong> a walk in the park</p>
-      <p><strong>08:</strong> love for kim</p>
+
+      <div class="timeline-list">
+        <div class="timeline-entry"><span class="timeline-day">01</span><span class="timeline-title">everything changes in the end</span></div>
+        <div class="timeline-entry"><span class="timeline-day">02</span><span class="timeline-title">the light of day</span></div>
+        <div class="timeline-entry"><span class="timeline-day">03</span><span class="timeline-title">chilled out</span></div>
+        <div class="timeline-entry"><span class="timeline-day">04</span><span class="timeline-title">trying to change</span></div>
+        <div class="timeline-entry"><span class="timeline-day">05</span><span class="timeline-title">i’ve been playing pretend</span></div>
+        <div class="timeline-entry"><span class="timeline-day">06</span><span class="timeline-title">dead names</span></div>
+        <div class="timeline-entry"><span class="timeline-day">07</span><span class="timeline-title">a walk in the park</span></div>
+        <div class="timeline-entry"><span class="timeline-day">08</span><span class="timeline-title">love for kim</span></div>
+      </div>
     </div>
   </li>
 
@@ -149,11 +210,14 @@
     <span class="timeline-event-icon"></span>
     <div class="timeline-event-copy">
       <p class="timeline-event-thumbnail">February</p>
-      <p><strong>01:</strong> farewell 42</p>
-      <p><strong>02:</strong> hello 33</p>
-      <p><strong>03:</strong> pandora’s box</p>
-      <p><strong>04:</strong> triggers</p>
-      <p><strong>05:</strong> A&amp;E</p>
+
+      <div class="timeline-list">
+        <div class="timeline-entry"><span class="timeline-day">01</span><span class="timeline-title">farewell 42</span></div>
+        <div class="timeline-entry"><span class="timeline-day">02</span><span class="timeline-title">hello 33</span></div>
+        <div class="timeline-entry"><span class="timeline-day">03</span><span class="timeline-title">pandora’s box</span></div>
+        <div class="timeline-entry"><span class="timeline-day">04</span><span class="timeline-title">triggers</span></div>
+        <div class="timeline-entry"><span class="timeline-day">05</span><span class="timeline-title">A&amp;E</span></div>
+      </div>
     </div>
   </li>
 
@@ -161,24 +225,48 @@
     <span class="timeline-event-icon"></span>
     <div class="timeline-event-copy">
       <p class="timeline-event-thumbnail">March 2026</p>
-      <p><strong>01:</strong> never mind the paradox</p>
-      <p><strong>02:</strong> memes and nukes</p>
-      <p><strong>03:</strong> wobbly sets</p>
-      <p><strong>04:</strong> lewis &amp; charlotte</p>
-      <p><strong>05:</strong> super, sonic, mania</p>
-      <p><strong>06:</strong> devvo returns</p>
-      <p><strong>07:</strong> thanks for the memories</p>
-      <p><strong>08:</strong> heart and hartnell</p>
-      <p><strong>09:</strong> day of the daleks</p>
-      <p><strong>10:</strong> mullet and the myrka</p>
-      <p><strong>11:</strong> waiting for bill</p>
-      <p><strong>12:</strong> alex, alice and amy</p>
-      <p><strong>13:</strong> back to hogwarts</p>
-      <p><strong>14:</strong> all the things she said</p>
+
+      <div class="timeline-list">
+        <div class="timeline-entry"><span class="timeline-day">01</span><span class="timeline-title">never mind the paradox</span></div>
+        <div class="timeline-entry"><span class="timeline-day">02</span><span class="timeline-title">memes and nukes</span></div>
+        <div class="timeline-entry"><span class="timeline-day">03</span><span class="timeline-title">wobbly sets</span></div>
+        <div class="timeline-entry"><span class="timeline-day">04</span><span class="timeline-title">lewis &amp; charlotte</span></div>
+        <div class="timeline-entry"><span class="timeline-day">05</span><span class="timeline-title">super, sonic, mania</span></div>
+        <div class="timeline-entry"><span class="timeline-day">06</span><span class="timeline-title">devvo returns</span></div>
+        <div class="timeline-entry"><span class="timeline-day">07</span><span class="timeline-title">thanks for the memories</span></div>
+        <div class="timeline-entry"><span class="timeline-day">08</span><span class="timeline-title">heart and hartnell</span></div>
+        <div class="timeline-entry"><span class="timeline-day">09</span><span class="timeline-title">day of the daleks</span></div>
+        <div class="timeline-entry"><span class="timeline-day">10</span><span class="timeline-title">mullet and the myrka</span></div>
+        <div class="timeline-entry"><span class="timeline-day">11</span><span class="timeline-title">waiting for bill</span></div>
+        <div class="timeline-entry"><span class="timeline-day">12</span><span class="timeline-title">alex, alice and amy</span></div>
+        <div class="timeline-entry"><span class="timeline-day">13</span><span class="timeline-title">back to hogwarts</span></div>
+        <div class="timeline-entry"><span class="timeline-day">14</span><span class="timeline-title">all the things she said</span></div>
+      </div>
     </div>
   </li>
 
 </ul>
+
+<script>
+  const timelineEvents = document.querySelectorAll('.timeline-event');
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.16,
+    rootMargin: "0px 0px -24px 0px"
+  });
+
+  timelineEvents.forEach((event, index) => {
+    event.style.transitionDelay = `${index * 55}ms`;
+    observer.observe(event);
+  });
+</script>
 
 </body>
 </html>
