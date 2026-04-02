@@ -18,14 +18,46 @@
       color: #111;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     .page-wrap {
       max-width: 46em;
       margin: 0 auto;
     }
+
+    /* ===== YEAR NAV ===== */
+
+    .year-nav {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .year-nav a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid #ddd;
+      color: #555;
+      transition: all 0.2s ease;
+    }
+
+    .year-nav a:hover {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .year-nav a[aria-current="page"] {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+      font-weight: 600;
+    }
+
+    /* ===== HEADER ===== */
 
     .page-header {
       margin: 0 0 2rem;
@@ -44,6 +76,8 @@
       font-style: italic;
       color: #555;
     }
+
+    /* ===== TIMELINE ===== */
 
     .timeline {
       list-style: none;
@@ -102,9 +136,7 @@
       color: white;
       font-size: 0.9rem;
       line-height: 1;
-      transition:
-        box-shadow 0.3s ease,
-        background 0.3s ease;
+      transition: 0.3s ease;
     }
 
     .timeline-event:hover .timeline-event-icon {
@@ -115,6 +147,8 @@
     .timeline-event:hover .timeline-event-thumbnail {
       box-shadow: inset 20em 0 0 0 rgb(168, 50, 121);
     }
+
+    /* ===== ENTRIES ===== */
 
     .timeline-list {
       display: grid;
@@ -151,14 +185,12 @@
       line-height: 1.4;
     }
 
-    @media (max-width: 700px) {
-      .timeline::before {
-        left: 1rem;
-      }
+    /* ===== MOBILE ===== */
 
-      .timeline-event {
-        padding-left: 2.8rem;
-      }
+    @media (max-width: 700px) {
+      .timeline::before { left: 1rem; }
+
+      .timeline-event { padding-left: 2.8rem; }
 
       .timeline-event-icon {
         left: 1rem;
@@ -184,17 +216,27 @@
         transition: none;
       }
     }
+
   </style>
 </head>
 
 <body>
   <div class="page-wrap">
 
+    <!-- YEAR SWITCHER -->
+    <nav class="year-nav">
+      <a href="/diary/2024">2024</a>
+      <a href="/diary/2025">2025</a>
+      <a href="/diary/2026" aria-current="page">2026</a>
+    </nav>
+
+    <!-- HEADER -->
     <header class="page-header">
       <h1>2026 Diary</h1>
       <p>too far gone</p>
     </header>
 
+    <!-- TIMELINE -->
     <ul class="timeline">
 
       <li class="timeline-event">
@@ -215,46 +257,8 @@
         </div>
       </li>
 
-      <li class="timeline-event">
-        <span class="timeline-event-icon"></span>
-        <div class="timeline-event-copy">
-          <p class="timeline-event-thumbnail">February</p>
-
-          <div class="timeline-list">
-            <div class="timeline-entry"><span class="timeline-day">01</span><span class="timeline-title">farewell 42</span></div>
-            <div class="timeline-entry"><span class="timeline-day">02</span><span class="timeline-title">hello 33</span></div>
-            <div class="timeline-entry"><span class="timeline-day">03</span><span class="timeline-title">pandora’s box</span></div>
-            <div class="timeline-entry"><span class="timeline-day">04</span><span class="timeline-title">triggers</span></div>
-            <div class="timeline-entry"><span class="timeline-day">05</span><span class="timeline-title">A&amp;E</span></div>
-          </div>
-        </div>
-      </li>
-
-      <li class="timeline-event">
-        <span class="timeline-event-icon"></span>
-        <div class="timeline-event-copy">
-          <p class="timeline-event-thumbnail">March 2026</p>
-
-          <div class="timeline-list">
-            <div class="timeline-entry"><span class="timeline-day">01</span><span class="timeline-title">never mind the paradox</span></div>
-            <div class="timeline-entry"><span class="timeline-day">02</span><span class="timeline-title">memes and nukes</span></div>
-            <div class="timeline-entry"><span class="timeline-day">03</span><span class="timeline-title">wobbly sets</span></div>
-            <div class="timeline-entry"><span class="timeline-day">04</span><span class="timeline-title">lewis &amp; charlotte</span></div>
-            <div class="timeline-entry"><span class="timeline-day">05</span><span class="timeline-title">super, sonic, mania</span></div>
-            <div class="timeline-entry"><span class="timeline-day">06</span><span class="timeline-title">devvo returns</span></div>
-            <div class="timeline-entry"><span class="timeline-day">07</span><span class="timeline-title">thanks for the memories</span></div>
-            <div class="timeline-entry"><span class="timeline-day">08</span><span class="timeline-title">heart and hartnell</span></div>
-            <div class="timeline-entry"><span class="timeline-day">09</span><span class="timeline-title">day of the daleks</span></div>
-            <div class="timeline-entry"><span class="timeline-day">10</span><span class="timeline-title">mullet and the myrka</span></div>
-            <div class="timeline-entry"><span class="timeline-day">11</span><span class="timeline-title">waiting for bill</span></div>
-            <div class="timeline-entry"><span class="timeline-day">12</span><span class="timeline-title">alex, alice and amy</span></div>
-            <div class="timeline-entry"><span class="timeline-day">13</span><span class="timeline-title">back to hogwarts</span></div>
-            <div class="timeline-entry"><span class="timeline-day">14</span><span class="timeline-title">all the things she said</span></div>
-          </div>
-        </div>
-      </li>
-
     </ul>
+
   </div>
 
   <script>
