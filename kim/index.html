@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Post Page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f5f1eb;
+      --surface: #f5f1eb;
+      --text: #3a312b;
+      --muted: #7c695d;
+      --line: rgba(58, 49, 43, 0.10);
+      --link: #3a312b;
+      --max: 1120px;
+      --reading: 760px;
+    }
+
+    *{
+      box-sizing: border-box;
+    }
+
+    html{
+      scroll-behavior: smooth;
+    }
+
+    body{
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Cormorant Garamond", Georgia, serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    img{
+      max-width: 100%;
+      display: block;
+    }
+
+    .page{
+      width: min(calc(100% - 48px), var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 42px 0 54px;
+    }
+
+    .brand{
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2rem, 2.2vw, 2.6rem);
+      line-height: 1;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .brand a{
+      color: var(--text);
+    }
+
+    .nav{
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+    }
+
+    .nav a{
+      color: var(--muted);
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .nav a:hover{
+      color: var(--text);
+    }
+
+    .nav a.active{
+      color: var(--text);
+      border-bottom-color: currentColor;
+    }
+
+    .divider{
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 0;
+    }
+
+    .article-shell{
+      padding: 66px 0 96px;
+    }
+
+    .article{
+      max-width: var(--reading);
+    }
+
+    .article-header{
+      margin-bottom: 44px;
+    }
+
+    .article-title{
+      margin: 0 0 20px;
+      font-size: clamp(3.25rem, 6vw, 5.2rem);
+      line-height: 0.98;
+      font-weight: 400;
+      letter-spacing: -0.03em;
+    }
+
+    .article-date{
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .article-body{
+      font-size: clamp(2rem, 2.2vw, 2.35rem);
+      line-height: 1.55;
+      letter-spacing: -0.01em;
+    }
+
+    .article-body p{
+      margin: 0 0 34px;
+    }
+
+    .article-body em{
+      font-style: italic;
+    }
+
+    .article-body figure{
+      margin: 42px 0 38px;
+    }
+
+    .article-body figcaption{
+      margin-top: 14px;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .article-body h2{
+      margin: 56px 0 18px;
+      font-size: clamp(2.3rem, 3vw, 3rem);
+      line-height: 1.08;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .article-body blockquote{
+      margin: 38px 0;
+      padding-left: 24px;
+      border-left: 2px solid rgba(58,49,43,0.18);
+      color: #4a3c32;
+    }
+
+    .article-body ul,
+    .article-body ol{
+      margin: 0 0 34px 1.3em;
+      padding: 0;
+    }
+
+    .article-body li{
+      margin-bottom: 10px;
+    }
+
+    .footer-space{
+      height: 40px;
+    }
+
+    @media (max-width: 900px){
+      .site-header{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 0 40px;
+      }
+
+      .nav{
+        gap: 18px 24px;
+        justify-content: flex-start;
+      }
+
+      .article-shell{
+        padding: 46px 0 72px;
+      }
+
+      .article-body{
+        font-size: clamp(1.65rem, 5.1vw, 2rem);
+        line-height: 1.58;
+      }
+    }
+
+    @media (max-width: 640px){
+      .page{
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .brand{
+        font-size: 2.1rem;
+      }
+
+      .nav{
+        font-size: 0.9rem;
+        gap: 14px 18px;
+      }
+
+      .article-title{
+        font-size: clamp(2.5rem, 10vw, 3.5rem);
+        line-height: 1.02;
+      }
+
+      .article-body{
+        font-size: 1.7rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="brand">
+        <a href="#">alex•day</a>
+      </div>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#">now</a>
+        <a href="#">timeline</a>
+        <a href="#">music</a>
+        <a href="#">rushmores</a>
+        <a href="#" class="active">posts</a>
+      </nav>
+    </header>
+
+    <hr class="divider" />
+
+    <main class="article-shell">
+      <article class="article">
+        <header class="article-header">
+          <h1 class="article-title">Alex's Digimon FanFiction</h1>
+          <div class="article-date">March 27, 2026</div>
+        </header>
+
+        <div class="article-body">
+          <p>
+            Building this new site - and, particularly, working on the timeline page -
+            got me thinking about my first ever website. I built it when I was ten years
+            old using Microsoft's WYSIWYG editor <em>Front Page 2000</em>, hosted on
+            Tripod (an alternative to Geocities at the time).
+          </p>
+
+          <p>
+            It looked like this:
+          </p>
+
+          <figure>
+            <img src="https://placehold.co/1200x720/e9e1d6/5b473a?text=Your+image+here" alt="Example image" />
+            <figcaption>
+              Replace this with your own screenshot, illustration, or archival image.
+            </figcaption>
+          </figure>
+
+          <p>
+            There is something very charming about those early personal websites:
+            earnest, cluttered, handmade, and entirely unconcerned with best practice.
+            They felt more like bedrooms than brands.
+          </p>
+
+          <h2>Why I still love this style</h2>
+
+          <p>
+            Even though this updated design is much cleaner, it still carries some of
+            that same personal warmth. The oversized serif typography, the pale paper
+            background, and the generous spacing all make it feel reflective rather than
+            corporate.
+          </p>
+
+          <blockquote>
+            Good personal websites feel like a person is speaking, not a content system.
+          </blockquote>
+
+          <p>
+            That is probably why this kind of layout works so well for essays, timeline
+            posts, diary entries, and nostalgic writing.
+          </p>
+        </div>
+      </article>
+    </main>
+  </div>
+</body>
+</html>
