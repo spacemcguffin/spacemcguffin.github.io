@@ -67,9 +67,12 @@
     }
 
     .brand{
-      font-family:"Onest", sans-serif;
-      font-size:clamp(2rem,2.6vw,2.6rem);
-      letter-spacing:-0.05em;
+    font-family: "Onest", "Inter", Arial, sans-serif;
+    font-size: clamp(2rem, 2.6vw, 2.65rem);
+    font-weight: 500;
+    letter-spacing: -0.05em;
+    line-height: 1;
+
     }
 
     .brand-dot{color:var(--accent);}
@@ -122,6 +125,14 @@
       max-width:var(--reading);
     }
 
+    .eyebrow::before {
+    content: "";
+    width: 30px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    opacity: 0.75;
+    }
+
     .eyebrow{
       font-size:.75rem;
       text-transform:uppercase;
@@ -131,11 +142,12 @@
     }
 
     .article-title{
-      font-family:"Onest", sans-serif;
-      font-size:clamp(3rem,6vw,5rem);
-      letter-spacing:-0.06em;
-      line-height:0.95;
-      margin:0 0 1rem;
+    margin: 0 0 1rem;
+    font-family: "Onest", "Inter", Arial, sans-serif;
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: -0.06em;
+    line-height: 1.1;
     }
 
     .article-meta{
@@ -148,9 +160,10 @@
     }
 
     .article-body{
-      font-size:clamp(1.15rem,1.3vw,1.35rem);
-      line-height:1.9;
-      color:var(--text);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+    color: var(--text);
     }
 
     .article-body p{
@@ -158,10 +171,12 @@
     }
 
     .article-body h2{
-      font-family:"Onest", sans-serif;
-      font-size:clamp(1.8rem,2.2vw,2.4rem);
-      margin:3rem 0 1rem;
-      letter-spacing:-0.04em;
+    margin: 3.6rem 0 1rem;
+    font-family: "Onest", "Inter", Arial, sans-serif;
+    font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+    font-weight: 500;
     }
 
     .article-body figure{
@@ -180,10 +195,12 @@
     }
 
     .article-body blockquote{
-      border-left:2px solid var(--accent);
-      padding-left:1.2rem;
-      color:var(--text-soft);
-      margin:2rem 0;
+    margin: 2.3rem 0;
+    padding: 0.2rem 0 0.2rem 1.35rem;
+    border-left: 2px solid 
+    color-mix(in srgb, var(--accent) 60%, var(--accent-2) 40%);
+    color: var(--text-soft);
+    font-size: 1.06em;
     }
 
     .signature{
@@ -224,11 +241,8 @@
       </div>
 
       <nav class="nav">
-        <a href="/diary/">diary</a>
-        <a href="/notes/">notes</a>
-        <a href="/wiki/">wiki</a>
-        <a href="/wobble/">wobble</a>
-        <a href="/posts/" class="active">posts</a>
+        <a href="/">home</a>
+        <a href="/kim" class="active">kim</a>
       </nav>
     </header>
 
