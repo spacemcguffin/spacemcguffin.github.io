@@ -124,21 +124,21 @@
     .article{
       max-width:var(--reading);
     }
-
-    .eyebrow::before {
-    content: "";
-    width: 30px;
-    height: 1px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
-    opacity: 0.75;
-    }
-
+    
     .eyebrow{
       font-size:.75rem;
       text-transform:uppercase;
       letter-spacing:.16em;
       color:var(--text-faint);
       margin-bottom:1rem;
+    }
+
+        .eyebrow::before{
+      content: "";
+      width: 30px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      opacity: 0.75;
     }
 
     .article-title{
