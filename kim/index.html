@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Post Page</title>
+  <title>lewis.lc — Post</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,12 +11,12 @@
 
   <style>
     :root{
-      --bg: #f5f1eb;
-      --surface: #f5f1eb;
-      --text: #3a312b;
-      --muted: #7c695d;
-      --line: rgba(58, 49, 43, 0.10);
-      --link: #3a312b;
+      --bg: #f6f3ee;
+      --bg-2: #f1ede7;
+      --text: #332c28;
+      --muted: #786a61;
+      --line: rgba(51, 44, 40, 0.10);
+      --link: #332c28;
       --max: 1120px;
       --reading: 760px;
     }
@@ -31,7 +31,7 @@
 
     body{
       margin: 0;
-      background: var(--bg);
+      background: linear-gradient(to bottom, var(--bg), var(--bg-2));
       color: var(--text);
       font-family: "Cormorant Garamond", Georgia, serif;
       -webkit-font-smoothing: antialiased;
@@ -39,7 +39,7 @@
     }
 
     a{
-      color: var(--link);
+      color: inherit;
       text-decoration: none;
     }
 
@@ -62,25 +62,24 @@
     }
 
     .brand{
-      font-family: "Cormorant Garamond", Georgia, serif;
-      font-size: clamp(2rem, 2.2vw, 2.6rem);
+      font-size: clamp(2rem, 2.2vw, 2.55rem);
       line-height: 1;
       font-weight: 500;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
 
     .brand a{
-      color: var(--text);
+      display: inline-block;
     }
 
     .nav{
       display: flex;
       align-items: center;
-      gap: 36px;
+      gap: 34px;
       flex-wrap: wrap;
       justify-content: flex-end;
       font-family: "Inter", Arial, sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       color: var(--muted);
     }
 
@@ -88,7 +87,7 @@
       color: var(--muted);
       padding-bottom: 4px;
       border-bottom: 1px solid transparent;
-      transition: border-color 0.2s ease, color 0.2s ease;
+      transition: color .2s ease, border-color .2s ease, opacity .2s ease;
     }
 
     .nav a:hover{
@@ -107,7 +106,7 @@
     }
 
     .article-shell{
-      padding: 66px 0 96px;
+      padding: 68px 0 100px;
     }
 
     .article{
@@ -118,24 +117,37 @@
       margin-bottom: 44px;
     }
 
-    .article-title{
-      margin: 0 0 20px;
-      font-size: clamp(3.25rem, 6vw, 5.2rem);
-      line-height: 0.98;
-      font-weight: 400;
-      letter-spacing: -0.03em;
+    .eyebrow{
+      margin: 0 0 14px;
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
     }
 
-    .article-date{
+    .article-title{
+      margin: 0 0 20px;
+      font-size: clamp(3.2rem, 6vw, 5.1rem);
+      line-height: 0.98;
+      font-weight: 400;
+      letter-spacing: -0.035em;
+    }
+
+    .article-meta{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
       font-family: "Inter", Arial, sans-serif;
-      font-size: 1rem;
+      font-size: 0.98rem;
       line-height: 1.5;
       color: var(--muted);
     }
 
     .article-body{
-      font-size: clamp(2rem, 2.2vw, 2.35rem);
-      line-height: 1.55;
+      font-size: clamp(2rem, 2.15vw, 2.3rem);
+      line-height: 1.56;
       letter-spacing: -0.01em;
     }
 
@@ -145,6 +157,14 @@
 
     .article-body em{
       font-style: italic;
+    }
+
+    .article-body h2{
+      margin: 56px 0 18px;
+      font-size: clamp(2.25rem, 3vw, 3rem);
+      line-height: 1.08;
+      font-weight: 400;
+      letter-spacing: -0.025em;
     }
 
     .article-body figure{
@@ -159,24 +179,22 @@
       color: var(--muted);
     }
 
-    .article-body h2{
-      margin: 56px 0 18px;
-      font-size: clamp(2.3rem, 3vw, 3rem);
-      line-height: 1.08;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-    }
-
     .article-body blockquote{
       margin: 38px 0;
-      padding-left: 24px;
-      border-left: 2px solid rgba(58,49,43,0.18);
-      color: #4a3c32;
+      padding: 2px 0 2px 24px;
+      border-left: 2px solid rgba(51, 44, 40, 0.18);
+      color: #433932;
+    }
+
+    .article-body a{
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.12em;
     }
 
     .article-body ul,
     .article-body ol{
-      margin: 0 0 34px 1.3em;
+      margin: 0 0 34px 1.2em;
       padding: 0;
     }
 
@@ -184,8 +202,10 @@
       margin-bottom: 10px;
     }
 
-    .footer-space{
-      height: 40px;
+    .signature{
+      margin-top: 46px;
+      font-size: 1.9rem;
+      color: var(--muted);
     }
 
     @media (max-width: 900px){
@@ -196,17 +216,16 @@
       }
 
       .nav{
-        gap: 18px 24px;
+        gap: 16px 22px;
         justify-content: flex-start;
       }
 
       .article-shell{
-        padding: 46px 0 72px;
+        padding: 48px 0 76px;
       }
 
       .article-body{
-        font-size: clamp(1.65rem, 5.1vw, 2rem);
-        line-height: 1.58;
+        font-size: clamp(1.65rem, 5vw, 2rem);
       }
     }
 
@@ -225,12 +244,13 @@
       }
 
       .article-title{
-        font-size: clamp(2.5rem, 10vw, 3.5rem);
+        font-size: clamp(2.4rem, 10vw, 3.5rem);
         line-height: 1.02;
       }
 
       .article-body{
-        font-size: 1.7rem;
+        font-size: 1.68rem;
+        line-height: 1.58;
       }
     }
   </style>
@@ -239,15 +259,15 @@
   <div class="page">
     <header class="site-header">
       <div class="brand">
-        <a href="#">alex•day</a>
+        <a href="/">lewis.lc</a>
       </div>
 
       <nav class="nav" aria-label="Primary navigation">
-        <a href="#">now</a>
-        <a href="#">timeline</a>
-        <a href="#">music</a>
-        <a href="#">rushmores</a>
-        <a href="#" class="active">posts</a>
+        <a href="/diary/">diary</a>
+        <a href="/notes/">notes</a>
+        <a href="/wiki/">wiki</a>
+        <a href="/wobble/">wobble</a>
+        <a href="/about/" class="active">posts</a>
       </nav>
     </header>
 
@@ -256,52 +276,59 @@
     <main class="article-shell">
       <article class="article">
         <header class="article-header">
-          <h1 class="article-title">Alex's Digimon FanFiction</h1>
-          <div class="article-date">March 27, 2026</div>
+          <div class="eyebrow">Longform</div>
+          <h1 class="article-title">Building a quieter version of lewis.lc</h1>
+          <div class="article-meta">
+            <span>April 5, 2026</span>
+            <span>•</span>
+            <span>Design / personal site</span>
+          </div>
         </header>
 
         <div class="article-body">
           <p>
-            Building this new site - and, particularly, working on the timeline page -
-            got me thinking about my first ever website. I built it when I was ten years
-            old using Microsoft's WYSIWYG editor <em>Front Page 2000</em>, hosted on
-            Tripod (an alternative to Geocities at the time).
+            I wanted to see what would happen if I stripped everything back a little.
+            Less glow, less layering, fewer effects — but still something that felt personal.
+            Not clinical, not like a template, and not especially “content-first” in the usual sense.
           </p>
 
           <p>
-            It looked like this:
+            A lot of my pages lean into atmosphere: neon gradients, glass surfaces, blur, depth,
+            movement. I still love all of that. But I also like the idea of a page that feels
+            closer to paper — something slower, softer, and a bit more reflective.
+          </p>
+
+          <p>
+            This layout sits somewhere between a blog post, a diary entry, and an archive page.
+            It keeps the wide breathing room and restrained navigation from the original inspiration,
+            but shifts the branding and tone toward <em>lewis.lc</em>.
           </p>
 
           <figure>
-            <img src="https://placehold.co/1200x720/e9e1d6/5b473a?text=Your+image+here" alt="Example image" />
+            <img src="https://placehold.co/1200x720/ebe5dc/4d4138?text=Add+your+image+or+screenshot" alt="Placeholder image">
             <figcaption>
-              Replace this with your own screenshot, illustration, or archival image.
+              Replace this area with a screenshot, archive image, diary visual, or article illustration.
             </figcaption>
           </figure>
 
-          <p>
-            There is something very charming about those early personal websites:
-            earnest, cluttered, handmade, and entirely unconcerned with best practice.
-            They felt more like bedrooms than brands.
-          </p>
-
-          <h2>Why I still love this style</h2>
+          <h2>Why this works</h2>
 
           <p>
-            Even though this updated design is much cleaner, it still carries some of
-            that same personal warmth. The oversized serif typography, the pale paper
-            background, and the generous spacing all make it feel reflective rather than
-            corporate.
+            The nicest thing about this kind of design is that it gives the words room to breathe.
+            The page feels authored rather than assembled. There is enough framing to feel intentional,
+            but not so much that the layout starts competing with the writing itself.
           </p>
 
           <blockquote>
-            Good personal websites feel like a person is speaking, not a content system.
+            Not every personal page needs to announce itself. Some of them can just invite you in.
           </blockquote>
 
           <p>
-            That is probably why this kind of layout works so well for essays, timeline
-            posts, diary entries, and nostalgic writing.
+            I could imagine using this for diary posts, archive writeups, retrospective pieces,
+            old internet memories, or longer articles that do not need the full neon treatment.
           </p>
+
+          <p class="signature">— Lewis</p>
         </div>
       </article>
     </main>
