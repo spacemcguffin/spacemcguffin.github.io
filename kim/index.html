@@ -3,329 +3,283 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lewis.lc — Post</title>
+  <title>lewis.lc — Editorial Post</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&family=Onest:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg: #f6f3ee;
-      --bg-2: #f1ede7;
-      --text: #3d3833;
-      --muted: #786a61;
-      --line: rgba(51, 44, 40, 0.10);
-      --link: #332c28;
-      --max: 1120px;
-      --reading: 760px;
+      --page-max: 1160px;
+      --reading: 780px;
+      --radius: 18px;
+
+      --bg:
+        radial-gradient(circle at top left, rgba(130, 101, 255, 0.16), transparent 28%),
+        radial-gradient(circle at top right, rgba(55, 199, 214, 0.14), transparent 26%),
+        linear-gradient(180deg, #0d1018 0%, #121522 100%);
+
+      --panel: rgba(24,28,40,0.55);
+
+      --text: #ece9f3;
+      --text-soft: rgba(236,233,243,0.78);
+      --text-faint: rgba(236,233,243,0.55);
+
+      --line: rgba(255,255,255,0.08);
+      --line-strong: rgba(255,255,255,0.16);
+
+      --accent: #9c8cff;
+      --accent-2: #5fe2d1;
+
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
 
-    *{
-      box-sizing: border-box;
-    }
+    *{box-sizing:border-box;}
 
-    html{
-      scroll-behavior: smooth;
-    }
+    html{scroll-behavior:smooth;}
 
     body{
-      margin: 0;
-      background: linear-gradient(to bottom, var(--bg), var(--bg-2));
-      color: var(--text);
-      font-family: "Newsreader", Georgia, serif;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+      margin:0;
+      font-family:"Inter", Arial, sans-serif;
+      background:var(--bg);
+      background-attachment:fixed;
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
 
-    a{
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img{
-      max-width: 100%;
-      display: block;
-    }
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;display:block;}
 
     .page{
-      width: min(calc(100% - 48px), var(--max));
-      margin: 0 auto;
+      width:min(calc(100% - 48px), var(--page-max));
+      margin:0 auto;
     }
 
+    /* HEADER */
     .site-header{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 42px 0 54px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:36px 0 48px;
+      gap:2rem;
     }
 
     .brand{
-      font-size: clamp(2rem, 2.2vw, 2.55rem);
-      line-height: 1;
-      font-weight: 500;
-      letter-spacing: -0.03em;
+      font-family:"Onest", sans-serif;
+      font-size:clamp(2rem,2.6vw,2.6rem);
+      letter-spacing:-0.05em;
     }
 
-    .brand a{
-      display: inline-block;
-    }
+    .brand-dot{color:var(--accent);}
 
     .nav{
-      display: flex;
-      align-items: center;
-      gap: 34px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      font-family: "Inter", Arial, sans-serif;
-      font-size: 0.96rem;
-      color: var(--muted);
+      display:flex;
+      gap:1.8rem;
+      font-size:0.95rem;
+      color:var(--text-soft);
+      flex-wrap:wrap;
     }
 
     .nav a{
-      color: var(--muted);
-      padding-bottom: 4px;
-      border-bottom: 1px solid transparent;
-      transition: color .2s ease, border-color .2s ease, opacity .2s ease;
+      position:relative;
+      padding-bottom:4px;
     }
 
-    .nav a:hover{
-      color: var(--text);
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:0; right:0; bottom:0;
+      height:1px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:.2s;
     }
 
+    .nav a:hover,
     .nav a.active{
-      color: var(--text);
-      border-bottom-color: currentColor;
+      color:var(--text);
+    }
+
+    .nav a:hover::after,
+    .nav a.active::after{
+      transform:scaleX(1);
     }
 
     .divider{
-      border: 0;
-      border-top: 1px solid var(--line);
-      margin: 0;
+      border:0;
+      border-top:1px solid var(--line);
     }
 
+    /* ARTICLE */
     .article-shell{
-      padding: 68px 0 100px;
+      padding:64px 0 92px;
     }
 
     .article{
-      max-width: var(--reading);
-    }
-
-    .article-header{
-      margin-bottom: 44px;
+      max-width:var(--reading);
     }
 
     .eyebrow{
-      margin: 0 0 14px;
-      font-family: "Inter", Arial, sans-serif;
-      font-size: 0.8rem;
-      line-height: 1.4;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
+      font-size:.75rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--text-faint);
+      margin-bottom:1rem;
     }
 
     .article-title{
-      margin: 0 0 12px;
-      font-size: 2rem;
-      line-height: 0.98;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      font-family:"Onest", sans-serif;
+      font-size:clamp(3rem,6vw,5rem);
+      letter-spacing:-0.06em;
+      line-height:0.95;
+      margin:0 0 1rem;
     }
 
     .article-meta{
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      font-family: "Inter", Arial, sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      color: var(--muted);
+      font-size:.95rem;
+      color:var(--text-soft);
+      display:flex;
+      gap:.8rem;
+      flex-wrap:wrap;
+      margin-bottom:2rem;
     }
 
     .article-body{
-    font-size: 1.16rem;
-    line-height: 1.6;
+      font-size:clamp(1.15rem,1.3vw,1.35rem);
+      line-height:1.9;
+      color:var(--text);
     }
 
     .article-body p{
-          margin-bottom: 1rem;
-    }
-
-    .article-body em{
-      font-style: italic;
+      margin:0 0 1.8rem;
     }
 
     .article-body h2{
-      margin: 56px 0 18px;
-      font-size: 0.9rem;
-      line-height: 1.08;
-      font-weight: 400;
+      font-family:"Onest", sans-serif;
+      font-size:clamp(1.8rem,2.2vw,2.4rem);
+      margin:3rem 0 1rem;
+      letter-spacing:-0.04em;
     }
 
     .article-body figure{
-      margin: 42px 0 38px;
+      margin:2.5rem 0;
+      border-radius:var(--radius);
+      overflow:hidden;
+      background:var(--panel);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
     }
 
     .article-body figcaption{
-      margin-top: 14px;
-      font-family: "Inter", Arial, sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.5;
-      color: var(--muted);
+      padding:1rem;
+      font-size:.9rem;
+      color:var(--text-faint);
     }
 
     .article-body blockquote{
-      margin: 38px 0;
-      padding: 2px 0 2px 24px;
-      border-left: 2px solid rgba(51, 44, 40, 0.18);
-      color: #433932;
-    }
-
-    .article-body a{
-      text-decoration: underline;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 0.12em;
-    }
-
-    .article-body ul,
-    .article-body ol{
-      margin: 0 0 34px 1.2em;
-      padding: 0;
-    }
-
-    .article-body li{
-      margin-bottom: 10px;
+      border-left:2px solid var(--accent);
+      padding-left:1.2rem;
+      color:var(--text-soft);
+      margin:2rem 0;
     }
 
     .signature{
-      margin-top: 46px;
-      font-size: 1.9rem;
-      color: var(--muted);
+      margin-top:2.5rem;
+      font-family:"Onest", sans-serif;
+      color:var(--text-soft);
     }
 
-    @media (max-width: 900px){
+    /* MOBILE */
+    @media(max-width:900px){
       .site-header{
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 30px 0 40px;
-      }
-
-      .nav{
-        gap: 16px 22px;
-        justify-content: flex-start;
-      }
-
-      .article-shell{
-        padding: 48px 0 76px;
-      }
-
-      .article-body{
-        font-size: clamp(1.65rem, 5vw, 2rem);
+        flex-direction:column;
+        align-items:flex-start;
       }
     }
 
-    @media (max-width: 640px){
+    @media(max-width:640px){
       .page{
-        width: min(calc(100% - 28px), var(--max));
-      }
-
-      .brand{
-        font-size: 2.1rem;
-      }
-
-      .nav{
-        font-size: 0.9rem;
-        gap: 14px 18px;
+        width:min(calc(100% - 28px), var(--page-max));
       }
 
       .article-title{
-        font-weight: 500;
-        font-size: 1.6rem;
+        font-size:2.6rem;
       }
 
       .article-body{
-        font-size: 1rem;
-        line-height: 1.58;
+        font-size:1.05rem;
       }
     }
   </style>
 </head>
 <body>
+
   <div class="page">
     <header class="site-header">
       <div class="brand">
-        <a href="/">lewis.lc</a>
+        lewis<span class="brand-dot">.</span>lc
       </div>
 
-      <nav class="nav" aria-label="Primary navigation">
+      <nav class="nav">
         <a href="/diary/">diary</a>
         <a href="/notes/">notes</a>
         <a href="/wiki/">wiki</a>
         <a href="/wobble/">wobble</a>
-        <a href="/about/" class="active">posts</a>
+        <a href="/posts/" class="active">posts</a>
       </nav>
     </header>
 
-    <hr class="divider" />
+    <hr class="divider">
 
     <main class="article-shell">
       <article class="article">
-        <header class="article-header">
-          <div class="eyebrow">Longform</div>
-          <h1 class="article-title">Building a quieter version of lewis.lc</h1>
-          <div class="article-meta">
-            <span>April 5, 2026</span>
-            <span>•</span>
-            <span>Design / personal site</span>
-          </div>
-        </header>
+        <div class="eyebrow">Longform / Design</div>
+
+        <h1 class="article-title">
+          A quieter editorial page for lewis.lc
+        </h1>
+
+        <div class="article-meta">
+          <span>April 5, 2026</span>
+          <span>•</span>
+          <span>Inter + Onest</span>
+        </div>
 
         <div class="article-body">
           <p>
-            I wanted to see what would happen if I stripped everything back a little.
-            Less glow, less layering, fewer effects — but still something that felt personal.
-            Not clinical, not like a template, and not especially “content-first” in the usual sense.
+            This is a stripped-back version of the Lewis.lc aesthetic — keeping the identity,
+            but removing the heavier glow and layered effects.
           </p>
 
           <p>
-            A lot of my pages lean into atmosphere: neon gradients, glass surfaces, blur, depth,
-            movement. I still love all of that. But I also like the idea of a page that feels
-            closer to paper — something slower, softer, and a bit more reflective.
-          </p>
-
-          <p>
-            This layout sits somewhere between a blog post, a diary entry, and an archive page.
-            It keeps the wide breathing room and restrained navigation from the original inspiration,
-            but shifts the branding and tone toward <em>lewis.lc</em>.
+            Instead of neon dominating the page, it now sits quietly in the background —
+            a faint purple and cyan wash that gives the page atmosphere without distraction.
           </p>
 
           <figure>
-            <img src="https://placehold.co/1200x720/ebe5dc/4d4138?text=Add+your+image+or+screenshot" alt="Placeholder image">
+            <img src="https://placehold.co/1400x900/1a1d2e/ffffff?text=Your+image">
             <figcaption>
-              Replace this area with a screenshot, archive image, diary visual, or article illustration.
+              Drop in your own images, archive screenshots, or diary visuals here.
             </figcaption>
           </figure>
 
           <h2>Why this works</h2>
 
           <p>
-            The nicest thing about this kind of design is that it gives the words room to breathe.
-            The page feels authored rather than assembled. There is enough framing to feel intentional,
-            but not so much that the layout starts competing with the writing itself.
+            It feels calmer. More intentional. The typography leads, the layout supports,
+            and the colour just gently holds everything together.
           </p>
 
           <blockquote>
-            Not every personal page needs to announce itself. Some of them can just invite you in.
+            Not every page needs to glow to feel like Lewis.lc.
           </blockquote>
 
           <p>
-            I could imagine using this for diary posts, archive writeups, retrospective pieces,
-            old internet memories, or longer articles that do not need the full neon treatment.
+            This is probably the version I’d use for longer writing — diary entries,
+            retrospectives, or anything more reflective.
           </p>
 
           <p class="signature">— Lewis</p>
@@ -333,5 +287,6 @@
       </article>
     </main>
   </div>
+
 </body>
 </html>
