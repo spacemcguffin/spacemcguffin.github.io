@@ -307,14 +307,14 @@ position: fixed;
 
 
 .article h1 {
-    letter-spacing: -0.5px;
-    font-size: 1.8rem;
-    font-family: 'Inter', sans-serif;
+letter-spacing: -0.5px;
+    font-size: 2.2rem;
+    font-family: 'Onest';
     line-height: 1.3;
-    color: var(--black-color);
+    color: var(--eptitle-color);
     margin: 0.8rem 0.5rem 0.8rem 0rem;
     text-align: left;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 
@@ -333,16 +333,15 @@ margin: 0.5em 0em 0.5em 0em;
 
 
 .article h3 {
-    margin: 0rem 0rem 1rem 0rem;
+margin: 0rem 0rem 1rem 0rem;
     color: var(--black-color);
     font-weight: 400;
-    font-family: 'Inter';
+    font-family: "Stack Sans Text", sans-serif;
     font-size: 1.2rem;
-    line-height: 1.1;
+    line-height: 1.2;
     background-image: linear-gradient(to left, #6e8ec1a1, #ffffff00);
-    padding: 0.3rem 0 0.3rem 0;
+    padding: 0.3em 0 0.3em 0;
     border-radius: 0 30px 30px 0;
-    margin-top: 0.5rem;
 }
 
 .article h4 {
@@ -367,10 +366,10 @@ h5 {
 }
 
 .article p {
-margin: 1em 0 1em 0px;
-    line-height: 1.58;
+    margin: 1em 0 1em 0px;
+    line-height: 1.6;
     font-weight: 400;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     color: var(--black-color);
 }
 
@@ -1555,9 +1554,10 @@ div.articleRightInner {
 
 		:where(.navbar, .sidebar) .nav-logo .logo-text {
     color: var(--black-color);
-    font-size: 0.9rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 	}
 
