@@ -1573,13 +1573,26 @@ window.addEventListener("keydown", (e)=>{
 });
 
 /* Populate tags */
+/* Populate tags with automatic post counts */
 function populateTags(){
-  const tagSet=new Set();
-  posts.forEach(p=>(p.tags||[]).forEach(t=>tagSet.add(String(t).toLowerCase())));
-  const sortedTags=[...tagSet].filter(Boolean).sort();
-  tagSelect.innerHTML='<option value="">All tags</option>'+
-    sortedTags.map(t=>`<option value="${t}">• ${t}</option>`).join("");
+  const counts = {};
+
+  posts.forEach(p => {
+    (p.tags || []).forEach(tag => {
+      const cleanTag = String(tag).toLowerCase();
+      counts[cleanTag] = (counts[cleanTag] || 0) + 1;
+    });
+  });
+
+  const sortedTags = Object.keys(counts).filter(Boolean).sort();
+
+  tagSelect.innerHTML =
+    `<option value="">All tags (${posts.length})</option>` +
+    sortedTags.map(tag =>
+      `<option value="${tag}">• ${tag} (${counts[tag]})</option>`
+    ).join("");
 }
+
 populateTags();
 
 /* Sort + range (from View dropdown) */
