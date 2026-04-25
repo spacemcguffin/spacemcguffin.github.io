@@ -362,6 +362,7 @@ h1{
 .post__time{
   font-size:13px;
   color:var(--muted2);
+  font-weight: 500;
   position:relative;
   cursor:help;
   display:inline-flex;
@@ -1612,28 +1613,67 @@ backToTop.onclick=()=> window.scrollTo({top:0,behavior:"smooth"});
 function initials(name=""){
   return name.split(" ").filter(Boolean).map(n=>n[0]).join("").slice(0,2).toUpperCase();
 }
+
 function avatar(p){
   if(p.avatar) return `<img src="${p.avatar}" alt="">`;
   if(p.avatarText) return p.avatarText;
   return initials(p.name);
 }
-function relativeTime(iso){
-  const now=new Date(), d=new Date(iso);
-  const diff=(now-d)/1000;
-  if(diff<15) return "now";
-  if(diff<60) return Math.floor(diff)+"s";
-  if(diff<3600) return Math.floor(diff/60)+"m";
-  if(diff<86400) return Math.floor(diff/3600)+"h";
-  const days=Math.floor(diff/86400);
-  if(days===1) return "Yesterday";
-  if(days<7) return days+"d";
-  return d.toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});
+
+function escapeAttr(str=""){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
 }
 
-/* Full date/time for tooltip */
+function relativeTime(iso){
+  const now = new Date();
+  const d = new Date(iso);
+  if(isNaN(d)) return "";
+
+  const diff = Math.floor((now - d) / 1000);
+
+  if(diff < 0) return "in the future";
+  if(diff < 15) return "just now";
+  if(diff < 60) return `${diff}s ago`;
+
+  const mins = Math.floor(diff / 60);
+  if(mins < 60) return `${mins}m ago`;
+
+  const hours = Math.floor(mins / 60);
+  if(hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+
+  const time = d.toLocaleTimeString(undefined,{
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+
+  if(days === 1) return `Yesterday at ${time}`;
+  if(days < 7) return `${days} days ago`;
+
+  if(days < 30){
+    return d.toLocaleDateString(undefined,{
+      weekday:"short",
+      day:"numeric",
+      month:"short"
+    });
+  }
+
+  return d.toLocaleDateString(undefined,{
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  });
+}
+
 function fullDateTime(iso){
   const d = new Date(iso);
   if(isNaN(d)) return String(iso || "");
+
   return d.toLocaleString(undefined,{
     weekday:"long",
     year:"numeric",
@@ -1641,6 +1681,17 @@ function fullDateTime(iso){
     day:"numeric",
     hour:"2-digit",
     minute:"2-digit"
+  });
+}
+
+function updateTimeContext(){
+  document.querySelectorAll(".post__time").forEach(el => {
+    const iso = el.getAttribute("datetime");
+    const full = fullDateTime(iso);
+
+    el.textContent = `· ${relativeTime(iso)}`;
+    el.dataset.tip = full;
+    el.title = full;
   });
 }
 
@@ -1718,11 +1769,14 @@ function render(reset=false){
       <div>
         <div class="post__top">
           <div class="post__name">${p.name}</div>
-          <time class="post__time" datetime="${p.date}" data-tip="${fullDateTime(p.date)}" tabindex="0">· ${relativeTime(p.date)}</time>
+          <time class="post__time"
+            datetime="${escapeAttr(p.date)}"
+            data-tip="${escapeAttr(fullDateTime(p.date))}"
+            title="${escapeAttr(fullDateTime(p.date))}"
+            tabindex="0">· ${relativeTime(p.date)}</time>
         </div>
         <div class="post__text">${p.text}</div>
         ${renderMedia(p)}
-
       </div>
     </article>
   `).join("") : `<div class="empty">No posts found.</div>`;
@@ -1732,6 +1786,7 @@ function render(reset=false){
   computeHeaderTrigger();
   updateBackToTop();
   applyMediaAspectRatios();
+  updateTimeContext();
 }
 
 /* Events */
@@ -1778,6 +1833,8 @@ applyViewSelection();
 render(true);
 computeHeaderTrigger();
 updateBackToTop();
+
+setInterval(updateTimeContext, 60000);
 </script>
 
 </body>
