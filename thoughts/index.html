@@ -1605,6 +1605,11 @@ function matchesView(post){
     return d >= cutoff;
   }
 
+  /* Year filter */
+  if(/^\d{4}$/.test(val)){
+    return d.getFullYear() === Number(val);
+  }
+
   return true;
 }
 
