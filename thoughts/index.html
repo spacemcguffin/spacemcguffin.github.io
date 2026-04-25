@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,GRAD,ROND@6..144,-10..0,25..151,1..1000,0..100,0..100&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -98,16 +97,16 @@ body{
 }
 
 .brand{
+  font-weight:600;
   font-size:15px;
   display:flex;
   align-items:center;
   gap:8px;
-  font-family: 'Google Sans Flex', sans-serif;
 }
 
 .brand__dot{
-  width:5px;
-  height:5px;
+  width:8px;
+  height:8px;
   border-radius:999px;
   background: var(--text);
 }
@@ -827,17 +826,41 @@ const posts=[
 
   
   {
-    date:"2021-02-07T18:10:00Z",
+    date:"2026-02-10T09:10:00Z",
+    name:"Lewis",
+    avatarText:"LC",
+    text:"Old post test: date should show the year once it stops being relative time.",
+    tags:["notes","meta"],
+    media:[
+      "https://lewis.lc/wiki/img/episodes/tt.png",
+      "https://lewis.lc/wiki/img/episodes/sns.png"
+    ]
+  },
+
+
+
+
+
+  {
+    date:"2021-02-07T09:10:00Z",
     name:"Lewis",
     avatarText:"LC",
     
     text:"I deleted everything. 
 <br>All 2137 entries. All 20,000 tweets. 
 <br>Time to let go. I’m not the person I used to be.",
+  
 
-  }
+  },
 
 
+
+
+
+
+
+
+  
 
   
 ];
