@@ -1542,7 +1542,7 @@ function populateTags(){
   posts.forEach(p=>(p.tags||[]).forEach(t=>tagSet.add(String(t).toLowerCase())));
   const sortedTags=[...tagSet].filter(Boolean).sort();
   tagSelect.innerHTML='<option value="">All tags</option>'+
-    sortedTags.map(t=>`<option value="${t}"># ${t}</option>`).join("");
+    sortedTags.map(t=>`<option value="${t}">• ${t}</option>`).join("");
 }
 populateTags();
 
