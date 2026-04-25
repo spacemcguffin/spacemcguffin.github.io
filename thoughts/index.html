@@ -1587,7 +1587,7 @@ function populateTags(){
   const sortedTags = Object.keys(counts).filter(Boolean).sort();
 
   tagSelect.innerHTML =
-    `<option value="">All tags (${posts.length})</option>` +
+    `<option value="">All tags</option>` +
     sortedTags.map(tag =>
       `<option value="${tag}">• ${tag} (${counts[tag]})</option>`
     ).join("");
