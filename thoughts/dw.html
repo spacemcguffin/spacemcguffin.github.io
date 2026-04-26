@@ -1,0 +1,1849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Thoughts</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  
+<style>
+:root{
+  --bg0:#f3f4f8;
+  --bg1:#e9ecf6;
+
+  --panel: rgba(255,255,255,.62);
+  --panel2: rgba(255,255,255,.42);
+  --border: rgba(0,0,0,.10);
+
+  --text:#111111;
+  --muted: rgba(17,17,17,.62);
+  --muted2: rgba(17,17,17,.45);
+
+  --avatarBg: rgba(0,0,0,.06);
+
+  --glassBlur: 14px;
+  --glassSat: 140%;
+
+  --shadow2: 0 10px 30px rgba(0,0,0,.08);
+
+  --maxw: 750px;
+  --topbarH: 56px;
+}
+
+:root[data-theme="dark"]{
+  --bg0:#070814;
+  --bg1:#0b1020;
+
+  --panel: rgba(255,255,255,.06);
+  --panel2: rgba(255,255,255,.10);
+  --border: rgba(255,255,255,.10);
+
+  --text: rgba(255,255,255,.92);
+  --muted: rgba(255,255,255,.65);
+  --muted2: rgba(255,255,255,.45);
+
+  --avatarBg: rgba(255,255,255,.10);
+
+  --glassBlur: 16px;
+  --glassSat: 155%;
+
+  --shadow2: 0 10px 30px rgba(0,0,0,.45);
+}
+
+*{box-sizing:border-box;}
+
+b {
+    font-weight: 600;
+}
+
+  ::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+  
+
+body{
+  margin:0;
+  font-family:'Inter', system-ui, sans-serif;
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  background:
+    radial-gradient(1200px 700px at 15% 0%, color-mix(in srgb, var(--bg1) 80%, transparent), transparent 60%),
+    radial-gradient(900px 600px at 85% 10%, color-mix(in srgb, var(--bg0) 85%, transparent), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+/* ===== Top Bar ===== */
+.topbar{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:var(--topbarH);
+  z-index:100;
+
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow2);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  display:flex;
+  align-items:center;
+}
+
+.wrap{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 16px;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.brand{
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.brand__dot{
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background: var(--text);
+}
+
+.topbar__right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.themeBtn{
+  height:34px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  padding:0 14px;
+  font-size:13px;
+  cursor:pointer;
+  font-family: 'Inter', sans-serif;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+}
+
+/* Home pill */
+.homePill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  height:34px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  padding:0 14px;
+  font-size:13px;
+  text-decoration:none;
+  cursor:pointer;
+  font-family: 'Inter', sans-serif;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.homePill:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--border) 55%, var(--text) 25%);
+  box-shadow: 0 10px 20px rgba(0,0,0,.10);
+}
+:root[data-theme="dark"] .homePill:hover{
+  box-shadow: 0 12px 24px rgba(0,0,0,.45);
+}
+.homePill:active{ transform: translateY(0) scale(.98); }
+.homePill:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--text) 30%, transparent);
+  outline-offset: 3px;
+}
+
+/* Dropdown menu colours */
+:root[data-theme="dark"] select option{
+  background-color: #0b1020;
+  color: rgba(255,255,255,.92);
+}
+:root:not([data-theme="dark"]) select option{
+  background-color: #ffffff;
+  color: #111111;
+}
+
+/* Make disabled "heading" options readable */
+select option:disabled{
+  font-weight:600;
+  opacity:1;
+}
+:root[data-theme="dark"] select option:disabled{
+  color: rgba(255,255,255,.65);
+  background-color:#0b1020;
+}
+:root:not([data-theme="dark"]) select option:disabled{
+  color: rgba(0,0,0,.55);
+  background-color:#ffffff;
+}
+
+.backToTop{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease;
+}
+.backToTop.visible{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.topInset{ height: var(--topbarH); }
+
+/* ===== Layout ===== */
+.layout{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:0 16px 40px;
+}
+
+.timelineHead{
+  padding:20px 0 10px;
+}
+
+h1{
+  margin:0;
+  font-size:20px;
+  font-weight:600;
+  font-family: 'Onest', sans-serif;
+}
+
+.subtitle{
+  margin-top:4px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+/* ===== Controls ===== */
+.controls{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:14px;
+  position:relative;
+  isolation:isolate;
+}
+
+.input,.select{
+  height:38px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  padding:0 12px;
+  font-size:14px;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  background-clip: padding-box;
+  overflow:hidden;
+}
+
+.btn{
+  height:38px;
+  border-radius:999px;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  color: var(--text);
+  padding:0 14px;
+  font-size:14px;
+  cursor:pointer;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  background-clip: padding-box;
+  overflow:hidden;
+}
+
+/* Fix C: consistent select + custom arrow */
+.select{
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) 52%,
+    calc(100% - 12px) 52%;
+  background-size:6px 6px, 6px 6px;
+  background-repeat:no-repeat;
+  padding-right:34px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ===== Feed ===== */
+.feed{ margin-top:14px; position:relative; }
+
+/* ===== Posts ===== */
+.post{
+  display:grid;
+  grid-template-columns:46px 1fr;
+  gap:12px;
+  padding:14px 14px;
+  margin: 30px 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  background: var(--panel2);
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.35);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  position:relative;
+
+  /* allow tooltips to escape card */
+  overflow: visible;
+}
+
+:root[data-theme="dark"] .post{
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.post__avatar{
+  width:42px;
+  height:42px;
+  border-radius:999px;
+  background: var(--avatarBg);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:600;
+  font-size:13px;
+  overflow:hidden;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+.post__avatar img{ width:100%; height:100%; object-fit:cover; }
+
+.post__top{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.post__name{ font-weight:600; font-size:14px; }
+
+/* ---- Time + custom tooltip ---- */
+.post__time{
+  font-size:13px;
+  color:var(--muted2);
+  font-weight: 500;
+  position:relative;
+  cursor:help;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* Tooltip bubble */
+.post__time::after{
+  content: attr(data-tip);
+  position:absolute;
+  left:50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%) translateY(6px);
+  opacity:0;
+  pointer-events:none;
+
+  padding:8px 10px;
+  border-radius:12px;
+  font-size:12px;
+  line-height:1.25;
+  white-space:nowrap;
+
+  color: var(--text);
+  background: var(--panel);
+  border:1px solid var(--border);
+  box-shadow: 0 18px 40px rgba(0,0,0,.12);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  transition: opacity .16s ease, transform .16s ease;
+  z-index:20;
+}
+
+/* Tooltip pointer */
+.post__time::before{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom: calc(100% + 3px);
+  width:10px;
+  height:10px;
+  transform: translateX(-50%) rotate(45deg);
+  opacity:0;
+  pointer-events:none;
+
+  background: var(--panel);
+  border-left:1px solid var(--border);
+  border-top:1px solid var(--border);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  transition: opacity .16s ease, transform .16s ease;
+  z-index:19;
+}
+
+.post__time:hover::after,
+.post__time:hover::before,
+.post__time:focus-visible::after,
+.post__time:focus-visible::before{
+  opacity:1;
+  transform: translateX(-50%) translateY(0px);
+}
+
+.post__time:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--text) 30%, transparent);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* === Dark-mode tooltip polish === */
+:root[data-theme="dark"] .post__time::after{
+  background: rgba(10,12,18,.88);
+  border: 1px solid rgba(255,255,255,.14);
+  color: rgba(255,255,255,.92);
+  box-shadow: 0 22px 55px rgba(0,0,0,.65);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+:root[data-theme="dark"] .post__time::before{
+  background: rgba(10,12,18,.88);
+  border-left: 1px solid rgba(255,255,255,.14);
+  border-top: 1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .post__time::after, .post__time::before{ transition:none; }
+}
+
+.post__text{
+  margin:6px 0 10px;
+  line-height: 1.5;
+  font-size: 14.5px;
+  white-space:pre-wrap;
+}
+
+/* ===== Media ===== */
+.media{ margin-top:10px; display:grid; gap:8px; }
+.media.cols-1{ grid-template-columns:1fr; }
+.media.cols-2{ grid-template-columns:repeat(2,1fr); }
+.media.cols-3{ grid-template-columns:repeat(2,1fr); }
+.media.cols-4{ grid-template-columns:repeat(2,1fr); }
+.media.cols-3 .media__item:first-child{ grid-column:1 / -1; }
+
+.media__item{
+  border-radius:14px;
+  overflow:hidden;
+
+  border:1px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.35);
+
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,.08),
+    inset 0 1px 0 rgba(255,255,255,.5);
+
+  cursor:pointer;
+  aspect-ratio: var(--ar, 16/10);
+
+  transition: transform .2s ease;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+}
+.media__item:hover{ transform: scale(1.02); }
+
+:root[data-theme="dark"] .media__item{
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,.6),
+    inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.media__item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1);
+  transition:transform .25s ease;
+}
+.media__item:hover img{ transform:scale(1.03); }
+
+.tags{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+
+.tagBtn{
+  font-size:12px;
+  font-family: 'Inter', sans-serif;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  color: var(--muted);
+  padding:5px 10px;
+  border-radius:999px;
+  cursor:pointer;
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+
+  background-clip: padding-box;
+  overflow:hidden;
+}
+
+/* ===== Pill hover/click polish ===== */
+.tagBtn{
+  position:relative;
+  transform: translateZ(0);
+  transition:
+    transform .16s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    background-color .18s ease;
+}
+
+.tagBtn::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:999px;
+  pointer-events:none;
+  opacity:0;
+  transition: opacity .18s ease;
+  background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.55), transparent 65%);
+}
+:root[data-theme="dark"] .tagBtn::before{
+  background: radial-gradient(120px 40px at 25% 20%, rgba(255,255,255,.14), transparent 65%);
+}
+
+.tagBtn:hover{
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--border) 55%, var(--text) 25%);
+  color: var(--text);
+  box-shadow:
+    0 10px 20px rgba(0,0,0,.10),
+    inset 0 1px 0 rgba(255,255,255,.35);
+}
+:root[data-theme="dark"] .tagBtn:hover{
+  box-shadow:
+    0 12px 24px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.06);
+}
+.tagBtn:hover::before{ opacity:1; }
+
+.tagBtn:active{
+  transform: translateY(0px) scale(.98);
+  box-shadow:
+    0 6px 14px rgba(0,0,0,.10),
+    inset 0 2px 8px rgba(0,0,0,.12);
+}
+
+.tagBtn:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--text) 30%, transparent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .tagBtn{ transition:none; }
+  .tagBtn::before{ transition:none; }
+}
+
+.footerRow{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:12px;
+  margin-top:20px;
+  flex-wrap:wrap;
+}
+
+.counter{ font-size:13px; color: var(--muted); }
+
+.empty{
+  padding:30px 0;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* ===== Lightbox ===== */
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background: rgba(0,0,0,.65);
+}
+.lightbox.open{ display:flex; }
+
+.lightbox__inner{
+  max-width:min(980px, 96vw);
+  max-height:86vh;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 30px 90px rgba(0,0,0,.6);
+  background: rgba(10,12,18,.35);
+  backdrop-filter: blur(10px);
+}
+
+/* ===== Sliding lightbox ===== */
+.lbViewport{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#000;
+}
+
+.lbTrack{
+  display:flex;
+  height:100%;
+  width:100%;
+  transform: translate3d(-100%,0,0);
+  transition: transform 320ms cubic-bezier(.22,1,.36,1);
+  will-change: transform;
+}
+
+.lbSlide{
+  flex:0 0 100%;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.lbSlide img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+}
+
+/* optional: reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .lbTrack{ transition:none; }
+}
+
+.lightbox__close{
+  position:fixed;
+  top: calc(var(--topbarH) + 14px);
+  right: 16px;
+  z-index:1000;
+  height:34px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.35);
+  color: rgba(255,255,255,.92);
+  padding:0 14px;
+  font-size:13px;
+  cursor:pointer;
+  backdrop-filter: blur(10px);
+}
+
+/* ===== Lightbox nav ===== */
+.lightbox__nav{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+}
+
+.lightbox__arrow{
+  pointer-events:auto;
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.35);
+  color: rgba(255,255,255,.92);
+  font-size:18px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.lightbox__arrow[disabled]{
+  opacity:.35;
+  cursor:default;
+}
+
+.lightbox__arrow--prev{ left:12px; }
+.lightbox__arrow--next{ right:12px; }
+
+.lightbox__caption{
+  position:absolute;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:13px;
+  color: rgba(255,255,255,.92);
+  background: rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.14);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand__dot"></span>
+      lewis.lc
+    </div>
+
+    <div class="topbar__right">
+      <a class="homePill" href="/" aria-label="Home">Home</a>
+      <button id="themeToggle" class="themeBtn" type="button">Dark</button>
+      <button id="backToTop" class="themeBtn backToTop" type="button">↑ Top</button>
+    </div>
+  </div>
+</header>
+
+<div class="topInset" aria-hidden="true"></div>
+
+<main class="layout">
+
+<section id="pageHeader" class="timelineHead">
+  <h1>Thoughts —</h1>
+  <div class="subtitle">Scattered thoughts from my journal.</div>
+
+  <div class="controls">
+    <input id="q" class="input" type="search" placeholder="Search..." />
+
+    <select id="tag" class="select" aria-label="Filter by tag">
+      <option value="">All tags</option>
+    </select>
+
+    <select id="view" class="select" aria-label="View">
+      <option value="all">All time</option>
+      <option value="" disabled>── Sort ──</option>
+      <option value="sort:new">Newest first</option>
+      <option value="sort:old">Oldest first</option>
+  <option disabled>── Year ──</option>
+  <option value="2026">2026</option>
+  <option value="2025">2025</option>
+  <option value="2024">2024</option>
+  <option value="2023">2023</option>
+  <option value="2022">2022</option>
+  <option value="2021">2021</option>
+  <option value="2016">2016</option>
+  <option value="2012">2012</option>
+    </select>
+
+    <button id="clear" class="btn" type="button">Clear</button>
+  </div>
+</section>
+
+<div id="feed" class="feed"></div>
+
+<div class="footerRow">
+  <span id="counter" class="counter">Showing 0 of 0 posts</span>
+  <button id="more" class="btn" type="button">Load more</button>
+</div>
+
+</main>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button id="lbClose" class="lightbox__close" type="button">Close</button>
+
+  <div class="lightbox__inner">
+    <div class="lbViewport">
+      <div id="lbTrack" class="lbTrack"></div>
+    </div>
+
+    <div class="lightbox__nav" aria-hidden="false">
+      <button id="lbPrev" class="lightbox__arrow lightbox__arrow--prev" type="button" aria-label="Previous image">‹</button>
+      <button id="lbNext" class="lightbox__arrow lightbox__arrow--next" type="button" aria-label="Next image">›</button>
+      <div id="lbCap" class="lightbox__caption" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const posts=[
+
+
+
+
+{
+    date:"2009-04-01T18:30:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/wiki/img/fractalavatar.png",
+    text:"The first four episodes are locked in.",
+    tags:["pointless meanderings","series 1"],
+    media:[
+      "/wobble/assets/img/starlightrobbery.jpg",
+      "/wobble/assets/img/starlightrobbery.jpg",
+      "/wobble/assets/img/starlightrobbery.jpg",
+      "/wobble/assets/img/starlightrobbery.jpg"
+    ]
+  },
+
+
+
+
+ {
+    date:"2026-04-25T01:42:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/thoughts/images/pixelme.png",
+    avatarText:"LC",
+    text:"Just spent about an hour at my window, enjoying the breeze, looking up at the stars and how pretty the moon is. I need to ground myself and recharge this weekend. Still listening to <i>Orbit</i> – currently blasting it through my headphones. It’s just fucking magical. And so is the night sky. And so is she.",
+    tags:["life"]
+  },
+
+
+
+
+
+  
+
+ {
+    date:"2026-04-25T00:06:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/thoughts/images/pixelme.png",
+    avatarText:"LC",
+    text:"Stumbled on a bunch of new songs and discovered some artists the other night, so my playlist has been refreshed. My new favourite song is <i>Orbit</i> by Henry Moodie.",
+    tags:["music"]
+  },
+
+
+
+
+
+  
+ {
+    date:"2026-04-16T23:36:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"I can’t put into words how much I appreciate Kim.",
+    tags:["friends"]
+  },
+
+
+
+
+
+
+ {
+    date:"2026-04-07T23:36:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"no longer giving my energy to people who don’t deserve it ✨",
+    tags:["life"]
+  },
+
+
+
+  
+
+ {
+    date:"2026-03-10T00:13:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"Charlie sent me this photo out of the blue earlier.\n\nCute memories 🥹💖",
+    tags:["life", "friends", "media"],
+       media:[
+      "https://lewis.lc/thoughts/images/charliecard.png",
+    ]
+  },
+
+
+
+
+
+  
+
+
+  
+ {
+    date:"2026-03-07T00:33:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"Devvo has returned. Actual Devvo from 2006 has made an internet comeback. There’s merch an’ everyfin’ m8. The world is healing.",
+    tags:["nostalgia"]
+  },
+
+
+
+  
+
+   {
+    date:"2026-01-28T23:32:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"dog walks and breakfast in the sun with zoe was the dopamine hit i needed today ☀️",
+    tags:["life"]
+  },
+
+
+
+
+  
+
+
+   {
+    date:"2026-01-12T00:50:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"Obsessed with <i>Born With a Broken Heart</i> by Damiano David.",
+    tags:["music"]
+  },
+
+
+
+
+
+
+
+  
+
+ {
+    date:"2025-12-31T20:25:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"This year, I’ve been blessed with the company of Gemma, Gems, Zoe, Kim, Bron and Sophie. Angels who have kept me afloat.",
+    tags:["friends"]
+  },
+
+
+
+
+
+
+
+
+
+  
+
+  {
+    date:"2025-06-23T18:28:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"Every time I see you, I feel the same wonder and joy I felt the first time we spoke. You breathe life into me the way nobody else does. You care in ways others don’t. You have my heart and I trust you with it the way I can’t with anyone else. You are so precious.",
+    tags:["life", "friends"]
+  },
+
+
+
+
+
+
+
+  
+
+  
+  {
+    date:"2025-05-30T18:28:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"I stopped at Zoe’s on my way home yesterday – ended up spending a few hours with her while I sobered up and she got progressively more drunk. She fed me chicken wraps and we put the world to rights. I love that girl.",
+    tags:["friends"]
+  },
+
+
+
+
+  
+
+
+  
+  {
+    date:"2025-03-17T23:28:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"Got home from work and felt so zen. I can’t articulate it well. I just felt so calm. No aches, no pains, no worries, no anxiety, no stress. I wish I could experience it more.",
+    tags:["life"]
+  },
+
+
+
+
+
+  
+
+  {
+    date:"2024-04-03T23:52:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"The only time I feel a semblance of normality is late at night when the world is peaceful.",
+    tags:["life"]
+  },
+
+
+  
+  
+
+
+
+  {
+    date:"2024-03-24T23:45:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newestprofile.png",
+    avatarText:"LC",
+    text:"I’m struggling with who I am. I feel lost in an increasingly alien world.",
+    tags:["life"]
+  },
+
+
+
+
+  
+
+
+
+  {
+    date:"2023-06-01T23:50:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"Someone asked me recently if I had good memories of my dad. The truth is I only really remember his last few months or so. Hooked up to machines, hospices and hospital beds. I can’t even hear his voice anymore. It fucking kills me. Cancer fucking sucks.",
+    tags:["family"]
+  },
+
+
+
+
+  
+
+
+  {
+    date:"2023-04-12T22:15:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"Just perched on my windowsill ‘cos the sky is so clear tonight. There are so many stars.\n\nThe world is quiet. Everything seems peaceful. Smiling through tears.",
+    tags:["life"]
+  },
+
+
+
+
+
+
+  {
+    date:"2023-03-06T00:01:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I want to lie out under the stars and hold her hand. Stargazing with my soulmate. I want to feel the winter chill brush against my skin, the freshness on my face. I want to watch the night sky blacken as the clouds fade, revealing a starlit canvas. I want to tilt my head to see her lying there beside me, pointing out her favourite stars.\n\nTwo heartbeats while the world sleeps. The earth beneath us, grounding us. Occasionally, the sound of an engine rumbling in the distance, or the church bell chiming faintly from afar.\n\nTwo kindred spirits in the dead of night. I wish upon a star.",
+    tags:["life"]
+  },
+
+
+
+
+
+
+  
+
+  {
+    date:"2023-02-04T23:33:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I grabbed myself an URL this week. I can’t believe <b>lewis.lc</b> wasn’t taken... so it’s mine now.",
+    tags:["updates"]
+  },
+
+
+
+
+
+
+  
+
+
+  {
+    date:"2023-01-12T00:20:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"January has been rough, and it’s only the twelfth day. My uncle is quickly deteriorating, which is just crap, and my emotions have been drifting all over the place. It sucks that the world keeps taking people away. I’m just a wandering spirit, a lonely soul.\n\nMy heart feels heavy.",
+    tags:["family", "life", "friends"]
+  },
+
+
+
+
+
+
+
+
+
+  
+
+
+  {
+    date:"2022-11-07T01:11:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I’m up late again, listening to Ville Valo. Had two nights of fireworks – both displays were visible from my garden, and both pretty spectacular. There’s something about being outside on a frosty November night, watching fireworks.\n\nGemma messaged me earlier to check in on me too, which was lovely. We’ve been messaging a little over the last couple of days and she’s helped lift my mood. She’s great.",
+    tags:["music", "life", "friends"]
+  },
+
+
+
+
+
+
+
+
+  
+
+
+
+  {
+    date:"2022-07-27T01:30:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"The last couple of nights have been cloudy, without stars. Tonight though, so many stars. It’s like the universe knew what I needed.\n\nLooking up at the stars somehow makes it all okay. It’s all mine. It’s so peaceful. I love it.",
+    tags:["life"]
+  },
+
+
+
+
+
+
+  
+
+
+  {
+    date:"2022-04-08T01:30:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I just listened to Ville Valo’s new single, <i>Loveletting</i>, and it’s great. It pains me that his new solo album isn’t out til 2023.\n\nIt’s 1:30am and I just got into bed. I’m glowing in moonlight. I hope tomorrow is a good day.",
+    tags:["music", "life"]
+  },
+
+
+
+
+
+
+  
+
+
+  {
+    date:"2022-03-30T22:55:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I dunno why but I ended up watching some 1990s <i>Coronation Street</i> on YouTube earlier. I wish I’d grown up watching that stuff. It’s gold. I miss old telly. Standard definition, 4:3, less polish, rough around the edges. I know we all romanticise the past, but old TV has such a charm to it. It felt more alive somehow – bristling with character and energy and life.",
+    tags:["nostalgia"]
+  },
+
+
+
+  
+
+
+
+
+  {
+    date:"2022-02-16T19:35:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"As the Sixth Doctor once said, <i>‘Planets come and go. Stars perish. Matter disperses, coalesces, forms into other patterns, other worlds. Nothing can be eternal.’</i> The same is true of people, friendships, and relationships too.",
+    tags:["quotes"]
+  },
+
+
+
+
+
+
+
+
+
+  
+
+  {
+    date:"2021-12-31T22:22:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"The house is quiet without Millie either snoring away or poking her head around the door whenever we’re in the kitchen. It’s strange cos it’s the first time in my life that I’ve not had a pet in the house.",
+    tags:["family", "life"]
+  },
+
+
+
+
+
+
+  
+
+
+
+  {
+    date:"2021-12-29T23:10:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"We had to put Millie to sleep earlier. She’s not been well for a while now, and she’s just massively deteriorated over the last couple of days. Struggling to breathe, no energy, sleeping the days away. It was the kindest thing, and tonight when I got in from work she just completely collapsed with exhaustion and couldn’t walk at all. Hopefully now she’s curled up with Tia and Ellie and the rest of the gang.\n\n<i>Love you Mills x</i>",
+    tags:["family", "life"]
+  },
+
+
+
+
+
+  
+
+
+
+  {
+    date:"2021-11-16T23:16:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"Had a lovely night out with some of the crew from work.\n\nMe, Amy, Gemma, and a few others went bowling. I had anxiety all day about it – <i>love</i> having anxiety, it really improves my life – but it was great and a good laugh. I started the night by getting the first strike, but it was all downhill after that. I got worse with each game.\n\nI came third overall, out of seven people, so I’m pretty chuffed with that.\n\nI’ve also got some bonfire toffee. <i>Winning.</i>",
+    tags:["life", "friends"]
+  },
+
+
+
+
+
+  {
+    date:"2021-02-24T18:22:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I have two tweets bookmarked at the minute: <i>everyone should have to write a memoir and file it away somewhere. there aren’t enough memoirs by regular non famous non writer people</i> [&] <i>obviously no one will care about your memoir now but in a couple hundred years the historians will have a field day with it.</i>",
+    tags:["life"]
+  },
+
+
+
+
+  
+
+  {
+    date:"2021-02-16T19:12:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I’ve officially been alive for 28 years, and I still have no idea what I’m doing.",
+    tags:["life"]
+  },
+
+
+
+
+  
+
+  {
+    date:"2021-02-15T01:45:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I’ve started just taking ten minutes or so to chill at the window at midnight and listen out for the church bell. It’s amazing how much I feel at peace. Slight annoyance at the bell being about two minutes early, but hey. The imperfections of life.\n\nI was thinking about the many windows I’ve looked out of at night. I miss the one at my dad’s house the most; in the tiniest boxroom with a DIY bed and a door that barely closed, the window of that room looked out across a landscape of hills, fields and country lanes. There was a street light directly opposite, one of those old yellowy warm ones, illuminating the stretch of main road directly below the window and reaching out into the street opposite. I miss watching lights flicker – cars driving by, homes switching lights out for the night.",
+    tags:["life"]
+  },
+
+
+  
+
+  {
+    date:"2021-02-11T02:30:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"Fewer stars in the sky tonight, but those visible are as bright as ever. The same winter chill on my chest. Snow dusting the tops of houses behind us, and absolute silence tonight. You could hear a pin drop. Peace. Momentary bliss. Being a night owl isn’t always a bad thing.\n\nThere’s something quite fairytale about snow-dusted rooftops against a starry sky. It’s nice to just let go and feel like a kid again. A world full of wonder and magic. I should enjoy the night sky more often. It does wonders for the soul.",
+    tags:["life"]
+  },
+
+
+
+  
+
+  {
+    date:"2021-02-10T02:30:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"The night sky is so clear tonight. An abundance of stars just littering the sky. So pretty. We all get so wrapped up in day to day life that we forget just how beautiful the world is. Poked my head out of the window. Felt the winter breeze on my chest. Stars gently flickering in the sky. The world asleep; so quiet, so calm.",
+    tags:["life"]
+  },
+
+
+  
+
+  {
+    date:"2021-02-07T20:00:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/newerprofile.png",
+    avatarText:"LC",
+    text:"I deleted everything.\nAll 2137 entries. All 20,000 tweets.\nTime to let go. I’m not the person I used to be.",
+    tags:["updates", "life"]
+  },
+
+
+
+
+
+ {
+    date:"2016-02-20T21:22:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/oldprofile.png",
+    avatarText:"LC",
+    text:"Just had a nostalgic flashback to Dailybooth. Such fun times. So many people I used to natter with on there, and I used to post so many random photos, all of which are now lost to the waves of history. Except this one xD",
+    tags:["nostalgia", "media"],
+       media:[
+      "https://lewis.lc/thoughts/images/dailybooth.png",
+    ]
+  },
+
+
+
+	
+ {
+    date:"2012-03-02T17:30:00Z",
+    name:"Lewis",
+    avatar:"https://lewis.lc/diary/images/oldprofile.png",
+    avatarText:"LC",
+    text:"Living in student flats is often quite shit due to cuntish people making shitloads of noise, and generally being arseholes. The guy in the room above me, especially.\n\nBut tonight, as I’m feeling the lowest I’ve felt for a long time, all I can hear is someone playing the guitar and I love it. It’s keeping me sane. I just want to go and hug whoever it is and say thanks.",
+    tags:["life"]
+  },
+
+
+
+
+
+
+  
+];
+
+/* Add stable IDs once */
+posts.forEach((p,i)=>{
+  if(!p.id){
+    p.id = `p${i}_${String(p.date||"").replaceAll(/[^0-9]/g,"")}`;
+  }
+});
+
+const PAGE_SIZE=10;
+let visible=PAGE_SIZE;
+let currentSort="new";
+
+const feed=document.getElementById("feed");
+const q=document.getElementById("q");
+const tagSelect=document.getElementById("tag");
+const viewSelect=document.getElementById("view");
+const more=document.getElementById("more");
+const clear=document.getElementById("clear");
+const counter=document.getElementById("counter");
+const backToTop=document.getElementById("backToTop");
+const pageHeader=document.getElementById("pageHeader");
+
+/* Lightbox */
+const lightbox=document.getElementById("lightbox");
+const lbClose=document.getElementById("lbClose");
+
+/* Lightbox + looping sliding nav */
+const lbPrev = document.getElementById("lbPrev");
+const lbNext = document.getElementById("lbNext");
+const lbCap  = document.getElementById("lbCap");
+const lbTrack = document.getElementById("lbTrack");
+
+let gallery = [];
+let galleryIndex = 0;
+let animating = false;
+
+function getGalleryForPost(postId){
+  const p = posts.find(x => x.id === postId);
+  const arr = Array.isArray(p?.media) ? p.media : (p?.media ? [p.media] : []);
+  return arr.filter(Boolean);
+}
+
+function idxWrap(i, n){
+  return ((i % n) + n) % n;
+}
+
+function buildTrack(){
+  lbTrack.innerHTML = "";
+
+  const total = gallery.length;
+  if(!total) return;
+
+  const prevI = idxWrap(galleryIndex - 1, total);
+  const nextI = idxWrap(galleryIndex + 1, total);
+
+  const slides = [
+    { src: gallery[prevI] },
+    { src: gallery[galleryIndex] },
+    { src: gallery[nextI] }
+  ];
+
+  slides.forEach(s=>{
+    const div = document.createElement("div");
+    div.className = "lbSlide";
+    div.innerHTML = `<img src="${s.src}" alt="" loading="eager" draggable="false">`;
+    lbTrack.appendChild(div);
+  });
+
+  lbTrack.style.transition = "none";
+  lbTrack.style.transform = "translate3d(-100%,0,0)";
+  lbTrack.getBoundingClientRect();
+  lbTrack.style.transition = "";
+}
+
+function updateCaption(){
+  const total = gallery.length || 0;
+  if(total > 1){
+    lbCap.style.display = "block";
+    lbCap.textContent = `${galleryIndex + 1} / ${total}`;
+  }else{
+    lbCap.style.display = "none";
+    lbCap.textContent = "";
+  }
+
+  const multi = total > 1;
+  lbPrev.style.display = multi ? "flex" : "none";
+  lbNext.style.display = multi ? "flex" : "none";
+  lbPrev.disabled = !multi;
+  lbNext.disabled = !multi;
+}
+
+function openLightboxFor(postId, idx=0){
+  gallery = getGalleryForPost(postId);
+  galleryIndex = Number.isFinite(idx) ? idx : 0;
+
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden","false");
+
+  buildTrack();
+  updateCaption();
+}
+
+function closeLightbox(){
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden","true");
+  lbTrack.innerHTML = "";
+  gallery = [];
+  galleryIndex = 0;
+  animating = false;
+}
+
+function slideTo(dir){
+  const total = gallery.length;
+  if(total <= 1 || animating) return;
+
+  animating = true;
+
+  lbTrack.style.transform = dir === 1
+    ? "translate3d(-200%,0,0)"
+    : "translate3d(0%,0,0)";
+
+  const onDone = () => {
+    galleryIndex = idxWrap(galleryIndex + dir, total);
+    buildTrack();
+    updateCaption();
+    animating = false;
+  };
+
+  lbTrack.addEventListener("transitionend", onDone, { once:true });
+}
+
+function prevImg(){ slideTo(-1); }
+function nextImg(){ slideTo( 1); }
+
+lbPrev.addEventListener("click", prevImg);
+lbNext.addEventListener("click", nextImg);
+
+lbClose.addEventListener("click", closeLightbox);
+lightbox.addEventListener("click", (e)=>{ if(e.target === lightbox) closeLightbox(); });
+
+window.addEventListener("keydown", (e)=>{
+  if(!lightbox.classList.contains("open")) return;
+  if(e.key === "Escape") closeLightbox();
+  if(e.key === "ArrowLeft") prevImg();
+  if(e.key === "ArrowRight") nextImg();
+});
+
+/* Populate tags */
+/* Populate tags with automatic post counts */
+function populateTags(){
+  const counts = {};
+
+  posts.forEach(p => {
+    (p.tags || []).forEach(tag => {
+      const cleanTag = String(tag).toLowerCase();
+      counts[cleanTag] = (counts[cleanTag] || 0) + 1;
+    });
+  });
+
+  const sortedTags = Object.keys(counts).filter(Boolean).sort();
+
+  tagSelect.innerHTML =
+    `<option value="">All tags</option>` +
+    sortedTags.map(tag =>
+      `<option value="${tag}">• ${tag} (${counts[tag]})</option>`
+    ).join("");
+}
+
+populateTags();
+
+/* Sort + range (from View dropdown) */
+function applyViewSelection(){
+  const val = (viewSelect.value || "all").trim();
+  if(val.startsWith("sort:")){
+    currentSort = val.split(":")[1] === "old" ? "old" : "new";
+  }
+}
+
+function matchesView(post){
+  const val = (viewSelect.value || "all").trim();
+  if(!val || val === "all") return true;
+
+  const d = new Date(post.date);
+  if(isNaN(d)) return false;
+
+  if(val.startsWith("range:")){
+    const days = Number(val.split(":")[1] || 0);
+    if(!days) return true;
+    const now = new Date();
+    const cutoff = new Date(now.getTime() - days * 24 * 60 * 60 * 1000);
+    return d >= cutoff;
+  }
+
+  /* Year filter */
+  if(/^\d{4}$/.test(val)){
+    return d.getFullYear() === Number(val);
+  }
+
+  return true;
+}
+
+viewSelect.onchange = () => {
+  applyViewSelection();
+  render(true);
+};
+
+/* Theme */
+const root=document.documentElement;
+const themeBtn=document.getElementById("themeToggle");
+function applyTheme(theme){
+  root.setAttribute("data-theme",theme);
+  themeBtn.textContent=theme==="dark"?"Light":"Dark";
+}
+themeBtn.onclick=()=>{
+  const next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+  localStorage.setItem("theme",next);
+  applyTheme(next);
+};
+applyTheme(localStorage.getItem("theme")||"light");
+
+/* Back to top */
+let headerTriggerY = 0;
+function computeHeaderTrigger(){
+  const rect = pageHeader.getBoundingClientRect();
+  headerTriggerY = window.scrollY + rect.bottom - 8;
+}
+function updateBackToTop(){
+  if(window.scrollY > headerTriggerY) backToTop.classList.add("visible");
+  else backToTop.classList.remove("visible");
+}
+window.addEventListener("resize", () => { computeHeaderTrigger(); updateBackToTop(); });
+window.addEventListener("scroll", updateBackToTop);
+backToTop.onclick=()=> window.scrollTo({top:0,behavior:"smooth"});
+
+/* Utilities */
+function initials(name=""){
+  return name.split(" ").filter(Boolean).map(n=>n[0]).join("").slice(0,2).toUpperCase();
+}
+
+function avatar(p){
+  if(p.avatar) return `<img src="${p.avatar}" alt="">`;
+  if(p.avatarText) return p.avatarText;
+  return initials(p.name);
+}
+
+function escapeAttr(str=""){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+function relativeTime(iso){
+  const now = new Date();
+  const d = new Date(iso);
+  if(isNaN(d)) return "";
+
+  const diff = Math.floor((now - d) / 1000);
+
+  if(diff < 0) return "in the future";
+  if(diff < 15) return "just now";
+  if(diff < 60) return `${diff}s ago`;
+
+  const mins = Math.floor(diff / 60);
+  if(mins < 60) return `${mins}m ago`;
+
+  const hours = Math.floor(mins / 60);
+  if(hours < 24) return `${hours}h ago`;
+
+  const days = Math.floor(hours / 24);
+
+  const time = d.toLocaleTimeString(undefined,{
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+
+  if(days === 1) return `Yesterday at ${time}`;
+  if(days < 7) return `${days} days ago`;
+
+  if(days < 30){
+    return d.toLocaleDateString(undefined,{
+      weekday:"short",
+      day:"numeric",
+      month:"short"
+    });
+  }
+
+  return d.toLocaleDateString(undefined,{
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+function fullDateTime(iso){
+  const d = new Date(iso);
+  if(isNaN(d)) return String(iso || "");
+
+  return d.toLocaleString(undefined,{
+    weekday:"long",
+    year:"numeric",
+    month:"long",
+    day:"numeric",
+    hour:"2-digit",
+    minute:"2-digit"
+  });
+}
+
+function updateTimeContext(){
+  document.querySelectorAll(".post__time").forEach(el => {
+    const iso = el.getAttribute("datetime");
+    const full = fullDateTime(iso);
+
+    el.textContent = `· ${relativeTime(iso)}`;
+    el.dataset.tip = full;
+    el.title = full;
+  });
+}
+
+function getSorted(){
+  return [...posts].sort((a,b)=>
+    currentSort==="new"
+      ? new Date(b.date)-new Date(a.date)
+      : new Date(a.date)-new Date(b.date)
+  );
+}
+
+/* Media rendering */
+function renderMedia(p){
+  const arr = Array.isArray(p.media) ? p.media : (p.media ? [p.media] : []);
+  if(!arr.length) return "";
+  const n = Math.min(arr.length, 4);
+  const cls = n===1 ? "cols-1" : n===2 ? "cols-2" : n===3 ? "cols-3" : "cols-4";
+
+  return `
+    <div class="media ${cls}" data-count="${n}" data-postid="${p.id}">
+      ${arr.slice(0,4).map((src,idx)=>`
+        <div class="media__item" role="button" tabindex="0" data-media="${src}" data-postid="${p.id}" data-idx="${idx}">
+          <img src="${src}" alt="" loading="lazy">
+        </div>
+      `).join("")}
+    </div>
+  `;
+}
+
+/* Auto-detect aspect ratio for media images */
+function applyMediaAspectRatios(){
+  const imgs = feed.querySelectorAll(".media__item img");
+  imgs.forEach(img=>{
+    if(img.dataset.arDone) return;
+    img.dataset.arDone = "1";
+
+    const apply = ()=>{
+      const w = img.naturalWidth || 0;
+      const h = img.naturalHeight || 0;
+      if(w && h){
+        img.parentElement.style.setProperty("--ar", (w/h).toFixed(4));
+      }
+    };
+
+    if(img.complete) apply();
+    else img.addEventListener("load", apply, { once:true });
+  });
+}
+
+/* Render */
+function render(reset=false){
+  if(reset) visible=PAGE_SIZE;
+
+  const sorted=getSorted();
+  const filtered=sorted.filter(p=>{
+    const query=(q.value||"").toLowerCase();
+    const tag=(tagSelect.value||"").toLowerCase();
+    const text=(p.text||"").toLowerCase();
+    const tags=(p.tags||[]).map(t=>String(t).toLowerCase());
+    const tagOk = (!tag||tags.includes(tag));
+    const qOk = (!query||text.includes(query));
+    const viewOk = matchesView(p);
+    return qOk && tagOk && viewOk;
+  });
+
+  const total=filtered.length;
+  const shown=Math.min(visible,total);
+  counter.textContent=`Showing ${shown} of ${total} posts`;
+
+  const slice=filtered.slice(0,visible);
+
+  feed.innerHTML = slice.length ? slice.map(p=>`
+    <article class="post">
+      <div class="post__avatar">${avatar(p)}</div>
+      <div>
+        <div class="post__top">
+          <div class="post__name">${p.name}</div>
+          <time class="post__time"
+            datetime="${escapeAttr(p.date)}"
+            data-tip="${escapeAttr(fullDateTime(p.date))}"
+            title="${escapeAttr(fullDateTime(p.date))}"
+            tabindex="0">· ${relativeTime(p.date)}</time>
+        </div>
+        <div class="post__text">${p.text}</div>
+        ${renderMedia(p)}
+      </div>
+    </article>
+  `).join("") : `<div class="empty">No posts found.</div>`;
+
+  more.style.display = total > visible ? "block" : "none";
+
+  computeHeaderTrigger();
+  updateBackToTop();
+  applyMediaAspectRatios();
+  updateTimeContext();
+}
+
+/* Events */
+feed.addEventListener("click",(e)=>{
+  const t=e.target?.dataset?.tag;
+  if(t){
+    tagSelect.value=String(t).toLowerCase();
+    render(true);
+    return;
+  }
+
+  const item = e.target?.closest?.(".media__item");
+  if(item){
+    const postId = item.dataset.postid;
+    const idx = Number(item.dataset.idx || 0);
+    openLightboxFor(postId, idx);
+  }
+});
+
+feed.addEventListener("keydown",(e)=>{
+  if(e.key !== "Enter") return;
+  const item = e.target?.closest?.(".media__item");
+  if(item){
+    const postId = item.dataset.postid;
+    const idx = Number(item.dataset.idx || 0);
+    openLightboxFor(postId, idx);
+  }
+});
+
+q.oninput=()=>render(true);
+tagSelect.onchange=()=>render(true);
+more.onclick=()=>{ visible+=PAGE_SIZE; render(); };
+
+clear.onclick=()=>{
+  q.value="";
+  tagSelect.value="";
+  viewSelect.value="all";
+  currentSort="new";
+  render(true);
+};
+
+/* Init */
+applyViewSelection();
+render(true);
+computeHeaderTrigger();
+updateBackToTop();
+
+setInterval(updateTimeContext, 60000);
+</script>
+
+</body>
+</html>
