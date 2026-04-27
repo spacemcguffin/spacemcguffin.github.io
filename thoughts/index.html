@@ -71,8 +71,6 @@ b {
   color:#000000;
 }
 
-  
-
 body{
   margin:0;
   font-family:'Inter', system-ui, sans-serif;
@@ -463,6 +461,43 @@ h1{
   white-space:pre-wrap;
 }
 
+/* ===== Video embeds ===== */
+.postVideo{
+  margin-top:10px;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  background: var(--panel2);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.35),
+    0 12px 28px rgba(0,0,0,.10);
+
+  backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+  -webkit-backdrop-filter: blur(var(--glassBlur)) saturate(var(--glassSat));
+}
+
+:root[data-theme="dark"] .postVideo{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 14px 34px rgba(0,0,0,.42);
+}
+
+.postVideo__frame{
+  position:relative;
+  width:100%;
+  aspect-ratio:16 / 9;
+  background:#000;
+}
+
+.postVideo__frame iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+}
+
 /* ===== Media ===== */
 .media{ margin-top:10px; display:grid; gap:8px; }
 .media.cols-1{ grid-template-columns:1fr; }
@@ -815,9 +850,6 @@ h1{
 <script>
 const posts=[
 
-
-
-
  {
     date:"2026-04-25T01:42:00Z",
     name:"Lewis",
@@ -827,26 +859,16 @@ const posts=[
     tags:["life"]
   },
 
-
-
-
-
-  
-
  {
     date:"2026-04-25T00:06:00Z",
     name:"Lewis",
     avatar:"https://lewis.lc/thoughts/images/pixelme.png",
     avatarText:"LC",
     text:"Stumbled on a bunch of new songs and discovered some artists the other night, so my playlist has been refreshed. My new favourite song is <i>Orbit</i> by Henry Moodie.",
-    tags:["music"]
+    video:"https://www.youtube.com/watch?v=JaijzqfgZuk",
+    tags:["music", "videos"]
   },
 
-
-
-
-
-  
  {
     date:"2026-04-16T23:36:00Z",
     name:"Lewis",
@@ -856,11 +878,6 @@ const posts=[
     tags:["friends"]
   },
 
-
-
-
-
-
  {
     date:"2026-04-07T23:36:00Z",
     name:"Lewis",
@@ -869,10 +886,6 @@ const posts=[
     text:"no longer giving my energy to people who don’t deserve it ✨",
     tags:["life"]
   },
-
-
-
-  
 
  {
     date:"2026-03-10T00:13:00Z",
@@ -886,14 +899,6 @@ const posts=[
     ]
   },
 
-
-
-
-
-  
-
-
-  
  {
     date:"2026-03-07T00:33:00Z",
     name:"Lewis",
@@ -902,10 +907,6 @@ const posts=[
     text:"Devvo has returned. Actual Devvo from 2006 has made an internet comeback. There’s merch an’ everyfin’ m8. The world is healing.",
     tags:["nostalgia"]
   },
-
-
-
-  
 
    {
     date:"2026-01-28T23:32:00Z",
@@ -916,12 +917,6 @@ const posts=[
     tags:["life"]
   },
 
-
-
-
-  
-
-
    {
     date:"2026-01-12T00:50:00Z",
     name:"Lewis",
@@ -930,14 +925,6 @@ const posts=[
     text:"Obsessed with <i>Born With a Broken Heart</i> by Damiano David.",
     tags:["music"]
   },
-
-
-
-
-
-
-
-  
 
  {
     date:"2025-12-31T20:25:00Z",
@@ -948,16 +935,6 @@ const posts=[
     tags:["friends"]
   },
 
-
-
-
-
-
-
-
-
-  
-
   {
     date:"2025-06-23T18:28:00Z",
     name:"Lewis",
@@ -967,15 +944,6 @@ const posts=[
     tags:["life", "friends"]
   },
 
-
-
-
-
-
-
-  
-
-  
   {
     date:"2025-05-30T18:28:00Z",
     name:"Lewis",
@@ -985,13 +953,6 @@ const posts=[
     tags:["friends"]
   },
 
-
-
-
-  
-
-
-  
   {
     date:"2025-03-17T23:28:00Z",
     name:"Lewis",
@@ -1000,12 +961,6 @@ const posts=[
     text:"Got home from work and felt so zen. I can’t articulate it well. I just felt so calm. No aches, no pains, no worries, no anxiety, no stress. I wish I could experience it more.",
     tags:["life"]
   },
-
-
-
-
-
-  
 
   {
     date:"2024-04-03T23:52:00Z",
@@ -1016,12 +971,6 @@ const posts=[
     tags:["life"]
   },
 
-
-  
-  
-
-
-
   {
     date:"2024-03-24T23:45:00Z",
     name:"Lewis",
@@ -1030,13 +979,6 @@ const posts=[
     text:"I’m struggling with who I am. I feel lost in an increasingly alien world.",
     tags:["life"]
   },
-
-
-
-
-  
-
-
 
   {
     date:"2023-06-01T23:50:00Z",
@@ -1047,12 +989,6 @@ const posts=[
     tags:["family"]
   },
 
-
-
-
-  
-
-
   {
     date:"2023-04-12T22:15:00Z",
     name:"Lewis",
@@ -1061,11 +997,6 @@ const posts=[
     text:"Just perched on my windowsill ‘cos the sky is so clear tonight. There are so many stars.\n\nThe world is quiet. Everything seems peaceful. Smiling through tears.",
     tags:["life"]
   },
-
-
-
-
-
 
   {
     date:"2023-03-06T00:01:00Z",
@@ -1076,13 +1007,6 @@ const posts=[
     tags:["life"]
   },
 
-
-
-
-
-
-  
-
   {
     date:"2023-02-04T23:33:00Z",
     name:"Lewis",
@@ -1091,14 +1015,6 @@ const posts=[
     text:"I grabbed myself an URL this week. I can’t believe <b>lewis.lc</b> wasn’t taken... so it’s mine now.",
     tags:["updates"]
   },
-
-
-
-
-
-
-  
-
 
   {
     date:"2023-01-12T00:20:00Z",
@@ -1109,17 +1025,6 @@ const posts=[
     tags:["family", "life", "friends"]
   },
 
-
-
-
-
-
-
-
-
-  
-
-
   {
     date:"2022-11-07T01:11:00Z",
     name:"Lewis",
@@ -1128,17 +1033,6 @@ const posts=[
     text:"I’m up late again, listening to Ville Valo. Had two nights of fireworks – both displays were visible from my garden, and both pretty spectacular. There’s something about being outside on a frosty November night, watching fireworks.\n\nGemma messaged me earlier to check in on me too, which was lovely. We’ve been messaging a little over the last couple of days and she’s helped lift my mood. She’s great.",
     tags:["music", "life", "friends"]
   },
-
-
-
-
-
-
-
-
-  
-
-
 
   {
     date:"2022-07-27T01:30:00Z",
@@ -1149,14 +1043,6 @@ const posts=[
     tags:["life"]
   },
 
-
-
-
-
-
-  
-
-
   {
     date:"2022-04-08T01:30:00Z",
     name:"Lewis",
@@ -1165,14 +1051,6 @@ const posts=[
     text:"I just listened to Ville Valo’s new single, <i>Loveletting</i>, and it’s great. It pains me that his new solo album isn’t out til 2023.\n\nIt’s 1:30am and I just got into bed. I’m glowing in moonlight. I hope tomorrow is a good day.",
     tags:["music", "life"]
   },
-
-
-
-
-
-
-  
-
 
   {
     date:"2022-03-30T22:55:00Z",
@@ -1183,13 +1061,6 @@ const posts=[
     tags:["nostalgia"]
   },
 
-
-
-  
-
-
-
-
   {
     date:"2022-02-16T19:35:00Z",
     name:"Lewis",
@@ -1198,16 +1069,6 @@ const posts=[
     text:"As the Sixth Doctor once said, <i>‘Planets come and go. Stars perish. Matter disperses, coalesces, forms into other patterns, other worlds. Nothing can be eternal.’</i> The same is true of people, friendships, and relationships too.",
     tags:["quotes"]
   },
-
-
-
-
-
-
-
-
-
-  
 
   {
     date:"2021-12-31T22:22:00Z",
@@ -1218,15 +1079,6 @@ const posts=[
     tags:["family", "life"]
   },
 
-
-
-
-
-
-  
-
-
-
   {
     date:"2021-12-29T23:10:00Z",
     name:"Lewis",
@@ -1235,14 +1087,6 @@ const posts=[
     text:"We had to put Millie to sleep earlier. She’s not been well for a while now, and she’s just massively deteriorated over the last couple of days. Struggling to breathe, no energy, sleeping the days away. It was the kindest thing, and tonight when I got in from work she just completely collapsed with exhaustion and couldn’t walk at all. Hopefully now she’s curled up with Tia and Ellie and the rest of the gang.\n\n<i>Love you Mills x</i>",
     tags:["family", "life"]
   },
-
-
-
-
-
-  
-
-
 
   {
     date:"2021-11-16T23:16:00Z",
@@ -1253,10 +1097,6 @@ const posts=[
     tags:["life", "friends"]
   },
 
-
-
-
-
   {
     date:"2021-02-24T18:22:00Z",
     name:"Lewis",
@@ -1265,11 +1105,6 @@ const posts=[
     text:"I have two tweets bookmarked at the minute: <i>everyone should have to write a memoir and file it away somewhere. there aren’t enough memoirs by regular non famous non writer people</i> [&] <i>obviously no one will care about your memoir now but in a couple hundred years the historians will have a field day with it.</i>",
     tags:["life"]
   },
-
-
-
-
-  
 
   {
     date:"2021-02-16T19:12:00Z",
@@ -1280,11 +1115,6 @@ const posts=[
     tags:["life"]
   },
 
-
-
-
-  
-
   {
     date:"2021-02-15T01:45:00Z",
     name:"Lewis",
@@ -1293,9 +1123,6 @@ const posts=[
     text:"I’ve started just taking ten minutes or so to chill at the window at midnight and listen out for the church bell. It’s amazing how much I feel at peace. Slight annoyance at the bell being about two minutes early, but hey. The imperfections of life.\n\nI was thinking about the many windows I’ve looked out of at night. I miss the one at my dad’s house the most; in the tiniest boxroom with a DIY bed and a door that barely closed, the window of that room looked out across a landscape of hills, fields and country lanes. There was a street light directly opposite, one of those old yellowy warm ones, illuminating the stretch of main road directly below the window and reaching out into the street opposite. I miss watching lights flicker – cars driving by, homes switching lights out for the night.",
     tags:["life"]
   },
-
-
-  
 
   {
     date:"2021-02-11T02:30:00Z",
@@ -1306,10 +1133,6 @@ const posts=[
     tags:["life"]
   },
 
-
-
-  
-
   {
     date:"2021-02-10T02:30:00Z",
     name:"Lewis",
@@ -1319,9 +1142,6 @@ const posts=[
     tags:["life"]
   },
 
-
-  
-
   {
     date:"2021-02-07T20:00:00Z",
     name:"Lewis",
@@ -1330,10 +1150,6 @@ const posts=[
     text:"I deleted everything.\nAll 2137 entries. All 20,000 tweets.\nTime to let go. I’m not the person I used to be.",
     tags:["updates", "life"]
   },
-
-
-
-
 
  {
     date:"2016-02-20T21:22:00Z",
@@ -1347,9 +1163,6 @@ const posts=[
     ]
   },
 
-
-
-	
  {
     date:"2012-03-02T17:30:00Z",
     name:"Lewis",
@@ -1359,12 +1172,6 @@ const posts=[
     tags:["life"]
   },
 
-
-
-
-
-
-  
 ];
 
 /* Add stable IDs once */
@@ -1694,6 +1501,46 @@ function getSorted(){
   );
 }
 
+/* Video rendering */
+function youtubeEmbedUrl(url){
+  const str = String(url || "").trim();
+  if(!str) return "";
+
+  if(str.includes("youtube.com/embed/")) return str;
+
+  const watchMatch = str.match(/[?&]v=([^&]+)/);
+  if(watchMatch) return `https://www.youtube.com/embed/${watchMatch[1]}`;
+
+  const shortMatch = str.match(/youtu\.be\/([^?&]+)/);
+  if(shortMatch) return `https://www.youtube.com/embed/${shortMatch[1]}`;
+
+  const shortsMatch = str.match(/youtube\.com\/shorts\/([^?&]+)/);
+  if(shortsMatch) return `https://www.youtube.com/embed/${shortsMatch[1]}`;
+
+  return str;
+}
+
+function renderVideo(p){
+  if(!p.video) return "";
+
+  const src = youtubeEmbedUrl(p.video);
+  if(!src) return "";
+
+  return `
+    <div class="postVideo">
+      <div class="postVideo__frame">
+        <iframe
+          src="${escapeAttr(src)}"
+          title="YouTube video"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  `;
+}
+
 /* Media rendering */
 function renderMedia(p){
   const arr = Array.isArray(p.media) ? p.media : (p.media ? [p.media] : []);
@@ -1767,6 +1614,7 @@ function render(reset=false){
             tabindex="0">· ${relativeTime(p.date)}</time>
         </div>
         <div class="post__text">${p.text}</div>
+        ${renderVideo(p)}
         ${renderMedia(p)}
       </div>
     </article>
