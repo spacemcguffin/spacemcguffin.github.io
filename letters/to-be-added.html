@@ -1,0 +1,166 @@
+<!-- Glassmorphism Login Gate -->
+<div id="loginGate" class="login-gate">
+  <div class="gate-card">
+    <div class="gate-orb"></div>
+
+    <p class="gate-kicker">Private page</p>
+    <h1>Enter password</h1>
+    <p class="gate-copy">This page is password protected.</p>
+
+    <form id="gateForm">
+      <input id="gatePassword" type="password" placeholder="Password" autocomplete="current-password">
+      <button type="submit">Unlock</button>
+      <p id="gateError" class="gate-error">Nope. Incorrect password. Try again.</p>
+    </form>
+  </div>
+</div>
+
+<style>
+  .login-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    font-family: Inter, system-ui, sans-serif;
+    background:
+      radial-gradient(circle at 20% 15%, rgba(255, 70, 210, .24), transparent 34%),
+      radial-gradient(circle at 85% 25%, rgba(55, 220, 255, .20), transparent 32%),
+      radial-gradient(circle at 50% 100%, rgba(120, 95, 255, .20), transparent 35%),
+      linear-gradient(135deg, #070816, #101832 55%, #080b18);
+    color: #eef4ff;
+  }
+
+  .gate-card {
+    position: relative;
+    width: min(100%, 390px);
+    overflow: hidden;
+    padding: 34px;
+    border-radius: 28px;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.18);
+    box-shadow: 0 30px 90px rgba(0,0,0,.42);
+    backdrop-filter: blur(24px);
+  }
+
+  .gate-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      135deg,
+      rgba(255,255,255,.20),
+      transparent 36%,
+      rgba(55,220,255,.10)
+    );
+  }
+
+  .gate-orb {
+    position: absolute;
+    right: -45px;
+    top: -45px;
+    width: 140px;
+    height: 140px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255,75,215,.75), rgba(55,220,255,.15), transparent 70%);
+    filter: blur(4px);
+  }
+
+  .gate-kicker {
+    position: relative;
+    margin: 0 0 10px;
+    color: rgba(238,244,255,.68);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .gate-card h1 {
+    position: relative;
+    margin: 0;
+    font-size: clamp(30px, 7vw, 44px);
+    letter-spacing: -.06em;
+    line-height: .95;
+  }
+
+  .gate-copy {
+    position: relative;
+    margin: 16px 0 24px;
+    color: rgba(238,244,255,.72);
+    line-height: 1.55;
+  }
+
+  .gate-card form {
+    position: relative;
+    display: grid;
+    gap: 12px;
+  }
+
+  .gate-card input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 15px 16px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.16);
+    outline: none;
+    background: rgba(5,8,22,.48);
+    color: #fff;
+    font: inherit;
+  }
+
+  .gate-card input:focus {
+    border-color: rgba(55,220,255,.55);
+    box-shadow: 0 0 0 4px rgba(55,220,255,.12);
+  }
+
+  .gate-card button {
+    border: 0;
+    cursor: pointer;
+    padding: 15px 18px;
+    border-radius: 16px;
+    color: #06101b;
+    font: inherit;
+    font-weight: 850;
+    background: linear-gradient(135deg, #63f0ff, #ff64d8);
+    box-shadow: 0 16px 36px rgba(55,220,255,.18);
+  }
+
+  .gate-error {
+    display: none;
+    margin: 4px 0 0;
+    color: #ffb4d6;
+    font-size: 14px;
+  }
+
+  .login-gate.is-unlocked {
+    display: none;
+  }
+</style>
+
+<script>
+  const PAGE_PASSWORD = "spacemcguffin";
+  const gate = document.getElementById("loginGate");
+  const form = document.getElementById("gateForm");
+  const input = document.getElementById("gatePassword");
+  const error = document.getElementById("gateError");
+
+  if (sessionStorage.getItem("pageUnlocked") === "true") {
+    gate.classList.add("is-unlocked");
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (input.value === PAGE_PASSWORD) {
+      sessionStorage.setItem("pageUnlocked", "true");
+      gate.classList.add("is-unlocked");
+    } else {
+      error.style.display = "block";
+      input.value = "";
+      input.focus();
+    }
+  });
+</script>
