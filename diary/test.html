@@ -6,75 +6,36 @@
 <title>2008 Diary</title>
 
 <style>
-  *{
-    box-sizing:border-box;
-  }
-
   html{
-    background:#f3de98;
+    background:#f0dc98;
   }
 
   body{
     margin:0;
-    padding:30px 16px;
-    background:#f3de98;
+    padding:8px;
+    background:#f0dc98;
     color:#000;
     font-family:"Trebuchet MS", Arial, sans-serif;
-  }
-
-  .page{
-    width:100%;
-    max-width:760px;
-    margin:0 auto;
-    background:#f3de98;
-    border:2px solid #000;
-    padding:16px 14px 30px;
-  }
-
-  .toplinks{
-    font-size:13px;
-    margin-bottom:16px;
-  }
-
-  .toplinks a{
-    color:#000;
-    font-weight:bold;
-    text-decoration:none;
-    margin-right:10px;
-  }
-
-  .toplinks a:hover{
-    text-decoration:underline;
-  }
-
-  h1{
-    font-size:22px;
-    margin:0 0 6px;
-  }
-
-  .meta{
-    font-size:13px;
-    line-height:1.4;
-    margin-bottom:18px;
-  }
-
-  .month{
-    font-size:18px;
-    font-weight:bold;
-    margin:20px 0 10px;
-  }
-
-  .diary-list{
-    font-size:16px;
+    font-size:15px;
     line-height:1.35;
   }
 
-  .entry{
-    margin:0 0 14px;
+  .diary-box{
+    max-width:790px;
+    min-height:100vh;
+    background:#f0dc98;
+    border:2px solid #000;
+    padding:8px;
   }
 
-  .entry-number{
-    display:none;
+  .section-title{
+    margin:0 0 12px;
+    font-size:15px;
+    font-weight:400;
+  }
+
+  .entry{
+    margin:0 0 15px;
   }
 
   .entry a{
@@ -87,115 +48,118 @@
     text-decoration:underline;
   }
 
-  .entry-date{
+  .date{
     font-weight:400;
+  }
+
+  .older{
+    margin-top:26px;
+  }
+
+  .year{
+    margin:14px 0 5px;
+    font-weight:400;
+  }
+
+  .month-link{
+    display:inline-block;
+    margin-right:10px;
+    color:#000;
+    font-weight:700;
+    text-decoration:none;
+  }
+
+  .month-link:hover{
+    text-decoration:underline;
   }
 
   @media (max-width:600px){
     body{
-      padding:16px 8px;
+      padding:6px;
+      font-size:14px;
     }
 
-    .page{
-      padding:12px 10px 24px;
+    .diary-box{
+      padding:7px;
     }
 
-    .diary-list{
-      font-size:15px;
+    .entry{
+      margin-bottom:13px;
     }
   }
 </style>
 </head>
 
 <body>
-  <main class="page">
 
-    <nav class="toplinks">
-      <a href="/">Home</a>
-      <a href="/diary/">Diary Archive</a>
-      <a href="/diary/2009">2009</a>
-    </nav>
+<div class="diary-box">
 
-    <h1>2008</h1>
+  <p class="section-title">Newest Entries:</p>
 
-    <div class="meta">
-      <strong>timelordwannabe</strong><br>
-      First post: 27 February 2008<br>
-      Last post: 31 December 2008
-    </div>
+  <p class="entry">
+    <a href="#">a day of drama</a>
+    <span class="date"> - Wednesday, Feb. 27, 2008</span>
+  </p>
 
-    <section class="diary-list">
+  <p class="entry">
+    <a href="#">torchw00t!</a>
+    <span class="date"> - Thursday, Feb. 28, 2008</span>
+  </p>
 
-      <h2 class="month">February 2008</h2>
+  <p class="entry">
+    <a href="#">youtube, school, beth &amp; pakistan</a>
+    <span class="date"> - Friday, Feb. 29, 2008</span>
+  </p>
 
-      <p class="entry">
-        <a href="#">a day of drama</a>
-        <span class="entry-date"> - Wednesday, Feb. 27, 2008</span>
-      </p>
+  <p class="entry">
+    <a href="#">and on the fifth day, lewis rested...</a>
+    <span class="date"> - Friday, Feb. 29, 2008</span>
+  </p>
 
-      <p class="entry">
-        <a href="#">torchw00t!</a>
-        <span class="entry-date"> - Thursday, Feb. 28, 2008</span>
-      </p>
+  <p class="entry">
+    <a href="#">a bordinary day</a>
+    <span class="date"> - March 2008</span>
+  </p>
 
-      <p class="entry">
-        <a href="#">youtube, school, beth &amp; pakistan</a>
-        <span class="entry-date"> - Friday, Feb. 29, 2008</span>
-      </p>
+  <p class="entry">
+    <a href="#">diary inspiration</a>
+    <span class="date"> - March 2008</span>
+  </p>
 
-      <p class="entry">
-        <a href="#">and on the fifth day, lewis rested...</a>
-        <span class="entry-date"> - Friday, Feb. 29, 2008</span>
-      </p>
+  <p class="entry">
+    <a href="#">who?</a>
+    <span class="date"> - April 2008</span>
+  </p>
 
+  <p class="entry">
+    <a href="#">series four, episode twelve</a>
+    <span class="date"> - April 2008</span>
+  </p>
 
-      <h2 class="month">March 2008</h2>
-
-      <p class="entry">
-        <a href="#">a bordinary day</a>
-        <span class="entry-date"> - March 2008</span>
-      </p>
-
-      <p class="entry">
-        <a href="#">diary inspiration</a>
-        <span class="entry-date"> - March 2008</span>
-      </p>
+  <p class="entry">
+    <a href="#">the best of 2008</a>
+    <span class="date"> - Wednesday, Dec. 31, 2008</span>
+  </p>
 
 
-      <h2 class="month">April 2008</h2>
+  <div class="older">
+    <p class="section-title">Older Entries:</p>
 
-      <p class="entry">
-        <a href="#">who?</a>
-        <span class="entry-date"> - April 2008</span>
-      </p>
+    <p class="year">2008</p>
+    <a class="month-link" href="#">February 2008</a>
+    <a class="month-link" href="#">March 2008</a>
+    <a class="month-link" href="#">April 2008</a>
+    <a class="month-link" href="#">May 2008</a>
+    <a class="month-link" href="#">June 2008</a>
+    <a class="month-link" href="#">July 2008</a>
+    <a class="month-link" href="#">August 2008</a>
+    <a class="month-link" href="#">September 2008</a>
+    <a class="month-link" href="#">October 2008</a>
+    <a class="month-link" href="#">November 2008</a>
+    <a class="month-link" href="#">December 2008</a>
+  </div>
 
-      <p class="entry">
-        <a href="#">series four, episode twelve (title speculation)</a>
-        <span class="entry-date"> - April 2008</span>
-      </p>
+</div>
 
-
-      <h2 class="month">May 2008</h2>
-
-      <p class="entry">
-        <a href="#">apologies for the delay...</a>
-        <span class="entry-date"> - May 2008</span>
-      </p>
-
-
-      <h2 class="month">December 2008</h2>
-
-      <p class="entry">
-        <a href="#">fucking freezing.</a>
-        <span class="entry-date"> - December 2008</span>
-      </p>
-
-      <p class="entry">
-        <a href="#">the best of 2008</a>
-        <span class="entry-date"> - Wednesday, Dec. 31, 2008</span>
-      </p>
-
-    </section>
-  </main>
 </body>
 </html>
