@@ -408,12 +408,15 @@ div.articletitlemain {
 
 table, th, td {
   border-collapse: collapse;
-  padding: 0.5em;
-  font-size: 0.95rem;
+  padding: 0.6rem;
+  font-size: 0.88rem;
   text-align: left;  
   overflow-wrap: break-word;
   width: -webkit-fill-available;
+  color: var(--black-color);
+  vertical-align: middle;
 }
+
 
 
 
@@ -882,15 +885,6 @@ height: 2px;
 }
 
 
-table, th, td {
-    border-collapse: collapse;
-    padding: 0.8rem;
-    text-align: left;
-    overflow-wrap: break-word;
-    width: -webkit-fill-available;
-    vertical-align: middle;
-    color: var(--black-color);
-}
 
 tr {
     border-bottom: 1px solid var(--border-color);
