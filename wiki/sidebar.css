@@ -418,7 +418,8 @@ div.articleRightInner {
 
 div.articletitle {
     width: auto;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-variation-settings: "wdth" 95;
     padding: 0.3rem;
     background-color: #456291;
     color: #ffffff;
@@ -431,8 +432,9 @@ div.articletitle {
 
 div.articletitlemain {
     width: auto;
-    font-family: 'Poppins', sans-serif;
-    padding: 0.3rem;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-variation-settings: "wdth" 95;
+	padding: 0.3rem;
     background-color: #456291;
     color: #ffffff;
     font-size: 0.85rem;
@@ -888,6 +890,8 @@ display:none;
     text-align: center;
     color: var(--black-color);
     font-weight: 500;
+	font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-variation-settings: "wdth" 95;
     font-size: 0.76rem;
     margin-bottom: 0.3rem;
     margin-top: 0.3rem;
@@ -1556,7 +1560,8 @@ div.articleRightInner {
 		:where(.navbar, .sidebar) .nav-logo .logo-text {
     color: var(--black-color);
     font-size: 1rem;
-    font-family: 'Poppins', sans-serif;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-variation-settings: "wdth" 95;
     font-weight: 700;
     text-transform: uppercase;
 }
