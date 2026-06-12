@@ -70,12 +70,17 @@ a{ color:inherit; text-decoration:none; }
 .wrap{ width:min(var(--maxw), calc(100% - 40px)); margin:0 auto; }
 
 .kicker{
-  font-size: 13px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: #f5bb32;
-  font-weight: 600;
-  opacity: 0.9;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    align-items: center;
+    font-weight: 600;
+    display: inline-flex;
+    color: #f5bb32;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    opacity: 0.9;
+    gap: 5px;
+    font-variation-settings: "wdth" 95;
 }
 
 .btn{
@@ -219,12 +224,20 @@ a{ color:inherit; text-decoration:none; }
   font-weight: 700;
   margin: 10px 0 8px;
   font-size: 58px;
-  letter-spacing: -.02em;
+  letter-spacing: -0.1rem;
   line-height: 1.2;
   max-width: 90%;
-  font-family: "Podcasty", "Inter", sans-serif;
+  font-family: "Google Sans Flex", "Inter", sans-serif;
 }
-.archiveHead__desc{ margin:0; color: rgba(255,255,255,.82); max-width: 70ch; }
+
+.archiveHead__desc{ 
+	margin: 0;
+    color: rgba(255, 255, 255, .82);
+    max-width: 70ch;
+    line-height: 1.5;
+    font-size: 17px;
+				  }
+
 .archiveHead__actions{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 14px; }
 
 .readmoretitle{
