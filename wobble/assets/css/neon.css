@@ -1,12 +1,3 @@
-@font-face {
-  font-family: "Podcasty";
-  src: url("/wobble/assets/fonts/podcasty.woff2") format("woff2"),
-       url("/wobble/assets/fonts/podcasty.woff") format("woff");
-	  font-weight: 100 900; 
-	font-style:normal;
-  font-display: swap;
-}
-
 :root{
   --bg0:#070814;
   --bg1:#0b1020;
@@ -221,7 +212,7 @@ a{ color:inherit; text-decoration:none; }
   align-items:stretch;
 }
 .archiveHead__title{
-  font-weight: 700;
+  font-weight: 600;
   margin: 10px 0 8px;
   font-size: 58px;
   letter-spacing: -0.1rem;
@@ -606,7 +597,7 @@ a{ color:inherit; text-decoration:none; }
   align-items: center;
   display: inline-flex;
   color: #f5bb32;
-  font-family: "Podcasty", "Inter", sans-serif;
+  font-family: "Google Sans Flex", "Inter", sans-serif;
   opacity: 0.9;
   gap: 5px;
 }
@@ -622,7 +613,7 @@ a{ color:inherit; text-decoration:none; }
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  font-family: "Podcasty", "Inter", sans-serif;
+  font-family: "Google Sans Flex", "Inter", sans-serif;
   text-wrap: balance;
 }
 
