@@ -1,3 +1,17 @@
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
+
 @layer base {
     :root {
         font-family: "Google Sans Flex", sans-serif;
@@ -155,7 +169,7 @@
 
         section {
             scroll-margin-top: 1.6rem;
-            padding-top: 2.6rem;
+            padding-top: 1.3rem;
 
             &#section-1 > p:first-of-type::first-letter {
                 font-weight: 500;
@@ -178,8 +192,8 @@
 
                 .num {
                     font-family: var(--mono);
-                    font-size: 0.78rem;
-                    font-weight: 500;
+                    font-size: 0.9rem;
+                    font-weight: 600;
                     color: var(--accent);
                     transform: translateY(-0.35em);
                     letter-spacing: 0.02em;
@@ -313,7 +327,7 @@
                     }
 
                     &:before{
-                        counter-reset: inc calc(var(--idx) - 1);
+                        counter-reset: inc calc(var(--idx));
                         content: if(style(--num = --idx): "_ " counter(inc); else: "";);
                         position: fixed;
                         top: 100%;
