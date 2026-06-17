@@ -346,7 +346,7 @@ a:hover {
                     }
 
                     &:before{
-                        counter-reset: inc calc(var(--idx));
+                        counter-reset: inc calc(var(--idx) - 1);
                         content: if(style(--num = --idx): "_ " counter(inc); else: "";);
                         position: fixed;
                         top: 100%;
