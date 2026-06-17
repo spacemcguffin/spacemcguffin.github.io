@@ -60,7 +60,7 @@
         padding: 0 2.5rem;
         display: grid;
         grid-template-columns: minmax(0, var(--reading)) 2px var(--aside-w);
-        grid-template-rows: 7rem 1fr 12rem;
+        grid-template-rows: 6rem 1fr 12rem;
         gap: 2rem;
         align-items: start;
         justify-content: center;
@@ -79,15 +79,18 @@
         height: 100%;
         align-self: center;
         border-bottom: 1px solid var(--hair);
+		
         h1 {
-            margin: 0;
-            font-weight: 400;
-            text-transform: uppercase;
-            opacity: .4;
-            width: 100%;
-            text-align: center;
-            color: var(--muted);
+             margin: 0;
+             font-weight: 900;
+             text-transform: uppercase;
+             opacity: .6;
+             width: 100%;
+             text-align: center;
+             color: var(--muted);
+             font-size: 1.8rem;
         }
+		
     }
 
     article, aside, hr.vertical {
