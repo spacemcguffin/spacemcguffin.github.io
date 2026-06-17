@@ -33,7 +33,7 @@
         --accent: oklch(0.35 0.11 251.94);
         --accent-soft: oklch(0 0 0 / 0.12);
 
-        --reading: 46rem;
+        --reading: 42rem;
         --aside-w: 16rem;
         --shape: circle(50% at 50% 50%);
     }
@@ -60,7 +60,7 @@
         padding: 0 2.5rem;
         display: grid;
         grid-template-columns: minmax(0, var(--reading)) 2px var(--aside-w);
-        grid-template-rows: 5rem 1fr 12rem;
+        grid-template-rows: 6rem 1fr 12rem;
         gap: 2rem;
         align-items: start;
         justify-content: center;
@@ -117,11 +117,11 @@
             font-size: clamp(2.6rem, 5vw, 3.5rem);
             line-height: 1.05;
             letter-spacing: -0.03rem;
-            margin: 0 0 1rem;
+            margin: 0 0 1.5rem;
             text-wrap: balance;
         }
 		img {
-			max-width: 46rem;
+			max-width: 42rem;
             border-radius: 1rem;
 		}
         .dek {
@@ -139,8 +139,8 @@
           display: flex;
           align-items: center;
           gap: 0.9rem;
-          padding-bottom: 1rem;
-          margin-bottom: 1.5rem;
+          padding-bottom: 1.5rem;
+          margin-bottom: 2rem;
           border-bottom: 1px solid var(--hair);
         }
         .pullquote {
@@ -346,7 +346,7 @@ a:hover {
                     }
 
                     &:before{
-                        counter-reset: inc calc(var(--idx) - 1);
+                        counter-reset: inc calc(var(--idx));
                         content: if(style(--num = --idx): "_ " counter(inc); else: "";);
                         position: fixed;
                         top: 100%;
@@ -357,10 +357,11 @@ a:hover {
                         opacity: .2;
                     }
                     a {
-                            display: block;
-                            color: inherit;
-                            font-size: 0.9rem;
-                            text-decoration: none;
+                        display: block;
+                        color: inherit;
+                        font-size: 0.875rem;
+                        letter-spacing: -0.005em;
+                        text-decoration: none;
                         &:after {
                             content: "";
                             position: absolute;
@@ -375,13 +376,12 @@ a:hover {
                         }
 
                         &:before {
-                            counter-reset: inc calc(var(--idx) - 1);
-							content: "0" counter(inc);
+                            counter-reset: inc var(--idx);
+                            content: "0" counter(inc);
                             position: relative;
                             font-size: 12px;
                             padding-inline-end: 1rem;
                             color: var(--accent);
-							font-weight: 500;
                         }
                     }
                 }
