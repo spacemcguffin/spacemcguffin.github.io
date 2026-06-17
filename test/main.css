@@ -376,8 +376,8 @@ a:hover {
                         }
 
                         &:before {
-                            counter-reset: inc var(--idx);
-                            content: "0" counter(inc);
+                            counter-reset: inc calc(var(--idx) - 1);
+							content: "0" counter(inc);
                             position: relative;
                             font-size: 12px;
                             padding-inline-end: 1rem;
