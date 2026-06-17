@@ -151,6 +151,18 @@
             text-wrap: pretty;
         }
 
+a {
+   color: var(--accent);
+   text-decoration: none;
+   font-weight:500; 
+}
+
+a:hover {
+   color: var(--ink);
+   text-decoration: underline;
+   font-weight:600; 
+}
+
         .top-button {
             --progress-90-100: clamp(
                     0%,
