@@ -108,16 +108,16 @@
             gap: 0.7rem;
         }
         h1.title {
-            padding-bottom: 1rem;
+            padding-bottom: 1.5rem;
             display: flex;
             align-items: center;
             font-size: clamp(2.6rem, 5vw, 1rem);
             line-height: 1.2;
             letter-spacing: -0.03rem;
-            margin: 0.5rem 0 1rem;
+            margin: 0.5rem 0 0 0;
             text-wrap: pretty;
             font-weight: 700;
-            border-bottom: 2px solid var(--hair);
+            border-bottom: 1px solid var(--hair);
 		}
 				img {
 			max-width: 100%;
@@ -179,8 +179,8 @@ a:hover {
 
 
         section {
-            scroll-margin-top: 1.6rem;
-            padding-top: 1.3rem;
+            scroll-margin-top: 1rem;
+            padding-top: 2rem;
 
             &#section-1 > p:first-of-type::first-letter {
                 font-weight: 600;
