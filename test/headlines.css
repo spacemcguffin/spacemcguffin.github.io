@@ -118,6 +118,7 @@
             letter-spacing: -0.03rem;
             margin: 0.5rem 0 1rem;
             text-wrap: pretty;
+            font-weight: 600;
             border-bottom: 2px solid var(--hair);
 		}
 				img {
@@ -158,13 +159,11 @@
 a {
    color: var(--accent);
    text-decoration: none;
-   font-weight:600; 
 }
 
 a:hover {
    color: var(--ink);
    text-decoration: none;
-   font-weight:600; 
 }
 
         .top-button {
@@ -414,6 +413,15 @@ a:hover {
         }
     }
 }
+
+
+ @media screen and (max-width:400px){
+h1.title {
+        font-size: clamp(2rem, 5vw, 1rem);
+        font-weight: 600;
+}
+
+	 
 
 @layer sections {
     body {
