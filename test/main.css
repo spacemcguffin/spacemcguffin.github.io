@@ -416,6 +416,17 @@ a:hover {
     }
 }
 
+
+
+ @media screen and (max-width:400px){
+h1.title {
+        font-size: clamp(1.8rem, 5vw, 1rem);
+        font-weight: 700;
+        line-height:1.1;
+}
+
+	 
+
 @layer sections {
     body {
         timeline-scope: --section-view-1, --section-view-2, --section-view-3, --section-view-4, --section-view-5, --section-view-6;
