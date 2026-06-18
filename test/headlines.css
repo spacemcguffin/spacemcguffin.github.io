@@ -9,13 +9,6 @@
 	text-shadow: none;
 } 
 
---progress-90-100: clamp(0%, calc((var
-0.920999
-(--scroll) - 0.9) * 1000%), 100%);
-        margin-top: 4rem;
-        background-color: 
- color-mix(in srgb, var(--paper) calc(100% - var(--progress-90-100)), #003b71 var(--progress-90-100));
-        text-align: center;
 
 @layer base {
     :root {
