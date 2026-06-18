@@ -414,15 +414,21 @@ a:hover {
           margin-left: 1rem;
 		}
 
+	 h1.title {
+        font-size: clamp(1.6rem, 5vw, 1rem);
+        font-weight: 700;
+        line-height:1.1;
+}
+ }
 
 
  @media screen and (max-width:400px){
 h1.title {
-        font-size: clamp(1.8rem, 5vw, 1rem);
+        font-size: clamp(1.3rem, 5vw, 1rem);
         font-weight: 700;
         line-height:1.1;
 }
-
+ }
 	 
 	 
 
