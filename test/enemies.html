@@ -26,9 +26,17 @@
         <p class="byline"><b>Editorial Team</b><span class="dot"></span>21 June 2026<span class="dot"></span><span id="category"><a href="/news">News</a></span></p>
 
 <div class="gallery">
-  <img src="/test/img/dalek.png" alt="Sontaran image 1">
-  <img src="/test/img/cyberman.png" alt="Sontaran image 2">
-  <img src="/test/img/sontaran.png" alt="Sontaran image 3">
+  <a class="lightbox" href="/test/img/dalek.png">
+    <img src="/test/img/dalek.png" alt="Dalek">
+  </a>
+
+  <a class="lightbox" href="/test/img/cyberman.png">
+    <img src="/test/img/cyberman.png" alt="Cyberman">
+  </a>
+
+  <a class="lightbox" href="/test/img/sontaran.png">
+    <img src="/test/img/sontaran.png" alt="Sontaran">
+  </a>
 </div>
           
         <p class="dek">We stopped turning pages and started pulling a single, endless one. What did the scroll quietly take from us — and what might a good map give back?</p>
@@ -107,5 +115,44 @@
       </div>
       </aside>
     </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+document.querySelectorAll('.lightbox').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
+
+    const image = document.createElement('img');
+    image.src = link.href;
+
+    overlay.appendChild(image);
+    document.body.appendChild(overlay);
+
+    overlay.addEventListener('click', () => {
+      overlay.remove();
+    });
+  });
+});
+</script>
+
+
+
+
+
+    
   </body>
 </html>
