@@ -128,24 +128,43 @@
 
 
 
-    <script>
-document.querySelectorAll('.lightbox').forEach(link => {
-  link.addEventListener('click', event => {
-    event.preventDefault();
+<script>
+document.addEventListener('DOMContentLoaded', function() {
 
-    const overlay = document.createElement('div');
-    overlay.className = 'lightbox-overlay';
+  document.querySelectorAll('.lightbox').forEach(function(link) {
 
-    const image = document.createElement('img');
-    image.src = link.href;
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
 
-    overlay.appendChild(image);
-    document.body.appendChild(overlay);
+      const overlay = document.createElement('div');
+      overlay.style.position = 'fixed';
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+      overlay.style.background = 'rgba(0,0,0,.9)';
+      overlay.style.display = 'flex';
+      overlay.style.alignItems = 'center';
+      overlay.style.justifyContent = 'center';
+      overlay.style.zIndex = '999999';
 
-    overlay.addEventListener('click', () => {
-      overlay.remove();
+      const img = document.createElement('img');
+      img.src = this.href;
+      img.style.maxWidth = '95vw';
+      img.style.maxHeight = '95vh';
+      img.style.objectFit = 'contain';
+
+      overlay.appendChild(img);
+
+      overlay.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+      });
+
+      document.body.appendChild(overlay);
     });
+
   });
+
 });
 </script>
 
