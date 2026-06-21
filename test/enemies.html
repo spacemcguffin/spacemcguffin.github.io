@@ -21,14 +21,11 @@
 
         <section class="sec" id="section-0" data-title="Top">
 
-        <h1 class="title">Brand New Daleks, Cybermen and Sontarans – First Look!</h1>
+        <h1 class="title">Brand New Cybermen and Sontarans – First Look!</h1>
 
         <p class="byline"><b>Editorial Team</b><span class="dot"></span>21 June 2026<span class="dot"></span><span id="category"><a href="/news">News</a></span></p>
 
 <div class="gallery">
-  <a class="lightbox" href="/test/img/dalek.png">
-    <img src="/test/img/dalek.png" alt="Dalek">
-  </a>
 
   <a class="lightbox" href="/test/img/cyberman.png">
     <img src="/test/img/cyberman.png" alt="Cyberman">
@@ -37,6 +34,7 @@
   <a class="lightbox" href="/test/img/sontaran.png">
     <img src="/test/img/sontaran.png" alt="Sontaran">
   </a>
+  
 </div>
           
         <p class="dek">We stopped turning pages and started pulling a single, endless one. What did the scroll quietly take from us — and what might a good map give back?</p>
@@ -129,40 +127,81 @@
 
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
-  document.querySelectorAll('.lightbox').forEach(function(link) {
+  const images = [...document.querySelectorAll('.lightbox')];
+  let currentIndex = 0;
 
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
+  function showLightbox(index) {
 
-      const overlay = document.createElement('div');
-      overlay.style.position = 'fixed';
-      overlay.style.top = '0';
-      overlay.style.left = '0';
-      overlay.style.width = '100vw';
-      overlay.style.height = '100vh';
-      overlay.style.background = 'rgba(0,0,0,.9)';
-      overlay.style.display = 'flex';
-      overlay.style.alignItems = 'center';
-      overlay.style.justifyContent = 'center';
-      overlay.style.zIndex = '999999';
+    currentIndex = index;
 
-      const img = document.createElement('img');
-      img.src = this.href;
-      img.style.maxWidth = '95vw';
-      img.style.maxHeight = '95vh';
-      img.style.objectFit = 'contain';
+    const overlay = document.createElement('div');
+    overlay.className = 'lightbox-overlay';
 
-      overlay.appendChild(img);
+    overlay.innerHTML = `
+      <button class="lb-prev">&#10094;</button>
+      <img src="${images[index].href}" alt="">
+      <button class="lb-next">&#10095;</button>
+      <button class="lb-close">&times;</button>
+    `;
 
-      overlay.addEventListener('click', function() {
-        document.body.removeChild(overlay);
-      });
+    document.body.appendChild(overlay);
 
-      document.body.appendChild(overlay);
+    const img = overlay.querySelector('img');
+
+    function updateImage() {
+      img.src = images[currentIndex].href;
+    }
+
+    overlay.querySelector('.lb-prev').addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      updateImage();
     });
 
+    overlay.querySelector('.lb-next').addEventListener('click', e => {
+      e.stopPropagation();
+      currentIndex = (currentIndex + 1) % images.length;
+      updateImage();
+    });
+
+    overlay.querySelector('.lb-close').addEventListener('click', () => {
+      overlay.remove();
+    });
+
+    document.addEventListener('keydown', function handler(e) {
+
+      if (!document.body.contains(overlay)) {
+        document.removeEventListener('keydown', handler);
+        return;
+      }
+
+      if (e.key === 'ArrowLeft') {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateImage();
+      }
+
+      if (e.key === 'ArrowRight') {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateImage();
+      }
+
+      if (e.key === 'Escape') {
+        overlay.remove();
+      }
+    });
+
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) overlay.remove();
+    });
+  }
+
+  images.forEach((link, index) => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      showLightbox(index);
+    });
   });
 
 });
