@@ -172,35 +172,35 @@ a:hover {
 
 
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin: 2rem 0;
+.gallery a {
+  display: block;
+}
+
+.gallery a:hover img {
+  transform: scale(1.03);
 }
 
 .gallery img {
-  width: 100%;
-  object-fit: cover;
-  border-radius: 8px;
+  transition: transform 0.2s ease;
+  cursor: zoom-in;
 }
 
 .lightbox-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(0, 0, 0, 0.9);
+  display: grid;
+  place-items: center;
   z-index: 99999;
-  cursor: pointer;
+  cursor: zoom-out;
 }
 
 .lightbox-overlay img {
-  max-width: 95vw;
-  max-height: 95vh;
+  max-width: 92vw;
+  max-height: 92vh;
   object-fit: contain;
-}		
+  border-radius: 8px;
+}
 
 @media (max-width: 700px) {
   .gallery {
