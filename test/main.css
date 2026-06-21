@@ -168,6 +168,40 @@ a:hover {
    font-weight:600; 
 }
 
+
+
+
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 2rem 0;
+}
+
+.gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+@media (max-width: 700px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+			
+
+
+
+			
+
         .top-button {
             --progress-90-100: clamp(
                     0%,
