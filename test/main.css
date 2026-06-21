@@ -181,16 +181,34 @@ a:hover {
 
 .gallery img {
   width: 100%;
-  aspect-ratio: 4 / 3;
   object-fit: cover;
   border-radius: 8px;
 }
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  cursor: pointer;
+}
+
+.lightbox-overlay img {
+  max-width: 95vw;
+  max-height: 95vh;
+  object-fit: contain;
+}		
 
 @media (max-width: 700px) {
   .gallery {
     grid-template-columns: 1fr;
   }
 }
+
+		
 
 
 
