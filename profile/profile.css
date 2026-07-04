@@ -147,6 +147,10 @@ p{
     padding-left:6px;
 }
 
+.nav a::before {
+  content: "🔗";
+}
+
 .meta{
     margin-top:15px;
     color:var(--muted);
