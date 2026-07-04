@@ -1,9 +1,9 @@
 :root{
-    --bg:#141414;
-    --text:#d6d6d6;
-    --muted:#888888;
+    --bg:#fbfaf7;
+    --text:#242424;
+    --muted:#7c7c7c;
     --accent:#d66f2d;
-	--accent1:#72a2d6;
+	--accent1:#2264ab;
     --border:#424242;
 }
 
@@ -228,8 +228,11 @@ p{
 /* footer */
 
 .footer{
-    margin-top:60px;
-    padding-top:20px;
-    border-top:1px solid var(--border);
-    color:var(--muted);
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Google Sans Flex', 'Inter', sans-serif;
+    letter-spacing: 0.3px;
 }
