@@ -3,7 +3,7 @@
     --text:#d6d6d6;
     --muted:#888888;
     --accent:#d66f2d;
-	--accent1:#2d94d6;
+	--accent1:#72a2d6;
     --border:#424242;
 }
 
@@ -70,12 +70,13 @@ body::before{
 }
 
 a{
-    color:#72a2d6;
+    color: var(--accent1);
     text-decoration:none;
+	font-weight:500;
 }
 
 a:hover{
-    color:#ffffff;
+    color:#000000;
     text-decoration:none;
 }
 
@@ -148,7 +149,7 @@ p{
 }
 
 .nav a::before {
-  content: "🔗";
+  content: "• ";
 }
 
 .meta{
