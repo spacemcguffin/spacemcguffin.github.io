@@ -197,6 +197,33 @@ p{
     flex:1;
 }
 
+.heading1{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+}
+
+.heading h3{
+    color:var(--accent1);
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:2px;
+    text-transform: uppercase !important;
+	  font-family: 'Google Sans Flex', 'Inter', sans-serif;
+}
+
+.heading1::before{
+    content:"";
+    height:1px;
+    background:var(--border);
+    flex:1;
+}
+
+
+
+
+
 /* journal */
 
 .entry{
