@@ -5,6 +5,7 @@
     --accent:#d66f2d;
 	--accent1:#2264ab;
     --border:#424242;
+	--border1:#cacaca;
 }
  
      
@@ -216,7 +217,7 @@ p{
 .heading1::before{
     content:"";
     height:1px;
-    background:var(--border);
+    background:var(--border1);
     flex:1;
 }
 
