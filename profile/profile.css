@@ -240,16 +240,13 @@ p{
 
 .gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:10px;
 }
 
 .gallery img{
     width:100%;
     display:block;
-    border:1px solid var(--border);
-    transition:.3s;
-    filter:grayscale(10%);
 }
 
 .gallery img:hover{
