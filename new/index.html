@@ -1,0 +1,843 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>wariann</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet"> 
+<style>
+  
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f0f2f5;
+  --card: #ffffff;
+  --border: #ddd;
+  --text: #1c1e21;
+  --muted: #65676b;
+  --link: #1b74e4;
+  --btn-bg: #e4e6eb;
+  --btn-hover: #d8dadf;
+  --violet: #9333ea;
+  --vert: #39ff6a;
+  --lilas: #c084fc;
+  --accent: #7c3aed;
+  --accent2: #39ff6a;
+  --topbar: #1c1e21;
+}
+
+html, body {
+  background: #f0f2f5 url("giphy-2.gif") center/cover fixed;
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--topbar);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.topbar-logo {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.3px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+.topbar-search {
+  background: #3a3b3c;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 1rem 0.4rem 2rem;
+  font-size: 0.85rem;
+  color: #e4e6eb;
+  outline: none;
+  width: 200px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23b0b3b8' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 0.6rem center;
+}
+.topbar-search::placeholder { color: #b0b3b8; }
+
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.topbar-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  color: #b0b3b8;
+  text-decoration: none;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: background 0.15s, color 0.15s;
+  flex-direction: column;
+  gap: 2px;
+}
+.topbar-nav a:hover {
+  background: #3a3b3c;
+  color: #e4e6eb;
+}
+.topbar-nav a.active {
+  color: #9333ea;
+  border-bottom: 3px solid #9333ea;
+  border-radius: 0;
+}
+.nav-icon { font-size: 1.2rem; }
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.topbar-avatar {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #39ff6a;
+  cursor: pointer;
+  overflow: hidden;
+}
+.topbar-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ===== PROFIL COVER ===== */
+.profile-wrapper {
+  max-width: 940px;
+  margin: 0 auto;
+  background: #f0f2f5;
+}
+
+.profile-content-wrap {
+  background: #f0f2f5;
+}
+
+.cover-wrap {
+  background: var(--card);
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.cover-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #0d0121, #1a0533, #080d16);
+  filter: brightness(0.7);
+}
+
+.profile-bar {
+  padding: 0 1.5rem 0;
+  position: relative;
+}
+
+.profile-identity {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-top: -32px;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  border: 4px solid white;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 2.5rem;
+  color: #39ff6a;
+  flex-shrink: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.profile-pic img { width: 100%; height: 100%; object-fit: cover; }
+
+.profile-name-area { flex: 1; padding-bottom: 0.5rem; }
+.profile-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+  line-height: 1.1;
+}
+.profile-friends {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+  align-self: flex-end;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s;
+}
+.btn-primary {
+  background: #9333ea;
+  color: white;
+}
+.btn-primary:hover { background: #7c3aed; }
+.btn-secondary {
+  background: var(--btn-bg);
+  color: var(--text);
+}
+.btn-secondary:hover { background: var(--btn-hover); }
+
+/* Onglets */
+.profile-tabs {
+  display: flex;
+  gap: 0;
+  padding: 0 0.5rem;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.profile-tab {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.profile-tab:hover {
+  background: var(--btn-bg);
+  border-radius: 8px 8px 0 0;
+  color: var(--text);
+}
+.profile-tab.active {
+  color: #9333ea;
+  border-bottom-color: #9333ea;
+}
+
+/* ===== CONTENU ===== */
+.profile-content {
+  margin: 1rem 0 4rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 1rem;
+}
+
+/* ===== PANNEAUX ===== */
+.panel {
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.panel-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  padding: 0.9rem 1rem 0.5rem;
+}
+.panel-body { padding: 0 1rem 0.8rem; }
+
+.about-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.45rem 0;
+  font-size: 0.85rem;
+  color: var(--text);
+  border-bottom: 1px solid #f0f2f5;
+}
+.about-item:last-child { border-bottom: none; }
+.about-icon {
+  width: 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.see-more {
+  display: block;
+  text-align: center;
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  width: 100%;
+  margin-top: 0.4rem;
+  transition: background 0.15s;
+  text-decoration: none;
+}
+.see-more:hover { background: var(--btn-hover); }
+
+/* Photos grid */
+.photos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  margin-top: 0.5rem;
+}
+.photo-thumb {
+  aspect-ratio: 1;
+  background: #e4e6eb;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+.photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Currently */
+.currently-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.4rem 0;
+  font-size: 0.83rem;
+  border-bottom: 1px solid #f0f2f5;
+}
+.currently-item:last-child { border-bottom: none; }
+.currently-icon {
+  width: 36px; height: 36px;
+  background: #f0f2f5;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.currently-text { flex: 1; }
+.currently-label {
+  font-size: 0.7rem;
+  color: var(--muted);
+  display: block;
+}
+.currently-val { font-weight: 500; color: var(--text); }
+
+/* ===== FIL ===== */
+.feed { display: flex; flex-direction: column; gap: 0.8rem; }
+
+.composer {
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  padding: 0.8rem 1rem;
+}
+.composer-top {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--border);
+}
+.composer-avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #39ff6a;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.composer-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.composer-box {
+  flex: 1;
+  background: var(--bg);
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+.composer-actions {
+  display: flex;
+  gap: 0;
+  padding-top: 0.5rem;
+}
+.composer-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.4rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.composer-action:hover { background: var(--bg); }
+
+/* Post */
+.post {
+  background: var(--card);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.post-head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem 0.4rem;
+}
+.post-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #39ff6a;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.post-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.post-meta { flex: 1; }
+.post-author {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+  display: block;
+}
+.post-time {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.post-more {
+  color: var(--muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  border-radius: 50%;
+  transition: background 0.15s;
+}
+.post-more:hover { background: var(--bg); }
+
+.post-body {
+  padding: 0.3rem 1rem 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* Compteur de réactions */
+.post-stats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 1rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.post-likes {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.like-icon {
+  background: #9333ea;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: white;
+}
+
+/* Boutons réaction */
+.post-actions {
+  display: flex;
+  padding: 0.2rem 0.5rem;
+}
+.post-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: background 0.15s, color 0.15s;
+}
+.post-action:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+.post-action.liked { color: #9333ea; }
+
+/* Aperçu lien */
+.post-link {
+  margin: 0 0 0.4rem;
+  border-top: 1px solid var(--border);
+  text-decoration: none;
+  display: block;
+  background: #f0f2f5;
+  transition: background 0.15s;
+}
+.post-link:hover { background: #e4e6eb; }
+.link-domain {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding: 0.6rem 1rem 0.1rem;
+  display: block;
+  letter-spacing: 0.05em;
+}
+.link-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+  padding: 0 1rem 0.2rem;
+  display: block;
+}
+.link-desc {
+  font-size: 0.78rem;
+  color: var(--muted);
+  padding: 0 1rem 0.6rem;
+  display: block;
+  line-height: 1.4;
+}
+
+/* Updates */
+.update-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.4rem 0;
+  font-size: 0.83rem;
+  border-bottom: 1px solid #f0f2f5;
+}
+.update-item:last-child { border-bottom: none; }
+.update-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #9333ea;
+  flex-shrink: 0;
+}
+.update-text { flex: 1; color: var(--text); }
+.update-date {
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .profile-content { grid-template-columns: 1fr; }
+  .cover-img { height: 180px; }
+  .profile-pic { width: 70px; height: 70px; font-size: 1.8rem; }
+  .profile-name { font-size: 1.2rem; }
+  .profile-tabs { overflow-x: auto; }
+  .topbar-search { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- PROFIL -->
+<div class="profile-wrapper">
+  <div class="cover-wrap">
+    <img src="giphy-1.gif" alt="bannière" class="cover-img">
+    <div class="profile-bar">
+      <div class="profile-identity">
+        <div class="profile-pic"><img src="/diary/images/newestprofile.png" alt="avatar" onerror="this.style.display='none'"></div>
+        <div class="profile-name-area">
+          <span class="profile-name">I R R E G U L A R &nbsp; C A U S A L I T Y</span>
+          <div class="profile-friends">Bienvenue dans mon jardin digital</div>
+        </div>
+        <div class="profile-actions">
+          <a href="#" class="btn btn-secondary">✉ message</a>
+        </div>
+      </div>
+      <div class="profile-tabs">
+        <a href="#" class="profile-tab active">Accueil</a>
+        <a href="#" class="profile-tab">À propos</a>
+        <a href="blog.html" class="profile-tab">Blog</a>
+        <a href="listes.html" class="profile-tab">Listes</a>
+        <a href="galerie.html" class="profile-tab">Galerie</a>
+      </div>
+    </div>
+  </div>
+  
+<div class="profile-content-wrap">
+<div class="profile-content">
+
+  <!-- GAUCHE -->
+  <div>
+
+    <div class="panel">
+      <div class="panel-title">Présentation</div>
+      <div class="panel-body">
+        <div class="about-item">
+          <img src="TV.gif" alt="vhs" style="width:80%;border-radius:4px;margin:0 auto 0.8rem;display:block;">
+        </div>
+        <div class="about-item">
+          <span class="about-icon">📍</span> France
+        </div>
+        <div class="about-item">
+          <span class="about-icon">🎨</span> Art · musique · vaporwave · pixels
+        </div>
+        <div class="about-item">
+          <span class="about-icon">🌙</span> Humeur : sereine
+        </div>
+        <div class="about-item">
+          <span class="about-icon">📅</span> Membre depuis mars 2025
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">En ce moment</div>
+      <div class="panel-body">
+        <div class="currently-item">
+          <div class="currently-icon">📖</div>
+          <div class="currently-text">
+            <span class="currently-label">Je lis</span>
+            <span class="currently-val">La Horde du Contrevent</span>
+          </div>
+        </div>
+        <div class="currently-item">
+          <div class="currently-icon">📺</div>
+          <div class="currently-text">
+            <span class="currently-label">Je regarde</span>
+            <span class="currently-val">Mushishi</span>
+          </div>
+        </div>
+        <div class="currently-item">
+          <div class="currently-icon">🎮</div>
+          <div class="currently-text">
+            <span class="currently-label">Je joue à</span>
+            <span class="currently-val">Disco Elysium</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">♪ musique</div>
+      <div class="panel-body">
+        <!-- Remplace le src par ton lien Spotify :
+             1. Sur Spotify, clique sur "···" → "Partager" → "Intégrer"
+             2. Copie le lien dans src ci-dessous -->
+        <iframe
+          src="https://open.spotify.com/embed/track/REMPLACE_PAR_TON_ID"
+          width="100%"
+          height="80"
+          frameborder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          style="border-radius: 8px; display: block;">
+        </iframe>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Photos</div>
+      <div class="panel-body">
+        <div class="photos-grid">
+          <div class="photo-thumb"><img src="photo1.jpg" alt="photo 1"></div>
+          <div class="photo-thumb"><img src="photo2.jpg" alt="photo 2"></div>
+          <div class="photo-thumb"><img src="photo3.jpg" alt="photo 3"></div>
+          <div class="photo-thumb"><img src="photo4.jpg" alt="photo 4"></div>
+          <div class="photo-thumb"><img src="photo5.jpg" alt="photo 5"></div>
+          <div class="photo-thumb"><img src="photo6.jpg" alt="photo 6"></div>
+        </div>
+        <a href="galerie.html" class="see-more" style="margin-top:0.6rem">Voir toutes les photos</a>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">Mises à jour</div>
+      <div class="panel-body">
+        <div class="update-item">
+          <div class="update-dot"></div>
+          <span class="update-text">Nouveau layout en ligne !</span>
+          <span class="update-date">20 juin</span>
+        </div>
+        <div class="update-item">
+          <div class="update-dot"></div>
+          <span class="update-text">Ajout de la galerie</span>
+          <span class="update-date">14 mai</span>
+        </div>
+        <div class="update-item">
+          <div class="update-dot"></div>
+          <span class="update-text">Ouverture du site ✦</span>
+          <span class="update-date">10 mars</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FIL -->
+  <div class="feed">
+
+    <div class="post" style="padding: 1.2rem 1rem;">
+      <div style="font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 0.7rem;">✦ bienvenue</div>
+      <p style="font-size: 0.88rem; line-height: 1.7; color: #333;">Bienvenue — Ce site est un espace pour partager ce que j'aime, ce que je crée, et plus généralement ce qu'il y a dans ma tête. Bonne visite !</p>
+      <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.8rem;">
+        <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:20px;background:#f3e8ff;color:#7e22ce;border:1px solid #e9d5ff;">art</span>
+        <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:20px;background:#fce7f3;color:#be185d;border:1px solid #fbcfe8;">musique</span>
+        <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:20px;background:#f3e8ff;color:#7e22ce;border:1px solid #e9d5ff;">création de réalité</span>
+        <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:20px;background:#fce7f3;color:#be185d;border:1px solid #fbcfe8;">développement personnel</span>
+        <span style="font-size:0.72rem;padding:0.2rem 0.6rem;border-radius:20px;background:#f3e8ff;color:#7e22ce;border:1px solid #e9d5ff;">promenades</span>
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar"><img src="avatar.jpg" alt="avatar" onerror="this.style.display='none'"></div>
+        <div class="post-meta">
+          <span class="post-author">wariann</span>
+          <span class="post-time">Aujourd'hui à 23:14 · 🌙</span>
+        </div>
+        <span class="post-more">···</span>
+      </div>
+      <div class="post-body">
+        Les nuits d'été où tout le monde dort sauf toi et les néons dehors. C'est ça que j'essaie de capturer dans mes dessins en ce moment.
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar"><img src="avatar.jpg" alt="avatar" onerror="this.style.display='none'"></div>
+        <div class="post-meta">
+          <span class="post-author">wariann</span>
+          <span class="post-time">15 juin 2025</span>
+        </div>
+        <span class="post-more">···</span>
+      </div>
+      <div class="post-body">Nouvel article sur le blog ✦</div>
+      <a href="article.html" class="post-link">
+        <img src="article-image.jpg" alt="illustration article" style="width:auto;max-width:100%;max-height:180px;object-fit:cover;border-radius:4px;margin:0 auto 0.5rem;display:block;">
+        <span class="link-title">Retrouver le goût de créer pour rien</span>
+        <span class="link-desc">Il y a quelques semaines, j'ai rouvert un vieux carnet de croquis que je n'avais pas touché depuis deux ans...</span>
+      </a>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar"><img src="avatar.jpg" alt="avatar" onerror="this.style.display='none'"></div>
+        <div class="post-meta">
+          <span class="post-author">wariann</span>
+          <span class="post-time">20 mai 2025</span>
+        </div>
+        <span class="post-more">···</span>
+      </div>
+      <div class="post-body">
+        Redécouvert un vieux CD de city pop dans une boîte. Certaines choses vieillissent exactement comme il faut.
+      </div>
+    </div>
+
+    <div class="post">
+      <div class="post-head">
+        <div class="post-avatar"><img src="avatar.jpg" alt="avatar" onerror="this.style.display='none'"></div>
+        <div class="post-meta">
+          <span class="post-author">wariann</span>
+          <span class="post-time">10 mars 2025</span>
+        </div>
+        <span class="post-more">···</span>
+      </div>
+      <div class="post-body">Le site est en ligne ✦ Bienvenue dans mon espace.</div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+
+<footer>
+  irregular causality · fait avec ♥ · 2025 · forever under construction
+</footer>
+
+</body>
+</html>
+
