@@ -29,6 +29,20 @@
   --topbar: #1c1e21;
 }
 
+
+  ::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+  
 html, body {
   background: #f0f2f5 url("giphy-2.gif") center/cover fixed;
   color: var(--text);
@@ -246,7 +260,6 @@ html, body {
   gap: 0;
   padding: 0 0.5rem;
   background: var(--card);
-  border-bottom: 1px solid var(--border);
   margin-bottom: 0;
 }
 .profile-tab {
