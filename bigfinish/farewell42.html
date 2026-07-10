@@ -388,7 +388,7 @@
     trailerAudio.addEventListener('pause', () => {
       playButton.textContent = '▶';
       playButton.setAttribute('aria-label', 'Play track');
-      audioStatus.textContent = trailerAudio.ended ? 'Trailer finished' : 'Track paused';
+      audioStatus.textContent = trailerAudio.ended ? 'Track finished' : 'Track paused';
     });
 
     trailerAudio.addEventListener('loadedmetadata', updateAudioProgress);
