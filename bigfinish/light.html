@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="A responsive audio release product page inspired by premium audio drama storefronts." />
-  <title>Doctor Who: Terror Firma — Audio Release</title>
+  <title>Even Darker Gallifrey</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
     }
 
 
-    ::-moz-selection {
+        ::-moz-selection {
 	background: #cfd8e4;
 	text-shadow: none;
   color:#000000;
@@ -58,7 +58,7 @@
 	text-shadow: none;
   color:#000000;
 } 
-
+    
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -71,6 +71,19 @@
         var(--page);
       transition: background .25s ease, color .25s ease;
     }
+
+    html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.page-shell,
+.product-grid,
+.cover-column,
+.details-column {
+  min-width: 0;
+}
 
     img { display: block; max-width: 100%; }
     button, input, select { font: inherit; }
@@ -204,10 +217,7 @@
     .mobile-panel a { padding: 14px 12px; border-radius: 10px; font-weight: 700; }
     .mobile-panel a:hover { background: var(--surface-2); }
 
-    .page-shell {   
-		width: min(1240px, calc(100% - clamp(24px, 8vw, 150px)));
-        margin-inline: auto;
-	}
+    .page-shell { width: min(1240px, calc(100% - 150px)); margin: 0 auto; }
 
     .breadcrumbs {
       display: flex;
@@ -227,7 +237,7 @@
 
     .product-grid {
       display: grid;
-      grid-template-columns: minmax(250px, 500px) minmax(0, 1fr);
+      grid-template-columns: minmax(280px, 520px) minmax(0, 1fr);
       gap: clamp(36px, 6vw, 78px);
       align-items: start;
       padding-bottom: 70px;
@@ -238,7 +248,7 @@
     .cover-frame {
       position: relative;
       overflow: hidden;
-      border-radius: 10px;
+      border-radius: 4px;
       background: #111;
       box-shadow: var(--shadow);
     }
@@ -291,13 +301,13 @@
     }
 
     .release-nav a {
-      padding: 13px 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--surface);
-      font-size: .82rem;
-      font-weight: 500;
-      transition: background .2s ease, transform .2s ease;
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    font-size: .82rem;
+    font-weight: 500;
+    transition: background .2s ease, transform .2s ease;
     }
 
     .release-nav a:last-child { text-align: right; }
@@ -321,7 +331,7 @@
     background: var(--surface-2);
     font-size: .8rem;
     font-weight: 600;
-      }
+    }
 
     .wishlist {
     margin-left: auto;
@@ -342,22 +352,16 @@
       font-size: clamp(3rem, 6vw, 3.2rem);
       font-weight: 500;
       line-height: 1;
-      letter-spacing: -.02em;
-      text-wrap: balance;
+      letter-spacing: -.03em;
     }
 
-    .release-number {
-    color: var(--brand);
-    font-size: 1.5rem;
-    vertical-align: middle;
-    letter-spacing: 0rem;
-	}
+    .release-number { color: var(--brand); }
 
     .release-date {
-      margin: 20px 0 28px;
-      color: var(--muted);
-      font-size: 1rem;
-      font-weight: 500;
+    margin: 20px 0 28px;
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 500;
     }
 
     .facts {
@@ -526,13 +530,13 @@
     }
 
     .section-heading h2 {
-      max-width: 800px;
-      margin: 0;
-      font-family: "Google Sans Flex", "Inter", sans-serif;
-      font-size: clamp(2rem, 2vw, 4rem);
-      font-weight: 500;
-      line-height: 1;
-      text-transform: uppercase;
+    max-width: 800px;
+    margin: 0;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-size: clamp(2rem, 2vw, 4rem);
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
     }
 
     .cards {
@@ -554,8 +558,8 @@
     .release-art img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
     .release-card:hover .release-art img { transform: scale(1.035); }
     .release-copy { padding: 16px; }
-    .series { color: var(--brand); font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-    .release-copy h3 { margin: 8px 0 16px; font-size: 1rem; line-height: 1.35; }
+    .series { color: var(--brand); font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+    .release-copy h3 { margin: 8px 0 0px; font-size: 1rem; font-weight: 600; line-height: 1.35; }
     .release-price { font-weight: 800; }
 
     .newsletter {
@@ -583,11 +587,11 @@
     .newsletter p { max-width: 600px; margin: 0; opacity: .85; }
     .signup { display: grid; grid-template-columns: 1fr auto; gap: 10px; }
     .signup input { min-width: 0; padding: 16px; border: 0; border-radius: 10px; }
-    .signup button { padding: 16px 22px; border: 0; border-radius: 10px; background: #242421; color: white; font-weight: 800; cursor: pointer; }
+    .signup button { padding: 16px 22px; border: 0; border-radius: 10px; background: #242421; color: white; font-weight: 600; cursor: pointer; }
 
     footer { padding: 48px 0; background: #242421; color: #f7f4ee; }
     .footer-grid { display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 40px; }
-    .footer-grid h3 { margin: 0 0 14px; font-size: .9rem; text-transform: uppercase; letter-spacing: .06em; }
+    .footer-grid h3 { margin: 0 0 14px; font-size: .85rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
     .footer-grid p, .footer-grid a { color: rgba(255,255,255,.68); font-size: .88rem; line-height: 1.7; }
     .footer-links { display: grid; gap: 4px; }
 
@@ -647,6 +651,102 @@
       .audio-bar { grid-template-columns: auto 1fr; }
       .audio-time { display: none; }
     }
+
+
+
+
+
+
+
+
+
+	      /* Audiobooks mega menu */
+    .nav-item{position:relative;display:flex;align-items:center}.nav-link-with-menu{display:inline-flex;align-items:center;gap:7px}.nav-link-with-menu::before{content:"";position:absolute;left:-18px;right:-18px;top:100%;height:26px}.nav-chevron{width:8px;height:8px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s ease}.nav-item:hover .nav-chevron,.nav-item:focus-within .nav-chevron{transform:rotate(225deg) translate(-1px,-1px)}
+    .mega-menu{position:fixed;z-index:49;left:0;right:0;top:calc(0px + var(--header-height));padding:28px 0 34px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--surface) 96%,transparent);box-shadow:0 28px 55px rgba(20,18,16,.14);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(-8px);pointer-events:none;transition:opacity .2s ease,visibility .2s ease,transform .24s cubic-bezier(.22,1,.36,1)}
+    .nav-item:hover .mega-menu,.nav-item:focus-within .mega-menu,.nav-item.menu-open .mega-menu{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}.mega-menu-inner{width:min(1240px,calc(100% - 36px));margin-inline:auto;display:grid;grid-template-columns:1.2fr repeat(3,minmax(150px,1fr));gap:clamp(28px,4vw,60px)}.mega-intro{max-width:280px}.mega-kicker{margin-bottom:8px;color:var(--brand);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.mega-intro h2{margin:0 0 10px;font-family:"Google Sans Flex",sans-serif;font-size:1.65rem;line-height:1.05}.mega-intro p{margin:0 0 18px;color:var(--muted);font-size:.88rem;line-height:1.55}.mega-feature-link{display:inline-flex;align-items:center;gap:8px;color:var(--brand);font-size:.86rem;font-weight:800}.mega-column h3{margin:0 0 12px;color:var(--muted);font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.mega-links{display:grid;gap:2px}.mega-links a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:9px 0;border-bottom:1px solid transparent;font-size:.9rem;font-weight:600;transition:color .18s ease,transform .18s ease,border-color .18s ease}.mega-links a::after{content:"→";color:var(--brand);opacity:0;transform:translateX(-5px);transition:opacity .18s ease,transform .18s ease}.mega-links a:hover::after,.mega-links a:focus-visible::after{opacity:1;transform:translateX(0)}
+    .mega-menu-backdrop{position:fixed;z-index:44;inset:calc(0px + var(--header-height)) 0 0;background:rgba(15,15,14,.2);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease}body.mega-menu-visible .mega-menu-backdrop{opacity:1;visibility:visible}.mobile-submenu-toggle{width:100%;padding:14px 12px;border:0;border-radius:10px;display:flex;align-items:center;justify-content:space-between;background:transparent;font-weight:700;text-align:left;cursor:pointer}.mobile-submenu-toggle:hover{background:var(--surface-2)}.mobile-submenu{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .28s ease}.mobile-submenu.open{grid-template-rows:1fr}.mobile-submenu-inner{min-height:0;display:grid;gap:3px;padding-inline:12px}.mobile-submenu.open .mobile-submenu-inner{padding-bottom:10px}.mobile-submenu a{padding:10px 14px;color:var(--muted);font-size:.9rem;font-weight:650}@media(max-width:980px){.mega-menu,.mega-menu-backdrop{display:none}}@media(prefers-reduced-motion:reduce){.mega-menu,.mobile-submenu,.nav-chevron,.mega-links a,.mega-links a::after{transition:none!important}}
+
+
+
+    /* Compact mega-menu and intrinsic-width link underlines */
+    .mega-menu {
+      left: 50%;
+      right: auto;
+      width: min(1080px, calc(100vw - 48px));
+      padding: 28px 30px 32px;
+      border: 1px solid var(--line);
+      border-radius: 0 0 20px 20px;
+      transform: translate(-50%, -8px);
+      overflow: hidden;
+    }
+
+    .nav-item:hover .mega-menu,
+    .nav-item:focus-within .mega-menu,
+    .nav-item.menu-open .mega-menu {
+      transform: translate(-50%, 0);
+    }
+
+    .mega-menu-inner {
+      width: 100%;
+      grid-template-columns: minmax(220px, 1.15fr) repeat(3, minmax(150px, .9fr));
+      gap: clamp(24px, 3vw, 44px);
+    }
+
+    .mega-links {
+      align-items: start;
+      justify-items: start;
+      gap: 4px;
+    }
+
+    .mega-links a {
+      position: relative;
+      width: fit-content;
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      padding: 8px 0 5px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .mega-links a::after {
+      flex: 0 0 auto;
+      opacity: 0;
+      transform: translateX(-4px);
+    }
+
+    .mega-links a:hover,
+    .mega-links a:focus-visible {
+      border-bottom-color: transparent;
+      transform: translateX(3px);
+    }
+
+    .mega-links a:hover::after,
+    .mega-links a:focus-visible::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    @media (max-width: 1120px) and (min-width: 981px) {
+      .mega-menu {
+        width: calc(100vw - 32px);
+        padding-inline: 22px;
+      }
+
+      .mega-menu-inner {
+        gap: 24px;
+      }
+    }
+
+
+
+
+
+
+
+
+	  
 
     /* Clickable cover lightbox */
     .cover-frame {
@@ -768,6 +868,159 @@
       }
     }
 
+
+    /* Blurred cover-art hero background */
+.product-hero {
+  position: relative;
+  isolation: isolate;
+
+  /* Prevent blurred background from creating horizontal overflow */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+    .product-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: -80px 0 auto;
+      height: min(760px, 78vh);
+      background:
+        linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--page) 30%, transparent),
+          var(--page) 96%
+        ),
+        var(--cover-art) center 32% / cover no-repeat;
+      filter: blur(44px) saturate(1.15);
+      transform: scale(1.08);
+      opacity: .34;
+      pointer-events: none;
+    }
+
+    .product-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: -80px 0 auto;
+      height: min(760px, 78vh);
+      background:
+        radial-gradient(circle at 24% 30%, transparent 0 18%, var(--page) 72%),
+        linear-gradient(to bottom, transparent 20%, var(--page) 96%);
+      pointer-events: none;
+    }
+
+    html[data-theme="dark"] .product-hero::before {
+      opacity: .24;
+      filter: blur(52px) saturate(1.2) brightness(.72);
+    }
+
+    /* Real custom audio player */
+    .audio-bar {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .audio-player-main {
+      min-width: 0;
+    }
+
+    .audio-player-topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .audio-progress {
+      width: 100%;
+      height: 5px;
+      margin-top: 9px;
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      outline: none;
+      background:
+        linear-gradient(
+          to right,
+          var(--brand) 0 var(--audio-progress, 0%),
+          var(--surface-3) var(--audio-progress, 0%) 100%
+        );
+      cursor: pointer;
+    }
+
+    .audio-progress::-webkit-slider-thumb {
+      width: 15px;
+      height: 15px;
+      appearance: none;
+      border: 3px solid var(--surface);
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .28);
+    }
+
+    .audio-progress::-moz-range-thumb {
+      width: 11px;
+      height: 11px;
+      border: 3px solid var(--surface);
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .28);
+    }
+
+    .audio-time {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    /* Sliding animated underline for tabs */
+    .tab-list {
+      position: relative;
+      scrollbar-width: thin;
+    }
+
+    .tab-list::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: var(--tab-indicator-width, 0px);
+      height: 3px;
+      border-radius: 999px 999px 0 0;
+      background: var(--brand);
+      transform: translateX(var(--tab-indicator-left, 0px));
+      transition:
+        transform .38s cubic-bezier(.22, 1, .36, 1),
+        width .38s cubic-bezier(.22, 1, .36, 1);
+      pointer-events: none;
+    }
+
+    .tab-button.active::after {
+      display: none;
+    }
+
+    .tab-button {
+      transition: color .25s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tab-list::after,
+      .cover-frame img,
+      .cover-lightbox-image {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .audio-player-topline {
+        align-items: center;
+      }
+
+      .audio-time {
+        display: block;
+        font-size: .72rem;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -781,13 +1034,24 @@
       </a>
 
       <nav class="desktop-nav" aria-label="Primary navigation">
-        <a href="#">Audiobooks</a>
+        <div class="nav-item" id="audiobooksNavItem">
+          <a class="nav-link-with-menu" href="#" id="audiobooksNavLink" aria-haspopup="true" aria-expanded="false">Audiobooks <span class="nav-chevron" aria-hidden="true"></span></a>
+          <div class="mega-menu" id="audiobooksMegaMenu">
+            <div class="mega-menu-inner">
+              <div class="mega-intro"><div class="mega-kicker">Explore audio</div><h2>Stories from across time and space</h2><p>Browse ranges, characters, creators, and the latest full-cast audio adventures.</p><a class="mega-feature-link" href="#">View all audiobooks →</a></div>
+              <div class="mega-column"><h3>Popular ranges</h3><div class="mega-links"><a href="#">Doctor Who</a><a href="#">Torchwood</a><a href="#">The Worlds of Doctor Who</a><a href="#">Blake's 7</a><a href="#">The Avengers</a></div></div>
+              <div class="mega-column"><h3>Browse by Doctor</h3><div class="mega-links"><a href="#">Classic Doctors</a><a href="#">Eighth Doctor</a><a href="#">Ninth Doctor</a><a href="#">Tenth Doctor</a><a href="#">War Doctor</a></div></div>
+              <div class="mega-column"><h3>Discover</h3><div class="mega-links"><a href="#">Latest releases</a><a href="#">Coming soon</a><a href="#">Box sets</a><a href="#">Bundles</a><a href="#">Free stories</a></div></div>
+            </div>
+          </div>
+        </div>
         <a href="#">Collections</a>
         <a href="#">What's New</a>
         <a href="#">News</a>
         <a href="#">Podcasts</a>
         <a href="#">About</a>
       </nav>
+		
 
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" aria-label="Toggle colour theme" title="Toggle colour theme">☾</button>
@@ -806,24 +1070,53 @@
   </nav>
 
   <main>
-    <div class="page-shell">
+    <div class="product-hero" style="--cover-art: url('edg.png');">
+      <div class="page-shell">
       <div class="breadcrumbs" aria-label="Breadcrumb">
-        <span><a href="/">Home</a></span><span>Release</span><span>Doctor Who: Terror Firma</span>
+        <span>Home</span><span>Release</span><span>Doctor Who: Even Darker Gallifrey</span>
       </div>
 
       <section class="product-grid">
         <aside class="cover-column">
           <div class="cover-frame">
-            <img src="https://admin.bigfinish.com/storage/images/optimised/5184f3aa-685d-428a-b9fd-4539822039b7__600x600.webp" alt="Doctor Who: Terror Firma cover artwork">
+            <img src="edg.png" alt="Doctor Who: Even Darker Gallifrey">
           </div>
 
           <div class="audio-bar">
-            <button class="play-btn" id="playButton" aria-label="Play trailer">▶</button>
-            <div>
-              <div class="audio-title">Listen to the trailer</div>
-              <div class="audio-meta" id="audioStatus">Preview audio demonstration</div>
+            <button class="play-btn" id="playButton" type="button" aria-label="Play trailer">▶</button>
+
+            <div class="audio-player-main">
+              <div class="audio-player-topline">
+                <div>
+                  <div class="audio-title">Listen to the trailer</div>
+                  <div class="audio-meta" id="audioStatus">Ready to play</div>
+                </div>
+
+                <div class="audio-time" id="audioTime">
+                  <span id="audioCurrentTime">0:00</span>
+                  <span aria-hidden="true"> / </span>
+                  <span id="audioDuration">0:00</span>
+                </div>
+              </div>
+
+              <input
+                class="audio-progress"
+                id="audioProgress"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                step="0.1"
+                aria-label="Trailer playback position"
+              >
             </div>
-            <div class="audio-time" id="audioTime">00:00</div>
+
+            <!-- Replace this src with your own trailer MP3 when available. -->
+            <audio
+              id="trailerAudio"
+              preload="metadata"
+              src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
+            ></audio>
           </div>
 
           <div class="release-nav">
@@ -839,7 +1132,7 @@
             <button class="wishlist" id="wishlistButton">♡ Add to wishlist</button>
           </div>
 
-          <h1>Doctor Who:<br>Terror Firma <span class="release-number">(072)</span></h1>
+          <h1>Doctor Who:<br>Even Darker Gallifrey <span class="release-number">(072)</span></h1>
           <p class="release-date">Released August 2005</p>
 
           <div class="facts">
@@ -896,6 +1189,7 @@
         </article>
       </section>
     </div>
+    </div>
 
     <section class="recommendations">
       <div class="page-shell">
@@ -907,19 +1201,19 @@
         <div class="cards">
           <article class="release-card">
             <div class="release-art"><img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80" alt="Atmospheric science fiction landscape"></div>
-            <div class="release-copy"><div class="series">Eighth Doctor Adventures</div><h3>New Pathways</h3><div class="release-price">From £19.99</div></div>
+            <div class="release-copy"><div class="series">Eighth Doctor Adventures</div><h3>New Pathways</h3></div>
           </article>
           <article class="release-card">
             <div class="release-art"><img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=700&q=80" alt="Spacecraft above Earth"></div>
-            <div class="release-copy"><div class="series">The Lost Stories</div><h3>Genesis of Terror</h3><div class="release-price">From £10.99</div></div>
+            <div class="release-copy"><div class="series">The Lost Stories</div><h3>Genesis of Terror</h3></div>
           </article>
           <article class="release-card">
             <div class="release-art"><img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=700&q=80" alt="Rocket launch at night"></div>
-            <div class="release-copy"><div class="series">Doctor Who: Unbound</div><h3>Doctor of War: Genesis</h3><div class="release-price">From £19.99</div></div>
+            <div class="release-copy"><div class="series">Doctor Who: Unbound</div><h3>Doctor of War: Genesis</h3></div>
           </article>
           <article class="release-card">
             <div class="release-art"><img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=700&q=80" alt="Deep space nebula"></div>
-            <div class="release-copy"><div class="series">The War Master</div><h3>Anti-Genesis</h3><div class="release-price">From £29.99</div></div>
+            <div class="release-copy"><div class="series">The War Master</div><h3>Anti-Genesis</h3></div>
           </article>
         </div>
       </div>
@@ -1023,26 +1317,101 @@
       });
     });
 
+
+    const tabList = document.querySelector('.tab-list');
+
+    function updateTabIndicator(activeTab = document.querySelector('.tab-button.active')) {
+      if (!tabList || !activeTab) return;
+
+      const listRect = tabList.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+
+      tabList.style.setProperty(
+        '--tab-indicator-left',
+        `${tabRect.left - listRect.left + tabList.scrollLeft}px`
+      );
+      tabList.style.setProperty('--tab-indicator-width', `${tabRect.width}px`);
+    }
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        requestAnimationFrame(() => updateTabIndicator(button));
+      });
+    });
+
+    tabList?.addEventListener('scroll', () => updateTabIndicator(), { passive: true });
+    window.addEventListener('resize', () => updateTabIndicator());
+    window.addEventListener('load', () => updateTabIndicator());
+    requestAnimationFrame(() => updateTabIndicator());
+
     const playButton = document.getElementById('playButton');
+    const trailerAudio = document.getElementById('trailerAudio');
     const audioStatus = document.getElementById('audioStatus');
-    const audioTime = document.getElementById('audioTime');
-    let playing = false;
-    let seconds = 0;
-    let timer;
+    const audioProgress = document.getElementById('audioProgress');
+    const audioCurrentTime = document.getElementById('audioCurrentTime');
+    const audioDuration = document.getElementById('audioDuration');
 
-    playButton.addEventListener('click', () => {
-      playing = !playing;
-      playButton.textContent = playing ? 'Ⅱ' : '▶';
-      audioStatus.textContent = playing ? 'Playing trailer preview…' : 'Preview paused';
+    function formatAudioTime(value) {
+      if (!Number.isFinite(value)) return '0:00';
 
-      if (playing) {
-        timer = setInterval(() => {
-          seconds = (seconds + 1) % 104;
-          audioTime.textContent = `00:${String(seconds).padStart(2, '0')}`;
-        }, 1000);
-      } else {
-        clearInterval(timer);
+      const minutes = Math.floor(value / 60);
+      const seconds = Math.floor(value % 60);
+      return `${minutes}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function updateAudioProgress() {
+      const duration = trailerAudio.duration || 0;
+      const currentTime = trailerAudio.currentTime || 0;
+      const percentage = duration ? (currentTime / duration) * 100 : 0;
+
+      audioProgress.value = percentage;
+      audioProgress.style.setProperty('--audio-progress', `${percentage}%`);
+      audioCurrentTime.textContent = formatAudioTime(currentTime);
+      audioDuration.textContent = formatAudioTime(duration);
+    }
+
+    playButton.addEventListener('click', async () => {
+      try {
+        if (trailerAudio.paused) {
+          await trailerAudio.play();
+        } else {
+          trailerAudio.pause();
+        }
+      } catch (error) {
+        audioStatus.textContent = 'Audio could not be played';
+        console.error(error);
       }
+    });
+
+    trailerAudio.addEventListener('play', () => {
+      playButton.textContent = '⏸';
+      playButton.setAttribute('aria-label', 'Pause trailer');
+      audioStatus.textContent = 'Playing trailer';
+    });
+
+    trailerAudio.addEventListener('pause', () => {
+      playButton.textContent = '▶';
+      playButton.setAttribute('aria-label', 'Play trailer');
+      audioStatus.textContent = trailerAudio.ended ? 'Trailer finished' : 'Trailer paused';
+    });
+
+    trailerAudio.addEventListener('loadedmetadata', updateAudioProgress);
+    trailerAudio.addEventListener('durationchange', updateAudioProgress);
+    trailerAudio.addEventListener('timeupdate', updateAudioProgress);
+    trailerAudio.addEventListener('ended', updateAudioProgress);
+
+    trailerAudio.addEventListener('error', () => {
+      audioStatus.textContent = 'Add your trailer MP3 to the audio source';
+      playButton.disabled = true;
+    });
+
+    audioProgress.addEventListener('input', () => {
+      if (!Number.isFinite(trailerAudio.duration)) return;
+
+      trailerAudio.currentTime =
+        (Number(audioProgress.value) / 100) * trailerAudio.duration;
+
+      updateAudioProgress();
     });
 
     document.getElementById('wishlistButton').addEventListener('click', event => {
