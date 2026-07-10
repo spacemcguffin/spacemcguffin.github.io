@@ -1040,7 +1040,6 @@ body {
             <label class="option-label">Options</label>
             <div class="format-choice"><span>Digital download</span><span>£3.99</span></div>
             <button class="buy-btn" id="basketButton">Add to basket</button>
-            <button class="bundle-btn" id="bundleButton">Save money with a bundle</button>
           </section>
 
           <section class="tabs">
@@ -1316,7 +1315,6 @@ body {
     });
 
     document.getElementById('basketButton').addEventListener('click', () => showToast('Digital download added to basket.'));
-    document.getElementById('bundleButton').addEventListener('click', () => showToast('Bundle selector opened — connect this to your own modal or shop system.'));
 
     document.getElementById('signupForm').addEventListener('submit', event => {
       event.preventDefault();
