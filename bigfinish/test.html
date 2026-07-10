@@ -46,6 +46,20 @@
       --shadow: 0 24px 70px rgba(0, 0, 0, .40);
     }
 
+
+        ::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+    
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -935,7 +949,6 @@ body {
 
       <div class="nav-actions">
         <button class="icon-btn" id="themeToggle" aria-label="Toggle colour theme" title="Toggle colour theme">☾</button>
-        <button class="icon-btn" aria-label="Shopping basket" title="Shopping basket">⌑</button>
         <button class="icon-btn menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </div>
