@@ -415,8 +415,13 @@
       showToast(active ? 'Added to your wishlist.' : 'Removed from your wishlist.');
     });
 
-    document.getElementById('basketButton').addEventListener('click', () => showToast('Digital download added to basket.'));
+const basketButton = document.getElementById('basketButton');
 
+if (basketButton) {
+    basketButton.addEventListener('click', () => {
+        showToast('Digital download added to basket.');
+    });
+}
     document.getElementById('signupForm').addEventListener('submit', event => {
       event.preventDefault();
       showToast('Thanks — your demo subscription was recorded.');
