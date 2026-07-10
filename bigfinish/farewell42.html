@@ -58,13 +58,24 @@
   </header>
 
   <nav class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
-    <a href="#">Audiobooks</a>
-    <a href="#">Collections</a>
-    <a href="#">What's New</a>
-    <a href="#">News</a>
-    <a href="#">Podcasts</a>
-    <a href="#">About</a>
-  </nav>
+        <div class="nav-item" id="audiobooksNavItem">
+          <a class="nav-link-with-menu" href="#" id="audiobooksNavLink" aria-haspopup="true" aria-expanded="false">Audiobooks <span class="nav-chevron" aria-hidden="true"></span></a>
+          <div class="mega-menu" id="audiobooksMegaMenu">
+            <div class="mega-menu-inner">
+              <div class="mega-intro"><div class="mega-kicker">Explore audio</div><h2>Stories from across time and space</h2><p>Browse ranges, characters, creators, and the latest full-cast audio adventures.</p><a class="mega-feature-link" href="#">View all audiobooks →</a></div>
+              <div class="mega-column"><h3>Popular ranges</h3><div class="mega-links"><a href="#">Doctor Who</a><a href="#">Torchwood</a><a href="#">The Worlds of Doctor Who</a><a href="#">Blake's 7</a><a href="#">The Avengers</a></div></div>
+              <div class="mega-column"><h3>Browse by Doctor</h3><div class="mega-links"><a href="#">Classic Doctors</a><a href="#">Eighth Doctor</a><a href="#">Ninth Doctor</a><a href="#">Tenth Doctor</a><a href="#">War Doctor</a></div></div>
+              <div class="mega-column"><h3>Discover</h3><div class="mega-links"><a href="#">Latest releases</a><a href="#">Coming soon</a><a href="#">Box sets</a><a href="#">Bundles</a><a href="#">Free stories</a></div></div>
+            </div>
+          </div>
+        </div>
+        <a href="#">Collections</a>
+        <a href="#">What's New</a>
+        <a href="#">News</a>
+        <a href="#">Podcasts</a>
+        <a href="#">About</a>
+      </nav>
+
 
   <main>
     <div class="product-hero" style="--cover-art: url('/images/farewell42.png');">
