@@ -175,7 +175,7 @@ body {
       width: 42px;
       height: 42px;
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-: 999px;
       display: grid;
       place-items: center;
       background: var(--surface);
@@ -198,7 +198,7 @@ body {
     }
 
     .mobile-panel.open { display: grid; gap: 8px; }
-    .mobile-panel a { padding: 14px 12px; border-radius: 10px; font-weight: 700; }
+    .mobile-panel a { padding: 14px 12px; border-: 10px; font-weight: 700; }
     .mobile-panel a:hover { background: var(--surface-2); }
 
     .page-shell { width: min(1240px, calc(100% - 150px)); margin: 0 auto; }
@@ -232,7 +232,7 @@ body {
     .cover-frame {
       position: relative;
       overflow: hidden;
-      border-radius: 4px;
+      border-radius: 10px;
       background: #111;
       box-shadow: var(--shadow);
     }
