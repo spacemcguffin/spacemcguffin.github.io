@@ -80,7 +80,7 @@
           </div>
 
           <div class="audio-bar">
-            <button class="play-btn" id="playButton" type="button" aria-label="Play trailer">▶</button>
+            <button class="play-btn" id="playButton" type="button" aria-label="Play track">▶</button>
 
             <div class="audio-player-main">
               <div class="audio-player-topline">
@@ -382,13 +382,13 @@
     trailerAudio.addEventListener('play', () => {
       playButton.textContent = '⏸';
       playButton.setAttribute('aria-label', 'Pause trailer');
-      audioStatus.textContent = 'Playing trailer';
+      audioStatus.textContent = 'Playing track';
     });
 
     trailerAudio.addEventListener('pause', () => {
       playButton.textContent = '▶';
-      playButton.setAttribute('aria-label', 'Play trailer');
-      audioStatus.textContent = trailerAudio.ended ? 'Trailer finished' : 'Trailer paused';
+      playButton.setAttribute('aria-label', 'Play track');
+      audioStatus.textContent = trailerAudio.ended ? 'Trailer finished' : 'Track paused';
     });
 
     trailerAudio.addEventListener('loadedmetadata', updateAudioProgress);
