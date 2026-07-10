@@ -58,6 +58,19 @@
       transition: background .25s ease, color .25s ease;
     }
 
+    html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.page-shell,
+.product-grid,
+.cover-column,
+.details-column {
+  min-width: 0;
+}
+
     img { display: block; max-width: 100%; }
     button, input, select { font: inherit; }
     a { color: inherit; text-decoration: none; }
@@ -748,10 +761,14 @@
 
 
     /* Blurred cover-art hero background */
-    .product-hero {
-      position: relative;
-      isolation: isolate;
-    }
+.product-hero {
+  position: relative;
+  isolation: isolate;
+
+  /* Prevent blurred background from creating horizontal overflow */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
 
     .product-hero::before {
       content: "";
