@@ -437,6 +437,7 @@
       display: flex;
       gap: clamp(14px, 3vw, 32px);
       overflow-x: auto;
+      overflow-y: hidden;
       border-bottom: 1px solid var(--line);
     }
 
@@ -624,6 +625,276 @@
       .audio-bar { grid-template-columns: auto 1fr; }
       .audio-time { display: none; }
     }
+
+    /* Clickable cover lightbox */
+    .cover-frame {
+      cursor: zoom-in;
+    }
+
+    .cover-frame img {
+      transition: transform .25s ease, filter .25s ease;
+    }
+
+    .cover-frame:hover img {
+      transform: scale(1.015);
+      filter: brightness(.96);
+    }
+
+    .cover-frame:focus-visible {
+      outline: 3px solid var(--brand);
+      outline-offset: 5px;
+    }
+
+    .cover-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      background: rgba(7, 7, 7, .9);
+      backdrop-filter: blur(12px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+
+    .cover-lightbox.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .cover-lightbox-image {
+      max-width: min(92vw, 1100px);
+      max-height: 88vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .6);
+      transform: scale(.96);
+      transition: transform .25s ease;
+    }
+
+    .cover-lightbox.open .cover-lightbox-image {
+      transform: scale(1);
+    }
+
+    .cover-lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255, 255, 255, .28);
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: rgba(20, 20, 20, .72);
+      font-size: 1.8rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .cover-lightbox-close:hover {
+      transform: scale(1.06);
+      background: rgba(50, 50, 50, .92);
+    }
+
+    .cover-lightbox-close:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 3px;
+    }
+
+    .cover-lightbox-caption {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      max-width: calc(100vw - 40px);
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, .88);
+      background: rgba(20, 20, 20, .68);
+      font-size: .82rem;
+      text-align: center;
+    }
+
+    body.lightbox-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 520px) {
+      .cover-lightbox {
+        padding: 18px;
+      }
+
+      .cover-lightbox-close {
+        top: 12px;
+        right: 12px;
+      }
+
+      .cover-lightbox-image {
+        max-width: 96vw;
+        max-height: 82vh;
+      }
+
+      .cover-lightbox-caption {
+        bottom: 12px;
+      }
+    }
+
+
+    /* Blurred cover-art hero background */
+    .product-hero {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .product-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: -80px 0 auto;
+      height: min(760px, 78vh);
+      background:
+        linear-gradient(
+          to bottom,
+          color-mix(in srgb, var(--page) 30%, transparent),
+          var(--page) 96%
+        ),
+        var(--cover-art) center 32% / cover no-repeat;
+      filter: blur(44px) saturate(1.15);
+      transform: scale(1.08);
+      opacity: .34;
+      pointer-events: none;
+    }
+
+    .product-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: -80px 0 auto;
+      height: min(760px, 78vh);
+      background:
+        radial-gradient(circle at 24% 30%, transparent 0 18%, var(--page) 72%),
+        linear-gradient(to bottom, transparent 20%, var(--page) 96%);
+      pointer-events: none;
+    }
+
+    html[data-theme="dark"] .product-hero::before {
+      opacity: .24;
+      filter: blur(52px) saturate(1.2) brightness(.72);
+    }
+
+    /* Real custom audio player */
+    .audio-bar {
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    .audio-player-main {
+      min-width: 0;
+    }
+
+    .audio-player-topline {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .audio-progress {
+      width: 100%;
+      height: 5px;
+      margin-top: 9px;
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      outline: none;
+      background:
+        linear-gradient(
+          to right,
+          var(--brand) 0 var(--audio-progress, 0%),
+          var(--surface-3) var(--audio-progress, 0%) 100%
+        );
+      cursor: pointer;
+    }
+
+    .audio-progress::-webkit-slider-thumb {
+      width: 15px;
+      height: 15px;
+      appearance: none;
+      border: 3px solid var(--surface);
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .28);
+    }
+
+    .audio-progress::-moz-range-thumb {
+      width: 11px;
+      height: 11px;
+      border: 3px solid var(--surface);
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .28);
+    }
+
+    .audio-time {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+
+    /* Sliding animated underline for tabs */
+    .tab-list {
+      position: relative;
+      scrollbar-width: thin;
+    }
+
+    .tab-list::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: var(--tab-indicator-width, 0px);
+      height: 3px;
+      border-radius: 999px 999px 0 0;
+      background: var(--brand);
+      transform: translateX(var(--tab-indicator-left, 0px));
+      transition:
+        transform .38s cubic-bezier(.22, 1, .36, 1),
+        width .38s cubic-bezier(.22, 1, .36, 1);
+      pointer-events: none;
+    }
+
+    .tab-button.active::after {
+      display: none;
+    }
+
+    .tab-button {
+      transition: color .25s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tab-list::after,
+      .cover-frame img,
+      .cover-lightbox-image {
+        transition: none !important;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .audio-player-topline {
+        align-items: center;
+      }
+
+      .audio-time {
+        display: block;
+        font-size: .72rem;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -663,7 +934,8 @@
   </nav>
 
   <main>
-    <div class="page-shell">
+    <div class="product-hero" style="--cover-art: url('https://admin.bigfinish.com/storage/images/optimised/5184f3aa-685d-428a-b9fd-4539822039b7__600x600.webp');">
+      <div class="page-shell">
       <div class="breadcrumbs" aria-label="Breadcrumb">
         <span>Home</span><span>Release</span><span>Doctor Who: Terror Firma</span>
       </div>
@@ -675,12 +947,40 @@
           </div>
 
           <div class="audio-bar">
-            <button class="play-btn" id="playButton" aria-label="Play trailer">▶</button>
-            <div>
-              <div class="audio-title">Listen to the trailer</div>
-              <div class="audio-meta" id="audioStatus">Preview audio demonstration</div>
+            <button class="play-btn" id="playButton" type="button" aria-label="Play trailer">▶</button>
+
+            <div class="audio-player-main">
+              <div class="audio-player-topline">
+                <div>
+                  <div class="audio-title">Listen to the trailer</div>
+                  <div class="audio-meta" id="audioStatus">Ready to play</div>
+                </div>
+
+                <div class="audio-time" id="audioTime">
+                  <span id="audioCurrentTime">0:00</span>
+                  <span aria-hidden="true"> / </span>
+                  <span id="audioDuration">0:00</span>
+                </div>
+              </div>
+
+              <input
+                class="audio-progress"
+                id="audioProgress"
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                step="0.1"
+                aria-label="Trailer playback position"
+              >
             </div>
-            <div class="audio-time" id="audioTime">00:00</div>
+
+            <!-- Replace this src with your own trailer MP3 when available. -->
+            <audio
+              id="trailerAudio"
+              preload="metadata"
+              src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+            ></audio>
           </div>
 
           <div class="release-nav">
@@ -754,6 +1054,7 @@
         </article>
       </section>
     </div>
+    </div>
 
     <section class="recommendations">
       <div class="page-shell">
@@ -812,6 +1113,33 @@
     </div>
   </footer>
 
+
+  <div
+    class="cover-lightbox"
+    id="coverLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Enlarged cover artwork"
+    aria-hidden="true"
+  >
+    <button
+      class="cover-lightbox-close"
+      id="coverLightboxClose"
+      type="button"
+      aria-label="Close enlarged cover"
+    >×</button>
+
+    <img
+      class="cover-lightbox-image"
+      id="coverLightboxImage"
+      src=""
+      alt=""
+    >
+
+    <div class="cover-lightbox-caption" id="coverLightboxCaption"></div>
+  </div>
+
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -854,26 +1182,101 @@
       });
     });
 
+
+    const tabList = document.querySelector('.tab-list');
+
+    function updateTabIndicator(activeTab = document.querySelector('.tab-button.active')) {
+      if (!tabList || !activeTab) return;
+
+      const listRect = tabList.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+
+      tabList.style.setProperty(
+        '--tab-indicator-left',
+        `${tabRect.left - listRect.left + tabList.scrollLeft}px`
+      );
+      tabList.style.setProperty('--tab-indicator-width', `${tabRect.width}px`);
+    }
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        requestAnimationFrame(() => updateTabIndicator(button));
+      });
+    });
+
+    tabList?.addEventListener('scroll', () => updateTabIndicator(), { passive: true });
+    window.addEventListener('resize', () => updateTabIndicator());
+    window.addEventListener('load', () => updateTabIndicator());
+    requestAnimationFrame(() => updateTabIndicator());
+
     const playButton = document.getElementById('playButton');
+    const trailerAudio = document.getElementById('trailerAudio');
     const audioStatus = document.getElementById('audioStatus');
-    const audioTime = document.getElementById('audioTime');
-    let playing = false;
-    let seconds = 0;
-    let timer;
+    const audioProgress = document.getElementById('audioProgress');
+    const audioCurrentTime = document.getElementById('audioCurrentTime');
+    const audioDuration = document.getElementById('audioDuration');
 
-    playButton.addEventListener('click', () => {
-      playing = !playing;
-      playButton.textContent = playing ? 'Ⅱ' : '▶';
-      audioStatus.textContent = playing ? 'Playing trailer preview…' : 'Preview paused';
+    function formatAudioTime(value) {
+      if (!Number.isFinite(value)) return '0:00';
 
-      if (playing) {
-        timer = setInterval(() => {
-          seconds = (seconds + 1) % 104;
-          audioTime.textContent = `00:${String(seconds).padStart(2, '0')}`;
-        }, 1000);
-      } else {
-        clearInterval(timer);
+      const minutes = Math.floor(value / 60);
+      const seconds = Math.floor(value % 60);
+      return `${minutes}:${String(seconds).padStart(2, '0')}`;
+    }
+
+    function updateAudioProgress() {
+      const duration = trailerAudio.duration || 0;
+      const currentTime = trailerAudio.currentTime || 0;
+      const percentage = duration ? (currentTime / duration) * 100 : 0;
+
+      audioProgress.value = percentage;
+      audioProgress.style.setProperty('--audio-progress', `${percentage}%`);
+      audioCurrentTime.textContent = formatAudioTime(currentTime);
+      audioDuration.textContent = formatAudioTime(duration);
+    }
+
+    playButton.addEventListener('click', async () => {
+      try {
+        if (trailerAudio.paused) {
+          await trailerAudio.play();
+        } else {
+          trailerAudio.pause();
+        }
+      } catch (error) {
+        audioStatus.textContent = 'Audio could not be played';
+        console.error(error);
       }
+    });
+
+    trailerAudio.addEventListener('play', () => {
+      playButton.textContent = 'Ⅱ';
+      playButton.setAttribute('aria-label', 'Pause trailer');
+      audioStatus.textContent = 'Playing trailer';
+    });
+
+    trailerAudio.addEventListener('pause', () => {
+      playButton.textContent = '▶';
+      playButton.setAttribute('aria-label', 'Play trailer');
+      audioStatus.textContent = trailerAudio.ended ? 'Trailer finished' : 'Trailer paused';
+    });
+
+    trailerAudio.addEventListener('loadedmetadata', updateAudioProgress);
+    trailerAudio.addEventListener('durationchange', updateAudioProgress);
+    trailerAudio.addEventListener('timeupdate', updateAudioProgress);
+    trailerAudio.addEventListener('ended', updateAudioProgress);
+
+    trailerAudio.addEventListener('error', () => {
+      audioStatus.textContent = 'Add your trailer MP3 to the audio source';
+      playButton.disabled = true;
+    });
+
+    audioProgress.addEventListener('input', () => {
+      if (!Number.isFinite(trailerAudio.duration)) return;
+
+      trailerAudio.currentTime =
+        (Number(audioProgress.value) / 100) * trailerAudio.duration;
+
+      updateAudioProgress();
     });
 
     document.getElementById('wishlistButton').addEventListener('click', event => {
@@ -898,6 +1301,74 @@
       clearTimeout(showToast.timeout);
       showToast.timeout = setTimeout(() => toast.classList.remove('show'), 2600);
     }
+
+    const coverFrame = document.querySelector('.cover-frame');
+    const coverImage = coverFrame?.querySelector('img');
+    const coverLightbox = document.getElementById('coverLightbox');
+    const coverLightboxImage = document.getElementById('coverLightboxImage');
+    const coverLightboxCaption = document.getElementById('coverLightboxCaption');
+    const coverLightboxClose = document.getElementById('coverLightboxClose');
+    let previouslyFocusedElement = null;
+
+    if (
+      coverFrame &&
+      coverImage &&
+      coverLightbox &&
+      coverLightboxImage &&
+      coverLightboxClose
+    ) {
+      coverFrame.setAttribute('role', 'button');
+      coverFrame.setAttribute('tabindex', '0');
+      coverFrame.setAttribute('aria-label', 'Open enlarged cover artwork');
+
+      function openCoverLightbox() {
+        previouslyFocusedElement = document.activeElement;
+        coverLightboxImage.src = coverImage.currentSrc || coverImage.src;
+        coverLightboxImage.alt = coverImage.alt;
+        coverLightboxCaption.textContent = coverImage.alt;
+        coverLightbox.classList.add('open');
+        coverLightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+        coverLightboxClose.focus();
+      }
+
+      function closeCoverLightbox() {
+        coverLightbox.classList.remove('open');
+        coverLightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+
+        if (previouslyFocusedElement) {
+          previouslyFocusedElement.focus();
+        }
+      }
+
+      coverFrame.addEventListener('click', openCoverLightbox);
+
+      coverFrame.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openCoverLightbox();
+        }
+      });
+
+      coverLightboxClose.addEventListener('click', closeCoverLightbox);
+
+      coverLightbox.addEventListener('click', event => {
+        if (event.target === coverLightbox) {
+          closeCoverLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (
+          event.key === 'Escape' &&
+          coverLightbox.classList.contains('open')
+        ) {
+          closeCoverLightbox();
+        }
+      });
+    }
+
   </script>
 </body>
 </html>
