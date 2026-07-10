@@ -204,7 +204,10 @@
     .mobile-panel a { padding: 14px 12px; border-radius: 10px; font-weight: 700; }
     .mobile-panel a:hover { background: var(--surface-2); }
 
-    .page-shell { width: min(1240px, calc(100% - 150px)); margin: 0 auto; }
+    .page-shell {   
+		width: min(1240px, calc(100% - clamp(24px, 8vw, 150px)));
+        margin-inline: auto;
+	}
 
     .breadcrumbs {
       display: flex;
