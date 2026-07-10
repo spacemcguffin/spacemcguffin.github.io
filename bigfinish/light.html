@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet"> 
 
   <style>
     :root {
@@ -319,12 +322,11 @@
     h1 {
       max-width: 790px;
       margin: 0;
-      font-family: "Oswald", sans-serif;
-      font-size: clamp(3rem, 6vw, 6.2rem);
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: clamp(3rem, 6vw, 3.2rem);
       font-weight: 500;
-      line-height: .95;
-      letter-spacing: -.035em;
-      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -.03em;
     }
 
     .release-number { color: var(--brand); }
@@ -373,8 +375,8 @@
 
     .price {
       margin: 4px 0 20px;
-      font-family: "Oswald", sans-serif;
-      font-size: 3.2rem;
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 2.6rem;
       line-height: 1;
     }
 
@@ -435,6 +437,7 @@
       display: flex;
       gap: clamp(14px, 3vw, 32px);
       overflow-x: auto;
+      overflow-y: hidden;
       border-bottom: 1px solid var(--line);
     }
 
@@ -466,9 +469,10 @@
 
     .quote {
       margin: 0 0 22px;
-      font-family: "Oswald", sans-serif;
-      font-size: 1.65rem;
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 1.5rem;
       line-height: 1.3;
+      font-weight: 600;
     }
 
     .credits-grid {
@@ -500,10 +504,10 @@
     }
 
     .section-heading h2 {
-      max-width: 700px;
+      max-width: 800px;
       margin: 0;
       font-family: "Oswald", sans-serif;
-      font-size: clamp(2.2rem, 4vw, 4rem);
+      font-size: clamp(2.2rem, 2vw, 4rem);
       font-weight: 500;
       line-height: 1;
       text-transform: uppercase;
@@ -529,7 +533,7 @@
     .release-card:hover .release-art img { transform: scale(1.035); }
     .release-copy { padding: 16px; }
     .series { color: var(--brand); font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-    .release-copy h3 { min-height: 48px; margin: 8px 0 16px; font-size: 1rem; line-height: 1.35; }
+    .release-copy h3 { margin: 8px 0 16px; font-size: 1rem; line-height: 1.35; }
     .release-price { font-weight: 800; }
 
     .newsletter {
@@ -547,8 +551,8 @@
 
     .newsletter h2 {
       margin: 0 0 10px;
-      font-family: "Oswald", sans-serif;
-      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: clamp(2.5rem, 4vw, 5rem);
       font-weight: 500;
       line-height: .95;
       text-transform: uppercase;
@@ -622,7 +626,7 @@
       .audio-time { display: none; }
     }
 
-    /* Cover image lightbox */
+    /* Clickable cover lightbox */
     .cover-frame {
       cursor: zoom-in;
     }
@@ -641,42 +645,42 @@
       outline-offset: 5px;
     }
 
-    .lightbox {
+    .cover-lightbox {
       position: fixed;
       inset: 0;
       z-index: 9999;
       display: grid;
       place-items: center;
       padding: 28px;
-      background: rgba(8, 8, 8, .88);
+      background: rgba(7, 7, 7, .9);
       backdrop-filter: blur(12px);
       opacity: 0;
       visibility: hidden;
       transition: opacity .25s ease, visibility .25s ease;
     }
 
-    .lightbox.open {
+    .cover-lightbox.open {
       opacity: 1;
       visibility: visible;
     }
 
-    .lightbox-image {
+    .cover-lightbox-image {
       max-width: min(92vw, 1100px);
       max-height: 88vh;
       width: auto;
       height: auto;
       object-fit: contain;
       border-radius: 4px;
-      box-shadow: 0 30px 90px rgba(0, 0, 0, .55);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .6);
       transform: scale(.96);
       transition: transform .25s ease;
     }
 
-    .lightbox.open .lightbox-image {
+    .cover-lightbox.open .cover-lightbox-image {
       transform: scale(1);
     }
 
-    .lightbox-close {
+    .cover-lightbox-close {
       position: fixed;
       top: 20px;
       right: 20px;
@@ -694,17 +698,17 @@
       transition: transform .2s ease, background .2s ease;
     }
 
-    .lightbox-close:hover {
+    .cover-lightbox-close:hover {
       transform: scale(1.06);
-      background: rgba(50, 50, 50, .9);
+      background: rgba(50, 50, 50, .92);
     }
 
-    .lightbox-close:focus-visible {
+    .cover-lightbox-close:focus-visible {
       outline: 3px solid #fff;
       outline-offset: 3px;
     }
 
-    .lightbox-caption {
+    .cover-lightbox-caption {
       position: fixed;
       left: 50%;
       bottom: 18px;
@@ -723,21 +727,21 @@
     }
 
     @media (max-width: 520px) {
-      .lightbox {
+      .cover-lightbox {
         padding: 18px;
       }
 
-      .lightbox-close {
+      .cover-lightbox-close {
         top: 12px;
         right: 12px;
       }
 
-      .lightbox-image {
+      .cover-lightbox-image {
         max-width: 96vw;
         max-height: 82vh;
       }
 
-      .lightbox-caption {
+      .cover-lightbox-caption {
         bottom: 12px;
       }
     }
@@ -931,11 +935,31 @@
   </footer>
 
 
-  <div class="lightbox" id="coverLightbox" role="dialog" aria-modal="true" aria-label="Enlarged cover artwork" aria-hidden="true">
-    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close enlarged cover">×</button>
-    <img class="lightbox-image" id="lightboxImage" src="" alt="">
-    <div class="lightbox-caption" id="lightboxCaption"></div>
+  <div
+    class="cover-lightbox"
+    id="coverLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Enlarged cover artwork"
+    aria-hidden="true"
+  >
+    <button
+      class="cover-lightbox-close"
+      id="coverLightboxClose"
+      type="button"
+      aria-label="Close enlarged cover"
+    >×</button>
+
+    <img
+      class="cover-lightbox-image"
+      id="coverLightboxImage"
+      src=""
+      alt=""
+    >
+
+    <div class="cover-lightbox-caption" id="coverLightboxCaption"></div>
   </div>
+
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -1027,52 +1051,66 @@
     const coverFrame = document.querySelector('.cover-frame');
     const coverImage = coverFrame?.querySelector('img');
     const coverLightbox = document.getElementById('coverLightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxCaption = document.getElementById('lightboxCaption');
-    const lightboxClose = document.getElementById('lightboxClose');
-    let lastFocusedElement = null;
+    const coverLightboxImage = document.getElementById('coverLightboxImage');
+    const coverLightboxCaption = document.getElementById('coverLightboxCaption');
+    const coverLightboxClose = document.getElementById('coverLightboxClose');
+    let previouslyFocusedElement = null;
 
-    if (coverFrame && coverImage && coverLightbox) {
+    if (
+      coverFrame &&
+      coverImage &&
+      coverLightbox &&
+      coverLightboxImage &&
+      coverLightboxClose
+    ) {
       coverFrame.setAttribute('role', 'button');
       coverFrame.setAttribute('tabindex', '0');
       coverFrame.setAttribute('aria-label', 'Open enlarged cover artwork');
 
-      function openLightbox() {
-        lastFocusedElement = document.activeElement;
-        lightboxImage.src = coverImage.currentSrc || coverImage.src;
-        lightboxImage.alt = coverImage.alt;
-        lightboxCaption.textContent = coverImage.alt;
+      function openCoverLightbox() {
+        previouslyFocusedElement = document.activeElement;
+        coverLightboxImage.src = coverImage.currentSrc || coverImage.src;
+        coverLightboxImage.alt = coverImage.alt;
+        coverLightboxCaption.textContent = coverImage.alt;
         coverLightbox.classList.add('open');
         coverLightbox.setAttribute('aria-hidden', 'false');
         document.body.classList.add('lightbox-open');
-        lightboxClose.focus();
+        coverLightboxClose.focus();
       }
 
-      function closeLightbox() {
+      function closeCoverLightbox() {
         coverLightbox.classList.remove('open');
         coverLightbox.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('lightbox-open');
-        if (lastFocusedElement) lastFocusedElement.focus();
+
+        if (previouslyFocusedElement) {
+          previouslyFocusedElement.focus();
+        }
       }
 
-      coverFrame.addEventListener('click', openLightbox);
+      coverFrame.addEventListener('click', openCoverLightbox);
 
       coverFrame.addEventListener('keydown', event => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
-          openLightbox();
+          openCoverLightbox();
         }
       });
 
-      lightboxClose.addEventListener('click', closeLightbox);
+      coverLightboxClose.addEventListener('click', closeCoverLightbox);
 
       coverLightbox.addEventListener('click', event => {
-        if (event.target === coverLightbox) closeLightbox();
+        if (event.target === coverLightbox) {
+          closeCoverLightbox();
+        }
       });
 
       document.addEventListener('keydown', event => {
-        if (event.key === 'Escape' && coverLightbox.classList.contains('open')) {
-          closeLightbox();
+        if (
+          event.key === 'Escape' &&
+          coverLightbox.classList.contains('open')
+        ) {
+          closeCoverLightbox();
         }
       });
     }
