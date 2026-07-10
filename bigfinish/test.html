@@ -64,7 +64,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "DM Sans", system-ui, sans-serif;
+      font-family: "Inter", system-ui, sans-serif;
       color: var(--text);
       background:
         radial-gradient(circle at 85% 4%, color-mix(in srgb, var(--brand) 15%, transparent), transparent 30rem),
@@ -158,14 +158,14 @@ body {
     .desktop-nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 30px;
     }
 
     .desktop-nav a {
       position: relative;
       padding: 12px 0;
       font-size: .93rem;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .desktop-nav a::after {
@@ -301,13 +301,13 @@ body {
     }
 
     .release-nav a {
-      padding: 13px 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--surface);
-      font-size: .82rem;
-      font-weight: 700;
-      transition: background .2s ease, transform .2s ease;
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    font-size: .82rem;
+    font-weight: 500;
+    transition: background .2s ease, transform .2s ease;
     }
 
     .release-nav a:last-child { text-align: right; }
@@ -322,26 +322,25 @@ body {
     }
 
     .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      color: var(--muted);
-      background: var(--surface-2);
-      font-size: .76rem;
-      font-weight: 700;
-      letter-spacing: .03em;
-      text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    color: var(--muted);
+    background: var(--surface-2);
+    font-size: .8rem;
+    font-weight: 600;
     }
 
     .wishlist {
-      margin-left: auto;
-      border: 0;
-      background: transparent;
-      color: var(--muted);
-      font-weight: 700;
-      cursor: pointer;
+    margin-left: auto;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.95rem;
     }
 
     .wishlist.active { color: var(--brand); }
@@ -359,10 +358,10 @@ body {
     .release-number { color: var(--brand); }
 
     .release-date {
-      margin: 20px 0 28px;
-      color: var(--muted);
-      font-size: 1rem;
-      font-weight: 600;
+    margin: 20px 0 28px;
+    color: var(--muted);
+    font-size: 1rem;
+    font-weight: 500;
     }
 
     .facts {
@@ -531,13 +530,13 @@ body {
     }
 
     .section-heading h2 {
-      max-width: 800px;
-      margin: 0;
-      font-family: "Oswald", sans-serif;
-      font-size: clamp(2.2rem, 2vw, 4rem);
-      font-weight: 500;
-      line-height: 1;
-      text-transform: uppercase;
+    max-width: 800px;
+    margin: 0;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-size: clamp(2rem, 2vw, 4rem);
+    font-weight: 500;
+    line-height: 1;
+    text-transform: uppercase;
     }
 
     .cards {
