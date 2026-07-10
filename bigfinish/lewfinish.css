@@ -213,12 +213,6 @@ body {
       font-size: .82rem;
     }
 
-    .breadcrumbs span:not(:last-child)::after {
-      content: "/";
-      margin-left: 8px;
-      opacity: .55;
-    }
-
     .product-grid {
       display: grid;
       grid-template-columns: minmax(280px, 520px) minmax(0, 1fr);
