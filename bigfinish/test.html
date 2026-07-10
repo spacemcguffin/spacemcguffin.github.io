@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet"> 
 
   <style>
     :root {
@@ -187,7 +190,7 @@
     .mobile-panel a { padding: 14px 12px; border-radius: 10px; font-weight: 700; }
     .mobile-panel a:hover { background: var(--surface-2); }
 
-    .page-shell { width: min(1240px, calc(100% - 36px)); margin: 0 auto; }
+    .page-shell { width: min(1240px, calc(100% - 150px)); margin: 0 auto; }
 
     .breadcrumbs {
       display: flex;
@@ -319,12 +322,11 @@
     h1 {
       max-width: 790px;
       margin: 0;
-      font-family: "Oswald", sans-serif;
-      font-size: clamp(3rem, 6vw, 6.2rem);
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: clamp(3rem, 6vw, 3.2rem);
       font-weight: 500;
-      line-height: .95;
-      letter-spacing: -.035em;
-      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -.03em;
     }
 
     .release-number { color: var(--brand); }
@@ -373,8 +375,8 @@
 
     .price {
       margin: 4px 0 20px;
-      font-family: "Oswald", sans-serif;
-      font-size: 3.2rem;
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 2.6rem;
       line-height: 1;
     }
 
@@ -427,8 +429,7 @@
     }
 
     .tabs {
-      width: 100%;
-      margin: -24px 0 70px;
+      margin-top: 34px;
       border-top: 1px solid var(--line);
     }
 
@@ -467,9 +468,10 @@
 
     .quote {
       margin: 0 0 22px;
-      font-family: "Oswald", sans-serif;
-      font-size: 1.65rem;
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 1.5rem;
       line-height: 1.3;
+      font-weight: 600;
     }
 
     .credits-grid {
@@ -501,10 +503,10 @@
     }
 
     .section-heading h2 {
-      max-width: 700px;
+      max-width: 800px;
       margin: 0;
       font-family: "Oswald", sans-serif;
-      font-size: clamp(2.2rem, 4vw, 4rem);
+      font-size: clamp(2.2rem, 2vw, 4rem);
       font-weight: 500;
       line-height: 1;
       text-transform: uppercase;
@@ -530,7 +532,7 @@
     .release-card:hover .release-art img { transform: scale(1.035); }
     .release-copy { padding: 16px; }
     .series { color: var(--brand); font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
-    .release-copy h3 { min-height: 48px; margin: 8px 0 16px; font-size: 1rem; line-height: 1.35; }
+    .release-copy h3 { margin: 8px 0 16px; font-size: 1rem; line-height: 1.35; }
     .release-price { font-weight: 800; }
 
     .newsletter {
@@ -548,8 +550,8 @@
 
     .newsletter h2 {
       margin: 0 0 10px;
-      font-family: "Oswald", sans-serif;
-      font-size: clamp(2.5rem, 5vw, 5rem);
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: clamp(2.5rem, 4vw, 5rem);
       font-weight: 500;
       line-height: .95;
       text-transform: uppercase;
@@ -712,45 +714,44 @@
             <button class="bundle-btn" id="bundleButton">Save money with a bundle</button>
           </section>
 
+          <section class="tabs">
+            <div class="tab-list" role="tablist" aria-label="Release information">
+              <button class="tab-button active" role="tab" aria-selected="true" data-tab="about">About</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="backstage">Backstage</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="cast">Cast</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="production">Production info</button>
+            </div>
+
+            <div class="tab-panel active" id="about" role="tabpanel">
+              <p class="quote">“Welcome back, Doctor...”</p>
+              <p>Centuries ago on the war-torn planet Skaro, a great scientist created the most dangerous creatures the universe would ever know: the Daleks. At their genesis, Davros first met—and was defeated by—the Doctor.</p>
+              <p>Across the years and throughout space they fought, a conflict that appeared to end with the destruction of Skaro. Except Davros survived. Alone in the dark, thoughts of revenge kept him alive. Now the Doctor is back, Davros is waiting, and their destiny is at hand.</p>
+            </div>
+
+            <div class="tab-panel" id="backstage" role="tabpanel">
+              <p class="quote">Behind the release</p>
+              <p>This panel is ready for interviews, recording photographs, writer’s notes, downloadable extras, and other behind-the-scenes material.</p>
+            </div>
+
+            <div class="tab-panel" id="cast" role="tabpanel">
+              <div class="credits-grid">
+                <div class="credit-card"><small>The Doctor</small><strong>Paul McGann</strong></div>
+                <div class="credit-card"><small>Charley Pollard</small><strong>India Fisher</strong></div>
+                <div class="credit-card"><small>C'rizz</small><strong>Conrad Westmaas</strong></div>
+                <div class="credit-card"><small>Davros</small><strong>Terry Molloy</strong></div>
+              </div>
+            </div>
+
+            <div class="tab-panel" id="production" role="tabpanel">
+              <div class="credits-grid">
+                <div class="credit-card"><small>Writer</small><strong>Joseph Lidster</strong></div>
+                <div class="credit-card"><small>Format</small><strong>Full-cast audio drama</strong></div>
+                <div class="credit-card"><small>Release number</small><strong>072</strong></div>
+                <div class="credit-card"><small>Running time</small><strong>103 minutes</strong></div>
+              </div>
+            </div>
+          </section>
         </article>
-      </section>
-
-      <section class="tabs">
-        <div class="tab-list" role="tablist" aria-label="Release information">
-          <button class="tab-button active" role="tab" aria-selected="true" data-tab="about">About</button>
-          <button class="tab-button" role="tab" aria-selected="false" data-tab="backstage">Backstage</button>
-          <button class="tab-button" role="tab" aria-selected="false" data-tab="cast">Cast</button>
-          <button class="tab-button" role="tab" aria-selected="false" data-tab="production">Production info</button>
-        </div>
-
-        <div class="tab-panel active" id="about" role="tabpanel">
-          <p class="quote">“Welcome back, Doctor...”</p>
-          <p>Centuries ago on the war-torn planet Skaro, a great scientist created the most dangerous creatures the universe would ever know: the Daleks. At their genesis, Davros first met—and was defeated by—the Doctor.</p>
-          <p>Across the years and throughout space they fought, a conflict that appeared to end with the destruction of Skaro. Except Davros survived. Alone in the dark, thoughts of revenge kept him alive. Now the Doctor is back, Davros is waiting, and their destiny is at hand.</p>
-        </div>
-
-        <div class="tab-panel" id="backstage" role="tabpanel">
-          <p class="quote">Behind the release</p>
-          <p>This panel is ready for interviews, recording photographs, writer’s notes, downloadable extras, and other behind-the-scenes material.</p>
-        </div>
-
-        <div class="tab-panel" id="cast" role="tabpanel">
-          <div class="credits-grid">
-            <div class="credit-card"><small>The Doctor</small><strong>Paul McGann</strong></div>
-            <div class="credit-card"><small>Charley Pollard</small><strong>India Fisher</strong></div>
-            <div class="credit-card"><small>C'rizz</small><strong>Conrad Westmaas</strong></div>
-            <div class="credit-card"><small>Davros</small><strong>Terry Molloy</strong></div>
-          </div>
-        </div>
-
-        <div class="tab-panel" id="production" role="tabpanel">
-          <div class="credits-grid">
-            <div class="credit-card"><small>Writer</small><strong>Joseph Lidster</strong></div>
-            <div class="credit-card"><small>Format</small><strong>Full-cast audio drama</strong></div>
-            <div class="credit-card"><small>Release number</small><strong>072</strong></div>
-            <div class="credit-card"><small>Running time</small><strong>103 minutes</strong></div>
-          </div>
-        </div>
       </section>
     </div>
 
