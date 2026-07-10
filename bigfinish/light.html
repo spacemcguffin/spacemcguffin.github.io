@@ -46,11 +46,25 @@
       --shadow: 0 24px 70px rgba(0, 0, 0, .40);
     }
 
+
+    ::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+  color:#000000;
+} 
+
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: "DM Sans", system-ui, sans-serif;
+      font-family: "Inter", system-ui, sans-serif;
       color: var(--text);
       background:
         radial-gradient(circle at 85% 4%, color-mix(in srgb, var(--brand) 15%, transparent), transparent 30rem),
@@ -279,7 +293,7 @@
       border-radius: 12px;
       background: var(--surface);
       font-size: .82rem;
-      font-weight: 700;
+      font-weight: 500;
       transition: background .2s ease, transform .2s ease;
     }
 
@@ -336,7 +350,7 @@
       margin: 20px 0 28px;
       color: var(--muted);
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .facts {
@@ -449,7 +463,7 @@
       border: 0;
       background: transparent;
       color: var(--muted);
-      font-weight: 800;
+      font-weight: 600;
       cursor: pointer;
     }
 
