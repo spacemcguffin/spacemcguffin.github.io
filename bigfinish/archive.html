@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="A clickable story archive by Lewis Christian" />
+  <title>Story Archive — Lewis.LC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Google+Sans+Flex:opsz,wght@6..144,400..800&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page: #f3f0ea;
+      --surface: #ffffff;
+      --surface-2: #e9e5dd;
+      --surface-3: #dcd6cd;
+      --text: #1f1f1d;
+      --muted: #6e6a64;
+      --line: rgba(31, 31, 29, .14);
+      --brand: #4771a2;
+      --brand-dark: #1e4470;
+      --shadow: 0 24px 70px rgba(40, 33, 28, .14);
+      --radius: 18px;
+      --header-height: 78px;
+    }
+
+    html[data-theme="dark"] {
+      --page: #11110f;
+      --surface: #1a1a17;
+      --surface-2: #24231f;
+      --surface-3: #302f29;
+      --text: #d4d4d4;
+      --muted: #b0aca3;
+      --line: rgba(255, 255, 255, .12);
+      --brand: #5d88ba;
+      --brand-dark: #7ba0cb;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .40);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: clip;
+      font-family: "Inter", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 84% 2%, color-mix(in srgb, var(--brand) 16%, transparent), transparent 32rem),
+        var(--page);
+      transition: background .25s ease, color .25s ease;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; color: inherit; }
+
+    .top-strip {
+      min-height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 20px;
+      color: #fff;
+      background: #252522;
+      font-size: .82rem;
+      text-align: center;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--header-height);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--page) 88%, transparent);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-shell,
+    .page-shell {
+      width: min(1240px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    .nav-shell {
+      height: 100%;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: max-content;
+    }
+
+    .brand-block {
+      width: 58px;
+      height: 48px;
+      padding: 5px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--brand);
+      font-family: "Oswald", sans-serif;
+      font-size: .88rem;
+      font-weight: 600;
+      line-height: .84;
+      text-align: center;
+    }
+
+    .brand-copy {
+      font-family: "Oswald", sans-serif;
+      font-size: 1rem;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      padding: 12px 0;
+      font-size: .92rem;
+      font-weight: 500;
+    }
+
+    .desktop-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 5px;
+      height: 2px;
+      background: var(--brand);
+      transition: right .2s ease;
+    }
+
+    .desktop-nav a:hover::after,
+    .desktop-nav a[aria-current="page"]::after {
+      right: 0;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: var(--surface);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .icon-btn:hover {
+      transform: translateY(-2px);
+      background: var(--surface-2);
+    }
+
+    .menu-btn { display: none; }
+
+    .mobile-panel {
+      display: none;
+      position: fixed;
+      inset: calc(38px + var(--header-height)) 0 auto;
+      z-index: 45;
+      max-height: calc(100vh - 38px - var(--header-height));
+      overflow-y: auto;
+      padding: 20px;
+      border-bottom: 1px solid var(--line);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .mobile-panel.open {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mobile-panel a {
+      padding: 13px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    .mobile-panel a:hover { background: var(--surface-2); }
+
+    .archive-hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: 72px 0 50px;
+    }
+
+    .archive-hero::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: -120px -5vw auto;
+      height: 620px;
+      background:
+        linear-gradient(to bottom, transparent 0%, var(--page) 92%),
+        url("/images/farewell42.png") center / cover no-repeat;
+      filter: blur(70px) saturate(1.1);
+      transform: scale(1.12);
+      opacity: .16;
+    }
+
+    .archive-hero::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, var(--page));
+      pointer-events: none;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: .82rem;
+      margin-bottom: 28px;
+    }
+
+    .breadcrumbs span:not(:last-child)::after {
+      content: "/";
+      margin-left: 8px;
+      opacity: .5;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+      gap: 48px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      color: var(--brand);
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: clamp(3.4rem, 8vw, 7.8rem);
+      font-weight: 520;
+      line-height: .9;
+      letter-spacing: -.055em;
+    }
+
+    .hero-copy {
+      max-width: 700px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .archive-summary {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      backdrop-filter: blur(14px);
+    }
+
+    .archive-summary strong {
+      display: block;
+      margin-bottom: 6px;
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .archive-summary span {
+      color: var(--muted);
+      font-size: .9rem;
+      line-height: 1.5;
+    }
+
+    .controls-wrap {
+      position: sticky;
+      top: var(--header-height);
+      z-index: 30;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: color-mix(in srgb, var(--page) 90%, transparent);
+      backdrop-filter: blur(18px);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box input,
+    .filter-select {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      outline: none;
+    }
+
+    .search-box input {
+      padding: 0 16px 0 44px;
+    }
+
+    .search-box::before {
+      content: "⌕";
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-52%);
+      color: var(--muted);
+      font-size: 1.3rem;
+      pointer-events: none;
+    }
+
+    .filter-select {
+      min-width: 175px;
+      padding: 0 38px 0 14px;
+      cursor: pointer;
+    }
+
+    .result-count {
+      min-width: max-content;
+      color: var(--muted);
+      font-size: .86rem;
+      font-weight: 600;
+    }
+
+    .archive-section {
+      padding: 48px 0 90px;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .story-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: 0 8px 30px rgba(40, 33, 28, .05);
+      transition:
+        transform .24s cubic-bezier(.22, 1, .36, 1),
+        box-shadow .24s ease,
+        border-color .24s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-7px);
+      border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
+      box-shadow: var(--shadow);
+    }
+
+    .story-art {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: var(--surface-2);
+    }
+
+    .story-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .story-card:hover .story-art img {
+      transform: scale(1.045);
+    }
+
+    .story-art::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.28), transparent 45%);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .story-card:hover .story-art::after { opacity: 1; }
+
+    .open-badge {
+      position: absolute;
+      z-index: 2;
+      right: 12px;
+      bottom: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: rgba(20, 20, 20, .72);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      transform: translateY(7px);
+      transition: opacity .22s ease, transform .22s ease;
+    }
+
+    .story-card:hover .open-badge {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .story-copy { padding: 17px; }
+
+    .story-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 10px;
+    }
+
+    .story-tag {
+      padding: 5px 8px;
+      border-radius: 999px;
+      color: var(--brand);
+      background: color-mix(in srgb, var(--brand) 10%, var(--surface));
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .story-year {
+      display: inline-flex;
+      align-items: center;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 600;
+    }
+
+    .story-copy h2 {
+      margin: 0;
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 1.16rem;
+      font-weight: 620;
+      line-height: 1.2;
+      letter-spacing: -.015em;
+    }
+
+    .story-copy p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: .86rem;
+      line-height: 1.55;
+    }
+
+    .empty-state {
+      display: none;
+      padding: 50px 20px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      color: var(--muted);
+      text-align: center;
+      background: var(--surface);
+    }
+
+    .empty-state.show { display: block; }
+
+    footer {
+      padding: 46px 0;
+      color: rgba(255,255,255,.78);
+      background: #242421;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .footer-grid h3 {
+      margin: 0 0 12px;
+      color: #fff;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 7px;
+    }
+
+    .footer-grid a,
+    .footer-grid p {
+      color: rgba(255,255,255,.65);
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 1000px) {
+      .desktop-nav { display: none; }
+      .menu-btn { display: grid; }
+      .nav-shell { grid-template-columns: 1fr auto; }
+      .story-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      :root { --header-height: 68px; }
+      .brand-copy { display: none; }
+      .brand-block { width: 48px; height: 42px; font-size: .76rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+      .archive-summary { max-width: 420px; }
+      .controls { grid-template-columns: 1fr 1fr; }
+      .search-box { grid-column: 1 / -1; }
+      .result-count { justify-self: end; }
+      .story-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 520px) {
+      .top-strip { min-height: 34px; }
+      .nav-shell,
+      .page-shell { width: min(100% - 24px, 1240px); }
+      .archive-hero { padding-top: 46px; }
+      h1 { font-size: clamp(3rem, 17vw, 5rem); }
+      .controls { grid-template-columns: 1fr; }
+      .search-box { grid-column: auto; }
+      .filter-select { min-width: 0; }
+      .result-count { justify-self: start; }
+      .story-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-strip">Browse the full Lewis.LC story archive.</div>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="Lewis.LC home">
+        <span class="brand-block">LEWIS<br>.LC</span>
+        <span class="brand-copy">For the love<br>of stories</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <a href="/bigfinish/" aria-current="page">Stories</a>
+        <a href="#">Collections</a>
+        <a href="#">What's New</a>
+        <a href="#">News</a>
+        <a href="#">About</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle colour theme">☾</button>
+        <button class="icon-btn menu-btn" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
+    <a href="/bigfinish/">Stories</a>
+    <a href="#">Collections</a>
+    <a href="#">What's New</a>
+    <a href="#">News</a>
+    <a href="#">About</a>
+  </nav>
+
+  <main>
+    <section class="archive-hero">
+      <div class="page-shell">
+        <div class="breadcrumbs" aria-label="Breadcrumb">
+          <span>Home</span><span>Stories</span><span>Archive</span>
+        </div>
+
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Lewis Christian Archive</div>
+            <h1>All Stories</h1>
+            <p class="hero-copy">
+              Browse every story, audio release, experiment, and alternate version in one place.
+              Use the search and category filters to quickly find what you are looking for.
+            </p>
+          </div>
+
+          <div class="archive-summary">
+            <strong id="totalStories">8 stories</strong>
+            <span>Each cover opens its own dedicated release page.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="controls-wrap">
+      <div class="page-shell controls">
+        <label class="search-box">
+          <span hidden>Search stories</span>
+          <input id="storySearch" type="search" placeholder="Search stories…" autocomplete="off">
+        </label>
+
+        <select class="filter-select" id="storyFilter" aria-label="Filter stories by category">
+          <option value="all">All categories</option>
+          <option value="single">Singles</option>
+          <option value="audio drama">Audio drama</option>
+          <option value="alternate version">Alternate versions</option>
+          <option value="archive">Archive</option>
+        </select>
+
+        <div class="result-count" id="resultCount">8 shown</div>
+      </div>
+    </div>
+
+    <section class="archive-section">
+      <div class="page-shell">
+        <div class="story-grid" id="storyGrid">
+
+          <a class="story-card" href="/bigfinish/farewell42" data-title="Farewell 42 V1" data-category="single archive">
+            <div class="story-art">
+              <img src="/images/farewell42.png" alt="Farewell 42 version one cover">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Single</span><span class="story-year">2024</span></div>
+              <h2>Farewell 42 (V1)</h2>
+              <p>The original version of Farewell 42.</p>
+            </div>
+          </a>
+
+          <a class="story-card" href="/bigfinish/farewell42b" data-title="Farewell 42 V2 alternate version" data-category="single alternate version">
+            <div class="story-art">
+              <img src="/images/farewell42b.png" alt="Farewell 42 version two cover">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Alternate version</span><span class="story-year">2024</span></div>
+              <h2>Farewell 42 (V2)</h2>
+              <p>A reworked alternate version of the original track.</p>
+            </div>
+          </a>
+
+          <a class="story-card" href="#" data-title="Story Three audio drama" data-category="audio drama">
+            <div class="story-art">
+              <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=900&q=85" alt="Space artwork placeholder">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Audio drama</span><span class="story-year">2025</span></div>
+              <h2>Story Three</h2>
+              <p>Replace this placeholder with your own story description.</p>
+            </div>
+          </a>
+
+          <a class="story-card" href="#" data-title="Story Four single" data-category="single">
+            <div class="story-art">
+              <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=900&q=85" alt="Nebula artwork placeholder">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Single</span><span class="story-year">2025</span></div>
+              <h2>Story Four</h2>
+              <p>Replace this placeholder with your own story description.</p>
+            </div>
+          </a>
+
+          <a class="story-card" href="#" data-title="Story Five archive" data-category="archive">
+            <div class="story-art">
+              <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85" alt="Landscape artwork placeholder">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Archive</span><span class="story-year">2023</span></div>
+              <h2>Story Five</h2>
+              <p>Replace this placeholder with your own story description.</p>
+            </div>
+          </a>
+
+          <a class="story-card" href="#" data-title="Story Six alternate version" data-category="alternate version">
+            <div class="story-art">
+              <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&w=900&q=85" alt="Rocket artwork placeholder">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Alternate version</span><span class="story-year">2023</span></div>
+              <h2>Story Six</h2>
+              <p>Replace this placeholder with your own story description.</p>
+            </div>
+          </a>
+
+          <a class="story-card" href="#" data-title="Story Seven audio drama" data-category="audio drama">
+            <div class="story-art">
+              <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=85" alt="Earth artwork placeholder">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Audio drama</span><span class="story-year">2022</span></div>
+              <h2>Story Seven</h2>
+              <p>Replace this placeholder with your own story description.</p>
+            </div>
+          </a>
+
+          <a class="story-card" href="#" data-title="Story Eight single archive" data-category="single archive">
+            <div class="story-art">
+              <img src="https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=900&q=85" alt="Stars artwork placeholder">
+              <span class="open-badge" aria-hidden="true">↗</span>
+            </div>
+            <div class="story-copy">
+              <div class="story-meta"><span class="story-tag">Single</span><span class="story-year">2022</span></div>
+              <h2>Story Eight</h2>
+              <p>Replace this placeholder with your own story description.</p>
+            </div>
+          </a>
+
+        </div>
+
+        <div class="empty-state" id="emptyState">No stories match your current search and filter.</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page-shell footer-grid">
+      <div>
+        <a class="brand" href="/">
+          <span class="brand-block">LEWIS<br>.LC</span>
+          <span class="brand-copy">For the love<br>of stories</span>
+        </a>
+        <p>An archive of stories, audio, experiments, and creative projects.</p>
+      </div>
+
+      <div><h3>Explore</h3><div class="footer-links"><a href="/bigfinish/">All stories</a><a href="#">Collections</a><a href="#">Latest stories</a></div></div>
+      <div><h3>Information</h3><div class="footer-links"><a href="#">About</a><a href="#">Contact</a><a href="#">Accessibility</a></div></div>
+      <div><h3>Elsewhere</h3><div class="footer-links"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Bluesky</a></div></div>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    const savedTheme = localStorage.getItem('archive-theme');
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeIcon();
+
+    function updateThemeIcon() {
+      themeToggle.textContent = root.dataset.theme === 'dark' ? '☀' : '☾';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('archive-theme', root.dataset.theme);
+      updateThemeIcon();
+    });
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobilePanel.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+
+    const searchInput = document.getElementById('storySearch');
+    const filterSelect = document.getElementById('storyFilter');
+    const storyCards = [...document.querySelectorAll('.story-card')];
+    const resultCount = document.getElementById('resultCount');
+    const totalStories = document.getElementById('totalStories');
+    const emptyState = document.getElementById('emptyState');
+
+    totalStories.textContent = `${storyCards.length} ${storyCards.length === 1 ? 'story' : 'stories'}`;
+
+    function filterStories() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const selectedCategory = filterSelect.value.toLowerCase();
+      let shown = 0;
+
+      storyCards.forEach(card => {
+        const title = card.dataset.title.toLowerCase();
+        const category = card.dataset.category.toLowerCase();
+        const matchesSearch = !searchTerm || title.includes(searchTerm);
+        const matchesCategory = selectedCategory === 'all' || category.includes(selectedCategory);
+        const visible = matchesSearch && matchesCategory;
+
+        card.hidden = !visible;
+        if (visible) shown++;
+      });
+
+      resultCount.textContent = `${shown} shown`;
+      emptyState.classList.toggle('show', shown === 0);
+    }
+
+    searchInput.addEventListener('input', filterStories);
+    filterSelect.addEventListener('change', filterStories);
+  </script>
+</body>
+</html>
