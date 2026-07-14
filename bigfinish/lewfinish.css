@@ -290,6 +290,31 @@ body {
     .release-nav a:last-child { text-align: right; }
     .release-nav a:hover { background: var(--surface-2); transform: translateY(-2px); }
 
+
+
+
+
+
+.spotify-player {
+  width: 100%;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.spotify-player iframe {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border: 0;
+}
+
+
+
+
+
+
+
     .eyebrow {
       display: flex;
       flex-wrap: wrap;
