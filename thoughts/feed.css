@@ -126,7 +126,7 @@ p{
 .name{
     font-size: 22px;
     font-weight: 550;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
     font-family: 'Google Sans Flex', 'Inter', sans-serif;
     text-align: center;
 }
@@ -148,10 +148,11 @@ p{
 }
 
 .heading{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:10px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+    padding-top: 10px;
 }
 
 .heading h2{
@@ -165,7 +166,7 @@ p{
 
 .heading h3{
     color: var(--muted);
-    font-family: 'Google Sans Flex';
+    font-family: 'Google Sans Flex', 'Inter', sans-serif;
     letter-spacing: 0.3px;
     text-transform: uppercase;
     font-weight: 400;
