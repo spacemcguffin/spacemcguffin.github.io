@@ -43,13 +43,10 @@ body{
 }
 
 b{
-  color:var(--accent1);
-  font-weight: normal !important;
-}
-
-.pfp{
-  width: 200px !important;
-  border-radius: 10px !important;
+    color: var(--accent1);
+    font-weight: normal !important;
+    font-family: 'Geist Pixel';
+    font-size: 15px;
 }
 
 /* subtle texture */
@@ -92,7 +89,7 @@ p{
 .wrapper{
     max-width:550px;
     margin:auto;
-    padding:35px 25px;
+    padding:20px;
 }
 
 .layout{
@@ -124,7 +121,6 @@ p{
     font-size:34px;
     font-weight:600;
     margin-bottom:4px;
-    margin-top: -10px !important;
 	font-family: 'Google Sans Flex', 'Inter', sans-serif;
 }
 
@@ -132,37 +128,7 @@ p{
     color:var(--muted);
 }
 
-.nav{
-    margin-top:5px;
-    margin-bottom:5px;
-    padding-top:10px;
-}
 
-.nav a{
-    display:block;
-    padding:3px 0;
-    color:var(--text);
-    transition:.3s;
-	font-weight:400;
-	letter-spacing: 0.3px;
-}
-
-.nav a:hover{
-    color: var(--accent1);
-    padding-left:6px;
-	letter-spacing:0.6px;
-}
-
-.nav a::before {
-  content: "❯ ";
-}
-
-.meta{
-    margin-top:15px;
-    color:var(--muted);
-    font-family: 'Google Sans Flex', 'Inter', sans-serif;
-	letter-spacing:0.3px;
-}
 
 /* content */
 
