@@ -156,15 +156,23 @@ p{
 
 .heading h2{
     color: var(--accent);
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 600;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
     text-transform: uppercase !important;
     font-family: 'Google Sans Flex', 'Inter', sans-serif;
-    transform: rotate(-3deg);
 }
 
-.heading::after{
+.heading h3{
+    color: var(--muted);
+    font-family: 'Google Sans Flex';
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 13.5px;
+}
+
+.heading h3::after{
     content:"";
     height:1px;
     background:var(--border);
