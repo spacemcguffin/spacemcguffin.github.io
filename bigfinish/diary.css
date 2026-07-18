@@ -1249,3 +1249,9 @@ tr {
         font-size: .72rem;
       }
     }
+
+
+/* Keep the generated gallery lightbox hidden until JavaScript opens it */
+.lightbox-overlay[hidden] {
+  display: none;
+}
