@@ -797,84 +797,119 @@ if (basketButton) {
     }
 
 
-    /* Gallery lightbox */
-    const galleryLinks = Array.from(document.querySelectorAll('.gallery a.lightbox'));
+/* Gallery lightbox */
+const galleryLinks = Array.from(
+  document.querySelectorAll('.gallery a.lightbox')
+);
 
-    if (galleryLinks.length) {
-      let galleryIndex = 0;
+if (galleryLinks.length) {
+  let galleryIndex = 0;
 
-      const galleryOverlay = document.createElement('div');
-      galleryOverlay.className = 'lightbox-overlay';
-      galleryOverlay.setAttribute('role', 'dialog');
-      galleryOverlay.setAttribute('aria-modal', 'true');
-      galleryOverlay.setAttribute('aria-label', 'Image gallery');
-      galleryOverlay.setAttribute('aria-hidden', 'true');
-      galleryOverlay.hidden = true;
+  const galleryOverlay = document.createElement('div');
+  galleryOverlay.className = 'lightbox-overlay';
+  galleryOverlay.setAttribute('role', 'dialog');
+  galleryOverlay.setAttribute('aria-modal', 'true');
+  galleryOverlay.setAttribute('aria-label', 'Image gallery');
+  galleryOverlay.setAttribute('aria-hidden', 'true');
+  galleryOverlay.hidden = true;
 
-      galleryOverlay.innerHTML = `
-        <button class="lb-close" type="button" aria-label="Close image">×</button>
-        <button class="lb-prev" type="button" aria-label="Previous image">←</button>
-        <img src="" alt="">
-        <button class="lb-next" type="button" aria-label="Next image">→</button>
-      `;
+  galleryOverlay.innerHTML = `
+    <button class="lb-close" type="button" aria-label="Close image">×</button>
+    <button class="lb-prev" type="button" aria-label="Previous image">←</button>
 
-      document.body.appendChild(galleryOverlay);
+    <div class="lb-image-wrap">
+      <img src="" alt="">
+      <div class="lb-caption" aria-live="polite"></div>
+    </div>
 
-      const galleryImage = galleryOverlay.querySelector('img');
-      const galleryClose = galleryOverlay.querySelector('.lb-close');
-      const galleryPrevious = galleryOverlay.querySelector('.lb-prev');
-      const galleryNext = galleryOverlay.querySelector('.lb-next');
+    <button class="lb-next" type="button" aria-label="Next image">→</button>
+  `;
 
-      function showGalleryImage(index) {
-        galleryIndex = (index + galleryLinks.length) % galleryLinks.length;
-        const link = galleryLinks[galleryIndex];
-        const thumbnail = link.querySelector('img');
+  document.body.appendChild(galleryOverlay);
 
-        galleryImage.src = link.href;
-        galleryImage.alt = thumbnail?.alt || '';
-        galleryPrevious.hidden = galleryLinks.length < 2;
-        galleryNext.hidden = galleryLinks.length < 2;
-      }
+  const galleryImage = galleryOverlay.querySelector('img');
+  const galleryCaption = galleryOverlay.querySelector('.lb-caption');
+  const galleryClose = galleryOverlay.querySelector('.lb-close');
+  const galleryPrevious = galleryOverlay.querySelector('.lb-prev');
+  const galleryNext = galleryOverlay.querySelector('.lb-next');
 
-      function openGalleryLightbox(index) {
-        showGalleryImage(index);
-        galleryOverlay.hidden = false;
-        galleryOverlay.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('lightbox-open');
-        galleryClose.focus();
-      }
+  function showGalleryImage(index) {
+    galleryIndex =
+      (index + galleryLinks.length) % galleryLinks.length;
 
-      function closeGalleryLightbox() {
-        galleryOverlay.hidden = true;
-        galleryOverlay.setAttribute('aria-hidden', 'true');
-        galleryImage.src = '';
-        document.body.classList.remove('lightbox-open');
-        galleryLinks[galleryIndex]?.focus();
-      }
+    const link = galleryLinks[galleryIndex];
+    const thumbnail = link.querySelector('img');
 
-      galleryLinks.forEach((link, index) => {
-        link.addEventListener('click', event => {
-          event.preventDefault();
-          openGalleryLightbox(index);
-        });
-      });
+    const caption =
+      link.dataset.caption ||
+      thumbnail?.dataset.caption ||
+      thumbnail?.alt ||
+      '';
 
-      galleryClose.addEventListener('click', closeGalleryLightbox);
-      galleryPrevious.addEventListener('click', () => showGalleryImage(galleryIndex - 1));
-      galleryNext.addEventListener('click', () => showGalleryImage(galleryIndex + 1));
+    galleryImage.src = link.href;
+    galleryImage.alt = thumbnail?.alt || caption;
+    galleryCaption.textContent = caption;
 
-      galleryOverlay.addEventListener('click', event => {
-        if (event.target === galleryOverlay) closeGalleryLightbox();
-      });
+    galleryPrevious.hidden = galleryLinks.length < 2;
+    galleryNext.hidden = galleryLinks.length < 2;
+  }
 
-      document.addEventListener('keydown', event => {
-        if (galleryOverlay.hidden) return;
+  function openGalleryLightbox(index) {
+    showGalleryImage(index);
+    galleryOverlay.hidden = false;
+    galleryOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+    galleryClose.focus();
+  }
 
-        if (event.key === 'Escape') closeGalleryLightbox();
-        if (event.key === 'ArrowLeft') showGalleryImage(galleryIndex - 1);
-        if (event.key === 'ArrowRight') showGalleryImage(galleryIndex + 1);
-      });
+  function closeGalleryLightbox() {
+    galleryOverlay.hidden = true;
+    galleryOverlay.setAttribute('aria-hidden', 'true');
+    galleryImage.src = '';
+    galleryCaption.textContent = '';
+    document.body.classList.remove('lightbox-open');
+    galleryLinks[galleryIndex]?.focus();
+  }
+
+  galleryLinks.forEach((link, index) => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      openGalleryLightbox(index);
+    });
+  });
+
+  galleryClose.addEventListener('click', closeGalleryLightbox);
+
+  galleryPrevious.addEventListener('click', () => {
+    showGalleryImage(galleryIndex - 1);
+  });
+
+  galleryNext.addEventListener('click', () => {
+    showGalleryImage(galleryIndex + 1);
+  });
+
+  galleryOverlay.addEventListener('click', event => {
+    if (event.target === galleryOverlay) {
+      closeGalleryLightbox();
     }
+  });
+
+  document.addEventListener('keydown', event => {
+    if (galleryOverlay.hidden) return;
+
+    if (event.key === 'Escape') {
+      closeGalleryLightbox();
+    }
+
+    if (event.key === 'ArrowLeft') {
+      showGalleryImage(galleryIndex - 1);
+    }
+
+    if (event.key === 'ArrowRight') {
+      showGalleryImage(galleryIndex + 1);
+    }
+  });
+}
 
   </script>
 </body>
