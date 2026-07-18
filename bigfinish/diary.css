@@ -1036,17 +1036,19 @@ tr:last-child {
 
 
     .footer-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 100%;
-      bottom: 5px;
-      height: 2px;
-      background: #4771a2;
-      transition: right .2s ease;
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 100%;
+    bottom: 5px;
+    height: 2px;
+    background: #4771a2;
+    transition: right .2s ease;
     }
 
-    .footer-links a:hover::after { right: 0; }
+    .footer-links a:hover { 
+		text-decoration: underline;
+	}
 
     .toast {
       position: fixed;
@@ -1083,7 +1085,6 @@ tr:last-child {
       .top-strip { min-height: 34px; }
       .nav-shell, .page-shell { width: min(100% - 24px, 1240px); }
       .brand-block { width: 75px; height: 40px; font-size: .78rem; }
-      .brand-copy { display: none; }
       .product-grid { grid-template-columns: 1fr; padding-bottom: 48px; }
       .cover-column { position: static; }
       .details-column { min-width: 0; }
