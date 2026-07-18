@@ -1035,7 +1035,7 @@ tr:last-child {
     .footer-links { display: grid; gap: 4px; }
 
 
-    .footer-links a::after {
+    .footer-grid a::after {
     content: "";
     position: absolute;
     left: 0;
@@ -1046,7 +1046,7 @@ tr:last-child {
     transition: right .2s ease;
     }
 
-    .footer-links a:hover { 
+    .footer-grid a:hover { 
 		text-decoration: underline;
 	}
 
