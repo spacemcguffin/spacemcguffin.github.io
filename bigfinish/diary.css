@@ -388,7 +388,7 @@ tr {
   backdrop-filter: blur(18px);
 }
 .album-player-header {display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:18px 18px 14px;border-bottom:1px solid var(--line);}
-.album-player-kicker {color:var(--brand);font-size:.7rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase;}
+.album-player-kicker {color:#4771a2;font-size:.7rem;font-weight:750;letter-spacing:.1em;text-transform:uppercase;}
 .album-player-heading {margin:4px 0 0;font-family:"Google Sans Flex",sans-serif;font-size:1.35rem;font-weight:600;line-height:1.1;}
 .album-player-summary {color:var(--muted);font-size:.78rem;white-space:nowrap;}
 .album-track-list {display:grid;max-height:330px;overflow-y:auto;scrollbar-width:thin;}
@@ -397,7 +397,7 @@ tr {
 .album-track:hover {background:var(--surface-2);}
 .album-track.active {background:color-mix(in srgb,var(--brand) 13%,var(--surface));color:var(--text);}
 .album-track-number {color:var(--muted);font-variant-numeric:tabular-nums;text-align:center;}
-.album-track.active .album-track-number {color:var(--brand);font-weight:700;}
+.album-track.active .album-track-number {color:#4771a2;font-weight:700;}
 .album-track-copy {min-width:0;}
 .album-track-title {display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.91rem;font-weight:600;}
 .album-track-subtitle {display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.72rem;}
@@ -622,7 +622,7 @@ tr {
       right: 0;
       bottom: -1px;
       height: 3px;
-      background: var(--brand);
+      background: #4771a2;
     }
 
     .tab-panel { display: none; padding: 30px 0 0; line-height: 1.75; }
