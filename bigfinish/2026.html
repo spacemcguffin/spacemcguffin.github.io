@@ -38,7 +38,19 @@
 			
 
       <div class="nav-actions">
-        <button class="icon-btn" id="themeToggle" aria-label="Toggle colour theme" title="Toggle colour theme">☾</button>
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <span class="theme-icon-wrap" aria-hidden="true">
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24">
+              <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
+              <path class="theme-star theme-star-one" d="M18.5 3.5v3M17 5h3"></path>
+              <path class="theme-star theme-star-two" d="M20 8.7v2M19 9.7h2"></path>
+            </svg>
+          </span>
+        </button>
         <button class="icon-btn menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
     </div>
