@@ -875,6 +875,106 @@ tr {
 
 
 
+
+
+
+
+
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.5rem;
+}
+		
+.gallery a {
+  display: block;
+}
+
+.gallery a:hover img {
+  transform: scale(1.02);
+}
+
+.gallery img {
+  transition: transform 0.2s ease;
+  cursor: zoom-in;
+}
+
+
+@media (max-width: 850px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}
+
+.lightbox-overlay img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+}
+
+.lb-prev,
+.lb-next,
+.lb-close {
+  position: absolute;
+  border: 0;
+  background: rgba(255,255,255,.15);
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.lb-prev,
+.lb-next {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  padding: 10px 12px;
+}
+
+.lb-prev {
+  left: 20px;
+}
+
+.lb-next {
+  right: 20px;
+}
+
+.lb-close {
+  top: 20px;
+  right: 20px;
+  font-size: 1.5rem;
+  padding: 0px 6px;
+}
+
+.lb-prev:hover,
+.lb-next:hover,
+.lb-close:hover {
+  background: rgba(255,255,255,.25);
+}
+
+
+
+
+
+
+
+
+
+
+
 		
 
     /* Clickable cover lightbox */
