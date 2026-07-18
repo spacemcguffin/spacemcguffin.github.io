@@ -50,7 +50,14 @@
 
 
 
+.maintable td[class^="mood-"]{
+    transition:all .2s ease;
+}
 
+.maintable td[class^="mood-"]:hover{
+    filter:brightness(1.2);
+    transform:translateX(2px);
+}
 
 
 
