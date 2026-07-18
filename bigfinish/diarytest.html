@@ -150,7 +150,7 @@
               <button class="tab-button active" role="tab" aria-selected="true" data-tab="about">About</button>
               <button class="tab-button" role="tab" aria-selected="false" data-tab="backstage">Backstage</button>
               <button class="tab-button" role="tab" aria-selected="false" data-tab="cast">Cast</button>
-              <button class="tab-button" role="tab" aria-selected="false" data-tab="production">Production info</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="farewell42">Farewell 42</button>
             </div>
 
 
@@ -614,13 +614,50 @@
               </div>
             </div>
 
-            <div class="tab-panel" id="production" role="tabpanel">
-              <div class="credits-grid">
-                <div class="credit-card"><small>Writer</small><strong>Joseph Lidster</strong></div>
-                <div class="credit-card"><small>Format</small><strong>Full-cast audio drama</strong></div>
-                <div class="credit-card"><small>Release number</small><strong>072</strong></div>
-                <div class="credit-card"><small>Running time</small><strong>103 minutes</strong></div>
+            <div class="tab-panel" id="farewell42" role="tabpanel">
+
+
+
+     <section class="album-player" aria-label="Farewell 42 album player">
+            <header class="album-player-header">
+              <div>
+                <div class="album-player-kicker">Album</div>
+                <h2 class="album-player-heading">Farewell 42</h2>
               </div>
+              <div class="album-player-summary" id="albumSummary">4 tracks</div>
+            </header>
+
+            <div class="album-track-list" id="albumTrackList" role="list" aria-label="Track listing"></div>
+
+            <div class="album-now-playing">
+              <div class="album-now-meta">
+                <div style="min-width:0">
+                  <div class="album-now-label">Now playing</div>
+                  <div class="album-now-title" id="albumNowTitle">Farewell 42</div>
+                </div>
+                <div class="album-time">
+                  <span id="albumCurrentTime">0:00</span>
+                  <span aria-hidden="true"> / </span>
+                  <span id="albumDuration">0:00</span>
+                </div>
+              </div>
+
+              <input class="album-progress" id="albumProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Playback position">
+
+              <div class="album-controls" aria-label="Playback controls">
+                <button class="album-control" id="albumPrevious" type="button" aria-label="Previous track">⏮</button>
+                <button class="album-control album-control-primary" id="albumPlay" type="button" aria-label="Play album">▶</button>
+                <button class="album-control" id="albumNext" type="button" aria-label="Next track">⏭</button>
+              </div>
+
+              <audio id="albumAudio" preload="metadata"></audio>
+            </div>
+          </section>
+
+
+
+							
+							
             </div>
           </section>
         </article>
@@ -785,75 +822,128 @@
     window.addEventListener('load', () => updateTabIndicator());
     requestAnimationFrame(() => updateTabIndicator());
 
-    const playButton = document.getElementById('playButton');
-    const trailerAudio = document.getElementById('trailerAudio');
-    const audioStatus = document.getElementById('audioStatus');
-    const audioProgress = document.getElementById('audioProgress');
-    const audioCurrentTime = document.getElementById('audioCurrentTime');
-    const audioDuration = document.getElementById('audioDuration');
+    /* Album player: edit this array to add, remove, rename, or reorder tracks. */
+    const albumTracks = [
+      { title: 'Farewell 42', subtitle: 'Lewis Christian', file: '/bigfinish/music/1.%20Farewell%2042.mp3', displayDuration: '1:56' },
+      { title: 'Farewell 42 (Reboot)', subtitle: 'Lewis Christian', file: '/bigfinish/music/2.%20Farewell%2042%20(Reboot).mp3', displayDuration: '3:06' },
+      { title: 'Farewell 42 (Finale)', subtitle: 'Lewis Christian', file: '/bigfinish/music/3.%20Farewell%2042%20(Finale).mp3', displayDuration: '2:49' }
+    ];
 
-    function formatAudioTime(value) {
+    const albumAudio = document.getElementById('albumAudio');
+    const albumTrackList = document.getElementById('albumTrackList');
+    const albumPlay = document.getElementById('albumPlay');
+    const albumPrevious = document.getElementById('albumPrevious');
+    const albumNext = document.getElementById('albumNext');
+    const albumProgress = document.getElementById('albumProgress');
+    const albumCurrentTime = document.getElementById('albumCurrentTime');
+    const albumDuration = document.getElementById('albumDuration');
+    const albumNowTitle = document.getElementById('albumNowTitle');
+    const albumSummary = document.getElementById('albumSummary');
+    let currentTrackIndex = 0;
+
+    function formatAlbumTime(value) {
       if (!Number.isFinite(value)) return '0:00';
-
       const minutes = Math.floor(value / 60);
       const seconds = Math.floor(value % 60);
       return `${minutes}:${String(seconds).padStart(2, '0')}`;
     }
 
-    function updateAudioProgress() {
-      const duration = trailerAudio.duration || 0;
-      const currentTime = trailerAudio.currentTime || 0;
-      const percentage = duration ? (currentTime / duration) * 100 : 0;
+    function renderAlbumTracks() {
+      albumTrackList.innerHTML = albumTracks.map((track, index) => `
+        <button class="album-track${index === currentTrackIndex ? ' active' : ''}" type="button" role="listitem" data-track-index="${index}" aria-label="Play ${track.title}">
+          <span class="album-track-number">${String(index + 1).padStart(2, '0')}</span>
+          <span class="album-equalizer" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span class="album-track-copy">
+            <span class="album-track-title">${track.title}</span>
+            <span class="album-track-subtitle">${track.subtitle || ''}</span>
+          </span>
+          <span class="album-track-duration">${track.displayDuration || '—'}</span>
+        </button>
+      `).join('');
 
-      audioProgress.value = percentage;
-      audioProgress.style.setProperty('--audio-progress', `${percentage}%`);
-      audioCurrentTime.textContent = formatAudioTime(currentTime);
-      audioDuration.textContent = formatAudioTime(duration);
+      albumTrackList.querySelectorAll('.album-track').forEach(button => {
+        button.addEventListener('click', () => {
+          const index = Number(button.dataset.trackIndex);
+          const sameTrack = index === currentTrackIndex;
+          if (!sameTrack) loadAlbumTrack(index, true);
+          else toggleAlbumPlayback();
+        });
+      });
     }
 
-    playButton.addEventListener('click', async () => {
-      try {
-        if (trailerAudio.paused) {
-          await trailerAudio.play();
-        } else {
-          trailerAudio.pause();
-        }
-      } catch (error) {
-        audioStatus.textContent = 'Audio could not be played';
-        console.error(error);
+    function updateAlbumTrackState() {
+      albumTrackList.querySelectorAll('.album-track').forEach((row, index) => {
+        row.classList.toggle('active', index === currentTrackIndex);
+        row.classList.toggle('playing', index === currentTrackIndex && !albumAudio.paused);
+        row.setAttribute('aria-current', index === currentTrackIndex ? 'true' : 'false');
+      });
+      albumPlay.textContent = albumAudio.paused ? '▶' : '⏸';
+      albumPlay.setAttribute('aria-label', albumAudio.paused ? 'Play album' : 'Pause album');
+    }
+
+    function loadAlbumTrack(index, shouldPlay = false) {
+      currentTrackIndex = (index + albumTracks.length) % albumTracks.length;
+      const track = albumTracks[currentTrackIndex];
+      albumAudio.src = track.file;
+      albumNowTitle.textContent = track.title;
+      albumProgress.value = 0;
+      albumProgress.style.setProperty('--album-progress', '0%');
+      albumCurrentTime.textContent = '0:00';
+      albumDuration.textContent = track.displayDuration || '0:00';
+      renderAlbumTracks();
+      updateAlbumTrackState();
+
+      if (shouldPlay) {
+        albumAudio.play().catch(error => {
+          console.error(error);
+          showToast(`Could not play ${track.title}. Check its MP3 path.`);
+        });
       }
+    }
+
+    function toggleAlbumPlayback() {
+      if (!albumAudio.src) loadAlbumTrack(currentTrackIndex, false);
+      if (albumAudio.paused) {
+        albumAudio.play().catch(error => {
+          console.error(error);
+          showToast('Audio could not be played. Check the MP3 file path.');
+        });
+      } else {
+        albumAudio.pause();
+      }
+    }
+
+    function updateAlbumProgress() {
+      const duration = albumAudio.duration || 0;
+      const currentTime = albumAudio.currentTime || 0;
+      const percentage = duration ? (currentTime / duration) * 100 : 0;
+      albumProgress.value = percentage;
+      albumProgress.style.setProperty('--album-progress', `${percentage}%`);
+      albumCurrentTime.textContent = formatAlbumTime(currentTime);
+      albumDuration.textContent = duration ? formatAlbumTime(duration) : (albumTracks[currentTrackIndex].displayDuration || '0:00');
+    }
+
+    albumPlay.addEventListener('click', toggleAlbumPlayback);
+    albumPrevious.addEventListener('click', () => loadAlbumTrack(currentTrackIndex - 1, true));
+    albumNext.addEventListener('click', () => loadAlbumTrack(currentTrackIndex + 1, true));
+    albumAudio.addEventListener('play', updateAlbumTrackState);
+    albumAudio.addEventListener('pause', updateAlbumTrackState);
+    albumAudio.addEventListener('loadedmetadata', updateAlbumProgress);
+    albumAudio.addEventListener('timeupdate', updateAlbumProgress);
+    albumAudio.addEventListener('ended', () => loadAlbumTrack(currentTrackIndex + 1, true));
+    albumAudio.addEventListener('error', () => {
+      updateAlbumTrackState();
+      showToast(`Missing audio file: ${albumTracks[currentTrackIndex].file}`);
+    });
+    albumProgress.addEventListener('input', () => {
+      if (!Number.isFinite(albumAudio.duration)) return;
+      albumAudio.currentTime = (Number(albumProgress.value) / 100) * albumAudio.duration;
+      updateAlbumProgress();
     });
 
-    trailerAudio.addEventListener('play', () => {
-      playButton.textContent = '⏸';
-      playButton.setAttribute('aria-label', 'Pause trailer');
-      audioStatus.textContent = 'Playing track';
-    });
-
-    trailerAudio.addEventListener('pause', () => {
-      playButton.textContent = '▶';
-      playButton.setAttribute('aria-label', 'Play track');
-      audioStatus.textContent = trailerAudio.ended ? 'Track finished' : 'Track paused';
-    });
-
-    trailerAudio.addEventListener('loadedmetadata', updateAudioProgress);
-    trailerAudio.addEventListener('durationchange', updateAudioProgress);
-    trailerAudio.addEventListener('timeupdate', updateAudioProgress);
-    trailerAudio.addEventListener('ended', updateAudioProgress);
-
-    trailerAudio.addEventListener('error', () => {
-      audioStatus.textContent = 'Add your trailer MP3 to the audio source';
-      playButton.disabled = true;
-    });
-
-    audioProgress.addEventListener('input', () => {
-      if (!Number.isFinite(trailerAudio.duration)) return;
-
-      trailerAudio.currentTime =
-        (Number(audioProgress.value) / 100) * trailerAudio.duration;
-
-      updateAudioProgress();
-    });
+    albumSummary.textContent = `${albumTracks.length} tracks`;
+    renderAlbumTracks();
+    loadAlbumTrack(0, false);
 
     document.getElementById('wishlistButton').addEventListener('click', event => {
       event.currentTarget.classList.toggle('active');
