@@ -738,6 +738,7 @@
   </div>
 
 
+
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
@@ -758,7 +759,10 @@
     });
 
     function updateThemeIcon() {
-      themeToggle.textContent = root.dataset.theme === 'dark' ? '☀' : '☾';
+      const darkMode = root.dataset.theme === 'dark';
+      const nextTheme = darkMode ? 'light' : 'dark';
+      themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+      themeToggle.setAttribute('title', `Switch to ${nextTheme} mode`);
     }
 
     menuToggle.addEventListener('click', () => {
