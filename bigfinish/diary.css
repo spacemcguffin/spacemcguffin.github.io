@@ -1034,6 +1034,20 @@ tr:last-child {
     .footer-grid p, .footer-grid a { color: rgba(255,255,255,.68); font-size: .88rem; line-height: 1.7; }
     .footer-links { display: grid; gap: 4px; }
 
+
+    .footer-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 100%;
+      bottom: 5px;
+      height: 2px;
+      background: #4771a2;
+      transition: right .2s ease;
+    }
+
+    .footer-links a:hover::after { right: 0; }
+
     .toast {
       position: fixed;
       right: 20px;
