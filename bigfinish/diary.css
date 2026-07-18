@@ -293,6 +293,27 @@ body {
 
 
 
+    .release-nav1 {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .release-nav1 a {
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface);
+    font-size: .82rem;
+    font-weight: 500;
+    transition: background .2s ease, transform .2s ease;
+    text-align: center;
+    }
+
+    .release-nav1 a:hover { background: var(--surface-2); transform: translateY(-2px); }
+
+
+
 
 
 
