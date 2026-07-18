@@ -884,7 +884,8 @@ tr {
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 0.5rem;
+  gap: 0.6rem;
+  margin-top:15px;
 }
 		
 .gallery a {
@@ -896,8 +897,9 @@ tr {
 }
 
 .gallery img {
-  transition: transform 0.2s ease;
-  cursor: zoom-in;
+    transition: transform 0.2s ease;
+    cursor: zoom-in;
+    border-radius: 20px;
 }
 
 
