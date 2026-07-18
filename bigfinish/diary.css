@@ -184,7 +184,151 @@ body {
     }
 
     .icon-btn:hover { transform: translateY(-2px); background: var(--surface-2); }
+
+
+
+
+
+
+
+
+
+
+    /* Animated sun / moon theme button */
+    .theme-toggle {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, .72), transparent 34%),
+        var(--surface);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .52),
+        0 8px 22px rgba(35, 45, 58, .10);
+    }
+
+    .theme-toggle::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      z-index: -1;
+      border-radius: inherit;
+      background: color-mix(in srgb, #f7c85c 18%, transparent);
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity .35s ease, transform .45s cubic-bezier(.22, 1, .36, 1), background .35s ease;
+    }
+
+    .theme-toggle-icon {
+      width: 22px;
+      height: 22px;
+      overflow: visible;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .theme-sun,
+    .theme-moon,
+    .theme-stars {
+      transform-origin: 12px 12px;
+      transition:
+        opacity .32s ease,
+        transform .52s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .theme-sun-core {
+      fill: #f5b942;
+      stroke: #d99718;
+      transition: fill .35s ease, stroke .35s ease;
+    }
+
+    .theme-sun-rays {
+      stroke: #c9820d;
+    }
+
+    .theme-moon {
+      fill: #dfe8ff;
+      stroke: #6680b8;
+      opacity: 0;
+      transform: rotate(-70deg) scale(.35);
+    }
+
+    .theme-stars {
+      stroke: #dce7ff;
+      opacity: 0;
+      transform: rotate(24deg) scale(.45);
+    }
+
+    html[data-theme="dark"] .theme-toggle {
+      color: #eaf0ff;
+      background:
+        radial-gradient(circle at 68% 72%, rgba(111, 138, 205, .22), transparent 38%),
+        #171c28;
+      border-color: rgba(170, 190, 230, .20);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .08),
+        0 8px 25px rgba(0, 0, 0, .28),
+        0 0 22px rgba(89, 112, 176, .10);
+    }
+
+    html[data-theme="dark"] .theme-toggle::before {
+      background: color-mix(in srgb, #7189c7 18%, transparent);
+      opacity: .9;
+      transform: scale(.9);
+    }
+
+    html[data-theme="dark"] .theme-sun {
+      opacity: 0;
+      transform: rotate(95deg) scale(.35);
+    }
+
+    html:not([data-theme="dark"]) .theme-sun {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+
+    html[data-theme="dark"] .theme-moon {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+    }
+
+    html[data-theme="dark"] .theme-stars {
+      opacity: 1;
+      transform: rotate(0) scale(1);
+      transition-delay: .10s;
+    }
+
+    html:not([data-theme="dark"]) .theme-stars {
+      transition-delay: 0s;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-2px) rotate(4deg);
+    }
+
+    .theme-toggle:active {
+      transform: translateY(0) scale(.94);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--brand) 52%, transparent);
+      outline-offset: 3px;
+    }
+
     .menu-btn { display: none; }
+
+
+
+
+
+
+
+
+
+
 
     .mobile-panel {
       display: none;
@@ -1416,4 +1560,92 @@ tr:last-child {
 /* Keep the generated gallery lightbox hidden until JavaScript opens it */
 .lightbox-overlay[hidden] {
   display: none;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle::before,
+  .theme-sun,
+  .theme-moon,
+  .theme-stars {
+    transition: none !important;
+  }
+}
+
+
+/* Reliable stacked SVG theme-toggle animation (v3) */
+.theme-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+}
+
+.theme-icon-wrap {
+  position: relative;
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+.theme-icon {
+  position: absolute;
+  inset: 0;
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .32s ease;
+}
+
+.theme-icon-sun {
+  color: #d78d13;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.theme-icon-sun circle {
+  fill: #f6c24f;
+}
+
+.theme-icon-moon {
+  color: #dce6ff;
+  opacity: 0;
+  transform: rotate(-90deg) scale(.35);
+}
+
+.theme-icon-moon > path:first-child {
+  fill: #dce6ff;
+  stroke: #6f86bd;
+}
+
+.theme-star {
+  opacity: 0;
+  transform-origin: center;
+  transform: scale(.2);
+  transition: opacity .25s ease .18s, transform .4s cubic-bezier(.22,1,.36,1) .18s;
+}
+
+html[data-theme="dark"] .theme-icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(.35);
+}
+
+html[data-theme="dark"] .theme-icon-moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+html[data-theme="dark"] .theme-star {
+  opacity: 1;
+  transform: scale(1);
+}
+
+html:not([data-theme="dark"]) .theme-star {
+  transition-delay: 0s;
 }
