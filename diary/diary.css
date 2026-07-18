@@ -1229,9 +1229,11 @@ tr:hover {
 }
 
 .gallery img {
+    object-fit: cover;
     transition: transform 0.2s ease;
     cursor: zoom-in;
     border-radius: 20px;
+    aspect-ratio: 1 / 1;
 }
 
 
