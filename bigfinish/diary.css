@@ -13,6 +13,7 @@
       --shadow: 0 24px 70px rgba(40, 33, 28, .14);
       --radius: 20px;
       --header-height: 78px;
+      --hoverback-color: #eaecf0;
     }
 
     html[data-theme="dark"] {
@@ -28,6 +29,7 @@
       --accent: #d66f2d;
       --accent-ink: #20250c;
       --shadow: 0 24px 70px rgba(0, 0, 0, .40);
+      --hoverback-color: #1b212d;
     }
 
 
@@ -483,6 +485,11 @@ tr {
 
 tr:last-child {
     border-bottom: none;
+}
+
+tr:hover {
+    background-color: var(--hoverback-color);
+	cursor: crosshair;
 }
 
 .month {
