@@ -634,34 +634,33 @@
     <section class="transmission-section" aria-labelledby="transmissionTitle">
       <div class="page-shell transmission-grid">
         <div class="transmission-copy">
-          <p class="transmission-kicker">Incoming signal</p>
-          <h2 id="transmissionTitle">Transmission Received</h2>
-          <p>This transmission is encrypted. Enter the correct access code to reveal the hidden message.</p>
+          <h2 id="transmissionTitle">Nothing to see here</h2>
+          <p>Enter the password to reveal a message from Lewis.</p>
         </div>
 
         <div class="transmission-console">
           <form class="transmission-form" id="transmissionForm">
-            <label for="transmissionCode">Access code</label>
+            <label for="transmissionCode">Enter password</label>
             <div class="transmission-input-row">
               <input
                 id="transmissionCode"
                 name="transmission-code"
                 type="text"
                 maxlength="20"
-                placeholder="Enter access code..."
+                placeholder="Enter password..."
                 autocomplete="off"
                 spellcheck="false"
               >
-              <button type="submit">Decrypt</button>
+              <button type="submit">Submit</button>
             </div>
           </form>
 
-          <p class="transmission-status" id="transmissionStatus" aria-live="polite">&gt; signal awaiting authentication.</p>
+          <p class="transmission-status" id="transmissionStatus" aria-live="polite">&gt; waiting for password</p>
 
           <div class="transmission-message" id="transmissionMessage" hidden>
-            <small>Decryption complete</small>
+            <small>Message unlocked</small>
             <h3>Hello.</h3>
-            <p>Thanks for taking the time to explore my little corner of the internet. I hope you enjoy what you find.</p>
+            <p>There really is nothing to see here. Sorry about that.</p>
           </div>
         </div>
       </div>
@@ -951,7 +950,7 @@ if (basketButton) {
         transmissionMessage.hidden = true;
         transmissionMessage.classList.remove('is-visible');
         transmissionStatus.className = 'transmission-status';
-        transmissionStatus.textContent = '> analysing transmission...';
+        transmissionStatus.textContent = '> analysing password...';
 
         window.setTimeout(() => {
           if (code === 'HELLO') {
@@ -961,10 +960,10 @@ if (basketButton) {
             requestAnimationFrame(() => transmissionMessage.classList.add('is-visible'));
           } else if (!code) {
             transmissionStatus.className = 'transmission-status is-error';
-            transmissionStatus.textContent = '> no access code detected.';
+            transmissionStatus.textContent = '> no password detected.';
           } else {
             transmissionStatus.className = 'transmission-status is-error';
-            transmissionStatus.textContent = '> access denied. Transmission not recognised.';
+            transmissionStatus.textContent = '> access denied. Password not recognised.';
           }
 
           transmissionCode.focus();
