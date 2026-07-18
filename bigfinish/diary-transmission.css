@@ -122,7 +122,7 @@ body {
     place-items: center;
     color: #fff;
     background: var(--brand);
-    font-family: 'Oswald';
+    font-family: 'Oswald', 'Inter', sans-serif;
     font-size: .88rem;
     font-weight: 800;
     line-height: 1;
@@ -131,7 +131,7 @@ body {
 
     .brand-copy {
     max-width: 145px;
-    font-family: "Oswald", sans-serif;
+    font-family: 'Oswald', 'Inter', sans-serif;
     font-size: 1.02rem;
     line-height: 1.05;
     text-transform: uppercase;
@@ -794,7 +794,6 @@ tr {
       background: rgba(8,12,18,.34);
       font-family: "Geist Pixel", monospace;
       letter-spacing: .06em;
-      text-transform: uppercase;
       transition: border-color .2s ease, box-shadow .2s ease;
     }
 
