@@ -1540,6 +1540,88 @@ button:active,
   }
 }
 
+
+/* =========================================================
+   MOBILE FULLSCREEN + DOCTOR RAIL SPACING FIXES
+   ========================================================= */
+
+/* Reduce the extra top space while keeping active rings visible. */
+.doctor-strip-viewport{
+  padding-top:2px !important;
+  padding-left:7px !important;
+}
+
+.doctor-strip{
+  padding-top:5px !important;
+  padding-bottom:10px !important;
+  padding-left:7px !important;
+}
+
+.doctor-strip .doctor-btn{
+  margin-top:0 !important;
+}
+
+/* Ensure the first "All" circle and its active ring never clip. */
+.doctor-list,
+#doctorList{
+  padding-left:7px !important;
+  scroll-padding-left:7px;
+}
+
+/* Mobile: arrow-only navigation and true full-screen inspector. */
+@media(max-width:760px){
+  .details{
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100dvh !important;
+    max-height:none !important;
+    border-radius:0 !important;
+    transform:translateY(105%) !important;
+    box-shadow:none !important;
+  }
+
+  .details.open{
+    transform:translateY(0) !important;
+  }
+
+  .details-top{
+    min-height:54px;
+    grid-template-columns:44px 1fr 44px;
+    padding:6px 68px 6px 8px;
+    border-radius:0 !important;
+  }
+
+  .details-nav-button{
+    width:40px;
+    min-width:40px;
+    height:40px;
+    min-height:40px;
+    padding:0;
+    border-radius:50%;
+  }
+
+  .details-nav-label{
+    display:none !important;
+  }
+
+  .details-nav-arrow{
+    font-size:1.45rem;
+  }
+
+  #detailsPrev{
+    justify-self:start;
+  }
+
+  #detailsNext{
+    justify-self:end;
+  }
+
+  #detailPosition{
+    justify-self:center;
+  }
+}
+
 </style>
 </head>
 
