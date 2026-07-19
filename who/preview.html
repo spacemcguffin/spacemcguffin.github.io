@@ -1685,39 +1685,46 @@
     }
 
 
-    /* SIMPLIFIED FILTERS + INSPECTOR NAVIGATION + DESKTOP GRID */
+    /* =========================================================
+       SIMPLIFIED FILTERS + INSPECTOR NAV + THREE-CARD DESKTOP
+       ========================================================= */
+    .details-top{
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      align-items:center;
+      justify-content:initial;
+      gap:12px;
+    }
+
     .details-nav-group{
       display:flex;
       align-items:center;
       gap:7px;
     }
 
-    .details-top{
-      display:grid;
-      grid-template-columns:auto minmax(0,1fr) auto;
-      align-items:center;
-      gap:12px;
+    .details-top-copy{
+      justify-self:center;
     }
 
+    .details-close{
+      justify-self:end;
+    }
+
+    /* Larger desktop: always exactly three episode cards per row. */
     @media(min-width:1180px){
       .episode-grid:not(.list-view){
         grid-template-columns:repeat(3,minmax(0,1fr)) !important;
       }
     }
 
-    @media(min-width:1180px) and (max-width:1500px){
-      .episode-grid:not(.list-view){
-        gap:14px;
-      }
-    }
-
     @media(max-width:760px){
+      .details-top{
+        grid-template-columns:auto minmax(0,1fr) auto;
+        gap:8px;
+      }
+
       .details-nav-group{
         gap:5px;
-      }
-
-      .details-top{
-        gap:8px;
       }
 
       .details-nav-group .details-button{
@@ -1803,10 +1810,6 @@
             <option value="all">All Doctors</option>
           </select>
 
-          <select class="filter" id="sortFilter">
-            <option value="broadcast">Broadcast order</option>
-            <option value="title">A–Z</option>
-          </select>
         </div>
 
         <div class="active-filter-row">
@@ -2314,11 +2317,6 @@
           && (!query || searchable.includes(query));
       });
 
-      result.sort((a,b)=>{
-        if(state.sort==="title") return a.title.localeCompare(b.title);
-        return a.year-b.year;
-      });
-
       return result;
     }
 
@@ -2504,7 +2502,6 @@
     function clearAllFilters(){
       state.doctor = "all";
       state.series = "all";
-      state.sort = "broadcast";
       state.search = "";
 
       el("doctorFilter").value = "all";
@@ -2548,9 +2545,6 @@
       document.querySelectorAll(".doctor-btn").forEach(btn=>{
         btn.classList.toggle("active",btn.dataset.doctor===state.doctor);
       });
-
-      render();
-    });
 
       render();
     });
