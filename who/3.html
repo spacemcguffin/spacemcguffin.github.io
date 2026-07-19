@@ -682,7 +682,7 @@
       display:block;
       margin-top:5px;
       font-size:.68rem;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     .detail-grid{
@@ -2451,7 +2451,6 @@ button:active,
           <div class="card-body">
             <h2 class="card-title">${episode.title}</h2>
             <div class="card-meta">${episode.doctor} · ${episode.series} · ${episode.year}</div>
-            <div class="card-companion">${episode.companion}</div>
             <div class="tags">
               ${episode.tags.slice(0,3).map(tag=>`<span class="tag">${tag}</span>`).join("")}
             </div>
