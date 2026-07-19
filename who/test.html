@@ -924,7 +924,129 @@
       .episode-grid.list-view .card{grid-template-columns:1fr}
       .episode-grid.list-view .card-image{aspect-ratio:16/9;min-height:auto}
     }
-  </style>
+  
+    /* COMPACT NUMBER-ONLY DOCTOR BUTTONS */
+    .doctor-strip{
+      gap:10px;
+      align-items:center;
+      padding-block:4px 8px;
+    }
+
+    .doctor-strip .doctor-btn{
+      position:relative;
+      width:42px;
+      min-width:42px;
+      height:42px;
+      min-height:42px;
+      padding:0;
+      justify-content:center;
+      border-radius:50%;
+      border:1px solid color-mix(in srgb,var(--doctor-color,#58a6ff) 50%,transparent);
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.16),transparent 32%),
+        color-mix(in srgb,var(--doctor-color,#58a6ff) 28%,rgba(8,17,31,.96));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.04),
+        0 7px 20px rgba(0,0,0,.22);
+      overflow:visible;
+    }
+
+    .doctor-strip .doctor-btn:hover{
+      transform:translateY(-2px) scale(1.06);
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.22),transparent 34%),
+        color-mix(in srgb,var(--doctor-color,#58a6ff) 42%,rgba(8,17,31,.96));
+      box-shadow:
+        0 0 0 4px color-mix(in srgb,var(--doctor-color,#58a6ff) 14%,transparent),
+        0 10px 26px rgba(0,0,0,.28);
+    }
+
+    .doctor-strip .doctor-btn.active{
+      border-color:var(--doctor-color,#58a6ff);
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.24),transparent 34%),
+        color-mix(in srgb,var(--doctor-color,#58a6ff) 54%,rgba(8,17,31,.96));
+      box-shadow:
+        0 0 0 3px rgba(4,9,18,.95),
+        0 0 0 5px var(--doctor-color,#58a6ff),
+        0 9px 24px rgba(0,0,0,.3);
+    }
+
+    .doctor-strip .doctor-avatar{
+      width:auto;
+      height:auto;
+      flex:0 0 auto;
+      border:0;
+      border-radius:0;
+      background:none !important;
+      box-shadow:none;
+      overflow:visible;
+      color:#fff;
+      font-size:.84rem;
+      font-weight:850;
+      letter-spacing:-.04em;
+      text-shadow:0 1px 8px rgba(0,0,0,.45);
+    }
+
+    .doctor-strip .doctor-avatar img{
+      display:none !important;
+    }
+
+    .doctor-strip .doctor-name{
+      display:none !important;
+    }
+
+    .doctor-strip .doctor-btn::after{
+      content:attr(data-tooltip);
+      position:absolute;
+      left:50%;
+      bottom:calc(100% + 10px);
+      z-index:20;
+      width:max-content;
+      max-width:170px;
+      padding:6px 8px;
+      border:1px solid rgba(125,166,225,.22);
+      border-radius:7px;
+      background:rgba(3,9,18,.98);
+      color:#dbe8fa;
+      font-size:.64rem;
+      font-weight:700;
+      letter-spacing:.02em;
+      white-space:nowrap;
+      pointer-events:none;
+      opacity:0;
+      transform:translate(-50%,5px);
+      transition:.16s ease;
+      box-shadow:0 8px 24px rgba(0,0,0,.35);
+    }
+
+    .doctor-strip .doctor-btn:hover::after,
+    .doctor-strip .doctor-btn:focus-visible::after{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    .doctor-strip .doctor-btn[data-doctor="all"]{
+      width:48px;
+      min-width:48px;
+      border-radius:999px;
+    }
+
+    @media(max-width:760px){
+      .doctor-strip .doctor-btn{
+        width:38px;
+        min-width:38px;
+        height:38px;
+        min-height:38px;
+      }
+
+      .doctor-strip .doctor-btn[data-doctor="all"]{
+        width:44px;
+        min-width:44px;
+      }
+    }
+
+</style>
 </head>
 
 <body>
@@ -1289,16 +1411,21 @@
       const allButton = document.createElement("button");
       allButton.className = "doctor-btn active";
       allButton.dataset.doctor = "all";
+      allButton.dataset.tooltip = "All Doctors";
+      allButton.title = "All Doctors";
       allButton.style.setProperty("--doctor-color","#58a6ff");
-      allButton.innerHTML = '<span class="doctor-avatar">ALL</span><span class="doctor-name">All</span>';
+      allButton.innerHTML = '<span class="doctor-avatar" aria-hidden="true">ALL</span>';
       doctorList.appendChild(allButton);
 
       doctors.forEach(([number,name])=>{
         const button = document.createElement("button");
         button.className = "doctor-btn";
+        button.dataset.tooltip = name;
         button.dataset.doctor = String(number);
+        button.title = name;
+        button.setAttribute("aria-label",name);
         button.style.setProperty("--doctor-color",doctorColors[number]);
-        button.innerHTML = `<span class="doctor-avatar">${number}</span><span class="doctor-name">${name}</span>`;
+        button.innerHTML = `<span class="doctor-avatar" aria-hidden="true">${number}</span>`;
         doctorList.appendChild(button);
       });
 
