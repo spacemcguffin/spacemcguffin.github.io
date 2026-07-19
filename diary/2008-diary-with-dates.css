@@ -467,13 +467,17 @@ body {
 
 
 
-table, th, td {
+table {
+  width: 100%;
   border-collapse: collapse;
+}
+
+th,
+td {
   padding: 0.4rem;
   font-size: 0.9rem;
-  text-align: left;  
+  text-align: left;
   overflow-wrap: break-word;
-  width: -webkit-fill-available;
   color: var(--text);
   vertical-align: middle;
 }
