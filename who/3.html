@@ -1764,54 +1764,289 @@
 
 
     /* =========================================================
-       SEASON / SERIES RAIL
+       SEASON / SERIES BROWSER
        ========================================================= */
 
-    .season-strip-wrap{
-      padding-top:15px;
+    .season-browser{
+      padding:16px 20px 18px;
       border-top:1px solid rgba(135,173,236,.08);
+      background:linear-gradient(180deg,rgba(9,17,31,.74),rgba(6,12,23,.48));
     }
 
-    .season-strip .season-btn{
-      --season-size:50px;
+    .season-browser-heading{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:12px;
     }
 
-    .season-strip .season-avatar{
-      width:var(--season-size);
-      min-width:var(--season-size);
-      height:var(--season-size);
-      padding-inline:5px;
+    .season-clear-button{
+      appearance:none;
+      border:1px solid rgba(135,173,236,.16);
+      border-radius:999px;
+      padding:7px 11px;
+      background:rgba(15,27,46,.62);
+      color:var(--muted);
+      font:inherit;
+      font-size:.75rem;
+      font-weight:750;
+      cursor:pointer;
+    }
+
+    .season-clear-button:hover{
+      color:var(--text);
+      border-color:rgba(135,173,236,.34);
+    }
+
+    .season-era-tabs{
+      display:flex;
+      gap:6px;
+      width:max-content;
+      max-width:100%;
+      margin-bottom:14px;
+      padding:5px;
+      overflow-x:auto;
+      scrollbar-width:none;
+      border:1px solid rgba(135,173,236,.12);
+      border-radius:14px;
+      background:rgba(3,8,17,.5);
+    }
+
+    .season-era-tabs::-webkit-scrollbar{
+      display:none;
+    }
+
+    .season-era-tab{
+      appearance:none;
+      border:0;
+      border-radius:10px;
+      padding:8px 13px;
+      background:transparent;
+      color:var(--muted);
+      font:inherit;
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      white-space:nowrap;
+      cursor:pointer;
+      transition:color .18s ease,background .18s ease,box-shadow .18s ease;
+    }
+
+    .season-era-tab:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+    }
+
+    .season-era-tab.active{
+      color:#fff;
+      background:linear-gradient(180deg,rgba(56,115,219,.9),rgba(31,76,160,.92));
+      box-shadow:0 7px 18px rgba(0,0,0,.24);
+    }
+
+    .season-pill-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(108px,1fr));
+      gap:8px;
+    }
+
+    .season-pill{
+      appearance:none;
+      min-width:0;
+      min-height:52px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:8px 10px;
+      border:1px solid rgba(135,173,236,.12);
+      border-radius:13px;
+      background:rgba(10,20,36,.6);
+      color:var(--text);
+      text-align:left;
+      cursor:pointer;
+      transition:transform .16s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease;
+    }
+
+    .season-pill:hover{
+      transform:translateY(-1px);
+      border-color:color-mix(in srgb,var(--season-accent) 55%,transparent);
+      background:rgba(15,28,48,.78);
+    }
+
+    .season-pill.active{
+      border-color:color-mix(in srgb,var(--season-accent) 78%,transparent);
+      background:linear-gradient(
+        135deg,
+        color-mix(in srgb,var(--season-accent) 25%,rgba(10,20,36,.82)),
+        rgba(8,17,31,.88)
+      );
+      box-shadow:
+        inset 0 0 0 1px color-mix(in srgb,var(--season-accent) 26%,transparent),
+        0 8px 22px rgba(0,0,0,.22);
+    }
+
+    .season-pill-number{
+      flex:0 0 auto;
+      min-width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      padding-inline:7px;
+      border-radius:10px;
+      background:color-mix(in srgb,var(--season-accent) 24%,rgba(255,255,255,.03));
+      color:#fff;
       font-size:.76rem;
-      letter-spacing:-.02em;
+      font-weight:900;
+      line-height:1;
     }
 
-    .season-strip .season-btn[data-season="all"] .season-avatar{
-      font-size:.68rem;
+    .season-pill-name{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      color:var(--muted);
+      font-size:.72rem;
+      line-height:1.2;
     }
 
-    .season-strip .season-btn[data-season="Audio Adventures"] .season-avatar{
-      font-size:.52rem;
+    .season-pill.active .season-pill-name{
+      color:rgba(255,255,255,.82);
     }
 
-    .mobile-filter-content{
-      padding-top:0;
-    }
-
-    .active-filter-row{
-      margin-top:0;
+    .season-pill[hidden]{
+      display:none !important;
     }
 
     @media(max-width:760px){
-      .season-strip-wrap{
-        padding-top:12px;
+      .season-browser{
+        padding:14px 15px 16px;
       }
 
-      .season-strip .season-btn{
-        --season-size:46px;
+      .season-browser-heading{
+        align-items:flex-start;
       }
 
-      .season-strip .season-avatar{
-        font-size:.72rem;
+      .season-pill-grid{
+        grid-template-columns:repeat(4,minmax(0,1fr));
+        gap:7px;
+      }
+
+      .season-pill{
+        min-height:46px;
+        justify-content:center;
+        padding:7px;
+      }
+
+      .season-pill-number{
+        min-width:31px;
+        height:31px;
+      }
+
+      .season-pill-name{
+        display:none;
+      }
+    }
+
+    @media(max-width:480px){
+      .season-pill-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+
+      .season-era-tab{
+        padding:8px 11px;
+      }
+    }
+
+
+    /* Compact collapsed Season browser */
+    .season-browser{
+      padding-top:12px;
+      padding-bottom:12px;
+    }
+
+    .season-browser-heading{
+      margin-bottom:8px;
+    }
+
+    .season-era-tabs{
+      width:100%;
+      margin-bottom:0;
+      padding:4px;
+      display:grid;
+      grid-template-columns:repeat(5,minmax(0,1fr));
+      overflow:visible;
+    }
+
+    .season-era-tab{
+      position:relative;
+      min-width:0;
+      padding:7px 8px;
+      font-size:.72rem;
+    }
+
+    .season-era-tab::after{
+      content:"›";
+      display:inline-block;
+      margin-left:5px;
+      opacity:.5;
+      transform:rotate(90deg);
+      transition:transform .18s ease,opacity .18s ease;
+    }
+
+    .season-era-tab.active::after{
+      opacity:.9;
+      transform:rotate(-90deg);
+    }
+
+    .season-pill-grid{
+      margin-top:10px;
+      padding-top:10px;
+      border-top:1px solid rgba(135,173,236,.1);
+      animation:seasonOptionsIn .2s ease both;
+    }
+
+    .season-pill-grid[hidden]{
+      display:none !important;
+    }
+
+    @keyframes seasonOptionsIn{
+      from{
+        opacity:0;
+        transform:translateY(-4px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media(max-width:760px){
+      .season-browser{
+        padding-top:10px;
+        padding-bottom:11px;
+      }
+
+      .season-browser-heading{
+        margin-bottom:7px;
+      }
+
+      .season-era-tabs{
+        grid-template-columns:repeat(5,max-content);
+        width:auto;
+        max-width:100%;
+        overflow-x:auto;
+        scroll-snap-type:x proximity;
+      }
+
+      .season-era-tab{
+        scroll-snap-align:start;
+        padding:7px 10px;
+      }
+
+      .season-pill-grid{
+        margin-top:9px;
+        padding-top:9px;
       }
     }
 
@@ -1868,25 +2103,28 @@
 
       <div class="doctor-floating-tooltip" id="doctorFloatingTooltip" role="tooltip"></div>
 
-      <section class="doctor-strip-wrap season-strip-wrap" aria-label="Filter episodes by season or series">
-        <div class="doctor-strip-heading">
+      <section class="season-browser" aria-label="Filter episodes by season or series">
+        <div class="season-browser-heading">
           <div class="doctor-strip-title">
             <span>Seasons</span>
             <strong id="activeSeasonLabel">All Seasons</strong>
           </div>
 
-          <div class="doctor-strip-actions" aria-label="Scroll Season filters">
-            <button class="doctor-scroll-button" id="seasonScrollLeft" type="button" aria-label="Scroll Seasons left">‹</button>
-            <button class="doctor-scroll-button" id="seasonScrollRight" type="button" aria-label="Scroll Seasons right">›</button>
-          </div>
+          <button class="season-clear-button" id="clearSeasonFilters" type="button" hidden>
+            Clear seasons
+          </button>
         </div>
 
-        <div class="doctor-strip-viewport season-strip-viewport">
-          <div class="doctor-strip season-strip" id="seasonList"></div>
+        <div class="season-era-tabs" id="seasonEraTabs" role="tablist" aria-label="Season eras">
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="all">All</button>
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="classic">Classic</button>
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="modern">Modern</button>
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="specials">Specials</button>
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="audio">Audio</button>
         </div>
+
+        <div class="season-pill-grid" id="seasonList" role="group" aria-label="Season choices" hidden></div>
       </section>
-
-      <div class="doctor-floating-tooltip" id="seasonFloatingTooltip" role="tooltip"></div>
 
       <section class="filter-bar mobile-filters-open" id="filterBar">
         <button class="mobile-filter-toggle" id="mobileFilterToggle" type="button"
@@ -2296,6 +2534,7 @@
     const state = {
       doctors:[],
       seasons:[],
+      seasonEra:null,
       search:"",
       view:"grid",
       filtered:[...episodes],
@@ -2346,18 +2585,6 @@
       const seasonList = el("seasonList");
       seasonList.innerHTML = "";
 
-      const allSeasonsButton = document.createElement("button");
-      allSeasonsButton.className = "doctor-btn season-btn active";
-      allSeasonsButton.dataset.season = "all";
-      allSeasonsButton.dataset.tooltip = "All Seasons";
-      allSeasonsButton.title = "All Seasons";
-      allSeasonsButton.setAttribute("aria-label","All Seasons");
-      allSeasonsButton.setAttribute("aria-pressed","true");
-      allSeasonsButton.style.setProperty("--doctor-color","#58a6ff");
-      allSeasonsButton.innerHTML =
-        '<span class="doctor-avatar season-avatar" aria-hidden="true">ALL</span>';
-      seasonList.appendChild(allSeasonsButton);
-
       const seasonValues = unique(
         episodes
           .map(episode=>episode.series)
@@ -2375,34 +2602,38 @@
       seasonValues.forEach((season,index)=>{
         const button = document.createElement("button");
         const numberMatch = season.match(/\d+/);
-        const shortLabel = numberMatch
-          ? numberMatch[0]
-          : season==="Christmas Special"
-            ? "XMAS"
-            : season==="50th Anniversary"
-              ? "50"
-              : season==="60th Anniversary"
-                ? "60"
-                : season==="Television Movie"
-                  ? "TV"
-                  : season==="Audio Adventures"
-                    ? "AUDIO"
-                    : season.slice(0,4).toUpperCase();
 
-        button.className = "doctor-btn season-btn";
+        let era = "specials";
+        if(season.startsWith("Season")) era = "classic";
+        else if(season.startsWith("Series")) era = "modern";
+        else if(season==="Audio Adventures") era = "audio";
+
+        let shortLabel = numberMatch ? numberMatch[0] : season;
+        if(season==="Christmas Special") shortLabel = "Christmas";
+        if(season==="50th Anniversary") shortLabel = "50th";
+        if(season==="60th Anniversary") shortLabel = "60th";
+        if(season==="Television Movie") shortLabel = "TV Movie";
+        if(season==="Audio Adventures") shortLabel = "Audio";
+
+        button.className = "season-pill";
         button.dataset.season = season;
-        button.dataset.tooltip = season;
-        button.title = season;
+        button.dataset.era = era;
         button.setAttribute("aria-label",season);
         button.setAttribute("aria-pressed","false");
         button.style.setProperty(
-          "--doctor-color",
+          "--season-accent",
           doctorColors[(index % 15) + 1] || "#58a6ff"
         );
-        button.innerHTML =
-          `<span class="doctor-avatar season-avatar" aria-hidden="true">${shortLabel}</span>`;
+
+        button.innerHTML = `
+          <span class="season-pill-number">${shortLabel}</span>
+          <span class="season-pill-name">${season}</span>
+        `;
+
         seasonList.appendChild(button);
       });
+
+      renderSeasonEra();
     }
 
     function getFilteredEpisodes(){
@@ -2464,22 +2695,42 @@
       updateActiveDoctorLabel();
     }
 
-    function syncSeasonControls(){
-      document.querySelectorAll(".season-btn").forEach(button=>{
-        const value = button.dataset.season;
+    function renderSeasonEra(){
+      const seasonList = el("seasonList");
+      const expanded = Boolean(state.seasonEra);
 
-        if(value==="all"){
-          const selected = state.seasons.length===0;
-          button.classList.toggle("active",selected);
-          button.setAttribute("aria-pressed",String(selected));
-        }else{
-          const selected = state.seasons.includes(value);
-          button.classList.toggle("active",selected);
-          button.setAttribute("aria-pressed",String(selected));
-        }
+      seasonList.hidden = !expanded;
+
+      document.querySelectorAll(".season-pill").forEach(button=>{
+        const visible =
+          expanded &&
+          (
+            state.seasonEra==="all" ||
+            button.dataset.era===state.seasonEra
+          );
+
+        button.hidden = !visible;
       });
 
+      document.querySelectorAll(".season-era-tab").forEach(tab=>{
+        const active = expanded && tab.dataset.era===state.seasonEra;
+        tab.classList.toggle("active",active);
+        tab.setAttribute("aria-selected",String(active));
+        tab.setAttribute("aria-expanded",String(active));
+      });
+    }
+
+    function syncSeasonControls(){
+      document.querySelectorAll(".season-pill").forEach(button=>{
+        const selected = state.seasons.includes(button.dataset.season);
+        button.classList.toggle("active",selected);
+        button.setAttribute("aria-pressed",String(selected));
+      });
+
+      el("clearSeasonFilters").hidden = state.seasons.length===0;
+
       updateActiveSeasonLabel();
+      renderSeasonEra();
     }
 
     function toggleSeason(value){
@@ -2690,6 +2941,7 @@
     function clearAllFilters(){
       state.doctors = [];
       state.seasons = [];
+      state.seasonEra = null;
       state.search = "";
 
       el("searchInput").value = "";
@@ -2719,10 +2971,26 @@
     });
 
     el("seasonList").addEventListener("click",event=>{
-      const button = event.target.closest(".season-btn");
+      const button = event.target.closest(".season-pill");
       if(!button) return;
 
       toggleSeason(button.dataset.season);
+    });
+
+    el("seasonEraTabs").addEventListener("click",event=>{
+      const tab = event.target.closest(".season-era-tab");
+      if(!tab) return;
+
+      const chosenEra = tab.dataset.era;
+      state.seasonEra = state.seasonEra===chosenEra ? null : chosenEra;
+      renderSeasonEra();
+    });
+
+    el("clearSeasonFilters").addEventListener("click",()=>{
+      state.seasons = [];
+      state.seasonEra = null;
+      syncSeasonControls();
+      render();
     });
 
     el("searchInput").addEventListener("input",()=>{
@@ -2844,11 +3112,7 @@
     const doctorScrollLeft = document.getElementById("doctorScrollLeft");
     const doctorScrollRight = document.getElementById("doctorScrollRight");
 
-    const seasonStrip = document.getElementById("seasonList");
-    const seasonStripViewport = seasonStrip?.closest(".season-strip-viewport");
-    const seasonTooltip = document.getElementById("seasonFloatingTooltip");
-    const seasonScrollLeft = document.getElementById("seasonScrollLeft");
-    const seasonScrollRight = document.getElementById("seasonScrollRight");
+
 
     function updateDoctorStripEdges(){
       if(!doctorStrip || !doctorStripViewport) return;
@@ -2938,9 +3202,7 @@
 
     doctorStrip?.addEventListener("scroll",()=>{
       hideDoctorTooltip();
-      hideSeasonTooltip();
       updateDoctorStripEdges();
-      updateSeasonStripEdges();
     },{passive:true});
 
     doctorStrip?.addEventListener("wheel",event=>{
@@ -2958,91 +3220,6 @@
       doctorStrip?.scrollBy({left:260,behavior:"smooth"});
     });
 
-
-    function updateSeasonStripEdges(){
-      if(!seasonStrip || !seasonStripViewport) return;
-
-      const maxScroll = seasonStrip.scrollWidth - seasonStrip.clientWidth;
-      const canLeft = seasonStrip.scrollLeft > 4;
-      const canRight = seasonStrip.scrollLeft < maxScroll - 4;
-
-      seasonStripViewport.classList.toggle("can-scroll-left",canLeft);
-      seasonStripViewport.classList.toggle("can-scroll-right",canRight);
-
-      if(seasonScrollLeft) seasonScrollLeft.disabled = !canLeft;
-      if(seasonScrollRight) seasonScrollRight.disabled = !canRight;
-    }
-
-    function showSeasonTooltip(button){
-      if(!seasonTooltip || !button) return;
-
-      const text = button.dataset.tooltip || button.getAttribute("aria-label");
-      if(!text) return;
-
-      seasonTooltip.textContent = text;
-      seasonTooltip.classList.add("visible");
-
-      const rect = button.getBoundingClientRect();
-      const tooltipRect = seasonTooltip.getBoundingClientRect();
-      const left = Math.min(
-        window.innerWidth-tooltipRect.width-12,
-        Math.max(12,rect.left + rect.width/2 - tooltipRect.width/2)
-      );
-
-      seasonTooltip.style.left = `${left}px`;
-      seasonTooltip.style.top = `${Math.max(10,rect.top-tooltipRect.height-10)}px`;
-    }
-
-    function hideSeasonTooltip(){
-      seasonTooltip?.classList.remove("visible");
-    }
-
-    if(seasonStrip){
-      seasonStrip.addEventListener("scroll",()=>{
-        updateSeasonStripEdges();
-        hideSeasonTooltip();
-      },{passive:true});
-
-      seasonStrip.addEventListener("wheel",event=>{
-        if(Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
-        if(seasonStrip.scrollWidth <= seasonStrip.clientWidth) return;
-
-        event.preventDefault();
-        seasonStrip.scrollLeft += event.deltaY;
-      },{passive:false});
-
-      seasonStrip.addEventListener("pointerover",event=>{
-        const button = event.target.closest(".season-btn");
-        if(button) showSeasonTooltip(button);
-      });
-
-      seasonStrip.addEventListener("pointerout",event=>{
-        if(!event.relatedTarget?.closest?.(".season-btn")){
-          hideSeasonTooltip();
-        }
-      });
-
-      seasonStrip.addEventListener("focusin",event=>{
-        const button = event.target.closest(".season-btn");
-        if(button) showSeasonTooltip(button);
-      });
-
-      seasonStrip.addEventListener("focusout",hideSeasonTooltip);
-    }
-
-    seasonScrollLeft?.addEventListener("click",()=>{
-      seasonStrip.scrollBy({
-        left:-Math.max(220,seasonStrip.clientWidth*.66),
-        behavior:"smooth"
-      });
-    });
-
-    seasonScrollRight?.addEventListener("click",()=>{
-      seasonStrip.scrollBy({
-        left:Math.max(220,seasonStrip.clientWidth*.66),
-        behavior:"smooth"
-      });
-    });
 
     let previousMobileInspectorState = isMobileInspector();
 
@@ -3083,7 +3260,6 @@
 
     requestAnimationFrame(()=>{
       updateDoctorStripEdges();
-      updateSeasonStripEdges();
     });
   </script>
 </body>
