@@ -1046,6 +1046,168 @@
       }
     }
 
+
+    /* ENHANCED DOCTOR STRIP */
+    .doctor-strip-wrap{
+      position:relative;
+      overflow:visible;
+    }
+
+    .doctor-strip-heading{
+      min-height:30px;
+    }
+
+    .doctor-strip-title{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      min-width:0;
+    }
+
+    .doctor-strip-title > span{
+      flex:0 0 auto;
+    }
+
+    .doctor-strip-title strong{
+      min-width:0;
+      overflow:hidden;
+      color:#eef5ff;
+      font-size:.75rem;
+      font-weight:750;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .doctor-strip-actions{
+      display:flex;
+      gap:6px;
+    }
+
+    .doctor-scroll-button{
+      width:29px;
+      height:29px;
+      display:grid;
+      place-items:center;
+      padding:0;
+      border:1px solid rgba(118,160,219,.22);
+      border-radius:8px;
+      background:rgba(11,22,39,.88);
+      color:#c9d9ef;
+      font-size:1.05rem;
+      line-height:1;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .doctor-scroll-button:hover{
+      border-color:rgba(104,166,255,.55);
+      background:rgba(28,54,91,.92);
+      color:#fff;
+    }
+
+    .doctor-scroll-button:disabled{
+      opacity:.28;
+      cursor:default;
+    }
+
+    .doctor-strip-viewport{
+      position:relative;
+      min-width:0;
+    }
+
+    .doctor-strip-viewport::before,
+    .doctor-strip-viewport::after{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:6px;
+      z-index:4;
+      width:28px;
+      pointer-events:none;
+      opacity:0;
+      transition:opacity .18s ease;
+    }
+
+    .doctor-strip-viewport::before{
+      left:0;
+      background:linear-gradient(90deg,rgba(4,9,18,.98),transparent);
+    }
+
+    .doctor-strip-viewport::after{
+      right:0;
+      background:linear-gradient(-90deg,rgba(4,9,18,.98),transparent);
+    }
+
+    .doctor-strip-viewport.can-scroll-left::before,
+    .doctor-strip-viewport.can-scroll-right::after{
+      opacity:1;
+    }
+
+    .doctor-strip{
+      scroll-behavior:smooth;
+      overscroll-behavior-inline:contain;
+    }
+
+    /* The old pseudo-element tooltips are disabled because overflow-x clips them. */
+    .doctor-strip .doctor-btn::after{
+      display:none !important;
+    }
+
+    .doctor-floating-tooltip{
+      position:fixed;
+      left:0;
+      top:0;
+      z-index:9999;
+      max-width:210px;
+      padding:7px 10px;
+      border:1px solid rgba(126,171,235,.28);
+      border-radius:8px;
+      background:rgba(3,9,18,.98);
+      color:#e3eeff;
+      font-size:.67rem;
+      font-weight:750;
+      letter-spacing:.02em;
+      line-height:1.25;
+      white-space:nowrap;
+      pointer-events:none;
+      opacity:0;
+      transform:translate(-50%,-100%) translateY(-10px);
+      transition:opacity .13s ease,transform .13s ease;
+      box-shadow:0 10px 30px rgba(0,0,0,.42);
+    }
+
+    .doctor-floating-tooltip.visible{
+      opacity:1;
+      transform:translate(-50%,-100%) translateY(-14px);
+    }
+
+    .doctor-strip .doctor-btn{
+      isolation:isolate;
+    }
+
+    .doctor-strip .doctor-btn.active::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-8px;
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:var(--doctor-color,#58a6ff);
+      box-shadow:0 0 10px var(--doctor-color,#58a6ff);
+      transform:translateX(-50%);
+    }
+
+    @media(max-width:760px){
+      .doctor-strip-actions{
+        display:none;
+      }
+
+      .doctor-strip-title strong{
+        font-size:.69rem;
+      }
+    }
+
 </style>
 </head>
 
@@ -1081,11 +1243,23 @@
 
       <section class="doctor-strip-wrap" aria-label="Filter episodes by Doctor">
         <div class="doctor-strip-heading">
-          <span>Doctors</span>
-          <small>Scroll to explore</small>
+          <div class="doctor-strip-title">
+            <span>Doctors</span>
+            <strong id="activeDoctorLabel">All Doctors</strong>
+          </div>
+
+          <div class="doctor-strip-actions" aria-label="Scroll Doctor filters">
+            <button class="doctor-scroll-button" id="doctorScrollLeft" type="button" aria-label="Scroll Doctors left">‹</button>
+            <button class="doctor-scroll-button" id="doctorScrollRight" type="button" aria-label="Scroll Doctors right">›</button>
+          </div>
         </div>
-        <div class="doctor-strip" id="doctorList"></div>
+
+        <div class="doctor-strip-viewport">
+          <div class="doctor-strip" id="doctorList"></div>
+        </div>
       </section>
+
+      <div class="doctor-floating-tooltip" id="doctorFloatingTooltip" role="tooltip"></div>
 
 
       <section class="filter-bar">
@@ -1260,8 +1434,8 @@
         id:"rose", code:"1.1", title:"Rose", doctor:"Ninth Doctor", doctorNumber:9,
         series:"Series 1", year:2005, date:"26 March 2005", duration:"45 minutes",
         setting:"Earth", format:"Story", companion:"Rose Tyler", monster:"Autons / Nestene Consciousness",
-        writer:"Russell T Davies", director:"Keith Boak", rating:4.5,
-        image:"https://images2.imgbox.com/3b/77/SXTopXBi_o.jpg",
+        writer:"Russell T Davies", director:"Keith Boak", rating:4.6,
+        image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=85",
         synopsis:"Rose Tyler's life is turned upside down when she meets a mysterious traveller and living shop-window dummies.",
         review:"A funny, direct and emotionally confident reintroduction to Doctor Who.",
         trivia:["This episode relaunched Doctor Who as a continuing television series in 2005.","It brought the Autons back for the first time since 1971."],
@@ -1543,6 +1717,10 @@
           span.querySelector("button").addEventListener("click",()=>{
             chip.clear();
             render();
+    requestAnimationFrame(()=>{
+      updateActiveDoctorLabel();
+      updateDoctorStripEdges();
+    });
           });
           container.appendChild(span);
         });
@@ -1717,6 +1895,116 @@
       if(event.key==="ArrowRight") selectByOffset(1);
       if(event.key==="Escape") details.classList.remove("open");
     });
+
+
+    const doctorStrip = document.getElementById("doctorList");
+    const doctorStripViewport = doctorStrip?.closest(".doctor-strip-viewport");
+    const doctorTooltip = document.getElementById("doctorFloatingTooltip");
+    const activeDoctorLabel = document.getElementById("activeDoctorLabel");
+    const doctorScrollLeft = document.getElementById("doctorScrollLeft");
+    const doctorScrollRight = document.getElementById("doctorScrollRight");
+
+    function updateDoctorStripEdges(){
+      if(!doctorStrip || !doctorStripViewport) return;
+
+      const maxScroll = doctorStrip.scrollWidth - doctorStrip.clientWidth;
+      const canLeft = doctorStrip.scrollLeft > 4;
+      const canRight = doctorStrip.scrollLeft < maxScroll - 4;
+
+      doctorStripViewport.classList.toggle("can-scroll-left",canLeft);
+      doctorStripViewport.classList.toggle("can-scroll-right",canRight);
+
+      if(doctorScrollLeft) doctorScrollLeft.disabled = !canLeft;
+      if(doctorScrollRight) doctorScrollRight.disabled = !canRight;
+    }
+
+    function updateActiveDoctorLabel(){
+      if(!doctorStrip || !activeDoctorLabel) return;
+      const activeButton = doctorStrip.querySelector(".doctor-btn.active");
+      activeDoctorLabel.textContent =
+        activeButton?.dataset.tooltip ||
+        activeButton?.getAttribute("aria-label") ||
+        "All Doctors";
+    }
+
+    function showDoctorTooltip(button){
+      if(!doctorTooltip || !button) return;
+
+      const label =
+        button.dataset.tooltip ||
+        button.getAttribute("aria-label") ||
+        button.title;
+
+      if(!label) return;
+
+      const rect = button.getBoundingClientRect();
+      doctorTooltip.textContent = label;
+      doctorTooltip.style.left = `${rect.left + rect.width / 2}px`;
+      doctorTooltip.style.top = `${rect.top}px`;
+      doctorTooltip.classList.add("visible");
+    }
+
+    function hideDoctorTooltip(){
+      doctorTooltip?.classList.remove("visible");
+    }
+
+    doctorStrip?.addEventListener("pointerover",event=>{
+      const button = event.target.closest(".doctor-btn");
+      if(button) showDoctorTooltip(button);
+    });
+
+    doctorStrip?.addEventListener("pointerout",event=>{
+      if(event.target.closest(".doctor-btn")) hideDoctorTooltip();
+    });
+
+    doctorStrip?.addEventListener("focusin",event=>{
+      const button = event.target.closest(".doctor-btn");
+      if(button) showDoctorTooltip(button);
+    });
+
+    doctorStrip?.addEventListener("focusout",hideDoctorTooltip);
+
+    doctorStrip?.addEventListener("click",()=>{
+      requestAnimationFrame(updateActiveDoctorLabel);
+    });
+
+    doctorStrip?.addEventListener("scroll",()=>{
+      hideDoctorTooltip();
+      updateDoctorStripEdges();
+    },{passive:true});
+
+    doctorStrip?.addEventListener("wheel",event=>{
+      if(Math.abs(event.deltaY) > Math.abs(event.deltaX)){
+        event.preventDefault();
+        doctorStrip.scrollBy({left:event.deltaY,behavior:"smooth"});
+      }
+    },{passive:false});
+
+    doctorScrollLeft?.addEventListener("click",()=>{
+      doctorStrip?.scrollBy({left:-260,behavior:"smooth"});
+    });
+
+    doctorScrollRight?.addEventListener("click",()=>{
+      doctorStrip?.scrollBy({left:260,behavior:"smooth"});
+    });
+
+    window.addEventListener("resize",()=>{
+      hideDoctorTooltip();
+      updateDoctorStripEdges();
+    });
+
+    const doctorStripObserver = new MutationObserver(()=>{
+      updateActiveDoctorLabel();
+      updateDoctorStripEdges();
+    });
+
+    if(doctorStrip){
+      doctorStripObserver.observe(doctorStrip,{
+        subtree:true,
+        attributes:true,
+        attributeFilter:["class"]
+      });
+    }
 
     buildFilters();
     render();
