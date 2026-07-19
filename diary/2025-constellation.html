@@ -1,0 +1,890 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Lewis Christian's 2025 memory constellation">
+  <title>2025 Memory Constellation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,100..1000&family=Geist+Pixel&family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="constellation.css">
+</head>
+
+<body>
+  <div class="space-noise" aria-hidden="true"></div>
+
+  <header class="constellation-header">
+    <a class="brand" href="/diary/2025" aria-label="Return to the 2025 diary">
+      <span class="brand-block">LEWIS<br>.LC</span>
+      <span class="brand-copy">2025 Memory<br>Constellation</span>
+    </a>
+
+    <nav class="header-actions" aria-label="Constellation controls">
+      <a class="back-link" href="/diary/2025">← Diary archive</a>
+      <button class="round-button" id="soundToggle" type="button" aria-label="Toggle ambience" title="Toggle ambience">◌</button>
+      <button class="round-button" id="infoToggle" type="button" aria-label="How to use the constellation" title="How to use">?</button>
+    </nav>
+  </header>
+
+  <main class="constellation-page">
+    <section class="intro">
+      <p class="eyebrow">A YEAR IN ORBIT</p>
+      <h1>dark disquiet<br><span>2025</span></h1>
+      <p class="intro-copy">
+        Fifty-two titles arranged as a living map of the year.
+        Search, filter, or choose a star to open a memory.
+      </p>
+    </section>
+
+    <section class="controls" aria-label="Filter memories">
+      <label class="search-box" for="memorySearch">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.4-3.4"></path>
+        </svg>
+        <input id="memorySearch" type="search" placeholder="Search titles, summaries or tags…" autocomplete="off">
+      </label>
+
+      <label class="select-box" for="monthFilter">
+        <span>Month</span>
+        <select id="monthFilter">
+          <option value="all">All months</option>
+          <option value="January">January</option><option value="February">February</option><option value="March">March</option><option value="April">April</option><option value="May">May</option><option value="June">June</option><option value="July">July</option><option value="August">August</option><option value="September">September</option><option value="October">October</option><option value="November">November</option><option value="December">December</option>
+        </select>
+      </label>
+
+      <button class="control-button" id="randomMemory" type="button">✦ Random memory</button>
+      <button class="control-button secondary" id="resetView" type="button">Reset view</button>
+    </section>
+
+    <section class="sky-shell" aria-label="Interactive 2025 memory constellation">
+      <div class="sky-toolbar">
+        <div>
+          <strong id="visibleCount">52</strong>
+          <span>memories visible</span>
+        </div>
+        <div class="legend" aria-label="Month colour legend">
+          <span><i class="legend-dot winter"></i> Winter</span>
+          <span><i class="legend-dot spring"></i> Spring</span>
+          <span><i class="legend-dot summer"></i> Summer</span>
+          <span><i class="legend-dot autumn"></i> Autumn</span>
+        </div>
+      </div>
+
+      <div class="sky" id="sky">
+        <canvas id="connectionCanvas" aria-hidden="true"></canvas>
+        <div class="nebula nebula-one" aria-hidden="true"></div>
+        <div class="nebula nebula-two" aria-hidden="true"></div>
+        <div class="star-layer" id="starLayer"></div>
+
+        <div class="empty-state" id="emptyState" hidden>
+          <strong>No memories found</strong>
+          <span>Try a different title, month, summary or tag.</span>
+        </div>
+
+        <div class="sky-instruction">
+          <span>Drag to explore</span>
+          <span>Scroll to zoom</span>
+          <span>Click a star</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="year-strip" aria-label="2025 by month">
+      <button class="month-chip" type="button" data-month="January"><span>Jan</span><strong>4</strong></button><button class="month-chip" type="button" data-month="February"><span>Feb</span><strong>3</strong></button><button class="month-chip" type="button" data-month="March"><span>Mar</span><strong>5</strong></button><button class="month-chip" type="button" data-month="April"><span>Apr</span><strong>4</strong></button><button class="month-chip" type="button" data-month="May"><span>May</span><strong>11</strong></button><button class="month-chip" type="button" data-month="June"><span>Jun</span><strong>3</strong></button><button class="month-chip" type="button" data-month="July"><span>Jul</span><strong>4</strong></button><button class="month-chip" type="button" data-month="August"><span>Aug</span><strong>6</strong></button><button class="month-chip" type="button" data-month="September"><span>Sep</span><strong>1</strong></button><button class="month-chip" type="button" data-month="October"><span>Oct</span><strong>1</strong></button><button class="month-chip" type="button" data-month="November"><span>Nov</span><strong>2</strong></button><button class="month-chip" type="button" data-month="December"><span>Dec</span><strong>8</strong></button>
+    </section>
+
+    <section class="year-statistics">
+      <article>
+        <small>Total memories</small>
+        <strong>52</strong>
+      </article>
+      <article>
+        <small>Busiest month</small>
+        <strong>May</strong>
+      </article>
+      <article>
+        <small>Quietest month</small>
+        <strong>September</strong>
+      </article>
+      <article>
+        <small>Current view</small>
+        <strong id="currentView">Whole year</strong>
+      </article>
+    </section>
+  </main>
+
+  <dialog class="memory-dialog" id="memoryDialog">
+    <button class="dialog-close" id="dialogClose" type="button" aria-label="Close memory">×</button>
+    <div class="dialog-orbit" aria-hidden="true"></div>
+    <p class="dialog-kicker" id="dialogKicker"></p>
+    <h2 id="dialogTitle"></h2>
+    <p class="dialog-summary" id="dialogSummary"></p>
+    <div class="dialog-meta">
+      <div>
+        <small>Mood</small>
+        <span id="dialogMood"></span>
+      </div>
+      <div>
+        <small>Tags</small>
+        <span id="dialogTags"></span>
+      </div>
+    </div>
+    <div class="dialog-navigation" aria-label="Browse memories">
+      <button id="previousMemory" type="button">← Previous</button>
+      <button id="nextMemory" type="button">Next →</button>
+    </div>
+    <p class="edit-note">Edit this memory in the <code>memoryData</code> list near the bottom of the HTML file.</p>
+  </dialog>
+
+  <dialog class="help-dialog" id="helpDialog">
+    <button class="dialog-close" id="helpClose" type="button" aria-label="Close instructions">×</button>
+    <p class="dialog-kicker">HOW TO EXPLORE</p>
+    <h2>Your year, mapped.</h2>
+    <p>Move across the sky by dragging. Zoom with the mouse wheel or trackpad. Search titles, summaries and tags, or isolate one month using the filter.</p>
+    <p>Every star already represents one of your diary titles. Summaries, moods and tags can be added gradually without rebuilding the page.</p>
+  </dialog>
+
+  <script>
+    /*
+      Add your summaries, moods and tags here.
+
+      Example:
+      {
+        "month": "January",
+        "number": 1,
+        "title": "snowfall",
+        "summary": "A quiet day watching snow settle outside.",
+        "mood": "calm",
+        "tags": ["winter", "home", "reflection"]
+      }
+    */
+    const memoryData = [
+  {
+    "month": "January",
+    "number": 1,
+    "title": "snowfall",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "January",
+    "number": 2,
+    "title": "respawn",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "January",
+    "number": 3,
+    "title": "vibe check",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "January",
+    "number": 4,
+    "title": "false start",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "February",
+    "number": 1,
+    "title": "spaced out",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "February",
+    "number": 2,
+    "title": "crazy frog",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "February",
+    "number": 3,
+    "title": "12,000 days",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "March",
+    "number": 1,
+    "title": "new season",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "March",
+    "number": 2,
+    "title": "head above water",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "March",
+    "number": 3,
+    "title": "contentment",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "March",
+    "number": 4,
+    "title": "and breathe",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "March",
+    "number": 5,
+    "title": "decades apart",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "April",
+    "number": 1,
+    "title": "fifteen years ago",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "April",
+    "number": 2,
+    "title": "eclipse",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "April",
+    "number": 3,
+    "title": "fading lights",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "April",
+    "number": 4,
+    "title": "love for sophie",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 1,
+    "title": "brophie",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 2,
+    "title": "five shots",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 3,
+    "title": "angels and demons",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 4,
+    "title": "the world is mine",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 5,
+    "title": "love for bron",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 6,
+    "title": "blonde and blue",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 7,
+    "title": "reunion",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 8,
+    "title": "sanctuary 🌻",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 9,
+    "title": "the end is nigh",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 10,
+    "title": "queen of hearts",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "May",
+    "number": 11,
+    "title": "clusterfuck",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "June",
+    "number": 1,
+    "title": "shattered",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "June",
+    "number": 2,
+    "title": "dear bronwyn",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "June",
+    "number": 3,
+    "title": "lone wolf",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "July",
+    "number": 1,
+    "title": "midpoint",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "July",
+    "number": 2,
+    "title": "moments of calm",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "July",
+    "number": 3,
+    "title": "day goes dark",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "July",
+    "number": 4,
+    "title": "beauty and the beast",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "August",
+    "number": 1,
+    "title": "autumn ready",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "August",
+    "number": 2,
+    "title": "work daze",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "August",
+    "number": 3,
+    "title": "404",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "August",
+    "number": 4,
+    "title": "energy shift",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "August",
+    "number": 5,
+    "title": "overcast skies",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "August",
+    "number": 6,
+    "title": "seasons of change",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "September",
+    "number": 1,
+    "title": "in between the rain",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "October",
+    "number": 1,
+    "title": "heart to hearts",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "November",
+    "number": 1,
+    "title": "wake me up when december ends",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "November",
+    "number": 2,
+    "title": "weight of the world",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 1,
+    "title": "so long, and thanks for all the fish",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 2,
+    "title": "that’s a wrap",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 3,
+    "title": "shitmas",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 4,
+    "title": "zoe and gem",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 5,
+    "title": "just another day",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 6,
+    "title": "SOS",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 7,
+    "title": "lift my spirit",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  },
+  {
+    "month": "December",
+    "number": 8,
+    "title": "final words",
+    "summary": "",
+    "mood": "unmapped",
+    "tags": []
+  }
+];
+
+    const monthIndex = {
+      January: 0, February: 1, March: 2, April: 3,
+      May: 4, June: 5, July: 6, August: 7,
+      September: 8, October: 9, November: 10, December: 11
+    };
+
+    const sky = document.getElementById('sky');
+    const starLayer = document.getElementById('starLayer');
+    const canvas = document.getElementById('connectionCanvas');
+    const context = canvas.getContext('2d');
+    const search = document.getElementById('memorySearch');
+    const monthFilter = document.getElementById('monthFilter');
+    const visibleCount = document.getElementById('visibleCount');
+    const currentView = document.getElementById('currentView');
+    const emptyState = document.getElementById('emptyState');
+    const memoryDialog = document.getElementById('memoryDialog');
+    const helpDialog = document.getElementById('helpDialog');
+
+    let stars = [];
+    let activeMemoryIndex = 0;
+    let camera = { x: 0, y: 0, scale: 1 };
+    let dragging = false;
+    let dragStart = { x: 0, y: 0 };
+    let cameraStart = { x: 0, y: 0 };
+    let animationFrame;
+
+    function hashString(value) {
+      let hash = 2166136261;
+      for (let i = 0; i < value.length; i++) {
+        hash ^= value.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash);
+    }
+
+    function seededUnit(seed) {
+      const x = Math.sin(seed) * 10000;
+      return x - Math.floor(x);
+    }
+
+    function createStars() {
+      const width = 1800;
+      const height = 1120;
+      const columns = 4;
+      const rows = 3;
+
+      memoryData.forEach((memory, index) => {
+        const month = monthIndex[memory.month];
+        const col = month % columns;
+        const row = Math.floor(month / columns);
+        const seed = hashString(`${memory.month}-${memory.number}-${memory.title}`);
+
+        const clusterX = 240 + col * 440;
+        const clusterY = 190 + row * 360;
+        const angle = seededUnit(seed) * Math.PI * 2;
+        const radius = 36 + seededUnit(seed + 19) * 142;
+        const x = clusterX + Math.cos(angle) * radius;
+        const y = clusterY + Math.sin(angle) * radius;
+
+        const button = document.createElement('button');
+        button.className = `memory-star season-${getSeason(memory.month)}`;
+        button.type = 'button';
+        button.setAttribute('aria-label', `${memory.title}, ${memory.month} memory ${memory.number}`);
+        button.style.setProperty('--x', `${x}px`);
+        button.style.setProperty('--y', `${y}px`);
+        button.style.setProperty('--delay', `${-seededUnit(seed + 7) * 5}s`);
+        button.style.setProperty('--size', `${6 + seededUnit(seed + 31) * 7}px`);
+        button.dataset.index = index;
+
+        const core = document.createElement('span');
+        core.className = 'star-core';
+        const label = document.createElement('span');
+        label.className = 'star-label';
+        label.textContent = memory.title;
+
+        button.append(core, label);
+        button.addEventListener('click', () => openMemory(index));
+        starLayer.appendChild(button);
+
+        stars.push({ element: button, memory, x, y, visible: true });
+      });
+
+      starLayer.style.width = `${width}px`;
+      starLayer.style.height = `${height}px`;
+      applyCamera();
+      resizeCanvas();
+      drawConnections();
+    }
+
+    function getSeason(month) {
+      const index = monthIndex[month];
+      if ([11, 0, 1].includes(index)) return 'winter';
+      if ([2, 3, 4].includes(index)) return 'spring';
+      if ([5, 6, 7].includes(index)) return 'summer';
+      return 'autumn';
+    }
+
+    function applyCamera() {
+      starLayer.style.transform = `translate(${camera.x}px, ${camera.y}px) scale(${camera.scale})`;
+      drawConnections();
+    }
+
+    function resizeCanvas() {
+      const rect = sky.getBoundingClientRect();
+      const ratio = window.devicePixelRatio || 1;
+      canvas.width = rect.width * ratio;
+      canvas.height = rect.height * ratio;
+      canvas.style.width = `${rect.width}px`;
+      canvas.style.height = `${rect.height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      drawConnections();
+    }
+
+    function screenPosition(star) {
+      return {
+        x: star.x * camera.scale + camera.x,
+        y: star.y * camera.scale + camera.y
+      };
+    }
+
+    function drawConnections() {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = requestAnimationFrame(() => {
+        const rect = sky.getBoundingClientRect();
+        context.clearRect(0, 0, rect.width, rect.height);
+        context.lineWidth = 0.7;
+
+        for (let i = 0; i < stars.length; i++) {
+          const first = stars[i];
+          if (!first.visible) continue;
+          const firstPos = screenPosition(first);
+
+          for (let j = i + 1; j < stars.length; j++) {
+            const second = stars[j];
+            if (!second.visible || first.memory.month !== second.memory.month) continue;
+
+            const secondPos = screenPosition(second);
+            const distance = Math.hypot(firstPos.x - secondPos.x, firstPos.y - secondPos.y);
+
+            if (distance < 155 * camera.scale) {
+              const opacity = Math.max(0, 0.22 - distance / 850);
+              context.strokeStyle = `rgba(151, 184, 255, ${opacity})`;
+              context.beginPath();
+              context.moveTo(firstPos.x, firstPos.y);
+              context.lineTo(secondPos.x, secondPos.y);
+              context.stroke();
+            }
+          }
+        }
+      });
+    }
+
+    function filterStars() {
+      const query = search.value.trim().toLowerCase();
+      const selectedMonth = monthFilter.value;
+      let count = 0;
+
+      stars.forEach(star => {
+        const haystack = [
+          star.memory.title,
+          star.memory.summary,
+          star.memory.mood,
+          ...(star.memory.tags || [])
+        ].join(' ').toLowerCase();
+
+        const matchesQuery = !query || haystack.includes(query);
+        const matchesMonth = selectedMonth === 'all' || star.memory.month === selectedMonth;
+        star.visible = matchesQuery && matchesMonth;
+        star.element.classList.toggle('filtered-out', !star.visible);
+        if (star.visible) count++;
+      });
+
+      visibleCount.textContent = count;
+      currentView.textContent = selectedMonth === 'all' ? 'Whole year' : selectedMonth;
+      emptyState.hidden = count !== 0;
+      document.querySelectorAll('.month-chip').forEach(chip => {
+        chip.classList.toggle('active', chip.dataset.month === selectedMonth);
+      });
+      drawConnections();
+    }
+
+    function openMemory(index) {
+      activeMemoryIndex = (index + memoryData.length) % memoryData.length;
+      const memory = memoryData[activeMemoryIndex];
+      document.getElementById('dialogKicker').textContent =
+        `${memory.month} 2025 · MEMORY ${String(memory.number).padStart(2, '0')}`;
+      document.getElementById('dialogTitle').textContent = memory.title;
+      document.getElementById('dialogSummary').textContent =
+        memory.summary || 'This memory does not have a summary yet.';
+      document.getElementById('dialogMood').textContent =
+        memory.mood && memory.mood !== 'unmapped' ? memory.mood : 'Not added yet';
+      document.getElementById('dialogTags').textContent =
+        memory.tags?.length ? memory.tags.join(' · ') : 'No tags yet';
+      memoryDialog.showModal();
+    }
+
+    function focusStar(star) {
+      const rect = sky.getBoundingClientRect();
+      camera.scale = 1.55;
+      camera.x = rect.width / 2 - star.x * camera.scale;
+      camera.y = rect.height / 2 - star.y * camera.scale;
+      applyCamera();
+      star.element.focus({ preventScroll: true });
+      star.element.classList.add('chosen');
+      setTimeout(() => star.element.classList.remove('chosen'), 1200);
+    }
+
+    sky.addEventListener('pointerdown', event => {
+      if (event.target.closest('.memory-star')) return;
+      dragging = true;
+      dragStart = { x: event.clientX, y: event.clientY };
+      cameraStart = { x: camera.x, y: camera.y };
+      sky.setPointerCapture(event.pointerId);
+      sky.classList.add('dragging');
+    });
+
+    sky.addEventListener('pointermove', event => {
+      if (!dragging) return;
+      camera.x = cameraStart.x + event.clientX - dragStart.x;
+      camera.y = cameraStart.y + event.clientY - dragStart.y;
+      applyCamera();
+    });
+
+    sky.addEventListener('pointerup', event => {
+      dragging = false;
+      sky.releasePointerCapture(event.pointerId);
+      sky.classList.remove('dragging');
+    });
+
+    sky.addEventListener('wheel', event => {
+      event.preventDefault();
+      const rect = sky.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
+      const previousScale = camera.scale;
+      const factor = event.deltaY < 0 ? 1.1 : 0.9;
+      camera.scale = Math.min(2.4, Math.max(0.58, camera.scale * factor));
+      camera.x = mouseX - ((mouseX - camera.x) / previousScale) * camera.scale;
+      camera.y = mouseY - ((mouseY - camera.y) / previousScale) * camera.scale;
+      applyCamera();
+    }, { passive: false });
+
+    search.addEventListener('input', filterStars);
+    monthFilter.addEventListener('change', filterStars);
+
+    document.querySelectorAll('.month-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        monthFilter.value = monthFilter.value === chip.dataset.month ? 'all' : chip.dataset.month;
+        filterStars();
+      });
+    });
+
+    document.getElementById('randomMemory').addEventListener('click', () => {
+      const candidates = stars.filter(star => star.visible);
+      if (!candidates.length) return;
+      const star = candidates[Math.floor(Math.random() * candidates.length)];
+      focusStar(star);
+      setTimeout(() => openMemory(Number(star.element.dataset.index)), 450);
+    });
+
+    document.getElementById('resetView').addEventListener('click', () => {
+      search.value = '';
+      monthFilter.value = 'all';
+      camera = { x: 0, y: 0, scale: 1 };
+      filterStars();
+      applyCamera();
+    });
+
+    function closeDialog(dialog) {
+      if (dialog?.open) dialog.close();
+    }
+
+    document.getElementById('dialogClose').addEventListener('click', event => {
+      event.stopPropagation();
+      closeDialog(memoryDialog);
+    });
+    document.getElementById('previousMemory').addEventListener('click', () => openMemory(activeMemoryIndex - 1));
+    document.getElementById('nextMemory').addEventListener('click', () => openMemory(activeMemoryIndex + 1));
+    document.getElementById('infoToggle').addEventListener('click', () => helpDialog.showModal());
+    document.getElementById('helpClose').addEventListener('click', event => {
+      event.stopPropagation();
+      closeDialog(helpDialog);
+    });
+
+    [memoryDialog, helpDialog].forEach(dialog => {
+      dialog.addEventListener('click', event => {
+        if (event.target === dialog) closeDialog(dialog);
+      });
+    });
+
+    document.addEventListener('keydown', event => {
+      if (!memoryDialog.open) return;
+      if (event.key === 'ArrowLeft') openMemory(activeMemoryIndex - 1);
+      if (event.key === 'ArrowRight') openMemory(activeMemoryIndex + 1);
+    });
+
+    document.getElementById('soundToggle').addEventListener('click', event => {
+      const active = event.currentTarget.classList.toggle('active');
+      event.currentTarget.textContent = active ? '◉' : '◌';
+      event.currentTarget.setAttribute('aria-label', active ? 'Disable ambience' : 'Enable ambience');
+      document.body.classList.toggle('ambience-on', active);
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+    createStars();
+  </script>
+</body>
+</html>
