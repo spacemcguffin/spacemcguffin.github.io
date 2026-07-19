@@ -1066,7 +1066,8 @@
 
     .doctor-strip-title > span{
       flex:0 0 auto;
-      color: #bed0ed;
+          flex: 0 0 auto;
+    color: #bed0ed;
     font-size: .72rem;
     letter-spacing: .15em;
     text-transform: uppercase;
@@ -1217,7 +1218,7 @@
     .filters,.rating,.detail-rating{display:none!important}
 
     .season-browser{
-      margin:0 -14px;padding:11px 20px 12px;border-bottom:1px solid var(--line);
+      margin:0 -14px;padding: 12px 14px 14px;border-bottom:1px solid var(--line);
       background:linear-gradient(180deg,rgba(9,17,31,.76),rgba(5,11,22,.58));
       backdrop-filter:blur(16px);
     }
@@ -2135,8 +2136,144 @@ button:active,
         trivia:["Draws heavily on Regency romance conventions.","Features Jonathan Groff as Rogue."],
         tags:["Regency","Chuldur","Romance"]
       }
-    ];
 
+{
+id:"tomb-cybermen",
+title:"The Tomb of the Cybermen",
+doctor:"Second Doctor",
+doctorNumber:2,
+series:"Season 5",
+year:"1967",
+companion:"Jamie & Victoria",
+monster:"Cybermen",
+writer:"Kit Pedler & Gerry Davis",
+director:"Morris Barry",
+tags:["Cybermen","Classic"],
+image:"https://picsum.photos/seed/tomb/800/450",
+summary:"The Doctor uncovers an archaeological expedition that awakens the Cybermen from their icy tomb."
+},
+{
+id:"web-of-fear",
+title:"The Web of Fear",
+doctor:"Second Doctor",
+doctorNumber:2,
+series:"Season 5",
+year:"1968",
+companion:"Jamie",
+monster:"Great Intelligence",
+writer:"Mervyn Haisman & Henry Lincoln",
+director:"Douglas Camfield",
+tags:["Yeti","London"],
+image:"https://picsum.photos/seed/web/800/450",
+summary:"The London Underground becomes the battleground for the Great Intelligence."
+},
+{
+id:"war-games",
+title:"The War Games",
+doctor:"Second Doctor",
+doctorNumber:2,
+series:"Season 6",
+year:"1969",
+companion:"Jamie & Zoe",
+monster:"War Lords",
+writer:"Malcolm Hulke & Terrance Dicks",
+director:"David Maloney",
+tags:["Time Lords","Regeneration"],
+image:"https://picsum.photos/seed/wargames/800/450",
+summary:"The Second Doctor faces trial by the Time Lords."
+},
+{
+id:"varos",
+title:"Vengeance on Varos",
+doctor:"Sixth Doctor",
+doctorNumber:6,
+series:"Season 22",
+year:"1985",
+companion:"Peri",
+monster:"Sil",
+writer:"Philip Martin",
+director:"Ron Jones",
+tags:["Sil","Politics"],
+image:"https://picsum.photos/seed/varos/800/450",
+summary:"A brutal televised society becomes the Doctor's latest battleground."
+},
+{
+id:"revelation",
+title:"Revelation of the Daleks",
+doctor:"Sixth Doctor",
+doctorNumber:6,
+series:"Season 22",
+year:"1985",
+companion:"Peri",
+monster:"Daleks",
+writer:"Eric Saward",
+director:"Graeme Harper",
+tags:["Daleks","Davros"],
+image:"https://picsum.photos/seed/revelation/800/450",
+summary:"Davros turns a funeral world into a horrifying Dalek factory."
+},
+{
+id:"mysterious-planet",
+title:"The Mysterious Planet",
+doctor:"Sixth Doctor",
+doctorNumber:6,
+series:"Season 23",
+year:"1986",
+companion:"Peri",
+monster:"Drathro",
+writer:"Robert Holmes",
+director:"Nicholas Mallett",
+tags:["Trial","Ravalox"],
+image:"https://picsum.photos/seed/planet/800/450",
+summary:"The opening chapter of The Trial of a Time Lord."
+},
+{
+id:"tv-movie",
+title:"Doctor Who: The TV Movie",
+doctor:"Eighth Doctor",
+doctorNumber:8,
+series:"Specials",
+year:"1996",
+companion:"Grace Holloway",
+monster:"The Master",
+writer:"Matthew Jacobs",
+director:"Geoffrey Sax",
+tags:["Movie"],
+image:"https://picsum.photos/seed/movie/800/450",
+summary:"The Eighth Doctor is born in San Francisco."
+},
+{
+id:"night-doctor",
+title:"The Night of the Doctor",
+doctor:"Eighth Doctor",
+doctorNumber:8,
+series:"Specials",
+year:"2013",
+companion:"Cass",
+monster:"Sisterhood of Karn",
+writer:"Steven Moffat",
+director:"Jamie Payne",
+tags:["Mini Episode"],
+image:"https://picsum.photos/seed/night/800/450",
+summary:"The Eighth Doctor makes his final stand."
+},
+{
+id:"storm-warning",
+title:"Storm Warning",
+doctor:"Eighth Doctor",
+doctorNumber:8,
+series:"Audio",
+year:"2001",
+companion:"Charley Pollard",
+monster:"Vortisaurs",
+writer:"Alan Barnes",
+director:"N/A",
+tags:["Big Finish","Audio"],
+image:"https://picsum.photos/seed/storm/800/450",
+summary:"The first Big Finish adventure for the Eighth Doctor."
+},
+
+];
     const doctorColors = {
       1:"#ddd6c8",2:"#62769f",3:"#ad73c8",4:"#d76b5e",5:"#e7cd72",
       6:"#eb78a2",7:"#a99369",8:"#648e99",9:"#7f9388",10:"#bd875f",
