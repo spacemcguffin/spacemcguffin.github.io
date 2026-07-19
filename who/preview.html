@@ -1,0 +1,1424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#040814">
+  <title>Doctor Who Episode Guide</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..850&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#030711;
+      --bg-soft:#07101d;
+      --panel:#08111f;
+      --panel-2:#0c1627;
+      --panel-3:#111d31;
+      --line:rgba(130,170,235,.18);
+      --line-strong:rgba(92,155,255,.5);
+      --text:#f7f9ff;
+      --muted:#93a3bd;
+      --blue:#53a4ff;
+      --cyan:#6be8ff;
+      --purple:#9677ff;
+      --gold:#ffd15c;
+      --green:#54dfa3;
+      --danger:#ff6684;
+      --radius:14px;
+      --shadow:0 24px 70px rgba(0,0,0,.42);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      color:var(--text);
+      font-family:"Google Sans Flex",system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 45% 4%, rgba(54,90,190,.24), transparent 24%),
+        radial-gradient(circle at 68% 4%, rgba(129,64,190,.16), transparent 22%),
+        linear-gradient(180deg,#02050c,#050a14 50%,#02050c);
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      opacity:.48;
+      background-image:
+        radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.3px),
+        radial-gradient(circle,rgba(109,182,255,.8) 0 1px,transparent 1.3px);
+      background-position:0 0,52px 71px;
+      background-size:124px 124px,191px 191px;
+    }
+
+    button,input,select{font:inherit}
+    button{color:inherit}
+
+    .shell{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:142px minmax(0,1fr) 520px;
+    }
+
+    /* LEFT DOCTOR RAIL */
+    .doctor-rail{
+      position:sticky;
+      top:0;
+      height:100vh;
+      z-index:30;
+      padding:14px 12px 16px;
+      border-right:1px solid var(--line);
+      background:rgba(3,8,16,.94);
+      backdrop-filter:blur(18px);
+    }
+
+    .rail-title{
+      margin:4px 6px 14px;
+      color:#b8c8e3;
+      font-size:.72rem;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .doctor-list{
+      height:calc(100vh - 52px);
+      display:grid;
+      align-content:start;
+      gap:5px;
+      overflow-y:auto;
+      scrollbar-width:thin;
+    }
+
+    .doctor-btn{
+      width:100%;
+      min-height:48px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:6px 7px;
+      border:1px solid transparent;
+      border-radius:10px;
+      background:transparent;
+      color:#cad5e8;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .doctor-btn:hover{
+      border-color:rgba(109,168,255,.2);
+      background:rgba(63,111,190,.08);
+    }
+
+    .doctor-btn.active{
+      border-color:rgba(75,152,255,.65);
+      background:linear-gradient(135deg,rgba(38,109,210,.22),rgba(43,62,127,.14));
+      box-shadow:inset 3px 0 0 var(--doctor-color,#58a6ff);
+    }
+
+    .doctor-avatar{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      display:grid;
+      place-items:center;
+      border:2px solid var(--doctor-color,#58a6ff);
+      border-radius:50%;
+      color:#fff;
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.2),transparent 24%),
+        #101827;
+      font-size:.68rem;
+      font-weight:800;
+    }
+
+    .doctor-name{
+      min-width:0;
+      text-align:left;
+      font-size:.66rem;
+      font-weight:700;
+      line-height:1.08;
+    }
+
+    /* CENTRE */
+    .main{
+      min-width:0;
+      padding:0 14px 72px;
+      border-right:1px solid var(--line);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:248px;
+      margin:0 -14px;
+      padding:28px 26px 24px;
+      border-bottom:1px solid var(--line);
+      background:
+        linear-gradient(90deg,rgba(2,7,15,.98) 0%,rgba(3,8,18,.92) 44%,rgba(3,8,18,.35) 75%,rgba(3,8,18,.88) 100%),
+        url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1800&q=85") center/cover;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      top:-64px;
+      right:9%;
+      width:190px;
+      height:330px;
+      border:2px solid rgba(130,176,255,.38);
+      background:
+        linear-gradient(180deg,rgba(68,121,205,.2),rgba(13,29,59,.9)),
+        repeating-linear-gradient(90deg,transparent 0 22px,rgba(126,180,255,.08) 22px 25px);
+      box-shadow:0 0 60px rgba(66,123,255,.26);
+      transform:rotate(14deg);
+      opacity:.82;
+    }
+
+    .logo{
+      position:relative;
+      z-index:2;
+      max-width:680px;
+    }
+
+    .logo-main{
+      font-size:clamp(2.2rem,4.5vw,4.9rem);
+      line-height:.88;
+      letter-spacing:-.055em;
+      font-weight:800;
+      text-transform:uppercase;
+      text-shadow:0 0 28px rgba(106,169,255,.24);
+    }
+
+    .logo-sub{
+      margin-top:7px;
+      color:#c4d2ec;
+      font-size:.86rem;
+      letter-spacing:.52em;
+      text-transform:uppercase;
+    }
+
+    .hero-copy{
+      position:relative;
+      z-index:2;
+      max-width:610px;
+      margin-top:18px;
+      color:#c1cce0;
+      line-height:1.55;
+      font-size:.9rem;
+    }
+
+    .hero-tools{
+      position:relative;
+      z-index:3;
+      display:grid;
+      grid-template-columns:140px minmax(220px,1fr) 146px;
+      gap:14px;
+      align-items:center;
+      margin-top:22px;
+    }
+
+    .episode-count{
+      min-height:52px;
+      padding:9px 14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:rgba(5,12,24,.76);
+      backdrop-filter:blur(12px);
+    }
+
+    .episode-count strong{
+      color:var(--blue);
+      font-size:1.8rem;
+      line-height:1;
+    }
+
+    .episode-count span{
+      color:#cbd6e9;
+      font-size:.66rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .search-wrap{
+      position:relative;
+    }
+
+    .search-wrap::before{
+      content:"⌕";
+      position:absolute;
+      left:15px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#9bb1d4;
+      font-size:1.15rem;
+    }
+
+    .search{
+      width:100%;
+      min-height:52px;
+      padding:0 48px 0 45px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      outline:none;
+      color:#fff;
+      background:rgba(6,13,26,.8);
+    }
+
+    .search:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px rgba(83,164,255,.12);
+    }
+
+    .surprise{
+      min-height:52px;
+      border:1px solid var(--line-strong);
+      border-radius:10px;
+      background:rgba(7,14,29,.78);
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .surprise:hover{
+      background:rgba(28,57,101,.82);
+    }
+
+    .filter-bar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      margin:0 -14px 16px;
+      padding:14px;
+      border-bottom:1px solid var(--line);
+      background:rgba(4,9,18,.92);
+      backdrop-filter:blur(18px);
+    }
+
+    .filters{
+      display:grid;
+      grid-template-columns:repeat(7,minmax(95px,1fr));
+      gap:8px;
+    }
+
+    .filter{
+      width:100%;
+      min-height:46px;
+      padding:7px 10px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      outline:none;
+      color:#f4f7ff;
+      background:#0b1424;
+      font-size:.74rem;
+    }
+
+    .filter option{background:#09111f}
+
+    .filter-foot{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .result-copy{
+      color:#9babc3;
+      font-size:.76rem;
+    }
+
+    .view-buttons{
+      display:flex;
+      gap:6px;
+    }
+
+    .view-btn{
+      height:34px;
+      min-width:38px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#0c1524;
+      cursor:pointer;
+    }
+
+    .view-btn.active{
+      border-color:var(--blue);
+      color:var(--cyan);
+      background:rgba(42,106,193,.15);
+    }
+
+    .episode-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .episode-grid.list-view{
+      grid-template-columns:1fr;
+    }
+
+    .card{
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:11px;
+      background:linear-gradient(180deg,#0f192a,#07101d);
+      cursor:pointer;
+      box-shadow:0 12px 34px rgba(0,0,0,.25);
+      transition:.2s ease;
+    }
+
+    .card:hover,
+    .card.selected{
+      transform:translateY(-3px);
+      border-color:var(--doctor-color,var(--blue));
+      box-shadow:0 18px 44px rgba(0,0,0,.38),0 0 0 1px color-mix(in srgb,var(--doctor-color) 24%,transparent);
+    }
+
+    .card-image{
+      position:relative;
+      aspect-ratio:16/9;
+      overflow:hidden;
+      background:#121b2d;
+    }
+
+    .card-image img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:transform .3s ease;
+    }
+
+    .card:hover img{transform:scale(1.04)}
+
+    .card-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,transparent 40%,rgba(4,8,16,.92));
+    }
+
+    .code,
+    .rating{
+      position:absolute;
+      z-index:2;
+      top:9px;
+      padding:5px 7px;
+      border-radius:7px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(4,9,18,.74);
+      backdrop-filter:blur(10px);
+      font-size:.72rem;
+      font-weight:800;
+    }
+
+    .code{
+      left:9px;
+      background:color-mix(in srgb,var(--doctor-color) 24%,rgba(4,9,18,.78));
+      border-color:color-mix(in srgb,var(--doctor-color) 68%,transparent);
+    }
+
+    .rating{
+      right:9px;
+      color:var(--gold);
+    }
+
+    .card-body{
+      padding:12px 12px 13px;
+    }
+
+    .card-title{
+      margin:0;
+      font-size:1rem;
+      line-height:1.15;
+    }
+
+    .card-meta{
+      margin-top:5px;
+      color:#90a1bc;
+      font-size:.7rem;
+    }
+
+    .card-companion{
+      margin-top:8px;
+      color:#bdc8dc;
+      font-size:.72rem;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:5px;
+      margin-top:9px;
+    }
+
+    .tag{
+      padding:4px 7px;
+      border:1px solid rgba(133,168,225,.16);
+      border-radius:6px;
+      color:#c7d1e4;
+      background:rgba(90,120,180,.09);
+      font-size:.64rem;
+    }
+
+    .episode-grid.list-view .card{
+      display:grid;
+      grid-template-columns:230px minmax(0,1fr);
+    }
+
+    .episode-grid.list-view .card-image{
+      min-height:160px;
+      aspect-ratio:auto;
+    }
+
+    /* RIGHT DETAILS SIDEBAR */
+    .details{
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow-y:auto;
+      background:rgba(5,11,21,.97);
+      scrollbar-width:thin;
+    }
+
+    .details-top{
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 18px;
+      border-bottom:1px solid var(--line);
+      color:#c7d5ec;
+      font-size:.78rem;
+    }
+
+    .details-close{
+      border:0;
+      background:transparent;
+      color:#c4d0e4;
+      font-size:1.35rem;
+      cursor:pointer;
+    }
+
+    .detail-hero{
+      position:relative;
+      min-height:272px;
+      display:flex;
+      align-items:end;
+      padding:20px;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .detail-hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(3,7,14,.02) 20%,rgba(4,9,18,.94) 92%);
+    }
+
+    .detail-heading{
+      position:relative;
+      z-index:2;
+      width:100%;
+    }
+
+    .detail-heading h2{
+      margin:0;
+      font-size:2.2rem;
+      line-height:1;
+    }
+
+    .detail-sub{
+      margin-top:7px;
+      color:#70b8ff;
+      font-size:.82rem;
+    }
+
+    .detail-rating{
+      position:absolute;
+      z-index:3;
+      right:18px;
+      bottom:56px;
+      padding:7px 10px;
+      border:1px solid rgba(255,209,92,.35);
+      border-radius:8px;
+      color:var(--gold);
+      background:rgba(5,10,19,.78);
+      font-weight:800;
+    }
+
+    .detail-body{
+      padding:12px 18px 24px;
+    }
+
+    .watch-button{
+      width:100%;
+      min-height:42px;
+      border:1px solid rgba(107,148,255,.38);
+      border-radius:9px;
+      background:linear-gradient(135deg,rgba(55,82,170,.3),rgba(30,50,113,.18));
+      cursor:pointer;
+      font-weight:750;
+    }
+
+    .watch-button.watched{
+      color:#08130e;
+      border-color:transparent;
+      background:linear-gradient(135deg,#5fe6af,#55b9ff);
+    }
+
+    .quick-info{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:8px;
+      margin-top:12px;
+    }
+
+    .quick-box{
+      min-height:58px;
+      padding:9px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#0b1525;
+    }
+
+    .quick-box span{
+      display:block;
+      color:#8fa1bd;
+      font-size:.58rem;
+      text-transform:uppercase;
+      letter-spacing:.07em;
+    }
+
+    .quick-box strong{
+      display:block;
+      margin-top:5px;
+      font-size:.68rem;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      gap:18px;
+      margin-top:16px;
+    }
+
+    .credits{
+      display:grid;
+      gap:12px;
+    }
+
+    .credit small{
+      display:block;
+      color:#74a9ec;
+      font-size:.62rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    .credit strong{
+      display:block;
+      margin-top:4px;
+      font-size:.78rem;
+      font-weight:600;
+    }
+
+    .detail-section{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+    }
+
+    .detail-section h3{
+      margin:0 0 8px;
+      color:#a9c9ff;
+      font-size:.7rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .detail-section p,
+    .detail-section li{
+      color:#c0cadc;
+      font-size:.77rem;
+      line-height:1.6;
+    }
+
+    .detail-section p{margin:0}
+    .detail-section ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .star-row{
+      display:flex;
+      gap:5px;
+      margin:8px 0 10px;
+      color:#368cff;
+      font-size:1.18rem;
+    }
+
+    .episode-nav{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .nav-card{
+      min-height:58px;
+      padding:9px 10px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:#0a1424;
+      cursor:pointer;
+      text-align:left;
+    }
+
+    .nav-card small{
+      display:block;
+      color:#7f91ae;
+      font-size:.58rem;
+      text-transform:uppercase;
+    }
+
+    .nav-card strong{
+      display:block;
+      margin-top:4px;
+      font-size:.72rem;
+    }
+
+    .bottom-strip{
+      position:fixed;
+      left:142px;
+      right:520px;
+      bottom:0;
+      z-index:24;
+      min-height:52px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      border-top:1px solid var(--line);
+      background:rgba(5,10,19,.92);
+      backdrop-filter:blur(16px);
+    }
+
+    .bottom-stat{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:9px;
+      padding:8px 12px;
+      border-right:1px solid var(--line);
+    }
+
+    .bottom-stat:last-child{border-right:0}
+    .bottom-icon{
+      width:30px;
+      height:30px;
+      display:grid;
+      place-items:center;
+      border-radius:9px;
+      background:rgba(68,111,180,.13);
+    }
+
+    .bottom-stat small{
+      display:block;
+      color:#8fa0bb;
+      font-size:.55rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    .bottom-stat strong{
+      display:block;
+      margin-top:2px;
+      font-size:.69rem;
+    }
+
+    .mobile-details-toggle{
+      display:none;
+    }
+
+    .empty{
+      display:none;
+      padding:44px 18px;
+      border:1px dashed var(--line);
+      border-radius:12px;
+      color:#95a5be;
+      text-align:center;
+    }
+
+    .empty.show{display:block}
+
+    @media(max-width:1450px){
+      .shell{grid-template-columns:120px minmax(0,1fr) 430px}
+      .bottom-strip{left:120px;right:430px}
+      .episode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .filters{grid-template-columns:repeat(4,minmax(110px,1fr))}
+    }
+
+    @media(max-width:1100px){
+      .shell{grid-template-columns:110px minmax(0,1fr)}
+      .details{
+        position:fixed;
+        top:0;
+        right:0;
+        z-index:80;
+        width:min(500px,94vw);
+        transform:translateX(103%);
+        transition:transform .25s ease;
+        box-shadow:-24px 0 70px rgba(0,0,0,.5);
+      }
+      .details.open{transform:translateX(0)}
+      .bottom-strip{left:110px;right:0}
+      .mobile-details-toggle{
+        position:fixed;
+        right:16px;
+        bottom:66px;
+        z-index:70;
+        display:block;
+        width:54px;
+        height:54px;
+        border:1px solid var(--line-strong);
+        border-radius:50%;
+        background:#0b1830;
+        box-shadow:0 14px 35px rgba(0,0,0,.4);
+        cursor:pointer;
+      }
+    }
+
+    @media(max-width:760px){
+      .shell{display:block}
+      .doctor-rail{display:none}
+      .main{padding:0 10px 68px}
+      .hero{margin:0 -10px;padding:22px 16px}
+      .hero-tools{grid-template-columns:1fr}
+      .episode-count{display:none}
+      .filters{grid-template-columns:1fr 1fr}
+      .episode-grid{grid-template-columns:1fr}
+      .bottom-strip{left:0;grid-template-columns:repeat(2,1fr)}
+      .bottom-stat:nth-child(3),
+      .bottom-stat:nth-child(4){display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="shell">
+    <aside class="doctor-rail">
+      <div class="rail-title">Doctors</div>
+      <div class="doctor-list" id="doctorList"></div>
+    </aside>
+
+    <main class="main">
+      <header class="hero">
+        <div class="logo">
+          <div class="logo-main">Doctor Who</div>
+          <div class="logo-sub">Episode Guide</div>
+          <p class="hero-copy">
+            Your complete guide to adventures across time and space. Search stories, filter by Doctor,
+            companion or monster, and open any card to inspect the full episode information panel.
+          </p>
+        </div>
+
+        <div class="hero-tools">
+          <div class="episode-count">
+            <strong id="episodeTotal">0</strong>
+            <span>episodes<br>found</span>
+          </div>
+
+          <div class="search-wrap">
+            <input class="search" id="searchInput" type="search" placeholder="Search episodes, Doctors, companions, monsters…">
+          </div>
+
+          <button class="surprise" id="randomButton">⤨ Surprise me</button>
+        </div>
+      </header>
+
+      <section class="filter-bar">
+        <div class="filters">
+          <select class="filter" id="eraFilter">
+            <option value="all">All eras</option>
+            <option value="Classic">Classic</option>
+            <option value="Revival">Revival</option>
+          </select>
+
+          <select class="filter" id="seriesFilter">
+            <option value="all">All series</option>
+          </select>
+
+          <select class="filter" id="doctorFilter">
+            <option value="all">All Doctors</option>
+          </select>
+
+          <select class="filter" id="companionFilter">
+            <option value="all">All companions</option>
+          </select>
+
+          <select class="filter" id="monsterFilter">
+            <option value="all">All monsters</option>
+          </select>
+
+          <select class="filter" id="statusFilter">
+            <option value="all">All statuses</option>
+            <option value="watched">Watched</option>
+            <option value="unwatched">Unwatched</option>
+          </select>
+
+          <select class="filter" id="sortFilter">
+            <option value="broadcast">Broadcast order</option>
+            <option value="title">A–Z</option>
+            <option value="rating">Highest rated</option>
+            <option value="newest">Newest first</option>
+          </select>
+        </div>
+
+        <div class="filter-foot">
+          <div class="result-copy" id="resultCopy">Showing all stories</div>
+          <div class="view-buttons">
+            <button class="view-btn active" id="gridView" title="Grid view">▦</button>
+            <button class="view-btn" id="listView" title="List view">☷</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="episode-grid" id="episodeGrid"></section>
+      <div class="empty" id="emptyState">No episodes match those filters.</div>
+    </main>
+
+    <aside class="details" id="detailsPanel">
+      <div class="details-top">
+        <button class="details-close" id="detailsPrev" aria-label="Previous episode">‹</button>
+        <span id="detailPosition">1 / 1</span>
+        <button class="details-close" id="detailsClose" aria-label="Close details">×</button>
+      </div>
+
+      <div class="detail-hero" id="detailHero">
+        <span class="code" id="detailCode"></span>
+        <span class="detail-rating" id="detailRating"></span>
+        <div class="detail-heading">
+          <h2 id="detailTitle"></h2>
+          <div class="detail-sub" id="detailSubtitle"></div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <button class="watch-button" id="watchButton">＋ Add to watched</button>
+
+        <div class="quick-info">
+          <div class="quick-box"><span>Air date</span><strong id="detailDate"></strong></div>
+          <div class="quick-box"><span>Duration</span><strong id="detailDuration"></strong></div>
+          <div class="quick-box"><span>Setting</span><strong id="detailSetting"></strong></div>
+          <div class="quick-box"><span>Format</span><strong id="detailFormat"></strong></div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="credits">
+            <div class="credit"><small>Written by</small><strong id="detailWriter"></strong></div>
+            <div class="credit"><small>Directed by</small><strong id="detailDirector"></strong></div>
+            <div class="credit"><small>Companions</small><strong id="detailCompanion"></strong></div>
+            <div class="credit"><small>Monsters</small><strong id="detailMonster"></strong></div>
+          </div>
+
+          <div>
+            <div class="detail-section" style="margin-top:0;padding-top:0;border-top:0">
+              <h3>Synopsis</h3>
+              <p id="detailSynopsis"></p>
+            </div>
+
+            <div class="detail-section">
+              <h3>My review</h3>
+              <div class="star-row" id="detailStars">★★★★★</div>
+              <p id="detailReview"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Trivia</h3>
+          <ul id="detailTrivia"></ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Tags</h3>
+          <div class="tags" id="detailTags"></div>
+        </div>
+
+        <div class="episode-nav">
+          <button class="nav-card" id="previousEpisode">
+            <small>Previous episode</small>
+            <strong id="previousTitle">—</strong>
+          </button>
+          <button class="nav-card" id="nextEpisode">
+            <small>Next episode</small>
+            <strong id="nextTitle">—</strong>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <button class="mobile-details-toggle" id="mobileDetailsToggle" aria-label="Open episode information">☰</button>
+
+  <div class="bottom-strip">
+    <div class="bottom-stat">
+      <div class="bottom-icon">♥</div>
+      <div><small>Favourites</small><strong>12 episodes</strong></div>
+    </div>
+    <div class="bottom-stat">
+      <div class="bottom-icon">✓</div>
+      <div><small>Watched</small><strong id="watchedCount">0 episodes</strong></div>
+    </div>
+    <div class="bottom-stat">
+      <div class="bottom-icon">☆</div>
+      <div><small>Highest rated</small><strong id="highestRated">—</strong></div>
+    </div>
+    <div class="bottom-stat">
+      <div class="bottom-icon">⤨</div>
+      <div><small>Random episode</small><strong id="randomLabel">—</strong></div>
+    </div>
+  </div>
+
+  <script>
+    const episodes = [
+      {
+        id:"unearthly-child", code:"S1.1", title:"An Unearthly Child", doctor:"First Doctor", doctorNumber:1,
+        era:"Classic", series:"Season 1", year:1963, date:"23 November 1963", duration:"4 episodes",
+        setting:"Earth / Prehistory", format:"Serial", companion:"Susan, Ian and Barbara", monster:"Cavemen",
+        writer:"Anthony Coburn", director:"Waris Hussein", rating:4.4, watched:true,
+        image:"https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        review:"A strange, atmospheric beginning whose opening episode still feels wonderfully alien.",
+        trivia:["The first televised Doctor Who story.","Introduced the Doctor, Susan, Ian, Barbara and the TARDIS."],
+        tags:["First story","TARDIS","1960s"]
+      },
+      {
+        id:"spearhead", code:"S7.1", title:"Spearhead from Space", doctor:"Third Doctor", doctorNumber:3,
+        era:"Classic", series:"Season 7", year:1970, date:"3 January 1970", duration:"4 episodes",
+        setting:"Earth", format:"Serial", companion:"Liz Shaw", monster:"Autons",
+        writer:"Robert Holmes", director:"Derek Martinus", rating:4.7, watched:true,
+        image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"A newly regenerated Doctor is stranded on Earth as the Nestene Consciousness prepares a plastic invasion.",
+        review:"A stylish reinvention of the programme and an excellent introduction to the UNIT era.",
+        trivia:["The first Doctor Who serial produced in colour.","The only classic serial filmed entirely on film."],
+        tags:["Autons","UNIT","Doctor debut"]
+      },
+      {
+        id:"genesis", code:"S12.4", title:"Genesis of the Daleks", doctor:"Fourth Doctor", doctorNumber:4,
+        era:"Classic", series:"Season 12", year:1975, date:"8 March 1975", duration:"6 episodes",
+        setting:"Skaro", format:"Serial", companion:"Sarah Jane and Harry", monster:"Daleks / Davros",
+        writer:"Terry Nation", director:"David Maloney", rating:4.9, watched:true,
+        image:"https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Time Lords send the Doctor to the birth of the Daleks, where he faces Davros and an impossible moral choice.",
+        review:"Dark, grand and morally complex, with one of Tom Baker's strongest performances.",
+        trivia:["This story introduced Davros.","It remains one of the most frequently repeated classic serials."],
+        tags:["Daleks","Davros","Skaro"]
+      },
+      {
+        id:"androzani", code:"S21.6", title:"The Caves of Androzani", doctor:"Fifth Doctor", doctorNumber:5,
+        era:"Classic", series:"Season 21", year:1984, date:"8 March 1984", duration:"4 episodes",
+        setting:"Androzani Minor", format:"Serial", companion:"Peri Brown", monster:"Sharaz Jek",
+        writer:"Robert Holmes", director:"Graeme Harper", rating:5.0, watched:true,
+        image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Doctor and Peri are caught between soldiers, smugglers and a masked genius while dying from spectrox poisoning.",
+        review:"Fast, fierce and tragic. A superb final story for the Fifth Doctor.",
+        trivia:["The final episode features the Fifth Doctor's regeneration.","Graeme Harper later directed stories in the revived series."],
+        tags:["Regeneration","Androzani","Classic"]
+      },
+      {
+        id:"remembrance", code:"S25.1", title:"Remembrance of the Daleks", doctor:"Seventh Doctor", doctorNumber:7,
+        era:"Classic", series:"Season 25", year:1988, date:"5 October 1988", duration:"4 episodes",
+        setting:"London, 1963", format:"Serial", companion:"Ace", monster:"Daleks",
+        writer:"Ben Aaronovitch", director:"Andrew Morgan", rating:4.8, watched:true,
+        image:"https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"Two rival Dalek factions descend on Shoreditch in pursuit of a powerful Time Lord artefact.",
+        review:"Explosive, clever and full of anniversary echoes, while deepening the Seventh Doctor.",
+        trivia:["Set near Coal Hill School and Totter's Lane.","Features the first televised Dalek climbing stairs."],
+        tags:["Daleks","Ace","1963"]
+      },
+      {
+        id:"rose", code:"1.1", title:"Rose", doctor:"Ninth Doctor", doctorNumber:9,
+        era:"Revival", series:"Series 1", year:2005, date:"26 March 2005", duration:"45 minutes",
+        setting:"Earth", format:"Story", companion:"Rose Tyler", monster:"Autons / Nestene Consciousness",
+        writer:"Russell T Davies", director:"Keith Boak", rating:4.6, watched:true,
+        image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"Rose Tyler's life is turned upside down when she meets a mysterious traveller and living shop-window dummies.",
+        review:"A funny, direct and emotionally confident reintroduction to Doctor Who.",
+        trivia:["This episode relaunched Doctor Who as a continuing television series in 2005.","It brought the Autons back for the first time since 1971."],
+        tags:["Autons","London","Beginning"]
+      },
+      {
+        id:"end-world", code:"1.2", title:"The End of the World", doctor:"Ninth Doctor", doctorNumber:9,
+        era:"Revival", series:"Series 1", year:2005, date:"2 April 2005", duration:"45 minutes",
+        setting:"Platform One", format:"Story", companion:"Rose Tyler", monster:"Lady Cassandra",
+        writer:"Russell T Davies", director:"Euros Lyn", rating:4.2, watched:true,
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Doctor takes Rose five billion years into the future to watch the destruction of Earth.",
+        review:"A colourful first trip into space with a strong emotional ending.",
+        trivia:["Introduced the Face of Boe.","The episode is set five billion years in the future."],
+        tags:["Future","Platform One","Cassandra"]
+      },
+      {
+        id:"unquiet-dead", code:"1.3", title:"The Unquiet Dead", doctor:"Ninth Doctor", doctorNumber:9,
+        era:"Revival", series:"Series 1", year:2005, date:"9 April 2005", duration:"45 minutes",
+        setting:"Cardiff, 1869", format:"Story", companion:"Rose Tyler", monster:"Gelth",
+        writer:"Mark Gatiss", director:"Euros Lyn", rating:4.1, watched:false,
+        image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Doctor and Rose meet Charles Dickens while ghostly creatures possess the dead.",
+        review:"A richly atmospheric first historical for the revived series.",
+        trivia:["Charles Dickens appears as a major character.","The story established Cardiff's recurring importance."],
+        tags:["Historical","Cardiff","Gelth"]
+      },
+      {
+        id:"dalek", code:"1.6", title:"Dalek", doctor:"Ninth Doctor", doctorNumber:9,
+        era:"Revival", series:"Series 1", year:2005, date:"30 April 2005", duration:"45 minutes",
+        setting:"Utah", format:"Story", companion:"Rose Tyler", monster:"Dalek",
+        writer:"Robert Shearman", director:"Joe Ahearne", rating:4.9, watched:true,
+        image:"https://images.unsplash.com/photo-1447433819943-74a20887a81e?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Doctor discovers a lone Dalek chained beneath a private museum of alien artefacts.",
+        review:"Intense, emotional and brilliantly focused on the Doctor's trauma.",
+        trivia:["The first Dalek story of the revived series.","Adapted in part from Robert Shearman's audio drama Jubilee."],
+        tags:["Dalek","Utah","Time War"]
+      },
+      {
+        id:"christmas-invasion", code:"2.X", title:"The Christmas Invasion", doctor:"Tenth Doctor", doctorNumber:10,
+        era:"Revival", series:"Christmas Special", year:2005, date:"25 December 2005", duration:"60 minutes",
+        setting:"Earth", format:"Special", companion:"Rose Tyler", monster:"Sycorax",
+        writer:"Russell T Davies", director:"James Hawes", rating:4.5, watched:true,
+        image:"https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"While the new Doctor sleeps through his regeneration, the Sycorax threaten Earth on Christmas Day.",
+        review:"A lively festive showcase that gives David Tennant a triumphant entrance.",
+        trivia:["The first full story starring David Tennant.","The first Doctor Who Christmas special of the revived era."],
+        tags:["Christmas","Sycorax","Doctor debut"]
+      },
+      {
+        id:"blink", code:"3.10", title:"Blink", doctor:"Tenth Doctor", doctorNumber:10,
+        era:"Revival", series:"Series 3", year:2007, date:"9 June 2007", duration:"45 minutes",
+        setting:"London", format:"Story", companion:"Martha Jones", monster:"Weeping Angels",
+        writer:"Steven Moffat", director:"Hettie MacDonald", rating:5.0, watched:true,
+        image:"https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"Sally Sparrow follows messages hidden across time while statues move whenever nobody is watching.",
+        review:"Elegant, terrifying and perfectly structured.",
+        trivia:["Introduced the Weeping Angels.","The Doctor appears only briefly compared with most episodes."],
+        tags:["Weeping Angels","Time travel","Doctor-lite"]
+      },
+      {
+        id:"eleventh-hour", code:"5.1", title:"The Eleventh Hour", doctor:"Eleventh Doctor", doctorNumber:11,
+        era:"Revival", series:"Series 5", year:2010, date:"3 April 2010", duration:"65 minutes",
+        setting:"Leadworth", format:"Story", companion:"Amy Pond and Rory Williams", monster:"Prisoner Zero",
+        writer:"Steven Moffat", director:"Adam Smith", rating:4.9, watched:true,
+        image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"A newly regenerated Doctor returns years late to Amelia Pond and has twenty minutes to save Earth.",
+        review:"Joyful, energetic and remarkably assured.",
+        trivia:["Matt Smith's first full episode.","Introduced Amy Pond, Rory Williams and the cracked wall arc."],
+        tags:["Doctor debut","Atraxi","Amy Pond"]
+      },
+      {
+        id:"heaven-sent", code:"9.11", title:"Heaven Sent", doctor:"Twelfth Doctor", doctorNumber:12,
+        era:"Revival", series:"Series 9", year:2015, date:"28 November 2015", duration:"55 minutes",
+        setting:"Confession Dial", format:"Story", companion:"Clara Oswald", monster:"The Veil",
+        writer:"Steven Moffat", director:"Rachel Talalay", rating:5.0, watched:true,
+        image:"https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"Alone in a shifting castle, the Doctor faces grief, fear and an apparently impossible escape.",
+        review:"Experimental, emotional and visually magnificent.",
+        trivia:["Peter Capaldi carries almost the entire episode alone.","The story takes place across an enormous span of time."],
+        tags:["The Veil","Confession Dial","Experimental"]
+      },
+      {
+        id:"punjab", code:"11.6", title:"Demons of the Punjab", doctor:"Thirteenth Doctor", doctorNumber:13,
+        era:"Revival", series:"Series 11", year:2018, date:"11 November 2018", duration:"50 minutes",
+        setting:"Punjab, 1947", format:"Story", companion:"Yaz, Ryan and Graham", monster:"Thijarians",
+        writer:"Vinay Patel", director:"Jamie Childs", rating:4.5, watched:false,
+        image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"Yaz asks the Doctor to take her to her grandmother's wedding during the Partition of India.",
+        review:"A moving historical story with a strong human focus.",
+        trivia:["Set during the 1947 Partition of India.","The Thijarians are revealed not to be the villains."],
+        tags:["Historical","Partition","Yaz"]
+      },
+      {
+        id:"giggle", code:"SP.3", title:"The Giggle", doctor:"Fourteenth Doctor", doctorNumber:14,
+        era:"Revival", series:"60th Anniversary", year:2023, date:"9 December 2023", duration:"60 minutes",
+        setting:"Earth", format:"Special", companion:"Donna Noble", monster:"The Toymaker",
+        writer:"Russell T Davies", director:"Chanya Button", rating:4.7, watched:true,
+        image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Toymaker returns as humanity falls into chaos and the Doctor faces an impossible game.",
+        review:"Wild, theatrical and emotionally generous.",
+        trivia:["Features the Doctor's first televised bi-generation.","Brings back the Toymaker after almost sixty years."],
+        tags:["Toymaker","Donna Noble","Anniversary"]
+      },
+      {
+        id:"rogue", code:"1.6", title:"Rogue", doctor:"Fifteenth Doctor", doctorNumber:15,
+        era:"Revival", series:"Season 1", year:2024, date:"8 June 2024", duration:"45 minutes",
+        setting:"Bath, 1813", format:"Story", companion:"Ruby Sunday", monster:"Chuldur",
+        writer:"Kate Herron and Briony Redman", director:"Ben Chessell", rating:4.6, watched:false,
+        image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"At a Regency ball, the Doctor meets a mysterious bounty hunter while shape-shifting aliens hunt the guests.",
+        review:"Romantic, funny and stylish, with a bittersweet finish.",
+        trivia:["Draws heavily on Regency romance conventions.","Features Jonathan Groff as Rogue."],
+        tags:["Regency","Chuldur","Romance"]
+      }
+    ];
+
+    const colors = {
+      1:"#ddd6c8",2:"#62769f",3:"#ad73c8",4:"#d76b5e",5:"#e7cd72",
+      6:"#eb78a2",7:"#a99369",8:"#648e99",9:"#7f9388",10:"#bd875f",
+      11:"#966caf",12:"#5b7dc2",13:"#e4ca55",14:"#58a0b4",15:"#e678a4"
+    };
+
+    const state = {
+      doctor:"all", era:"all", series:"all", companion:"all", monster:"all",
+      status:"all", sort:"broadcast", search:"", view:"grid",
+      filtered:[...episodes], selectedId:"rose"
+    };
+
+    const el = id => document.getElementById(id);
+    const grid = el("episodeGrid");
+    const doctorList = el("doctorList");
+    const details = el("detailsPanel");
+
+    function unique(values){
+      return [...new Set(values)].sort((a,b)=>String(a).localeCompare(String(b)));
+    }
+
+    function fillSelect(id, values, label){
+      const select = el(id);
+      select.innerHTML = `<option value="all">All ${label}</option>`;
+      values.forEach(value=>{
+        const option=document.createElement("option");
+        option.value=value;
+        option.textContent=value;
+        select.appendChild(option);
+      });
+    }
+
+    function buildFilters(){
+      const doctorMap = [...new Map(episodes.map(e=>[e.doctorNumber,e.doctor])).entries()].sort((a,b)=>a[0]-b[0]);
+
+      const all=document.createElement("button");
+      all.className="doctor-btn active";
+      all.dataset.doctor="all";
+      all.style.setProperty("--doctor-color","#58a6ff");
+      all.innerHTML='<span class="doctor-avatar">ALL</span><span class="doctor-name">All</span>';
+      doctorList.appendChild(all);
+
+      doctorMap.forEach(([number,name])=>{
+        const btn=document.createElement("button");
+        btn.className="doctor-btn";
+        btn.dataset.doctor=String(number);
+        btn.style.setProperty("--doctor-color",colors[number]);
+        btn.innerHTML=`<span class="doctor-avatar">${number}</span><span class="doctor-name">${name}</span>`;
+        doctorList.appendChild(btn);
+      });
+
+      fillSelect("doctorFilter", doctorMap.map(([,name])=>name), "Doctors");
+      fillSelect("seriesFilter", unique(episodes.map(e=>e.series)), "series");
+      fillSelect("companionFilter", unique(episodes.map(e=>e.companion)), "companions");
+      fillSelect("monsterFilter", unique(episodes.map(e=>e.monster)), "monsters");
+    }
+
+    function getFiltered(){
+      const q=state.search.trim().toLowerCase();
+
+      let items=episodes.filter(e=>{
+        const haystack=[
+          e.title,e.doctor,e.era,e.series,e.year,e.companion,e.monster,e.writer,e.director,e.tags.join(" ")
+        ].join(" ").toLowerCase();
+
+        return (state.doctor==="all" || String(e.doctorNumber)===state.doctor)
+          && (state.era==="all" || e.era===state.era)
+          && (state.series==="all" || e.series===state.series)
+          && (state.companion==="all" || e.companion===state.companion)
+          && (state.monster==="all" || e.monster===state.monster)
+          && (state.status==="all" || (state.status==="watched" ? e.watched : !e.watched))
+          && (!q || haystack.includes(q));
+      });
+
+      items.sort((a,b)=>{
+        if(state.sort==="title") return a.title.localeCompare(b.title);
+        if(state.sort==="rating") return b.rating-a.rating || a.year-b.year;
+        if(state.sort==="newest") return b.year-a.year;
+        return a.year-b.year;
+      });
+
+      return items;
+    }
+
+    function cardTemplate(e){
+      return `
+        <article class="card ${e.id===state.selectedId ? "selected":""}" data-id="${e.id}"
+          style="--doctor-color:${colors[e.doctorNumber] || "#58a6ff"}" tabindex="0">
+          <div class="card-image">
+            <img src="${e.image}" alt="" loading="lazy">
+            <span class="code">${e.code}</span>
+            <span class="rating">★ ${e.rating.toFixed(1)}</span>
+          </div>
+          <div class="card-body">
+            <h2 class="card-title">${e.title}</h2>
+            <div class="card-meta">${e.doctor} · ${e.series} · ${e.year}</div>
+            <div class="card-companion">${e.companion}</div>
+            <div class="tags">${e.tags.slice(0,3).map(tag=>`<span class="tag">${tag}</span>`).join("")}</div>
+          </div>
+        </article>
+      `;
+    }
+
+    function render(){
+      state.filtered=getFiltered();
+      grid.classList.toggle("list-view",state.view==="list");
+      grid.innerHTML=state.filtered.map(cardTemplate).join("");
+      el("emptyState").classList.toggle("show",state.filtered.length===0);
+      el("episodeTotal").textContent=state.filtered.length;
+      el("resultCopy").textContent=`Showing ${state.filtered.length} of ${episodes.length} stories`;
+
+      const watched=episodes.filter(e=>e.watched).length;
+      el("watchedCount").textContent=`${watched} episodes`;
+
+      const top=[...episodes].sort((a,b)=>b.rating-a.rating)[0];
+      el("highestRated").textContent=`${top.title} (${top.rating.toFixed(1)})`;
+
+      if(!state.filtered.some(e=>e.id===state.selectedId) && state.filtered[0]){
+        state.selectedId=state.filtered[0].id;
+      }
+
+      const selected=episodes.find(e=>e.id===state.selectedId) || episodes[0];
+      populateDetails(selected);
+
+      grid.querySelectorAll(".card").forEach(card=>{
+        const open=()=>{
+          state.selectedId=card.dataset.id;
+          render();
+          details.classList.add("open");
+        };
+        card.addEventListener("click",open);
+        card.addEventListener("keydown",event=>{
+          if(event.key==="Enter" || event.key===" "){
+            event.preventDefault();
+            open();
+          }
+        });
+      });
+    }
+
+    function populateDetails(e){
+      const index=episodes.findIndex(item=>item.id===e.id);
+      el("detailPosition").textContent=`${index+1} / ${episodes.length}`;
+      el("detailHero").style.backgroundImage=
+        `linear-gradient(180deg,rgba(3,7,14,.04),rgba(4,9,18,.8)),url("${e.image}")`;
+      el("detailCode").textContent=e.code;
+      el("detailRating").textContent=`★ ${e.rating.toFixed(1)}`;
+      el("detailTitle").textContent=e.title;
+      el("detailSubtitle").textContent=`${e.doctor} · ${e.series} · ${e.year}`;
+      el("detailDate").textContent=e.date;
+      el("detailDuration").textContent=e.duration;
+      el("detailSetting").textContent=e.setting;
+      el("detailFormat").textContent=e.format;
+      el("detailWriter").textContent=e.writer;
+      el("detailDirector").textContent=e.director;
+      el("detailCompanion").textContent=e.companion;
+      el("detailMonster").textContent=e.monster;
+      el("detailSynopsis").textContent=e.synopsis;
+      el("detailReview").textContent=e.review;
+      el("detailStars").textContent="★".repeat(Math.round(e.rating));
+      el("detailTrivia").innerHTML=e.trivia.map(item=>`<li>${item}</li>`).join("");
+      el("detailTags").innerHTML=e.tags.map(tag=>`<span class="tag">${tag}</span>`).join("");
+
+      const prev=episodes[(index-1+episodes.length)%episodes.length];
+      const next=episodes[(index+1)%episodes.length];
+      el("previousTitle").textContent=prev.title;
+      el("nextTitle").textContent=next.title;
+
+      const watchButton=el("watchButton");
+      watchButton.classList.toggle("watched",e.watched);
+      watchButton.textContent=e.watched ? "✓ Watched" : "＋ Add to watched";
+    }
+
+    function selectByOffset(offset){
+      const index=episodes.findIndex(e=>e.id===state.selectedId);
+      const next=episodes[(index+offset+episodes.length)%episodes.length];
+      state.selectedId=next.id;
+      render();
+    }
+
+    doctorList.addEventListener("click",event=>{
+      const btn=event.target.closest(".doctor-btn");
+      if(!btn) return;
+      state.doctor=btn.dataset.doctor;
+      document.querySelectorAll(".doctor-btn").forEach(b=>b.classList.toggle("active",b===btn));
+
+      const match=episodes.find(e=>String(e.doctorNumber)===state.doctor);
+      el("doctorFilter").value=match ? match.doctor : "all";
+      render();
+    });
+
+    el("searchInput").addEventListener("input",()=>{state.search=el("searchInput").value;render()});
+    el("eraFilter").addEventListener("change",()=>{state.era=el("eraFilter").value;render()});
+    el("seriesFilter").addEventListener("change",()=>{state.series=el("seriesFilter").value;render()});
+    el("companionFilter").addEventListener("change",()=>{state.companion=el("companionFilter").value;render()});
+    el("monsterFilter").addEventListener("change",()=>{state.monster=el("monsterFilter").value;render()});
+    el("statusFilter").addEventListener("change",()=>{state.status=el("statusFilter").value;render()});
+    el("sortFilter").addEventListener("change",()=>{state.sort=el("sortFilter").value;render()});
+
+    el("doctorFilter").addEventListener("change",()=>{
+      const doctor=episodes.find(e=>e.doctor===el("doctorFilter").value);
+      state.doctor=doctor ? String(doctor.doctorNumber) : "all";
+      document.querySelectorAll(".doctor-btn").forEach(btn=>btn.classList.toggle("active",btn.dataset.doctor===state.doctor));
+      render();
+    });
+
+    el("gridView").addEventListener("click",()=>{
+      state.view="grid";
+      el("gridView").classList.add("active");
+      el("listView").classList.remove("active");
+      render();
+    });
+
+    el("listView").addEventListener("click",()=>{
+      state.view="list";
+      el("listView").classList.add("active");
+      el("gridView").classList.remove("active");
+      render();
+    });
+
+    el("randomButton").addEventListener("click",()=>{
+      const pool=state.filtered.length ? state.filtered : episodes;
+      const random=pool[Math.floor(Math.random()*pool.length)];
+      state.selectedId=random.id;
+      el("randomLabel").textContent=random.title;
+      render();
+      details.classList.add("open");
+    });
+
+    el("watchButton").addEventListener("click",()=>{
+      const selected=episodes.find(e=>e.id===state.selectedId);
+      selected.watched=!selected.watched;
+      render();
+    });
+
+    el("previousEpisode").addEventListener("click",()=>selectByOffset(-1));
+    el("nextEpisode").addEventListener("click",()=>selectByOffset(1));
+    el("detailsPrev").addEventListener("click",()=>selectByOffset(-1));
+    el("detailsClose").addEventListener("click",()=>details.classList.remove("open"));
+    el("mobileDetailsToggle").addEventListener("click",()=>details.classList.add("open"));
+
+    document.addEventListener("keydown",event=>{
+      if(event.key==="ArrowLeft") selectByOffset(-1);
+      if(event.key==="ArrowRight") selectByOffset(1);
+      if(event.key==="Escape") details.classList.remove("open");
+    });
+
+    buildFilters();
+    render();
+  </script>
+</body>
+</html>
