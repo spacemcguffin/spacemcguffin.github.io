@@ -1,0 +1,1929 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060a0d">
+<title>The Wanderer — 2021 Temporal Archive</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wdth,wght@6..144,75..125,300..800&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================
+   THE WANDERER — TEMPORAL ARCHIVE CONSOLE
+   One-file HTML / CSS / JavaScript build
+   ========================================================== */
+
+:root {
+  --ink: #ecf9f4;
+  --muted: #8ca19d;
+  --faint: rgba(220,255,245,.14);
+  --panel: rgba(10, 18, 20, .82);
+  --panel-2: rgba(17, 28, 29, .78);
+  --glass: rgba(172, 255, 232, .07);
+  --edge: rgba(184, 255, 235, .2);
+  --accent: #a3ffe3;
+  --accent-rgb: 163,255,227;
+  --accent-2: #e7bd77;
+  --danger: #ff766f;
+  --danger-rgb: 255,118,111;
+  --success: #8effa0;
+  --console-size: min(76vw, 780px);
+  --month-angle: 0deg;
+  --tilt-x: 61deg;
+  --tilt-z: 0deg;
+  --ease: cubic-bezier(.2,.8,.2,1);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% 35%, rgba(var(--accent-rgb),.12), transparent 30rem),
+    radial-gradient(circle at 15% 70%, rgba(231,189,119,.08), transparent 34rem),
+    linear-gradient(180deg, #030608, #071012 48%, #020506);
+  color: var(--ink);
+  font-family: "Google Sans Flex", system-ui, sans-serif;
+}
+
+button, input { font: inherit; }
+button { color: inherit; }
+::selection { background: rgba(var(--accent-rgb), .28); }
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: .15;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.025) 3px 4px),
+    radial-gradient(circle at center, transparent 55%, rgba(0,0,0,.7));
+  mix-blend-mode: screen;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.32) 0 1px, transparent 1.2px),
+    radial-gradient(circle, rgba(var(--accent-rgb),.26) 0 1px, transparent 1.2px);
+  background-size: 97px 97px, 163px 163px;
+  background-position: 0 0, 34px 57px;
+  animation: starDrift 90s linear infinite;
+}
+
+@keyframes starDrift { to { transform: translate3d(-160px, 120px, 0) rotate(.001deg); } }
+@keyframes pulse { 50% { opacity: .35; filter: brightness(.75); } }
+@keyframes breathe { 50% { box-shadow: 0 0 28px rgba(var(--accent-rgb), .42); } }
+@keyframes scan { from { transform: translateY(-120%); } to { transform: translateY(480%); } }
+@keyframes orbit { to { transform: rotate(360deg); } }
+@keyframes orbitReverse { to { transform: rotate(-360deg); } }
+@keyframes float { 50% { transform: translateY(-8px); } }
+@keyframes noiseShift {
+  0%,100% { background-position: 0 0; }
+  25% { background-position: 40px -25px; }
+  50% { background-position: -30px 35px; }
+  75% { background-position: 20px 50px; }
+}
+
+a { color: inherit; }
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: -5rem;
+  z-index: 999;
+  padding: .7rem 1rem;
+  background: #fff;
+  color: #000;
+  border-radius: 999px;
+}
+.skip-link:focus { top: 1rem; }
+
+.shell {
+  width: min(1600px, 100%);
+  margin-inline: auto;
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 2rem);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+}
+
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  min-height: 56px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  text-decoration: none;
+  font-weight: 720;
+  letter-spacing: -.04em;
+  font-size: clamp(1.05rem, 2vw, 1.45rem);
+}
+.brand-mark {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 18px rgba(var(--accent-rgb), .9);
+  animation: pulse 2.3s infinite;
+}
+
+.archive-label {
+  font-family: Orbitron, sans-serif;
+  font-size: .68rem;
+  letter-spacing: .24em;
+  color: var(--muted);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.top-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: .6rem;
+}
+.icon-btn, .control-btn {
+  border: 1px solid var(--edge);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.025));
+  box-shadow: inset 0 1px rgba(255,255,255,.1), 0 8px 25px rgba(0,0,0,.2);
+  cursor: pointer;
+  transition: .22s var(--ease);
+}
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+.icon-btn:hover, .control-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(var(--accent-rgb), .55);
+  background: rgba(var(--accent-rgb), .09);
+}
+.icon-btn:focus-visible,
+.control-btn:focus-visible,
+.entry-control:focus-visible,
+.month-node:focus-visible,
+.timeline-dot:focus-visible,
+.search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+main {
+  display: grid;
+  grid-template-columns: minmax(230px, .76fr) minmax(560px, 2fr) minmax(230px, .76fr);
+  gap: clamp(.8rem, 2vw, 1.6rem);
+  align-items: center;
+}
+
+.side-panel {
+  align-self: stretch;
+  padding: 1rem;
+  border: 1px solid var(--edge);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.06), transparent 35%),
+    linear-gradient(180deg, rgba(13,24,25,.82), rgba(4,9,10,.82));
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 30px 60px rgba(0,0,0,.25);
+  backdrop-filter: blur(18px);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  padding-bottom: .85rem;
+  border-bottom: 1px solid var(--faint);
+}
+.panel-kicker {
+  margin: 0;
+  color: var(--accent-2);
+  font: 600 .6rem/1 Orbitron, sans-serif;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.panel-title {
+  margin: .35rem 0 0;
+  font-size: 1.05rem;
+  letter-spacing: -.025em;
+}
+.status-light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 14px var(--success);
+}
+
+.readout {
+  padding: .8rem;
+  border: 1px solid var(--faint);
+  border-radius: 14px;
+  background: rgba(0,0,0,.25);
+}
+.readout-label {
+  display: block;
+  margin-bottom: .35rem;
+  color: var(--muted);
+  font: 500 .55rem/1 Orbitron, sans-serif;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+.readout-value {
+  display: block;
+  font-size: clamp(1.05rem, 2vw, 1.5rem);
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+.readout-value.small {
+  font-size: .95rem;
+  letter-spacing: 0;
+}
+
+.meter {
+  height: 8px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.meter > span {
+  display: block;
+  width: 60%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+  box-shadow: 0 0 16px rgba(var(--accent-rgb), .55);
+  transition: width .4s var(--ease);
+}
+
+.legend {
+  display: grid;
+  gap: .6rem;
+}
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  color: var(--muted);
+  font-size: .75rem;
+}
+.legend-lamp {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.legend-lamp.live {
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), .65);
+}
+.legend-lamp.lost {
+  background: #291718;
+  border: 1px solid rgba(var(--danger-rgb), .65);
+  box-shadow: 0 0 9px rgba(var(--danger-rgb), .18);
+}
+
+.control-stack {
+  display: grid;
+  gap: .6rem;
+}
+.control-btn {
+  width: 100%;
+  min-height: 44px;
+  padding: .68rem .8rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  font-size: .75rem;
+  text-align: left;
+}
+.control-btn span:last-child {
+  color: var(--accent);
+  font-family: Orbitron, sans-serif;
+  font-size: .55rem;
+  letter-spacing: .1em;
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .8rem;
+  color: var(--muted);
+  font-size: .75rem;
+}
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background: rgba(0,0,0,.35);
+  cursor: pointer;
+}
+.toggle::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 3px;
+  left: 4px;
+  border-radius: 50%;
+  background: var(--muted);
+  transition: .25s var(--ease);
+}
+.toggle[aria-pressed="true"]::after {
+  transform: translateX(19px);
+  background: var(--accent);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), .65);
+}
+
+.console-stage {
+  min-height: min(76vw, 820px);
+  display: grid;
+  place-items: center;
+  position: relative;
+  isolation: isolate;
+  perspective: 1200px;
+}
+
+.console-aura {
+  position: absolute;
+  width: calc(var(--console-size) * .92);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  filter: blur(40px);
+  background: radial-gradient(circle, rgba(var(--accent-rgb),.15), transparent 68%);
+  opacity: .8;
+  z-index: -2;
+}
+
+.console-wrap {
+  width: var(--console-size);
+  aspect-ratio: 1;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--tilt-x)) rotateZ(var(--tilt-z));
+  transition: transform .9s var(--ease);
+}
+
+.console-wrap:hover {
+  --tilt-x: 58deg;
+}
+
+.console-disc {
+  position: absolute;
+  inset: 5%;
+  border-radius: 50%;
+  border: 2px solid rgba(var(--accent-rgb), .2);
+  background:
+    repeating-conic-gradient(from 0deg, rgba(255,255,255,.055) 0 1deg, transparent 1deg 12deg),
+    radial-gradient(circle at 50% 47%, transparent 0 22%, rgba(255,255,255,.045) 22.4% 23%, transparent 23.4% 33%, rgba(var(--accent-rgb),.06) 33.4% 34%, transparent 34.4% 49%, rgba(255,255,255,.04) 49.4% 50%, transparent 50.5%),
+    radial-gradient(circle, #18282a 0 35%, #0d1718 35.5% 58%, #142123 58.5% 72%, #080e0f 72.5%);
+  box-shadow:
+    inset 0 0 0 8px #05090a,
+    inset 0 0 0 11px rgba(231,189,119,.25),
+    inset 0 0 60px rgba(0,0,0,.9),
+    0 0 0 2px rgba(255,255,255,.05),
+    0 40px 80px rgba(0,0,0,.55);
+}
+
+.console-disc::before,
+.console-disc::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.console-disc::before {
+  inset: 10%;
+  border: 1px dashed rgba(var(--accent-rgb), .24);
+  animation: orbit 90s linear infinite;
+}
+.console-disc::after {
+  inset: 21%;
+  border: 1px dotted rgba(231,189,119,.38);
+  animation: orbitReverse 42s linear infinite;
+}
+
+.rivet-ring {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.rivet {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: linear-gradient(#657476, #20292a);
+  box-shadow: inset 1px 1px rgba(255,255,255,.28), 0 1px 2px #000;
+  transform: rotate(var(--r)) translateY(calc(var(--console-size) * -.405)) rotate(calc(var(--r) * -1));
+}
+
+.month-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  transform: rotate(var(--month-angle));
+  transition: transform 1.1s var(--ease);
+  transform-style: preserve-3d;
+}
+
+.month-node {
+  --node-angle: calc(var(--i) * 30deg);
+  --selected-scale: 1;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(58px, 8.2vw, 94px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.15);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(255,255,255,.25), transparent 12%),
+    radial-gradient(circle, rgba(var(--month-rgb),.35), rgba(7,14,15,.95) 68%);
+  box-shadow:
+    inset 0 0 0 5px rgba(0,0,0,.28),
+    inset 0 0 18px rgba(var(--month-rgb),.18),
+    0 0 0 4px #090f10,
+    0 0 0 5px rgba(231,189,119,.19),
+    0 8px 20px rgba(0,0,0,.5);
+  transform:
+    rotate(var(--node-angle))
+    translateY(calc(var(--console-size) * -.405))
+    rotate(calc((var(--node-angle) + var(--month-angle)) * -1))
+    rotateX(calc(var(--tilt-x) * -1))
+    scale(var(--selected-scale));
+  transition: transform 1.1s var(--ease), border-color .25s, box-shadow .25s;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: .5rem;
+  z-index: 10;
+}
+.month-node:hover { --selected-scale: 1.1; border-color: rgba(var(--month-rgb),.9); }
+.month-node.active {
+  --selected-scale: 1.16;
+  border-color: rgb(var(--month-rgb));
+  box-shadow:
+    inset 0 0 0 5px rgba(0,0,0,.25),
+    inset 0 0 24px rgba(var(--month-rgb),.4),
+    0 0 0 4px #090f10,
+    0 0 0 6px rgba(var(--month-rgb),.28),
+    0 0 26px rgba(var(--month-rgb),.6);
+}
+.month-node .abbr {
+  font: 600 clamp(.55rem, 1vw, .76rem)/1 Orbitron, sans-serif;
+  letter-spacing: .12em;
+  text-shadow: 0 0 12px currentColor;
+}
+.month-node .count {
+  display: block;
+  margin-top: .28rem;
+  color: var(--muted);
+  font-size: .53rem;
+}
+
+.core {
+  position: absolute;
+  inset: 27%;
+  border-radius: 50%;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  transform: rotateX(calc(var(--tilt-x) * -1)) rotateZ(calc(var(--month-angle) * -1));
+  transition: transform 1.1s var(--ease);
+}
+
+.core-outer {
+  position: absolute;
+  inset: -12%;
+  border-radius: 50%;
+  border: 1px solid rgba(var(--accent-rgb),.3);
+  box-shadow: 0 0 25px rgba(var(--accent-rgb),.08);
+  animation: orbit 28s linear infinite;
+}
+.core-outer::before,
+.core-outer::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.core-outer::before {
+  width: 9px;
+  height: 9px;
+  background: var(--accent);
+  box-shadow: 0 0 13px var(--accent);
+  top: 11%;
+  left: 20%;
+}
+.core-outer::after {
+  inset: 10%;
+  border: 1px dashed rgba(231,189,119,.4);
+}
+
+.core-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 15%;
+  background:
+    linear-gradient(rgba(var(--accent-rgb),.05), rgba(0,0,0,.18)),
+    radial-gradient(circle, rgba(var(--accent-rgb),.16), #061011 65%);
+  border: 2px solid rgba(var(--accent-rgb),.5);
+  box-shadow:
+    inset 0 0 45px rgba(var(--accent-rgb),.12),
+    inset 0 0 0 8px rgba(0,0,0,.35),
+    0 0 0 7px #111d1e,
+    0 0 0 9px rgba(231,189,119,.25),
+    0 0 30px rgba(var(--accent-rgb),.18);
+}
+.core-screen::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 25%;
+  top: -30%;
+  background: linear-gradient(transparent, rgba(var(--accent-rgb),.12), transparent);
+  animation: scan 5s linear infinite;
+}
+
+.core-kicker {
+  position: relative;
+  z-index: 2;
+  color: var(--accent-2);
+  font: 600 clamp(.4rem, .8vw, .65rem)/1.4 Orbitron, sans-serif;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.core-year {
+  position: relative;
+  z-index: 2;
+  margin: .35rem 0;
+  font: 700 clamp(2rem, 5vw, 4rem)/.9 Orbitron, sans-serif;
+  letter-spacing: -.07em;
+  text-shadow: 0 0 25px rgba(var(--accent-rgb),.35);
+}
+.core-month {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(.75rem, 1.4vw, 1.05rem);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.core-records {
+  position: relative;
+  z-index: 2;
+  margin-top: .45rem;
+  color: var(--muted);
+  font-size: clamp(.55rem, .8vw, .7rem);
+}
+
+.entry-bay {
+  position: absolute;
+  inset: 13%;
+  pointer-events: none;
+  z-index: 14;
+  transform-style: preserve-3d;
+}
+
+.entry-control {
+  --entry-angle: calc(var(--j) * (360deg / var(--total)));
+  --entry-radius: calc(var(--console-size) * .305);
+  --entry-size: clamp(20px, 2.8vw, 32px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--entry-size);
+  height: var(--entry-size);
+  margin: calc(var(--entry-size) / -2);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 50%;
+  pointer-events: auto;
+  cursor: pointer;
+  transform:
+    rotate(var(--entry-angle))
+    translateY(calc(var(--entry-radius) * -1))
+    rotate(calc((var(--entry-angle) + var(--month-angle)) * -1))
+    rotateX(calc(var(--tilt-x) * -1));
+  transition: transform 1.1s var(--ease), opacity .35s, filter .35s;
+  background:
+    radial-gradient(circle at 35% 28%, rgba(255,255,255,.8), transparent 15%),
+    radial-gradient(circle, rgba(var(--accent-rgb),.95), rgba(var(--accent-rgb),.25) 48%, #071113 73%);
+  box-shadow:
+    inset 0 0 0 3px rgba(0,0,0,.25),
+    0 0 0 3px #0b1415,
+    0 0 10px rgba(var(--accent-rgb),.75);
+}
+.entry-control.removed {
+  border-color: rgba(var(--danger-rgb),.55);
+  background:
+    linear-gradient(35deg, transparent 44%, rgba(var(--danger-rgb),.65) 47% 51%, transparent 54%),
+    radial-gradient(circle at 40% 35%, rgba(var(--danger-rgb),.22), #100708 68%);
+  box-shadow:
+    inset 0 0 0 3px rgba(0,0,0,.28),
+    0 0 0 3px #0b1415,
+    0 0 8px rgba(var(--danger-rgb),.3);
+  animation: pulse 3.8s infinite;
+}
+.entry-control:hover {
+  transform:
+    rotate(var(--entry-angle))
+    translateY(calc(var(--entry-radius) * -1))
+    rotate(calc((var(--entry-angle) + var(--month-angle)) * -1))
+    rotateX(calc(var(--tilt-x) * -1))
+    scale(1.4);
+  z-index: 50;
+}
+.entry-control.filtered-out {
+  opacity: .05;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+.entry-control.match {
+  animation: breathe 1s infinite;
+}
+.entry-control::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  width: max-content;
+  max-width: 180px;
+  transform: translateX(-50%) scale(.88);
+  padding: .45rem .6rem;
+  border: 1px solid var(--edge);
+  border-radius: 8px;
+  background: rgba(3,8,9,.95);
+  color: var(--ink);
+  font-size: .64rem;
+  line-height: 1.2;
+  pointer-events: none;
+  opacity: 0;
+  transition: .18s var(--ease);
+  box-shadow: 0 10px 25px rgba(0,0,0,.45);
+}
+.entry-control:hover::after,
+.entry-control:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.console-caption {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  width: min(85%, 480px);
+  padding: .7rem 1rem;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background: rgba(4,10,11,.8);
+  backdrop-filter: blur(14px);
+  text-align: center;
+  color: var(--muted);
+  font-size: .68rem;
+  letter-spacing: .04em;
+  box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}
+
+.search-wrap { position: relative; }
+.search-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  padding: .7rem 2.7rem .7rem .85rem;
+  background: rgba(0,0,0,.28);
+  color: var(--ink);
+}
+.search-input::placeholder { color: #71827f; }
+.search-clear {
+  position: absolute;
+  right: .35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.search-clear:hover { background: rgba(255,255,255,.06); color: var(--ink); }
+
+.results {
+  min-height: 0;
+  display: grid;
+  gap: .45rem;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  max-height: 260px;
+}
+.result-item {
+  padding: .65rem .7rem;
+  border: 1px solid var(--faint);
+  border-radius: 10px;
+  background: rgba(255,255,255,.025);
+  cursor: pointer;
+  transition: .2s;
+}
+.result-item:hover {
+  border-color: rgba(var(--accent-rgb),.42);
+  background: rgba(var(--accent-rgb),.06);
+}
+.result-title {
+  font-size: .74rem;
+  line-height: 1.2;
+}
+.result-meta {
+  margin-top: .3rem;
+  color: var(--muted);
+  font-size: .57rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+.empty-result {
+  padding: 1rem;
+  color: var(--muted);
+  text-align: center;
+  font-size: .72rem;
+}
+
+.timeline-panel {
+  border: 1px solid var(--edge);
+  border-radius: 20px;
+  padding: .9rem clamp(.8rem, 2vw, 1.3rem);
+  background: rgba(7,14,15,.82);
+  backdrop-filter: blur(18px);
+  box-shadow: inset 0 1px rgba(255,255,255,.07), 0 20px 50px rgba(0,0,0,.22);
+}
+.timeline-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .75rem;
+}
+.timeline-title {
+  font: 600 .56rem/1 Orbitron, sans-serif;
+  letter-spacing: .16em;
+  color: var(--accent-2);
+  text-transform: uppercase;
+}
+.timeline-help {
+  color: var(--muted);
+  font-size: .65rem;
+}
+.timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  min-height: 42px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 2.5%;
+  right: 2.5%;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(var(--accent-rgb),.12), rgba(var(--accent-rgb),.65), rgba(var(--accent-rgb),.12));
+}
+.timeline-dot {
+  position: relative;
+  z-index: 2;
+  justify-self: center;
+  width: 31px;
+  height: 31px;
+  padding: 0;
+  border: 1px solid var(--edge);
+  border-radius: 50%;
+  background: #0a1213;
+  cursor: pointer;
+  font: 500 .48rem/1 Orbitron, sans-serif;
+  color: var(--muted);
+  transition: .2s var(--ease);
+}
+.timeline-dot:hover, .timeline-dot.active {
+  color: var(--ink);
+  border-color: rgb(var(--month-rgb));
+  background: rgba(var(--month-rgb),.2);
+  box-shadow: 0 0 15px rgba(var(--month-rgb),.45);
+  transform: scale(1.14);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(0,3,4,.76);
+  backdrop-filter: blur(18px);
+  opacity: 0;
+  visibility: hidden;
+  transition: .28s var(--ease);
+}
+.modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+.modal-card {
+  width: min(680px, 100%);
+  max-height: min(760px, calc(100vh - 2rem));
+  overflow: hidden;
+  border: 1px solid rgba(var(--accent-rgb),.35);
+  border-radius: 30px;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.07), transparent 25%),
+    linear-gradient(180deg, #0e1a1b, #050b0c);
+  box-shadow: 0 40px 120px rgba(0,0,0,.65), inset 0 1px rgba(255,255,255,.11);
+  transform: translateY(25px) scale(.96);
+  transition: .35s var(--ease);
+}
+.modal.open .modal-card { transform: none; }
+.modal-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .9rem 1rem;
+  border-bottom: 1px solid var(--faint);
+}
+.modal-coordinates {
+  font: 500 .58rem/1 Orbitron, sans-serif;
+  color: var(--accent-2);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.modal-close {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--edge);
+  border-radius: 50%;
+  background: rgba(255,255,255,.04);
+  cursor: pointer;
+}
+.modal-body {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+  padding: clamp(1.25rem, 4vw, 3rem);
+  text-align: center;
+  scrollbar-width: thin;
+}
+.modal-status {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .42rem .65rem;
+  border: 1px solid rgba(var(--accent-rgb),.25);
+  border-radius: 999px;
+  color: var(--accent);
+  background: rgba(var(--accent-rgb),.07);
+  font: 500 .58rem/1 Orbitron, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.modal-status.removed {
+  color: var(--danger);
+  border-color: rgba(var(--danger-rgb),.3);
+  background: rgba(var(--danger-rgb),.07);
+}
+.modal-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+}
+.modal-title {
+  margin: 1.2rem auto .75rem;
+  max-width: 16ch;
+  font-size: clamp(2.1rem, 7vw, 5.6rem);
+  line-height: .92;
+  letter-spacing: -.065em;
+  text-wrap: balance;
+}
+.modal-sub {
+  color: var(--muted);
+  font-size: .8rem;
+}
+.modal-message {
+  margin: 2rem auto 0;
+  max-width: 44ch;
+  padding: 1rem;
+  border: 1px dashed var(--faint);
+  border-radius: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  font-size: .88rem;
+}
+.modal-message.removed {
+  color: #c89895;
+  border-color: rgba(var(--danger-rgb),.24);
+  background: rgba(var(--danger-rgb),.035);
+}
+.modal-nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: .75rem;
+  padding: .9rem 1rem;
+  border-top: 1px solid var(--faint);
+}
+.modal-nav button {
+  min-height: 42px;
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  background: rgba(255,255,255,.035);
+  cursor: pointer;
+}
+.modal-nav button:hover { background: rgba(var(--accent-rgb),.08); }
+.modal-index {
+  color: var(--muted);
+  font: 500 .55rem/1 Orbitron, sans-serif;
+  letter-spacing: .1em;
+}
+
+.boot {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: grid;
+  place-items: center;
+  background: #020506;
+  transition: opacity .9s ease, visibility .9s;
+}
+.boot.done { opacity: 0; visibility: hidden; }
+.boot-inner {
+  width: min(480px, calc(100% - 2rem));
+  text-align: center;
+}
+.boot-logo {
+  width: 90px;
+  aspect-ratio: 1;
+  margin: auto;
+  border: 1px solid rgba(var(--accent-rgb),.35);
+  border-radius: 50%;
+  position: relative;
+  animation: orbit 6s linear infinite;
+}
+.boot-logo::before, .boot-logo::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.boot-logo::before {
+  inset: 15px;
+  border: 1px dashed rgba(var(--accent-rgb),.55);
+}
+.boot-logo::after {
+  inset: 33px;
+  background: var(--accent);
+  box-shadow: 0 0 25px var(--accent);
+}
+.boot-title {
+  margin: 1.4rem 0 .55rem;
+  font: 600 .8rem/1 Orbitron, sans-serif;
+  letter-spacing: .2em;
+}
+.boot-status {
+  min-height: 1.5em;
+  color: var(--muted);
+  font-family: monospace;
+  font-size: .75rem;
+}
+.boot-bar {
+  margin-top: 1rem;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+}
+.boot-bar span {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+  transition: width .3s;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 700;
+  transform: translate(-50%, 20px);
+  padding: .75rem 1rem;
+  border: 1px solid var(--edge);
+  border-radius: 999px;
+  background: rgba(4,10,11,.92);
+  color: var(--ink);
+  font-size: .72rem;
+  box-shadow: 0 15px 45px rgba(0,0,0,.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+.mobile-controls {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  :root { --console-size: min(92vw, 740px); }
+  main {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "stage"
+      "left"
+      "right";
+  }
+  .console-stage { grid-area: stage; min-height: min(92vw, 780px); }
+  .side-panel.left { grid-area: left; }
+  .side-panel.right { grid-area: right; }
+  .side-panel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    align-self: auto;
+  }
+  .panel-heading { grid-column: 1 / -1; }
+  .results { max-height: 190px; }
+}
+
+@media (max-width: 700px) {
+  :root {
+    --console-size: 105vw;
+    --tilt-x: 54deg;
+  }
+  .shell { padding: .7rem; }
+  .topbar {
+    grid-template-columns: 1fr auto;
+  }
+  .archive-label { display: none; }
+  .brand { font-size: 1rem; }
+  .console-stage {
+    min-height: 105vw;
+    margin-inline: -.7rem;
+    overflow: hidden;
+  }
+  .console-wrap { transform: rotateX(var(--tilt-x)) rotateZ(var(--tilt-z)) scale(.94); }
+  .month-node {
+    width: 58px;
+    font-size: .6rem;
+  }
+  .month-node .count { display: none; }
+  .core { inset: 29%; }
+  .core-kicker { display: none; }
+  .core-records { font-size: .48rem; }
+  .console-caption { bottom: 0; font-size: .58rem; width: 80%; }
+  .side-panel {
+    grid-template-columns: 1fr;
+  }
+  .timeline-panel {
+    padding-inline: .45rem;
+  }
+  .timeline-head { padding-inline: .4rem; }
+  .timeline-help { display: none; }
+  .timeline-dot {
+    width: 25px;
+    height: 25px;
+    font-size: .4rem;
+  }
+  .modal-nav {
+    grid-template-columns: 1fr 1fr;
+  }
+  .modal-index {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<a class="skip-link" href="#archive-console">Skip to archive console</a>
+
+<div class="boot" id="boot" aria-hidden="true">
+  <div class="boot-inner">
+    <div class="boot-logo"></div>
+    <div class="boot-title">TEMPORAL ARCHIVE // 2021</div>
+    <div class="boot-status" id="bootStatus">Initialising memory coils...</div>
+    <div class="boot-bar"><span id="bootBar"></span></div>
+  </div>
+</div>
+
+<div class="shell">
+  <header class="topbar">
+    <a class="brand" href="/diary/2021">
+      <span class="brand-mark"></span>
+      <span>LEWIS .LC</span>
+    </a>
+
+    <div class="archive-label">Temporal Archive Interface · The Wanderer</div>
+
+    <div class="top-actions">
+      <button class="icon-btn" id="soundToggle" type="button" aria-label="Toggle interface sound" aria-pressed="false">♪</button>
+      <button class="icon-btn" id="helpToggle" type="button" aria-label="Show controls">?</button>
+    </div>
+  </header>
+
+  <main id="archive-console">
+    <aside class="side-panel left">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">Archive telemetry</p>
+          <h2 class="panel-title">Memory status</h2>
+        </div>
+        <span class="status-light" aria-hidden="true"></span>
+      </div>
+
+      <div class="readout">
+        <span class="readout-label">Current coordinates</span>
+        <strong class="readout-value" id="coordinateReadout">JAN 2021</strong>
+      </div>
+
+      <div class="readout">
+        <span class="readout-label">Published records</span>
+        <strong class="readout-value" id="publishedReadout">3</strong>
+      </div>
+
+      <div class="readout">
+        <span class="readout-label">Removed records</span>
+        <strong class="readout-value" id="removedReadout">7</strong>
+      </div>
+
+      <div class="readout">
+        <span class="readout-label">Archive integrity</span>
+        <div class="meter" aria-hidden="true"><span id="integrityMeter"></span></div>
+        <strong class="readout-value small" id="integrityReadout" style="margin-top:.55rem">30% accessible</strong>
+      </div>
+
+      <div class="legend" aria-label="Record legend">
+        <div class="legend-row"><span class="legend-lamp live"></span> Published memory</div>
+        <div class="legend-row"><span class="legend-lamp lost"></span> Removed memory</div>
+      </div>
+
+      <div class="control-stack">
+        <button class="control-btn" id="randomBtn" type="button">
+          <span>Random coordinates</span><span>ENGAGE</span>
+        </button>
+        <button class="control-btn" id="overviewBtn" type="button">
+          <span>Year overview</span><span>RESET</span>
+        </button>
+        <button class="control-btn" id="prevMonthBtn" type="button">
+          <span>Previous month</span><span>←</span>
+        </button>
+        <button class="control-btn" id="nextMonthBtn" type="button">
+          <span>Next month</span><span>→</span>
+        </button>
+      </div>
+
+      <div class="switch-row">
+        <span>Reveal removed records</span>
+        <button class="toggle" id="removedToggle" type="button" aria-label="Reveal removed records" aria-pressed="true"></button>
+      </div>
+    </aside>
+
+    <section class="console-stage" aria-label="Interactive 2021 diary console">
+      <div class="console-aura"></div>
+
+      <div class="console-wrap" id="consoleWrap">
+        <div class="console-disc"></div>
+        <div class="rivet-ring" id="rivetRing" aria-hidden="true"></div>
+        <div class="month-ring" id="monthRing"></div>
+        <div class="entry-bay" id="entryBay"></div>
+
+        <div class="core">
+          <div class="core-outer" aria-hidden="true"></div>
+          <button class="core-screen" id="coreScreen" type="button" aria-label="Open a random record from current month">
+            <span>
+              <span class="core-kicker">The Wanderer</span>
+              <strong class="core-year">2021</strong>
+              <span class="core-month" id="coreMonth">January</span>
+              <span class="core-records" id="coreRecords">10 archive records</span>
+            </span>
+          </button>
+        </div>
+
+        <div class="console-caption" id="consoleCaption">
+          Select a month, then activate one of its illuminated memory controls.
+        </div>
+      </div>
+    </section>
+
+    <aside class="side-panel right">
+      <div class="panel-heading">
+        <div>
+          <p class="panel-kicker">Frequency scanner</p>
+          <h2 class="panel-title">Locate a memory</h2>
+        </div>
+        <span class="status-light" aria-hidden="true"></span>
+      </div>
+
+      <div class="search-wrap">
+        <input class="search-input" id="searchInput" type="search" autocomplete="off" placeholder="Search entry titles…" aria-label="Search diary titles">
+        <button class="search-clear" id="searchClear" type="button" aria-label="Clear search">×</button>
+      </div>
+
+      <div class="results" id="results" aria-live="polite">
+        <div class="empty-result">Enter a title fragment to scan the archive.</div>
+      </div>
+
+      <div class="readout">
+        <span class="readout-label">Total archive</span>
+        <strong class="readout-value">100</strong>
+      </div>
+
+      <div class="readout">
+        <span class="readout-label">Signal distribution</span>
+        <strong class="readout-value small">60 published · 40 removed</strong>
+      </div>
+
+      <div class="switch-row">
+        <span>Reduced console tilt</span>
+        <button class="toggle" id="tiltToggle" type="button" aria-label="Reduce console tilt" aria-pressed="false"></button>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="timeline-panel">
+    <div class="timeline-head">
+      <span class="timeline-title">Temporal coordinate rail</span>
+      <span class="timeline-help">Use ← → keys or drag through the year</span>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </footer>
+</div>
+
+<div class="modal" id="recordModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <article class="modal-card">
+    <header class="modal-top">
+      <span class="modal-coordinates" id="modalCoordinates">JAN 2021 // RECORD 01</span>
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close record">×</button>
+    </header>
+
+    <div class="modal-body">
+      <div class="modal-status" id="modalStatus">
+        <span class="modal-status-dot"></span>
+        <span id="modalStatusText">Published</span>
+      </div>
+      <h2 class="modal-title" id="modalTitle">The sequel</h2>
+      <p class="modal-sub" id="modalSub">January 2021</p>
+      <div class="modal-message" id="modalMessage">
+        This archive interface contains the diary title and its publication state.
+      </div>
+    </div>
+
+    <footer class="modal-nav">
+      <button id="modalPrev" type="button">← Previous</button>
+      <span class="modal-index" id="modalIndex">1 / 100</span>
+      <button id="modalNext" type="button">Next →</button>
+    </footer>
+  </article>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ==========================================================
+   ARCHIVE DATA
+   status: "published" or "removed"
+   ========================================================== */
+
+const archive = [
+  {month:"January", title:"the sequel", status:"published"},
+  {month:"January", title:"half the problem", status:"published"},
+  {month:"January", title:"lockdown", status:"published"},
+  {month:"January", title:"memory lane", status:"removed"},
+  {month:"January", title:"insurrection", status:"removed"},
+  {month:"January", title:"out of sync", status:"removed"},
+  {month:"January", title:"lost memories", status:"removed"},
+  {month:"January", title:"a mountain of maybes", status:"removed"},
+  {month:"January", title:"online traces", status:"removed"},
+  {month:"January", title:"someone to love", status:"published"},
+  {month:"January", title:"inauguration", status:"removed"},
+
+  {month:"February", title:"tldr; just feeling kinda stuck", status:"published"},
+  {month:"February", title:"social obligation", status:"removed"},
+  {month:"February", title:"offline", status:"published"},
+  {month:"February", title:"rabbit hole", status:"removed"},
+  {month:"February", title:"winter breeze", status:"published"},
+  {month:"February", title:"retroactive titles", status:"removed"},
+  {month:"February", title:"winding down", status:"removed"},
+  {month:"February", title:"night owl", status:"published"},
+  {month:"February", title:"chimes of midnight", status:"published"},
+  {month:"February", title:"the tangled web", status:"removed"},
+  {month:"February", title:"digital footprints", status:"removed"},
+  {month:"February", title:"windows", status:"published"},
+  {month:"February", title:"birthday chill", status:"published"},
+  {month:"February", title:"lewbo the grouch", status:"removed"},
+  {month:"February", title:"skidmarks", status:"removed"},
+  {month:"February", title:"dawn of the daleks", status:"published"},
+  {month:"February", title:"in words and play", status:"removed"},
+  {month:"February", title:"at the end of the diary", status:"published"},
+  {month:"February", title:"yesterday’s optimism", status:"published"},
+  {month:"February", title:"disconnect", status:"removed"},
+  {month:"February", title:"traveller’s freedom", status:"removed"},
+  {month:"February", title:"rubbish usernames", status:"published"},
+
+  {month:"March", title:"breaking up", status:"removed"},
+  {month:"March", title:"wishful thinking", status:"published"},
+  {month:"March", title:"nearly (but not quite) spring", status:"removed"},
+  {month:"March", title:"pandemic fog", status:"published"},
+  {month:"March", title:"fifteen years ago", status:"removed"},
+  {month:"March", title:"waxing lyrical", status:"published"},
+  {month:"March", title:"the sky at night", status:"published"},
+  {month:"March", title:"all over the place", status:"removed"},
+  {month:"March", title:"the same old", status:"removed"},
+  {month:"March", title:"bring me sunshine", status:"published"},
+  {month:"March", title:"end credits", status:"published"},
+
+  {month:"April", title:"proposal", status:"published"},
+  {month:"April", title:"the stars align", status:"published"},
+  {month:"April", title:"spring blizzard", status:"published"},
+
+  {month:"May", title:"turning the key", status:"published"},
+  {month:"May", title:"pizza with a pal", status:"published"},
+  {month:"May", title:"lost in smoke", status:"published"},
+  {month:"May", title:"bottom of the board", status:"published"},
+  {month:"May", title:"anxiety :)", status:"removed"},
+  {month:"May", title:"catching a break", status:"published"},
+
+  {month:"June", title:"drunk on sunshine", status:"published"},
+  {month:"June", title:"short and stubborn", status:"published"},
+  {month:"June", title:"chain reaction", status:"published"},
+  {month:"June", title:"shot in the arm", status:"published"},
+  {month:"June", title:"thursday, my old friend", status:"removed"},
+  {month:"June", title:"moderna man", status:"published"},
+  {month:"June", title:"life in limbo", status:"published"},
+  {month:"June", title:"goodnight, jackie", status:"removed"},
+
+  {month:"July", title:"moving in", status:"published"},
+  {month:"July", title:"counting the days", status:"published"},
+  {month:"July", title:"gifts for grace", status:"removed"},
+  {month:"July", title:"heatwave", status:"published"},
+  {month:"July", title:"way of the ghost", status:"removed"},
+  {month:"July", title:"chapters of life", status:"removed"},
+  {month:"July", title:"exit wounds", status:"published"},
+
+  {month:"August", title:"new places", status:"published"},
+  {month:"August", title:"old faces", status:"published"},
+  {month:"August", title:"comic timing", status:"published"},
+  {month:"August", title:"fading memories", status:"published"},
+
+  {month:"September", title:"ticket for one", status:"published"},
+  {month:"September", title:"firestarter", status:"removed"},
+  {month:"September", title:"RTD2", status:"published"},
+  {month:"September", title:"classic tales", status:"removed"},
+
+  {month:"October", title:"no time to die", status:"published"},
+  {month:"October", title:"regeneration", status:"removed"},
+  {month:"October", title:"clusterfuck", status:"removed"},
+  {month:"October", title:"trailer thoughts", status:"removed"},
+  {month:"October", title:"오징어 게임", status:"published"},
+  {month:"October", title:"three quid down", status:"removed"},
+  {month:"October", title:"preservation", status:"removed"},
+  {month:"October", title:"halloween horrors", status:"published"},
+
+  {month:"November", title:"nostalgia high", status:"published"},
+  {month:"November", title:"scattershot", status:"published"},
+  {month:"November", title:"pin pals", status:"published"},
+  {month:"November", title:"losing the plot", status:"published"},
+  {month:"November", title:"status quo", status:"published"},
+
+  {month:"December", title:"amazing grace", status:"removed"},
+  {month:"December", title:"end of the year", status:"published"},
+  {month:"December", title:"slapdash", status:"published"},
+  {month:"December", title:"high hopes", status:"removed"},
+  {month:"December", title:"wrapping up", status:"removed"},
+  {month:"December", title:"autopilot", status:"removed"},
+  {month:"December", title:"festive days", status:"published"},
+  {month:"December", title:"christmas", status:"published"},
+  {month:"December", title:"millie ❤️", status:"published"},
+  {month:"December", title:"new year’s eve", status:"published"},
+  {month:"December", title:"in summary", status:"published"}
+];
+
+const months = [
+  {name:"January", abbr:"JAN", rgb:"122,198,255"},
+  {name:"February", abbr:"FEB", rgb:"185,132,255"},
+  {name:"March", abbr:"MAR", rgb:"125,236,205"},
+  {name:"April", abbr:"APR", rgb:"164,218,255"},
+  {name:"May", abbr:"MAY", rgb:"154,240,126"},
+  {name:"June", abbr:"JUN", rgb:"255,209,111"},
+  {name:"July", abbr:"JUL", rgb:"255,138,88"},
+  {name:"August", abbr:"AUG", rgb:"255,182,108"},
+  {name:"September", abbr:"SEP", rgb:"214,169,101"},
+  {name:"October", abbr:"OCT", rgb:"255,98,104"},
+  {name:"November", abbr:"NOV", rgb:"183,127,224"},
+  {name:"December", abbr:"DEC", rgb:"198,231,255"}
+];
+
+archive.forEach((item, index) => {
+  item.index = index;
+  item.monthIndex = months.findIndex(m => m.name === item.month);
+  item.monthRecordIndex = archive.filter((entry, i) => i <= index && entry.month === item.month).length;
+});
+
+/* ==========================================================
+   ELEMENTS + STATE
+   ========================================================== */
+
+const root = document.documentElement;
+const monthRing = document.getElementById("monthRing");
+const entryBay = document.getElementById("entryBay");
+const timeline = document.getElementById("timeline");
+const results = document.getElementById("results");
+const searchInput = document.getElementById("searchInput");
+const modal = document.getElementById("recordModal");
+
+let currentMonth = 0;
+let currentRecordIndex = 0;
+let revealRemoved = true;
+let soundEnabled = false;
+let reducedTilt = false;
+let searchTerm = "";
+let audioContext = null;
+
+/* ==========================================================
+   SMALL SYNTHETIC INTERFACE SOUNDS
+   ========================================================== */
+
+function beep(frequency = 540, duration = .045, type = "sine", volume = .025) {
+  if (!soundEnabled) return;
+  try {
+    audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    osc.type = type;
+    osc.frequency.value = frequency;
+    gain.gain.setValueAtTime(volume, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.0001, audioContext.currentTime + duration);
+    osc.connect(gain).connect(audioContext.destination);
+    osc.start();
+    osc.stop(audioContext.currentTime + duration);
+  } catch (_) {}
+}
+
+/* ==========================================================
+   BUILD STATIC INTERFACE
+   ========================================================== */
+
+function buildRivets() {
+  const ring = document.getElementById("rivetRing");
+  for (let i = 0; i < 36; i++) {
+    const rivet = document.createElement("span");
+    rivet.className = "rivet";
+    rivet.style.setProperty("--r", `${i * 10}deg`);
+    ring.appendChild(rivet);
+  }
+}
+
+function buildMonths() {
+  months.forEach((month, index) => {
+    const monthEntries = archive.filter(item => item.monthIndex === index);
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "month-node";
+    button.dataset.month = index;
+    button.style.setProperty("--i", index);
+    button.style.setProperty("--month-rgb", month.rgb);
+    button.setAttribute("aria-label", `${month.name}, ${monthEntries.length} records`);
+    button.innerHTML = `
+      <span>
+        <span class="abbr">${month.abbr}</span>
+        <span class="count">${monthEntries.length} RECORDS</span>
+      </span>
+    `;
+    button.addEventListener("click", () => selectMonth(index));
+    monthRing.appendChild(button);
+
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "timeline-dot";
+    dot.dataset.month = index;
+    dot.textContent = month.abbr.slice(0,1);
+    dot.title = month.name;
+    dot.style.setProperty("--month-rgb", month.rgb);
+    dot.addEventListener("click", () => selectMonth(index));
+    timeline.appendChild(dot);
+  });
+}
+
+/* ==========================================================
+   MONTH + RECORD RENDERING
+   ========================================================== */
+
+function selectMonth(index, announce = true) {
+  currentMonth = (index + 12) % 12;
+  const month = months[currentMonth];
+  const angle = currentMonth * -30;
+
+  root.style.setProperty("--month-angle", `${angle}deg`);
+  root.style.setProperty("--accent-rgb", month.rgb);
+  root.style.setProperty("--accent", `rgb(${month.rgb})`);
+
+  document.querySelectorAll(".month-node").forEach((node, i) => {
+    node.classList.toggle("active", i === currentMonth);
+  });
+
+  document.querySelectorAll(".timeline-dot").forEach((node, i) => {
+    node.classList.toggle("active", i === currentMonth);
+  });
+
+  renderMonthEntries();
+  updateTelemetry();
+
+  if (announce) {
+    beep(400 + currentMonth * 22, .06, "triangle", .018);
+    showToast(`Coordinates locked: ${month.name} 2021`);
+  }
+}
+
+function renderMonthEntries() {
+  entryBay.innerHTML = "";
+  const entries = archive.filter(item => item.monthIndex === currentMonth);
+  const total = entries.length;
+
+  entries.forEach((entry, localIndex) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = `entry-control ${entry.status}`;
+    button.style.setProperty("--j", localIndex);
+    button.style.setProperty("--total", total);
+    button.dataset.label = entry.title;
+    button.dataset.index = entry.index;
+    button.setAttribute("aria-label", `${entry.title}, ${entry.status}`);
+    button.addEventListener("click", () => openRecord(entry.index));
+    entryBay.appendChild(button);
+  });
+
+  applyFilters();
+}
+
+function updateTelemetry() {
+  const selected = archive.filter(item => item.monthIndex === currentMonth);
+  const published = selected.filter(item => item.status === "published").length;
+  const removed = selected.length - published;
+  const integrity = Math.round((published / selected.length) * 100);
+
+  document.getElementById("coordinateReadout").textContent = `${months[currentMonth].abbr} 2021`;
+  document.getElementById("publishedReadout").textContent = published;
+  document.getElementById("removedReadout").textContent = removed;
+  document.getElementById("integrityReadout").textContent = `${integrity}% accessible`;
+  document.getElementById("integrityMeter").style.width = `${integrity}%`;
+  document.getElementById("coreMonth").textContent = months[currentMonth].name;
+  document.getElementById("coreRecords").textContent = `${selected.length} archive record${selected.length === 1 ? "" : "s"}`;
+  document.getElementById("consoleCaption").textContent =
+    `${published} published memories and ${removed} removed signal${removed === 1 ? "" : "s"} detected in ${months[currentMonth].name}.`;
+}
+
+/* ==========================================================
+   FILTER + SEARCH
+   ========================================================== */
+
+function applyFilters() {
+  document.querySelectorAll(".entry-control").forEach(button => {
+    const item = archive[Number(button.dataset.index)];
+    const hiddenRemoved = !revealRemoved && item.status === "removed";
+    const noSearchMatch = searchTerm && !item.title.toLowerCase().includes(searchTerm);
+    button.classList.toggle("filtered-out", hiddenRemoved || noSearchMatch);
+    button.classList.toggle("match", Boolean(searchTerm) && !noSearchMatch && !hiddenRemoved);
+  });
+}
+
+function renderSearchResults() {
+  searchTerm = searchInput.value.trim().toLowerCase();
+  applyFilters();
+
+  if (!searchTerm) {
+    results.innerHTML = `<div class="empty-result">Enter a title fragment to scan the archive.</div>`;
+    return;
+  }
+
+  const matches = archive.filter(item =>
+    item.title.toLowerCase().includes(searchTerm) &&
+    (revealRemoved || item.status !== "removed")
+  );
+
+  if (!matches.length) {
+    results.innerHTML = `<div class="empty-result">No matching temporal records found.</div>`;
+    return;
+  }
+
+  results.innerHTML = "";
+  matches.slice(0, 30).forEach(item => {
+    const result = document.createElement("div");
+    result.className = "result-item";
+    result.tabIndex = 0;
+    result.innerHTML = `
+      <div class="result-title">${escapeHTML(item.title)}</div>
+      <div class="result-meta">${item.month} · ${item.status}</div>
+    `;
+    const activate = () => {
+      selectMonth(item.monthIndex, false);
+      setTimeout(() => openRecord(item.index), 300);
+    };
+    result.addEventListener("click", activate);
+    result.addEventListener("keydown", event => {
+      if (event.key === "Enter" || event.key === " ") activate();
+    });
+    results.appendChild(result);
+  });
+}
+
+/* ==========================================================
+   MODAL RECORD VIEWER
+   ========================================================== */
+
+function openRecord(index) {
+  const item = archive[index];
+  if (!item) return;
+
+  currentRecordIndex = index;
+  const removed = item.status === "removed";
+  const status = document.getElementById("modalStatus");
+  const message = document.getElementById("modalMessage");
+
+  document.getElementById("modalCoordinates").textContent =
+    `${months[item.monthIndex].abbr} 2021 // RECORD ${String(item.monthRecordIndex).padStart(2,"0")}`;
+  document.getElementById("modalTitle").textContent = item.title;
+  document.getElementById("modalSub").textContent = `${item.month} 2021`;
+  document.getElementById("modalStatusText").textContent = removed ? "Removed" : "Published";
+  document.getElementById("modalIndex").textContent = `${index + 1} / ${archive.length}`;
+
+  status.classList.toggle("removed", removed);
+  message.classList.toggle("removed", removed);
+  message.textContent = removed
+    ? "ARCHIVE SIGNAL LOST. This memory was removed from the surviving record. Its title remains as a residual temporal trace."
+    : "This memory survives in the 2021 archive. Add an excerpt, date, private note or full diary text here whenever you decide to expand the console.";
+
+  modal.classList.add("open");
+  document.body.style.overflow = "hidden";
+  document.getElementById("modalClose").focus();
+  beep(removed ? 170 : 680, .1, removed ? "sawtooth" : "sine", .025);
+}
+
+function closeModal() {
+  modal.classList.remove("open");
+  document.body.style.overflow = "";
+  const activeControl = document.querySelector(`.entry-control[data-index="${currentRecordIndex}"]`);
+  if (activeControl) activeControl.focus();
+}
+
+function moveRecord(direction) {
+  let next = currentRecordIndex;
+  do {
+    next = (next + direction + archive.length) % archive.length;
+  } while (!revealRemoved && archive[next].status === "removed");
+
+  const nextItem = archive[next];
+  if (nextItem.monthIndex !== currentMonth) selectMonth(nextItem.monthIndex, false);
+  openRecord(next);
+}
+
+/* ==========================================================
+   BUTTON ACTIONS
+   ========================================================== */
+
+document.getElementById("prevMonthBtn").addEventListener("click", () => selectMonth(currentMonth - 1));
+document.getElementById("nextMonthBtn").addEventListener("click", () => selectMonth(currentMonth + 1));
+document.getElementById("overviewBtn").addEventListener("click", () => {
+  selectMonth(0);
+  searchInput.value = "";
+  searchTerm = "";
+  renderSearchResults();
+  showToast("Temporal coordinates reset to January 2021");
+});
+
+document.getElementById("randomBtn").addEventListener("click", () => {
+  const pool = archive.filter(item => revealRemoved || item.status !== "removed");
+  const item = pool[Math.floor(Math.random() * pool.length)];
+  selectMonth(item.monthIndex, false);
+  setTimeout(() => openRecord(item.index), 340);
+});
+
+document.getElementById("coreScreen").addEventListener("click", () => {
+  const pool = archive.filter(item =>
+    item.monthIndex === currentMonth &&
+    (revealRemoved || item.status !== "removed")
+  );
+  const item = pool[Math.floor(Math.random() * pool.length)];
+  if (item) openRecord(item.index);
+});
+
+document.getElementById("removedToggle").addEventListener("click", event => {
+  revealRemoved = !revealRemoved;
+  event.currentTarget.setAttribute("aria-pressed", String(revealRemoved));
+  applyFilters();
+  renderSearchResults();
+  showToast(revealRemoved ? "Removed records revealed" : "Removed records concealed");
+});
+
+document.getElementById("tiltToggle").addEventListener("click", event => {
+  reducedTilt = !reducedTilt;
+  event.currentTarget.setAttribute("aria-pressed", String(reducedTilt));
+  root.style.setProperty("--tilt-x", reducedTilt ? "15deg" : window.innerWidth < 700 ? "54deg" : "61deg");
+  showToast(reducedTilt ? "Console tilt reduced" : "Console tilt restored");
+});
+
+document.getElementById("soundToggle").addEventListener("click", event => {
+  soundEnabled = !soundEnabled;
+  event.currentTarget.setAttribute("aria-pressed", String(soundEnabled));
+  event.currentTarget.textContent = soundEnabled ? "♫" : "♪";
+  if (soundEnabled) {
+    beep(620, .12, "sine", .03);
+    showToast("Interface sound enabled");
+  } else {
+    showToast("Interface sound disabled");
+  }
+});
+
+document.getElementById("helpToggle").addEventListener("click", () => {
+  showToast("Click months and glowing controls. Use ← → to travel, Escape to close.");
+});
+
+searchInput.addEventListener("input", renderSearchResults);
+document.getElementById("searchClear").addEventListener("click", () => {
+  searchInput.value = "";
+  renderSearchResults();
+  searchInput.focus();
+});
+
+document.getElementById("modalClose").addEventListener("click", closeModal);
+document.getElementById("modalPrev").addEventListener("click", () => moveRecord(-1));
+document.getElementById("modalNext").addEventListener("click", () => moveRecord(1));
+modal.addEventListener("click", event => {
+  if (event.target === modal) closeModal();
+});
+
+/* ==========================================================
+   KEYBOARD + WHEEL NAVIGATION
+   ========================================================== */
+
+document.addEventListener("keydown", event => {
+  const modalOpen = modal.classList.contains("open");
+
+  if (event.key === "Escape" && modalOpen) {
+    closeModal();
+    return;
+  }
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    modalOpen ? moveRecord(-1) : selectMonth(currentMonth - 1);
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    modalOpen ? moveRecord(1) : selectMonth(currentMonth + 1);
+  }
+
+  if (event.key === "/" && !modalOpen) {
+    event.preventDefault();
+    searchInput.focus();
+  }
+});
+
+let wheelLock = false;
+document.querySelector(".console-stage").addEventListener("wheel", event => {
+  if (wheelLock || Math.abs(event.deltaY) < 10) return;
+  wheelLock = true;
+  selectMonth(currentMonth + (event.deltaY > 0 ? 1 : -1));
+  setTimeout(() => wheelLock = false, 650);
+}, {passive:true});
+
+/* ==========================================================
+   DRAG / SWIPE MONTH CONTROL
+   ========================================================== */
+
+let dragStartX = null;
+const stage = document.querySelector(".console-stage");
+
+stage.addEventListener("pointerdown", event => {
+  dragStartX = event.clientX;
+  stage.setPointerCapture?.(event.pointerId);
+});
+
+stage.addEventListener("pointerup", event => {
+  if (dragStartX === null) return;
+  const distance = event.clientX - dragStartX;
+  if (Math.abs(distance) > 50) selectMonth(currentMonth + (distance < 0 ? 1 : -1));
+  dragStartX = null;
+});
+
+/* ==========================================================
+   UTILITIES
+   ========================================================== */
+
+function escapeHTML(value) {
+  return value.replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#039;"
+  })[char]);
+}
+
+let toastTimer;
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+}
+
+/* ==========================================================
+   BOOT SEQUENCE
+   ========================================================== */
+
+function bootSequence() {
+  const boot = document.getElementById("boot");
+  const status = document.getElementById("bootStatus");
+  const bar = document.getElementById("bootBar");
+
+  const steps = [
+    ["Initialising memory coils...", 18],
+    ["Scanning 100 temporal records...", 42],
+    ["Locating 60 surviving signals...", 67],
+    ["Mapping 40 removed fragments...", 86],
+    ["Coordinates locked: 2021", 100]
+  ];
+
+  steps.forEach(([message, progress], index) => {
+    setTimeout(() => {
+      status.textContent = message;
+      bar.style.width = `${progress}%`;
+      if (index === steps.length - 1) {
+        setTimeout(() => boot.classList.add("done"), 420);
+      }
+    }, index * 360);
+  });
+}
+
+/* ==========================================================
+   START
+   ========================================================== */
+
+buildRivets();
+buildMonths();
+selectMonth(0, false);
+bootSequence();
+</script>
+</body>
+</html>
