@@ -1047,7 +1047,13 @@
     }
 
 
-    /* ENHANCED DOCTOR STRIP */
+    
+.doctor-strip{
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+.doctor-strip::-webkit-scrollbar{display:none;width:0;height:0;background:transparent;}
+/* ENHANCED DOCTOR STRIP */
     .doctor-strip-wrap{
       position:relative;
       overflow:visible;
@@ -2225,6 +2231,8 @@ button:active,
         tags:["Regeneration","Time War","Anniversary"]
       }
 
+
+      /* +20 stories placeholder to be added */
     ];
     const doctorColors = {
       1:"#ddd6c8",2:"#62769f",3:"#ad73c8",4:"#d76b5e",5:"#e7cd72",
