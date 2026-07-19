@@ -1468,6 +1468,282 @@
       }
     }
 
+
+    /* =========================================================
+       FINAL RESPONSIVE INSPECTOR / BOTTOM SHEET
+       ========================================================= */
+
+    :root{
+      --sheet-radius:22px;
+      --sheet-transition:cubic-bezier(.22,.78,.24,1);
+    }
+
+    body.sheet-open-mobile{
+      overflow:hidden;
+      touch-action:none;
+    }
+
+    .details-backdrop{
+      position:fixed;
+      inset:0;
+      z-index:88;
+      border:0;
+      background:rgba(0,4,12,.62);
+      backdrop-filter:blur(5px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .24s ease;
+    }
+
+    .details-backdrop.visible{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .sheet-grab-area{
+      display:none;
+    }
+
+    .details-direction-nav{
+      display:flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .details-top{
+      display:grid;
+      grid-template-columns:auto 1fr auto;
+      align-items:center;
+      gap:12px;
+    }
+
+    .details-top #detailPosition{
+      justify-self:center;
+    }
+
+    /* Hide the horizontal Doctor scrollbar everywhere. */
+    .doctor-strip{
+      scrollbar-width:none !important;
+      -ms-overflow-style:none;
+    }
+
+    .doctor-strip::-webkit-scrollbar{
+      width:0;
+      height:0;
+      display:none;
+    }
+
+    /* More generous safe padding around the Doctor controls. */
+    .doctor-strip-wrap{
+      padding-left:20px;
+      padding-right:20px;
+    }
+
+    .doctor-strip-viewport{
+      margin-inline:-9px;
+      padding-inline:9px;
+    }
+
+    .doctor-strip{
+      padding-left:12px;
+      padding-right:12px;
+      scroll-padding-inline:12px;
+    }
+
+    /* Desktop panel behaviour. */
+    @media(min-width:1101px){
+      .shell{
+        transition:grid-template-columns .28s var(--sheet-transition);
+      }
+
+      .details{
+        transform:none !important;
+        width:auto !important;
+        min-width:0;
+        opacity:1;
+        pointer-events:auto;
+        transition:opacity .2s ease;
+      }
+
+      .shell.details-collapsed{
+        grid-template-columns:minmax(0,1fr) 0;
+      }
+
+      .shell.details-collapsed .details{
+        opacity:0;
+        overflow:hidden;
+        pointer-events:none;
+      }
+
+      .details-backdrop{
+        display:none !important;
+      }
+
+      .mobile-details-toggle.panel-toggle-visible{
+        transition:right .28s var(--sheet-transition),transform .18s ease;
+      }
+
+      .mobile-details-toggle.panel-toggle-visible:hover{
+        transform:scale(1.05);
+      }
+    }
+
+    /* Mobile and tablet: proper bottom sheet. */
+    @media(max-width:1100px){
+      .shell{
+        display:block;
+      }
+
+      .main{
+        border-right:0;
+      }
+
+      .details{
+        position:fixed;
+        left:0;
+        right:0;
+        top:auto;
+        bottom:0;
+        z-index:90;
+        width:100% !important;
+        max-width:none;
+        height:min(88dvh,820px);
+        border:1px solid rgba(135,173,236,.2);
+        border-bottom:0;
+        border-radius:var(--sheet-radius) var(--sheet-radius) 0 0;
+        background:rgba(5,11,21,.985);
+        box-shadow:0 -24px 80px rgba(0,0,0,.58);
+        overflow-y:auto;
+        overscroll-behavior:contain;
+        opacity:1 !important;
+        transform:translateY(calc(100% + 28px));
+        transition:transform .34s var(--sheet-transition);
+        will-change:transform;
+        pointer-events:none;
+      }
+
+      .details.open{
+        transform:translateY(0);
+        pointer-events:auto;
+      }
+
+      .shell.details-collapsed .details{
+        width:100% !important;
+        opacity:1;
+        transform:translateY(calc(100% + 28px));
+      }
+
+      .sheet-grab-area{
+        position:sticky;
+        top:0;
+        z-index:8;
+        height:24px;
+        display:grid;
+        place-items:center;
+        touch-action:none;
+        cursor:grab;
+        background:linear-gradient(180deg,rgba(5,11,21,.995),rgba(5,11,21,.94));
+        border-radius:var(--sheet-radius) var(--sheet-radius) 0 0;
+      }
+
+      .sheet-grab-area:active{
+        cursor:grabbing;
+      }
+
+      .sheet-grab-handle{
+        width:46px;
+        height:5px;
+        border-radius:999px;
+        background:rgba(188,207,235,.48);
+        box-shadow:0 1px 0 rgba(255,255,255,.08);
+      }
+
+      .details-top{
+        position:sticky;
+        top:24px;
+        z-index:7;
+        height:50px;
+        padding:0 14px;
+        background:rgba(5,11,21,.97);
+        backdrop-filter:blur(14px);
+      }
+
+      .details-button{
+        width:38px;
+        height:38px;
+        display:grid;
+        place-items:center;
+        padding:0;
+        border:1px solid rgba(135,173,236,.16);
+        border-radius:10px;
+        background:rgba(15,27,46,.76);
+      }
+
+      .details-direction-nav{
+        gap:5px;
+      }
+
+      .detail-hero{
+        min-height:240px;
+      }
+
+      .mobile-details-toggle.panel-toggle-visible{
+        display:grid;
+        right:16px;
+        bottom:16px;
+      }
+
+      .shell:not(.details-collapsed) .mobile-details-toggle.panel-toggle-visible{
+        opacity:0;
+        pointer-events:none;
+        transform:translateY(12px);
+      }
+    }
+
+    @media(max-width:760px){
+      .doctor-strip-wrap{
+        padding-left:15px;
+        padding-right:15px;
+      }
+
+      .doctor-strip{
+        padding-left:11px;
+        padding-right:11px;
+      }
+
+      .details{
+        height:min(90dvh,760px);
+      }
+
+      .detail-grid{
+        grid-template-columns:1fr;
+      }
+
+      .quick-info{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .episode-nav{
+        position:sticky;
+        bottom:0;
+        z-index:5;
+        margin:20px -18px -24px;
+        padding:10px 18px max(12px,env(safe-area-inset-bottom));
+        border-top:1px solid var(--line);
+        background:rgba(5,11,21,.96);
+        backdrop-filter:blur(16px);
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .details,
+      .details-backdrop,
+      .shell,
+      .mobile-details-toggle.panel-toggle-visible{
+        transition:none !important;
+      }
+    }
+
 </style>
 </head>
 
@@ -1574,11 +1850,22 @@
       <div class="empty" id="emptyState">No episodes match those filters.</div>
     </main>
 
-    <aside class="details open" id="detailsPanel" aria-hidden="false">
+    <div class="details-backdrop" id="detailsBackdrop" hidden></div>
+
+    <aside class="details open" id="detailsPanel" aria-hidden="false" aria-label="Episode information">
+      <div class="sheet-grab-area" id="sheetGrabArea" aria-hidden="true">
+        <span class="sheet-grab-handle"></span>
+      </div>
+
       <div class="details-top">
-        <button class="details-button" id="detailsPrev" aria-label="Previous episode">‹</button>
+        <div class="details-direction-nav" aria-label="Episode navigation">
+          <button class="details-button" id="detailsPrev" type="button" aria-label="Previous episode">‹</button>
+          <button class="details-button" id="detailsNext" type="button" aria-label="Next episode">›</button>
+        </div>
+
         <span id="detailPosition">1 / 1</span>
-        <button class="details-button" id="detailsClose" aria-label="Close details">×</button>
+
+        <button class="details-button" id="detailsClose" type="button" aria-label="Close details">×</button>
       </div>
 
       <div class="detail-hero" id="detailHero">
@@ -1951,6 +2238,9 @@
     const filterBar = el("filterBar");
     const mobileFilterToggle = el("mobileFilterToggle");
     const mobileFilterSummary = el("mobileFilterSummary");
+    const detailsBackdrop = el("detailsBackdrop");
+    const sheetGrabArea = el("sheetGrabArea");
+    const mobileBreakpoint = window.matchMedia("(max-width: 1100px)");
 
     function unique(values){
       return [...new Set(values)].sort((a,b)=>String(a).localeCompare(String(b)));
@@ -2193,12 +2483,39 @@
       el("nextTitle").textContent = next.title;
     }
 
-    function setDetailsOpen(open){
+    function isMobileInspector(){
+      return mobileBreakpoint.matches;
+    }
+
+    function setDetailsOpen(open, options = {}){
+      const {animate = true} = options;
+
+      if(!animate){
+        details.style.transition = "none";
+      }
+
       shell.classList.toggle("details-collapsed",!open);
       details.classList.toggle("open",open);
       details.setAttribute("aria-hidden",String(!open));
       el("mobileDetailsToggle").setAttribute("aria-expanded",String(open));
       el("mobileDetailsToggle").textContent = open ? "×" : "☰";
+
+      const useBackdrop = open && isMobileInspector();
+      detailsBackdrop.hidden = !useBackdrop;
+      detailsBackdrop.classList.toggle("visible",useBackdrop);
+      document.body.classList.toggle("sheet-open-mobile",useBackdrop);
+
+      if(!animate){
+        requestAnimationFrame(()=>{
+          requestAnimationFrame(()=>{
+            details.style.transition = "";
+          });
+        });
+      }
+    }
+
+    function initialiseResponsiveInspector(){
+      setDetailsOpen(!isMobileInspector(),{animate:false});
     }
 
     function selectByOffset(offset){
@@ -2295,10 +2612,13 @@
     el("previousEpisode").addEventListener("click",()=>selectByOffset(-1));
     el("nextEpisode").addEventListener("click",()=>selectByOffset(1));
     el("detailsPrev").addEventListener("click",()=>selectByOffset(-1));
+    el("detailsNext").addEventListener("click",()=>selectByOffset(1));
     el("detailsClose").addEventListener("click",()=>setDetailsOpen(false));
     el("mobileDetailsToggle").addEventListener("click",()=>{
       setDetailsOpen(shell.classList.contains("details-collapsed"));
     });
+
+    detailsBackdrop.addEventListener("click",()=>setDetailsOpen(false));
 
     document.addEventListener("keydown",event=>{
       if(event.key==="ArrowLeft") selectByOffset(-1);
@@ -2306,6 +2626,68 @@
       if(event.key==="Escape") setDetailsOpen(false);
     });
 
+
+
+    let sheetDrag = null;
+
+    function beginSheetDrag(event){
+      if(!isMobileInspector() || !details.classList.contains("open")) return;
+
+      const point = event.touches ? event.touches[0] : event;
+      sheetDrag = {
+        startY:point.clientY,
+        lastY:point.clientY,
+        startTime:performance.now()
+      };
+
+      details.style.transition = "none";
+      if(event.pointerId !== undefined){
+        sheetGrabArea.setPointerCapture?.(event.pointerId);
+      }
+    }
+
+    function moveSheetDrag(event){
+      if(!sheetDrag) return;
+
+      const point = event.touches ? event.touches[0] : event;
+      const delta = Math.max(0,point.clientY - sheetDrag.startY);
+      sheetDrag.lastY = point.clientY;
+
+      details.style.transform = `translateY(${delta}px)`;
+      detailsBackdrop.style.opacity = String(Math.max(0,1 - delta / 420));
+
+      if(event.cancelable) event.preventDefault();
+    }
+
+    function finishSheetDrag(){
+      if(!sheetDrag) return;
+
+      const delta = Math.max(0,sheetDrag.lastY - sheetDrag.startY);
+      const elapsed = Math.max(1,performance.now() - sheetDrag.startTime);
+      const velocity = delta / elapsed;
+
+      details.style.transition = "";
+      details.style.transform = "";
+      detailsBackdrop.style.opacity = "";
+
+      const dismiss = delta > Math.min(190,details.offsetHeight * .24) || velocity > .75;
+      sheetDrag = null;
+
+      if(dismiss){
+        setDetailsOpen(false);
+      }else{
+        setDetailsOpen(true);
+      }
+    }
+
+    sheetGrabArea.addEventListener("pointerdown",beginSheetDrag);
+    window.addEventListener("pointermove",moveSheetDrag,{passive:false});
+    window.addEventListener("pointerup",finishSheetDrag);
+    window.addEventListener("pointercancel",finishSheetDrag);
+
+    sheetGrabArea.addEventListener("touchstart",beginSheetDrag,{passive:true});
+    window.addEventListener("touchmove",moveSheetDrag,{passive:false});
+    window.addEventListener("touchend",finishSheetDrag);
 
     const doctorStrip = document.getElementById("doctorList");
     const doctorStripViewport = doctorStrip?.closest(".doctor-strip-viewport");
@@ -2398,6 +2780,8 @@
       doctorStrip?.scrollBy({left:260,behavior:"smooth"});
     });
 
+    let previousMobileInspectorState = isMobileInspector();
+
     window.addEventListener("resize",()=>{
       hideDoctorTooltip();
       updateDoctorStripEdges();
@@ -2405,6 +2789,12 @@
       if(window.innerWidth > 760){
         filterBar.classList.add("mobile-filters-open");
         mobileFilterToggle.setAttribute("aria-expanded","true");
+      }
+
+      const nowMobile = isMobileInspector();
+      if(nowMobile !== previousMobileInspectorState){
+        previousMobileInspectorState = nowMobile;
+        setDetailsOpen(!nowMobile,{animate:false});
       }
     });
 
@@ -2423,7 +2813,7 @@
 
     buildFilters();
     render();
-    setDetailsOpen(true);
+    initialiseResponsiveInspector();
   </script>
 </body>
 </html>
