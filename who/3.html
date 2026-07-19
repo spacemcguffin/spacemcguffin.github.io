@@ -1335,6 +1335,54 @@
       .season-pill-grid{grid-template-columns:1fr}
     }
 
+
+/* =========================================================
+   CURSOR + PRESS FEEDBACK
+   ========================================================= */
+
+button,
+[role="button"],
+a,
+.doctor-btn,
+.season-pill,
+.season-era-tab,
+.chip button,
+.clear-all,
+.inspector-toggle,
+.details-button,
+.doctor-scroll-button,
+.card,
+.view-btn,
+.surprise-btn,
+.search,
+input[type="button"],
+input[type="submit"]{
+  cursor:pointer;
+}
+
+button:disabled,
+.clear-all:disabled{
+  cursor:not-allowed;
+}
+
+input[type="text"],
+input[type="search"],
+textarea{
+  cursor:text;
+}
+
+button:active,
+.doctor-btn:active,
+.season-pill:active,
+.season-era-tab:active,
+.card:active,
+.view-btn:active,
+.surprise-btn:active,
+.doctor-scroll-button:active,
+.inspector-toggle:active{
+  transform:scale(.97);
+}
+
 </style>
 </head>
 
