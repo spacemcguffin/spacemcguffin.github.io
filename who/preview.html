@@ -1421,6 +1421,269 @@
       }
     }
 
+
+    /* =========================================================
+       DOCTOR STRIP PADDING + MOBILE FILTERS + VIEW FIX
+       ========================================================= */
+    .doctor-strip-viewport{
+      margin-inline:-8px;
+      padding-inline:8px;
+    }
+
+    .doctor-strip{
+      padding:7px 8px 11px;
+      scroll-padding-inline:8px;
+    }
+
+    .doctor-strip .doctor-btn:first-child{
+      margin-left:3px;
+    }
+
+    .doctor-strip .doctor-btn:last-child{
+      margin-right:3px;
+    }
+
+    .mobile-filter-header{
+      display:none;
+    }
+
+    .mobile-filter-content{
+      display:block;
+    }
+
+    .view-btn{
+      position:relative;
+      z-index:1;
+      touch-action:manipulation;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    .view-btn:focus-visible,
+    .mobile-filter-toggle:focus-visible{
+      outline:2px solid var(--cyan);
+      outline-offset:2px;
+    }
+
+    @media(max-width:760px){
+      .doctor-strip-wrap{
+        padding-inline:12px;
+      }
+
+      .doctor-strip-viewport{
+        margin-inline:-4px;
+        padding-inline:4px;
+      }
+
+      .doctor-strip{
+        padding:7px 9px 12px;
+      }
+
+      .filter-bar{
+        position:sticky;
+        top:0;
+        margin:0 -10px 13px;
+        padding:0;
+        overflow:visible;
+      }
+
+      .mobile-filter-header{
+        display:block;
+      }
+
+      .mobile-filter-toggle{
+        width:100%;
+        min-height:58px;
+        display:grid;
+        grid-template-columns:minmax(0,1fr) auto auto;
+        align-items:center;
+        gap:10px;
+        padding:9px 12px;
+        border:0;
+        border-bottom:1px solid var(--line);
+        background:rgba(5,12,23,.96);
+        color:var(--text);
+        text-align:left;
+        cursor:pointer;
+      }
+
+      .mobile-filter-toggle > span:first-child{
+        min-width:0;
+        display:flex;
+        flex-direction:column;
+        gap:1px;
+      }
+
+      .mobile-filter-toggle small{
+        color:#8092ad;
+        font-size:.57rem;
+        font-weight:750;
+        letter-spacing:.11em;
+        text-transform:uppercase;
+      }
+
+      .mobile-filter-toggle strong{
+        font-size:.78rem;
+        font-weight:780;
+      }
+
+      .mobile-filter-summary{
+        max-width:116px;
+        overflow:hidden;
+        padding:5px 8px;
+        border:1px solid rgba(113,158,225,.17);
+        border-radius:999px;
+        color:#aebed5;
+        background:rgba(28,48,78,.45);
+        font-size:.62rem;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+      }
+
+      .mobile-filter-chevron{
+        color:#9eb4d3;
+        font-size:1.1rem;
+        transition:transform .2s ease;
+      }
+
+      .filter-bar.mobile-filters-open .mobile-filter-chevron{
+        transform:rotate(180deg);
+      }
+
+      .mobile-filter-content{
+        display:grid;
+        grid-template-rows:0fr;
+        opacity:0;
+        visibility:hidden;
+        transition:grid-template-rows .24s ease,opacity .18s ease,visibility 0s linear .24s;
+      }
+
+      .mobile-filter-content > *{
+        min-height:0;
+      }
+
+      .filter-bar.mobile-filters-open .mobile-filter-content{
+        grid-template-rows:1fr;
+        opacity:1;
+        visibility:visible;
+        transition:grid-template-rows .24s ease,opacity .2s ease,visibility 0s;
+      }
+
+      .filter-bar.mobile-filters-open .mobile-filter-content{
+        display:block;
+        padding:12px;
+        border-bottom:1px solid var(--line);
+        background:rgba(4,9,18,.97);
+      }
+
+      .filter-bar:not(.mobile-filters-open) .mobile-filter-content{
+        display:none;
+      }
+
+      .filters{
+        grid-template-columns:1fr 1fr;
+        gap:8px;
+      }
+
+      .filters .filter:last-child{
+        grid-column:1 / -1;
+      }
+
+      .filter{
+        min-height:42px;
+        padding:6px 9px;
+        font-size:.7rem;
+      }
+
+      .active-filter-row{
+        margin-top:10px;
+      }
+
+      .active-label{
+        display:none;
+      }
+
+      .active-filter-left{
+        flex:1;
+      }
+
+      .results-view-row{
+        margin-top:10px;
+        padding-top:10px;
+        border-top:1px solid rgba(135,173,236,.12);
+      }
+
+      .view-buttons{
+        flex:0 0 auto;
+      }
+
+      .view-btn{
+        width:42px;
+        min-width:42px;
+        height:38px;
+        font-size:1rem;
+      }
+
+      /* Grid view remains image-led. */
+      .episode-grid:not(.list-view){
+        grid-template-columns:1fr;
+      }
+
+      /* List view becomes genuinely compact on mobile. */
+      .episode-grid.list-view{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+
+      .episode-grid.list-view .card{
+        display:grid;
+        grid-template-columns:112px minmax(0,1fr);
+        min-height:98px;
+        align-items:stretch;
+      }
+
+      .episode-grid.list-view .card-image{
+        min-height:98px;
+        height:100%;
+        aspect-ratio:auto;
+        border-radius:10px 0 0 10px;
+      }
+
+      .episode-grid.list-view .card-body{
+        min-width:0;
+        padding:10px 11px;
+      }
+
+      .episode-grid.list-view .card-title{
+        margin-bottom:4px;
+        font-size:.9rem;
+      }
+
+      .episode-grid.list-view .card-meta{
+        font-size:.61rem;
+      }
+
+      .episode-grid.list-view .card-companion{
+        margin-top:5px;
+        font-size:.63rem;
+      }
+
+      .episode-grid.list-view .tags{
+        display:none;
+      }
+
+      .episode-grid.list-view .rating{
+        display:none;
+      }
+
+      .episode-grid.list-view .code{
+        top:6px;
+        left:6px;
+        padding:4px 5px;
+        font-size:.56rem;
+      }
+    }
+
 </style>
 </head>
 
@@ -1475,7 +1738,20 @@
       <div class="doctor-floating-tooltip" id="doctorFloatingTooltip" role="tooltip"></div>
 
 
-      <section class="filter-bar">
+      <section class="filter-bar" id="filterBar">
+        <div class="mobile-filter-header">
+          <button class="mobile-filter-toggle" id="mobileFilterToggle" type="button"
+            aria-expanded="false" aria-controls="mobileFilterContent">
+            <span>
+              <small>Browse episodes</small>
+              <strong>Filters &amp; display</strong>
+            </span>
+            <span class="mobile-filter-summary" id="mobileFilterSummary">All episodes</span>
+            <span class="mobile-filter-chevron" aria-hidden="true">⌄</span>
+          </button>
+        </div>
+
+        <div class="mobile-filter-content" id="mobileFilterContent">
         <div class="filters">
           <select class="filter" id="seriesFilter">
             <option value="all">All series</option>
@@ -1502,10 +1778,11 @@
 
         <div class="results-view-row">
           <div class="result-copy" id="resultCopy">Showing all stories</div>
-          <div class="view-buttons">
-            <button class="view-btn active" id="gridView" title="Grid view">▦</button>
-            <button class="view-btn" id="listView" title="List view">☷</button>
+          <div class="view-buttons" role="group" aria-label="Episode display">
+            <button class="view-btn active" id="gridView" type="button" title="Grid view" aria-label="Grid view" aria-pressed="true">▦</button>
+            <button class="view-btn" id="listView" type="button" title="List view" aria-label="List view" aria-pressed="false">☷</button>
           </div>
+        </div>
         </div>
       </section>
 
@@ -1603,6 +1880,105 @@
         review:"A strange and atmospheric beginning whose opening episode still feels wonderfully alien.",
         trivia:["The first televised Doctor Who story.","Introduced the Doctor, Susan, Ian, Barbara and the TARDIS."],
         tags:["First story","TARDIS","1960s"]
+      },
+      {
+        id:"tomb-cybermen", code:"S5.1", title:"The Tomb of the Cybermen", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1967, date:"2 September 1967", duration:"4 episodes",
+        setting:"Telos", format:"Serial", companion:"Jamie and Victoria", monster:"Cybermen",
+        writer:"Kit Pedler and Gerry Davis", director:"Morris Barry", rating:4.7,
+        image:"https://images.unsplash.com/photo-1446776877081-d282a0f896e2?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"An archaeological expedition opens an ancient Cyberman tomb beneath the surface of Telos.",
+        review:"Cold, eerie and wonderfully atmospheric, with Patrick Troughton balancing mischief and quiet authority.",
+        trivia:["The serial was recovered in Hong Kong in 1991.","It is one of the best-known surviving Second Doctor stories."],
+        tags:["Cybermen","Telos","Jamie"]
+      },
+      {
+        id:"web-fear", code:"S5.5", title:"The Web of Fear", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1968, date:"3 February 1968", duration:"6 episodes",
+        setting:"London Underground", format:"Serial", companion:"Jamie and Victoria", monster:"Yeti / Great Intelligence",
+        writer:"Mervyn Haisman and Henry Lincoln", director:"Douglas Camfield", rating:4.8,
+        image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The London Underground is sealed beneath a deadly web as the Great Intelligence prepares an invasion.",
+        review:"Claustrophobic and suspenseful, with one of the classic series' strongest siege atmospheres.",
+        trivia:["Introduced Colonel Lethbridge-Stewart.","Most of the serial was recovered in 2013."],
+        tags:["Yeti","UNIT origins","London"]
+      },
+      {
+        id:"war-games", code:"S6.7", title:"The War Games", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 6", year:1969, date:"19 April 1969", duration:"10 episodes",
+        setting:"The War Zones", format:"Serial", companion:"Jamie and Zoe", monster:"The War Lords",
+        writer:"Malcolm Hulke and Terrance Dicks", director:"David Maloney", rating:4.9,
+        image:"https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Doctor discovers soldiers from different periods of history trapped in an enormous alien experiment.",
+        review:"An ambitious, steadily escalating finale that gives the Second Doctor a moving departure.",
+        trivia:["The final Second Doctor serial.","The story reveals significantly more about the Doctor's own people."],
+        tags:["Time Lords","Regeneration","Jamie and Zoe"]
+      },
+      {
+        id:"varos", code:"S22.2", title:"Vengeance on Varos", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 22", year:1985, date:"19 January 1985", duration:"2 episodes",
+        setting:"Varos", format:"Serial", companion:"Peri Brown", monster:"Sil",
+        writer:"Philip Martin", director:"Ron Jones", rating:4.4,
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The TARDIS lands on a prison planet where punishment and politics have become mass entertainment.",
+        review:"A harsh and unusually prescient satire, enlivened by the memorable introduction of Sil.",
+        trivia:["This story introduced Sil.","Its television and reality-show satire has gained new relevance over time."],
+        tags:["Sil","Satire","Peri"]
+      },
+      {
+        id:"revelation-daleks", code:"S22.6", title:"Revelation of the Daleks", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 22", year:1985, date:"23 March 1985", duration:"2 episodes",
+        setting:"Necros", format:"Serial", companion:"Peri Brown", monster:"Daleks / Davros",
+        writer:"Eric Saward", director:"Graeme Harper", rating:4.6,
+        image:"https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"On the funeral world of Necros, Davros runs a sinister food-production operation beneath Tranquil Repose.",
+        review:"Macabre, visually confident and packed with memorable supporting characters.",
+        trivia:["Davros operates under the title of the Great Healer.","Graeme Harper also directed The Caves of Androzani."],
+        tags:["Daleks","Davros","Necros"]
+      },
+      {
+        id:"mysterious-planet", code:"S23.1", title:"The Mysterious Planet", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 23", year:1986, date:"6 September 1986", duration:"4 episodes",
+        setting:"Ravolox", format:"Serial", companion:"Peri Brown", monster:"Drathro",
+        writer:"Robert Holmes", director:"Nicholas Mallett", rating:4.2,
+        image:"https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"While standing trial, the Doctor presents evidence from a visit to the apparently devastated planet Ravolox.",
+        review:"A lively opening to the Trial season, with strong dialogue and an intriguing central mystery.",
+        trivia:["The opening chapter of The Trial of a Time Lord.","The story was Robert Holmes' final completed Doctor Who script."],
+        tags:["Trial","Ravolox","Time Lords"]
+      },
+      {
+        id:"doctor-who-movie", code:"TV", title:"Doctor Who", doctor:"Eighth Doctor", doctorNumber:8,
+        series:"Television Movie", year:1996, date:"27 May 1996", duration:"89 minutes",
+        setting:"San Francisco, 1999", format:"Television movie", companion:"Grace Holloway", monster:"The Master",
+        writer:"Matthew Jacobs", director:"Geoffrey Sax", rating:4.3,
+        image:"https://images.unsplash.com/photo-1502134249126-9f3755a50d78?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"After being caught in a gang shooting, the Doctor regenerates and races to stop the Master destroying Earth.",
+        review:"Glossy, romantic and uneven, but Paul McGann makes an immediately charming Doctor.",
+        trivia:["Paul McGann's only full televised story before 2013.","The production was filmed primarily in Vancouver."],
+        tags:["Doctor debut","The Master","San Francisco"]
+      },
+      {
+        id:"night-doctor", code:"MINI", title:"The Night of the Doctor", doctor:"Eighth Doctor", doctorNumber:8,
+        series:"50th Anniversary", year:2013, date:"14 November 2013", duration:"7 minutes",
+        setting:"Karn", format:"Mini-episode", companion:"Cass", monster:"Sisterhood of Karn",
+        writer:"Steven Moffat", director:"John Hayes", rating:4.9,
+        image:"https://images.unsplash.com/photo-1447433819943-74a20887a81e?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"During the Time War, the Eighth Doctor tries to rescue a pilot who refuses to trust a Time Lord.",
+        review:"Brief but emotionally rich, giving the Eighth Doctor the televised farewell he deserved.",
+        trivia:["Paul McGann returned to the role on television after seventeen years.","The episode leads directly into the creation of the War Doctor."],
+        tags:["Time War","Regeneration","Karn"]
+      },
+      {
+        id:"storm-warning", code:"BF.1", title:"Storm Warning", doctor:"Eighth Doctor", doctorNumber:8,
+        series:"Audio Adventures", year:2001, date:"15 January 2001", duration:"2 hours",
+        setting:"Airship R101, 1930", format:"Audio drama", companion:"Charley Pollard", monster:"Triskele",
+        writer:"Alan Barnes", director:"Gary Russell", rating:4.5,
+        image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=85",
+        synopsis:"The Doctor boards the doomed R101 and meets adventurer Charley Pollard as alien passengers reveal themselves.",
+        review:"A confident audio-era beginning with a vivid setting and immediate chemistry between its leads.",
+        trivia:["Introduced Charley Pollard.","Began a long-running sequence of Eighth Doctor audio adventures."],
+        tags:["Audio","Charley Pollard","R101"]
       },
       {
         id:"spearhead", code:"S7.1", title:"Spearhead from Space", doctor:"Third Doctor", doctorNumber:3,
@@ -1791,6 +2167,9 @@
     const grid = el("episodeGrid");
     const doctorList = el("doctorList");
     const details = el("detailsPanel");
+    const filterBar = el("filterBar");
+    const mobileFilterToggle = el("mobileFilterToggle");
+    const mobileFilterSummary = el("mobileFilterSummary");
 
     const inspectorBackdrop = el("inspectorBackdrop");
     let inspectorReturnFocus = null;
@@ -1984,11 +2363,30 @@
       state.filtered = getFilteredEpisodes();
 
       grid.classList.toggle("list-view",state.view==="list");
+
+      el("gridView").classList.toggle("active",state.view==="grid");
+      el("listView").classList.toggle("active",state.view==="list");
+      el("gridView").setAttribute("aria-pressed",String(state.view==="grid"));
+      el("listView").setAttribute("aria-pressed",String(state.view==="list"));
+
       grid.innerHTML = state.filtered.map(cardTemplate).join("");
 
       el("emptyState").classList.toggle("show",state.filtered.length===0);
       el("episodeTotal").textContent = state.filtered.length;
       el("resultCopy").textContent = `Showing ${state.filtered.length} of ${episodes.length} stories`;
+
+      const summaryParts = [];
+      if(state.doctor!=="all"){
+        const chosenDoctor = episodes.find(e=>String(e.doctorNumber)===state.doctor);
+        if(chosenDoctor) summaryParts.push(chosenDoctor.doctor.replace(" Doctor",""));
+      }
+      if(state.series!=="all") summaryParts.push(state.series);
+      if(state.search.trim()) summaryParts.push("Search");
+      if(mobileFilterSummary){
+        mobileFilterSummary.textContent = summaryParts.length
+          ? summaryParts.join(" · ")
+          : `${state.filtered.length} episodes`;
+      }
 
       renderActiveFilters();
 
@@ -2116,18 +2514,21 @@
 
     el("clearAll").addEventListener("click",clearAllFilters);
 
-    el("gridView").addEventListener("click",()=>{
+    el("gridView").addEventListener("click",event=>{
+      event.preventDefault();
       state.view = "grid";
-      el("gridView").classList.add("active");
-      el("listView").classList.remove("active");
       render();
     });
 
-    el("listView").addEventListener("click",()=>{
+    el("listView").addEventListener("click",event=>{
+      event.preventDefault();
       state.view = "list";
-      el("listView").classList.add("active");
-      el("gridView").classList.remove("active");
       render();
+    });
+
+    mobileFilterToggle?.addEventListener("click",()=>{
+      const isOpen = filterBar.classList.toggle("mobile-filters-open");
+      mobileFilterToggle.setAttribute("aria-expanded",String(isOpen));
     });
 
     el("randomButton").addEventListener("click",()=>{
@@ -2279,6 +2680,11 @@
     window.addEventListener("resize",()=>{
       hideDoctorTooltip();
       updateDoctorStripEdges();
+
+      if(window.innerWidth > 760){
+        filterBar?.classList.remove("mobile-filters-open");
+        mobileFilterToggle?.setAttribute("aria-expanded","false");
+      }
     });
 
     const doctorStripObserver = new MutationObserver(()=>{
