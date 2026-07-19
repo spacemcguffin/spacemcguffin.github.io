@@ -996,6 +996,216 @@
       }
     }
 
+
+    .months {
+      display: block;
+      padding-top: 34px;
+    }
+
+    .month-section {
+      display: none !important;
+    }
+
+    .year-map-shell {
+      position: relative;
+      height: min(76vh, 860px);
+      min-height: 620px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 18% 16%, rgba(83, 132, 215, .18), transparent 26rem),
+        radial-gradient(circle at 72% 68%, rgba(151, 89, 194, .13), transparent 30rem),
+        linear-gradient(180deg, rgba(7, 15, 29, .96), rgba(2, 6, 13, .99));
+      box-shadow: var(--shadow), inset 0 1px rgba(255,255,255,.04);
+      touch-action: none;
+      user-select: none;
+      cursor: grab;
+      isolation: isolate;
+    }
+
+    html[data-theme="light"] .year-map-shell {
+      background:
+        radial-gradient(circle at 18% 16%, rgba(83, 132, 215, .13), transparent 26rem),
+        radial-gradient(circle at 72% 68%, rgba(151, 89, 194, .09), transparent 30rem),
+        linear-gradient(180deg, #f3f8ff, #dfe8f5);
+    }
+
+    .year-map-shell.dragging {
+      cursor: grabbing;
+    }
+
+    .year-map-world {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 2200px;
+      height: 1700px;
+      transform-origin: 0 0;
+      will-change: transform;
+    }
+
+    .year-map-world::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .42;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.2px),
+        radial-gradient(circle, rgba(123,167,255,.65) 0 .8px, transparent 1.15px);
+      background-size: 113px 113px, 173px 173px;
+      background-position: 19px 31px, 71px 9px;
+    }
+
+    html[data-theme="light"] .year-map-world::before {
+      opacity: .16;
+    }
+
+    .year-map-world canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .year-map-world .star-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+    }
+
+    .month-zone {
+      position: absolute;
+      width: 360px;
+      height: 300px;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: .92;
+      pointer-events: none;
+      z-index: 1;
+      background:
+        radial-gradient(circle at center,
+          rgba(var(--zone-rgb), .23) 0%,
+          rgba(var(--zone-rgb), .12) 32%,
+          rgba(var(--zone-rgb), .04) 58%,
+          transparent 74%);
+    }
+
+    .month-label {
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      color: rgba(var(--zone-rgb), .22);
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 5rem;
+      font-weight: 700;
+      letter-spacing: -.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    html[data-theme="light"] .month-label {
+      color: rgba(var(--zone-rgb), .16);
+    }
+
+    .year-map-controls {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 12;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .year-map-controls button {
+      min-height: 40px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--text);
+      background: color-mix(in srgb, var(--panel-solid) 88%, transparent);
+      box-shadow: 0 10px 26px rgba(0,0,0,.16);
+      cursor: pointer;
+      backdrop-filter: blur(16px);
+      transition: .2s ease;
+    }
+
+    .year-map-controls button:hover {
+      border-color: var(--line-strong);
+      background: var(--accent-soft);
+      transform: translateY(-2px);
+    }
+
+    .year-map-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      z-index: 10;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: color-mix(in srgb, var(--panel-solid) 86%, transparent);
+      font-size: .62rem;
+      transform: translateX(-50%);
+      backdrop-filter: blur(16px);
+      pointer-events: none;
+    }
+
+    .map-empty {
+      position: absolute;
+      inset: 0;
+      z-index: 8;
+      display: none;
+      place-items: center;
+      color: var(--muted);
+      font-size: .8rem;
+      pointer-events: none;
+    }
+
+    .year-map-shell.no-results .map-empty {
+      display: grid;
+    }
+
+    .star {
+      position: absolute;
+    }
+
+    .star.selected {
+      z-index: 30;
+    }
+
+    .minimap {
+      grid-template-columns: repeat(11, minmax(54px, 1fr));
+    }
+
+    @media (max-width: 700px) {
+      .year-map-shell {
+        height: 72vh;
+        min-height: 560px;
+        border-radius: 18px;
+      }
+
+      .year-map-hint {
+        width: calc(100% - 32px);
+        text-align: center;
+        border-radius: 12px;
+      }
+
+      .year-map-controls {
+        right: 14px;
+      }
+
+      .year-map-controls button {
+        flex: 1;
+      }
+    }
+
     @media (max-width: 980px) {
       :root { --sidebar: 0px; }
 
@@ -1125,19 +1335,36 @@
 
         <div class="hero-copy">
           <p>
-            Every point is one diary entry. The constellations follow the year month by month,
-            preserving all 623 original titles from February to December.
+            Every point is one diary entry. The entire year now lives inside one continuous map,
+            with each month forming its own glowing region from February to December.
           </p>
 
           <div class="hero-actions">
             <button class="view-btn active" id="constellationView" type="button">Constellation view</button>
-            <button class="view-btn" id="listView" type="button">List view</button>
+            <button class="view-btn" id="listView" type="button" hidden>List view</button>
             <button class="random-btn" id="randomEntry" type="button">✦ Random entry</button>
           </div>
         </div>
       </section>
 
-      <div class="months" id="months"></div>
+      <div class="months" id="months">
+        <section class="year-map-shell" id="yearMapShell" aria-label="Interactive 2008 constellation map">
+          <div class="year-map-controls">
+            <button id="zoomIn" type="button">＋ Zoom</button>
+            <button id="zoomOut" type="button">− Zoom</button>
+            <button id="fitYear" type="button">Fit year</button>
+            <button id="resetView" type="button">Reset view</button>
+          </div>
+
+          <div class="year-map-world" id="yearMapWorld">
+            <canvas id="yearMapCanvas" aria-hidden="true"></canvas>
+            <div class="star-layer" id="yearStarLayer"></div>
+          </div>
+
+          <div class="map-empty">No entries match your search.</div>
+          <div class="year-map-hint">Drag to explore · scroll or pinch to zoom · click any star</div>
+        </section>
+      </div>
     </main>
   </div>
 
@@ -1187,6 +1414,14 @@
     };
 
     const monthsRoot = document.getElementById("months");
+    const yearMapShell = document.getElementById("yearMapShell");
+    const yearMapWorld = document.getElementById("yearMapWorld");
+    const yearMapCanvas = document.getElementById("yearMapCanvas");
+    const yearStarLayer = document.getElementById("yearStarLayer");
+    const zoomIn = document.getElementById("zoomIn");
+    const zoomOut = document.getElementById("zoomOut");
+    const fitYear = document.getElementById("fitYear");
+    const resetView = document.getElementById("resetView");
     const monthNav = document.getElementById("monthNav");
     const searchInput = document.getElementById("searchInput");
     const dialog = document.getElementById("memoryDialog");
@@ -1267,10 +1502,7 @@
         button.style.setProperty("--density", Math.max(.16, group.entries.length / maxEntries));
         button.innerHTML = `<strong>${group.month.slice(0, 3).toUpperCase()}</strong><small>${group.entries.length}</small>`;
         button.addEventListener("click", () => {
-          document.getElementById(`month-${group.month.toLowerCase()}`)?.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+          focusMonth(group.month);
         });
         minimap.appendChild(button);
       });
@@ -1286,10 +1518,7 @@
         button.style.setProperty("--dot-colour", `rgb(${monthRgb(group.month)})`);
         button.setAttribute("aria-label", `Jump to ${group.month}`);
         button.addEventListener("click", () => {
-          document.getElementById(`month-${group.month.toLowerCase()}`)?.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+          focusMonth(group.month);
         });
         yearTimeline.appendChild(button);
       });
@@ -1329,8 +1558,8 @@
           button.addEventListener("click", () => {
             searchResultsPanel.classList.remove("visible");
             const star = document.querySelector(`.star[data-index="${item.index}"]`);
-            star?.closest(".month-section")?.scrollIntoView({ behavior: "smooth", block: "center" });
-            window.setTimeout(() => openEntry(item.index), 380);
+            if (star) focusStar(star, 1.55);
+            window.setTimeout(() => openEntry(item.index), 300);
           });
           group.appendChild(button);
         });
@@ -1360,63 +1589,74 @@
       });
     }
 
+
+    const worldWidth = 2200;
+    const worldHeight = 1700;
+
+    const monthLayout = {
+      February:  { x: 330,  y: 260 },
+      March:     { x: 760,  y: 210 },
+      April:     { x: 1210, y: 260 },
+      May:       { x: 1630, y: 420 },
+      June:      { x: 1810, y: 780 },
+      July:      { x: 1650, y: 1160 },
+      August:    { x: 1260, y: 1390 },
+      September: { x: 820,  y: 1360 },
+      October:   { x: 430,  y: 1180 },
+      November:  { x: 250,  y: 800 },
+      December:  { x: 430,  y: 500 }
+    };
+
     function createMonths(groups) {
       groups.forEach(group => {
-        const section = document.createElement("section");
-        section.className = "month-section";
-        section.id = `month-${group.month.toLowerCase()}`;
-        section.dataset.month = group.month;
+        const centre = monthLayout[group.month];
+        const rgb = monthRgb(group.month);
 
-        const rows = Math.max(5, Math.ceil(group.entries.length / 10));
-        const height = Math.max(520, rows * 92);
-        const mobileHeight = Math.max(650, rows * 118);
+        const zone = document.createElement("div");
+        zone.className = "month-zone";
+        zone.style.left = `${centre.x - 180}px`;
+        zone.style.top = `${centre.y - 150}px`;
+        zone.style.setProperty("--zone-rgb", rgb);
+        yearMapWorld.appendChild(zone);
 
-        section.innerHTML = `
-          <header class="month-heading">
-            <div>
-              <p>2008 / ${group.month}</p>
-              <h3>${group.month}</h3>
-            </div>
-            <span class="month-count">${group.entries.length} entries</span>
-          </header>
+        const label = document.createElement("div");
+        label.className = "month-label";
+        label.textContent = group.month;
+        label.style.left = `${centre.x}px`;
+        label.style.top = `${centre.y}px`;
+        label.style.setProperty("--zone-rgb", rgb);
+        yearMapWorld.appendChild(label);
 
-          <div class="constellation" style="--month-height:${height}px;--mobile-height:${mobileHeight}px">
-            <canvas aria-hidden="true"></canvas>
-            <div class="star-layer"></div>
-            <div class="empty-month">No entries match your search.</div>
-          </div>
-
-          <div class="list-grid"></div>
-        `;
-
-        monthsRoot.appendChild(section);
-        monthElements.set(group.month, section);
-
-        const starLayer = section.querySelector(".star-layer");
-        const listGrid = section.querySelector(".list-grid");
+        const total = group.entries.length;
+        const columns = Math.max(5, Math.ceil(Math.sqrt(total * 1.35)));
+        const rows = Math.ceil(total / columns);
+        const spreadX = 300;
+        const spreadY = 250;
 
         group.entries.forEach((entry, localIndex) => {
           const globalIndex = entries.findIndex(item => item.number === entry.number);
-          const columns = 10;
           const row = Math.floor(localIndex / columns);
           const column = localIndex % columns;
 
-          const xCell = 100 / columns;
-          const rowCount = Math.ceil(group.entries.length / columns);
-          const yCell = 86 / Math.max(rowCount, 1);
+          const x = centre.x - spreadX / 2 +
+            (columns === 1 ? 0 : (column / (columns - 1)) * spreadX) +
+            (seededUnit(entry.title, "mapx") - .5) * 28;
 
-          const x = xCell * (column + .5) + (seededUnit(entry.title, "x") - .5) * xCell * .52;
-          const y = 8 + yCell * (row + .5) + (seededUnit(entry.title, "y") - .5) * yCell * .48;
-          const size = 4.3 + seededUnit(entry.title, "size") * 5.7;
-          const hue = (monthColours[group.month] + seededUnit(entry.title, "hue") * 28 - 14 + 360) % 360;
+          const y = centre.y - spreadY / 2 +
+            (rows === 1 ? 0 : (row / (rows - 1)) * spreadY) +
+            (seededUnit(entry.title, "mapy") - .5) * 28;
+
+          const size = 4.2 + seededUnit(entry.title, "size") * 5.8;
+          const hue = (monthColours[group.month] + seededUnit(entry.title, "hue") * 24 - 12 + 360) % 360;
 
           const star = document.createElement("button");
           star.className = "star";
           star.type = "button";
           star.dataset.index = globalIndex;
+          star.dataset.month = group.month;
           star.dataset.title = entry.title.toLowerCase();
-          star.style.setProperty("--x", `${x}%`);
-          star.style.setProperty("--y", `${y}%`);
+          star.style.setProperty("--x", `${x}px`);
+          star.style.setProperty("--y", `${y}px`);
           star.style.setProperty("--size", `${size}px`);
           star.style.setProperty("--hue", hue);
           star.style.setProperty("--delay", `${-seededUnit(entry.title, "delay") * 3.5}s`);
@@ -1427,21 +1667,86 @@
             <span class="entry-number">${entry.number}</span>
           `;
           star.addEventListener("click", () => openEntry(globalIndex));
-          starLayer.appendChild(star);
-
-          const listButton = document.createElement("button");
-          listButton.className = "list-entry";
-          listButton.type = "button";
-          listButton.dataset.index = globalIndex;
-          listButton.dataset.title = entry.title.toLowerCase();
-          listButton.innerHTML = `<strong>${entry.number}</strong><span>${escapeHtml(entry.title)}</span>`;
-          listButton.addEventListener("click", () => openEntry(globalIndex));
-          listGrid.appendChild(listButton);
+          yearStarLayer.appendChild(star);
         });
+      });
 
-        requestAnimationFrame(() => drawConnections(section));
+      requestAnimationFrame(() => {
+        drawYearConnections();
+        fitEntireYear();
       });
     }
+
+    function drawYearConnections() {
+      const context = yearMapCanvas.getContext("2d");
+      const ratio = window.devicePixelRatio || 1;
+      yearMapCanvas.width = worldWidth * ratio;
+      yearMapCanvas.height = worldHeight * ratio;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      context.clearRect(0, 0, worldWidth, worldHeight);
+
+      const visibleStars = [...yearStarLayer.querySelectorAll(".star:not(.hidden)")];
+      const pointsByMonth = {};
+
+      visibleStars.forEach(star => {
+        const month = star.dataset.month;
+        pointsByMonth[month] ||= [];
+        pointsByMonth[month].push({
+          x: parseFloat(star.style.getPropertyValue("--x")),
+          y: parseFloat(star.style.getPropertyValue("--y"))
+        });
+      });
+
+      monthOrder.forEach((month, monthIndex) => {
+        const points = pointsByMonth[month] || [];
+        if (points.length < 2) return;
+
+        context.lineWidth = 1;
+        context.strokeStyle = `rgba(${monthRgb(month)}, .22)`;
+
+        points.forEach((point, index) => {
+          const neighbours = points
+            .map((other, otherIndex) => ({
+              other,
+              otherIndex,
+              distance: Math.hypot(point.x - other.x, point.y - other.y)
+            }))
+            .filter(item => item.otherIndex !== index)
+            .sort((a, b) => a.distance - b.distance)
+            .slice(0, index % 6 === 0 ? 2 : 1);
+
+          neighbours.forEach(item => {
+            if (item.otherIndex < index || item.distance > 120) return;
+            context.globalAlpha = Math.max(.08, .36 - item.distance / 420);
+            context.beginPath();
+            context.moveTo(point.x, point.y);
+            context.lineTo(item.other.x, item.other.y);
+            context.stroke();
+          });
+        });
+
+        const nextMonth = monthOrder[monthIndex + 1];
+        if (nextMonth && pointsByMonth[nextMonth]?.length) {
+          const a = points[points.length - 1];
+          const b = pointsByMonth[nextMonth][0];
+          context.strokeStyle = `rgba(170,190,235,.13)`;
+          context.globalAlpha = .5;
+          context.setLineDash([6, 10]);
+          context.beginPath();
+          context.moveTo(a.x, a.y);
+          context.bezierCurveTo(
+            a.x + (b.x - a.x) * .35, a.y,
+            b.x - (b.x - a.x) * .35, b.y,
+            b.x, b.y
+          );
+          context.stroke();
+          context.setLineDash([]);
+        }
+      });
+
+      context.globalAlpha = 1;
+    }
+
 
     function escapeHtml(value) {
       return value
@@ -1451,56 +1756,8 @@
         .replaceAll('"', "&quot;");
     }
 
-    function drawConnections(section) {
-      const constellation = section.querySelector(".constellation");
-      const canvas = section.querySelector("canvas");
-      const stars = [...section.querySelectorAll(".star:not(.hidden)")];
-      const context = canvas.getContext("2d");
-      const rect = constellation.getBoundingClientRect();
-      const ratio = window.devicePixelRatio || 1;
-
-      canvas.width = Math.max(1, Math.round(rect.width * ratio));
-      canvas.height = Math.max(1, Math.round(rect.height * ratio));
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      context.clearRect(0, 0, rect.width, rect.height);
-
-      if (stars.length < 2) return;
-
-      context.lineWidth = 1;
-      context.strokeStyle = getComputedStyle(document.documentElement)
-        .getPropertyValue("--line-strong").trim();
-
-      const points = stars.map(star => ({
-        x: parseFloat(star.style.getPropertyValue("--x")) / 100 * rect.width,
-        y: parseFloat(star.style.getPropertyValue("--y")) / 100 * rect.height
-      }));
-
-      points.forEach((point, index) => {
-        const neighbours = points
-          .map((other, otherIndex) => ({
-            other,
-            otherIndex,
-            distance: Math.hypot(point.x - other.x, point.y - other.y)
-          }))
-          .filter(item => item.otherIndex !== index)
-          .sort((a, b) => a.distance - b.distance)
-          .slice(0, index % 5 === 0 ? 2 : 1);
-
-        neighbours.forEach(item => {
-          if (item.otherIndex < index || item.distance > 170) return;
-          context.globalAlpha = Math.max(.08, .34 - item.distance / 650);
-          context.beginPath();
-          context.moveTo(point.x, point.y);
-          context.lineTo(item.other.x, item.other.y);
-          context.stroke();
-        });
-      });
-
-      context.globalAlpha = 1;
-    }
-
     function redrawAll() {
-      monthElements.forEach(section => drawConnections(section));
+      drawYearConnections();
     }
 
     function openEntry(index) {
@@ -1522,70 +1779,44 @@
 
     function filterEntries() {
       const query = searchInput.value.trim().toLowerCase();
-      let visibleTotal = 0;
       const matches = [];
+      let visibleTotal = 0;
 
-      monthElements.forEach(section => {
-        const stars = [...section.querySelectorAll(".star")];
-        const listItems = [...section.querySelectorAll(".list-entry")];
-        let monthVisible = 0;
+      [...yearStarLayer.querySelectorAll(".star")].forEach(star => {
+        const entryIndex = Number(star.dataset.index);
+        const entry = entries[entryIndex];
+        const visible =
+          entry.title.toLowerCase().includes(query) ||
+          String(entry.number).includes(query) ||
+          entry.month.toLowerCase().includes(query);
 
-        stars.forEach(star => {
-          const entryIndex = Number(star.dataset.index);
-          const entry = entries[entryIndex];
-          const visible =
-            entry.title.toLowerCase().includes(query) ||
-            String(entry.number).includes(query) ||
-            entry.month.toLowerCase().includes(query);
+        star.classList.toggle("hidden", !visible);
 
-          star.classList.toggle("hidden", !visible);
-
-          if (visible) {
-            visibleTotal += 1;
-            monthVisible += 1;
-            if (query) matches.push({ entry, index: entryIndex });
-          }
-        });
-
-        listItems.forEach(item => {
-          const entryIndex = Number(item.dataset.index);
-          const entry = entries[entryIndex];
-          const visible =
-            entry.title.toLowerCase().includes(query) ||
-            String(entry.number).includes(query) ||
-            entry.month.toLowerCase().includes(query);
-
-          item.classList.toggle("hidden", !visible);
-        });
-
-        section.querySelector(".constellation").classList.toggle("no-results", monthVisible === 0);
-        drawConnections(section);
+        if (visible) {
+          visibleTotal += 1;
+          if (query) matches.push({ entry, index: entryIndex });
+        }
       });
 
+      yearMapShell.classList.toggle("no-results", visibleTotal === 0);
       document.getElementById("sidebarTotal").textContent = query ? visibleTotal : entries.length;
       updateSearchPanel(query, matches);
+      drawYearConnections();
     }
 
     function setView(view) {
-      currentView = view;
-      const listMode = view === "list";
-
-      monthElements.forEach(section => section.classList.toggle("list-mode", listMode));
-      constellationView.classList.toggle("active", !listMode);
-      listView.classList.toggle("active", listMode);
-
-      if (!listMode) requestAnimationFrame(redrawAll);
+      currentView = "constellation";
+      constellationView.classList.add("active");
+      listView.classList.remove("active");
     }
 
     function chooseRandomEntry() {
-      const visible = [...document.querySelectorAll(".star:not(.hidden)")];
+      const visible = [...yearStarLayer.querySelectorAll(".star:not(.hidden)")];
       if (!visible.length) return;
 
       const chosen = visible[Math.floor(Math.random() * visible.length)];
-      const section = chosen.closest(".month-section");
-      section.scrollIntoView({ behavior: "smooth", block: "center" });
-
-      window.setTimeout(() => openEntry(Number(chosen.dataset.index)), 440);
+      focusStar(chosen, 1.45);
+      window.setTimeout(() => openEntry(Number(chosen.dataset.index)), 320);
     }
 
     function initialiseTheme() {
@@ -1602,18 +1833,146 @@
       requestAnimationFrame(redrawAll);
     }
 
-    function observeMonths() {
-      const observer = new IntersectionObserver(entriesObserved => {
-        const current = entriesObserved
-          .filter(item => item.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    let mapScale = 1;
+    let mapX = 0;
+    let mapY = 0;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let startMapX = 0;
+    let startMapY = 0;
 
-        if (!current) return;
-        setActiveMonth(current.target.dataset.month);
-      }, { rootMargin: "-18% 0px -68% 0px", threshold: [0, .1, .35] });
-
-      monthElements.forEach(section => observer.observe(section));
+    function applyMapTransform() {
+      yearMapWorld.style.transform = `translate(${mapX}px, ${mapY}px) scale(${mapScale})`;
+      updateActiveMonthFromViewport();
     }
+
+    function clampScale(value) {
+      return Math.min(2.6, Math.max(.28, value));
+    }
+
+    function fitEntireYear() {
+      const rect = yearMapShell.getBoundingClientRect();
+      const padding = 34;
+      mapScale = clampScale(Math.min(
+        (rect.width - padding * 2) / worldWidth,
+        (rect.height - padding * 2) / worldHeight
+      ));
+      mapX = (rect.width - worldWidth * mapScale) / 2;
+      mapY = (rect.height - worldHeight * mapScale) / 2;
+      applyMapTransform();
+    }
+
+    function resetMapView() {
+      mapScale = .72;
+      const rect = yearMapShell.getBoundingClientRect();
+      mapX = rect.width / 2 - 1080 * mapScale;
+      mapY = rect.height / 2 - 790 * mapScale;
+      applyMapTransform();
+    }
+
+    function zoomAt(factor, clientX, clientY) {
+      const rect = yearMapShell.getBoundingClientRect();
+      const pointerX = clientX - rect.left;
+      const pointerY = clientY - rect.top;
+      const worldX = (pointerX - mapX) / mapScale;
+      const worldY = (pointerY - mapY) / mapScale;
+      const nextScale = clampScale(mapScale * factor);
+
+      mapX = pointerX - worldX * nextScale;
+      mapY = pointerY - worldY * nextScale;
+      mapScale = nextScale;
+      applyMapTransform();
+    }
+
+    function focusMonth(month, scale = 1.05) {
+      const centre = monthLayout[month];
+      if (!centre) return;
+      const rect = yearMapShell.getBoundingClientRect();
+      mapScale = clampScale(scale);
+      mapX = rect.width / 2 - centre.x * mapScale;
+      mapY = rect.height / 2 - centre.y * mapScale;
+      applyMapTransform();
+    }
+
+    function focusStar(star, scale = 1.45) {
+      const x = parseFloat(star.style.getPropertyValue("--x"));
+      const y = parseFloat(star.style.getPropertyValue("--y"));
+      const rect = yearMapShell.getBoundingClientRect();
+      mapScale = clampScale(scale);
+      mapX = rect.width / 2 - x * mapScale;
+      mapY = rect.height / 2 - y * mapScale;
+      applyMapTransform();
+    }
+
+    function updateActiveMonthFromViewport() {
+      const rect = yearMapShell.getBoundingClientRect();
+      const worldCentreX = (rect.width / 2 - mapX) / mapScale;
+      const worldCentreY = (rect.height / 2 - mapY) / mapScale;
+
+      const nearest = monthOrder
+        .map(month => ({
+          month,
+          distance: Math.hypot(
+            worldCentreX - monthLayout[month].x,
+            worldCentreY - monthLayout[month].y
+          )
+        }))
+        .sort((a, b) => a.distance - b.distance)[0];
+
+      if (nearest) setActiveMonth(nearest.month);
+    }
+
+    function observeMonths() {
+      setActiveMonth("February");
+    }
+
+    yearMapShell.addEventListener("pointerdown", event => {
+      if (event.target.closest("button")) return;
+      dragging = true;
+      dragStartX = event.clientX;
+      dragStartY = event.clientY;
+      startMapX = mapX;
+      startMapY = mapY;
+      yearMapShell.classList.add("dragging");
+      yearMapShell.setPointerCapture(event.pointerId);
+    });
+
+    yearMapShell.addEventListener("pointermove", event => {
+      if (!dragging) return;
+      mapX = startMapX + event.clientX - dragStartX;
+      mapY = startMapY + event.clientY - dragStartY;
+      applyMapTransform();
+    });
+
+    yearMapShell.addEventListener("pointerup", event => {
+      dragging = false;
+      yearMapShell.classList.remove("dragging");
+      yearMapShell.releasePointerCapture(event.pointerId);
+    });
+
+    yearMapShell.addEventListener("pointercancel", () => {
+      dragging = false;
+      yearMapShell.classList.remove("dragging");
+    });
+
+    yearMapShell.addEventListener("wheel", event => {
+      event.preventDefault();
+      zoomAt(event.deltaY < 0 ? 1.12 : .89, event.clientX, event.clientY);
+    }, { passive: false });
+
+    zoomIn.addEventListener("click", () => {
+      const rect = yearMapShell.getBoundingClientRect();
+      zoomAt(1.18, rect.left + rect.width / 2, rect.top + rect.height / 2);
+    });
+
+    zoomOut.addEventListener("click", () => {
+      const rect = yearMapShell.getBoundingClientRect();
+      zoomAt(.84, rect.left + rect.width / 2, rect.top + rect.height / 2);
+    });
+
+    fitYear.addEventListener("click", fitEntireYear);
+    resetView.addEventListener("click", resetMapView);
 
     const groups = groupByMonth();
     createMonthNav(groups);
@@ -1664,7 +2023,10 @@
     let resizeTimer;
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(redrawAll, 120);
+      resizeTimer = setTimeout(() => {
+        drawYearConnections();
+        fitEntireYear();
+      }, 120);
     });
   </script>
 </body>
