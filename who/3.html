@@ -1622,6 +1622,53 @@ button:active,
   }
 }
 
+
+/* =========================================================
+   MOBILE GRID/LIST TOGGLE FIX
+   ========================================================= */
+@media (max-width:760px){
+
+  .view-toggle{
+    display:flex !important;
+    width:100%;
+    gap:8px;
+    margin:10px 0 14px;
+  }
+
+  .view-toggle button,
+  .view-btn{
+    flex:1 1 0;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* Ensure list/grid layouts still switch on mobile */
+  .episodes.grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+
+  .episodes.list{
+    display:flex !important;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .episodes.list .card{
+    display:grid !important;
+    grid-template-columns:auto 1fr;
+    align-items:center;
+  }
+
+  .episodes.grid .card{
+    display:flex !important;
+    flex-direction:column;
+  }
+}
+
 </style>
 </head>
 
@@ -2526,6 +2573,17 @@ button:active,
     render();
     setDetailsOpen(state.detailsOpen);
     requestAnimationFrame(updateDoctorStripEdges);
-  </script>
+  
+// Mobile view toggle safeguard
+document.querySelectorAll('.view-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const wrap=document.querySelector('.episodes');
+    if(!wrap) return;
+    wrap.classList.remove('grid','list');
+    wrap.classList.add(btn.dataset.view||'grid');
+  });
+});
+
+</script>
 </body>
 </html>
