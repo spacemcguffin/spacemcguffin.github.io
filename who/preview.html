@@ -1684,6 +1684,48 @@
       }
     }
 
+
+    /* SIMPLIFIED FILTERS + INSPECTOR NAVIGATION + DESKTOP GRID */
+    .details-nav-group{
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+
+    .details-top{
+      display:grid;
+      grid-template-columns:auto minmax(0,1fr) auto;
+      align-items:center;
+      gap:12px;
+    }
+
+    @media(min-width:1180px){
+      .episode-grid:not(.list-view){
+        grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+      }
+    }
+
+    @media(min-width:1180px) and (max-width:1500px){
+      .episode-grid:not(.list-view){
+        gap:14px;
+      }
+    }
+
+    @media(max-width:760px){
+      .details-nav-group{
+        gap:5px;
+      }
+
+      .details-top{
+        gap:8px;
+      }
+
+      .details-nav-group .details-button{
+        width:34px;
+        height:34px;
+      }
+    }
+
 </style>
 </head>
 
@@ -1754,7 +1796,7 @@
         <div class="mobile-filter-content" id="mobileFilterContent">
         <div class="filters">
           <select class="filter" id="seriesFilter">
-            <option value="all">All series</option>
+            <option value="all">Browse by Series</option>
           </select>
 
           <select class="filter" id="doctorFilter">
@@ -1794,12 +1836,17 @@
 
     <aside class="details" id="detailsPanel" aria-hidden="true" aria-label="Episode information" role="dialog" aria-modal="true" aria-labelledby="detailTitle">
       <div class="details-top">
-        <button class="details-button details-back" id="detailsPrev" aria-label="Previous episode">‹</button>
+        <div class="details-nav-group" aria-label="Episode navigation">
+          <button class="details-button details-back" id="detailsPrev" type="button" aria-label="Previous episode">‹</button>
+          <button class="details-button details-next" id="detailsNext" type="button" aria-label="Next episode">›</button>
+        </div>
+
         <div class="details-top-copy">
           <small>Episode inspector</small>
           <span id="detailPosition">1 / 1</span>
         </div>
-        <button class="details-button details-close" id="detailsClose" aria-label="Close episode information">×</button>
+
+        <button class="details-button details-close" id="detailsClose" type="button" aria-label="Close episode information">×</button>
       </div>
 
       <div class="detail-hero" id="detailHero">
@@ -2156,7 +2203,6 @@
     const state = {
       doctor:"all",
       series:"all",
-      sort:"broadcast",
       search:"",
       view:"grid",
       filtered:[...episodes],
@@ -2238,7 +2284,7 @@
         el("doctorFilter").appendChild(option);
       });
 
-      el("seriesFilter").innerHTML = '<option value="all">All series</option>';
+      el("seriesFilter").innerHTML = '<option value="all">Browse by Series</option>';
       unique(episodes.map(e=>e.series)).forEach(series=>{
         const option = document.createElement("option");
         option.value = series;
@@ -2463,7 +2509,6 @@
 
       el("doctorFilter").value = "all";
       el("seriesFilter").value = "all";
-      el("sortFilter").value = "broadcast";
       el("searchInput").value = "";
 
       document.querySelectorAll(".doctor-btn").forEach(btn=>{
@@ -2507,8 +2552,6 @@
       render();
     });
 
-    el("sortFilter").addEventListener("change",()=>{
-      state.sort = el("sortFilter").value;
       render();
     });
 
@@ -2542,6 +2585,7 @@
     el("previousEpisode").addEventListener("click",()=>selectByOffset(-1));
     el("nextEpisode").addEventListener("click",()=>selectByOffset(1));
     el("detailsPrev").addEventListener("click",()=>selectByOffset(-1));
+    el("detailsNext").addEventListener("click",()=>selectByOffset(1));
     el("detailsClose").addEventListener("click",()=>closeInspector());
     el("mobileDetailsToggle").addEventListener("click",()=>openInspector(el("mobileDetailsToggle")));
     inspectorBackdrop.addEventListener("click",()=>closeInspector());
