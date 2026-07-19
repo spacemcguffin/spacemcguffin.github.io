@@ -658,7 +658,7 @@
 
     .quick-info{
       display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
+      grid-template-columns:repeat(2,minmax(0,1fr));
       gap:8px;
     }
 
@@ -1911,8 +1911,6 @@ button:active,
         <div class="quick-info">
           <div class="quick-box"><span>Air date</span><strong id="detailDate"></strong></div>
           <div class="quick-box"><span>Duration</span><strong id="detailDuration"></strong></div>
-          <div class="quick-box"><span>Season</span><strong id="detailSeries"></strong></div>
-          <div class="quick-box"><span>Format</span><strong id="detailFormat"></strong></div>
         </div>
 
         <div class="detail-grid">
@@ -2305,6 +2303,24 @@ button:active,
         tags:["Krynoid","Antarctica","Sarah Jane"]
       }
     ];
+
+    // Keep every view and episode-navigation control in original broadcast order.
+    function broadcastTime(dateText){
+      const months = {
+        January:0, February:1, March:2, April:3, May:4, June:5,
+        July:6, August:7, September:8, October:9, November:10, December:11
+      };
+      const match = String(dateText).trim().match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+      if(!match) return Number.MAX_SAFE_INTEGER;
+      const [,day,month,year] = match;
+      return Date.UTC(Number(year), months[month] ?? 0, Number(day));
+    }
+
+    episodes.sort((a,b)=>
+      broadcastTime(a.date)-broadcastTime(b.date) ||
+      String(a.code).localeCompare(String(b.code),undefined,{numeric:true})
+    );
+
     const doctorColors = {
       1:"#ddd6c8",2:"#62769f",3:"#ad73c8",4:"#d76b5e",5:"#e7cd72",
       6:"#eb78a2",7:"#a99369",8:"#648e99",9:"#7f9388",10:"#bd875f",
@@ -2546,8 +2562,6 @@ button:active,
       el("detailSubtitle").textContent = `${episode.doctor} · ${episode.series} · ${episode.year}`;
       el("detailDate").textContent = episode.date;
       el("detailDuration").textContent = episode.duration;
-      el("detailSeries").textContent = episode.series;
-      el("detailFormat").textContent = episode.format;
       el("detailWriter").textContent = episode.writer;
       el("detailDirector").textContent = episode.director;
       el("detailCompanion").textContent = episode.companion;
