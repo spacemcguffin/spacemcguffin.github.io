@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#040713">
   <title>Doctor Who Episode Guide</title>
- 
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..850&display=swap" rel="stylesheet">
@@ -89,7 +89,7 @@
     }
 
     .doctor-list{
-      height:calc(100vh - 108px);
+      height:calc(100vh - 52px);
       display:grid;
       align-content:start;
       gap:5px;
@@ -330,7 +330,7 @@
       outline:none;
       color:#f4f7ff;
       background:#0b1424;
-      font-size:.71rem;
+      font-size:.75rem;
     }
 
     .filter option{background:#09111f}
@@ -644,7 +644,7 @@
       z-index:3;
       right:18px;
       bottom:56px;
-      padding:7px 8px;
+      padding:7px 10px;
       border:1px solid rgba(255,209,92,.35);
       border-radius:8px;
       color:var(--gold);
@@ -772,304 +772,6 @@
       display:none;
     }
 
-
-    .rail-collapse{
-      position:absolute;
-      left:12px;
-      right:12px;
-      bottom:14px;
-      min-height:42px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      border:1px solid var(--line);
-      border-radius:10px;
-      background:rgba(10,20,37,.92);
-      color:#cbd6e9;
-      cursor:pointer;
-      transition:.2s ease;
-    }
-
-    .rail-collapse:hover{
-      border-color:var(--line-strong);
-      background:rgba(23,44,78,.95);
-    }
-
-    .rail-collapse-icon{
-      font-size:1.25rem;
-      line-height:1;
-      transition:transform .2s ease;
-    }
-
-    .rail-collapse-label{
-      font-size:.68rem;
-      font-weight:750;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-    }
-
-    body.rail-collapsed .shell{
-      grid-template-columns:68px minmax(0,1fr) 520px;
-    }
-
-    body.rail-collapsed .doctor-rail{
-      padding-inline:8px;
-    }
-
-    body.rail-collapsed .doctor-heading{
-      text-align:center;
-      margin-inline:0;
-      font-size:0;
-    }
-
-    body.rail-collapsed .doctor-heading::after{
-      content:"DW";
-      font-size:.64rem;
-      letter-spacing:.14em;
-    }
-
-    body.rail-collapsed .doctor-btn{
-      justify-content:center;
-      padding-inline:5px;
-    }
-
-    body.rail-collapsed .doctor-name{
-      display:none;
-    }
-
-    body.rail-collapsed .doctor-avatar{
-      width:38px;
-      height:38px;
-      flex-basis:38px;
-    }
-
-    body.rail-collapsed .rail-collapse{
-      left:8px;
-      right:8px;
-    }
-
-    body.rail-collapsed .rail-collapse-label{
-      display:none;
-    }
-
-    body.rail-collapsed .rail-collapse-icon{
-      transform:rotate(180deg);
-    }
-
-    @media(max-width:1450px){
-      body.rail-collapsed .shell{
-        grid-template-columns:68px minmax(0,1fr) 430px;
-      }
-    }
-
-    @media(max-width:1100px){
-      body.rail-collapsed .shell{
-        grid-template-columns:68px minmax(0,1fr);
-      }
-    }
-
-
-    /* OVERLAY DOCTOR DRAWER */
-    .shell{
-      grid-template-columns:minmax(0,1fr) 520px;
-    }
-
-    .doctor-rail{
-      position:fixed;
-      inset:0 auto 0 0;
-      width:230px;
-      height:100vh;
-      z-index:120;
-      padding:16px 12px 70px;
-      border-right:1px solid rgba(107,165,255,.35);
-      background:
-        linear-gradient(180deg,rgba(4,10,21,.99),rgba(3,8,16,.985));
-      box-shadow:18px 0 48px rgba(0,0,0,.48);
-      backdrop-filter:blur(22px);
-      transform:translateX(0);
-      transition:transform .28s cubic-bezier(.22,.8,.24,1);
-    }
-
-    .doctor-rail::after{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-1;
-      pointer-events:none;
-      background:rgba(0,3,9,.18);
-      opacity:1;
-      transition:opacity .25s ease;
-    }
-
-    body.rail-collapsed .doctor-rail{
-      transform:translateX(-105%);
-    }
-
-    body.rail-collapsed .doctor-rail::after{
-      opacity:0;
-    }
-
-    .doctor-heading{
-      margin:3px 4px 18px;
-      font-size:.78rem;
-      text-align:left;
-    }
-
-    .doctor-list{
-      height:calc(100vh - 112px);
-      gap:7px;
-      padding-right:3px;
-    }
-
-    .doctor-btn{
-      min-height:52px;
-      justify-content:flex-start;
-      padding:7px 10px;
-    }
-
-    .doctor-avatar{
-      width:38px;
-      height:38px;
-      flex-basis:38px;
-    }
-
-    .doctor-name{
-      display:block;
-      font-size:.75rem;
-      white-space:normal;
-    }
-
-    .rail-collapse{
-      left:12px;
-      right:12px;
-      bottom:16px;
-      min-height:44px;
-    }
-
-    .rail-collapse-icon{
-      font-size:1.05rem;
-      transform:none !important;
-    }
-
-    .rail-collapse-label{
-      display:inline !important;
-    }
-
-    body.rail-collapsed .shell{
-      grid-template-columns:minmax(0,1fr) 520px;
-    }
-
-    body.rail-collapsed .doctor-rail{
-      padding:16px 12px 70px;
-    }
-
-    body.rail-collapsed .doctor-heading{
-      margin:3px 4px 18px;
-      text-align:left;
-      font-size:.78rem;
-    }
-
-    body.rail-collapsed .doctor-heading::after{
-      content:none;
-    }
-
-    body.rail-collapsed .doctor-btn{
-      justify-content:flex-start;
-      padding:7px 10px;
-    }
-
-    body.rail-collapsed .doctor-name{
-      display:block;
-    }
-
-    body.rail-collapsed .doctor-avatar{
-      width:38px;
-      height:38px;
-      flex-basis:38px;
-    }
-
-    body.rail-collapsed .rail-collapse{
-      left:12px;
-      right:12px;
-    }
-
-    .doctor-reopen{
-      position:fixed;
-      left:0;
-      top:50%;
-      z-index:110;
-      min-height:118px;
-      width:38px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      padding:10px 6px;
-      border:1px solid rgba(90,155,255,.42);
-      border-left:0;
-      border-radius:0 10px 10px 0;
-      color:#d7e5fb;
-      background:rgba(8,18,35,.95);
-      box-shadow:10px 0 30px rgba(0,0,0,.36);
-      backdrop-filter:blur(14px);
-      cursor:pointer;
-      transform:translate(-105%,-50%);
-      transition:transform .22s ease,background .2s ease;
-    }
-
-    .doctor-reopen:hover{
-      background:rgba(22,48,88,.98);
-    }
-
-    body.rail-collapsed .doctor-reopen{
-      transform:translate(0,-50%);
-    }
-
-    .doctor-reopen-icon{
-      font-size:1.2rem;
-      line-height:1;
-    }
-
-    .doctor-reopen-label{
-      writing-mode:vertical-rl;
-      transform:rotate(180deg);
-      font-size:.65rem;
-      font-weight:800;
-      letter-spacing:.1em;
-      text-transform:uppercase;
-    }
-
-    @media(max-width:1450px){
-      .shell,
-      body.rail-collapsed .shell{
-        grid-template-columns:minmax(0,1fr) 430px;
-      }
-    }
-
-    @media(max-width:1100px){
-      .shell,
-      body.rail-collapsed .shell{
-        grid-template-columns:minmax(0,1fr);
-      }
-
-      .doctor-rail{
-        width:min(260px,82vw);
-      }
-    }
-
-    @media(max-width:760px){
-      .doctor-rail{
-        display:block;
-        width:min(260px,84vw);
-      }
-
-      .doctor-reopen{
-        min-height:104px;
-      }
-    }
-
     @media(max-width:1450px){
       .shell{grid-template-columns:120px minmax(0,1fr) 430px}
       .episode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -1126,11 +828,6 @@
     <aside class="doctor-rail">
       <div class="doctor-heading">Doctors</div>
       <div class="doctor-list" id="doctorList"></div>
-
-      <button class="rail-collapse" id="railCollapse" type="button" aria-expanded="true">
-        <span class="rail-collapse-icon">×</span>
-        <span class="rail-collapse-label">Close Doctors</span>
-      </button>
     </aside>
 
     <main class="main">
@@ -1269,11 +966,6 @@
       </div>
     </aside>
   </div>
-
-  <button class="doctor-reopen" id="doctorReopen" type="button" aria-label="Open Doctor filters">
-    <span class="doctor-reopen-icon">›</span>
-    <span class="doctor-reopen-label">Doctors</span>
-  </button>
 
   <button class="mobile-details-toggle" id="mobileDetailsToggle" aria-label="Open episode information">☰</button>
 
@@ -1778,7 +1470,7 @@
       render();
       details.classList.add("open");
     });
-
+ 
     el("previousEpisode").addEventListener("click",()=>selectByOffset(-1));
     el("nextEpisode").addEventListener("click",()=>selectByOffset(1));
     el("detailsPrev").addEventListener("click",()=>selectByOffset(-1));
@@ -1790,49 +1482,6 @@
       if(event.key==="ArrowRight") selectByOffset(1);
       if(event.key==="Escape") details.classList.remove("open");
     });
-
-
-    const railCollapseButton = el("railCollapse");
-    const doctorReopenButton = el("doctorReopen");
-
-    function setRailCollapsed(collapsed){
-      document.body.classList.toggle("rail-collapsed",collapsed);
-      railCollapseButton.setAttribute("aria-expanded",String(!collapsed));
-      doctorReopenButton.setAttribute("aria-expanded",String(!collapsed));
-
-      try{
-        localStorage.setItem("doctorGuideRailCollapsed",collapsed ? "1" : "0");
-      }catch(error){}
-    }
-
-    railCollapseButton.addEventListener("click",()=>{
-      setRailCollapsed(true);
-    });
-
-    doctorReopenButton.addEventListener("click",()=>{
-      setRailCollapsed(false);
-    });
-
-    document.addEventListener("click",event=>{
-      if(document.body.classList.contains("rail-collapsed")) return;
-      const clickedInsideRail = event.target.closest(".doctor-rail");
-      const clickedReopen = event.target.closest("#doctorReopen");
-      if(!clickedInsideRail && !clickedReopen && window.innerWidth <= 1100){
-        setRailCollapsed(true);
-      }
-    });
-
-    document.addEventListener("keydown",event=>{
-      if(event.key==="Escape" && !document.body.classList.contains("rail-collapsed")){
-        setRailCollapsed(true);
-      }
-    });
-
-    try{
-      setRailCollapsed(localStorage.getItem("doctorGuideRailCollapsed")==="1");
-    }catch(error){
-      setRailCollapsed(false);
-    }
 
     buildFilters();
     render();
