@@ -1695,6 +1695,112 @@ button:active,
   }
 }
 
+
+/* =========================================================
+   DEFINITIVE MOBILE GRID / LIST TOGGLE FIX
+   ========================================================= */
+@media(max-width:760px){
+  .results-view-row{
+    align-items:center;
+  }
+
+  .view-buttons{
+    display:grid !important;
+    grid-template-columns:repeat(2,42px);
+    flex:0 0 auto;
+    gap:6px;
+  }
+
+  .view-btn{
+    width:42px;
+    min-width:42px;
+    height:38px;
+    padding:0;
+    display:grid;
+    place-items:center;
+  }
+
+  /* GRID: full-width poster-style cards */
+  .episode-grid:not(.list-view){
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+
+  .episode-grid:not(.list-view) .card{
+    display:block !important;
+  }
+
+  .episode-grid:not(.list-view) .card-image{
+    width:100%;
+    min-height:0;
+    aspect-ratio:16 / 9;
+  }
+
+  /* LIST: compact horizontal rows */
+  .episode-grid.list-view{
+    display:flex !important;
+    flex-direction:column;
+    gap:9px;
+  }
+
+  .episode-grid.list-view .card{
+    display:grid !important;
+    grid-template-columns:112px minmax(0,1fr) !important;
+    align-items:stretch;
+    min-height:94px;
+  }
+
+  .episode-grid.list-view .card-image{
+    width:112px;
+    height:100%;
+    min-height:94px !important;
+    aspect-ratio:auto !important;
+  }
+
+  .episode-grid.list-view .card-body{
+    min-width:0;
+    padding:10px 11px;
+    align-self:center;
+  }
+
+  .episode-grid.list-view .card-title{
+    font-size:.91rem;
+  }
+
+  .episode-grid.list-view .card-meta{
+    margin-top:4px;
+  }
+
+  .episode-grid.list-view .card-companion{
+    margin-top:5px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .episode-grid.list-view .tags{
+    display:none;
+  }
+
+  .episode-grid.list-view .code{
+    top:6px;
+    left:6px;
+    padding:4px 5px;
+    font-size:.61rem;
+  }
+}
+
+@media(max-width:390px){
+  .episode-grid.list-view .card{
+    grid-template-columns:94px minmax(0,1fr) !important;
+  }
+
+  .episode-grid.list-view .card-image{
+    width:94px;
+  }
+}
+
 </style>
 </head>
 
@@ -2600,15 +2706,6 @@ button:active,
     setDetailsOpen(state.detailsOpen);
     requestAnimationFrame(updateDoctorStripEdges);
   
-// Mobile view toggle safeguard
-document.querySelectorAll('.view-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    const wrap=document.querySelector('.episodes');
-    if(!wrap) return;
-    wrap.classList.remove('grid','list');
-    wrap.classList.add(btn.dataset.view||'grid');
-  });
-});
 
 
     /* =========================================================
