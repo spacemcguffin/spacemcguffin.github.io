@@ -1669,6 +1669,32 @@ button:active,
   }
 }
 
+
+/* Swipe hint and touch behaviour for the mobile full-screen panel */
+@media(max-width:760px){
+  .details{
+    touch-action:pan-y;
+  }
+
+  .details::after{
+    content:"Swipe left or right";
+    position:fixed;
+    left:50%;
+    bottom:10px;
+    z-index:6;
+    transform:translateX(-50%);
+    padding:5px 9px;
+    border:1px solid rgba(135,173,236,.14);
+    border-radius:999px;
+    background:rgba(5,11,21,.72);
+    color:#7f91aa;
+    font-size:.62rem;
+    letter-spacing:.04em;
+    pointer-events:none;
+    opacity:.72;
+  }
+}
+
 </style>
 </head>
 
@@ -2583,6 +2609,57 @@ document.querySelectorAll('.view-btn').forEach(btn=>{
     wrap.classList.add(btn.dataset.view||'grid');
   });
 });
+
+
+    /* =========================================================
+       MOBILE SWIPE NAVIGATION FOR FULL-SCREEN EPISODE PANEL
+       ========================================================= */
+    let detailsTouchStartX = 0;
+    let detailsTouchStartY = 0;
+    let detailsTouchCurrentX = 0;
+    let detailsTouchTracking = false;
+
+    details.addEventListener("touchstart",event=>{
+      if(!window.matchMedia("(max-width:760px)").matches) return;
+      if(!details.classList.contains("open")) return;
+      if(event.touches.length!==1) return;
+
+      const touch = event.touches[0];
+      detailsTouchStartX = touch.clientX;
+      detailsTouchStartY = touch.clientY;
+      detailsTouchCurrentX = touch.clientX;
+      detailsTouchTracking = true;
+    },{passive:true});
+
+    details.addEventListener("touchmove",event=>{
+      if(!detailsTouchTracking || event.touches.length!==1) return;
+      detailsTouchCurrentX = event.touches[0].clientX;
+    },{passive:true});
+
+    details.addEventListener("touchend",event=>{
+      if(!detailsTouchTracking) return;
+      detailsTouchTracking = false;
+
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - detailsTouchStartX;
+      const deltaY = touch.clientY - detailsTouchStartY;
+
+      const horizontalSwipe =
+        Math.abs(deltaX) >= 58 &&
+        Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
+
+      if(!horizontalSwipe) return;
+
+      if(deltaX < 0){
+        selectByOffset(1);
+      }else{
+        selectByOffset(-1);
+      }
+    },{passive:true});
+
+    details.addEventListener("touchcancel",()=>{
+      detailsTouchTracking = false;
+    },{passive:true});
 
 </script>
 </body>
