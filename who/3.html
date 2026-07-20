@@ -1794,6 +1794,17 @@ button:active,
   }
 }
 
+
+
+/* =========================================================
+   DESKTOP: THREE-COLUMN GRID WHEN INSPECTOR IS MINIMISED
+   ========================================================= */
+@media (min-width:1101px){
+  .shell.details-hidden .episode-grid:not(.list-view){
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+}
+
 </style>
 </head>
 
