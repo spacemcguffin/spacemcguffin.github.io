@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#080b14"
+  >
+
+  <title>lewis.lc</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&family=Geist+Pixel&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --background-top: #0c1120;
+      --background-middle: #080c17;
+      --background-bottom: #05070d;
+
+      --nebula-one: rgba(77, 100, 177, 0.14);
+      --nebula-two: rgba(104, 73, 147, 0.1);
+      --nebula-three: rgba(47, 112, 133, 0.08);
+
+      --cursor-x: 50vw;
+      --cursor-y: 50vh;
+
+      --cursor-opacity: 0;
+
+      --text-primary: rgba(255, 255, 255, 0.96);
+      --text-secondary: rgba(255, 255, 255, 0.62);
+
+      --panel-background: rgba(12, 15, 25, 0.42);
+      --panel-border: rgba(255, 255, 255, 0.09);
+      --panel-highlight: rgba(255, 255, 255, 0.045);
+
+      --link-background: rgba(255, 255, 255, 0.065);
+      --link-background-hover: rgba(255, 255, 255, 0.12);
+      --link-border: rgba(255, 255, 255, 0.08);
+      --link-border-hover: rgba(255, 255, 255, 0.17);
+    }
+
+    /*
+      Time-aware colour palettes.
+      JavaScript assigns one of these classes to the body.
+    */
+
+    body.time-morning {
+      --background-top: #171523;
+      --background-middle: #100f19;
+      --background-bottom: #090a0f;
+
+      --nebula-one: rgba(181, 121, 108, 0.12);
+      --nebula-two: rgba(110, 92, 144, 0.1);
+      --nebula-three: rgba(190, 146, 94, 0.06);
+    }
+
+    body.time-day {
+      --background-top: #111827;
+      --background-middle: #0b111c;
+      --background-bottom: #070a10;
+
+      --nebula-one: rgba(83, 119, 165, 0.12);
+      --nebula-two: rgba(89, 90, 146, 0.09);
+      --nebula-three: rgba(56, 126, 143, 0.07);
+    }
+
+    body.time-evening {
+      --background-top: #15142a;
+      --background-middle: #0d0d1c;
+      --background-bottom: #07070f;
+
+      --nebula-one: rgba(112, 79, 163, 0.14);
+      --nebula-two: rgba(78, 91, 161, 0.1);
+      --nebula-three: rgba(171, 94, 113, 0.065);
+    }
+
+    body.time-night {
+      --background-top: #0b1020;
+      --background-middle: #070b14;
+      --background-bottom: #03050a;
+
+      --nebula-one: rgba(64, 87, 164, 0.15);
+      --nebula-two: rgba(94, 61, 144, 0.1);
+      --nebula-three: rgba(37, 100, 125, 0.08);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      min-height: 100%;
+      background: var(--background-bottom);
+    }
+
+    body {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      margin: 0;
+      overflow: hidden;
+
+      color: var(--text-primary);
+      background:
+        linear-gradient(
+          160deg,
+          var(--background-top) 0%,
+          var(--background-middle) 48%,
+          var(--background-bottom) 100%
+        );
+
+      font-family:
+        "Google Sans Flex",
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      transition: background 1.5s ease;
+      isolation: isolate;
+    }
+
+    /*
+      Ambient nebula layer.
+    */
+
+    .ambient-background {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .nebula {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.9;
+      will-change: transform;
+    }
+
+    .nebula-one {
+      top: -25%;
+      left: -15%;
+      width: min(70vw, 850px);
+      aspect-ratio: 1;
+
+      background: var(--nebula-one);
+
+      animation:
+        drift-one 30s ease-in-out infinite alternate;
+    }
+
+    .nebula-two {
+      right: -25%;
+      bottom: -30%;
+      width: min(76vw, 950px);
+      aspect-ratio: 1;
+
+      background: var(--nebula-two);
+
+      animation:
+        drift-two 38s ease-in-out infinite alternate;
+    }
+
+    .nebula-three {
+      top: 35%;
+      left: 42%;
+      width: min(46vw, 620px);
+      aspect-ratio: 1;
+
+      background: var(--nebula-three);
+
+      animation:
+        drift-three 34s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift-one {
+      from {
+        transform: translate3d(-2%, -2%, 0) scale(1);
+      }
+
+      to {
+        transform: translate3d(8%, 5%, 0) scale(1.08);
+      }
+    }
+
+    @keyframes drift-two {
+      from {
+        transform: translate3d(3%, 3%, 0) scale(1.03);
+      }
+
+      to {
+        transform: translate3d(-7%, -5%, 0) scale(1.12);
+      }
+    }
+
+    @keyframes drift-three {
+      from {
+        transform: translate3d(-4%, 3%, 0) scale(0.96);
+      }
+
+      to {
+        transform: translate3d(5%, -5%, 0) scale(1.08);
+      }
+    }
+
+    /*
+      Star layers.
+      Each layer uses repeated radial gradients rather than hundreds
+      of separate HTML elements.
+    */
+
+    .stars,
+    .stars::before,
+    .stars::after {
+      position: absolute;
+      inset: -20%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .stars {
+      opacity: 0.52;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.68) 0 0.7px,
+          transparent 0.9px
+        ),
+        radial-gradient(
+          circle,
+          rgba(205, 220, 255, 0.46) 0 0.65px,
+          transparent 0.9px
+        );
+
+      background-position:
+        0 0,
+        37px 61px;
+
+      background-size:
+        104px 104px,
+        151px 151px;
+
+      animation:
+        star-drift 55s linear infinite;
+    }
+
+    .stars::before {
+      opacity: 0.48;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.7) 0 1px,
+          transparent 1.2px
+        );
+
+      background-position: 31px 17px;
+      background-size: 223px 223px;
+
+      animation:
+        star-drift-reverse 76s linear infinite;
+    }
+
+    .stars::after {
+      opacity: 0.25;
+
+      background-image:
+        radial-gradient(
+          circle,
+          rgba(170, 199, 255, 0.9) 0 1.2px,
+          transparent 1.4px
+        );
+
+      background-position: 90px 44px;
+      background-size: 337px 337px;
+
+      animation:
+        star-pulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes star-drift {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(-45px, 35px, 0);
+      }
+    }
+
+    @keyframes star-drift-reverse {
+      from {
+        transform: translate3d(0, 0, 0);
+      }
+
+      to {
+        transform: translate3d(38px, -30px, 0);
+      }
+    }
+
+    @keyframes star-pulse {
+      from {
+        opacity: 0.15;
+      }
+
+      to {
+        opacity: 0.32;
+      }
+    }
+
+    /*
+      Cursor-following light.
+    */
+
+    .cursor-light {
+      position: fixed;
+      z-index: -3;
+      top: 0;
+      left: 0;
+
+      width: 650px;
+      height: 650px;
+
+      border-radius: 50%;
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(145, 167, 255, 0.105) 0%,
+          rgba(112, 128, 218, 0.045) 28%,
+          transparent 70%
+        );
+
+      opacity: var(--cursor-opacity);
+
+      transform:
+        translate(
+          calc(var(--cursor-x) - 50%),
+          calc(var(--cursor-y) - 50%)
+        );
+
+      transition:
+        opacity 450ms ease;
+
+      will-change: transform;
+    }
+
+    /*
+      Fine grain prevents the gradients from feeling too smooth or synthetic.
+    */
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.027;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.55'/%3E%3C/svg%3E");
+    }
+
+    /*
+      Main page layout.
+    */
+
+    .page {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      min-height: 100svh;
+      padding: 28px;
+    }
+
+    .container {
+      position: relative;
+      width: min(100%, 560px);
+      padding:
+        clamp(30px, 7vw, 54px)
+        clamp(26px, 7vw, 52px);
+
+      text-align: center;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.045),
+          transparent 35%
+        ),
+        var(--panel-background);
+
+      border: 1px solid var(--panel-border);
+      border-radius: 30px;
+
+      box-shadow:
+        0 30px 90px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 var(--panel-highlight);
+
+      backdrop-filter: blur(22px) saturate(115%);
+      -webkit-backdrop-filter: blur(22px) saturate(115%);
+
+      animation:
+        panel-arrive 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .container::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      z-index: -1;
+
+      border-radius: inherit;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(255, 255, 255, 0.07),
+          transparent 43%
+        );
+
+      pointer-events: none;
+    }
+
+    @keyframes panel-arrive {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.985);
+        filter: blur(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 10vw, 5rem);
+      font-weight: 650;
+      letter-spacing: -0.075em;
+      line-height: 0.95;
+      text-wrap: balance;
+
+      text-shadow:
+        0 2px 24px rgba(255, 255, 255, 0.05);
+    }
+
+    .subtitle {
+      margin-top: 18px;
+
+      color: var(--text-secondary);
+
+      font-size: clamp(0.94rem, 2vw, 1.04rem);
+      font-weight: 420;
+      line-height: 1.5;
+      letter-spacing: -0.012em;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+
+      margin-top: 32px;
+    }
+
+    .link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      min-height: 44px;
+      padding: 10px 17px;
+
+      color: rgba(255, 255, 255, 0.84);
+      background: var(--link-background);
+
+      border: 1px solid var(--link-border);
+      border-radius: 999px;
+
+      font-size: 0.91rem;
+      font-weight: 520;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+      transition:
+        color 180ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease,
+        box-shadow 180ms ease;
+    }
+
+    .link:hover {
+      color: #ffffff;
+      background: var(--link-background-hover);
+      border-color: var(--link-border-hover);
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 10px 26px rgba(0, 0, 0, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    .link:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .link:focus-visible {
+      outline: 2px solid rgba(190, 206, 255, 0.75);
+      outline-offset: 4px;
+    }
+
+    .spotify-link {
+      font-family:
+        "Geist Pixel",
+        "Google Sans Flex",
+        sans-serif;
+
+      font-size: 0.95rem;
+      letter-spacing: 0.015em;
+    }
+
+    /*
+      Mobile adjustments.
+    */
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 18px;
+      }
+
+      .container {
+        padding: 38px 24px;
+        border-radius: 25px;
+      }
+
+      .links {
+        flex-direction: column;
+        margin-top: 28px;
+      }
+
+      .link {
+        width: 100%;
+      }
+
+      .nebula {
+        filter: blur(75px);
+      }
+    }
+
+    /*
+      Cursor effect is unnecessary on touch devices.
+    */
+
+    @media (hover: none), (pointer: coarse) {
+      .cursor-light {
+        display: none;
+      }
+    }
+
+    /*
+      Respect reduced-motion preferences.
+    */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .cursor-light {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ambient-background" aria-hidden="true">
+    <div class="nebula nebula-one"></div>
+    <div class="nebula nebula-two"></div>
+    <div class="nebula nebula-three"></div>
+    <div class="stars"></div>
+  </div>
+
+  <div class="cursor-light" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="page">
+    <section class="container">
+      <h1>lewis.lc</h1>
+
+      <p class="subtitle">
+        deleted all my social media :)
+      </p>
+
+      <nav class="links" aria-label="Main links">
+        <a
+          class="link spotify-link"
+          href="https://open.spotify.com/artist/2zrZaCJ7VeKonkoDa8oES1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          farewell 42
+        </a>
+
+        <a class="link" href="/diary">
+          diary
+        </a>
+      </nav>
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      const body = document.body;
+      const root = document.documentElement;
+      const cursorLight = document.querySelector(".cursor-light");
+
+      /*
+        Apply the colour palette according to the visitor's local time.
+      */
+
+      function applyTimeTheme() {
+        const hour = new Date().getHours();
+
+        body.classList.remove(
+          "time-morning",
+          "time-day",
+          "time-evening",
+          "time-night"
+        );
+
+        if (hour >= 5 && hour < 11) {
+          body.classList.add("time-morning");
+        } else if (hour >= 11 && hour < 17) {
+          body.classList.add("time-day");
+        } else if (hour >= 17 && hour < 21) {
+          body.classList.add("time-evening");
+        } else {
+          body.classList.add("time-night");
+        }
+      }
+
+      applyTimeTheme();
+
+      /*
+        Recheck occasionally in case the page is left open across
+        another part of the day.
+      */
+
+      window.setInterval(applyTimeTheme, 10 * 60 * 1000);
+
+      /*
+        Cursor light with smooth interpolation.
+      */
+
+      const supportsCursor =
+        window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+      if (supportsCursor && cursorLight) {
+        let targetX = window.innerWidth / 2;
+        let targetY = window.innerHeight / 2;
+
+        let currentX = targetX;
+        let currentY = targetY;
+
+        let animationFrame;
+
+        function animateCursorLight() {
+          currentX += (targetX - currentX) * 0.09;
+          currentY += (targetY - currentY) * 0.09;
+
+          root.style.setProperty("--cursor-x", `${currentX}px`);
+          root.style.setProperty("--cursor-y", `${currentY}px`);
+
+          animationFrame = requestAnimationFrame(animateCursorLight);
+        }
+
+        window.addEventListener(
+          "pointermove",
+          (event) => {
+            targetX = event.clientX;
+            targetY = event.clientY;
+
+            root.style.setProperty("--cursor-opacity", "1");
+          },
+          { passive: true }
+        );
+
+        document.documentElement.addEventListener("mouseleave", () => {
+          root.style.setProperty("--cursor-opacity", "0");
+        });
+
+        document.documentElement.addEventListener("mouseenter", () => {
+          root.style.setProperty("--cursor-opacity", "1");
+        });
+
+        animationFrame = requestAnimationFrame(animateCursorLight);
+
+        window.addEventListener("beforeunload", () => {
+          cancelAnimationFrame(animationFrame);
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
