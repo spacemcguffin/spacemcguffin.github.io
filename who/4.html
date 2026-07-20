@@ -2643,11 +2643,7 @@ button:active,
       populateDetails(selected);
 
       grid.querySelectorAll(".card").forEach(card=>{
-        const open = ()=>{
-          state.selectedId = card.dataset.id;
-          render();
-          setDetailsOpen(true);
-        };
+        const open = ()=>selectEpisode(card.dataset.id,{openDetails:true});
 
         card.addEventListener("click",open);
         card.addEventListener("keydown",event=>{
@@ -2657,6 +2653,24 @@ button:active,
           }
         });
       });
+    }
+
+    // Update only the selected-card styling and inspector content.
+    // The grid is deliberately not rebuilt here, preventing every card's
+    // entrance animation from restarting when browsing between episodes.
+    function selectEpisode(id,{openDetails=false}={}){
+      const episode = episodes.find(item=>item.id===id);
+      if(!episode) return;
+
+      state.selectedId = episode.id;
+
+      grid.querySelectorAll(".card").forEach(card=>{
+        card.classList.toggle("selected",card.dataset.id===episode.id);
+      });
+
+      populateDetails(episode);
+
+      if(openDetails) setDetailsOpen(true);
     }
 
     function populateDetails(episode){
@@ -2698,9 +2712,9 @@ if(changed){
 
     function selectByOffset(offset){
       const index = episodes.findIndex(e=>e.id===state.selectedId);
-      const next = episodes[(index+offset+episodes.length)%episodes.length];
-      state.selectedId = next.id;
-      render();
+      const safeIndex = index>=0 ? index : 0;
+      const next = episodes[(safeIndex+offset+episodes.length)%episodes.length];
+      selectEpisode(next.id);
     }
 
     function syncDoctorControls(){
@@ -2832,9 +2846,7 @@ if(changed){
     el("randomButton").addEventListener("click",()=>{
       const pool = state.filtered.length ? state.filtered : episodes;
       const random = pool[Math.floor(Math.random()*pool.length)];
-      state.selectedId = random.id;
-      render();
-      setDetailsOpen(true);
+      selectEpisode(random.id,{openDetails:true});
     });
 
     el("previousEpisode").addEventListener("click",()=>selectByOffset(-1));
