@@ -1798,6 +1798,59 @@ button:active,
 
 }
 
+
+
+/* =========================================================
+   DESKTOP INSPECTOR REFLOW
+   Smoothly expands the episode area to three columns when
+   the episode information panel is minimised.
+   ========================================================= */
+@media (min-width:1101px){
+  .shell{
+    transition:grid-template-columns .38s cubic-bezier(.22,.8,.22,1);
+  }
+
+  .main{
+    min-width:0;
+  }
+
+  .episode-grid{
+    transition:grid-template-columns .38s cubic-bezier(.22,.8,.22,1),
+               gap .38s cubic-bezier(.22,.8,.22,1);
+  }
+
+  .episode-grid .card{
+    min-width:0;
+    transition:
+      transform .28s cubic-bezier(.22,.8,.22,1),
+      border-color .2s ease,
+      box-shadow .28s ease;
+  }
+
+  .shell.details-hidden .episode-grid:not(.list-view){
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  }
+
+  .shell.details-hidden .episode-grid.list-view{
+    grid-template-columns:1fr !important;
+  }
+
+  .shell.details-hidden .details{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateX(48px);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .shell,
+  .episode-grid,
+  .episode-grid .card,
+  .details{
+    transition:none !important;
+  }
+}
 </style>
 </head>
 
