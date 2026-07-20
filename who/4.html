@@ -606,12 +606,13 @@
 
     .detail-hero{
       position:relative;
+      isolation:isolate;
       min-height:272px;
       display:flex;
       align-items:end;
+      overflow:hidden;
       padding:20px;
-      background-size:cover;
-      background-position:center;
+      background:#07101d;
     }
 
 
@@ -1210,7 +1211,7 @@
       background:rgba(3,9,18,.98);
       color:#e3eeff;
       font-size:.67rem;
-      font-weight:750;
+      font-weight:500;
       letter-spacing:.02em;
       line-height:1.25;
       white-space:nowrap;
@@ -2666,6 +2667,9 @@ if(changed){
   detailHero.classList.remove("image-changing");
   void detailHero.offsetWidth;
   detailHero.classList.add("image-changing");
+  detailHero.addEventListener("animationend",()=>{
+    detailHero.classList.remove("image-changing");
+  },{once:true});
 }
 
       el("detailCode").textContent = episode.code;
