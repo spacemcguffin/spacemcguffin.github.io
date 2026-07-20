@@ -879,7 +879,6 @@
 
     @media(max-width:1450px){
       .shell{grid-template-columns:minmax(0,1fr) 430px}
-      .episode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
     }
 
     @media(max-width:1100px){
@@ -1796,14 +1795,9 @@ button:active,
 
 
 
-}
-
-
-
 /* =========================================================
    DESKTOP INSPECTOR REFLOW
-   Smoothly expands the episode area to three columns when
-   the episode information panel is minimised.
+   Two cards with the panel open; three cards when minimised.
    ========================================================= */
 @media (min-width:1101px){
   .shell{
@@ -1814,9 +1808,17 @@ button:active,
     min-width:0;
   }
 
+  .details{
+    transition:
+      opacity .28s ease,
+      transform .38s cubic-bezier(.22,.8,.22,1),
+      visibility .28s ease;
+  }
+
   .episode-grid{
-    transition:grid-template-columns .38s cubic-bezier(.22,.8,.22,1),
-               gap .38s cubic-bezier(.22,.8,.22,1);
+    transition:
+      grid-template-columns .38s cubic-bezier(.22,.8,.22,1),
+      gap .38s cubic-bezier(.22,.8,.22,1);
   }
 
   .episode-grid .card{
@@ -1827,11 +1829,18 @@ button:active,
       box-shadow .28s ease;
   }
 
+  /* Episode panel open */
+  .shell:not(.details-hidden) .episode-grid:not(.list-view){
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+
+  /* Episode panel minimised */
   .shell.details-hidden .episode-grid:not(.list-view){
     grid-template-columns:repeat(3,minmax(0,1fr)) !important;
   }
 
-  .shell.details-hidden .episode-grid.list-view{
+  /* List view always remains a single column */
+  .shell .episode-grid.list-view{
     grid-template-columns:1fr !important;
   }
 
