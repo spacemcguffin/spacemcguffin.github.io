@@ -1,0 +1,3089 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#040713">
+  <title>Doctor Who Episode Guide</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..850&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#030712;
+      --panel:#08111f;
+      --panel-2:#0c1627;
+      --panel-3:#101b2d;
+      --line:rgba(135,173,236,.18);
+      --line-strong:rgba(83,154,255,.56);
+      --text:#f6f8ff;
+      --muted:#92a2bc;
+      --blue:#53a4ff;
+      --cyan:#74e8ff;
+      --gold:#ffd45c;
+      --purple:#9c78ff;
+      --green:#55dda7;
+      --radius:12px;
+      --shadow:0 20px 60px rgba(0,0,0,.42);
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      overflow-x:hidden;
+      color:var(--text);
+      font-family:"Google Sans Flex",system-ui,sans-serif;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(86,190,255,.28), transparent 28%),
+        radial-gradient(circle at 82% 22%, rgba(176,92,255,.26), transparent 26%),
+        radial-gradient(circle at 68% 72%, rgba(0,214,255,.18), transparent 30%),
+        radial-gradient(circle at 28% 78%, rgba(255,78,170,.16), transparent 25%),
+        linear-gradient(135deg,#01030a 0%,#040b18 35%,#081226 60%,#02040b 100%);
+      background-attachment:fixed;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      pointer-events:none;
+      opacity:.75;
+      filter:drop-shadow(0 0 3px rgba(120,180,255,.35));
+      background-image:
+        radial-gradient(circle,rgba(255,255,255,.9) 0 1px,transparent 1.3px),
+        radial-gradient(circle,rgba(98,181,255,.75) 0 1px,transparent 1.4px);
+      background-position:0 0,53px 71px;
+      background-size:124px 124px,191px 191px;
+    }
+
+    
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      pointer-events:none;
+      background:
+        url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2200&q=80")
+        center/cover no-repeat;
+      opacity:.22;
+      filter:saturate(1.35) blur(2px);
+      transform:scale(1.06);
+    }
+
+    button,input,select{font:inherit}
+    button{color:inherit}
+
+    .shell{
+      min-height:100vh;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 520px;
+    }
+
+    /* LEFT DOCTOR SIDEBAR */
+    .doctor-rail{
+      position:sticky;
+      top:0;
+      height:100vh;
+      z-index:40;
+      padding:14px 12px;
+      border-right:1px solid var(--line);
+      background:rgba(3,8,16,.95);
+      backdrop-filter:blur(18px);
+    }
+
+    .doctor-heading{
+      margin:5px 7px 14px;
+      color:#bed0ed;
+      font-size:.72rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .doctor-list{
+      height:calc(100vh - 52px);
+      display:grid;
+      align-content:start;
+      gap:5px;
+      overflow-y:auto;
+      scrollbar-width:thin;
+    }
+
+    .doctor-btn{
+      width:100%;
+      min-height:46px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 7px;
+      border:1px solid transparent;
+      border-radius:10px;
+      background:transparent;
+      color:#cad5e8;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .doctor-btn:hover{
+      border-color:rgba(96,158,255,.22);
+      background:rgba(62,110,188,.08);
+    }
+
+    .doctor-btn.active{
+      border-color:rgba(77,153,255,.66);
+      background:linear-gradient(135deg,rgba(39,108,208,.23),rgba(43,61,126,.14));
+      box-shadow:inset 3px 0 0 var(--doctor-color,#58a6ff);
+    }
+
+    .doctor-avatar{
+      width:34px;
+      height:34px;
+      flex:0 0 34px;
+      display:grid;
+      place-items:center;
+      border:2px solid var(--doctor-color,#58a6ff);
+      border-radius:50%;
+      color:#fff;
+      background:
+        radial-gradient(circle at 35% 27%,rgba(255,255,255,.2),transparent 24%),
+        #101827;
+      font-size:.66rem;
+      font-weight:800;
+    }
+
+    .doctor-name{
+      min-width:0;
+      font-size:.65rem;
+      font-weight:700;
+      line-height:1.08;
+      text-align:left;
+    }
+
+    /* CENTRE */
+    .main{
+      min-width:0;
+      padding:0 14px 70px;
+      border-right:1px solid var(--line);
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:250px;
+      margin:0 -14px;
+      padding:28px 26px 22px;
+      border-bottom:1px solid var(--line);
+      background:
+        linear-gradient(90deg,rgba(2,7,15,.99) 0%,rgba(3,8,18,.92) 42%,rgba(3,8,18,.34) 74%,rgba(3,8,18,.86) 100%),
+        url("https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1900&q=85") center/cover;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      top:50%;
+      right:5%;
+      width:330px;
+      height:330px;
+      border-radius:50%;
+      pointer-events:none;
+      opacity:.2;
+      background:
+        radial-gradient(circle at center,
+          transparent 0 21%,
+          rgba(110,214,255,.65) 21.4% 22.1%,
+          transparent 22.5% 35%,
+          rgba(110,214,255,.42) 35.4% 36%,
+          transparent 36.4% 49%,
+          rgba(156,120,255,.42) 49.4% 50.2%,
+          transparent 50.6% 67%,
+          rgba(110,214,255,.48) 67.4% 68.1%,
+          transparent 68.5%),
+        repeating-conic-gradient(
+          from 12deg,
+          rgba(116,232,255,.75) 0deg 2deg,
+          transparent 2deg 12deg,
+          rgba(156,120,255,.46) 12deg 14deg,
+          transparent 14deg 28deg
+        );
+      border:1px solid rgba(116,232,255,.28);
+      box-shadow:
+        0 0 32px rgba(83,164,255,.18),
+        inset 0 0 30px rgba(156,120,255,.08);
+      filter:drop-shadow(0 0 12px rgba(116,232,255,.2));
+      transform:translateY(-50%);
+      animation:gallifreyanRotateLarge 95s linear infinite;
+    }
+
+    .hero .gallifreyan-ring{
+      position:absolute;
+      z-index:1;
+      border-radius:50%;
+      pointer-events:none;
+      opacity:.16;
+      border:1px solid rgba(116,232,255,.28);
+      background:
+        radial-gradient(circle at center,
+          transparent 0 28%,
+          rgba(116,232,255,.55) 28.5% 29.3%,
+          transparent 29.8% 48%,
+          rgba(156,120,255,.45) 48.5% 49.4%,
+          transparent 50% 69%,
+          rgba(116,232,255,.36) 69.5% 70.2%,
+          transparent 70.7%),
+        repeating-conic-gradient(
+          from 0deg,
+          rgba(116,232,255,.7) 0deg 2deg,
+          transparent 2deg 18deg,
+          rgba(156,120,255,.4) 18deg 20deg,
+          transparent 20deg 34deg
+        );
+      filter:drop-shadow(0 0 10px rgba(116,232,255,.18));
+    }
+
+    .hero .gallifreyan-ring::before,
+    .hero .gallifreyan-ring::after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      border:1px solid rgba(116,232,255,.32);
+    }
+
+    .hero .gallifreyan-ring::before{
+      inset:17%;
+      border-style:dashed;
+      animation:gallifreyanPulse 7s ease-in-out infinite;
+    }
+
+    .hero .gallifreyan-ring::after{
+      width:14%;
+      height:14%;
+      right:7%;
+      top:43%;
+      background:rgba(116,232,255,.12);
+      box-shadow:
+        -180px -40px 0 -2px rgba(156,120,255,.1),
+        -90px 110px 0 -3px rgba(116,232,255,.1);
+    }
+
+    .hero .gallifreyan-ring--medium{
+      width:190px;
+      height:190px;
+      right:25%;
+      top:12px;
+      animation:gallifreyanRotateMedium 68s linear infinite reverse;
+    }
+
+    .hero .gallifreyan-ring--small{
+      width:105px;
+      height:105px;
+      right:37%;
+      bottom:18px;
+      opacity:.13;
+      animation:gallifreyanRotateSmall 48s linear infinite;
+    }
+
+    @keyframes gallifreyanRotateLarge{
+      from{transform:translateY(-50%) rotate(0deg)}
+      to{transform:translateY(-50%) rotate(360deg)}
+    }
+
+    @keyframes gallifreyanRotateMedium{
+      from{transform:rotate(0deg)}
+      to{transform:rotate(360deg)}
+    }
+
+    @keyframes gallifreyanRotateSmall{
+      from{transform:rotate(0deg) scale(.98)}
+      50%{transform:rotate(180deg) scale(1.03)}
+      to{transform:rotate(360deg) scale(.98)}
+    }
+
+    @keyframes gallifreyanPulse{
+      0%,100%{opacity:.35;transform:scale(.98)}
+      50%{opacity:.8;transform:scale(1.03)}
+    }
+
+    @media(max-width:760px){
+      .hero::after{
+        right:-86px;
+        width:250px;
+        height:250px;
+        opacity:.13;
+      }
+
+      .hero .gallifreyan-ring--medium{
+        right:-18px;
+        top:26px;
+        width:142px;
+        height:142px;
+        opacity:.1;
+      }
+
+      .hero .gallifreyan-ring--small{
+        display:none;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce){
+      .hero::after,
+      .hero .gallifreyan-ring,
+      .hero .gallifreyan-ring::before{
+        animation:none !important;
+      }
+    }
+
+    .logo-block{
+      position:relative;
+      z-index:2;
+      max-width:650px;
+    }
+
+    .logo-title{
+      font-size:clamp(2.2rem,4.8vw,5rem);
+      line-height:.88;
+      letter-spacing:-.055em;
+      font-weight:800;
+      text-transform:uppercase;
+      text-shadow:0 0 30px rgba(103,169,255,.23);
+    }
+
+    .logo-subtitle{
+      margin-top:8px;
+      color:#c4d1e8;
+      font-size:.88rem;
+      letter-spacing:.52em;
+      text-transform:uppercase;
+    }
+
+    .hero-copy{
+      max-width:610px;
+      margin:17px 0 0;
+      color:#c1cbdd;
+      font-size:.88rem;
+      line-height:1.55;
+    }
+
+    .surprise-row{
+      position:relative;
+      z-index:3;
+      display:flex;
+      justify-content:flex-end;
+      margin-top:-8px;
+    }
+
+    .surprise-btn{
+      min-height:42px;
+      padding:0 16px;
+      border:1px solid var(--line-strong);
+      border-radius:9px;
+      background:rgba(7,14,29,.82);
+      cursor:pointer;
+      font-size:.74rem;
+      font-weight:750;
+      letter-spacing:.02em;
+      text-transform:uppercase;
+    }
+
+    .surprise-btn:hover{
+      background:rgba(28,57,102,.86);
+    }
+
+    .search-row{
+      position:relative;
+      z-index:3;
+      display:grid;
+      grid-template-columns:140px minmax(220px,1fr);
+      gap:14px;
+      align-items:center;
+      margin-top:14px;
+    }
+
+    .episode-count{
+      min-height:52px;
+      padding:9px 14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:rgba(5,12,24,.8);
+      backdrop-filter:blur(12px);
+    }
+
+    .episode-count strong{
+      color:var(--blue);
+      font-size:1.8rem;
+      line-height:1;
+    }
+
+    .episode-count span{
+      color:#ccd7ea;
+      font-size:.65rem;
+      line-height:1.15;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .search-wrap{
+      position:relative;
+    }
+
+    .search-wrap::before{
+      content:"⌕";
+      position:absolute;
+      left:15px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#9db2d2;
+      font-size:1.15rem;
+    }
+
+    .search{
+      width:100%;
+      min-height:52px;
+      padding:0 18px 0 44px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      outline:none;
+      color:#fff;
+      background:rgba(6,13,26,.83);
+    }
+
+    .search:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px rgba(83,164,255,.12);
+    }
+
+    .filter-bar{
+      position:sticky;
+      top:0;
+      z-index:25;
+      margin:0 -14px 16px;
+      padding:14px;
+      border-bottom:1px solid var(--line);
+      background:rgba(4,9,18,.93);
+      backdrop-filter:blur(18px);
+    }
+
+    .filters{
+      display:grid;
+      grid-template-columns:minmax(150px,1fr) minmax(150px,1fr) minmax(120px,.75fr);
+      gap:9px;
+    }
+
+    .filter{
+      width:100%;
+      min-height:46px;
+      padding:7px 11px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      outline:none;
+      color:#f4f7ff;
+      background:#0b1424;
+      font-size:.75rem;
+    }
+
+    .filter option{background:#09111f}
+
+    .active-filter-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .active-filter-left{
+      min-width:0;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .active-label{
+      color:#aab9d1;
+      font-size:.7rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    .active-chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:5px 8px;
+      border:1px solid rgba(127,169,237,.18);
+      border-radius:999px;
+      color:#c7d2e5;
+      background:rgba(89,121,181,.1);
+      font-size:.66rem;
+    }
+
+    .chip button{
+      padding:0;
+      border:0;
+      background:transparent;
+      color:#9fb3d2;
+      cursor:pointer;
+      font-size:.78rem;
+      line-height:1;
+    }
+
+    .no-filters{
+      color:#9eacc2;
+      font-size:.67rem;
+    }
+
+    .clear-all{
+      padding:0;
+      border:0;
+      background:transparent;
+      color:#69b6ff;
+      cursor:pointer;
+      font-size:.7rem;
+      text-decoration:underline;
+      text-underline-offset:3px;
+    }
+
+    .clear-all:disabled{
+      opacity:.38;
+      cursor:default;
+    }
+
+    .results-view-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:11px;
+    }
+
+    .result-copy{
+      color:#91a2bc;
+      font-size:.73rem;
+    }
+
+    .view-buttons{
+      display:flex;
+      gap:6px;
+    }
+
+    .view-btn{
+      height:34px;
+      min-width:38px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#0c1524;
+      cursor:pointer;
+    }
+
+    .view-btn.active{
+      border-color:var(--blue);
+      color:var(--cyan);
+      background:rgba(42,106,193,.15);
+    }
+
+    .episode-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .episode-grid.list-view{
+      grid-template-columns:1fr;
+    }
+
+    .card{
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:11px;
+      background:linear-gradient(180deg,#0f192a,#07101d);
+      cursor:pointer;
+      box-shadow:0 12px 34px rgba(0,0,0,.25);
+      transition:.2s ease;
+    }
+
+    .card:hover,
+    .card.selected{
+      transform:translateY(-3px);
+      border-color:var(--doctor-color,var(--blue));
+      box-shadow:0 18px 44px rgba(0,0,0,.38),0 0 0 1px color-mix(in srgb,var(--doctor-color) 24%,transparent);
+    }
+
+    .card-image{
+      position:relative;
+      aspect-ratio:16/9;
+      overflow:hidden;
+      background:#121b2d;
+    }
+
+    .card-image img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:transform .3s ease;
+    }
+
+    .card:hover img{transform:scale(1.04)}
+
+    .card-image::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,transparent 40%,rgba(4,8,16,.92));
+    }
+
+    .code,
+    .rating{
+      position:absolute;
+      z-index:2;
+      top:9px;
+      padding:5px 7px;
+      border-radius:7px;
+      border:1px solid rgba(255,255,255,.15);
+      background:rgba(4,9,18,.74);
+      backdrop-filter:blur(10px);
+      font-size:.72rem;
+      font-weight:800;
+    }
+
+    .code{
+      left:9px;
+      background:color-mix(in srgb,var(--doctor-color) 24%,rgba(4,9,18,.78));
+      border-color:color-mix(in srgb,var(--doctor-color) 68%,transparent);
+    }
+
+    .rating{
+      right:9px;
+      color:var(--gold);
+    }
+
+    .card-body{
+      padding:12px 12px 13px;
+    }
+
+    .card-title{
+      margin:0;
+      font-size:1rem;
+      line-height:1.15;
+    }
+
+    .card-meta{
+      margin-top:5px;
+      color:#90a1bc;
+      font-size:.7rem;
+    }
+
+    .card-companion{
+      margin-top:8px;
+      color:#bdc8dc;
+      font-size:.72rem;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:5px;
+      margin-top:9px;
+    }
+
+    .tag{
+      padding:4px 7px;
+      border:1px solid rgba(133,168,225,.16);
+      border-radius:6px;
+      color:#c7d1e4;
+      background:rgba(90,120,180,.09);
+      font-size:.64rem;
+    }
+
+    .episode-grid.list-view .card{
+      display:grid;
+      grid-template-columns:230px minmax(0,1fr);
+    }
+
+    .episode-grid.list-view .card-image{
+      min-height:160px;
+      aspect-ratio:auto;
+    }
+
+    .empty{
+      display:none;
+      padding:42px 18px;
+      border:1px dashed var(--line);
+      border-radius:12px;
+      color:#94a4be;
+      text-align:center;
+    }
+
+    .empty.show{display:block}
+
+    /* RIGHT EPISODE INFORMATION */
+    .details{
+      position:sticky;
+      top:0;
+      height:100vh;
+      overflow-y:auto;
+      background:rgba(5,11,21,.97);
+      scrollbar-width:thin;
+    }
+
+    .details-top{
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 18px;
+      border-bottom:1px solid var(--line);
+      color:#c8d5ea;
+      font-size:.78rem;
+    }
+
+    .details-button{
+      border:0;
+      background:transparent;
+      color:#c5d1e5;
+      font-size:1.35rem;
+      cursor:pointer;
+    }
+
+    .detail-hero{
+      position:relative;
+      min-height:272px;
+      display:flex;
+      align-items:end;
+      padding:20px;
+      background-size:cover;
+      background-position:center;
+    }
+
+    .detail-hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,rgba(3,7,14,.02) 18%,rgba(4,9,18,.95) 93%);
+    }
+
+    .detail-heading{
+      position:relative;
+      z-index:2;
+      width:100%;
+    }
+
+    .detail-heading h2{
+      margin:0;
+      font-size:2.2rem;
+      line-height:1;
+    }
+
+    .detail-sub{
+      margin-top:7px;
+      color:#70b8ff;
+      font-size:.82rem;
+    }
+
+    .detail-rating{
+      position:absolute;
+      z-index:3;
+      right:18px;
+      bottom:56px;
+      padding:7px 10px;
+      border:1px solid rgba(255,209,92,.35);
+      border-radius:8px;
+      color:var(--gold);
+      background:rgba(5,10,19,.8);
+      font-weight:800;
+    }
+
+    .detail-body{
+      padding:12px 18px 24px;
+    }
+
+    .quick-info{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
+    }
+
+    .quick-box{
+      min-height:58px;
+      padding:9px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      background:#0b1525;
+    }
+
+    .quick-box span{
+      display:block;
+      color:#8fa1bd;
+      font-size:.58rem;
+      text-transform:uppercase;
+      letter-spacing:.07em;
+    }
+
+    .quick-box strong{
+      display:block;
+      margin-top:5px;
+      font-size:.68rem;
+      font-weight: 500;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:.85fr 1.15fr;
+      gap:18px;
+      margin-top:16px;
+    }
+
+    .credits{
+      display:grid;
+      gap:12px;
+    }
+
+    .credit small{
+      display:block;
+      color:#74a9ec;
+      font-size:.62rem;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+
+    .credit strong{
+      display:block;
+      margin-top:4px;
+      font-size:.78rem;
+      font-weight:500;
+    }
+
+    .detail-section{
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+    }
+
+    .detail-section h3{
+      margin:0 0 8px;
+      color:#a9c9ff;
+      font-size:.7rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .detail-section p,
+    .detail-section li{
+      color:#c0cadc;
+      font-size:.77rem;
+      line-height:1.6;
+    }
+
+    .detail-section p{margin:0}
+    .detail-section ul{
+      margin:0;
+      padding-left:18px;
+    }
+
+    .episode-nav{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .nav-card{
+      min-height:58px;
+      padding:9px 10px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:#0a1424;
+      cursor:pointer;
+      text-align:left;
+    }
+
+    .nav-card small{
+      display:block;
+      color:#7f91ae;
+      font-size:.58rem;
+      text-transform:uppercase;
+    }
+
+    .nav-card strong{
+      display:block;
+      margin-top:4px;
+      font-size:.72rem;
+    }
+
+    .mobile-details-toggle{
+      display:none;
+    }
+
+
+    /* HORIZONTAL DOCTOR STRIP */
+    .doctor-rail{
+      display:none !important;
+    }
+
+    .doctor-strip-wrap{
+      margin:0 -14px;
+      padding:12px 14px 14px;
+      border-bottom:1px solid var(--line);
+      background:rgba(4,9,18,.94);
+      backdrop-filter:blur(16px);
+    }
+
+    .doctor-strip-heading{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+
+    .doctor-strip-heading span{
+      color:#bed0ed;
+      font-size:.72rem;
+      letter-spacing:.15em;
+      text-transform:uppercase;
+    }
+
+    .doctor-strip-heading small{
+      color:#7f90aa;
+      font-size:.64rem;
+    }
+
+    .doctor-strip{
+      display:flex;
+      gap:8px;
+      overflow-x:auto;
+      padding:2px 2px 6px;
+      scrollbar-width:thin;
+      scroll-snap-type:x proximity;
+    }
+
+    .doctor-strip .doctor-btn{
+      flex:0 0 auto;
+      width:auto;
+      min-width:112px;
+      min-height:50px;
+      padding:7px 10px;
+      border:1px solid rgba(113,158,225,.16);
+      border-radius:12px;
+      background:rgba(10,19,34,.86);
+      scroll-snap-align:start;
+    }
+
+    .doctor-strip .doctor-btn:hover{
+      background:rgba(30,56,94,.9);
+    }
+
+    .doctor-strip .doctor-btn.active{
+      border-color:rgba(77,153,255,.72);
+      background:linear-gradient(135deg,rgba(39,108,208,.25),rgba(43,61,126,.18));
+      box-shadow:inset 0 -3px 0 var(--doctor-color,#58a6ff);
+    }
+
+    .doctor-strip .doctor-avatar{
+      width:34px;
+      height:34px;
+      flex-basis:34px;
+    }
+
+    .doctor-strip .doctor-name{
+      display:block;
+      font-size:.68rem;
+      white-space:nowrap;
+    }
+
+    @media(max-width:1450px){
+      .shell{
+        grid-template-columns:minmax(0,1fr) 430px;
+      }
+    }
+
+    @media(max-width:1100px){
+      .shell{
+        grid-template-columns:minmax(0,1fr);
+      }
+    }
+
+    @media(max-width:760px){
+      .doctor-strip-wrap{
+        margin:0 -10px;
+        padding-inline:10px;
+      }
+
+      .doctor-strip .doctor-btn{
+        min-width:96px;
+      }
+
+      .doctor-strip-heading small{
+        display:none;
+      }
+    }
+
+    @media(max-width:1450px){
+      .shell{grid-template-columns:minmax(0,1fr) 430px}
+      .episode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+
+    @media(max-width:1100px){
+      .shell{grid-template-columns:minmax(0,1fr)}
+      .details{
+        position:fixed;
+        top:0;
+        right:0;
+        z-index:90;
+        width:min(500px,94vw);
+        transform:translateX(103%);
+        transition:transform .25s ease;
+        box-shadow:-24px 0 70px rgba(0,0,0,.5);
+      }
+      .details.open{transform:translateX(0)}
+      .mobile-details-toggle{
+        position:fixed;
+        right:16px;
+        bottom:16px;
+        z-index:80;
+        display:block;
+        width:54px;
+        height:54px;
+        border:1px solid var(--line-strong);
+        border-radius:50%;
+        background:#0b1830;
+        box-shadow:0 14px 35px rgba(0,0,0,.4);
+        cursor:pointer;
+      }
+    }
+
+    @media(max-width:760px){
+      .shell{display:block}
+      .doctor-rail{display:none}
+      .main{padding:0 10px 28px}
+      .hero{margin:0 -10px;padding:22px 16px}
+      .surprise-row{justify-content:flex-start;margin-top:16px}
+      .search-row{grid-template-columns:1fr}
+      .episode-count{display:none}
+      .filters{grid-template-columns:1fr}
+      .episode-grid{grid-template-columns:1fr}
+      .active-filter-row{align-items:flex-start}
+      .episode-grid.list-view .card{grid-template-columns:1fr}
+      .episode-grid.list-view .card-image{aspect-ratio:16/9;min-height:auto}
+    }
+  
+    /* COMPACT NUMBER-ONLY DOCTOR BUTTONS */
+    .doctor-strip{
+      gap:10px;
+      align-items:center;
+      padding-block:4px 8px;
+    }
+
+    .doctor-strip .doctor-btn{
+      position:relative;
+      width:42px;
+      min-width:42px;
+      height:42px;
+      min-height:42px;
+      padding:0;
+      justify-content:center;
+      border-radius:50%;
+      border:1px solid color-mix(in srgb,var(--doctor-color,#58a6ff) 50%,transparent);
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.16),transparent 32%),
+        color-mix(in srgb,var(--doctor-color,#58a6ff) 28%,rgba(8,17,31,.96));
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.04),
+        0 7px 20px rgba(0,0,0,.22);
+      overflow:visible;
+    }
+
+    .doctor-strip .doctor-btn:hover{
+      transform:translateY(-2px) scale(1.06);
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.22),transparent 34%),
+        color-mix(in srgb,var(--doctor-color,#58a6ff) 42%,rgba(8,17,31,.96));
+      box-shadow:
+        0 0 0 4px color-mix(in srgb,var(--doctor-color,#58a6ff) 14%,transparent),
+        0 10px 26px rgba(0,0,0,.28);
+    }
+
+    .doctor-strip .doctor-btn.active{
+      border-color:var(--doctor-color,#58a6ff);
+      background:
+        radial-gradient(circle at 35% 28%,rgba(255,255,255,.24),transparent 34%),
+        color-mix(in srgb,var(--doctor-color,#58a6ff) 54%,rgba(8,17,31,.96));
+      box-shadow:
+        0 0 0 3px rgba(4,9,18,.95),
+        0 0 0 5px var(--doctor-color,#58a6ff),
+        0 9px 24px rgba(0,0,0,.3);
+    }
+
+    .doctor-strip .doctor-avatar{
+      width:auto;
+      height:auto;
+      flex:0 0 auto;
+      border:0;
+      border-radius:0;
+      background:none !important;
+      box-shadow:none;
+      overflow:visible;
+      color:#fff;
+      font-size:.84rem;
+      font-weight:700;
+      letter-spacing:-.04em;
+      text-shadow:0 1px 8px rgba(0,0,0,.45);
+    }
+
+    .doctor-strip .doctor-avatar img{
+      display:none !important;
+    }
+
+    .doctor-strip .doctor-name{
+      display:none !important;
+    }
+
+    .doctor-strip .doctor-btn::after{
+      content:attr(data-tooltip);
+      position:absolute;
+      left:50%;
+      bottom:calc(100% + 10px);
+      z-index:20;
+      width:max-content;
+      max-width:170px;
+      padding:6px 8px;
+      border:1px solid rgba(125,166,225,.22);
+      border-radius:7px;
+      background:rgba(3,9,18,.98);
+      color:#dbe8fa;
+      font-size:.64rem;
+      font-weight:700;
+      letter-spacing:.02em;
+      white-space:nowrap;
+      pointer-events:none;
+      opacity:0;
+      transform:translate(-50%,5px);
+      transition:.16s ease;
+      box-shadow:0 8px 24px rgba(0,0,0,.35);
+    }
+
+    .doctor-strip .doctor-btn:hover::after,
+    .doctor-strip .doctor-btn:focus-visible::after{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    .doctor-strip .doctor-btn[data-doctor="all"]{
+      border-radius:999px;
+    }
+
+    @media(max-width:760px){
+      .doctor-strip .doctor-btn{
+        width:38px;
+        min-width:38px;
+        height:38px;
+        min-height:38px;
+      }
+
+      .doctor-strip .doctor-btn[data-doctor="all"]{
+      border-radius:999px;
+      }
+    }
+
+
+    
+.doctor-strip{
+  -ms-overflow-style:none;
+  scrollbar-width:none;
+}
+.doctor-strip::-webkit-scrollbar{display:none;width:0;height:0;background:transparent;}
+/* ENHANCED DOCTOR STRIP */
+    .doctor-strip-wrap{
+      position:relative;
+      overflow:visible;
+    }
+
+    .doctor-strip-heading{
+      min-height:30px;
+    }
+
+    .doctor-strip-title{
+      display:flex;
+      align-items:baseline;
+      gap:10px;
+      min-width:0;
+    }
+
+    .doctor-strip-title > span{
+      flex:0 0 auto;
+          flex: 0 0 auto;
+    color: #bed0ed;
+    font-size: .72rem;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    }
+
+    .doctor-strip-title strong{
+      min-width:0;
+      overflow:hidden;
+      color:#eef5ff;
+      font-size:.75rem;
+      font-weight:750;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .doctor-strip-actions{
+      display:flex;
+      gap:6px;
+    }
+
+    .doctor-scroll-button{
+      width:29px;
+      height:29px;
+      display:grid;
+      place-items:center;
+      padding:0;
+      border:1px solid rgba(118,160,219,.22);
+      border-radius:8px;
+      background:rgba(11,22,39,.88);
+      color:#c9d9ef;
+      font-size:1.05rem;
+      line-height:1;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .doctor-scroll-button:hover{
+      border-color:rgba(104,166,255,.55);
+      background:rgba(28,54,91,.92);
+      color:#fff;
+    }
+
+    .doctor-scroll-button:disabled{
+      opacity:.28;
+      cursor:default;
+    }
+
+    .doctor-strip-viewport{
+      position:relative;
+      min-width:0;
+    }
+
+    .doctor-strip-viewport::before,
+    .doctor-strip-viewport::after{
+      content:"";
+      position:absolute;
+      top:0;
+      bottom:6px;
+      z-index:4;
+      width:28px;
+      pointer-events:none;
+      opacity:0;
+      transition:opacity .18s ease;
+    }
+
+    .doctor-strip-viewport::before{
+      left:0;
+      background:linear-gradient(90deg,rgba(4,9,18,.98),transparent);
+    }
+
+    .doctor-strip-viewport::after{
+      right:0;
+      background:linear-gradient(-90deg,rgba(4,9,18,.98),transparent);
+    }
+
+    .doctor-strip-viewport.can-scroll-left::before,
+    .doctor-strip-viewport.can-scroll-right::after{
+      opacity:1;
+    }
+
+    .doctor-strip{
+      scroll-behavior:smooth;
+      overscroll-behavior-inline:contain;
+    }
+
+    /* The old pseudo-element tooltips are disabled because overflow-x clips them. */
+    .doctor-strip .doctor-btn::after{
+      display:none !important;
+    }
+
+    .doctor-floating-tooltip{
+      position:fixed;
+      left:0;
+      top:0;
+      z-index:9999;
+      max-width:210px;
+      padding:7px 10px;
+      border:1px solid rgba(126,171,235,.28);
+      border-radius:8px;
+      background:rgba(3,9,18,.98);
+      color:#e3eeff;
+      font-size:.67rem;
+      font-weight:750;
+      letter-spacing:.02em;
+      line-height:1.25;
+      white-space:nowrap;
+      pointer-events:none;
+      opacity:0;
+      transform:translate(-50%,-100%) translateY(-10px);
+      transition:opacity .13s ease,transform .13s ease;
+      box-shadow:0 10px 30px rgba(0,0,0,.42);
+    }
+
+    .doctor-floating-tooltip.visible{
+      opacity:1;
+      transform:translate(-50%,-100%) translateY(-14px);
+    }
+
+    .doctor-strip .doctor-btn{
+      isolation:isolate;
+    }
+
+    .doctor-strip .doctor-btn.active::before{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:-8px;
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:var(--doctor-color,#58a6ff);
+      box-shadow:0 0 10px var(--doctor-color,#58a6ff);
+      transform:translateX(-50%);
+    }
+
+    @media(max-width:760px){
+      .doctor-strip-actions{
+        display:none;
+      }
+
+      .doctor-strip-title strong{
+        font-size:.69rem;
+      }
+    }
+
+
+    /* FINAL COMPACT SEASON BROWSER + UNIFIED INSPECTOR */
+    .filters,.rating,.detail-rating{display:none!important}
+
+    .season-browser{
+      margin:0 -14px;padding: 12px 14px 14px;border-bottom:1px solid var(--line);
+      background:linear-gradient(180deg,rgba(9,17,31,.76),rgba(5,11,22,.58));
+      backdrop-filter:blur(16px);
+    }
+    .season-browser-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px}
+    .season-clear-button{
+      appearance:none;padding:6px 10px;border:1px solid rgba(135,173,236,.18);
+      border-radius:999px;background:rgba(15,27,46,.64);color:var(--muted);
+      font-size:.72rem;font-weight:750
+    }
+    .season-era-tabs{
+      display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:4px;
+      border:1px solid rgba(135,173,236,.13);border-radius:14px;background:rgba(3,8,17,.54)
+    }
+    .season-era-tab{
+      appearance:none;min-width:0;padding:8px 13px;border:0;border-radius:10px;
+      background:transparent;color:var(--muted);font-size:.76rem;font-weight:850;
+      letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;transition:.18s ease
+    }
+    .season-era-tab::after{
+      content:"›";display:inline-block;margin-left:6px;opacity:.52;
+      transform:rotate(90deg);transition:.18s ease
+    }
+    .season-era-tab:hover{color:#fff;background:rgba(255,255,255,.045)}
+    .season-era-tab.active{
+      color:#fff;background:linear-gradient(180deg,rgba(60,120,226,.94),rgba(31,76,160,.94));
+      box-shadow:0 7px 18px rgba(0,0,0,.24)
+    }
+    .season-era-tab.active::after{opacity:1;transform:rotate(-90deg)}
+    .season-pill-grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(164px,1fr));gap:9px;
+      margin-top:10px;padding-top:10px;border-top:1px solid rgba(135,173,236,.11);
+      animation:seasonBrowserOpen .2s ease both
+    }
+    .season-pill-grid[hidden],.season-pill[hidden]{display:none!important}
+    @keyframes seasonBrowserOpen{
+      from{opacity:0;transform:translateY(-4px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .season-pill{
+      --season-color:#58a6ff;appearance:none;min-width:0;min-height:58px;
+      display:flex;align-items:center;gap:12px;padding:8px 14px;
+      border:1px solid rgba(135,173,236,.13);border-radius:14px;
+      background:rgba(10,20,36,.66);color:var(--text);text-align:left;transition:.16s ease
+    }
+    .season-pill:hover{
+      transform:translateY(-1px);
+      border-color:color-mix(in srgb,var(--season-color) 62%,transparent);
+      background:rgba(15,28,48,.8)
+    }
+    .season-pill.active{
+      border-color:var(--season-color);
+      background:linear-gradient(135deg,color-mix(in srgb,var(--season-color) 25%,rgba(10,20,36,.86)),rgba(8,17,31,.92));
+      box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--season-color) 27%,transparent),0 9px 24px rgba(0,0,0,.22)
+    }
+    .season-number{
+      flex:0 0 42px;width:42px;height:42px;display:grid;place-items:center;
+      border:2px solid color-mix(in srgb,var(--season-color) 82%,white 8%);
+      border-radius:50%;color:#fff;
+      background:radial-gradient(circle at 35% 27%,rgba(255,255,255,.32),transparent 34%),color-mix(in srgb,var(--season-color) 70%,#091321);
+      box-shadow:0 0 0 3px rgba(4,9,18,.76),0 0 17px color-mix(in srgb,var(--season-color) 38%,transparent);
+      font-size:.78rem;font-weight:900;line-height:1;text-shadow:0 1px 7px rgba(0,0,0,.42)
+    }
+    .season-pill.active .season-number{
+      box-shadow:0 0 0 3px rgba(4,9,18,.86),0 0 0 5px var(--season-color),0 0 22px color-mix(in srgb,var(--season-color) 52%,transparent)
+    }
+    .season-pill-copy{min-width:0;display:grid;gap:2px}
+    .season-pill-name{
+      overflow:hidden;color:#e9f1ff;font-size:.77rem;font-weight:790;
+      line-height:1.15;text-overflow:ellipsis;white-space:nowrap
+    }
+    .season-pill-era{color:#899bb7;font-size:.61rem;letter-spacing:.06em;text-transform:uppercase}
+
+    .inspector-toggle{
+      position:fixed;right:18px;top:18px;z-index:140;width:52px;height:52px;
+      display:grid;place-items:center;padding:0;border:1px solid rgba(107,170,255,.62);
+      border-radius:50%;background:rgba(8,19,38,.94);color:#fff;
+      box-shadow:0 14px 38px rgba(0,0,0,.44),0 0 0 4px rgba(4,9,18,.58);
+      font-size:1.55rem;line-height:1;transition:.2s ease
+    }
+    .inspector-toggle:hover{transform:scale(1.06);background:rgba(27,61,113,.96)}
+    .details-backdrop{
+      display:none;position:fixed;inset:0;z-index:88;padding:0;border:0;
+      background:rgba(0,0,0,.56);backdrop-filter:blur(3px)
+    }
+    .details-top{padding-right:78px}
+
+    @media(min-width:1101px){
+      .shell{transition:grid-template-columns .26s ease}
+      .shell.details-hidden{grid-template-columns:minmax(0,1fr) 0}
+      .shell.details-hidden .details{
+        opacity:0;visibility:hidden;pointer-events:none;transform:translateX(40px)
+      }
+      .details{transition:opacity .22s ease,visibility .22s ease,transform .26s ease}
+    }
+    @media(max-width:1100px){
+      .inspector-toggle{top:auto;right:16px;bottom:16px}
+      .details-backdrop.open{display:block}
+      .details{z-index:100}
+    }
+    @media(max-width:760px){
+      .season-browser{margin-inline:-10px;padding:10px 14px 11px}
+      .season-era-tab{padding:8px 9px;font-size:.69rem}
+      .season-pill-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+      .season-pill{min-height:56px;padding:7px 10px}
+      .season-number{flex-basis:38px;width:38px;height:38px}
+      .season-pill-name{font-size:.71rem}
+      .details{
+        top:auto!important;right:0;bottom:0;left:0;width:100%;max-height:88vh;height:auto;
+        border-radius:22px 22px 0 0;transform:translateY(105%)!important;
+        box-shadow:0 -24px 70px rgba(0,0,0,.58)
+      }
+      .details.open{transform:translateY(0)!important}
+      .details-top{
+        position:sticky;top:0;z-index:4;border-radius:22px 22px 0 0;
+        background:rgba(5,11,21,.98)
+      }
+    }
+    @media(max-width:470px){
+      .season-pill-grid{grid-template-columns:1fr}
+    }
+
+
+/* =========================================================
+   CURSOR + PRESS FEEDBACK
+   ========================================================= */
+
+button,
+[role="button"],
+a,
+.doctor-btn,
+.season-pill,
+.season-era-tab,
+.chip button,
+.clear-all,
+.inspector-toggle,
+.details-button,
+.doctor-scroll-button,
+.card,
+.view-btn,
+.surprise-btn,
+.search,
+input[type="button"],
+input[type="submit"]{
+  cursor:pointer;
+}
+
+button:disabled,
+.clear-all:disabled{
+  cursor:not-allowed;
+}
+
+input[type="text"],
+input[type="search"],
+textarea{
+  cursor:text;
+}
+
+button:active,
+.doctor-btn:active,
+.season-pill:active,
+.season-era-tab:active,
+.card:active,
+.view-btn:active,
+.surprise-btn:active,
+.doctor-scroll-button:active,
+.inspector-toggle:active{
+  transform:scale(.97);
+}
+
+
+/* =========================================================
+   POLISH ANIMATIONS
+   ========================================================= */
+:root{
+  --ui-speed:.24s;
+  --ui-ease:cubic-bezier(.22,.8,.22,1);
+}
+
+.doctor-btn,
+.season-pill,
+.season-era-tab,
+.doctor-scroll-button,
+.view-btn,
+.surprise-btn{
+  transition:
+    transform var(--ui-speed) var(--ui-ease),
+    background var(--ui-speed) var(--ui-ease),
+    border-color var(--ui-speed) var(--ui-ease),
+    box-shadow var(--ui-speed) var(--ui-ease),
+    opacity var(--ui-speed) var(--ui-ease);
+}
+
+/* Accordion */
+.season-pill-grid{
+  transform-origin:top;
+  overflow:hidden;
+  animation:seasonAccordion var(--ui-speed) var(--ui-ease);
+}
+@keyframes seasonAccordion{
+  from{
+    opacity:0;
+    transform:translateY(-8px) scaleY(.92);
+    max-height:0;
+  }
+  to{
+    opacity:1;
+    transform:translateY(0) scaleY(1);
+    max-height:1200px;
+  }
+}
+
+/* Card stagger */
+.card{
+  opacity:0;
+  transform:translateY(18px) scale(.985);
+  animation:cardFade .42s var(--ui-ease) forwards;
+}
+
+.card:nth-child(1){animation-delay:.00s}
+.card:nth-child(2){animation-delay:.03s}
+.card:nth-child(3){animation-delay:.06s}
+.card:nth-child(4){animation-delay:.09s}
+.card:nth-child(5){animation-delay:.12s}
+.card:nth-child(6){animation-delay:.15s}
+.card:nth-child(7){animation-delay:.18s}
+.card:nth-child(8){animation-delay:.21s}
+.card:nth-child(9){animation-delay:.24s}
+.card:nth-child(n+10){animation-delay:.27s}
+
+@keyframes cardFade{
+  to{
+    opacity:1;
+    transform:translateY(0) scale(1);
+  }
+}
+
+
+/* =========================================================
+   SEASON / MOBILE NAV / DOCTOR RAIL FIXES
+   ========================================================= */
+
+/* Remove the accordion/reveal animation from the season options. */
+.season-pill-grid{
+  animation:none !important;
+  transform:none !important;
+  max-height:none !important;
+  opacity:1 !important;
+}
+
+/* Give active and hovered Doctor circles enough vertical space for their rings. */
+.doctor-strip-viewport{
+  padding-top:7px;
+}
+
+.doctor-strip{
+  padding-top:10px !important;
+  padding-bottom:12px !important;
+}
+
+.doctor-strip .doctor-btn{
+  margin-top:2px;
+}
+
+/* Desktop keeps the compact arrow-only controls. */
+.details-nav-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+}
+
+.details-nav-label{
+  display:none;
+}
+
+.details-nav-arrow{
+  display:inline-block;
+  line-height:1;
+}
+
+/* Mobile restores clearly labelled Previous / Next controls at the top. */
+@media(max-width:760px){
+  .details-top{
+    height:auto;
+    min-height:58px;
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    gap:8px;
+    padding:8px 72px 8px 12px;
+  }
+
+  .details-nav-button{
+    min-height:40px;
+    padding:0 10px;
+    border:1px solid rgba(135,173,236,.18);
+    border-radius:10px;
+    background:rgba(12,24,42,.88);
+    color:#dce9fb;
+    font-size:.72rem;
+    font-weight:780;
+  }
+
+  #detailsPrev{
+    justify-self:start;
+  }
+
+  #detailsNext{
+    justify-self:end;
+  }
+
+  .details-nav-label{
+    display:inline;
+  }
+
+  .details-nav-arrow{
+    font-size:1.25rem;
+  }
+
+  #detailPosition{
+    align-self:center;
+    color:#9eb0ca;
+    font-size:.7rem;
+    white-space:nowrap;
+  }
+}
+
+
+/* =========================================================
+   MOBILE FULLSCREEN + DOCTOR RAIL SPACING FIXES
+   ========================================================= */
+
+/* Reduce the extra top space while keeping active rings visible. */
+.doctor-strip-viewport{
+  padding-top:2px !important;
+  padding-left:7px !important;
+}
+
+.doctor-strip{
+  padding-top:5px !important;
+  padding-bottom:10px !important;
+  padding-left:7px !important;
+}
+
+.doctor-strip .doctor-btn{
+  margin-top:0 !important;
+}
+
+/* Ensure the first "All" circle and its active ring never clip. */
+.doctor-list,
+#doctorList{
+  padding-left:7px !important;
+  scroll-padding-left:7px;
+}
+
+/* Mobile: arrow-only navigation and true full-screen inspector. */
+@media(max-width:760px){
+  .details{
+    position:fixed !important;
+    inset:0 !important;
+    width:100vw !important;
+    height:100dvh !important;
+    max-height:none !important;
+    border-radius:0 !important;
+    transform:translateY(105%) !important;
+    box-shadow:none !important;
+  }
+
+  .details.open{
+    transform:translateY(0) !important;
+  }
+
+  .details-top{
+    min-height:54px;
+    grid-template-columns:44px 1fr 44px;
+    padding:6px 68px 6px 8px;
+    border-radius:0 !important;
+  }
+
+  .details-nav-button{
+    width:40px;
+    min-width:40px;
+    height:40px;
+    min-height:40px;
+    padding:0;
+    border-radius:50%;
+  }
+
+  .details-nav-label{
+    display:none !important;
+  }
+
+  .details-nav-arrow{
+    font-size:1.45rem;
+  }
+
+  #detailsPrev{
+    justify-self:start;
+  }
+
+  #detailsNext{
+    justify-self:end;
+  }
+
+  #detailPosition{
+    justify-self:center;
+  }
+}
+
+
+/* =========================================================
+   MOBILE GRID/LIST TOGGLE FIX
+   ========================================================= */
+@media (max-width:760px){
+
+  .view-toggle{
+    display:flex !important;
+    width:100%;
+    gap:8px;
+    margin:10px 0 14px;
+  }
+
+  .view-toggle button,
+  .view-btn{
+    flex:1 1 0;
+    min-height:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* Ensure list/grid layouts still switch on mobile */
+  .episodes.grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+
+  .episodes.list{
+    display:flex !important;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .episodes.list .card{
+    display:grid !important;
+    grid-template-columns:auto 1fr;
+    align-items:center;
+  }
+
+  .episodes.grid .card{
+    display:flex !important;
+    flex-direction:column;
+  }
+}
+
+
+/* Swipe hint and touch behaviour for the mobile full-screen panel */
+@media(max-width:760px){
+  .details{
+    touch-action:pan-y;
+  }
+
+  
+}
+
+
+/* =========================================================
+   DEFINITIVE MOBILE GRID / LIST TOGGLE FIX
+   ========================================================= */
+@media(max-width:760px){
+  .results-view-row{
+    align-items:center;
+  }
+
+  .view-buttons{
+    display:grid !important;
+    grid-template-columns:repeat(2,42px);
+    flex:0 0 auto;
+    gap:6px;
+  }
+
+  .view-btn{
+    width:42px;
+    min-width:42px;
+    height:38px;
+    padding:0;
+    display:grid;
+    place-items:center;
+  }
+
+  /* GRID: full-width poster-style cards */
+  .episode-grid:not(.list-view){
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:12px;
+  }
+
+  .episode-grid:not(.list-view) .card{
+    display:block !important;
+  }
+
+  .episode-grid:not(.list-view) .card-image{
+    width:100%;
+    min-height:0;
+    aspect-ratio:16 / 9;
+  }
+
+  /* LIST: compact horizontal rows */
+  .episode-grid.list-view{
+    display:flex !important;
+    flex-direction:column;
+    gap:9px;
+  }
+
+  .episode-grid.list-view .card{
+    display:grid !important;
+    grid-template-columns:112px minmax(0,1fr) !important;
+    align-items:stretch;
+    min-height:94px;
+  }
+
+  .episode-grid.list-view .card-image{
+    width:112px;
+    height:100%;
+    min-height:94px !important;
+    aspect-ratio:auto !important;
+  }
+
+  .episode-grid.list-view .card-body{
+    min-width:0;
+    padding:10px 11px;
+    align-self:center;
+  }
+
+  .episode-grid.list-view .card-title{
+    font-size:.91rem;
+  }
+
+  .episode-grid.list-view .card-meta{
+    margin-top:4px;
+  }
+
+  .episode-grid.list-view .card-companion{
+    margin-top:5px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+
+  .episode-grid.list-view .tags{
+    display:none;
+  }
+
+  .episode-grid.list-view .code{
+    top:6px;
+    left:6px;
+    padding:4px 5px;
+    font-size:.61rem;
+  }
+}
+
+@media(max-width:390px){
+  .episode-grid.list-view .card{
+    grid-template-columns:94px minmax(0,1fr) !important;
+  }
+
+  .episode-grid.list-view .card-image{
+    width:94px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+  <div class="shell">
+    <main class="main">
+      <header class="hero">
+        <span class="gallifreyan-ring gallifreyan-ring--medium" aria-hidden="true"></span>
+        <span class="gallifreyan-ring gallifreyan-ring--small" aria-hidden="true"></span>
+        <div class="logo-block">
+          <div class="logo-title">Doctor Who</div>
+          <div class="logo-subtitle">Episode Guide</div>
+          <p class="hero-copy">
+            Your complete guide to adventures across time and space. Search episodes,
+            filter by series or Doctor, and open any card to see full information.
+          </p>
+        </div>
+
+        <div class="surprise-row">
+          <button class="surprise-btn" id="randomButton">⤨ Surprise me</button>
+        </div>
+
+        <div class="search-row">
+          <div class="episode-count">
+            <strong id="episodeTotal">0</strong>
+            <span>episodes<br>found</span>
+          </div>
+
+          <div class="search-wrap">
+            <input class="search" id="searchInput" type="search"
+              placeholder="Search episodes, Doctors, companions, monsters…">
+          </div>
+        </div>
+      </header>
+
+      <section class="doctor-strip-wrap" aria-label="Filter episodes by Doctor">
+        <div class="doctor-strip-heading">
+          <div class="doctor-strip-title">
+            <span>Doctors</span>
+            <strong id="activeDoctorLabel">All Doctors</strong>
+          </div>
+
+          <div class="doctor-strip-actions" aria-label="Scroll Doctor filters">
+            <button class="doctor-scroll-button" id="doctorScrollLeft" type="button" aria-label="Scroll Doctors left">‹</button>
+            <button class="doctor-scroll-button" id="doctorScrollRight" type="button" aria-label="Scroll Doctors right">›</button>
+          </div>
+        </div>
+
+        <div class="doctor-strip-viewport">
+          <div class="doctor-strip" id="doctorList"></div>
+        </div>
+      </section>
+
+      <div class="doctor-floating-tooltip" id="doctorFloatingTooltip" role="tooltip"></div>
+
+      <section class="season-browser" aria-label="Filter episodes by season">
+        <div class="season-browser-heading">
+          <div class="doctor-strip-title">
+            <span>Seasons</span>
+            <strong id="activeSeasonLabel">Choose an era</strong>
+          </div>
+          <button class="season-clear-button" id="clearSeasonFilters" type="button" hidden>Clear seasons</button>
+        </div>
+
+        <div class="season-era-tabs" id="seasonEraTabs" role="tablist" aria-label="Season eras">
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="classic">Classic</button>
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="modern">Modern</button>
+          <button class="season-era-tab" type="button" role="tab" aria-selected="false" aria-expanded="false" data-era="specials">Specials</button>
+        </div>
+
+        <div class="season-pill-grid" id="seasonList" role="group" aria-label="Season choices" hidden></div>
+      </section>
+
+
+      <section class="filter-bar">
+<div class="active-filter-row">
+          <div class="active-filter-left">
+            <span class="active-label">Active filters:</span>
+            <div class="active-chips" id="activeChips"></div>
+          </div>
+
+          <button class="clear-all" id="clearAll">Clear all</button>
+        </div>
+
+        <div class="results-view-row">
+          <div class="result-copy" id="resultCopy">Showing all stories</div>
+          <div class="view-buttons">
+            <button class="view-btn active" id="gridView" title="Grid view">▦</button>
+            <button class="view-btn" id="listView" title="List view">☷</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="episode-grid" id="episodeGrid"></section>
+      <div class="empty" id="emptyState">No episodes match those filters.</div>
+    </main>
+
+    <aside class="details" id="detailsPanel">
+      <div class="details-top">
+        <button class="details-button details-nav-button" id="detailsPrev" aria-label="Previous episode"><span class="details-nav-arrow">‹</span><span class="details-nav-label">Previous</span></button>
+        <span id="detailPosition">1 / 1</span>
+        <button class="details-button details-nav-button" id="detailsNext" aria-label="Next episode"><span class="details-nav-label">Next</span><span class="details-nav-arrow">›</span></button>
+      </div>
+
+      <div class="detail-hero" id="detailHero">
+        <span class="code" id="detailCode"></span>
+
+        <div class="detail-heading">
+          <h2 id="detailTitle"></h2>
+          <div class="detail-sub" id="detailSubtitle"></div>
+        </div>
+      </div>
+
+      <div class="detail-body">
+        <div class="quick-info">
+          <div class="quick-box"><span>Air date</span><strong id="detailDate"></strong></div>
+          <div class="quick-box"><span>Duration</span><strong id="detailDuration"></strong></div>
+        </div>
+
+        <div class="detail-grid">
+          <div class="credits">
+            <div class="credit"><small>Written by</small><strong id="detailWriter"></strong></div>
+            <div class="credit"><small>Directed by</small><strong id="detailDirector"></strong></div>
+            <div class="credit"><small>Companions</small><strong id="detailCompanion"></strong></div>
+            <div class="credit"><small>Monsters</small><strong id="detailMonster"></strong></div>
+          </div>
+
+          <div>
+            <div class="detail-section" style="margin-top:0;padding-top:0;border-top:0">
+              <h3>Synopsis</h3>
+              <p id="detailSynopsis"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h3>Trivia</h3>
+          <ul id="detailTrivia"></ul>
+        </div>
+
+        <div class="detail-section">
+          <h3>Tags</h3>
+          <div class="tags" id="detailTags"></div>
+        </div>
+
+        <div class="episode-nav">
+          <button class="nav-card" id="previousEpisode">
+            <small>Previous episode</small>
+            <strong id="previousTitle">—</strong>
+          </button>
+
+          <button class="nav-card" id="nextEpisode">
+            <small>Next episode</small>
+            <strong id="nextTitle">—</strong>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <button class="inspector-toggle" id="inspectorToggle" aria-label="Close episode information" aria-expanded="true">×</button>
+  <button class="details-backdrop" id="detailsBackdrop" aria-label="Close episode information"></button>
+
+  <script>
+    const episodes = [
+      {
+        id:"unearthly-child", code:"S1.1", title:"An Unearthly Child", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1963, date:"23 November 1963", duration:"4 episodes",
+        format:"Serial", companion:"Susan, Ian and Barbara", monster:"Cavemen",
+        writer:"Anthony Coburn", director:"Waris Hussein", rating:4.4,
+        image:"https://images2.imgbox.com/69/3c/EwRpE5hC_o.jpg",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The first televised Doctor Who story.","Introduced the Doctor, Susan, Ian, Barbara and the TARDIS."],
+        tags:["First story","TARDIS","1960s"]
+      },
+      {
+        id:"spearhead", code:"S7.1", title:"Spearhead from Space", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 7", year:1970, date:"3 January 1970", duration:"4 episodes",
+        format:"Serial", companion:"Liz Shaw", monster:"Autons",
+        writer:"Robert Holmes", director:"Derek Martinus", rating:4.7,
+        image:"https://images2.imgbox.com/f9/d8/3VccADyX_o.jpg",
+        synopsis:"A newly regenerated Doctor is stranded on Earth as the Nestene Consciousness prepares a plastic invasion.",
+        trivia:["The first Doctor Who serial produced in colour.","The only classic serial filmed entirely on film."],
+        tags:["Autons","UNIT","Doctor debut"]
+      },
+      {
+        id:"genesis", code:"S12.4", title:"Genesis of the Daleks", doctor:"Fourth Doctor", doctorNumber:4,
+        series:"Season 12", year:1975, date:"8 March 1975", duration:"6 episodes",
+        format:"Serial", companion:"Sarah Jane and Harry", monster:"Daleks / Davros",
+        writer:"Terry Nation", director:"David Maloney", rating:4.9,
+        image:"https://images2.imgbox.com/fa/42/uXZaAxay_o.jpg",
+        synopsis:"The Time Lords send the Doctor to the birth of the Daleks, where he faces Davros and an impossible moral choice.",
+        trivia:["This story introduced Davros.","It remains one of the most frequently repeated classic serials."],
+        tags:["Daleks","Davros","Skaro"]
+      },
+      {
+        id:"androzani", code:"S21.6", title:"The Caves of Androzani", doctor:"Fifth Doctor", doctorNumber:5,
+        series:"Season 21", year:1984, date:"8 March 1984", duration:"4 episodes",
+        format:"Serial", companion:"Peri Brown", monster:"Sharaz Jek",
+        writer:"Robert Holmes", director:"Graeme Harper", rating:5.0,
+        image:"https://images2.imgbox.com/b4/87/M2AjK2t8_o.jpg",
+        synopsis:"The Doctor and Peri are caught between soldiers, smugglers and a masked genius while dying from spectrox poisoning.",
+        trivia:["The final episode features the Fifth Doctor's regeneration.","Graeme Harper later directed stories in the revived series."],
+        tags:["Regeneration","Androzani","Classic"]
+      },
+      {
+        id:"remembrance", code:"S25.1", title:"Remembrance of the Daleks", doctor:"Seventh Doctor", doctorNumber:7,
+        series:"Season 25", year:1988, date:"5 October 1988", duration:"4 episodes",
+        format:"Serial", companion:"Ace", monster:"Daleks",
+        writer:"Ben Aaronovitch", director:"Andrew Morgan", rating:4.8,
+        image:"https://images2.imgbox.com/7c/46/MkJGRaLX_o.jpg",
+        synopsis:"Two rival Dalek factions descend on Shoreditch in pursuit of a powerful Time Lord artefact.",
+        trivia:["Set near Coal Hill School and Totter's Lane.","Features the first televised Dalek climbing stairs."],
+        tags:["Daleks","Ace","1963"]
+      },
+      {
+        id:"rose", code:"1.1", title:"Rose", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"26 March 2005", duration:"45 minutes",
+        format:"Story", companion:"Rose Tyler", monster:"Autons / Nestene Consciousness",
+        writer:"Russell T Davies", director:"Keith Boak", rating:4.6,
+        image:"https://images2.imgbox.com/2c/fc/bpTHvPF4_o.jpg",
+        synopsis:"Rose Tyler's life is turned upside down when she meets a mysterious traveller and living shop-window dummies.",
+        trivia:["This episode relaunched Doctor Who as a continuing television series in 2005.","It brought the Autons back for the first time since 1971."],
+        tags:["Autons","London","Beginning"]
+      },
+      {
+        id:"end-world", code:"1.2", title:"The End of the World", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"2 April 2005", duration:"45 minutes",
+        format:"Story", companion:"Rose Tyler", monster:"Lady Cassandra",
+        writer:"Russell T Davies", director:"Euros Lyn", rating:4.2,
+        image:"https://images2.imgbox.com/b1/b8/cPVwYaOi_o.jpg",
+        synopsis:"The Doctor takes Rose five billion years into the future to watch the destruction of Earth.",
+        trivia:["Introduced the Face of Boe.","The episode is set five billion years in the future."],
+        tags:["Future","Platform One","Cassandra"]
+      },
+      {
+        id:"unquiet-dead", code:"1.3", title:"The Unquiet Dead", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"9 April 2005", duration:"45 minutes",
+        format:"Story", companion:"Rose Tyler", monster:"Gelth",
+        writer:"Mark Gatiss", director:"Euros Lyn", rating:4.1,
+        image:"https://images2.imgbox.com/1c/89/7vOBBGnd_o.jpg",
+        synopsis:"The Doctor and Rose meet Charles Dickens while ghostly creatures possess the dead.",
+        trivia:["Charles Dickens appears as a major character.","The story established Cardiff's recurring importance."],
+        tags:["Historical","Cardiff","Gelth"]
+      },
+      {
+        id:"dalek", code:"1.6", title:"Dalek", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"30 April 2005", duration:"45 minutes",
+        format:"Story", companion:"Rose Tyler", monster:"Dalek",
+        writer:"Robert Shearman", director:"Joe Ahearne", rating:4.9,
+        image:"https://images2.imgbox.com/1f/5f/Os8l4MjP_o.jpg",
+        synopsis:"The Doctor discovers a lone Dalek chained beneath a private museum of alien artefacts.",
+        trivia:["The first Dalek story of the revived series.","Adapted in part from Robert Shearman's audio drama Jubilee."],
+        tags:["Dalek","Utah","Time War"]
+      },
+      {
+        id:"christmas-invasion", code:"2.X", title:"The Christmas Invasion", doctor:"Tenth Doctor", doctorNumber:10,
+        series:"Christmas Special", year:2005, date:"25 December 2005", duration:"60 minutes",
+        format:"Special", companion:"Rose Tyler", monster:"Sycorax",
+        writer:"Russell T Davies", director:"James Hawes", rating:4.5,
+        image:"https://images2.imgbox.com/c3/3b/ejlL8Iua_o.jpg",
+        synopsis:"While the new Doctor sleeps through his regeneration, the Sycorax threaten Earth on Christmas Day.",
+        trivia:["The first full story starring David Tennant.","The first Doctor Who Christmas special of the revived era."],
+        tags:["Christmas","Sycorax","Doctor debut"]
+      },
+      {
+        id:"blink", code:"3.10", title:"Blink", doctor:"Tenth Doctor", doctorNumber:10,
+        series:"Series 3", year:2007, date:"9 June 2007", duration:"45 minutes",
+        format:"Story", companion:"Martha Jones", monster:"Weeping Angels",
+        writer:"Steven Moffat", director:"Hettie MacDonald", rating:5.0,
+        image:"https://images2.imgbox.com/37/d7/uWkf4Sth_o.jpg",
+        synopsis:"Sally Sparrow follows messages hidden across time while statues move whenever nobody is watching.",
+        trivia:["Introduced the Weeping Angels.","The Doctor appears only briefly compared with most episodes."],
+        tags:["Weeping Angels","Time travel","Doctor-lite"]
+      },
+      {
+        id:"eleventh-hour", code:"5.1", title:"The Eleventh Hour", doctor:"Eleventh Doctor", doctorNumber:11,
+        series:"Series 5", year:2010, date:"3 April 2010", duration:"65 minutes",
+        format:"Story", companion:"Amy Pond and Rory Williams", monster:"Prisoner Zero",
+        writer:"Steven Moffat", director:"Adam Smith", rating:4.9,
+        image:"https://images2.imgbox.com/df/e6/NlFSItbz_o.jpg",
+        synopsis:"A newly regenerated Doctor returns years late to Amelia Pond and has twenty minutes to save Earth.",
+        trivia:["Matt Smith's first full episode.","Introduced Amy Pond, Rory Williams and the cracked wall arc."],
+        tags:["Doctor debut","Atraxi","Amy Pond"]
+      },
+      {
+        id:"heaven-sent", code:"9.11", title:"Heaven Sent", doctor:"Twelfth Doctor", doctorNumber:12,
+        series:"Series 9", year:2015, date:"28 November 2015", duration:"55 minutes",
+        format:"Story", companion:"Clara Oswald", monster:"The Veil",
+        writer:"Steven Moffat", director:"Rachel Talalay", rating:5.0,
+        image:"https://images2.imgbox.com/7e/82/8vIogyXs_o.jpg",
+        synopsis:"Alone in a shifting castle, the Doctor faces grief, fear and an apparently impossible escape.",
+        trivia:["Peter Capaldi carries almost the entire episode alone.","The story takes place across an enormous span of time."],
+        tags:["The Veil","Confession Dial","Experimental"]
+      },
+      {
+        id:"punjab", code:"11.6", title:"Demons of the Punjab", doctor:"Thirteenth Doctor", doctorNumber:13,
+        series:"Series 11", year:2018, date:"11 November 2018", duration:"50 minutes",
+        format:"Story", companion:"Yaz, Ryan and Graham", monster:"Thijarians",
+        writer:"Vinay Patel", director:"Jamie Childs", rating:4.5,
+        image:"https://images2.imgbox.com/70/a5/DM7D3AOT_o.jpg",
+        synopsis:"Yaz asks the Doctor to take her to her grandmother's wedding during the Partition of India.",
+        trivia:["Set during the 1947 Partition of India.","The Thijarians are revealed not to be the villains."],
+        tags:["Historical","Partition","Yaz"]
+      },
+      {
+        id:"giggle", code:"SP.3", title:"The Giggle", doctor:"Fourteenth Doctor", doctorNumber:14,
+        series:"60th Anniversary", year:2023, date:"9 December 2023", duration:"60 minutes",
+        format:"Special", companion:"Donna Noble", monster:"The Toymaker",
+        writer:"Russell T Davies", director:"Chanya Button", rating:4.7,
+        image:"https://images2.imgbox.com/98/30/x4vlhhsC_o.jpg",
+        synopsis:"The Toymaker returns as humanity falls into chaos and the Doctor faces an impossible game.",
+        trivia:["Features the Doctor's first televised bi-generation.","Brings back the Toymaker after almost sixty years."],
+        tags:["Toymaker","Donna Noble","Anniversary"]
+      },
+      {
+        id:"rogue", code:"1.6", title:"Rogue", doctor:"Fifteenth Doctor", doctorNumber:15,
+        series:"Season 1", year:2024, date:"8 June 2024", duration:"45 minutes",
+        format:"Story", companion:"Ruby Sunday", monster:"Chuldur",
+        writer:"Kate Herron and Briony Redman", director:"Ben Chessell", rating:4.6,
+        image:"https://images2.imgbox.com/e3/df/GzfqOn0R_o.jpg",
+        synopsis:"At a Regency ball, the Doctor meets a mysterious bounty hunter while shape-shifting aliens hunt the guests.",
+        trivia:["Draws heavily on Regency romance conventions.","Features Jonathan Groff as Rogue."],
+        tags:["Regency","Chuldur","Romance"]
+      },
+      {
+        id:"tomb-cybermen", code:"S5.1", title:"The Tomb of the Cybermen", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1967, date:"2 September 1967", duration:"4 episodes",
+        format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Cybermen",
+        writer:"Kit Pedler and Gerry Davis", director:"Morris Barry", rating:4.8,
+        image:"https://picsum.photos/seed/tomb-cybermen/800/450",
+        synopsis:"An archaeological expedition on Telos opens an ancient tomb and awakens a dormant army of Cybermen.",
+        trivia:["The serial was recovered in Hong Kong in 1992.","It introduced the Cyber Controller and the Cybermats."],
+        tags:["Cybermen","Telos","Classic"]
+      },
+      {
+        id:"web-of-fear", code:"S5.5", title:"The Web of Fear", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1968, date:"3 February 1968", duration:"6 episodes",
+        format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Great Intelligence / Yeti",
+        writer:"Mervyn Haisman and Henry Lincoln", director:"Douglas Camfield", rating:4.7,
+        image:"https://picsum.photos/seed/web-of-fear/800/450",
+        synopsis:"The Great Intelligence fills the London Underground with a deadly web while its robotic Yeti close in.",
+        trivia:["The story introduced Colonel Lethbridge-Stewart.","Five of its six episodes survive in the BBC archive."],
+        tags:["Yeti","Great Intelligence","UNIT origins"]
+      },
+      {
+        id:"war-games", code:"S6.7", title:"The War Games", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 6", year:1969, date:"19 April 1969", duration:"10 episodes",
+        format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"War Lords",
+        writer:"Malcolm Hulke and Terrance Dicks", director:"David Maloney", rating:4.9,
+        image:"https://picsum.photos/seed/war-games/800/450",
+        synopsis:"Soldiers from different periods of history are abducted and forced to fight in a vast alien experiment.",
+        trivia:["The story contains the first televised appearance of the Time Lords.","Its final episode features the Second Doctor's forced regeneration."],
+        tags:["Time Lords","Regeneration","Finale"]
+      },
+      {
+        id:"vengeance-on-varos", code:"S22.2", title:"Vengeance on Varos", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 22", year:1985, date:"19 January 1985", duration:"2 episodes",
+        format:"Serial", companion:"Peri Brown", monster:"Sil",
+        writer:"Philip Martin", director:"Ron Jones", rating:4.5,
+        image:"https://picsum.photos/seed/vengeance-varos/800/450",
+        synopsis:"The Doctor and Peri arrive on a prison world where torture and government policy are broadcast as entertainment.",
+        trivia:["This serial introduced Sil.","Its original episodes were each approximately forty-five minutes long."],
+        tags:["Sil","Satire","Varos"]
+      },
+      {
+        id:"revelation-daleks", code:"S22.6", title:"Revelation of the Daleks", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 22", year:1985, date:"23 March 1985", duration:"2 episodes",
+        format:"Serial", companion:"Peri Brown", monster:"Daleks / Davros",
+        writer:"Eric Saward", director:"Graeme Harper", rating:4.7,
+        image:"https://picsum.photos/seed/revelation-daleks/800/450",
+        synopsis:"At the funeral complex Tranquil Repose, Davros is secretly turning the dead into a new army of Daleks.",
+        trivia:["Davros operates under the name of the Great Healer.","The serial was the final story of Season 22."],
+        tags:["Daleks","Davros","Necros"]
+      },
+      {
+        id:"mysterious-planet", code:"S23.1", title:"The Mysterious Planet", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 23", year:1986, date:"6 September 1986", duration:"4 episodes",
+        format:"Serial", companion:"Peri Brown", monster:"Drathro",
+        writer:"Robert Holmes", director:"Nicholas Mallett", rating:4.2,
+        image:"https://picsum.photos/seed/mysterious-planet/800/450",
+        synopsis:"The Doctor is placed on trial while evidence from his recent visit to the mysterious planet Ravalox is presented.",
+        trivia:["This is the opening segment of The Trial of a Time Lord.","It introduced the Valeyard and the Inquisitor."],
+        tags:["Trial","Ravalox","Valeyard"]
+      },
+      {
+        id:"doctor-who-tv-movie", code:"TVM", title:"Doctor Who: The TV Movie", doctor:"Eighth Doctor", doctorNumber:8,
+        series:"TV Movie", year:1996, date:"27 May 1996", duration:"89 minutes",
+        format:"Television film", companion:"Grace Holloway", monster:"The Master",
+        writer:"Matthew Jacobs", director:"Geoffrey Sax", rating:4.3,
+        image:"https://picsum.photos/seed/doctor-who-tv-movie/800/450",
+        synopsis:"After being caught in a gang shooting, the Doctor regenerates in San Francisco and must stop the Master's plan to steal his remaining lives.",
+        trivia:["Paul McGann made his full televised debut as the Doctor.","The story begins with Sylvester McCoy as the Seventh Doctor."],
+        tags:["TV Movie","The Master","Doctor debut"]
+      },
+      {
+        id:"night-of-the-doctor", code:"WEB.1", title:"The Night of the Doctor", doctor:"Eighth Doctor", doctorNumber:8,
+        series:"50th Anniversary", year:2013, date:"14 November 2013", duration:"7 minutes",
+        format:"Mini-episode", companion:"Cass", monster:"Sisterhood of Karn",
+        writer:"Steven Moffat", director:"John Hayes", rating:4.8,
+        image:"https://picsum.photos/seed/night-of-the-doctor/800/450",
+        synopsis:"As the Time War intensifies, the Eighth Doctor tries to save a pilot who refuses to trust a Time Lord.",
+        trivia:["Paul McGann returned to the role on screen after seventeen years.","The episode depicts the Eighth Doctor's regeneration."],
+        tags:["Regeneration","Time War","Anniversary"]
+      },
+
+      /* v13a: ten additional televised stories */
+
+      {
+        id:"moonbase", code:"S4.6", title:"The Moonbase", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 4", year:1967, date:"11 February 1967", duration:"4 episodes",
+        format:"Serial", companion:"Jamie McCrimmon, Polly and Ben Jackson", monster:"Cybermen",
+        writer:"Kit Pedler", director:"Morris Barry", rating:4.3,
+        image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"In 2070, the TARDIS crew reaches a weather-control base on the Moon where a mysterious illness conceals a Cyberman invasion.",
+        trivia:["Two of the four episodes are currently missing from the BBC archive.","The story introduced the Cybermen's more streamlined Moonbase design."],
+        tags:["Cybermen","Moon","Missing episodes"]
+      },
+      {
+        id:"enemy-of-the-world", code:"S5.4", title:"The Enemy of the World", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1967, date:"23 December 1967", duration:"6 episodes",
+        format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Salamander",
+        writer:"David Whitaker", director:"Barry Letts", rating:4.5,
+        image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"The Doctor discovers that he is the exact double of Salamander, a celebrated world leader suspected of engineering global disasters.",
+        trivia:["Patrick Troughton plays both the Doctor and Salamander.","Five previously missing episodes were recovered in Nigeria in 2013."],
+        tags:["Doppelgänger","Political thriller","Recovered"]
+      },
+      {
+        id:"mind-robber", code:"S6.2", title:"The Mind Robber", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 6", year:1968, date:"14 September 1968", duration:"5 episodes",
+        format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"The Master of the Land",
+        writer:"Peter Ling and Derrick Sherwin", director:"David Maloney", rating:4.7,
+        image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"Forced outside normal space and time, the travellers enter a surreal realm where fictional characters and language itself become dangerous.",
+        trivia:["Episode one was added late when the preceding story was reduced by one episode.","Hamish Wilson briefly plays Jamie after the character's face is incorrectly reconstructed."],
+        tags:["Land of Fiction","Surreal","Zoe"]
+      },
+      {
+        id:"invasion", code:"S6.3", title:"The Invasion", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 6", year:1968, date:"2 November 1968", duration:"8 episodes",
+        format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"Cybermen",
+        writer:"Derrick Sherwin", director:"Douglas Camfield", rating:4.8,
+        image:"https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"An electronics magnate works with the Cybermen to paralyse humanity, bringing the Doctor back into contact with UNIT and Brigadier Lethbridge-Stewart.",
+        trivia:["Episodes one and four survive only as audio and were animated for DVD.","The serial established UNIT as a major part of the programme."],
+        tags:["Cybermen","UNIT","London"]
+      },
+      {
+        id:"inferno", code:"S7.4", title:"Inferno", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 7", year:1970, date:"9 May 1970", duration:"7 episodes",
+        format:"Serial", companion:"Liz Shaw", monster:"Primords",
+        writer:"Don Houghton", director:"Douglas Camfield and Barry Letts", rating:4.9,
+        image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"A drilling project threatens the planet while a damaged TARDIS console sends the Doctor into a brutal parallel version of Earth.",
+        trivia:["This was Liz Shaw's final televised story as the Doctor's regular companion.","Barry Letts completed direction after Douglas Camfield became unwell."],
+        tags:["Parallel Earth","UNIT","Primords"]
+      },
+      {
+        id:"terror-of-the-autons", code:"S8.1", title:"Terror of the Autons", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 8", year:1971, date:"2 January 1971", duration:"4 episodes",
+        format:"Serial", companion:"Jo Grant", monster:"The Master / Autons",
+        writer:"Robert Holmes", director:"Barry Letts", rating:4.6,
+        image:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"The newly arrived Master allies himself with the Nestene Consciousness, turning everyday plastic objects into lethal weapons.",
+        trivia:["The story introduced the Master and Jo Grant.","It also marked Captain Mike Yates's first appearance."],
+        tags:["The Master","Autons","Jo Grant"]
+      },
+      {
+        id:"daemons", code:"S8.5", title:"The Dæmons", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 8", year:1971, date:"22 May 1971", duration:"5 episodes",
+        format:"Serial", companion:"Jo Grant", monster:"Azal / The Master",
+        writer:"Guy Leopold", director:"Christopher Barry", rating:4.7,
+        image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"At the village of Devil's End, the Master awakens an ancient alien whose species has guided humanity for millennia.",
+        trivia:["Guy Leopold was a shared pseudonym for Barry Letts and Robert Sloman.","Much of the location filming took place in Aldbourne, Wiltshire."],
+        tags:["The Master","UNIT","Devil's End"]
+      },
+      {
+        id:"three-doctors", code:"S10.1", title:"The Three Doctors", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 10", year:1972, date:"30 December 1972", duration:"4 episodes",
+        format:"Serial", companion:"Jo Grant", monster:"Omega",
+        writer:"Bob Baker and Dave Martin", director:"Lennie Mayne", rating:4.7,
+        image:"https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"A threat from beyond the universe forces the Time Lords to unite three incarnations of the Doctor against the legendary Omega.",
+        trivia:["The serial celebrated Doctor Who's tenth season.","William Hartnell appeared through pre-recorded inserts because of ill health."],
+        tags:["Multi-Doctor","Omega","Anniversary"]
+      },
+      {
+        id:"pyramids-of-mars", code:"S13.3", title:"Pyramids of Mars", doctor:"Fourth Doctor", doctorNumber:4,
+        series:"Season 13", year:1975, date:"25 October 1975", duration:"4 episodes",
+        format:"Serial", companion:"Sarah Jane Smith", monster:"Sutekh / Mummies",
+        writer:"Stephen Harris", director:"Paddy Russell", rating:4.9,
+        image:"https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"In an English priory in 1911, the Doctor battles Sutekh, an imprisoned Osiran whose freedom would mean the destruction of all life.",
+        trivia:["Stephen Harris was a pseudonym used by Robert Holmes and Lewis Greifer.","Gabriel Woolf later voiced the Beast in the revived series."],
+        tags:["Sutekh","Sarah Jane","1911"]
+      },
+      {
+        id:"seeds-of-doom", code:"S13.6", title:"The Seeds of Doom", doctor:"Fourth Doctor", doctorNumber:4,
+        series:"Season 13", year:1976, date:"31 January 1976", duration:"6 episodes",
+        format:"Serial", companion:"Sarah Jane Smith", monster:"Krynoid",
+        writer:"Robert Banks Stewart", director:"Douglas Camfield", rating:4.8,
+        image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=82",
+        synopsis:"An alien seed pod found in Antarctica infects a scientist before a ruthless collector brings the growing Krynoid to England.",
+        trivia:["The story was partly inspired by classic plant-invasion fiction.","It was Douglas Camfield's final Doctor Who directing credit."],
+        tags:["Krynoid","Antarctica","Sarah Jane"]
+      }
+    ];
+
+    // Keep every view and episode-navigation control in original broadcast order.
+    function broadcastTime(dateText){
+      const months = {
+        January:0, February:1, March:2, April:3, May:4, June:5,
+        July:6, August:7, September:8, October:9, November:10, December:11
+      };
+      const match = String(dateText).trim().match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);
+      if(!match) return Number.MAX_SAFE_INTEGER;
+      const [,day,month,year] = match;
+      return Date.UTC(Number(year), months[month] ?? 0, Number(day));
+    }
+
+    episodes.sort((a,b)=>
+      broadcastTime(a.date)-broadcastTime(b.date) ||
+      String(a.code).localeCompare(String(b.code),undefined,{numeric:true})
+    );
+
+    const doctorColors = {
+      1:"#ddd6c8",2:"#62769f",3:"#ad73c8",4:"#d76b5e",5:"#e7cd72",
+      6:"#eb78a2",7:"#a99369",8:"#648e99",9:"#7f9388",10:"#bd875f",
+      11:"#966caf",12:"#5b7dc2",13:"#e4ca55",14:"#58a0b4",15:"#e678a4"
+    };
+
+    const state = {
+      doctors:[],
+      seasons:[],
+      seasonEra:null,
+      search:"",
+      view:"grid",
+      filtered:[...episodes],
+      selectedId:"rose",
+      detailsOpen:window.innerWidth > 1100
+    };
+
+    const el = id => document.getElementById(id);
+    const grid = el("episodeGrid");
+    const doctorList = el("doctorList");
+    const details = el("detailsPanel");
+
+    function unique(values){
+      return [...new Set(values)].sort((a,b)=>String(a).localeCompare(String(b)));
+    }
+
+    function getSeasonEra(series){
+      if(/^Season \d+$/i.test(series)) return "classic";
+      if(/^Series \d+$/i.test(series)) return "modern";
+      return "specials";
+    }
+
+    function seasonNumberLabel(series){
+      const number = series.match(/\d+/)?.[0];
+      if(/^Season \d+$/i.test(series) || /^Series \d+$/i.test(series)) return number;
+      if(/Christmas/i.test(series)) return "X";
+      if(/50th/i.test(series)) return "50";
+      if(/60th/i.test(series)) return "60";
+      if(/Television Movie|TV Movie/i.test(series)) return "TV";
+      return "SP";
+    }
+
+    function buildFilters(){
+      doctorList.innerHTML = "";
+
+      const doctors = [...new Map(
+        episodes.map(episode=>[episode.doctorNumber,episode.doctor])
+      ).entries()].sort((a,b)=>a[0]-b[0]);
+
+      const allButton = document.createElement("button");
+      allButton.className = "doctor-btn active";
+      allButton.dataset.doctor = "all";
+      allButton.dataset.tooltip = "All Doctors";
+      allButton.setAttribute("aria-label","All Doctors");
+      allButton.setAttribute("aria-pressed","true");
+      allButton.style.setProperty("--doctor-color","#58a6ff");
+      allButton.innerHTML = '<span class="doctor-avatar" aria-hidden="true">ALL</span>';
+      doctorList.appendChild(allButton);
+
+      doctors.forEach(([number,name])=>{
+        const button = document.createElement("button");
+        button.className = "doctor-btn";
+        button.dataset.doctor = String(number);
+        button.dataset.tooltip = name;
+        button.setAttribute("aria-label",name);
+        button.setAttribute("aria-pressed","false");
+        button.style.setProperty("--doctor-color",doctorColors[number] || "#58a6ff");
+        button.innerHTML = `<span class="doctor-avatar" aria-hidden="true">${number}</span>`;
+        doctorList.appendChild(button);
+      });
+
+      const seasonColours = [
+        "#58a6ff","#36c6d3","#53d5a0","#a4d65e","#f1cd58",
+        "#f7a258","#ef6f6c","#e678a4","#b277ef","#7d8df3"
+      ];
+
+      el("seasonList").innerHTML = "";
+      unique(episodes.map(episode=>episode.series)).forEach((series,index)=>{
+        const era = getSeasonEra(series);
+        const button = document.createElement("button");
+        button.className = "season-pill";
+        button.dataset.season = series;
+        button.dataset.era = era;
+        button.setAttribute("aria-label",series);
+        button.setAttribute("aria-pressed","false");
+        button.style.setProperty("--season-color",seasonColours[index % seasonColours.length]);
+
+        const eraName = era==="classic" ? "Classic era" : era==="modern" ? "Modern era" : "Special";
+        button.innerHTML = `
+          <span class="season-number" aria-hidden="true">${seasonNumberLabel(series)}</span>
+          <span class="season-pill-copy">
+            <span class="season-pill-name">${series}</span>
+            <span class="season-pill-era">${eraName}</span>
+          </span>
+        `;
+        el("seasonList").appendChild(button);
+      });
+
+      syncDoctorControls();
+      syncSeasonControls();
+    }
+
+    function getFilteredEpisodes(){
+      const query = state.search.trim().toLowerCase();
+
+      return episodes.filter(episode=>{
+        const searchable = [
+          episode.title,episode.doctor,episode.series,episode.year,
+          episode.companion,episode.monster,episode.writer,episode.director,
+          episode.tags.join(" ")
+        ].join(" ").toLowerCase();
+
+        return (!state.doctors.length || state.doctors.includes(String(episode.doctorNumber)))
+          && (!state.seasons.length || state.seasons.includes(episode.series))
+          && (!query || searchable.includes(query));
+      });
+    }
+
+    function cardTemplate(episode){
+      return `
+        <article class="card ${episode.id===state.selectedId ? "selected":""}"
+          data-id="${episode.id}"
+          style="--doctor-color:${doctorColors[episode.doctorNumber] || "#58a6ff"}"
+          tabindex="0">
+          <div class="card-image">
+            <img src="${episode.image}" alt="" loading="lazy">
+            <span class="code">${episode.code}</span>
+          </div>
+
+          <div class="card-body">
+            <h2 class="card-title">${episode.title}</h2>
+            <div class="card-meta">${episode.doctor} · ${episode.series} · ${episode.year}</div>
+            <div class="tags">
+              ${episode.tags.slice(0,3).map(tag=>`<span class="tag">${tag}</span>`).join("")}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderActiveFilters(){
+      const chips = [];
+
+      state.doctors.forEach(number=>{
+        const doctor = episodes.find(episode=>String(episode.doctorNumber)===number);
+        chips.push({
+          label:doctor?.doctor || `Doctor ${number}`,
+          clear:()=>{
+            state.doctors = state.doctors.filter(item=>item!==number);
+            syncDoctorControls();
+          }
+        });
+      });
+
+      state.seasons.forEach(season=>{
+        chips.push({
+          label:season,
+          clear:()=>{
+            state.seasons = state.seasons.filter(item=>item!==season);
+            syncSeasonControls();
+          }
+        });
+      });
+
+      if(state.search.trim()){
+        chips.push({
+          label:`Search: ${state.search.trim()}`,
+          clear:()=>{state.search="";el("searchInput").value=""}
+        });
+      }
+
+      const container = el("activeChips");
+      container.innerHTML = "";
+
+      if(!chips.length){
+        container.innerHTML = '<span class="no-filters">No filters active</span>';
+      }else{
+        chips.forEach(chip=>{
+          const span = document.createElement("span");
+          span.className = "chip";
+          span.innerHTML = `${chip.label}<button type="button" aria-label="Remove ${chip.label} filter">×</button>`;
+          span.querySelector("button").addEventListener("click",()=>{
+            chip.clear();
+            render();
+          });
+          container.appendChild(span);
+        });
+      }
+
+      el("clearAll").disabled = chips.length===0;
+    }
+
+    function render(){
+      state.filtered = getFilteredEpisodes();
+
+      grid.classList.toggle("list-view",state.view==="list");
+      grid.innerHTML = state.filtered.map(cardTemplate).join("");
+
+      el("emptyState").classList.toggle("show",state.filtered.length===0);
+      el("episodeTotal").textContent = state.filtered.length;
+      el("resultCopy").textContent = `Showing ${state.filtered.length} of ${episodes.length} stories`;
+
+      renderActiveFilters();
+
+      if(!state.filtered.some(e=>e.id===state.selectedId) && state.filtered[0]){
+        state.selectedId = state.filtered[0].id;
+      }
+
+      const selected = episodes.find(e=>e.id===state.selectedId) || episodes[0];
+      populateDetails(selected);
+
+      grid.querySelectorAll(".card").forEach(card=>{
+        const open = ()=>{
+          state.selectedId = card.dataset.id;
+          render();
+          setDetailsOpen(true);
+        };
+
+        card.addEventListener("click",open);
+        card.addEventListener("keydown",event=>{
+          if(event.key==="Enter" || event.key===" "){
+            event.preventDefault();
+            open();
+          }
+        });
+      });
+    }
+
+    function populateDetails(episode){
+      const index = episodes.findIndex(item=>item.id===episode.id);
+
+      el("detailPosition").textContent = `${index+1} / ${episodes.length}`;
+      el("detailHero").style.backgroundImage =
+        `linear-gradient(180deg,rgba(3,7,14,.04),rgba(4,9,18,.82)),url("${episode.image}")`;
+
+      el("detailCode").textContent = episode.code;
+      el("detailTitle").textContent = episode.title;
+      el("detailSubtitle").textContent = `${episode.doctor} · ${episode.series} · ${episode.year}`;
+      el("detailDate").textContent = episode.date;
+      el("detailDuration").textContent = episode.duration;
+      el("detailWriter").textContent = episode.writer;
+      el("detailDirector").textContent = episode.director;
+      el("detailCompanion").textContent = episode.companion;
+      el("detailMonster").textContent = episode.monster;
+      el("detailSynopsis").textContent = episode.synopsis;
+      el("detailTrivia").innerHTML = episode.trivia.map(item=>`<li>${item}</li>`).join("");
+      el("detailTags").innerHTML = episode.tags.map(tag=>`<span class="tag">${tag}</span>`).join("");
+
+      const previous = episodes[(index-1+episodes.length)%episodes.length];
+      const next = episodes[(index+1)%episodes.length];
+
+      el("previousTitle").textContent = previous.title;
+      el("nextTitle").textContent = next.title;
+    }
+
+    function selectByOffset(offset){
+      const index = episodes.findIndex(e=>e.id===state.selectedId);
+      const next = episodes[(index+offset+episodes.length)%episodes.length];
+      state.selectedId = next.id;
+      render();
+    }
+
+    function syncDoctorControls(){
+      document.querySelectorAll(".doctor-btn").forEach(button=>{
+        const value = button.dataset.doctor;
+        const active = value==="all" ? state.doctors.length===0 : state.doctors.includes(value);
+        button.classList.toggle("active",active);
+        button.setAttribute("aria-pressed",String(active));
+      });
+      updateActiveDoctorLabel();
+    }
+
+    function toggleDoctor(value){
+      if(value==="all"){
+        state.doctors = [];
+      }else if(state.doctors.includes(value)){
+        state.doctors = state.doctors.filter(number=>number!==value);
+      }else{
+        state.doctors = [...state.doctors,value].sort((a,b)=>Number(a)-Number(b));
+      }
+      syncDoctorControls();
+      render();
+    }
+
+    function renderSeasonEra(){
+      const expanded = Boolean(state.seasonEra);
+      el("seasonList").hidden = !expanded;
+
+      document.querySelectorAll(".season-pill").forEach(button=>{
+        button.hidden = !expanded || button.dataset.era!==state.seasonEra;
+      });
+
+      document.querySelectorAll(".season-era-tab").forEach(tab=>{
+        const active = expanded && tab.dataset.era===state.seasonEra;
+        tab.classList.toggle("active",active);
+        tab.setAttribute("aria-selected",String(active));
+        tab.setAttribute("aria-expanded",String(active));
+      });
+    }
+
+    function updateActiveSeasonLabel(){
+      if(!state.seasons.length){
+        el("activeSeasonLabel").textContent = state.seasonEra
+          ? `${state.seasonEra[0].toUpperCase()}${state.seasonEra.slice(1)} seasons`
+          : "Choose an era";
+      }else if(state.seasons.length<=2){
+        el("activeSeasonLabel").textContent = state.seasons.join(" + ");
+      }else{
+        el("activeSeasonLabel").textContent = `${state.seasons.length} seasons selected`;
+      }
+    }
+
+    function syncSeasonControls(){
+      document.querySelectorAll(".season-pill").forEach(button=>{
+        const active = state.seasons.includes(button.dataset.season);
+        button.classList.toggle("active",active);
+        button.setAttribute("aria-pressed",String(active));
+      });
+      el("clearSeasonFilters").hidden = state.seasons.length===0;
+      updateActiveSeasonLabel();
+      renderSeasonEra();
+    }
+
+    function toggleSeason(value){
+      state.seasons = state.seasons.includes(value)
+        ? state.seasons.filter(season=>season!==value)
+        : [...state.seasons,value];
+      syncSeasonControls();
+      render();
+    }
+
+    function clearAllFilters(){
+      state.doctors = [];
+      state.seasons = [];
+      state.seasonEra = null;
+      state.search = "";
+      el("searchInput").value = "";
+      syncDoctorControls();
+      syncSeasonControls();
+      render();
+    }
+
+    doctorList.addEventListener("click",event=>{
+      const button = event.target.closest(".doctor-btn");
+      if(button) toggleDoctor(button.dataset.doctor);
+    });
+
+    el("seasonEraTabs").addEventListener("click",event=>{
+      const tab = event.target.closest(".season-era-tab");
+      if(!tab) return;
+      state.seasonEra = state.seasonEra===tab.dataset.era ? null : tab.dataset.era;
+      updateActiveSeasonLabel();
+      renderSeasonEra();
+    });
+
+    el("seasonList").addEventListener("click",event=>{
+      const button = event.target.closest(".season-pill");
+      if(button) toggleSeason(button.dataset.season);
+    });
+
+    el("clearSeasonFilters").addEventListener("click",()=>{
+      state.seasons = [];
+      state.seasonEra = null;
+      syncSeasonControls();
+      render();
+    });
+
+    el("searchInput").addEventListener("input",()=>{
+      state.search = el("searchInput").value;
+      render();
+    });
+
+    el("clearAll").addEventListener("click",clearAllFilters);
+
+    el("gridView").addEventListener("click",()=>{
+      state.view = "grid";
+      el("gridView").classList.add("active");
+      el("listView").classList.remove("active");
+      render();
+    });
+
+    el("listView").addEventListener("click",()=>{
+      state.view = "list";
+      el("listView").classList.add("active");
+      el("gridView").classList.remove("active");
+      render();
+    });
+
+    el("randomButton").addEventListener("click",()=>{
+      const pool = state.filtered.length ? state.filtered : episodes;
+      const random = pool[Math.floor(Math.random()*pool.length)];
+      state.selectedId = random.id;
+      render();
+      setDetailsOpen(true);
+    });
+
+    el("previousEpisode").addEventListener("click",()=>selectByOffset(-1));
+    el("nextEpisode").addEventListener("click",()=>selectByOffset(1));
+    el("detailsPrev").addEventListener("click",()=>selectByOffset(-1));
+    el("detailsNext").addEventListener("click",()=>selectByOffset(1));
+
+    const shell = document.querySelector(".shell");
+    const inspectorToggle = el("inspectorToggle");
+    const detailsBackdrop = el("detailsBackdrop");
+
+    function isMobileInspector(){
+      return window.matchMedia("(max-width:1100px)").matches;
+    }
+
+    function setDetailsOpen(open){
+      state.detailsOpen = open;
+      if(isMobileInspector()){
+        details.classList.toggle("open",open);
+        detailsBackdrop.classList.toggle("open",open);
+      }else{
+        shell.classList.toggle("details-hidden",!open);
+        details.classList.remove("open");
+        detailsBackdrop.classList.remove("open");
+      }
+      inspectorToggle.textContent = open ? "×" : "i";
+      inspectorToggle.setAttribute("aria-label",open ? "Close episode information" : "Open episode information");
+      inspectorToggle.setAttribute("aria-expanded",String(open));
+    }
+
+    inspectorToggle.addEventListener("click",()=>setDetailsOpen(!state.detailsOpen));
+    detailsBackdrop.addEventListener("click",()=>setDetailsOpen(false));
+
+    document.addEventListener("keydown",event=>{
+      if(event.key==="ArrowLeft") selectByOffset(-1);
+      if(event.key==="ArrowRight") selectByOffset(1);
+      if(event.key==="Escape") setDetailsOpen(false);
+    });
+
+
+    const doctorStrip = document.getElementById("doctorList");
+    const doctorStripViewport = doctorStrip?.closest(".doctor-strip-viewport");
+    const doctorTooltip = document.getElementById("doctorFloatingTooltip");
+    const activeDoctorLabel = document.getElementById("activeDoctorLabel");
+    const doctorScrollLeft = document.getElementById("doctorScrollLeft");
+    const doctorScrollRight = document.getElementById("doctorScrollRight");
+
+    function updateDoctorStripEdges(){
+      if(!doctorStrip || !doctorStripViewport) return;
+
+      const maxScroll = doctorStrip.scrollWidth - doctorStrip.clientWidth;
+      const canLeft = doctorStrip.scrollLeft > 4;
+      const canRight = doctorStrip.scrollLeft < maxScroll - 4;
+
+      doctorStripViewport.classList.toggle("can-scroll-left",canLeft);
+      doctorStripViewport.classList.toggle("can-scroll-right",canRight);
+
+      if(doctorScrollLeft) doctorScrollLeft.disabled = !canLeft;
+      if(doctorScrollRight) doctorScrollRight.disabled = !canRight;
+    }
+
+    function updateActiveDoctorLabel(){
+      if(!activeDoctorLabel) return;
+      if(!state.doctors.length){
+        activeDoctorLabel.textContent = "All Doctors";
+        return;
+      }
+      const labels = state.doctors.map(number=>{
+        const episode = episodes.find(item=>String(item.doctorNumber)===number);
+        return episode?.doctor || `Doctor ${number}`;
+      });
+      activeDoctorLabel.textContent = labels.length<=2 ? labels.join(" + ") : `${labels.length} Doctors selected`;
+    }
+
+    function showDoctorTooltip(button){
+      if(!doctorTooltip || !button) return;
+
+      const label =
+        button.dataset.tooltip ||
+        button.getAttribute("aria-label") ||
+        button.title;
+
+      if(!label) return;
+
+      const rect = button.getBoundingClientRect();
+      doctorTooltip.textContent = label;
+      doctorTooltip.style.left = `${rect.left + rect.width / 2}px`;
+      doctorTooltip.style.top = `${rect.top}px`;
+      doctorTooltip.classList.add("visible");
+    }
+
+    function hideDoctorTooltip(){
+      doctorTooltip?.classList.remove("visible");
+    }
+
+    doctorStrip?.addEventListener("pointerover",event=>{
+      const button = event.target.closest(".doctor-btn");
+      if(button) showDoctorTooltip(button);
+    });
+
+    doctorStrip?.addEventListener("pointerout",event=>{
+      if(event.target.closest(".doctor-btn")) hideDoctorTooltip();
+    });
+
+    doctorStrip?.addEventListener("focusin",event=>{
+      const button = event.target.closest(".doctor-btn");
+      if(button) showDoctorTooltip(button);
+    });
+
+    doctorStrip?.addEventListener("focusout",hideDoctorTooltip);
+
+    doctorStrip?.addEventListener("click",()=>{
+      requestAnimationFrame(updateActiveDoctorLabel);
+    });
+
+    doctorStrip?.addEventListener("scroll",()=>{
+      hideDoctorTooltip();
+      updateDoctorStripEdges();
+    },{passive:true});
+
+    doctorStrip?.addEventListener("wheel",event=>{
+      if(Math.abs(event.deltaY) > Math.abs(event.deltaX)){
+        event.preventDefault();
+        doctorStrip.scrollBy({left:event.deltaY,behavior:"smooth"});
+      }
+    },{passive:false});
+
+    doctorScrollLeft?.addEventListener("click",()=>{
+      doctorStrip?.scrollBy({left:-260,behavior:"smooth"});
+    });
+
+    doctorScrollRight?.addEventListener("click",()=>{
+      doctorStrip?.scrollBy({left:260,behavior:"smooth"});
+    });
+
+    window.addEventListener("resize",()=>{
+      hideDoctorTooltip();
+      updateDoctorStripEdges();
+      setDetailsOpen(state.detailsOpen);
+    });
+
+    const doctorStripObserver = new MutationObserver(()=>{
+      updateActiveDoctorLabel();
+      updateDoctorStripEdges();
+    });
+
+    if(doctorStrip){
+      doctorStripObserver.observe(doctorStrip,{
+        subtree:true,
+        attributes:true,
+        attributeFilter:["class"]
+      });
+    }
+
+    buildFilters();
+    render();
+    setDetailsOpen(state.detailsOpen);
+    requestAnimationFrame(updateDoctorStripEdges);
+  
+
+
+    /* =========================================================
+       MOBILE SWIPE NAVIGATION FOR FULL-SCREEN EPISODE PANEL
+       ========================================================= */
+    let detailsTouchStartX = 0;
+    let detailsTouchStartY = 0;
+    let detailsTouchCurrentX = 0;
+    let detailsTouchTracking = false;
+
+    details.addEventListener("touchstart",event=>{
+      if(!window.matchMedia("(max-width:760px)").matches) return;
+      if(!details.classList.contains("open")) return;
+      if(event.touches.length!==1) return;
+
+      const touch = event.touches[0];
+      detailsTouchStartX = touch.clientX;
+      detailsTouchStartY = touch.clientY;
+      detailsTouchCurrentX = touch.clientX;
+      detailsTouchTracking = true;
+    },{passive:true});
+
+    details.addEventListener("touchmove",event=>{
+      if(!detailsTouchTracking || event.touches.length!==1) return;
+      detailsTouchCurrentX = event.touches[0].clientX;
+    },{passive:true});
+
+    details.addEventListener("touchend",event=>{
+      if(!detailsTouchTracking) return;
+      detailsTouchTracking = false;
+
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - detailsTouchStartX;
+      const deltaY = touch.clientY - detailsTouchStartY;
+
+      const horizontalSwipe =
+        Math.abs(deltaX) >= 58 &&
+        Math.abs(deltaX) > Math.abs(deltaY) * 1.25;
+
+      if(!horizontalSwipe) return;
+
+      if(deltaX < 0){
+        selectByOffset(1);
+      }else{
+        selectByOffset(-1);
+      }
+    },{passive:true});
+
+    details.addEventListener("touchcancel",()=>{
+      detailsTouchTracking = false;
+    },{passive:true});
+
+</script>
+</body>
+</html>
