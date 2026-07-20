@@ -614,6 +614,35 @@
       background-position:center;
     }
 
+
+
+.detail-hero::before{
+    content:"";
+    position:absolute;
+    inset:-3%;
+    z-index:-2;
+    background-image:var(--detail-image);
+    background-size:cover;
+    background-position:center;
+    transform:scale(1);
+    will-change:transform,opacity;
+}
+
+.detail-hero.image-changing::before{
+    animation:detailImageReveal .72s cubic-bezier(.22,.8,.22,1) both;
+}
+
+@keyframes detailImageReveal{
+    from{
+        opacity:.35;
+        transform:scale(1.075) translateY(6px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
 .detail-hero::after{
     content:"";
     position:absolute;
@@ -1868,6 +1897,10 @@ button:active,
     transition:none !important;
   }
 }
+
+@media (prefers-reduced-motion:reduce){
+  .detail-hero.image-changing::before{animation:none!important;}
+}
 </style>
 </head>
 
@@ -2625,8 +2658,15 @@ button:active,
       const index = episodes.findIndex(item=>item.id===episode.id);
 
       el("detailPosition").textContent = `${index+1} / ${episodes.length}`;
-      el("detailHero").style.backgroundImage =
-        `linear-gradient(180deg,rgba(3,7,14,.04),rgba(4,9,18,.82)),url("${episode.image}")`;
+      const detailHero=el("detailHero");
+const changed=detailHero.dataset.episodeId!==episode.id;
+detailHero.style.setProperty("--detail-image",`url("${episode.image}")`);
+detailHero.dataset.episodeId=episode.id;
+if(changed){
+  detailHero.classList.remove("image-changing");
+  void detailHero.offsetWidth;
+  detailHero.classList.add("image-changing");
+}
 
       el("detailCode").textContent = episode.code;
       el("detailTitle").textContent = episode.title;
