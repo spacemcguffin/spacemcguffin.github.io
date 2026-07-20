@@ -606,57 +606,28 @@
 
     .detail-hero{
       position:relative;
-      isolation:isolate;
-      min-height:320px;
+      min-height:272px;
       display:flex;
       align-items:end;
-      overflow:hidden;
       padding:20px;
-      background:#07101d;
-    }
-
-    /* Separate artwork layer so only the image animates when episodes change. */
-    .detail-hero::before{
-      content:"";
-      position:absolute;
-      inset:-3%;
-      z-index:-2;
-      background-image:var(--detail-image);
       background-size:cover;
       background-position:center;
-      transform:scale(1);
-      will-change:transform,opacity;
     }
 
-    /* Faint black gradient retained for title readability without obscuring the image. */
-    .detail-hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      pointer-events:none;
-      background:linear-gradient(
+.detail-hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:linear-gradient(
         180deg,
-        rgba(3,7,14,0) 25%,
-        rgba(3,7,14,.16) 72%,
-        rgba(3,7,14,.48) 100%
-      );
-    }
-
-    .detail-hero.image-changing::before{
-      animation:detailImageReveal .72s cubic-bezier(.22,.8,.22,1) both;
-    }
-
-    @keyframes detailImageReveal{
-      0%{
-        opacity:.35;
-        transform:scale(1.075) translate3d(0,6px,0);
-      }
-      100%{
-        opacity:1;
-        transform:scale(1) translate3d(0,0,0);
-      }
-    }
+        rgba(0,0,0,0) 38%,
+        rgba(0,0,0,.12) 58%,
+        rgba(0,0,0,.32) 82%,
+        rgba(0,0,0,.62) 100%
+    );
+}
 
     .detail-heading{
       position:relative;
@@ -668,14 +639,12 @@
       margin:0;
       font-size:2.2rem;
       line-height:1;
-      text-shadow:0 2px 10px rgba(0,0,0,.45);
     }
 
     .detail-sub{
       margin-top:7px;
-      color:#8ec8ff;
+      color:#70b8ff;
       font-size:.82rem;
-      text-shadow:0 1px 8px rgba(0,0,0,.45);
     }
 
     .detail-rating{
@@ -1898,10 +1867,6 @@ button:active,
   .details{
     transition:none !important;
   }
-
-  .detail-hero.image-changing::before{
-    animation:none !important;
-  }
 }
 </style>
 </head>
@@ -2660,16 +2625,8 @@ button:active,
       const index = episodes.findIndex(item=>item.id===episode.id);
 
       el("detailPosition").textContent = `${index+1} / ${episodes.length}`;
-      const detailHero = el("detailHero");
-      const episodeChanged = detailHero.dataset.episodeId !== episode.id;
-      detailHero.style.setProperty("--detail-image", `url("${episode.image}")`);
-      detailHero.dataset.episodeId = episode.id;
-
-      if(episodeChanged){
-        detailHero.classList.remove("image-changing");
-        void detailHero.offsetWidth;
-        detailHero.classList.add("image-changing");
-      }
+      el("detailHero").style.backgroundImage =
+        `linear-gradient(180deg,rgba(3,7,14,.04),rgba(4,9,18,.82)),url("${episode.image}")`;
 
       el("detailCode").textContent = episode.code;
       el("detailTitle").textContent = episode.title;
