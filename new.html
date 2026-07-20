@@ -10,7 +10,7 @@
 
   <meta
     name="theme-color"
-    content="#080b14"
+    content="#05070d"
   >
 
   <title>lewis.lc</title>
@@ -25,65 +25,51 @@
 
   <style>
     :root {
-      --background-top: #0c1120;
-      --background-middle: #080c17;
-      --background-bottom: #05070d;
+      --background-top: #0b1020;
+      --background-middle: #070b14;
+      --background-bottom: #03050a;
 
-      --nebula-one: rgba(77, 100, 177, 0.14);
-      --nebula-two: rgba(104, 73, 147, 0.1);
-      --nebula-three: rgba(47, 112, 133, 0.08);
+      --nebula-one: rgba(66, 89, 164, 0.15);
+      --nebula-two: rgba(98, 65, 147, 0.1);
+      --nebula-three: rgba(38, 105, 128, 0.08);
+
+      --text-primary: rgba(255, 255, 255, 0.96);
+      --text-secondary: rgba(255, 255, 255, 0.57);
+      --text-muted: rgba(255, 255, 255, 0.34);
 
       --cursor-x: 50vw;
       --cursor-y: 50vh;
-
       --cursor-opacity: 0;
-
-      --text-primary: rgba(255, 255, 255, 0.96);
-      --text-secondary: rgba(255, 255, 255, 0.62);
-
-      --panel-background: rgba(12, 15, 25, 0.42);
-      --panel-border: rgba(255, 255, 255, 0.09);
-      --panel-highlight: rgba(255, 255, 255, 0.045);
-
-      --link-background: rgba(255, 255, 255, 0.065);
-      --link-background-hover: rgba(255, 255, 255, 0.12);
-      --link-border: rgba(255, 255, 255, 0.08);
-      --link-border-hover: rgba(255, 255, 255, 0.17);
     }
 
-    /*
-      Time-aware colour palettes.
-      JavaScript assigns one of these classes to the body.
-    */
-
     body.time-morning {
-      --background-top: #171523;
-      --background-middle: #100f19;
-      --background-bottom: #090a0f;
+      --background-top: #17141e;
+      --background-middle: #0f0e16;
+      --background-bottom: #08090d;
 
-      --nebula-one: rgba(181, 121, 108, 0.12);
-      --nebula-two: rgba(110, 92, 144, 0.1);
-      --nebula-three: rgba(190, 146, 94, 0.06);
+      --nebula-one: rgba(176, 119, 103, 0.11);
+      --nebula-two: rgba(112, 91, 145, 0.1);
+      --nebula-three: rgba(184, 141, 93, 0.055);
     }
 
     body.time-day {
-      --background-top: #111827;
-      --background-middle: #0b111c;
-      --background-bottom: #070a10;
+      --background-top: #101724;
+      --background-middle: #0a101a;
+      --background-bottom: #06090f;
 
-      --nebula-one: rgba(83, 119, 165, 0.12);
-      --nebula-two: rgba(89, 90, 146, 0.09);
-      --nebula-three: rgba(56, 126, 143, 0.07);
+      --nebula-one: rgba(77, 112, 158, 0.12);
+      --nebula-two: rgba(85, 88, 145, 0.09);
+      --nebula-three: rgba(52, 121, 139, 0.065);
     }
 
     body.time-evening {
-      --background-top: #15142a;
-      --background-middle: #0d0d1c;
-      --background-bottom: #07070f;
+      --background-top: #151329;
+      --background-middle: #0d0c1b;
+      --background-bottom: #06070e;
 
-      --nebula-one: rgba(112, 79, 163, 0.14);
-      --nebula-two: rgba(78, 91, 161, 0.1);
-      --nebula-three: rgba(171, 94, 113, 0.065);
+      --nebula-one: rgba(111, 77, 161, 0.13);
+      --nebula-two: rgba(77, 91, 158, 0.1);
+      --nebula-three: rgba(166, 91, 111, 0.06);
     }
 
     body.time-night {
@@ -91,9 +77,9 @@
       --background-middle: #070b14;
       --background-bottom: #03050a;
 
-      --nebula-one: rgba(64, 87, 164, 0.15);
-      --nebula-two: rgba(94, 61, 144, 0.1);
-      --nebula-three: rgba(37, 100, 125, 0.08);
+      --nebula-one: rgba(66, 89, 164, 0.15);
+      --nebula-two: rgba(98, 65, 147, 0.1);
+      --nebula-three: rgba(38, 105, 128, 0.08);
     }
 
     *,
@@ -109,17 +95,17 @@
 
     body {
       position: relative;
-      display: grid;
       min-height: 100svh;
       margin: 0;
       overflow: hidden;
 
       color: var(--text-primary);
+
       background:
         linear-gradient(
-          160deg,
+          155deg,
           var(--background-top) 0%,
-          var(--background-middle) 48%,
+          var(--background-middle) 50%,
           var(--background-bottom) 100%
         );
 
@@ -136,10 +122,6 @@
       isolation: isolate;
     }
 
-    /*
-      Ambient nebula layer.
-    */
-
     .ambient-background {
       position: fixed;
       inset: 0;
@@ -151,45 +133,36 @@
     .nebula {
       position: absolute;
       border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.9;
+      filter: blur(110px);
+      opacity: 0.88;
       will-change: transform;
     }
 
     .nebula-one {
-      top: -25%;
-      left: -15%;
-      width: min(70vw, 850px);
+      top: -32%;
+      left: -18%;
+      width: min(75vw, 920px);
       aspect-ratio: 1;
-
       background: var(--nebula-one);
-
-      animation:
-        drift-one 30s ease-in-out infinite alternate;
+      animation: drift-one 34s ease-in-out infinite alternate;
     }
 
     .nebula-two {
-      right: -25%;
-      bottom: -30%;
-      width: min(76vw, 950px);
+      right: -28%;
+      bottom: -38%;
+      width: min(82vw, 980px);
       aspect-ratio: 1;
-
       background: var(--nebula-two);
-
-      animation:
-        drift-two 38s ease-in-out infinite alternate;
+      animation: drift-two 42s ease-in-out infinite alternate;
     }
 
     .nebula-three {
-      top: 35%;
-      left: 42%;
-      width: min(46vw, 620px);
+      top: 34%;
+      left: 48%;
+      width: min(48vw, 620px);
       aspect-ratio: 1;
-
       background: var(--nebula-three);
-
-      animation:
-        drift-three 34s ease-in-out infinite alternate;
+      animation: drift-three 38s ease-in-out infinite alternate;
     }
 
     @keyframes drift-one {
@@ -198,17 +171,17 @@
       }
 
       to {
-        transform: translate3d(8%, 5%, 0) scale(1.08);
+        transform: translate3d(8%, 6%, 0) scale(1.09);
       }
     }
 
     @keyframes drift-two {
       from {
-        transform: translate3d(3%, 3%, 0) scale(1.03);
+        transform: translate3d(3%, 2%, 0) scale(1.02);
       }
 
       to {
-        transform: translate3d(-7%, -5%, 0) scale(1.12);
+        transform: translate3d(-7%, -5%, 0) scale(1.11);
       }
     }
 
@@ -222,12 +195,6 @@
       }
     }
 
-    /*
-      Star layers.
-      Each layer uses repeated radial gradients rather than hundreds
-      of separate HTML elements.
-    */
-
     .stars,
     .stars::before,
     .stars::after {
@@ -238,17 +205,17 @@
     }
 
     .stars {
-      opacity: 0.52;
+      opacity: 0.48;
 
       background-image:
         radial-gradient(
           circle,
-          rgba(255, 255, 255, 0.68) 0 0.7px,
+          rgba(255, 255, 255, 0.65) 0 0.7px,
           transparent 0.9px
         ),
         radial-gradient(
           circle,
-          rgba(205, 220, 255, 0.46) 0 0.65px,
+          rgba(196, 215, 255, 0.42) 0 0.65px,
           transparent 0.9px
         );
 
@@ -257,45 +224,42 @@
         37px 61px;
 
       background-size:
-        104px 104px,
-        151px 151px;
+        108px 108px,
+        157px 157px;
 
-      animation:
-        star-drift 55s linear infinite;
+      animation: star-drift 62s linear infinite;
     }
 
     .stars::before {
-      opacity: 0.48;
+      opacity: 0.42;
 
       background-image:
         radial-gradient(
           circle,
-          rgba(255, 255, 255, 0.7) 0 1px,
+          rgba(255, 255, 255, 0.72) 0 1px,
           transparent 1.2px
         );
 
       background-position: 31px 17px;
-      background-size: 223px 223px;
+      background-size: 229px 229px;
 
-      animation:
-        star-drift-reverse 76s linear infinite;
+      animation: star-drift-reverse 84s linear infinite;
     }
 
     .stars::after {
-      opacity: 0.25;
+      opacity: 0.2;
 
       background-image:
         radial-gradient(
           circle,
-          rgba(170, 199, 255, 0.9) 0 1.2px,
+          rgba(173, 200, 255, 0.88) 0 1.2px,
           transparent 1.4px
         );
 
       background-position: 90px 44px;
-      background-size: 337px 337px;
+      background-size: 341px 341px;
 
-      animation:
-        star-pulse 8s ease-in-out infinite alternate;
+      animation: star-pulse 9s ease-in-out infinite alternate;
     }
 
     @keyframes star-drift {
@@ -304,7 +268,7 @@
       }
 
       to {
-        transform: translate3d(-45px, 35px, 0);
+        transform: translate3d(-42px, 32px, 0);
       }
     }
 
@@ -314,23 +278,19 @@
       }
 
       to {
-        transform: translate3d(38px, -30px, 0);
+        transform: translate3d(35px, -28px, 0);
       }
     }
 
     @keyframes star-pulse {
       from {
-        opacity: 0.15;
+        opacity: 0.13;
       }
 
       to {
-        opacity: 0.32;
+        opacity: 0.28;
       }
     }
-
-    /*
-      Cursor-following light.
-    */
 
     .cursor-light {
       position: fixed;
@@ -338,8 +298,8 @@
       top: 0;
       left: 0;
 
-      width: 650px;
-      height: 650px;
+      width: 720px;
+      height: 720px;
 
       border-radius: 50%;
       pointer-events: none;
@@ -347,8 +307,8 @@
       background:
         radial-gradient(
           circle,
-          rgba(145, 167, 255, 0.105) 0%,
-          rgba(112, 128, 218, 0.045) 28%,
+          rgba(142, 163, 255, 0.095) 0%,
+          rgba(105, 121, 210, 0.037) 30%,
           transparent 70%
         );
 
@@ -360,98 +320,46 @@
           calc(var(--cursor-y) - 50%)
         );
 
-      transition:
-        opacity 450ms ease;
-
+      transition: opacity 450ms ease;
       will-change: transform;
     }
-
-    /*
-      Fine grain prevents the gradients from feeling too smooth or synthetic.
-    */
 
     .grain {
       position: fixed;
       inset: 0;
       z-index: -2;
       pointer-events: none;
-      opacity: 0.027;
+      opacity: 0.024;
 
       background-image:
         url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='.55'/%3E%3C/svg%3E");
     }
 
-    /*
-      Main page layout.
-    */
-
     .page {
       display: grid;
       place-items: center;
-      width: 100%;
       min-height: 100svh;
-      padding: 28px;
+      padding: 32px;
     }
 
     .container {
-      position: relative;
-      width: min(100%, 560px);
-      padding:
-        clamp(30px, 7vw, 54px)
-        clamp(26px, 7vw, 52px);
-
+      width: min(100%, 720px);
       text-align: center;
 
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255, 255, 255, 0.045),
-          transparent 35%
-        ),
-        var(--panel-background);
-
-      border: 1px solid var(--panel-border);
-      border-radius: 30px;
-
-      box-shadow:
-        0 30px 90px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 var(--panel-highlight);
-
-      backdrop-filter: blur(22px) saturate(115%);
-      -webkit-backdrop-filter: blur(22px) saturate(115%);
-
       animation:
-        panel-arrive 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+        page-arrive 950ms cubic-bezier(0.22, 1, 0.36, 1) both;
     }
 
-    .container::before {
-      position: absolute;
-      inset: 0;
-      content: "";
-      z-index: -1;
-
-      border-radius: inherit;
-
-      background:
-        radial-gradient(
-          circle at 50% 0%,
-          rgba(255, 255, 255, 0.07),
-          transparent 43%
-        );
-
-      pointer-events: none;
-    }
-
-    @keyframes panel-arrive {
+    @keyframes page-arrive {
       from {
         opacity: 0;
-        transform: translateY(14px) scale(0.985);
-        filter: blur(6px);
+        transform: translateY(16px);
+        filter: blur(5px);
       }
 
       to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateY(0);
         filter: blur(0);
       }
     }
@@ -463,86 +371,100 @@
     }
 
     h1 {
-      font-size: clamp(2.8rem, 10vw, 5rem);
-      font-weight: 650;
-      letter-spacing: -0.075em;
-      line-height: 0.95;
-      text-wrap: balance;
+      font-size: clamp(4rem, 13vw, 8.5rem);
+      font-weight: 680;
+      line-height: 0.86;
+      letter-spacing: -0.085em;
 
       text-shadow:
-        0 2px 24px rgba(255, 255, 255, 0.05);
+        0 3px 34px rgba(255, 255, 255, 0.055);
     }
 
     .subtitle {
-      margin-top: 18px;
+      margin: 28px 0 0;
 
       color: var(--text-secondary);
 
-      font-size: clamp(0.94rem, 2vw, 1.04rem);
+      font-size: clamp(1rem, 2.6vw, 1.22rem);
       font-weight: 420;
-      line-height: 1.5;
-      letter-spacing: -0.012em;
+      line-height: 1.45;
+      letter-spacing: -0.018em;
+    }
+
+    .divider {
+      width: 42px;
+      height: 1px;
+      margin: 34px auto;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
     }
 
     .links {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
-      gap: 10px;
-
-      margin-top: 32px;
+      flex-wrap: wrap;
+      gap: 14px 28px;
     }
 
     .link {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
 
-      min-height: 44px;
-      padding: 10px 17px;
+      color: rgba(255, 255, 255, 0.72);
 
-      color: rgba(255, 255, 255, 0.84);
-      background: var(--link-background);
-
-      border: 1px solid var(--link-border);
-      border-radius: 999px;
-
-      font-size: 0.91rem;
-      font-weight: 520;
+      font-size: 0.98rem;
+      font-weight: 500;
       line-height: 1;
       letter-spacing: -0.01em;
       text-decoration: none;
 
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.035);
-
       transition:
         color 180ms ease,
-        background-color 180ms ease,
-        border-color 180ms ease,
-        transform 180ms ease,
-        box-shadow 180ms ease;
+        transform 180ms ease;
+    }
+
+    .link::after {
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      left: 0;
+
+      height: 1px;
+      content: "";
+
+      background: currentColor;
+
+      transform: scaleX(0);
+      transform-origin: center;
+
+      transition: transform 220ms ease;
     }
 
     .link:hover {
       color: #ffffff;
-      background: var(--link-background-hover);
-      border-color: var(--link-border-hover);
-
       transform: translateY(-2px);
+    }
 
-      box-shadow:
-        0 10px 26px rgba(0, 0, 0, 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    .link:hover::after {
+      transform: scaleX(1);
     }
 
     .link:active {
-      transform: translateY(0) scale(0.98);
+      transform: translateY(0);
     }
 
     .link:focus-visible {
-      outline: 2px solid rgba(190, 206, 255, 0.75);
-      outline-offset: 4px;
+      outline: 2px solid rgba(190, 206, 255, 0.72);
+      outline-offset: 7px;
+      border-radius: 3px;
     }
 
     .spotify-link {
@@ -551,41 +473,46 @@
         "Google Sans Flex",
         sans-serif;
 
-      font-size: 0.95rem;
-      letter-spacing: 0.015em;
+      letter-spacing: 0.02em;
     }
 
-    /*
-      Mobile adjustments.
-    */
+    .link-separator {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
 
     @media (max-width: 600px) {
       .page {
-        padding: 18px;
+        padding: 24px;
       }
 
-      .container {
-        padding: 38px 24px;
-        border-radius: 25px;
+      h1 {
+        font-size: clamp(3.7rem, 20vw, 6rem);
+      }
+
+      .subtitle {
+        margin-top: 23px;
+      }
+
+      .divider {
+        margin: 29px auto;
       }
 
       .links {
+        gap: 20px;
         flex-direction: column;
-        margin-top: 28px;
       }
 
-      .link {
-        width: 100%;
+      .link-separator {
+        display: none;
       }
 
       .nebula {
-        filter: blur(75px);
+        filter: blur(80px);
       }
     }
-
-    /*
-      Cursor effect is unnecessary on touch devices.
-    */
 
     @media (hover: none), (pointer: coarse) {
       .cursor-light {
@@ -593,15 +520,10 @@
       }
     }
 
-    /*
-      Respect reduced-motion preferences.
-    */
-
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
       *::after {
-        scroll-behavior: auto !important;
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
@@ -633,6 +555,8 @@
         deleted all my social media :)
       </p>
 
+      <div class="divider" aria-hidden="true"></div>
+
       <nav class="links" aria-label="Main links">
         <a
           class="link spotify-link"
@@ -642,6 +566,8 @@
         >
           farewell 42
         </a>
+
+        <span class="link-separator" aria-hidden="true"></span>
 
         <a class="link" href="/diary">
           diary
@@ -655,10 +581,6 @@
       const body = document.body;
       const root = document.documentElement;
       const cursorLight = document.querySelector(".cursor-light");
-
-      /*
-        Apply the colour palette according to the visitor's local time.
-      */
 
       function applyTimeTheme() {
         const hour = new Date().getHours();
@@ -683,16 +605,7 @@
 
       applyTimeTheme();
 
-      /*
-        Recheck occasionally in case the page is left open across
-        another part of the day.
-      */
-
       window.setInterval(applyTimeTheme, 10 * 60 * 1000);
-
-      /*
-        Cursor light with smooth interpolation.
-      */
 
       const supportsCursor =
         window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -704,16 +617,14 @@
         let currentX = targetX;
         let currentY = targetY;
 
-        let animationFrame;
-
         function animateCursorLight() {
-          currentX += (targetX - currentX) * 0.09;
-          currentY += (targetY - currentY) * 0.09;
+          currentX += (targetX - currentX) * 0.085;
+          currentY += (targetY - currentY) * 0.085;
 
           root.style.setProperty("--cursor-x", `${currentX}px`);
           root.style.setProperty("--cursor-y", `${currentY}px`);
 
-          animationFrame = requestAnimationFrame(animateCursorLight);
+          requestAnimationFrame(animateCursorLight);
         }
 
         window.addEventListener(
@@ -735,11 +646,7 @@
           root.style.setProperty("--cursor-opacity", "1");
         });
 
-        animationFrame = requestAnimationFrame(animateCursorLight);
-
-        window.addEventListener("beforeunload", () => {
-          cancelAnimationFrame(animationFrame);
-        });
+        requestAnimationFrame(animateCursorLight);
       }
     })();
   </script>
