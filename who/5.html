@@ -185,7 +185,21 @@
     .logo-block{
       position:relative;
       z-index:2;
-      max-width:650px;
+      max-width:760px;
+    }
+
+    .site-logo{
+      display:block;
+      width:min(100%,720px);
+      height:auto;
+      margin-bottom:12px;
+      filter:drop-shadow(0 0 20px rgba(78,140,255,.35));
+    }
+
+    @media(max-width:760px){
+      .site-logo{
+        width:100%;
+      }
     }
 
     .logo-title{
@@ -194,7 +208,6 @@
       letter-spacing:-.055em;
       font-weight:800;
       text-transform:uppercase;
-      text-shadow:0 0 30px rgba(103,169,255,.23);
     }
 
     .logo-subtitle{
@@ -607,7 +620,7 @@
     .detail-hero{
       position:relative;
       isolation:isolate;
-      min-height:320px;
+      min-height:272px;
       display:flex;
       align-items:end;
       overflow:hidden;
@@ -615,78 +628,67 @@
       background:#07101d;
     }
 
-    /* The episode artwork now sits on its own layer so it can gently zoom
-       without moving the title panel or the rest of the inspector. */
-    .detail-hero::before{
-      content:"";
-      position:absolute;
-      inset:-3%;
-      z-index:-2;
-      background-image:var(--detail-image);
-      background-size:cover;
-      background-position:center;
-      transform:scale(1);
-      will-change:transform,opacity;
-    }
 
-    /* A very light edge treatment replaces the former heavy black gradient. */
-    .detail-hero::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      z-index:-1;
-      pointer-events:none;
-      background:
-        linear-gradient(180deg,rgba(3,7,14,.04),transparent 38%),
-        linear-gradient(0deg,rgba(3,7,14,.12),transparent 34%);
-    }
 
-    .detail-hero.image-changing::before{
-      animation:detailImageReveal .72s cubic-bezier(.22,.8,.22,1) both;
-    }
+.detail-hero::before{
+    content:"";
+    position:absolute;
+    inset:-3%;
+    z-index:-2;
+    background-image:var(--detail-image);
+    background-size:cover;
+    background-position:center;
+    transform:scale(1);
+    will-change:transform,opacity;
+}
 
-    @keyframes detailImageReveal{
-      0%{
+.detail-hero.image-changing::before{
+    animation:detailImageReveal .72s cubic-bezier(.22,.8,.22,1) both;
+}
+
+@keyframes detailImageReveal{
+    from{
         opacity:.35;
-        transform:scale(1.075) translate3d(0,6px,0);
-      }
-      100%{
-        opacity:1;
-        transform:scale(1) translate3d(0,0,0);
-      }
+        transform:scale(1.075) translateY(6px);
     }
+    to{
+        opacity:1;
+        transform:scale(1) translateY(0);
+    }
+}
+
+.detail-hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    pointer-events:none;
+    background:linear-gradient(
+        180deg,
+        rgba(0,0,0,0) 25%,
+        rgba(0,0,0,.08) 45%,
+        rgba(0,0,0,.28) 68%,
+        rgba(0,0,0,.58) 88%,
+        rgba(0,0,0,.82) 100%
+    );
+}
 
     .detail-heading{
       position:relative;
       z-index:2;
       width:100%;
-      padding:15px 16px 14px;
-      border:1px solid rgba(255,255,255,.22);
-      border-radius:15px;
-      background:linear-gradient(
-        135deg,
-        rgba(7,15,28,.58),
-        rgba(12,27,48,.38)
-      );
-      box-shadow:
-        0 15px 40px rgba(0,0,0,.28),
-        inset 0 1px 0 rgba(255,255,255,.11);
-      backdrop-filter:blur(14px) saturate(135%);
-      -webkit-backdrop-filter:blur(14px) saturate(135%);
     }
 
     .detail-heading h2{
       margin:0;
-      font-size:clamp(1.65rem,3vw,2.2rem);
-      line-height:1.02;
-      text-shadow:0 2px 16px rgba(0,0,0,.62);
+      font-size:2.2rem;
+      line-height:1;
     }
 
     .detail-sub{
       margin-top:7px;
-      color:#a9d5ff;
+      color:#70b8ff;
       font-size:.82rem;
-      text-shadow:0 1px 10px rgba(0,0,0,.72);
     }
 
     .detail-rating{
@@ -1035,7 +1037,6 @@
       font-size:.84rem;
       font-weight:700;
       letter-spacing:-.04em;
-      text-shadow:0 1px 8px rgba(0,0,0,.45);
     }
 
     .doctor-strip .doctor-avatar img{
@@ -1332,12 +1333,7 @@
       border-radius:50%;color:#fff;
       background:radial-gradient(circle at 35% 27%,rgba(255,255,255,.32),transparent 34%),color-mix(in srgb,var(--season-color) 70%,#091321);
       box-shadow:0 0 0 3px rgba(4,9,18,.76),0 0 17px color-mix(in srgb,var(--season-color) 38%,transparent);
-      font-size:.78rem;font-weight:900;line-height:1;text-shadow:0 1px 7px rgba(0,0,0,.42)
-    }
-    .season-pill.active .season-number{
-      box-shadow:0 0 0 3px rgba(4,9,18,.86),0 0 0 5px var(--season-color),0 0 22px color-mix(in srgb,var(--season-color) 52%,transparent)
-    }
-    .season-pill-copy{min-width:0;display:grid;gap:2px}
+      font-size:.78rem;font-weight:900;line-height:1;display:grid;gap:2px}
     .season-pill-name{
       overflow:hidden;color:#e9f1ff;font-size:.77rem;font-weight:790;
       line-height:1.15;text-overflow:ellipsis;white-space:nowrap
@@ -1909,10 +1905,10 @@ button:active,
   .details{
     transition:none !important;
   }
+}
 
-  .detail-hero.image-changing::before{
-    animation:none !important;
-  }
+@media (prefers-reduced-motion:reduce){
+  .detail-hero.image-changing::before{animation:none!important;}
 }
 </style>
 </head>
@@ -1922,9 +1918,8 @@ button:active,
     <main class="main">
       <header class="hero">
                 <div class="logo-block">
-          <div class="logo-title">Doctor Who</div>
-          <div class="logo-subtitle">Episode Guide</div>
-          <p class="hero-copy">
+  <img class="site-logo" src="dwlogo.png" alt="Doctor Who Episode Guide">
+  <p class="hero-copy">
             Your complete guide to adventures across time and space. Search episodes,
             filter by series or Doctor, and open any card to see full information.
           </p>
@@ -2242,7 +2237,7 @@ button:active,
         series:"Season 5", year:1967, date:"2 September 1967", duration:"4 episodes",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Cybermen",
         writer:"Kit Pedler and Gerry Davis", director:"Morris Barry", rating:4.8,
-        image:"https://picsum.photos/seed/tomb-cybermen/800/450",
+        image:"https://images2.imgbox.com/84/6e/jiQXqBSE_o.jpg",
         synopsis:"An archaeological expedition on Telos opens an ancient tomb and awakens a dormant army of Cybermen.",
         trivia:["The serial was recovered in Hong Kong in 1992.","It introduced the Cyber Controller and the Cybermats."],
         tags:["Cybermen","Telos","Classic"]
@@ -2252,7 +2247,7 @@ button:active,
         series:"Season 5", year:1968, date:"3 February 1968", duration:"6 episodes",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Great Intelligence / Yeti",
         writer:"Mervyn Haisman and Henry Lincoln", director:"Douglas Camfield", rating:4.7,
-        image:"https://picsum.photos/seed/web-of-fear/800/450",
+        image:"https://images2.imgbox.com/94/35/RSKhTkfM_o.jpg",
         synopsis:"The Great Intelligence fills the London Underground with a deadly web while its robotic Yeti close in.",
         trivia:["The story introduced Colonel Lethbridge-Stewart.","Five of its six episodes survive in the BBC archive."],
         tags:["Yeti","Great Intelligence","UNIT origins"]
@@ -2262,7 +2257,7 @@ button:active,
         series:"Season 6", year:1969, date:"19 April 1969", duration:"10 episodes",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"War Lords",
         writer:"Malcolm Hulke and Terrance Dicks", director:"David Maloney", rating:4.9,
-        image:"https://picsum.photos/seed/war-games/800/450",
+        image:"https://images2.imgbox.com/ff/10/yEfnTX8h_o.jpg",
         synopsis:"Soldiers from different periods of history are abducted and forced to fight in a vast alien experiment.",
         trivia:["The story contains the first televised appearance of the Time Lords.","Its final episode features the Second Doctor's forced regeneration."],
         tags:["Time Lords","Regeneration","Finale"]
@@ -2272,7 +2267,7 @@ button:active,
         series:"Season 22", year:1985, date:"19 January 1985", duration:"2 episodes",
         format:"Serial", companion:"Peri Brown", monster:"Sil",
         writer:"Philip Martin", director:"Ron Jones", rating:4.5,
-        image:"https://picsum.photos/seed/vengeance-varos/800/450",
+        image:"https://images2.imgbox.com/f7/f8/39YuUeGq_o.jpg",
         synopsis:"The Doctor and Peri arrive on a prison world where torture and government policy are broadcast as entertainment.",
         trivia:["This serial introduced Sil.","Its original episodes were each approximately forty-five minutes long."],
         tags:["Sil","Satire","Varos"]
@@ -2282,7 +2277,7 @@ button:active,
         series:"Season 22", year:1985, date:"23 March 1985", duration:"2 episodes",
         format:"Serial", companion:"Peri Brown", monster:"Daleks / Davros",
         writer:"Eric Saward", director:"Graeme Harper", rating:4.7,
-        image:"https://picsum.photos/seed/revelation-daleks/800/450",
+        image:"https://images2.imgbox.com/eb/58/M9zU1xIk_o.jpg",
         synopsis:"At the funeral complex Tranquil Repose, Davros is secretly turning the dead into a new army of Daleks.",
         trivia:["Davros operates under the name of the Great Healer.","The serial was the final story of Season 22."],
         tags:["Daleks","Davros","Necros"]
@@ -2292,7 +2287,7 @@ button:active,
         series:"Season 23", year:1986, date:"6 September 1986", duration:"4 episodes",
         format:"Serial", companion:"Peri Brown", monster:"Drathro",
         writer:"Robert Holmes", director:"Nicholas Mallett", rating:4.2,
-        image:"https://picsum.photos/seed/mysterious-planet/800/450",
+        image:"https://images2.imgbox.com/b6/f3/SC7MoCT2_o.jpg",
         synopsis:"The Doctor is placed on trial while evidence from his recent visit to the mysterious planet Ravalox is presented.",
         trivia:["This is the opening segment of The Trial of a Time Lord.","It introduced the Valeyard and the Inquisitor."],
         tags:["Trial","Ravalox","Valeyard"]
@@ -2302,7 +2297,7 @@ button:active,
         series:"TV Movie", year:1996, date:"27 May 1996", duration:"89 minutes",
         format:"Television film", companion:"Grace Holloway", monster:"The Master",
         writer:"Matthew Jacobs", director:"Geoffrey Sax", rating:4.3,
-        image:"https://picsum.photos/seed/doctor-who-tv-movie/800/450",
+        image:"https://images2.imgbox.com/7c/c5/WDcUe1ts_o.jpg",
         synopsis:"After being caught in a gang shooting, the Doctor regenerates in San Francisco and must stop the Master's plan to steal his remaining lives.",
         trivia:["Paul McGann made his full televised debut as the Doctor.","The story begins with Sylvester McCoy as the Seventh Doctor."],
         tags:["TV Movie","The Master","Doctor debut"]
@@ -2312,7 +2307,7 @@ button:active,
         series:"50th Anniversary", year:2013, date:"14 November 2013", duration:"7 minutes",
         format:"Mini-episode", companion:"Cass", monster:"Sisterhood of Karn",
         writer:"Steven Moffat", director:"John Hayes", rating:4.8,
-        image:"https://picsum.photos/seed/night-of-the-doctor/800/450",
+        image:"https://images2.imgbox.com/de/bf/h3SBfQWC_o.jpg",
         synopsis:"As the Time War intensifies, the Eighth Doctor tries to save a pilot who refuses to trust a Time Lord.",
         trivia:["Paul McGann returned to the role on screen after seventeen years.","The episode depicts the Eighth Doctor's regeneration."],
         tags:["Regeneration","Time War","Anniversary"]
@@ -2325,7 +2320,7 @@ button:active,
         series:"Season 4", year:1967, date:"11 February 1967", duration:"4 episodes",
         format:"Serial", companion:"Jamie McCrimmon, Polly and Ben Jackson", monster:"Cybermen",
         writer:"Kit Pedler", director:"Morris Barry", rating:4.3,
-        image:"https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/bf/a1/8ZgAuWTe_o.jpg",
         synopsis:"In 2070, the TARDIS crew reaches a weather-control base on the Moon where a mysterious illness conceals a Cyberman invasion.",
         trivia:["Two of the four episodes are currently missing from the BBC archive.","The story introduced the Cybermen's more streamlined Moonbase design."],
         tags:["Cybermen","Moon","Missing episodes"]
@@ -2335,7 +2330,7 @@ button:active,
         series:"Season 5", year:1967, date:"23 December 1967", duration:"6 episodes",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Salamander",
         writer:"David Whitaker", director:"Barry Letts", rating:4.5,
-        image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/54/c6/pMa4xdjw_o.jpg",
         synopsis:"The Doctor discovers that he is the exact double of Salamander, a celebrated world leader suspected of engineering global disasters.",
         trivia:["Patrick Troughton plays both the Doctor and Salamander.","Five previously missing episodes were recovered in Nigeria in 2013."],
         tags:["Doppelgänger","Political thriller","Recovered"]
@@ -2345,7 +2340,7 @@ button:active,
         series:"Season 6", year:1968, date:"14 September 1968", duration:"5 episodes",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"The Master of the Land",
         writer:"Peter Ling and Derrick Sherwin", director:"David Maloney", rating:4.7,
-        image:"https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/5e/4c/VBS5ni89_o.jpg",
         synopsis:"Forced outside normal space and time, the travellers enter a surreal realm where fictional characters and language itself become dangerous.",
         trivia:["Episode one was added late when the preceding story was reduced by one episode.","Hamish Wilson briefly plays Jamie after the character's face is incorrectly reconstructed."],
         tags:["Land of Fiction","Surreal","Zoe"]
@@ -2355,7 +2350,7 @@ button:active,
         series:"Season 6", year:1968, date:"2 November 1968", duration:"8 episodes",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"Cybermen",
         writer:"Derrick Sherwin", director:"Douglas Camfield", rating:4.8,
-        image:"https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/d7/25/MlvGE9zu_o.jpg",
         synopsis:"An electronics magnate works with the Cybermen to paralyse humanity, bringing the Doctor back into contact with UNIT and Brigadier Lethbridge-Stewart.",
         trivia:["Episodes one and four survive only as audio and were animated for DVD.","The serial established UNIT as a major part of the programme."],
         tags:["Cybermen","UNIT","London"]
@@ -2365,7 +2360,7 @@ button:active,
         series:"Season 7", year:1970, date:"9 May 1970", duration:"7 episodes",
         format:"Serial", companion:"Liz Shaw", monster:"Primords",
         writer:"Don Houghton", director:"Douglas Camfield and Barry Letts", rating:4.9,
-        image:"https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/28/61/nPMsYUBq_o.jpg",
         synopsis:"A drilling project threatens the planet while a damaged TARDIS console sends the Doctor into a brutal parallel version of Earth.",
         trivia:["This was Liz Shaw's final televised story as the Doctor's regular companion.","Barry Letts completed direction after Douglas Camfield became unwell."],
         tags:["Parallel Earth","UNIT","Primords"]
@@ -2375,7 +2370,7 @@ button:active,
         series:"Season 8", year:1971, date:"2 January 1971", duration:"4 episodes",
         format:"Serial", companion:"Jo Grant", monster:"The Master / Autons",
         writer:"Robert Holmes", director:"Barry Letts", rating:4.6,
-        image:"https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/0a/fb/QiX505u8_o.jpg",
         synopsis:"The newly arrived Master allies himself with the Nestene Consciousness, turning everyday plastic objects into lethal weapons.",
         trivia:["The story introduced the Master and Jo Grant.","It also marked Captain Mike Yates's first appearance."],
         tags:["The Master","Autons","Jo Grant"]
@@ -2385,7 +2380,7 @@ button:active,
         series:"Season 8", year:1971, date:"22 May 1971", duration:"5 episodes",
         format:"Serial", companion:"Jo Grant", monster:"Azal / The Master",
         writer:"Guy Leopold", director:"Christopher Barry", rating:4.7,
-        image:"https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/4f/73/ugdSqIMz_o.jpg",
         synopsis:"At the village of Devil's End, the Master awakens an ancient alien whose species has guided humanity for millennia.",
         trivia:["Guy Leopold was a shared pseudonym for Barry Letts and Robert Sloman.","Much of the location filming took place in Aldbourne, Wiltshire."],
         tags:["The Master","UNIT","Devil's End"]
@@ -2395,7 +2390,7 @@ button:active,
         series:"Season 10", year:1972, date:"30 December 1972", duration:"4 episodes",
         format:"Serial", companion:"Jo Grant", monster:"Omega",
         writer:"Bob Baker and Dave Martin", director:"Lennie Mayne", rating:4.7,
-        image:"https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/f4/74/1LAHCYS7_o.jpg",
         synopsis:"A threat from beyond the universe forces the Time Lords to unite three incarnations of the Doctor against the legendary Omega.",
         trivia:["The serial celebrated Doctor Who's tenth season.","William Hartnell appeared through pre-recorded inserts because of ill health."],
         tags:["Multi-Doctor","Omega","Anniversary"]
@@ -2405,7 +2400,7 @@ button:active,
         series:"Season 13", year:1975, date:"25 October 1975", duration:"4 episodes",
         format:"Serial", companion:"Sarah Jane Smith", monster:"Sutekh / Mummies",
         writer:"Stephen Harris", director:"Paddy Russell", rating:4.9,
-        image:"https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/01/ea/71Dq0Uh0_o.jpg",
         synopsis:"In an English priory in 1911, the Doctor battles Sutekh, an imprisoned Osiran whose freedom would mean the destruction of all life.",
         trivia:["Stephen Harris was a pseudonym used by Robert Holmes and Lewis Greifer.","Gabriel Woolf later voiced the Beast in the revived series."],
         tags:["Sutekh","Sarah Jane","1911"]
@@ -2415,10 +2410,20 @@ button:active,
         series:"Season 13", year:1976, date:"31 January 1976", duration:"6 episodes",
         format:"Serial", companion:"Sarah Jane Smith", monster:"Krynoid",
         writer:"Robert Banks Stewart", director:"Douglas Camfield", rating:4.8,
-        image:"https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=82",
+        image:"https://images2.imgbox.com/61/53/W2arljLX_o.jpg",
         synopsis:"An alien seed pod found in Antarctica infects a scientist before a ruthless collector brings the growing Krynoid to England.",
         trivia:["The story was partly inspired by classic plant-invasion fiction.","It was Douglas Camfield's final Doctor Who directing credit."],
         tags:["Krynoid","Antarctica","Sarah Jane"]
+      },
+      {
+        id:"end-of-time", code:"4.17", title:"The End of Time", doctor:"Tenth Doctor", doctorNumber:10,
+        series:"Series 4", year:2010, date:"1 January 2010", duration:"2 episodes",
+        format:"Special", companion:"Wilfred Mott", monster:"The Master",
+        writer:"Russell T Davies", director:"Euros Lyn", rating:4.8,
+        image:"/who/10regen.png",
+        synopsis:"It is the Tenth Doctor's final journey — but his psychotic nemesis, the Master, has been resurrected on Christmas Eve! Each determined to cheat death, the battle rages from the abandoned wastelands of London to the mysterious Immortality Gate, whilst the alien Ood warn of an even greater danger approaching, as a terrible shadow falls across the entire universe.",
+        trivia:["The story was partly inspired by classic plant-invasion fiction.","It was Douglas Camfield's final Doctor Who directing credit."],
+        tags:["The Master","Regeneration"]
       }
     ];
 
@@ -2651,11 +2656,7 @@ button:active,
       populateDetails(selected);
 
       grid.querySelectorAll(".card").forEach(card=>{
-        const open = ()=>{
-          state.selectedId = card.dataset.id;
-          render();
-          setDetailsOpen(true);
-        };
+        const open = ()=>selectEpisode(card.dataset.id,{openDetails:true});
 
         card.addEventListener("click",open);
         card.addEventListener("keydown",event=>{
@@ -2667,21 +2668,40 @@ button:active,
       });
     }
 
+    // Update only the selected-card styling and inspector content.
+    // The grid is deliberately not rebuilt here, preventing every card's
+    // entrance animation from restarting when browsing between episodes.
+    function selectEpisode(id,{openDetails=false}={}){
+      const episode = episodes.find(item=>item.id===id);
+      if(!episode) return;
+
+      state.selectedId = episode.id;
+
+      grid.querySelectorAll(".card").forEach(card=>{
+        card.classList.toggle("selected",card.dataset.id===episode.id);
+      });
+
+      populateDetails(episode);
+
+      if(openDetails) setDetailsOpen(true);
+    }
+
     function populateDetails(episode){
       const index = episodes.findIndex(item=>item.id===episode.id);
 
       el("detailPosition").textContent = `${index+1} / ${episodes.length}`;
-
-      const detailHero = el("detailHero");
-      const episodeChanged = detailHero.dataset.episodeId !== episode.id;
-      detailHero.style.setProperty("--detail-image", `url("${episode.image}")`);
-      detailHero.dataset.episodeId = episode.id;
-
-      if(episodeChanged){
-        detailHero.classList.remove("image-changing");
-        void detailHero.offsetWidth;
-        detailHero.classList.add("image-changing");
-      }
+      const detailHero=el("detailHero");
+const changed=detailHero.dataset.episodeId!==episode.id;
+detailHero.style.setProperty("--detail-image",`url("${episode.image}")`);
+detailHero.dataset.episodeId=episode.id;
+if(changed){
+  detailHero.classList.remove("image-changing");
+  void detailHero.offsetWidth;
+  detailHero.classList.add("image-changing");
+  detailHero.addEventListener("animationend",()=>{
+    detailHero.classList.remove("image-changing");
+  },{once:true});
+}
 
       el("detailCode").textContent = episode.code;
       el("detailTitle").textContent = episode.title;
@@ -2705,9 +2725,9 @@ button:active,
 
     function selectByOffset(offset){
       const index = episodes.findIndex(e=>e.id===state.selectedId);
-      const next = episodes[(index+offset+episodes.length)%episodes.length];
-      state.selectedId = next.id;
-      render();
+      const safeIndex = index>=0 ? index : 0;
+      const next = episodes[(safeIndex+offset+episodes.length)%episodes.length];
+      selectEpisode(next.id);
     }
 
     function syncDoctorControls(){
@@ -2839,9 +2859,7 @@ button:active,
     el("randomButton").addEventListener("click",()=>{
       const pool = state.filtered.length ? state.filtered : episodes;
       const random = pool[Math.floor(Math.random()*pool.length)];
-      state.selectedId = random.id;
-      render();
-      setDetailsOpen(true);
+      selectEpisode(random.id,{openDetails:true});
     });
 
     el("previousEpisode").addEventListener("click",()=>selectByOffset(-1));
