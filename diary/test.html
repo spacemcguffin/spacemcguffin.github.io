@@ -3,778 +3,912 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#090b12">
-  <meta name="description" content="An interactive calendar archive for Lewis's 2021 diary.">
-  <title>2021 Diary Calendar</title>
+  <meta name="theme-color" content="#05010d">
+  <meta name="description" content="A neon nebula timeline archive of 623 diary entries from 2008.">
+  <title>2008 Diary — Infinite Neon Timeline</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #090b12;
-      --bg-soft: #10141f;
-      --panel: rgba(20, 24, 36, 0.78);
-      --panel-strong: #171c29;
-      --text: #f4f5f7;
-      --muted: #9aa3b5;
-      --border: rgba(255,255,255,0.09);
-      --accent: #a9b8ff;
-      --accent-strong: #d9e0ff;
-      --accent-soft: rgba(169,184,255,0.12);
-      --danger-soft: rgba(255, 145, 145, 0.08);
-      --danger: #d89a9a;
-      --shadow: 0 24px 80px rgba(0,0,0,0.34);
+      --void: #030008;
+      --void-soft: #090116;
+      --glass: rgba(10, 5, 26, .72);
+      --glass-strong: rgba(12, 7, 30, .9);
+      --line: rgba(255,255,255,.08);
+      --text: #faf7ff;
+      --muted: #aaa1c2;
+      --accent-a: #59dfff;
+      --accent-b: #7b61ff;
+      --shadow: 0 26px 80px rgba(0,0,0,.5);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
+      background: var(--void);
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at 15% 15%, rgba(94, 110, 175, 0.16), transparent 30%),
-        radial-gradient(circle at 85% 8%, rgba(116, 86, 156, 0.12), transparent 28%),
-        linear-gradient(180deg, #090b12 0%, #0d1018 100%);
+      overflow-x: hidden;
       color: var(--text);
-      font-family: "DM Sans", sans-serif;
+      font-family: "Space Grotesk", sans-serif;
+      background:
+        radial-gradient(circle at 18% 14%, color-mix(in srgb, var(--accent-b) 26%, transparent), transparent 28%),
+        radial-gradient(circle at 82% 18%, color-mix(in srgb, var(--accent-a) 20%, transparent), transparent 30%),
+        linear-gradient(180deg, #030008 0%, #090116 48%, #030008 100%);
+      transition: background 1s ease;
     }
 
-    button {
-      font: inherit;
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      pointer-events: none;
+      inset: -20%;
+      z-index: -3;
     }
 
-    .page-shell {
-      width: min(1240px, calc(100% - 32px));
+    body::before {
+      background:
+        radial-gradient(circle at 25% 34%, color-mix(in srgb, var(--accent-a) 22%, transparent), transparent 17%),
+        radial-gradient(circle at 66% 58%, color-mix(in srgb, var(--accent-b) 23%, transparent), transparent 22%),
+        radial-gradient(circle at 72% 26%, rgba(255,255,255,.05), transparent 14%);
+      filter: blur(55px);
+      animation: nebula 24s ease-in-out infinite alternate;
+      transition: background 1s ease;
+    }
+
+    body::after {
+      z-index: -2;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,.9) 0 1px, transparent 1.4px),
+        radial-gradient(circle, color-mix(in srgb, var(--accent-a) 68%, transparent) 0 1px, transparent 1.5px),
+        radial-gradient(circle, color-mix(in srgb, var(--accent-b) 60%, transparent) 0 1px, transparent 1.5px);
+      background-size: 84px 84px, 137px 137px, 211px 211px;
+      background-position: 0 0, 24px 36px, 86px 104px;
+      opacity: .34;
+      animation: stars 90s linear infinite;
+    }
+
+    @keyframes nebula {
+      from { transform: translate3d(-2%, -1%, 0) scale(1); }
+      to { transform: translate3d(3%, 2%, 0) scale(1.08); }
+    }
+
+    @keyframes stars {
+      to { transform: translateY(210px); }
+    }
+
+    @keyframes scan {
+      from { transform: translateX(-120%); }
+      to { transform: translateX(220%); }
+    }
+
+    button, input { font: inherit; }
+
+    .progress {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 30;
+      width: 3px;
+      background: rgba(255,255,255,.04);
+    }
+
+    .progress span {
+      display: block;
+      width: 100%;
+      height: 0%;
+      background: linear-gradient(var(--accent-a), var(--accent-b));
+      box-shadow: 0 0 18px var(--accent-a);
+    }
+
+    .page {
+      width: min(1500px, calc(100% - 28px));
       margin: 0 auto;
-      padding: 28px 0 56px;
+      padding: 26px 0 70px;
     }
 
-    .masthead {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 28px;
-      padding: 10px 4px 0;
+    .hero {
+      position: relative;
+      min-height: min(760px, 88vh);
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent-b) 10%, transparent), transparent 38%),
+        linear-gradient(315deg, color-mix(in srgb, var(--accent-a) 9%, transparent), transparent 40%),
+        rgba(7,2,20,.58);
+      box-shadow: var(--shadow), inset 0 0 120px rgba(255,255,255,.025);
+      backdrop-filter: blur(24px);
     }
 
-    .masthead-copy {
-      max-width: 760px;
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid color-mix(in srgb, var(--accent-a) 35%, transparent);
+      box-shadow: 0 0 80px color-mix(in srgb, var(--accent-b) 18%, transparent);
+    }
+
+    .hero::before {
+      width: 520px;
+      height: 520px;
+      left: -240px;
+      top: -220px;
+    }
+
+    .hero::after {
+      width: 360px;
+      height: 360px;
+      right: -130px;
+      bottom: -150px;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(930px, 90%);
     }
 
     .eyebrow {
-      margin: 0 0 10px;
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      margin: 0;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(3.2rem, 8vw, 7rem);
-      font-weight: 400;
-      line-height: 0.88;
-      letter-spacing: -0.04em;
-    }
-
-    .intro {
-      max-width: 620px;
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    .year-chip {
-      flex: 0 0 auto;
-      display: grid;
-      width: 112px;
-      height: 112px;
-      place-items: center;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      background: rgba(255,255,255,0.03);
-      box-shadow: inset 0 0 0 8px rgba(255,255,255,0.015);
-      color: var(--accent-strong);
-      font-family: "Instrument Serif", serif;
-      font-size: 2rem;
-    }
-
-    .calendar-app {
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(310px, 0.7fr);
-      gap: 20px;
-      align-items: stretch;
-    }
-
-    .calendar-card,
-    .entry-panel {
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .calendar-card {
-      padding: clamp(18px, 3vw, 30px);
-    }
-
-    .calendar-toolbar {
-      display: grid;
-      grid-template-columns: 48px 1fr 48px;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-
-    .month-title {
-      text-align: center;
-    }
-
-    .month-title small {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--muted);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .month-title h2 {
-      margin: 0;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 400;
-      line-height: 1;
-    }
-
-    .nav-button {
-      display: grid;
-      width: 48px;
-      height: 48px;
-      place-items: center;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.035);
-      color: var(--text);
-      cursor: pointer;
-      transition: 180ms ease;
-    }
-
-    .nav-button:hover:not(:disabled) {
-      transform: translateY(-2px);
-      border-color: rgba(169,184,255,0.4);
-      background: var(--accent-soft);
-    }
-
-    .nav-button:disabled {
-      opacity: 0.25;
-      cursor: not-allowed;
-    }
-
-    .weekdays,
-    .calendar-grid {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .weekdays {
-      margin-bottom: 8px;
-    }
-
-    .weekdays span {
-      padding: 6px 0;
-      color: var(--muted);
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-align: center;
-      text-transform: uppercase;
-    }
-
-    .day {
-      position: relative;
-      min-height: 94px;
-      padding: 12px;
-      border: 1px solid transparent;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.018);
-      color: var(--text);
-      text-align: left;
-    }
-
-    button.day {
-      cursor: pointer;
-      transition: 180ms ease;
-    }
-
-    button.day:hover {
-      transform: translateY(-3px);
-      border-color: rgba(169,184,255,0.45);
-      background: rgba(169,184,255,0.10);
-    }
-
-    .day.has-entry {
-      border-color: rgba(169,184,255,0.22);
-      background:
-        linear-gradient(145deg, rgba(169,184,255,0.14), rgba(169,184,255,0.035));
-    }
-
-    .day.selected {
-      border-color: var(--accent);
-      background: rgba(169,184,255,0.17);
-      box-shadow: 0 0 0 3px rgba(169,184,255,0.08);
-    }
-
-    .day-number {
-      position: relative;
-      z-index: 1;
-      font-weight: 700;
-    }
-
-    .day-entry-preview {
-      display: block;
-      margin-top: 22px;
-      color: var(--accent-strong);
-      font-size: 0.72rem;
-      line-height: 1.25;
-      opacity: 0.9;
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-    }
-
-    .day-dot {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 6px rgba(169,184,255,0.08);
-    }
-
-    .empty-day {
-      min-height: 94px;
-    }
-
-    .calendar-footer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .legend span {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: var(--accent-a);
+      font-family: "Geist Mono", monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
     }
 
-    .legend i {
-      width: 8px;
-      height: 8px;
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--accent-a);
+      box-shadow: 0 0 18px var(--accent-a);
     }
 
-    .entry-panel {
-      position: relative;
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(5rem, 17vw, 12rem);
+      line-height: .76;
+      letter-spacing: -.085em;
+      background: linear-gradient(90deg, #fff, var(--accent-a) 42%, var(--accent-b));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 35px color-mix(in srgb, var(--accent-b) 18%, transparent));
+    }
+
+    .hero h2 {
+      margin: 26px 0 0;
+      font-size: clamp(1.2rem, 3vw, 2.2rem);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 22px auto 0;
+      color: var(--muted);
+      font-size: clamp(.96rem, 1.6vw, 1.1rem);
+      line-height: 1.75;
+    }
+
+    .hero-stats {
       display: flex;
-      min-height: 620px;
-      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .hero-stats span {
+      padding: 10px 14px;
+      border: 1px solid color-mix(in srgb, var(--accent-a) 20%, transparent);
+      border-radius: 999px;
+      background: rgba(255,255,255,.025);
+      color: #dcd6eb;
+      font-family: "Geist Mono", monospace;
+      font-size: .72rem;
+    }
+
+    .archive {
+      display: grid;
+      grid-template-columns: 250px minmax(0,1fr);
+      gap: 26px;
+      align-items: start;
+      margin-top: 26px;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 18px;
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      background: var(--glass);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+      scrollbar-width: none;
+    }
+
+    .sidebar::-webkit-scrollbar { display: none; }
+
+    .brand {
+      margin-bottom: 18px;
+      padding: 4px 4px 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1.7rem;
+      letter-spacing: -.04em;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-family: "Geist Mono", monospace;
+      font-size: .68rem;
+    }
+
+    .search-wrap {
+      position: relative;
+      margin-bottom: 18px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 16px;
+      outline: none;
+      padding: 13px 38px 13px 13px;
+      background: rgba(255,255,255,.035);
+      color: #fff;
+    }
+
+    .search-wrap input:focus {
+      border-color: var(--accent-a);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-a) 12%, transparent);
+    }
+
+    .search-wrap kbd {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 3px 6px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--muted);
+      font-family: "Geist Mono", monospace;
+      font-size: .62rem;
+    }
+
+    .month-nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    .month-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 10px 11px;
+      background: transparent;
+      color: #bbb3ce;
+      cursor: pointer;
+      text-align: left;
+      transition: .2s ease;
+    }
+
+    .month-link:hover,
+    .month-link.active {
+      background: linear-gradient(90deg, color-mix(in srgb, var(--accent-a) 12%, transparent), color-mix(in srgb, var(--accent-b) 8%, transparent));
+      color: #fff;
+      transform: translateX(3px);
+    }
+
+    .month-link span:first-child::before {
+      content: "○";
+      margin-right: 8px;
+      color: var(--accent-a);
+    }
+
+    .month-link.active span:first-child::before {
+      content: "●";
+      text-shadow: 0 0 14px var(--accent-a);
+    }
+
+    .month-link small {
+      font-family: "Geist Mono", monospace;
+      color: var(--muted);
+    }
+
+    .main-feed {
+      min-width: 0;
+    }
+
+    .results-bar {
+      position: sticky;
+      top: 18px;
+      z-index: 12;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(8,3,21,.78);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.3);
+    }
+
+    .results-bar strong {
+      font-size: .95rem;
+    }
+
+    .results-bar span {
+      color: var(--muted);
+      font-family: "Geist Mono", monospace;
+      font-size: .7rem;
+    }
+
+    .month-section {
+      position: relative;
+      scroll-margin-top: 95px;
+      margin-bottom: 48px;
+      padding: clamp(20px, 3vw, 34px);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--month-a) 7%, transparent), transparent 35%),
+        linear-gradient(315deg, color-mix(in srgb, var(--month-b) 8%, transparent), transparent 40%),
+        rgba(9,4,24,.58);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
       overflow: hidden;
     }
 
-    .entry-panel::before {
+    .month-section::before {
       content: "";
       position: absolute;
-      inset: 0 0 auto;
-      height: 160px;
-      background: linear-gradient(180deg, rgba(169,184,255,0.10), transparent);
+      inset: -80px auto auto -90px;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--month-a) 20%, transparent), transparent 70%);
+      filter: blur(14px);
       pointer-events: none;
     }
 
-    .entry-panel-inner {
+    .month-head {
       position: relative;
       z-index: 1;
       display: flex;
-      height: 100%;
-      flex-direction: column;
-      padding: clamp(22px, 3vw, 30px);
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
-    .panel-kicker {
-      margin: 0 0 12px;
-      color: var(--accent);
-      font-size: 0.72rem;
+    .month-head small {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--month-a);
+      font-family: "Geist Mono", monospace;
+      font-size: .67rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
 
-    .panel-date {
+    .month-head h3 {
       margin: 0;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 400;
-      line-height: 0.95;
+      font-size: clamp(2.6rem, 7vw, 6.2rem);
+      line-height: .88;
+      letter-spacing: -.065em;
+      background: linear-gradient(90deg, #fff, var(--month-a), var(--month-b));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
-    .panel-entry {
-      margin-top: 48px;
+    .month-total {
+      color: var(--muted);
+      font-family: "Geist Mono", monospace;
+      font-size: .73rem;
+      white-space: nowrap;
     }
 
-    .panel-entry h3 {
-      margin: 0 0 14px;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(2rem, 4vw, 3.3rem);
-      font-weight: 400;
-      line-height: 1.02;
-    }
-
-    .status {
-      display: inline-flex;
-      align-items: center;
+    .entries {
+      position: relative;
+      z-index: 1;
+      display: grid;
       gap: 8px;
-      padding: 8px 11px;
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: var(--accent-strong);
-      font-size: 0.76rem;
-      font-weight: 700;
     }
 
-    .status::before {
+    .entry {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.055);
+      border-radius: 18px;
+      background: rgba(255,255,255,.018);
+      transition: .22s ease;
+    }
+
+    .entry.hidden { display: none; }
+
+    .entry::after {
       content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
+      position: absolute;
+      inset: 0;
+      width: 28%;
+      pointer-events: none;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.055), transparent);
+      transform: translateX(-120%);
     }
 
-    .panel-empty {
-      margin: auto 0;
-      color: var(--muted);
-      line-height: 1.7;
+    .entry:hover {
+      border-color: color-mix(in srgb, var(--month-a) 42%, transparent);
+      transform: translateX(5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.24), 0 0 26px color-mix(in srgb, var(--month-a) 10%, transparent);
     }
 
-    .panel-empty strong {
-      display: block;
-      margin-bottom: 10px;
-      color: var(--text);
-      font-family: "Instrument Serif", serif;
-      font-size: 2rem;
-      font-weight: 400;
-    }
+    .entry:hover::after { animation: scan .9s ease; }
 
-    .removed-section {
-      margin-top: auto;
-      padding-top: 22px;
-      border-top: 1px solid var(--border);
-    }
-
-    .removed-toggle {
-      display: flex;
-      width: 100%;
+    .entry-toggle {
+      display: grid;
+      grid-template-columns: auto minmax(0,1fr) auto;
+      gap: 16px;
       align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      padding: 0;
+      width: 100%;
       border: 0;
+      padding: 17px 18px;
       background: transparent;
-      color: var(--text);
-      font-weight: 700;
-      text-align: left;
+      color: inherit;
       cursor: pointer;
+      text-align: left;
     }
 
-    .removed-toggle span:last-child {
-      display: grid;
-      min-width: 30px;
-      height: 30px;
-      place-items: center;
+    .entry-dot {
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.05);
-      color: var(--muted);
-      font-size: 0.75rem;
+      background: var(--month-a);
+      box-shadow: 0 0 18px var(--month-a);
     }
 
-    .removed-list {
+    .entry-copy strong {
+      display: block;
+      font-size: clamp(1rem, 2vw, 1.45rem);
+      line-height: 1.2;
+      letter-spacing: -.025em;
+    }
+
+    .entry-copy small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-family: "Geist Mono", monospace;
+      font-size: .65rem;
+    }
+
+    .entry-arrow {
+      color: var(--month-a);
+      font-size: 1.2rem;
+      transition: transform .25s ease;
+    }
+
+    .entry.open .entry-arrow {
+      transform: rotate(90deg);
+    }
+
+    .entry-panel {
       display: grid;
-      gap: 8px;
-      max-height: 210px;
-      margin-top: 14px;
-      overflow-y: auto;
-      scrollbar-width: thin;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows .35s ease;
     }
 
-    .removed-item {
-      padding: 10px 12px;
-      border-radius: 12px;
-      background: var(--danger-soft);
-      color: var(--danger);
-      font-size: 0.82rem;
-      line-height: 1.35;
-      text-decoration: line-through;
+    .entry.open .entry-panel {
+      grid-template-rows: 1fr;
     }
 
-    .mobile-entry-sheet {
+    .entry-panel-inner {
+      overflow: hidden;
+    }
+
+    .entry-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 0 18px 18px 44px;
+      padding-top: 2px;
+    }
+
+    .entry-meta span {
+      padding: 8px 10px;
+      border: 1px solid color-mix(in srgb, var(--month-a) 18%, transparent);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--month-a) 5%, transparent);
+      color: #dcd6eb;
+      font-family: "Geist Mono", monospace;
+      font-size: .64rem;
+    }
+
+    .empty-state {
       display: none;
-    }
-
-    .data-note {
-      margin: 18px 4px 0;
+      padding: 42px 20px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      text-align: center;
       color: var(--muted);
-      font-size: 0.76rem;
-      line-height: 1.6;
+      background: var(--glass);
     }
 
-    @media (max-width: 920px) {
-      .calendar-app {
+    .footer-note {
+      margin: 18px 0 0;
+      color: #8d84a5;
+      font-family: "Geist Mono", monospace;
+      font-size: .67rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .archive {
         grid-template-columns: 1fr;
       }
 
-      .entry-panel {
-        min-height: 420px;
+      .sidebar {
+        position: sticky;
+        top: 8px;
+        z-index: 25;
+        max-height: none;
+        padding: 12px;
+      }
+
+      .brand { display: none; }
+
+      .month-nav {
+        grid-template-columns: repeat(11, max-content);
+        overflow-x: auto;
+        padding-bottom: 3px;
+        scrollbar-width: none;
+      }
+
+      .month-nav::-webkit-scrollbar { display: none; }
+
+      .month-link {
+        padding: 9px 11px;
+        background: rgba(255,255,255,.025);
+      }
+
+      .month-link small { display: none; }
+
+      .search-wrap { margin-bottom: 10px; }
+
+      .results-bar {
+        top: 134px;
       }
     }
 
     @media (max-width: 640px) {
-      .page-shell {
-        width: min(100% - 20px, 1240px);
-        padding-top: 18px;
+      .page {
+        width: min(100% - 14px, 1500px);
+        padding-top: 7px;
       }
 
-      .masthead {
-        align-items: flex-start;
+      .hero {
+        min-height: 72vh;
+        border-radius: 25px;
       }
 
-      .year-chip {
-        width: 72px;
-        height: 72px;
-        font-size: 1.4rem;
+      .hero h1 {
+        font-size: clamp(4.4rem, 27vw, 7rem);
       }
 
-      h1 {
-        font-size: clamp(3.2rem, 18vw, 5rem);
+      .archive {
+        gap: 12px;
+        margin-top: 12px;
       }
 
-      .calendar-card {
-        padding: 14px;
+      .sidebar {
+        border-radius: 18px;
+      }
+
+      .results-bar {
+        top: 126px;
+        border-radius: 15px;
+      }
+
+      .month-section {
+        padding: 18px 12px;
         border-radius: 22px;
       }
 
-      .calendar-toolbar {
-        grid-template-columns: 42px 1fr 42px;
-        gap: 8px;
+      .month-head {
+        align-items: start;
+        flex-direction: column;
       }
 
-      .nav-button {
-        width: 42px;
-        height: 42px;
-        border-radius: 14px;
+      .entry-toggle {
+        grid-template-columns: auto minmax(0,1fr) auto;
+        gap: 11px;
+        padding: 15px 13px;
       }
 
-      .weekdays,
-      .calendar-grid {
-        gap: 4px;
+      .entry-meta {
+        margin-left: 34px;
       }
+    }
 
-      .day,
-      .empty-day {
-        min-height: 58px;
-      }
-
-      .day {
-        padding: 8px;
-        border-radius: 12px;
-      }
-
-      .day-entry-preview {
-        display: none;
-      }
-
-      .day-dot {
-        top: auto;
-        right: 8px;
-        bottom: 8px;
-        width: 6px;
-        height: 6px;
-        box-shadow: none;
-      }
-
-      .entry-panel {
-        min-height: 360px;
-        border-radius: 22px;
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="page-shell">
-    <header class="masthead">
-      <div class="masthead-copy">
-        <p class="eyebrow">Interactive archive</p>
-        <h1>The Wanderer</h1>
-        <p class="intro">
-          A calendar view of the 2021 diary. Highlighted days contain entries;
-          choose one to reveal its title and explore the month.
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <main class="page">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">Archive signal online</div>
+        <h1>2008</h1>
+        <h2>Timelordwannabe</h2>
+        <p>
+          Six hundred and twenty-three recovered diary transmissions arranged as one continuous journey through the year.
         </p>
-      </div>
-      <div class="year-chip" aria-label="Year 2021">2021</div>
-    </header>
-
-    <section class="calendar-app">
-      <div class="calendar-card">
-        <div class="calendar-toolbar">
-          <button class="nav-button" id="prevMonth" type="button" aria-label="Previous month">←</button>
-
-          <div class="month-title">
-            <small>Diary month</small>
-            <h2 id="monthHeading">January</h2>
-          </div>
-
-          <button class="nav-button" id="nextMonth" type="button" aria-label="Next month">→</button>
-        </div>
-
-        <div class="weekdays" aria-hidden="true">
-          <span>Mon</span>
-          <span>Tue</span>
-          <span>Wed</span>
-          <span>Thu</span>
-          <span>Fri</span>
-          <span>Sat</span>
-          <span>Sun</span>
-        </div>
-
-        <div class="calendar-grid" id="calendarGrid"></div>
-
-        <div class="calendar-footer">
-          <div class="legend">
-            <span><i></i> Entry available</span>
-          </div>
-          <span id="monthSummary"></span>
+        <div class="hero-stats">
+          <span>623 entries</span>
+          <span>11 months</span>
+          <span>Infinite neon timeline</span>
         </div>
       </div>
-
-      <aside class="entry-panel" aria-live="polite">
-        <div class="entry-panel-inner">
-          <div id="panelEmpty" class="panel-empty">
-            <strong>Select a day</strong>
-            Click any highlighted date to reveal the diary entry title.
-          </div>
-
-          <div id="panelContent" hidden>
-            <p class="panel-kicker">Selected diary entry</p>
-            <h2 class="panel-date" id="panelDate"></h2>
-
-            <div class="panel-entry">
-              <h3 id="panelTitle"></h3>
-              <span class="status">Published</span>
-            </div>
-          </div>
-
-          <div class="removed-section">
-            <button class="removed-toggle" id="removedToggle" type="button" aria-expanded="false">
-              <span>Removed entries this month</span>
-              <span id="removedCount">0</span>
-            </button>
-            <div class="removed-list" id="removedList" hidden></div>
-          </div>
-        </div>
-      </aside>
     </section>
 
-    <p class="data-note">
-      The original archive labels published entries by sequence number rather than exact publication date,
-      so those numbers are used here as provisional calendar days.
+    <section class="archive">
+      <aside class="sidebar">
+        <div class="brand">
+          <strong>2008 Archive</strong>
+          <span>Navigate transmissions</span>
+        </div>
+
+        <div class="search-wrap">
+          <input id="searchInput" type="search" placeholder="Search titles..." autocomplete="off" aria-label="Search diary titles">
+          <kbd>/</kbd>
+        </div>
+
+        <nav class="month-nav" id="monthNav" aria-label="Month navigation"></nav>
+      </aside>
+
+      <div class="main-feed">
+        <div class="results-bar">
+          <strong id="resultCount">623 transmissions</strong>
+          <span id="activeSector">February sector</span>
+        </div>
+
+        <div id="timeline"></div>
+
+        <div class="empty-state" id="emptyState">
+          No transmissions match that search.
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">
+      Entry sequence numbers and titles are preserved from the archive. Click any transmission to reveal its archive metadata.
     </p>
   </main>
 
   <script>
-    const diaryData = {"January": {"published": [{"day": 1, "title": "the sequel"}, {"day": 2, "title": "half the problem"}, {"day": 3, "title": "lockdown"}, {"day": 4, "title": "someone to love"}], "removed": ["memory lane", "insurrection", "out of sync", "lost memories", "a mountain of maybes", "online traces", "inauguration"]}, "February": {"published": [{"day": 1, "title": "tldr; just feeling kinda stuck"}, {"day": 2, "title": "offline"}, {"day": 3, "title": "winter breeze"}, {"day": 4, "title": "night owl"}, {"day": 5, "title": "chimes of midnight"}, {"day": 6, "title": "windows"}, {"day": 7, "title": "birthday chill"}, {"day": 8, "title": "dawn of the daleks"}, {"day": 9, "title": "at the end of the diary"}, {"day": 10, "title": "yesterday’s optimism"}, {"day": 11, "title": "rubbish usernames"}], "removed": ["social obligation", "rabbit hole", "retroactive titles", "winding down", "the tangled web", "digital footprints", "lewbo the grouch", "skidmarks", "in words and play", "disconnect", "traveller’s freedom"]}, "March": {"published": [{"day": 1, "title": "wishful thinking"}, {"day": 2, "title": "pandemic fog"}, {"day": 3, "title": "waxing lyrical"}, {"day": 4, "title": "the sky at night"}, {"day": 5, "title": "bring me sunshine"}, {"day": 6, "title": "end credits"}], "removed": ["breaking up", "nearly (but not quite) spring", "fifteen years ago", "all over the place", "the same old"]}, "April": {"published": [{"day": 1, "title": "proposal"}, {"day": 2, "title": "the stars align"}, {"day": 3, "title": "spring blizzard"}], "removed": []}, "May": {"published": [{"day": 1, "title": "turning the key"}, {"day": 2, "title": "pizza with a pal"}, {"day": 3, "title": "lost in smoke"}, {"day": 4, "title": "bottom of the board"}, {"day": 5, "title": "catching a break"}], "removed": ["anxiety :)"]}, "June": {"published": [{"day": 1, "title": "drunk on sunshine"}, {"day": 2, "title": "short and stubborn"}, {"day": 3, "title": "chain reaction"}, {"day": 4, "title": "shot in the arm"}, {"day": 5, "title": "moderna man"}, {"day": 6, "title": "life in limbo"}], "removed": ["thursday, my old friend", "goodnight, jackie"]}, "July": {"published": [{"day": 1, "title": "moving in"}, {"day": 2, "title": "counting the days"}, {"day": 3, "title": "heatwave"}, {"day": 4, "title": "exit wounds"}], "removed": ["gifts for grace", "way of the ghost", "chapters of life"]}, "August": {"published": [{"day": 1, "title": "new places"}, {"day": 2, "title": "old faces"}, {"day": 3, "title": "comic timing"}, {"day": 4, "title": "fading memories"}], "removed": []}, "September": {"published": [{"day": 1, "title": "ticket for one"}, {"day": 2, "title": "RTD2"}], "removed": ["firestarter", "classic tales"]}, "October": {"published": [{"day": 1, "title": "no time to die"}, {"day": 2, "title": "오징어 게임"}, {"day": 3, "title": "halloween horrors"}], "removed": ["regeneration", "clusterfuck", "trailer thoughts", "three quid down", "preservation"]}, "November": {"published": [{"day": 1, "title": "nostalgia high"}, {"day": 2, "title": "scattershot"}, {"day": 3, "title": "pin pals"}, {"day": 4, "title": "losing the plot"}, {"day": 5, "title": "status quo"}], "removed": []}, "December": {"published": [{"day": 1, "title": "end of the year"}, {"day": 2, "title": "slapdash"}, {"day": 3, "title": "festive days"}, {"day": 4, "title": "christmas"}, {"day": 5, "title": "millie ❤️"}, {"day": 6, "title": "new year’s eve"}, {"day": 7, "title": "in summary"}], "removed": ["amazing grace", "high hopes", "wrapping up", "autopilot"]}};
-
-    const monthNames = [
-      "January", "February", "March", "April", "May", "June",
+    const diaryData = {"February": {"published": [{"sequence": 1, "title": "a day of drama", "day": 1}, {"sequence": 2, "title": "torchw00t!", "day": 10}, {"sequence": 3, "title": "youtube, school, beth & pakistan", "day": 20}, {"sequence": 4, "title": "and on the fifth day, lewis rested...", "day": 29}], "removed": []}, "March": {"published": [{"sequence": 5, "title": "a bordinary day", "day": 1}, {"sequence": 6, "title": "diary inspiration", "day": 1}, {"sequence": 7, "title": "layout", "day": 2}, {"sequence": 8, "title": "facehooked", "day": 2}, {"sequence": 9, "title": "why i’m keeping this diary...", "day": 3}, {"sequence": 10, "title": "it’s earlier every year...", "day": 3}, {"sequence": 11, "title": "manic monday xD", "day": 3}, {"sequence": 12, "title": "omgwtfhenry?!", "day": 4}, {"sequence": 13, "title": "bondage xD", "day": 4}, {"sequence": 14, "title": "mazness", "day": 5}, {"sequence": 15, "title": "torchwouldyouchangethescheduleplease?", "day": 5}, {"sequence": 16, "title": "VLROFL!", "day": 5}, {"sequence": 17, "title": "THE DUMBEST GUY ON THE FUCKING PLANET!!11!", "day": 6}, {"sequence": 18, "title": "piggy in the middle.", "day": 6}, {"sequence": 19, "title": "allow me a moment to calm down, please.", "day": 6}, {"sequence": 20, "title": "chip butties - the cure to everything xD", "day": 7}, {"sequence": 21, "title": "17,545 - spacesnotincluded", "day": 7}, {"sequence": 22, "title": "*yawn*", "day": 8}, {"sequence": 23, "title": "downfall <|3", "day": 8}, {"sequence": 24, "title": "the waiting game", "day": 8}, {"sequence": 25, "title": "rosie", "day": 9}, {"sequence": 26, "title": "tomorrow.", "day": 9}, {"sequence": 27, "title": "oh no, he’s turned emo xD", "day": 10}, {"sequence": 28, "title": "weird questions and quotes :)", "day": 10}, {"sequence": 29, "title": "another entry based around charlotte", "day": 10}, {"sequence": 30, "title": "happy ^__^", "day": 11}, {"sequence": 31, "title": "school starts too early :(", "day": 11}, {"sequence": 32, "title": "my colour scheme", "day": 12}, {"sequence": 33, "title": "scatman skiveman", "day": 12}, {"sequence": 34, "title": "laralaralara... i adore mah lara <3", "day": 12}, {"sequence": 35, "title": "the [hilarious] problem with perfume!", "day": 13}, {"sequence": 36, "title": "building bridges <3", "day": 13}, {"sequence": 37, "title": "=D", "day": 13}, {"sequence": 38, "title": "*sings* - things can only get better =]", "day": 14}, {"sequence": 39, "title": "television = heaven", "day": 14}, {"sequence": 40, "title": "five doctors, five hours, three commentaries, two discs and one massive thrill!", "day": 15}, {"sequence": 41, "title": "the five doctors (...of rassilon)", "day": 15}, {"sequence": 42, "title": "just shag rosie :O", "day": 15}, {"sequence": 43, "title": "just shag jade :O", "day": 16}, {"sequence": 44, "title": "mr diary <333", "day": 16}, {"sequence": 45, "title": "pathetic friends and relationships =@", "day": 17}, {"sequence": 46, "title": "con-(and on, and on, and on)-or", "day": 17}, {"sequence": 47, "title": "harmless flirting", "day": 17}, {"sequence": 48, "title": "note to self.", "day": 18}, {"sequence": 49, "title": "year ten: star report", "day": 18}, {"sequence": 50, "title": "torchwooooooooooooooo!", "day": 19}, {"sequence": 51, "title": "...and god bless kate’s little heart <333", "day": 19}, {"sequence": 52, "title": "ooooh, a strike!", "day": 19}, {"sequence": 53, "title": "the story of a dyslexic man...", "day": 20}, {"sequence": 54, "title": "three irish wankers =]", "day": 20}, {"sequence": 55, "title": "palm sunday", "day": 20}, {"sequence": 56, "title": "good friday, great television!", "day": 21}, {"sequence": 57, "title": "bleeping, haunting, snowing.", "day": 21}, {"sequence": 58, "title": "doctor who - RTD’s masterplan", "day": 22}, {"sequence": 59, "title": "saturday squee!", "day": 22}, {"sequence": 60, "title": "the little blue box...", "day": 22}, {"sequence": 61, "title": "squeeeaster!", "day": 23}, {"sequence": 62, "title": "my doctor who wishlist", "day": 23}, {"sequence": 63, "title": "night at the confuseum", "day": 24}, {"sequence": 64, "title": "blog vs journal vs diary", "day": 24}, {"sequence": 65, "title": "anti-ginga", "day": 24}, {"sequence": 66, "title": "the bleeping smoke alarm mystery - solved!", "day": 25}, {"sequence": 67, "title": "she has no idea.", "day": 25}, {"sequence": 68, "title": "how to completely take the piss, starring conor", "day": 26}, {"sequence": 69, "title": "pandora’s pageant (little miss sunshine) - film review", "day": 26}, {"sequence": 70, "title": "little miss sunshine... and me, mr sunshine!", "day": 26}, {"sequence": 71, "title": "updates", "day": 27}, {"sequence": 72, "title": "charl(OTT)e", "day": 27}, {"sequence": 73, "title": "dear charlotte,", "day": 27}, {"sequence": 74, "title": "parents’ evening and charlotte <333", "day": 28}, {"sequence": 75, "title": "ch******* xD", "day": 28}, {"sequence": 76, "title": "the friday night schedule", "day": 29}, {"sequence": 77, "title": "torchwow, a trailer and a teaser!", "day": 29}, {"sequence": 78, "title": "my dad, the ex and the new guy", "day": 29}, {"sequence": 79, "title": "lewis & charlotte: their story", "day": 30}, {"sequence": 80, "title": "i love this smiley face ツ", "day": 30}, {"sequence": 81, "title": "i am lewis.", "day": 31}, {"sequence": 82, "title": "third week unlucky.", "day": 31}], "removed": []}, "April": {"published": [{"sequence": 83, "title": "who?", "day": 1}, {"sequence": 84, "title": "series four, episode twelve (title speculation)", "day": 2}, {"sequence": 85, "title": "well, this entry was kinda pointless.", "day": 2}, {"sequence": 86, "title": "“cuz tomorrow it all ends.”", "day": 3}, {"sequence": 87, "title": "charlotte/kate/conor", "day": 4}, {"sequence": 88, "title": "today.", "day": 5}, {"sequence": 89, "title": "end of term.", "day": 5}, {"sequence": 90, "title": "end of torchwood.", "day": 6}, {"sequence": 91, "title": "doctor who: partners in crime", "day": 7}, {"sequence": 92, "title": "sunday stuff", "day": 7}, {"sequence": 93, "title": "23:59", "day": 8}, {"sequence": 94, "title": "annoyed", "day": 9}, {"sequence": 95, "title": "partners in crime - clues, hints and speculation", "day": 9}, {"sequence": 96, "title": "chicken nuggets ^__^", "day": 10}, {"sequence": 97, "title": "nerimowned!", "day": 11}, {"sequence": 98, "title": "this entry starts with the word “jesus”", "day": 12}, {"sequence": 99, "title": "doctor who: the fires of pompeii", "day": 12}, {"sequence": 100, "title": "reflections", "day": 13}, {"sequence": 101, "title": "the fires of pompeii - clues, hints and speculation", "day": 14}, {"sequence": 102, "title": "monday morning madness", "day": 14}, {"sequence": 103, "title": "haircut", "day": 15}, {"sequence": 104, "title": "an email to kate", "day": 16}, {"sequence": 105, "title": "kate’s response", "day": 17}, {"sequence": 106, "title": "potty about potter", "day": 17}, {"sequence": 107, "title": "doctor who: planet of the ood", "day": 18}, {"sequence": 108, "title": "planet of the ood - clues, hints and speculation", "day": 19}, {"sequence": 109, "title": "basically, i’m fucking pissed off.", "day": 19}, {"sequence": 110, "title": "graham norton", "day": 20}, {"sequence": 111, "title": "i can has internetz nao!", "day": 21}, {"sequence": 112, "title": "quick one before bed...", "day": 22}, {"sequence": 113, "title": "first day back", "day": 22}, {"sequence": 114, "title": "omgmhazzrocks", "day": 23}, {"sequence": 115, "title": "omglewisrocks", "day": 24}, {"sequence": 116, "title": "lewis meets lewis", "day": 24}, {"sequence": 117, "title": "typical wednesday", "day": 25}, {"sequence": 118, "title": "every song must end :(", "day": 26}, {"sequence": 119, "title": "all lol’d out!", "day": 26}, {"sequence": 120, "title": "secrets, lies and kate muldowney", "day": 27}, {"sequence": 121, "title": "the calm after the storm.", "day": 28}, {"sequence": 122, "title": "boredboredbored =\\", "day": 29}, {"sequence": 123, "title": "doctor who: the sontaran stratagem", "day": 29}, {"sequence": 124, "title": "bedshed xD", "day": 30}], "removed": []}, "May": {"published": [{"sequence": 125, "title": "apologies for the delay. we are currently experiencing technical difficulties. please stand by.", "day": 1}, {"sequence": 126, "title": "suppose i’d better talk about the new house then...", "day": 2}, {"sequence": 127, "title": "so charlotte hates me yet again... oh well.", "day": 2}, {"sequence": 128, "title": "i finally had the guts to tell somebody about my diary.", "day": 3}, {"sequence": 129, "title": "knock knock...", "day": 4}, {"sequence": 130, "title": "lewis is feeling sad :(", "day": 5}, {"sequence": 131, "title": "twenty emo facts", "day": 5}, {"sequence": 132, "title": "third and final entry of the night", "day": 6}, {"sequence": 133, "title": "relaxed", "day": 7}, {"sequence": 134, "title": "a bulletin and a note xD", "day": 7}, {"sequence": 135, "title": "reboot, restore, restart... relieved!", "day": 8}, {"sequence": 136, "title": "boringly boring", "day": 9}, {"sequence": 137, "title": "i has a room =]", "day": 10}, {"sequence": 138, "title": "doctor who: the doctor’s daughter", "day": 10}, {"sequence": 139, "title": "my five seconds of fame... on bbc news!", "day": 11}, {"sequence": 140, "title": "lew on the news", "day": 12}, {"sequence": 141, "title": "two more screenshots :)", "day": 12}, {"sequence": 142, "title": "big brother 9: the eye", "day": 13}, {"sequence": 143, "title": "and now for a proper entry.", "day": 14}, {"sequence": 144, "title": "wednesday’s entry", "day": 15}, {"sequence": 145, "title": "lacking and lateness", "day": 15}, {"sequence": 146, "title": "detailed and early", "day": 16}, {"sequence": 147, "title": "division", "day": 17}, {"sequence": 148, "title": "mighty moff!", "day": 17}, {"sequence": 149, "title": "torn apart by love and friendship", "day": 18}, {"sequence": 150, "title": "charlotte, ginga and kate", "day": 19}, {"sequence": 151, "title": "mehness and stuff", "day": 20}, {"sequence": 152, "title": "user-generated coffee", "day": 20}, {"sequence": 153, "title": "lewis slept with charlotte on the school field!", "day": 21}, {"sequence": 154, "title": "youmug", "day": 22}, {"sequence": 155, "title": "LOL!", "day": 22}, {"sequence": 156, "title": "omg omg omg omg omg omg omg omg omg omg omg", "day": 23}, {"sequence": 157, "title": "eurovision 2008", "day": 24}, {"sequence": 158, "title": "amazon", "day": 25}, {"sequence": 159, "title": "101 things about lewis", "day": 25}, {"sequence": 160, "title": "big brother’s big house", "day": 26}, {"sequence": 161, "title": "structure", "day": 27}, {"sequence": 162, "title": "snip and drill", "day": 27}, {"sequence": 163, "title": "parking fine", "day": 28}, {"sequence": 164, "title": "ooof, i did it again :]", "day": 29}, {"sequence": 165, "title": "i think i need help...", "day": 30}, {"sequence": 166, "title": "a snuggleh feelin’ ^__^", "day": 30}, {"sequence": 167, "title": "silence in a library... so?", "day": 31}], "removed": []}, "June": {"published": [{"sequence": 168, "title": "the place of educational provision", "day": 1}, {"sequence": 169, "title": "PS:", "day": 1}, {"sequence": 170, "title": "oops!", "day": 2}, {"sequence": 171, "title": "last one, promise.", "day": 2}, {"sequence": 172, "title": "one unique loop", "day": 2}, {"sequence": 173, "title": "last day of freedom", "day": 3}, {"sequence": 174, "title": "happeh <3", "day": 3}, {"sequence": 175, "title": "my final word before school starts", "day": 4}, {"sequence": 176, "title": "don’t worry, BB happeh ;)", "day": 4}, {"sequence": 177, "title": "charlotte tried to get with me.", "day": 4}, {"sequence": 178, "title": "REtard", "day": 5}, {"sequence": 179, "title": "coming clean", "day": 5}, {"sequence": 180, "title": "missing maths", "day": 5}, {"sequence": 181, "title": "common sense", "day": 6}, {"sequence": 182, "title": "screenshots from last night <3", "day": 6}, {"sequence": 183, "title": "my spaz", "day": 7}, {"sequence": 184, "title": "video stuffs", "day": 7}, {"sequence": 185, "title": "big brother nine", "day": 7}, {"sequence": 186, "title": "basic big brother breakdown", "day": 8}, {"sequence": 187, "title": "forest of the dead", "day": 8}, {"sequence": 188, "title": "stella", "day": 8}, {"sequence": 189, "title": "thanks, but no thanks.", "day": 9}, {"sequence": 190, "title": "‘norralot’ happened xD", "day": 9}, {"sequence": 191, "title": "eviction prediction #1", "day": 9}, {"sequence": 192, "title": "aislinn, natalie, essi, dom, mel, mel’s dad, my dad, bryony, nat’s mum, conor, ginga and chaz", "day": 10}, {"sequence": 193, "title": "paper and ash", "day": 10}, {"sequence": 194, "title": "dave ross", "day": 11}, {"sequence": 195, "title": "the x factor", "day": 11}, {"sequence": 196, "title": "lara jane waddington", "day": 11}, {"sequence": 197, "title": "charlotte & co.", "day": 12}, {"sequence": 198, "title": "grades", "day": 12}, {"sequence": 199, "title": "maths and drama", "day": 12}, {"sequence": 200, "title": "the opposite of what i had planned.", "day": 13}, {"sequence": 201, "title": "eviction result #1", "day": 13}, {"sequence": 202, "title": "davrosqueeeeeeeee!", "day": 13}, {"sequence": 203, "title": "midnight", "day": 14}, {"sequence": 204, "title": "again", "day": 14}, {"sequence": 205, "title": "selfishness", "day": 15}, {"sequence": 206, "title": "watching who", "day": 15}, {"sequence": 207, "title": "coolsday ^_^", "day": 15}, {"sequence": 208, "title": "oh, and...", "day": 16}, {"sequence": 209, "title": "eviction prediction #2", "day": 16}, {"sequence": 210, "title": "plays and panties", "day": 16}, {"sequence": 211, "title": "big brother voting", "day": 17}, {"sequence": 212, "title": "big brother’s big boot", "day": 17}, {"sequence": 213, "title": "it’s raining, it’s pouring, lewis should be snoring...", "day": 18}, {"sequence": 214, "title": "aye eye =[", "day": 18}, {"sequence": 215, "title": "eye update o_O", "day": 18}, {"sequence": 216, "title": "emergency waiting room", "day": 19}, {"sequence": 217, "title": "fr[eye]day xD", "day": 19}, {"sequence": 218, "title": "the removal and the replacement", "day": 19}, {"sequence": 219, "title": "doctor/rose", "day": 20}, {"sequence": 220, "title": "OMGBADWOLF!", "day": 20}, {"sequence": 221, "title": "lew’s who: a quick explanation...", "day": 20}, {"sequence": 222, "title": "lew’s who: the first doctor", "day": 21}, {"sequence": 223, "title": "lew’s who: the second doctor", "day": 21}, {"sequence": 224, "title": "lew’s who: the third doctor", "day": 22}, {"sequence": 225, "title": "lew’s who: the fourth doctor", "day": 22}, {"sequence": 226, "title": "lew’s who: the fifth doctor", "day": 22}, {"sequence": 227, "title": "lew’s who: the sixth doctor", "day": 23}, {"sequence": 228, "title": "lew’s who: the seventh doctor", "day": 23}, {"sequence": 229, "title": "lew’s who: the eighth doctor", "day": 23}, {"sequence": 230, "title": "lew’s who: the ninth doctor", "day": 24}, {"sequence": 231, "title": "lew’s who: the tenth doctor", "day": 24}, {"sequence": 232, "title": "davros speaks!", "day": 24}, {"sequence": 233, "title": "00:00 (videos)", "day": 25}, {"sequence": 234, "title": "17:09 (video updates)", "day": 25}, {"sequence": 235, "title": "22:46 (clothing crisis)", "day": 26}, {"sequence": 236, "title": "blackpool", "day": 26}, {"sequence": 237, "title": "eviction predictions", "day": 26}, {"sequence": 238, "title": "nothing interesting here. no, really, there isn’t.", "day": 27}, {"sequence": 239, "title": "they call me [insert silly name here]!", "day": 27}, {"sequence": 240, "title": "year 10 timetable", "day": 27}, {"sequence": 241, "title": "year 9 timetable", "day": 28}, {"sequence": 242, "title": "big bother", "day": 28}, {"sequence": 243, "title": "child of the night", "day": 29}, {"sequence": 244, "title": "the stolen earth", "day": 29}, {"sequence": 245, "title": "the speculating earth", "day": 29}, {"sequence": 246, "title": "friendship", "day": 30}, {"sequence": 247, "title": "letter to lindsay", "day": 30}], "removed": []}, "July": {"published": [{"sequence": 248, "title": "friendship ii", "day": 1}, {"sequence": 249, "title": "big shudder", "day": 1}, {"sequence": 250, "title": "table of friends", "day": 2}, {"sequence": 251, "title": "death day", "day": 2}, {"sequence": 252, "title": "year ten - the penultimate day", "day": 3}, {"sequence": 253, "title": "year ten - the final day", "day": 3}, {"sequence": 254, "title": "big bollocks", "day": 3}, {"sequence": 255, "title": "addicted to doctor who", "day": 4}, {"sequence": 256, "title": "journey’s end", "day": 4}, {"sequence": 257, "title": "still not tired", "day": 5}, {"sequence": 258, "title": "finale fanwank", "day": 5}, {"sequence": 259, "title": "year 11 timetable", "day": 5}, {"sequence": 260, "title": "crazy and cramped", "day": 6}, {"sequence": 261, "title": "“conor”, by lewis [redacted]", "day": 6}, {"sequence": 262, "title": "idunnowhattocallthisentry", "day": 7}, {"sequence": 263, "title": "fuckshitwankbollocks!", "day": 7}, {"sequence": 264, "title": "hmm...", "day": 7}, {"sequence": 265, "title": "religion & science", "day": 8}, {"sequence": 266, "title": "the conor/gaby thing", "day": 8}, {"sequence": 267, "title": "genuine *omg*", "day": 9}, {"sequence": 268, "title": "watching who - the classic series", "day": 9}, {"sequence": 269, "title": "watching who - the new series", "day": 9}, {"sequence": 270, "title": "diary facelift", "day": 10}, {"sequence": 271, "title": "comments enabled", "day": 10}, {"sequence": 272, "title": "diary tags", "day": 11}, {"sequence": 273, "title": "iconic entries", "day": 11}, {"sequence": 274, "title": "decisions - original writing", "day": 11}, {"sequence": 275, "title": "decisions - an explanation :)", "day": 12}, {"sequence": 276, "title": "buying who", "day": 12}, {"sequence": 277, "title": "it’s called *privacy* for a reason... respect it please.", "day": 13}, {"sequence": 278, "title": "toniiiii", "day": 13}, {"sequence": 279, "title": "FOD", "day": 13}, {"sequence": 280, "title": "beth", "day": 14}, {"sequence": 281, "title": "fiveawesomeguys, “fangirls” and £50000...", "day": 14}, {"sequence": 282, "title": "kateeeeeeee <3", "day": 15}, {"sequence": 283, "title": "non-uniform day", "day": 15}, {"sequence": 284, "title": "about time", "day": 15}, {"sequence": 285, "title": "gangs and grumbles", "day": 16}, {"sequence": 286, "title": "hate", "day": 16}, {"sequence": 287, "title": "gangs and grumbles (charlotte’s opinion)", "day": 17}, {"sequence": 288, "title": "another amazon update", "day": 17}, {"sequence": 289, "title": "another diary facelift", "day": 17}, {"sequence": 290, "title": "milk roll pizza", "day": 18}, {"sequence": 291, "title": "cheer up charlieeeeee <3", "day": 18}, {"sequence": 292, "title": "the moon", "day": 19}, {"sequence": 293, "title": "spaz da", "day": 19}, {"sequence": 294, "title": "little miss fun", "day": 19}, {"sequence": 295, "title": "high school musical", "day": 20}, {"sequence": 296, "title": "baking buns", "day": 20}, {"sequence": 297, "title": "my first impressions of marsden heights", "day": 21}, {"sequence": 298, "title": "celebrity of the decade", "day": 21}, {"sequence": 299, "title": "ugly nannies never eat carrots", "day": 21}, {"sequence": 300, "title": "i sing of...", "day": 22}, {"sequence": 301, "title": "most haunted", "day": 22}, {"sequence": 302, "title": "the dreaded pieces of paper...", "day": 23}, {"sequence": 303, "title": "the blair witch project", "day": 23}, {"sequence": 304, "title": "school shuts and summer starts.", "day": 23}, {"sequence": 305, "title": "one hour ago...", "day": 24}, {"sequence": 306, "title": "fear of cars", "day": 24}, {"sequence": 307, "title": "i am the master!", "day": 25}, {"sequence": 308, "title": "scientology secret", "day": 25}, {"sequence": 309, "title": "number 16 bus shelter", "day": 25}, {"sequence": 310, "title": "mock the week", "day": 26}, {"sequence": 311, "title": "time lord rock", "day": 26}, {"sequence": 312, "title": "take 2", "day": 27}, {"sequence": 313, "title": "the sonic spoon", "day": 27}, {"sequence": 314, "title": "the online community", "day": 27}, {"sequence": 315, "title": "bbc proms: doctor who", "day": 28}, {"sequence": 316, "title": "doctor who: music of the spheres", "day": 28}, {"sequence": 317, "title": "squeeeeeeeee!", "day": 29}, {"sequence": 318, "title": "doctor who: my top favourites", "day": 29}, {"sequence": 319, "title": "remember", "day": 29}, {"sequence": 320, "title": "bollocksing up birthdays", "day": 30}, {"sequence": 321, "title": "morning crap... literally x.x", "day": 30}, {"sequence": 322, "title": "i knew i’d forgotten something...", "day": 31}, {"sequence": 323, "title": "i died last night.", "day": 31}], "removed": []}, "August": {"published": [{"sequence": 324, "title": "dreading going to bed :(", "day": 1}, {"sequence": 325, "title": "nothing to worry about :)", "day": 1}, {"sequence": 326, "title": "truth or dare, without the dare, with anna ;)", "day": 2}, {"sequence": 327, "title": "unlimited texts - the truth!", "day": 2}, {"sequence": 328, "title": "mybignightlifefriendspacename", "day": 2}, {"sequence": 329, "title": "trock", "day": 3}, {"sequence": 330, "title": "erm, honey... i think we forgot the kid!", "day": 3}, {"sequence": 331, "title": "burberry c.h.v.", "day": 4}, {"sequence": 332, "title": "year ten: full report", "day": 4}, {"sequence": 333, "title": "charlotte, gaby & lara <3", "day": 4}, {"sequence": 334, "title": "childhood memories", "day": 5}, {"sequence": 335, "title": "evil heartless twat (aka FUCK OFF)", "day": 5}, {"sequence": 336, "title": "amazon update", "day": 6}, {"sequence": 337, "title": "FUCK OFF!", "day": 6}, {"sequence": 338, "title": "the royal albert hole", "day": 6}, {"sequence": 339, "title": "fan-plastic!", "day": 7}, {"sequence": 340, "title": "time lord rock (trock)", "day": 7}, {"sequence": 341, "title": "delay of a time lord", "day": 7}, {"sequence": 342, "title": "w00t.", "day": 8}, {"sequence": 343, "title": "not-so-w00t.", "day": 8}, {"sequence": 344, "title": "i finally experience part of a *morning*", "day": 8}, {"sequence": 345, "title": "just a liccle update ^_^", "day": 9}, {"sequence": 346, "title": "survival", "day": 9}, {"sequence": 347, "title": "doomsday", "day": 10}, {"sequence": 348, "title": "mother muldowney?!", "day": 10}, {"sequence": 349, "title": "“even a sponge has more life than i”", "day": 10}, {"sequence": 350, "title": "^_^", "day": 11}, {"sequence": 351, "title": "don’t read this. it’s just another amazon update *yawn*", "day": 11}, {"sequence": 352, "title": "who in order", "day": 12}, {"sequence": 353, "title": "sweep swears! <333", "day": 12}, {"sequence": 354, "title": "harry potter and the tree branch of doom", "day": 12}, {"sequence": 355, "title": "nerimania!", "day": 13}, {"sequence": 356, "title": "whale cack", "day": 13}, {"sequence": 357, "title": "writing <3", "day": 13}, {"sequence": 358, "title": "thanks twidge!", "day": 14}, {"sequence": 359, "title": "doctor who episodes that will never be made...", "day": 14}, {"sequence": 360, "title": "trock forum", "day": 14}, {"sequence": 361, "title": "fuckkkkkkkkkkk :’(", "day": 15}, {"sequence": 362, "title": "the morning after x.x", "day": 15}, {"sequence": 363, "title": "heartache", "day": 16}, {"sequence": 364, "title": "and gaby is blocked.", "day": 16}, {"sequence": 365, "title": "post whore", "day": 16}, {"sequence": 366, "title": "ivy palace", "day": 17}, {"sequence": 367, "title": "guess who’s a trock forum moderator?", "day": 17}, {"sequence": 368, "title": "happy birthday mummy ^_^", "day": 18}, {"sequence": 369, "title": "cut off from reality", "day": 18}, {"sequence": 370, "title": "rosie butler", "day": 18}, {"sequence": 371, "title": "kabbam?", "day": 19}, {"sequence": 372, "title": "a fresh new look ^_^", "day": 19}, {"sequence": 373, "title": "snuggley ^___^", "day": 19}, {"sequence": 374, "title": "a million and one thousand things are screaming in my head...", "day": 20}, {"sequence": 375, "title": "when i’m out deletin’", "day": 20}, {"sequence": 376, "title": "bessie <3", "day": 20}, {"sequence": 377, "title": "cheap chicken", "day": 21}, {"sequence": 378, "title": "an unofficial guide to doctor who", "day": 21}, {"sequence": 379, "title": "idiots.", "day": 22}, {"sequence": 380, "title": "confusing results", "day": 22}, {"sequence": 381, "title": "mr. lonely", "day": 22}, {"sequence": 382, "title": "early in the morning, just as day was dawning x_x", "day": 23}, {"sequence": 383, "title": "project change", "day": 23}, {"sequence": 384, "title": "my ten names", "day": 24}, {"sequence": 385, "title": "trock featured on DWO!", "day": 24}, {"sequence": 386, "title": "revenge of the time lords", "day": 24}, {"sequence": 387, "title": "doctor who weekend", "day": 25}, {"sequence": 388, "title": "great grandma", "day": 25}, {"sequence": 389, "title": "three things", "day": 25}, {"sequence": 390, "title": "the final full week", "day": 26}, {"sequence": 391, "title": "wallace & gromit", "day": 26}, {"sequence": 392, "title": "lewis & charlotte: charlotte’s revenge", "day": 26}, {"sequence": 393, "title": "the best night of 2008 (so far)", "day": 27}, {"sequence": 394, "title": "eh?", "day": 27}, {"sequence": 395, "title": "writing on plates is fun ^_^", "day": 28}, {"sequence": 396, "title": "“where’s that lady going?”", "day": 28}, {"sequence": 397, "title": "a story in just six words", "day": 28}, {"sequence": 398, "title": "erm.", "day": 29}, {"sequence": 399, "title": "the lewis [redacted] adventures", "day": 29}, {"sequence": 400, "title": "mint memories ^_^", "day": 30}, {"sequence": 401, "title": "lewis & charlotte: guessing games", "day": 30}, {"sequence": 402, "title": "change of plan or travelling in time?", "day": 30}, {"sequence": 403, "title": "you know when it feels like something’s missing...", "day": 31}, {"sequence": 404, "title": "swansea", "day": 31}], "removed": []}, "September": {"published": [{"sequence": 405, "title": "home sweet home", "day": 1}, {"sequence": 406, "title": "type 40", "day": 1}, {"sequence": 407, "title": "tuesday today", "day": 2}, {"sequence": 408, "title": "i’m gunna be educated tomorrow :(", "day": 2}, {"sequence": 409, "title": "wonky wednesday", "day": 3}, {"sequence": 410, "title": "i give up.", "day": 3}, {"sequence": 411, "title": "twoddly thursday?!", "day": 4}, {"sequence": 412, "title": "lewis & charlotte - series one finale!", "day": 4}, {"sequence": 413, "title": "the day of fri.", "day": 5}, {"sequence": 414, "title": "funky friday :)", "day": 5}, {"sequence": 415, "title": "links", "day": 5}, {"sequence": 416, "title": "dinnertimes suck.", "day": 6}, {"sequence": 417, "title": "bedtime ^_^", "day": 6}, {"sequence": 418, "title": "twat(s)", "day": 7}, {"sequence": 419, "title": "this time last week...", "day": 7}, {"sequence": 420, "title": "gabz", "day": 8}, {"sequence": 421, "title": "five things", "day": 8}, {"sequence": 422, "title": "project notes", "day": 9}, {"sequence": 423, "title": "not again... *sighs*", "day": 9}, {"sequence": 424, "title": "boxers", "day": 9}, {"sequence": 425, "title": "my favourite doctor", "day": 10}, {"sequence": 426, "title": "steve", "day": 10}, {"sequence": 427, "title": "9/11", "day": 11}, {"sequence": 428, "title": "billie", "day": 11}, {"sequence": 429, "title": "maisie", "day": 12}, {"sequence": 430, "title": "x", "day": 12}, {"sequence": 431, "title": "livin’ in a box", "day": 13}, {"sequence": 432, "title": "picture book", "day": 13}, {"sequence": 433, "title": "feelin’ hot hot hot!", "day": 13}, {"sequence": 434, "title": "picture presents", "day": 14}, {"sequence": 435, "title": "ahhh ^_^", "day": 14}, {"sequence": 436, "title": "london 2012", "day": 15}, {"sequence": 437, "title": "tennant’s future", "day": 15}, {"sequence": 438, "title": "the big bang", "day": 16}, {"sequence": 439, "title": "work experience", "day": 16}, {"sequence": 440, "title": "funnies", "day": 17}, {"sequence": 441, "title": "media trip", "day": 17}, {"sequence": 442, "title": "gareth", "day": 18}, {"sequence": 443, "title": "love and education", "day": 18}, {"sequence": 444, "title": "the A-Z of burnley (my bits)", "day": 18}, {"sequence": 445, "title": "new project", "day": 19}, {"sequence": 446, "title": "party pooper?", "day": 19}, {"sequence": 447, "title": "on the radio!", "day": 20}, {"sequence": 448, "title": "doctor lew?", "day": 20}, {"sequence": 449, "title": "school photos", "day": 21}, {"sequence": 450, "title": "fourfifty", "day": 21}, {"sequence": 451, "title": "ronald mcdonald", "day": 22}, {"sequence": 452, "title": "whatever happened to chocolate sponge and custard?", "day": 22}, {"sequence": 453, "title": "uber mod", "day": 22}, {"sequence": 454, "title": "mod god", "day": 23}, {"sequence": 455, "title": "fuck it.", "day": 23}, {"sequence": 456, "title": "phone fear", "day": 24}, {"sequence": 457, "title": "end.", "day": 24}, {"sequence": 458, "title": "charlie & conor", "day": 25}, {"sequence": 459, "title": "billie ryan <3", "day": 25}, {"sequence": 460, "title": "postman what?!", "day": 26}, {"sequence": 461, "title": "bum chums", "day": 26}, {"sequence": 462, "title": "bryony and the bitch", "day": 26}, {"sequence": 463, "title": "grandma and grandad", "day": 27}, {"sequence": 464, "title": "the next doctor", "day": 27}, {"sequence": 465, "title": "how not to spend a friday night", "day": 28}, {"sequence": 466, "title": "an awful lot of chillin’", "day": 28}, {"sequence": 467, "title": "SJA - the last sontaran", "day": 29}, {"sequence": 468, "title": "the release of a time lord", "day": 29}, {"sequence": 469, "title": "regeneration", "day": 30}, {"sequence": 470, "title": "one awesome night with two awesome guys", "day": 30}], "removed": []}, "October": {"published": [{"sequence": 471, "title": "blogtv birthday", "day": 1}, {"sequence": 472, "title": "month #10", "day": 2}, {"sequence": 473, "title": "merry eidmas xD", "day": 2}, {"sequence": 474, "title": "gabriella christina jay <3", "day": 3}, {"sequence": 475, "title": "a proper fucking entry (at last)", "day": 3}, {"sequence": 476, "title": "thursday thinking", "day": 4}, {"sequence": 477, "title": "personal privacy", "day": 4}, {"sequence": 478, "title": "dickheads", "day": 5}, {"sequence": 479, "title": "/endrant", "day": 5}, {"sequence": 480, "title": "neripost", "day": 6}, {"sequence": 481, "title": "little britain usa", "day": 6}, {"sequence": 482, "title": "lazy lewis", "day": 7}, {"sequence": 483, "title": "trial today", "day": 7}, {"sequence": 484, "title": "the ultimate bore?", "day": 8}, {"sequence": 485, "title": "mindfuck", "day": 8}, {"sequence": 486, "title": "gabriella jay", "day": 9}, {"sequence": 487, "title": "work experience - day 01", "day": 9}, {"sequence": 488, "title": "work experience - day 02", "day": 10}, {"sequence": 489, "title": "bye bye torchwood?", "day": 10}, {"sequence": 490, "title": "work experience - day 03", "day": 11}, {"sequence": 491, "title": "open evening @ marsden sheights*", "day": 11}, {"sequence": 492, "title": "work experience - day 04", "day": 12}, {"sequence": 493, "title": "50/50", "day": 12}, {"sequence": 494, "title": "yay for k ^__^", "day": 13}, {"sequence": 495, "title": "work experience - day 05", "day": 13}, {"sequence": 496, "title": "shhhhhhhhhhh", "day": 14}, {"sequence": 497, "title": "the writer’s tale", "day": 14}, {"sequence": 498, "title": "stfu lol", "day": 15}, {"sequence": 499, "title": "500 tomorrow", "day": 15}, {"sequence": 500, "title": "ZOMFG FIVE HUNDRED!", "day": 16}, {"sequence": 501, "title": "burnley college", "day": 17}, {"sequence": 502, "title": "burnley library", "day": 17}, {"sequence": 503, "title": "burnley library, again", "day": 18}, {"sequence": 504, "title": "life’s alright ^_^", "day": 18}, {"sequence": 505, "title": "sadness and fun times", "day": 19}, {"sequence": 506, "title": "prezzies for pursglove", "day": 19}, {"sequence": 507, "title": "two words...", "day": 20}, {"sequence": 508, "title": "finally finished!", "day": 20}, {"sequence": 509, "title": "lewis meets lewis #2", "day": 21}, {"sequence": 510, "title": "basically, she loved everything... yay!", "day": 21}, {"sequence": 511, "title": "lewis meets lewis #3", "day": 22}, {"sequence": 512, "title": "stuff i did today :)", "day": 22}, {"sequence": 513, "title": "steve’s strop", "day": 23}, {"sequence": 514, "title": "blargh", "day": 23}, {"sequence": 515, "title": "wikipedia and writing", "day": 24}, {"sequence": 516, "title": "dead set", "day": 24}, {"sequence": 517, "title": "dead brother", "day": 25}, {"sequence": 518, "title": "kate + ramadan <3", "day": 25}, {"sequence": 519, "title": "“iyerrrr lew”", "day": 26}, {"sequence": 520, "title": "vital mistake", "day": 26}, {"sequence": 521, "title": "18 weeks later...", "day": 27}, {"sequence": 522, "title": "a hot chocolate and a cuddle", "day": 27}, {"sequence": 523, "title": "nothing much really.", "day": 28}, {"sequence": 524, "title": "kinky wombles", "day": 28}, {"sequence": 525, "title": "further proof", "day": 29}, {"sequence": 526, "title": "bye bye tennant <3", "day": 29}, {"sequence": 527, "title": "who history", "day": 30}, {"sequence": 528, "title": "o noes!!1!!!11!!!!one!!1!", "day": 30}, {"sequence": 529, "title": "ghostmode:activated", "day": 31}], "removed": []}, "November": {"published": [{"sequence": 530, "title": "it’s the beginning of a new month...", "day": 1}, {"sequence": 531, "title": "what i am doing vs. what i should be doing", "day": 2}, {"sequence": 532, "title": "wally wishing", "day": 3}, {"sequence": 533, "title": "christmas, school and other stuff", "day": 3}, {"sequence": 534, "title": "stewish slaggox, 1993 - 2008", "day": 4}, {"sequence": 535, "title": "barack opresident", "day": 5}, {"sequence": 536, "title": "bonfire night", "day": 6}, {"sequence": 537, "title": "guy forks", "day": 6}, {"sequence": 538, "title": "hospital hell", "day": 7}, {"sequence": 539, "title": "thumping thursday", "day": 8}, {"sequence": 540, "title": "mum and exam prep.", "day": 9}, {"sequence": 541, "title": "the gaby situation", "day": 9}, {"sequence": 542, "title": "the exam work and the firework", "day": 10}, {"sequence": 543, "title": "dinorawrrrrrrrr", "day": 11}, {"sequence": 544, "title": "plonkii the alien", "day": 12}, {"sequence": 545, "title": "sunday: day of rest? yeah right!", "day": 12}, {"sequence": 546, "title": "annoyed. arghhhhh.", "day": 13}, {"sequence": 547, "title": "fuckadoodledoo", "day": 14}, {"sequence": 548, "title": "chore", "day": 15}, {"sequence": 549, "title": "“jeez” sounds like “cheese”", "day": 16}, {"sequence": 550, "title": "an awesome thursday - yeah, really!", "day": 16}, {"sequence": 551, "title": "children in need", "day": 17}, {"sequence": 552, "title": "every cloud has a silver lining...", "day": 18}, {"sequence": 553, "title": "actual written notes", "day": 19}, {"sequence": 554, "title": "void", "day": 19}, {"sequence": 555, "title": "same old, same old.", "day": 20}, {"sequence": 556, "title": "boring week", "day": 21}, {"sequence": 557, "title": "trock rocks my sonic socks", "day": 22}, {"sequence": 558, "title": "the eleventh doctor?", "day": 22}, {"sequence": 559, "title": "the origins of a time lord", "day": 23}, {"sequence": 560, "title": "dad and the doctor", "day": 24}, {"sequence": 561, "title": "youtube live", "day": 25}, {"sequence": 562, "title": "a number of things...", "day": 25}, {"sequence": 563, "title": "school, friends, youtube and stuff", "day": 26}, {"sequence": 564, "title": "bringing gallifrey back", "day": 27}, {"sequence": 565, "title": "sacrifice", "day": 28}, {"sequence": 566, "title": "winterness", "day": 28}, {"sequence": 567, "title": "winterness ii", "day": 29}, {"sequence": 568, "title": "december’s obstacles", "day": 30}], "removed": []}, "December": {"published": [{"sequence": 569, "title": "fucking freezing.", "day": 1}, {"sequence": 570, "title": "snowday", "day": 2}, {"sequence": 571, "title": "graeme harper answered my question!", "day": 2}, {"sequence": 572, "title": "snowday ii", "day": 3}, {"sequence": 573, "title": "copying charlie(issocoollike)", "day": 3}, {"sequence": 574, "title": "snowday iii", "day": 4}, {"sequence": 575, "title": "coz.", "day": 4}, {"sequence": 576, "title": "91 and counting...", "day": 5}, {"sequence": 577, "title": "the ultimate doctor who collection", "day": 5}, {"sequence": 578, "title": "hitler rises, kyrra fails", "day": 6}, {"sequence": 579, "title": "the brigadier and sarah jane vs kaagh and the bane", "day": 7}, {"sequence": 580, "title": "bless billie <333", "day": 7}, {"sequence": 581, "title": "nearing the end of term...", "day": 8}, {"sequence": 582, "title": "burnt peas", "day": 8}, {"sequence": 583, "title": "christmas who speculation", "day": 9}, {"sequence": 584, "title": "mocks and marks, friends and festivities", "day": 9}, {"sequence": 585, "title": "text memories", "day": 10}, {"sequence": 586, "title": "packing presents", "day": 10}, {"sequence": 587, "title": "the fix factor", "day": 11}, {"sequence": 588, "title": "the hitchhiker’s guide to the galaxy", "day": 12}, {"sequence": 589, "title": "destiny of the daleks", "day": 12}, {"sequence": 590, "title": "santa who", "day": 13}, {"sequence": 591, "title": "time to celebrate!", "day": 13}, {"sequence": 592, "title": "stop-motion webcam madness", "day": 14}, {"sequence": 593, "title": "more stop-motion webcam madness", "day": 14}, {"sequence": 594, "title": "last of the mock exams", "day": 15}, {"sequence": 595, "title": "lew’s magic makeup & mirror kit for morons like you :)", "day": 15}, {"sequence": 596, "title": "presents and pantomimes", "day": 16}, {"sequence": 597, "title": "tomorrow’s treat, sunday’s surprise", "day": 17}, {"sequence": 598, "title": "getting and giving gifts", "day": 17}, {"sequence": 599, "title": "the next doctor - hints", "day": 18}, {"sequence": 600, "title": "from the mind and mouth of charlotte...", "day": 18}, {"sequence": 601, "title": "600+1", "day": 19}, {"sequence": 602, "title": "wardrobe of wonders (keep out plzkthxbi)", "day": 19}, {"sequence": 603, "title": "mrs g and mrs b", "day": 20}, {"sequence": 604, "title": "nearing ever closer...", "day": 20}, {"sequence": 605, "title": "counting the minutes...", "day": 21}, {"sequence": 606, "title": "time lord wannabe", "day": 22}, {"sequence": 607, "title": "rollercoaster tycoon 2", "day": 22}, {"sequence": 608, "title": "the eve of christmas", "day": 23}, {"sequence": 609, "title": "change of plan", "day": 23}, {"sequence": 610, "title": "easter eggs at christmas!", "day": 24}, {"sequence": 611, "title": "the final countdown (to christmas!)", "day": 24}, {"sequence": 612, "title": "christmas", "day": 25}, {"sequence": 613, "title": "the other doctor", "day": 25}, {"sequence": 614, "title": "christmas 2008 - what i got...", "day": 26}, {"sequence": 615, "title": "christmas 2008 - the day itself...", "day": 27}, {"sequence": 616, "title": "christmas 2008 - the texts...", "day": 27}, {"sequence": 617, "title": "frankie boyle and sean lock", "day": 28}, {"sequence": 618, "title": "saturday and sunday", "day": 28}, {"sequence": 619, "title": "winding down with dvds", "day": 29}, {"sequence": 620, "title": "well now it’s just fucking ridiculous!", "day": 29}, {"sequence": 621, "title": "“it’s the end, but the moment has been prepared for...”", "day": 30}, {"sequence": 622, "title": "knights, swords and spiderwebs", "day": 30}, {"sequence": 623, "title": "the best of 2008", "day": 31}], "removed": []}};
+    const monthColours = {"February": ["#59dfff", "#7b61ff"], "March": ["#9b6cff", "#ff4fd8"], "April": ["#ff4fd8", "#ff7cb8"], "May": ["#51f1ff", "#66ffc2"], "June": ["#65ff9a", "#b5ff6a"], "July": ["#ffb45e", "#ff5f7a"], "August": ["#4b7dff", "#5be7ff"], "September": ["#ff526f", "#b248ff"], "October": ["#b05cff", "#ff4fd8"], "November": ["#4ee3d0", "#52a8ff"], "December": ["#ffd76a", "#ff8e5d"]};
+    const monthOrder = [
+      "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
     ];
 
-    let currentMonth = 0;
+    const timeline = document.getElementById("timeline");
+    const monthNav = document.getElementById("monthNav");
+    const searchInput = document.getElementById("searchInput");
+    const resultCount = document.getElementById("resultCount");
+    const activeSector = document.getElementById("activeSector");
+    const progressBar = document.getElementById("progressBar");
+    const emptyState = document.getElementById("emptyState");
 
-    const monthHeading = document.getElementById("monthHeading");
-    const calendarGrid = document.getElementById("calendarGrid");
-    const prevMonth = document.getElementById("prevMonth");
-    const nextMonth = document.getElementById("nextMonth");
-    const monthSummary = document.getElementById("monthSummary");
+    let totalEntries = 0;
 
-    const panelEmpty = document.getElementById("panelEmpty");
-    const panelContent = document.getElementById("panelContent");
-    const panelDate = document.getElementById("panelDate");
-    const panelTitle = document.getElementById("panelTitle");
+    monthOrder.forEach((month, index) => {
+      const entries = diaryData[month]?.published || [];
+      totalEntries += entries.length;
+      const [a, b] = monthColours[month];
 
-    const removedToggle = document.getElementById("removedToggle");
-    const removedCount = document.getElementById("removedCount");
-    const removedList = document.getElementById("removedList");
+      const navButton = document.createElement("button");
+      navButton.className = "month-link";
+      navButton.type = "button";
+      navButton.dataset.target = month;
+      navButton.innerHTML = `<span>${month}</span><small>${entries.length}</small>`;
+      navButton.addEventListener("click", () => {
+        document.getElementById(`month-${month}`).scrollIntoView({behavior: "smooth"});
+      });
+      monthNav.appendChild(navButton);
 
-    function renderMonth() {
-      const monthName = monthNames[currentMonth];
-      const monthData = diaryData[monthName] || { published: [], removed: [] };
-      const entries = new Map(monthData.published.map(entry => [entry.day, entry]));
+      const section = document.createElement("section");
+      section.className = "month-section";
+      section.id = `month-${month}`;
+      section.dataset.month = month;
+      section.style.setProperty("--month-a", a);
+      section.style.setProperty("--month-b", b);
 
-      monthHeading.textContent = monthName;
-      calendarGrid.innerHTML = "";
-      panelEmpty.hidden = false;
-      panelContent.hidden = true;
+      section.innerHTML = `
+        <header class="month-head">
+          <div>
+            <small>Sector ${String(index + 1).padStart(2, "0")}</small>
+            <h3>${month}</h3>
+          </div>
+          <div class="month-total">${entries.length} transmissions</div>
+        </header>
+        <div class="entries"></div>
+      `;
 
-      const firstDay = new Date(2021, currentMonth, 1);
-      const daysInMonth = new Date(2021, currentMonth + 1, 0).getDate();
-      const offset = (firstDay.getDay() + 6) % 7;
+      const entriesWrap = section.querySelector(".entries");
 
-      for (let i = 0; i < offset; i += 1) {
-        const blank = document.createElement("div");
-        blank.className = "empty-day";
-        blank.setAttribute("aria-hidden", "true");
-        calendarGrid.appendChild(blank);
-      }
+      entries.forEach(entry => {
+        const article = document.createElement("article");
+        article.className = "entry";
+        article.dataset.search = `${entry.title} ${month} ${entry.sequence}`.toLowerCase();
 
-      for (let day = 1; day <= daysInMonth; day += 1) {
-        const entry = entries.get(day);
-        const cell = document.createElement(entry ? "button" : "div");
-        cell.className = `day${entry ? " has-entry" : ""}`;
+        article.innerHTML = `
+          <button class="entry-toggle" type="button" aria-expanded="false">
+            <span class="entry-dot" aria-hidden="true"></span>
+            <span class="entry-copy">
+              <strong></strong>
+              <small>Entry #${entry.sequence} · ${month} 2008</small>
+            </span>
+            <span class="entry-arrow" aria-hidden="true">›</span>
+          </button>
+          <div class="entry-panel">
+            <div class="entry-panel-inner">
+              <div class="entry-meta">
+                <span>Archive entry ${entry.sequence}</span>
+                <span>${month} 2008</span>
+                <span>Published</span>
+              </div>
+            </div>
+          </div>
+        `;
 
-        if (entry) {
-          cell.type = "button";
-          cell.setAttribute(
-            "aria-label",
-            `${day} ${monthName} 2021: ${entry.title}`
-          );
-        }
+        article.querySelector("strong").textContent = entry.title;
 
-        const number = document.createElement("span");
-        number.className = "day-number";
-        number.textContent = day;
-        cell.appendChild(number);
-
-        if (entry) {
-          const dot = document.createElement("span");
-          dot.className = "day-dot";
-          dot.setAttribute("aria-hidden", "true");
-          cell.appendChild(dot);
-
-          const preview = document.createElement("span");
-          preview.className = "day-entry-preview";
-          preview.textContent = entry.title;
-          cell.appendChild(preview);
-
-          cell.addEventListener("click", () => {
-            document.querySelectorAll(".day.selected").forEach(item => {
-              item.classList.remove("selected");
-            });
-
-            cell.classList.add("selected");
-            panelEmpty.hidden = true;
-            panelContent.hidden = false;
-
-            panelDate.textContent = new Intl.DateTimeFormat("en-GB", {
-              day: "numeric",
-              month: "long",
-              year: "numeric"
-            }).format(new Date(2021, currentMonth, day));
-
-            panelTitle.textContent = entry.title;
-          });
-        }
-
-        calendarGrid.appendChild(cell);
-      }
-
-      monthSummary.textContent =
-        `${monthData.published.length} published · ${monthData.removed.length} removed`;
-
-      removedCount.textContent = monthData.removed.length;
-      removedList.innerHTML = "";
-      removedList.hidden = true;
-      removedToggle.setAttribute("aria-expanded", "false");
-
-      if (monthData.removed.length) {
-        monthData.removed.forEach(title => {
-          const item = document.createElement("div");
-          item.className = "removed-item";
-          item.textContent = title;
-          removedList.appendChild(item);
+        const toggle = article.querySelector(".entry-toggle");
+        toggle.addEventListener("click", () => {
+          const open = article.classList.toggle("open");
+          toggle.setAttribute("aria-expanded", String(open));
         });
-      } else {
-        const item = document.createElement("div");
-        item.className = "removed-item";
-        item.style.textDecoration = "none";
-        item.textContent = "No removed entries listed.";
-        removedList.appendChild(item);
-      }
 
-      prevMonth.disabled = currentMonth === 0;
-      nextMonth.disabled = currentMonth === 11;
+        entriesWrap.appendChild(article);
+      });
+
+      timeline.appendChild(section);
+    });
+
+    resultCount.textContent = `${totalEntries} transmissions`;
+
+    function applySearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      document.querySelectorAll(".month-section").forEach(section => {
+        let monthVisible = 0;
+
+        section.querySelectorAll(".entry").forEach(entry => {
+          const matches = !query || entry.dataset.search.includes(query);
+          entry.classList.toggle("hidden", !matches);
+          if (matches) {
+            visibleCount++;
+            monthVisible++;
+          }
+        });
+
+        section.hidden = monthVisible === 0;
+        section.querySelector(".month-total").textContent =
+          `${monthVisible} ${monthVisible === 1 ? "transmission" : "transmissions"}`;
+      });
+
+      resultCount.textContent =
+        `${visibleCount} ${visibleCount === 1 ? "transmission" : "transmissions"}`;
+
+      emptyState.style.display = visibleCount === 0 ? "block" : "none";
     }
 
-    prevMonth.addEventListener("click", () => {
-      if (currentMonth > 0) {
-        currentMonth -= 1;
-        renderMonth();
-      }
-    });
-
-    nextMonth.addEventListener("click", () => {
-      if (currentMonth < 11) {
-        currentMonth += 1;
-        renderMonth();
-      }
-    });
-
-    removedToggle.addEventListener("click", () => {
-      const isExpanded = removedToggle.getAttribute("aria-expanded") === "true";
-      removedToggle.setAttribute("aria-expanded", String(!isExpanded));
-      removedList.hidden = isExpanded;
-    });
+    searchInput.addEventListener("input", applySearch);
 
     document.addEventListener("keydown", event => {
-      if (event.key === "ArrowLeft" && currentMonth > 0) {
-        currentMonth -= 1;
-        renderMonth();
+      if (event.key === "/" && document.activeElement !== searchInput) {
+        event.preventDefault();
+        searchInput.focus();
       }
 
-      if (event.key === "ArrowRight" && currentMonth < 11) {
-        currentMonth += 1;
-        renderMonth();
+      if (event.key === "Escape" && document.activeElement === searchInput) {
+        searchInput.value = "";
+        searchInput.blur();
+        applySearch();
       }
     });
 
-    renderMonth();
+    const sections = [...document.querySelectorAll(".month-section")];
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+
+      const month = visible.target.dataset.month;
+      const [a, b] = monthColours[month];
+
+      document.documentElement.style.setProperty("--accent-a", a);
+      document.documentElement.style.setProperty("--accent-b", b);
+      activeSector.textContent = `${month} sector`;
+
+      document.querySelectorAll(".month-link").forEach(link => {
+        link.classList.toggle("active", link.dataset.target === month);
+      });
+    }, {
+      rootMargin: "-25% 0px -55% 0px",
+      threshold: [0, .1, .3, .6]
+    });
+
+    sections.forEach(section => observer.observe(section));
+
+    function updateProgress() {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progressBar.style.height = `${percent}%`;
+    }
+
+    window.addEventListener("scroll", updateProgress, {passive: true});
+    updateProgress();
+
+    if (monthNav.firstElementChild) {
+      monthNav.firstElementChild.classList.add("active");
+    }
   </script>
 </body>
 </html>
