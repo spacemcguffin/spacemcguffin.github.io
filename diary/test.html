@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Lewis Christian's diary archive" name="description"/>
+<title>2021 Diary</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Oswald:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="diary.css" media="all" rel="stylesheet" type="text/css"/>
+
+<style>
+  .diary-calendar-app {
+    --calendar-accent: var(--accent, #6e8ec1);
+    --calendar-border: var(--border-color, rgba(80, 100, 130, .22));
+    --calendar-panel: color-mix(in srgb, var(--background, #fff) 88%, transparent);
+    margin-top: 1rem;
+  }
+
+  .calendar-toolbar {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    gap: .85rem;
+    margin-bottom: 1rem;
+  }
+
+  .calendar-heading {
+    min-width: 0;
+    text-align: center;
+  }
+
+  .calendar-heading h2 {
+    margin: .15rem 0 0;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    line-height: 1.05;
+  }
+
+  .calendar-kicker,
+  .entry-panel-eyebrow {
+    display: block;
+    color: var(--calendar-accent);
+    font-family: "Geist Pixel", "Inter", sans-serif;
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+
+  .calendar-nav-button {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--calendar-border);
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--calendar-accent) 10%, transparent);
+    color: inherit;
+    font: inherit;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform .2s ease, background .2s ease;
+  }
+
+  .calendar-nav-button:hover {
+    transform: translateY(-2px);
+    background: color-mix(in srgb, var(--calendar-accent) 18%, transparent);
+  }
+
+  .calendar-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+    gap: 1rem;
+    align-items: stretch;
+  }
+
+  .calendar-surface,
+  .calendar-entry-panel {
+    border: 1px solid var(--calendar-border);
+    border-radius: 24px;
+    background: var(--calendar-panel);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .calendar-surface {
+    padding: clamp(.75rem, 2vw, 1.25rem);
+  }
+
+  .calendar-weekdays,
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: .45rem;
+  }
+
+  .calendar-weekdays {
+    margin-bottom: .45rem;
+  }
+
+  .calendar-weekdays span {
+    padding: .35rem .1rem;
+    color: color-mix(in srgb, currentColor 58%, transparent);
+    font-size: .72rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .calendar-day,
+  .calendar-blank {
+    min-height: 74px;
+    border-radius: 16px;
+  }
+
+  .calendar-blank {
+    opacity: .18;
+  }
+
+  .calendar-day {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: .7rem;
+    border: 1px solid transparent;
+    background: color-mix(in srgb, currentColor 3%, transparent);
+    color: inherit;
+    font: inherit;
+    cursor: default;
+    transition: transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+
+  .calendar-day.has-entry {
+    border-color: color-mix(in srgb, var(--calendar-accent) 34%, transparent);
+    background:
+      linear-gradient(145deg,
+        color-mix(in srgb, var(--calendar-accent) 18%, transparent),
+        color-mix(in srgb, var(--calendar-accent) 5%, transparent));
+    cursor: pointer;
+  }
+
+  .calendar-day.has-entry:hover {
+    transform: translateY(-3px);
+    border-color: var(--calendar-accent);
+  }
+
+  .calendar-day.is-selected {
+    outline: 2px solid var(--calendar-accent);
+    outline-offset: 2px;
+    background: color-mix(in srgb, var(--calendar-accent) 24%, transparent);
+  }
+
+  .calendar-day-number {
+    font-weight: 700;
+  }
+
+  .calendar-entry-dot {
+    position: absolute;
+    right: .65rem;
+    bottom: .65rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--calendar-accent);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--calendar-accent) 13%, transparent);
+  }
+
+  .calendar-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .85rem;
+    margin-top: 1rem;
+    color: color-mix(in srgb, currentColor 65%, transparent);
+    font-size: .8rem;
+  }
+
+  .calendar-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+  }
+
+  .legend-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    display: inline-block;
+  }
+
+  .legend-published { background: var(--calendar-accent); }
+  .legend-selected {
+    border: 2px solid var(--calendar-accent);
+    background: transparent;
+  }
+
+  .calendar-entry-panel {
+    display: flex;
+    min-height: 100%;
+    flex-direction: column;
+    padding: clamp(1rem, 2.5vw, 1.5rem);
+    overflow: hidden;
+  }
+
+  .entry-panel-empty,
+  .entry-panel-content {
+    flex: 1;
+    animation: calendarPanelIn .28s ease;
+  }
+
+  .entry-panel-icon {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    margin-bottom: 1.4rem;
+    place-items: center;
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--calendar-accent) 15%, transparent);
+    color: var(--calendar-accent);
+    font-size: 1.25rem;
+  }
+
+  .calendar-entry-panel h3 {
+    margin: .45rem 0 .65rem;
+    font-family: "Google Sans Flex", "Inter", sans-serif;
+    font-size: clamp(1.35rem, 2.5vw, 2rem);
+    line-height: 1.08;
+  }
+
+  .calendar-entry-panel p {
+    line-height: 1.65;
+  }
+
+  .entry-status-badge {
+    display: inline-flex;
+    margin-top: .5rem;
+    padding: .45rem .7rem;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--calendar-accent) 14%, transparent);
+    color: var(--calendar-accent);
+    font-size: .78rem;
+    font-weight: 700;
+  }
+
+  .removed-entries-block {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--calendar-border);
+  }
+
+  .removed-toggle {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .removed-toggle span:last-child {
+    display: grid;
+    min-width: 28px;
+    height: 28px;
+    place-items: center;
+    border-radius: 999px;
+    background: color-mix(in srgb, currentColor 8%, transparent);
+    font-size: .78rem;
+  }
+
+  .removed-entry-list {
+    display: grid;
+    gap: .5rem;
+    margin-top: .85rem;
+  }
+
+  .removed-entry-item {
+    padding: .65rem .75rem;
+    border-radius: 12px;
+    background: color-mix(in srgb, currentColor 4%, transparent);
+    color: color-mix(in srgb, currentColor 55%, transparent);
+    font-size: .88rem;
+    text-decoration: line-through;
+  }
+
+  .calendar-data-note {
+    margin: .85rem .2rem 0;
+    color: color-mix(in srgb, currentColor 52%, transparent);
+    font-size: .76rem;
+    line-height: 1.5;
+  }
+
+  @keyframes calendarPanelIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 820px) {
+    .calendar-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .calendar-entry-panel {
+      min-height: 260px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .calendar-weekdays span {
+      font-size: .62rem;
+    }
+
+    .calendar-weekdays,
+    .calendar-grid {
+      gap: .28rem;
+    }
+
+    .calendar-day,
+    .calendar-blank {
+      min-height: 52px;
+      border-radius: 12px;
+    }
+
+    .calendar-day {
+      padding: .45rem;
+    }
+
+    .calendar-entry-dot {
+      right: .45rem;
+      bottom: .45rem;
+      width: 6px;
+      height: 6px;
+      box-shadow: none;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="top-strip">This page is currently being updated.</div>
+<header class="site-header">
+<div class="nav-shell">
+<a aria-label="home" class="brand" href="#">
+<span class="brand-block">LEWIS<br/>.LC</span>
+<span class="brand-copy">2021 Diary</span>
+</a>
+<nav aria-label="Primary navigation" class="desktop-nav">
+<a href="/">Home</a>
+<a href="/profile">About</a>
+<a href="/diary">Diary Archive</a>
+<a href="/myspace">MySpace</a>
+<a href="/livejournal">LiveJournal</a>
+</nav>
+<div class="nav-actions">
+<button aria-label="Switch to dark mode" class="icon-btn theme-toggle" id="themeToggle" title="Switch to dark mode" type="button">
+<span aria-hidden="true" class="theme-icon-wrap">
+<svg class="theme-icon theme-icon-sun" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="4"></circle>
+<path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+</svg>
+<svg class="theme-icon theme-icon-moon" viewbox="0 0 24 24">
+<path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
+<path class="theme-star theme-star-one" d="M18.5 3.5v3M17 5h3"></path>
+<path class="theme-star theme-star-two" d="M20 8.7v2M19 9.7h2"></path>
+</svg>
+</span>
+</button>
+<button aria-expanded="false" aria-label="Open menu" class="icon-btn menu-btn" id="menuToggle">☰</button>
+</div>
+</div>
+</header>
+<nav aria-label="Mobile navigation" class="mobile-panel" id="mobilePanel">
+<a href="/">Home</a>
+<a href="/profile">Profile</a>
+<a href="/diary">Diary Archive</a>
+<a href="/myspace">MySpace</a>
+<a href="/livejournal">LiveJournal</a>
+</nav>
+<main>
+<div class="page-shell">
+<div aria-label="Breadcrumb" class="breadcrumbs">
+<span><a href="/">Home</a></span>
+<svg aria-hidden="true" class="lucide lucide-chevron-right w-4 h-4 text-[var(--color-text-muted)] ml-1.5 md:ml-2" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg>
+<span>Diary</span>
+<svg aria-hidden="true" class="lucide lucide-chevron-right w-4 h-4 text-[var(--color-text-muted)] ml-1.5 md:ml-2" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="14" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg>
+<span>2021</span>
+</div>
+<section class="product-grid">
+<aside class="cover-column">
+<div class="cover-frame">
+<img alt="2021 Diary" src="/diary/images/2021.png"/>
+</div>
+<div class="release-nav">
+<a href="/diary/2009">← 2009</a>
+<a href="/diary/2022">2022 →</a>
+</div>
+<div class="release-nav1">
+<a href="/diary">Diary Archive</a>
+</div>
+</aside>
+<article class="details-column">
+<h1>the wanderer <span class="release-number">(2021)</span></h1>
+<section class="tabs">
+<div aria-label="Release information" class="tab-list" role="tablist">
+<button aria-selected="true" class="tab-button active" data-tab="entries" role="tab">Entries</button>
+<button aria-selected="false" class="tab-button" data-tab="notes" role="tab">Notes</button>
+<button aria-selected="false" class="tab-button" data-tab="gallery" role="tab">Gallery</button>
+</div>
+<div class="tab-panel active" id="entries" role="tabpanel">
+
+<div class="diary-calendar-app" id="diaryCalendarApp">
+<div class="calendar-toolbar">
+<button aria-label="Previous month" class="calendar-nav-button" id="calendarPrev" type="button">←</button>
+<div class="calendar-heading">
+<span class="calendar-kicker">2021 diary calendar</span>
+<h2 id="calendarMonthTitle">January 2021</h2>
+</div>
+<button aria-label="Next month" class="calendar-nav-button" id="calendarNext" type="button">→</button>
+</div>
+<div class="calendar-layout">
+<section aria-label="Diary calendar" class="calendar-surface">
+<div aria-hidden="true" class="calendar-weekdays">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span>
+<span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+<div class="calendar-grid" id="calendarGrid"></div>
+<div class="calendar-legend">
+<span><i class="legend-dot legend-published"></i> Diary entry</span>
+<span><i class="legend-dot legend-selected"></i> Selected day</span>
+</div>
+</section>
+<aside aria-live="polite" class="calendar-entry-panel" id="calendarEntryPanel">
+<div class="entry-panel-empty" id="entryPanelEmpty">
+<span class="entry-panel-icon">✦</span>
+<p class="entry-panel-eyebrow">Choose a highlighted day</p>
+<h3>Explore the 2021 diary</h3>
+<p>Days containing an entry are marked in the calendar. Select one to reveal its title.</p>
+</div>
+<div class="entry-panel-content" hidden="" id="entryPanelContent">
+<p class="entry-panel-eyebrow" id="selectedDateLabel"></p>
+<h3 id="selectedEntryTitle"></h3>
+<span class="entry-status-badge">Published entry</span>
+</div>
+<div class="removed-entries-block">
+<button aria-expanded="false" class="removed-toggle" id="removedToggle" type="button">
+<span>Removed entries this month</span>
+<span id="removedCount">0</span>
+</button>
+<div class="removed-entry-list" hidden="" id="removedEntryList"></div>
+</div>
+</aside>
+</div>
+<p class="calendar-data-note">
+    The original page lists entry numbers rather than exact publication dates, so those numbers are being used as provisional calendar days.
+  </p>
+</div>
+
+</div>
+<div class="tab-panel" id="notes" role="tabpanel">
+<p>The diary writing resumes, almost a decade after <i>timelordwannabe</i> was retired. Entries are kept offline and private.</p>
+<div class="credits-grid">
+<div class="credit-card"><small>Written by</small><strong>Lewis Christian</strong></div>
+<div class="credit-card"><small>No. of entries</small><strong>60</strong></div>
+<div class="credit-card"><small>No. of deleted entries</small><strong>40</strong></div>
+</div>
+</div>
+<div class="tab-panel" id="gallery" role="tabpanel">
+<div class="gallery">
+<a class="lightbox" data-caption="Profile photo" href="/diary/images/newerprofile.png">
+<img alt="Profile photo" src="/diary/images/newerprofile.png"/>
+</a>
+<a class="lightbox" data-caption="Profile photo" href="/diary/images/newerprofile.png">
+<img alt="Profile photo" src="/diary/images/newerprofile.png"/>
+</a>
+</div>
+</div>
+</section>
+</article>
+</section>
+</div>
+
+<section aria-labelledby="transmissionTitle" class="transmission-section">
+<div class="page-shell transmission-grid">
+<div class="transmission-copy">
+<h2 id="transmissionTitle">Nothing to see here</h2>
+<p>Enter the password to reveal a message from Lewis.</p>
+</div>
+<div class="transmission-console">
+<form class="transmission-form" id="transmissionForm">
+<label for="transmissionCode">Enter password</label>
+<div class="transmission-input-row">
+<input autocomplete="off" id="transmissionCode" maxlength="20" name="transmission-code" placeholder="Enter password..." spellcheck="false" type="text"/>
+<button type="submit">Submit</button>
+</div>
+</form>
+<p aria-live="polite" class="transmission-status" id="transmissionStatus">&gt; waiting for password</p>
+<div class="transmission-message" hidden="" id="transmissionMessage">
+<small>Message unlocked</small>
+<h3>Hello.</h3>
+<p>There really is nothing to see here. Sorry about that.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer>
+<div class="page-shell footer-grid">
+<div>
+<a class="brand" href="#">
+<span class="brand-block">LEWIS<br/>.LC</span>
+<span class="brand-copy">written by<br/>lewis christian</span>
+</a>
+<p style="font-family: 'Geist Pixel', sans-serif;">my return to writing a diary after almost a <span style="font-size: 14px;color: var(--accent);font-family: 'Google Sans Flex', 'Inter', sans-serif;">decade</span></p>
+</div>
+<div>
+<h3>Explore</h3>
+<div class="footer-links">
+<a href="/">Home</a>
+<a href="/profile">About</a>
+<a href="/diary">Diary Archive</a>
+</div>
+</div>
+<div>
+<h3>Nostalgia</h3>
+<div class="footer-links">
+<a href="/myspace">MySpace</a>
+<a href="/livejournal">LiveJournal</a>
+</div>
+</div>
+</div>
+</footer>
+<div aria-hidden="true" aria-label="Enlarged cover artwork" aria-modal="true" class="cover-lightbox" id="coverLightbox" role="dialog">
+<button aria-label="Close enlarged cover" class="cover-lightbox-close" id="coverLightboxClose" type="button">×</button>
+<img alt="" class="cover-lightbox-image" id="coverLightboxImage" src=""/>
+<div class="cover-lightbox-caption" id="coverLightboxCaption"></div>
+</div>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const menuToggle = document.getElementById('menuToggle');
+    const mobilePanel = document.getElementById('mobilePanel');
+    const toast = document.getElementById('toast');
+
+    const savedTheme = localStorage.getItem('release-theme');
+    if (savedTheme) root.dataset.theme = savedTheme;
+    updateThemeIcon();
+
+    themeToggle.addEventListener('click', () => {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('release-theme', root.dataset.theme);
+      updateThemeIcon();
+    });
+
+    function updateThemeIcon() {
+      const darkMode = root.dataset.theme === 'dark';
+      const nextTheme = darkMode ? 'light' : 'dark';
+      themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+      themeToggle.setAttribute('title', `Switch to ${nextTheme} mode`);
+    }
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = mobilePanel.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.tab-button').forEach(tab => {
+          tab.classList.remove('active');
+          tab.setAttribute('aria-selected', 'false');
+        });
+        document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        document.getElementById(button.dataset.tab).classList.add('active');
+      });
+    });
+
+
+    const tabList = document.querySelector('.tab-list');
+
+    function updateTabIndicator(activeTab = document.querySelector('.tab-button.active')) {
+      if (!tabList || !activeTab) return;
+
+      const listRect = tabList.getBoundingClientRect();
+      const tabRect = activeTab.getBoundingClientRect();
+
+      tabList.style.setProperty(
+        '--tab-indicator-left',
+        `${tabRect.left - listRect.left + tabList.scrollLeft}px`
+      );
+      tabList.style.setProperty('--tab-indicator-width', `${tabRect.width}px`);
+    }
+
+    document.querySelectorAll('.tab-button').forEach(button => {
+      button.addEventListener('click', () => {
+        requestAnimationFrame(() => updateTabIndicator(button));
+      });
+    });
+
+    tabList?.addEventListener('scroll', () => updateTabIndicator(), { passive: true });
+    window.addEventListener('resize', () => updateTabIndicator());
+    window.addEventListener('load', () => updateTabIndicator());
+    requestAnimationFrame(() => updateTabIndicator());
+
+
+
+    const wishlistButton = document.getElementById('wishlistButton');
+
+    if (wishlistButton) {
+      wishlistButton.addEventListener('click', event => {
+        event.currentTarget.classList.toggle('active');
+        const active = event.currentTarget.classList.contains('active');
+        event.currentTarget.textContent = active ? '♥ In your wishlist' : '♡ Add to wishlist';
+        showToast(active ? 'Added to your wishlist.' : 'Removed from your wishlist.');
+      });
+    }
+
+const basketButton = document.getElementById('basketButton');
+
+if (basketButton) {
+    basketButton.addEventListener('click', () => {
+        showToast('Digital download added to basket.');
+    });
+}
+    const transmissionForm = document.getElementById('transmissionForm');
+    const transmissionCode = document.getElementById('transmissionCode');
+    const transmissionStatus = document.getElementById('transmissionStatus');
+    const transmissionMessage = document.getElementById('transmissionMessage');
+
+    if (transmissionForm && transmissionCode && transmissionStatus && transmissionMessage) {
+      transmissionForm.addEventListener('submit', event => {
+        event.preventDefault();
+
+        const code = transmissionCode.value.trim().toUpperCase();
+        transmissionMessage.hidden = true;
+        transmissionMessage.classList.remove('is-visible');
+        transmissionStatus.className = 'transmission-status';
+        transmissionStatus.textContent = '> analysing password...';
+
+        window.setTimeout(() => {
+          if (code === 'HELLO') {
+            transmissionStatus.className = 'transmission-status is-success';
+            transmissionStatus.textContent = '> access granted.';
+            transmissionMessage.hidden = false;
+            requestAnimationFrame(() => transmissionMessage.classList.add('is-visible'));
+          } else if (!code) {
+            transmissionStatus.className = 'transmission-status is-error';
+            transmissionStatus.textContent = '> no password detected.';
+          } else {
+            transmissionStatus.className = 'transmission-status is-error';
+            transmissionStatus.textContent = '> access denied. Password not recognised.';
+          }
+
+          transmissionCode.focus();
+          transmissionCode.select();
+        }, 550);
+      });
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(showToast.timeout);
+      showToast.timeout = setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    const coverFrame = document.querySelector('.cover-frame');
+    const coverImage = coverFrame?.querySelector('img');
+    const coverLightbox = document.getElementById('coverLightbox');
+    const coverLightboxImage = document.getElementById('coverLightboxImage');
+    const coverLightboxCaption = document.getElementById('coverLightboxCaption');
+    const coverLightboxClose = document.getElementById('coverLightboxClose');
+    let previouslyFocusedElement = null;
+
+    if (
+      coverFrame &&
+      coverImage &&
+      coverLightbox &&
+      coverLightboxImage &&
+      coverLightboxClose
+    ) {
+      coverFrame.setAttribute('role', 'button');
+      coverFrame.setAttribute('tabindex', '0');
+      coverFrame.setAttribute('aria-label', 'Open enlarged cover artwork');
+
+      function openCoverLightbox() {
+        previouslyFocusedElement = document.activeElement;
+        coverLightboxImage.src = coverImage.currentSrc || coverImage.src;
+        coverLightboxImage.alt = coverImage.alt;
+        coverLightboxCaption.textContent = coverImage.alt;
+        coverLightbox.classList.add('open');
+        coverLightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+        coverLightboxClose.focus();
+      }
+
+      function closeCoverLightbox() {
+        coverLightbox.classList.remove('open');
+        coverLightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+
+        if (previouslyFocusedElement) {
+          previouslyFocusedElement.focus();
+        }
+      }
+
+      coverFrame.addEventListener('click', openCoverLightbox);
+
+      coverFrame.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openCoverLightbox();
+        }
+      });
+
+      coverLightboxClose.addEventListener('click', closeCoverLightbox);
+
+      coverLightbox.addEventListener('click', event => {
+        if (event.target === coverLightbox) {
+          closeCoverLightbox();
+        }
+      });
+
+      document.addEventListener('keydown', event => {
+        if (
+          event.key === 'Escape' &&
+          coverLightbox.classList.contains('open')
+        ) {
+          closeCoverLightbox();
+        }
+      });
+    }
+
+
+/* Gallery lightbox */
+const galleryLinks = Array.from(
+  document.querySelectorAll('.gallery a.lightbox')
+);
+
+if (galleryLinks.length) {
+  let galleryIndex = 0;
+
+  const galleryOverlay = document.createElement('div');
+  galleryOverlay.className = 'lightbox-overlay';
+  galleryOverlay.setAttribute('role', 'dialog');
+  galleryOverlay.setAttribute('aria-modal', 'true');
+  galleryOverlay.setAttribute('aria-label', 'Image gallery');
+  galleryOverlay.setAttribute('aria-hidden', 'true');
+  galleryOverlay.hidden = true;
+
+  galleryOverlay.innerHTML = `
+    <button class="lb-close" type="button" aria-label="Close image">×</button>
+    <button class="lb-prev" type="button" aria-label="Previous image">←</button>
+
+    <div class="lb-image-wrap">
+      <img src="" alt="">
+      <div class="lb-caption" aria-live="polite"></div>
+    </div>
+
+    <button class="lb-next" type="button" aria-label="Next image">→</button>
+  `;
+
+  document.body.appendChild(galleryOverlay);
+
+  const galleryImage = galleryOverlay.querySelector('img');
+  const galleryCaption = galleryOverlay.querySelector('.lb-caption');
+  const galleryClose = galleryOverlay.querySelector('.lb-close');
+  const galleryPrevious = galleryOverlay.querySelector('.lb-prev');
+  const galleryNext = galleryOverlay.querySelector('.lb-next');
+
+  function showGalleryImage(index) {
+    galleryIndex =
+      (index + galleryLinks.length) % galleryLinks.length;
+
+    const link = galleryLinks[galleryIndex];
+    const thumbnail = link.querySelector('img');
+
+    const caption =
+      link.dataset.caption ||
+      thumbnail?.dataset.caption ||
+      thumbnail?.alt ||
+      '';
+
+    galleryImage.src = link.href;
+    galleryImage.alt = thumbnail?.alt || caption;
+    galleryCaption.textContent = caption;
+
+    galleryPrevious.hidden = galleryLinks.length < 2;
+    galleryNext.hidden = galleryLinks.length < 2;
+  }
+
+  function openGalleryLightbox(index) {
+    showGalleryImage(index);
+    galleryOverlay.hidden = false;
+    galleryOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+    galleryClose.focus();
+  }
+
+  function closeGalleryLightbox() {
+    galleryOverlay.hidden = true;
+    galleryOverlay.setAttribute('aria-hidden', 'true');
+    galleryImage.src = '';
+    galleryCaption.textContent = '';
+    document.body.classList.remove('lightbox-open');
+    galleryLinks[galleryIndex]?.focus();
+  }
+
+  galleryLinks.forEach((link, index) => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      openGalleryLightbox(index);
+    });
+  });
+
+  galleryClose.addEventListener('click', closeGalleryLightbox);
+
+  galleryPrevious.addEventListener('click', () => {
+    showGalleryImage(galleryIndex - 1);
+  });
+
+  galleryNext.addEventListener('click', () => {
+    showGalleryImage(galleryIndex + 1);
+  });
+
+  galleryOverlay.addEventListener('click', event => {
+    if (event.target === galleryOverlay) {
+      closeGalleryLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', event => {
+    if (galleryOverlay.hidden) return;
+
+    if (event.key === 'Escape') {
+      closeGalleryLightbox();
+    }
+
+    if (event.key === 'ArrowLeft') {
+      showGalleryImage(galleryIndex - 1);
+    }
+
+    if (event.key === 'ArrowRight') {
+      showGalleryImage(galleryIndex + 1);
+    }
+  });
+}
+
+  </script>
+
+<script>
+(() => {
+  const diaryCalendarData = {"January": {"published": [{"day": 1, "title": "the sequel"}, {"day": 2, "title": "half the problem"}, {"day": 3, "title": "lockdown"}, {"day": 4, "title": "someone to love"}], "removed": ["memory lane", "insurrection", "out of sync", "lost memories", "a mountain of maybes", "online traces", "inauguration"]}, "February": {"published": [{"day": 1, "title": "tldr; just feeling kinda stuck"}, {"day": 2, "title": "offline"}, {"day": 3, "title": "winter breeze"}, {"day": 4, "title": "night owl"}, {"day": 5, "title": "chimes of midnight"}, {"day": 6, "title": "windows"}, {"day": 7, "title": "birthday chill"}, {"day": 8, "title": "dawn of the daleks"}, {"day": 9, "title": "at the end of the diary"}, {"day": 10, "title": "yesterday’s optimism"}, {"day": 11, "title": "rubbish usernames"}], "removed": ["social obligation", "rabbit hole", "retroactive titles", "winding down", "the tangled web", "digital footprints", "lewbo the grouch", "skidmarks", "in words and play", "disconnect", "traveller’s freedom"]}, "March": {"published": [{"day": 1, "title": "wishful thinking"}, {"day": 2, "title": "pandemic fog"}, {"day": 3, "title": "waxing lyrical"}, {"day": 4, "title": "the sky at night"}, {"day": 5, "title": "bring me sunshine"}, {"day": 6, "title": "end credits"}], "removed": ["breaking up", "nearly (but not quite) spring", "fifteen years ago", "all over the place", "the same old"]}, "April": {"published": [{"day": 1, "title": "proposal"}, {"day": 2, "title": "the stars align"}, {"day": 3, "title": "spring blizzard"}], "removed": []}, "May": {"published": [{"day": 1, "title": "turning the key"}, {"day": 2, "title": "pizza with a pal"}, {"day": 3, "title": "lost in smoke"}, {"day": 4, "title": "bottom of the board"}, {"day": 5, "title": "catching a break"}], "removed": ["anxiety :)"]}, "June": {"published": [{"day": 1, "title": "drunk on sunshine"}, {"day": 2, "title": "short and stubborn"}, {"day": 3, "title": "chain reaction"}, {"day": 4, "title": "shot in the arm"}, {"day": 5, "title": "moderna man"}, {"day": 6, "title": "life in limbo"}], "removed": ["thursday, my old friend", "goodnight, jackie"]}, "July": {"published": [{"day": 1, "title": "moving in"}, {"day": 2, "title": "counting the days"}, {"day": 3, "title": "heatwave"}, {"day": 4, "title": "exit wounds"}], "removed": ["gifts for grace", "way of the ghost", "chapters of life"]}, "August": {"published": [{"day": 1, "title": "new places"}, {"day": 2, "title": "old faces"}, {"day": 3, "title": "comic timing"}, {"day": 4, "title": "fading memories"}], "removed": []}, "September": {"published": [{"day": 1, "title": "ticket for one"}, {"day": 2, "title": "RTD2"}], "removed": ["firestarter", "classic tales"]}, "October": {"published": [{"day": 1, "title": "no time to die"}, {"day": 2, "title": "오징어 게임"}, {"day": 3, "title": "halloween horrors"}], "removed": ["regeneration", "clusterfuck", "trailer thoughts", "three quid down", "preservation"]}, "November": {"published": [{"day": 1, "title": "nostalgia high"}, {"day": 2, "title": "scattershot"}, {"day": 3, "title": "pin pals"}, {"day": 4, "title": "losing the plot"}, {"day": 5, "title": "status quo"}], "removed": []}, "December": {"published": [{"day": 1, "title": "end of the year"}, {"day": 2, "title": "slapdash"}, {"day": 3, "title": "festive days"}, {"day": 4, "title": "christmas"}, {"day": 5, "title": "millie ❤️"}, {"day": 6, "title": "new year’s eve"}, {"day": 7, "title": "in summary"}], "removed": ["amazing grace", "high hopes", "wrapping up", "autopilot"]}};
+
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  let currentMonth = 0;
+  let selectedDay = null;
+
+  const grid = document.getElementById('calendarGrid');
+  const title = document.getElementById('calendarMonthTitle');
+  const previous = document.getElementById('calendarPrev');
+  const next = document.getElementById('calendarNext');
+  const emptyPanel = document.getElementById('entryPanelEmpty');
+  const contentPanel = document.getElementById('entryPanelContent');
+  const dateLabel = document.getElementById('selectedDateLabel');
+  const entryTitle = document.getElementById('selectedEntryTitle');
+  const removedToggle = document.getElementById('removedToggle');
+  const removedList = document.getElementById('removedEntryList');
+  const removedCount = document.getElementById('removedCount');
+
+  if (!grid || !title) return;
+
+  function renderCalendar() {
+    const monthName = monthNames[currentMonth];
+    const monthData = diaryCalendarData[monthName] || { published: [], removed: [] };
+    const entriesByDay = new Map(monthData.published.map(entry => [entry.day, entry]));
+
+    title.textContent = `${monthName} 2021`;
+    grid.innerHTML = '';
+    selectedDay = null;
+    emptyPanel.hidden = false;
+    contentPanel.hidden = true;
+
+    const firstDay = new Date(2021, currentMonth, 1);
+    const daysInMonth = new Date(2021, currentMonth + 1, 0).getDate();
+    const mondayOffset = (firstDay.getDay() + 6) % 7;
+
+    for (let index = 0; index < mondayOffset; index += 1) {
+      const blank = document.createElement('div');
+      blank.className = 'calendar-blank';
+      blank.setAttribute('aria-hidden', 'true');
+      grid.appendChild(blank);
+    }
+
+    for (let day = 1; day <= daysInMonth; day += 1) {
+      const entry = entriesByDay.get(day);
+      const cell = document.createElement(entry ? 'button' : 'div');
+      cell.className = `calendar-day${entry ? ' has-entry' : ''}`;
+
+      if (entry) {
+        cell.type = 'button';
+        cell.dataset.day = String(day);
+        cell.setAttribute('aria-label', `${day} ${monthName} 2021: ${entry.title}`);
+      } else {
+        cell.setAttribute('aria-label', `${day} ${monthName} 2021, no diary entry`);
+      }
+
+      const number = document.createElement('span');
+      number.className = 'calendar-day-number';
+      number.textContent = String(day);
+      cell.appendChild(number);
+
+      if (entry) {
+        const dot = document.createElement('span');
+        dot.className = 'calendar-entry-dot';
+        dot.setAttribute('aria-hidden', 'true');
+        cell.appendChild(dot);
+
+        cell.addEventListener('click', () => selectEntry(day, entry, cell));
+      }
+
+      grid.appendChild(cell);
+    }
+
+    renderRemoved(monthData.removed);
+    previous.disabled = currentMonth === 0;
+    next.disabled = currentMonth === 11;
+    previous.style.opacity = previous.disabled ? '.35' : '1';
+    next.style.opacity = next.disabled ? '.35' : '1';
+  }
+
+  function selectEntry(day, entry, cell) {
+    grid.querySelectorAll('.calendar-day.is-selected').forEach(item => {
+      item.classList.remove('is-selected');
+    });
+
+    cell.classList.add('is-selected');
+    selectedDay = day;
+
+    const monthName = monthNames[currentMonth];
+    const formattedDate = new Intl.DateTimeFormat('en-GB', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }).format(new Date(2021, currentMonth, day));
+
+    dateLabel.textContent = formattedDate;
+    entryTitle.textContent = entry.title;
+    emptyPanel.hidden = true;
+    contentPanel.hidden = false;
+  }
+
+  function renderRemoved(items) {
+    removedCount.textContent = String(items.length);
+    removedList.innerHTML = '';
+    removedList.hidden = true;
+    removedToggle.setAttribute('aria-expanded', 'false');
+
+    if (!items.length) {
+      const item = document.createElement('div');
+      item.className = 'removed-entry-item';
+      item.textContent = 'No removed entries listed for this month.';
+      item.style.textDecoration = 'none';
+      removedList.appendChild(item);
+      return;
+    }
+
+    items.forEach(titleText => {
+      const item = document.createElement('div');
+      item.className = 'removed-entry-item';
+      item.textContent = titleText;
+      removedList.appendChild(item);
+    });
+  }
+
+  previous.addEventListener('click', () => {
+    if (currentMonth > 0) {
+      currentMonth -= 1;
+      renderCalendar();
+    }
+  });
+
+  next.addEventListener('click', () => {
+    if (currentMonth < 11) {
+      currentMonth += 1;
+      renderCalendar();
+    }
+  });
+
+  removedToggle.addEventListener('click', () => {
+    const expanded = removedToggle.getAttribute('aria-expanded') === 'true';
+    removedToggle.setAttribute('aria-expanded', String(!expanded));
+    removedList.hidden = expanded;
+  });
+
+  document.addEventListener('keydown', event => {
+    if (!document.getElementById('entries')?.classList.contains('active')) return;
+
+    if (event.key === 'ArrowLeft' && currentMonth > 0 && !event.target.closest('input, textarea')) {
+      currentMonth -= 1;
+      renderCalendar();
+    }
+
+    if (event.key === 'ArrowRight' && currentMonth < 11 && !event.target.closest('input, textarea')) {
+      currentMonth += 1;
+      renderCalendar();
+    }
+  });
+
+  renderCalendar();
+})();
+</script>
+</body>
+</html>
