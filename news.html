@@ -3,1093 +3,715 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#eaf0f8" id="themeColor">
-  <title>Articles — lewis.lc</title>
-
+  <meta name="theme-color" content="#f4efe7">
+  <title>Nerimon — First Twenty</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #eaf0f8;
-      --bg-soft: #f6f9fd;
-      --surface: rgba(255, 255, 255, 0.82);
-      --surface-solid: #ffffff;
-      --surface-hover: #f8fbff;
-      --text: #162033;
-      --text-soft: #4f5e74;
-      --text-faint: #78879c;
-      --border: rgba(50, 72, 104, 0.16);
-      --border-strong: rgba(50, 72, 104, 0.26);
-      --accent: #2f6fed;
-      --accent-soft: rgba(47, 111, 237, 0.12);
-      --neon: #00d9ff;
-      --neon-soft: rgba(0, 217, 255, 0.18);
-      --shadow: 0 18px 55px rgba(34, 58, 94, 0.12);
-      --shadow-hover: 0 26px 70px rgba(34, 58, 94, 0.18);
-      --header-bg: rgba(234, 240, 248, 0.84);
-      --newsletter-bg: linear-gradient(135deg, #dfeaff 0%, #f7fbff 100%);
-      --footer-bg: #dfe7f2;
-      --image-overlay: linear-gradient(to top, rgba(8, 20, 43, 0.14), transparent 55%);
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --max-width: 1240px;
+      --paper: #f4efe7;
+      --paper-2: #ebe3d7;
+      --ink: #1f2328;
+      --muted: #716b63;
+      --line: rgba(31,35,40,.14);
+      --card: rgba(255,255,255,.55);
+      --accent: #d84f76;
+      --accent-2: #6c63d8;
+      --shadow: 0 20px 60px rgba(66,49,36,.10);
     }
 
-    html[data-theme="dark"] {
-      --bg: #071426;
-      --bg-soft: #0a1a31;
-      --surface: rgba(14, 34, 61, 0.82);
-      --surface-solid: #0f2340;
-      --surface-hover: #142b4d;
-      --text: #f4f8ff;
-      --text-soft: #bac8db;
-      --text-faint: #8fa4bf;
-      --border: rgba(149, 181, 220, 0.15);
-      --border-strong: rgba(149, 181, 220, 0.28);
-      --accent: #79a7ff;
-      --accent-soft: rgba(121, 167, 255, 0.15);
-      --neon: #39e7ff;
-      --neon-soft: rgba(57, 231, 255, 0.18);
-      --shadow: 0 22px 60px rgba(0, 5, 18, 0.3);
-      --shadow-hover: 0 30px 85px rgba(0, 5, 18, 0.42);
-      --header-bg: rgba(7, 20, 38, 0.84);
-      --newsletter-bg: linear-gradient(135deg, #102b50 0%, #0b1d35 100%);
-      --footer-bg: #08182d;
-      --image-overlay: linear-gradient(to top, rgba(2, 12, 27, 0.34), transparent 58%);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: "Inter", sans-serif;
-      color: var(--text);
+      color: var(--ink);
       background:
-        radial-gradient(circle at 10% 0%, rgba(72, 124, 255, 0.14), transparent 34%),
-        radial-gradient(circle at 92% 22%, rgba(80, 159, 255, 0.10), transparent 30%),
-        var(--bg);
-      transition: background-color 0.35s ease, color 0.35s ease;
+        radial-gradient(circle at 8% 4%, rgba(216,79,118,.12), transparent 30rem),
+        radial-gradient(circle at 95% 30%, rgba(108,99,216,.10), transparent 30rem),
+        var(--paper);
+      font-family: "Manrope", sans-serif;
+      min-height: 100vh;
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      z-index: -1;
       pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
-      background-size: 46px 46px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.75), transparent 76%);
+      opacity: .23;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+      mix-blend-mode: multiply;
+      z-index: 20;
     }
 
-    button,
-    input {
-      font: inherit;
-    }
+    button, input { font: inherit; }
+    button { color: inherit; }
 
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      border-bottom: 1px solid var(--border);
-      background: var(--header-bg);
-      backdrop-filter: blur(18px);
-      transition: background 0.35s ease, border-color 0.35s ease;
-    }
-
-    .header-inner {
-      width: min(calc(100% - 40px), var(--max-width));
-      min-height: 76px;
+    .shell {
+      width: min(1380px, calc(100% - 32px));
       margin: 0 auto;
+      padding: 24px 0 80px;
+    }
+
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
+      gap: 20px;
+      padding: 14px 0 28px;
+      border-bottom: 1px solid var(--line);
     }
 
     .brand {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(1.9rem, 3vw, 2.55rem);
-      line-height: 1;
-      letter-spacing: -0.03em;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "DM Mono", monospace;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
     .brand-dot {
-      width: 8px;
-      height: 8px;
+      width: 12px;
+      aspect-ratio: 1;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 7px var(--accent-soft), 0 0 22px var(--neon-soft);
+      box-shadow: 18px 0 0 var(--accent-2);
+      margin-right: 18px;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .icon-button,
-    .theme-toggle {
-      min-height: 44px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text);
-      background: var(--surface);
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-    }
-
-    .icon-button:hover,
-    .theme-toggle:hover {
-      transform: translateY(-2px);
-      border-color: var(--border-strong);
-      background: var(--surface-hover);
-    }
-
-    .icon-button {
-      width: 44px;
-      padding: 0;
-      display: grid;
-      place-items: center;
-    }
-
-    .theme-toggle {
-      padding: 0 15px;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-weight: 700;
-      font-size: 0.86rem;
-    }
-
-    .theme-icon {
-      font-size: 1rem;
-      line-height: 1;
-      transition: transform 0.35s ease;
-    }
-
-    .theme-toggle:hover .theme-icon {
-      transform: rotate(16deg);
-    }
-
-    .page-shell {
-      width: min(calc(100% - 40px), var(--max-width));
-      margin: 0 auto;
-      padding: 76px 0 90px;
+    .issue {
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: .75rem;
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
       gap: 48px;
+      padding: clamp(56px, 8vw, 116px) 0 64px;
       align-items: end;
-      margin-bottom: 46px;
     }
 
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--accent);
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.18em;
+    .kicker {
+      font-family: "DM Mono", monospace;
       text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin-top: 0;
+      letter-spacing: .15em;
+      font-size: .75rem;
+      color: var(--accent);
+      margin-bottom: 18px;
     }
 
     h1 {
-      margin-bottom: 18px;
-      max-width: 760px;
+      margin: 0;
+      max-width: 850px;
       font-family: "Instrument Serif", serif;
-      font-size: clamp(4.4rem, 10vw, 9rem);
+      font-size: clamp(4.1rem, 10vw, 9rem);
+      line-height: .78;
       font-weight: 400;
-      line-height: 0.86;
-      letter-spacing: -0.055em;
+      letter-spacing: -.055em;
+    }
+
+    h1 em {
+      color: var(--accent);
+      font-weight: 400;
     }
 
     .hero-copy {
-      margin: 0;
-      max-width: 560px;
-      color: var(--text-soft);
-      font-size: clamp(1rem, 1.8vw, 1.16rem);
-      line-height: 1.8;
+      border-left: 1px solid var(--line);
+      padding-left: 28px;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: .96rem;
     }
 
-    .hero-note {
-      padding: 24px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: var(--surface);
-      box-shadow: var(--shadow);
-    }
+    .hero-copy strong { color: var(--ink); }
+    .hero-copy p { margin: 0 0 18px; }
 
-    .hero-note strong {
-      display: block;
-      margin-bottom: 8px;
-      font-family: "Instrument Serif", serif;
-      font-size: 1.55rem;
-      font-weight: 400;
-    }
-
-    .hero-note p {
-      margin: 0;
-      color: var(--text-soft);
-      line-height: 1.65;
-    }
-
-    .neon-signal {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      margin-bottom: 16px;
-      color: var(--neon);
-      font-size: 0.68rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      text-shadow: 0 0 14px var(--neon-soft);
-    }
-
-    .neon-signal::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--neon);
-      box-shadow: 0 0 8px var(--neon), 0 0 22px var(--neon);
-      animation: neonPulse 2.2s ease-in-out infinite;
-    }
-
-    @keyframes neonPulse {
-      0%, 100% { opacity: 0.72; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.08); }
-    }
-
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 34px;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 22px;
-      background: var(--surface);
-      backdrop-filter: blur(16px);
-    }
-
-    .filters {
+    .stats {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin-top: 24px;
     }
 
-    .filter-button {
-      border: 0;
+    .stat {
+      border: 1px solid var(--line);
       border-radius: 999px;
-      padding: 11px 16px;
-      color: var(--text-soft);
-      background: transparent;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.25s ease, color 0.25s ease, transform 0.2s ease;
+      padding: 8px 12px;
+      font-family: "DM Mono", monospace;
+      font-size: .72rem;
+      color: var(--ink);
+      background: rgba(255,255,255,.28);
     }
 
-    .filter-button:hover {
-      color: var(--text);
-      background: var(--accent-soft);
-      transform: translateY(-1px);
-    }
-
-    .filter-button.active {
-      color: #fff;
-      background: var(--accent);
-    }
-
-    .search-wrap {
-      position: relative;
-      flex: 0 1 320px;
-    }
-
-    .search-wrap svg {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      width: 18px;
-      height: 18px;
-      transform: translateY(-50%);
-      stroke: var(--text-faint);
-      pointer-events: none;
-    }
-
-    .search-input {
-      width: 100%;
-      height: 46px;
-      padding: 0 16px 0 43px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      color: var(--text);
-      outline: none;
-      background: var(--bg-soft);
-      transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    }
-
-    .search-input::placeholder {
-      color: var(--text-faint);
-    }
-
-    .search-input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px var(--accent-soft);
-      background: var(--surface-solid);
-    }
-
-    .articles-grid {
+    .archive {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 24px;
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 36px;
+      align-items: start;
     }
 
-    .article-card {
-      min-width: 0;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      background: var(--surface-solid);
-      box-shadow: var(--shadow);
-      transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease, background 0.35s ease;
+    .sidebar {
+      position: sticky;
+      top: 24px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
     }
 
-    .article-card:hover {
-      transform: translateY(-7px);
-      border-color: var(--border-strong);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .article-card[hidden] {
-      display: none;
-    }
-
-    .card-image-link {
-      position: relative;
-      display: block;
-      aspect-ratio: 16 / 10;
-      overflow: hidden;
-      background: var(--bg-soft);
-    }
-
-    .card-image-link::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: var(--image-overlay);
-      pointer-events: none;
-    }
-
-    .card-image {
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.65s cubic-bezier(.2,.7,.2,1), filter 0.35s ease;
-    }
-
-    .article-card:hover .card-image {
-      transform: scale(1.055);
-    }
-
-    .card-body {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 23px;
-    }
-
-    .card-category {
-      margin-bottom: 13px;
-      color: var(--accent);
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.15em;
+    .sidebar-title {
+      margin: 0 0 14px;
+      font-family: "DM Mono", monospace;
+      font-size: .72rem;
+      letter-spacing: .12em;
       text-transform: uppercase;
     }
 
-    .card-title {
-      margin-bottom: 12px;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(1.65rem, 2.4vw, 2.15rem);
-      font-weight: 400;
-      line-height: 1.02;
-      letter-spacing: -0.025em;
-    }
-
-    .card-title a {
+    .search {
       position: relative;
-      display: inline;
-      color: var(--text);
-      background-image: linear-gradient(90deg, var(--neon), var(--accent));
-      background-repeat: no-repeat;
-      background-position: 100% 100%;
-      background-size: 0 2px;
-      text-decoration: none;
-      transition: color 0.24s ease, background-size 0.38s cubic-bezier(.22, 1, .36, 1), text-shadow 0.24s ease;
-      -webkit-box-decoration-break: clone;
-      box-decoration-break: clone;
-    }
-
-    .article-card:hover .card-title a,
-    .card-title a:hover,
-    .card-title a:focus-visible,
-    .card-title a:active {
-      color: var(--text);
-      background-position: 0 100%;
-      background-size: 100% 2px;
-      text-shadow: 0 0 18px var(--neon-soft);
-    }
-
-    .card-title a:focus-visible {
-      outline: 2px solid var(--neon);
-      outline-offset: 5px;
-      border-radius: 3px;
-    }
-
-    .card-excerpt {
-      display: -webkit-box;
       margin-bottom: 22px;
-      overflow: hidden;
-      color: var(--text-soft);
-      font-size: 0.94rem;
-      line-height: 1.65;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
     }
 
-    .card-footer {
-      margin-top: auto;
-      padding-top: 18px;
-      border-top: 1px solid var(--border);
+    .search input {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
+      padding: 12px 28px 12px 0;
+      outline: none;
+      color: var(--ink);
+    }
+
+    .search input:focus { border-color: var(--accent); }
+    .search span {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+    }
+
+    .dates {
+      display: grid;
+      gap: 2px;
+    }
+
+    .date-filter {
+      border: 0;
+      background: transparent;
+      text-align: left;
+      padding: 10px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: .2s ease;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      color: var(--text-faint);
-      font-size: 0.78rem;
-    }
-
-    .author {
-      display: flex;
-      align-items: center;
       gap: 10px;
-      min-width: 0;
     }
 
-    .author-avatar {
-      width: 34px;
-      height: 34px;
-      flex: 0 0 34px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--surface-solid);
-      box-shadow: 0 0 0 1px var(--border);
+    .date-filter:hover,
+    .date-filter.active {
+      color: var(--ink);
+      background: rgba(255,255,255,.5);
     }
 
-    .author-name {
-      color: var(--text-soft);
-      font-weight: 700;
-      white-space: nowrap;
+    .date-filter.active::before {
+      content: "•";
+      color: var(--accent);
+      margin-right: 3px;
     }
 
-    .article-meta {
-      text-align: right;
-      white-space: nowrap;
+    .clear {
+      margin-top: 20px;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      color: var(--accent);
+      cursor: pointer;
+      font-family: "DM Mono", monospace;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
     }
 
-    .empty-state {
-      display: none;
-      padding: 70px 24px;
-      border: 1px dashed var(--border-strong);
-      border-radius: var(--radius-lg);
-      color: var(--text-soft);
-      text-align: center;
-      background: var(--surface);
-    }
-
-    .empty-state.visible {
-      display: block;
-    }
-
-    .pagination {
+    .entries-head {
       display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 48px;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: baseline;
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+      margin-bottom: 10px;
     }
 
-    .page-button {
-      width: 44px;
-      height: 44px;
+    .entries-head h2 {
+      margin: 0;
+      font-family: "Instrument Serif", serif;
+      font-size: 2rem;
+      font-weight: 400;
+    }
+
+    #resultCount {
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: .72rem;
+    }
+
+    .entry-list {
+      display: grid;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: 54px 150px minmax(0, 1fr) 42px;
+      gap: 22px;
+      align-items: center;
+      padding: 22px 4px;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+      transition: background .2s ease, padding .2s ease;
+      outline: none;
+    }
+
+    .entry:hover,
+    .entry:focus-visible {
+      background: rgba(255,255,255,.4);
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .entry-number {
+      font-family: "Instrument Serif", serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    .entry-date {
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: .7rem;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .entry-title {
+      margin: 0;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(1.45rem, 2.4vw, 2.3rem);
+      line-height: 1;
+      font-weight: 400;
+    }
+
+    .entry-preview {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: .78rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 65ch;
+    }
+
+    .entry-arrow {
+      border: 1px solid var(--line);
+      width: 38px;
+      aspect-ratio: 1;
+      border-radius: 50%;
       display: grid;
       place-items: center;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      color: var(--text-soft);
-      background: var(--surface);
-      font-weight: 700;
-      transition: transform 0.2s ease, background 0.25s ease, color 0.25s ease;
+      transition: .2s ease;
     }
 
-    .page-button:hover,
-    .page-button.active {
-      transform: translateY(-2px);
-      color: #fff;
-      background: var(--accent);
+    .entry:hover .entry-arrow {
+      transform: rotate(-12deg);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
-    .newsletter {
-      margin-top: 86px;
-      padding: clamp(32px, 6vw, 62px);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      background: var(--newsletter-bg);
-      box-shadow: var(--shadow);
-      display: grid;
-      grid-template-columns: 1fr minmax(280px, 0.7fr);
-      gap: 40px;
-      align-items: center;
-    }
-
-    .newsletter h2 {
-      margin-bottom: 12px;
+    .empty {
+      display: none;
+      padding: 60px 0;
+      color: var(--muted);
       font-family: "Instrument Serif", serif;
-      font-size: clamp(2.7rem, 6vw, 4.8rem);
+      font-size: 2rem;
+    }
+
+    dialog {
+      width: min(920px, calc(100% - 28px));
+      max-height: calc(100vh - 28px);
+      border: 0;
+      border-radius: 24px;
+      padding: 0;
+      background: #f8f4ed;
+      color: var(--ink);
+      box-shadow: 0 40px 110px rgba(24,20,18,.3);
+      overflow: hidden;
+    }
+
+    dialog::backdrop {
+      background: rgba(25,21,28,.58);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-inner {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      max-height: calc(100vh - 28px);
+    }
+
+    .modal-meta {
+      padding: 32px 24px;
+      background: var(--paper-2);
+      border-right: 1px solid var(--line);
+    }
+
+    .modal-num {
+      font-family: "Instrument Serif", serif;
+      color: var(--accent);
+      font-style: italic;
+      font-size: 4rem;
+      line-height: 1;
+      margin-bottom: 30px;
+    }
+
+    .meta-label {
+      display: block;
+      margin-top: 18px;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .meta-value {
+      display: block;
+      margin-top: 5px;
+      font-size: .78rem;
+      line-height: 1.45;
+    }
+
+    .modal-main {
+      position: relative;
+      padding: 46px clamp(26px, 6vw, 72px) 56px;
+      overflow-y: auto;
+    }
+
+    .close {
+      position: sticky;
+      top: 0;
+      float: right;
+      border: 1px solid var(--line);
+      background: rgba(248,244,237,.88);
+      backdrop-filter: blur(8px);
+      width: 42px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .modal-kicker {
+      color: var(--accent);
+      font-family: "DM Mono", monospace;
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .modal-title {
+      margin: 0 46px 30px 0;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(2.7rem, 7vw, 5.8rem);
+      line-height: .92;
       font-weight: 400;
-      line-height: 0.95;
-      letter-spacing: -0.04em;
+      letter-spacing: -.035em;
     }
 
-    .newsletter p {
-      margin-bottom: 0;
-      color: var(--text-soft);
-      line-height: 1.7;
+    .modal-body {
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(1.15rem, 2vw, 1.38rem);
+      line-height: 1.65;
+      white-space: pre-wrap;
     }
 
-    .newsletter-form {
+    .modal-nav {
       display: flex;
-      gap: 10px;
-      padding: 7px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--surface-solid);
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 42px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
     }
 
-    .newsletter-input {
-      min-width: 0;
-      flex: 1;
-      border: 0;
-      outline: 0;
-      padding: 0 12px;
-      color: var(--text);
+    .modal-nav button {
+      border: 1px solid var(--line);
       background: transparent;
-    }
-
-    .newsletter-input::placeholder {
-      color: var(--text-faint);
-    }
-
-    .newsletter-button {
-      border: 0;
       border-radius: 999px;
-      padding: 13px 18px;
-      color: #fff;
-      background: var(--accent);
-      font-weight: 800;
+      padding: 10px 16px;
       cursor: pointer;
     }
 
-    .newsletter-status {
-      min-height: 20px;
-      margin-top: 10px;
-      color: var(--text-soft);
-      font-size: 0.83rem;
-      text-align: center;
+    .modal-nav button:disabled {
+      opacity: .3;
+      cursor: default;
     }
 
-    .site-footer {
-      padding: 38px 20px;
-      border-top: 1px solid var(--border);
-      color: var(--text-soft);
-      background: var(--footer-bg);
-      transition: background 0.35s ease, color 0.35s ease;
-    }
-
-    .footer-inner {
-      width: min(100%, var(--max-width));
-      margin: 0 auto;
+    footer {
+      margin-top: 70px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
       display: flex;
       justify-content: space-between;
-      gap: 24px;
-      font-size: 0.86rem;
+      gap: 18px;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: .68rem;
     }
 
-    @media (max-width: 980px) {
-      .articles-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .hero,
-      .newsletter {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-note {
-        max-width: 560px;
-      }
-
-      .toolbar {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .search-wrap {
-        flex-basis: auto;
-      }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; gap: 28px; }
+      .hero-copy { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
+      .archive { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .dates { display: flex; overflow-x: auto; padding-bottom: 8px; }
+      .date-filter { white-space: nowrap; }
+      .entry { grid-template-columns: 42px minmax(0, 1fr) 36px; gap: 14px; }
+      .entry-date { grid-column: 2; grid-row: 2; }
+      .entry-content { grid-column: 2; grid-row: 1; }
+      .entry-number { grid-row: 1 / 3; }
+      .entry-arrow { grid-column: 3; grid-row: 1 / 3; }
     }
 
-    @media (max-width: 640px) {
-      .header-inner,
-      .page-shell {
-        width: min(calc(100% - 24px), var(--max-width));
-      }
-
-      .header-inner {
-        min-height: 68px;
-      }
-
-      .page-shell {
-        padding-top: 52px;
-      }
-
-      .brand {
-        font-size: 1.85rem;
-      }
-
-      .theme-label {
-        display: none;
-      }
-
-      .theme-toggle {
-        width: 44px;
-        padding: 0;
-        justify-content: center;
-      }
-
-      .articles-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .filters {
-        flex-wrap: nowrap;
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 22px, 1380px); padding-top: 10px; }
+      .topbar { padding-bottom: 16px; }
+      .issue { display: none; }
+      h1 { font-size: clamp(3.8rem, 24vw, 6.8rem); }
+      .hero { padding-top: 54px; }
+      .entry-preview { max-width: 45vw; }
+      .modal-inner { grid-template-columns: 1fr; }
+      .modal-meta {
+        padding: 16px 20px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        gap: 14px;
         overflow-x: auto;
-        scrollbar-width: none;
       }
-
-      .filters::-webkit-scrollbar {
-        display: none;
-      }
-
-      .filter-button {
-        white-space: nowrap;
-      }
-
-      .newsletter-form {
-        align-items: stretch;
-        flex-direction: column;
-        border-radius: 20px;
-      }
-
-      .newsletter-input {
-        min-height: 48px;
-      }
-
-      .newsletter-button {
-        min-height: 48px;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-      }
+      .modal-num { font-size: 2.4rem; margin: 0 8px 0 0; }
+      .meta-label { display: none; }
+      .meta-value { margin: 0; white-space: nowrap; }
+      .modal-main { padding: 28px 22px 42px; }
+      footer { flex-direction: column; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-      }
+      * { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#" aria-label="lewis.lc home">
-        lewis.lc <span class="brand-dot" aria-hidden="true"></span>
-      </a>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="brand-dot"></span>Nerimon Diary Archive</div>
+      <div class="issue">SEPTEMBER 2003 · ENTRIES 001—020</div>
+    </header>
 
-      <div class="header-actions">
-        <button class="icon-button" type="button" aria-label="Open search" id="focusSearch">
-          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <circle cx="11" cy="11" r="7"></circle>
-            <path d="m20 20-3.7-3.7"></path>
-          </svg>
-        </button>
-
-        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Switch colour theme">
-          <span class="theme-icon" aria-hidden="true">☾</span>
-          <span class="theme-label">Dark mode</span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="page-shell">
     <section class="hero">
       <div>
-        <p class="eyebrow">Journal & observations</p>
-        <h1>Articles</h1>
-        <p class="hero-copy">Essays, reviews and occasional dispatches about television, music, memory, design and the strange things that make everyday life interesting.</p>
+        <div class="kicker">An early internet time capsule</div>
+        <h1>The first <em>twenty.</em></h1>
       </div>
+      <div class="hero-copy">
+        <p><strong>Twenty entries across three days.</strong> Notes on school, games, witchcraft, friendships, late-night thoughts and the strange immediacy of writing online in 2003.</p>
+        <p>Choose an entry below to open it in the reading panel.</p>
+        <div class="stats">
+          <span class="stat">02–04 SEPT</span>
+          <span class="stat">20 ENTRIES</span>
+          <span class="stat">PUBLIC ARCHIVE</span>
+        </div>
+      </div>
+    </section>
 
-      <aside class="hero-note">
-        <span class="neon-signal">Signal online</span>
-        <strong>Latest edition</strong>
-        <p>Nine new pieces, loosely connected by nostalgia, curiosity and the urge to make sense of things.</p>
+    <section class="archive">
+      <aside class="sidebar">
+        <h2 class="sidebar-title">Browse the archive</h2>
+        <label class="search">
+          <input id="searchInput" type="search" placeholder="Search titles or text…" aria-label="Search entries">
+          <span>⌕</span>
+        </label>
+        <div class="dates" id="dateFilters"></div>
+        <button class="clear" id="clearFilters">Reset filters</button>
       </aside>
-    </section>
-
-    <section class="toolbar" aria-label="Article filters">
-      <div class="filters" role="group" aria-label="Filter by category">
-        <button class="filter-button active" type="button" data-filter="all">All</button>
-        <button class="filter-button" type="button" data-filter="features">Features</button>
-        <button class="filter-button" type="button" data-filter="reviews">Reviews</button>
-        <button class="filter-button" type="button" data-filter="culture">Culture</button>
-        <button class="filter-button" type="button" data-filter="personal">Personal</button>
-      </div>
-
-      <label class="search-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7"></circle>
-          <path d="m20 20-3.7-3.7"></path>
-        </svg>
-        <span class="sr-only" hidden>Search articles</span>
-        <input class="search-input" id="searchInput" type="search" placeholder="Search articles">
-      </label>
-    </section>
-
-    <section class="articles-grid" id="articlesGrid">
-      <article class="article-card" data-category="features" data-search="the quiet architecture of late night television television design broadcasting nostalgia">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?auto=format&fit=crop&w=1200&q=82" alt="Television screen glowing in a dark room">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Features</div>
-          <h2 class="card-title"><a href="#">The Quiet Architecture of Late-Night Television</a></h2>
-          <p class="card-excerpt">Why continuity announcements, dim studio lighting and familiar theme music once made the small hours feel like a place of their own.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">18 Jul 2026 · 6 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="reviews" data-search="a beautiful mess of an album review music synth pop">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1200&q=82" alt="Singer performing beneath dramatic stage lights">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Reviews</div>
-          <h2 class="card-title"><a href="#">A Beautiful Mess of an Album</a></h2>
-          <p class="card-excerpt">A track-by-track look at a record that refuses neat conclusions and somehow becomes more moving because of it.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">12 Jul 2026 · 8 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="culture" data-search="why old websites still feel alive internet design personal homepage culture">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=82" alt="Computer monitor displaying website code">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Culture</div>
-          <h2 class="card-title"><a href="#">Why Old Websites Still Feel Alive</a></h2>
-          <p class="card-excerpt">Personal homepages were imperfect, expressive and unmistakably human. The modern web could still learn a great deal from them.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">3 Jul 2026 · 5 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="personal" data-search="the year i kept everything diary memory archive personal">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=82" alt="Open notebook and pen on a desk">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Personal</div>
-          <h2 class="card-title"><a href="#">The Year I Kept Everything</a></h2>
-          <p class="card-excerpt">A diary can become a second memory, preserving small details that would otherwise disappear without ceremony.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">29 Jun 2026 · 7 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="features" data-search="designing a home page that feels like home web design homepage">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=82" alt="Laptop displaying a website project">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Features</div>
-          <h2 class="card-title"><a href="#">Designing a Homepage That Feels Like Home</a></h2>
-          <p class="card-excerpt">The best personal sites are not perfectly optimised products. They are rooms, noticeboards and invitations to wander.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">21 Jun 2026 · 6 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="reviews" data-search="three stories one unforgettable ending review drama television">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1200&q=82" alt="Cinema projector casting a beam of light">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Reviews</div>
-          <h2 class="card-title"><a href="#">Three Stories, One Unforgettable Ending</a></h2>
-          <p class="card-excerpt">A television trilogy that spends most of its time appearing modest before revealing just how ambitious it has been all along.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">14 Jun 2026 · 9 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="culture" data-search="the lost art of the television ident broadcasting culture design">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&w=1200&q=82" alt="Colourful editing studio screens">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Culture</div>
-          <h2 class="card-title"><a href="#">The Lost Art of the Television Ident</a></h2>
-          <p class="card-excerpt">Before streaming flattened everything into menus, channels had identities you could recognise from a few seconds of music and motion.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">5 Jun 2026 · 5 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="personal" data-search="a walk through streets i thought i remembered memory place personal">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=1200&q=82" alt="City streets illuminated at dusk">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Personal</div>
-          <h2 class="card-title"><a href="#">A Walk Through Streets I Thought I Remembered</a></h2>
-          <p class="card-excerpt">Returning to a familiar place reveals how much of memory is architecture and how much is the person you were inside it.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">27 May 2026 · 6 min</div>
-          </div>
-        </div>
-      </article>
-
-      <article class="article-card" data-category="features" data-search="small details that make interfaces feel human interface design features">
-        <a class="card-image-link" href="#">
-          <img class="card-image" src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=82" alt="Designer working on a digital interface">
-        </a>
-        <div class="card-body">
-          <div class="card-category">Features</div>
-          <h2 class="card-title"><a href="#">Small Details That Make Interfaces Feel Human</a></h2>
-          <p class="card-excerpt">Good digital design is often less about spectacular effects than timing, restraint and the tiny moments that communicate care.</p>
-          <div class="card-footer">
-            <div class="author">
-              <img class="author-avatar" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Portrait of Lewis">
-              <span class="author-name">Lewis</span>
-            </div>
-            <div class="article-meta">18 May 2026 · 7 min</div>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <div class="empty-state" id="emptyState">No articles matched your search.</div>
-
-    <nav class="pagination" aria-label="Pagination">
-      <a class="page-button active" href="#" aria-current="page">1</a>
-      <a class="page-button" href="#">2</a>
-      <a class="page-button" href="#">3</a>
-      <a class="page-button" href="#" aria-label="Next page">→</a>
-    </nav>
-
-    <section class="newsletter">
-      <div>
-        <p class="eyebrow">Occasional transmissions</p>
-        <h2>New writing, without the noise.</h2>
-        <p>A small email whenever something new appears. No schedule, no algorithms and no unnecessary urgency.</p>
-      </div>
 
       <div>
-        <form class="newsletter-form" id="newsletterForm">
-          <input class="newsletter-input" type="email" placeholder="you@example.com" aria-label="Email address" required>
-          <button class="newsletter-button" type="submit">Subscribe</button>
-        </form>
-        <div class="newsletter-status" id="newsletterStatus" role="status" aria-live="polite"></div>
+        <div class="entries-head">
+          <h2>Entries</h2>
+          <span id="resultCount">20 shown</span>
+        </div>
+        <div class="entry-list" id="entryList"></div>
+        <div class="empty" id="emptyState">Nothing matched that search.</div>
       </div>
     </section>
+
+    <footer>
+      <span>DIARYLAND BACKUP · ORIGINAL WORDING PRESERVED</span>
+      <span>DESIGNED AS A SINGLE-FILE ARCHIVE</span>
+    </footer>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <span>© 2026 lewis.lc</span>
-      <span>Built slowly, updated occasionally.</span>
+  <dialog id="entryDialog">
+    <div class="modal-inner">
+      <aside class="modal-meta">
+        <div class="modal-num" id="modalNum">01</div>
+        <div><span class="meta-label">Date</span><span class="meta-value" id="modalDate"></span></div>
+        <div><span class="meta-label">Time</span><span class="meta-value" id="modalTime"></span></div>
+        <div><span class="meta-label">Status</span><span class="meta-value" id="modalVisibility"></span></div>
+      </aside>
+      <article class="modal-main">
+        <button class="close" id="closeDialog" aria-label="Close entry">×</button>
+        <div class="modal-kicker" id="modalKicker">Diary entry</div>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <div class="modal-body" id="modalBody"></div>
+        <nav class="modal-nav" aria-label="Entry navigation">
+          <button id="prevEntry">← Previous</button>
+          <button id="nextEntry">Next →</button>
+        </nav>
+      </article>
     </div>
-  </footer>
+  </dialog>
 
   <script>
-    const root = document.documentElement;
-    const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = themeToggle.querySelector('.theme-icon');
-    const themeLabel = themeToggle.querySelector('.theme-label');
-    const themeColor = document.getElementById('themeColor');
-
-    const getPreferredTheme = () => {
-      const savedTheme = localStorage.getItem('lewis-articles-theme');
-      if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    const applyTheme = (theme) => {
-      root.dataset.theme = theme;
-      const isDark = theme === 'dark';
-      themeIcon.textContent = isDark ? '☀' : '☾';
-      themeLabel.textContent = isDark ? 'Light mode' : 'Dark mode';
-      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-      themeColor.setAttribute('content', isDark ? '#071426' : '#eaf0f8');
-    };
-
-    applyTheme(getPreferredTheme());
-
-    themeToggle.addEventListener('click', () => {
-      const nextTheme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      localStorage.setItem('lewis-articles-theme', nextTheme);
-      applyTheme(nextTheme);
-    });
-
-    const filterButtons = [...document.querySelectorAll('.filter-button')];
-    const cards = [...document.querySelectorAll('.article-card')];
-    const searchInput = document.getElementById('searchInput');
+    const entries = [{"num": 1, "title": "My first entry ^__^", "filename": "one.html", "date": "Tuesday, Sept. 02, 2003", "time": "11:11 am", "visibility": "Public", "body": "MY FIRST ENTRY ^__^\nHa!! Look at the time - 11:11! One one one one! *big grin*\nMoving on . . . so, this is my diary/weblog/slambook. I'll call it a slambook. Yeah, I like that, and I'm sure much slamming wll be taking place.\nSo, look forward to my entries one and all,\nAlex/Boo-chan/Nerimon\nWe'll go with Boo-chan. Yeah I like that."}, {"num": 2, "title": "Life As It Stands - Vol. 1; Kim, Crystal and Sash", "filename": "two.html", "date": "Tuesday, Sept. 02, 2003", "time": "11:22 am", "visibility": "Public", "body": "LIFE AS IT STANDS - VOL. 1; KIM, CRYSTAL AND SASH\n\nWell, my life is all messed at the moment. Last night Kim and I had a fight because of the fact that she doesn't think I love her, and she doesn't trust me. I was going to break up with her but I didn't because I didn't want to - I thought I could just forget she ever said it and move on. However, it doesn't help when she keeps reminding me. I feel this pain every time she says it, I hate it. So I told her that, and also that she doesn't sound too bothered if we stay together or not.\n\nI sent that last night - it's now 11:25 and she hasn't replied yet. *shrugs* Sla. Right now, I'm not too bothered whether or not Kim and I stay together - the only thing is, we slept together, and I guess it hurts to think that the person I lost my virginity to isn't the one for me. Or maybe she is, and she doesn't even realise - I love her so much, but the thing that splits us up is that she doesn't know. I want to be with her and I don't want this to end, but sometimes these things just happen I guess.\n\nNow on to the girl that's making me wonder whether Kim and I are right for each other - the lovely Crystal-hime (who, by some strange twist of fate is also called Kim. But so there's no confusion I'll call her Crystal). She's like nothing I've ever known, and I can honestly say that I love her, truly and deeply. So, I'm thinking this isn't a good thing for Kim and I? I can't even be with Crystal - I've had 3 online relationships, but never any with a girl outside of this country. I wouldn't ever be able to see her, and it probably wouldn't last because of this distance; so why do I long to be with her? I want to tell her that, but I don't know how she'd take it; I've made her feel pretty down and I don't want to share all of my feeling with her. It's like, say you dangled a steak in front of a dog, and then you ate the steak in front of it? It's like that. I can easily tell her that my heart is aching to be with her, close to her, being her boyfriend, but I can't do anything about it (my feeling is the steak. But that would make Crystal a dog . . . oh, bad analogy). It's hard to explain; I guess I'll just see where the wind takes me (Mr. Free Spirit here *waves*). I wanna try and write some sort of song or poem about this but I'm not at home, and I can't really write in other places cos I have no writing paper. I said I'd try and find a spell to make this easier (just call me Willow the Witchy Guy) but, again I'm not at home, where all my spells are.\n\nLastly, the ever-erratic ex-girlfriend Sasha emailed me the other day. No clue why, she thought I was a loverat and that I was 'manipulative and cruel'. Basically her best mate told Sash I'd been hitting on her, and (obviously, being her best friend) Sash believed her. Her best mate was of course lying, but anyway she had a lot of pent up anger she wanted to let out. And then I replied, and she forgave me. She said she was thinking about being friends with me but that it'd take some time. And then I didn't hear anything else from her . . . *shrugs* Ah well, I guess thse things just happen, like when I lost touch with 'the b.o. bitch' Phillipa.\n\nWell, I guess this is it for now - bye bye,\nBoo-chan"}, {"num": 3, "title": "Cardshows, Money, Games and School", "filename": "three.html", "date": "Tuesday, Sept. 02, 2003", "time": "11:46 pm", "visibility": "Public", "body": "CARDSHOWS, MONEY, GAMES AND SCHOOL\n\nAck. Just looked at the date. Its exactly 8 days until I go back to miserable school. :-( Just gets you down, dunnit?\n\nStill, I have some stuff to look forward to. On Saturday I'm attending my 3rd Cardshows Yu-Gi-Oh tournament. I'll be using my Beatdown deck, which will be fun since I have several new kick-ass cards like Fiber Jar, Mirror Force etc. I took out Obelisk cos they won't let me use him now, and I also took out The Masked Beast to save card space - I have other ways of getting strong monsters on the field. So now I want Destiny Board (for my Exodia deck), Ring of Destruction, Jinzo and Tyrant Dragon (some really nice duellist in Wales is buying a Tyrant Dragon for me! How nice *grin*). I have £60 for Cardshows, so I'm gonna buy The Winged Dragon of Ra and, if it's in stock, Ring of Destruction. Any money I have left, I'll be saving towards two great new games coming out for PS2 soon; Buffy the Vampire Slayer: Chaos Bleeds and Harry Potter: Quidditch World Cup. I play-tested them both at the Playstation Exprience and they're brilliant.\n\nOK, I'm done now. Will continue to have dreamy thoughts of Crystal-hime. Also, I'm hungry. *wanders off to have dreamy thoughts of Crystal while making cereal*\n\nBoo-chan"}, {"num": 4, "title": "Waiting for mail; Pojo delight ^__^", "filename": "four.html", "date": "Tuesday, Sept. 02, 2003", "time": "8:24 pm", "visibility": "Public", "body": "WAITING FOR MAIL; POJO DELIGHT ^__^\n\nI'm just sitting on the Net, waiting for a reply fom Crystal . . . will probably have to read it tomorrow morning like I did last night. Have been talking to Kim about what it would be like if she had 9 orgasms . . . can't remember what got us on to that topic @_@. Anyway I got some fan mail from a guy who agreed with a topic I sent to Pojo about Upper Deck going too fast with their Yu-Gi-Oh releases; hold on, I didn't know that'd been posted! I checked Pojo and all 3 of my tips have been posted, including my massive essay on psychology. Me so pleased, so proud!! I emailed Sam to tell him about it, he probably won't look. I want him to see my site too . . . I don't know if he's OK or not cos I haven't spoken to him recently. I miss my Sam-san :-( I know that sounded gay - what can you do? What, I can't miss a best friend who I haven't spoken to for a month, even though he lives 5 minutes' walk away? I'm lazy, email is easier.\n\nAnyways, I shall continue my email sit-in for Crystal's msg. Byeeee!\n\nBoo-chan"}, {"num": 5, "title": "Crystal-hime", "filename": "five.html", "date": "Tuesday, Sept. 02, 2003", "time": "11:57 am", "visibility": "Public", "body": "CRYSTAL-HIME\n\nWell, it's almost midnight - time's flying here at Jamie's, I wanna stay so much longer and I can't believe it's now 7 days till my wonderful life at school reawakens *unenthusiastic smile*. I just had another exhilarating ride on Jamie's bike - and all I could think about was Crystal. I don't know why, but I wanted to talk to her and take care of her, so when I got home I checked my email and her blog and found she had felt ill, said she had a fever. I'm worried that I am a major reason for this, because she said she feels ill when she sees an email from me. I've had some sweet commnts from girls but never that ^__^ I know it's not her fault, but I suggested that we maybe stop talking until she feels a bit better; I doubt she'll go for that idea, and it's not like I wanna stop talking to her anyway, but I don't want to be the cause of her pain. She doesn't deserve it. Anyway, I've emailed her again and said I'll just write here till she wants to talk. So, this is me, writing *waves*. I hope she feels better soon and that she can still talk to me, because I am completely, head-over-heels in love and I don't want to stop contacting her."}, {"num": 6, "title": "Memoirs of a tired, lovesick fool", "filename": "six.html", "date": "Wednesday, Sept. 03, 2003", "time": "12:15 am", "visibility": "Public", "body": "MEMOIRS OF A TIRED, LOVESICK FOOL\nHi there, my name's Alex Day and I'm a lovesick fool. *people in the room applaud* Yeah, I've been a lovesick fool for about a week now - what should I do?\n\nOf course: wait till you're really tired at some stupid hour of the morning, and try to write a song about it! Clever.\n\nSo here we go, my song, Such A Fool:\n\n[V1]\nI never thought it would be this way\nI never thought I could love you so much\nAnd it hurts me inside that you're so far away\nI just want to feel your gentle, warm touch\n\n[C]\nIt's weird, I feel like such a fool\nYou're so close to me, yet so far from me\nI'm trying to be calm, trying to act cool\nBut my feelings show, and I feel like such a fool\n\n[V2]\nI never thought I could feel so numb\nI never thought my love was so true\nAnd it hurts me inside that nothing can be done\nI just want to be with you\n\n[C]\nIt's weird, I feel like such a fool\nYou're so close to me, yet so far from me\nI'm trying to be calm, trying to act cool\nBut my feelings show, and I feel like such a fool\n\n[MIDDLE-8]\nI guess I'm just a fool\nIt's just the way I am\nBut I try and keep my cool\nAnd it doesn't work\nI guess I'm just a fool\nI'm trying to be a man\nBut I just can't keep my cool\nIt just doesn't work\n\n[C]\nIt's weird, I feel like such a fool\nYou're so close to me, yet so far from me\nI'm trying to be calm, trying to act cool\nBut my feelings show, and I feel like such a fool\n\nWow, so scary - I'll have to write songs when I'm tired more often. This is the best song I have ever written, and I already have a melody in my head. So strange how things work out, huh? Anyway, Crystal if you're reading this, this is my feelings. I have a girlfriend, I love you, it's all so messed up and I feel like such a fool for hurting you the way I have. Well, I guess we are meant for each other, what with me being such a fool and you being another loser ^__^ Anyways - bye,\nBoo-chan"}, {"num": 7, "title": "The promise of a new day.", "filename": "seven.html", "date": "Wednesday, Sept. 03, 2003", "time": "12:32 am", "visibility": "Public", "body": "THE PROMISE OF A NEW DAY.\n\nWell it's now Wednesday, and I have the promise of a new day ahead of me. Who knows what wonderful surprises Jamie will have in store - he probably doesn't even know himself. Still having my little email sit-in, waiting for Crystal's msg. Crystal-hime, if you're reading this: hi!! *waves* Email me!\n\nOK, so, what to talk about . . .oh yeah, I've decided to spend my money on Ra and Ring of Destruction if they have them. If not, then I'll just save my money on Buffy or Harry. Dunno which, whatever I see at the shop first I guess. Probably Buffy, that's more fun. I'll get Harry for Gamecube so I can play it at my nan's house. If I do get RoD then I'll have to save a bit longer . . . but sla.\n\nWill probably find something else that's dull to talk about while I wait for Crystal's msg. Byeeee!\n\nBoo-chan"}, {"num": 8, "title": "Witchcraft", "filename": "eight.html", "date": "Wednesday, Sept. 03, 2003", "time": "12:42 am", "visibility": "Public", "body": "WITCHCRAFT\n\nFoe those of you that don't understand, Witchcraft (or Wicca) is a RELIGION. Not some spiritual thing, that anyone can do. Nor is it evil. We don't worship Satan; we don't even believe Satan exists. And, we don't do black magick. Well, some of us do but I don't; I only believe in white magick (to quote the Wiccan Rede; 'an' it harm none, do what ye will'. This is the Wiccan's most important rule; do what you like so long as it doesn't harm others). So here is a spell I'm writing off the top of my head (more creative writings from tired ol' me) for . . . dunno, we shall see when we get there:\n\nMy Lord and Lady, fair and true\nI wish to give myself to you\nPlease aid me when I cast this spell\nAnd help me to focus so it works well;\n\nI cast this spell to ease my pain\nI cannot handle this feeling again\nPlease give me the courage to face my fears\nAnd take away the sadness and tears.\n\nAs I speak to you, I know you can see\nI want, more than anything, to be\nSomeone who can move on and cope with life\nI want no worries, no trouble, no strife\n\nI close this spell now, and I hope you've heard\nI hope you take my spoken words\nChannel my energy and protect me with light\nSo I can feel my inner might.\n\nA spell to ease pain and make yourself more positive *bows*\n\nBoo-chan"}, {"num": 9, "title": "Bed . . . and surprisingly, Crystal", "filename": "nine.html", "date": "Wednesday, Sept. 03, 2003", "time": "1:03 am", "visibility": "Public", "body": "BED . . . .AND SURPRISINGLY, CRYSTAL\n\nIs it possible? Crystal-hime, I think I talk about you in my blog more than you talk about me in yours! I'm not trying to do it on purpose, just I have to think of something to write about while I wait for your msg and, strangely, you always come to mind.\n\nAnyway I'm so tired now so I'm gonna have to filter out these creative juices that I didn't even know were there at this time of the morning. So, I'll wake up in the morning and read/reply to Crystal's email, then probably spend the rets of the day writing about it. Sla. Night-night.\n\nBoo-chan"}, {"num": 10, "title": "11:11 - Crystal Update", "filename": "ten.html", "date": "Wednesday, Sept. 03, 2003", "time": "11:11 am", "visibility": "Public", "body": "11:11 - CRYSTAL UPDATE\n\nHey, it's 1111 again! *giggles* One one one one! Anyway, that means I've had my diary for exactly ONE DAY!!! *fanfares roll*\n\nAnyways I read Crystal's blog (cos I still haven't got an email from her *sulks*) and she said that she felt much better, which has made me feel really happy ^__^ I kept having these little pangs inside me when I knew she was upset; call it a sixth sense or something. But anyway now she's all 'yay' again! And then she can feel well enough to EMAIL ME!!!! *subtle clue* Nah, 'tis OK, I can wait for koibito's email. (Koibito - One I love)\n\nSo, yeah. Me happy! And I have to re-read my spell that I wrote last night; I can't remember any of it. I just re-read Such a Fool, it is pretty good! And I emailed it to Elanna and she said it had lots of emotion in it. 'Tis true, I guess.\n\nByeeeeee!\nBoo-chan"}, {"num": 11, "title": "Jamie's all asleep-did!", "filename": "eleven.html", "date": "Wednesday, Sept. 03, 2003", "time": "11:25 am", "visibility": "Public", "body": "JAMIE'S ALL ASLEEP-DID!\n\nJamie's asleep-did-ee-dudlled! It's weird to wake up and find him not there, but I looked and he was all curled up on his bed. Awww :-)\n\nThat wasn't really worth one entry, was it? Ah well, sla.\n\nBoo-chan"}, {"num": 12, "title": "Religious stuff (and general fun)", "filename": "twelve.html", "date": "Wednesday, Sept. 03, 2003", "time": "7:12 pm", "visibility": "Public", "body": "RELIGIOUS STUFF (AND GENERAL FUN)\n\n'Don't be fooled by the cross that I've got, I'm still, I'm still Jesus from the block'. I just saw that on a banner and it really made me laugh so I thought I'd post it. I thought I'd put this religious joke too, cos it made me laugh: (warning; if you're not a Wicca, you probably won't get this)\n\nA Pagan in Hell\n\nBy: Pendragon\n\nA Pagan dies and, to his great surprise, he finds himself standing before some pearly gates. St. Peter asks him, \\\"May I help you?\\\" The Pagan asks, \\\"Where am I?\\\"\n\nPeter says, \\\"You're at the gates of heaven.\\\"\n\nThe Pagan says, \\\"But I don't believe in heaven.\\\"\n\nPeter frowns at him. \\\"You're one of those Pagans, aren't you?\\\"\n\n\\\"Yes. I believe I'm in the wrong place; I'm supposed to go to Summerland.\\\"\n\nPeter says, \\\"Sorry. We took over Summerland, and it's temporarily closed for remodeling.\\\"\n\n\\\"What should I do now?\\\"\n\nPeter says, \\\"Well, since we don't allow Pagans in heaven, you have to go to hell. Sorry. Just follow that path that leads downward and to the left.\\\"\n\nThe Pagan walks down to hell, where the gates are standing open. He walks in and finds beautiful meadows, happy animals, and clear streams of water.\n\nHe walks on in and begins exploring, and after a few minutes a courtly gentleman walks up to him and bows politely. \\\"Hello, I'm Satan. You must be the guy that St. Peter phoned me about. Are you a Pagan?\\\"\n\n\\\"Yes, I am. What's going to happen now?\\\"\n\nSatan says, \\\"Well, the fishing's pretty good, if you enjoy that sort of thing. There's a little refreshment stand down the road. And I believe the Pagan meeting grounds are right over the next hill.\\\"\n\nSuddenly, a hole opens up in the sky above, and a yawning chasm opens directly underneath it. The stench of sulphur fills the air. Hundreds of screaming, tortured souls drop down into the flaming pit, which immediately closes up with a thud.\n\nThe Pagan, hardly believing what he just saw, asks Satan, \\\"And what was THAT ???\\\"\n\nSatan rolls his eyes. \\\"Oh, just ignore them. They're Christians; they wouldn't have it any other way.\\\"\n\nAlso, did you know that 'Sucks Large Portions of Ass' translated into German and back into English again comes out as 'Sucks Large Sections of the Donkey'? You learn something new every day.\n\nBoo-chan"}, {"num": 13, "title": "My rant on witchcraft and stupid people", "filename": "thirteen.html", "date": "Wednesday, Sept. 03, 2003", "time": "9:47 pm", "visibility": "Public", "body": "MY RANT ON WITCHCRAFT AND STUPID PEOPLE\n\nI've been surfing around the Net and I'm just about sick of people saying that witchcraft has anything to do with Satan. SATAN DOES NOT EXIST. OK? What's the point of creating an entity to represent evil? It just makes the fear stronger if you have a physical deity composed of fear, hatred and death. Wicca means that there is no evil deity you can blame all of your problems on; if you get tempted to do something you shouldn't, you can't use Satan as a crappy excuse; with Wicca, we respect and understand that our wrongdoing is our own. We are responsible for our own actions, and cannot blame others for what we do. So, if anyone apart from Crystal actually reads this (doubtful since I haven't told anyone else) please get your facts straight; Wicca is not Satanism.\n\nAlso, white magick is good. White magick means that you believe in the God and Goddess, and harnessing the power of nature, the world around you, the elements and the two deities to make the world a better place, or to help your life and the life of others for the better. Christians believe that God is some force that created the Universe; for Wiccans, the Lord and Lady IS the Universe, and everything in it. The Universe was not created, it has been here before time began, and so has the Lord and Lady.\n\nBlack magick has nothing to do with the beliefs of the God and Goddess; it is about using your own power and harnessing it. Black magick is stronger, you do not rely on nature or the God or Goddess or anyone else except you, which can make you an incredibly powerful black sorceror. Since black magick is not tied with religion, they don't follow the rules of the Wiccan Rede (an' it harm none, do what ye will). This means they are quite willing to perform magickal spells and rituals which could harm others. Black sorcerors summon individual spirits that have their own special abilities to harm others (just so we're clear, black magick has nothing to do with Satanism either). The path of the black magickian is tempting; infinite power could be yours if you followed this path, and I certainly have trouble resisting. However, I like being tied down by the Rede, being restricted back; it stops my power from being too great, it keeps me in check to a point. Besides, what with us being a weak species, too many people have chosen the path of the black arts and are wreaking havoc upon the world; it is my job to try and stop it, not make it worse.\n\nBoo-chan"}, {"num": 14, "title": "A warning spell", "filename": "fourteen.html", "date": "Wednesday, Sept. 03, 2003", "time": "10:12 pm", "visibility": "Public", "body": "A WARNING SPELL\n\nYes, I got this off a black magick site; still, I like this because it doesn't cause ill intent, it just warns people of what I might do if they mess with me. And, they don't know that I'd never do black magick, so the warning should go down pretty well :-) Plus, I like this cos the words are powerful.\n\nSend this warning to the one of my intent\nMake them shiver and shake with lament\nMake sure they know I will give them much worse\nIf they hurt me again, I shall give them a curse\nMake them hear in their head, this verse\nAnd know it is me that is chanting the words\n\nBlood turn black and flesh turn Blue,\nI will curse you if you force me too.\nI`ll swoop down on you with no disguise,\nI`ll call down the plague of flies.\nBlood go black and flesh go blue\nEvil hit me and went back to you\nMy soul clean and yours on fire\nYou fuck with a witch, you'll burn on a pyre"}, {"num": 15, "title": "The Rede", "filename": "fifteen.html", "date": "Wednesday, Sept. 03, 2003", "time": "10:44 pm", "visibility": "Public", "body": "THE REDE\n\nFor those who are interested, here is the Wiccan Rede:\n\nTHE WICCAN REDE\nAuthor unknown\n\nBide these Wiccan Laws you must\nWith perfect love and perfect trust\nLive and let live\nFairly take and fairly give\nCast the circle thrice about\nTo keep all evil spirits out\nTo bind a spell every time\nLet the spell be spoken in rhyme\nNine wood `neath and cauldron go\nBurn them fast and then slow\nWiddershins go by waning moon\nChanting out the baleful tune\nWhen the Lady`s moon is new\nKiss her hands to her times two\nWhen the moon rides at her peak\nThen your heart`s desire seek\nHeed the Northwind`s mighty gale\nLock the door and trim the sail\nWhen the wind comes from the South\nLove will kiss you in the mouth\nWhen the wind blows from the West\nDeparted souls will have no rest\nWhen the winds blow from East\nExpect the new and set the feast\nNine wood `neath and cauldron go\nBurn them fast then slow\nElderwood,the lady`s tree\nBurn it not or cursed you`ll be\nWhen the wheel begins to turn\nSoon the Beltane fires will burn\nWhen the wheel has turned to Yule\nLight the log the Horned one rulse\nTeaching flower bush and tree\nBy the Lady Blessed Be\nWhere the rippiling waters go\nCast the stone and truth you`ll know\nWhen ye have and hold a seed\nHarken not to other`s greed\nWith a fool no season spend\nOr be counted as his friend\nMerry meet and Merry part\nBright the cheeks and warm the heart\nMind the Threefold Law you must\nThree times bad and three times good\nWhen misfortune is anow\nWear the Star upon thy brow\nTrue in love ye must ever be\nLest thy love be faulse to thee\nThese eight words be rede fulfill\nAnd ye harm none do what thou will."}, {"num": 16, "title": "Bloody viruses", "filename": "sixteen.html", "date": "Wednesday, Sept. 03, 2003", "time": "11:06 pm", "visibility": "Public", "body": "BLOODY VIRUSES\n\nI've had two or three viruses sent to me today and they're starting to get on my nerves. What's the point? I found out I was immune to the MSBlaster virus thogh, which is pretty cool. It's cos it only targets Windows 2000, ME and XP, and I'm Windows 98. So, for the firts time, my computer being old is a good thing :-) Either that or Microsoft haven't yet developed a patch for it, which could happen. So, yeah.\n\nBoo-chan"}, {"num": 17, "title": "Ack.", "filename": "seventeen.html", "date": "Wednesday, Sept. 03, 2003", "time": "11:23 pm", "visibility": "Public", "body": "ACK.\n\nI feel ill :-( I had really bad stomach cramps, and I'm trying to convince myself it's not black magick (it wouldn't surprise me if someone was cursing me as a way to show me the power I was missing out on by choosing the good path). Further proof in the fact that my internet code was bh666nj. Great, nothing like the digits of Satan to put you right at ease. However, Jamie had the same pain a couple of nights ago so I'm gonna blame it on his wife's cooking, and leave it at that.\n\nCrystal - I know your pain now, koibito *smiles sadly*\n\n*wishes Crystal were here* You know when you long for someone to put your arms round, give a gentle, sweet kiss to and then fall asleep with? Well, I want that, and I want it to be with my Crystal-hime. *stomps around* And I want it now!! *pouts*\n\nSla, I guess this is just the way of things; the object of your affections always has to be on the other side of the world (sorry in advance for sounding so British) - bloody hell.\n\nBoo-chan"}, {"num": 18, "title": "My philosophical quote of the evening", "filename": "eighteen.html", "date": "Wednesday, Sept. 03, 2003", "time": "11:25 pm", "visibility": "Public", "body": "MY PHILOSOPHICAL QUOTE OF THE EVENING\n\nMy philosophical quote for this evening, taken from a Diaryland ad banner; it's so much easier to get out of bed when the house is on fire.\n\nBoo-chan"}, {"num": 19, "title": "Crystal-koibito", "filename": "nineteen.html", "date": "Thursday, Sept. 04, 2003", "time": "12:08 am", "visibility": "Public", "body": "CRYSTAL-KOIBITO\n\nHee, 'tis strange - it turns out Crystal's email provider is being stupid, so it won't let her reply to my emails. So, we're just reading each other's diary entries and then writing about them in our ones :-) Heh. This did make me chuckle though:\n\n'It's bad enough my stupid computer is in Chinese (I quote my dad, \\\"A chinese computer will make you learn chinese\\\"'\n*giggles* I feel for you, my darlin' - it must be really annoying for ya.\n\nApparently her sister's been telling her that we have a cold climate here in the winter (when koibito will hopefully be coming here!!! *cheers, preys and casts many wish spells*) - heh, we have a cold climate. This is England, we are always cold. However, it is pretty cold in the winter - I don't know what my Crystal is so worried about though. I will put my arms round her and we can snuggle together, and my love will keep her warm :-) *pictures romantic scene* Yeah.\n\nTo my koibito - here, I can be your warmth, the one who will take care of you the one who will give you all the love you require; and when we are apart, I'm just an email or a diary entry away.\n\nBoo-chan"}, {"num": 20, "title": "Entry no. 20 - guess what it's about? ^_^", "filename": "twenty.html", "date": "Thursday, Sept. 04, 2003", "time": "12:42 am", "visibility": "Public", "body": "ENTRY NO. 20 - GUESS WHAT IT'S ABOUT? ^_^\n\nYeppers - Crystal posts another entry and I post another one here in response. Now, I'm kinda offended at the moment cos she said:\n\n'I'll just sit back, listen to my CD, practice for the talent show and think about Aleh-chan like the loser I am ^^;'\n\nSo what, thinking about me makes you a loser? *sulks*\n\nI know she didn't mean it like that though, I'm just being my silly self. Sla.\n\nI can't believe she said she'll be singing for me in her talent show - that is so sweet. I'm so touched *blushes and feels special* Koibito, if you're there; do your best and know that I'm real proud of ya! Knock 'em dead sugar, I have faith in you :-D\n\nI really wanna see her now, after being so close to her online it'd be so nice to be with her IRL. I mean, it wouldn't be spectacular; we'd just go out places, do normal things. But at the moment it seems like I would give anything to be with her, and if I could steal just a few minutes I would.\n\nLOL - maybe when we're finally together, we can write some joint entries and post the same entry in both our blogs, with both of us writing on it ^__^ Yeah.\n\nBoo-chan"}];
+    const entryList = document.getElementById('entryList');
+    const resultCount = document.getElementById('resultCount');
     const emptyState = document.getElementById('emptyState');
-    let activeFilter = 'all';
+    const searchInput = document.getElementById('searchInput');
+    const dateFilters = document.getElementById('dateFilters');
+    const dialog = document.getElementById('entryDialog');
+    let activeDate = 'All';
+    let activeIndex = 0;
+    let visibleEntries = [...entries];
 
-    const updateArticles = () => {
+    const dateKey = date => date.replace(/^[A-Za-z]+,\s*/, '').replace(/,\s*2003$/, '');
+    const escapeHTML = value => value.replace(/[&<>"']/g, char => ({
+      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
+    }[char]));
+
+    function buildDateFilters() {
+      const dates = ['All', ...new Set(entries.map(e => dateKey(e.date)))];
+      dateFilters.innerHTML = dates.map(date => `
+        <button class="date-filter ${date === 'All' ? 'active' : ''}" data-date="${date}">
+          <span>${date === 'All' ? 'All entries' : date}</span>
+          <small>${date === 'All' ? entries.length : entries.filter(e => dateKey(e.date) === date).length}</small>
+        </button>
+      `).join('');
+
+      dateFilters.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+          activeDate = button.dataset.date;
+          dateFilters.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === button));
+          renderEntries();
+        });
+      });
+    }
+
+    function getPreview(body) {
+      return body.replace(/\s+/g, ' ').replace(/^.*?\n/, '').slice(0, 145);
+    }
+
+    function renderEntries() {
       const query = searchInput.value.trim().toLowerCase();
-      let visibleCount = 0;
-
-      cards.forEach((card) => {
-        const categoryMatches = activeFilter === 'all' || card.dataset.category === activeFilter;
-        const searchMatches = !query || card.dataset.search.includes(query) || card.textContent.toLowerCase().includes(query);
-        const shouldShow = categoryMatches && searchMatches;
-        card.hidden = !shouldShow;
-        if (shouldShow) visibleCount += 1;
+      visibleEntries = entries.filter(entry => {
+        const matchesDate = activeDate === 'All' || dateKey(entry.date) === activeDate;
+        const matchesSearch = !query || `${entry.title} ${entry.body}`.toLowerCase().includes(query);
+        return matchesDate && matchesSearch;
       });
 
-      emptyState.classList.toggle('visible', visibleCount === 0);
-    };
+      entryList.innerHTML = visibleEntries.map(entry => `
+        <article class="entry" tabindex="0" data-number="${entry.num}" aria-label="Open entry ${entry.num}: ${escapeHTML(entry.title)}">
+          <div class="entry-number">${String(entry.num).padStart(2, '0')}</div>
+          <div class="entry-date">${escapeHTML(dateKey(entry.date))}<br>${escapeHTML(entry.time)}</div>
+          <div class="entry-content">
+            <h3 class="entry-title">${escapeHTML(entry.title)}</h3>
+            <span class="entry-preview">${escapeHTML(getPreview(entry.body))}</span>
+          </div>
+          <div class="entry-arrow">↗</div>
+        </article>
+      `).join('');
 
-    filterButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        activeFilter = button.dataset.filter;
-        filterButtons.forEach((item) => item.classList.toggle('active', item === button));
-        updateArticles();
+      resultCount.textContent = `${visibleEntries.length} shown`;
+      emptyState.style.display = visibleEntries.length ? 'none' : 'block';
+
+      entryList.querySelectorAll('.entry').forEach(card => {
+        const open = () => openEntry(Number(card.dataset.number));
+        card.addEventListener('click', open);
+        card.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            open();
+          }
+        });
       });
+    }
+
+    function openEntry(number) {
+      activeIndex = entries.findIndex(entry => entry.num === number);
+      updateDialog();
+      if (!dialog.open) dialog.showModal();
+    }
+
+    function updateDialog() {
+      const entry = entries[activeIndex];
+      document.getElementById('modalNum').textContent = String(entry.num).padStart(2, '0');
+      document.getElementById('modalDate').textContent = entry.date;
+      document.getElementById('modalTime').textContent = entry.time;
+      document.getElementById('modalVisibility').textContent = entry.visibility;
+      document.getElementById('modalKicker').textContent = `Diary entry ${String(entry.num).padStart(2, '0')}`;
+      document.getElementById('modalTitle').textContent = entry.title;
+      document.getElementById('modalBody').textContent = entry.body;
+      document.querySelector('.modal-main').scrollTop = 0;
+      document.getElementById('prevEntry').disabled = activeIndex === 0;
+      document.getElementById('nextEntry').disabled = activeIndex === entries.length - 1;
+    }
+
+    searchInput.addEventListener('input', renderEntries);
+    document.getElementById('clearFilters').addEventListener('click', () => {
+      searchInput.value = '';
+      activeDate = 'All';
+      buildDateFilters();
+      renderEntries();
     });
 
-    searchInput.addEventListener('input', updateArticles);
-    document.getElementById('focusSearch').addEventListener('click', () => searchInput.focus());
-
-    document.getElementById('newsletterForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const form = event.currentTarget;
-      const status = document.getElementById('newsletterStatus');
-      status.textContent = 'Thanks — you are on the list.';
-      form.reset();
+    document.getElementById('closeDialog').addEventListener('click', () => dialog.close());
+    document.getElementById('prevEntry').addEventListener('click', () => {
+      if (activeIndex > 0) { activeIndex--; updateDialog(); }
     });
+    document.getElementById('nextEntry').addEventListener('click', () => {
+      if (activeIndex < entries.length - 1) { activeIndex++; updateDialog(); }
+    });
+    dialog.addEventListener('click', event => {
+      const box = dialog.getBoundingClientRect();
+      const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
+      if (outside) dialog.close();
+    });
+    window.addEventListener('keydown', event => {
+      if (!dialog.open) return;
+      if (event.key === 'ArrowLeft' && activeIndex > 0) { activeIndex--; updateDialog(); }
+      if (event.key === 'ArrowRight' && activeIndex < entries.length - 1) { activeIndex++; updateDialog(); }
+    });
+
+    buildDateFilters();
+    renderEntries();
   </script>
 </body>
 </html>
