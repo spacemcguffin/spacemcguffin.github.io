@@ -400,7 +400,10 @@
     .modal-main {
       position: relative;
       padding: 46px clamp(26px, 6vw, 72px) 56px;
-      overflow-y: auto;
+      overflow: hidden;
+      display:flex;
+      flex-direction:column;
+      min-height:0;
     }
 
     .close {
@@ -440,9 +443,19 @@
       font-size: clamp(1.15rem, 2vw, 1.38rem);
       line-height: 1.65;
       white-space: pre-wrap;
+      overflow-y:auto;
+      flex:1;
+      min-height:0;
+      padding-right:18px;
+      scrollbar-width:thin;
+      scrollbar-color: var(--accent) rgba(0,0,0,.08);
     }
+    .modal-body::-webkit-scrollbar{width:10px;}
+    .modal-body::-webkit-scrollbar-track{background:rgba(0,0,0,.06);border-radius:999px;}
+    .modal-body::-webkit-scrollbar-thumb{background:var(--accent);border-radius:999px;}
 
     .modal-nav {
+      flex-shrink:0;
       display: flex;
       justify-content: space-between;
       gap: 12px;
@@ -679,7 +692,7 @@
       document.getElementById('modalKicker').textContent = `Diary entry ${String(entry.num).padStart(2, '0')}`;
       document.getElementById('modalTitle').textContent = entry.title;
       document.getElementById('modalBody').textContent = entry.body;
-      document.querySelector('.modal-main').scrollTop = 0;
+      document.getElementById('modalBody').scrollTop = 0;
       document.getElementById('prevEntry').disabled = activeIndex === 0;
       document.getElementById('nextEntry').disabled = activeIndex === entries.length - 1;
     }
