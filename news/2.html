@@ -225,6 +225,144 @@
       margin-right: 3px;
     }
 
+    .sidebar-heading-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .calendar-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.42);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-family: "DM Mono", monospace;
+      font-size: .66rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .calendar-toggle span {
+      display: inline-block;
+      margin-left: 5px;
+      transition: transform .2s ease;
+    }
+
+    .calendar-toggle[aria-expanded="true"] span {
+      transform: rotate(45deg);
+    }
+
+    .calendar-panel {
+      display: block;
+    }
+
+    .sidebar-summary {
+      margin: 0 0 16px;
+      padding: 14px 0 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sidebar-summary strong {
+      display: block;
+      font-family: "Instrument Serif", serif;
+      font-size: 1.7rem;
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .sidebar-summary span {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-family: "DM Mono", monospace;
+      font-size: .66rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .date-filter {
+      position: relative;
+      min-width: 0;
+      min-height: 78px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.28);
+      border-radius: 14px;
+      padding: 10px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .date-filter:first-child {
+      grid-column: 1 / -1;
+      min-height: 58px;
+    }
+
+    .date-filter:hover,
+    .date-filter.active {
+      color: var(--ink);
+      background: rgba(255,255,255,.68);
+      border-color: rgba(216,79,118,.36);
+      transform: translateY(-2px);
+    }
+
+    .date-filter.active {
+      box-shadow: inset 0 0 0 1px rgba(216,79,118,.22);
+    }
+
+    .month-copy {
+      display: contents;
+    }
+
+    .month-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+      width: 100%;
+    }
+
+    .month-name {
+      font-family: "DM Mono", monospace;
+      font-size: .67rem;
+      line-height: 1.25;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      color: inherit;
+    }
+
+    .month-count {
+      min-width: 24px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(31,35,40,.06);
+      font-family: "DM Mono", monospace;
+      font-size: .58rem;
+      color: var(--muted);
+    }
+
+    .date-filter.active .month-count {
+      background: var(--accent);
+      color: white;
+    }
+
     .clear {
       margin-top: 20px;
       border: 0;
@@ -498,9 +636,28 @@
       .hero { grid-template-columns: 1fr; gap: 28px; }
       .hero-copy { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
       .archive { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .dates { display: flex; overflow-x: auto; padding-bottom: 8px; }
-      .date-filter { white-space: nowrap; }
+      .sidebar {
+        position: static;
+        border-top: 1px solid var(--ink);
+        padding-top: 14px;
+      }
+      .calendar-toggle {
+        display: inline-flex;
+        align-items: center;
+      }
+      .calendar-panel {
+        display: none;
+        padding-top: 14px;
+      }
+      .calendar-panel.open {
+        display: block;
+      }
+      .calendar-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .date-filter {
+        min-height: 68px;
+      }
       .entry { grid-template-columns: 42px minmax(0, 1fr) 36px; gap: 14px; }
       .entry-date { grid-column: 2; grid-row: 2; }
       .entry-content { grid-column: 2; grid-row: 1; }
@@ -514,7 +671,26 @@
       .issue { display: none; }
       h1 { font-size: clamp(3.8rem, 24vw, 6.8rem); }
       .hero { padding-top: 54px; }
-      .entry-preview { max-width: 45vw; }
+      .entry-preview { max-width: 42vw; }
+      .calendar-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+      }
+      .date-filter {
+        min-height: 64px;
+        padding: 8px;
+        border-radius: 12px;
+      }
+      .month-name {
+        font-size: .61rem;
+      }
+      .month-count {
+        min-width: 21px;
+        font-size: .54rem;
+      }
+      .sidebar-summary strong {
+        font-size: 1.45rem;
+      }
       dialog {
         height: calc(100dvh - 18px);
         max-height: calc(100dvh - 18px);
@@ -583,13 +759,22 @@
 
     <section class="archive">
       <aside class="sidebar">
-        <h2 class="sidebar-title">Browse by month</h2>
+        <div class="sidebar-heading-row">
+          <h2 class="sidebar-title">Calendar</h2>
+          <button class="calendar-toggle" id="calendarToggle" type="button" aria-expanded="false" aria-controls="calendarPanel">
+            Browse months
+            <span aria-hidden="true">＋</span>
+          </button>
+        </div>
+        <div class="calendar-panel" id="calendarPanel">
+          <div class="sidebar-summary" id="sidebarSummary"><strong>All months</strong><span>58 entries</span></div>
         <label class="search">
           <input id="searchInput" type="search" placeholder="Search titles or text…" aria-label="Search entries">
           <span>⌕</span>
         </label>
-        <div class="dates" id="dateFilters"></div>
+        <div class="dates calendar-grid" id="dateFilters"></div>
         <button class="clear" id="clearFilters">Reset filters</button>
+        </div>
       </aside>
 
       <div>
@@ -652,11 +837,39 @@
     }
 
     function renderFilters() {
+      const query = searchInput.value.trim().toLowerCase();
+      const monthCounts = {};
+      months.slice(1).forEach(month => {
+        monthCounts[month] = entries.filter(entry => {
+          const haystack = `${entry.title} ${entry.date} ${entry.body}`.toLowerCase();
+          return entry.month === month && (!query || haystack.includes(query));
+        }).length;
+      });
+
+      const maxCount = Math.max(1, ...Object.values(monthCounts));
+
       dateFilters.innerHTML = months.map(month => {
-        const count = month === "All" ? entries.length : entries.filter(e => e.month === month).length;
-        if (month !== "All" && count === 0) return "";
+        const count = month === "All"
+          ? entries.filter(entry => {
+              const haystack = `${entry.title} ${entry.date} ${entry.body}`.toLowerCase();
+              return !query || haystack.includes(query);
+            }).length
+          : monthCounts[month];
+
+        if (month !== "All" && count === 0 && query) return "";
+
+        const width = month === "All" ? 100 : Math.max(8, Math.round((count / maxCount) * 100));
+
+        const shortMonth = month === "All" ? "All entries" : month.slice(0, 3);
+
         return `<button class="date-filter ${activeMonth === month ? "active" : ""}" data-month="${month}">
-          <span>${month}</span><span>${count}</span>
+          <span class="month-copy">
+            <span class="month-topline">
+              <span class="month-name">${shortMonth}</span>
+              <span class="month-count">${count}</span>
+            </span>
+            
+          </span>
         </button>`;
       }).join("");
 
@@ -665,6 +878,12 @@
           activeMonth = button.dataset.month;
           renderFilters();
           renderEntries();
+          updateSidebarSummary();
+          if (window.matchMedia("(max-width: 880px)").matches) {
+            document.getElementById("calendarPanel").classList.remove("open");
+            document.getElementById("calendarToggle").setAttribute("aria-expanded", "false");
+          }
+          window.scrollTo({ top: document.querySelector(".entries-head").offsetTop - 20, behavior: "smooth" });
         });
       });
     }
@@ -679,7 +898,7 @@
       });
 
       entryList.innerHTML = filteredEntries.map(entry => `
-        <article class="entry" tabindex="0" data-num="${entry.num}">
+        <article class="entry" tabindex="0" data-num="${entry.num}" data-month="${entry.month}" id="entry-${entry.num}">
           <div class="entry-number">${String(entry.num).padStart(2,"0")}</div>
           <div class="entry-date">${entry.date}${entry.time ? `<br>${entry.time}` : ""}</div>
           <div class="entry-content">
@@ -693,6 +912,8 @@
       resultCount.textContent = `${filteredEntries.length} shown`;
       emptyState.style.display = filteredEntries.length ? "none" : "block";
 
+      updateSidebarSummary();
+
       entryList.querySelectorAll(".entry").forEach(card => {
         const open = () => openEntry(Number(card.dataset.num));
         card.addEventListener("click", open);
@@ -703,6 +924,48 @@
           }
         });
       });
+
+      requestAnimationFrame(setupMonthObserver);
+    }
+
+    function updateSidebarSummary() {
+      const label = activeMonth === "All" ? "All months" : `${activeMonth} 2021`;
+      document.querySelector("#sidebarSummary strong").textContent = label;
+      document.querySelector("#sidebarSummary span").textContent =
+        `${filteredEntries.length} ${filteredEntries.length === 1 ? "entry" : "entries"}`;
+    }
+
+    let monthObserver;
+
+    function setupMonthObserver() {
+      if (monthObserver) monthObserver.disconnect();
+      if (activeMonth !== "All" || searchInput.value.trim()) return;
+
+      const visibleCards = [...entryList.querySelectorAll(".entry")];
+      if (!visibleCards.length) return;
+
+      monthObserver = new IntersectionObserver(entriesObserved => {
+        const visible = entriesObserved
+          .filter(item => item.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+        if (!visible.length) return;
+
+        const month = visible[0].target.dataset.month;
+        if (!month || month === activeMonth) return;
+
+        activeMonth = month;
+        renderFilters();
+        document.querySelector("#sidebarSummary strong").textContent = `${month} 2021`;
+        document.querySelector("#sidebarSummary span").textContent =
+          `${entries.filter(entry => entry.month === month).length} entries`;
+      }, {
+        root: null,
+        threshold: 0.15,
+        rootMargin: "-90px 0px -65% 0px"
+      });
+
+      visibleCards.forEach(card => monthObserver.observe(card));
     }
 
     function openEntry(num) {
@@ -739,7 +1002,31 @@
       updateModal();
     }
 
-    searchInput.addEventListener("input", renderEntries);
+
+    const calendarToggle = document.getElementById("calendarToggle");
+    const calendarPanel = document.getElementById("calendarPanel");
+
+    calendarToggle.addEventListener("click", () => {
+      const isOpen = calendarPanel.classList.toggle("open");
+      calendarToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 880) {
+        calendarPanel.classList.remove("open");
+        calendarToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    searchInput.addEventListener("input", () => {
+      activeMonth = "All";
+      renderFilters();
+      renderEntries();
+      if (window.matchMedia("(max-width: 880px)").matches && searchInput.value.trim()) {
+        calendarPanel.classList.add("open");
+        calendarToggle.setAttribute("aria-expanded", "true");
+      }
+    });
     clearFilters.addEventListener("click", () => {
       activeMonth = "All";
       searchInput.value = "";
