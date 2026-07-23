@@ -145,7 +145,7 @@
     .search-wrap input::placeholder { color: #788196; }
     .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #9ca5b8; }
 
-    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.75fr) minmax(280px, .9fr); gap: 44px; align-items: start; }
+    .hero-grid { display: block; }
     .hero-copy h1 {
       margin: 0;
       font-family: "Instrument Serif", serif;
@@ -157,21 +157,23 @@
     .hero-line { width: 66px; height: 1px; margin: 28px 0 24px; background: linear-gradient(90deg, var(--purple), transparent); }
     .hero-copy p { max-width: 550px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
 
-    .type-card, .quote-card, .stats-card {
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      max-width: 760px;
+      margin-top: 34px;
+      overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: linear-gradient(145deg, rgba(11, 20, 38, .82), rgba(5, 11, 22, .72));
+      border-radius: 16px;
+      background: var(--line);
       box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
     }
-    .type-card { padding: 22px 24px; }
-    .card-kicker { margin-bottom: 15px; color: var(--purple); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
-    .type-sample { display: grid; grid-template-columns: 92px 1fr; align-items: center; gap: 20px; }
-    .type-aa { font-family: "Instrument Serif", serif; font-size: 70px; line-height: .8; }
-    .alphabet { color: #d6d4dd; font-size: 12px; line-height: 1.6; word-break: break-all; }
-    .type-card p { margin: 19px 0 0; color: #c0c4ce; font-size: 13px; line-height: 1.65; }
+    .stat-item { padding: 16px 18px; background: rgba(7, 15, 29, .88); }
+    .stat-item span { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+    .stat-item strong { display: block; margin-top: 6px; font-family: "Instrument Serif", serif; font-size: 27px; font-weight: 400; }
 
-    .content-grid { display: grid; grid-template-columns: minmax(0, 1fr) 314px; gap: 42px; margin-top: 38px; align-items: start; }
+    .content-grid { margin-top: 42px; }
     .entries-head, .entry-row { display: grid; grid-template-columns: 58px minmax(220px, 1fr) 135px 85px 92px 25px; gap: 14px; align-items: center; }
     .entries-head { min-height: 42px; padding: 0 0 10px; color: #b47be8; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 16px; letter-spacing: .04em; }
     .entry-row { min-height: 57px; border-bottom: 1px solid rgba(187, 203, 235, .10); cursor: pointer; transition: .2s ease; }
@@ -183,16 +185,26 @@
     .entry-arrow { color: #e7e9ef; font-size: 22px; }
     .mood-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--mood); box-shadow: 0 0 13px color-mix(in srgb, var(--mood) 42%, transparent); }
 
-    .side-cards { display: grid; gap: 22px; position: sticky; top: 28px; }
-    .quote-card { position: relative; min-height: 315px; padding: 25px; overflow: hidden; background: linear-gradient(145deg, rgba(73, 36, 103, .64), rgba(10, 13, 28, .94)); }
-    .quote-card::after { content: ""; position: absolute; inset: auto -10% -35% -10%; height: 56%; background: radial-gradient(ellipse at center, rgba(190, 104, 220, .35), transparent 67%); }
-    .quote-label { display: flex; gap: 12px; color: #ded5ec; font-size: 13px; }
-    blockquote { position: relative; z-index: 1; margin: 25px 0 0 20px; font-family: "Instrument Serif", serif; font-size: 27px; line-height: 1.35; }
-    .quote-by { position: relative; z-index: 1; margin: 16px 0 0 20px; color: #bd89ef; font-size: 12px; }
-    .stats-card { padding: 22px 24px; }
-    .stats-title { margin-bottom: 22px; font-family: "Instrument Serif", serif; font-size: 20px; }
-    .stat { display: flex; justify-content: space-between; gap: 15px; margin: 16px 0; color: var(--muted); font-size: 12px; }
-    .stat strong { color: #ede9e2; font-family: "Instrument Serif", serif; font-size: 18px; font-weight: 400; }
+    .month-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 26px 0 11px;
+      padding: 0 10px;
+      border: 0;
+      background: transparent;
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .month-toggle-icon { transition: transform .22s ease; }
+    .month-section.collapsed .month-toggle-icon { transform: rotate(-90deg); }
+    .month-list { display: grid; gap: 5px; max-height: 620px; overflow: hidden; transition: max-height .32s ease, opacity .22s ease; }
+    .month-section.collapsed .month-list { max-height: 0; opacity: 0; }
 
     .empty { display: none; padding: 60px 20px; color: var(--muted); text-align: center; font-family: "Instrument Serif", serif; font-size: 28px; }
     .footer-note { margin: 28px 0 0; color: #737b8c; text-align: center; font-family: "Instrument Serif", serif; font-size: 18px; font-style: italic; }
@@ -240,11 +252,7 @@
     .modal-nav button { padding: 11px 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.04); cursor: pointer; }
 
     @media (max-width: 1180px) {
-      .hero-grid { grid-template-columns: 1fr; }
-      .type-card { max-width: 560px; }
-      .content-grid { grid-template-columns: 1fr; }
-      .side-cards { grid-template-columns: 1fr 1fr; position: static; }
-      .quote-card { min-height: 240px; }
+      .stats-strip { max-width: 100%; }
     }
 
     @media (max-width: 900px) {
@@ -264,16 +272,16 @@
       .entry-row { grid-template-columns: 40px minmax(0,1fr) auto; gap: 12px; padding: 13px 0; }
       .entry-date, .entry-mood, .entry-status { display: none; }
       .entry-title { font-size: 23px; }
-      .side-cards { grid-template-columns: 1fr; }
+      .stats-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 560px) {
       main { padding-inline: 16px; }
       .top-actions .select-wrap { display: none; }
       .hero-copy h1 { font-size: 76px; }
-      .type-sample { grid-template-columns: 70px 1fr; }
-      .type-aa { font-size: 58px; }
-      .content-grid { margin-top: 26px; }
+      .stats-strip { grid-template-columns: 1fr 1fr; }
+      .stat-item { padding: 14px; }
+      .content-grid { margin-top: 30px; }
       .modal { padding: 0; align-items: end; }
       .modal-panel { width: 100%; max-height: 94vh; border-radius: 24px 24px 0 0; padding: 36px 24px; }
     }
@@ -291,8 +299,12 @@
       </nav>
 
       <div class="side-rule"></div>
-      <div class="side-label">Browse by month</div>
-      <nav class="side-nav" id="monthNav"></nav>
+      <section class="month-section" id="monthSection">
+        <button class="month-toggle" id="monthToggle" aria-expanded="true" aria-controls="monthNav">
+          <span>Browse by month</span><span class="month-toggle-icon">⌄</span>
+        </button>
+        <nav class="side-nav month-list" id="monthNav"></nav>
+      </section>
 
       <div class="side-rule"></div>
       <div class="sidebar-bottom">
@@ -326,16 +338,13 @@
           <h1>2026 diary</h1>
           <div class="hero-line"></div>
           <p>A collection of thoughts, moments and memories from throughout the year — written by Lewis Christian.</p>
-        </div>
-
-        <aside class="type-card">
-          <div class="card-kicker">Using Instrument Serif</div>
-          <div class="type-sample">
-            <div class="type-aa">Aa</div>
-            <div class="alphabet">ABCDEFGHIJKLMNOPQRSTUVWXYZ<br>abcdefghijklmnopqrstuvwxyz<br>1234567890</div>
+          <div class="stats-strip" aria-label="2026 diary statistics">
+            <div class="stat-item"><span>entries listed</span><strong id="entryCount">0</strong></div>
+            <div class="stat-item"><span>published</span><strong id="publishedCount">0</strong></div>
+            <div class="stat-item"><span>removed</span><strong id="removedCount">0</strong></div>
+            <div class="stat-item"><span>latest month</span><strong>july</strong></div>
           </div>
-          <p>Instrument Serif gives the archive a softer editorial voice, while Inter keeps navigation and metadata clear.</p>
-        </aside>
+        </div>
       </section>
 
       <section class="content-grid">
@@ -347,22 +356,6 @@
           <div class="empty" id="emptyState">no entries found</div>
           <p class="footer-note">Every entry is a moment in time, captured forever. ✦</p>
         </div>
-
-        <aside class="side-cards">
-          <section class="quote-card">
-            <div class="quote-label"><span>❝</span> quote of the year</div>
-            <blockquote>“I am rooted, but I flow.”</blockquote>
-            <div class="quote-by">— Virginia Woolf</div>
-          </section>
-
-          <section class="stats-card">
-            <div class="stats-title">2026 so far</div>
-            <div class="stat"><span>entries listed</span><strong id="entryCount">0</strong></div>
-            <div class="stat"><span>published</span><strong id="publishedCount">0</strong></div>
-            <div class="stat"><span>removed</span><strong id="removedCount">0</strong></div>
-            <div class="stat"><span>latest month</span><strong>july</strong></div>
-          </section>
-        </aside>
       </section>
     </main>
   </div>
@@ -542,6 +535,13 @@
 
     document.getElementById('mobileMenu').addEventListener('click', () => document.body.classList.add('menu-open'));
     document.getElementById('mobileOverlay').addEventListener('click', () => document.body.classList.remove('menu-open'));
+
+    const monthSection = document.getElementById('monthSection');
+    const monthToggle = document.getElementById('monthToggle');
+    monthToggle.addEventListener('click', () => {
+      const collapsed = monthSection.classList.toggle('collapsed');
+      monthToggle.setAttribute('aria-expanded', String(!collapsed));
+    });
 
     buildMonthNav();
     render();
