@@ -711,6 +711,46 @@ dialog button.close{
   align-items:center;
 }
 
+
+/* Refined modal close button */
+.modal-close,
+.dialog-close,
+dialog .close,
+dialog button.close{
+  position:absolute !important;
+  top:18px !important;
+  right:18px !important;
+  left:auto !important;
+  width:40px !important;
+  height:40px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:1px solid var(--line) !important;
+  border-radius:999px !important;
+  background:rgba(255,255,255,.9) !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  font-size:1.4rem !important;
+  line-height:1 !important;
+  font-weight:300 !important;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.modal-close:hover,
+.dialog-close:hover,
+dialog .close:hover,
+dialog button.close:hover{
+  transform:translateY(-2px);
+  background:var(--paper) !important;
+  border-color:var(--accent);
+}
+.modal-header,
+.dialog-header{
+  position:relative;
+  padding-right:60px;
+}
+
 </style>
 </head>
 <body>
