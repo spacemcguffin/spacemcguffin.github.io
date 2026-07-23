@@ -4,754 +4,427 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f4efe7">
-  <title>2025 Diary Archive</title>
+  <meta name="color-scheme" content="light">
+
+  <!-- Change this for each entry -->
+  <title>old and new — 2023 diary</title>
+  <meta name="description" content="A diary entry from January 1, 2023.">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=Google+Sans+Flex:opsz,wght@6..144,300..700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --paper: #f4efe7;
-      --paper-2: #ebe3d7;
-      --ink: #1f2328;
+      --paper-deep: #e9dfd1;
+      --surface: #f8f4ed;
+      --ink: #202328;
       --muted: #716b63;
-      --line: rgba(31,35,40,.14);
-      --card: rgba(255,255,255,.55);
+      --line: rgba(32, 35, 40, .14);
       --accent: #d84f76;
-      --accent-2: #6c63d8;
-      --shadow: 0 20px 60px rgba(66,49,36,.10);
+      --accent-alt: #6c63d8;
+      --radius: 24px;
+      --page: min(1040px, calc(100% - 32px));
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
+      min-width: 320px;
+      min-height: 100vh;
       color: var(--ink);
       background:
-        radial-gradient(circle at 8% 4%, rgba(216,79,118,.12), transparent 30rem),
-        radial-gradient(circle at 95% 30%, rgba(108,99,216,.10), transparent 30rem),
+        radial-gradient(circle at 8% 4%, rgba(216, 79, 118, .12), transparent 30rem),
+        radial-gradient(circle at 95% 30%, rgba(108, 99, 216, .10), transparent 30rem),
         var(--paper);
       font-family: "Manrope", sans-serif;
-      min-height: 100vh;
     }
 
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      pointer-events: none;
-      opacity: .23;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
-      mix-blend-mode: multiply;
       z-index: 20;
+      pointer-events: none;
+      opacity: .22;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.88' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
     }
 
-    button, input { font: inherit; }
-    button { color: inherit; }
+    a { color: inherit; }
+    button { font: inherit; }
 
-    .shell {
-      width: min(1380px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 24px 0 80px;
-    }
-
-    .topbar {
+    .site-header {
+      width: var(--page);
+      margin-inline: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      padding: 14px 0 28px;
+      padding: 24px 0 18px;
       border-bottom: 1px solid var(--line);
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 12px;
-      font-family: "DM Mono", monospace;
-      font-size: .82rem;
+      color: inherit;
+      font: 500 .76rem/1 "DM Mono", monospace;
       letter-spacing: .08em;
+      text-decoration: none;
       text-transform: uppercase;
     }
 
-    .brand-dot {
+    .brand__mark {
       width: 12px;
       aspect-ratio: 1;
+      margin-right: 18px;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 18px 0 0 var(--accent-2);
-      margin-right: 18px;
+      box-shadow: 18px 0 0 var(--accent-alt);
     }
 
-    .issue {
+    .archive-link {
       color: var(--muted);
-      font-family: "DM Mono", monospace;
-      font-size: .75rem;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
-      gap: 48px;
-      padding: clamp(56px, 8vw, 116px) 0 64px;
-      align-items: end;
-    }
-
-    .kicker {
-      font-family: "DM Mono", monospace;
-      text-transform: uppercase;
-      letter-spacing: .15em;
-      font-size: .75rem;
-      color: var(--accent);
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 850px;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(4.1rem, 10vw, 9rem);
-      line-height: .78;
-      font-weight: 400;
-      letter-spacing: -.055em;
-    }
-
-    h1 em {
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    .hero-copy {
-      border-left: 1px solid var(--line);
-      padding-left: 28px;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: .96rem;
-    }
-
-    .hero-copy strong { color: var(--ink); }
-    .hero-copy p { margin: 0 0 18px; }
-
-    .stats {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 24px;
-    }
-
-    .stat {
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-family: "DM Mono", monospace;
-      font-size: .72rem;
-      color: var(--ink);
-      background: rgba(255,255,255,.28);
-    }
-
-    .archive {
-      display: grid;
-      grid-template-columns: 290px minmax(0, 1fr);
-      gap: 36px;
-      align-items: start;
-    }
-
-    .sidebar {
-      position: sticky;
-      top: 24px;
-      border-top: 1px solid var(--ink);
-      padding-top: 18px;
-    }
-
-    .sidebar-title {
-      margin: 0 0 14px;
-      font-family: "DM Mono", monospace;
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .search {
-      position: relative;
-      margin-bottom: 22px;
-    }
-
-    .search input {
-      width: 100%;
-      border: 0;
-      border-bottom: 1px solid var(--line);
-      background: transparent;
-      padding: 12px 28px 12px 0;
-      outline: none;
-      color: var(--ink);
-    }
-
-    .search input:focus { border-color: var(--accent); }
-    .search span {
-      position: absolute;
-      right: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--muted);
-    }
-
-    .dates {
-      display: grid;
-      gap: 2px;
-    }
-
-    .date-filter {
-      border: 0;
-      background: transparent;
-      text-align: left;
-      padding: 10px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      color: var(--muted);
-      transition: .2s ease;
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .date-filter:hover,
-    .date-filter.active {
-      color: var(--ink);
-      background: rgba(255,255,255,.5);
-    }
-
-    .date-filter.active::before {
-      content: "•";
-      color: var(--accent);
-      margin-right: 3px;
-    }
-
-    .clear {
-      margin-top: 20px;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      color: var(--accent);
-      cursor: pointer;
-      font-family: "DM Mono", monospace;
-      font-size: .72rem;
-      text-transform: uppercase;
+      font: .68rem/1 "DM Mono", monospace;
       letter-spacing: .08em;
-    }
-
-    .entries-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: baseline;
-      border-top: 1px solid var(--ink);
-      padding-top: 16px;
-      margin-bottom: 10px;
-    }
-
-    .entries-head h2 {
-      margin: 0;
-      font-family: "Instrument Serif", serif;
-      font-size: 2rem;
-      font-weight: 400;
-    }
-
-    #resultCount {
-      color: var(--muted);
-      font-family: "DM Mono", monospace;
-      font-size: .72rem;
-    }
-
-    .entry-list {
-      display: grid;
-    }
-
-    .entry {
-      display: grid;
-      grid-template-columns: 54px 150px minmax(0, 1fr) 42px;
-      gap: 22px;
-      align-items: center;
-      padding: 22px 4px;
-      border-bottom: 1px solid var(--line);
-      cursor: pointer;
-      transition: background .2s ease, padding .2s ease;
-      outline: none;
-    }
-
-    .entry:hover,
-    .entry:focus-visible {
-      background: rgba(255,255,255,.4);
-      padding-left: 14px;
-      padding-right: 14px;
-    }
-
-    .entry-number {
-      font-family: "Instrument Serif", serif;
-      font-style: italic;
-      font-size: 1.4rem;
-      color: var(--accent);
-    }
-
-    .entry-date {
-      color: var(--muted);
-      font-family: "DM Mono", monospace;
-      font-size: .7rem;
-      line-height: 1.5;
+      text-decoration: none;
       text-transform: uppercase;
     }
 
-    .entry-title {
-      margin: 0;
-      font-family: "Instrument Serif", serif;
-      font-size: clamp(1.45rem, 2.4vw, 2.3rem);
-      line-height: 1;
-      font-weight: 400;
-    }
+    .archive-link:hover { color: var(--accent); }
 
-    .entry-preview {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: .78rem;
-      white-space: nowrap;
+    .entry-page {
+      width: var(--page);
+      margin: 34px auto 70px;
       overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 65ch;
+      border: 1px solid rgba(32, 35, 40, .09);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 40px 110px rgba(24, 20, 18, .14);
     }
 
-    .entry-arrow {
-      border: 1px solid var(--line);
-      width: 38px;
-      aspect-ratio: 1;
-      border-radius: 50%;
+    .reader {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .reader__meta {
+      position: relative;
+      padding: 34px 25px;
+      border-right: 1px solid var(--line);
+      background: var(--paper-deep);
+    }
+
+    .reader__meta-inner {
+      position: sticky;
+      top: 28px;
+    }
+
+    .reader__number {
+      margin-bottom: 34px;
+      color: var(--accent);
+      font: italic 4.3rem/1 "Instrument Serif", serif;
+    }
+
+    .reader__group { margin-top: 21px; }
+
+    .reader__label {
+      display: block;
+      color: var(--muted);
+      font: .61rem/1.3 "DM Mono", monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .reader__value {
+      display: block;
+      margin-top: 6px;
+      font-size: .79rem;
+      line-height: 1.5;
+    }
+
+    .reader__main {
+      position: relative;
+      min-width: 0;
+      padding: clamp(44px, 7vw, 82px) clamp(27px, 7vw, 86px) 58px;
+    }
+
+    .reader__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
-      transition: .2s ease;
-    }
-
-    .entry:hover .entry-arrow {
-      transform: rotate(-12deg);
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .empty {
-      display: none;
-      padding: 60px 0;
-      color: var(--muted);
-      font-family: "Instrument Serif", serif;
-      font-size: 2rem;
-    }
-
-    dialog {
-      width: min(920px, calc(100% - 28px));
-      height: min(860px, calc(100dvh - 28px));
-      max-height: calc(100dvh - 28px);
-      border: 0;
-      border-radius: 24px;
       padding: 0;
-      background: #f8f4ed;
-      color: var(--ink);
-      box-shadow: 0 40px 110px rgba(24,20,18,.3);
-      overflow: hidden;
-    }
-
-    dialog::backdrop {
-      background: rgba(25,21,28,.58);
-      backdrop-filter: blur(10px);
-    }
-
-    .modal-inner {
-      display: grid;
-      grid-template-columns: 180px minmax(0, 1fr);
-      height: 100%;
-      min-height: 0;
-      overflow: hidden;
-    }
-
-    .modal-meta {
-      padding: 32px 24px;
-      background: var(--paper-2);
-      border-right: 1px solid var(--line);
-      min-height: 0;
-      overflow-y: auto;
-    }
-
-    .modal-num {
-      font-family: "Instrument Serif", serif;
-      color: var(--accent);
-      font-style: italic;
-      font-size: 4rem;
-      line-height: 1;
-      margin-bottom: 30px;
-    }
-
-    .meta-label {
-      display: block;
-      margin-top: 18px;
-      color: var(--muted);
-      font-family: "DM Mono", monospace;
-      font-size: .62rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .meta-value {
-      display: block;
-      margin-top: 5px;
-      font-size: .78rem;
-      line-height: 1.45;
-    }
-
-    .modal-main {
-      position: relative;
-      padding: 46px clamp(26px, 6vw, 72px) 56px;
-      overflow: hidden;
-      display:flex;
-      flex-direction:column;
-      min-height:0;
-    }
-
-    .close {
-      position: sticky;
-      top: 0;
-      float: right;
       border: 1px solid var(--line);
-      background: rgba(248,244,237,.88);
-      backdrop-filter: blur(8px);
-      width: 42px;
-      aspect-ratio: 1;
       border-radius: 50%;
-      cursor: pointer;
-      z-index: 2;
+      background: rgba(248, 244, 237, .88);
+      font-size: 1.35rem;
+      line-height: 1;
+      text-decoration: none;
+      backdrop-filter: blur(8px);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
     }
 
-    .modal-kicker {
+    .reader__close:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: #fffaf3;
+    }
+
+    .reader__kicker {
+      margin-bottom: 15px;
       color: var(--accent);
-      font-family: "DM Mono", monospace;
-      font-size: .68rem;
-      letter-spacing: .1em;
+      font: .67rem/1 "DM Mono", monospace;
+      letter-spacing: .11em;
       text-transform: uppercase;
-      margin-bottom: 14px;
     }
 
-    .modal-title {
-      margin: 0 46px 30px 0;
+    .reader__title {
+      max-width: 12ch;
+      margin: 0 48px 34px 0;
+      font: 400 clamp(3rem, 7vw, 6.2rem)/.88 "Instrument Serif", serif;
+      letter-spacing: -.045em;
+      overflow-wrap: anywhere;
+    }
+
+    .reader__body {
+      max-width: 690px;
+      font: clamp(1rem, 1.35vw, 1.1rem)/1.72 "Google Sans Flex", sans-serif;
+    }
+
+    .reader__body p { margin: 0 0 1.25em; }
+    .reader__body p:last-child { margin-bottom: 0; }
+    .reader__body em { color: #53505a; }
+    .reader__body strong { font-weight: 650; }
+    .reader__body blockquote {
+      margin: 1.8em 0;
+      padding: 2px 0 2px 22px;
+      border-left: 2px solid var(--accent);
+      color: #57525b;
       font-family: "Instrument Serif", serif;
-      font-size: clamp(2.15rem, 5.4vw, 4.6rem);
-      line-height: .92;
-      font-weight: 400;
-      letter-spacing: -.035em;
+      font-size: 1.35em;
+      line-height: 1.4;
     }
 
-    .modal-body {
-      font-family: "Google Sans Flex", sans-serif;
-      font-size: clamp(0.96rem, 1.35vw, 1.08rem);
-      line-height: 1.65;
-      white-space: pre-wrap;
-      overflow-y:auto;
-      flex:1;
-      min-height:0;
-      padding-right:18px;
-      scrollbar-width:thin;
-      scrollbar-color: var(--accent) rgba(0,0,0,.08);
-    }
-    .modal-body::-webkit-scrollbar{width:10px;}
-    .modal-body::-webkit-scrollbar-track{background:rgba(0,0,0,.06);border-radius:999px;}
-    .modal-body::-webkit-scrollbar-thumb{background:var(--accent);border-radius:999px;}
-
-    .modal-nav {
-      flex-shrink:0;
-      display: flex;
-      justify-content: space-between;
+    .reader__nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-top: 18px;
-      padding-top: 18px;
+      margin-top: 48px;
+      padding-top: 20px;
       border-top: 1px solid var(--line);
     }
 
-    .modal-nav button {
+    .reader__nav a {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 12px 18px;
       border: 1px solid var(--line);
-      background: transparent;
       border-radius: 999px;
-      padding: 10px 16px;
-      cursor: pointer;
+      background: rgba(255, 255, 255, .6);
+      font: .67rem/1.3 "DM Mono", monospace;
+      letter-spacing: .07em;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
     }
 
-    .modal-nav button:disabled {
-      opacity: .3;
-      cursor: default;
+    .reader__nav a:last-child { justify-content: flex-end; text-align: right; }
+
+    .reader__nav a:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      background: var(--paper);
     }
 
-    footer {
-      margin-top: 70px;
-      padding-top: 24px;
-      border-top: 1px solid var(--line);
+    .site-footer {
+      width: var(--page);
+      margin: 0 auto 34px;
       display: flex;
       justify-content: space-between;
       gap: 18px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
-      font-family: "DM Mono", monospace;
-      font-size: .68rem;
+      font: .65rem/1.5 "DM Mono", monospace;
+      text-transform: uppercase;
     }
 
-    @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; gap: 28px; }
-      .hero-copy { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
-      .archive { grid-template-columns: 1fr; }
-      .sidebar { position: static; }
-      .dates { display: flex; overflow-x: auto; padding-bottom: 8px; }
-      .date-filter { white-space: nowrap; }
-      .entry { grid-template-columns: 42px minmax(0, 1fr) 36px; gap: 14px; }
-      .entry-date { grid-column: 2; grid-row: 2; }
-      .entry-content { grid-column: 2; grid-row: 1; }
-      .entry-number { grid-row: 1 / 3; }
-      .entry-arrow { grid-column: 3; grid-row: 1 / 3; }
+    .back-to-top {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 30;
+      min-height: 34px;
+      padding: 7px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, .9);
+      box-shadow: 0 8px 28px rgba(31, 35, 40, .1);
+      font: .63rem/1 "DM Mono", monospace;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: .2s ease;
     }
 
-    @media (max-width: 620px) {
-      .shell { width: min(100% - 22px, 1380px); padding-top: 10px; }
-      .topbar { padding-bottom: 16px; }
-      .issue { display: none; }
-      h1 { font-size: clamp(3.8rem, 24vw, 6.8rem); }
-      .hero { padding-top: 54px; }
-      .entry-preview { max-width: 45vw; }
-      dialog {
-        height: calc(100dvh - 18px);
-        max-height: calc(100dvh - 18px);
-      }
-      .modal-inner {
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 720px) {
+      :root { --page: min(100% - 18px, 1040px); }
+
+      .site-header { padding-top: 16px; }
+      .archive-link span { display: none; }
+      .entry-page { margin-top: 18px; }
+
+      .reader {
         grid-template-columns: 1fr;
-        grid-template-rows: auto minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
       }
-      .modal-meta {
-        padding: 16px 20px;
+
+      .reader__meta {
+        padding: 15px 18px;
         border-right: 0;
         border-bottom: 1px solid var(--line);
+        overflow-x: auto;
+      }
+
+      .reader__meta-inner {
+        position: static;
         display: flex;
         align-items: center;
-        gap: 14px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        flex-shrink: 0;
+        gap: 18px;
+        min-width: max-content;
       }
-      .modal-num { font-size: 2.4rem; margin: 0 8px 0 0; }
-      .meta-label { display: none; }
-      .meta-value { margin: 0; white-space: nowrap; }
-      .modal-main {
-        padding: 24px 22px 22px;
-        min-height: 0;
-        overflow: hidden;
+
+      .reader__number {
+        margin: 0 5px 0 0;
+        font-size: 2.6rem;
       }
-      .modal-title {
-        margin-bottom: 18px;
-        font-size: clamp(2.15rem, 5.4vw, 4.6rem);
-      }
-      .modal-body {
-        overscroll-behavior: contain;
-        -webkit-overflow-scrolling: touch;
-      }
-      footer { flex-direction: column; }
+
+      .reader__group { margin: 0; }
+      .reader__label { display: none; }
+      .reader__value { margin: 0; white-space: nowrap; }
+
+      .reader__main { padding: 40px 22px 28px; }
+      .reader__close { top: 14px; right: 14px; width: 38px; height: 38px; }
+      .reader__title { margin-bottom: 24px; font-size: clamp(2.8rem, 16vw, 5rem); }
+      .reader__nav { grid-template-columns: 1fr; }
+      .reader__nav a:last-child { justify-content: flex-start; text-align: left; }
+      .site-footer { flex-direction: column; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      * { scroll-behavior: auto !important; transition: none !important; }
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <header class="topbar">
-      <div class="brand"><span class="brand-dot"></span>2025 Diary Archive</div>
-      <div class="issue">JANUARY—DECEMBER 2025 · 54 ENTRIES</div>
-    </header>
+  <header class="site-header">
+    <!-- Replace this href with the archive page URL -->
+    <a class="brand" href="2023-diary-archive.html">
+      <span class="brand__mark" aria-hidden="true"></span>
+      2023 diary archive
+    </a>
 
-    <section class="hero">
-      <div>
-        <div class="kicker">A year in diary entries</div>
-        <h1>The <em>2025</em> diary.</h1>
-      </div>
-      <div class="hero-copy">
-        <p><strong>Fifty-four entries across 2025.</strong> Dates are shown for every entry, with a time included only where one appears in the original document.</p>
-        <p>Choose an entry below to open it in the reading panel.</p>
-        <div class="stats">
-          <span class="stat">JAN—DEC 2025</span>
-          <span class="stat">54 ENTRIES</span>
-          <span class="stat">DIARY ARCHIVE</span>
+    <a class="archive-link" href="2023-diary-archive.html">← <span>back to all entries</span></a>
+  </header>
+
+  <main class="entry-page">
+    <article class="reader">
+      <aside class="reader__meta" aria-label="Entry information">
+        <div class="reader__meta-inner">
+          <!-- Change these values for each entry -->
+          <div class="reader__number">01</div>
+
+          <div class="reader__group">
+            <span class="reader__label">Date</span>
+            <span class="reader__value"><time datetime="2023-01-01">January 1, 2023</time></span>
+          </div>
+
+          <div class="reader__group">
+            <span class="reader__label">Time</span>
+            <span class="reader__value">2:00am</span>
+          </div>
+
+          <div class="reader__group">
+            <span class="reader__label">Written by</span>
+            <span class="reader__value">Lewis Christian</span>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section class="archive">
-      <aside class="sidebar">
-        <h2 class="sidebar-title">Browse the archive</h2>
-        <label class="search">
-          <input id="searchInput" type="search" placeholder="Search titles or text…" aria-label="Search entries">
-          <span>⌕</span>
-        </label>
-        <div class="dates" id="dateFilters"></div>
-        <button class="clear" id="clearFilters">Reset filters</button>
       </aside>
 
-      <div>
-        <div class="entries-head">
-          <h2>Entries</h2>
-          <span id="resultCount">20 shown</span>
-        </div>
-        <div class="entry-list" id="entryList"></div>
-        <div class="empty" id="emptyState">Nothing matched that search.</div>
-      </div>
-    </section>
+      <div class="reader__main">
+        <!-- This acts like the modal close button and returns to the archive -->
+        <a class="reader__close" href="2023-diary-archive.html" aria-label="Return to diary archive">×</a>
 
-    <footer>
-      <span>DIARYLAND BACKUP · ORIGINAL WORDING PRESERVED</span>
-      <span>DESIGNED AS A SINGLE-FILE ARCHIVE</span>
-    </footer>
+        <div class="reader__kicker">Diary entry</div>
+
+        <!-- Change the title for each entry -->
+        <h1 class="reader__title">old and new</h1>
+
+        <!-- Replace this article content for each entry -->
+        <div class="reader__body">
+          <p><em>2:00am.</em> This year’s London showcase was great, and Sam Ryder’s performance was joyous. One of the better showings of recent years. I sent out all my messages before the lines got busy. Remember those days. My favourite message came back from Lauren, who made my new year before it even began:</p>
+
+          <blockquote><strong>Lauren:</strong> Awww thanks Lewis! I’ve just been in the nursery faffing with all his new baby stuff and think I’m going to take the hat and socks from your little set as a going-home outfit! Happy New Year!</blockquote>
+
+          <p>I’ve also had a few conversations over the course of the evening, with Guy, Liam, Amy, and cousin Gem. I realise two of those people I’ve never mentioned in my diary before. Guy has been an internet friend since about 2011, and Liam is one of those people you speak to once in a blue moon because you sort of know each other but not massively so.</p>
+
+          <p>There was also a post on the front page of Reddit yesterday that said: <em>“I found my dad’s PlayStation 1 from when he was a kid.”</em></p>
+
+          <p>I am officially old.</p>
+        </div>
+
+        <nav class="reader__nav" aria-label="Entry navigation">
+          <!-- Replace these hrefs and labels with the adjacent entries -->
+          <a href="2022-entry-56.html">← Previous entry</a>
+          <a href="2023-entry-02.html">Next entry →</a>
+        </nav>
+      </div>
+    </article>
   </main>
 
-  <dialog id="entryDialog">
-    <div class="modal-inner">
-      <aside class="modal-meta">
-        <div class="modal-num" id="modalNum">01</div>
-        <div><span class="meta-label">Date</span><span class="meta-value" id="modalDate"></span></div>
-        <div id="modalTimeWrap"><span class="meta-label">Time</span><span class="meta-value" id="modalTime"></span></div>
-        <div><span class="meta-label">Status</span><span class="meta-value" id="modalVisibility"></span></div>
-      </aside>
-      <article class="modal-main">
-        <button class="close" id="closeDialog" aria-label="Close entry">×</button>
-        <div class="modal-kicker" id="modalKicker">Diary entry</div>
-        <h2 class="modal-title" id="modalTitle"></h2>
-        <div class="modal-body" id="modalBody"></div>
-        <nav class="modal-nav" aria-label="Entry navigation">
-          <button id="prevEntry">← Previous</button>
-          <button id="nextEntry">Next →</button>
-        </nav>
-      </article>
-    </div>
-  </dialog>
+  <footer class="site-footer">
+    <span>2023 diary · original wording preserved</span>
+    <span>written by Lewis Christian</span>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑ top</button>
 
   <script>
-    const entries = [{"num": 1, "title": "SNOWFALL", "filename": "2025-entry-01.html", "date": "January 5, 2025", "time": "", "visibility": "Private archive", "body": "The start of this year has been a blur, continuing on from the end of 2024. The last five days have consisted of frustrating managers, work irritation, blankets of snow, not enough hot chocolate, and days of illness. I don’t feel like I wrapped up my 2024 diary because I haven’t been in the writing mood since around Christmas, but hey.\n\nOn new year’s day, I considered making a kind of mood chart – 365 days, and each day would be coloured – green for a good day, red for a bad day, that sort of thing. But after a middling first day of 2025, everything collapsed into a pile of shit and I never bothered. Then I got sick – I shouldn’t have gone into work on Friday cos all it did was piss me off, and I felt myself getting more ill as the day went on. The only saving grace was seeing Kim, who allowed me an outlet to vent.\n\nIt snowed overnight quite heavily, so tomorrow will be bundles of fun if it continues or the slush turns into ice. On the one hand, it might mean a quieter day at work but, on the other hand, a quieter day at work might mean my manager is more of an irritant than usual. And with manager Gem off this coming week, all I can say is ~ ugh. Roll on weekend, and my week off.\n\nIt’s crazy that this year we’ll be closer to 2050 than 2000."}, {"num": 2, "title": "RESPAWN", "filename": "2025-entry-02.html", "date": "January 18, 2025", "time": "", "visibility": "Private archive", "body": "Sickness has mostly subsided. I took a week off work, went back for two days (shouldn’t have done), and I’ve been off this week on holiday. So I feel like I’ve had quite a good break from work, even though part of it wasn’t by choice. January has been a write-off, and it’s dragging. I don’t wanna go back to work.\n\nI haven’t had the urge to write, so apologies. Sometimes that happens. I’m just rotting away, days all blurring together, and I’ve nothing to share. I’m fine though. Just meandering through the month.\n\nI’ve been playing around with Midjourney AI again and I’ve given my website an aesthetic tweak using some images I’ve generated. Beyond that, I’ve just been watching livestreams, catching up on Eastenders, listening to music, and passively scrolling through the internet.\n\nNew year, new aesthetic. Ready for Spring. Craving sunlight and warmth."}, {"num": 3, "title": "VIBE CHECK", "filename": "2025-entry-03.html", "date": "January 20, 2025", "time": "9:40am", "visibility": "Private archive", "body": "9:40am. Vibes are so off today. Don’t wanna go back to work. It’s just a toxic, uninviting atmosphere. Plan is to keep myself to myself. I’m just so over everything. It’s Blue Monday – the most depressing day of the year.\n\nToday is also the second inauguration of the guy America finally got rid of four years ago – I have a morbid fascination and curiosity but I’m going to avoid as much of it as I can. The world already suffered four long years of his bullshit, and now we’ve got four more. Chat later.\n\nLater that day...\n\nHad a good day. I did fuck all at work, and gave zero fucks. It was a mostly manager-free affair, which is rare, so I took full advantage. Spent some time with Gem and Sophie, and did the bare minimum. Felt good.\n\nI just watched part of the inauguration. Very different vibe to the one four years ago. It’ll be a long four years for America, but thankfully we’ll be unaffected and at least here in the UK we just have a few idiots in charge, as opposed to convicted criminals. Goodnight world."}, {"num": 4, "title": "FALSE START", "filename": "2025-entry-04.html", "date": "January 24, 2025", "time": "", "visibility": "Private archive", "body": "Work is negatively affecting my mental health. I feel constantly on edge when I’m there. The relief of a day off is massive. I just wish I didn’t constantly feel like crap, cos I’ve spent this last week full of flu again. I’m ready to leave all this behind, and bring on warmer days. I feel so disassociated (dissociated?) and out of it. I normally kick off new years with optimism and a sense of renewal, but frustratingly not this time. It’s been like a false start, and I can’t get into gear.\n\nA trailer for the upcoming Season 7 blu-ray dropped earlier, which made me long for good Doctor Who again. (I rewatched The Age of Steel randomly a few days ago and loved it. I watched the opening moments of The Doctor Falls earlier, and loved that too). I wish everything hadn’t gone to shit."}, {"num": 5, "title": "SPACED OUT", "filename": "2025-entry-05.html", "date": "February 12, 2025", "time": "", "visibility": "Private archive", "body": "“I’m not 19 anymore; I'm 35, and sometimes I can’t work the phone.” \n– Alex Day, 2025\n\nI just watched Jason (vee3rdeye), NerdCubed and Alex Day (nerimon). Like I’ve just stepped back in time a few years. It’s been a lovely couple of hours. Now browsing a Doctor Who forum, listening to Peter Howell, and writing a diary entry. I had a bit of a clean up earlier so now I’m just shutting off the world in my tidy, cosy nostalgic bubble.\n\nI haven’t been as connected with my diary this year for some reason. January was just a struggle, and February has been a blur of work, sleep and feeling disconnected from reality."}, {"num": 6, "title": "CRAZY FROG", "filename": "2025-entry-06.html", "date": "February 22, 2025", "time": "", "visibility": "Private archive", "body": "Sophie doesn’t know Crazy Frog. She doesn’t know who Mr Blobby is, or what a rickroll is, or what trance music is. Context – Sophie is a girl I work with, and her birthday is 24th March. Specifically, she was born in 2006. I felt ancient earlier, talking to her about stuff we grew up with. She had to google what a VHS was, and she doesn’t know a time without the internet. YouTube is older than her. Wild.\n\nBumped into Lara and her mum towards the end of my shift, so we had a reminisce and a catch-up. We don’t talk anymore, cos life goes on, but it was nice to see her. It’s always like old times on the rare occasion I see her.\n\nToday was fresh. The sun was out, we had blue skies, and it felt somewhat warm for the first time this year. Spring is on the horizon, at last."}, {"num": 7, "title": "12,000 DAYS", "filename": "2025-entry-07.html", "date": "February 24, 2025", "time": "", "visibility": "Private archive", "body": "There have been 11,696 days since 16 February 1993. Out of curiosity, I looked up what day I’ll celebrate 12,000 days on Earth – and it turns out that, on Christmas day of this year, I will have been alive for exactly 12,000 days.\n\nI feel like I’ve been coasting the whole of this year so far. Nearly into March and everything has just been a grey blur. I finished last year in a haze of illness and stress, entered this year with more illness and stress, and I’ve just been somewhat detached ever since. I’m autopiloting my way through the days. I’m somehow finding the energy I need to plow through shifts at work, but I’m not achieving anything or building myself up. I’ve just plateaued. Winter depression is still kicking my ass, and it’s as though I’ve just allowed myself to succumb to it, and that’s my constant state of being now. The same beats, day in, day out.\n\nI messaged Zoe the other day explaining my state of being and how I’ve been feeling. She said maybe I’ve needed time to reset, switch off, detach myself. Then once spring and summer roll around, I can blossom into my best self again. Time will tell. My eyes are craving green grass, blue skies, and white clouds. In myself, I’m craving love and affection, of which I’m running on empty.\n\nI saw Gem today for the first time in a while, but the energy wasn’t like it usually is. Zoe gives me a boost of dopamine and indulges in hugs when I see her, but I don’t get to see her too often. I just feel at an arm’s length from everyone. It’s like I’ve got barriers in the way and I either don’t know how to get past them, or I don’t have the energy to. I dunno. Sorry for the less than positive entry today. I haven’t been inspired to write much lately, and I don’t even know what I have written across the last few entries. Just emptying my head on to the page, so hopefully I can pick up the pieces later.\n\nGoodnight world."}, {"num": 8, "title": "NEW SEASON", "filename": "2025-entry-08.html", "date": "March 1, 2025", "time": "01:51am", "visibility": "Private archive", "body": "01:51am. Spent some time with Kim at work yesterday, and she made me feel mushy and calm and happy. I felt a bit lost otherwise – I think I’m just ready for a break now. I’m a bit of an emotional wreck.\n\nDoctor Who will be dropping at 8am on Saturdays from April. Midnight releases were shit but at least I could get them out of the way and forget them by the time I woke up on Saturday mornings, but now I’m gunna have some weekends where I’m working from 9am so I’m gunna have to wait all day to play catch-up. I’m resigned to seeing spoilers while I work, but they might just help manage my expectations. I’m just ready to get this crap out of the way. It feels like an obligation. I’m trapped here. My Season 7 blu-ray set is due to arrive tomorrow so at least I’ll have some proper Doctor Who to enjoy, and I’ll finally get around to watching The Ambassadors of Death nearly thirteen whole years after I first got the DVD and just never got around to watching it.\n\nBought myself a little candle as a treat, and it smells like fresh fruit juice and summer. The fragrance is literally an encapsulation of summer. I love it. Been scoffing crème eggs and mini eggs too, and enjoying brief glimpses of Spring. We’re getting longer days, more blue skies, and even sunlight. I felt some of my seasonal depression leave my body the other day.\n\nTime to leave the grey behind."}, {"num": 9, "title": "HEAD ABOVE WATER", "filename": "2025-entry-09.html", "date": "March 9, 2025", "time": "", "visibility": "Private archive", "body": "I’ve fallen out of love with writing my diary. To be honest, I’ve fallen out of love with a lot of things. I’m just autopiloting my way through each day, then turning to food and music and scrollable shit for distraction. I occasionally toy with the idea of ‘filling in some of the blanks’, ie. writing about some older stuff in my life, stuff that happened throughout the blur of the 2010s, but I can never find myself motivated enough to bother. And, as I’ve said before, I also don’t want to dwell on my own past too much either. I could ramble about Hannah and Joedy and Lara and Lewis in his 20s, but what would be the point? I can’t be too precious and cling on to memories. The 2010s are a giant blur in general. Therein lies a toxic relationship, the origins of my anxiety, and probably problematic stuff that should remain buried.\n\nAnd as for the now – tbh there’s just not much going on. I live a simple life, and that’s okay. I go to work, socialise with people who share the same energy as me, and just aim to keep my head above water most days. I’m surviving, not quite thriving, but I’m still here and doing okay. So I’m not writing all that much, nor can I force myself to.\n\nCurrently listening to Head Above Water by Avril Lavigne."}, {"num": 10, "title": "CONTENTMENT", "filename": "2025-entry-10.html", "date": "March 17, 2025", "time": "", "visibility": "Private archive", "body": "Got home from work and felt so zen. I can’t articulate it well. I just felt so calm. No aches, no pains, no worries, no anxiety, no stress. Like a pleasant numbness. I wish I could experience it more. It just sorta happens sometimes and I don’t know why. I wish I could harness it and sink myself into the essence of it more.\n\nAnyway. Bedtime."}, {"num": 11, "title": "AND BREATHE", "filename": "2025-entry-11.html", "date": "March 18, 2025", "time": "2:02pm", "visibility": "Private archive", "body": "2:02pm. The calmness of yesterday has continued into today. I have things to keep me busy at work so that’s also helping. I’m living for these blue skies and longer days of sunlight. I’m sat out on my lunch and enjoying the relative calmness. Not a cloud in sight. Just peace. More of this please. The simple life.\n\n3:37pm. I’m ready for home now. Every shift I’m running on low battery around 4pm. I’ve got a podcast and some Eastenders to catch up on, so that’s my plan for later. Slight lie-in tomorrow so I can relax a bit more tonight. Feeling okay.\n\n10:58pm. Listening to Miss Melancholy by Evan Fong. Still calm, still breathing, still feeling okay."}, {"num": 12, "title": "DECADES APART", "filename": "2025-entry-12.html", "date": "March 24, 2025", "time": "", "visibility": "Private archive", "body": "Sophie’s birthday today, and she’d booked the day off work so I didn’t expect to see her, so it was a nice surprise when she turned up to say hello. Also got a squeeze off Zoe and Kim. Today was fairly chilled.\n\nWe’ve had some Doctor Who stuff drop over the last few days. We got a trailer and a poster earlier, and the episode titles were revealed a couple of days ago. Most of the previously leaked titles were spot-on, apart from one which changed (Five Miles Deep has become The Well – bit of a downgrade in my opinion). So we have eight new episodes ~ The Robot Revolution, Lux, The Well, Lucky Day, The Story & the Engine, The Interstellar Song Contest, Wish World, and The Reality War. Only three weeks to go.\n\nMy copy of The Savages arrived today too – I’ve fallen behind watching the 1960s animations, so let’s see if I bother with this one. There’s also a special DWM coming out soon to celebrate 20 years since the Ninth Doctor. Absolutely mental. I remember when 20 years ago meant The Two Doctors was airing. Now it means The End of the World was airing. I’m old."}, {"num": 13, "title": "FIFTEEN YEARS AGO", "filename": "2025-entry-13.html", "date": "April 4, 2025", "time": "01:36am", "visibility": "Private archive", "body": "01:36am. Didn’t plan on being awake so late tonight but I needed to loosen up and unwind after, frankly, a fucking horrible day at work. It’s been a crap week tbh.\n\nI reminisced about better times earlier, since it’s fifteen years since The Eleventh Hour aired, so I watched two episodes of Doctor Who Confidential – the one revealing Matt, and the full episode for The Eleventh Hour. Simpler times for the show, and simpler times in my life."}, {"num": 14, "title": "ECLIPSE", "filename": "2025-entry-14.html", "date": "April 6, 2025", "time": "", "visibility": "Private archive", "body": "Discovered Tom Grennan today. Listening to a bunch of his songs. Music is my therapy again. Unwinding after a long, quiet and crap weekend. I’ve extended my time off by a day, so I’ve only got tomorrow’s shift left before I can shut out the world again for a bit.\n\nI miss Sophie and Bron, and I feel sad."}, {"num": 15, "title": "FADING LIGHTS", "filename": "2025-entry-15.html", "date": "April 20, 2025", "time": "", "visibility": "Private archive", "body": "Doctor Who managed to hit 1.58m viewers overnight yesterday, not including anyone who may have watched on iPlayer during the day. It was beaten by Blankety Blank. Ouch. The sky keeps on caving inwards.\n\nI was at work all day and it didn’t bother me that I had to wait to watch the episode. If it weren’t for the weird loyalist in me and the fact I discuss the show with a couple of friends, I don’t think it’d even bother me if I waited until the finale and binge watched them all across an afternoon. It’s just not appointment viewing anymore. Worse, it’s usually shit. Propped up by RTD hailing himself a genius at every opportunity, as the last of the diehard fans cling on while everyone else has long abandoned the Titanic.\n\nThat said, Lux was an alright episode. Last week’s was pretty naff. This one was mostly fine. I enjoyed the animation aspects of it. Didn’t care for the meta fan wankery and, in typical RTD fashion, it all fell apart in the third act, but on the whole I enjoyed the ride. Just a shame that the bar is so low now, and it’s managed to sink even lower than even the old Chibnall era.\n\nOnly six more episodes to go. (And a spin-off nobody asked for.)"}, {"num": 16, "title": "LOVE FOR SOPHIE", "filename": "2025-entry-16.html", "date": "April 23, 2025", "time": "00:45am", "visibility": "Private archive", "body": "00:45am. Sophie was sacked last week, and it fucking sucks. She was given zero warning – just turned up for work and then immediately sent home, all because she’d had three absences over the space of six months. Both of us were just a bit dumbfounded. Her manager should’ve handled it way more professionally than she did (she’s a dick). Work is now decidedly more shit than ever, and I miss her hugely. We’ve been messaging each other throughout the week though, looking out for each other.\n\nShe’s spent some time with Bron too, and they were both messaging me earlier being absolutely adorable and lovely. Appreciate them both so much."}, {"num": 17, "title": "BROPHIE", "filename": "2025-entry-17.html", "date": "May 2, 2025", "time": "", "visibility": "Private archive", "body": "Hottest day of the year so far yesterday. The heatwave is not being kind to me.\n\nFinished work a little earlier though so I could meet up with Bron and Sophie. What started out as a plan to just get food and a drink turned into getting food and multiple drinks, and we just had the best time. It’s been a long time since I’ve just fully let my guard down, and I can’t do that with just anyone. It’s also the first time in over a year that I’ve been pissed (although I knew my limit this time and didn’t spend a whole half an hour throwing up on the way home). There were many laughs, cuddles and sexual innuendos.\n\nMuch needed. More needed. I miss them like mad. Brophie <3"}, {"num": 18, "title": "FIVE SHOTS", "filename": "2025-entry-18.html", "date": "May 4, 2025", "time": "", "visibility": "Private archive", "body": "Discovered a band called Moon Shot earlier and I’m blasting them through my headphones.\n\n• Fell apart this weekend. I’m still in tatters.\n\n• Brain is broken, head is mashed.\n\n• Work is a fucking chore lately.\n\n• My heart is in pieces. I feel lost, empty and aimless.\n\n• Grateful for Bronwyn."}, {"num": 19, "title": "ANGELS AND DEMONS", "filename": "2025-entry-19.html", "date": "May 6, 2025", "time": "1:11pm", "visibility": "Private archive", "body": "1:11pm. Make a wish. Sat out on my lunch break. Pretty much penniless because I’m waiting for a new bank card to arrive. Just soaking in the sun and breathing. It’s fairly peaceful.\n\nI’ve had a rough couple of days. Got into a proper state yesterday and bombarded Bron with messages. I’m a fucking idiot sometimes. Haven’t messaged her today. I was so exhausted after work yesterday that I pretty much got home, ate, then fell asleep. I woke up and just sobbed for an hour before I fell asleep again. I woke up this morning to a couple of replies from Sophie which made me smile. She’s so busy at the minute, but I can’t help but really fucking miss her. I hate feeling the way I do about her, and about everything else.\n\nGems also messaged me a little last night. Might see her later. I don’t want to talk though, cos I know I’ll just get myself upset and worked up again. Last thing I need in the middle of work.\n\nJust trying to keep myself distracted. Getting this off my chest and enjoying the slight breeze. I’m ready for another week off – only the rest of this week and next week to go. I’m just pushing myself through every day. The worst times are when I’m alone with my thoughts. My late shift yesterday was painful cos I had nothing to do and about two hours to pass, stood on my own, while I tried to just not break down. My head is just so noisy."}, {"num": 20, "title": "THE WORLD IS MINE", "filename": "2025-entry-20.html", "date": "May 7, 2025", "time": "00:42am", "visibility": "Private archive", "body": "00:42am. In a better headspace. It’s the dead of night and I’m blasting Moon Shot through my headphones. I didn’t listen to any music yesterday and tonight I realise how much I need it, for my sanity. I’m glad I stumbled across a few new songs and artists the other day – my previous cycle was getting a little stale. I feel re-energised now I have new stuff to listen to.\n\nBron and Soph sent me brief messages during the day which made me smile. I also spent my break with Gems and we went for a walk in the sun. She sorta forced me to talk a little, and it was okay – kept myself fairly guarded still, cos I didn’t wanna get upset. We ended up just having a little ramble and it was the pick me up I needed. I haven’t seen her properly in a while, and I adore that girl so much. She helps restore a semblance of normality and optimism in me, and I can never thank her enough.\n\nKept myself distracted after work too. Because I just fell asleep from exhaustion yesterday, I missed the fact there was a new Squid Game trailer – very much looking forward to the conclusion of that show next month! On top of that, out of nowhere, Rockstar Games released a new GTA VI trailer earlier which looked amazing. I won’t ever play it, probably, but I’m hyped for it because some of the YouTubers I enjoy will be pouring hours of gameplay into it and the videos will be incredible. Shame they pushed the release date back a whole year, but it looks to be worth the wait.\n\nStumbled across my old laptop earlier. Also stumbled across my laptop from before that one. It’s a beast – it’s bloody huge and hefty, and it made me smile. Might hold on to those relics forever.\n\n01:11am. The world’s asleep. The world is mine."}, {"num": 21, "title": "LOVE FOR BRON", "filename": "2025-entry-21.html", "date": "May 8, 2025", "time": "11:25pm", "visibility": "Private archive", "body": "11:25pm. I got to see Bron and Sophie again today. Rang them on my break and they stopped by work to say hello, so that made my day. Me and Bron have organised to get food when I finish work next Friday, so we’ve invited Sophie too. Be nice to see her again. I just want to spend more time with them both because they’re such kind, generous souls and they’re little bursts of joy that I so desperately need and appreciate in my life right now. Bron also gives the best cuddles. She’s fucking amazing."}, {"num": 22, "title": "BLONDE AND BLUE", "filename": "2025-entry-22.html", "date": "May 9, 2025", "time": "1:25pm", "visibility": "Private archive", "body": "1:25pm. Sat in the sun on my lunch eating Skittles like a big kid. I didn’t get much rest last night – I couldn’t wind down properly, then I woke up an hour after I’d settled to see a message from Bron. Ended up having a proper heart to heart with her into the early hours of the morning. She was upset but wasn’t opening up much, but I reassured her where and best I could, as she did with me. I opened up a bit too much tbh. On the one hand it’s nice to be able to have someone who you can fully open up to, but on the other hand it can also be terrifying. I probably told her a little too much. She doesn’t judge though and she’s a good listener. I really appreciate that girl more than she’ll ever know. She’s been through a lot too so we’re like two peas in a pod.\n\nWork is pretty chill today. Most of the managers seem to be off, so I’m just doing my own thing and keeping myself busy at my own pace. The sky is so blue and there’s a good breeze. I could do without traffic noise but hey. Getting as much sunlight as I can on my work breaks because it does me the world of good. I need to get out of my own head and this weather is the best antidote."}, {"num": 23, "title": "REUNION", "filename": "2025-entry-23.html", "date": "May 17, 2025", "time": "", "visibility": "Private archive", "body": "Been a while. Just focused on getting myself through this week. I’m in holiday mode now, even though I’ve got one more shift tomorrow before my full week off. Work has been pretty chill, in all fairness, and I’ve had time to just do my own thing and de-stress.\n\nSaw Bron yesterday. We met at Spoons once I’d finished work and had a catch-up. I got fairly tipsy, and we had a good laugh for a couple of hours. Had a bit of a heart-to-heart with her and gifted her a bracelet with a little sunflower on it. She’s my little sunflower. After Bron, I took a detour to Zoe’s and spent a few hours sat in her kitchen having a catch-up and putting the world to rights. She fed and watered me and looked after me. She’s a proper gem and it helped soften my post-drink comedown.\n\nI was in bed for midnight. Messaged Bron a few times to make sure she was okay. Woke up this morning at 6am which wasn’t planned, but I’m sorta glad I did. For the first time this season, I wanted to watch Doctor Who on its 8am launch so I spent a couple of hours waking up in order to do so. It was the Eurovision episode. It feels like a fever dream. Lots of noise, clunky dialogue, wafer-thin characters, gimmicks, and the usual nonsense. And then, out of nowhere, cameos from Carole Ann Ford as Susan, and then the Rani turned up. I’d known about that for months prior, due to leaks, and was quite bewildered that this brand new era was going there. But they did. They have. The Rani is back. Absolutely bizarre. I don’t have anything more to say.\n\nHaving a quiet, calm day. Eurovision and pizza later <3"}, {"num": 24, "title": "SANCTUARY. 🌻", "filename": "2025-entry-24.html", "date": "May 18, 2025", "time": "00:35am", "visibility": "Private archive", "body": "00:35am. Eurovision washed over me for the last few hours. I’m now listening to some bops and I feel like I could dance the night away in my own little bubble. The world’s asleep and I could just let everything out. Gotta sleep though and get through tomorrow. Then I can breathe and have a week off from the world. Missing Bron a little too, but hey. Deep breath. Goodnight x"}, {"num": 25, "title": "THE END IS NIGH", "filename": "2025-entry-25.html", "date": "May 17, 2025", "time": "", "visibility": "Private archive", "body": "RTD2. Brand new global relaunch. We’re 20 episodes deep.\n\nGranted it kicked off with the 60th but we’ve had: flashbacks to Series 4, Beep the Meep, Wrarth Warriors, a Davros sketch, Tales of the TARDIS, Mel Bush, the Toymaker, bigeneration, a reference to the Shalka Doctor, David Tennant and Catherine Tate, Kate Lethbridge Stewart and UNIT, Sutekh, Ruby watching Pyramids of Mars on an iPad, a sequel to Midnight, the Fugitive Doctor, ‘John Smith’, the Memory TARDIS, the Master in a tooth, endless mentions of old characters and concepts (Sarah Jane, Rose, River Song, Glitz, Adric, the Time War, the Pandorica, the Gods of Ragnarok, the Flux, Mavic Chen), nods to former companions, more clips than ever before of classic Who, references to being the last of the Time Lords, a flashback to Dimensions in Time (!), Susan Foreman, the Rani, another Rani, and now Omega.\n\nChrist on a hoverbike.\n\nWish World was a mess. I’m not surprised. I’m not even surprised we got a flashback to Dimensions in Time. Let’s get this era over with."}, {"num": 26, "title": "QUEEN OF HEARTS", "filename": "2025-entry-26.html", "date": "May 30, 2025", "time": "", "visibility": "Private archive", "body": "Spent today in numbness. Just realised I haven’t written anything in nearly two weeks. My mood’s been shit, the weather’s been shit, and work’s been shit. I met up with Bron and Soph yesterday after work – had food, a few drinks, gave Soph her gift, and gave Bron some crystals. She’s been through the wringer lately so it was nice to just be there for her, ramble with her, and give her a cuddle or two. She suggested meeting today but neither of us were in the mood, but I’m hopeful we can meet up next week and just go for a walk, and just spend some time together.\n\nI stopped at Zoe’s again on my way home yesterday – ended up spending a few hours with her while I sobered up and she got progressively more drunk. She fed me chicken wraps and we put the world to rights. I love that girl.\n\nTomorrow is the shit finale of Doctor Who, and I’m just wishing away my life again until my next day off. Great stuff."}, {"num": 27, "title": "CLUSTERFUCK", "filename": "2025-entry-27.html", "date": "May 31, 2025", "time": "", "visibility": "Private archive", "body": "What the fuck was that.\n\nOmega showed up as a giant CGI baby skull thing and just ate the Rani after ten minutes. The other Rani just fucked off. Cut to endless exposition in that bland fucking UNIT set. More fucking flashbacks to old stuff. Characters doing absolutely fuck all. Susan didn’t even show up, so we’ve had two years of Susan-baiting for nothing. Every single leak came true. Jodie Whittaker showed up and made me genuinely nostalgic for her era (how the fuck), and then Ncuti Gatwa regenerated into Billie Piper. (Suspiciously she isn’t credited as the Doctor, so more RTD gimmicks ahead.) It’s hilariously shit. This makes The Timeless Children look competent, focused and good. I actually felt joy seeing Jodie, which is a feat, and she became the highlight in Gatwa’s final episode. Like, what the fuck.\n\nHow the fuck did we get here? Then there was a trailer for a spin-off that literally nobody cares about.\n\nI read my entry from September 2021 earlier where I was fanboying over the return of RTD. The temptation to quietly delete it, but I won’t because the journey from that evening to this one is… quite something.\n\n1 March 2020 and 31 May 2025. Dates that will live in Doctor Who history. And not for good reason. For perspective, Tennant was Dr Who just 18 months ago. Now, Billie Piper is Dr Who (seemingly). Desperate. Slop. As described by someone on Twitter, this show has become a slop ouroboros."}, {"num": 28, "title": "SHATTERED", "filename": "2025-entry-28.html", "date": "June 6, 2025", "time": "", "visibility": "Private archive", "body": "Had to endure a disgusting 1-9pm shift at work yesterday. I also had a complete breakdown on manager Gem, twice. This week can just get in the bin.\n\nOne of our lower level managers is leaving, which came as a shock to everyone, and her last day is next week. The signage for sale throughout most of the store is, apparently, wrong and instead of appreciation for the hours I’ve put into it all (alongside Gem), we just got a barrage of criticism and shit – when, actually, it’s the fault of our head office marketing team and piss poor communication. I flat out said to Gem yesterday they can fuck off and change it themselves if they want, cos I’m not redoing work multiple times over. I got so stressed that I ended up getting today off, giving me a three-day weekend to just chill the fuck out and get into a better headspace.\n\nI had a little catch-up with my other Gem downstairs too – haven’t seen her properly in ages so it was nice to just spend part of my break with her and ramble. Once I finished work and everyone in the house went to bed, I just stayed up vibing into the early hours of the morning. A few messages with Bron, and discovering new music. I needed that. I’ve felt somewhat calmer since."}, {"num": 29, "title": "DEAR BRONWYN", "filename": "2025-entry-29.html", "date": "June 23, 2025", "time": "", "visibility": "Private archive", "body": "If you’re ever sad or alone or you can’t sleep, look up to the night sky. Look for the brightest star. If there are no stars, look to the moon. Because I do. Every night I look to the stars and find the brightest one. I’ll think of you. I’ll wish upon that star. So if you find it too, that’s ours. That’s us. Me and you. Always together, never alone.\n\nAim high. Follow the sun, and radiate warmth. You are my lil’ sunflower. Pretty and bright and you bring a smile. It’s in your nature. You have a beautiful soul.\n\nEvery time I see you, I feel the same wonder and joy I felt the first time we spoke. You breathe life into me the way nobody else does. You care in ways others don’t. You have my heart and I trust you with it the way I can’t with anyone else. You are so precious.\n\nWhen we separate I think it hurts because I feel our souls are connected. I never once take time with you for granted. I’m drawn to you. I could listen to you for hours. I could sit in silence with you for hours and still feel comfortable. Your soul completes mine.\n\nThe world will always turn, with or without us. But not having you makes everything so much heavier. My heart, my soul. Heavier, yet emptier."}, {"num": 30, "title": "LONE WOLF", "filename": "2025-entry-30.html", "date": "June 30, 2025", "time": "", "visibility": "Private archive", "body": "Spent a couple of hours with Bron the other day. Could’ve stayed with her longer but didn’t want to end up having a messy Friday night, and I wanted to get home to enjoy my day off after a shit week at work.\n\nPlus Squid Game 3 was out and I wanted to watch it – bit of a let-down. It dropped the ball completely. I sort of enjoyed watching it, but it fell apart after the second episode and never recovered. Ah well. Season 1 will always be iconic, and Season 2 was pretty great too.\n\nJune has been pretty shit. I’m just worn out by work, as we’re endlessly understaffed and our manager is taking on more and more – and then just passing it down the line for us to deal with, as she fucks off and doesn’t really help. I’m kinda over it, largely mentally checked out, and I’ll be annoyed if they don’t hire someone extra soon.\n\nHeatwaves have also worn me down, and I’m just realising all over again that the only person you can ever truly rely on is yourself. People are shit. Everyone just uses each other when it suits them and their interests, and I’m just over everything and everyone at the mo’.\n\nI’m just tired. I was longing for sun and warmth but now I just sorta want autumnal vibes, darker evenings, and a season of hibernation instead."}, {"num": 31, "title": "MIDPOINT", "filename": "2025-entry-31.html", "date": "July 3, 2025", "time": "", "visibility": "Private archive", "body": "Yesterday marked the exact midpoint between the year 2000 and the year 2050.\n\nToday marked the release of the Season 13 Collection blu-ray trailer. Watched it when I got home from work and loved it. Then rewatched it and scrolled online, realising that some of the upscaling looks iffy. Faces look quite rubbery and waxy, and some detail has been lost. People started noticing similar upscale issues on the last couple of sets too. It’s a shame – they’re clearly using some AI along the way and it’s leading to some questionable results. I’ve still preordered the set, and some of the shots look amazing, but hmm. I’m glad I still have all the old DVD-quality releases backed up on a hard-drive."}, {"num": 32, "title": "MOMENTS OF CALM", "filename": "2025-entry-32.html", "date": "July 16, 2025", "time": "", "visibility": "Private archive", "body": "In the midst of my week off work and doing absolutely nothing.\n\nRecharging my batteries. Only messaging people who message me first. Zoe and Bron have been angels. Tinkering with my website, and just letting the real world turn past me. Having cuddles with Ellie, and rambles with thewinekone (one of my earliest YouTube memories is watching him back in 2007 – surreal to think we casually chat online now, in between his livestreams). Eating too many biscuits and too much chocolate. Passively scrolling on Twitter and racking up my amount of total liked tweets to 58,000. Casting news about the upcoming Harry Potter TV show is coming thick and fast, and is supposedly due to start airing in 2027. (Harry Potter and the Half-Blood Prince was released twenty years ago today – my favourite book of the series.) Big Finish posted a trailer for the upcoming Ninth Doctor and Rose audio, and it was meh. Doctor Who is quiet, and I’m enjoying the peace.\n\nJust little things."}, {"num": 33, "title": "DAY GOES DARK", "filename": "2025-entry-33.html", "date": "July 19, 2025", "time": "00:15am", "visibility": "Private archive", "body": "00:15am. Clicked on Patreon earlier to find Alex Day’s profile gone. No warning, no reason, just gone.\n\nGutted, cos I always loved his videos and the fact we could continue to support him online in exchange for the occasional new video and the relisting of an old one. I’ve got a couple of my favourite nerimon videos saved but everything’s just gone. In an instant. Part of me doesn’t blame him – no matter what led him to that decision (assuming he took it down himself), I can totally respect wanting to lead a much more private life, away from any internet goblins and prying eyes."}, {"num": 34, "title": "BEAUTY AND THE BEAST", "filename": "2025-entry-34.html", "date": "July 25, 2025", "time": "11:18pm", "visibility": "Private archive", "body": "11:18pm. Spent a few hours with Zoe yesterday. Ended up rambling together for a few hours, along with a couple of drinks and KFC.\n\nI spent today in my own little bubble, listening to music and watching the new episode of South Park. Matt and Trey are back firing on all cylinders. Sermon on the ‘Mount was the best episode in years. I’m looking forward to the next few weeks’ worth of chaos."}, {"num": 35, "title": "AUTUMN READY", "filename": "2025-entry-35.html", "date": "August 3, 2025", "time": "", "visibility": "Private archive", "body": "Not quite sure how it’s August now, but here we are. I’ve spent my weekend terminally online, tweaking code, building a Wiki on my little corner of the internet. No interruptions, no real world noise; just music and my own mind. I’m at a stage where I’m really happy with the design – I think. Good old MySpace in the early 2000s enabled me to sort of learn basic HTML and CSS, and I’m forever grateful. I’ve done a lot of bodging, scrambling, hitting ‘inspect element’ and praying stuff works, and it’s paid off.\n\nI’m ready for the world to become autumnal. Give me rain and falling leaves, and let’s wind down the end of the year. This whole year has sort of just washed over me, as have much of the last five years to be honest. It’s all a big blur. Just remaining grateful for the friends who have kept me going through it all.\n\nThere have been times I considered giving up my diary this year. I’ve just felt a huge wave of apathy towards a lot of things. It’s the depression numbing all my senses and feelings, and my brain being stupid. I’m glad I’ve stuck it out. I just need to remind myself that I can go days and weeks without writing, and it’s fine. (Ironically, due to me taking an axe to some previous diaries, this year’s currently has the highest entry count.) I just need to not think too much about this old thing – it’s here for me as and when I need it, as and when I remember.\n\nLooking forward to new South Park this week. Last week was a ‘dark week’ with no episode, and it was a bummer coming after the incredible season opener. Hoping it stays weekly now, so it’s 20 minutes of joy to look forward to every week."}, {"num": 36, "title": "WORK DAZE", "filename": "2025-entry-36.html", "date": "August 7, 2025", "time": "08:36am", "visibility": "Private archive", "body": "08:36am. New South Park when I get home. Emphasis on when I get home. I’m already over today. I feel sick and tired and generally bleh. Just let me go home, get comfy, stuff my face with biscuits, and watch South Park. I’m also catching up on the last series of Taskmaster here and there, and that’s been somewhat of a return to form.\n\nI’m just hating the world and hating work at the mo’. I took myself off to one of the storage rooms yesterday, sat on the floor, organised some stuff, and just tried to chill. It’s a secluded room, locked away, and it was good to just escape the noise of management and the shop floor for a few minutes.\n\nNot sure if I’m just having a bad week or if the seasonal depression is rearing its head, or both. Bron’s being inconsistent, Zoe’s got a lot on, and Gem’s off, so I feel a bit out of it with nowhere to go. I just gotta force myself through the next eight hours somehow and then shut out the world for a while.\n\n404."}, {"num": 37, "title": "August 9", "filename": "2025-entry-37.html", "date": "August 9, 2025", "time": "4:04pm", "visibility": "Private archive", "body": "4:04pm. Tired. Working weekends has become a chore – I’m on my own and my manager does fuck all. Counting down the hours til 8pm.\n\nI’ve been recreating school friends as South Park characters, building my website, designing my Wiki, and zoning out from the world in my time off. It’s slowly but surely becoming Autumn, and I’m ready for those vibes. Wintery weather outside while I’m inside comfy and cosy, please.\n\nI think I’ve already reached the point in the year where I’m just ready for it to end. The next few months will be a build up to Christmas and I just cannot be arsed. Feeling thankful for friends keeping me going, and for South Park and Taskmaster keeping me entertained.\n\n4:42pm. I manifested wind and rain, and got caught in it on my break. I knew it felt like the calm before the storm, and then the heavens opened out of nowhere. Back in work now – weary sighs abound."}, {"num": 38, "title": "ENERGY SHIFT", "filename": "2025-entry-38.html", "date": "August 10, 2025", "time": "9:33am", "visibility": "Private archive", "body": "9:33am. I am, once again, tired. Quelle surprise. Sundays are the worst. Another day of my manager saying ‘we have lots to do’ – in other words, she’s gunna make me run around like a dickhead while she vanishes. I can’t be arsed dealing with this.\n\nLast week, Bron messaged to say we would one million percent meet up during the week. We didn’t meet up this week. I messaged Kim and got no reply back either. I’m done with flaky people. I’m tired of putting myself out there and giving my energy to people who don't reciprocate or care."}, {"num": 39, "title": "August 11", "filename": "2025-entry-39.html", "date": "August 11, 2025", "time": "4:33pm", "visibility": "Private archive", "body": "4:33pm. Enduring a random heatwave in the middle of August. The last gasp of summer. It’s humid and muggy, and today’s shift has been horrible. Both Gems are off for the week and I’m just existing; counting the hours at work til my next day off."}, {"num": 40, "title": "OVERCAST SKIES", "filename": "2025-entry-40.html", "date": "August 14, 2025", "time": "4:55pm", "visibility": "Private archive", "body": "4:55pm. It’s too bloody warm. Another summer hangover. August is Autumn in my brain. Give me clouds and overcast skies.\n\nThe world’s gone to absolute shit and I feel so numb about everything. I’ve lost my passions, my ability to write, and my want to even give a shit. I sort of autopilot my way through every day now, and it sucks. I feel like I’ll just push through it but maybe everything stays grey and dull forever now. No idea.\n\nI miss Gem and Zoe and Freya and Sophie and Bron. All my gals. They’ve all slowly slipped away, moved on, and I miss the joy they gave me."}, {"num": 41, "title": "SEASONS OF CHANGE", "filename": "2025-entry-41.html", "date": "August 20, 2025", "time": "4:36pm", "visibility": "Private archive", "body": "4:36pm. Finally had some work holidays approved after digging my heels in for the past month and a half. I might even fall lucky and get the first full week of January off but we’ll see. It’s been a long week this week for some reason.\n\nLowered my hopes for the next South Park episode cos it looks like it’ll be based around Towelie. I’ve also been slowly catching up on the last series of Taskmaster – it’s been nice to discover it at my own pace, and it’s become a treat to myself when I need a laugh.\n\nJust sat out on my break getting some fresh air. I can feel the seasons gradually changing and this transition might be my favourite. Glimpses of sun, with cloudy overcast skies. It’s not warm but it’s not cold. There’s no rain, and the wind is around but bearable. More of this please."}, {"num": 42, "title": "August 21", "filename": "2025-entry-42.html", "date": "August 21, 2025", "time": "1:33pm", "visibility": "Private archive", "body": "1:33pm. New South Park is waiting for me after my shift. I’ve seen a spoiler but hey – my lowered expectation is slightly higher now, cos it’s a good spoiler.\n\nDoctor Who’s crap spin off that nobody asked for (nor cares about) is being pushed back until 2026, presumably to plug the gap as there’ll be no Doctor Who for a while. All that’s done is made me even less inclined to watch it. It’s been sat on a shelf for months already, and one of the actors said it’ll involve thrilling stuff such as climate change. It just sounds absolutely naff and who cares. I’m enjoying the new Doctor Who wilderness. It’s peaceful."}, {"num": 43, "title": "IN BETWEEN THE RAIN", "filename": "2025-entry-43.html", "date": "September 18, 2025", "time": "00:25am", "visibility": "Private archive", "body": "00:25am. We had the briefest burst of sunlight today and I enjoyed every second of it. I’m all for autumnal weather and rain, but I still cherish warmth and sunlight when the clouds allow for it.\n\nLizzie is back at work, so it’s good to have her back around. Spent some time with Kim and Zoe today too. Just sort of mooching along at work – the Christmas prep has begun, and I’m already the Scrooge of work. There’s a cushion that says ‘wake me up when Christmas is over’ and we were joking about fashioning the cover into a cape for me to wear. Less than a hundred days to go.\n\nNo new South Park this week. Boo."}, {"num": 44, "title": "HEART TO HEARTS", "filename": "2025-entry-44.html", "date": "October 25, 2025", "time": "", "visibility": "Private archive", "body": "I’ve had a bit of a whirlwind week with my emotions all over the place. I spent the best part of last weekend having a full breakdown at work – they practically paid me a full shift just to cry and lose my head. Manager Gem took me aside and we spent a good hour and a half outside just talking. Bless her. She really looked after me and just listened to me ramble all the depresso thoughts out of my head. Other people I work with noticed I wasn’t myself and everyone’s been nice to me, while I’ve just focused getting through the days.\n\nBeen off work since Wednesday for a mini break, and I have another week off almost as soon as I’m back. But then that’s it until January, so that’ll be the real test of my mental health and work. Mid-November right through Black Friday, up to Christmas and the Boxing Day noise. I’m so ready to skip ahead and leave 2025 behind.\n\nI spent a couple of hours with Zoe at hers the other morning and felt better for it. We just put the world to rights and it set us both up for the day ahead. I really appreciate Zoe – she’s the only friend who welcomes me into her home anytime I need an escape, and listening to her helps me put everything back into perspective."}, {"num": 45, "title": "WAKE ME UP WHEN DECEMBER ENDS", "filename": "2025-entry-45.html", "date": "November 1, 2025", "time": "00:18am", "visibility": "Private archive", "body": "00:18am. Spooky season is over. Hibernation, or what should be, has begun. Dark mornings, darker nights, winter chills. It’s at this point I wish I could go to sleep and wake up in January. I’ve just finished watching the new series of Educating Yorkshire (one of my favourite documentary series) and now I’m just listening to a couple of songs before bed.\n\nI should have a new Halloween episode of South Park to watch after work tomorrow, and I’m gunna just try and get through the weekend as smoothly as I can before my few days off next week.\n\nWake me up when December ends."}, {"num": 46, "title": "WEIGHT OF THE WORLD", "filename": "2025-entry-46.html", "date": "November 11, 2025", "time": "11:30pm", "visibility": "Private archive", "body": "11:30pm. Anxiety has a hold of me tonight. Just burst out into tears and the bottle has overspilled again. I’m just tired. I’m tired of giving my energy to those who don’t reciprocate, tired of feeling undervalued, tired of feeling weighted down by the world. I didn’t wanna do a sad entry but here we are. Sometimes I just need a release – to just let everything out. I’m just blasting heavy Rammstein through my headphones and trying to zone the world out.\n\nBriefly saw Gem today after not seeing her for a while, and she made me smile. Also been spending a bit more time alongside manager Gem; she’s been so good to me lately. I’m just dreading the next month and a half – the build up to Christmas, the late nights, the crowds and people we get being horrible at work. I just want to hibernate and hide away for the winter."}, {"num": 47, "title": "SO LONG, AND THANKS FOR ALL THE FISH", "filename": "2025-entry-47.html", "date": "December 18, 2025", "time": "", "visibility": "Private archive", "body": "It’s been a few weeks since my last diary entry. I also took the scissors to 2025 and trimmed out some of the fat.\n\nI’ve not felt all that inspired over the last month, mostly due to dealing with a winter flu which floored me for a couple of weeks (had to get my first-ever sick note), and December itself has just been pretty meh. Currently enjoying a handful of days off work before the chaos of Christmas week, and blasting Poets of the Fall through my headphones. (That band is my find of the year, and they may well be my new favourite band, full stop.)\n\nI’ve done my Christmas shopping, albeit all quite uninspired. Just got little bits for people – haven’t felt up to it again this year. Just got wrapping to do. I’m feeling largely non-festive, probably due to having been surrounded by it at work for weeks on end, and I’m just ready for the year to be over. I reach this point towards the end of every year. Everything just feels cold and miserable and grey. Next year may not be much better, but at least we’ll be heading towards sunshine and warmth and summer again.\n\nThe latest season of South Park wrapped up the other day, and I largely enjoyed it. It’s been quite a weird little year of the show, but it’s provided some fun escapism over the last few months, and the finale was comfy. Beside that, I haven’t watched much else. There’s the Doctor Who spin-off, which I’ve jokingly dubbed The Fish Programme, but that’s nearly over (thankfully) – the BBC decided to get it all over and done with quickly by double-banking episodes, so they shat out five episodes across three weeks.\n\nMini review of The Fish Programme – the show doesn’t know what it wants to be, as it flips between multiple genres and premises. Characters are wafer-thin and cardboard. Dialogue ranges between wanky nonsense and laughable first-draft amateur hour. No wonder Disney probably hate it, and the BBC want it out of the way. The VFX for the Sea Devil base looked nice, for all of its two scenes on screen. But it’s wishy washy rubbish, and we’re doomed if Pete McTighe ever gets offered the role of Doctor Who showrunner. Kate Stewart is still shit."}, {"num": 48, "title": "THAT’S A WRAP", "filename": "2025-entry-48.html", "date": "December 21, 2025", "time": "", "visibility": "Private archive", "body": "Two utterly shit finales in a single calendar year – that’s a new record for RTD. The Fish Programme ended earlier, and thank god they didn’t string it out over five weeks. Lots of drivel, then the main character magically turned into a fish man and the final scene was Kate Stewart pointing a gun at some random bloke as she shouted at him to pick up litter. No wonder Disney were embarrassed. Hopefully now we only have one more RTD episode left, next Christmas.\n\nIn other news, Amazon to the rescue. I needed a couple of extra Christmas gifts, so they should arrive tomorrow.\n\nI’m hoping the next few days at work are pretty chill. I suspect I’ll have a few jobs to keep me busy, cos I just want it to be Thursday now. Not even because it’s Christmas – just for another day off. My mental health skyrockets when I’m not in that building. ‘Tis also the shortest day of the year today, so from now on we’re heading towards longer days and summer. I’m ready for warmth."}, {"num": 49, "title": "SHITMAS", "filename": "2025-entry-49.html", "date": "December 23, 2025", "time": "", "visibility": "Private archive", "body": "Manager thoroughly pissed me off today. I’m glad she’s leaving in a few weeks. If she wasn’t, I’d be seriously looking for something else. Christmas has become Shitmas because of work. Saw manager Gem briefly and gave her a couple of gifts, and it was nice to just breathe for a minute. Tomorrow should, in theory, be quite a fun Christmas Eve but, thanks to my absolute shit manager, I’ve got a job that should’ve taken about two hours now taking me two days. Mad doesn’t cover it.\n\nANYWAY.\n\nI’m gunna go see Zoe and Gemma downstairs tomorrow, to give them gifts and say a brief hello. I haven’t seen either of them properly for a few weeks and I miss ‘em. I’ve got Zoe a couple of witchy candles, hand creams and a Scorpio-themed notebook, and Gemma’s got a candle, some little hand creams and pink gin. Just little cutesy things. I got manager Gem a fancy notebook and some chocolates. And I gave Kim a little AU vodka gift set the other day. I’ve felt less miserable this week due to giving gifts. That’s been nice."}, {"num": 50, "title": "ZOE AND GEM", "filename": "2025-entry-50.html", "date": "Christmas Eve, 2025", "time": "", "visibility": "Private archive", "body": "Nothing like a shit Christmas Eve at work to get you in the festive spirit. Finished at 4pm, but mentally checked out at 1pm. The next few days are going to be a fucking drag. Get me to New Year already.\n\nDid get to go and see Zoe and Gemma though. Few cuddles, bit of a catch up, and gave them both their gifts. Zoe loved the candle I got her, said she’d open the rest tomorrow, and said I was the best at buying gifts. Gem said she’ll open hers tomorrow, and gave the most adorable cuddle. Bloody love them both.\n\nGot home and finished wrapping stuff for the family. New headphones arrived, which is a godsend after two days of broken headphones – I’ve got my peace, my privacy and my music back."}, {"num": 51, "title": "JUST ANOTHER DAY", "filename": "2025-entry-51.html", "date": "Christmas Day, 2025", "time": "", "visibility": "Private archive", "body": "Christmas has come and gone. It’s almost midnight. Made a conscious decision not to message anyone first, and only Zoe bothered messaging me. She told me she loved her gifts, which was great. Appreciate her so much. Mum basically got me a whole new wardrobe of black and grey t-shirts, which were very much appreciated, as well as a new coat, vouchers, money and chocolate.\n\nEastenders was shit. Doctor Who wasn’t on (so, every cloud). And there’s just been absolutely nothing worth bothering with. I’ve not bothered much with Christmas music this year, nor have I watched anything festive. Christmas this year hasn’t felt like Christmas. I’m kinda glad it’s over. Now I just want the rest of the week to be over. I’m ready for new year, and to leave the 2025 trainwreck behind."}, {"num": 52, "title": "SOS", "filename": "2025-entry-52.html", "date": "December 29, 2025", "time": "", "visibility": "Private archive", "body": "Just survived day four of five, of the post-Christmas frenzy at work. Yesterday was an absolute shower of shit, and probably the worst shift of 2025. It didn’t help that it was a Sunday too (which are always shit), but damn. Today was a slog too, as I ended up in the coffee shop for three hours – never again. But the crap is mostly out of the way – one more shift to go, and then five days off over new year.\n\nI saw the lovely Gemma today, and I’m hopefully going to visit Zoe over the next couple of days for a brief catch up. Those two, along with manager Gem, are keeping me going.\n\nNothing else to say. Doesn’t feel like it was Christmas a few days ago. Winter is just cold and dark and miserable. One more day to get through."}, {"num": 53, "title": "LIFT MY SPIRIT", "filename": "2025-entry-53.html", "date": "New Year’s Eve, 2025", "time": "", "visibility": "Private archive", "body": "Below is a list of the ten most recently added songs to my main Spotify playlist. Poets of the Fall really got me through the back-end of this year, and quickly became one of my favourite bands.\n\n• Hanging Out In My Head – The Strumbellas\n\n• One Of Us Will Be Next – Lord of the Lost\n\n• Lift – Poets of the Fall\n\n• War – Poets of the Fall\n\n• Chasing Echoes – Poets of the Fall\n\n• Lust for Life – Poets of the Fall\n\n• Revelations – Poets of the Fall\n\n• Requiem for My Harlequin – Poets of the Fall\n\n• My Dark Disquiet – Poets of the Fall\n\n• Carnival of Rust – Poets of the Fall"}, {"num": 54, "title": "FINAL WORDS", "filename": "2025-entry-54.html", "date": "New Year’s Eve, 2025", "time": "", "visibility": "Private archive", "body": "I ended 2024 feeling sick, with every day blurring into one big cloud. I’m ending 2025 clear-headed, grounded, and calm. I’m also alone, but that’s okay. I’ve grown weary and tired of flaky people, friends letting me down, and being screwed over. So I’m a lone ranger right now, and I’m okay with that.\n\nThis year, I’ve been blessed with the company of Gemma, Gems, Zoe, Kim, Bron and Sophie. All of those angels have played a part in keeping me afloat, looking after me, and being there for me through the rough moments.\n\nI’m not gunna waffle on about what I want from 2026 – the only thing I’d like is for it to go easier on me and my mental health than 2025 did. This year has felt like a slog, for the most part, with the world descending more and more into madness. I want more peace, less chaos.\n\nYou have been reading the diary of Lewis Christian,\nwritten during the calendar year of 2025.\n\nNEXT TIME\n2026"}];
-    const entryList = document.getElementById('entryList');
-    const resultCount = document.getElementById('resultCount');
-    const emptyState = document.getElementById('emptyState');
-    const searchInput = document.getElementById('searchInput');
-    const dateFilters = document.getElementById('dateFilters');
-    const dialog = document.getElementById('entryDialog');
-    let activeDate = 'All';
-    let activeIndex = 0;
-    let visibleEntries = [...entries];
+    const backToTop = document.querySelector('#backToTop');
 
-    const dateKey = date => date.replace(/,\s*2025$/, '');
-    const escapeHTML = value => value.replace(/[&<>"']/g, char => ({
-      '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;'
-    }[char]));
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    }, { passive: true });
 
-    function buildDateFilters() {
-      const dates = ['All', ...new Set(entries.map(e => dateKey(e.date)))];
-      dateFilters.innerHTML = dates.map(date => `
-        <button class="date-filter ${date === 'All' ? 'active' : ''}" data-date="${date}">
-          <span>${date === 'All' ? 'All entries' : date}</span>
-          <small>${date === 'All' ? entries.length : entries.filter(e => dateKey(e.date) === date).length}</small>
-        </button>
-      `).join('');
-
-      dateFilters.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', () => {
-          activeDate = button.dataset.date;
-          dateFilters.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === button));
-          renderEntries();
-        });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
       });
-    }
-
-    function getPreview(body) {
-      return body.replace(/\s+/g, ' ').replace(/^.*?\n/, '').slice(0, 145);
-    }
-
-    function renderEntries() {
-      const query = searchInput.value.trim().toLowerCase();
-      visibleEntries = entries.filter(entry => {
-        const matchesDate = activeDate === 'All' || dateKey(entry.date) === activeDate;
-        const matchesSearch = !query || `${entry.title} ${entry.body}`.toLowerCase().includes(query);
-        return matchesDate && matchesSearch;
-      });
-
-      entryList.innerHTML = visibleEntries.map(entry => `
-        <article class="entry" tabindex="0" data-number="${entry.num}" aria-label="Open entry ${entry.num}: ${escapeHTML(entry.title)}">
-          <div class="entry-number">${String(entry.num).padStart(2, '0')}</div>
-          <div class="entry-date">${escapeHTML(dateKey(entry.date))}${entry.time ? `<br>${escapeHTML(entry.time)}` : ''}</div>
-          <div class="entry-content">
-            <h3 class="entry-title">${escapeHTML(entry.title)}</h3>
-            <span class="entry-preview">${escapeHTML(getPreview(entry.body))}</span>
-          </div>
-          <div class="entry-arrow">↗</div>
-        </article>
-      `).join('');
-
-      resultCount.textContent = `${visibleEntries.length} shown`;
-      emptyState.style.display = visibleEntries.length ? 'none' : 'block';
-
-      entryList.querySelectorAll('.entry').forEach(card => {
-        const open = () => openEntry(Number(card.dataset.number));
-        card.addEventListener('click', open);
-        card.addEventListener('keydown', event => {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            open();
-          }
-        });
-      });
-    }
-
-    function openEntry(number) {
-      activeIndex = entries.findIndex(entry => entry.num === number);
-      updateDialog();
-      if (!dialog.open) dialog.showModal();
-    }
-
-    function updateDialog() {
-      const entry = entries[activeIndex];
-      document.getElementById('modalNum').textContent = String(entry.num).padStart(2, '0');
-      document.getElementById('modalDate').textContent = entry.date;
-      document.getElementById('modalTime').textContent = entry.time;
-      document.getElementById('modalTimeWrap').hidden = !entry.time;
-      document.getElementById('modalVisibility').textContent = entry.visibility;
-      document.getElementById('modalKicker').textContent = `Diary entry ${String(entry.num).padStart(2, '0')}`;
-      document.getElementById('modalTitle').textContent = entry.title;
-      document.getElementById('modalBody').textContent = entry.body;
-      document.getElementById('modalBody').scrollTop = 0;
-      document.getElementById('prevEntry').disabled = activeIndex === 0;
-      document.getElementById('nextEntry').disabled = activeIndex === entries.length - 1;
-    }
-
-    searchInput.addEventListener('input', renderEntries);
-    document.getElementById('clearFilters').addEventListener('click', () => {
-      searchInput.value = '';
-      activeDate = 'All';
-      buildDateFilters();
-      renderEntries();
     });
-
-    document.getElementById('closeDialog').addEventListener('click', () => dialog.close());
-    document.getElementById('prevEntry').addEventListener('click', () => {
-      if (activeIndex > 0) { activeIndex--; updateDialog(); }
-    });
-    document.getElementById('nextEntry').addEventListener('click', () => {
-      if (activeIndex < entries.length - 1) { activeIndex++; updateDialog(); }
-    });
-    dialog.addEventListener('click', event => {
-      const box = dialog.getBoundingClientRect();
-      const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
-      if (outside) dialog.close();
-    });
-    window.addEventListener('keydown', event => {
-      if (!dialog.open) return;
-      if (event.key === 'ArrowLeft' && activeIndex > 0) { activeIndex--; updateDialog(); }
-      if (event.key === 'ArrowRight' && activeIndex < entries.length - 1) { activeIndex++; updateDialog(); }
-    });
-
-    buildDateFilters();
-    renderEntries();
   </script>
 </body>
 </html>
