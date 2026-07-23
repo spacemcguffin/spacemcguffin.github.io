@@ -25,7 +25,6 @@
       --purple-soft: rgba(184, 124, 255, .14);
       --green: #68d6b1;
       --danger: #f07b9a;
-      --sidebar: 244px;
       --radius: 18px;
       --shadow: 0 24px 70px rgba(0,0,0,.32);
     }
@@ -62,62 +61,9 @@
     button { color: inherit; }
     a { color: inherit; text-decoration: none; }
 
-    .shell { min-height: 100vh; display: grid; grid-template-columns: var(--sidebar) minmax(0, 1fr); }
+    .shell { min-height: 100vh; }
 
-    .sidebar {
-      position: fixed;
-      inset: 0 auto 0 0;
-      width: var(--sidebar);
-      padding: 32px 24px 24px;
-      border-right: 1px solid var(--line);
-      background: rgba(5, 12, 24, .86);
-      backdrop-filter: blur(18px);
-      z-index: 30;
-      overflow-y: auto;
-    }
-
-    .brand {
-      display: inline-block;
-      margin-bottom: 40px;
-      font-family: "Instrument Serif", serif;
-      font-size: 43px;
-      line-height: .9;
-      letter-spacing: -.035em;
-    }
-
-    .side-label {
-      margin: 26px 10px 11px;
-      color: var(--purple);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .side-nav { display: grid; gap: 5px; }
-    .side-btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      width: 100%;
-      min-height: 44px;
-      padding: 0 13px;
-      border: 0;
-      border-radius: 14px;
-      background: transparent;
-      color: #cbd2df;
-      text-align: left;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-    .side-btn:hover, .side-btn.active { background: var(--purple-soft); color: #eee7ff; }
-    .side-icon { width: 20px; text-align: center; color: #bca2f3; }
-
-    .month-dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; background: var(--dot, var(--purple)); box-shadow: 0 0 14px color-mix(in srgb, var(--dot, var(--purple)) 55%, transparent); }
-    .side-rule { height: 1px; margin: 22px 8px; background: var(--line); }
-    .sidebar-bottom { margin-top: 25px; }
-
-    main { grid-column: 2; padding: 28px clamp(24px, 4vw, 70px) 80px; position: relative; z-index: 1; }
+    main { width: 100%; padding: 32px clamp(28px, 5vw, 88px) 90px; position: relative; z-index: 1; }
 
     .topbar {
       display: flex;
@@ -161,7 +107,7 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
-      max-width: 760px;
+      max-width: 900px;
       margin-top: 34px;
       overflow: hidden;
       border: 1px solid var(--line);
@@ -173,13 +119,14 @@
     .stat-item span { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
     .stat-item strong { display: block; margin-top: 6px; font-family: "Instrument Serif", serif; font-size: 27px; font-weight: 400; }
 
-    .content-grid { margin-top: 42px; }
-    .entries-head, .entry-row { display: grid; grid-template-columns: 58px minmax(220px, 1fr) 150px 100px; gap: 14px; align-items: center; }
-    .entries-head { min-height: 42px; padding: 0 0 10px; color: #b47be8; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 16px; letter-spacing: .04em; }
-    .entry-row { min-height: 57px; border-bottom: 1px solid rgba(187, 203, 235, .10); cursor: pointer; transition: .2s ease; }
-    .entry-row:hover { padding-left: 7px; background: linear-gradient(90deg, rgba(184,124,255,.075), transparent); }
-    .entry-num, .entry-date { color: #d1d5df; font-size: 13px; }
-    .entry-title { font-family: "Instrument Serif", serif; font-size: 25px; letter-spacing: -.015em; }
+    .content-grid { margin-top: 56px; }
+    .entries-panel { width: 100%; }
+    .entries-head, .entry-row { display: grid; grid-template-columns: 76px minmax(320px, 1fr) 190px 120px; gap: 22px; align-items: center; }
+    .entries-head { min-height: 54px; padding: 0 4px 14px; color: #c18aef; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 20px; letter-spacing: .025em; }
+    .entry-row { min-height: 84px; padding: 8px 4px; border-bottom: 1px solid rgba(187, 203, 235, .11); cursor: pointer; transition: padding .22s ease, background .22s ease, border-color .22s ease; }
+    .entry-row:hover { padding-left: 16px; background: linear-gradient(90deg, rgba(184,124,255,.095), rgba(184,124,255,.02) 55%, transparent); border-color: rgba(196,175,255,.22); }
+    .entry-num, .entry-date { color: #c9ced9; font-size: 15px; }
+    .entry-title { font-family: "Instrument Serif", serif; font-size: clamp(30px, 2.6vw, 43px); line-height: 1.02; letter-spacing: -.025em; }
     .entry-row.removed-row .entry-title {
       color: #8f8998;
       text-decoration: line-through;
@@ -204,32 +151,8 @@
     .entry-status { display: inline-flex; justify-content: center; width: fit-content; padding: 6px 9px; border-radius: 7px; color: var(--green); background: rgba(35, 142, 115, .17); font-size: 11px; }
     .entry-status.removed { color: #f5a5b9; background: rgba(202, 67, 104, .14); }
 
-    .month-toggle {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      margin: 26px 0 11px;
-      padding: 0 10px;
-      border: 0;
-      background: transparent;
-      color: var(--purple);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-    .month-toggle-icon { transition: transform .22s ease; }
-    .month-section.collapsed .month-toggle-icon { transform: rotate(-90deg); }
-    .month-list { display: grid; gap: 5px; max-height: 620px; overflow: hidden; transition: max-height .32s ease, opacity .22s ease; }
-    .month-section.collapsed .month-list { max-height: 0; opacity: 0; }
-
     .empty { display: none; padding: 60px 20px; color: var(--muted); text-align: center; font-family: "Instrument Serif", serif; font-size: 28px; }
     .footer-note { margin: 28px 0 0; color: #737b8c; text-align: center; font-family: "Instrument Serif", serif; font-size: 18px; font-style: italic; }
-
-    .mobile-menu { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); cursor: pointer; }
-    .mobile-overlay { display: none; }
 
     .toast {
       position: fixed;
@@ -253,64 +176,39 @@
     .toast-title { display: block; margin-bottom: 4px; font-family: "Instrument Serif", serif; font-size: 23px; font-weight: 400; }
     .toast-message { color: var(--muted); font-size: 13px; line-height: 1.55; }
 
-    @media (max-width: 1180px) {
-      .stats-strip { max-width: 100%; }
-    }
-
     @media (max-width: 900px) {
-      :root { --sidebar: 280px; }
-      .shell { display: block; }
-      main { padding: 20px 20px 70px; }
-      .sidebar { transform: translateX(-102%); transition: .28s ease; box-shadow: 20px 0 60px rgba(0,0,0,.4); }
-      body.menu-open .sidebar { transform: none; }
-      .mobile-overlay { position: fixed; inset: 0; z-index: 25; display: block; opacity: 0; visibility: hidden; background: rgba(0,0,0,.55); transition: .25s; }
-      body.menu-open .mobile-overlay { opacity: 1; visibility: visible; }
-      .mobile-menu { display: block; }
-      .topbar { margin-bottom: 42px; }
+      main { padding: 22px 22px 70px; }
+      .topbar { margin-bottom: 44px; }
       .eyebrow { display: none; }
-      .top-actions { flex: 1; }
+      .top-actions { width: 100%; }
       .search-wrap { width: 100%; }
       .entries-head { display: none; }
-      .entry-row { grid-template-columns: 40px minmax(0,1fr) auto; gap: 12px; padding: 13px 0; }
+      .entry-row { grid-template-columns: 50px minmax(0,1fr); gap: 16px; min-height: 78px; padding: 12px 0; }
       .entry-date, .entry-status { display: none; }
-      .entry-title { font-size: 23px; }
-      .stats-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .entry-title { font-size: clamp(29px, 6vw, 38px); }
+      .stats-strip { max-width: 100%; }
     }
 
     @media (max-width: 560px) {
       main { padding-inline: 16px; }
       .top-actions .select-wrap { display: none; }
-      .hero-copy h1 { font-size: 76px; }
-      .stats-strip { grid-template-columns: 1fr 1fr; }
-      .stat-item { padding: 14px; }
-      .content-grid { margin-top: 30px; }
+      .hero-copy h1 { font-size: 78px; }
+      .hero-copy p { font-size: 15px; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .stat-item { padding: 15px 16px; }
+      .content-grid { margin-top: 38px; }
+      .entry-row { grid-template-columns: 38px minmax(0,1fr); gap: 12px; min-height: 72px; }
+      .entry-num { font-size: 12px; }
+      .entry-title { font-size: 29px; }
+      .entry-row.removed-row .entry-title::after { display: block; width: fit-content; margin: 7px 0 0; }
       .toast { right: 16px; bottom: 16px; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
-    <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#top">lewis.lc</a>
-
-      <section class="month-section" id="monthSection">
-        <button class="month-toggle" id="monthToggle" aria-expanded="true" aria-controls="monthNav">
-          <span>Browse by month</span><span class="month-toggle-icon">⌄</span>
-        </button>
-        <nav class="side-nav month-list" id="monthNav"></nav>
-      </section>
-
-      <div class="side-rule"></div>
-      <div class="sidebar-bottom">
-        <button class="side-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="side-icon">↑</span>Back to top</button>
-      </div>
-    </aside>
-
-    <div class="mobile-overlay" id="mobileOverlay"></div>
-
     <main id="top">
       <header class="topbar">
-        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
         <div class="eyebrow"><span class="spark">✦</span> a year in diary entries</div>
         <div class="top-actions">
           <div class="select-wrap">
@@ -407,25 +305,12 @@
     const entriesList = document.getElementById('entriesList');
     const searchInput = document.getElementById('searchInput');
     const emptyState = document.getElementById('emptyState');
-    const monthNav = document.getElementById('monthNav');
-    let activeMonth = 'all';
     let visibleEntries = [...entries];
     let toastTimer;
-
-    function buildMonthNav() {
-      Object.keys(rawEntries).forEach(month => {
-        const button = document.createElement('button');
-        button.className = 'side-btn';
-        button.dataset.filter = month;
-        button.innerHTML = `<span class="month-dot" style="--dot:${monthColours[month]}"></span>${month}`;
-        monthNav.appendChild(button);
-      });
-    }
 
     function render() {
       const query = searchInput.value.trim().toLowerCase();
       visibleEntries = entries.filter(entry =>
-        (activeMonth === 'all' || entry.month === activeMonth) &&
         entry.title.toLowerCase().includes(query)
       );
 
@@ -448,14 +333,6 @@
     }
 
     document.addEventListener('click', event => {
-      const filterButton = event.target.closest('[data-filter]');
-      if (filterButton) {
-        activeMonth = filterButton.dataset.filter;
-        document.querySelectorAll('[data-filter]').forEach(btn => btn.classList.toggle('active', btn === filterButton));
-        render();
-        document.body.classList.remove('menu-open');
-      }
-
       const row = event.target.closest('.entry-row');
       if (row) showArchiveToast(visibleEntries[Number(row.dataset.index)]);
     });
@@ -484,17 +361,6 @@
     }
 
 
-    document.getElementById('mobileMenu').addEventListener('click', () => document.body.classList.add('menu-open'));
-    document.getElementById('mobileOverlay').addEventListener('click', () => document.body.classList.remove('menu-open'));
-
-    const monthSection = document.getElementById('monthSection');
-    const monthToggle = document.getElementById('monthToggle');
-    monthToggle.addEventListener('click', () => {
-      const collapsed = monthSection.classList.toggle('collapsed');
-      monthToggle.setAttribute('aria-expanded', String(!collapsed));
-    });
-
-    buildMonthNav();
     render();
   </script>
 </body>
