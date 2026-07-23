@@ -762,6 +762,9 @@
         height: 38px;
       }
     }
+
+    html.dialog-open { overflow: hidden; }
+    .empty[hidden] { display: none !important; }
 </style>
 </head>
 <body>
@@ -3321,52 +3324,99 @@ written during the calendar year of 2021.</p>
 
   <script>
     const searchInput = document.getElementById("searchInput");
-    const entryCards = [...document.querySelectorAll(".entry")];
-    const dialogs = [...document.querySelectorAll(".entry-dialog")];
+    const entryCards = Array.from(document.querySelectorAll(".entry[data-dialog]"));
+    const dialogs = Array.from(document.querySelectorAll("dialog.entry-dialog"));
     const resultCount = document.getElementById("resultCount");
     const emptyState = document.getElementById("emptyState");
+    const backToTop = document.getElementById("backToTop");
+
+    let lastTrigger = null;
+    let changingDialog = false;
 
     function filterEntries() {
-      const query = searchInput.value.trim().toLowerCase();
+      const query = searchInput.value.trim().toLocaleLowerCase();
       let shown = 0;
 
       entryCards.forEach(card => {
-        const matches = !query || card.dataset.search.includes(query);
+        const searchableText = (card.dataset.search || card.textContent).toLocaleLowerCase();
+        const matches = query === "" || searchableText.includes(query);
         card.hidden = !matches;
         if (matches) shown += 1;
       });
 
       resultCount.textContent = `${shown} shown`;
-      emptyState.style.display = shown ? "none" : "block";
+      emptyState.hidden = shown !== 0;
+      emptyState.style.display = shown === 0 ? "block" : "none";
     }
 
-    function openDialog(dialog) {
-      if (!dialog) return;
-      dialog.showModal();
-      document.body.style.overflow = "hidden";
-      dialog.querySelector(".modal-body").scrollTop = 0;
-      history.replaceState(null, "", `#${dialog.id}`);
+    function getOpenDialog() {
+      return dialogs.find(dialog => dialog.open) || null;
     }
 
-    function closeDialog(dialog) {
-      if (!dialog?.open) return;
+    function setPageLocked(locked) {
+      document.documentElement.classList.toggle("dialog-open", locked);
+      document.body.style.overflow = locked ? "hidden" : "";
+    }
+
+    function updateHash(dialog) {
+      const nextUrl = dialog
+        ? `${location.pathname}${location.search}#${dialog.id}`
+        : `${location.pathname}${location.search}`;
+      history.replaceState(null, "", nextUrl);
+    }
+
+    function openDialog(dialog, trigger = null, updateUrl = true) {
+      if (!(dialog instanceof HTMLDialogElement)) return;
+
+      const currentlyOpen = getOpenDialog();
+      if (currentlyOpen && currentlyOpen !== dialog) {
+        changingDialog = true;
+        currentlyOpen.close();
+        changingDialog = false;
+      }
+
+      if (trigger) lastTrigger = trigger;
+
+      if (!dialog.open) {
+        try {
+          dialog.showModal();
+        } catch (error) {
+          console.error("Unable to open diary entry dialog:", error);
+          return;
+        }
+      }
+
+      setPageLocked(true);
+      const body = dialog.querySelector(".modal-body");
+      if (body) body.scrollTop = 0;
+      dialog.querySelector(".close")?.focus({ preventScroll: true });
+      if (updateUrl) updateHash(dialog);
+    }
+
+    function closeDialog(dialog, restoreFocus = true, updateUrl = true) {
+      if (!(dialog instanceof HTMLDialogElement) || !dialog.open) return;
       dialog.close();
-      document.body.style.overflow = "";
-      if (location.hash === `#${dialog.id}`) {
-        history.replaceState(null, "", location.pathname + location.search);
+      setPageLocked(false);
+      if (updateUrl) updateHash(null);
+
+      if (restoreFocus && lastTrigger instanceof HTMLElement) {
+        lastTrigger.focus({ preventScroll: true });
       }
     }
 
     function moveDialog(dialog, direction) {
-      const index = Number(dialog.dataset.index);
+      const index = dialogs.indexOf(dialog);
       const nextDialog = dialogs[index + direction];
       if (!nextDialog) return;
-      dialog.close();
-      openDialog(nextDialog);
+      openDialog(nextDialog, lastTrigger, true);
     }
 
     entryCards.forEach(card => {
-      const activate = () => openDialog(document.getElementById(card.dataset.dialog));
+      const activate = () => {
+        const dialog = document.getElementById(card.dataset.dialog);
+        openDialog(dialog, card, true);
+      };
+
       card.addEventListener("click", activate);
       card.addEventListener("keydown", event => {
         if (event.key === "Enter" || event.key === " ") {
@@ -3377,48 +3427,63 @@ written during the calendar year of 2021.</p>
     });
 
     dialogs.forEach(dialog => {
-      dialog.querySelector(".close").addEventListener("click", () => closeDialog(dialog));
-      dialog.querySelector(".prev-entry").addEventListener("click", () => moveDialog(dialog, -1));
-      dialog.querySelector(".next-entry").addEventListener("click", () => moveDialog(dialog, 1));
+      dialog.querySelector(".close")?.addEventListener("click", () => closeDialog(dialog));
+      dialog.querySelector(".prev-entry")?.addEventListener("click", () => moveDialog(dialog, -1));
+      dialog.querySelector(".next-entry")?.addEventListener("click", () => moveDialog(dialog, 1));
 
       dialog.addEventListener("click", event => {
-        const rect = dialog.getBoundingClientRect();
-        const outside = event.clientX < rect.left || event.clientX > rect.right ||
-                        event.clientY < rect.top || event.clientY > rect.bottom;
-        if (outside) closeDialog(dialog);
+        if (event.target === dialog) closeDialog(dialog);
       });
 
       dialog.addEventListener("cancel", event => {
         event.preventDefault();
         closeDialog(dialog);
       });
+
+      dialog.addEventListener("close", () => {
+        if (!changingDialog && !getOpenDialog()) setPageLocked(false);
+      });
     });
 
     window.addEventListener("keydown", event => {
-      const dialog = dialogs.find(item => item.open);
-      if (!dialog) return;
-      if (event.key === "ArrowLeft") moveDialog(dialog, -1);
-      if (event.key === "ArrowRight") moveDialog(dialog, 1);
+      const dialog = getOpenDialog();
+      if (!dialog || event.altKey || event.ctrlKey || event.metaKey) return;
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        moveDialog(dialog, -1);
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        moveDialog(dialog, 1);
+      }
     });
+
+    function openDialogFromHash() {
+      const id = decodeURIComponent(location.hash.slice(1));
+      if (!id) return;
+      const dialog = document.getElementById(id);
+      if (dialog?.matches("dialog.entry-dialog")) openDialog(dialog, null, false);
+    }
 
     searchInput.addEventListener("input", filterEntries);
 
-    const backToTop = document.getElementById("backToTop");
     function updateBackToTop() {
       backToTop.classList.toggle("visible", window.scrollY > 420);
     }
+
     backToTop.addEventListener("click", () => {
       window.scrollTo({
         top: 0,
         behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"
       });
     });
-    window.addEventListener("scroll", updateBackToTop, { passive: true });
-    updateBackToTop();
-    filterEntries();
 
-    const requestedDialog = location.hash && document.querySelector(location.hash);
-    if (requestedDialog?.matches(".entry-dialog")) openDialog(requestedDialog);
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+    window.addEventListener("hashchange", openDialogFromHash);
+
+    filterEntries();
+    updateBackToTop();
+    openDialogFromHash();
   </script>
 </body>
 </html>
