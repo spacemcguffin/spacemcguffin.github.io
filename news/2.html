@@ -89,6 +89,7 @@
     }
 
     .hero {
+      min-height:auto!important;
       display: grid;
       grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
       gap: 48px;
@@ -508,7 +509,8 @@
     }
 
     @media (max-width: 880px) {
-      .hero { grid-template-columns: 1fr; gap: 28px; }
+      .hero {
+      min-height:auto!important; grid-template-columns: 1fr; gap: 28px; }
       .hero-copy { border-left: 0; border-top: 1px solid var(--line); padding: 22px 0 0; }
       .archive {
       display: block;
@@ -530,7 +532,8 @@
       .topbar { padding-bottom: 16px; }
       .issue { display: none; }
       h1 { font-size: clamp(3.8rem, 24vw, 6.8rem); }
-      .hero { padding-top: 54px; }
+      .hero {
+      min-height:auto!important; padding-top: 54px; }
       .entries-toolbar {
         grid-template-columns: 1fr;
         gap: 14px;
@@ -682,15 +685,31 @@
     }
 
     header.hero{
+      min-height:auto!important;
       padding-top:32px!important;
       padding-bottom:26px!important;
     }
     .hero{
+      min-height:auto!important;
       margin-top:0!important;
     }
     main{
       padding-top:18px!important;
     }
+
+
+dialog .close,
+dialog .modal-close,
+dialog button.close{
+  margin-left:auto!important;
+  margin-right:0!important;
+  display:flex;
+}
+.dialog-header,
+.modal-header{
+  display:flex;
+  align-items:center;
+}
 
 </style>
 </head>
