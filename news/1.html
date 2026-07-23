@@ -159,7 +159,7 @@
 
     .stats-strip {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
       max-width: 760px;
       margin-top: 34px;
@@ -174,16 +174,35 @@
     .stat-item strong { display: block; margin-top: 6px; font-family: "Instrument Serif", serif; font-size: 27px; font-weight: 400; }
 
     .content-grid { margin-top: 42px; }
-    .entries-head, .entry-row { display: grid; grid-template-columns: 58px minmax(220px, 1fr) 135px 85px 92px 25px; gap: 14px; align-items: center; }
+    .entries-head, .entry-row { display: grid; grid-template-columns: 58px minmax(220px, 1fr) 150px 100px; gap: 14px; align-items: center; }
     .entries-head { min-height: 42px; padding: 0 0 10px; color: #b47be8; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 16px; letter-spacing: .04em; }
     .entry-row { min-height: 57px; border-bottom: 1px solid rgba(187, 203, 235, .10); cursor: pointer; transition: .2s ease; }
     .entry-row:hover { padding-left: 7px; background: linear-gradient(90deg, rgba(184,124,255,.075), transparent); }
     .entry-num, .entry-date { color: #d1d5df; font-size: 13px; }
     .entry-title { font-family: "Instrument Serif", serif; font-size: 25px; letter-spacing: -.015em; }
+    .entry-row.removed-row .entry-title {
+      color: #8f8998;
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(240, 123, 154, .72);
+    }
+    .entry-row.removed-row .entry-title::after {
+      content: "removed";
+      display: inline-block;
+      margin-left: 10px;
+      color: #f0a1b6;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: 9px;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: .09em;
+      text-decoration: none;
+      text-transform: uppercase;
+      vertical-align: middle;
+      opacity: .78;
+    }
     .entry-status { display: inline-flex; justify-content: center; width: fit-content; padding: 6px 9px; border-radius: 7px; color: var(--green); background: rgba(35, 142, 115, .17); font-size: 11px; }
     .entry-status.removed { color: #f5a5b9; background: rgba(202, 67, 104, .14); }
-    .entry-arrow { color: #e7e9ef; font-size: 22px; }
-    .mood-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--mood); box-shadow: 0 0 13px color-mix(in srgb, var(--mood) 42%, transparent); }
 
     .month-toggle {
       display: flex;
@@ -212,44 +231,27 @@
     .mobile-menu { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); cursor: pointer; }
     .mobile-overlay { display: none; }
 
-    .modal {
+    .toast {
       position: fixed;
-      inset: 0;
-      z-index: 100;
-      display: grid;
-      place-items: center;
-      padding: 20px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 120;
+      width: min(390px, calc(100vw - 32px));
+      padding: 16px 18px;
+      border: 1px solid rgba(205, 186, 255, .28);
+      border-radius: 15px;
+      background: rgba(8, 18, 33, .96);
+      box-shadow: 0 22px 60px rgba(0,0,0,.48);
+      backdrop-filter: blur(16px);
       opacity: 0;
       visibility: hidden;
-      background: rgba(1, 5, 12, .75);
-      backdrop-filter: blur(15px);
-      transition: .25s ease;
+      transform: translateY(18px);
+      transition: opacity .22s ease, transform .22s ease, visibility .22s;
+      pointer-events: none;
     }
-    .modal.open { opacity: 1; visibility: visible; }
-    .modal-panel {
-      position: relative;
-      width: min(720px, 100%);
-      max-height: min(790px, 92vh);
-      overflow: auto;
-      padding: clamp(28px, 5vw, 58px);
-      border: 1px solid rgba(205, 186, 255, .26);
-      border-radius: 24px;
-      background:
-        radial-gradient(circle at 100% 0%, rgba(132, 73, 196, .18), transparent 40%),
-        #081221;
-      box-shadow: 0 35px 100px rgba(0,0,0,.55);
-      transform: translateY(18px) scale(.98);
-      transition: .25s ease;
-    }
-    .modal.open .modal-panel { transform: none; }
-    .modal-close { position: absolute; top: 18px; right: 18px; width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%; background: rgba(255,255,255,.04); cursor: pointer; font-size: 22px; }
-    .modal-kicker { color: var(--purple); font-size: 11px; letter-spacing: .13em; text-transform: uppercase; }
-    .modal h2 { margin: 15px 50px 10px 0; font-family: "Instrument Serif", serif; font-size: clamp(45px, 7vw, 76px); font-weight: 400; line-height: .92; letter-spacing: -.03em; }
-    .modal-meta { display: flex; gap: 12px; flex-wrap: wrap; margin: 22px 0 30px; color: #afb7c7; font-size: 12px; }
-    .modal-meta span { padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; }
-    .modal-copy { color: #c7ccd6; font-family: "Instrument Serif", serif; font-size: 23px; line-height: 1.65; }
-    .modal-nav { display: flex; justify-content: space-between; gap: 15px; margin-top: 38px; padding-top: 22px; border-top: 1px solid var(--line); }
-    .modal-nav button { padding: 11px 16px; border: 1px solid var(--line); border-radius: 12px; background: rgba(255,255,255,.04); cursor: pointer; }
+    .toast.show { opacity: 1; visibility: visible; transform: none; }
+    .toast-title { display: block; margin-bottom: 4px; font-family: "Instrument Serif", serif; font-size: 23px; font-weight: 400; }
+    .toast-message { color: var(--muted); font-size: 13px; line-height: 1.55; }
 
     @media (max-width: 1180px) {
       .stats-strip { max-width: 100%; }
@@ -270,7 +272,7 @@
       .search-wrap { width: 100%; }
       .entries-head { display: none; }
       .entry-row { grid-template-columns: 40px minmax(0,1fr) auto; gap: 12px; padding: 13px 0; }
-      .entry-date, .entry-mood, .entry-status { display: none; }
+      .entry-date, .entry-status { display: none; }
       .entry-title { font-size: 23px; }
       .stats-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -282,8 +284,7 @@
       .stats-strip { grid-template-columns: 1fr 1fr; }
       .stat-item { padding: 14px; }
       .content-grid { margin-top: 30px; }
-      .modal { padding: 0; align-items: end; }
-      .modal-panel { width: 100%; max-height: 94vh; border-radius: 24px 24px 0 0; padding: 36px 24px; }
+      .toast { right: 16px; bottom: 16px; }
     }
   </style>
 </head>
@@ -292,13 +293,6 @@
     <aside class="sidebar" id="sidebar">
       <a class="brand" href="#top">lewis.lc</a>
 
-      <div class="side-label">Browse</div>
-      <nav class="side-nav">
-        <button class="side-btn active" data-filter="all"><span class="side-icon">▣</span>All entries</button>
-        <button class="side-btn" id="randomEntry"><span class="side-icon">↝</span>Random entry</button>
-      </nav>
-
-      <div class="side-rule"></div>
       <section class="month-section" id="monthSection">
         <button class="month-toggle" id="monthToggle" aria-expanded="true" aria-controls="monthNav">
           <span>Browse by month</span><span class="month-toggle-icon">⌄</span>
@@ -342,7 +336,6 @@
             <div class="stat-item"><span>entries listed</span><strong id="entryCount">0</strong></div>
             <div class="stat-item"><span>published</span><strong id="publishedCount">0</strong></div>
             <div class="stat-item"><span>removed</span><strong id="removedCount">0</strong></div>
-            <div class="stat-item"><span>latest month</span><strong>july</strong></div>
           </div>
         </div>
       </section>
@@ -350,7 +343,7 @@
       <section class="content-grid">
         <div class="entries-panel">
           <div class="entries-head">
-            <span>#</span><span>entry title</span><span>month</span><span>mood</span><span>status</span><span></span>
+            <span>#</span><span>entry title</span><span>month</span><span>status</span>
           </div>
           <div id="entriesList"></div>
           <div class="empty" id="emptyState">no entries found</div>
@@ -360,18 +353,9 @@
     </main>
   </div>
 
-  <div class="modal" id="entryModal" aria-hidden="true">
-    <article class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal-close" id="modalClose" aria-label="Close">×</button>
-      <div class="modal-kicker" id="modalKicker"></div>
-      <h2 id="modalTitle"></h2>
-      <div class="modal-meta" id="modalMeta"></div>
-      <div class="modal-copy" id="modalCopy"></div>
-      <div class="modal-nav">
-        <button id="modalPrev">← previous</button>
-        <button id="modalNext">next →</button>
-      </div>
-    </article>
+  <div class="toast" id="archiveToast" role="status" aria-live="polite" aria-atomic="true">
+    <strong class="toast-title" id="toastTitle"></strong>
+    <div class="toast-message" id="toastMessage"></div>
   </div>
 
   <script>
@@ -415,11 +399,7 @@
       list.forEach(([title, published], monthIndex) => {
         entries.push({
           id: counter++, title, month, published: Boolean(published),
-          mood: monthColours[month],
-          displayNumber: String(counter - 1).padStart(3,'0'),
-          copy: published
-            ? 'This is a space for the diary entry summary or extract. Replace this text with the entry content you would like visitors to read inside the modal.'
-            : 'This entry has been removed from the public archive. Its title remains here as part of the shape and history of the year.'
+          displayNumber: String(counter - 1).padStart(3,'0')
         });
       });
     });
@@ -430,7 +410,7 @@
     const monthNav = document.getElementById('monthNav');
     let activeMonth = 'all';
     let visibleEntries = [...entries];
-    let activeIndex = 0;
+    let toastTimer;
 
     function buildMonthNav() {
       Object.keys(rawEntries).forEach(month => {
@@ -450,13 +430,11 @@
       );
 
       entriesList.innerHTML = visibleEntries.map((entry, index) => `
-        <article class="entry-row" data-index="${index}" tabindex="0" aria-label="Open ${entry.title}">
+        <article class="entry-row ${entry.published ? '' : 'removed-row'}" data-index="${index}" tabindex="0" aria-label="View archive information for ${entry.title}">
           <span class="entry-num">${entry.displayNumber}</span>
           <span class="entry-title">${escapeHtml(entry.title)}</span>
           <span class="entry-date">${entry.month} 2026</span>
-          <span class="entry-mood"><span class="mood-dot" style="--mood:${entry.mood}"></span></span>
           <span class="entry-status ${entry.published ? '' : 'removed'}">${entry.published ? 'published' : 'removed'}</span>
-          <span class="entry-arrow">›</span>
         </article>`).join('');
 
       emptyState.style.display = visibleEntries.length ? 'none' : 'block';
@@ -479,59 +457,32 @@
       }
 
       const row = event.target.closest('.entry-row');
-      if (row) openModal(Number(row.dataset.index));
+      if (row) showArchiveToast(visibleEntries[Number(row.dataset.index)]);
     });
 
     document.addEventListener('keydown', event => {
       if (event.target.closest('.entry-row') && (event.key === 'Enter' || event.key === ' ')) {
         event.preventDefault();
-        openModal(Number(event.target.closest('.entry-row').dataset.index));
-      }
-      if (document.getElementById('entryModal').classList.contains('open')) {
-        if (event.key === 'Escape') closeModal();
-        if (event.key === 'ArrowLeft') moveModal(-1);
-        if (event.key === 'ArrowRight') moveModal(1);
+        showArchiveToast(visibleEntries[Number(event.target.closest('.entry-row').dataset.index)]);
       }
     });
 
     searchInput.addEventListener('input', render);
 
-    const modal = document.getElementById('entryModal');
-    function openModal(index) {
-      if (!visibleEntries.length) return;
-      activeIndex = index;
-      const entry = visibleEntries[activeIndex];
-      document.getElementById('modalKicker').textContent = `entry ${entry.displayNumber} · ${entry.month} 2026`;
-      document.getElementById('modalTitle').textContent = entry.title;
-      document.getElementById('modalMeta').innerHTML = `<span>${entry.published ? 'published' : 'removed'}</span><span>written by Lewis Christian</span>`;
-      document.getElementById('modalCopy').textContent = entry.copy;
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden';
-      document.getElementById('modalClose').focus();
-    }
-    function closeModal() {
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow = '';
-    }
-    function moveModal(direction) {
-      activeIndex = (activeIndex + direction + visibleEntries.length) % visibleEntries.length;
-      openModal(activeIndex);
+    const toast = document.getElementById('archiveToast');
+    function showArchiveToast(entry) {
+      if (!entry) return;
+      document.getElementById('toastTitle').textContent = entry.title;
+      document.getElementById('toastMessage').textContent = entry.published
+        ? 'This diary entry is not available to read. Only its title has been archived.'
+        : 'This entry has been removed. Its title remains in the archive.';
+      toast.classList.remove('show');
+      void toast.offsetWidth;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
     }
 
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    document.getElementById('modalPrev').addEventListener('click', () => moveModal(-1));
-    document.getElementById('modalNext').addEventListener('click', () => moveModal(1));
-    modal.addEventListener('click', event => { if (event.target === modal) closeModal(); });
-
-    document.getElementById('randomEntry').addEventListener('click', () => {
-      activeMonth = 'all'; searchInput.value = '';
-      document.querySelectorAll('[data-filter]').forEach(btn => btn.classList.toggle('active', btn.dataset.filter === 'all'));
-      render();
-      openModal(Math.floor(Math.random() * visibleEntries.length));
-      document.body.classList.remove('menu-open');
-    });
 
     document.getElementById('mobileMenu').addEventListener('click', () => document.body.classList.add('menu-open'));
     document.getElementById('mobileOverlay').addEventListener('click', () => document.body.classList.remove('menu-open'));
