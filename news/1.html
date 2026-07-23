@@ -129,25 +129,25 @@
     .entry-num, .entry-date { color: #c9ced9; font-size: 15px; }
     .entry-title { font-family: "Instrument Serif", serif; font-size: clamp(30px, 2.6vw, 43px); line-height: 1.02; letter-spacing: -.025em; }
     .entry-row.removed-row .entry-title {
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+      max-width: 100%;
       color: #8f8998;
-      text-decoration: line-through;
-      text-decoration-thickness: 1px;
-      text-decoration-color: rgba(240, 123, 154, .72);
     }
     .entry-row.removed-row .entry-title::after {
-      content: "removed";
-      display: inline-block;
-      margin-left: 10px;
-      color: #f0a1b6;
-      font-family: Inter, system-ui, sans-serif;
-      font-size: 9px;
-      font-style: normal;
-      font-weight: 600;
-      letter-spacing: .09em;
-      text-decoration: none;
-      text-transform: uppercase;
-      vertical-align: middle;
-      opacity: .78;
+      content: "";
+      position: absolute;
+      left: -2%;
+      top: 50%;
+      width: 104%;
+      height: 1.5px;
+      border-radius: 999px;
+      background: rgba(240, 123, 154, .72);
+      box-shadow: 0 0 6px rgba(240, 123, 154, .18);
+      transform: translateY(-50%) rotate(-7deg);
+      transform-origin: center;
+      pointer-events: none;
     }
     .entry-status { display: inline-flex; justify-content: center; width: fit-content; padding: 6px 9px; border-radius: 7px; color: var(--green); background: rgba(35, 142, 115, .17); font-size: 11px; }
     .entry-status.removed { color: #f5a5b9; background: rgba(202, 67, 104, .14); }
@@ -203,7 +203,6 @@
     .panel-meta-item strong { display: block; margin-top: 7px; font-family: "Instrument Serif", serif; font-size: 23px; font-weight: 400; }
     .panel-message { padding-top: 26px; border-top: 1px solid var(--line); color: var(--serif-muted); font-family: "Instrument Serif", serif; font-size: 25px; line-height: 1.35; }
     .panel-message.removed { color: #c9a0ad; }
-    .panel-footer { padding: 18px 34px 28px; border-top: 1px solid var(--line); color: #737b8c; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
 
     @media (max-width: 900px) {
       body.panel-open { overflow: hidden; }
@@ -227,7 +226,6 @@
       .panel-topbar { position: relative; padding-top: 20px; }
       .panel-content { padding: 30px 24px 34px; }
       .panel-title { font-size: clamp(46px, 12vw, 64px); }
-      .panel-footer { padding-inline: 24px; }
     }
 
     @media (max-width: 560px) {
@@ -241,7 +239,6 @@
       .entry-row { grid-template-columns: 38px minmax(0,1fr); gap: 12px; min-height: 72px; }
       .entry-num { font-size: 12px; }
       .entry-title { font-size: 29px; }
-      .entry-row.removed-row .entry-title::after { display: block; width: fit-content; margin: 7px 0 0; }
       .entry-panel { height: 100dvh; border-radius: 0; }
       .panel-meta { grid-template-columns: 1fr; }
     }
@@ -312,7 +309,6 @@
       </div>
       <div class="panel-message" id="panelMessage"></div>
     </div>
-    <div class="panel-footer">Only diary titles are displayed publicly.</div>
   </aside>
 
   <script>
