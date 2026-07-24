@@ -432,6 +432,36 @@ tr.active-entry,
   }
 }
 
+
+/* Prevent long unbroken diary titles from widening the page */
+td,
+.entry-title,
+.title,
+.diary-title,
+.entry-row,
+.diary-row {
+  min-width: 0;
+}
+
+.entry-title,
+.title,
+.diary-title,
+td:nth-child(2) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+@media (max-width: 700px) {
+  .entry-title,
+  .title,
+  .diary-title,
+  td:nth-child(2) {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
 </style>
 </head>
 <body>
