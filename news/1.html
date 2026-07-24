@@ -104,12 +104,12 @@
     .hero-line { width: 66px; height: 1px; margin: 28px 0 24px; background: linear-gradient(90deg, var(--purple), transparent); }
     .hero-copy p { max-width: 550px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
 
-    .content-grid { margin-top: 56px; }
-    .entries-panel { width: 100%; }
+    .content-grid { margin-top: 32px; }
+    .entries-panel { width: 100%; padding: 0 18px; }
     .entries-head, .entry-row { display: grid; grid-template-columns: 76px minmax(320px, 1fr) 190px 120px; gap: 22px; align-items: center; }
-    .entries-head { min-height: 54px; padding: 0 4px 14px; color: #7db6ff; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 20px; letter-spacing: .025em; }
-    .entry-row { min-height: 84px; padding: 8px 4px; border-bottom: 1px solid rgba(187, 203, 235, .11); cursor: pointer; transition: padding .22s ease, background .22s ease, border-color .22s ease; }
-    .entry-row:hover { padding-left: 16px; background: linear-gradient(90deg, rgba(73,145,255,.095), rgba(73,145,255,.02) 55%, transparent); border-color: rgba(112,169,255,.22); }
+    .entries-head { min-height: 54px; padding: 0 14px 14px; color: #7db6ff; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 20px; letter-spacing: .025em; }
+    .entry-row { min-height: 84px; padding: 8px 14px; border-bottom: 1px solid rgba(187, 203, 235, .11); cursor: pointer; transition: padding .22s ease, background .22s ease, border-color .22s ease; }
+    .entry-row:hover { padding-left: 24px; background: linear-gradient(90deg, rgba(73,145,255,.095), rgba(73,145,255,.02) 55%, transparent); border-color: rgba(112,169,255,.22); }
     .entry-num, .entry-date { color: #c9ced9; font-size: 15px; }
     .entry-title { font-family: "Instrument Serif", serif; font-size: clamp(30px, 2.6vw, 43px); line-height: 1.02; letter-spacing: -.025em; }
     .entry-row.removed-row .entry-title {
@@ -191,13 +191,14 @@
     @media (max-width: 900px) {
       body.panel-open { overflow: hidden; }
       body.panel-open .shell { padding-right: 0; }
-      main { padding: 22px 22px 70px; }
+      main { padding: 22px 18px 70px; }
       .topbar { margin-bottom: 44px; }
       .eyebrow { display: none; }
       .top-actions { width: 100%; }
       .search-wrap { width: 100%; }
       .entries-head { display: none; }
-      .entry-row { grid-template-columns: 50px minmax(0,1fr); gap: 16px; min-height: 78px; padding: 12px 0; }
+      .entries-panel { padding: 0 4px; }
+      .entry-row { grid-template-columns: 50px minmax(0,1fr); gap: 16px; min-height: 78px; padding: 12px 8px; }
       .entry-date, .entry-status { display: none; }
       .entry-title { font-size: clamp(29px, 6vw, 38px); }
       .entry-panel {
@@ -216,8 +217,9 @@
       .top-actions .select-wrap { display: none; }
       .hero-copy h1 { font-size: 78px; }
       .hero-copy p { font-size: 15px; }
-      .content-grid { margin-top: 38px; }
-      .entry-row { grid-template-columns: 38px minmax(0,1fr); gap: 12px; min-height: 72px; }
+      .content-grid { margin-top: 28px; }
+      .entries-panel { padding: 0; }
+      .entry-row { grid-template-columns: 38px minmax(0,1fr); gap: 12px; min-height: 72px; padding-inline: 6px; }
       .entry-num { font-size: 12px; }
       .entry-title { font-size: 29px; }
       .entry-panel { height: 100dvh; border-radius: 0; }
@@ -250,7 +252,6 @@
           <h1>2008 diary</h1>
           <div class="hero-line"></div>
           <p>The original timelordwannabe archive — 623 diary entry titles preserved from February to December 2008.</p>
-        </div>
         </div>
       </section>
 
