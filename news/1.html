@@ -781,6 +781,78 @@ document.addEventListener('click', function(e){
   syncOpenState();
 })();
 
+
+(function () {
+  const panelSelector = '.detail-panel,.sidebar,.entry-panel,#detailPanel';
+  const rowSelector = 'tr[data-index],tr[data-id],.entry-row,.diary-row,.entry';
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+
+  function getPanel() {
+    return document.querySelector(panelSelector);
+  }
+
+  function getRows() {
+    return Array.from(document.querySelectorAll(rowSelector))
+      .filter(row => row.offsetParent !== null);
+  }
+
+  function getActiveRow(rows) {
+    return rows.find(row =>
+      row.classList.contains('active-entry') ||
+      row.getAttribute('aria-selected') === 'true'
+    );
+  }
+
+  function openRow(row) {
+    if (!row) return;
+    row.click();
+    row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  document.addEventListener('touchstart', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target)) return;
+
+    const touch = e.touches[0];
+    swipeStartX = touch.clientX;
+    swipeStartY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target) || !swipeStartX) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - swipeStartX;
+    const dy = touch.clientY - swipeStartY;
+
+    swipeStartX = 0;
+    swipeStartY = 0;
+
+    if (Math.abs(dx) < 65 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+    const rows = getRows();
+    const activeRow = getActiveRow(rows);
+    const currentIndex = Math.max(0, rows.indexOf(activeRow));
+
+    // Swipe left: next entry
+    if (dx < 0 && currentIndex < rows.length - 1) {
+      e.preventDefault();
+      openRow(rows[currentIndex + 1]);
+      return;
+    }
+
+    // Swipe right: previous entry.
+    // At the first entry, preserve the existing swipe-right-to-dismiss action.
+    if (dx > 0 && currentIndex > 0) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openRow(rows[currentIndex - 1]);
+    }
+  }, { passive: false, capture: true });
+})();
+
 </script>
 </body>
 </html>
