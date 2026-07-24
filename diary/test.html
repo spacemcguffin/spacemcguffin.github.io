@@ -59,6 +59,8 @@ html[data-theme="dark"] {
 }
 
 .diary-search-icon {
+  width:20px;
+  height:20px;
   position: absolute;
   left: 1rem;
   top: 50%;
@@ -338,7 +340,12 @@ html[data-theme="dark"] {
               
 
 <div class="diary-search" id="diarySearchWrap" role="search">
-  <span class="diary-search-icon" aria-hidden="true">⌕</span>
+  
+<svg class="diary-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<circle cx="11" cy="11" r="7"></circle>
+<path d="M20 20l-3.5-3.5"></path>
+</svg>
+
   <input
     type="search"
     id="diarySearch"
