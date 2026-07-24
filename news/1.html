@@ -109,6 +109,32 @@
     .entries-head, .entry-row { display: grid; grid-template-columns: 76px minmax(320px, 1fr) 190px 120px; gap: 22px; align-items: center; }
     .entries-head { min-height: 54px; padding: 0 14px 14px; color: #7db6ff; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 20px; letter-spacing: .025em; }
     .entry-row { min-height: 84px; padding: 8px 14px; border-bottom: 1px solid rgba(187, 203, 235, .11); cursor: pointer; transition: padding .22s ease, background .22s ease, border-color .22s ease; }
+
+    .month-divider {
+      display: grid;
+      grid-template-columns: 76px minmax(320px, 1fr) 190px 120px;
+      gap: 22px;
+      align-items: end;
+      min-height: 82px;
+      padding: 30px 14px 12px;
+      border-bottom: 1px solid var(--line-strong);
+      color: var(--purple);
+    }
+
+    .month-divider:first-child {
+      min-height: 66px;
+      padding-top: 14px;
+    }
+
+    .month-divider-name {
+      grid-column: 1 / -1;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(29px, 2.3vw, 40px);
+      line-height: 1;
+      letter-spacing: -.02em;
+      text-transform: lowercase;
+    }
+
     .entry-row:hover { padding-left: 24px; background: linear-gradient(90deg, rgba(73,145,255,.095), rgba(73,145,255,.02) 55%, transparent); border-color: rgba(112,169,255,.22); }
     .entry-num, .entry-date { color: #c9ced9; font-size: 15px; }
     .entry-title { font-family: "Instrument Serif", serif; font-size: clamp(30px, 2.6vw, 43px); line-height: 1.02; letter-spacing: -.025em; }
@@ -338,7 +364,22 @@
       }
     }
 
-  </style>
+  
+    @media (max-width: 760px) {
+      .month-divider {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 12px;
+        min-height: 68px;
+        padding: 24px 12px 10px;
+      }
+
+      .month-divider:first-child {
+        min-height: 54px;
+        padding-top: 10px;
+      }
+
+    }
+</style>
 </head>
 <body>
   <div class="shell">
@@ -433,13 +474,23 @@
         entry.title.toLowerCase().includes(query)
       );
 
-      entriesList.innerHTML = visibleEntries.map((entry, index) => `
-        <article class="entry-row ${entry.published ? '' : 'removed-row'}" data-index="${index}" tabindex="0" aria-label="Open archive information for ${entry.title}">
+      let currentMonth = '';
+      entriesList.innerHTML = visibleEntries.map((entry, index) => {
+        const month = entry.date.split(' ').slice(1).join(' ');
+        const monthHeading = month !== currentMonth
+          ? `<div class="month-divider" aria-label="${escapeHtml(month)} entries"><span class="month-divider-name">${escapeHtml(month)}</span></div>`
+          : '';
+
+        currentMonth = month;
+
+        return `${monthHeading}
+        <article class="entry-row ${entry.published ? '' : 'removed-row'}" data-index="${index}" tabindex="0" aria-label="Open archive information for ${escapeHtml(entry.title)}">
           <span class="entry-num">${entry.displayNumber}</span>
           <span class="entry-title">${escapeHtml(entry.title)}</span>
           <span class="entry-date">${entry.dateTime}</span>
           <span class="entry-status ${entry.published ? '' : 'removed'}">${entry.published ? 'published' : 'removed'}</span>
-        </article>`).join('');
+        </article>`;
+      }).join('');
 
       emptyState.style.display = visibleEntries.length ? 'none' : 'block';
     }
