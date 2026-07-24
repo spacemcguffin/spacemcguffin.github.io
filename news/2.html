@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#07101f">
-  <title>2008 Diary — Lewis Christian</title>
+  <title>2009 Diary — Lewis Christian</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,12 +17,12 @@
       --panel: rgba(8, 16, 31, .82);
       --panel-solid: #0a1425;
       --line: rgba(187, 203, 235, .14);
-      --line-strong: rgba(196, 175, 255, .30);
+      --line-strong: rgba(114, 199, 255, .38);
       --text: #f4f0ea;
       --muted: #a9b1c3;
       --serif-muted: #c9c1d7;
-      --purple: #b87cff;
-      --purple-soft: rgba(184, 124, 255, .14);
+      --purple: #72c7ff;
+      --purple-soft: rgba(114, 199, 255, .15);
       --green: #68d6b1;
       --danger: #f07b9a;
       --radius: 18px;
@@ -37,7 +37,7 @@
       color: var(--text);
       font-family: Inter, system-ui, sans-serif;
       background:
-        radial-gradient(circle at 92% 10%, rgba(135, 76, 221, .18), transparent 28rem),
+        radial-gradient(circle at 92% 10%, rgba(79, 165, 230, .20), transparent 28rem),
         radial-gradient(circle at 72% 105%, rgba(37, 114, 197, .10), transparent 30rem),
         linear-gradient(135deg, #050a13 0%, #07101d 55%, #050a13 100%);
       overflow-x: hidden;
@@ -52,7 +52,7 @@
       background-image:
         radial-gradient(circle at 10% 15%, rgba(255,255,255,.75) 0 1px, transparent 1.5px),
         radial-gradient(circle at 86% 25%, rgba(255,255,255,.45) 0 1px, transparent 1.5px),
-        radial-gradient(circle at 70% 70%, rgba(196,166,255,.5) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 70%, rgba(114,199,255,.58) 0 1px, transparent 1.5px),
         radial-gradient(circle at 35% 85%, rgba(255,255,255,.35) 0 1px, transparent 1.5px);
       background-size: 180px 180px, 260px 260px, 340px 340px, 220px 220px;
     }
@@ -104,28 +104,38 @@
     .hero-line { width: 66px; height: 1px; margin: 28px 0 24px; background: linear-gradient(90deg, var(--purple), transparent); }
     .hero-copy p { max-width: 550px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
 
-    .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1px;
-      max-width: 900px;
-      margin-top: 34px;
-      overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: var(--line);
-      box-shadow: var(--shadow);
-    }
-    .stat-item { padding: 16px 18px; background: rgba(7, 15, 29, .88); }
-    .stat-item span { display: block; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
-    .stat-item strong { display: block; margin-top: 6px; font-family: "Instrument Serif", serif; font-size: 27px; font-weight: 400; }
-
-    .content-grid { margin-top: 56px; }
-    .entries-panel { width: 100%; }
+    .content-grid { margin-top: 32px; }
+    .entries-panel { width: 100%; padding: 0 18px; }
     .entries-head, .entry-row { display: grid; grid-template-columns: 76px minmax(320px, 1fr) 190px 120px; gap: 22px; align-items: center; }
-    .entries-head { min-height: 54px; padding: 0 4px 14px; color: #c18aef; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 20px; letter-spacing: .025em; }
-    .entry-row { min-height: 84px; padding: 8px 4px; border-bottom: 1px solid rgba(187, 203, 235, .11); cursor: pointer; transition: padding .22s ease, background .22s ease, border-color .22s ease; }
-    .entry-row:hover { padding-left: 16px; background: linear-gradient(90deg, rgba(184,124,255,.095), rgba(184,124,255,.02) 55%, transparent); border-color: rgba(196,175,255,.22); }
+    .entries-head { min-height: 54px; padding: 0 14px 14px; color: #9ad8ff; border-bottom: 1px solid var(--line-strong); font-family: "Instrument Serif", serif; font-size: 20px; letter-spacing: .025em; }
+    .entry-row { min-height: 84px; padding: 8px 14px; border-bottom: 1px solid rgba(187, 203, 235, .11); cursor: pointer; transition: padding .22s ease, background .22s ease, border-color .22s ease; }
+
+    .month-divider {
+      display: grid;
+      grid-template-columns: 76px minmax(320px, 1fr) 190px 120px;
+      gap: 22px;
+      align-items: end;
+      min-height: 82px;
+      padding: 30px 14px 12px;
+      border-bottom: 1px solid var(--line-strong);
+      color: var(--purple);
+    }
+
+    .month-divider:first-child {
+      min-height: 66px;
+      padding-top: 14px;
+    }
+
+    .month-divider-name {
+      grid-column: 1 / -1;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(29px, 2.3vw, 40px);
+      line-height: 1;
+      letter-spacing: -.02em;
+      text-transform: lowercase;
+    }
+
+    .entry-row:hover { padding-left: 24px; background: linear-gradient(90deg, rgba(114,199,255,.10), rgba(114,199,255,.03) 55%, transparent); border-color: rgba(114,199,255,.24); }
     .entry-num, .entry-date { color: #c9ced9; font-size: 15px; }
     .entry-title { font-family: "Instrument Serif", serif; font-size: clamp(30px, 2.6vw, 43px); line-height: 1.02; letter-spacing: -.025em; }
     .entry-row.removed-row .entry-title {
@@ -166,7 +176,7 @@
       flex-direction: column;
       border-left: 1px solid var(--line-strong);
       background:
-        radial-gradient(circle at 90% 0%, rgba(184,124,255,.18), transparent 20rem),
+        radial-gradient(circle at 90% 0%, rgba(114,199,255,.18), transparent 20rem),
         linear-gradient(180deg, rgba(10,20,37,.99), rgba(5,11,21,.995));
       box-shadow: -28px 0 70px rgba(0,0,0,.42);
       transform: translateX(105%);
@@ -207,16 +217,16 @@
     @media (max-width: 900px) {
       body.panel-open { overflow: hidden; }
       body.panel-open .shell { padding-right: 0; }
-      main { padding: 22px 22px 70px; }
+      main { padding: 22px 18px 70px; }
       .topbar { margin-bottom: 44px; }
       .eyebrow { display: none; }
       .top-actions { width: 100%; }
       .search-wrap { width: 100%; }
       .entries-head { display: none; }
-      .entry-row { grid-template-columns: 50px minmax(0,1fr); gap: 16px; min-height: 78px; padding: 12px 0; }
+      .entries-panel { padding: 0 4px; }
+      .entry-row { grid-template-columns: 50px minmax(0,1fr); gap: 16px; min-height: 78px; padding: 12px 8px; }
       .entry-date, .entry-status { display: none; }
       .entry-title { font-size: clamp(29px, 6vw, 38px); }
-      .stats-strip { max-width: 100%; }
       .entry-panel {
         top: auto; bottom: 0; width: 100%; height: min(88dvh, 760px); border-left: 0; border-top: 1px solid var(--line-strong);
         border-radius: 24px 24px 0 0; transform: translateY(105%);
@@ -233,32 +243,297 @@
       .top-actions .select-wrap { display: none; }
       .hero-copy h1 { font-size: 78px; }
       .hero-copy p { font-size: 15px; }
-      .stats-strip { grid-template-columns: 1fr; }
-      .stat-item { padding: 15px 16px; }
-      .content-grid { margin-top: 38px; }
-      .entry-row { grid-template-columns: 38px minmax(0,1fr); gap: 12px; min-height: 72px; }
+      .content-grid { margin-top: 28px; }
+      .entries-panel { padding: 0; }
+      .entry-row { grid-template-columns: 38px minmax(0,1fr); gap: 12px; min-height: 72px; padding-inline: 6px; }
       .entry-num { font-size: 12px; }
       .entry-title { font-size: 29px; }
       .entry-panel { height: 100dvh; border-radius: 0; }
       .panel-meta { grid-template-columns: 1fr; }
     }
-  </style>
+  
+    .masthead-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 1.15em;
+      height: 1.15em;
+      margin-right: .48em;
+      color: var(--purple);
+      vertical-align: -0.16em;
+      flex: 0 0 auto;
+    }
+
+    .masthead-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(10, 17, 30, .88);
+      color: var(--purple);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity .22s ease, transform .22s ease, visibility .22s ease,
+                  background .22s ease, border-color .22s ease;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .24);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+    }
+
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .detail-panel,
+    .panel-body,
+    .sidebar-panel,
+    .entry-panel {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(114, 199, 255, .66) transparent;
+    }
+
+    .detail-panel::-webkit-scrollbar,
+    .panel-body::-webkit-scrollbar,
+    .sidebar-panel::-webkit-scrollbar,
+    .entry-panel::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .detail-panel::-webkit-scrollbar-track,
+    .panel-body::-webkit-scrollbar-track,
+    .sidebar-panel::-webkit-scrollbar-track,
+    .entry-panel::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .detail-panel::-webkit-scrollbar-thumb,
+    .panel-body::-webkit-scrollbar-thumb,
+    .sidebar-panel::-webkit-scrollbar-thumb,
+    .entry-panel::-webkit-scrollbar-thumb {
+      background: rgba(114, 199, 255, .50);
+      border-radius: 999px;
+    }
+
+    .detail-panel::-webkit-scrollbar-thumb:hover,
+    .panel-body::-webkit-scrollbar-thumb:hover,
+    .sidebar-panel::-webkit-scrollbar-thumb:hover,
+    .entry-panel::-webkit-scrollbar-thumb:hover {
+      background: rgba(154, 216, 255, .86);
+    }
+
+    @media (max-width: 640px) {
+      .back-to-top {
+        right: 14px;
+        bottom: 14px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+  
+    @media (max-width: 760px) {
+      .month-divider {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 12px;
+        min-height: 68px;
+        padding: 24px 12px 10px;
+      }
+
+      .month-divider:first-child {
+        min-height: 54px;
+        padding-top: 10px;
+      }
+
+    }
+
+    .eyebrow,
+    .month-heading,
+    .masthead-icon,
+    .back-to-top {
+      text-shadow: 0 0 10px rgba(114, 199, 255, .26);
+    }
+
+    .month-heading::after {
+      box-shadow: 0 0 14px rgba(114, 199, 255, .15);
+    }
+
+    .back-to-top:hover {
+      box-shadow:
+        0 0 0 1px rgba(114, 199, 255, .15),
+        0 0 22px rgba(114, 199, 255, .24),
+        0 12px 34px rgba(0, 0, 0, .24);
+    }
+
+  
+/* Panel focus states */
+body.panel-open main,
+body.panel-open .table-wrap,
+body.panel-open .archive-table,
+body.sidebar-open main,
+body.sidebar-open .table-wrap,
+body.sidebar-open .archive-table {
+  opacity: .46;
+  transition: opacity .24s ease;
+}
+
+main,
+.table-wrap,
+.archive-table {
+  transition: opacity .24s ease;
+}
+
+tr.active-entry,
+.entry-row.active-entry,
+.diary-row.active-entry {
+  opacity: 1 !important;
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main,
+  .table-wrap,
+  .archive-table {
+    transition: none;
+  }
+}
+
+
+/* Prevent long unbroken diary titles from widening the page */
+td,
+.entry-title,
+.title,
+.diary-title,
+.entry-row,
+.diary-row {
+  min-width: 0;
+}
+
+.entry-title,
+.title,
+.diary-title,
+td:nth-child(2) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+@media (max-width: 700px) {
+  .entry-title,
+  .title,
+  .diary-title,
+  td:nth-child(2) {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
+
+/* Neater two-line date and time column */
+.date-time-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 7.7rem;
+  line-height: 1.15;
+}
+
+.date-line {
+  font-weight: 500;
+  font-size: .90em;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.date-time-divider {
+  width: 100%;
+  height: 1px;
+  margin: .38rem 0 .32rem;
+  background: linear-gradient(
+    90deg,
+    rgba(114, 199, 255, .72),
+    rgba(114, 199, 255, .16)
+  );
+  box-shadow: 0 0 8px rgba(114, 199, 255, .14);
+}
+
+.time-line {
+  font-size: .82em;
+  font-weight: 500;
+  color: var(--muted, rgba(255,255,255,.64));
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .date-time-stack {
+    min-width: 6.9rem;
+  }
+
+  .date-line {
+    white-space: normal;
+  }
+}
+
+</style>
 </head>
 <body>
   <div class="shell">
     <main id="top">
       <header class="topbar">
-        <div class="eyebrow"><span class="spark">✦</span> a year in diary entries</div>
+        <div class="eyebrow">
+          <span class="masthead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 3v3M17 3v3M4.5 8.5h15M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/>
+              <path d="M8 12h2M12 12h2M16 12h1M8 16h2M12 16h2M16 16h1"/>
+            </svg>
+          </span>
+          timelordwannabe
+        </div>
         <div class="top-actions">
           <div class="select-wrap">
             <select aria-label="Choose year" onchange="location.href=this.value">
               <option value="/diary/2026">2026</option>
-              <option value="/diary/2008" selected>2008</option>
-              <option value="/diary/2009">2009</option>
+              <option value="/diary/2008">2008</option>
+              <option value="/diary/2009" selected>2009</option>
             </select>
           </div>
           <label class="search-wrap">
-            <input id="searchInput" type="search" placeholder="Search 623 entries…" autocomplete="off">
+            <input id="searchInput" type="search" placeholder="Search 419 entries…" autocomplete="off">
             <span class="search-icon">⌕</span>
           </label>
         </div>
@@ -266,25 +541,20 @@
 
       <section class="hero-grid">
         <div class="hero-copy">
-          <h1>2008 diary</h1>
+          <h1>2009 diary</h1>
           <div class="hero-line"></div>
-          <p>The original timelordwannabe archive — 623 diary entry titles preserved from February to December 2008.</p>
-          <div class="stats-strip" aria-label="2008 diary statistics">
-            <div class="stat-item"><span>entries listed</span><strong id="entryCount">0</strong></div>
-            <div class="stat-item"><span>published</span><strong id="publishedCount">0</strong></div>
-            <div class="stat-item"><span>removed</span><strong id="removedCount">0</strong></div>
-          </div>
+          <p>The timelordwannabe archive — 419 diary entry titles preserved from January to December 2009.</p>
         </div>
       </section>
 
       <section class="content-grid">
         <div class="entries-panel">
           <div class="entries-head">
-            <span>#</span><span>entry title</span><span>month</span><span>status</span>
+            <span>#</span><span>entry title</span><span>date &amp; time</span><span>status</span>
           </div>
           <div id="entriesList"></div>
           <div class="empty" id="emptyState">no entries found</div>
-          <p class="footer-note">Six hundred and twenty-three titles from the original 2008 archive. ✦</p>
+          <p class="footer-note">Four hundred and nineteen titles from the original 2009 archive. ✦</p>
         </div>
       </section>
     </main>
@@ -304,19 +574,66 @@
       <h2 class="panel-title" id="panelTitle"></h2>
       <div class="panel-rule"></div>
       <div class="panel-meta">
-        <div class="panel-meta-item"><span>date archived</span><strong id="panelDate"></strong></div>
+        <div class="panel-meta-item"><span>date &amp; time</span><strong id="panelDate"></strong></div>
         <div class="panel-meta-item"><span>status</span><strong id="panelStatus"></strong></div>
       </div>
       <div class="panel-message" id="panelMessage"></div>
     </div>
   </aside>
 
-  <script>
-    const monthColours = { February:'#ff9565', March:'#d7bd6c', April:'#55c8ae', May:'#42b6c8', June:'#62aee8', July:'#9e82f7', August:'#c882f7', September:'#ec79b1', October:'#ff856c', November:'#89a7ef', December:'#b9cce9' };
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m6 14 6-6 6 6"/>
+    </svg>
+  </button>
 
-    const SOURCE_URL = 'https://lewis.lc/diary/2008';
-    const MONTHS = ['February','March','April','May','June','July','August','September','October','November','December'];
-    let entries = [];
+  <script>
+    const monthColours = { January:'#78b9f2', February:'#ff9565', March:'#d7bd6c', April:'#55c8ae', May:'#42b6c8', June:'#62aee8', July:'#9e82f7', August:'#c882f7', September:'#ec79b1', October:'#ff856c', November:'#89a7ef', December:'#b9cce9' };
+
+    const entries = [{"id":1,"displayNumber":"001","title":"2009 begins...","date":"Thursday 1 January","time":"2:05 am","dateTime":"Thursday 1 January, 2:05 am","published":true},{"id":2,"displayNumber":"002","title":"The actual next Doctor","date":"Friday 2 January","time":"5:06 pm","dateTime":"Friday 2 January, 5:06 pm","published":true},{"id":3,"displayNumber":"003","title":"Celebrity Big Shudder","date":"Friday 2 January","time":"11:18 pm","dateTime":"Friday 2 January, 11:18 pm","published":true},{"id":4,"displayNumber":"004","title":"The Eleventh Doctor","date":"Saturday 3 January","time":"6:18 pm","dateTime":"Saturday 3 January, 6:18 pm","published":true},{"id":5,"displayNumber":"005","title":"Back to the Future","date":"Sunday 4 January","time":"11:20 pm","dateTime":"Sunday 4 January, 11:20 pm","published":true},{"id":6,"displayNumber":"006","title":"Into the future","date":"Monday 5 January","time":"5:06 pm","dateTime":"Monday 5 January, 5:06 pm","published":true},{"id":7,"displayNumber":"007","title":"Trock updates","date":"Monday 5 January","time":"11:12 pm","dateTime":"Monday 5 January, 11:12 pm","published":true},{"id":8,"displayNumber":"008","title":"Home today, school tomorrow","date":"Tuesday 6 January","time":"4:59 pm","dateTime":"Tuesday 6 January, 4:59 pm","published":true},{"id":9,"displayNumber":"009","title":"Writer's block","date":"Wednesday 7 January","time":"5:50 pm","dateTime":"Wednesday 7 January, 5:50 pm","published":true},{"id":10,"displayNumber":"010","title":"Return of the Thursdays","date":"Thursday 8 January","time":"5:57 pm","dateTime":"Thursday 8 January, 5:57 pm","published":true},{"id":11,"displayNumber":"011","title":"Charlotte, makeup and a calendar","date":"Friday 9 January","time":"8:19 pm","dateTime":"Friday 9 January, 8:19 pm","published":true},{"id":12,"displayNumber":"012","title":"Battle of the bears","date":"Saturday 10 January","time":"1:06 am","dateTime":"Saturday 10 January, 1:06 am","published":true},{"id":13,"displayNumber":"013","title":"Pixels and Paint","date":"Saturday 10 January","time":"10:42 pm","dateTime":"Saturday 10 January, 10:42 pm","published":true},{"id":14,"displayNumber":"014","title":"Remember that project?","date":"Sunday 11 January","time":"10:20 pm","dateTime":"Sunday 11 January, 10:20 pm","published":true},{"id":15,"displayNumber":"015","title":"A certain LJW <3","date":"Monday 12 January","time":"10:21 pm","dateTime":"Monday 12 January, 10:21 pm","published":true},{"id":16,"displayNumber":"016","title":"Friends and exams","date":"Tuesday 13 January","time":"6:37 pm","dateTime":"Tuesday 13 January, 6:37 pm","published":true},{"id":17,"displayNumber":"017","title":"Nicole's birthday / attack of the hoover","date":"Wednesday 14 January","time":"4:24 pm","dateTime":"Wednesday 14 January, 4:24 pm","published":true},{"id":18,"displayNumber":"018","title":"Thursday 15th January, 2009","date":"Thursday 15 January","time":"6:04 pm","dateTime":"Thursday 15 January, 6:04 pm","published":true},{"id":19,"displayNumber":"019","title":"Top five entry titles","date":"Thursday 15 January","time":"6:34 pm","dateTime":"Thursday 15 January, 6:34 pm","published":true},{"id":20,"displayNumber":"020","title":"Textness","date":"Friday 16 January","time":"12:02 am","dateTime":"Friday 16 January, 12:02 am","published":true},{"id":21,"displayNumber":"021","title":"Yuckness x_x","date":"Saturday 17 January","time":"2:39 pm","dateTime":"Saturday 17 January, 2:39 pm","published":true},{"id":22,"displayNumber":"022","title":"Completely blah","date":"Sunday 18 January","time":"11:38 pm","dateTime":"Sunday 18 January, 11:38 pm","published":true},{"id":23,"displayNumber":"023","title":"Silence, science, snow and shiz","date":"Monday 19 January","time":"4:49 pm","dateTime":"Monday 19 January, 4:49 pm","published":true},{"id":24,"displayNumber":"024","title":"Heart-to-heart with Charlotte","date":"Monday 19 January","time":"10:48 pm","dateTime":"Monday 19 January, 10:48 pm","published":true},{"id":25,"displayNumber":"025","title":"...and so the ICT exam was finished, never to be spoken of again ^_^","date":"Tuesday 20 January","time":"4:32 pm","dateTime":"Tuesday 20 January, 4:32 pm","published":true},{"id":26,"displayNumber":"026","title":"No more hiding","date":"Tuesday 20 January","time":"11:03 pm","dateTime":"Tuesday 20 January, 11:03 pm","published":true},{"id":27,"displayNumber":"027","title":"SixFiveOh!","date":"Wednesday 21 January","time":"11:18 pm","dateTime":"Wednesday 21 January, 11:18 pm","published":true},{"id":28,"displayNumber":"028","title":"Maisie STFU plzkthx","date":"Thursday 22 January","time":"4:09 pm","dateTime":"Thursday 22 January, 4:09 pm","published":true},{"id":29,"displayNumber":"029","title":"Bitching, Billie and Big Brother","date":"Friday 23 January","time":"6:18 pm","dateTime":"Friday 23 January, 6:18 pm","published":true},{"id":30,"displayNumber":"030","title":"Fix Brother","date":"Saturday 24 January","time":"12:49 am","dateTime":"Saturday 24 January, 12:49 am","published":true},{"id":31,"displayNumber":"031","title":"The Life of a Carr","date":"Sunday 25 January","time":"11:40 pm","dateTime":"Sunday 25 January, 11:40 pm","published":true},{"id":32,"displayNumber":"032","title":"Completing CVs and chatting with Charlie","date":"Monday 26 January","time":"9:04 pm","dateTime":"Monday 26 January, 9:04 pm","published":true},{"id":33,"displayNumber":"033","title":"The sawdust beneath the sparkle","date":"Monday 26 January","time":"11:09 pm","dateTime":"Monday 26 January, 11:09 pm","published":true},{"id":34,"displayNumber":"034","title":"Interview day","date":"Tuesday 27 January","time":"7:12 pm","dateTime":"Tuesday 27 January, 7:12 pm","published":true},{"id":35,"displayNumber":"035","title":"*insert bad Carr/journey joke here*","date":"Tuesday 27 January","time":"9:46 pm","dateTime":"Tuesday 27 January, 9:46 pm","published":true},{"id":36,"displayNumber":"036","title":"Breaking point","date":"Wednesday 28 January","time":"5:23 pm","dateTime":"Wednesday 28 January, 5:23 pm","published":true},{"id":37,"displayNumber":"037","title":"Happiness and hair","date":"Thursday 29 January","time":"4:55 pm","dateTime":"Thursday 29 January, 4:55 pm","published":true},{"id":38,"displayNumber":"038","title":"Lewis and Charlotte: The Final Chapter","date":"Thursday 29 January","time":"6:56 pm","dateTime":"Thursday 29 January, 6:56 pm","published":true},{"id":39,"displayNumber":"039","title":"Wedding planners and Time Lords","date":"Friday 30 January","time":"6:21 pm","dateTime":"Friday 30 January, 6:21 pm","published":true},{"id":40,"displayNumber":"040","title":"Dreams","date":"Saturday 31 January","time":"11:41 am","dateTime":"Saturday 31 January, 11:41 am","published":true},{"id":41,"displayNumber":"041","title":"Eek-Space","date":"Saturday 31 January","time":"8:13 pm","dateTime":"Saturday 31 January, 8:13 pm","published":true},{"id":42,"displayNumber":"042","title":"The titles of doom","date":"Sunday 1 February","time":"11:06 am","dateTime":"Sunday 1 February, 11:06 am","published":true},{"id":43,"displayNumber":"043","title":"Harry Pothead and the Philosopher's Stoned","date":"Sunday 1 February","time":"10:26 pm","dateTime":"Sunday 1 February, 10:26 pm","published":true},{"id":44,"displayNumber":"044","title":"Breaking the snowday trilogy","date":"Monday 2 February","time":"11:10 am","dateTime":"Monday 2 February, 11:10 am","published":true},{"id":45,"displayNumber":"045","title":"Entry #666 (+2)","date":"Monday 2 February","time":"7:22 pm","dateTime":"Monday 2 February, 7:22 pm","published":true},{"id":46,"displayNumber":"046","title":"Winter wonderland <3","date":"Tuesday 3 February","time":"12:14 pm","dateTime":"Tuesday 3 February, 12:14 pm","published":true},{"id":47,"displayNumber":"047","title":"A cartoon for Charlie","date":"Tuesday 3 February","time":"11:31 pm","dateTime":"Tuesday 3 February, 11:31 pm","published":true},{"id":48,"displayNumber":"048","title":"Genuinely happy // Charlie, Charlie, Charlie ^_^","date":"Wednesday 4 February","time":"10:45 pm","dateTime":"Wednesday 4 February, 10:45 pm","published":true},{"id":49,"displayNumber":"049","title":"Penny the penguin // stealing from science","date":"Thursday 5 February","time":"7:54 pm","dateTime":"Thursday 5 February, 7:54 pm","published":true},{"id":50,"displayNumber":"050","title":"www.myfloorisdirty.com","date":"Friday 6 February","time":"6:38 pm","dateTime":"Friday 6 February, 6:38 pm","published":true},{"id":51,"displayNumber":"051","title":"Secrets and surprises","date":"Saturday 7 February","time":"8:05 pm","dateTime":"Saturday 7 February, 8:05 pm","published":true},{"id":52,"displayNumber":"052","title":"YouBoob","date":"Sunday 8 February","time":"10:44 pm","dateTime":"Sunday 8 February, 10:44 pm","published":true},{"id":53,"displayNumber":"053","title":"Louis Walsh","date":"Monday 9 February","time":"4:33 pm","dateTime":"Monday 9 February, 4:33 pm","published":true},{"id":54,"displayNumber":"054","title":"Today :)","date":"Monday 9 February","time":"9:55 pm","dateTime":"Monday 9 February, 9:55 pm","published":true},{"id":55,"displayNumber":"055","title":"Tonight :(","date":"Monday 9 February","time":"10:14 pm","dateTime":"Monday 9 February, 10:14 pm","published":true},{"id":56,"displayNumber":"056","title":"PISSED OFF TO THE MAX","date":"Tuesday 10 February","time":"9:03 pm","dateTime":"Tuesday 10 February, 9:03 pm","published":true},{"id":57,"displayNumber":"057","title":"I think - I hope - life's gunna be alright :)","date":"Tuesday 10 February","time":"10:42 pm","dateTime":"Tuesday 10 February, 10:42 pm","published":true},{"id":58,"displayNumber":"058","title":"Charlie, counselling and gifts","date":"Wednesday 11 February","time":"3:31 pm","dateTime":"Wednesday 11 February, 3:31 pm","published":true},{"id":59,"displayNumber":"059","title":"The latest","date":"Wednesday 11 February","time":"11:15 pm","dateTime":"Wednesday 11 February, 11:15 pm","published":true},{"id":60,"displayNumber":"060","title":"Photos, presents and Miss Pursglove","date":"Thursday 12 February","time":"7:47 pm","dateTime":"Thursday 12 February, 7:47 pm","published":true},{"id":61,"displayNumber":"061","title":"FODface","date":"Thursday 12 February","time":"9:52 pm","dateTime":"Thursday 12 February, 9:52 pm","published":true},{"id":62,"displayNumber":"062","title":"Big fish, little fish, cardboard box!","date":"Thursday 12 February","time":"10:45 pm","dateTime":"Thursday 12 February, 10:45 pm","published":true},{"id":63,"displayNumber":"063","title":"Friday the 13th","date":"Friday 13 February","time":"8:10 pm","dateTime":"Friday 13 February, 8:10 pm","published":true},{"id":64,"displayNumber":"064","title":"V Day","date":"Saturday 14 February","time":"1:00 pm","dateTime":"Saturday 14 February, 1:00 pm","published":true},{"id":65,"displayNumber":"065","title":"Wall-E","date":"Saturday 14 February","time":"4:39 pm","dateTime":"Saturday 14 February, 4:39 pm","published":true},{"id":66,"displayNumber":"066","title":"Saturday night awesomeness","date":"Saturday 14 February","time":"11:18 pm","dateTime":"Saturday 14 February, 11:18 pm","published":true},{"id":67,"displayNumber":"067","title":"Mini-party planning and preparations","date":"Sunday 15 February","time":"6:14 pm","dateTime":"Sunday 15 February, 6:14 pm","published":true},{"id":68,"displayNumber":"068","title":"i r legalz lol","date":"Monday 16 February","time":"12:36 pm","dateTime":"Monday 16 February, 12:36 pm","published":true},{"id":69,"displayNumber":"069","title":"[entry deleted]","date":"Monday 16 February","time":"6:03 pm","dateTime":"Monday 16 February, 6:03 pm","published":false},{"id":70,"displayNumber":"070","title":"Mini birthday bash ^_^","date":"Tuesday 17 February","time":"10:49 pm","dateTime":"Tuesday 17 February, 10:49 pm","published":true},{"id":71,"displayNumber":"071","title":"Birthday video","date":"Wednesday 18 February","time":"6:03 pm","dateTime":"Wednesday 18 February, 6:03 pm","published":true},{"id":72,"displayNumber":"072","title":"Lewis and Charlotte - The Specials!","date":"Thursday 19 February","time":"2:01 pm","dateTime":"Thursday 19 February, 2:01 pm","published":true},{"id":73,"displayNumber":"073","title":"Twatter and Facefuck","date":"Friday 20 February","time":"1:22 pm","dateTime":"Friday 20 February, 1:22 pm","published":true},{"id":74,"displayNumber":"074","title":"Dailybooth","date":"Saturday 21 February","time":"3:43 pm","dateTime":"Saturday 21 February, 3:43 pm","published":true},{"id":75,"displayNumber":"075","title":"Hide the Daleks, hide the Charlotte","date":"Saturday 21 February","time":"9:31 pm","dateTime":"Saturday 21 February, 9:31 pm","published":true},{"id":76,"displayNumber":"076","title":"The story of Adam Arnold","date":"Sunday 22 February","time":"9:27 pm","dateTime":"Sunday 22 February, 9:27 pm","published":true},{"id":77,"displayNumber":"077","title":"(700) Sick of science","date":"Monday 23 February","time":"4:41 pm","dateTime":"Monday 23 February, 4:41 pm","published":true},{"id":78,"displayNumber":"078","title":"School and cuddles","date":"Monday 23 February","time":"10:40 pm","dateTime":"Monday 23 February, 10:40 pm","published":true},{"id":79,"displayNumber":"079","title":"Wedding presents and hamsters","date":"Tuesday 24 February","time":"8:31 pm","dateTime":"Tuesday 24 February, 8:31 pm","published":true},{"id":80,"displayNumber":"080","title":"Science, girls and hamsters","date":"Wednesday 25 February","time":"8:18 pm","dateTime":"Wednesday 25 February, 8:18 pm","published":true},{"id":81,"displayNumber":"081","title":"School, Lent and no hamsters this time!","date":"Thursday 26 February","time":"7:21 pm","dateTime":"Thursday 26 February, 7:21 pm","published":true},{"id":82,"displayNumber":"082","title":"Media creations","date":"Thursday 26 February","time":"10:06 pm","dateTime":"Thursday 26 February, 10:06 pm","published":true},{"id":83,"displayNumber":"083","title":"The death of Paperclip Paul","date":"Thursday 26 February","time":"10:41 pm","dateTime":"Thursday 26 February, 10:41 pm","published":true},{"id":84,"displayNumber":"084","title":"365 days, 707 entries","date":"Friday 27 February","time":"4:38 pm","dateTime":"Friday 27 February, 4:38 pm","published":true},{"id":85,"displayNumber":"085","title":"Today's real entry","date":"Friday 27 February","time":"4:50 pm","dateTime":"Friday 27 February, 4:50 pm","published":true},{"id":86,"displayNumber":"086","title":"Two girls, one Doctor","date":"Saturday 28 February","time":"10:32 pm","dateTime":"Saturday 28 February, 10:32 pm","published":true},{"id":87,"displayNumber":"087","title":"Doctor Who is sexist!","date":"Saturday 28 February","time":"10:48 pm","dateTime":"Saturday 28 February, 10:48 pm","published":true},{"id":88,"displayNumber":"088","title":"Fail.","date":"Sunday 1 March","time":"10:55 pm","dateTime":"Sunday 1 March, 10:55 pm","published":true},{"id":89,"displayNumber":"089","title":"Uninspired mood","date":"Monday 2 March","time":"9:11 pm","dateTime":"Monday 2 March, 9:11 pm","published":true},{"id":90,"displayNumber":"090","title":"Science, suck it!","date":"Tuesday 3 March","time":"5:40 pm","dateTime":"Tuesday 3 March, 5:40 pm","published":true},{"id":91,"displayNumber":"091","title":"Emotionally infected","date":"Wednesday 4 March","time":"8:47 pm","dateTime":"Wednesday 4 March, 8:47 pm","published":true},{"id":92,"displayNumber":"092","title":"Dying twice","date":"Thursday 5 March","time":"4:19 pm","dateTime":"Thursday 5 March, 4:19 pm","published":true},{"id":93,"displayNumber":"093","title":"I had a good day :)","date":"Friday 6 March","time":"4:36 pm","dateTime":"Friday 6 March, 4:36 pm","published":true},{"id":94,"displayNumber":"094","title":"Organised","date":"Saturday 7 March","time":"4:20 pm","dateTime":"Saturday 7 March, 4:20 pm","published":true},{"id":95,"displayNumber":"095","title":"Incomplete","date":"Sunday 8 March","time":"4:20 pm","dateTime":"Sunday 8 March, 4:20 pm","published":true},{"id":96,"displayNumber":"096","title":"Several lovely people","date":"Monday 9 March","time":"10:05 pm","dateTime":"Monday 9 March, 10:05 pm","published":true},{"id":97,"displayNumber":"097","title":"Reduced to cheap gossip","date":"Tuesday 10 March","time":"6:12 pm","dateTime":"Tuesday 10 March, 6:12 pm","published":true},{"id":98,"displayNumber":"098","title":"Four girls I know","date":"Wednesday 11 March","time":"8:02 pm","dateTime":"Wednesday 11 March, 8:02 pm","published":true},{"id":99,"displayNumber":"099","title":"Reviews and results","date":"Thursday 12 March","time":"8:01 pm","dateTime":"Thursday 12 March, 8:01 pm","published":true},{"id":100,"displayNumber":"100","title":"Crazy hair day","date":"Saturday 14 March","time":"12:41 am","dateTime":"Saturday 14 March, 12:41 am","published":true},{"id":101,"displayNumber":"101","title":"Photographs, presentations and Pingu","date":"Saturday 14 March","time":"9:27 pm","dateTime":"Saturday 14 March, 9:27 pm","published":true},{"id":102,"displayNumber":"102","title":"Put a positive happy title here plz","date":"Sunday 15 March","time":"4:33 pm","dateTime":"Sunday 15 March, 4:33 pm","published":true},{"id":103,"displayNumber":"103","title":"The note that went wrong","date":"Tuesday 17 March","time":"3:45 pm","dateTime":"Tuesday 17 March, 3:45 pm","published":true},{"id":104,"displayNumber":"104","title":"Frogs.","date":"Wednesday 18 March","time":"5:19 pm","dateTime":"Wednesday 18 March, 5:19 pm","published":true},{"id":105,"displayNumber":"105","title":"Regarding the Jess of my previous entry","date":"Wednesday 18 March","time":"5:48 pm","dateTime":"Wednesday 18 March, 5:48 pm","published":true},{"id":106,"displayNumber":"106","title":"Non-existent words","date":"Thursday 19 March","time":"11:01 pm","dateTime":"Thursday 19 March, 11:01 pm","published":true},{"id":107,"displayNumber":"107","title":"Girls, girls, girls","date":"Friday 20 March","time":"11:21 pm","dateTime":"Friday 20 March, 11:21 pm","published":true},{"id":108,"displayNumber":"108","title":"On that box what shows me things","date":"Saturday 21 March","time":"9:37 pm","dateTime":"Saturday 21 March, 9:37 pm","published":true},{"id":109,"displayNumber":"109","title":"Mother's Day","date":"Sunday 22 March","time":"10:49 am","dateTime":"Sunday 22 March, 10:49 am","published":true},{"id":110,"displayNumber":"110","title":"Trock feature","date":"Monday 23 March","time":"5:01 pm","dateTime":"Monday 23 March, 5:01 pm","published":true},{"id":111,"displayNumber":"111","title":"One dislikes me, one fancies me","date":"Tuesday 24 March","time":"8:37 pm","dateTime":"Tuesday 24 March, 8:37 pm","published":true},{"id":112,"displayNumber":"112","title":"Being secretive","date":"Thursday 26 March","time":"11:28 pm","dateTime":"Thursday 26 March, 11:28 pm","published":true},{"id":113,"displayNumber":"113","title":"Midday on Monday... except it's not","date":"Friday 27 March","time":"10:58 pm","dateTime":"Friday 27 March, 10:58 pm","published":true},{"id":114,"displayNumber":"114","title":"Vaguely Live Return <3","date":"Sunday 29 March","time":"12:13 am","dateTime":"Sunday 29 March, 12:13 am","published":true},{"id":115,"displayNumber":"115","title":"Sexual invitations","date":"Sunday 29 March","time":"5:09 pm","dateTime":"Sunday 29 March, 5:09 pm","published":true},{"id":116,"displayNumber":"116","title":"Win-ful Wonderwall ... what?!","date":"Monday 30 March","time":"9:47 pm","dateTime":"Monday 30 March, 9:47 pm","published":true},{"id":117,"displayNumber":"117","title":"Bullshitty blargh.","date":"Monday 30 March","time":"10:41 pm","dateTime":"Monday 30 March, 10:41 pm","published":true},{"id":118,"displayNumber":"118","title":"Say cheese!","date":"Tuesday 31 March","time":"4:41 pm","dateTime":"Tuesday 31 March, 4:41 pm","published":true},{"id":119,"displayNumber":"119","title":"Guess who's pissed off, again? :p","date":"Tuesday 31 March","time":"4:44 pm","dateTime":"Tuesday 31 March, 4:44 pm","published":true},{"id":120,"displayNumber":"120","title":"Finally the finale","date":"Tuesday 31 March","time":"10:27 pm","dateTime":"Tuesday 31 March, 10:27 pm","published":true},{"id":121,"displayNumber":"121","title":"April fools","date":"Wednesday 1 April","time":"5:57 pm","dateTime":"Wednesday 1 April, 5:57 pm","published":true},{"id":122,"displayNumber":"122","title":"Happyface :)","date":"Wednesday 1 April","time":"11:21 pm","dateTime":"Wednesday 1 April, 11:21 pm","published":true},{"id":123,"displayNumber":"123","title":"Today has been pretty lovely.","date":"Thursday 2 April","time":"4:38 pm","dateTime":"Thursday 2 April, 4:38 pm","published":true},{"id":124,"displayNumber":"124","title":"Who am I?","date":"Thursday 2 April","time":"10:17 pm","dateTime":"Thursday 2 April, 10:17 pm","published":true},{"id":125,"displayNumber":"125","title":"Told you so.","date":"Thursday 2 April","time":"10:41 pm","dateTime":"Thursday 2 April, 10:41 pm","published":true},{"id":126,"displayNumber":"126","title":"Non-uniform day, porno poems and love queues","date":"Friday 3 April","time":"4:08 pm","dateTime":"Friday 3 April, 4:08 pm","published":true},{"id":127,"displayNumber":"127","title":"(750) One week to go...","date":"Saturday 4 April","time":"1:37 pm","dateTime":"Saturday 4 April, 1:37 pm","published":true},{"id":128,"displayNumber":"128","title":"H2G2","date":"Sunday 5 April","time":"7:05 pm","dateTime":"Sunday 5 April, 7:05 pm","published":true},{"id":129,"displayNumber":"129","title":"One Christian, one Atheist, one webcam","date":"Monday 6 April","time":"10:58 pm","dateTime":"Monday 6 April, 10:58 pm","published":true},{"id":130,"displayNumber":"130","title":"Club Charlie","date":"Monday 6 April","time":"11:08 pm","dateTime":"Monday 6 April, 11:08 pm","published":true},{"id":131,"displayNumber":"131","title":"Who filming","date":"Monday 6 April","time":"11:40 pm","dateTime":"Monday 6 April, 11:40 pm","published":true},{"id":132,"displayNumber":"132","title":"Classic Who for newbies","date":"Tuesday 7 April","time":"3:20 pm","dateTime":"Tuesday 7 April, 3:20 pm","published":true},{"id":133,"displayNumber":"133","title":"When I went to school during the school holidays.","date":"Wednesday 8 April","time":"10:02 pm","dateTime":"Wednesday 8 April, 10:02 pm","published":true},{"id":134,"displayNumber":"134","title":"Interwebsites :)","date":"Thursday 9 April","time":"11:37 am","dateTime":"Thursday 9 April, 11:37 am","published":true},{"id":135,"displayNumber":"135","title":"Pondering...","date":"Thursday 9 April","time":"4:01 pm","dateTime":"Thursday 9 April, 4:01 pm","published":true},{"id":136,"displayNumber":"136","title":"To be on the safe side.","date":"Friday 10 April","time":"12:00 am","dateTime":"Friday 10 April, 12:00 am","published":true},{"id":137,"displayNumber":"137","title":"Yesterday in a nutshell","date":"Saturday 11 April","time":"11:24 am","dateTime":"Saturday 11 April, 11:24 am","published":true},{"id":138,"displayNumber":"138","title":"Lent failure","date":"Saturday 11 April","time":"11:42 am","dateTime":"Saturday 11 April, 11:42 am","published":true},{"id":139,"displayNumber":"139","title":"Discussing classic Who with Alex Day","date":"Saturday 11 April","time":"4:09 pm","dateTime":"Saturday 11 April, 4:09 pm","published":true},{"id":140,"displayNumber":"140","title":"Tomb Raider meets Harry Potter","date":"Saturday 11 April","time":"9:40 pm","dateTime":"Saturday 11 April, 9:40 pm","published":true},{"id":141,"displayNumber":"141","title":"Planet of the Dead","date":"Sunday 12 April","time":"5:05 pm","dateTime":"Sunday 12 April, 5:05 pm","published":true},{"id":142,"displayNumber":"142","title":"Unlucky... it's the 13th...","date":"Monday 13 April","time":"10:11 pm","dateTime":"Monday 13 April, 10:11 pm","published":true},{"id":143,"displayNumber":"143","title":"FiveAwesomeWhovians?","date":"Tuesday 14 April","time":"11:23 pm","dateTime":"Tuesday 14 April, 11:23 pm","published":true},{"id":144,"displayNumber":"144","title":"FiveAwesomeWhoFans?","date":"Tuesday 14 April","time":"11:24 pm","dateTime":"Tuesday 14 April, 11:24 pm","published":true},{"id":145,"displayNumber":"145","title":"Lew's internet news","date":"Thursday 16 April","time":"2:07 pm","dateTime":"Thursday 16 April, 2:07 pm","published":true},{"id":146,"displayNumber":"146","title":"Seeing the future?","date":"Thursday 16 April","time":"3:12 pm","dateTime":"Thursday 16 April, 3:12 pm","published":true},{"id":147,"displayNumber":"147","title":"Creative block","date":"Friday 17 April","time":"3:58 pm","dateTime":"Friday 17 April, 3:58 pm","published":true},{"id":148,"displayNumber":"148","title":"Because everyone does it at some point.","date":"Friday 17 April","time":"4:19 pm","dateTime":"Friday 17 April, 4:19 pm","published":true},{"id":149,"displayNumber":"149","title":"From the Mind and Mobile of Lewis","date":"Saturday 18 April","time":"1:46 am","dateTime":"Saturday 18 April, 1:46 am","published":true},{"id":150,"displayNumber":"150","title":"Mobile diary","date":"Saturday 18 April","time":"1:12 pm","dateTime":"Saturday 18 April, 1:12 pm","published":true},{"id":151,"displayNumber":"151","title":"Turn Left // The Stolen Earth // Journey's End","date":"Saturday 18 April","time":"5:18 pm","dateTime":"Saturday 18 April, 5:18 pm","published":true},{"id":152,"displayNumber":"152","title":"English","date":"Sunday 19 April","time":"2:30 pm","dateTime":"Sunday 19 April, 2:30 pm","published":true},{"id":153,"displayNumber":"153","title":"Removing the unnecessary","date":"Monday 20 April","time":"4:39 pm","dateTime":"Monday 20 April, 4:39 pm","published":true},{"id":154,"displayNumber":"154","title":"God vs. wallpaper stripping","date":"Tuesday 21 April","time":"12:31 am","dateTime":"Tuesday 21 April, 12:31 am","published":true},{"id":155,"displayNumber":"155","title":"Charlie, chilli and chocolate","date":"Tuesday 21 April","time":"4:19 pm","dateTime":"Tuesday 21 April, 4:19 pm","published":true},{"id":156,"displayNumber":"156","title":"Facebook: Reactivated","date":"Tuesday 21 April","time":"6:58 pm","dateTime":"Tuesday 21 April, 6:58 pm","published":true},{"id":157,"displayNumber":"157","title":"FiveAwesomeBloggers?","date":"Wednesday 22 April","time":"3:19 pm","dateTime":"Wednesday 22 April, 3:19 pm","published":true},{"id":158,"displayNumber":"158","title":"Texting God","date":"Wednesday 22 April","time":"3:25 pm","dateTime":"Wednesday 22 April, 3:25 pm","published":true},{"id":159,"displayNumber":"159","title":"Textual education","date":"Thursday 23 April","time":"10:47 am","dateTime":"Thursday 23 April, 10:47 am","published":true},{"id":160,"displayNumber":"160","title":"Textual education (continued)","date":"Thursday 23 April","time":"3:55 pm","dateTime":"Thursday 23 April, 3:55 pm","published":true},{"id":161,"displayNumber":"161","title":"A pisstake for Pursglove","date":"Thursday 23 April","time":"11:05 pm","dateTime":"Thursday 23 April, 11:05 pm","published":true},{"id":162,"displayNumber":"162","title":"Who Q's","date":"Friday 24 April","time":"7:01 pm","dateTime":"Friday 24 April, 7:01 pm","published":true},{"id":163,"displayNumber":"163","title":"Quite simply, Billie and Maisie are cunts.","date":"Saturday 25 April","time":"12:12 pm","dateTime":"Saturday 25 April, 12:12 pm","published":true},{"id":164,"displayNumber":"164","title":"Urban Dictionary","date":"Saturday 25 April","time":"7:19 pm","dateTime":"Saturday 25 April, 7:19 pm","published":true},{"id":165,"displayNumber":"165","title":"The ultimate Doctor Who collection - update","date":"Sunday 26 April","time":"11:49 am","dateTime":"Sunday 26 April, 11:49 am","published":true},{"id":166,"displayNumber":"166","title":"Watching Who - The Classic Series - Update","date":"Sunday 26 April","time":"11:56 am","dateTime":"Sunday 26 April, 11:56 am","published":true},{"id":167,"displayNumber":"167","title":"Who and Torchwood shizzle","date":"Sunday 26 April","time":"12:01 pm","dateTime":"Sunday 26 April, 12:01 pm","published":true},{"id":168,"displayNumber":"168","title":"BAFTA laughter?","date":"Sunday 26 April","time":"10:59 pm","dateTime":"Sunday 26 April, 10:59 pm","published":true},{"id":169,"displayNumber":"169","title":"\"Look mum, I eat da apple wivz spoon!\"","date":"Monday 27 April","time":"6:40 pm","dateTime":"Monday 27 April, 6:40 pm","published":true},{"id":170,"displayNumber":"170","title":"Lck f vwls :)","date":"Monday 27 April","time":"9:21 pm","dateTime":"Monday 27 April, 9:21 pm","published":true},{"id":171,"displayNumber":"171","title":"Fatty's fault","date":"Tuesday 28 April","time":"4:13 pm","dateTime":"Tuesday 28 April, 4:13 pm","published":true},{"id":172,"displayNumber":"172","title":"The twatty triangle of people","date":"Tuesday 28 April","time":"4:55 pm","dateTime":"Tuesday 28 April, 4:55 pm","published":true},{"id":173,"displayNumber":"173","title":"The end of an era","date":"Tuesday 28 April","time":"10:40 pm","dateTime":"Tuesday 28 April, 10:40 pm","published":true},{"id":174,"displayNumber":"174","title":"Chilled and happyful ^_^","date":"Wednesday 29 April","time":"3:34 pm","dateTime":"Wednesday 29 April, 3:34 pm","published":true},{"id":175,"displayNumber":"175","title":"\"Whoever employs him needs to get a receipt!\"","date":"Wednesday 29 April","time":"10:33 pm","dateTime":"Wednesday 29 April, 10:33 pm","published":true},{"id":176,"displayNumber":"176","title":"Nasty notes and two twats","date":"Thursday 30 April","time":"4:37 pm","dateTime":"Thursday 30 April, 4:37 pm","published":true},{"id":177,"displayNumber":"177","title":"eighthundred.","date":"Friday 1 May","time":"6:32 pm","dateTime":"Friday 1 May, 6:32 pm","published":true},{"id":178,"displayNumber":"178","title":"Red Dwarf","date":"Friday 1 May","time":"11:54 pm","dateTime":"Friday 1 May, 11:54 pm","published":true},{"id":179,"displayNumber":"179","title":"I-shit-E","date":"Sunday 3 May","time":"6:31 pm","dateTime":"Sunday 3 May, 6:31 pm","published":true},{"id":180,"displayNumber":"180","title":"Swine flu","date":"Sunday 3 May","time":"11:53 pm","dateTime":"Sunday 3 May, 11:53 pm","published":true},{"id":181,"displayNumber":"181","title":"Answering questions","date":"Monday 4 May","time":"12:41 am","dateTime":"Monday 4 May, 12:41 am","published":true},{"id":182,"displayNumber":"182","title":"Prom night and flu fright","date":"Tuesday 5 May","time":"6:18 pm","dateTime":"Tuesday 5 May, 6:18 pm","published":true},{"id":183,"displayNumber":"183","title":"Letters","date":"Wednesday 6 May","time":"11:54 pm","dateTime":"Wednesday 6 May, 11:54 pm","published":true},{"id":184,"displayNumber":"184","title":"Specialness ^_^","date":"Thursday 7 May","time":"5:39 pm","dateTime":"Thursday 7 May, 5:39 pm","published":true},{"id":185,"displayNumber":"185","title":"Chameleon Circuit","date":"Friday 8 May","time":"5:59 pm","dateTime":"Friday 8 May, 5:59 pm","published":true},{"id":186,"displayNumber":"186","title":"Friends and funtiemz ^_^","date":"Friday 8 May","time":"6:38 pm","dateTime":"Friday 8 May, 6:38 pm","published":true},{"id":187,"displayNumber":"187","title":"Jessica","date":"Saturday 9 May","time":"12:08 am","dateTime":"Saturday 9 May, 12:08 am","published":true},{"id":188,"displayNumber":"188","title":"For Jess <3","date":"Saturday 9 May","time":"12:27 am","dateTime":"Saturday 9 May, 12:27 am","published":true},{"id":189,"displayNumber":"189","title":"Lazy Sunday","date":"Sunday 10 May","time":"4:16 pm","dateTime":"Sunday 10 May, 4:16 pm","published":true},{"id":190,"displayNumber":"190","title":"Jordan and Peter Andre split","date":"Monday 11 May","time":"5:33 pm","dateTime":"Monday 11 May, 5:33 pm","published":true},{"id":191,"displayNumber":"191","title":"Clown nightmares","date":"Monday 11 May","time":"6:14 pm","dateTime":"Monday 11 May, 6:14 pm","published":true},{"id":192,"displayNumber":"192","title":"Letters and photos","date":"Monday 11 May","time":"10:30 pm","dateTime":"Monday 11 May, 10:30 pm","published":true},{"id":193,"displayNumber":"193","title":"ICT, RE, ICT","date":"Tuesday 12 May","time":"6:12 pm","dateTime":"Tuesday 12 May, 6:12 pm","published":true},{"id":194,"displayNumber":"194","title":"Football and freaks","date":"Wednesday 13 May","time":"3:33 pm","dateTime":"Wednesday 13 May, 3:33 pm","published":true},{"id":195,"displayNumber":"195","title":"The Sniffing Assassin","date":"Thursday 14 May","time":"9:10 pm","dateTime":"Thursday 14 May, 9:10 pm","published":true},{"id":196,"displayNumber":"196","title":"Study leave, kisses and a diary","date":"Friday 15 May","time":"1:51 pm","dateTime":"Friday 15 May, 1:51 pm","published":true},{"id":197,"displayNumber":"197","title":"She's back... again","date":"Saturday 16 May","time":"1:39 pm","dateTime":"Saturday 16 May, 1:39 pm","published":true},{"id":198,"displayNumber":"198","title":"Finishing fifth","date":"Sunday 17 May","time":"12:09 am","dateTime":"Sunday 17 May, 12:09 am","published":true},{"id":199,"displayNumber":"199","title":"Christmas tease","date":"Sunday 17 May","time":"1:44 am","dateTime":"Sunday 17 May, 1:44 am","published":true},{"id":200,"displayNumber":"200","title":"Robert","date":"Sunday 17 May","time":"7:36 pm","dateTime":"Sunday 17 May, 7:36 pm","published":true},{"id":201,"displayNumber":"201","title":"LiveJournal thoughts","date":"Sunday 17 May","time":"8:50 pm","dateTime":"Sunday 17 May, 8:50 pm","published":true},{"id":202,"displayNumber":"202","title":"Exams and Father Ted","date":"Monday 18 May","time":"4:35 pm","dateTime":"Monday 18 May, 4:35 pm","published":true},{"id":203,"displayNumber":"203","title":"Peter Andre to take back 'tart'","date":"Tuesday 19 May","time":"11:54 am","dateTime":"Tuesday 19 May, 11:54 am","published":true},{"id":204,"displayNumber":"204","title":"English Literature","date":"Tuesday 19 May","time":"12:05 pm","dateTime":"Tuesday 19 May, 12:05 pm","published":true},{"id":205,"displayNumber":"205","title":"Day meets Cook","date":"Tuesday 19 May","time":"9:30 pm","dateTime":"Tuesday 19 May, 9:30 pm","published":true},{"id":206,"displayNumber":"206","title":"The final wrap","date":"Wednesday 20 May","time":"7:48 pm","dateTime":"Wednesday 20 May, 7:48 pm","published":true},{"id":207,"displayNumber":"207","title":"Non-existent lessons","date":"Thursday 21 May","time":"3:56 pm","dateTime":"Thursday 21 May, 3:56 pm","published":true},{"id":208,"displayNumber":"208","title":"Lee Evans","date":"Thursday 21 May","time":"9:38 pm","dateTime":"Thursday 21 May, 9:38 pm","published":true},{"id":209,"displayNumber":"209","title":"School or skive?","date":"Thursday 21 May","time":"11:08 pm","dateTime":"Thursday 21 May, 11:08 pm","published":true},{"id":210,"displayNumber":"210","title":"A day of not a lot","date":"Friday 22 May","time":"10:46 pm","dateTime":"Friday 22 May, 10:46 pm","published":true},{"id":211,"displayNumber":"211","title":"BANG SORTED BOOYAH!","date":"Saturday 23 May","time":"11:59 pm","dateTime":"Saturday 23 May, 11:59 pm","published":true},{"id":212,"displayNumber":"212","title":"Priorities","date":"Sunday 24 May","time":"11:50 pm","dateTime":"Sunday 24 May, 11:50 pm","published":true},{"id":213,"displayNumber":"213","title":"Home alone with Lewis","date":"Monday 25 May","time":"12:58 am","dateTime":"Monday 25 May, 12:58 am","published":true},{"id":214,"displayNumber":"214","title":"Actually...","date":"Monday 25 May","time":"1:31 am","dateTime":"Monday 25 May, 1:31 am","published":true},{"id":215,"displayNumber":"215","title":"I gave in and watched the first half - so shoot me!","date":"Tuesday 26 May","time":"12:49 am","dateTime":"Tuesday 26 May, 12:49 am","published":true},{"id":216,"displayNumber":"216","title":"Sarah Jane speculation","date":"Tuesday 26 May","time":"2:53 pm","dateTime":"Tuesday 26 May, 2:53 pm","published":true},{"id":217,"displayNumber":"217","title":"\"BBC confirms work started on Doctor Who movie\"","date":"Wednesday 27 May","time":"1:30 pm","dateTime":"Wednesday 27 May, 1:30 pm","published":true},{"id":218,"displayNumber":"218","title":"At home with Lewis","date":"Thursday 28 May","time":"5:19 pm","dateTime":"Thursday 28 May, 5:19 pm","published":true},{"id":219,"displayNumber":"219","title":"And we have a [sexy, Scottish and ginger] companion!","date":"Friday 29 May","time":"1:26 pm","dateTime":"Friday 29 May, 1:26 pm","published":true},{"id":220,"displayNumber":"220","title":"Probably not the next companion's costume... :(","date":"Friday 29 May","time":"4:04 pm","dateTime":"Friday 29 May, 4:04 pm","published":true},{"id":221,"displayNumber":"221","title":"From Doctor Who to Big Brother","date":"Friday 29 May","time":"4:41 pm","dateTime":"Friday 29 May, 4:41 pm","published":true},{"id":222,"displayNumber":"222","title":"Project #3","date":"Saturday 30 May","time":"11:05 am","dateTime":"Saturday 30 May, 11:05 am","published":true},{"id":223,"displayNumber":"223","title":"Charlie Who?","date":"Sunday 31 May","time":"5:16 pm","dateTime":"Sunday 31 May, 5:16 pm","published":true},{"id":224,"displayNumber":"224","title":"Exams, CDs, presents and stories :)","date":"Monday 1 June","time":"10:11 pm","dateTime":"Monday 1 June, 10:11 pm","published":true},{"id":225,"displayNumber":"225","title":"English Language - Paper 1","date":"Tuesday 2 June","time":"12:02 pm","dateTime":"Tuesday 2 June, 12:02 pm","published":true},{"id":226,"displayNumber":"226","title":"Lee Evans DVDs","date":"Tuesday 2 June","time":"12:02 pm","dateTime":"Tuesday 2 June, 12:02 pm","published":true},{"id":227,"displayNumber":"227","title":"850: CHAMELEON CIRCUIT LOVE","date":"Tuesday 2 June","time":"12:03 pm","dateTime":"Tuesday 2 June, 12:03 pm","published":true},{"id":228,"displayNumber":"228","title":"Revision... not quite","date":"Tuesday 2 June","time":"10:47 pm","dateTime":"Tuesday 2 June, 10:47 pm","published":true},{"id":229,"displayNumber":"229","title":"History - Paper 1","date":"Wednesday 3 June","time":"12:18 pm","dateTime":"Wednesday 3 June, 12:18 pm","published":true},{"id":230,"displayNumber":"230","title":"\"Everything has its time and everything dies…\"","date":"Wednesday 3 June","time":"4:18 pm","dateTime":"Wednesday 3 June, 4:18 pm","published":true},{"id":231,"displayNumber":"231","title":"Bare Brother","date":"Thursday 4 June","time":"5:00 pm","dateTime":"Thursday 4 June, 5:00 pm","published":true},{"id":232,"displayNumber":"232","title":"English Language - Paper 2","date":"Thursday 4 June","time":"6:58 pm","dateTime":"Thursday 4 June, 6:58 pm","published":true},{"id":233,"displayNumber":"233","title":"Yeah yeah whatever","date":"Friday 5 June","time":"11:40 pm","dateTime":"Friday 5 June, 11:40 pm","published":true},{"id":234,"displayNumber":"234","title":"Lindsay and Rose","date":"Saturday 6 June","time":"1:43 pm","dateTime":"Saturday 6 June, 1:43 pm","published":true},{"id":235,"displayNumber":"235","title":"Surprises?","date":"Saturday 6 June","time":"7:34 pm","dateTime":"Saturday 6 June, 7:34 pm","published":true},{"id":236,"displayNumber":"236","title":"On Charlie's MSN","date":"Sunday 7 June","time":"12:25 am","dateTime":"Sunday 7 June, 12:25 am","published":true},{"id":237,"displayNumber":"237","title":"In which Charlie reads the chat logs and Big Brother reveals the house.","date":"Sunday 7 June","time":"2:36 pm","dateTime":"Sunday 7 June, 2:36 pm","published":true},{"id":238,"displayNumber":"238","title":"Big Brother's Big... Bus?!","date":"Sunday 7 June","time":"11:37 pm","dateTime":"Sunday 7 June, 11:37 pm","published":true},{"id":239,"displayNumber":"239","title":"Goodnight? No. Badnight? Yes.","date":"Tuesday 9 June","time":"12:27 pm","dateTime":"Tuesday 9 June, 12:27 pm","published":true},{"id":240,"displayNumber":"240","title":"Story time with Lewis and Charlotte","date":"Tuesday 9 June","time":"5:41 pm","dateTime":"Tuesday 9 June, 5:41 pm","published":true},{"id":241,"displayNumber":"241","title":"*yawns*","date":"Wednesday 10 June","time":"11:30 pm","dateTime":"Wednesday 10 June, 11:30 pm","published":true},{"id":242,"displayNumber":"242","title":"Manual archiving","date":"Thursday 11 June","time":"8:12 am","dateTime":"Thursday 11 June, 8:12 am","published":true},{"id":243,"displayNumber":"243","title":"Of stories, exams and ducks?!","date":"Thursday 11 June","time":"5:48 pm","dateTime":"Thursday 11 June, 5:48 pm","published":true},{"id":244,"displayNumber":"244","title":"Ish complete ^_^","date":"Thursday 11 June","time":"11:12 pm","dateTime":"Thursday 11 June, 11:12 pm","published":true},{"id":245,"displayNumber":"245","title":"Presents and physics","date":"Friday 12 June","time":"11:43 am","dateTime":"Friday 12 June, 11:43 am","published":true},{"id":246,"displayNumber":"246","title":"Charlie 1 - 0 Lewis","date":"Friday 12 June","time":"11:51 am","dateTime":"Friday 12 June, 11:51 am","published":true},{"id":247,"displayNumber":"247","title":"Gallifrey Base","date":"Sunday 14 June","time":"3:44 pm","dateTime":"Sunday 14 June, 3:44 pm","published":true},{"id":248,"displayNumber":"248","title":"No more RE","date":"Monday 15 June","time":"1:13 pm","dateTime":"Monday 15 June, 1:13 pm","published":true},{"id":249,"displayNumber":"249","title":"IT'S A FUCKING TIME LORD!","date":"Monday 15 June","time":"11:46 pm","dateTime":"Monday 15 June, 11:46 pm","published":true},{"id":250,"displayNumber":"250","title":"The Fantasy Vortex","date":"Tuesday 16 June","time":"11:19 pm","dateTime":"Tuesday 16 June, 11:19 pm","published":true},{"id":251,"displayNumber":"251","title":"My final exam","date":"Wednesday 17 June","time":"10:59 pm","dateTime":"Wednesday 17 June, 10:59 pm","published":true},{"id":252,"displayNumber":"252","title":"Chameleon Circuit: Taking over the world!","date":"Thursday 18 June","time":"12:31 am","dateTime":"Thursday 18 June, 12:31 am","published":true},{"id":253,"displayNumber":"253","title":"Jobfuck","date":"Thursday 18 June","time":"3:30 pm","dateTime":"Thursday 18 June, 3:30 pm","published":true},{"id":254,"displayNumber":"254","title":"Two-hour lecture","date":"Friday 19 June","time":"3:39 pm","dateTime":"Friday 19 June, 3:39 pm","published":true},{"id":255,"displayNumber":"255","title":"A day of doing fuck all","date":"Sunday 21 June","time":"6:16 pm","dateTime":"Sunday 21 June, 6:16 pm","published":true},{"id":256,"displayNumber":"256","title":"Aaron","date":"Monday 22 June","time":"1:05 pm","dateTime":"Monday 22 June, 1:05 pm","published":true},{"id":257,"displayNumber":"257","title":"College and Charlotte","date":"Thursday 25 June","time":"7:24 pm","dateTime":"Thursday 25 June, 7:24 pm","published":true},{"id":258,"displayNumber":"258","title":"Chipmonks","date":"Thursday 25 June","time":"7:39 pm","dateTime":"Thursday 25 June, 7:39 pm","published":true},{"id":259,"displayNumber":"259","title":"Michael Jackson","date":"Friday 26 June","time":"1:20 am","dateTime":"Friday 26 June, 1:20 am","published":true},{"id":260,"displayNumber":"260","title":"Random Time Lords","date":"Friday 26 June","time":"8:18 pm","dateTime":"Friday 26 June, 8:18 pm","published":true},{"id":261,"displayNumber":"261","title":"Computer reboot","date":"Saturday 27 June","time":"8:20 pm","dateTime":"Saturday 27 June, 8:20 pm","published":true},{"id":262,"displayNumber":"262","title":"Heatwave","date":"Sunday 28 June","time":"11:13 pm","dateTime":"Sunday 28 June, 11:13 pm","published":true},{"id":263,"displayNumber":"263","title":"Facebook pointlessness x_x","date":"Wednesday 1 July","time":"6:49 pm","dateTime":"Wednesday 1 July, 6:49 pm","published":true},{"id":264,"displayNumber":"264","title":"Heatwave horrors (1/3)","date":"Thursday 2 July","time":"11:50 pm","dateTime":"Thursday 2 July, 11:50 pm","published":true},{"id":265,"displayNumber":"265","title":"A singing sensation called Charlie (2/3)","date":"Thursday 2 July","time":"11:54 pm","dateTime":"Thursday 2 July, 11:54 pm","published":true},{"id":266,"displayNumber":"266","title":"Photos and reflections (3/3)","date":"Thursday 2 July","time":"11:55 pm","dateTime":"Thursday 2 July, 11:55 pm","published":true},{"id":267,"displayNumber":"267","title":"Unwanted","date":"Friday 3 July","time":"2:07 pm","dateTime":"Friday 3 July, 2:07 pm","published":true},{"id":268,"displayNumber":"268","title":"Gnomes and ginger gypsies","date":"Saturday 4 July","time":"11:19 am","dateTime":"Saturday 4 July, 11:19 am","published":true},{"id":269,"displayNumber":"269","title":"Performance photos","date":"Sunday 5 July","time":"12:52 pm","dateTime":"Sunday 5 July, 12:52 pm","published":true},{"id":270,"displayNumber":"270","title":"Torchwood - Day One","date":"Monday 6 July","time":"10:27 pm","dateTime":"Monday 6 July, 10:27 pm","published":true},{"id":271,"displayNumber":"271","title":"Torchwood - Day Two","date":"Tuesday 7 July","time":"11:47 pm","dateTime":"Tuesday 7 July, 11:47 pm","published":true},{"id":272,"displayNumber":"272","title":"The War Games","date":"Wednesday 8 July","time":"7:20 pm","dateTime":"Wednesday 8 July, 7:20 pm","published":true},{"id":273,"displayNumber":"273","title":"Torchwood - Day Three","date":"Wednesday 8 July","time":"10:52 pm","dateTime":"Wednesday 8 July, 10:52 pm","published":true},{"id":274,"displayNumber":"274","title":"Torchwood - Day Four","date":"Thursday 9 July","time":"10:32 pm","dateTime":"Thursday 9 July, 10:32 pm","published":true},{"id":275,"displayNumber":"275","title":"Torchwood - Day Five (+ Big Brother)","date":"Friday 10 July","time":"10:41 pm","dateTime":"Friday 10 July, 10:41 pm","published":true},{"id":276,"displayNumber":"276","title":"Stand back. This is one hell of an entry xD","date":"Monday 13 July","time":"10:26 pm","dateTime":"Monday 13 July, 10:26 pm","published":true},{"id":277,"displayNumber":"277","title":"900: Taking the p...resents ^_^","date":"Tuesday 14 July","time":"3:19 pm","dateTime":"Tuesday 14 July, 3:19 pm","published":true},{"id":278,"displayNumber":"278","title":"New beginnings","date":"Thursday 16 July","time":"3:18 pm","dateTime":"Thursday 16 July, 3:18 pm","published":true},{"id":279,"displayNumber":"279","title":"Protests FTW <3","date":"Thursday 16 July","time":"11:01 pm","dateTime":"Thursday 16 July, 11:01 pm","published":true},{"id":280,"displayNumber":"280","title":"Mostly Ghostly","date":"Friday 17 July","time":"1:44 pm","dateTime":"Friday 17 July, 1:44 pm","published":true},{"id":281,"displayNumber":"281","title":"Tweed and bowtie","date":"Monday 20 July","time":"11:54 am","dateTime":"Monday 20 July, 11:54 am","published":true},{"id":282,"displayNumber":"282","title":"Squeeing like a fangirl","date":"Monday 20 July","time":"1:00 pm","dateTime":"Monday 20 July, 1:00 pm","published":true},{"id":283,"displayNumber":"283","title":"It'll grow on me","date":"Tuesday 21 July","time":"7:14 pm","dateTime":"Tuesday 21 July, 7:14 pm","published":true},{"id":284,"displayNumber":"284","title":"Interview","date":"Wednesday 22 July","time":"8:00 pm","dateTime":"Wednesday 22 July, 8:00 pm","published":true},{"id":285,"displayNumber":"285","title":"Lewis got an actual job!","date":"Friday 24 July","time":"3:41 pm","dateTime":"Friday 24 July, 3:41 pm","published":true},{"id":286,"displayNumber":"286","title":"Gathering at Charlie's","date":"Friday 24 July","time":"4:35 pm","dateTime":"Friday 24 July, 4:35 pm","published":true},{"id":287,"displayNumber":"287","title":"A geek with a job","date":"Saturday 25 July","time":"12:02 am","dateTime":"Saturday 25 July, 12:02 am","published":true},{"id":288,"displayNumber":"288","title":"Regarding work","date":"Sunday 26 July","time":"3:24 pm","dateTime":"Sunday 26 July, 3:24 pm","published":true},{"id":289,"displayNumber":"289","title":"Time Lords, teasers and Tennant","date":"Sunday 26 July","time":"10:31 pm","dateTime":"Sunday 26 July, 10:31 pm","published":true},{"id":290,"displayNumber":"290","title":"Water always wins","date":"Monday 27 July","time":"12:17 am","dateTime":"Monday 27 July, 12:17 am","published":true},{"id":291,"displayNumber":"291","title":"BBye?","date":"Monday 27 July","time":"1:36 pm","dateTime":"Monday 27 July, 1:36 pm","published":true},{"id":292,"displayNumber":"292","title":"Work, secrets and updates","date":"Thursday 30 July","time":"1:42 pm","dateTime":"Thursday 30 July, 1:42 pm","published":true},{"id":293,"displayNumber":"293","title":"\"Cashier number two please!\"","date":"Thursday 30 July","time":"11:40 pm","dateTime":"Thursday 30 July, 11:40 pm","published":true},{"id":294,"displayNumber":"294","title":"July summary","date":"Friday 31 July","time":"5:32 pm","dateTime":"Friday 31 July, 5:32 pm","published":true},{"id":295,"displayNumber":"295","title":"I'm in love with a dinosaur","date":"Friday 31 July","time":"6:30 pm","dateTime":"Friday 31 July, 6:30 pm","published":true},{"id":296,"displayNumber":"296","title":"Workday","date":"Saturday 1 August","time":"11:50 pm","dateTime":"Saturday 1 August, 11:50 pm","published":true},{"id":297,"displayNumber":"297","title":"Eleven days later...","date":"Wednesday 12 August","time":"11:29 pm","dateTime":"Wednesday 12 August, 11:29 pm","published":true},{"id":298,"displayNumber":"298","title":"August: Almost Deserted","date":"Sunday 16 August","time":"6:44 pm","dateTime":"Sunday 16 August, 6:44 pm","published":true},{"id":299,"displayNumber":"299","title":"Birthdays, balloons, banners and books","date":"Monday 17 August","time":"11:16 pm","dateTime":"Monday 17 August, 11:16 pm","published":true},{"id":300,"displayNumber":"300","title":"Gathering at Charlie's - photos","date":"Tuesday 18 August","time":"8:01 pm","dateTime":"Tuesday 18 August, 8:01 pm","published":true},{"id":301,"displayNumber":"301","title":"A theory for \"The End of Time\"","date":"Wednesday 19 August","time":"12:50 pm","dateTime":"Wednesday 19 August, 12:50 pm","published":true},{"id":302,"displayNumber":"302","title":"Charlotte II","date":"Sunday 23 August","time":"12:04 am","dateTime":"Sunday 23 August, 12:04 am","published":true},{"id":303,"displayNumber":"303","title":"Stuck in the middle","date":"Monday 24 August","time":"1:03 pm","dateTime":"Monday 24 August, 1:03 pm","published":true},{"id":304,"displayNumber":"304","title":"Swingball","date":"Monday 24 August","time":"11:38 pm","dateTime":"Monday 24 August, 11:38 pm","published":true},{"id":305,"displayNumber":"305","title":"GCS-Please","date":"Wednesday 26 August","time":"10:48 pm","dateTime":"Wednesday 26 August, 10:48 pm","published":true},{"id":306,"displayNumber":"306","title":"GCSE Results","date":"Thursday 27 August","time":"2:02 pm","dateTime":"Thursday 27 August, 2:02 pm","published":true},{"id":307,"displayNumber":"307","title":"Just to clarify...","date":"Thursday 27 August","time":"2:11 pm","dateTime":"Thursday 27 August, 2:11 pm","published":true},{"id":308,"displayNumber":"308","title":"Puppehness! <3","date":"Sunday 30 August","time":"9:17 pm","dateTime":"Sunday 30 August, 9:17 pm","published":true},{"id":309,"displayNumber":"309","title":"Why did the chicken cross the road?","date":"Sunday 30 August","time":"9:34 pm","dateTime":"Sunday 30 August, 9:34 pm","published":true},{"id":310,"displayNumber":"310","title":"September changes","date":"Tuesday 1 September","time":"1:37 pm","dateTime":"Tuesday 1 September, 1:37 pm","published":true},{"id":311,"displayNumber":"311","title":"Rambles regarding Big Brother and college","date":"Wednesday 2 September","time":"5:00 pm","dateTime":"Wednesday 2 September, 5:00 pm","published":true},{"id":312,"displayNumber":"312","title":"First day skiver","date":"Thursday 3 September","time":"2:10 pm","dateTime":"Thursday 3 September, 2:10 pm","published":true},{"id":313,"displayNumber":"313","title":"College timetable","date":"Thursday 3 September","time":"2:24 pm","dateTime":"Thursday 3 September, 2:24 pm","published":true},{"id":314,"displayNumber":"314","title":"The not-so-epic final","date":"Sunday 6 September","time":"10:01 pm","dateTime":"Sunday 6 September, 10:01 pm","published":true},{"id":315,"displayNumber":"315","title":"Christmas Charlie","date":"Sunday 6 September","time":"10:38 pm","dateTime":"Sunday 6 September, 10:38 pm","published":true},{"id":316,"displayNumber":"316","title":"The timetable dilemma","date":"Tuesday 8 September","time":"8:39 pm","dateTime":"Tuesday 8 September, 8:39 pm","published":true},{"id":317,"displayNumber":"317","title":"2009-09-09 00:00:00","date":"Wednesday 9 September","time":"11:17 pm","dateTime":"Wednesday 9 September, 11:17 pm","published":true},{"id":318,"displayNumber":"318","title":"Third timetable lucky?","date":"Thursday 10 September","time":"10:39 pm","dateTime":"Thursday 10 September, 10:39 pm","published":true},{"id":319,"displayNumber":"319","title":"Weekend tales and tails","date":"Sunday 13 September","time":"7:08 pm","dateTime":"Sunday 13 September, 7:08 pm","published":true},{"id":320,"displayNumber":"320","title":"Tedious Terry","date":"Tuesday 15 September","time":"10:40 pm","dateTime":"Tuesday 15 September, 10:40 pm","published":true},{"id":321,"displayNumber":"321","title":"A girl called Nicola","date":"Tuesday 15 September","time":"11:08 pm","dateTime":"Tuesday 15 September, 11:08 pm","published":true},{"id":322,"displayNumber":"322","title":"College friends","date":"Wednesday 16 September","time":"10:38 pm","dateTime":"Wednesday 16 September, 10:38 pm","published":true},{"id":323,"displayNumber":"323","title":"Advice and education","date":"Thursday 17 September","time":"11:04 pm","dateTime":"Thursday 17 September, 11:04 pm","published":true},{"id":324,"displayNumber":"324","title":"Stuck to your seat?","date":"Friday 18 September","time":"10:41 pm","dateTime":"Friday 18 September, 10:41 pm","published":true},{"id":325,"displayNumber":"325","title":"Fanboy moment! ^____^","date":"Friday 18 September","time":"10:48 pm","dateTime":"Friday 18 September, 10:48 pm","published":true},{"id":326,"displayNumber":"326","title":"Feelin' a bit shit","date":"Sunday 20 September","time":"10:16 pm","dateTime":"Sunday 20 September, 10:16 pm","published":true},{"id":327,"displayNumber":"327","title":"Half-muslim","date":"Monday 21 September","time":"9:53 pm","dateTime":"Monday 21 September, 9:53 pm","published":true},{"id":328,"displayNumber":"328","title":"Thankyou for shopping at Boundary Mill stores :)","date":"Wednesday 23 September","time":"12:00 am","dateTime":"Wednesday 23 September, 12:00 am","published":true},{"id":329,"displayNumber":"329","title":"\"...like a stereotypical grandma in a disco foam party\"","date":"Wednesday 23 September","time":"10:55 pm","dateTime":"Wednesday 23 September, 10:55 pm","published":true},{"id":330,"displayNumber":"330","title":"Chips with Charlie","date":"Thursday 24 September","time":"11:35 pm","dateTime":"Thursday 24 September, 11:35 pm","published":true},{"id":331,"displayNumber":"331","title":"CHARLIE STOLE DAVID!","date":"Friday 25 September","time":"11:07 pm","dateTime":"Friday 25 September, 11:07 pm","published":true},{"id":332,"displayNumber":"332","title":"Mindfreak","date":"Friday 25 September","time":"11:09 pm","dateTime":"Friday 25 September, 11:09 pm","published":true},{"id":333,"displayNumber":"333","title":"Goodnight, world.","date":"Sunday 27 September","time":"11:34 pm","dateTime":"Sunday 27 September, 11:34 pm","published":true},{"id":334,"displayNumber":"334","title":"Ye olde internet","date":"Monday 28 September","time":"3:15 pm","dateTime":"Monday 28 September, 3:15 pm","published":true},{"id":335,"displayNumber":"335","title":"Lift me up ^_^","date":"Thursday 1 October","time":"10:46 pm","dateTime":"Thursday 1 October, 10:46 pm","published":true},{"id":336,"displayNumber":"336","title":"Saturday, Sunday, Swotday","date":"Monday 5 October","time":"10:34 pm","dateTime":"Monday 5 October, 10:34 pm","published":true},{"id":337,"displayNumber":"337","title":"Logopolice","date":"Tuesday 6 October","time":"6:28 pm","dateTime":"Tuesday 6 October, 6:28 pm","published":true},{"id":338,"displayNumber":"338","title":"Ladies and logos","date":"Wednesday 7 October","time":"10:25 am","dateTime":"Wednesday 7 October, 10:25 am","published":true},{"id":339,"displayNumber":"339","title":"Hi, I'm alive.","date":"Sunday 11 October","time":"10:12 pm","dateTime":"Sunday 11 October, 10:12 pm","published":true},{"id":340,"displayNumber":"340","title":"Happeh Tuesday ^_^","date":"Wednesday 14 October","time":"12:12 am","dateTime":"Wednesday 14 October, 12:12 am","published":true},{"id":341,"displayNumber":"341","title":"The mission","date":"Thursday 15 October","time":"11:22 pm","dateTime":"Thursday 15 October, 11:22 pm","published":true},{"id":342,"displayNumber":"342","title":"Mission failure","date":"Saturday 17 October","time":"11:45 pm","dateTime":"Saturday 17 October, 11:45 pm","published":true},{"id":343,"displayNumber":"343","title":"I'm no Adrian Mole","date":"Sunday 18 October","time":"11:45 pm","dateTime":"Sunday 18 October, 11:45 pm","published":true},{"id":344,"displayNumber":"344","title":"I'd hate to be Santa","date":"Monday 19 October","time":"10:06 pm","dateTime":"Monday 19 October, 10:06 pm","published":true},{"id":345,"displayNumber":"345","title":"Mission to Morrisons","date":"Wednesday 21 October","time":"7:05 pm","dateTime":"Wednesday 21 October, 7:05 pm","published":true},{"id":346,"displayNumber":"346","title":"Quote of the day","date":"Wednesday 21 October","time":"7:26 pm","dateTime":"Wednesday 21 October, 7:26 pm","published":true},{"id":347,"displayNumber":"347","title":"Bookmole","date":"Wednesday 21 October","time":"7:36 pm","dateTime":"Wednesday 21 October, 7:36 pm","published":true},{"id":348,"displayNumber":"348","title":"Happeh birthday, Charlie ^_^","date":"Saturday 24 October","time":"12:30 am","dateTime":"Saturday 24 October, 12:30 am","published":true},{"id":349,"displayNumber":"349","title":"\"You've redecorated haven't you? Hmm, don't like it!\"","date":"Saturday 24 October","time":"12:41 am","dateTime":"Saturday 24 October, 12:41 am","published":true},{"id":350,"displayNumber":"350","title":"My first pay rise","date":"Sunday 25 October","time":"7:51 pm","dateTime":"Sunday 25 October, 7:51 pm","published":true},{"id":351,"displayNumber":"351","title":"Oh. Right. Okay.","date":"Sunday 25 October","time":"8:14 pm","dateTime":"Sunday 25 October, 8:14 pm","published":true},{"id":352,"displayNumber":"352","title":"The birthday meal","date":"Tuesday 27 October","time":"6:42 pm","dateTime":"Tuesday 27 October, 6:42 pm","published":true},{"id":353,"displayNumber":"353","title":"Armpoke","date":"Tuesday 27 October","time":"11:39 pm","dateTime":"Tuesday 27 October, 11:39 pm","published":true},{"id":354,"displayNumber":"354","title":"Wot I got for Charlie...","date":"Wednesday 28 October","time":"10:29 pm","dateTime":"Wednesday 28 October, 10:29 pm","published":true},{"id":355,"displayNumber":"355","title":"A text message","date":"Wednesday 28 October","time":"10:35 pm","dateTime":"Wednesday 28 October, 10:35 pm","published":true},{"id":356,"displayNumber":"356","title":"No, you can't have any money or sweets. Now fuck off.","date":"Saturday 31 October","time":"10:45 pm","dateTime":"Saturday 31 October, 10:45 pm","published":true},{"id":357,"displayNumber":"357","title":"Human stupidity","date":"Monday 2 November","time":"10:16 pm","dateTime":"Monday 2 November, 10:16 pm","published":true},{"id":358,"displayNumber":"358","title":"More meal photos","date":"Wednesday 4 November","time":"4:00 pm","dateTime":"Wednesday 4 November, 4:00 pm","published":true},{"id":359,"displayNumber":"359","title":"The Hannah Factor","date":"Saturday 7 November","time":"11:43 pm","dateTime":"Saturday 7 November, 11:43 pm","published":true},{"id":360,"displayNumber":"360","title":"The Runaway Speculation","date":"Monday 9 November","time":"3:27 pm","dateTime":"Monday 9 November, 3:27 pm","published":true},{"id":361,"displayNumber":"361","title":"Best Facebook group ever.","date":"Monday 9 November","time":"6:03 pm","dateTime":"Monday 9 November, 6:03 pm","published":true},{"id":362,"displayNumber":"362","title":"Osama bin Hidin'","date":"Tuesday 10 November","time":"6:53 pm","dateTime":"Tuesday 10 November, 6:53 pm","published":true},{"id":363,"displayNumber":"363","title":"Two girls and a Time Lord","date":"Wednesday 11 November","time":"11:28 pm","dateTime":"Wednesday 11 November, 11:28 pm","published":true},{"id":364,"displayNumber":"364","title":"A not-too-bad Thursday","date":"Thursday 12 November","time":"6:10 pm","dateTime":"Thursday 12 November, 6:10 pm","published":true},{"id":365,"displayNumber":"365","title":"An early spring clean","date":"Thursday 12 November","time":"11:49 pm","dateTime":"Thursday 12 November, 11:49 pm","published":true},{"id":366,"displayNumber":"366","title":"Friday 13th","date":"Friday 13 November","time":"11:20 am","dateTime":"Friday 13 November, 11:20 am","published":true},{"id":367,"displayNumber":"367","title":"Drive safely...","date":"Friday 13 November","time":"6:21 pm","dateTime":"Friday 13 November, 6:21 pm","published":true},{"id":368,"displayNumber":"368","title":"Lewis rants.","date":"Friday 13 November","time":"11:15 pm","dateTime":"Friday 13 November, 11:15 pm","published":true},{"id":369,"displayNumber":"369","title":"Holidays are coming ^__^","date":"Saturday 14 November","time":"10:06 pm","dateTime":"Saturday 14 November, 10:06 pm","published":true},{"id":370,"displayNumber":"370","title":"Kelly hour ♥","date":"Saturday 14 November","time":"11:34 pm","dateTime":"Saturday 14 November, 11:34 pm","published":true},{"id":371,"displayNumber":"371","title":"The Waters of Mars","date":"Sunday 15 November","time":"10:52 pm","dateTime":"Sunday 15 November, 10:52 pm","published":true},{"id":372,"displayNumber":"372","title":"\"Kelly's over there!\"","date":"Sunday 15 November","time":"11:27 pm","dateTime":"Sunday 15 November, 11:27 pm","published":true},{"id":373,"displayNumber":"373","title":"Birthday girls","date":"Tuesday 17 November","time":"6:54 pm","dateTime":"Tuesday 17 November, 6:54 pm","published":true},{"id":374,"displayNumber":"374","title":"You're a Pleb... GTFO My TV!","date":"Tuesday 17 November","time":"9:25 pm","dateTime":"Tuesday 17 November, 9:25 pm","published":true},{"id":375,"displayNumber":"375","title":"Pyronecrobeastiality","date":"Tuesday 17 November","time":"11:00 pm","dateTime":"Tuesday 17 November, 11:00 pm","published":true},{"id":376,"displayNumber":"376","title":"Of friendship, threats and a girl called Jess","date":"Thursday 19 November","time":"11:43 pm","dateTime":"Thursday 19 November, 11:43 pm","published":true},{"id":377,"displayNumber":"377","title":"ONE THOUSAND!","date":"Saturday 21 November","time":"12:32 pm","dateTime":"Saturday 21 November, 12:32 pm","published":true},{"id":378,"displayNumber":"378","title":"Bedroom plans","date":"Saturday 21 November","time":"12:34 pm","dateTime":"Saturday 21 November, 12:34 pm","published":true},{"id":379,"displayNumber":"379","title":"November birthdays","date":"Sunday 22 November","time":"12:11 pm","dateTime":"Sunday 22 November, 12:11 pm","published":true},{"id":380,"displayNumber":"380","title":"The Candy Cane Quest","date":"Monday 23 November","time":"4:00 pm","dateTime":"Monday 23 November, 4:00 pm","published":true},{"id":381,"displayNumber":"381","title":"FreeTranslation.com = WIN.","date":"Monday 23 November","time":"6:12 pm","dateTime":"Monday 23 November, 6:12 pm","published":true},{"id":382,"displayNumber":"382","title":"A Hannah Montana duvet for Grandad","date":"Wednesday 25 November","time":"11:55 am","dateTime":"Wednesday 25 November, 11:55 am","published":true},{"id":383,"displayNumber":"383","title":"Kelly, Hannah and Mickey Bubble","date":"Thursday 26 November","time":"11:55 am","dateTime":"Thursday 26 November, 11:55 am","published":true},{"id":384,"displayNumber":"384","title":"Bubble burst","date":"Saturday 28 November","time":"1:06 am","dateTime":"Saturday 28 November, 1:06 am","published":true},{"id":385,"displayNumber":"385","title":"Handwritten","date":"Sunday 29 November","time":"12:33 am","dateTime":"Sunday 29 November, 12:33 am","published":true},{"id":386,"displayNumber":"386","title":"Slomping and yomping","date":"Monday 30 November","time":"9:22 pm","dateTime":"Monday 30 November, 9:22 pm","published":true},{"id":387,"displayNumber":"387","title":"Parents' night at college","date":"Monday 30 November","time":"9:24 pm","dateTime":"Monday 30 November, 9:24 pm","published":true},{"id":388,"displayNumber":"388","title":"Shitty little chocolates","date":"Tuesday 1 December","time":"11:57 pm","dateTime":"Tuesday 1 December, 11:57 pm","published":true},{"id":389,"displayNumber":"389","title":"Shitty little illness ¬¬","date":"Wednesday 2 December","time":"11:31 pm","dateTime":"Wednesday 2 December, 11:31 pm","published":true},{"id":390,"displayNumber":"390","title":"Sniffles and sneezes","date":"Thursday 3 December","time":"10:19 pm","dateTime":"Thursday 3 December, 10:19 pm","published":true},{"id":391,"displayNumber":"391","title":"Lew flu","date":"Friday 4 December","time":"5:52 pm","dateTime":"Friday 4 December, 5:52 pm","published":true},{"id":392,"displayNumber":"392","title":"colonatsign.","date":"Saturday 5 December","time":"11:56 pm","dateTime":"Saturday 5 December, 11:56 pm","published":true},{"id":393,"displayNumber":"393","title":"Fu-cough!","date":"Sunday 6 December","time":"11:49 pm","dateTime":"Sunday 6 December, 11:49 pm","published":true},{"id":394,"displayNumber":"394","title":"Short and sweet and sarcastic","date":"Monday 7 December","time":"11:34 pm","dateTime":"Monday 7 December, 11:34 pm","published":true},{"id":395,"displayNumber":"395","title":"An operation, a death and a long lost friend","date":"Tuesday 8 December","time":"11:37 pm","dateTime":"Tuesday 8 December, 11:37 pm","published":true},{"id":396,"displayNumber":"396","title":"Another one of them uninteresting posts","date":"Thursday 10 December","time":"2:01 pm","dateTime":"Thursday 10 December, 2:01 pm","published":true},{"id":397,"displayNumber":"397","title":"A chesty cough and a tenner from work","date":"Friday 11 December","time":"10:51 pm","dateTime":"Friday 11 December, 10:51 pm","published":true},{"id":398,"displayNumber":"398","title":"Re-evaluation","date":"Saturday 12 December","time":"4:07 pm","dateTime":"Saturday 12 December, 4:07 pm","published":true},{"id":399,"displayNumber":"399","title":"I saw Saw, did you see Saw?","date":"Saturday 12 December","time":"11:53 pm","dateTime":"Saturday 12 December, 11:53 pm","published":true},{"id":400,"displayNumber":"400","title":"Four knocks","date":"Sunday 13 December","time":"2:21 pm","dateTime":"Sunday 13 December, 2:21 pm","published":true},{"id":401,"displayNumber":"401","title":"People ¬¬","date":"Monday 14 December","time":"10:34 pm","dateTime":"Monday 14 December, 10:34 pm","published":true},{"id":402,"displayNumber":"402","title":"Five and a half hours of ICT ... and still not completed = RAWRRR ¬¬","date":"Wednesday 16 December","time":"12:47 am","dateTime":"Wednesday 16 December, 12:47 am","published":true},{"id":403,"displayNumber":"403","title":"ICT 100%","date":"Wednesday 16 December","time":"11:48 am","dateTime":"Wednesday 16 December, 11:48 am","published":true},{"id":404,"displayNumber":"404","title":"Silence from Snowden","date":"Wednesday 16 December","time":"10:22 pm","dateTime":"Wednesday 16 December, 10:22 pm","published":true},{"id":405,"displayNumber":"405","title":"Feeling empty and hungry","date":"Wednesday 16 December","time":"11:24 pm","dateTime":"Wednesday 16 December, 11:24 pm","published":true},{"id":406,"displayNumber":"406","title":"Lots of lovely little things ^_^","date":"Thursday 17 December","time":"10:20 pm","dateTime":"Thursday 17 December, 10:20 pm","published":true},{"id":407,"displayNumber":"407","title":"This isn't sad or olt.","date":"Thursday 17 December","time":"10:22 pm","dateTime":"Thursday 17 December, 10:22 pm","published":true},{"id":408,"displayNumber":"408","title":"Croc!","date":"Friday 18 December","time":"9:56 pm","dateTime":"Friday 18 December, 9:56 pm","published":true},{"id":409,"displayNumber":"409","title":"Soul-shredding box-shredding","date":"Friday 18 December","time":"10:13 pm","dateTime":"Friday 18 December, 10:13 pm","published":true},{"id":410,"displayNumber":"410","title":"Work glorious work","date":"Saturday 19 December","time":"11:45 pm","dateTime":"Saturday 19 December, 11:45 pm","published":true},{"id":411,"displayNumber":"411","title":"Of fame, Lego and snow.","date":"Sunday 20 December","time":"11:40 pm","dateTime":"Sunday 20 December, 11:40 pm","published":true},{"id":412,"displayNumber":"412","title":"Snazzy photos of friends","date":"Monday 21 December","time":"12:22 am","dateTime":"Monday 21 December, 12:22 am","published":true},{"id":413,"displayNumber":"413","title":"Cold-dog","date":"Monday 21 December","time":"4:23 pm","dateTime":"Monday 21 December, 4:23 pm","published":true},{"id":414,"displayNumber":"414","title":"Snowballs and presents","date":"Monday 21 December","time":"4:39 pm","dateTime":"Monday 21 December, 4:39 pm","published":true},{"id":415,"displayNumber":"415","title":"Editing fun ^__^","date":"Tuesday 22 December","time":"1:16 pm","dateTime":"Tuesday 22 December, 1:16 pm","published":true},{"id":416,"displayNumber":"416","title":"For a year and a day.","date":"Tuesday 22 December","time":"11:32 pm","dateTime":"Tuesday 22 December, 11:32 pm","published":true},{"id":417,"displayNumber":"417","title":"Meet me half way.","date":"Wednesday 23 December","time":"11:13 pm","dateTime":"Wednesday 23 December, 11:13 pm","published":true},{"id":418,"displayNumber":"418","title":"This time last year...","date":"Thursday 24 December","time":"10:13 pm","dateTime":"Thursday 24 December, 10:13 pm","published":true},{"id":419,"displayNumber":"419","title":"SMILEYFACE","date":"Thursday 24 December","time":"10:45 pm","dateTime":"Thursday 24 December, 10:45 pm","published":true}];
+
+
+const shortDays = {
+  Monday: 'Mon.',
+  Tuesday: 'Tue.',
+  Wednesday: 'Wed.',
+  Thursday: 'Thu.',
+  Friday: 'Fri.',
+  Saturday: 'Sat.',
+  Sunday: 'Sun.'
+};
+
+const shortMonths = {
+  January: 'Jan.',
+  February: 'Feb.',
+  March: 'Mar.',
+  April: 'Apr.',
+  May: 'May',
+  June: 'Jun.',
+  July: 'Jul.',
+  August: 'Aug.',
+  September: 'Sept.',
+  October: 'Oct.',
+  November: 'Nov.',
+  December: 'Dec.'
+};
+
+function formatDateTime(value) {
+  const [datePart, timePart = ''] = value.split(', ');
+  const bits = datePart.trim().split(/\s+/);
+  const day = shortDays[bits[0]] || bits[0] || '';
+  const date = bits[1] || '';
+  const month = shortMonths[bits[2]] || bits[2] || '';
+
+  return `
+    <span class="date-time-stack">
+      <span class="date-line">${day} ${date} ${month}</span>
+      <span class="date-time-divider" aria-hidden="true"></span>
+      <span class="time-line">${timePart}</span>
+    </span>
+  `;
+}
+
 
     const entriesList = document.getElementById('entriesList');
     const searchInput = document.getElementById('searchInput');
@@ -324,107 +641,31 @@
     let visibleEntries = [];
     let activePanelIndex = -1;
 
-    function normaliseMonth(value) {
-      const found = MONTHS.find(month => month.toLowerCase() === value.toLowerCase());
-      return found || '';
-    }
-
-    function parseArchiveDocument(doc) {
-      const found = [];
-      let currentMonth = '';
-      const lines = doc.body.innerText.split(/\n+/).map(line => line.trim()).filter(Boolean);
-
-      for (const line of lines) {
-        const monthMatch = line.match(/^(February|March|April|May|June|July|August|September|October|November|December)\s+2008$/i);
-        if (monthMatch) {
-          currentMonth = normaliseMonth(monthMatch[1]);
-          continue;
-        }
-        const entryMatch = line.match(/^(\d{1,3})\s+(.+)$/);
-        if (!entryMatch || !currentMonth) continue;
-        const number = Number(entryMatch[1]);
-        if (number < 1 || number > 623) continue;
-        found.push({
-          id: number,
-          displayNumber: String(number).padStart(3, '0'),
-          title: entryMatch[2].trim(),
-          month: currentMonth,
-          published: true
-        });
-      }
-
-      return [...new Map(found.map(entry => [entry.id, entry])).values()].sort((a, b) => a.id - b.id);
-    }
-
-    async function fetchArchiveHtml() {
-      const attempts = [
-        SOURCE_URL,
-        `https://api.allorigins.win/raw?url=${encodeURIComponent(SOURCE_URL)}`
-      ];
-
-      let lastError;
-      for (const url of attempts) {
-        try {
-          const response = await fetch(url, {
-            credentials: url === SOURCE_URL ? 'same-origin' : 'omit',
-            cache: 'no-store'
-          });
-          if (!response.ok) throw new Error(`HTTP ${response.status}`);
-          const html = await response.text();
-          if (!html || html.length < 1000) throw new Error('Archive response was empty');
-          return html;
-        } catch (error) {
-          lastError = error;
-        }
-      }
-      throw lastError || new Error('Unable to load archive');
-    }
-
-    async function loadArchive() {
-      entriesList.innerHTML = '<div class="empty" style="display:block">loading 623 archive titles…</div>';
-
-      try {
-        const html = await fetchArchiveHtml();
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const parsed = parseArchiveDocument(doc);
-
-        if (parsed.length !== 623) {
-          throw new Error(`Found ${parsed.length} of 623 titles`);
-        }
-
-        entries = parsed;
-        render();
-      } catch (error) {
-        console.error('Could not load the 2008 diary archive:', error);
-        entries = [];
-        entriesList.innerHTML = `
-          <div class="empty" style="display:block; max-width:760px; margin:60px auto; line-height:1.7">
-            The archive titles could not be imported. Check that you are online, then refresh the page.
-          </div>`;
-        document.getElementById('entryCount').textContent = '623';
-        document.getElementById('publishedCount').textContent = '623';
-        document.getElementById('removedCount').textContent = '0';
-      }
-    }
-
     function render() {
       const query = searchInput.value.trim().toLowerCase();
       visibleEntries = entries.filter(entry =>
         entry.title.toLowerCase().includes(query)
       );
 
-      entriesList.innerHTML = visibleEntries.map((entry, index) => `
-        <article class="entry-row ${entry.published ? '' : 'removed-row'}" data-index="${index}" tabindex="0" aria-label="Open archive information for ${entry.title}">
+      let currentMonth = '';
+      entriesList.innerHTML = visibleEntries.map((entry, index) => {
+        const month = entry.date.split(' ')[2] || '';
+        const monthHeading = month !== currentMonth
+          ? `<div class="month-divider" aria-label="${escapeHtml(month)} entries"><span class="month-divider-name">${escapeHtml(month)}</span></div>`
+          : '';
+
+        currentMonth = month;
+
+        return `${monthHeading}
+        <article class="entry-row ${entry.published ? '' : 'removed-row'}" data-index="${index}" tabindex="0" aria-label="Open archive information for ${escapeHtml(entry.title)}">
           <span class="entry-num">${entry.displayNumber}</span>
           <span class="entry-title">${escapeHtml(entry.title)}</span>
-          <span class="entry-date">${entry.month} 2008</span>
+          <span class="entry-date">${formatDateTime(entry.dateTime)}</span>
           <span class="entry-status ${entry.published ? '' : 'removed'}">${entry.published ? 'published' : 'removed'}</span>
-        </article>`).join('');
+        </article>`;
+      }).join('');
 
       emptyState.style.display = visibleEntries.length ? 'none' : 'block';
-      document.getElementById('entryCount').textContent = entries.length;
-      document.getElementById('publishedCount').textContent = entries.filter(e => e.published).length;
-      document.getElementById('removedCount').textContent = entries.filter(e => !e.published).length;
     }
 
     function escapeHtml(value) {
@@ -457,7 +698,7 @@
       activePanelIndex = (index + visibleEntries.length) % visibleEntries.length;
       const entry = visibleEntries[activePanelIndex];
       panelTitle.textContent = entry.title;
-      panelDate.textContent = `${entry.month} 2008`;
+      panelDate.textContent = entry.dateTime;
       panelStatus.textContent = entry.published ? 'Published' : 'Removed';
       panelMessage.textContent = entry.published
         ? 'This diary entry is not available to read. Only its title has been archived.'
@@ -487,7 +728,221 @@
     });
 
 
-    loadArchive();
-  </script>
+    render();
+  
+    const backToTop = document.getElementById('backToTop');
+
+    if (backToTop) {
+      function updateBackToTop() {
+        backToTop.classList.toggle('is-visible', window.scrollY > 320);
+      }
+
+      window.addEventListener('scroll', updateBackToTop, { passive: true });
+      updateBackToTop();
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+  
+// Close sidebar when clicking anywhere outside it
+document.addEventListener('click', function(e){
+  const panel=document.querySelector('.detail-panel,.sidebar,.entry-panel,#detailPanel');
+  if(!panel) return;
+  if(panel.contains(e.target)) return;
+  if(e.target.closest('tr,.entry-row,.entry,.diary-row')) return;
+  if(typeof closePanel==='function'){closePanel();return;}
+  if(typeof closeSidebar==='function'){closeSidebar();return;}
+  panel.classList.remove('open','active','visible');
+  document.body.classList.remove('panel-open','sidebar-open');
+});
+
+
+(function () {
+  const panelSelector = '.detail-panel,.sidebar,.entry-panel,#detailPanel';
+  const rowSelector = 'tr[data-index],tr[data-id],.entry-row,.diary-row,.entry';
+  let activeRow = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  function getPanel() {
+    return document.querySelector(panelSelector);
+  }
+
+  function panelIsOpen(panel) {
+    if (!panel) return false;
+    return panel.classList.contains('open') ||
+           panel.classList.contains('active') ||
+           panel.classList.contains('visible') ||
+           document.body.classList.contains('panel-open') ||
+           document.body.classList.contains('sidebar-open');
+  }
+
+  function closeDiaryPanel() {
+    const panel = getPanel();
+    if (!panel) return;
+
+    if (typeof closePanel === 'function') {
+      closePanel();
+    } else if (typeof closeSidebar === 'function') {
+      closeSidebar();
+    } else {
+      panel.classList.remove('open', 'active', 'visible');
+      document.body.classList.remove('panel-open', 'sidebar-open');
+    }
+
+    if (activeRow) {
+      activeRow.classList.remove('active-entry');
+      activeRow = null;
+    }
+  }
+
+  function syncOpenState() {
+    const panel = getPanel();
+    if (!panel) return;
+    const open = panelIsOpen(panel);
+    document.body.classList.toggle('panel-open', open);
+  }
+
+  // Esc closes the panel.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDiaryPanel();
+  });
+
+  // Clicking the currently open row toggles the panel closed.
+  document.addEventListener('click', function (e) {
+    const row = e.target.closest(rowSelector);
+    const panel = getPanel();
+
+    if (!row || !panel) return;
+
+    if (activeRow === row && panelIsOpen(panel)) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeDiaryPanel();
+      return;
+    }
+
+    if (activeRow && activeRow !== row) {
+      activeRow.classList.remove('active-entry');
+    }
+
+    activeRow = row;
+    activeRow.classList.add('active-entry');
+
+    // Let the page's existing row-opening handler run first.
+    setTimeout(syncOpenState, 0);
+  }, true);
+
+  // Swipe right to dismiss on touch devices.
+  document.addEventListener('touchstart', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target) || !panelIsOpen(panel)) return;
+
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    const panel = getPanel();
+    if (!panel || !panelIsOpen(panel) || !touchStartX) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = Math.abs(touch.clientY - touchStartY);
+
+    if (dx > 70 && dy < 60) {
+      closeDiaryPanel();
+    }
+
+    touchStartX = 0;
+    touchStartY = 0;
+  }, { passive: true });
+
+  // Keep body state in sync if the page opens/closes the panel elsewhere.
+  const observer = new MutationObserver(syncOpenState);
+  const panel = getPanel();
+  if (panel) {
+    observer.observe(panel, { attributes: true, attributeFilter: ['class', 'aria-hidden'] });
+  }
+
+  syncOpenState();
+})();
+
+
+(function () {
+  const panelSelector = '.detail-panel,.sidebar,.entry-panel,#detailPanel';
+  const rowSelector = 'tr[data-index],tr[data-id],.entry-row,.diary-row,.entry';
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+
+  function getPanel() {
+    return document.querySelector(panelSelector);
+  }
+
+  function getRows() {
+    return Array.from(document.querySelectorAll(rowSelector))
+      .filter(row => row.offsetParent !== null);
+  }
+
+  function getActiveRow(rows) {
+    return rows.find(row =>
+      row.classList.contains('active-entry') ||
+      row.getAttribute('aria-selected') === 'true'
+    );
+  }
+
+  function openRow(row) {
+    if (!row) return;
+    row.click();
+    row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  document.addEventListener('touchstart', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target)) return;
+
+    const touch = e.touches[0];
+    swipeStartX = touch.clientX;
+    swipeStartY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target) || !swipeStartX) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - swipeStartX;
+    const dy = touch.clientY - swipeStartY;
+
+    swipeStartX = 0;
+    swipeStartY = 0;
+
+    if (Math.abs(dx) < 65 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+    const rows = getRows();
+    const activeRow = getActiveRow(rows);
+    const currentIndex = Math.max(0, rows.indexOf(activeRow));
+
+    // Swipe left: next entry
+    if (dx < 0 && currentIndex < rows.length - 1) {
+      e.preventDefault();
+      openRow(rows[currentIndex + 1]);
+      return;
+    }
+
+    // Swipe right: previous entry.
+    // At the first entry, preserve the existing swipe-right-to-dismiss action.
+    if (dx > 0 && currentIndex > 0) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openRow(rows[currentIndex - 1]);
+    }
+  }, { passive: false, capture: true });
+})();
+
+</script>
 </body>
 </html>
