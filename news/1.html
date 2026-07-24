@@ -591,6 +591,19 @@
       });
     }
 
-  </script>
+  
+// Close sidebar when clicking anywhere outside it
+document.addEventListener('click', function(e){
+  const panel=document.querySelector('.detail-panel,.sidebar,.entry-panel,#detailPanel');
+  if(!panel) return;
+  if(panel.contains(e.target)) return;
+  if(e.target.closest('tr,.entry-row,.entry,.diary-row')) return;
+  if(typeof closePanel==='function'){closePanel();return;}
+  if(typeof closeSidebar==='function'){closeSidebar();return;}
+  panel.classList.remove('open','active','visible');
+  document.body.classList.remove('panel-open','sidebar-open');
+});
+
+</script>
 </body>
 </html>
