@@ -15,6 +15,219 @@
 
     <link href="diary.css" rel="stylesheet" type="text/css" media="all">  
 	
+
+
+<style>
+.diary-search input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none;}
+.diary-search input[type="search"]::-ms-clear{display:none;}
+#clearDiarySearch{position:absolute;right:42px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:none;border-radius:50%;background:transparent;color:var(--text);cursor:pointer;opacity:0;pointer-events:none;transition:.18s;font-size:18px;line-height:1}
+.diary-search{position:relative}
+.diary-search.has-text #clearDiarySearch{opacity:.7;pointer-events:auto}
+#clearDiarySearch:hover{opacity:1;background:rgba(255,255,255,.08)}
+</style>
+
+<style id="diary-search-repair">
+:root {
+  --diary-ui-bg: rgba(255,255,255,.86);
+  --diary-ui-border: rgba(80,105,145,.28);
+  --diary-ui-text: #182235;
+  --diary-ui-muted: rgba(24,34,53,.54);
+  --diary-ui-focus: #6e8ec1;
+  --diary-ui-ring: rgba(110,142,193,.18);
+  --diary-ui-hover: rgba(110,142,193,.13);
+  --diary-ui-shadow: 0 8px 24px rgba(42,57,82,.10);
+}
+
+html[data-theme="dark"] {
+  --diary-ui-bg: rgba(18,24,37,.9);
+  --diary-ui-border: rgba(154,181,226,.25);
+  --diary-ui-text: rgba(244,247,255,.96);
+  --diary-ui-muted: rgba(219,228,245,.6);
+  --diary-ui-focus: #9bbcff;
+  --diary-ui-ring: rgba(130,169,255,.22);
+  --diary-ui-hover: rgba(155,188,255,.14);
+  --diary-ui-shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+
+.diary-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 1rem;
+  color: var(--diary-ui-text);
+}
+
+.diary-search-icon {
+  width:20px;
+  height:20px;
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  color: var(--diary-ui-muted);
+  pointer-events: none;
+  font-size: 1.05rem;
+}
+
+#diarySearch {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: .85rem 7.5rem .85rem 2.75rem;
+  border: 1px solid var(--diary-ui-border);
+  border-radius: 12px;
+  background: var(--diary-ui-bg);
+  color: var(--diary-ui-text);
+  font: inherit;
+  outline: none;
+  box-shadow: var(--diary-ui-shadow);
+  caret-color: var(--diary-ui-focus);
+  transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease, color .18s ease;
+}
+
+#diarySearch:focus {
+  border-color: var(--diary-ui-focus);
+  box-shadow: 0 0 0 3px var(--diary-ui-ring), var(--diary-ui-shadow);
+}
+
+#diarySearch::placeholder {
+  color: var(--diary-ui-muted);
+  opacity: 1;
+}
+
+#diarySearch::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+#diarySearch::-ms-clear,
+#diarySearch::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+#clearDiarySearch {
+  position: absolute;
+  right: 4.6rem;
+  top: 50%;
+  transform: translateY(-50%) scale(.9);
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--diary-ui-text);
+  font: inherit;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, background-color .18s ease, color .18s ease;
+}
+
+.diary-search.has-text #clearDiarySearch {
+  opacity: .7;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1);
+}
+
+#clearDiarySearch:hover,
+#clearDiarySearch:focus-visible {
+  opacity: 1;
+  background: var(--diary-ui-hover);
+  outline: none;
+}
+
+#searchCount {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--diary-ui-muted);
+  white-space: nowrap;
+  font-size: .78rem;
+  pointer-events: none;
+}
+
+#diaryNoResults {
+  margin: 1rem 0;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid var(--diary-ui-border);
+  border-radius: 12px;
+  background: var(--diary-ui-bg);
+  color: var(--diary-ui-muted);
+  box-shadow: var(--diary-ui-shadow);
+}
+
+#backToTop {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  padding: 0;
+  border: 1px solid var(--diary-ui-border);
+  border-radius: 999px;
+  background: var(--diary-ui-bg);
+  color: var(--diary-ui-text);
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--diary-ui-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.65rem);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#backToTop.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#backToTop:hover,
+#backToTop:focus-visible {
+  transform: translateY(-2px);
+  background: var(--diary-ui-hover);
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  #diarySearch {
+    padding-right: 6.7rem;
+  }
+
+  #clearDiarySearch {
+    right: 4.15rem;
+  }
+
+  #searchCount {
+    right: .8rem;
+    font-size: .72rem;
+  }
+}
+</style>
+
 </head>
 <body>
   <div class="top-strip">This page is currently being updated.</div>
@@ -125,6 +338,25 @@
 
               
               
+<div class="diary-search" id="diarySearchWrap" role="search">
+  
+<svg class="diary-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<circle cx="11" cy="11" r="7"></circle>
+<path d="M20 20l-3.5-3.5"></path>
+</svg>
+
+  <input
+    type="search"
+    id="diarySearch"
+    placeholder="Search diary titles..."
+    aria-label="Search diary titles"
+    autocomplete="off"
+    spellcheck="false">
+  <button type="button" id="clearDiarySearch" aria-label="Clear search">×</button>
+  <span id="searchCount" aria-live="polite"></span>
+</div>
+<div id="diaryNoResults" hidden>No matching diary entries found.</div>
+
 <div class="maintable">
 <table>
 <tbody>
@@ -915,5 +1147,90 @@ if (galleryLinks.length) {
 }
 
   </script>
+
+
+<button type="button" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<script id="diary-search-repair-script">
+document.addEventListener("DOMContentLoaded", function () {
+  const search = document.getElementById("diarySearch");
+  const wrapper = document.getElementById("diarySearchWrap") || document.querySelector(".diary-search");
+  const clearButton = document.getElementById("clearDiarySearch");
+  const count = document.getElementById("searchCount");
+  const noResults = document.getElementById("diaryNoResults");
+  const table = document.querySelector(".maintable table");
+  const backToTop = document.getElementById("backToTop");
+
+  if (search && wrapper && clearButton && table) {
+    const rows = Array.from(table.querySelectorAll("tbody > tr"));
+    const monthRows = rows.filter(row => row.querySelector(".month"));
+    const entryRows = rows.filter(row => !row.querySelector(".month") && row.cells.length >= 2);
+
+    function updateSearch() {
+      const query = search.value.trim().toLocaleLowerCase();
+      let visibleCount = 0;
+
+      entryRows.forEach(row => {
+        const titleCell = row.cells[row.cells.length - 1];
+        const matches = !query || titleCell.textContent.toLocaleLowerCase().includes(query);
+        row.hidden = !matches;
+        if (matches) visibleCount += 1;
+      });
+
+      monthRows.forEach((monthRow, index) => {
+        const nextMonth = monthRows[index + 1];
+        let row = monthRow.nextElementSibling;
+        let hasVisibleEntry = false;
+
+        while (row && row !== nextMonth) {
+          if (!row.querySelector(".month") && row.cells.length >= 2 && !row.hidden) {
+            hasVisibleEntry = true;
+            break;
+          }
+          row = row.nextElementSibling;
+        }
+
+        monthRow.hidden = query ? !hasVisibleEntry : false;
+      });
+
+      wrapper.classList.toggle("has-text", search.value.length > 0);
+
+      if (count) {
+        count.textContent = query
+          ? visibleCount + (visibleCount === 1 ? " result" : " results")
+          : entryRows.length + " entries";
+      }
+
+      if (noResults) {
+        noResults.hidden = !query || visibleCount !== 0;
+      }
+    }
+
+    search.addEventListener("input", updateSearch);
+
+    clearButton.addEventListener("click", function () {
+      search.value = "";
+      updateSearch();
+      search.focus();
+    });
+
+    updateSearch();
+  }
+
+  if (backToTop) {
+    function updateBackToTop() {
+      backToTop.classList.toggle("visible", window.scrollY > 450);
+    }
+
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    updateBackToTop();
+  }
+});
+</script>
+
 </body>
 </html>
