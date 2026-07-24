@@ -16,6 +16,7 @@
     <link href="diary.css" rel="stylesheet" type="text/css" media="all">  
 	
 
+
 <style>
 .diary-search input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none;}
 .diary-search input[type="search"]::-ms-clear{display:none;}
@@ -24,7 +25,6 @@
 .diary-search.has-text #clearDiarySearch{opacity:.7;pointer-events:auto}
 #clearDiarySearch:hover{opacity:1;background:rgba(255,255,255,.08)}
 </style>
-
 
 <style id="diary-search-repair">
 :root {
@@ -307,7 +307,7 @@ html[data-theme="dark"] {
          
 
           <div class="release-nav">
-            <a href="/diary/2020">← 2020</a>
+            <a href="/diary/2009">← 2009</a>
             <a href="/diary/2022">2022 →</a>
           </div>
 
@@ -319,7 +319,7 @@ html[data-theme="dark"] {
 
         <article class="details-column">
 
-          <h1>2021 <span class="release-number">(2008)</span></h1>
+          <h1>the wanderer <span class="release-number">(2021)</span></h1>
 
 
           <section class="tabs">
@@ -338,7 +338,6 @@ html[data-theme="dark"] {
 
               
               
-
 <div class="diary-search" id="diarySearchWrap" role="search">
   
 <svg class="diary-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -923,6 +922,7 @@ html[data-theme="dark"] {
 
 </tbody></table></div>
 
+
               
 
 
@@ -933,22 +933,17 @@ html[data-theme="dark"] {
             
 
             <div class="tab-panel" id="notes" role="tabpanel">
-              <p class="quote">‘from the mind and keyboard of lewis’</p>
 				
 								
-		<p>
-				<b>First entry:</b> 27 February 2008
-				<br><b>Last entry:</b> 9 March 2012
-				<br><b>Total entries:</b> 2137							
-		</p>
+		<p>The diary writing resumes, almost a decade after <i>timelordwannabe</i> was retired. Entries are kept offline and private.</p>
 
-              <p>Diary originally hosted on LiveJournal.</p>
 
 
 
               <div class="credits-grid">
                 <div class="credit-card"><small>Written by</small><strong>Lewis Christian</strong></div>
-                <div class="credit-card"><small>No. of entries (2008)</small><strong>623</strong></div> 
+                <div class="credit-card"><small>No. of entries</small><strong>60</strong></div> 
+                <div class="credit-card"><small>No. of deleted entries</small><strong>40</strong></div> 
               </div>
 
 							
@@ -957,16 +952,19 @@ html[data-theme="dark"] {
 
 
 
+
+						
+
             <div class="tab-panel" id="gallery" role="tabpanel">
 
               
               <div class="gallery">
-                <a class="lightbox" href="/diary/images/oldprofile.png" data-caption="Profile photo">
-                  <img src="/diary/images/oldprofile.png" alt="Profile photo">
+                <a class="lightbox" href="/diary/images/newerprofile.png" data-caption="Profile photo">
+                  <img src="/diary/images/newerprofile.png" alt="Profile photo">
                 </a>
 
-                <a class="lightbox" href="/diary/images/oldprofile.png" data-caption="Profile photo">
-                  <img src="/diary/images/oldprofile.png" alt="Profile photo">
+                <a class="lightbox" href="/diary/images/newerprofile.png" data-caption="Profile photo">
+                  <img src="/diary/images/newerprofile.png" alt="Profile photo">
                 </a>
               </div>
             </div>
@@ -1031,7 +1029,7 @@ html[data-theme="dark"] {
           <span class="brand-copy">written by<br>lewis christian</span>
         </a>
         
-        <p style="font-family: 'Geist Pixel', sans-serif;"> from the mind and keyboard of <span style="font-size: 14px;color: var(--accent);font-family: 'Google Sans Flex', 'Inter', sans-serif;">lewis</span></p>
+        <p style="font-family: 'Geist Pixel', sans-serif;">my return to writing a diary after almost a <span style="font-size: 14px;color: var(--accent);font-family: 'Google Sans Flex', 'Inter', sans-serif;">decade</span></p>
       </div>
       
       <div>
@@ -1400,18 +1398,6 @@ if (galleryLinks.length) {
 
   </script>
 
-<script>
-document.addEventListener('DOMContentLoaded',()=>{
- const s=document.getElementById('diarySearch');
- const b=document.getElementById('clearDiarySearch');
- const w=document.querySelector('.diary-search');
- if(!s||!b||!w)return;
- const update=()=>w.classList.toggle('has-text',s.value.length>0);
- s.addEventListener('input',update);
- b.addEventListener('click',()=>{s.value='';s.dispatchEvent(new Event('input'));s.focus();});
- update();
-});
-</script>
 
 <button type="button" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
 
