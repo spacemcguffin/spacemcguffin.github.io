@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07101f">
+  <title>2007 Diary — Archive</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050b15;
+      --bg-soft: #091322;
+      --panel: rgba(8, 16, 31, .82);
+      --panel-solid: #0a1425;
+      --line: rgba(187, 203, 235, .14);
+      --line-strong: rgba(114, 199, 255, .38);
+      --text: #f4f0ea;
+      --muted: #a9b1c3;
+      --serif-muted: #c9c1d7;
+      --purple: #72c7ff;
+      --purple-soft: rgba(114, 199, 255, .15);
+      --green: #68d6b1;
+      --danger: #f07b9a;
+      --radius: 18px;
+      --shadow: 0 24px 70px rgba(0,0,0,.32);
+    }
+
+    html[data-theme="light"] {
+      --bg: #eef6fc;
+      --bg-soft: #e4f0f8;
+      --panel: rgba(250, 253, 255, .90);
+      --panel-solid: #f7fbfe;
+      --line: rgba(46, 91, 128, .14);
+      --line-strong: rgba(39, 137, 202, .34);
+      --text: #172434;
+      --muted: #647487;
+      --serif-muted: #596b7e;
+      --purple: #2188c9;
+      --purple-soft: rgba(33, 136, 201, .11);
+      --green: #16846b;
+      --danger: #c34c70;
+      --shadow: 0 24px 70px rgba(49, 83, 107, .14);
+      color-scheme: light;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Inter, system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 92% 10%, rgba(79, 165, 230, .20), transparent 28rem),
+        radial-gradient(circle at 72% 105%, rgba(37, 114, 197, .10), transparent 30rem),
+        linear-gradient(135deg, #050a13 0%, #07101d 55%, #050a13 100%);
+      overflow-x: hidden;
+    }
+
+
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(circle at 92% 10%, rgba(66, 166, 224, .18), transparent 28rem),
+        radial-gradient(circle at 72% 105%, rgba(77, 146, 198, .12), transparent 30rem),
+        linear-gradient(135deg, #f5fbff 0%, #eaf4fb 55%, #f8fcff 100%);
+    }
+
+    html[data-theme="light"] body::before {
+      opacity: .38;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(50, 112, 153, .42) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 86% 25%, rgba(50, 112, 153, .28) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 70%, rgba(33, 136, 201, .36) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 35% 85%, rgba(50, 112, 153, .22) 0 1px, transparent 1.5px);
+    }
+
+    html[data-theme="light"] .search-wrap,
+    html[data-theme="light"] .archive-nav-link,
+    html[data-theme="light"] .theme-toggle {
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 8px 26px rgba(60, 104, 137, .08);
+    }
+
+    html[data-theme="light"] .entry-row:hover {
+      background: linear-gradient(90deg, rgba(33,136,201,.10), rgba(33,136,201,.035) 55%, transparent);
+    }
+
+    html[data-theme="light"] .entry-num,
+    html[data-theme="light"] .entry-date {
+      color: #5c6c7e;
+    }
+
+    html[data-theme="light"] .entry-panel {
+      background:
+        radial-gradient(circle at 90% 0%, rgba(33,136,201,.14), transparent 20rem),
+        linear-gradient(180deg, rgba(249,253,255,.99), rgba(237,246,252,.995));
+      box-shadow: -28px 0 70px rgba(58, 91, 115, .18);
+    }
+
+    html[data-theme="light"] .panel-button,
+    html[data-theme="light"] .panel-meta-item {
+      background: rgba(255,255,255,.54);
+    }
+
+    html[data-theme="light"] .back-to-top {
+      background: rgba(249, 253, 255, .90);
+      box-shadow: 0 12px 34px rgba(55, 91, 119, .16);
+    }
+
+    html[data-theme="light"] .footer-note {
+      color: #738397;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .65;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(255,255,255,.75) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 86% 25%, rgba(255,255,255,.45) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 70%, rgba(114,199,255,.58) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 35% 85%, rgba(255,255,255,.35) 0 1px, transparent 1.5px);
+      background-size: 180px 180px, 260px 260px, 340px 340px, 220px 220px;
+    }
+
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+
+    .shell { min-height: 100vh; transition: padding-right .42s cubic-bezier(.22,.8,.24,1); }
+    body.panel-open .shell { padding-right: 430px; }
+
+    main { width: 100%; padding: 32px clamp(28px, 5vw, 88px) 90px; position: relative; z-index: 1; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .eyebrow { display: flex; align-items: center; gap: 12px; font-family: "Instrument Serif", serif; font-size: 23px; }
+    .spark { color: var(--purple); font-family: serif; }
+    .top-actions { display: flex; gap: 12px; }
+
+    .theme-toggle {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      background: rgba(7, 14, 27, .62);
+      color: var(--purple);
+      cursor: pointer;
+      transition:
+        background .22s ease,
+        border-color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus-visible {
+      outline: none;
+      background: var(--purple-soft);
+      border-color: var(--purple);
+      transform: translateY(-1px);
+      box-shadow: 0 0 20px rgba(114, 199, 255, .16);
+    }
+
+    .theme-toggle svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform .35s ease, opacity .22s ease;
+    }
+
+    .theme-icon-sun { display: none; }
+    html[data-theme="light"] .theme-icon-sun { display: block; }
+    html[data-theme="light"] .theme-icon-moon { display: none; }
+
+
+    .search-wrap {
+      height: 46px;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      background: rgba(7, 14, 27, .62);
+    }
+
+    .archive-nav {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+    }
+
+    .archive-nav-link {
+      min-width: 112px;
+      min-height: 46px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 13px;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      background: rgba(7, 14, 27, .62);
+      transition:
+        background .22s ease,
+        border-color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease;
+    }
+
+    .archive-nav-link.next {
+      grid-template-columns: 1fr auto;
+      text-align: right;
+    }
+
+    .archive-nav-copy {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .archive-nav-label {
+      color: var(--text);
+      font-family: "Instrument Serif", serif;
+      font-size: 17px;
+    }
+
+    .archive-nav-year {
+      margin-top: 3px;
+      color: var(--purple);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
+    }
+
+    .archive-nav-arrow {
+      color: var(--purple);
+      font-size: 22px;
+      line-height: 1;
+      transition: transform .22s ease;
+    }
+
+    .archive-nav-link:hover,
+    .archive-nav-link:focus-visible {
+      outline: none;
+      background: var(--purple-soft);
+      border-color: var(--purple);
+      transform: translateY(-1px);
+      box-shadow:
+        0 0 0 1px rgba(114, 199, 255, .08),
+        0 0 20px rgba(114, 199, 255, .14);
+    }
+
+    .archive-nav-link.previous:hover .archive-nav-arrow,
+    .archive-nav-link.previous:focus-visible .archive-nav-arrow {
+      transform: translateX(-3px);
+    }
+
+    .archive-nav-link.next:hover .archive-nav-arrow,
+    .archive-nav-link.next:focus-visible .archive-nav-arrow {
+      transform: translateX(3px);
+    }
+    .search-wrap { position: relative; width: min(280px, 30vw); }
+    .search-wrap input { width: 100%; height: 100%; padding: 0 42px 0 16px; color: var(--text); border: 0; outline: 0; background: transparent; }
+    .search-wrap input::placeholder { color: #788196; }
+    .search-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); color: #9ca5b8; }
+
+    .hero-grid { display: block; }
+    .hero-copy h1 {
+      margin: 0;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(78px, 9vw, 136px);
+      font-weight: 400;
+      line-height: .78;
+      letter-spacing: -.045em;
+    }
+    .hero-line { width: 66px; height: 1px; margin: 28px 0 24px; background: linear-gradient(90deg, var(--purple), transparent); }
+    .hero-copy p { max-width: 550px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+    .content-grid { margin-top: 32px; }
+    .entries-panel { width: 100%; padding: 0 18px; }
+    .entry-row { display: grid; grid-template-columns: 76px minmax(320px, 1fr) 190px 120px; gap: 22px; align-items: center; min-height: 84px; padding: 8px 14px; border-bottom: 1px solid rgba(187, 203, 235, .11); cursor: pointer; transition: padding .22s ease, background .22s ease, border-color .22s ease; }
+
+    .month-divider {
+      display: grid;
+      grid-template-columns: 76px minmax(320px, 1fr) 190px 120px;
+      gap: 22px;
+      align-items: end;
+      min-height: 82px;
+      padding: 30px 14px 12px;
+      border-bottom: 1px solid var(--line-strong);
+      color: var(--purple);
+    }
+
+    .month-divider:first-child {
+      min-height: 66px;
+      padding-top: 14px;
+    }
+
+    .month-divider-name {
+      grid-column: 1 / -1;
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(29px, 2.3vw, 40px);
+      line-height: 1;
+      letter-spacing: -.02em;
+      text-transform: lowercase;
+    }
+
+    .entry-row:hover { padding-left: 24px; background: linear-gradient(90deg, rgba(114,199,255,.10), rgba(114,199,255,.03) 55%, transparent); border-color: rgba(114,199,255,.24); }
+    .entry-num, .entry-date { color: #c9ced9; font-size: 15px; }
+    .entry-title { font-family: "Instrument Serif", serif; font-size: clamp(30px, 2.6vw, 43px); line-height: 1.02; letter-spacing: -.01em; }
+    .entry-row.removed-row .entry-title {
+      position: relative;
+      display: inline-block;
+      width: fit-content;
+      max-width: 100%;
+      color: #8f8998;
+    }
+    .entry-row.removed-row .entry-title::after {
+      content: "";
+      position: absolute;
+      left: -2%;
+      top: 50%;
+      width: 104%;
+      height: 1.5px;
+      border-radius: 999px;
+      background: rgba(240, 123, 154, .72);
+      box-shadow: 0 0 6px rgba(240, 123, 154, .18);
+      transform: translateY(-50%) rotate(-7deg);
+      transform-origin: center;
+      pointer-events: none;
+    }
+    .entry-status { display: inline-flex; justify-content: center; width: fit-content; padding: 6px 9px; border-radius: 7px; color: var(--green); background: rgba(35, 142, 115, .17); font-size: 11px; }
+    .entry-status.removed { color: #f5a5b9; background: rgba(202, 67, 104, .14); }
+
+    .empty { display: none; padding: 60px 20px; color: var(--muted); text-align: center; font-family: "Instrument Serif", serif; font-size: 28px; }
+    .footer-note { margin: 28px 0 0; color: #737b8c; text-align: center; font-family: "Instrument Serif", serif; font-size: 18px; font-style: italic; }
+
+    .entry-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 120;
+      width: 430px;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--line-strong);
+      background:
+        radial-gradient(circle at 90% 0%, rgba(114,199,255,.18), transparent 20rem),
+        linear-gradient(180deg, rgba(10,20,37,.99), rgba(5,11,21,.995));
+      box-shadow: -28px 0 70px rgba(0,0,0,.42);
+      transform: translateX(105%);
+      visibility: hidden;
+      transition: transform .42s cubic-bezier(.22,.8,.24,1), visibility .42s;
+    }
+    .entry-panel.open { transform: translateX(0); visibility: visible; }
+    .panel-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 70px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .panel-nav { display: flex; align-items: center; gap: 8px; }
+    .panel-button {
+      width: 42px; height: 42px; border: 1px solid var(--line); border-radius: 50%;
+      background: rgba(255,255,255,.025); cursor: pointer; font-size: 21px;
+      transition: background .2s ease, border-color .2s ease, transform .2s ease;
+    }
+    .panel-button:hover { background: var(--purple-soft); border-color: var(--line-strong); transform: translateY(-1px); }
+    .panel-position { color: var(--muted); font-size: 12px; letter-spacing: .04em; }
+    .panel-content { flex: 1; overflow-y: auto; padding: clamp(30px, 5vw, 52px) 34px 40px; }
+    .panel-kicker { color: var(--purple); font-size: 11px; font-weight: 600; letter-spacing: .11em; text-transform: uppercase; }
+    .panel-title {
+      margin: 18px 0 22px; font-family: "Instrument Serif", serif; font-size: clamp(48px, 5vw, 68px);
+      font-weight: 400; line-height: .93; letter-spacing: -.035em; overflow-wrap: anywhere;
+    }
+    .panel-rule { width: 64px; height: 1px; margin: 0 0 28px; background: linear-gradient(90deg,var(--purple),transparent); }
+    .panel-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+    .panel-meta-item { padding: 15px; border: 1px solid var(--line); border-radius: 13px; background: rgba(255,255,255,.025); }
+    .panel-meta-item span { display: block; color: var(--muted); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; }
+    .panel-meta-item strong { display: block; margin-top: 7px; font-family: "Instrument Serif", serif; font-size: 23px; font-weight: 400; }
+    .panel-message { padding-top: 26px; border-top: 1px solid var(--line); color: var(--serif-muted); font-family: "Instrument Serif", serif; font-size: 25px; line-height: 1.35; }
+    .panel-message.removed { color: #c9a0ad; }
+
+    @media (max-width: 900px) {
+      body.panel-open { overflow: hidden; }
+      body.panel-open .shell { padding-right: 0; }
+      main { padding: 22px 18px 70px; }
+      .topbar { margin-bottom: 44px; }
+      .eyebrow { display: none; }
+      .top-actions { width: 100%; }
+      .search-wrap { width: 100%; }
+      .entries-panel { padding: 0 4px; }
+      .entry-row { grid-template-columns: 50px minmax(0,1fr); gap: 16px; min-height: 78px; padding: 12px 8px; }
+      .entry-date, .entry-status { display: none; }
+      .entry-title { font-size: clamp(29px, 6vw, 38px); }
+      .entry-panel {
+        top: auto; bottom: 0; width: 100%; height: min(88dvh, 760px); border-left: 0; border-top: 1px solid var(--line-strong);
+        border-radius: 24px 24px 0 0; transform: translateY(105%);
+      }
+      .entry-panel.open { transform: translateY(0); }
+      .panel-topbar::before { content: ""; position: absolute; top: 9px; left: 50%; width: 42px; height: 4px; border-radius: 99px; background: rgba(255,255,255,.22); transform: translateX(-50%); }
+      .panel-topbar { position: relative; padding-top: 20px; }
+      .panel-content { padding: 30px 24px 34px; }
+      .panel-title { font-size: clamp(46px, 12vw, 64px); }
+    }
+
+    @media (max-width: 560px) {
+      main { padding-inline: 16px; }
+      .top-actions {
+        flex-wrap: wrap;
+      }
+
+      .theme-toggle {
+        order: 1;
+      }
+
+
+      .archive-nav {
+        width: 100%;
+      }
+
+      .archive-nav-link {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      .search-wrap {
+        order: 2;
+      }
+      .hero-copy h1 { font-size: 78px; }
+      .hero-copy p { font-size: 15px; }
+      .content-grid { margin-top: 28px; }
+      .entries-panel { padding: 0; }
+      .entry-row { grid-template-columns: 38px minmax(0,1fr); gap: 12px; min-height: 72px; padding-inline: 6px; }
+      .entry-num { font-size: 12px; }
+      .entry-title { font-size: 29px; }
+      .entry-panel { height: 100dvh; border-radius: 0; }
+      .panel-meta { grid-template-columns: 1fr; }
+    }
+  
+    .masthead-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 1.15em;
+      height: 1.15em;
+      margin-right: .48em;
+      color: var(--purple);
+      vertical-align: -0.16em;
+      flex: 0 0 auto;
+    }
+
+    .masthead-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(10, 17, 30, .88);
+      color: var(--purple);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity .22s ease, transform .22s ease, visibility .22s ease,
+                  background .22s ease, border-color .22s ease;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .24);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+    }
+
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .detail-panel,
+    .panel-body,
+    .sidebar-panel,
+    .entry-panel {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(114, 199, 255, .66) transparent;
+    }
+
+    .detail-panel::-webkit-scrollbar,
+    .panel-body::-webkit-scrollbar,
+    .sidebar-panel::-webkit-scrollbar,
+    .entry-panel::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .detail-panel::-webkit-scrollbar-track,
+    .panel-body::-webkit-scrollbar-track,
+    .sidebar-panel::-webkit-scrollbar-track,
+    .entry-panel::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .detail-panel::-webkit-scrollbar-thumb,
+    .panel-body::-webkit-scrollbar-thumb,
+    .sidebar-panel::-webkit-scrollbar-thumb,
+    .entry-panel::-webkit-scrollbar-thumb {
+      background: rgba(114, 199, 255, .50);
+      border-radius: 999px;
+    }
+
+    .detail-panel::-webkit-scrollbar-thumb:hover,
+    .panel-body::-webkit-scrollbar-thumb:hover,
+    .sidebar-panel::-webkit-scrollbar-thumb:hover,
+    .entry-panel::-webkit-scrollbar-thumb:hover {
+      background: rgba(154, 216, 255, .86);
+    }
+
+    @media (max-width: 640px) {
+      .back-to-top {
+        right: 14px;
+        bottom: 14px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+  
+    @media (max-width: 760px) {
+      .month-divider {
+        grid-template-columns: 48px minmax(0, 1fr);
+        gap: 12px;
+        min-height: 68px;
+        padding: 24px 12px 10px;
+      }
+
+      .month-divider:first-child {
+        min-height: 54px;
+        padding-top: 10px;
+      }
+
+    }
+
+    .eyebrow,
+    .month-heading,
+    .masthead-icon,
+    .back-to-top {
+      text-shadow: 0 0 10px rgba(114, 199, 255, .26);
+    }
+
+    .month-heading::after {
+      box-shadow: 0 0 14px rgba(114, 199, 255, .15);
+    }
+
+    .back-to-top:hover {
+      box-shadow:
+        0 0 0 1px rgba(114, 199, 255, .15),
+        0 0 22px rgba(114, 199, 255, .24),
+        0 12px 34px rgba(0, 0, 0, .24);
+    }
+
+  
+/* Panel focus states */
+body.panel-open main,
+body.panel-open .table-wrap,
+body.panel-open .archive-table,
+body.sidebar-open main,
+body.sidebar-open .table-wrap,
+body.sidebar-open .archive-table {
+  opacity: .46;
+  transition: opacity .24s ease;
+}
+
+main,
+.table-wrap,
+.archive-table {
+  transition: opacity .24s ease;
+}
+
+tr.active-entry,
+.entry-row.active-entry,
+.diary-row.active-entry {
+  opacity: 1 !important;
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main,
+  .table-wrap,
+  .archive-table {
+    transition: none;
+  }
+}
+
+
+/* Prevent long unbroken diary titles from widening the page */
+td,
+.entry-title,
+.title,
+.diary-title,
+.entry-row,
+.diary-row {
+  min-width: 0;
+}
+
+.entry-title,
+.title,
+.diary-title,
+td:nth-child(2) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+@media (max-width: 700px) {
+  .entry-title,
+  .title,
+  .diary-title,
+  td:nth-child(2) {
+    max-width: 100%;
+    white-space: normal;
+  }
+}
+
+
+/* Neater two-line date and time column */
+.date-time-stack {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 7.7rem;
+  line-height: 1.15;
+}
+
+.date-line {
+  font-weight: 500;
+  font-size: .90em;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+.date-time-divider {
+  width: 100%;
+  height: 1px;
+  margin: .38rem 0 .32rem;
+  background: linear-gradient(
+    90deg,
+    rgba(114, 199, 255, .72),
+    rgba(114, 199, 255, .16)
+  );
+  box-shadow: 0 0 8px rgba(114, 199, 255, .14);
+}
+
+.time-line {
+  font-size: .82em;
+  font-weight: 500;
+  color: var(--muted, rgba(255,255,255,.64));
+  letter-spacing: .025em;
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  .date-time-stack {
+    min-width: 6.9rem;
+  }
+
+  .date-line {
+    white-space: normal;
+  }
+}
+
+
+    @media (max-width: 440px) {
+      .archive-nav-link {
+        padding-inline: 11px;
+      }
+
+      .archive-nav-label {
+        font-size: 16px;
+      }
+
+      .archive-nav-year {
+        font-size: 9px;
+      }
+    }
+
+</style>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("diary-theme");
+      const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    })();
+  </script>
+</head>
+<body>
+  <div class="shell">
+    <main id="top">
+      <header class="topbar">
+        <div class="eyebrow">
+          <span class="masthead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 3v3M17 3v3M4.5 8.5h15M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/>
+              <path d="M8 12h2M12 12h2M16 12h1M8 16h2M12 16h2M16 16h1"/>
+            </svg>
+          </span>
+          nerimon
+        </div>
+        <div class="top-actions">
+          <nav class="archive-nav" aria-label="Diary archive navigation">
+            <a class="archive-nav-link previous" href="/diary/2006" aria-label="Previous diary archive: 2006">
+              <span class="archive-nav-arrow" aria-hidden="true">←</span>
+              <span class="archive-nav-copy">
+                <span class="archive-nav-label">Previous</span>
+                <span class="archive-nav-year">2006</span>
+              </span>
+            </a>
+
+            <a class="archive-nav-link next" href="/diary/2008" aria-label="Next diary archive: 2008">
+              <span class="archive-nav-copy">
+                <span class="archive-nav-label">Next</span>
+                <span class="archive-nav-year">2008</span>
+              </span>
+              <span class="archive-nav-arrow" aria-hidden="true">→</span>
+            </a>
+          </nav>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch colour mode">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z"/>
+            </svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.5"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/>
+            </svg>
+          </button>
+
+          <label class="search-wrap">
+            <input id="searchInput" type="search" placeholder="Search 364 entries…" autocomplete="off">
+            <span class="search-icon">⌕</span>
+          </label>
+        </div>
+      </header>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <h1>2007 diary</h1>
+          <div class="hero-line"></div>
+          <p>The nerimon archive — 364 diary entry titles preserved from January to December 2007.</p>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="entries-panel">
+          <div id="entriesList"></div>
+          <div class="empty" id="emptyState">no entries found</div>
+          <p class="footer-note">364 titles from the original 2007 archive. ✦</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <aside class="entry-panel" id="entryPanel" aria-hidden="true" aria-label="Diary entry archive information">
+    <div class="panel-topbar">
+      <div class="panel-nav">
+        <button class="panel-button" id="panelPrev" type="button" aria-label="Previous entry">‹</button>
+        <button class="panel-button" id="panelNext" type="button" aria-label="Next entry">›</button>
+        <span class="panel-position" id="panelPosition">1 / 1</span>
+      </div>
+      <button class="panel-button" id="panelClose" type="button" aria-label="Close entry panel">×</button>
+    </div>
+    <div class="panel-content">
+      <div class="panel-kicker">diary archive</div>
+      <h2 class="panel-title" id="panelTitle"></h2>
+      <div class="panel-rule"></div>
+      <div class="panel-meta">
+        <div class="panel-meta-item"><span>date &amp; time</span><strong id="panelDate"></strong></div>
+        <div class="panel-meta-item"><span>status</span><strong id="panelStatus"></strong></div>
+      </div>
+      <div class="panel-message" id="panelMessage"></div>
+    </div>
+  </aside>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m6 14 6-6 6 6"/>
+    </svg>
+  </button>
+
+  <script>
+    const monthColours = { January:'#78b9f2', February:'#ff9565', March:'#d7bd6c', April:'#55c8ae', May:'#42b6c8', June:'#62aee8', July:'#9e82f7', August:'#c882f7', September:'#ec79b1', October:'#ff856c', November:'#89a7ef', December:'#b9cce9' };
+
+    const entries = [{"title":"2007","date":"Wednesday 3 January","time":"4:20 pm","dateTime":"Wednesday 3 January, 4:20 pm","published":true,"id":1,"displayNumber":"001"},{"title":"Live @ The Lion EP","date":"Friday 5 January","time":"11:34 pm","dateTime":"Friday 5 January, 11:34 pm","published":true,"id":2,"displayNumber":"002"},{"title":"The older generation","date":"Saturday 6 January","time":"9:18 pm","dateTime":"Saturday 6 January, 9:18 pm","published":true,"id":3,"displayNumber":"003"},{"title":"The progress of The Random Touch","date":"Sunday 7 January","time":"1:57 pm","dateTime":"Sunday 7 January, 1:57 pm","published":true,"id":4,"displayNumber":"004"},{"title":"'A personal insult'","date":"Tuesday 9 January","time":"8:21 am","dateTime":"Tuesday 9 January, 8:21 am","published":true,"id":5,"displayNumber":"005"},{"title":"Exception to the rule of humanity","date":"Tuesday 9 January","time":"10:51 am","dateTime":"Tuesday 9 January, 10:51 am","published":true,"id":6,"displayNumber":"006"},{"title":"Gay marriage","date":"Tuesday 9 January","time":"2:15 pm","dateTime":"Tuesday 9 January, 2:15 pm","published":true,"id":7,"displayNumber":"007"},{"title":"An example of Nietzschian philosophy","date":"Tuesday 9 January","time":"5:40 pm","dateTime":"Tuesday 9 January, 5:40 pm","published":true,"id":8,"displayNumber":"008"},{"title":"Backlash","date":"Tuesday 9 January","time":"7:25 pm","dateTime":"Tuesday 9 January, 7:25 pm","published":true,"id":9,"displayNumber":"009"},{"title":"For the record","date":"Wednesday 10 January","time":"4:53 pm","dateTime":"Wednesday 10 January, 4:53 pm","published":true,"id":10,"displayNumber":"010"},{"title":"Weariness","date":"Wednesday 10 January","time":"9:30 pm","dateTime":"Wednesday 10 January, 9:30 pm","published":true,"id":11,"displayNumber":"011"},{"title":"The longshort entry","date":"Monday 15 January","time":"9:20 pm","dateTime":"Monday 15 January, 9:20 pm","published":true,"id":12,"displayNumber":"012"},{"title":"And also, if you don't mind -","date":"Monday 15 January","time":"10:17 pm","dateTime":"Monday 15 January, 10:17 pm","published":true,"id":13,"displayNumber":"013"},{"title":"The argument against the iPhone","date":"Monday 15 January","time":"11:00 pm","dateTime":"Monday 15 January, 11:00 pm","published":true,"id":14,"displayNumber":"014"},{"title":"Out of the mood","date":"Tuesday 16 January","time":"1:21 pm","dateTime":"Tuesday 16 January, 1:21 pm","published":true,"id":15,"displayNumber":"015"},{"title":"UCL","date":"Tuesday 16 January","time":"6:23 pm","dateTime":"Tuesday 16 January, 6:23 pm","published":true,"id":16,"displayNumber":"016"},{"title":"American Idiot follow-up","date":"Tuesday 16 January","time":"8:32 pm","dateTime":"Tuesday 16 January, 8:32 pm","published":true,"id":17,"displayNumber":"017"},{"title":"MED2","date":"Wednesday 17 January","time":"4:04 pm","dateTime":"Wednesday 17 January, 4:04 pm","published":true,"id":18,"displayNumber":"018"},{"title":"Alex's media circus","date":"Tuesday 23 January","time":"8:54 pm","dateTime":"Tuesday 23 January, 8:54 pm","published":true,"id":19,"displayNumber":"019"},{"title":"No rest for the wicked","date":"Wednesday 24 January","time":"10:11 am","dateTime":"Wednesday 24 January, 10:11 am","published":true,"id":20,"displayNumber":"020"},{"title":"Those days of innocence","date":"Wednesday 24 January","time":"7:16 pm","dateTime":"Wednesday 24 January, 7:16 pm","published":true,"id":21,"displayNumber":"021"},{"title":"My comedy diary","date":"Friday 26 January","time":"11:40 pm","dateTime":"Friday 26 January, 11:40 pm","published":true,"id":22,"displayNumber":"022"},{"title":"Two more ideas","date":"Saturday 27 January","time":"1:55 pm","dateTime":"Saturday 27 January, 1:55 pm","published":true,"id":23,"displayNumber":"023"},{"title":"13 days","date":"Saturday 27 January","time":"8:37 pm","dateTime":"Saturday 27 January, 8:37 pm","published":true,"id":24,"displayNumber":"024"},{"title":"'Chasing Amy'","date":"Sunday 28 January","time":"1:06 am","dateTime":"Sunday 28 January, 1:06 am","published":true,"id":25,"displayNumber":"025"},{"title":"Education","date":"Monday 29 January","time":"12:26 am","dateTime":"Monday 29 January, 12:26 am","published":true,"id":26,"displayNumber":"026"},{"title":"To the minister","date":"Monday 29 January","time":"1:47 am","dateTime":"Monday 29 January, 1:47 am","published":true,"id":27,"displayNumber":"027"},{"title":"Sarah le J","date":"Tuesday 30 January","time":"12:09 am","dateTime":"Tuesday 30 January, 12:09 am","published":true,"id":28,"displayNumber":"028"},{"title":"The projects","date":"Wednesday 31 January","time":"4:14 pm","dateTime":"Wednesday 31 January, 4:14 pm","published":true,"id":29,"displayNumber":"029"},{"title":"A quote from Heather Carlson","date":"Sunday 4 February","time":"3:29 am","dateTime":"Sunday 4 February, 3:29 am","published":true,"id":30,"displayNumber":"030"},{"title":"<i>How You Were<\/i>","date":"Monday 5 February","time":"3:03 pm","dateTime":"Monday 5 February, 3:03 pm","published":true,"id":31,"displayNumber":"031"},{"title":"Memories","date":"Tuesday 6 February","time":"8:39 pm","dateTime":"Tuesday 6 February, 8:39 pm","published":true,"id":32,"displayNumber":"032"},{"title":"<i>Anyone But Me<\/i>","date":"Wednesday 7 February","time":"7:48 pm","dateTime":"Wednesday 7 February, 7:48 pm","published":true,"id":33,"displayNumber":"033"},{"title":"Have a nice day!","date":"Thursday 8 February","time":"10:48 am","dateTime":"Thursday 8 February, 10:48 am","published":true,"id":34,"displayNumber":"034"},{"title":"A From and To","date":"Friday 9 February","time":"9:59 pm","dateTime":"Friday 9 February, 9:59 pm","published":true,"id":35,"displayNumber":"035"},{"title":"The youth BNP","date":"Friday 9 February","time":"10:14 pm","dateTime":"Friday 9 February, 10:14 pm","published":true,"id":36,"displayNumber":"036"},{"title":"Big Brother","date":"Monday 12 February","time":"1:14 pm","dateTime":"Monday 12 February, 1:14 pm","published":true,"id":37,"displayNumber":"037"},{"title":"The criminals McFly","date":"Monday 12 February","time":"2:40 pm","dateTime":"Monday 12 February, 2:40 pm","published":true,"id":38,"displayNumber":"038"},{"title":"Castlebuilders","date":"Monday 12 February","time":"5:52 pm","dateTime":"Monday 12 February, 5:52 pm","published":true,"id":39,"displayNumber":"039"},{"title":"Social engineering","date":"Monday 12 February","time":"10:19 pm","dateTime":"Monday 12 February, 10:19 pm","published":true,"id":40,"displayNumber":"040"},{"title":"The day of the Valentine and the Brits","date":"Wednesday 14 February","time":"10:28 pm","dateTime":"Wednesday 14 February, 10:28 pm","published":true,"id":41,"displayNumber":"041"},{"title":"Pathetic","date":"Friday 16 February","time":"11:27 am","dateTime":"Friday 16 February, 11:27 am","published":true,"id":42,"displayNumber":"042"},{"title":"*does the happy dance*","date":"Friday 16 February","time":"4:50 pm","dateTime":"Friday 16 February, 4:50 pm","published":true,"id":43,"displayNumber":"043"},{"title":"An hour's worth of Philosophy","date":"Monday 19 February","time":"7:06 pm","dateTime":"Monday 19 February, 7:06 pm","published":true,"id":44,"displayNumber":"044"},{"title":"Literary agents","date":"Monday 19 February","time":"8:36 pm","dateTime":"Monday 19 February, 8:36 pm","published":true,"id":45,"displayNumber":"045"},{"title":"The rotten crisp","date":"Monday 19 February","time":"9:15 pm","dateTime":"Monday 19 February, 9:15 pm","published":true,"id":46,"displayNumber":"046"},{"title":"Lynsey","date":"Tuesday 20 February","time":"12:19 am","dateTime":"Tuesday 20 February, 12:19 am","published":true,"id":47,"displayNumber":"047"},{"title":"Not in college","date":"Tuesday 20 February","time":"12:43 pm","dateTime":"Tuesday 20 February, 12:43 pm","published":true,"id":48,"displayNumber":"048"},{"title":"Xbox Live","date":"Thursday 22 February","time":"9:22 am","dateTime":"Thursday 22 February, 9:22 am","published":true,"id":49,"displayNumber":"049"},{"title":"The Star","date":"Thursday 22 February","time":"2:41 pm","dateTime":"Thursday 22 February, 2:41 pm","published":true,"id":50,"displayNumber":"050"},{"title":"E4 form","date":"Thursday 22 February","time":"11:14 pm","dateTime":"Thursday 22 February, 11:14 pm","published":true,"id":51,"displayNumber":"051"},{"title":"College summed up","date":"Friday 23 February","time":"8:33 pm","dateTime":"Friday 23 February, 8:33 pm","published":true,"id":52,"displayNumber":"052"},{"title":"The best idea","date":"Friday 23 February","time":"10:24 pm","dateTime":"Friday 23 February, 10:24 pm","published":true,"id":53,"displayNumber":"053"},{"title":"Fucking maniac","date":"Friday 23 February","time":"11:04 pm","dateTime":"Friday 23 February, 11:04 pm","published":true,"id":54,"displayNumber":"054"},{"title":"Royfire123","date":"Saturday 24 February","time":"2:13 am","dateTime":"Saturday 24 February, 2:13 am","published":true,"id":55,"displayNumber":"055"},{"title":"holy shit xD","date":"Saturday 24 February","time":"11:16 am","dateTime":"Saturday 24 February, 11:16 am","published":true,"id":56,"displayNumber":"056"},{"title":"Laptops and apathy","date":"Monday 26 February","time":"5:15 pm","dateTime":"Monday 26 February, 5:15 pm","published":true,"id":57,"displayNumber":"057"},{"title":"Heythrop in 2008","date":"Monday 26 February","time":"5:56 pm","dateTime":"Monday 26 February, 5:56 pm","published":true,"id":58,"displayNumber":"058"},{"title":"Two opportunities","date":"Monday 26 February","time":"11:41 pm","dateTime":"Monday 26 February, 11:41 pm","published":true,"id":59,"displayNumber":"059"},{"title":"Acoustical Alternative","date":"Wednesday 28 February","time":"7:35 pm","dateTime":"Wednesday 28 February, 7:35 pm","published":true,"id":60,"displayNumber":"060"},{"title":"The wonders of Ashley Copping and Chris Foale","date":"Friday 2 March","time":"12:04 am","dateTime":"Friday 2 March, 12:04 am","published":true,"id":61,"displayNumber":"061"},{"title":"A short film","date":"Friday 2 March","time":"10:42 pm","dateTime":"Friday 2 March, 10:42 pm","published":true,"id":62,"displayNumber":"062"},{"title":"Fame Academy gossip","date":"Friday 2 March","time":"10:58 pm","dateTime":"Friday 2 March, 10:58 pm","published":true,"id":63,"displayNumber":"063"},{"title":"The fourth generation","date":"Sunday 4 March","time":"1:10 am","dateTime":"Sunday 4 March, 1:10 am","published":true,"id":64,"displayNumber":"064"},{"title":"The eighth day of the week","date":"Sunday 4 March","time":"12:45 pm","dateTime":"Sunday 4 March, 12:45 pm","published":true,"id":65,"displayNumber":"065"},{"title":"'A Piece Of Cake' extract","date":"Tuesday 6 March","time":"12:02 pm","dateTime":"Tuesday 6 March, 12:02 pm","published":true,"id":66,"displayNumber":"066"},{"title":"Pointless Media work","date":"Wednesday 7 March","time":"8:36 pm","dateTime":"Wednesday 7 March, 8:36 pm","published":true,"id":67,"displayNumber":"067"},{"title":"Dearest Melody","date":"Thursday 8 March","time":"10:02 am","dateTime":"Thursday 8 March, 10:02 am","published":true,"id":68,"displayNumber":"068"},{"title":"Progress","date":"Friday 9 March","time":"12:29 am","dateTime":"Friday 9 March, 12:29 am","published":true,"id":69,"displayNumber":"069"},{"title":"Two days in the college","date":"Friday 9 March","time":"2:32 pm","dateTime":"Friday 9 March, 2:32 pm","published":true,"id":70,"displayNumber":"070"},{"title":"Bethan","date":"Saturday 10 March","time":"12:16 pm","dateTime":"Saturday 10 March, 12:16 pm","published":true,"id":71,"displayNumber":"071"},{"title":"Get.A.Mac","date":"Monday 12 March","time":"3:24 pm","dateTime":"Monday 12 March, 3:24 pm","published":true,"id":72,"displayNumber":"072"},{"title":"The next viral sensation","date":"Wednesday 14 March","time":"6:54 pm","dateTime":"Wednesday 14 March, 6:54 pm","published":true,"id":73,"displayNumber":"073"},{"title":"<i>What You Do<\/i>","date":"Thursday 15 March","time":"8:06 pm","dateTime":"Thursday 15 March, 8:06 pm","published":true,"id":74,"displayNumber":"074"},{"title":"Comic Relief","date":"Friday 16 March","time":"7:19 pm","dateTime":"Friday 16 March, 7:19 pm","published":true,"id":75,"displayNumber":"075"},{"title":"Internet grooming","date":"Friday 16 March","time":"7:46 pm","dateTime":"Friday 16 March, 7:46 pm","published":true,"id":76,"displayNumber":"076"},{"title":"More comic relief","date":"Saturday 17 March","time":"12:32 am","dateTime":"Saturday 17 March, 12:32 am","published":true,"id":77,"displayNumber":"077"},{"title":"Well this is surreal.","date":"Tuesday 20 March","time":"4:35 pm","dateTime":"Tuesday 20 March, 4:35 pm","published":true,"id":78,"displayNumber":"078"},{"title":"Kerry's party, and Bristow and filmage and lack of college and stuff","date":"Thursday 22 March","time":"1:21 pm","dateTime":"Thursday 22 March, 1:21 pm","published":true,"id":79,"displayNumber":"079"},{"title":"A moment from Jenni","date":"Thursday 22 March","time":"3:41 pm","dateTime":"Thursday 22 March, 3:41 pm","published":true,"id":80,"displayNumber":"080"},{"title":"<i>Intoxicated You<\/i>","date":"Thursday 22 March","time":"4:37 pm","dateTime":"Thursday 22 March, 4:37 pm","published":true,"id":81,"displayNumber":"081"},{"title":"Words for Lenis Arcane","date":"Saturday 24 March","time":"11:06 am","dateTime":"Saturday 24 March, 11:06 am","published":true,"id":82,"displayNumber":"082"},{"title":"The Project","date":"Saturday 24 March","time":"1:11 pm","dateTime":"Saturday 24 March, 1:11 pm","published":true,"id":83,"displayNumber":"083"},{"title":"The clocks","date":"Sunday 25 March","time":"1:03 pm","dateTime":"Sunday 25 March, 1:03 pm","published":true,"id":84,"displayNumber":"084"},{"title":"*confusion*","date":"Monday 26 March","time":"8:01 pm","dateTime":"Monday 26 March, 8:01 pm","published":true,"id":85,"displayNumber":"085"},{"title":"'Spose I might as well do this, then","date":"Monday 26 March","time":"8:13 pm","dateTime":"Monday 26 March, 8:13 pm","published":true,"id":86,"displayNumber":"086"},{"title":"There was no hope for me","date":"Monday 26 March","time":"9:29 pm","dateTime":"Monday 26 March, 9:29 pm","published":true,"id":87,"displayNumber":"087"},{"title":"Suppression of creativity","date":"Tuesday 27 March","time":"2:07 pm","dateTime":"Tuesday 27 March, 2:07 pm","published":true,"id":88,"displayNumber":"088"},{"title":"Every now and then, I need to run away","date":"Wednesday 28 March","time":"2:21 am","dateTime":"Wednesday 28 March, 2:21 am","published":true,"id":89,"displayNumber":"089"},{"title":"Austria","date":"Wednesday 28 March","time":"3:04 am","dateTime":"Wednesday 28 March, 3:04 am","published":true,"id":90,"displayNumber":"090"},{"title":"The survey of spoilage","date":"Wednesday 28 March","time":"12:40 pm","dateTime":"Wednesday 28 March, 12:40 pm","published":true,"id":91,"displayNumber":"091"},{"title":"Shadows","date":"Wednesday 28 March","time":"12:53 pm","dateTime":"Wednesday 28 March, 12:53 pm","published":true,"id":92,"displayNumber":"092"},{"title":"The awesomeness of Jenni","date":"Wednesday 28 March","time":"1:31 pm","dateTime":"Wednesday 28 March, 1:31 pm","published":true,"id":93,"displayNumber":"093"},{"title":"A code of conduct for effective rational discussion","date":"Wednesday 28 March","time":"5:07 pm","dateTime":"Wednesday 28 March, 5:07 pm","published":true,"id":94,"displayNumber":"094"},{"title":"The ransom","date":"Friday 30 March","time":"11:02 am","dateTime":"Friday 30 March, 11:02 am","published":true,"id":95,"displayNumber":"095"},{"title":"Three dinner parties","date":"Friday 30 March","time":"4:43 pm","dateTime":"Friday 30 March, 4:43 pm","published":true,"id":96,"displayNumber":"096"},{"title":"Social causes","date":"Sunday 1 April","time":"1:28 pm","dateTime":"Sunday 1 April, 1:28 pm","published":true,"id":97,"displayNumber":"097"},{"title":"Cousins","date":"Monday 2 April","time":"12:20 pm","dateTime":"Monday 2 April, 12:20 pm","published":true,"id":98,"displayNumber":"098"},{"title":"Entry 1447","date":"Wednesday 4 April","time":"12:41 pm","dateTime":"Wednesday 4 April, 12:41 pm","published":true,"id":99,"displayNumber":"099"},{"title":"Comments","date":"Wednesday 4 April","time":"1:53 pm","dateTime":"Wednesday 4 April, 1:53 pm","published":true,"id":100,"displayNumber":"100"},{"title":"On to something good","date":"Thursday 5 April","time":"1:18 am","dateTime":"Thursday 5 April, 1:18 am","published":true,"id":101,"displayNumber":"101"},{"title":"And leading from that, to this","date":"Thursday 5 April","time":"1:32 am","dateTime":"Thursday 5 April, 1:32 am","published":true,"id":102,"displayNumber":"102"},{"title":"Under The Sea","date":"Thursday 5 April","time":"10:46 am","dateTime":"Thursday 5 April, 10:46 am","published":true,"id":103,"displayNumber":"103"},{"title":"Videoage","date":"Friday 6 April","time":"9:56 am","dateTime":"Friday 6 April, 9:56 am","published":true,"id":104,"displayNumber":"104"},{"title":"Birthday textage","date":"Saturday 7 April","time":"11:10 pm","dateTime":"Saturday 7 April, 11:10 pm","published":true,"id":105,"displayNumber":"105"},{"title":"Ash and Becky","date":"Sunday 8 April","time":"10:31 am","dateTime":"Sunday 8 April, 10:31 am","published":true,"id":106,"displayNumber":"106"},{"title":"BIRTHDAYAGE!","date":"Monday 9 April","time":"10:49 pm","dateTime":"Monday 9 April, 10:49 pm","published":true,"id":107,"displayNumber":"107"},{"title":"Gamblage","date":"Saturday 14 April","time":"12:34 pm","dateTime":"Saturday 14 April, 12:34 pm","published":true,"id":108,"displayNumber":"108"},{"title":"The best damn review","date":"Monday 16 April","time":"10:20 pm","dateTime":"Monday 16 April, 10:20 pm","published":true,"id":109,"displayNumber":"109"},{"title":"Kenda","date":"Tuesday 17 April","time":"2:48 pm","dateTime":"Tuesday 17 April, 2:48 pm","published":true,"id":110,"displayNumber":"110"},{"title":"Noah","date":"Tuesday 17 April","time":"7:23 pm","dateTime":"Tuesday 17 April, 7:23 pm","published":true,"id":111,"displayNumber":"111"},{"title":"Storyteller","date":"Wednesday 18 April","time":"9:38 pm","dateTime":"Wednesday 18 April, 9:38 pm","published":true,"id":112,"displayNumber":"112"},{"title":"<i>Mr. Day,<\/i>","date":"Thursday 19 April","time":"8:59 am","dateTime":"Thursday 19 April, 8:59 am","published":true,"id":113,"displayNumber":"113"},{"title":"The tattoo adventure","date":"Thursday 19 April","time":"11:37 pm","dateTime":"Thursday 19 April, 11:37 pm","published":true,"id":114,"displayNumber":"114"},{"title":"The right to vote","date":"Saturday 21 April","time":"3:22 pm","dateTime":"Saturday 21 April, 3:22 pm","published":true,"id":115,"displayNumber":"115"},{"title":"God bless the internet","date":"Saturday 21 April","time":"6:32 pm","dateTime":"Saturday 21 April, 6:32 pm","published":true,"id":116,"displayNumber":"116"},{"title":"The petition","date":"Saturday 21 April","time":"8:35 pm","dateTime":"Saturday 21 April, 8:35 pm","published":true,"id":117,"displayNumber":"117"},{"title":"I despair at times","date":"Saturday 21 April","time":"11:57 pm","dateTime":"Saturday 21 April, 11:57 pm","published":true,"id":118,"displayNumber":"118"},{"title":"The secrets of Lost","date":"Sunday 22 April","time":"9:18 am","dateTime":"Sunday 22 April, 9:18 am","published":true,"id":119,"displayNumber":"119"},{"title":"Music talk","date":"Monday 23 April","time":"10:53 pm","dateTime":"Monday 23 April, 10:53 pm","published":true,"id":120,"displayNumber":"120"},{"title":"LOLOLOL xDD","date":"Wednesday 25 April","time":"2:44 pm","dateTime":"Wednesday 25 April, 2:44 pm","published":true,"id":121,"displayNumber":"121"},{"title":"The wallflower","date":"Thursday 26 April","time":"12:29 am","dateTime":"Thursday 26 April, 12:29 am","published":true,"id":122,"displayNumber":"122"},{"title":"A synoptic exam","date":"Friday 27 April","time":"10:46 pm","dateTime":"Friday 27 April, 10:46 pm","published":true,"id":123,"displayNumber":"123"},{"title":"Stunting progress","date":"Saturday 28 April","time":"5:21 pm","dateTime":"Saturday 28 April, 5:21 pm","published":true,"id":124,"displayNumber":"124"},{"title":"Raindrops","date":"Saturday 28 April","time":"8:05 pm","dateTime":"Saturday 28 April, 8:05 pm","published":true,"id":125,"displayNumber":"125"},{"title":"Combat cards","date":"Sunday 29 April","time":"12:18 pm","dateTime":"Sunday 29 April, 12:18 pm","published":true,"id":126,"displayNumber":"126"},{"title":"My funny family","date":"Tuesday 1 May","time":"9:58 pm","dateTime":"Tuesday 1 May, 9:58 pm","published":true,"id":127,"displayNumber":"127"},{"title":"Alex's first job","date":"Tuesday 1 May","time":"10:28 pm","dateTime":"Tuesday 1 May, 10:28 pm","published":true,"id":128,"displayNumber":"128"},{"title":"It's a giant book!","date":"Monday 7 May","time":"9:34 pm","dateTime":"Monday 7 May, 9:34 pm","published":true,"id":129,"displayNumber":"129"},{"title":"The incredible amounts of awesomeness that you exude","date":"Monday 7 May","time":"11:02 pm","dateTime":"Monday 7 May, 11:02 pm","published":true,"id":130,"displayNumber":"130"},{"title":"Further instructions","date":"Tuesday 8 May","time":"12:07 pm","dateTime":"Tuesday 8 May, 12:07 pm","published":true,"id":131,"displayNumber":"131"},{"title":"Uncomfortable deletion","date":"Wednesday 9 May","time":"2:00 am","dateTime":"Wednesday 9 May, 2:00 am","published":true,"id":132,"displayNumber":"132"},{"title":"Introspection lies ahead.","date":"Thursday 10 May","time":"8:16 am","dateTime":"Thursday 10 May, 8:16 am","published":true,"id":133,"displayNumber":"133"},{"title":"Luke over","date":"Saturday 12 May","time":"12:28 am","dateTime":"Saturday 12 May, 12:28 am","published":true,"id":134,"displayNumber":"134"},{"title":"\"This may look like a dead horse's penis, but it's mine.\"","date":"Saturday 12 May","time":"6:39 pm","dateTime":"Saturday 12 May, 6:39 pm","published":true,"id":135,"displayNumber":"135"},{"title":"What I'd like to see","date":"Monday 14 May","time":"9:01 pm","dateTime":"Monday 14 May, 9:01 pm","published":true,"id":136,"displayNumber":"136"},{"title":"'<i>Eighth Day<\/i>' finished","date":"Tuesday 15 May","time":"12:21 pm","dateTime":"Tuesday 15 May, 12:21 pm","published":true,"id":137,"displayNumber":"137"},{"title":"The return","date":"Wednesday 16 May","time":"8:38 pm","dateTime":"Wednesday 16 May, 8:38 pm","published":true,"id":138,"displayNumber":"138"},{"title":"An AQA question","date":"Wednesday 16 May","time":"11:10 pm","dateTime":"Wednesday 16 May, 11:10 pm","published":true,"id":139,"displayNumber":"139"},{"title":"Miss Natalie Moran","date":"Thursday 17 May","time":"11:20 pm","dateTime":"Thursday 17 May, 11:20 pm","published":true,"id":140,"displayNumber":"140"},{"title":"And here I am still","date":"Friday 18 May","time":"9:53 am","dateTime":"Friday 18 May, 9:53 am","published":true,"id":141,"displayNumber":"141"},{"title":"Free as a bird","date":"Saturday 19 May","time":"10:26 am","dateTime":"Saturday 19 May, 10:26 am","published":true,"id":142,"displayNumber":"142"},{"title":"A <i>Lost<\/i> theory","date":"Sunday 20 May","time":"2:31 pm","dateTime":"Sunday 20 May, 2:31 pm","published":true,"id":143,"displayNumber":"143"},{"title":"Innovatia bloggage","date":"Sunday 20 May","time":"10:43 pm","dateTime":"Sunday 20 May, 10:43 pm","published":true,"id":144,"displayNumber":"144"},{"title":"My thought process","date":"Monday 21 May","time":"8:06 am","dateTime":"Monday 21 May, 8:06 am","published":true,"id":145,"displayNumber":"145"},{"title":"Another conversation with Al","date":"Monday 21 May","time":"8:26 am","dateTime":"Monday 21 May, 8:26 am","published":true,"id":146,"displayNumber":"146"},{"title":"Discontentment","date":"Monday 21 May","time":"8:55 am","dateTime":"Monday 21 May, 8:55 am","published":true,"id":147,"displayNumber":"147"},{"title":"The cheerup method with Becky and Jenni","date":"Monday 21 May","time":"4:35 pm","dateTime":"Monday 21 May, 4:35 pm","published":true,"id":148,"displayNumber":"148"},{"title":"Writing the novel","date":"Monday 21 May","time":"5:32 pm","dateTime":"Monday 21 May, 5:32 pm","published":true,"id":149,"displayNumber":"149"},{"title":"From a guy on MySpace called Dominic","date":"Tuesday 22 May","time":"8:18 am","dateTime":"Tuesday 22 May, 8:18 am","published":true,"id":150,"displayNumber":"150"},{"title":"Bonus tracks and other songs","date":"Tuesday 22 May","time":"8:41 am","dateTime":"Tuesday 22 May, 8:41 am","published":true,"id":151,"displayNumber":"151"},{"title":"Caitlin","date":"Tuesday 22 May","time":"1:57 pm","dateTime":"Tuesday 22 May, 1:57 pm","published":true,"id":152,"displayNumber":"152"},{"title":"Comedy song, HillUpdatey8, and a note from Luke","date":"Wednesday 23 May","time":"1:53 pm","dateTime":"Wednesday 23 May, 1:53 pm","published":true,"id":153,"displayNumber":"153"},{"title":"On this, Bristow's 18th birthday","date":"Thursday 24 May","time":"7:22 pm","dateTime":"Thursday 24 May, 7:22 pm","published":true,"id":154,"displayNumber":"154"},{"title":"A name for myself","date":"Friday 25 May","time":"9:26 am","dateTime":"Friday 25 May, 9:26 am","published":true,"id":155,"displayNumber":"155"},{"title":"Being left behind","date":"Friday 25 May","time":"12:14 pm","dateTime":"Friday 25 May, 12:14 pm","published":true,"id":156,"displayNumber":"156"},{"title":"At wit's end","date":"Friday 25 May","time":"9:08 pm","dateTime":"Friday 25 May, 9:08 pm","published":true,"id":157,"displayNumber":"157"},{"title":"Becky's quote of the day","date":"Saturday 26 May","time":"10:39 pm","dateTime":"Saturday 26 May, 10:39 pm","published":true,"id":158,"displayNumber":"158"},{"title":"<i>A real community<\/i>","date":"Sunday 27 May","time":"4:37 am","dateTime":"Sunday 27 May, 4:37 am","published":true,"id":159,"displayNumber":"159"},{"title":"Finances","date":"Monday 28 May","time":"11:08 pm","dateTime":"Monday 28 May, 11:08 pm","published":true,"id":160,"displayNumber":"160"},{"title":"A conversation waiting","date":"Tuesday 29 May","time":"10:11 pm","dateTime":"Tuesday 29 May, 10:11 pm","published":true,"id":161,"displayNumber":"161"},{"title":"If we could write our own reviews","date":"Tuesday 29 May","time":"11:33 pm","dateTime":"Tuesday 29 May, 11:33 pm","published":true,"id":162,"displayNumber":"162"},{"title":"Undergraduate 2007","date":"Wednesday 30 May","time":"10:17 am","dateTime":"Wednesday 30 May, 10:17 am","published":true,"id":163,"displayNumber":"163"},{"title":"SnapVine Player","date":"Wednesday 30 May","time":"10:54 am","dateTime":"Wednesday 30 May, 10:54 am","published":true,"id":164,"displayNumber":"164"},{"title":"Big Brother comments","date":"Thursday 31 May","time":"11:37 am","dateTime":"Thursday 31 May, 11:37 am","published":true,"id":165,"displayNumber":"165"},{"title":"\"Grab your left nut, make your right one jealous\"","date":"Saturday 2 June","time":"6:31 pm","dateTime":"Saturday 2 June, 6:31 pm","published":true,"id":166,"displayNumber":"166"},{"title":"BlogFest","date":"Sunday 3 June","time":"4:03 pm","dateTime":"Sunday 3 June, 4:03 pm","published":true,"id":167,"displayNumber":"167"},{"title":"Feel Good","date":"Monday 4 June","time":"12:16 pm","dateTime":"Monday 4 June, 12:16 pm","published":true,"id":168,"displayNumber":"168"},{"title":"Big Fat Quiz","date":"Monday 4 June","time":"3:17 pm","dateTime":"Monday 4 June, 3:17 pm","published":true,"id":169,"displayNumber":"169"},{"title":"Piss.","date":"Monday 4 June","time":"9:09 pm","dateTime":"Monday 4 June, 9:09 pm","published":true,"id":170,"displayNumber":"170"},{"title":"AS Philosophy resit","date":"Wednesday 6 June","time":"12:16 am","dateTime":"Wednesday 6 June, 12:16 am","published":true,"id":171,"displayNumber":"171"},{"title":"AS Media resit","date":"Friday 8 June","time":"6:46 pm","dateTime":"Friday 8 June, 6:46 pm","published":true,"id":172,"displayNumber":"172"},{"title":"Rylan","date":"Friday 8 June","time":"10:57 pm","dateTime":"Friday 8 June, 10:57 pm","published":true,"id":173,"displayNumber":"173"},{"title":"Light and serious","date":"Saturday 9 June","time":"7:47 pm","dateTime":"Saturday 9 June, 7:47 pm","published":true,"id":174,"displayNumber":"174"},{"title":"I hate being here","date":"Saturday 9 June","time":"8:15 pm","dateTime":"Saturday 9 June, 8:15 pm","published":true,"id":175,"displayNumber":"175"},{"title":"London 2012","date":"Sunday 10 June","time":"2:56 pm","dateTime":"Sunday 10 June, 2:56 pm","published":true,"id":176,"displayNumber":"176"},{"title":"Another comment","date":"Monday 11 June","time":"11:07 am","dateTime":"Monday 11 June, 11:07 am","published":true,"id":177,"displayNumber":"177"},{"title":"A2 Psychology","date":"Friday 15 June","time":"2:07 pm","dateTime":"Friday 15 June, 2:07 pm","published":true,"id":178,"displayNumber":"178"},{"title":"Making a note of things","date":"Friday 15 June","time":"4:19 pm","dateTime":"Friday 15 June, 4:19 pm","published":true,"id":179,"displayNumber":"179"},{"title":"Frustration in the workplace","date":"Monday 18 June","time":"10:41 am","dateTime":"Monday 18 June, 10:41 am","published":true,"id":180,"displayNumber":"180"},{"title":"A2 Media Studies","date":"Monday 18 June","time":"6:08 pm","dateTime":"Monday 18 June, 6:08 pm","published":true,"id":181,"displayNumber":"181"},{"title":"Lisa Smith","date":"Wednesday 20 June","time":"1:38 am","dateTime":"Wednesday 20 June, 1:38 am","published":true,"id":182,"displayNumber":"182"},{"title":"Last minute tickets","date":"Thursday 21 June","time":"2:44 pm","dateTime":"Thursday 21 June, 2:44 pm","published":true,"id":183,"displayNumber":"183"},{"title":"Random Touch help","date":"Saturday 23 June","time":"6:07 pm","dateTime":"Saturday 23 June, 6:07 pm","published":true,"id":184,"displayNumber":"184"},{"title":"A2 Philosophy","date":"Saturday 23 June","time":"9:52 pm","dateTime":"Saturday 23 June, 9:52 pm","published":true,"id":185,"displayNumber":"185"},{"title":"But on a lighter note","date":"Saturday 23 June","time":"10:13 pm","dateTime":"Saturday 23 June, 10:13 pm","published":true,"id":186,"displayNumber":"186"},{"title":"Political stance","date":"Sunday 24 June","time":"12:12 am","dateTime":"Sunday 24 June, 12:12 am","published":true,"id":187,"displayNumber":"187"},{"title":"Holiday bound","date":"Tuesday 26 June","time":"2:30 am","dateTime":"Tuesday 26 June, 2:30 am","published":true,"id":188,"displayNumber":"188"},{"title":"Clinical matters","date":"Tuesday 26 June","time":"3:56 pm","dateTime":"Tuesday 26 June, 3:56 pm","published":true,"id":189,"displayNumber":"189"},{"title":"Pimpom","date":"Tuesday 26 June","time":"8:59 pm","dateTime":"Tuesday 26 June, 8:59 pm","published":true,"id":190,"displayNumber":"190"},{"title":"8 Outta 10","date":"Wednesday 27 June","time":"5:16 pm","dateTime":"Wednesday 27 June, 5:16 pm","published":true,"id":191,"displayNumber":"191"},{"title":"OMGOMGOMGOMGOMGOMGOMG","date":"Wednesday 27 June","time":"6:54 pm","dateTime":"Wednesday 27 June, 6:54 pm","published":true,"id":192,"displayNumber":"192"},{"title":"Just one of many","date":"Thursday 28 June","time":"2:34 pm","dateTime":"Thursday 28 June, 2:34 pm","published":true,"id":193,"displayNumber":"193"},{"title":"NEW YOOOOORK!","date":"Friday 29 June","time":"12:58 pm","dateTime":"Friday 29 June, 12:58 pm","published":true,"id":194,"displayNumber":"194"},{"title":"YouTubian sexuality","date":"Friday 29 June","time":"6:45 pm","dateTime":"Friday 29 June, 6:45 pm","published":true,"id":195,"displayNumber":"195"},{"title":"A prisoner of my own arrogance","date":"Friday 29 June","time":"6:56 pm","dateTime":"Friday 29 June, 6:56 pm","published":true,"id":196,"displayNumber":"196"},{"title":"Messages and conversations","date":"Friday 29 June","time":"9:33 pm","dateTime":"Friday 29 June, 9:33 pm","published":true,"id":197,"displayNumber":"197"},{"title":"Tales of the big city","date":"Saturday 30 June","time":"9:41 pm (NY time)","dateTime":"Saturday 30 June, 9:41 pm (NY time)","published":true,"id":198,"displayNumber":"198"},{"title":"The indian guy from New York","date":"Sunday 1 July","time":"10:26 am (NY time)","dateTime":"Sunday 1 July, 10:26 am (NY time)","published":true,"id":199,"displayNumber":"199"},{"title":"\"If I can't get my hand around it, it's not going in my ass\"","date":"Monday 2 July","time":"11:35 am (NY time)","dateTime":"Monday 2 July, 11:35 am (NY time)","published":true,"id":200,"displayNumber":"200"},{"title":"The soberest Europen","date":"Monday 2 July","time":"9:40 pm (NY time)","dateTime":"Monday 2 July, 9:40 pm (NY time)","published":true,"id":201,"displayNumber":"201"},{"title":"Fame","date":"Monday 2 July","time":"11:48 pm (NY time)","dateTime":"Monday 2 July, 11:48 pm (NY time)","published":true,"id":202,"displayNumber":"202"},{"title":"Jewsberg","date":"Tuesday 3 July","time":"8:07 pm (NY time)","dateTime":"Tuesday 3 July, 8:07 pm (NY time)","published":true,"id":203,"displayNumber":"203"},{"title":"Correspondence","date":"Tuesday 3 July","time":"10:27 pm (NY time)","dateTime":"Tuesday 3 July, 10:27 pm (NY time)","published":true,"id":204,"displayNumber":"204"},{"title":"One of life's winners","date":"Wednesday 4 July","time":"12:04 pm (NY time)","dateTime":"Wednesday 4 July, 12:04 pm (NY time)","published":true,"id":205,"displayNumber":"205"},{"title":"The fourth of July","date":"Wednesday 4 July","time":"12:59 pm (NY time)","dateTime":"Wednesday 4 July, 12:59 pm (NY time)","published":true,"id":206,"displayNumber":"206"},{"title":"The highlight","date":"Wednesday 4 July","time":"11:41 pm (NY time)","dateTime":"Wednesday 4 July, 11:41 pm (NY time)","published":true,"id":207,"displayNumber":"207"},{"title":"All things start and end at Broadway (the seven-hour entry)","date":"Thursday 5 July","time":"9:52 pm (NY time)","dateTime":"Thursday 5 July, 9:52 pm (NY time)","published":true,"id":208,"displayNumber":"208"},{"title":"Sitting in the den again","date":"Saturday 7 July","time":"9:40 pm","dateTime":"Saturday 7 July, 9:40 pm","published":true,"id":209,"displayNumber":"209"},{"title":"43 Things","date":"Saturday 7 July","time":"10:02 pm","dateTime":"Saturday 7 July, 10:02 pm","published":true,"id":210,"displayNumber":"210"},{"title":"Mark Watson","date":"Monday 9 July","time":"8:19 am","dateTime":"Monday 9 July, 8:19 am","published":true,"id":211,"displayNumber":"211"},{"title":"Dual worlds","date":"Monday 9 July","time":"3:50 pm","dateTime":"Monday 9 July, 3:50 pm","published":true,"id":212,"displayNumber":"212"},{"title":"Superpower","date":"Monday 9 July","time":"4:40 pm","dateTime":"Monday 9 July, 4:40 pm","published":true,"id":213,"displayNumber":"213"},{"title":"A spam message on MySpace","date":"Tuesday 10 July","time":"1:07 am","dateTime":"Tuesday 10 July, 1:07 am","published":true,"id":214,"displayNumber":"214"},{"title":"I say that shit just clowning dog, c'mon - how fucked up is you?","date":"Wednesday 11 July","time":"2:55 pm","dateTime":"Wednesday 11 July, 2:55 pm","published":true,"id":215,"displayNumber":"215"},{"title":"Harry Potter request","date":"Wednesday 11 July","time":"5:01 pm","dateTime":"Wednesday 11 July, 5:01 pm","published":true,"id":216,"displayNumber":"216"},{"title":"The Potter","date":"Thursday 12 July","time":"8:26 pm","dateTime":"Thursday 12 July, 8:26 pm","published":true,"id":217,"displayNumber":"217"},{"title":"We used to call ourselves The Circle","date":"Friday 13 July","time":"12:43 pm","dateTime":"Friday 13 July, 12:43 pm","published":true,"id":218,"displayNumber":"218"},{"title":"Reduction addiction","date":"Friday 13 July","time":"3:13 pm","dateTime":"Friday 13 July, 3:13 pm","published":true,"id":219,"displayNumber":"219"},{"title":"The glorious Dagenham","date":"Friday 13 July","time":"11:41 pm","dateTime":"Friday 13 July, 11:41 pm","published":true,"id":220,"displayNumber":"220"},{"title":"Mum-Nav","date":"Saturday 14 July","time":"5:03 pm","dateTime":"Saturday 14 July, 5:03 pm","published":true,"id":221,"displayNumber":"221"},{"title":"Debunking/Innovatia","date":"Monday 16 July","time":"3:48 pm","dateTime":"Monday 16 July, 3:48 pm","published":true,"id":222,"displayNumber":"222"},{"title":"\"... I always wanted to play the flute.\"","date":"Wednesday 18 July","time":"2:44 pm","dateTime":"Wednesday 18 July, 2:44 pm","published":true,"id":223,"displayNumber":"223"},{"title":"Post-<i>Deathly Hallows<\/i>","date":"Sunday 22 July","time":"10:17 pm","dateTime":"Sunday 22 July, 10:17 pm","published":true,"id":224,"displayNumber":"224"},{"title":"The critical review","date":"Sunday 22 July","time":"11:48 pm","dateTime":"Sunday 22 July, 11:48 pm","published":true,"id":225,"displayNumber":"225"},{"title":"Magpie","date":"Friday 27 July","time":"2:26 pm","dateTime":"Friday 27 July, 2:26 pm","published":true,"id":226,"displayNumber":"226"},{"title":"Simpsonize Me","date":"Sunday 29 July","time":"9:01 pm","dateTime":"Sunday 29 July, 9:01 pm","published":true,"id":227,"displayNumber":"227"},{"title":"The Chain","date":"Wednesday 1 August","time":"5:48 pm","dateTime":"Wednesday 1 August, 5:48 pm","published":true,"id":228,"displayNumber":"228"},{"title":"Creative liberation","date":"Thursday 2 August","time":"8:28 pm","dateTime":"Thursday 2 August, 8:28 pm","published":true,"id":229,"displayNumber":"229"},{"title":"A project update to de-clutter my mind","date":"Friday 3 August","time":"2:13 am","dateTime":"Friday 3 August, 2:13 am","published":true,"id":230,"displayNumber":"230"},{"title":"New York Chronicles' epilogue","date":"Friday 3 August","time":"3:43 am","dateTime":"Friday 3 August, 3:43 am","published":true,"id":231,"displayNumber":"231"},{"title":"My first imposter","date":"Friday 3 August","time":"11:16 pm","dateTime":"Friday 3 August, 11:16 pm","published":true,"id":232,"displayNumber":"232"},{"title":"<i>New York Entertainment<\/i> - DH Reading Diary","date":"Saturday 4 August","time":"3:36 am","dateTime":"Saturday 4 August, 3:36 am","published":true,"id":233,"displayNumber":"233"},{"title":"Alex By Day","date":"Sunday 5 August","time":"3:08 pm","dateTime":"Sunday 5 August, 3:08 pm","published":true,"id":234,"displayNumber":"234"},{"title":"Words of TheAmazingAtheist","date":"Monday 6 August","time":"1:51 am","dateTime":"Monday 6 August, 1:51 am","published":true,"id":235,"displayNumber":"235"},{"title":"The Becky","date":"Tuesday 7 August","time":"5:48 pm","dateTime":"Tuesday 7 August, 5:48 pm","published":true,"id":236,"displayNumber":"236"},{"title":"Life Hackers","date":"Wednesday 8 August","time":"9:16 pm","dateTime":"Wednesday 8 August, 9:16 pm","published":true,"id":237,"displayNumber":"237"},{"title":"The monotony of conversation","date":"Saturday 11 August","time":"3:22 pm","dateTime":"Saturday 11 August, 3:22 pm","published":true,"id":238,"displayNumber":"238"},{"title":"Song lyrics and gossip quotes","date":"Saturday 11 August","time":"3:31 pm","dateTime":"Saturday 11 August, 3:31 pm","published":true,"id":239,"displayNumber":"239"},{"title":"Episode Nine","date":"Monday 13 August","time":"5:15 pm","dateTime":"Monday 13 August, 5:15 pm","published":true,"id":240,"displayNumber":"240"},{"title":"Photoshoot","date":"Monday 13 August","time":"10:12 pm","dateTime":"Monday 13 August, 10:12 pm","published":true,"id":241,"displayNumber":"241"},{"title":"Bloggage","date":"Wednesday 15 August","time":"12:36 pm","dateTime":"Wednesday 15 August, 12:36 pm","published":true,"id":242,"displayNumber":"242"},{"title":"Lucid dreaming","date":"Wednesday 15 August","time":"5:36 pm","dateTime":"Wednesday 15 August, 5:36 pm","published":true,"id":243,"displayNumber":"243"},{"title":"How best can we stifle the human spirit?","date":"Wednesday 15 August","time":"7:05 pm","dateTime":"Wednesday 15 August, 7:05 pm","published":true,"id":244,"displayNumber":"244"},{"title":"That blissful sensation called apathy","date":"Thursday 16 August","time":"1:27 am","dateTime":"Thursday 16 August, 1:27 am","published":true,"id":245,"displayNumber":"245"},{"title":"The path to university","date":"Thursday 16 August","time":"10:56 am","dateTime":"Thursday 16 August, 10:56 am","published":true,"id":246,"displayNumber":"246"},{"title":"How embarrassing","date":"Thursday 16 August","time":"11:01 am","dateTime":"Thursday 16 August, 11:01 am","published":true,"id":247,"displayNumber":"247"},{"title":"Results forthcoming","date":"Friday 17 August","time":"11:38 am","dateTime":"Friday 17 August, 11:38 am","published":true,"id":248,"displayNumber":"248"},{"title":"OH MY GOD","date":"Saturday 18 August","time":"11:11 am","dateTime":"Saturday 18 August, 11:11 am","published":true,"id":249,"displayNumber":"249"},{"title":"Motivated","date":"Saturday 18 August","time":"5:11 pm","dateTime":"Saturday 18 August, 5:11 pm","published":true,"id":250,"displayNumber":"250"},{"title":"Pointlessly irritating","date":"Monday 20 August","time":"11:07 am","dateTime":"Monday 20 August, 11:07 am","published":true,"id":251,"displayNumber":"251"},{"title":"Results","date":"Thursday 23 August","time":"12:27 am","dateTime":"Thursday 23 August, 12:27 am","published":true,"id":252,"displayNumber":"252"},{"title":"The best message I ever got on MySpace","date":"Thursday 23 August","time":"3:44 pm","dateTime":"Thursday 23 August, 3:44 pm","published":true,"id":253,"displayNumber":"253"},{"title":"OMG","date":"Saturday 25 August","time":"8:10 pm","dateTime":"Saturday 25 August, 8:10 pm","published":true,"id":254,"displayNumber":"254"},{"title":"Fucking HELL!","date":"Monday 27 August","time":"8:14 pm","dateTime":"Monday 27 August, 8:14 pm","published":true,"id":255,"displayNumber":"255"},{"title":"Blank card project","date":"Wednesday 29 August","time":"1:53 am","dateTime":"Wednesday 29 August, 1:53 am","published":true,"id":256,"displayNumber":"256"},{"title":"Just found another one","date":"Wednesday 29 August","time":"2:09 am","dateTime":"Wednesday 29 August, 2:09 am","published":true,"id":257,"displayNumber":"257"},{"title":"Porno titles","date":"Wednesday 29 August","time":"4:05 am","dateTime":"Wednesday 29 August, 4:05 am","published":true,"id":258,"displayNumber":"258"},{"title":"Charley off Big Brother","date":"Wednesday 29 August","time":"11:56 pm","dateTime":"Wednesday 29 August, 11:56 pm","published":true,"id":259,"displayNumber":"259"},{"title":"Travelogue, October 1st","date":"Monday 1 October","time":"7:40 pm","dateTime":"Monday 1 October, 7:40 pm","published":true,"id":260,"displayNumber":"260"},{"title":"Surreal YouTube journey","date":"Thursday 4 October","time":"11:53 am","dateTime":"Thursday 4 October, 11:53 am","published":true,"id":261,"displayNumber":"261"},{"title":"YouTube Trip Rules","date":"Thursday 4 October","time":"12:32 pm","dateTime":"Thursday 4 October, 12:32 pm","published":true,"id":262,"displayNumber":"262"},{"title":"Secret YouTube party","date":"Friday 5 October","time":"5:44 pm","dateTime":"Friday 5 October, 5:44 pm","published":true,"id":263,"displayNumber":"263"},{"title":"To Portsmouth","date":"Saturday 6 October","time":"2:52 pm","dateTime":"Saturday 6 October, 2:52 pm","published":true,"id":264,"displayNumber":"264"},{"title":"Haslemere","date":"Saturday 6 October","time":"4:36 pm","dateTime":"Saturday 6 October, 4:36 pm","published":true,"id":265,"displayNumber":"265"},{"title":"The detachment feeling","date":"Sunday 7 October","time":"6:51 pm","dateTime":"Sunday 7 October, 6:51 pm","published":true,"id":266,"displayNumber":"266"},{"title":"Two useful lessons","date":"Sunday 7 October","time":"11:54 pm","dateTime":"Sunday 7 October, 11:54 pm","published":true,"id":267,"displayNumber":"267"},{"title":"ACCOMMODATION MUCH?!","date":"Monday 8 October","time":"1:06 pm","dateTime":"Monday 8 October, 1:06 pm","published":true,"id":268,"displayNumber":"268"},{"title":"Best holiday plan ever","date":"Monday 8 October","time":"2:36 pm","dateTime":"Monday 8 October, 2:36 pm","published":true,"id":269,"displayNumber":"269"},{"title":"iPod touch found","date":"Monday 8 October","time":"3:25 pm","dateTime":"Monday 8 October, 3:25 pm","published":true,"id":270,"displayNumber":"270"},{"title":"The Nermie Army","date":"Monday 8 October","time":"9:17 pm","dateTime":"Monday 8 October, 9:17 pm","published":true,"id":271,"displayNumber":"271"},{"title":"Why Becky rules","date":"Tuesday 9 October","time":"10:29 am","dateTime":"Tuesday 9 October, 10:29 am","published":true,"id":272,"displayNumber":"272"},{"title":"Living Charlie's lifestyle","date":"Tuesday 9 October","time":"4:28 pm","dateTime":"Tuesday 9 October, 4:28 pm","published":true,"id":273,"displayNumber":"273"},{"title":"YouTube-related opportunity","date":"Wednesday 10 October","time":"11:22 pm","dateTime":"Wednesday 10 October, 11:22 pm","published":true,"id":274,"displayNumber":"274"},{"title":"Clothing merch","date":"Thursday 11 October","time":"1:55 pm","dateTime":"Thursday 11 October, 1:55 pm","published":true,"id":275,"displayNumber":"275"},{"title":"Idea five","date":"Friday 12 October","time":"12:20 pm","dateTime":"Friday 12 October, 12:20 pm","published":true,"id":276,"displayNumber":"276"},{"title":"The website nut","date":"Sunday 14 October","time":"7:17 pm","dateTime":"Sunday 14 October, 7:17 pm","published":true,"id":277,"displayNumber":"277"},{"title":"YouTube phone calls","date":"Monday 15 October","time":"11:17 am","dateTime":"Monday 15 October, 11:17 am","published":true,"id":278,"displayNumber":"278"},{"title":"The power four","date":"Monday 15 October","time":"11:35 am","dateTime":"Monday 15 October, 11:35 am","published":true,"id":279,"displayNumber":"279"},{"title":"Firsts","date":"Monday 15 October","time":"12:34 pm","dateTime":"Monday 15 October, 12:34 pm","published":true,"id":280,"displayNumber":"280"},{"title":"The invite","date":"Monday 15 October","time":"2:19 pm","dateTime":"Monday 15 October, 2:19 pm","published":true,"id":281,"displayNumber":"281"},{"title":"The radio show","date":"Monday 15 October","time":"10:37 pm","dateTime":"Monday 15 October, 10:37 pm","published":true,"id":282,"displayNumber":"282"},{"title":"Vaguely Live Radio","date":"Tuesday 16 October","time":"10:49 pm","dateTime":"Tuesday 16 October, 10:49 pm","published":true,"id":283,"displayNumber":"283"},{"title":"Feature potential","date":"Wednesday 17 October","time":"12:06 am","dateTime":"Wednesday 17 October, 12:06 am","published":true,"id":284,"displayNumber":"284"},{"title":"Download stats","date":"Wednesday 17 October","time":"8:14 pm","dateTime":"Wednesday 17 October, 8:14 pm","published":true,"id":285,"displayNumber":"285"},{"title":"VLR techie problems","date":"Thursday 18 October","time":"2:46 am","dateTime":"Thursday 18 October, 2:46 am","published":true,"id":286,"displayNumber":"286"},{"title":"Killing the rollercoaster analogy","date":"Thursday 18 October","time":"12:06 pm","dateTime":"Thursday 18 October, 12:06 pm","published":true,"id":287,"displayNumber":"287"},{"title":"Another whirlwind adventure","date":"Friday 19 October","time":"4:42 pm","dateTime":"Friday 19 October, 4:42 pm","published":true,"id":288,"displayNumber":"288"},{"title":"Japan Airlines","date":"Friday 19 October","time":"8:02 pm","dateTime":"Friday 19 October, 8:02 pm","published":true,"id":289,"displayNumber":"289"},{"title":"\"Welcome to Australia!\"","date":"Sunday 21 October","time":"2:10 pm (Sydney time)","dateTime":"Sunday 21 October, 2:10 pm (Sydney time)","published":true,"id":290,"displayNumber":"290"},{"title":"Alex and Caitlin rock up the Hilton","date":"Sunday 21 October","time":"5:18 pm (Sydney time)","dateTime":"Sunday 21 October, 5:18 pm (Sydney time)","published":true,"id":291,"displayNumber":"291"},{"title":"Alex's current condition","date":"Monday 22 October","time":"12:54 am (Sydney time)","dateTime":"Monday 22 October, 12:54 am (Sydney time)","published":true,"id":292,"displayNumber":"292"},{"title":"Hysteria","date":"Monday 22 October","time":"1:35 am (Sydney time)","dateTime":"Monday 22 October, 1:35 am (Sydney time)","published":true,"id":293,"displayNumber":"293"},{"title":"Live from a hotel room in Sydney","date":"Monday 22 October","time":"4:44 am (Sydney time)","dateTime":"Monday 22 October, 4:44 am (Sydney time)","published":true,"id":294,"displayNumber":"294"},{"title":"Weird morning","date":"Monday 22 October","time":"7:00 am (Sydney time)","dateTime":"Monday 22 October, 7:00 am (Sydney time)","published":true,"id":295,"displayNumber":"295"},{"title":"Testicles, videos and an asian lady named Natalie","date":"Monday 22 October","time":"8:28 pm (Sydney time)","dateTime":"Monday 22 October, 8:28 pm (Sydney time)","published":true,"id":296,"displayNumber":"296"},{"title":"YouTube Australia","date":"Wednesday 24 October","time":"8:19 am (Sydney time)","dateTime":"Wednesday 24 October, 8:19 am (Sydney time)","published":true,"id":297,"displayNumber":"297"},{"title":"Four thousand yen and a fruit rocket","date":"Thursday 25 October","time":"9:22 am (Sydney time)","dateTime":"Thursday 25 October, 9:22 am (Sydney time)","published":true,"id":298,"displayNumber":"298"},{"title":"Movies","date":"Thursday 25 October","time":"3:27 pm (Sydney time)","dateTime":"Thursday 25 October, 3:27 pm (Sydney time)","published":true,"id":299,"displayNumber":"299"},{"title":"An official Japanese visitor","date":"Thursday 25 October","time":"10:29 pm (Tokyo time)","dateTime":"Thursday 25 October, 10:29 pm (Tokyo time)","published":true,"id":300,"displayNumber":"300"},{"title":"The prisoners","date":"Friday 26 October","time":"9:24 am (Tokyo time)","dateTime":"Friday 26 October, 9:24 am (Tokyo time)","published":true,"id":301,"displayNumber":"301"},{"title":"Mememolly","date":"Sunday 28 October","time":"1:51 am","dateTime":"Sunday 28 October, 1:51 am","published":true,"id":302,"displayNumber":"302"},{"title":"Quoting","date":"Sunday 28 October","time":"2:11 am","dateTime":"Sunday 28 October, 2:11 am","published":true,"id":303,"displayNumber":"303"},{"title":"YouTube Stats","date":"Sunday 28 October","time":"4:37 am","dateTime":"Sunday 28 October, 4:37 am","published":true,"id":304,"displayNumber":"304"},{"title":"Guitar Hero 3 demo!","date":"Sunday 28 October","time":"6:54 am","dateTime":"Sunday 28 October, 6:54 am","published":true,"id":305,"displayNumber":"305"},{"title":"Another new entry from Nerimon","date":"Sunday 28 October","time":"7:40 am","dateTime":"Sunday 28 October, 7:40 am","published":true,"id":306,"displayNumber":"306"},{"title":"The Sydney video experience","date":"Sunday 28 October","time":"11:24 am","dateTime":"Sunday 28 October, 11:24 am","published":true,"id":307,"displayNumber":"307"},{"title":"\"Hey love - tis Caitlin\"","date":"Sunday 28 October","time":"9:52 pm","dateTime":"Sunday 28 October, 9:52 pm","published":true,"id":308,"displayNumber":"308"},{"title":"The Ashley","date":"Sunday 28 October","time":"11:42 pm","dateTime":"Sunday 28 October, 11:42 pm","published":true,"id":309,"displayNumber":"309"},{"title":"A celebrity","date":"Monday 29 October","time":"10:17 pm","dateTime":"Monday 29 October, 10:17 pm","published":true,"id":310,"displayNumber":"310"},{"title":"The shop","date":"Monday 29 October","time":"10:32 pm","dateTime":"Monday 29 October, 10:32 pm","published":true,"id":311,"displayNumber":"311"},{"title":"Two lovely Aussies","date":"Tuesday 30 October","time":"5:25 am","dateTime":"Tuesday 30 October, 5:25 am","published":true,"id":312,"displayNumber":"312"},{"title":"Busy life of the recent me","date":"Wednesday 31 October","time":"8:00 pm","dateTime":"Wednesday 31 October, 8:00 pm","published":true,"id":313,"displayNumber":"313"},{"title":"Ooh, oh and -","date":"Wednesday 31 October","time":"8:50 pm","dateTime":"Wednesday 31 October, 8:50 pm","published":true,"id":314,"displayNumber":"314"},{"title":"Up the comedian ladder","date":"Thursday 1 November","time":"2:07 pm","dateTime":"Thursday 1 November, 2:07 pm","published":true,"id":315,"displayNumber":"315"},{"title":"A text message","date":"Thursday 1 November","time":"3:07 pm","dateTime":"Thursday 1 November, 3:07 pm","published":true,"id":316,"displayNumber":"316"},{"title":"The nerimon brand","date":"Friday 2 November","time":"7:01 am","dateTime":"Friday 2 November, 7:01 am","published":true,"id":317,"displayNumber":"317"},{"title":"An email from the Apple store Regent Street","date":"Friday 2 November","time":"8:54 pm","dateTime":"Friday 2 November, 8:54 pm","published":true,"id":318,"displayNumber":"318"},{"title":"At Euston station","date":"Saturday 3 November","time":"1:35 am","dateTime":"Saturday 3 November, 1:35 am","published":true,"id":319,"displayNumber":"319"},{"title":"The Scottish journey experience","date":"Saturday 3 November","time":"5:21 am","dateTime":"Saturday 3 November, 5:21 am","published":true,"id":320,"displayNumber":"320"},{"title":"Bolton","date":"Sunday 4 November","time":"4:34 pm","dateTime":"Sunday 4 November, 4:34 pm","published":true,"id":321,"displayNumber":"321"},{"title":"The morning call","date":"Wednesday 7 November","time":"11:36 am","dateTime":"Wednesday 7 November, 11:36 am","published":true,"id":322,"displayNumber":"322"},{"title":"Old phone new phone","date":"Friday 9 November","time":"2:33 pm","dateTime":"Friday 9 November, 2:33 pm","published":true,"id":323,"displayNumber":"323"},{"title":"Never stop questioning.","date":"Sunday 11 November","time":"2:26 am","dateTime":"Sunday 11 November, 2:26 am","published":true,"id":324,"displayNumber":"324"},{"title":"Someone who gets me","date":"Monday 12 November","time":"2:35 am","dateTime":"Monday 12 November, 2:35 am","published":true,"id":325,"displayNumber":"325"},{"title":"I call this an overreaction","date":"Monday 12 November","time":"5:15 am","dateTime":"Monday 12 November, 5:15 am","published":true,"id":326,"displayNumber":"326"},{"title":"An actual blog","date":"Tuesday 13 November","time":"5:44 pm","dateTime":"Tuesday 13 November, 5:44 pm","published":true,"id":327,"displayNumber":"327"},{"title":"Blogging for blogging's sake","date":"Wednesday 14 November","time":"9:04 am","dateTime":"Wednesday 14 November, 9:04 am","published":true,"id":328,"displayNumber":"328"},{"title":"Headhunted","date":"Wednesday 14 November","time":"11:30 pm","dateTime":"Wednesday 14 November, 11:30 pm","published":true,"id":329,"displayNumber":"329"},{"title":"The man","date":"Wednesday 14 November","time":"11:32 pm","dateTime":"Wednesday 14 November, 11:32 pm","published":true,"id":330,"displayNumber":"330"},{"title":"Featured! *sings*","date":"Thursday 15 November","time":"4:42 pm","dateTime":"Thursday 15 November, 4:42 pm","published":true,"id":331,"displayNumber":"331"},{"title":"Wonderful foundation","date":"Thursday 15 November","time":"11:59 pm","dateTime":"Thursday 15 November, 11:59 pm","published":true,"id":332,"displayNumber":"332"},{"title":"The American in London","date":"Friday 16 November","time":"5:46 pm","dateTime":"Friday 16 November, 5:46 pm","published":true,"id":333,"displayNumber":"333"},{"title":"Dreaming and working","date":"Saturday 17 November","time":"7:49 am","dateTime":"Saturday 17 November, 7:49 am","published":true,"id":334,"displayNumber":"334"},{"title":"The content Alex","date":"Saturday 17 November","time":"9:56 pm","dateTime":"Saturday 17 November, 9:56 pm","published":true,"id":335,"displayNumber":"335"},{"title":"It's so cold.","date":"Sunday 18 November","time":"8:04 am","dateTime":"Sunday 18 November, 8:04 am","published":true,"id":336,"displayNumber":"336"},{"title":"Apple and Maddie","date":"Sunday 18 November","time":"6:26 pm","dateTime":"Sunday 18 November, 6:26 pm","published":true,"id":337,"displayNumber":"337"},{"title":"Subconscious resistance","date":"Monday 19 November","time":"7:48 am","dateTime":"Monday 19 November, 7:48 am","published":true,"id":338,"displayNumber":"338"},{"title":"YouTube and Las Vegas","date":"Monday 19 November","time":"12:15 pm","dateTime":"Monday 19 November, 12:15 pm","published":true,"id":339,"displayNumber":"339"},{"title":"A social networking meltdown","date":"Wednesday 21 November","time":"6:31 pm","dateTime":"Wednesday 21 November, 6:31 pm","published":true,"id":340,"displayNumber":"340"},{"title":"Becky hijacks Nerimon's diary","date":"Thursday 22 November","time":"7:11 pm","dateTime":"Thursday 22 November, 7:11 pm","published":true,"id":341,"displayNumber":"341"},{"title":"1717","date":"Friday 30 November","time":"9:05 am","dateTime":"Friday 30 November, 9:05 am","published":true,"id":342,"displayNumber":"342"},{"title":"Alex's very own stalker person","date":"Saturday 1 December","time":"3:46 pm","dateTime":"Saturday 1 December, 3:46 pm","published":true,"id":343,"displayNumber":"343"},{"title":"Fun times in London","date":"Sunday 2 December","time":"7:30 pm","dateTime":"Sunday 2 December, 7:30 pm","published":true,"id":344,"displayNumber":"344"},{"title":"Cyanide and Happiness","date":"Wednesday 5 December","time":"12:35 am","dateTime":"Wednesday 5 December, 12:35 am","published":true,"id":345,"displayNumber":"345"},{"title":"Two little messages","date":"Wednesday 5 December","time":"11:32 am","dateTime":"Wednesday 5 December, 11:32 am","published":true,"id":346,"displayNumber":"346"},{"title":"News and pictures","date":"Monday 10 December","time":"10:55 am","dateTime":"Monday 10 December, 10:55 am","published":true,"id":347,"displayNumber":"347"},{"title":"Four prices. Twelve designs.","date":"Monday 10 December","time":"7:10 pm","dateTime":"Monday 10 December, 7:10 pm","published":true,"id":348,"displayNumber":"348"},{"title":"NEW SONG NEW SONG NEW SONG","date":"Monday 10 December","time":"10:20 pm","dateTime":"Monday 10 December, 10:20 pm","published":true,"id":349,"displayNumber":"349"},{"title":"Trevor","date":"Wednesday 12 December","time":"12:07 pm","dateTime":"Wednesday 12 December, 12:07 pm","published":true,"id":350,"displayNumber":"350"},{"title":"YouTube rocks London (again)","date":"Sunday 16 December","time":"12:14 pm","dateTime":"Sunday 16 December, 12:14 pm","published":true,"id":351,"displayNumber":"351"},{"title":"And another day goes by","date":"Monday 17 December","time":"8:29 pm","dateTime":"Monday 17 December, 8:29 pm","published":true,"id":352,"displayNumber":"352"},{"title":"Trainin' it","date":"Tuesday 18 December","time":"7:01 am","dateTime":"Tuesday 18 December, 7:01 am","published":true,"id":353,"displayNumber":"353"},{"title":"Alex be selling his laptop","date":"Tuesday 18 December","time":"8:25 am","dateTime":"Tuesday 18 December, 8:25 am","published":true,"id":354,"displayNumber":"354"},{"title":"Fucking university!","date":"Thursday 20 December","time":"1:19 pm","dateTime":"Thursday 20 December, 1:19 pm","published":true,"id":355,"displayNumber":"355"},{"title":"Projects on the eve of Christmas","date":"Saturday 22 December","time":"9:13 pm","dateTime":"Saturday 22 December, 9:13 pm","published":true,"id":356,"displayNumber":"356"},{"title":"Creative minimalism","date":"Sunday 23 December","time":"1:04 am","dateTime":"Sunday 23 December, 1:04 am","published":true,"id":357,"displayNumber":"357"},{"title":"Odd cast","date":"Tuesday 25 December","time":"9:57 am","dateTime":"Tuesday 25 December, 9:57 am","published":true,"id":358,"displayNumber":"358"},{"title":"From gr00gles:","date":"Saturday 29 December","time":"2:32 pm","dateTime":"Saturday 29 December, 2:32 pm","published":true,"id":359,"displayNumber":"359"},{"title":"Reflections","date":"Saturday 29 December","time":"10:44 pm","dateTime":"Saturday 29 December, 10:44 pm","published":true,"id":360,"displayNumber":"360"},{"title":"Let's finish with this, actually","date":"Sunday 30 December","time":"1:51 am","dateTime":"Sunday 30 December, 1:51 am","published":true,"id":361,"displayNumber":"361"},{"title":"The 2007","date":"Sunday 30 December","time":"2:34 pm","dateTime":"Sunday 30 December, 2:34 pm","published":true,"id":362,"displayNumber":"362"},{"title":"To Remember Bristow","date":"Monday 31 December","time":"7:49 am","dateTime":"Monday 31 December, 7:49 am","published":true,"id":363,"displayNumber":"363"},{"title":"NEW SHIRTS W0W ZOMG","date":"Monday 31 December","time":"12:48 pm","dateTime":"Monday 31 December, 12:48 pm","published":true,"id":364,"displayNumber":"364"}];
+
+
+const shortDays = {
+  Monday: 'Mon.',
+  Tuesday: 'Tue.',
+  Wednesday: 'Wed.',
+  Thursday: 'Thu.',
+  Friday: 'Fri.',
+  Saturday: 'Sat.',
+  Sunday: 'Sun.'
+};
+
+const shortMonths = {
+  January: 'Jan.',
+  February: 'Feb.',
+  March: 'Mar.',
+  April: 'Apr.',
+  May: 'May',
+  June: 'Jun.',
+  July: 'Jul.',
+  August: 'Aug.',
+  September: 'Sept.',
+  October: 'Oct.',
+  November: 'Nov.',
+  December: 'Dec.'
+};
+
+function formatDateTime(value) {
+  const [datePart, timePart = ''] = value.split(', ');
+  const bits = datePart.trim().split(/\s+/);
+  const day = shortDays[bits[0]] || bits[0] || '';
+  const date = bits[1] || '';
+  const month = shortMonths[bits[2]] || bits[2] || '';
+
+  return `
+    <span class="date-time-stack">
+      <span class="date-line">${day} ${date} ${month}</span>
+      <span class="date-time-divider" aria-hidden="true"></span>
+      <span class="time-line">${timePart}</span>
+    </span>
+  `;
+}
+
+
+    const entriesList = document.getElementById('entriesList');
+    const searchInput = document.getElementById('searchInput');
+    const emptyState = document.getElementById('emptyState');
+    let visibleEntries = [];
+    let activePanelIndex = -1;
+
+    function render() {
+      const query = searchInput.value.trim().toLowerCase();
+      visibleEntries = entries.filter(entry =>
+        entry.title.toLowerCase().includes(query)
+      );
+
+      let currentMonth = '';
+      entriesList.innerHTML = visibleEntries.map((entry, index) => {
+        const month = entry.date.split(' ')[2] || '';
+        const monthHeading = month !== currentMonth
+          ? `<div class="month-divider" aria-label="${escapeHtml(month)} entries"><span class="month-divider-name">${escapeHtml(month)}</span></div>`
+          : '';
+
+        currentMonth = month;
+
+        return `${monthHeading}
+        <article class="entry-row ${entry.published ? '' : 'removed-row'}" data-index="${index}" tabindex="0" aria-label="Open archive information for ${escapeHtml(entry.title)}">
+          <span class="entry-num">${entry.displayNumber}</span>
+          <span class="entry-title">${escapeHtml(entry.title)}</span>
+          <span class="entry-date">${formatDateTime(entry.dateTime)}</span>
+          <span class="entry-status ${entry.published ? '' : 'removed'}">${entry.published ? 'published' : 'removed'}</span>
+        </article>`;
+      }).join('');
+
+      emptyState.style.display = visibleEntries.length ? 'none' : 'block';
+    }
+
+    function escapeHtml(value) {
+      return value.replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    }
+
+    document.addEventListener('click', event => {
+      const row = event.target.closest('.entry-row');
+      if (row) openEntryPanel(Number(row.dataset.index));
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.target.closest('.entry-row') && (event.key === 'Enter' || event.key === ' ')) {
+        event.preventDefault();
+        openEntryPanel(Number(event.target.closest('.entry-row').dataset.index));
+      }
+    });
+
+    searchInput.addEventListener('input', render);
+
+    const entryPanel = document.getElementById('entryPanel');
+    const panelTitle = document.getElementById('panelTitle');
+    const panelDate = document.getElementById('panelDate');
+    const panelStatus = document.getElementById('panelStatus');
+    const panelMessage = document.getElementById('panelMessage');
+    const panelPosition = document.getElementById('panelPosition');
+
+    function openEntryPanel(index) {
+      if (!visibleEntries.length) return;
+      activePanelIndex = (index + visibleEntries.length) % visibleEntries.length;
+      const entry = visibleEntries[activePanelIndex];
+      panelTitle.textContent = entry.title;
+      panelDate.textContent = entry.dateTime;
+      panelStatus.textContent = entry.published ? 'Published' : 'Removed';
+      panelMessage.textContent = entry.published
+        ? 'This diary entry is not available to read. Only its title has been archived.'
+        : 'This entry has been removed. Its title remains in the archive.';
+      panelMessage.classList.toggle('removed', !entry.published);
+      panelPosition.textContent = `${activePanelIndex + 1} / ${visibleEntries.length}`;
+      entryPanel.classList.add('open');
+      entryPanel.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('panel-open');
+    }
+
+    function closeEntryPanel() {
+      entryPanel.classList.remove('open');
+      entryPanel.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('panel-open');
+    }
+
+    document.getElementById('panelClose').addEventListener('click', closeEntryPanel);
+    document.getElementById('panelPrev').addEventListener('click', () => openEntryPanel(activePanelIndex - 1));
+    document.getElementById('panelNext').addEventListener('click', () => openEntryPanel(activePanelIndex + 1));
+
+    document.addEventListener('keydown', event => {
+      if (!entryPanel.classList.contains('open')) return;
+      if (event.key === 'Escape') closeEntryPanel();
+      if (event.key === 'ArrowLeft') openEntryPanel(activePanelIndex - 1);
+      if (event.key === 'ArrowRight') openEntryPanel(activePanelIndex + 1);
+    });
+
+
+    render();
+  
+    const backToTop = document.getElementById('backToTop');
+
+    if (backToTop) {
+      function updateBackToTop() {
+        backToTop.classList.toggle('is-visible', window.scrollY > 320);
+      }
+
+      window.addEventListener('scroll', updateBackToTop, { passive: true });
+      updateBackToTop();
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+  
+// Close sidebar when clicking anywhere outside it
+document.addEventListener('click', function(e){
+  const panel=document.querySelector('.detail-panel,.sidebar,.entry-panel,#detailPanel');
+  if(!panel) return;
+  if(panel.contains(e.target)) return;
+  if(e.target.closest('tr,.entry-row,.entry,.diary-row')) return;
+  if(typeof closePanel==='function'){closePanel();return;}
+  if(typeof closeSidebar==='function'){closeSidebar();return;}
+  panel.classList.remove('open','active','visible');
+  document.body.classList.remove('panel-open','sidebar-open');
+});
+
+
+(function () {
+  const panelSelector = '.detail-panel,.sidebar,.entry-panel,#detailPanel';
+  const rowSelector = 'tr[data-index],tr[data-id],.entry-row,.diary-row,.entry';
+  let activeRow = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  function getPanel() {
+    return document.querySelector(panelSelector);
+  }
+
+  function panelIsOpen(panel) {
+    if (!panel) return false;
+    return panel.classList.contains('open') ||
+           panel.classList.contains('active') ||
+           panel.classList.contains('visible') ||
+           document.body.classList.contains('panel-open') ||
+           document.body.classList.contains('sidebar-open');
+  }
+
+  function closeDiaryPanel() {
+    const panel = getPanel();
+    if (!panel) return;
+
+    if (typeof closePanel === 'function') {
+      closePanel();
+    } else if (typeof closeSidebar === 'function') {
+      closeSidebar();
+    } else {
+      panel.classList.remove('open', 'active', 'visible');
+      document.body.classList.remove('panel-open', 'sidebar-open');
+    }
+
+    if (activeRow) {
+      activeRow.classList.remove('active-entry');
+      activeRow = null;
+    }
+  }
+
+  function syncOpenState() {
+    const panel = getPanel();
+    if (!panel) return;
+    const open = panelIsOpen(panel);
+    document.body.classList.toggle('panel-open', open);
+  }
+
+  // Esc closes the panel.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDiaryPanel();
+  });
+
+  // Clicking the currently open row toggles the panel closed.
+  document.addEventListener('click', function (e) {
+    const row = e.target.closest(rowSelector);
+    const panel = getPanel();
+
+    if (!row || !panel) return;
+
+    if (activeRow === row && panelIsOpen(panel)) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeDiaryPanel();
+      return;
+    }
+
+    if (activeRow && activeRow !== row) {
+      activeRow.classList.remove('active-entry');
+    }
+
+    activeRow = row;
+    activeRow.classList.add('active-entry');
+
+    // Let the page's existing row-opening handler run first.
+    setTimeout(syncOpenState, 0);
+  }, true);
+
+  // Swipe right to dismiss on touch devices.
+  document.addEventListener('touchstart', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target) || !panelIsOpen(panel)) return;
+
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    const panel = getPanel();
+    if (!panel || !panelIsOpen(panel) || !touchStartX) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = Math.abs(touch.clientY - touchStartY);
+
+    if (dx > 70 && dy < 60) {
+      closeDiaryPanel();
+    }
+
+    touchStartX = 0;
+    touchStartY = 0;
+  }, { passive: true });
+
+  // Keep body state in sync if the page opens/closes the panel elsewhere.
+  const observer = new MutationObserver(syncOpenState);
+  const panel = getPanel();
+  if (panel) {
+    observer.observe(panel, { attributes: true, attributeFilter: ['class', 'aria-hidden'] });
+  }
+
+  syncOpenState();
+})();
+
+
+(function () {
+  const panelSelector = '.detail-panel,.sidebar,.entry-panel,#detailPanel';
+  const rowSelector = 'tr[data-index],tr[data-id],.entry-row,.diary-row,.entry';
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+
+  function getPanel() {
+    return document.querySelector(panelSelector);
+  }
+
+  function getRows() {
+    return Array.from(document.querySelectorAll(rowSelector))
+      .filter(row => row.offsetParent !== null);
+  }
+
+  function getActiveRow(rows) {
+    return rows.find(row =>
+      row.classList.contains('active-entry') ||
+      row.getAttribute('aria-selected') === 'true'
+    );
+  }
+
+  function openRow(row) {
+    if (!row) return;
+    row.click();
+    row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+
+  document.addEventListener('touchstart', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target)) return;
+
+    const touch = e.touches[0];
+    swipeStartX = touch.clientX;
+    swipeStartY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target) || !swipeStartX) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - swipeStartX;
+    const dy = touch.clientY - swipeStartY;
+
+    swipeStartX = 0;
+    swipeStartY = 0;
+
+    if (Math.abs(dx) < 65 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+
+    const rows = getRows();
+    const activeRow = getActiveRow(rows);
+    const currentIndex = Math.max(0, rows.indexOf(activeRow));
+
+    // Swipe left: next entry
+    if (dx < 0 && currentIndex < rows.length - 1) {
+      e.preventDefault();
+      openRow(rows[currentIndex + 1]);
+      return;
+    }
+
+    // Swipe right: previous entry.
+    // At the first entry, preserve the existing swipe-right-to-dismiss action.
+    if (dx > 0 && currentIndex > 0) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      openRow(rows[currentIndex - 1]);
+    }
+  }, { passive: false, capture: true });
+})();
+
+
+    const themeToggle = document.getElementById("themeToggle");
+
+    function updateThemeToggle() {
+      const isLight = document.documentElement.dataset.theme === "light";
+      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+      themeToggle.title = isLight ? "Switch to dark mode" : "Switch to light mode";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem("diary-theme", nextTheme);
+      updateThemeToggle();
+    });
+
+    updateThemeToggle();
+
+</script>
+</body>
+</html>
