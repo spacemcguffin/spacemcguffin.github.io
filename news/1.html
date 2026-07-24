@@ -225,13 +225,134 @@
       .entry-panel { height: 100dvh; border-radius: 0; }
       .panel-meta { grid-template-columns: 1fr; }
     }
+  
+    .masthead-icon {
+      display: inline-grid;
+      place-items: center;
+      width: 1.15em;
+      height: 1.15em;
+      margin-right: .48em;
+      color: var(--purple);
+      vertical-align: -0.16em;
+      flex: 0 0 auto;
+    }
+
+    .masthead-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 80;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: rgba(10, 17, 30, .88);
+      color: var(--purple);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity .22s ease, transform .22s ease, visibility .22s ease,
+                  background .22s ease, border-color .22s ease;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, .24);
+    }
+
+    .back-to-top.is-visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: var(--purple-soft);
+      border-color: var(--purple);
+    }
+
+    .back-to-top svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.9;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .detail-panel,
+    .panel-body,
+    .sidebar-panel,
+    .entry-panel {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(105, 169, 255, .58) transparent;
+    }
+
+    .detail-panel::-webkit-scrollbar,
+    .panel-body::-webkit-scrollbar,
+    .sidebar-panel::-webkit-scrollbar,
+    .entry-panel::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .detail-panel::-webkit-scrollbar-track,
+    .panel-body::-webkit-scrollbar-track,
+    .sidebar-panel::-webkit-scrollbar-track,
+    .entry-panel::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .detail-panel::-webkit-scrollbar-thumb,
+    .panel-body::-webkit-scrollbar-thumb,
+    .sidebar-panel::-webkit-scrollbar-thumb,
+    .entry-panel::-webkit-scrollbar-thumb {
+      background: rgba(105, 169, 255, .48);
+      border-radius: 999px;
+    }
+
+    .detail-panel::-webkit-scrollbar-thumb:hover,
+    .panel-body::-webkit-scrollbar-thumb:hover,
+    .sidebar-panel::-webkit-scrollbar-thumb:hover,
+    .entry-panel::-webkit-scrollbar-thumb:hover {
+      background: rgba(105, 169, 255, .78);
+    }
+
+    @media (max-width: 640px) {
+      .back-to-top {
+        right: 14px;
+        bottom: 14px;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
   </style>
 </head>
 <body>
   <div class="shell">
     <main id="top">
       <header class="topbar">
-        <div class="eyebrow"><span class="spark">✦</span> a year in diary entries</div>
+        <div class="eyebrow">
+          <span class="masthead-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M7 3v3M17 3v3M4.5 8.5h15M6 5h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/>
+              <path d="M8 12h2M12 12h2M16 12h1M8 16h2M12 16h2M16 16h1"/>
+            </svg>
+          </span>
+          timelordwannabe
+        </div>
         <div class="top-actions">
           <div class="select-wrap">
             <select aria-label="Choose year" onchange="location.href=this.value">
@@ -288,6 +409,12 @@
       <div class="panel-message" id="panelMessage"></div>
     </div>
   </aside>
+
+  <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top" title="Back to top">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m6 14 6-6 6 6"/>
+    </svg>
+  </button>
 
   <script>
     const monthColours = { February:'#ff9565', March:'#d7bd6c', April:'#55c8ae', May:'#42b6c8', June:'#62aee8', July:'#9e82f7', August:'#c882f7', September:'#ec79b1', October:'#ff856c', November:'#89a7ef', December:'#b9cce9' };
@@ -378,6 +505,22 @@
 
 
     render();
+  
+    const backToTop = document.getElementById('backToTop');
+
+    if (backToTop) {
+      function updateBackToTop() {
+        backToTop.classList.toggle('is-visible', window.scrollY > 320);
+      }
+
+      window.addEventListener('scroll', updateBackToTop, { passive: true });
+      updateBackToTop();
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
   </script>
 </body>
 </html>
