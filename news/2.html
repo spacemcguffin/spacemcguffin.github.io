@@ -356,15 +356,42 @@
       return [...new Map(found.map(entry => [entry.id, entry])).values()].sort((a, b) => a.id - b.id);
     }
 
+    async function fetchArchiveHtml() {
+      const attempts = [
+        SOURCE_URL,
+        `https://api.allorigins.win/raw?url=${encodeURIComponent(SOURCE_URL)}`
+      ];
+
+      let lastError;
+      for (const url of attempts) {
+        try {
+          const response = await fetch(url, {
+            credentials: url === SOURCE_URL ? 'same-origin' : 'omit',
+            cache: 'no-store'
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const html = await response.text();
+          if (!html || html.length < 1000) throw new Error('Archive response was empty');
+          return html;
+        } catch (error) {
+          lastError = error;
+        }
+      }
+      throw lastError || new Error('Unable to load archive');
+    }
+
     async function loadArchive() {
       entriesList.innerHTML = '<div class="empty" style="display:block">loading 623 archive titles…</div>';
+
       try {
-        const response = await fetch(SOURCE_URL, { credentials: 'same-origin' });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const html = await response.text();
+        const html = await fetchArchiveHtml();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const parsed = parseArchiveDocument(doc);
-        if (parsed.length !== 623) throw new Error(`Found ${parsed.length} of 623 titles`);
+
+        if (parsed.length !== 623) {
+          throw new Error(`Found ${parsed.length} of 623 titles`);
+        }
+
         entries = parsed;
         render();
       } catch (error) {
@@ -372,7 +399,7 @@
         entries = [];
         entriesList.innerHTML = `
           <div class="empty" style="display:block; max-width:760px; margin:60px auto; line-height:1.7">
-            The 2008 titles could not be loaded. Upload this file to the lewis.lc domain so it can read the existing <strong>/diary/2008</strong> archive.
+            The archive titles could not be imported. Check that you are online, then refresh the page.
           </div>`;
         document.getElementById('entryCount').textContent = '623';
         document.getElementById('publishedCount').textContent = '623';
