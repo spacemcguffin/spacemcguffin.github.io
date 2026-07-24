@@ -388,6 +388,15 @@ body {
 
     .cover-frame img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
 
+
+
+.archive-cover { aspect-ratio:16/9; display:grid; align-content:end; padding:22px; color:#fff; background:linear-gradient(145deg,#182b47,#4771a2 56%,#8aa8c8); }
+.archive-cover small { font-family:'Geist Pixel',sans-serif; opacity:.75; letter-spacing:.08em; }
+.archive-cover strong { display:block; margin-top:6px; font-family:'Google Sans Flex',sans-serif; font-size:clamp(1.5rem,3vw,2.35rem); line-height:.95; }
+
+
+
+
     .audio-bar {
       display: grid;
       grid-template-columns: auto 1fr auto;
