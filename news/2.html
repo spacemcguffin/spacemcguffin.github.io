@@ -29,6 +29,28 @@
       --shadow: 0 24px 70px rgba(0,0,0,.32);
     }
 
+    html[data-theme="light"] {
+      --bg: #eef6fc;
+      --bg-soft: #e4f0f8;
+      --panel: rgba(250, 253, 255, .90);
+      --panel-solid: #f7fbfe;
+      --line: rgba(46, 91, 128, .14);
+      --line-strong: rgba(39, 137, 202, .34);
+      --text: #172434;
+      --muted: #647487;
+      --serif-muted: #596b7e;
+      --purple: #2188c9;
+      --purple-soft: rgba(33, 136, 201, .11);
+      --green: #16846b;
+      --danger: #c34c70;
+      --shadow: 0 24px 70px rgba(49, 83, 107, .14);
+      color-scheme: light;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+    }
+
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
@@ -41,6 +63,60 @@
         radial-gradient(circle at 72% 105%, rgba(37, 114, 197, .10), transparent 30rem),
         linear-gradient(135deg, #050a13 0%, #07101d 55%, #050a13 100%);
       overflow-x: hidden;
+    }
+
+
+    html[data-theme="light"] body {
+      background:
+        radial-gradient(circle at 92% 10%, rgba(66, 166, 224, .18), transparent 28rem),
+        radial-gradient(circle at 72% 105%, rgba(77, 146, 198, .12), transparent 30rem),
+        linear-gradient(135deg, #f5fbff 0%, #eaf4fb 55%, #f8fcff 100%);
+    }
+
+    html[data-theme="light"] body::before {
+      opacity: .38;
+      background-image:
+        radial-gradient(circle at 10% 15%, rgba(50, 112, 153, .42) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 86% 25%, rgba(50, 112, 153, .28) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 70% 70%, rgba(33, 136, 201, .36) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 35% 85%, rgba(50, 112, 153, .22) 0 1px, transparent 1.5px);
+    }
+
+    html[data-theme="light"] .search-wrap,
+    html[data-theme="light"] .archive-nav-link,
+    html[data-theme="light"] .theme-toggle {
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 8px 26px rgba(60, 104, 137, .08);
+    }
+
+    html[data-theme="light"] .entry-row:hover {
+      background: linear-gradient(90deg, rgba(33,136,201,.10), rgba(33,136,201,.035) 55%, transparent);
+    }
+
+    html[data-theme="light"] .entry-num,
+    html[data-theme="light"] .entry-date {
+      color: #5c6c7e;
+    }
+
+    html[data-theme="light"] .entry-panel {
+      background:
+        radial-gradient(circle at 90% 0%, rgba(33,136,201,.14), transparent 20rem),
+        linear-gradient(180deg, rgba(249,253,255,.99), rgba(237,246,252,.995));
+      box-shadow: -28px 0 70px rgba(58, 91, 115, .18);
+    }
+
+    html[data-theme="light"] .panel-button,
+    html[data-theme="light"] .panel-meta-item {
+      background: rgba(255,255,255,.54);
+    }
+
+    html[data-theme="light"] .back-to-top {
+      background: rgba(249, 253, 255, .90);
+      box-shadow: 0 12px 34px rgba(55, 91, 119, .16);
+    }
+
+    html[data-theme="light"] .footer-note {
+      color: #738397;
     }
 
     body::before {
@@ -77,6 +153,49 @@
     .eyebrow { display: flex; align-items: center; gap: 12px; font-family: "Instrument Serif", serif; font-size: 23px; }
     .spark { color: var(--purple); font-family: serif; }
     .top-actions { display: flex; gap: 12px; }
+
+    .theme-toggle {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 13px;
+      background: rgba(7, 14, 27, .62);
+      color: var(--purple);
+      cursor: pointer;
+      transition:
+        background .22s ease,
+        border-color .22s ease,
+        transform .22s ease,
+        box-shadow .22s ease;
+    }
+
+    .theme-toggle:hover,
+    .theme-toggle:focus-visible {
+      outline: none;
+      background: var(--purple-soft);
+      border-color: var(--purple);
+      transform: translateY(-1px);
+      box-shadow: 0 0 20px rgba(114, 199, 255, .16);
+    }
+
+    .theme-toggle svg {
+      width: 19px;
+      height: 19px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform .35s ease, opacity .22s ease;
+    }
+
+    .theme-icon-sun { display: none; }
+    html[data-theme="light"] .theme-icon-sun { display: block; }
+    html[data-theme="light"] .theme-icon-moon { display: none; }
+
 
     .search-wrap {
       height: 46px;
@@ -314,6 +433,11 @@
       .top-actions {
         flex-wrap: wrap;
       }
+
+      .theme-toggle {
+        order: 1;
+      }
+
 
       .archive-nav {
         width: 100%;
@@ -611,6 +735,14 @@ td:nth-child(2) {
     }
 
 </style>
+
+  <script>
+    (() => {
+      const savedTheme = localStorage.getItem("diary-theme");
+      const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+      document.documentElement.dataset.theme = savedTheme || preferredTheme;
+    })();
+  </script>
 </head>
 <body>
   <div class="shell">
@@ -643,6 +775,16 @@ td:nth-child(2) {
               <span class="archive-nav-arrow" aria-hidden="true">→</span>
             </a>
           </nav>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch colour mode">
+            <svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z"/>
+            </svg>
+            <svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.5"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/>
+            </svg>
+          </button>
+
           <label class="search-wrap">
             <input id="searchInput" type="search" placeholder="Search 419 entries…" autocomplete="off">
             <span class="search-icon">⌕</span>
@@ -1050,6 +1192,24 @@ document.addEventListener('click', function(e){
     }
   }, { passive: false, capture: true });
 })();
+
+
+    const themeToggle = document.getElementById("themeToggle");
+
+    function updateThemeToggle() {
+      const isLight = document.documentElement.dataset.theme === "light";
+      themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+      themeToggle.title = isLight ? "Switch to dark mode" : "Switch to light mode";
+    }
+
+    themeToggle.addEventListener("click", () => {
+      const nextTheme = document.documentElement.dataset.theme === "light" ? "dark" : "light";
+      document.documentElement.dataset.theme = nextTheme;
+      localStorage.setItem("diary-theme", nextTheme);
+      updateThemeToggle();
+    });
+
+    updateThemeToggle();
 
 </script>
 </body>
