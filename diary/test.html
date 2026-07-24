@@ -16,83 +16,14 @@
     <link href="diary.css" rel="stylesheet" type="text/css" media="all">  
 	
 
-  <style>
-    /* Diary title search */
-    .diary-search {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      width: 100%;
-      margin: 0 0 1rem;
-      padding: 0.8rem 1rem;
-      border: 1px solid var(--border-color, var(--line, rgba(127, 127, 127, 0.28)));
-      border-radius: 999px;
-      background: color-mix(in srgb, var(--accent, #6e8ec1) 7%, transparent);
-      color: inherit;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-      box-sizing: border-box;
-    }
-
-    .diary-search:focus-within {
-      border-color: var(--accent, #6e8ec1);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, #6e8ec1) 18%, transparent);
-      background: color-mix(in srgb, var(--accent, #6e8ec1) 10%, transparent);
-    }
-
-    .diary-search svg {
-      flex: 0 0 auto;
-      width: 18px;
-      height: 18px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      opacity: 0.55;
-    }
-
-    .diary-search input {
-      width: 100%;
-      min-width: 0;
-      padding: 0;
-      border: 0;
-      outline: 0;
-      background: transparent;
-      color: inherit;
-      font: inherit;
-    }
-
-    .diary-search input::placeholder {
-      color: currentColor;
-      opacity: 0.5;
-    }
-
-    .diary-search-status {
-      min-height: 1.35em;
-      margin: -0.35rem 0 1rem;
-      font-size: 0.82rem;
-      opacity: 0.62;
-    }
-
-    .diary-search-empty {
-      display: none;
-      margin: 0 0 1rem;
-      padding: 1rem;
-      border: 1px dashed var(--border-color, var(--line, rgba(127, 127, 127, 0.28)));
-      border-radius: 12px;
-      text-align: center;
-      opacity: 0.7;
-    }
-
-    .diary-search-empty.is-visible {
-      display: block;
-    }
-
-    @media (max-width: 600px) {
-      .diary-search {
-        padding: 0.72rem 0.85rem;
-      }
-    }
-  </style>
+<style>
+.diary-search input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none;}
+.diary-search input[type="search"]::-ms-clear{display:none;}
+#clearDiarySearch{position:absolute;right:42px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:none;border-radius:50%;background:transparent;color:var(--text);cursor:pointer;opacity:0;pointer-events:none;transition:.18s;font-size:18px;line-height:1}
+.diary-search{position:relative}
+.diary-search.has-text #clearDiarySearch{opacity:.7;pointer-events:auto}
+#clearDiarySearch:hover{opacity:1;background:rgba(255,255,255,.08)}
+</style>
 
 </head>
 <body>
@@ -204,24 +135,6 @@
 
               
               
-
-              <div class="diary-search" role="search">
-                <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7"></circle>
-                  <path d="m20 20-4-4"></path>
-                </svg>
-                <input
-                  type="search"
-                  id="diarySearch"
-                  placeholder="Search 2008 diary titles..."
-                  autocomplete="off"
-                  spellcheck="false"
-                  aria-label="Search 2008 diary titles"
-                >
-              </div>
-              <p class="diary-search-status" id="diarySearchStatus" aria-live="polite"></p>
-              <p class="diary-search-empty" id="diarySearchEmpty">No diary entries match that search.</p>
-
 <div class="maintable">
 <table>
 <tbody>
@@ -3865,95 +3778,20 @@ if (galleryLinks.length) {
   });
 }
 
-  
-    /* 2008 diary title search */
-    const diarySearch = document.getElementById('diarySearch');
-    const diarySearchStatus = document.getElementById('diarySearchStatus');
-    const diarySearchEmpty = document.getElementById('diarySearchEmpty');
-    const diaryTableBody = document.querySelector('#entries .maintable tbody');
+  </script>
 
-    if (diarySearch && diarySearchStatus && diarySearchEmpty && diaryTableBody) {
-      const diaryRows = Array.from(diaryTableBody.querySelectorAll(':scope > tr'));
-      const monthRows = diaryRows.filter(row => row.querySelector('.month'));
-
-      const normaliseSearchText = value =>
-        value
-          .toLocaleLowerCase()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[’‘]/g, "'")
-          .trim();
-
-      const monthGroups = monthRows.map((monthRow, monthIndex) => {
-        const startIndex = diaryRows.indexOf(monthRow) + 1;
-        const nextMonthRow = monthRows[monthIndex + 1];
-        const endIndex = nextMonthRow ? diaryRows.indexOf(nextMonthRow) : diaryRows.length;
-
-        return {
-          monthRow,
-          entryRows: diaryRows
-            .slice(startIndex, endIndex)
-            .filter(row => row.cells.length >= 2)
-        };
-      });
-
-      const allEntryRows = monthGroups.flatMap(group => group.entryRows);
-
-      function filterDiaryTitles() {
-        const query = normaliseSearchText(diarySearch.value);
-        let visibleEntries = 0;
-
-        monthGroups.forEach(({ monthRow, entryRows }) => {
-          let visibleInMonth = 0;
-
-          entryRows.forEach(row => {
-            const titleCell = row.cells[1];
-            const title = normaliseSearchText(titleCell?.textContent || '');
-            const matches = !query || title.includes(query);
-
-            row.hidden = !matches;
-
-            if (matches) {
-              visibleEntries += 1;
-              visibleInMonth += 1;
-            }
-          });
-
-          monthRow.hidden = Boolean(query) && visibleInMonth === 0;
-        });
-
-        diarySearchEmpty.classList.toggle(
-          'is-visible',
-          Boolean(query) && visibleEntries === 0
-        );
-
-        if (!query) {
-          diarySearchStatus.textContent = '';
-        } else {
-          diarySearchStatus.textContent =
-            `${visibleEntries} ${visibleEntries === 1 ? 'entry' : 'entries'} found`;
-        }
-      }
-
-      diarySearch.addEventListener('input', filterDiaryTitles);
-
-      diarySearch.addEventListener('search', filterDiaryTitles);
-
-      document.addEventListener('keydown', event => {
-        if (
-          event.key === '/' &&
-          document.activeElement !== diarySearch &&
-          !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)
-        ) {
-          event.preventDefault();
-          diarySearch.focus();
-        }
-      });
-
-      filterDiaryTitles();
-    }
-
-
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+ const s=document.getElementById('diarySearch');
+ const b=document.getElementById('clearDiarySearch');
+ const w=document.querySelector('.diary-search');
+ if(!s||!b||!w)return;
+ const update=()=>w.classList.toggle('has-text',s.value.length>0);
+ s.addEventListener('input',update);
+ b.addEventListener('click',()=>{s.value='';s.dispatchEvent(new Event('input'));s.focus();});
+ update();
+});
 </script>
+
 </body>
 </html>
