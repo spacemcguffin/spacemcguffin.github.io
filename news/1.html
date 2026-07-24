@@ -398,7 +398,41 @@
         0 12px 34px rgba(0, 0, 0, .24);
     }
 
-  </style>
+  
+/* Panel focus states */
+body.panel-open main,
+body.panel-open .table-wrap,
+body.panel-open .archive-table,
+body.sidebar-open main,
+body.sidebar-open .table-wrap,
+body.sidebar-open .archive-table {
+  opacity: .46;
+  transition: opacity .24s ease;
+}
+
+main,
+.table-wrap,
+.archive-table {
+  transition: opacity .24s ease;
+}
+
+tr.active-entry,
+.entry-row.active-entry,
+.diary-row.active-entry {
+  opacity: 1 !important;
+  position: relative;
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main,
+  .table-wrap,
+  .archive-table {
+    transition: none;
+  }
+}
+
+</style>
 </head>
 <body>
   <div class="shell">
@@ -603,6 +637,119 @@ document.addEventListener('click', function(e){
   panel.classList.remove('open','active','visible');
   document.body.classList.remove('panel-open','sidebar-open');
 });
+
+
+(function () {
+  const panelSelector = '.detail-panel,.sidebar,.entry-panel,#detailPanel';
+  const rowSelector = 'tr[data-index],tr[data-id],.entry-row,.diary-row,.entry';
+  let activeRow = null;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  function getPanel() {
+    return document.querySelector(panelSelector);
+  }
+
+  function panelIsOpen(panel) {
+    if (!panel) return false;
+    return panel.classList.contains('open') ||
+           panel.classList.contains('active') ||
+           panel.classList.contains('visible') ||
+           document.body.classList.contains('panel-open') ||
+           document.body.classList.contains('sidebar-open');
+  }
+
+  function closeDiaryPanel() {
+    const panel = getPanel();
+    if (!panel) return;
+
+    if (typeof closePanel === 'function') {
+      closePanel();
+    } else if (typeof closeSidebar === 'function') {
+      closeSidebar();
+    } else {
+      panel.classList.remove('open', 'active', 'visible');
+      document.body.classList.remove('panel-open', 'sidebar-open');
+    }
+
+    if (activeRow) {
+      activeRow.classList.remove('active-entry');
+      activeRow = null;
+    }
+  }
+
+  function syncOpenState() {
+    const panel = getPanel();
+    if (!panel) return;
+    const open = panelIsOpen(panel);
+    document.body.classList.toggle('panel-open', open);
+  }
+
+  // Esc closes the panel.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeDiaryPanel();
+  });
+
+  // Clicking the currently open row toggles the panel closed.
+  document.addEventListener('click', function (e) {
+    const row = e.target.closest(rowSelector);
+    const panel = getPanel();
+
+    if (!row || !panel) return;
+
+    if (activeRow === row && panelIsOpen(panel)) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeDiaryPanel();
+      return;
+    }
+
+    if (activeRow && activeRow !== row) {
+      activeRow.classList.remove('active-entry');
+    }
+
+    activeRow = row;
+    activeRow.classList.add('active-entry');
+
+    // Let the page's existing row-opening handler run first.
+    setTimeout(syncOpenState, 0);
+  }, true);
+
+  // Swipe right to dismiss on touch devices.
+  document.addEventListener('touchstart', function (e) {
+    const panel = getPanel();
+    if (!panel || !panel.contains(e.target) || !panelIsOpen(panel)) return;
+
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  document.addEventListener('touchend', function (e) {
+    const panel = getPanel();
+    if (!panel || !panelIsOpen(panel) || !touchStartX) return;
+
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = Math.abs(touch.clientY - touchStartY);
+
+    if (dx > 70 && dy < 60) {
+      closeDiaryPanel();
+    }
+
+    touchStartX = 0;
+    touchStartY = 0;
+  }, { passive: true });
+
+  // Keep body state in sync if the page opens/closes the panel elsewhere.
+  const observer = new MutationObserver(syncOpenState);
+  const panel = getPanel();
+  if (panel) {
+    observer.observe(panel, { attributes: true, attributeFilter: ['class', 'aria-hidden'] });
+  }
+
+  syncOpenState();
+})();
 
 </script>
 </body>
