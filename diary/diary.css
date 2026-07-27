@@ -512,11 +512,29 @@ tr:hover {
     font-family: 'Geist Pixel', 'Inter', sans-serif;
     opacity: 0.4;
     letter-spacing: 0.3px;
-	text-decoration: line-through;
 }
 
 
+.removed {
+    position: relative;
+    display: inline-block;
+    color: var(--muted);
+    text-decoration: none;
+}
 
+.removed::after {
+    content: "";
+    position: absolute;
+    left: -3%;
+    top: 50%;
+    width: 106%;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(-8deg);
+    transform-origin: center;
+    opacity: .8;
+    pointer-events: none;
+}
 
 
 
