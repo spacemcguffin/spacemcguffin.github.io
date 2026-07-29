@@ -44,7 +44,23 @@
 	text-shadow: none;
   color:#000000;
 } 
-    
+
+
+
+.heartagram{
+    width: 40px;
+    height: auto;
+    opacity: 0.85;
+    transition: transform .3s ease, opacity .3s ease;
+}
+
+.heartagram:hover{
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+}
+
+
+
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
