@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet">
+
+<title>lewis.lc</title>
+
+<style>
+:root{
+    --bg:#fbfaf7;
+    --text:#242424;
+    --muted:#7c7c7c;
+    --accent:#d66f2d;
+    --accent1:#2264ab;
+    --border:#424242;
+    --border1:#cacaca;
+}
+
+::-moz-selection {
+    background:#cfd8e4;
+    text-shadow:none;
+    color:#000000;
+}
+
+::selection {
+    background:#cfd8e4;
+    text-shadow:none;
+    color:#000000;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,sans-serif;
+    font-size:13.5px;
+    line-height:1.48;
+    text-transform:lowercase !important;
+}
+
+b{
+    color:var(--accent1);
+    font-weight:normal !important;
+}
+
+.pfp{
+    width:200px !important;
+    border-radius:10px !important;
+}
+
+/* subtle texture */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.02;
+    background:
+    repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        white 2px,
+        white 3px
+    );
+    z-index:10;
+}
+
+a{
+    color:var(--accent1);
+    text-decoration:none;
+    font-weight:500;
+}
+
+a:hover{
+    color:var(--accent);
+    text-decoration:none;
+}
+
+p{
+    margin-bottom:20px;
+    font-size:14px;
+    margin-top:5px;
+}
+
+/* layout */
+
+.wrapper{
+    max-width:1000px;
+    margin:auto;
+    padding:35px 25px;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    gap:45px;
+}
+
+@media(max-width:850px){
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .sidebar{
+        position:relative !important;
+    }
+}
+
+/* sidebar */
+
+.sidebar{
+    position:sticky;
+    top:30px;
+    align-self:start;
+}
+
+.name{
+    font-size:34px;
+    font-weight:600;
+    margin-bottom:4px;
+    margin-top:-10px !important;
+    font-family:'Google Sans Flex','Inter',sans-serif;
+}
+
+.tagline{
+    color:var(--muted);
+}
+
+.nav{
+    margin-top:5px;
+    margin-bottom:5px;
+    padding-top:10px;
+}
+
+.nav a{
+    display:block;
+    padding:3px 0;
+    color:var(--text);
+    transition:.3s;
+    font-weight:400;
+    letter-spacing:.3px;
+}
+
+.nav a:hover{
+    color:var(--accent1);
+    padding-left:6px;
+    letter-spacing:.6px;
+}
+
+.nav a::before{
+    content:"❯ ";
+}
+
+.meta{
+    margin-top:15px;
+    color:var(--muted);
+    font-family:'Google Sans Flex','Inter',sans-serif;
+    letter-spacing:.3px;
+}
+
+/* content */
+
+.content{
+    position:relative;
+    isolation:isolate;
+    min-width:0;
+}
+
+/*
+   Heartagram watermark:
+   - Positioned inside .content, so it scrolls with the page.
+   - Uses pointer-events:none so links remain clickable.
+   - Change the URL below if your SVG lives elsewhere.
+*/
+.content::before{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    top:70px;
+    left:50%;
+    width:min(920px, 120vw);
+    aspect-ratio:1 / 1;
+    transform:translateX(-50%) rotate(-4deg);
+    background:url("/images/heartagram.svg") center / contain no-repeat;
+    opacity:.035;
+    pointer-events:none;
+    filter:grayscale(1);
+}
+
+.section{
+    position:relative;
+    z-index:1;
+    margin-bottom:40px;
+}
+
+.heading{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+}
+
+.heading h2{
+    color:var(--accent);
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase !important;
+    font-family:'Google Sans Flex','Inter',sans-serif;
+    transform:rotate(-2deg);
+}
+
+.heading::after{
+    content:"";
+    height:1px;
+    background:var(--border);
+    flex:1;
+}
+
+.heading1{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+}
+
+.heading1 h3{
+    color:var(--accent1);
+    font-size:12px;
+    font-weight:500;
+    letter-spacing:1px;
+    text-transform:uppercase !important;
+    font-family:'Google Sans Flex','Inter',sans-serif;
+}
+
+.heading1::before{
+    content:"";
+    height:1px;
+    background:var(--border1);
+    flex:1;
+}
+
+/* journal */
+
+.entry{
+    margin-bottom:20px;
+}
+
+.date{
+    color:var(--muted);
+    margin-bottom:3px;
+}
+
+/* photography */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:10px;
+}
+
+.gallery img{
+    width:100%;
+    display:block;
+    border-radius:10px !important;
+    transition:.3s;
+}
+
+.gallery img:hover{
+    filter:none;
+    transform:scale(1.05);
+}
+
+/* footer */
+
+.footer{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    margin-top:60px;
+    padding-top:20px;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    font-family:"Geist Pixel",sans-serif;
+    letter-spacing:.3px;
+    font-size:14px;
+}
+
+@media(max-width:850px){
+    .content::before{
+        top:40px;
+        width:130vw;
+        opacity:.028;
+    }
+}
+
+@media(max-width:520px){
+    .wrapper{
+        padding:25px 18px;
+    }
+
+    .content::before{
+        top:90px;
+        width:155vw;
+        opacity:.026;
+    }
+}
+
+@media(prefers-reduced-motion:reduce){
+    html{
+        scroll-behavior:auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+<div class="name">
+lewis.lc
+</div>
+
+<div class="tagline">
+<img class="pfp" src="/diary/images/newestprofile.png" alt="Lewis">
+</div>
+
+<nav class="nav">
+
+<div class="heading">
+<h2>Contents</h2>
+</div>
+
+<a href="#about">about</a>
+<a href="#likes">likes</a>
+<a href="#dislikes">dislikes</a>
+<a href="#music">music</a>
+
+</nav>
+
+<nav class="nav">
+
+<div class="heading">
+<h2>Navigation</h2>
+</div>
+
+<a href="/diary">diary archive</a>
+<a href="/myspace">myspace</a>
+<a href="/livejournal">livejournal</a>
+
+</nav>
+
+<div class="meta">
+<b>last updated:</b> 5/7/26<br>
+<b>mood:</b> nostalgic<br>
+<b>listening to:</b> the pretty reckless
+</div>
+
+</aside>
+
+<!-- MAIN CONTENT -->
+
+<main class="content">
+
+<section id="about" class="section">
+
+<div class="heading">
+<h2>ABOUT</h2>
+</div>
+
+<p>i’m lewis. i’m in my early 30s and have been using the internet for over 20 years now. although, in the past decade, i’ve become a social media hermit. the internet i once loved has been lost to time, like many of my former usernames. i’m enjoying the peace and quiet now, with my own space here. my own space. my space. nice.</p>
+
+<p>After two decades frequenting the likes of Piczo, Bebo, Blogger, <a href="/myspace">MySpace</a>, Dailybooth, Tumblr, <a href="/livejournal">LiveJournal</a>, Wordpress, Facebook, Twitter, and other forums, I can’t keep up anymore. I’m exhausted. I’m also old, and just way more private than I used to be. Between 2008 and 2012, I wrote an online diary on LiveJournal. For years later, I posted over 25,000 tweets. Then, one random day in the mid-2010s, I just nuked it all. Gone, at the click of a button. Now, I just have a couple of empty profiles around the internet, purely for browsing and lurking from the shadows, and for private messaging friends.</p>
+
+<p>And I have this website. I’ve mostly used it for playing around with CSS and HTML, creating templates and just fucking about with code. Most of my stuff has been temporary. The only fixed feature of <i>lewis.lc</i> is an archive of my <a href="/diary">diary entries</a>. Using the Wayback Machine, I’ve been able to salvage most titles from 2008 and 2009, though the rest are gone. Since 2021, I’ve resumed writing a diary but it’s offline.</p>
+
+</section>
+
+<section id="likes" class="section">
+
+<div class="heading">
+<h2>LIKES</h2>
+</div>
+
+<p>looking at the moon on clear night skies, minimalism, the days of msn messenger, spending time on my laptop doing nothing in particular, discovering new music, over-indulging on chocolate and pepsi max, sleeping in on days off, nostalgia and reminiscing, physical media, messing around with html and creating new layouts, being introspective about myself and the world, anything to do with space and the universe, amethyst crystals, finding beauty in nature, shutting out the world by listening to music, causing chaos on livestreams, pulling all-nighters for elections, meaningful cuddles.</p>
+
+</section>
+
+<section id="dislikes" class="section">
+
+<div class="heading">
+<h2>DISLIKES</h2>
+</div>
+
+<p>repetitive noises, being surrounded by large crowds, pineapple on pizza, obnoxious people, tiktok, uk heatwaves, early mornings, ‘stan’ culture, working retail at christmas, life being ridiculously expensive, wine.</p>
+
+</section>
+
+<section id="music" class="section">
+
+<div class="heading">
+<h2>MUSIC</h2>
+</div>
+
+<p>i spend a lot of time with headphones on:</p>
+
+<p>adam and the ants, alestorm, alex day, alex warren, alfie templeman, alphaville, arcade fire, banners, beast in black, benson boone, bleachers, blossoms, brett domino, cascada, chameleon circuit, damiano david, dead or alive, elliot minor, evanescence, green day, hard-fi, <b>henry moodie</b>, <b>him</b>, hollow coves, joost klein, kaiser chiefs, kygo, linkin park, majestica, mc devvo, mehro, mindless self indulgence, moon shot, murderdolls, my chemical romance, nightwish, ninja sex party, of monsters and men, panic! at the disco, <b>pet shop boys</b>, <b>poets of the fall</b>, rammstein, sam fender, sam ryder, scooter, the fratellis, the killers, <b>the strumbellas</b>, the struts, tom grennan, <b>ville valo</b>, vistas, woodkid.</p>
+
+</section>
+
+<div class="footer">
+coded by an introvert hiding in a dark room at his laptop
+</div>
+
+</main>
+
+</div>
+
+</div>
+
+</body>
+</html>
