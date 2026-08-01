@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17130f">
+<title>lewis.lc — a little archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --desk:#30271e;
+  --desk-deep:#17130f;
+  --paper:#eee6d5;
+  --paper-edge:#cbbd9f;
+  --ink:#211f1b;
+  --muted:#756e61;
+  --red:#a33b35;
+  --blue:#416c78;
+  --shadow:rgba(0,0,0,.43);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-width:320px;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 28% 15%,rgba(255,255,255,.035),transparent 25%),
+    radial-gradient(circle at 70% 75%,rgba(0,0,0,.14),transparent 32%),
+    repeating-linear-gradient(88deg,rgba(255,255,255,.012) 0 1px,transparent 1px 6px),
+    linear-gradient(110deg,#3b3025,var(--desk) 42%,#211a14 100%);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+  opacity:.22;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.24'/%3E%3C/svg%3E");
+  mix-blend-mode:soft-light;
+}
+a{color:inherit}.desk{position:relative;min-height:100vh;padding:56px 24px 100px}
+.paper{
+  position:relative;z-index:5;width:min(690px,calc(100vw - 40px));margin:0 auto;
+  padding:64px 74px 70px;
+  background:
+    linear-gradient(rgba(113,97,67,.065) 1px,transparent 1px) 0 126px/100% 29px,
+    radial-gradient(circle at 12% 8%,rgba(142,116,74,.08),transparent 21%),
+    var(--paper);
+  border:1px solid rgba(63,48,29,.32);
+  box-shadow:0 3px 1px rgba(255,255,255,.1) inset,0 24px 60px var(--shadow),0 2px 5px rgba(0,0,0,.45);
+  transform:rotate(-.22deg);
+}
+.paper::before,.paper::after{content:"";position:absolute;pointer-events:none}
+.paper::before{inset:0;box-shadow:inset 0 0 45px rgba(77,54,25,.11)}
+.paper::after{left:18px;right:14px;bottom:-8px;height:10px;background:#b5a585;filter:blur(1px);z-index:-1;transform:rotate(.5deg)}
+.site-header{text-align:center;border-bottom:1px solid rgba(50,46,38,.33);padding-bottom:28px;margin-bottom:42px}
+.eyebrow{font:500 10px/1 DM Mono,monospace;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.logo{font:italic 400 clamp(50px,8vw,76px)/.9 Instrument Serif,serif;margin:11px 0 15px;letter-spacing:-.045em}
+.logo span{position:relative}.logo span::after{content:"";position:absolute;left:4%;right:-4%;bottom:3px;height:8px;background:rgba(163,59,53,.21);transform:rotate(-1deg);z-index:-1}
+.tagline{font:300 12px/1.5 DM Mono,monospace;color:#5e584e;margin-bottom:24px}
+.nav{display:flex;justify-content:center;flex-wrap:wrap;gap:10px 22px;font:500 10px/1 DM Mono,monospace;text-transform:uppercase;letter-spacing:.15em}
+.nav a{text-decoration:none;position:relative;padding:4px 0}.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--red);transition:right .25s}.nav a:hover::after,.nav a:focus-visible::after{right:0}
+.post{padding:0 0 39px;margin:0 0 39px;border-bottom:1px dashed rgba(62,55,43,.34)}
+.post:last-of-type{border-bottom:0;margin-bottom:8px}
+.post-meta{display:flex;justify-content:space-between;gap:20px;margin-bottom:12px;font:400 10px/1.4 DM Mono,monospace;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.post h2{font:400 clamp(31px,5vw,43px)/1 Instrument Serif,serif;letter-spacing:-.025em;margin:0 0 16px}
+.post h2 a{text-decoration:none}.post h2 a:hover{color:var(--red)}
+.post p{font-size:14px;line-height:1.86;margin:0 0 19px;color:#37332c}
+.read-more{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font:500 10px/1 DM Mono,monospace;text-transform:uppercase;letter-spacing:.15em;color:var(--red)}
+.read-more::after{content:"→";font-size:15px;transition:transform .2s}.read-more:hover::after{transform:translateX(5px)}
+.pagination{display:flex;justify-content:space-between;align-items:center;padding-top:24px;border-top:1px solid rgba(50,46,38,.33);font:400 10px/1 DM Mono,monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.pagination a{text-decoration:none;color:var(--ink)}
+.footer{text-align:center;margin-top:45px;font:300 9px/1.8 DM Mono,monospace;letter-spacing:.13em;text-transform:uppercase;color:#72695c}
+.object{position:absolute;z-index:2;user-select:none;filter:drop-shadow(0 16px 13px rgba(0,0,0,.36));transition:transform .35s ease;pointer-events:auto}
+.object:hover{transform:translateY(-5px) rotate(var(--rot,0deg)) scale(1.025)}
+.polaroid{width:190px;background:#ddd4c3;padding:11px 11px 39px;transform:rotate(var(--rot));box-shadow:0 1px 2px rgba(0,0,0,.55)}
+.polaroid .photo{height:150px;background:linear-gradient(145deg,#16151e,#2e1c3e 40%,#92515e 71%,#d6a77d);position:relative;overflow:hidden}
+.polaroid .photo::before{content:"";position:absolute;inset:17% 20%;background:radial-gradient(circle at 45% 50%,#cddfe4 0 8%,#587987 9% 16%,transparent 17%),linear-gradient(80deg,transparent 20%,rgba(255,255,255,.35) 21% 23%,transparent 24%);filter:blur(.3px);transform:rotate(-12deg)}
+.polaroid small{display:block;text-align:center;margin-top:12px;font:italic 18px/1 Instrument Serif,serif;color:#413b33}
+.obj-photo{left:max(18px,calc(50% - 590px));top:110px;--rot:-7deg;transform:rotate(var(--rot))}
+.cassette{right:max(20px,calc(50% - 600px));top:155px;width:230px;height:143px;border-radius:10px;background:linear-gradient(145deg,#242424,#090909);border:2px solid #444;--rot:8deg;transform:rotate(var(--rot));padding:17px 19px;color:#ddd}
+.cassette::before{content:"LEWIS MIX / 08";display:block;background:#d7d0ba;color:#25231f;height:54px;padding:8px 12px;font:500 10px DM Mono,monospace;letter-spacing:.12em;border-radius:2px;box-shadow:inset 0 0 0 1px #9b927e}
+.cassette::after{content:"◉      ◉";position:absolute;left:53px;right:53px;top:58px;height:35px;background:#171717;color:#a99d82;border-radius:18px;text-align:center;padding-top:8px;font-size:15px;letter-spacing:14px;border:2px solid #5b5548}
+.ticket{left:max(15px,calc(50% - 620px));top:610px;width:242px;padding:16px 18px;background:#b9ae83;color:#302d25;border:1px solid #625d49;--rot:5deg;transform:rotate(var(--rot));font:500 9px/1.7 DM Mono,monospace;letter-spacing:.12em;text-transform:uppercase;clip-path:polygon(0 0,100% 0,100% 18%,97% 22%,100% 26%,100% 100%,0 100%,0 72%,3% 68%,0 64%)}
+.ticket b{font-size:17px;letter-spacing:.03em}.ticket span{display:flex;justify-content:space-between;border-top:1px dashed #665f4b;margin-top:8px;padding-top:7px}
+.cd{right:max(30px,calc(50% - 580px));top:650px;width:205px;aspect-ratio:1;border-radius:50%;--rot:-10deg;transform:rotate(var(--rot));background:conic-gradient(from 20deg,#7d7d7d,#ddd,#727d87,#ded4ac,#745f83,#d8e0df,#7c7c7c);box-shadow:inset 0 0 0 28px rgba(20,20,20,.18),inset 0 0 0 73px rgba(235,235,224,.35),0 16px 22px rgba(0,0,0,.38)}
+.cd::after{content:"";position:absolute;inset:42%;border-radius:50%;background:#2c261e;box-shadow:0 0 0 7px rgba(255,255,255,.35)}
+.note{right:max(20px,calc(50% - 625px));top:1020px;width:205px;min-height:175px;background:#c8bd70;padding:35px 24px 20px;--rot:4deg;transform:rotate(var(--rot));font:italic 23px/1.13 Instrument Serif,serif;box-shadow:0 12px 28px rgba(0,0,0,.35)}
+.note::before{content:"";position:absolute;top:-5px;left:54px;width:90px;height:25px;background:rgba(220,211,185,.64);transform:rotate(-3deg)}
+.note a{text-decoration:none;border-bottom:1px solid rgba(0,0,0,.45)}
+.vhs{left:max(14px,calc(50% - 610px));top:1120px;width:220px;height:130px;background:#171717;border-radius:3px;--rot:-4deg;transform:rotate(var(--rot));border:2px solid #0a0a0a;padding:18px}
+.vhs::before{content:"ARCHIVE 2021";display:block;background:#e5ded1;height:61px;color:#161616;font:500 12px/61px DM Mono,monospace;text-align:center;letter-spacing:.12em}
+.vhs::after{content:"";position:absolute;left:79px;bottom:12px;width:58px;height:12px;border:2px solid #555;border-radius:10px}
+.pencil{right:max(30px,calc(50% - 540px));top:1380px;width:250px;height:13px;border-radius:5px;--rot:-24deg;transform:rotate(var(--rot));background:linear-gradient(to right,#d0b994 0 7%,#c15a45 7% 86%,#ddd0a2 86% 96%,#39342e 96%);filter:drop-shadow(0 9px 5px rgba(0,0,0,.35))}
+.paperclip{left:max(12px,calc(50% - 500px));top:1560px;width:85px;height:170px;border:7px solid #8e8980;border-radius:50px;--rot:19deg;transform:rotate(var(--rot));filter:drop-shadow(0 8px 6px rgba(0,0,0,.4))}
+.paperclip::after{content:"";position:absolute;left:17px;top:20px;width:35px;height:115px;border:6px solid #8e8980;border-radius:30px;border-bottom-color:transparent}
+@media(max-width:1120px){.obj-photo,.cassette{opacity:.82}.ticket,.cd,.note,.vhs,.pencil,.paperclip{display:none}.obj-photo{left:-68px}.cassette{right:-85px}}
+@media(max-width:760px){
+ .desk{padding:20px 0 55px}.paper{width:calc(100vw - 20px);padding:44px 26px 52px;transform:none}.object{display:none}.site-header{margin-bottom:34px}.logo{font-size:58px}.post-meta{display:block}.post-meta span{display:block;margin-bottom:4px}.post p{font-size:13px}.nav{gap:13px 19px}.pagination{gap:16px}.pagination span{text-align:center}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="desk">
+  <a class="object polaroid obj-photo" href="#about" aria-label="Jump to about this site"><div class="photo"></div><small>everywhere, everywhen</small></a>
+  <div class="object cassette" aria-hidden="true"></div>
+  <div class="object ticket" aria-hidden="true"><b>ONE WAY</b><br>somewhere → nowhere<span><i>01 AUG 26</i><i>10:30</i></span></div>
+  <div class="object cd" aria-hidden="true"></div>
+  <div class="object note"><a href="#archive">remember<br>everything</a></div>
+  <div class="object vhs" aria-hidden="true"></div>
+  <div class="object pencil" aria-hidden="true"></div>
+  <div class="object paperclip" aria-hidden="true"></div>
+
+  <main class="paper">
+    <header class="site-header">
+      <div class="eyebrow">the personal website of</div>
+      <h1 class="logo"><span>lewis.lc</span></h1>
+      <div class="tagline">a little archive of everything</div>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#latest">latest</a><a href="#archive">diary</a><a href="#gallery">gallery</a><a href="#about">about</a>
+      </nav>
+    </header>
+
+    <section id="latest" aria-label="Latest posts">
+      <article class="post">
+        <div class="post-meta"><span>Entry no. 026</span><time datetime="2026-08-01">01 August 2026</time></div>
+        <h2><a href="#">the shape of an old internet</a></h2>
+        <p>I miss websites that felt like places. Not immaculate products or endlessly scrolling feeds, but little rooms assembled by one person: uneven, personal, occasionally broken, and full of things that meant something.</p>
+        <a class="read-more" href="#">continue reading</a>
+      </article>
+
+      <article class="post" id="archive">
+        <div class="post-meta"><span>Entry no. 025</span><time datetime="2026-07-29">29 July 2026</time></div>
+        <h2><a href="#">everything ends up in the archive</a></h2>
+        <p>Old diary titles, half-finished pages, screenshots of vanished websites, photographs with no context, and folders whose names made perfect sense fifteen years ago. I have started putting them all in one place.</p>
+        <a class="read-more" href="#">continue reading</a>
+      </article>
+
+      <article class="post" id="gallery">
+        <div class="post-meta"><span>Entry no. 024</span><time datetime="2026-07-20">20 July 2026</time></div>
+        <h2><a href="#">transmission received</a></h2>
+        <p>A few recent fragments from the gallery: electric blue skies, CRT light, scratched metal, a handwritten symbol, and something that might have arrived from much further away.</p>
+        <a class="read-more" href="#">open the transmission</a>
+      </article>
+
+      <article class="post" id="about">
+        <div class="post-meta"><span>Filed under: website</span><time datetime="2026-07-12">12 July 2026</time></div>
+        <h2><a href="#">about this corner of the web</a></h2>
+        <p>This is a personal archive, diary, gallery and collection of experiments. It is intentionally small, handmade and a little untidy. The objects scattered around the page are links, memories, and decoration in roughly equal measure.</p>
+        <a class="read-more" href="#">more about lewis.lc</a>
+      </article>
+    </section>
+
+    <nav class="pagination" aria-label="Post pagination">
+      <a href="#" aria-disabled="true">← newer</a><span>page 1 of 4</span><a href="#">older →</a>
+    </nav>
+    <footer class="footer">handmade in the north of england<br>© 2026 lewis.lc</footer>
+  </main>
+</div>
+<script>
+// Slight depth movement on desktop; decorative only.
+const objects = [...document.querySelectorAll('.object')];
+if (matchMedia('(min-width: 1121px) and (prefers-reduced-motion: no-preference)').matches) {
+  window.addEventListener('pointermove', (event) => {
+    const x = (event.clientX / innerWidth - .5);
+    const y = (event.clientY / innerHeight - .5);
+    objects.forEach((object, index) => {
+      const depth = (index % 3 + 1) * 1.8;
+      object.style.marginLeft = `${x * depth}px`;
+      object.style.marginTop = `${y * depth}px`;
+    });
+  }, {passive:true});
+}
+</script>
+</body>
+</html>
