@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I R R E G U L A R / C A U S A L I T Y</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --bg2: #f9f9f9;
+  --text: #1a1a1a;
+  --muted: #999;
+  --border: #efefef;
+  --pink: #e53e8a;
+  --pink-light: #fce7f3;
+  --violet: #9333ea;
+  --purple-light: #f3e8ff;
+}
+
+html, body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+}
+
+/* ===== TOPBAR WHI ===== */
+.topbar {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.topbar-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--pink);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.topbar-nav a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.15s;
+}
+.topbar-nav a:hover { color: var(--text); }
+
+.topbar-search {
+  background: #f5f5f5;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 0.35rem 1rem;
+  font-size: 0.78rem;
+  color: var(--text);
+  outline: none;
+  width: 160px;
+}
+.topbar-search::placeholder { color: var(--muted); }
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.topbar-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  cursor: pointer;
+}
+.topbar-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ===== PROFIL COVER ===== */
+.cover-section {
+  position: relative;
+  background: #f0e6ff;
+}
+
+.cover-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.75) saturate(0.8);
+}
+
+/* ===== PROFIL INFO ===== */
+.profile-section {
+  background: white;
+  border-bottom: 1px solid var(--border);
+}
+
+.profile-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.profile-identity {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 0;
+}
+
+.profile-pic {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #f3e8ff;
+}
+.profile-pic img { width: 100%; height: 100%; object-fit: cover; }
+
+.profile-text { flex: 1; padding-bottom: 0.4rem; }
+.profile-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: var(--text);
+  display: block;
+  line-height: 1.1;
+}
+.profile-handle {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.15rem;
+  display: block;
+}
+.profile-bio {
+  font-size: 0.78rem;
+  color: #555;
+  margin-top: 0.3rem;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 1.5rem;
+  padding-bottom: 0.6rem;
+  align-self: flex-end;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.1rem;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.5rem;
+  padding-bottom: 0.6rem;
+  align-self: flex-end;
+}
+.btn {
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.btn-heart {
+  background: var(--pink);
+  color: white;
+}
+.btn-heart:hover { background: #d63578; }
+.btn-follow {
+  background: white;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-follow:hover { background: #f5f5f5; }
+
+/* Onglets */
+.profile-tabs {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+.profile-tab {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 0.65rem 1.1rem;
+  border-bottom: 2px solid transparent;
+  letter-spacing: 0.03em;
+  transition: color 0.15s, border-color 0.15s;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+.profile-tab:hover { color: var(--text); }
+.profile-tab.active {
+  color: var(--pink);
+  border-bottom-color: var(--pink);
+}
+
+/* ===== MASONRY ===== */
+.gallery-wrap {
+  max-width: 1000px;
+  margin: 1.5rem auto 4rem;
+  padding: 0 1rem;
+}
+
+/* Filtre catégories style WHI */
+.category-filter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.2rem;
+  align-items: center;
+}
+.filter-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 0.3rem;
+}
+.filter-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.25rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s;
+  background: white;
+}
+.filter-tag:hover {
+  border-color: var(--pink);
+  color: var(--pink);
+}
+.filter-tag.active {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: white;
+}
+
+/* Grille uniforme 3 colonnes */
+.masonry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 680px) { .masonry { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 400px) { .masonry { grid-template-columns: 1fr; } }
+
+.photo-card {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: #f5f5f5;
+  display: block;
+  aspect-ratio: 1;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 8px;
+  object-fit: cover;
+  transition: filter 0.2s;
+}
+
+/* Overlay */
+.photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  opacity: 0;
+  transition: all 0.2s;
+}
+.photo-card:hover .photo-overlay {
+  opacity: 1;
+  background: rgba(0,0,0,0.25);
+}
+
+.heart-btn {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px; height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  transition: transform 0.15s, background 0.15s;
+  color: var(--pink);
+  transform: scale(0.8);
+}
+.photo-card:hover .heart-btn {
+  transform: scale(1);
+}
+.heart-btn:hover {
+  background: var(--pink);
+  color: white;
+}
+
+.save-btn {
+  background: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  color: var(--text);
+  transform: translateY(4px);
+  transition: transform 0.2s;
+}
+.photo-card:hover .save-btn {
+  transform: translateY(0);
+}
+.save-btn:hover { background: #f5f5f5; }
+
+/* Caption en bas de carte */
+.photo-caption {
+  padding: 0.35rem 0.6rem 0.4rem;
+  font-size: 0.7rem;
+  color: var(--muted);
+  font-style: italic;
+  background: white;
+  border-top: 1px solid var(--border);
+}
+
+/* Placeholder */
+.photo-placeholder {
+  border-radius: 8px;
+  background: #fafafa;
+  border: 2px dashed #e8d5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  color: #c9a0dc;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  aspect-ratio: 1;
+}
+.photo-placeholder:hover {
+  background: #f3e8ff;
+  border-color: var(--violet);
+  color: var(--violet);
+}
+.ph-icon { font-size: 1.4rem; }
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+footer a { color: var(--muted); text-decoration: none; }
+footer a:hover { color: var(--pink); }
+
+/* ===== VISIONNEUSE (style weheartit) ===== */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 15, 25, 0.92);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+.lightbox-overlay.active { display: flex; }
+
+.lightbox-box {
+  background: white;
+  border-radius: 10px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4);
+}
+
+.lightbox-img-wrap {
+  flex: 1.4;
+  background: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+.lightbox-img-wrap img {
+  width: 100%;
+  height: 100%;
+  max-height: 90vh;
+  object-fit: contain;
+  display: block;
+}
+
+.lightbox-side {
+  flex: 1;
+  min-width: 240px;
+  max-width: 300px;
+  padding: 1.6rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.lightbox-user {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 1.2rem;
+}
+.lightbox-user img {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.lightbox-user span {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.lightbox-caption {
+  font-size: 0.85rem;
+  color: #444;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.lightbox-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.lightbox-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.25rem 0.8rem;
+  border-radius: 20px;
+  background: var(--pink-light);
+  color: var(--pink);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.85;
+}
+.lightbox-close:hover { opacity: 1; }
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 2.2rem;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0.5rem 0.8rem;
+  user-select: none;
+}
+.lightbox-nav:hover { opacity: 1; }
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
+
+@media (max-width: 680px) {
+  .lightbox-box { flex-direction: column; max-height: 92vh; overflow-y: auto; }
+  .lightbox-img-wrap img { max-height: 50vh; }
+  .lightbox-side { max-width: none; }
+}
+
+@media (max-width: 640px) {
+  .topbar { padding: 0 1rem; gap: 0.8rem; }
+  .topbar-logo { font-size: 1.05rem; }
+  .topbar-nav { gap: 0.9rem; overflow-x: auto; }
+  .topbar-nav a { white-space: nowrap; font-size: 0.72rem; }
+
+  .cover-img { height: 130px; }
+
+  .profile-inner { padding: 0 1rem; }
+  .profile-identity {
+    flex-wrap: wrap;
+    gap: 0.8rem 1rem;
+    padding: 0.9rem 0;
+  }
+  .profile-pic { width: 60px; height: 60px; }
+  .profile-text { flex-basis: calc(100% - 76px); padding-bottom: 0; }
+  .profile-name { font-size: 1.15rem; }
+  .profile-stats { align-self: flex-start; padding-bottom: 0; }
+
+  .gallery-wrap { padding: 0 0.7rem; margin-top: 1rem; }
+  .category-filter { gap: 0.4rem; margin-bottom: 1rem; }
+  .filter-label { width: 100%; margin-bottom: 0.2rem; }
+  .filter-tag { font-size: 0.68rem; padding: 0.28rem 0.7rem; }
+
+  .masonry { gap: 6px; }
+
+  .lightbox-overlay { padding: 0; }
+  .lightbox-box { border-radius: 0; max-height: 100vh; height: 100%; }
+  .lightbox-img-wrap img { max-height: 42vh; }
+  .lightbox-close { top: 12px; right: 16px; font-size: 1.7rem; }
+  .lightbox-nav { font-size: 1.8rem; padding: 0.4rem 0.5rem; }
+  .lightbox-prev { left: 2px; }
+  .lightbox-next { right: 2px; }
+  .lightbox-side { padding: 1.1rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="index.html" class="topbar-logo">irregular 🩷 causality</a>
+  <nav class="topbar-nav">
+    <a href="index.html">accueil</a>
+    <a href="apropos.html">à propos</a>
+    <a href="blog.html">blog</a>
+    <a href="listes.html">listes</a>
+    <a href="galerie.html">galerie</a>
+    <a href="archives.html">archives</a>
+    <a href="liens.html">liens</a>
+  </nav>
+</div>
+
+<div class="cover-section">
+  <img src="water2.gif" class="cover-img" alt="bannière">
+</div>
+
+<!-- PROFIL -->
+<div class="profile-section">
+  <div class="profile-inner">
+    <div class="profile-identity">
+      <div class="profile-pic">
+        <img src="avatar3.jpg" alt="avatar">
+      </div>
+      <div class="profile-text">
+        <span class="profile-name">wariann</span>
+        <span class="profile-handle">@irregular.causality</span>
+        <p class="profile-bio">Voici quelques photos prises notamment lors de mes voyages et de mes promenades ✨ <br>Merci de créditer (wariann_the_wanderer) si usage 📷</p>
+      </div>
+      <div class="profile-stats">
+        <div class="stat">
+          <span class="stat-num">9</span>
+          <span class="stat-label">photos</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GALERIE -->
+<div class="gallery-wrap">
+
+  <div class="category-filter">
+    <span class="filter-label">catégories ·</span>
+    <a href="#" class="filter-tag active" data-filter="all">toutes</a>
+    <a href="#" class="filter-tag" data-filter="nature">nature</a>
+    <a href="#" class="filter-tag" data-filter="ville">ville</a>
+    <a href="#" class="filter-tag" data-filter="voyages">voyages</a>
+    <a href="#" class="filter-tag" data-filter="france">france</a>
+    <a href="#" class="filter-tag" data-filter="ciel">ciel</a>
+    <a href="#" class="filter-tag" data-filter="divers">divers</a>
+  </div>
+
+  <div class="masonry">
+
+    <!-- ✦ EXEMPLE DE CARTE — remplace src="ta-photo.jpg" par ton fichier.
+         data-category : une ou plusieurs catégories séparées par une virgule, ex: data-category="ville,voyages"
+                          (la photo apparaîtra alors dans les deux filtres, et les deux mots serviront de tags dans la visionneuse)
+         data-tags : optionnel, pour afficher des tags différents des catégories, ex: data-tags="nuit,architecture,long exposure" -->
+         <div class="photo-card" data-category="nature, ciel">
+      <img src="ciel1.jpg" alt="ciel">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">18h37 / Février</b> 
+      <br><br>
+      <p>Photo prise de mon balcon</p><p>Je prends pas mal de photos du ciel, étant exposée ouest 😊</p>
+      <br>
+      <p>📷 Photo prise avec un iPhone 13 mini le 19 février 2023.</p><br>📍 France</div>
+    </div> 
+    <div class="photo-card" data-category="ville,voyages">
+      <img src="athenes.jpg" alt="athenes">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">La superbe <b>Académie d'Athènes</b> 
+      <br><br>
+      <p>Photo prise pendant une promenade dans <b>Athènes</b>.</p><p>J'aime bien cette photo parce que tout est juste tellement... grec !</p><p> En plus, c'est exactement comme ça que j'imaginais l'université quand j'étais petite 😍</p>
+      <br>
+      <p>📷 Photo prise avec un iPhone 16 Pro le 6 mai 2026.</p><br>📍 Athènes - Grèce</div>
+    </div>  
+   <div class="photo-card" data-category="nature,france">
+      <img src="bagatelle.jpg" alt="bagatelle">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">La roseraie française de <b>Bagatelle</b> 🌹
+      <br><br>
+      <p>Photo prise au <b>Parc de Bagatelle</b> pendant le <i>Week end de la Rose 2018</i>.</p><p>Franchement, le Parc de Bagatelle début juin, c'est le plus bel endroit de Paris 🩷 Rien ne vaut l'émerveillement quand vous arrivez dans la roseraie pour la 1ère fois, alors allez-y ! !</p>
+      <br>
+      <p>📷 Photo prise avec un iPhone 8 le 2 juin 2018.</p><br>📍 Paris - France</div>
+    </div>
+   <div class="photo-card" data-category="nature,voyages">
+      <img src="islande1.jpg" alt="islande">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">Les glaces du <b>Jökulsárlón</b> ❄️
+      <br><br>
+      <p>Photo prise dans la lagune glaciaire Jökulsárlón, à la limite du parc national de Vatnajökull.</p>
+      <br>
+      <p>📷 Photo prise avec un iPhone 6 le 10 décembre 2017.</p><br>📍 Jökulsárlón - Islande</div>
+    </div>
+   <div class="photo-card" data-category="nature,france">
+      <img src="bretagne.jpg" alt="bretagne">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">Un après-midi subtropical au <b>Val André</b> 🌿
+      <br><br>
+      <p>Oui oui, c'est bien la Bretagne ! Photo prise pendant une randonnée avec une amie ; il faisait moche et le temps a changé brutalement pour un climat lourd et ensoleillé... </p></p>
+      <br>
+      <p>📷 Photo prise avec un iPhone 13 mini le 10 juillet 2021.</p><br>📍 Pléneuf Val André - France</div>
+    </div>
+   <div class="photo-card" data-category="ville,voyages">
+      <img src="gardensbythebay.jpg" alt="singapour">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption"><b>Gardens By The Bay</b> la nuit 🌟
+      <br><br>
+      <p>Photo prise juste avant d'arriver enfin au spectacle <i>Garden Rhapsody</i> et après avoir galéré à trouver...quand on n'arrive pas par le métro, cet endroit est un peu labyrinthique... </p>
+      <br>
+      <p>📷 Photo prise avec un appareil <b>Sony RX100</b> le 27 mars 2019.</p><br>📍 Singapour</div>
+    </div>
+  <div class="photo-card" data-category="nature,voyages">
+      <img src="canaries1.jpeg" alt="canaries">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">Les figuiers de Barbarie</b> 🌴
+      <br><br>
+      <p>La photo a été prise pendant une matinée de randonnée sur l'île de <b>la Gomera</b> (dans la forêt d’Hermigua).</p>
+      <br>
+      <p>📷 Photo prise avec un iPhone 6 (cassé) le 10 août 2018.</p><br>📍 La Gomera - Canaries/Espagne</div>
+    </div>
+ <div class="photo-card" data-category="ville,voyages">
+      <img src="budapest1.jpeg" alt="budapest">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">Les lumières de <b>Budapest</b>✨
+      <br><br>
+      <p>La photo a été prise pendant une promenade hivernale sur les rives du Danube, à proximité du Parlement de Budapest. Une bien belle luminosité ce soir là, accompagnée par une température négative, pour plus d'immersion ⛄</p>
+      <br>
+      <p>📷 Photo prise avec un appareil <b>Lumix GX9</b> le 29 janvier 2024.</p><br>📍 Budapest - Hongrie</div>
+    </div>
+ <div class="photo-card" data-category="ville,voyages">
+      <img src="copenhague1.jpeg" alt="copenhague">
+      <div class="photo-overlay"></div>
+      <div class="photo-caption">Nuit brumeuse à <b>Copenhague</b> 🌃
+      <br><br>
+      <p>La photo a été prise lors de la dernière soirée de mon voyage au Danemark sur l'avenue Vesterbrogade, proche de la place Rådhuspladsen, à proximité des jardins de Tivoli et de la gare centrale. La brume complètait bien l'ambiance Halloween dans la ville 🎃</p>
+      <p>Je l'aime vraiment bien, c'est une de mes photos de voyage préférées.</p>
+      <br>
+      <p>📷 Photo prise avec un Iphone 13 mini le 30 octobre 2022.</p><br>📍 Copenhague - Danemark</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <a href="galerie.html">← retour à la galerie</a> © 2026 irregular causality 
+</footer>
+
+<!-- VISIONNEUSE -->
+<div class="lightbox-overlay" id="lightboxOverlay">
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <span class="lightbox-nav lightbox-prev" id="lightboxPrev">&#8249;</span>
+  <div class="lightbox-box">
+    <div class="lightbox-img-wrap">
+      <img src="" alt="" id="lightboxImg">
+    </div>
+    <div class="lightbox-side">
+      <div class="lightbox-user">
+        <img src="avatar3.jpg" alt="avatar">
+        <span>wariann</span>
+      </div>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+      <div class="lightbox-tags" id="lightboxTags"></div>
+    </div>
+  </div>
+  <span class="lightbox-nav lightbox-next" id="lightboxNext">&#8250;</span>
+</div>
+
+<script>
+const cards = Array.from(document.querySelectorAll('.photo-card'));
+
+// ===== FILTRE PAR CATÉGORIE =====
+const filterTags = document.querySelectorAll('.filter-tag');
+const placeholders = document.querySelectorAll('.photo-placeholder');
+
+function applyFilter(filter) {
+  cards.forEach(card => {
+    const categories = (card.dataset.category || '').split(',').map(c => c.trim());
+    const match = filter === 'all' || categories.includes(filter);
+    card.style.display = match ? '' : 'none';
+  });
+  // les blocs "+ ajouter une photo" ne sont pas catégorisés : visibles seulement sur "toutes"
+  placeholders.forEach(ph => {
+    ph.style.display = filter === 'all' ? '' : 'none';
+  });
+}
+
+filterTags.forEach(tag => {
+  tag.addEventListener('click', (e) => {
+    e.preventDefault();
+    filterTags.forEach(t => t.classList.remove('active'));
+    tag.classList.add('active');
+    applyFilter(tag.dataset.filter);
+  });
+});
+
+// ===== VISIONNEUSE (respecte le filtre actif) =====
+let currentIndex = 0;
+
+const overlay = document.getElementById('lightboxOverlay');
+const lbImg = document.getElementById('lightboxImg');
+const lbCaption = document.getElementById('lightboxCaption');
+const lbTags = document.getElementById('lightboxTags');
+
+// renvoie uniquement les cartes actuellement affichées (non masquées par le filtre)
+function getVisibleCards() {
+  return cards.filter(card => card.style.display !== 'none');
+}
+
+function openLightbox(card) {
+  const visible = getVisibleCards();
+  currentIndex = visible.indexOf(card);
+  const img = card.querySelector('img');
+  const caption = card.querySelector('.photo-caption');
+  lbImg.src = img.src;
+  lbImg.alt = img.alt || '';
+  lbCaption.innerHTML = caption ? caption.innerHTML : '';
+
+  // tags : basés sur data-tags si présent, sinon sur data-category
+  const tagsAttr = card.dataset.tags || card.dataset.category || '';
+  const tagList = tagsAttr.split(',').map(t => t.trim()).filter(Boolean);
+  lbTags.innerHTML = tagList.map(t => `<span class="lightbox-tag">${t}</span>`).join('');
+
+  overlay.classList.add('active');
+}
+
+function closeLightbox() { overlay.classList.remove('active'); }
+
+function showRelative(offset) {
+  const visible = getVisibleCards();
+  currentIndex = (currentIndex + offset + visible.length) % visible.length;
+  openLightbox(visible[currentIndex]);
+}
+
+cards.forEach(card => {
+  card.addEventListener('click', () => openLightbox(card));
+});
+
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+document.getElementById('lightboxPrev').addEventListener('click', () => showRelative(-1));
+document.getElementById('lightboxNext').addEventListener('click', () => showRelative(1));
+
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (!overlay.classList.contains('active')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowLeft') showRelative(-1);
+  if (e.key === 'ArrowRight') showRelative(1);
+});
+</script>
+
+</body>
+</html>
