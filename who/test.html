@@ -252,7 +252,7 @@
       padding:9px 14px;
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:8px;
       border:1px solid var(--line);
       border-radius:10px;
       background:rgba(5,12,24,.8);
@@ -1926,7 +1926,7 @@ body.modal-open{
 .shell:not(.details-hidden) .episode-grid:not(.list-view),
 .shell.details-hidden .episode-grid:not(.list-view){
   display:grid !important;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr)) !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
   gap:16px !important;
 }
 
@@ -1969,9 +1969,9 @@ body.modal-open{
   right:auto !important;
   bottom:auto !important;
   z-index:310 !important;
-  width:min(1080px,calc(100vw - 64px)) !important;
-  height:min(90vh,900px) !important;
-  max-height:90vh !important;
+  width:min(820px,calc(100vw - 48px)) !important;
+  height:min(88vh,820px) !important;
+  max-height:88vh !important;
   overflow-y:auto !important;
   border:1px solid rgba(129,178,248,.24) !important;
   border-radius:22px !important;
@@ -2030,16 +2030,16 @@ body.modal-open{
 }
 
 .detail-hero{
-  min-height:285px !important;
-  padding:24px 26px !important;
+  min-height:225px !important;
+  padding:18px 20px !important;
 }
 
-/* Slightly soften the artwork so the title stays crisp and readable. */
+/* Keep the hero artwork sharp; the gradient handles title readability. */
 .detail-hero::before{
   inset:-2% !important;
   z-index:-3 !important;
-  filter:blur(2.2px);
-  transform:scale(1.018);
+  filter:none;
+  transform:scale(1);
 }
 
 .detail-hero-previous{
@@ -2049,8 +2049,8 @@ body.modal-open{
   pointer-events:none;
   background-size:cover;
   background-position:center;
-  filter:blur(2.2px);
-  transform:scale(1.018);
+  filter:none;
+  transform:scale(1);
   opacity:0;
 }
 
@@ -2078,19 +2078,19 @@ body.modal-open{
 }
 
 .detail-heading h2{
-  max-width:850px;
-  font-size:clamp(1.65rem,2.6vw,2.35rem) !important;
+  max-width:680px;
+  font-size:clamp(1.5rem,2.2vw,1.95rem) !important;
   line-height:1.04 !important;
   letter-spacing:-.025em;
 }
 
 .detail-sub{
-  margin-top:10px;
-  font-size:.9rem !important;
+  margin-top:7px;
+  font-size:.82rem !important;
 }
 
 .detail-body{
-  padding:20px 28px 30px !important;
+  padding:15px 20px 22px !important;
 }
 
 .quick-info{
@@ -2099,36 +2099,36 @@ body.modal-open{
 }
 
 .quick-box{
-  min-height:68px;
-  padding:12px 14px;
+  min-height:58px;
+  padding:9px 11px;
   border-radius:10px;
 }
 
 .detail-grid{
-  grid-template-columns:minmax(220px,.72fr) minmax(0,1.55fr) !important;
-  gap:30px !important;
-  margin-top:24px !important;
+  grid-template-columns:minmax(185px,.72fr) minmax(0,1.45fr) !important;
+  gap:20px !important;
+  margin-top:17px !important;
 }
 
 .credit strong,
 .detail-section p,
 .detail-section li{
-  font-size:.84rem !important;
+  font-size:.78rem !important;
 }
 
 .detail-section{
-  margin-top:24px;
-  padding-top:20px;
+  margin-top:17px;
+  padding-top:14px;
 }
 
 .episode-nav{
-  gap:12px;
-  margin-top:26px;
+  gap:8px;
+  margin-top:18px;
 }
 
 .nav-card{
-  min-height:72px;
-  padding:12px 14px;
+  min-height:60px;
+  padding:9px 11px;
   transition:transform .18s ease,border-color .18s ease,background .18s ease;
 }
 
@@ -2177,11 +2177,11 @@ body.modal-open{
   .episode-grid:not(.list-view),
   .shell:not(.details-hidden) .episode-grid:not(.list-view),
   .shell.details-hidden .episode-grid:not(.list-view){
-    grid-template-columns:repeat(auto-fill,minmax(280px,1fr)) !important;
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
   }
 }
 
-@media(max-width:980px){
+@media(max-width:1040px){
   .episode-grid:not(.list-view),
   .shell:not(.details-hidden) .episode-grid:not(.list-view),
   .shell.details-hidden .episode-grid:not(.list-view){
@@ -2190,9 +2190,9 @@ body.modal-open{
 
   .details,
   .shell.details-hidden .details{
-    width:calc(100vw - 28px) !important;
-    height:min(92dvh,900px) !important;
-    max-height:92dvh !important;
+    width:min(760px,calc(100vw - 28px)) !important;
+    height:min(90dvh,820px) !important;
+    max-height:90dvh !important;
   }
 
 }
@@ -2241,16 +2241,16 @@ body.modal-open{
   }
 
   .detail-hero{
-    min-height:235px !important;
-    padding:18px !important;
+    min-height:210px !important;
+    padding:16px !important;
   }
 
   .detail-heading h2{
-    font-size:clamp(1.55rem,7.3vw,2.35rem) !important;
+    font-size:clamp(1.45rem,6.8vw,2rem) !important;
   }
 
   .detail-body{
-    padding:14px 16px 28px !important;
+    padding:12px 14px 22px !important;
   }
 
   .detail-grid{
@@ -2268,7 +2268,7 @@ body.modal-open{
 
 @media(max-width:460px){
   .quick-info{grid-template-columns:1fr 1fr;}
-  .detail-hero{min-height:215px !important;}
+  .detail-hero{min-height:190px !important;}
 }
 
 @media(prefers-reduced-motion:reduce){
