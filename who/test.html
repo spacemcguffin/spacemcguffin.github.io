@@ -2460,6 +2460,92 @@ body.modal-open{
   .quick-box strong,.essential-fact strong{font-size:.88rem !important;}
 }
 
+
+/* =========================================================
+   ESSENTIAL MODAL V2 — CLEAN HERO EDGE + TWO-TIER FACTS
+   ========================================================= */
+
+/* End the artwork exactly at the hero boundary: no negative inset/edge bleed. */
+.detail-hero{
+  overflow:hidden !important;
+  border-bottom:1px solid rgba(135,173,236,.16) !important;
+  background:#07101d !important;
+}
+
+.detail-hero::before,
+.detail-hero-previous{
+  inset:0 !important;
+  transform:none !important;
+}
+
+/* Writer first, then air date, preserving the paired-box treatment. */
+.quick-info{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:9px !important;
+}
+
+.quick-box{
+  min-height:62px !important;
+  padding:10px 12px !important;
+}
+
+.quick-box-writer{
+  border-color:rgba(116,184,255,.26) !important;
+  background:linear-gradient(180deg,rgba(17,35,61,.96),rgba(10,22,39,.96)) !important;
+}
+
+.quick-box-date{
+  background:#0b1525 !important;
+}
+
+/* Setting and Enemy are deliberately distinct from each other. */
+.essential-facts{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  gap:9px !important;
+  margin-top:9px !important;
+}
+
+.essential-fact{
+  min-height:66px !important;
+  padding:10px 12px !important;
+}
+
+.essential-setting{
+  border-color:rgba(116,232,255,.28) !important;
+  background:linear-gradient(180deg,rgba(12,39,51,.88),rgba(8,27,38,.94)) !important;
+  box-shadow:inset 3px 0 0 rgba(116,232,255,.48) !important;
+}
+
+.essential-setting small{
+  color:#8fe8f6 !important;
+}
+
+.essential-enemy{
+  border-color:rgba(255,136,136,.27) !important;
+  background:linear-gradient(180deg,rgba(50,24,31,.9),rgba(31,16,24,.96)) !important;
+  box-shadow:inset 3px 0 0 rgba(255,116,126,.52) !important;
+}
+
+.essential-enemy small{
+  color:#ff9ba5 !important;
+}
+
+@media(max-width:560px){
+  .essential-facts{
+    grid-template-columns:1fr 1fr !important;
+  }
+  .essential-fact:first-child{
+    grid-column:auto !important;
+  }
+}
+
+@media(max-width:390px){
+  .quick-info,
+  .essential-facts{
+    grid-template-columns:1fr !important;
+  }
+}
+
 </style>
 </head>
 
@@ -2571,20 +2657,16 @@ body.modal-open{
 
       <div class="detail-body essential-detail-body">
         <div class="quick-info">
-          <div class="quick-box"><span>Air date</span><strong id="detailDate"></strong></div>
-          <div class="quick-box"><span>Duration</span><strong id="detailDuration"></strong></div>
+          <div class="quick-box quick-box-writer"><span>Written by</span><strong id="detailWriter"></strong></div>
+          <div class="quick-box quick-box-date"><span>Air date</span><strong id="detailDate"></strong></div>
         </div>
 
         <div class="essential-facts">
-          <div class="essential-fact">
-            <small>Written by</small>
-            <strong id="detailWriter"></strong>
-          </div>
-          <div class="essential-fact">
+          <div class="essential-fact essential-setting">
             <small>Setting</small>
             <strong id="detailSetting">—</strong>
           </div>
-          <div class="essential-fact">
+          <div class="essential-fact essential-enemy">
             <small>Enemy</small>
             <strong id="detailMonster"></strong>
           </div>
@@ -2611,7 +2693,7 @@ body.modal-open{
     const episodes = [
       {
         id:"unearthly-child", code:"S1.1", title:"An Unearthly Child", doctor:"First Doctor", doctorNumber:1,
-        series:"Season 1", year:1963, date:"23 November 1963", duration:"4 episodes",
+        series:"Season 1", year:1963, date:"23 November 1963",
         format:"Serial", companion:"Susan, Ian and Barbara", monster:"Cavemen",
         writer:"Anthony Coburn", director:"Waris Hussein",
         image:"/who/img/1/unearthly.png",
@@ -2621,17 +2703,18 @@ body.modal-open{
       },
       {
         id:"the-daleks", code:"S1.2", title:"The Daleks", doctor:"First Doctor", doctorNumber:1,
-        series:"Season 1", year:1963, date:"21 December 1963", duration:"7 episodes",
+        series:"Season 1", year:1963, date:"21 December 1963",
         format:"Serial", companion:"Susan, Ian and Barbara", monster:"Daleks",
         writer:"Anthony Coburn", director:"Christopher Barry and Richard Martin",
         image:"/who/img/1/daleks.png",
         synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
         trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
-        tags:["Daleks","Skaro","1960s"]
+        tags:["Daleks","Skaro","1960s"],
+        setting:["Skaro City"]   
       },
         {
         id:"the-edge-of-destruction", code:"S1.3", title:"The Edge of Destruction", doctor:"First Doctor", doctorNumber:1,
-        series:"Season 1", year:1964, date:"8 February 1964", duration:"2 episodes",
+        series:"Season 1", year:1964, date:"8 February 1964",
         format:"Serial", companion:"Susan, Ian and Barbara", monster:"N/A",
         writer:"Anthony Coburn", director:"Richard Martin and Frank Cox",
         image:"/who/img/1/edgeofdestruction.png",
@@ -2641,7 +2724,7 @@ body.modal-open{
       },
         {
         id:"marco-polo", code:"S1.4", title:"Marco Polo", doctor:"First Doctor", doctorNumber:1,
-        series:"Season 1", year:1964, date:"22 February 1964", duration:"7 episodes",
+        series:"Season 1", year:1964, date:"22 February 1964",
         format:"Serial", companion:"Susan, Ian and Barbara", monster:"Tegana",
         writer:"Anthony Coburn", director:"Waris Hussein and John Crockett",
         image:"/who/img/1/marcopolo.png",
@@ -2651,7 +2734,7 @@ body.modal-open{
       },
       {
         id:"spearhead", code:"S7.1", title:"Spearhead from Space", doctor:"Third Doctor", doctorNumber:3,
-        series:"Season 7", year:1970, date:"3 January 1970", duration:"4 episodes",
+        series:"Season 7", year:1970, date:"3 January 1970",
         format:"Serial", companion:"Liz Shaw", monster:"Autons",
         writer:"Robert Holmes", director:"Derek Martinus", rating:4.7,
         image:"https://images2.imgbox.com/f9/d8/3VccADyX_o.jpg",
@@ -2661,7 +2744,7 @@ body.modal-open{
       },
       {
         id:"genesis", code:"S12.4", title:"Genesis of the Daleks", doctor:"Fourth Doctor", doctorNumber:4,
-        series:"Season 12", year:1975, date:"8 March 1975", duration:"6 episodes",
+        series:"Season 12", year:1975, date:"8 March 1975",
         format:"Serial", companion:"Sarah Jane and Harry", monster:"Daleks / Davros",
         writer:"Terry Nation", director:"David Maloney", rating:4.9,
         image:"https://images2.imgbox.com/fa/42/uXZaAxay_o.jpg",
@@ -2671,7 +2754,7 @@ body.modal-open{
       },
       {
         id:"androzani", code:"S21.6", title:"The Caves of Androzani", doctor:"Fifth Doctor", doctorNumber:5,
-        series:"Season 21", year:1984, date:"8 March 1984", duration:"4 episodes",
+        series:"Season 21", year:1984, date:"8 March 1984",
         format:"Serial", companion:"Peri Brown", monster:"Sharaz Jek",
         writer:"Robert Holmes", director:"Graeme Harper", rating:5.0,
         image:"https://images2.imgbox.com/b4/87/M2AjK2t8_o.jpg",
@@ -2681,7 +2764,7 @@ body.modal-open{
       },
       {
         id:"remembrance", code:"S25.1", title:"Remembrance of the Daleks", doctor:"Seventh Doctor", doctorNumber:7,
-        series:"Season 25", year:1988, date:"5 October 1988", duration:"4 episodes",
+        series:"Season 25", year:1988, date:"5 October 1988",
         format:"Serial", companion:"Ace", monster:"Daleks",
         writer:"Ben Aaronovitch", director:"Andrew Morgan", rating:4.8,
         image:"https://images2.imgbox.com/7c/46/MkJGRaLX_o.jpg",
@@ -2691,7 +2774,7 @@ body.modal-open{
       },
       {
         id:"rose", code:"1.1", title:"Rose", doctor:"Ninth Doctor", doctorNumber:9,
-        series:"Series 1", year:2005, date:"26 March 2005", duration:"45 minutes",
+        series:"Series 1", year:2005, date:"26 March 2005",
         format:"Story", companion:"Rose Tyler", monster:"Autons / Nestene Consciousness",
         writer:"Russell T Davies", director:"Keith Boak", rating:4.6,
         image:"https://images2.imgbox.com/2c/fc/bpTHvPF4_o.jpg",
@@ -2701,7 +2784,7 @@ body.modal-open{
       },
       {
         id:"end-world", code:"1.2", title:"The End of the World", doctor:"Ninth Doctor", doctorNumber:9,
-        series:"Series 1", year:2005, date:"2 April 2005", duration:"45 minutes",
+        series:"Series 1", year:2005, date:"2 April 2005",
         format:"Story", companion:"Rose Tyler", monster:"Lady Cassandra",
         writer:"Russell T Davies", director:"Euros Lyn", rating:4.2,
         image:"https://images2.imgbox.com/b1/b8/cPVwYaOi_o.jpg",
@@ -2711,7 +2794,7 @@ body.modal-open{
       },
       {
         id:"unquiet-dead", code:"1.3", title:"The Unquiet Dead", doctor:"Ninth Doctor", doctorNumber:9,
-        series:"Series 1", year:2005, date:"9 April 2005", duration:"45 minutes",
+        series:"Series 1", year:2005, date:"9 April 2005",
         format:"Story", companion:"Rose Tyler", monster:"Gelth",
         writer:"Mark Gatiss", director:"Euros Lyn", rating:4.1,
         image:"https://images2.imgbox.com/1c/89/7vOBBGnd_o.jpg",
@@ -2721,7 +2804,7 @@ body.modal-open{
       },
       {
         id:"dalek", code:"1.6", title:"Dalek", doctor:"Ninth Doctor", doctorNumber:9,
-        series:"Series 1", year:2005, date:"30 April 2005", duration:"45 minutes",
+        series:"Series 1", year:2005, date:"30 April 2005",
         format:"Story", companion:"Rose Tyler", monster:"Dalek",
         writer:"Robert Shearman", director:"Joe Ahearne", rating:4.9,
         image:"https://images2.imgbox.com/1f/5f/Os8l4MjP_o.jpg",
@@ -2731,7 +2814,7 @@ body.modal-open{
       },
       {
         id:"christmas-invasion", code:"2.X", title:"The Christmas Invasion", doctor:"Tenth Doctor", doctorNumber:10,
-        series:"Christmas Special", year:2005, date:"25 December 2005", duration:"60 minutes",
+        series:"Christmas Special", year:2005, date:"25 December 2005",
         format:"Special", companion:"Rose Tyler", monster:"Sycorax",
         writer:"Russell T Davies", director:"James Hawes", rating:4.5,
         image:"https://images2.imgbox.com/c3/3b/ejlL8Iua_o.jpg",
@@ -2741,7 +2824,7 @@ body.modal-open{
       },
       {
         id:"blink", code:"3.10", title:"Blink", doctor:"Tenth Doctor", doctorNumber:10,
-        series:"Series 3", year:2007, date:"9 June 2007", duration:"45 minutes",
+        series:"Series 3", year:2007, date:"9 June 2007",
         format:"Story", companion:"Martha Jones", monster:"Weeping Angels",
         writer:"Steven Moffat", director:"Hettie MacDonald", rating:5.0,
         image:"https://images2.imgbox.com/37/d7/uWkf4Sth_o.jpg",
@@ -2751,7 +2834,7 @@ body.modal-open{
       },
       {
         id:"eleventh-hour", code:"5.1", title:"The Eleventh Hour", doctor:"Eleventh Doctor", doctorNumber:11,
-        series:"Series 5", year:2010, date:"3 April 2010", duration:"65 minutes",
+        series:"Series 5", year:2010, date:"3 April 2010",
         format:"Story", companion:"Amy Pond and Rory Williams", monster:"Prisoner Zero",
         writer:"Steven Moffat", director:"Adam Smith", rating:4.9,
         image:"https://images2.imgbox.com/df/e6/NlFSItbz_o.jpg",
@@ -2761,7 +2844,7 @@ body.modal-open{
       },
       {
         id:"heaven-sent", code:"9.11", title:"Heaven Sent", doctor:"Twelfth Doctor", doctorNumber:12,
-        series:"Series 9", year:2015, date:"28 November 2015", duration:"55 minutes",
+        series:"Series 9", year:2015, date:"28 November 2015",
         format:"Story", companion:"Clara Oswald", monster:"The Veil",
         writer:"Steven Moffat", director:"Rachel Talalay", rating:5.0,
         image:"https://images2.imgbox.com/7e/82/8vIogyXs_o.jpg",
@@ -2771,7 +2854,7 @@ body.modal-open{
       },
       {
         id:"punjab", code:"11.6", title:"Demons of the Punjab", doctor:"Thirteenth Doctor", doctorNumber:13,
-        series:"Series 11", year:2018, date:"11 November 2018", duration:"50 minutes",
+        series:"Series 11", year:2018, date:"11 November 2018",
         format:"Story", companion:"Yaz, Ryan and Graham", monster:"Thijarians",
         writer:"Vinay Patel", director:"Jamie Childs", rating:4.5,
         image:"https://images2.imgbox.com/70/a5/DM7D3AOT_o.jpg",
@@ -2781,7 +2864,7 @@ body.modal-open{
       },
       {
         id:"giggle", code:"SP.3", title:"The Giggle", doctor:"Fourteenth Doctor", doctorNumber:14,
-        series:"60th Anniversary", year:2023, date:"9 December 2023", duration:"60 minutes",
+        series:"60th Anniversary", year:2023, date:"9 December 2023",
         format:"Special", companion:"Donna Noble", monster:"The Toymaker",
         writer:"Russell T Davies", director:"Chanya Button", rating:4.7,
         image:"https://images2.imgbox.com/98/30/x4vlhhsC_o.jpg",
@@ -2791,7 +2874,7 @@ body.modal-open{
       },
       {
         id:"rogue", code:"1.6", title:"Rogue", doctor:"Fifteenth Doctor", doctorNumber:15,
-        series:"Season 1", year:2024, date:"8 June 2024", duration:"45 minutes",
+        series:"Season 1", year:2024, date:"8 June 2024",
         format:"Story", companion:"Ruby Sunday", monster:"Chuldur",
         writer:"Kate Herron and Briony Redman", director:"Ben Chessell", rating:4.6,
         image:"https://images2.imgbox.com/e3/df/GzfqOn0R_o.jpg",
@@ -2801,7 +2884,7 @@ body.modal-open{
       },
       {
         id:"tomb-cybermen", code:"S5.1", title:"The Tomb of the Cybermen", doctor:"Second Doctor", doctorNumber:2,
-        series:"Season 5", year:1967, date:"2 September 1967", duration:"4 episodes",
+        series:"Season 5", year:1967, date:"2 September 1967",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Cybermen",
         writer:"Kit Pedler and Gerry Davis", director:"Morris Barry", rating:4.8,
         image:"https://images2.imgbox.com/84/6e/jiQXqBSE_o.jpg",
@@ -2811,7 +2894,7 @@ body.modal-open{
       },
       {
         id:"web-of-fear", code:"S5.5", title:"The Web of Fear", doctor:"Second Doctor", doctorNumber:2,
-        series:"Season 5", year:1968, date:"3 February 1968", duration:"6 episodes",
+        series:"Season 5", year:1968, date:"3 February 1968",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Great Intelligence / Yeti",
         writer:"Mervyn Haisman and Henry Lincoln", director:"Douglas Camfield", rating:4.7,
         image:"https://images2.imgbox.com/94/35/RSKhTkfM_o.jpg",
@@ -2821,7 +2904,7 @@ body.modal-open{
       },
       {
         id:"war-games", code:"S6.7", title:"The War Games", doctor:"Second Doctor", doctorNumber:2,
-        series:"Season 6", year:1969, date:"19 April 1969", duration:"10 episodes",
+        series:"Season 6", year:1969, date:"19 April 1969",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"War Lords",
         writer:"Malcolm Hulke and Terrance Dicks", director:"David Maloney", rating:4.9,
         image:"https://images2.imgbox.com/ff/10/yEfnTX8h_o.jpg",
@@ -2831,7 +2914,7 @@ body.modal-open{
       },
       {
         id:"vengeance-on-varos", code:"S22.2", title:"Vengeance on Varos", doctor:"Sixth Doctor", doctorNumber:6,
-        series:"Season 22", year:1985, date:"19 January 1985", duration:"2 episodes",
+        series:"Season 22", year:1985, date:"19 January 1985",
         format:"Serial", companion:"Peri Brown", monster:"Sil",
         writer:"Philip Martin", director:"Ron Jones", rating:4.5,
         image:"https://images2.imgbox.com/f7/f8/39YuUeGq_o.jpg",
@@ -2841,7 +2924,7 @@ body.modal-open{
       },
       {
         id:"revelation-daleks", code:"S22.6", title:"Revelation of the Daleks", doctor:"Sixth Doctor", doctorNumber:6,
-        series:"Season 22", year:1985, date:"23 March 1985", duration:"2 episodes",
+        series:"Season 22", year:1985, date:"23 March 1985",
         format:"Serial", companion:"Peri Brown", monster:"Daleks / Davros",
         writer:"Eric Saward", director:"Graeme Harper", rating:4.7,
         image:"https://images2.imgbox.com/eb/58/M9zU1xIk_o.jpg",
@@ -2851,7 +2934,7 @@ body.modal-open{
       },
       {
         id:"mysterious-planet", code:"S23.1", title:"The Mysterious Planet", doctor:"Sixth Doctor", doctorNumber:6,
-        series:"Season 23", year:1986, date:"6 September 1986", duration:"4 episodes",
+        series:"Season 23", year:1986, date:"6 September 1986",
         format:"Serial", companion:"Peri Brown", monster:"Drathro",
         writer:"Robert Holmes", director:"Nicholas Mallett", rating:4.2,
         image:"https://images2.imgbox.com/b6/f3/SC7MoCT2_o.jpg",
@@ -2861,7 +2944,7 @@ body.modal-open{
       },
       {
         id:"doctor-who-tv-movie", code:"TVM", title:"Doctor Who: The TV Movie", doctor:"Eighth Doctor", doctorNumber:8,
-        series:"TV Movie", year:1996, date:"27 May 1996", duration:"89 minutes",
+        series:"TV Movie", year:1996, date:"27 May 1996",
         format:"Television film", companion:"Grace Holloway", monster:"The Master",
         writer:"Matthew Jacobs", director:"Geoffrey Sax", rating:4.3,
         image:"https://images2.imgbox.com/7c/c5/WDcUe1ts_o.jpg",
@@ -2871,7 +2954,7 @@ body.modal-open{
       },
       {
         id:"night-of-the-doctor", code:"WEB.1", title:"The Night of the Doctor", doctor:"Eighth Doctor", doctorNumber:8,
-        series:"50th Anniversary", year:2013, date:"14 November 2013", duration:"7 minutes",
+        series:"50th Anniversary", year:2013, date:"14 November 2013",
         format:"Mini-episode", companion:"Cass", monster:"Sisterhood of Karn",
         writer:"Steven Moffat", director:"John Hayes", rating:4.8,
         image:"https://images2.imgbox.com/de/bf/h3SBfQWC_o.jpg",
@@ -2884,7 +2967,7 @@ body.modal-open{
 
       {
         id:"moonbase", code:"S4.6", title:"The Moonbase", doctor:"Second Doctor", doctorNumber:2,
-        series:"Season 4", year:1967, date:"11 February 1967", duration:"4 episodes",
+        series:"Season 4", year:1967, date:"11 February 1967",
         format:"Serial", companion:"Jamie McCrimmon, Polly and Ben Jackson", monster:"Cybermen",
         writer:"Kit Pedler", director:"Morris Barry", rating:4.3,
         image:"https://images2.imgbox.com/bf/a1/8ZgAuWTe_o.jpg",
@@ -2894,7 +2977,7 @@ body.modal-open{
       },
       {
         id:"enemy-of-the-world", code:"S5.4", title:"The Enemy of the World", doctor:"Second Doctor", doctorNumber:2,
-        series:"Season 5", year:1967, date:"23 December 1967", duration:"6 episodes",
+        series:"Season 5", year:1967, date:"23 December 1967",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Salamander",
         writer:"David Whitaker", director:"Barry Letts", rating:4.5,
         image:"https://images2.imgbox.com/54/c6/pMa4xdjw_o.jpg",
@@ -2904,7 +2987,7 @@ body.modal-open{
       },
       {
         id:"mind-robber", code:"S6.2", title:"The Mind Robber", doctor:"Second Doctor", doctorNumber:2,
-        series:"Season 6", year:1968, date:"14 September 1968", duration:"5 episodes",
+        series:"Season 6", year:1968, date:"14 September 1968",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"The Master of the Land",
         writer:"Peter Ling and Derrick Sherwin", director:"David Maloney", rating:4.7,
         image:"https://images2.imgbox.com/5e/4c/VBS5ni89_o.jpg",
@@ -2914,7 +2997,7 @@ body.modal-open{
       },
       {
         id:"invasion", code:"S6.3", title:"The Invasion", doctor:"Second Doctor", doctorNumber:2,
-        series:"Season 6", year:1968, date:"2 November 1968", duration:"8 episodes",
+        series:"Season 6", year:1968, date:"2 November 1968",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"Cybermen",
         writer:"Derrick Sherwin", director:"Douglas Camfield", rating:4.8,
         image:"https://images2.imgbox.com/d7/25/MlvGE9zu_o.jpg",
@@ -2924,7 +3007,7 @@ body.modal-open{
       },
       {
         id:"inferno", code:"S7.4", title:"Inferno", doctor:"Third Doctor", doctorNumber:3,
-        series:"Season 7", year:1970, date:"9 May 1970", duration:"7 episodes",
+        series:"Season 7", year:1970, date:"9 May 1970",
         format:"Serial", companion:"Liz Shaw", monster:"Primords",
         writer:"Don Houghton", director:"Douglas Camfield and Barry Letts", rating:4.9,
         image:"https://images2.imgbox.com/28/61/nPMsYUBq_o.jpg",
@@ -2934,7 +3017,7 @@ body.modal-open{
       },
       {
         id:"terror-of-the-autons", code:"S8.1", title:"Terror of the Autons", doctor:"Third Doctor", doctorNumber:3,
-        series:"Season 8", year:1971, date:"2 January 1971", duration:"4 episodes",
+        series:"Season 8", year:1971, date:"2 January 1971",
         format:"Serial", companion:"Jo Grant", monster:"The Master / Autons",
         writer:"Robert Holmes", director:"Barry Letts", rating:4.6,
         image:"https://images2.imgbox.com/0a/fb/QiX505u8_o.jpg",
@@ -2944,7 +3027,7 @@ body.modal-open{
       },
       {
         id:"daemons", code:"S8.5", title:"The Dæmons", doctor:"Third Doctor", doctorNumber:3,
-        series:"Season 8", year:1971, date:"22 May 1971", duration:"5 episodes",
+        series:"Season 8", year:1971, date:"22 May 1971",
         format:"Serial", companion:"Jo Grant", monster:"Azal / The Master",
         writer:"Guy Leopold", director:"Christopher Barry", rating:4.7,
         image:"https://images2.imgbox.com/4f/73/ugdSqIMz_o.jpg",
@@ -2954,7 +3037,7 @@ body.modal-open{
       },
       {
         id:"three-doctors", code:"S10.1", title:"The Three Doctors", doctor:"Third Doctor", doctorNumber:3,
-        series:"Season 10", year:1972, date:"30 December 1972", duration:"4 episodes",
+        series:"Season 10", year:1972, date:"30 December 1972",
         format:"Serial", companion:"Jo Grant", monster:"Omega",
         writer:"Bob Baker and Dave Martin", director:"Lennie Mayne", rating:4.7,
         image:"https://images2.imgbox.com/f4/74/1LAHCYS7_o.jpg",
@@ -2964,7 +3047,7 @@ body.modal-open{
       },
       {
         id:"pyramids-of-mars", code:"S13.3", title:"Pyramids of Mars", doctor:"Fourth Doctor", doctorNumber:4,
-        series:"Season 13", year:1975, date:"25 October 1975", duration:"4 episodes",
+        series:"Season 13", year:1975, date:"25 October 1975",
         format:"Serial", companion:"Sarah Jane Smith", monster:"Sutekh / Mummies",
         writer:"Stephen Harris", director:"Paddy Russell", rating:4.9,
         image:"https://images2.imgbox.com/01/ea/71Dq0Uh0_o.jpg",
@@ -2974,7 +3057,7 @@ body.modal-open{
       },
       {
         id:"seeds-of-doom", code:"S13.6", title:"The Seeds of Doom", doctor:"Fourth Doctor", doctorNumber:4,
-        series:"Season 13", year:1976, date:"31 January 1976", duration:"6 episodes",
+        series:"Season 13", year:1976, date:"31 January 1976",
         format:"Serial", companion:"Sarah Jane Smith", monster:"Krynoid",
         writer:"Robert Banks Stewart", director:"Douglas Camfield", rating:4.8,
         image:"https://images2.imgbox.com/61/53/W2arljLX_o.jpg",
@@ -2984,7 +3067,7 @@ body.modal-open{
       },
       {
         id:"end-of-time", code:"4.17", title:"The End of Time", doctor:"Tenth Doctor", doctorNumber:10,
-        series:"Series 4", year:2010, date:"1 January 2010", duration:"2 episodes",
+        series:"Series 4", year:2010, date:"1 January 2010",
         format:"Special", companion:"Wilfred Mott", monster:"The Master",
         writer:"Russell T Davies", director:"Euros Lyn", rating:4.8,
         image:"/who/10regen.png",
@@ -3288,7 +3371,6 @@ body.modal-open{
 
       el("detailTitle").textContent = episode.title;
       el("detailDate").textContent = episode.date;
-      el("detailDuration").textContent = episode.duration;
       el("detailWriter").textContent = episode.writer;
       el("detailSetting").textContent = episode.setting || inferSetting(episode) || "—";
       el("detailMonster").textContent = episode.monster || "—";
