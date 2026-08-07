@@ -966,7 +966,7 @@
   
     /* COMPACT NUMBER-ONLY DOCTOR BUTTONS */
     .doctor-strip{
-      gap:10px;
+      gap:7px;
       align-items:center;
       padding-block:4px 8px;
     }
@@ -1899,6 +1899,30 @@ button:active,
 }
 
 
+/* SPECIALS / LONG SEASON LABEL SAFETY */
+.season-pill-copy{
+  min-width:0;
+  flex:1 1 auto;
+}
+.season-pill-name{
+  white-space:normal !important;
+  overflow:visible !important;
+  text-overflow:clip !important;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  line-height:1.12 !important;
+}
+.season-pill{
+  min-width:0;
+}
+
+/* Prevent the full-screen backdrop button from showing a browser focus halo. */
+.details-backdrop:focus,
+.details-backdrop:focus-visible{
+  outline:none !important;
+  box-shadow:none !important;
+}
+
 /* =========================================================
    FULL-WIDTH STORY GRID + CINEMATIC EPISODE MODAL
    Final layout override: the inspector never consumes grid width.
@@ -1969,14 +1993,14 @@ body.modal-open{
   right:auto !important;
   bottom:auto !important;
   z-index:310 !important;
-  width:min(820px,calc(100vw - 48px)) !important;
-  height:min(88vh,820px) !important;
-  max-height:88vh !important;
+  width:min(720px,calc(100vw - 48px)) !important;
+  height:min(84vh,740px) !important;
+  max-height:84vh !important;
   overflow-y:auto !important;
-  border:1px solid rgba(129,178,248,.24) !important;
-  border-radius:22px !important;
+  border:1px solid rgba(129,178,248,.14) !important;
+  border-radius:18px !important;
   background:rgba(5,11,21,.985) !important;
-  box-shadow:0 35px 120px rgba(0,0,0,.72),0 0 0 1px rgba(255,255,255,.025) inset !important;
+  box-shadow:0 24px 70px rgba(0,0,0,.58) !important;
   opacity:0 !important;
   visibility:hidden !important;
   pointer-events:none !important;
@@ -1998,13 +2022,13 @@ body.modal-open{
   position:sticky !important;
   top:0 !important;
   z-index:8 !important;
-  height:54px !important;
+  height:48px !important;
   display:grid !important;
-  grid-template-columns:44px 1fr 44px 44px !important;
+  grid-template-columns:38px 1fr 38px 38px !important;
   align-items:center !important;
-  padding:0 14px !important;
+  padding:0 10px !important;
   border-bottom:1px solid var(--line) !important;
-  border-radius:22px 22px 0 0 !important;
+  border-radius:18px 18px 0 0 !important;
   background:rgba(5,11,21,.94) !important;
   backdrop-filter:blur(18px);
 }
@@ -2019,10 +2043,10 @@ body.modal-open{
 }
 
 .details-nav-button{
-  width:38px;
-  min-width:38px;
-  height:38px;
-  min-height:38px;
+  width:34px;
+  min-width:34px;
+  height:34px;
+  min-height:34px;
   padding:0;
   border:1px solid rgba(135,173,236,.18);
   border-radius:50%;
@@ -2030,8 +2054,8 @@ body.modal-open{
 }
 
 .detail-hero{
-  min-height:225px !important;
-  padding:18px 20px !important;
+  min-height:180px !important;
+  padding:14px 16px !important;
 }
 
 /* Keep the hero artwork sharp; the gradient handles title readability. */
@@ -2079,56 +2103,56 @@ body.modal-open{
 
 .detail-heading h2{
   max-width:680px;
-  font-size:clamp(1.5rem,2.2vw,1.95rem) !important;
+  font-size:clamp(1.35rem,2vw,1.72rem) !important;
   line-height:1.04 !important;
   letter-spacing:-.025em;
 }
 
 .detail-sub{
-  margin-top:7px;
-  font-size:.82rem !important;
+  margin-top:5px;
+  font-size:.76rem !important;
 }
 
 .detail-body{
-  padding:15px 20px 22px !important;
+  padding:11px 16px 16px !important;
 }
 
 .quick-info{
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:10px;
+  gap:7px;
 }
 
 .quick-box{
-  min-height:58px;
-  padding:9px 11px;
-  border-radius:10px;
+  min-height:50px;
+  padding:7px 9px;
+  border-radius:9px;
 }
 
 .detail-grid{
-  grid-template-columns:minmax(185px,.72fr) minmax(0,1.45fr) !important;
-  gap:20px !important;
-  margin-top:17px !important;
+  grid-template-columns:minmax(160px,.68fr) minmax(0,1.5fr) !important;
+  gap:15px !important;
+  margin-top:13px !important;
 }
 
 .credit strong,
 .detail-section p,
 .detail-section li{
-  font-size:.78rem !important;
+  font-size:.74rem !important;
 }
 
 .detail-section{
-  margin-top:17px;
-  padding-top:14px;
+  margin-top:13px;
+  padding-top:11px;
 }
 
 .episode-nav{
-  gap:8px;
-  margin-top:18px;
+  gap:7px;
+  margin-top:13px;
 }
 
 .nav-card{
-  min-height:60px;
-  padding:9px 11px;
+  min-height:52px;
+  padding:7px 9px;
   transition:transform .18s ease,border-color .18s ease,background .18s ease;
 }
 
@@ -2143,10 +2167,10 @@ body.modal-open{
   position:static !important;
   justify-self:end;
   z-index:auto !important;
-  width:36px !important;
-  min-width:36px !important;
-  height:36px !important;
-  min-height:36px !important;
+  width:32px !important;
+  min-width:32px !important;
+  height:32px !important;
+  min-height:32px !important;
   display:grid !important;
   place-items:center;
   padding:0 !important;
@@ -2156,7 +2180,7 @@ body.modal-open{
   color:#e9f2ff;
   box-shadow:none !important;
   backdrop-filter:none !important;
-  font-size:1.28rem !important;
+  font-size:1.12rem !important;
   line-height:1;
   transition:transform .18s ease,background .18s ease,border-color .18s ease !important;
 }
@@ -2190,9 +2214,9 @@ body.modal-open{
 
   .details,
   .shell.details-hidden .details{
-    width:min(760px,calc(100vw - 28px)) !important;
-    height:min(90dvh,820px) !important;
-    max-height:90dvh !important;
+    width:min(680px,calc(100vw - 28px)) !important;
+    height:min(88dvh,740px) !important;
+    max-height:88dvh !important;
   }
 
 }
