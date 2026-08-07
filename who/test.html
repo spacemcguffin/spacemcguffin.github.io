@@ -2302,6 +2302,164 @@ body.modal-open{
   .detail-hero-previous.crossfading{animation:none !important; opacity:0 !important;}
 }
 
+
+
+/* =========================================================
+   ESSENTIAL COMPACT EPISODE MODAL
+   Hero + title + core facts + episode navigation only.
+   ========================================================= */
+.details{
+  width:min(720px,calc(100vw - 32px)) !important;
+  height:auto !important;
+  max-height:90dvh !important;
+}
+
+.details-top{
+  min-height:50px !important;
+  height:50px !important;
+  padding:5px 54px 5px 8px !important;
+  grid-template-columns:42px 1fr 42px !important;
+}
+
+.details .inspector-toggle{
+  position:absolute !important;
+  top:7px !important;
+  right:8px !important;
+  bottom:auto !important;
+  width:36px !important;
+  min-width:36px !important;
+  height:36px !important;
+  min-height:36px !important;
+  border-radius:50% !important;
+  font-size:1.2rem !important;
+  z-index:8 !important;
+}
+
+.detail-hero{
+  min-height:230px !important;
+  padding:20px !important;
+}
+
+.detail-heading h2{
+  max-width:610px !important;
+  font-size:clamp(1.75rem,2.8vw,2.25rem) !important;
+  line-height:1.02 !important;
+  letter-spacing:-.03em !important;
+}
+
+.essential-detail-body{
+  padding:14px 16px 16px !important;
+}
+
+.quick-info{
+  gap:9px !important;
+}
+
+.quick-box{
+  min-height:62px !important;
+  padding:9px 11px !important;
+}
+
+.quick-box span,
+.essential-fact small{
+  color:#8fa1bd;
+  font-size:.72rem !important;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.quick-box strong{
+  margin-top:6px !important;
+  font-size:.94rem !important;
+  line-height:1.25;
+}
+
+.essential-facts{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:9px;
+  margin-top:10px;
+}
+
+.essential-fact{
+  min-width:0;
+  min-height:70px;
+  padding:10px 11px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#0b1525;
+}
+
+.essential-fact strong{
+  display:block;
+  margin-top:6px;
+  color:#eef4ff;
+  font-size:.95rem;
+  font-weight:500;
+  line-height:1.3;
+  overflow-wrap:anywhere;
+}
+
+.episode-nav{
+  gap:9px !important;
+  margin-top:12px !important;
+}
+
+.nav-card{
+  min-height:66px !important;
+  padding:10px 12px !important;
+}
+
+.nav-card small{
+  font-size:.64rem !important;
+  letter-spacing:.06em;
+}
+
+.nav-card strong{
+  margin-top:5px !important;
+  font-size:.84rem !important;
+  line-height:1.25;
+}
+
+/* Old detail sections no longer exist; keep their styles from affecting layout. */
+.detail-grid,
+.credits,
+.detail-section,
+.detail-sub,
+.detail-hero > .code{
+  display:none !important;
+}
+
+@media(max-width:760px){
+  .detail-hero{
+    min-height:245px !important;
+    padding:18px !important;
+  }
+
+  .detail-heading h2{
+    font-size:clamp(1.7rem,7.3vw,2.2rem) !important;
+  }
+
+  .essential-detail-body{
+    padding:13px 14px 18px !important;
+  }
+}
+
+@media(max-width:560px){
+  .essential-facts{
+    grid-template-columns:1fr 1fr;
+  }
+  .essential-fact:first-child{
+    grid-column:1 / -1;
+  }
+}
+
+@media(max-width:390px){
+  .detail-hero{min-height:220px !important;}
+  .quick-box strong,.essential-fact strong{font-size:.88rem !important;}
+}
+
 </style>
 </head>
 
@@ -2399,52 +2557,37 @@ body.modal-open{
 
     <aside class="details" id="detailsPanel" role="dialog" aria-modal="true" aria-label="Episode information" aria-hidden="true" tabindex="-1">
       <div class="details-top">
-        <button class="details-button details-nav-button" id="detailsPrev" aria-label="Previous episode" title="Previous story"><span class="details-nav-arrow">‹</span><span class="details-nav-label">Previous</span></button>
+        <button class="details-button details-nav-button" id="detailsPrev" aria-label="Previous episode" title="Previous story"><span class="details-nav-arrow">‹</span></button>
         <span id="detailPosition">1 / 1</span>
-        <button class="details-button details-nav-button" id="detailsNext" aria-label="Next episode" title="Next story"><span class="details-nav-label">Next</span><span class="details-nav-arrow">›</span></button>
-        <button class="inspector-toggle" id="inspectorToggle" type="button" aria-label="Close episode information" title="Close" aria-expanded="true">×</button>
+        <button class="details-button details-nav-button" id="detailsNext" aria-label="Next episode" title="Next story"><span class="details-nav-arrow">›</span></button>
+        <button class="inspector-toggle" id="inspectorToggle" type="button" aria-label="Close episode information" title="Close">×</button>
       </div>
 
       <div class="detail-hero" id="detailHero">
-        <div class="detail-hero-previous" id="detailHeroPrevious" aria-hidden="true"></div>
-        <span class="code" id="detailCode"></span>
-
         <div class="detail-heading">
           <h2 id="detailTitle"></h2>
-          <div class="detail-sub" id="detailSubtitle"></div>
         </div>
       </div>
 
-      <div class="detail-body">
+      <div class="detail-body essential-detail-body">
         <div class="quick-info">
           <div class="quick-box"><span>Air date</span><strong id="detailDate"></strong></div>
           <div class="quick-box"><span>Duration</span><strong id="detailDuration"></strong></div>
         </div>
 
-        <div class="detail-grid">
-          <div class="credits">
-            <div class="credit"><small>Written by</small><strong id="detailWriter"></strong></div>
-            <div class="credit"><small>Directed by</small><strong id="detailDirector"></strong></div>
-            <div class="credit"><small>Companions</small><strong id="detailCompanion"></strong></div>
-            <div class="credit"><small>Monsters</small><strong id="detailMonster"></strong></div>
+        <div class="essential-facts">
+          <div class="essential-fact">
+            <small>Written by</small>
+            <strong id="detailWriter"></strong>
           </div>
-
-          <div>
-            <div class="detail-section" style="margin-top:0;padding-top:0;border-top:0">
-              <h3>Synopsis</h3>
-              <p id="detailSynopsis"></p>
-            </div>
+          <div class="essential-fact">
+            <small>Setting</small>
+            <strong id="detailSetting">—</strong>
           </div>
-        </div>
-
-        <div class="detail-section">
-          <h3>Trivia</h3>
-          <ul id="detailTrivia"></ul>
-        </div>
-
-        <div class="detail-section">
-          <h3>Tags</h3>
-          <div class="tags" id="detailTags"></div>
+          <div class="essential-fact">
+            <small>Enemy</small>
+            <strong id="detailMonster"></strong>
+          </div>
         </div>
 
         <div class="episode-nav">
@@ -3143,24 +3286,25 @@ body.modal-open{
         },{once:true});
       }
 
-      el("detailCode").textContent = episode.code;
       el("detailTitle").textContent = episode.title;
-      el("detailSubtitle").textContent = `${episode.doctor} · ${episode.series} · ${episode.year}`;
       el("detailDate").textContent = episode.date;
       el("detailDuration").textContent = episode.duration;
       el("detailWriter").textContent = episode.writer;
-      el("detailDirector").textContent = episode.director;
-      el("detailCompanion").textContent = episode.companion;
-      el("detailMonster").textContent = episode.monster;
-      el("detailSynopsis").textContent = episode.synopsis;
-      el("detailTrivia").innerHTML = episode.trivia.map(item=>`<li>${item}</li>`).join("");
-      el("detailTags").innerHTML = episode.tags.map(tag=>`<span class="tag">${tag}</span>`).join("");
+      el("detailSetting").textContent = episode.setting || inferSetting(episode) || "—";
+      el("detailMonster").textContent = episode.monster || "—";
 
       const previous = episodes[(index-1+episodes.length)%episodes.length];
       const next = episodes[(index+1)%episodes.length];
 
       el("previousTitle").textContent = previous.title;
       el("nextTitle").textContent = next.title;
+    }
+
+    function inferSetting(episode){
+      const tags = Array.isArray(episode.tags) ? episode.tags : [];
+      const generic = /^(first story|tardis|1960s|1970s|1980s|classic|beginning|future|historical|regeneration|doctor debut|time war|christmas|multi-doctor|anniversary|missing episodes|sarah jane|ace|unit|daleks?|davros|autons?|cassandra|gelth|weeping angels?|the master|omega|krynoid|sycorax|sutekh)$/i;
+      const locationLike = tags.find(tag => !generic.test(String(tag).trim()) && !/^\d{4}$/.test(String(tag).trim()));
+      return locationLike || "";
     }
 
     function selectByOffset(offset){
