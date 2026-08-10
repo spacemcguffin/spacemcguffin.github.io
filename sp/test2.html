@@ -3872,6 +3872,41 @@ a {
   }
 }
 
+
+/* =========================================================
+   GENERATED SOUTH PARK BACKGROUND
+========================================================= */
+
+body {
+  background-color: #071225 !important;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(4, 10, 23, .12) 0%,
+      rgba(4, 10, 23, .34) 46%,
+      rgba(3, 8, 19, .68) 100%
+    ),
+    url("/sp/img/background.png") !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: center top, center top !important;
+  background-size: cover, cover !important;
+  background-attachment: fixed, fixed !important;
+}
+
+/* The generated full-page background now supplies the mountains, so suppress
+   the earlier vector mountain layer to avoid doubling the scenery. */
+.guide-hero::before {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  body {
+    background-attachment: scroll, scroll !important;
+    background-size: auto 100vh, auto 100vh !important;
+    background-position: center top, center top !important;
+  }
+}
+
 </style>
 </head>
 
