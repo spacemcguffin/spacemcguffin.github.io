@@ -4675,6 +4675,237 @@ body.modal-open .paper-back-to-top {
   }
 }
 
+
+/* =========================================================
+   RESTORED PAPER DETAILS
+   Sticky season paper, longer underlines, random ticker,
+   scrap-paper subtitle, and stronger back-to-top arrow.
+========================================================= */
+
+/* Longer cut-paper underline beneath SOUTH PARK. */
+.guide-logo::after {
+  width: min(315px, 78%) !important;
+  height: 9px !important;
+}
+
+/* Longer season heading underline. */
+.season-name::after {
+  width: 110px !important;
+  height: 5px !important;
+}
+
+/* Turn EPISODE GUIDE into a crooked paper scrap. */
+.guide-subtitle {
+  position: relative;
+  display: inline-block !important;
+  width: max-content;
+  margin-top: 17px !important;
+  padding: 7px 13px 6px !important;
+  border: 1px solid rgba(44,47,50,.18);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246,244,235,.98),
+      rgba(215,216,210,.96)
+    ) !important;
+  color: #252a31 !important;
+  font-size: .68rem !important;
+  font-weight: 820 !important;
+  line-height: 1 !important;
+  letter-spacing: .22em !important;
+  text-shadow: none !important;
+  clip-path: polygon(
+    2% 10%, 20% 2%, 43% 7%, 66% 1%, 98% 9%,
+    96% 88%, 79% 97%, 54% 93%, 29% 99%, 1% 90%
+  );
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.74);
+  transform: rotate(-1.1deg);
+}
+
+/* Random-episode paper ticker restored. */
+.guide-surprise-button {
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.guide-surprise-button::after {
+  content: attr(data-shuffle-label);
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 9px);
+  z-index: 30;
+  min-width: 78px;
+  padding: 6px 10px;
+  border: 1px solid rgba(40,43,48,.16);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246,244,235,.98),
+      rgba(214,215,209,.96)
+    );
+  color: #252a31;
+  font-size: .64rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: .06em;
+  text-align: center;
+  clip-path: polygon(
+    2% 9%, 26% 2%, 50% 7%, 75% 1%, 98% 10%,
+    96% 89%, 73% 97%, 48% 93%, 23% 99%, 1% 90%
+  );
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.74);
+  transform: translate(-50%,-5px) rotate(-1deg);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity .12s ease,
+    transform .12s ease;
+}
+
+.guide-surprise-button.show-shuffle-label::after {
+  opacity: 1;
+  transform: translate(-50%,1px) rotate(-1deg);
+}
+
+/* Sticky paper that follows the season currently passing the viewport. */
+.current-season-scrap {
+  position: fixed;
+  z-index: 820;
+  top: 18px;
+  right: 22px;
+  min-width: 132px;
+  padding: 10px 13px 9px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgba(40,43,48,.17);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246,244,235,.98),
+      rgba(214,215,209,.96)
+    );
+  color: #272c33;
+  clip-path: polygon(
+    2% 8%, 22% 2%, 43% 7%, 66% 1%, 98% 9%,
+    96% 90%, 76% 97%, 52% 93%, 27% 99%, 1% 91%
+  );
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.27),
+    inset 0 1px 0 rgba(255,255,255,.76);
+  transform: translateY(-8px) rotate(.65deg);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity .18s ease,
+    transform .18s ease;
+}
+
+.current-season-scrap::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 0;
+  width: 48%;
+  height: 3px;
+  background: #f0a044;
+}
+
+.current-season-scrap strong {
+  font-size: .70rem;
+  font-weight: 830;
+  line-height: 1;
+  letter-spacing: .055em;
+}
+
+.current-season-scrap span {
+  color: rgba(39,44,51,.64);
+  font-size: .55rem;
+  font-weight: 740;
+  line-height: 1.1;
+  letter-spacing: .075em;
+}
+
+.current-season-scrap.visible {
+  opacity: .96;
+  transform: translateY(0) rotate(.65deg);
+}
+
+body.modal-open .current-season-scrap {
+  opacity: 0 !important;
+}
+
+/* Make the existing back-to-top scrap and arrow substantially clearer. */
+.paper-back-to-top {
+  color: #111820 !important;
+  font-size: 1.48rem !important;
+  font-weight: 950 !important;
+  text-shadow: 0 1px 0 rgba(255,255,255,.7);
+  border-color: rgba(26,30,35,.29) !important;
+  box-shadow:
+    0 7px 20px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.82) !important;
+}
+
+.paper-back-to-top.visible {
+  opacity: 1 !important;
+}
+
+.paper-back-to-top:hover {
+  color: #000 !important;
+  filter: brightness(1.08) contrast(1.03);
+}
+
+@media (max-width: 760px) {
+  .guide-logo::after {
+    width: min(260px, 82%) !important;
+  }
+
+  .guide-subtitle {
+    padding: 6px 10px 5px !important;
+    font-size: .64rem !important;
+    letter-spacing: .19em !important;
+  }
+
+  .season-name::after {
+    width: 92px !important;
+  }
+
+  .current-season-scrap {
+    top: 10px;
+    right: 10px;
+    min-width: 112px;
+    padding: 8px 10px 7px;
+  }
+
+  .current-season-scrap strong {
+    font-size: .66rem;
+  }
+
+  .current-season-scrap span {
+    font-size: .52rem;
+  }
+
+  .guide-surprise-button::after {
+    min-width: 72px;
+    font-size: .61rem;
+  }
+
+  .paper-back-to-top {
+    font-size: 1.35rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .current-season-scrap,
+  .guide-surprise-button::after {
+    transition: none !important;
+  }
+}
+
 </style>
 </head>
 
@@ -4837,6 +5068,17 @@ body.modal-open .paper-back-to-top {
 
 </main>
 
+
+
+<div
+  class="current-season-scrap"
+  id="currentSeasonScrap"
+  aria-live="polite"
+  aria-hidden="true"
+>
+  <strong>SEASON</strong>
+  <span></span>
+</div>
 
 
 <button
@@ -6469,7 +6711,11 @@ function renderArchive() {
       && lastShownPosition < fullGroupItems.length - 1;
 
     return `
-      <section class="season-section ${isSpecialGroup ? "specials-section" : ""}">
+      <section
+        class="season-section ${isSpecialGroup ? "specials-section" : ""}"
+        data-section-label="${escapeHTML(heading)}"
+        data-section-count="${getFullGroupCount(group)}"
+      >
 
         <header class="season-header">
           <div>
@@ -6526,6 +6772,8 @@ function renderArchive() {
   }).join("");
 
   initImageSkeletons();
+
+  requestAnimationFrame(syncCurrentSeasonScrap);
 
 }
 
@@ -7237,10 +7485,8 @@ randomEpisodeButton
 
       const pool =
         candidates.length
-          ?
-          candidates
-          :
-          episodes;
+          ? candidates
+          : episodes;
 
       const selected =
         pool[
@@ -7256,6 +7502,11 @@ randomEpisodeButton
           selected
         );
 
+      const reduceMotion =
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
       randomEpisodeButton.classList.remove(
         "is-shuffling"
       );
@@ -7266,24 +7517,63 @@ randomEpisodeButton
         "is-shuffling"
       );
 
-      window.setTimeout(
-        () => {
-          randomEpisodeButton.classList.remove(
-            "is-shuffling"
-          );
+      if (reduceMotion) {
+        randomEpisodeButton.dataset.shuffleLabel = "";
+        randomEpisodeButton.classList.remove("show-shuffle-label");
+        openModal(index);
+        return;
+      }
 
-          openModal(
-            index
-          );
-        },
-        window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches
-          ?
-          0
-          :
-          230
+      randomEpisodeButton.classList.add(
+        "show-shuffle-label"
       );
+
+      let tick = 0;
+
+      const shuffleTimer =
+        window.setInterval(
+          () => {
+
+            const preview =
+              pool[
+                Math.floor(
+                  Math.random()
+                  *
+                  pool.length
+                )
+              ];
+
+            randomEpisodeButton.dataset.shuffleLabel =
+              episodeCode(preview);
+
+            tick += 1;
+
+            if (tick >= 6) {
+              window.clearInterval(
+                shuffleTimer
+              );
+
+              randomEpisodeButton.dataset.shuffleLabel =
+                episodeCode(selected);
+
+              window.setTimeout(
+                () => {
+                  randomEpisodeButton.classList.remove(
+                    "is-shuffling",
+                    "show-shuffle-label"
+                  );
+
+                  randomEpisodeButton.dataset.shuffleLabel = "";
+
+                  openModal(index);
+                },
+                150
+              );
+            }
+
+          },
+          58
+        );
 
     }
   );
@@ -7614,6 +7904,128 @@ searchInput?.addEventListener(
 
 
 /* =========================================================
+   CURRENT-SEASON STICKY PAPER
+========================================================= */
+
+const currentSeasonScrap =
+  document.getElementById("currentSeasonScrap");
+
+function syncCurrentSeasonScrap() {
+
+  if (
+    !currentSeasonScrap
+    ||
+    document.body.classList.contains("modal-open")
+  ) {
+    currentSeasonScrap?.classList.remove("visible");
+    return;
+  }
+
+  const sections =
+    [...archive.querySelectorAll(".season-section")];
+
+  if (!sections.length) {
+    currentSeasonScrap.classList.remove("visible");
+    currentSeasonScrap.setAttribute("aria-hidden", "true");
+    return;
+  }
+
+  const markerY =
+    Math.min(
+      180,
+      window.innerHeight * .28
+    );
+
+  let active = null;
+
+  sections.forEach(section => {
+    const rect =
+      section.getBoundingClientRect();
+
+    if (
+      rect.top <= markerY
+      &&
+      rect.bottom > markerY
+    ) {
+      active = section;
+    }
+  });
+
+  if (!active) {
+    const passed =
+      sections.filter(
+        section =>
+          section.getBoundingClientRect().top
+          <= markerY
+      );
+
+    active =
+      passed[passed.length - 1]
+      || null;
+  }
+
+  const archiveRect =
+    archive.getBoundingClientRect();
+
+  const shouldShow =
+    Boolean(active)
+    &&
+    archiveRect.top < markerY
+    &&
+    archiveRect.bottom > 90;
+
+  if (!shouldShow) {
+    currentSeasonScrap.classList.remove("visible");
+    currentSeasonScrap.setAttribute("aria-hidden", "true");
+    return;
+  }
+
+  const label =
+    active.dataset.sectionLabel
+    || "Season";
+
+  const count =
+    Number(active.dataset.sectionCount)
+    || 0;
+
+  const strong =
+    currentSeasonScrap.querySelector("strong");
+
+  const detail =
+    currentSeasonScrap.querySelector("span");
+
+  if (/^Season\s+\d+$/i.test(label)) {
+    const number =
+      label.match(/\d+/)?.[0] || "";
+
+    strong.textContent =
+      `SEASON ${number}`;
+  }
+  else {
+    strong.textContent =
+      label.toUpperCase();
+  }
+
+  detail.textContent =
+    `${count} ${count === 1 ? "EPISODE" : "EPISODES"}`;
+
+  currentSeasonScrap.classList.add("visible");
+  currentSeasonScrap.setAttribute("aria-hidden", "false");
+}
+
+window.addEventListener(
+  "scroll",
+  syncCurrentSeasonScrap,
+  { passive: true }
+);
+
+window.addEventListener(
+  "resize",
+  syncCurrentSeasonScrap
+);
+
+
+/* =========================================================
    BACK TO TOP
 ========================================================= */
 
@@ -7644,6 +8056,7 @@ paperBackToTop?.addEventListener(
 );
 
 syncBackToTop();
+syncCurrentSeasonScrap();
 
 
 /* =========================================================
