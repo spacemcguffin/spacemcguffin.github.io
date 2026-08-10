@@ -3626,6 +3626,67 @@ a {
   }
 }
 
+
+/* =========================================================
+   SEARCH ICON FIX
+========================================================= */
+
+.guide-search-wrap {
+  position: relative;
+}
+
+.guide-search-icon {
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  transform: translateY(-50%);
+  color: rgba(178, 188, 204, .82);
+  pointer-events: none;
+}
+
+.guide-search-icon svg {
+  display: block;
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.guide-search-input {
+  padding-left: 49px !important;
+}
+
+.guide-search-wrap:focus-within .guide-search-icon {
+  color: rgba(207, 216, 229, .94);
+}
+
+@media (max-width: 760px) {
+  .guide-search-icon {
+    left: 15px;
+    width: 19px;
+    height: 19px;
+  }
+
+  .guide-search-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .guide-search-input {
+    padding-left: 44px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -3667,7 +3728,12 @@ a {
         <div class="guide-count" id="browseCount" aria-live="polite"></div>
 
         <div class="guide-search-wrap">
-          <span class="guide-search-icon" aria-hidden="true">⌕</span>
+          <span class="guide-search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.75"></circle>
+              <path d="M16.1 16.1 21 21"></path>
+            </svg>
+          </span>
           <input
             type="search"
             class="search-input guide-search-input"
