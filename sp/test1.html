@@ -2676,6 +2676,311 @@ a {
   }
 }
 
+
+/* =========================================================
+   RECOVERY / TOOLTIPS / BOUNDARIES / MOBILE FILTERS
+========================================================= */
+
+.empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+}
+
+.empty-state-copy {
+  max-width: 520px;
+  color: var(--text-soft);
+  font-size: .84rem;
+  line-height: 1.5;
+}
+
+.empty-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.empty-state-action {
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  background: rgba(255,255,255,.06);
+  color: rgba(255,255,255,.75);
+  cursor: pointer;
+  font-size: .64rem;
+  font-weight: 700;
+  letter-spacing: .045em;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.empty-state-action:hover {
+  transform: translateY(-1px);
+  border-color: rgba(255,255,255,.28);
+  background: rgba(255,255,255,.11);
+  color: #fff;
+}
+
+.empty-state-action.primary {
+  border-color: rgba(83,170,255,.38);
+  background: rgba(47,126,206,.18);
+  color: #dcecff;
+}
+
+.season-tooltip {
+  position: fixed;
+  z-index: 400;
+  left: 0;
+  top: 0;
+  padding: 9px 13px;
+  border: 1px solid rgba(74,116,170,.45);
+  border-radius: 11px;
+  background: rgba(5,15,29,.96);
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);
+  color: #eef5ff;
+  font-size: .73rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -100%) translateY(-8px);
+  transition: opacity .14s ease, transform .14s ease;
+}
+
+.season-tooltip.visible {
+  opacity: 1;
+  transform: translate(-50%, -100%) translateY(-11px);
+}
+
+.season-tooltip::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-50%) rotate(45deg);
+  border-right: 1px solid rgba(74,116,170,.45);
+  border-bottom: 1px solid rgba(74,116,170,.45);
+  background: rgba(5,15,29,.96);
+}
+
+.season-name .season-continuation {
+  margin-left: 7px;
+  color: rgba(255,255,255,.36);
+  font-size: .55em;
+  font-weight: 650;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.season-boundary-note {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 13px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 11px;
+  background: rgba(255,255,255,.035);
+  color: rgba(255,255,255,.42);
+  font-size: .61rem;
+  font-weight: 650;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.season-boundary-note .boundary-arrow {
+  color: rgba(255,255,255,.7);
+}
+
+.grid-image {
+  background: rgba(255,255,255,.045);
+}
+
+.grid-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(
+      110deg,
+      rgba(255,255,255,.025) 25%,
+      rgba(255,255,255,.11) 42%,
+      rgba(255,255,255,.025) 60%
+    );
+  background-size: 220% 100%;
+  animation: imageSkeleton 1.25s linear infinite;
+  transition: opacity .25s ease;
+}
+
+.grid-image.loaded::before {
+  opacity: 0;
+  animation: none;
+}
+
+.grid-image img {
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+  transition:
+    opacity .28s ease,
+    transform .55s cubic-bezier(.2,.8,.2,1);
+}
+
+.grid-image.loaded img {
+  opacity: 1;
+}
+
+.grid-image::after,
+.grid-number {
+  z-index: 2;
+}
+
+@keyframes imageSkeleton {
+  from { background-position: 160% 0; }
+  to { background-position: -70% 0; }
+}
+
+.modal-cross-season {
+  display: none;
+  gap: 9px;
+  margin-top: 11px;
+}
+
+.modal-cross-season.visible {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+}
+
+.modal-cross-link {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 11px;
+  background: rgba(255,255,255,.035);
+  color: rgba(255,255,255,.5);
+  cursor: pointer;
+  text-align: left;
+  transition: background .2s ease, border-color .2s ease, color .2s ease;
+}
+
+.modal-cross-link:hover {
+  background: rgba(255,255,255,.075);
+  border-color: rgba(255,255,255,.17);
+  color: rgba(255,255,255,.85);
+}
+
+.modal-cross-link.next {
+  text-align: right;
+}
+
+.modal-cross-label {
+  display: block;
+  margin-bottom: 2px;
+  font-size: .51rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+}
+
+.modal-cross-title {
+  display: block;
+  font-size: .72rem;
+  font-weight: 650;
+}
+
+.mobile-filter-button {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .season-strip-heading {
+    align-items: center;
+  }
+
+  .season-strip-title strong {
+    display: none;
+  }
+
+  .mobile-filter-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 36px;
+    margin-left: auto;
+    padding: 0 11px;
+    border: 1px solid rgba(83,137,201,.22);
+    border-radius: 10px;
+    background: rgba(8,18,35,.55);
+    color: rgba(223,235,250,.78);
+    cursor: pointer;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+
+  .mobile-filter-button strong {
+    min-width: 24px;
+    padding: 3px 6px;
+    border-radius: 999px;
+    background: rgba(78,153,236,.16);
+    color: #9dccff;
+    text-align: center;
+    font-size: .57rem;
+  }
+
+  .who-season-rail {
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 18px;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+    transition: max-height .25s ease, opacity .2s ease, margin .25s ease, padding .25s ease;
+  }
+
+  .who-season-rail .season-button {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .season-strip:not(.mobile-open) .who-season-rail {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    pointer-events: none;
+  }
+
+  .season-strip.mobile-open .who-season-rail {
+    max-height: 80px;
+    opacity: 1;
+  }
+
+  .modal-cross-season.visible {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (hover: none) {
+  .season-tooltip {
+    display: none;
+  }
+}
+
 </style>
 </head>
 
@@ -2743,6 +3048,17 @@ a {
           <strong id="seasonStripStatus">All Seasons</strong>
         </div>
 
+        <button
+          type="button"
+          class="mobile-filter-button"
+          id="mobileFilterButton"
+          aria-expanded="false"
+          aria-controls="seasonRail"
+        >
+          <span>Filters</span>
+          <strong id="mobileFilterCount">All</strong>
+        </button>
+
         <div class="season-strip-arrows">
           <button type="button" id="seasonRailPrevious" aria-label="Scroll seasons left">‹</button>
           <button type="button" id="seasonRailNext" aria-label="Scroll seasons right">›</button>
@@ -2750,6 +3066,8 @@ a {
       </div>
 
       <div class="season-rail who-season-rail" id="seasonRail"></div>
+
+      <div class="season-tooltip" id="seasonTooltip" role="tooltip" aria-hidden="true"></div>
 
     </section>
 
@@ -2941,6 +3259,12 @@ a {
           </button>
 
         </div>
+
+        <div
+          class="modal-cross-season"
+          id="modalCrossSeason"
+          aria-label="Continue between seasons"
+        ></div>
 
       </div>
 
@@ -3515,6 +3839,103 @@ function getSeasonEpisodeIndexes(index = activeEpisodeIndex) {
 }
 
 
+
+function navigationGroupKey(item) {
+
+  if (!item) return "";
+
+  return itemType(item) === "special"
+    ? `special:${specialGroupKey(item)}`
+    : `season:${item.season}`;
+
+}
+
+
+function getGroupIndexesForItem(item) {
+
+  const key = navigationGroupKey(item);
+
+  return episodes
+    .map((episode, episodeIndex) => ({ episode, episodeIndex }))
+    .filter(entry => navigationGroupKey(entry.episode) === key)
+    .sort((a, b) => itemOrder(a.episode) - itemOrder(b.episode))
+    .map(entry => entry.episodeIndex);
+
+}
+
+
+function getCrossGroupNavigation(index = activeEpisodeIndex) {
+
+  const current = episodes[index];
+
+  if (!current) {
+    return {
+      previousIndex: null,
+      nextIndex: null
+    };
+  }
+
+  const currentGroup = navigationGroupKey(current);
+  const chronological = episodes
+    .map((episode, episodeIndex) => ({ episode, episodeIndex }))
+    .sort((a, b) => itemOrder(a.episode) - itemOrder(b.episode));
+
+  const groupItems = chronological.filter(
+    entry => navigationGroupKey(entry.episode) === currentGroup
+  );
+
+  if (!groupItems.length) {
+    return {
+      previousIndex: null,
+      nextIndex: null
+    };
+  }
+
+  const firstPosition = chronological.findIndex(
+    entry => entry.episodeIndex === groupItems[0].episodeIndex
+  );
+
+  const lastEpisodeIndex = groupItems[groupItems.length - 1].episodeIndex;
+  const lastPosition = chronological.findIndex(
+    entry => entry.episodeIndex === lastEpisodeIndex
+  );
+
+  let previousIndex = null;
+  let nextIndex = null;
+
+  for (let i = firstPosition - 1; i >= 0; i--) {
+    if (navigationGroupKey(chronological[i].episode) !== currentGroup) {
+      previousIndex = chronological[i].episodeIndex;
+      break;
+    }
+  }
+
+  for (let i = lastPosition + 1; i < chronological.length; i++) {
+    if (navigationGroupKey(chronological[i].episode) !== currentGroup) {
+      nextIndex = chronological[i].episodeIndex;
+      break;
+    }
+  }
+
+  return {
+    previousIndex,
+    nextIndex
+  };
+
+}
+
+
+function groupDisplayName(item) {
+
+  if (!item) return "";
+
+  return itemType(item) === "special"
+    ? "Specials"
+    : `Season ${item.season}`;
+
+}
+
+
 function getSeasonNavigation(index = activeEpisodeIndex) {
 
   const seasonIndexes = getSeasonEpisodeIndexes(index);
@@ -3706,13 +4127,13 @@ function renderSeasonRail() {
   entries.sort((a, b) => b.order - a.order);
 
   const railEntries = [
-    `<button class="season-button ${allActive ? "active" : ""}" data-season="all" style="--season-hue:210">ALL</button>`,
+    `<button class="season-button ${allActive ? "active" : ""}" data-season="all" data-tooltip="All Seasons" style="--season-hue:210">ALL</button>`,
     ...entries.map(entry => `
       <button
         class="season-button ${selectedSeasons.has(entry.value) ? "active" : ""}"
         data-season="${entry.value}"
         style="--season-hue:${entry.hue}"
-        title="${escapeHTML(entry.name)}"
+        data-tooltip="${escapeHTML(entry.name)}"
       >${entry.label}</button>
     `)
   ];
@@ -3728,6 +4149,27 @@ function renderSeasonRail() {
         .join(" + ");
       seasonStripStatus.textContent = labels;
     }
+  }
+
+  if (mobileFilterCount) {
+    mobileFilterCount.textContent =
+      selectedSeasons.size === 0
+        ? "All"
+        : String(selectedSeasons.size);
+  }
+
+  if (window.matchMedia("(max-width: 760px)").matches) {
+    requestAnimationFrame(() => {
+      const activeButton =
+        seasonRail.querySelector(".season-button.active")
+        || seasonRail.querySelector(".season-button");
+
+      activeButton?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+      });
+    });
   }
 
 }
@@ -4009,10 +4451,61 @@ function renderArchive() {
   renderPagination(filtered.length);
 
   if (!filtered.length) {
+
+    const hasSearch = Boolean(searchInput.value.trim());
+    const hasFilters = selectedSeasons.size > 0;
+
+    let recoveryText = "Nothing matches the current archive view.";
+
+    if (hasSearch && hasFilters) {
+      recoveryText =
+        `Nothing matched “${escapeHTML(searchInput.value.trim())}” within the selected season filters.`;
+    }
+    else if (hasSearch) {
+      recoveryText =
+        `Nothing matched “${escapeHTML(searchInput.value.trim())}”.`;
+    }
+    else if (hasFilters) {
+      recoveryText =
+        "There are no archived episodes matching those season filters.";
+    }
+
     archive.innerHTML = `
       <div class="empty-state">
         <strong>No episodes found</strong>
-        Try another search or filter.
+        <div class="empty-state-copy">${recoveryText}</div>
+
+        <div class="empty-state-actions">
+          ${hasSearch ? `
+            <button
+              type="button"
+              class="empty-state-action"
+              data-clear-search="true"
+            >
+              Clear search
+            </button>
+          ` : ""}
+
+          ${hasFilters ? `
+            <button
+              type="button"
+              class="empty-state-action"
+              data-clear-season-filters="true"
+            >
+              Clear season filters
+            </button>
+          ` : ""}
+
+          ${(hasSearch || hasFilters) ? `
+            <button
+              type="button"
+              class="empty-state-action primary"
+              data-clear-filters="true"
+            >
+              Reset all
+            </button>
+          ` : ""}
+        </div>
       </div>
     `;
     return;
@@ -4071,12 +4564,40 @@ function renderArchive() {
       ? specialSectionLabel(group.specialExample)
       : yearText;
 
+    const fullGroupItems = episodes
+      .filter(item => {
+        if (isSpecialGroup) {
+          return itemType(item) === "special"
+            && specialGroupKey(item) === specialGroupKey(group.specialExample);
+        }
+
+        return itemType(item) === "episode"
+          && item.season === group.season;
+      })
+      .sort((a, b) => itemOrder(a) - itemOrder(b));
+
+    const firstShownPosition =
+      fullGroupItems.findIndex(item => item === groupItems[0]);
+
+    const lastShownPosition =
+      fullGroupItems.findIndex(item => item === groupItems[groupItems.length - 1]);
+
+    const continuesFromPreviousPage =
+      firstShownPosition > 0;
+
+    const continuesToNextPage =
+      lastShownPosition >= 0
+      && lastShownPosition < fullGroupItems.length - 1;
+
     return `
       <section class="season-section ${isSpecialGroup ? "specials-section" : ""}">
 
         <header class="season-header">
           <div>
-            <h2 class="season-name">${heading}</h2>
+            <h2 class="season-name">
+              ${heading}
+              ${continuesFromPreviousPage ? `<span class="season-continuation">continued</span>` : ""}
+            </h2>
             ${subheading ? `<div class="season-year">${escapeHTML(subheading)}</div>` : ""}
             ${isSpecialGroup && yearText ? `<div class="season-year">${escapeHTML(yearText)}</div>` : ""}
           </div>
@@ -4113,13 +4634,46 @@ function renderArchive() {
           }).join("")}
         </div>
 
+        ${continuesToNextPage ? `
+          <div class="season-boundary-note">
+            <span>${escapeHTML(heading)} continues on the next page</span>
+            <span class="boundary-arrow" aria-hidden="true">→</span>
+          </div>
+        ` : ""}
+
       </section>
     `;
 
   }).join("");
 
+  initImageSkeletons();
+
 }
 
+
+
+
+function initImageSkeletons() {
+
+  archive.querySelectorAll(".grid-image img").forEach(image => {
+
+    const frame = image.closest(".grid-image");
+
+    const markLoaded = () => {
+      frame?.classList.add("loaded");
+    };
+
+    if (image.complete && image.naturalWidth > 0) {
+      markLoaded();
+      return;
+    }
+
+    image.addEventListener("load", markLoaded, { once: true });
+    image.addEventListener("error", markLoaded, { once: true });
+
+  });
+
+}
 
 
 /* =========================================================
@@ -4223,6 +4777,26 @@ const nextTitle =
     "nextTitle"
   );
 
+const mobileFilterButton =
+  document.getElementById(
+    "mobileFilterButton"
+  );
+
+const mobileFilterCount =
+  document.getElementById(
+    "mobileFilterCount"
+  );
+
+const seasonTooltip =
+  document.getElementById(
+    "seasonTooltip"
+  );
+
+const modalCrossSeason =
+  document.getElementById(
+    "modalCrossSeason"
+  );
+
 
 /* =========================================================
    MODAL
@@ -4321,6 +4895,63 @@ function updateModal(
       delete button.dataset.targetIndex;
     }
   });
+
+  const crossGroup =
+    getCrossGroupNavigation(activeEpisodeIndex);
+
+  const crossLinks = [];
+
+  if (!hasPrevious && crossGroup.previousIndex !== null) {
+    const previousGroupEpisode =
+      episodes[crossGroup.previousIndex];
+
+    crossLinks.push(`
+      <button
+        type="button"
+        class="modal-cross-link previous"
+        data-cross-target-index="${crossGroup.previousIndex}"
+        data-cross-direction="previous"
+      >
+        <span aria-hidden="true">←</span>
+        <span>
+          <span class="modal-cross-label">Before this season</span>
+          <span class="modal-cross-title">
+            Back to ${escapeHTML(groupDisplayName(previousGroupEpisode))}
+          </span>
+        </span>
+      </button>
+    `);
+  }
+
+  if (!hasNext && crossGroup.nextIndex !== null) {
+    const nextGroupEpisode =
+      episodes[crossGroup.nextIndex];
+
+    crossLinks.push(`
+      <button
+        type="button"
+        class="modal-cross-link next"
+        data-cross-target-index="${crossGroup.nextIndex}"
+        data-cross-direction="next"
+      >
+        <span>
+          <span class="modal-cross-label">Continue archive</span>
+          <span class="modal-cross-title">
+            Continue to ${escapeHTML(groupDisplayName(nextGroupEpisode))}
+          </span>
+        </span>
+        <span aria-hidden="true">→</span>
+      </button>
+    `);
+  }
+
+  modalCrossSeason.innerHTML =
+    crossLinks.join("");
+
+  modalCrossSeason.classList.toggle(
+    "visible",
+    crossLinks.length > 0
+  );
 
   modalScroll.scrollTop = 0;
 
@@ -4492,6 +5123,23 @@ document.addEventListener(
     }
 
 
+    const clearSeasonFilters =
+      event.target.closest(
+        "[data-clear-season-filters]"
+      );
+
+    if (clearSeasonFilters) {
+      selectedSeasons.clear();
+
+      currentPage = 1;
+      renderSeasonRail();
+      renderActiveFilters();
+      renderArchive();
+      syncURL();
+      return;
+    }
+
+
     const clearFilters =
       event.target.closest(
         "[data-clear-filters]"
@@ -4532,6 +5180,28 @@ document.addEventListener(
       }
       return;
     }
+
+    const crossLink =
+      event.target.closest(
+        "[data-cross-target-index]"
+      );
+
+    if (crossLink) {
+      const targetIndex =
+        Number(crossLink.dataset.crossTargetIndex);
+
+      if (!Number.isNaN(targetIndex)) {
+        animateModalChange(
+          targetIndex,
+          crossLink.dataset.crossDirection === "previous"
+            ? "previous"
+            : "next"
+        );
+      }
+
+      return;
+    }
+
 
     const card =
       event.target.closest(
@@ -4899,6 +5569,111 @@ modalScroll.addEventListener(
   },
   { passive: true }
 );
+
+
+
+/* =========================================================
+   SEASON TOOLTIP + MOBILE FILTER DRAWER
+========================================================= */
+
+function showSeasonTooltip(button) {
+
+  if (!seasonTooltip || !button?.dataset.tooltip) return;
+
+  const rect = button.getBoundingClientRect();
+
+  seasonTooltip.textContent =
+    button.dataset.tooltip;
+
+  seasonTooltip.style.left =
+    `${rect.left + rect.width / 2}px`;
+
+  seasonTooltip.style.top =
+    `${rect.top}px`;
+
+  seasonTooltip.classList.add("visible");
+  seasonTooltip.setAttribute("aria-hidden", "false");
+
+}
+
+
+function hideSeasonTooltip() {
+
+  if (!seasonTooltip) return;
+
+  seasonTooltip.classList.remove("visible");
+  seasonTooltip.setAttribute("aria-hidden", "true");
+
+}
+
+
+seasonRail.addEventListener("pointerover", event => {
+
+  const button =
+    event.target.closest(".season-button[data-tooltip]");
+
+  if (button) showSeasonTooltip(button);
+
+});
+
+
+seasonRail.addEventListener("pointerout", event => {
+
+  const button =
+    event.target.closest(".season-button[data-tooltip]");
+
+  if (button) hideSeasonTooltip();
+
+});
+
+
+seasonRail.addEventListener("focusin", event => {
+
+  const button =
+    event.target.closest(".season-button[data-tooltip]");
+
+  if (button) showSeasonTooltip(button);
+
+});
+
+
+seasonRail.addEventListener("focusout", hideSeasonTooltip);
+
+
+window.addEventListener("scroll", hideSeasonTooltip, { passive: true });
+window.addEventListener("resize", hideSeasonTooltip);
+
+
+mobileFilterButton?.addEventListener("click", () => {
+
+  const strip =
+    mobileFilterButton.closest(".season-strip");
+
+  const open =
+    !strip.classList.contains("mobile-open");
+
+  strip.classList.toggle("mobile-open", open);
+
+  mobileFilterButton.setAttribute(
+    "aria-expanded",
+    String(open)
+  );
+
+  if (open) {
+    requestAnimationFrame(() => {
+      const activeButton =
+        seasonRail.querySelector(".season-button.active")
+        || seasonRail.querySelector(".season-button");
+
+      activeButton?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+      });
+    });
+  }
+
+});
 
 
 /* =========================================================
