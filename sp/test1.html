@@ -3440,101 +3440,6 @@ a {
 
 
 /* =========================================================
-   MOBILE MODAL TOPBAR FIX
-========================================================= */
-
-/* Keep desktop behavior intact, but make the counter visually
-   centered relative to the entire modal rather than the grid columns. */
-.modal-topbar {
-  position: relative !important;
-}
-
-/* The counter no longer depends on unequal left/right controls. */
-.modal-topbar .modal-counter {
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  z-index: 2;
-  width: max-content;
-  max-width: calc(100% - 180px);
-  margin: 0 !important;
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-/* Preserve left and right control groups with predictable widths. */
-.modal-topbar > .modal-top-arrow:first-child {
-  justify-self: start;
-  position: relative;
-  z-index: 3;
-}
-
-.modal-topbar-actions {
-  justify-self: end;
-  position: relative;
-  z-index: 3;
-}
-
-@media (max-width: 760px) {
-  .modal-topbar {
-    flex-basis: 50px !important;
-    min-height: 50px;
-    padding: 0 10px !important;
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .modal-topbar > .modal-top-arrow:first-child,
-  .modal-topbar-actions {
-    flex: 0 0 auto;
-  }
-
-  .modal-topbar-actions {
-    gap: 6px !important;
-  }
-
-  .modal-topbar .modal-counter {
-    max-width: calc(100% - 150px);
-    font-size: .61rem !important;
-    letter-spacing: .07em !important;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .modal-top-arrow,
-  .modal-topbar .modal-close {
-    width: 30px !important;
-    height: 30px !important;
-    font-size: .9rem !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .modal-topbar {
-    padding-inline: 8px !important;
-  }
-
-  .modal-topbar-actions {
-    gap: 5px !important;
-  }
-
-  .modal-topbar .modal-counter {
-    max-width: calc(100% - 138px);
-    font-size: .58rem !important;
-    letter-spacing: .055em !important;
-  }
-
-  .modal-top-arrow,
-  .modal-topbar .modal-close {
-    width: 28px !important;
-    height: 28px !important;
-  }
-}
-
-
-/* =========================================================
    SEARCH / CLEAR ICON REFINEMENT
 ========================================================= */
 
@@ -4198,67 +4103,6 @@ body {
 .grid-image {
   border-radius: 4px !important;
   clip-path: polygon(.7% 1.1%,99% .3%,99.6% 98.2%,98.4% 99.3%,.5% 98.8%,.2% 2.1%) !important;
-}
-
-/* =========================================================
-   MODAL TOPBAR — RIGHT ARROW + CLOSE FLUSH RIGHT
-========================================================= */
-
-.modal-topbar {
-  position: relative !important;
-  display: grid !important;
-  grid-template-columns: 42px minmax(0, 1fr) auto !important;
-  align-items: center !important;
-  min-height: 58px !important;
-  padding: 8px 16px !important;
-  gap: 8px !important;
-}
-
-.modal-topbar > #modalTopPrevious {
-  grid-column: 1 !important;
-  justify-self: start !important;
-  position: static !important;
-  transform: none !important;
-}
-
-.modal-topbar .modal-counter {
-  position: absolute !important;
-  left: 50% !important;
-  top: 50% !important;
-  transform: translate(-50%,-50%) !important;
-  margin: 0 !important;
-  width: max-content;
-  pointer-events: none;
-}
-
-.modal-topbar-actions {
-  grid-column: 3 !important;
-  justify-self: end !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  gap: 9px !important;
-  margin-left: auto !important;
-}
-
-.modal-topbar-actions #modalTopNext,
-.modal-topbar-actions #modalClose {
-  position: static !important;
-  inset: auto !important;
-  transform: none !important;
-  margin: 0 !important;
-  flex: 0 0 auto !important;
-}
-
-.modal-topbar .modal-top-arrow,
-.modal-topbar .modal-close {
-  width: 36px !important;
-  height: 36px !important;
-  min-width: 36px !important;
-  display: grid !important;
-  place-items: center !important;
-  padding: 0 !important;
-  line-height: 1 !important;
 }
 
 /* =========================================================
@@ -5533,6 +5377,136 @@ body.modal-open .current-season-scrap {
   .modal-nav.next .nav-copy,
   .modal-nav.next > span:not(.nav-circle) {
     order: 1 !important;
+  }
+}
+
+
+/* =========================================================
+   MODAL TOPBAR — DEFINITIVE DESKTOP + MOBILE LAYOUT
+========================================================= */
+
+.modal-topbar {
+  position: relative !important;
+  z-index: 20 !important;
+  flex: 0 0 58px !important;
+  min-height: 58px !important;
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 16px !important;
+  border-bottom: 1px solid rgba(255,255,255,0.09) !important;
+  background: rgba(18,22,40,0.58) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
+}
+
+.modal-topbar > #modalTopPrevious {
+  grid-column: 1 !important;
+  justify-self: start !important;
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+.modal-topbar .modal-counter {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2 !important;
+  width: max-content !important;
+  max-width: calc(100% - 190px) !important;
+  margin: 0 !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.modal-topbar-actions {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 9px !important;
+  margin-left: auto !important;
+  position: static !important;
+}
+
+.modal-topbar-actions #modalTopNext,
+.modal-topbar-actions #modalClose {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+.modal-topbar .modal-top-arrow,
+.modal-topbar .modal-close {
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* Mobile: keep the same structure, simply make it more compact. */
+@media (max-width: 760px) {
+  .modal-topbar {
+    flex: 0 0 50px !important;
+    min-height: 50px !important;
+    grid-template-columns: 32px minmax(0, 1fr) auto !important;
+    gap: 6px !important;
+    padding: 7px 10px !important;
+  }
+
+  .modal-topbar .modal-counter {
+    max-width: calc(100% - 148px) !important;
+    font-size: .61rem !important;
+    letter-spacing: .07em !important;
+  }
+
+  .modal-topbar-actions {
+    gap: 6px !important;
+  }
+
+  .modal-topbar .modal-top-arrow,
+  .modal-topbar .modal-close {
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+    font-size: .9rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .modal-topbar {
+    grid-template-columns: 30px minmax(0, 1fr) auto !important;
+    padding-inline: 8px !important;
+    gap: 5px !important;
+  }
+
+  .modal-topbar .modal-counter {
+    max-width: calc(100% - 136px) !important;
+    font-size: .58rem !important;
+    letter-spacing: .055em !important;
+  }
+
+  .modal-topbar-actions {
+    gap: 5px !important;
+  }
+
+  .modal-topbar .modal-top-arrow,
+  .modal-topbar .modal-close {
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
   }
 }
 
