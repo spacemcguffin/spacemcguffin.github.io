@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>Doctor Who — Episode Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#06101d;--bg2:#0a1626;--glass:rgba(15,30,49,.58);--glass2:rgba(11,24,41,.82);
+  --line:rgba(184,215,255,.14);--line2:rgba(184,215,255,.25);--text:#f7fbff;--muted:#9fb0c7;
+  --blue:#68b7ff;--cyan:#a7edff;--green:#7ce1b3;--red:#ff8997;--shadow:0 28px 90px rgba(0,0,0,.42);
+  --r:24px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--text);font-family:"Google Sans Flex",system-ui,sans-serif;background:
+ radial-gradient(circle at 18% -10%,rgba(87,167,255,.24),transparent 30%),
+ radial-gradient(circle at 82% 0%,rgba(116,93,255,.15),transparent 24%),
+ linear-gradient(180deg,#07111f 0%,#07101b 48%,#050b13 100%);}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+ linear-gradient(rgba(255,255,255,.015),rgba(255,255,255,0)),
+ radial-gradient(circle at 50% 0%,rgba(255,255,255,.06),transparent 36%);}
+button,input{font:inherit} button{color:inherit}
+.app{width:min(1560px,100%);margin:auto;padding:18px 18px 70px}
+.glass{border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),var(--glass);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 60px rgba(0,0,0,.18);backdrop-filter:blur(24px) saturate(135%);-webkit-backdrop-filter:blur(24px) saturate(135%)}
+.hero{position:relative;overflow:hidden;border-radius:32px;min-height:300px;padding:30px;background:
+ linear-gradient(90deg,rgba(6,15,28,.94),rgba(6,15,28,.67) 48%,rgba(6,15,28,.2)),
+ url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2000&q=85') center/cover;box-shadow:var(--shadow)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 20%);pointer-events:none}
+.brand{position:relative;z-index:1;max-width:720px}
+.kicker{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#c8ddf6;margin-bottom:14px}
+h1{margin:0;font-size:clamp(3rem,7vw,7rem);line-height:.84;letter-spacing:-.065em;font-weight:850;text-transform:uppercase}
+.hero p{max-width:610px;margin:20px 0 0;color:#d5dfec;font-size:.98rem;line-height:1.55}
+.hero-actions{position:absolute;z-index:2;right:24px;bottom:24px;display:flex;gap:10px}
+.gloss-btn,.icon-btn{border:1px solid rgba(214,235,255,.22);background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.05)),rgba(17,43,69,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 10px 28px rgba(0,0,0,.22);cursor:pointer;transition:.2s ease}
+.gloss-btn:hover,.icon-btn:hover{transform:translateY(-1px);border-color:rgba(139,201,255,.52);background:linear-gradient(180deg,rgba(255,255,255,.2),rgba(255,255,255,.07)),rgba(21,55,89,.78)}
+.gloss-btn{min-height:46px;padding:0 16px;border-radius:14px;font-weight:720}
+.controls{margin-top:18px;display:grid;gap:14px}
+.toolbar{display:grid;grid-template-columns:minmax(250px,1fr) auto;gap:12px;padding:12px;border-radius:22px}
+.search-wrap{position:relative}.search-wrap::before{content:"⌕";position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#a9bed8;font-size:1.2rem}
+#searchInput{width:100%;height:50px;padding:0 16px 0 45px;border:1px solid rgba(196,224,255,.14);border-radius:15px;outline:none;color:#fff;background:rgba(4,14,27,.56);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+#searchInput:focus{border-color:rgba(104,183,255,.58);box-shadow:0 0 0 4px rgba(104,183,255,.09)}
+.count{min-width:126px;display:flex;align-items:center;gap:9px;padding:0 15px;border-radius:15px;background:rgba(4,14,27,.48);border:1px solid rgba(196,224,255,.11)}
+.count strong{font-size:1.7rem;color:#bde6ff}.count span{color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em}
+.filter-panel{padding:16px;border-radius:24px}.filter-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:12px}.filter-head span{display:block;color:#88a0bc;font-size:.66rem;text-transform:uppercase;letter-spacing:.12em}.filter-head strong{font-size:.95rem}.tiny-btn{border:0;background:transparent;color:#8cc9ff;cursor:pointer;font-size:.72rem}
+.doctor-row,.era-row,.season-row,.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 1px}.doctor-row::-webkit-scrollbar,.season-row::-webkit-scrollbar{display:none}
+.pill{flex:0 0 auto;border:1px solid rgba(183,215,255,.13);border-radius:999px;min-height:42px;padding:0 14px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025)),rgba(9,23,39,.62);cursor:pointer;color:#c5d2e2;box-shadow:inset 0 1px 0 rgba(255,255,255,.06);transition:.18s}
+.pill:hover{border-color:rgba(132,194,255,.35);color:#fff}.pill.active{color:#fff;border-color:rgba(105,183,255,.52);background:linear-gradient(180deg,rgba(115,190,255,.22),rgba(62,122,189,.12)),rgba(10,26,45,.82);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 1px rgba(98,169,244,.06)}
+.era-row{margin-top:14px}.era-row .pill{min-width:100px}.season-row{margin-top:9px;flex-wrap:wrap;overflow:visible}
+.resultbar{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:2px 4px}.resultcopy{color:#9cb0c8;font-size:.78rem}.view-toggle{display:flex;gap:7px}.icon-btn{width:38px;height:38px;border-radius:12px}.icon-btn.active{border-color:rgba(105,183,255,.5);color:#b9e6ff;background:rgba(71,135,207,.18)}
+.active-chips{min-height:32px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:rgba(75,131,190,.13);border:1px solid rgba(136,192,248,.18);color:#bfd0e2;font-size:.7rem}.chip button{border:0;background:none;color:#a8c6e4;cursor:pointer;padding:0}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:14px}.grid.list{grid-template-columns:1fr}
+.card{position:relative;overflow:hidden;border-radius:22px;border:1px solid rgba(185,215,248,.13);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),rgba(9,21,36,.72);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 14px 40px rgba(0,0,0,.2);cursor:pointer;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}.card:hover{transform:translateY(-4px);border-color:rgba(116,186,255,.37);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 22px 54px rgba(0,0,0,.28)}
+.card-image{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0a1524}.card-image img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s cubic-bezier(.2,.75,.2,1)}.card:hover img{transform:scale(1.045)}.card-image::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 47%,rgba(4,10,18,.78) 100%)}
+.code{position:absolute;left:10px;top:10px;z-index:2;padding:6px 9px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(4,12,22,.55);backdrop-filter:blur(12px);font-size:.68rem;font-weight:760}
+.card-body{padding:14px 15px 16px}.card-title{margin:0;font-size:1.02rem;line-height:1.16;letter-spacing:-.01em}.card-meta{margin-top:7px;color:#93a7bf;font-size:.72rem}.card-companion{margin-top:9px;color:#bdcad9;font-size:.75rem}
+.grid.list .card{display:grid;grid-template-columns:260px 1fr}.grid.list .card-image{aspect-ratio:auto;min-height:150px}.empty{display:none;padding:50px 20px;text-align:center;color:#93a7bf}.empty.show{display:block}
+.backdrop{position:fixed;inset:0;z-index:100;background:rgba(1,6,12,.72);backdrop-filter:blur(16px) saturate(.8);opacity:0;visibility:hidden;pointer-events:none;transition:.25s}.backdrop.open{opacity:1;visibility:visible;pointer-events:auto}
+.modal{position:fixed;left:50%;top:50%;z-index:110;width:min(860px,calc(100vw - 38px));max-height:min(88vh,850px);overflow:auto;border:1px solid rgba(195,225,255,.2);border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.018)),rgba(7,18,31,.9);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 45px 120px rgba(0,0,0,.55),0 0 55px rgba(64,139,216,.1);backdrop-filter:blur(28px) saturate(140%);transform:translate(-50%,-46%) scale(.97);opacity:0;visibility:hidden;pointer-events:none;transition:.28s cubic-bezier(.2,.75,.2,1)}.modal.open{transform:translate(-50%,-50%) scale(1);opacity:1;visibility:visible;pointer-events:auto}
+.modal-top{position:sticky;top:0;z-index:8;height:50px;display:grid;grid-template-columns:44px 1fr 44px 44px;align-items:center;padding:0 10px;border-bottom:1px solid rgba(190,221,255,.1);background:rgba(7,18,31,.7);backdrop-filter:blur(20px)}
+.modal-top span{text-align:center;color:#aebed0;font-size:.74rem}.modal-nav,.modal-close{border:0;background:transparent;cursor:pointer;color:#c9d7e7}.modal-nav{font-size:1.65rem}.modal-close{font-size:1.3rem}
+.modal-hero{position:relative;min-height:390px;display:flex;align-items:flex-end;padding:26px;overflow:hidden;background:#0a1420}.modal-hero::before{content:"";position:absolute;inset:0;background-image:var(--modal-image);background-size:cover;background-position:center;transition:opacity .25s,transform .5s;animation:heroReveal .55s cubic-bezier(.2,.75,.2,1)}@keyframes heroReveal{from{opacity:.45;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}.modal-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,10,18,0) 22%,rgba(4,10,18,.16) 50%,rgba(4,10,18,.86) 100%)}
+.story-marker{position:absolute;left:22px;top:20px;z-index:2;padding:7px 10px;border:1px solid rgba(255,255,255,.17);border-radius:999px;background:rgba(4,12,22,.46);backdrop-filter:blur(13px);font-size:.67rem;color:#d9e7f6}
+.modal-heading{position:relative;z-index:2;max-width:760px}.modal-heading h2{margin:0;font-size:clamp(2.2rem,5vw,4.5rem);line-height:.9;letter-spacing:-.045em}.modal-context{margin-top:10px;color:#b7d9f4;font-size:.8rem}
+.modal-body{padding:16px 20px 22px}.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.fact{min-height:78px;padding:12px 13px;border-radius:16px;border:1px solid rgba(187,217,250,.12);background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.018)),rgba(8,22,37,.62);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}.fact small{display:flex;align-items:center;gap:6px;color:#8ea5bf;font-size:.62rem;text-transform:uppercase;letter-spacing:.08em}.fact strong{display:block;margin-top:8px;font-size:.84rem;font-weight:520}.fact.writer,.fact.date{border-color:rgba(124,225,179,.17)}.fact.writer small,.fact.date small{color:#8ddfb9}.fact.setting{border-color:rgba(104,183,255,.22)}.fact.setting small{color:#92ccff}.fact.enemy{border-color:rgba(255,137,151,.2)}.fact.enemy small{color:#ff9eaa}
+.episode-nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.nav-card{min-height:66px;padding:11px 13px;border:1px solid rgba(186,217,250,.12);border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015)),rgba(7,20,34,.62);cursor:pointer;text-align:left}.nav-card small{display:block;color:#7f95ad;font-size:.58rem;text-transform:uppercase}.nav-card strong{display:block;margin-top:5px;font-size:.78rem}
+@media(max-width:1200px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){.app{padding:10px 10px 40px}.hero{min-height:270px;padding:22px;border-radius:24px}.hero-actions{position:relative;right:auto;bottom:auto;margin-top:24px}.toolbar{grid-template-columns:1fr}.count{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.facts{grid-template-columns:1fr 1fr}.modal{width:calc(100vw - 18px);max-height:94vh;border-radius:24px}.modal-hero{min-height:38vh}.modal-body{padding:12px 14px 16px}}
+@media(max-width:560px){h1{font-size:3.25rem}.hero p{font-size:.86rem}.grid{grid-template-columns:1fr}.grid.list .card{grid-template-columns:1fr}.grid.list .card-image{aspect-ratio:16/9;min-height:auto}.facts{grid-template-columns:1fr 1fr}.modal-heading h2{font-size:2.4rem}.modal-hero{min-height:40vh;padding:18px}.story-marker{left:16px;top:14px}.episode-nav{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <div class="brand"><div class="kicker">lewis.lc · Doctor Who archive</div><h1>Doctor Who</h1><p>A cleaner, modern episode guide for adventures across time and space. Search stories, filter by Doctor or season, and open a story for its essential details.</p></div>
+    <div class="hero-actions"><button class="gloss-btn" id="randomButton">✦ Surprise me</button></div>
+  </header>
+
+  <section class="controls">
+    <div class="toolbar glass"><div class="search-wrap"><input id="searchInput" type="search" placeholder="Search stories, Doctors, companions, enemies…"></div><div class="count"><strong id="episodeTotal">0</strong><span>stories<br>found</span></div></div>
+
+    <div class="filter-panel glass">
+      <div class="filter-head"><div><span>Doctors</span><strong id="activeDoctorLabel">All Doctors</strong></div><button class="tiny-btn" id="clearAll">Clear all</button></div>
+      <div class="doctor-row" id="doctorList"></div>
+      <div class="era-row" id="eraList"><button class="pill" data-era="classic">Classic</button><button class="pill" data-era="modern">Modern</button></div>
+      <div class="season-row" id="seasonList"></div>
+    </div>
+
+    <div class="active-chips" id="activeChips"></div>
+    <div class="resultbar"><div class="resultcopy" id="resultCopy">Showing all stories</div><div class="view-toggle"><button class="icon-btn active" id="gridView" title="Grid view">▦</button><button class="icon-btn" id="listView" title="List view">☷</button></div></div>
+  </section>
+
+  <main class="grid" id="episodeGrid"></main>
+  <div class="empty" id="emptyState">No stories match those filters.</div>
+</div>
+
+<button class="backdrop" id="detailsBackdrop" aria-label="Close episode information"></button>
+<aside class="modal" id="detailsPanel" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1">
+  <div class="modal-top"><button class="modal-nav" id="detailsPrev" aria-label="Previous episode">‹</button><span id="detailPosition">1 / 1</span><button class="modal-nav" id="detailsNext" aria-label="Next episode">›</button><button class="modal-close" id="inspectorToggle" aria-label="Close">×</button></div>
+  <div class="modal-hero" id="detailHero"><div class="story-marker" id="detailStoryMarker"></div><div class="modal-heading"><h2 id="detailTitle"></h2><div class="modal-context" id="detailContext"></div></div></div>
+  <div class="modal-body">
+    <div class="facts">
+      <div class="fact writer"><small>✎ Written by</small><strong id="detailWriter"></strong></div>
+      <div class="fact date"><small>◷ Air date</small><strong id="detailDate"></strong></div>
+      <div class="fact setting"><small>⌖ Setting</small><strong id="detailSetting">—</strong></div>
+      <div class="fact enemy"><small>◉ Enemy</small><strong id="detailMonster">—</strong></div>
+    </div>
+    <div class="episode-nav"><button class="nav-card" id="previousEpisode"><small>Previous episode</small><strong id="previousTitle">—</strong></button><button class="nav-card" id="nextEpisode"><small>Next episode</small><strong id="nextTitle">—</strong></button></div>
+  </div>
+</aside>
+<script>
+const episodes = [
+      {
+        id:"unearthly-child", code:"S1.1", title:"An Unearthly Child", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1963, date:"23 November 1963",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        monster:"Cavemen",
+        writer:"Anthony Coburn", director:"Waris Hussein",
+        image:"/who/img/1/unearthly.png",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The first televised Doctor Who story.","Introduced the Doctor, Susan, Ian, Barbara and the TARDIS."],
+        tags:["First story","TARDIS","1960s"],
+        setting:["100,000 BC"]        
+      },
+      {
+        id:"the-daleks", code:"S1.2", title:"The Daleks", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1963, date:"21 December 1963",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        monster:"Daleks",
+        writer:"Anthony Coburn", director:"Christopher Barry and Richard Martin",
+        image:"/who/img/1/daleks.png",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
+        tags:["Daleks","Skaro","1960s"],
+        setting:["Skaro"]              
+      },
+        {
+        id:"the-edge-of-destruction", code:"S1.3", title:"The Edge of Destruction", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1964, date:"8 February 1964",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        writer:"Anthony Coburn", director:"Richard Martin and Frank Cox",
+        image:"/who/img/1/edgeofdestruction.png",
+        synopsis:"As they slowly recover from the shock of being thrown to the TARDIS floor, the Doctor, Susan, Ian and Barbara all start acting strangely.",
+        trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
+        tags:["TARDIS","1960s"],
+        setting:["TARDIS"]            
+      },
+        {
+        id:"marco-polo", code:"S1.4", title:"Marco Polo", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1964, date:"22 February 1964",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        monster:"Tegana",
+        writer:"Anthony Coburn", director:"Waris Hussein and John Crockett",
+        image:"/who/img/1/marcopolo.png",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
+        tags:["Historical","Marco Polo","Missing episodes"],
+        setting:["Cathay, 1289"]            
+      },
+        {
+        id:"keys-of-marinus", code:"S1.5", title:"The Keys of Marinus", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1964, date:"11 April 1964",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        monster:"Yartek",
+        writer:"Terry Nation", director:"John Gorrie",
+        image:"/who/img/1/marinus.png",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
+        tags:["Voord","quest"],
+        setting:["Marinus"]            
+      },
+        {
+        id:"aztecs", code:"S1.6", title:"The Aztecs", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1964, date:"23 May 1964",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        monster:"Tlotoxl",
+        writer:"John Lucarotti", director:"John Crockett",
+        image:"/who/img/1/aztecs.png",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
+        tags:["aztecs","historical"],
+        setting:["Tenochtitlan"]            
+      },
+        {
+        id:"sensorites", code:"S1.7", title:"The Sensorites", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1964, date:"20 June 1964",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        monster:"City Administrator",
+        writer:"Peter R. Newman", director:"Mervyn Pinfield and Frank Cox",
+        image:"/who/img/1/sensorites.png",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
+        tags:["sensorites"],
+        setting:["Sense Sphere"]            
+      },
+        {
+        id:"reign-of-terror", code:"S1.8", title:"The Reign of Terror", doctor:"First Doctor", doctorNumber:1,
+        series:"Season 1", year:1964, date:"8 August 1964",
+        format:"Serial", companion:"Susan, Ian and Barbara", 
+        monster:"Maximilien Robespierre",
+        writer:"Dennis Spooner", director:"Henric Hirsch",
+        image:"/who/img/1/reign.png",
+        synopsis:"Two schoolteachers follow a mysterious pupil into a police box that is far more than it seems.",
+        trivia:["The TARDIS crew land on Skaro and meet the Daleks for the very first time."],
+        tags:["historical", "France"],
+        setting:["Paris, 1794"]            
+      },
+      {
+        id:"spearhead", code:"S7.1", title:"Spearhead from Space", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 7", year:1970, date:"3 January 1970",
+        format:"Serial", companion:"Liz Shaw", 
+        monster:"Autons",
+        writer:"Robert Holmes", director:"Derek Martinus", rating:4.7,
+        image:"https://images2.imgbox.com/f9/d8/3VccADyX_o.jpg",
+        synopsis:"A newly regenerated Doctor is stranded on Earth as the Nestene Consciousness prepares a plastic invasion.",
+        trivia:["The first Doctor Who serial produced in colour.","The only classic serial filmed entirely on film."],
+        tags:["Autons","UNIT","Doctor debut"]
+      },
+      {
+        id:"genesis", code:"S12.4", title:"Genesis of the Daleks", doctor:"Fourth Doctor", doctorNumber:4,
+        series:"Season 12", year:1975, date:"8 March 1975",
+        format:"Serial", companion:"Sarah Jane and Harry", monster:"Daleks / Davros",
+        writer:"Terry Nation", director:"David Maloney", rating:4.9,
+        image:"https://images2.imgbox.com/fa/42/uXZaAxay_o.jpg",
+        synopsis:"The Time Lords send the Doctor to the birth of the Daleks, where he faces Davros and an impossible moral choice.",
+        trivia:["This story introduced Davros.","It remains one of the most frequently repeated classic serials."],
+        tags:["Daleks","Davros","Skaro"]
+      },
+      {
+        id:"androzani", code:"S21.6", title:"The Caves of Androzani", doctor:"Fifth Doctor", doctorNumber:5,
+        series:"Season 21", year:1984, date:"8 March 1984",
+        format:"Serial", companion:"Peri Brown", monster:"Sharaz Jek",
+        writer:"Robert Holmes", director:"Graeme Harper", rating:5.0,
+        image:"https://images2.imgbox.com/b4/87/M2AjK2t8_o.jpg",
+        synopsis:"The Doctor and Peri are caught between soldiers, smugglers and a masked genius while dying from spectrox poisoning.",
+        trivia:["The final episode features the Fifth Doctor's regeneration.","Graeme Harper later directed stories in the revived series."],
+        tags:["Regeneration","Androzani","Classic"]
+      },
+      {
+        id:"remembrance", code:"S25.1", title:"Remembrance of the Daleks", doctor:"Seventh Doctor", doctorNumber:7,
+        series:"Season 25", year:1988, date:"5 October 1988",
+        format:"Serial", companion:"Ace", monster:"Daleks",
+        writer:"Ben Aaronovitch", director:"Andrew Morgan", rating:4.8,
+        image:"https://images2.imgbox.com/7c/46/MkJGRaLX_o.jpg",
+        synopsis:"Two rival Dalek factions descend on Shoreditch in pursuit of a powerful Time Lord artefact.",
+        trivia:["Set near Coal Hill School and Totter's Lane.","Features the first televised Dalek climbing stairs."],
+        tags:["Daleks","Ace","1963"]
+      },
+      {
+        id:"rose", code:"1.1", title:"Rose", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"26 March 2005",
+        format:"Story", companion:"Rose Tyler", monster:"Autons / Nestene Consciousness",
+        writer:"Russell T Davies", director:"Keith Boak", rating:4.6,
+        image:"https://images2.imgbox.com/2c/fc/bpTHvPF4_o.jpg",
+        synopsis:"Rose Tyler's life is turned upside down when she meets a mysterious traveller and living shop-window dummies.",
+        trivia:["This episode relaunched Doctor Who as a continuing television series in 2005.","It brought the Autons back for the first time since 1971."],
+        tags:["Autons","London","Beginning"]
+      },
+      {
+        id:"end-world", code:"1.2", title:"The End of the World", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"2 April 2005",
+        format:"Story", companion:"Rose Tyler", monster:"Lady Cassandra",
+        writer:"Russell T Davies", director:"Euros Lyn", rating:4.2,
+        image:"https://images2.imgbox.com/b1/b8/cPVwYaOi_o.jpg",
+        synopsis:"The Doctor takes Rose five billion years into the future to watch the destruction of Earth.",
+        trivia:["Introduced the Face of Boe.","The episode is set five billion years in the future."],
+        tags:["Future","Platform One","Cassandra"]
+      },
+      {
+        id:"unquiet-dead", code:"1.3", title:"The Unquiet Dead", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"9 April 2005",
+        format:"Story", companion:"Rose Tyler", monster:"Gelth",
+        writer:"Mark Gatiss", director:"Euros Lyn", rating:4.1,
+        image:"https://images2.imgbox.com/1c/89/7vOBBGnd_o.jpg",
+        synopsis:"The Doctor and Rose meet Charles Dickens while ghostly creatures possess the dead.",
+        trivia:["Charles Dickens appears as a major character.","The story established Cardiff's recurring importance."],
+        tags:["Historical","Cardiff","Gelth"]
+      },
+      {
+        id:"dalek", code:"1.6", title:"Dalek", doctor:"Ninth Doctor", doctorNumber:9,
+        series:"Series 1", year:2005, date:"30 April 2005",
+        format:"Story", companion:"Rose Tyler", monster:"Dalek",
+        writer:"Robert Shearman", director:"Joe Ahearne", rating:4.9,
+        image:"https://images2.imgbox.com/1f/5f/Os8l4MjP_o.jpg",
+        synopsis:"The Doctor discovers a lone Dalek chained beneath a private museum of alien artefacts.",
+        trivia:["The first Dalek story of the revived series.","Adapted in part from Robert Shearman's audio drama Jubilee."],
+        tags:["Dalek","Utah","Time War"]
+      },
+      {
+        id:"christmas-invasion", code:"2.X", title:"The Christmas Invasion", doctor:"Tenth Doctor", doctorNumber:10,
+        series:"Christmas Special", year:2005, date:"25 December 2005",
+        format:"Special", companion:"Rose Tyler", monster:"Sycorax",
+        writer:"Russell T Davies", director:"James Hawes", rating:4.5,
+        image:"https://images2.imgbox.com/c3/3b/ejlL8Iua_o.jpg",
+        synopsis:"While the new Doctor sleeps through his regeneration, the Sycorax threaten Earth on Christmas Day.",
+        trivia:["The first full story starring David Tennant.","The first Doctor Who Christmas special of the revived era."],
+        tags:["Christmas","Sycorax","Doctor debut"]
+      },
+      {
+        id:"blink", code:"3.10", title:"Blink", doctor:"Tenth Doctor", doctorNumber:10,
+        series:"Series 3", year:2007, date:"9 June 2007",
+        format:"Story", companion:"Martha Jones", monster:"Weeping Angels",
+        writer:"Steven Moffat", director:"Hettie MacDonald", rating:5.0,
+        image:"https://images2.imgbox.com/37/d7/uWkf4Sth_o.jpg",
+        synopsis:"Sally Sparrow follows messages hidden across time while statues move whenever nobody is watching.",
+        trivia:["Introduced the Weeping Angels.","The Doctor appears only briefly compared with most episodes."],
+        tags:["Weeping Angels","Time travel","Doctor-lite"]
+      },
+      {
+        id:"eleventh-hour", code:"5.1", title:"The Eleventh Hour", doctor:"Eleventh Doctor", doctorNumber:11,
+        series:"Series 5", year:2010, date:"3 April 2010",
+        format:"Story", companion:"Amy Pond and Rory Williams", monster:"Prisoner Zero",
+        writer:"Steven Moffat", director:"Adam Smith", rating:4.9,
+        image:"https://images2.imgbox.com/df/e6/NlFSItbz_o.jpg",
+        synopsis:"A newly regenerated Doctor returns years late to Amelia Pond and has twenty minutes to save Earth.",
+        trivia:["Matt Smith's first full episode.","Introduced Amy Pond, Rory Williams and the cracked wall arc."],
+        tags:["Doctor debut","Atraxi","Amy Pond"]
+      },
+      {
+        id:"heaven-sent", code:"9.11", title:"Heaven Sent", doctor:"Twelfth Doctor", doctorNumber:12,
+        series:"Series 9", year:2015, date:"28 November 2015",
+        format:"Story", companion:"Clara Oswald", monster:"The Veil",
+        writer:"Steven Moffat", director:"Rachel Talalay", rating:5.0,
+        image:"https://images2.imgbox.com/7e/82/8vIogyXs_o.jpg",
+        synopsis:"Alone in a shifting castle, the Doctor faces grief, fear and an apparently impossible escape.",
+        trivia:["Peter Capaldi carries almost the entire episode alone.","The story takes place across an enormous span of time."],
+        tags:["The Veil","Confession Dial","Experimental"]
+      },
+      {
+        id:"punjab", code:"11.6", title:"Demons of the Punjab", doctor:"Thirteenth Doctor", doctorNumber:13,
+        series:"Series 11", year:2018, date:"11 November 2018",
+        format:"Story", companion:"Yaz, Ryan and Graham", monster:"Thijarians",
+        writer:"Vinay Patel", director:"Jamie Childs", rating:4.5,
+        image:"https://images2.imgbox.com/70/a5/DM7D3AOT_o.jpg",
+        synopsis:"Yaz asks the Doctor to take her to her grandmother's wedding during the Partition of India.",
+        trivia:["Set during the 1947 Partition of India.","The Thijarians are revealed not to be the villains."],
+        tags:["Historical","Partition","Yaz"]
+      },
+      {
+        id:"giggle", code:"SP.3", title:"The Giggle", doctor:"Fourteenth Doctor", doctorNumber:14,
+        series:"60th Anniversary", year:2023, date:"9 December 2023",
+        format:"Special", companion:"Donna Noble", monster:"The Toymaker",
+        writer:"Russell T Davies", director:"Chanya Button", rating:4.7,
+        image:"https://images2.imgbox.com/98/30/x4vlhhsC_o.jpg",
+        synopsis:"The Toymaker returns as humanity falls into chaos and the Doctor faces an impossible game.",
+        trivia:["Features the Doctor's first televised bi-generation.","Brings back the Toymaker after almost sixty years."],
+        tags:["Toymaker","Donna Noble","Anniversary"]
+      },
+      {
+        id:"rogue", code:"1.6", title:"Rogue", doctor:"Fifteenth Doctor", doctorNumber:15,
+        series:"Season 1", year:2024, date:"8 June 2024",
+        format:"Story", companion:"Ruby Sunday", monster:"Chuldur",
+        writer:"Kate Herron and Briony Redman", director:"Ben Chessell", rating:4.6,
+        image:"https://images2.imgbox.com/e3/df/GzfqOn0R_o.jpg",
+        synopsis:"At a Regency ball, the Doctor meets a mysterious bounty hunter while shape-shifting aliens hunt the guests.",
+        trivia:["Draws heavily on Regency romance conventions.","Features Jonathan Groff as Rogue."],
+        tags:["Regency","Chuldur","Romance"]
+      },
+      {
+        id:"tomb-cybermen", code:"S5.1", title:"The Tomb of the Cybermen", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1967, date:"2 September 1967",
+        format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Cybermen",
+        writer:"Kit Pedler and Gerry Davis", director:"Morris Barry", rating:4.8,
+        image:"https://images2.imgbox.com/84/6e/jiQXqBSE_o.jpg",
+        synopsis:"An archaeological expedition on Telos opens an ancient tomb and awakens a dormant army of Cybermen.",
+        trivia:["The serial was recovered in Hong Kong in 1992.","It introduced the Cyber Controller and the Cybermats."],
+        tags:["Cybermen","Telos","Classic"]
+      },
+      {
+        id:"web-of-fear", code:"S5.5", title:"The Web of Fear", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1968, date:"3 February 1968",
+        format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Great Intelligence / Yeti",
+        writer:"Mervyn Haisman and Henry Lincoln", director:"Douglas Camfield", rating:4.7,
+        image:"https://images2.imgbox.com/94/35/RSKhTkfM_o.jpg",
+        synopsis:"The Great Intelligence fills the London Underground with a deadly web while its robotic Yeti close in.",
+        trivia:["The story introduced Colonel Lethbridge-Stewart.","Five of its six episodes survive in the BBC archive."],
+        tags:["Yeti","Great Intelligence","UNIT origins"]
+      },
+      {
+        id:"war-games", code:"S6.7", title:"The War Games", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 6", year:1969, date:"19 April 1969",
+        format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"War Lords",
+        writer:"Malcolm Hulke and Terrance Dicks", director:"David Maloney", rating:4.9,
+        image:"https://images2.imgbox.com/ff/10/yEfnTX8h_o.jpg",
+        synopsis:"Soldiers from different periods of history are abducted and forced to fight in a vast alien experiment.",
+        trivia:["The story contains the first televised appearance of the Time Lords.","Its final episode features the Second Doctor's forced regeneration."],
+        tags:["Time Lords","Regeneration","Finale"]
+      },
+      {
+        id:"vengeance-on-varos", code:"S22.2", title:"Vengeance on Varos", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 22", year:1985, date:"19 January 1985",
+        format:"Serial", companion:"Peri Brown", monster:"Sil",
+        writer:"Philip Martin", director:"Ron Jones", rating:4.5,
+        image:"https://images2.imgbox.com/f7/f8/39YuUeGq_o.jpg",
+        synopsis:"The Doctor and Peri arrive on a prison world where torture and government policy are broadcast as entertainment.",
+        trivia:["This serial introduced Sil.","Its original episodes were each approximately forty-five minutes long."],
+        tags:["Sil","Satire","Varos"]
+      },
+      {
+        id:"revelation-daleks", code:"S22.6", title:"Revelation of the Daleks", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 22", year:1985, date:"23 March 1985",
+        format:"Serial", companion:"Peri Brown", monster:"Daleks / Davros",
+        writer:"Eric Saward", director:"Graeme Harper", rating:4.7,
+        image:"https://images2.imgbox.com/eb/58/M9zU1xIk_o.jpg",
+        synopsis:"At the funeral complex Tranquil Repose, Davros is secretly turning the dead into a new army of Daleks.",
+        trivia:["Davros operates under the name of the Great Healer.","The serial was the final story of Season 22."],
+        tags:["Daleks","Davros","Necros"]
+      },
+      {
+        id:"mysterious-planet", code:"S23.1", title:"The Mysterious Planet", doctor:"Sixth Doctor", doctorNumber:6,
+        series:"Season 23", year:1986, date:"6 September 1986",
+        format:"Serial", companion:"Peri Brown", monster:"Drathro",
+        writer:"Robert Holmes", director:"Nicholas Mallett", rating:4.2,
+        image:"https://images2.imgbox.com/b6/f3/SC7MoCT2_o.jpg",
+        synopsis:"The Doctor is placed on trial while evidence from his recent visit to the mysterious planet Ravalox is presented.",
+        trivia:["This is the opening segment of The Trial of a Time Lord.","It introduced the Valeyard and the Inquisitor."],
+        tags:["Trial","Ravalox","Valeyard"]
+      },
+      {
+        id:"doctor-who-tv-movie", code:"TVM", title:"Doctor Who: The TV Movie", doctor:"Eighth Doctor", doctorNumber:8,
+        series:"TV Movie", year:1996, date:"27 May 1996",
+        format:"Television film", companion:"Grace Holloway", monster:"The Master",
+        writer:"Matthew Jacobs", director:"Geoffrey Sax", rating:4.3,
+        image:"https://images2.imgbox.com/7c/c5/WDcUe1ts_o.jpg",
+        synopsis:"After being caught in a gang shooting, the Doctor regenerates in San Francisco and must stop the Master's plan to steal his remaining lives.",
+        trivia:["Paul McGann made his full televised debut as the Doctor.","The story begins with Sylvester McCoy as the Seventh Doctor."],
+        tags:["TV Movie","The Master","Doctor debut"]
+      },
+      {
+        id:"night-of-the-doctor", code:"WEB.1", title:"The Night of the Doctor", doctor:"Eighth Doctor", doctorNumber:8,
+        series:"50th Anniversary", year:2013, date:"14 November 2013",
+        format:"Mini-episode", companion:"Cass", monster:"Sisterhood of Karn",
+        writer:"Steven Moffat", director:"John Hayes", rating:4.8,
+        image:"https://images2.imgbox.com/de/bf/h3SBfQWC_o.jpg",
+        synopsis:"As the Time War intensifies, the Eighth Doctor tries to save a pilot who refuses to trust a Time Lord.",
+        trivia:["Paul McGann returned to the role on screen after seventeen years.","The episode depicts the Eighth Doctor's regeneration."],
+        tags:["Regeneration","Time War","Anniversary"]
+      },
+
+      /* v13a: ten additional televised stories */
+
+      {
+        id:"moonbase", code:"S4.6", title:"The Moonbase", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 4", year:1967, date:"11 February 1967",
+        format:"Serial", companion:"Jamie McCrimmon, Polly and Ben Jackson", monster:"Cybermen",
+        writer:"Kit Pedler", director:"Morris Barry", rating:4.3,
+        image:"https://images2.imgbox.com/bf/a1/8ZgAuWTe_o.jpg",
+        synopsis:"In 2070, the TARDIS crew reaches a weather-control base on the Moon where a mysterious illness conceals a Cyberman invasion.",
+        trivia:["Two of the four episodes are currently missing from the BBC archive.","The story introduced the Cybermen's more streamlined Moonbase design."],
+        tags:["Cybermen","Moon","Missing episodes"]
+      },
+      {
+        id:"enemy-of-the-world", code:"S5.4", title:"The Enemy of the World", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 5", year:1967, date:"23 December 1967",
+        format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Salamander",
+        writer:"David Whitaker", director:"Barry Letts", rating:4.5,
+        image:"https://images2.imgbox.com/54/c6/pMa4xdjw_o.jpg",
+        synopsis:"The Doctor discovers that he is the exact double of Salamander, a celebrated world leader suspected of engineering global disasters.",
+        trivia:["Patrick Troughton plays both the Doctor and Salamander.","Five previously missing episodes were recovered in Nigeria in 2013."],
+        tags:["Doppelgänger","Political thriller","Recovered"]
+      },
+      {
+        id:"mind-robber", code:"S6.2", title:"The Mind Robber", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 6", year:1968, date:"14 September 1968",
+        format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"The Master of the Land",
+        writer:"Peter Ling and Derrick Sherwin", director:"David Maloney", rating:4.7,
+        image:"https://images2.imgbox.com/5e/4c/VBS5ni89_o.jpg",
+        synopsis:"Forced outside normal space and time, the travellers enter a surreal realm where fictional characters and language itself become dangerous.",
+        trivia:["Episode one was added late when the preceding story was reduced by one episode.","Hamish Wilson briefly plays Jamie after the character's face is incorrectly reconstructed."],
+        tags:["Land of Fiction","Surreal","Zoe"]
+      },
+      {
+        id:"invasion", code:"S6.3", title:"The Invasion", doctor:"Second Doctor", doctorNumber:2,
+        series:"Season 6", year:1968, date:"2 November 1968",
+        format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"Cybermen",
+        writer:"Derrick Sherwin", director:"Douglas Camfield", rating:4.8,
+        image:"https://images2.imgbox.com/d7/25/MlvGE9zu_o.jpg",
+        synopsis:"An electronics magnate works with the Cybermen to paralyse humanity, bringing the Doctor back into contact with UNIT and Brigadier Lethbridge-Stewart.",
+        trivia:["Episodes one and four survive only as audio and were animated for DVD.","The serial established UNIT as a major part of the programme."],
+        tags:["Cybermen","UNIT","London"]
+      },
+      {
+        id:"inferno", code:"S7.4", title:"Inferno", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 7", year:1970, date:"9 May 1970",
+        format:"Serial", companion:"Liz Shaw", monster:"Primords",
+        writer:"Don Houghton", director:"Douglas Camfield and Barry Letts", rating:4.9,
+        image:"https://images2.imgbox.com/28/61/nPMsYUBq_o.jpg",
+        synopsis:"A drilling project threatens the planet while a damaged TARDIS console sends the Doctor into a brutal parallel version of Earth.",
+        trivia:["This was Liz Shaw's final televised story as the Doctor's regular companion.","Barry Letts completed direction after Douglas Camfield became unwell."],
+        tags:["Parallel Earth","UNIT","Primords"]
+      },
+      {
+        id:"terror-of-the-autons", code:"S8.1", title:"Terror of the Autons", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 8", year:1971, date:"2 January 1971",
+        format:"Serial", companion:"Jo Grant", monster:"The Master / Autons",
+        writer:"Robert Holmes", director:"Barry Letts", rating:4.6,
+        image:"https://images2.imgbox.com/0a/fb/QiX505u8_o.jpg",
+        synopsis:"The newly arrived Master allies himself with the Nestene Consciousness, turning everyday plastic objects into lethal weapons.",
+        trivia:["The story introduced the Master and Jo Grant.","It also marked Captain Mike Yates's first appearance."],
+        tags:["The Master","Autons","Jo Grant"]
+      },
+      {
+        id:"daemons", code:"S8.5", title:"The Dæmons", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 8", year:1971, date:"22 May 1971",
+        format:"Serial", companion:"Jo Grant", monster:"Azal / The Master",
+        writer:"Guy Leopold", director:"Christopher Barry", rating:4.7,
+        image:"https://images2.imgbox.com/4f/73/ugdSqIMz_o.jpg",
+        synopsis:"At the village of Devil's End, the Master awakens an ancient alien whose species has guided humanity for millennia.",
+        trivia:["Guy Leopold was a shared pseudonym for Barry Letts and Robert Sloman.","Much of the location filming took place in Aldbourne, Wiltshire."],
+        tags:["The Master","UNIT","Devil's End"]
+      },
+      {
+        id:"three-doctors", code:"S10.1", title:"The Three Doctors", doctor:"Third Doctor", doctorNumber:3,
+        series:"Season 10", year:1972, date:"30 December 1972",
+        format:"Serial", companion:"Jo Grant", monster:"Omega",
+        writer:"Bob Baker and Dave Martin", director:"Lennie Mayne", rating:4.7,
+        image:"https://images2.imgbox.com/f4/74/1LAHCYS7_o.jpg",
+        synopsis:"A threat from beyond the universe forces the Time Lords to unite three incarnations of the Doctor against the legendary Omega.",
+        trivia:["The serial celebrated Doctor Who's tenth season.","William Hartnell appeared through pre-recorded inserts because of ill health."],
+        tags:["Multi-Doctor","Omega","Anniversary"]
+      },
+      {
+        id:"pyramids-of-mars", code:"S13.3", title:"Pyramids of Mars", doctor:"Fourth Doctor", doctorNumber:4,
+        series:"Season 13", year:1975, date:"25 October 1975",
+        format:"Serial", companion:"Sarah Jane Smith", monster:"Sutekh / Mummies",
+        writer:"Stephen Harris", director:"Paddy Russell", rating:4.9,
+        image:"https://images2.imgbox.com/01/ea/71Dq0Uh0_o.jpg",
+        synopsis:"In an English priory in 1911, the Doctor battles Sutekh, an imprisoned Osiran whose freedom would mean the destruction of all life.",
+        trivia:["Stephen Harris was a pseudonym used by Robert Holmes and Lewis Greifer.","Gabriel Woolf later voiced the Beast in the revived series."],
+        tags:["Sutekh","Sarah Jane","1911"]
+      },
+      {
+        id:"seeds-of-doom", code:"S13.6", title:"The Seeds of Doom", doctor:"Fourth Doctor", doctorNumber:4,
+        series:"Season 13", year:1976, date:"31 January 1976",
+        format:"Serial", companion:"Sarah Jane Smith", monster:"Krynoid",
+        writer:"Robert Banks Stewart", director:"Douglas Camfield", rating:4.8,
+        image:"https://images2.imgbox.com/61/53/W2arljLX_o.jpg",
+        synopsis:"An alien seed pod found in Antarctica infects a scientist before a ruthless collector brings the growing Krynoid to England.",
+        trivia:["The story was partly inspired by classic plant-invasion fiction.","It was Douglas Camfield's final Doctor Who directing credit."],
+        tags:["Krynoid","Antarctica","Sarah Jane"]
+      },
+      {
+        id:"end-of-time", code:"4.17", title:"The End of Time", doctor:"Tenth Doctor", doctorNumber:10,
+        series:"Series 4", year:2010, date:"1 January 2010",
+        format:"Special", companion:"Wilfred Mott", monster:"The Master",
+        writer:"Russell T Davies", director:"Euros Lyn", rating:4.8,
+        image:"/who/10regen.png",
+        synopsis:"It is the Tenth Doctor's final journey — but his psychotic nemesis, the Master, has been resurrected on Christmas Eve! Each determined to cheat death, the battle rages from the abandoned wastelands of London to the mysterious Immortality Gate, whilst the alien Ood warn of an even greater danger approaching, as a terrible shadow falls across the entire universe.",
+        trivia:["The story was partly inspired by classic plant-invasion fiction.","It was Douglas Camfield's final Doctor Who directing credit."],
+        tags:["The Master","Regeneration"]
+      }
+    ];
+
+function broadcastTime(dateText){const months={January:0,February:1,March:2,April:3,May:4,June:5,July:6,August:7,September:8,October:9,November:10,December:11};const m=String(dateText).trim().match(/^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/);if(!m)return Number.MAX_SAFE_INTEGER;return Date.UTC(+m[3],months[m[2]]??0,+m[1])}
+episodes.sort((a,b)=>broadcastTime(a.date)-broadcastTime(b.date)||String(a.code).localeCompare(String(b.code),undefined,{numeric:true}));
+const $=id=>document.getElementById(id);
+const state={doctors:[],seasons:[],era:null,search:"",view:"grid",selectedId:null,filtered:[]};
+const doctorNames=new Map();episodes.forEach(e=>doctorNames.set(String(e.doctorNumber),e.doctor));
+const unique=v=>[...new Set(v)];
+const getEra=s=>/^Season\s/i.test(s)?"classic":"modern";
+const inferSetting=e=>{const tags=Array.isArray(e.tags)?e.tags:[];const generic=/^(first story|tardis|1960s|1970s|1980s|classic|beginning|future|historical|regeneration|doctor debut|time war|christmas|multi-doctor|anniversary|missing episodes|sarah jane|ace|unit|daleks?|davros|autons?|cassandra|gelth|weeping angels?|the master|omega|krynoid|sycorax|sutekh)$/i;return tags.find(t=>!generic.test(String(t).trim())&&!/^\d{4}$/.test(String(t).trim()))||"—"};
+
+function buildDoctors(){const root=$("doctorList");root.innerHTML='<button class="pill active" data-doctor="all">All</button>'+[...doctorNames.entries()].sort((a,b)=>+a[0]-+b[0]).map(([n,name])=>`<button class="pill" data-doctor="${n}" title="${name}">${n}</button>`).join("");}
+function buildSeasons(){const seasons=unique(episodes.map(e=>e.series));const visible=state.era?seasons.filter(s=>getEra(s)===state.era):[];$("seasonList").innerHTML=visible.map(s=>`<button class="pill ${state.seasons.includes(s)?'active':''}" data-season="${s}">${s}</button>`).join("");}
+function syncControls(){document.querySelectorAll('[data-doctor]').forEach(b=>{const v=b.dataset.doctor;b.classList.toggle('active',v==='all'?state.doctors.length===0:state.doctors.includes(v))});document.querySelectorAll('[data-era]').forEach(b=>b.classList.toggle('active',b.dataset.era===state.era));buildSeasons();const names=state.doctors.map(n=>doctorNames.get(n)).filter(Boolean);$("activeDoctorLabel").textContent=names.length?names.join(', '):'All Doctors';}
+function filtered(){const q=state.search.trim().toLowerCase();return episodes.filter(e=>(!state.doctors.length||state.doctors.includes(String(e.doctorNumber)))&&(!state.seasons.length||state.seasons.includes(e.series))&&(!q||[e.title,e.doctor,e.series,e.companion,e.monster,e.writer,e.date,...(e.tags||[])].join(' ').toLowerCase().includes(q)));}
+function card(e){return `<article class="card" tabindex="0" data-id="${e.id}"><div class="card-image"><img src="${e.image}" alt="" loading="lazy"><span class="code">${e.code}</span></div><div class="card-body"><h2 class="card-title">${e.title}</h2><div class="card-meta">${e.doctor} · ${e.series} · ${e.year}</div><div class="card-companion">${e.companion||''}</div></div></article>`}
+function renderChips(){const chips=[];state.doctors.forEach(n=>chips.push({label:doctorNames.get(n),clear:()=>state.doctors=state.doctors.filter(x=>x!==n)}));state.seasons.forEach(s=>chips.push({label:s,clear:()=>state.seasons=state.seasons.filter(x=>x!==s)}));if(state.search)chips.push({label:`“${state.search}”`,clear:()=>{state.search='';$("searchInput").value=''}});$("activeChips").innerHTML=chips.map((c,i)=>`<span class="chip">${c.label}<button data-chip="${i}">×</button></span>`).join('');$("activeChips").querySelectorAll('[data-chip]').forEach(b=>b.onclick=()=>{chips[+b.dataset.chip].clear();syncControls();render()});}
+function render(){state.filtered=filtered();$("episodeTotal").textContent=state.filtered.length;$("resultCopy").textContent=state.filtered.length===episodes.length?'Showing all stories':`Showing ${state.filtered.length} of ${episodes.length} stories`;$("episodeGrid").classList.toggle('list',state.view==='list');$("episodeGrid").innerHTML=state.filtered.map(card).join('');$("emptyState").classList.toggle('show',!state.filtered.length);renderChips();document.querySelectorAll('.card').forEach(c=>{const open=()=>openEpisode(c.dataset.id,true);c.onclick=open;c.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}}});}
+function openEpisode(id,open=false){const e=episodes.find(x=>x.id===id);if(!e)return;state.selectedId=id;populate(e);if(open)setModal(true)}
+function populate(e){const i=episodes.findIndex(x=>x.id===e.id);$("detailPosition").textContent=`${i+1} / ${episodes.length}`;const hero=$("detailHero");hero.style.setProperty('--modal-image',`url("${e.image}")`);hero.style.animation='none';void hero.offsetWidth;hero.style.animation='';$("detailStoryMarker").textContent=`${e.series} · Story ${i+1}`;$("detailTitle").textContent=e.title;$("detailContext").textContent=[e.doctor,e.series].filter(Boolean).join(' · ');$("detailWriter").textContent=e.writer||'—';$("detailDate").textContent=e.date||'—';$("detailSetting").textContent=e.setting||inferSetting(e);$("detailMonster").textContent=e.monster||'—';$("previousTitle").textContent=episodes[(i-1+episodes.length)%episodes.length].title;$("nextTitle").textContent=episodes[(i+1)%episodes.length].title;}
+function offset(n){let i=episodes.findIndex(e=>e.id===state.selectedId);if(i<0)i=0;openEpisode(episodes[(i+n+episodes.length)%episodes.length].id)}
+function setModal(open){$("detailsPanel").classList.toggle('open',open);$("detailsBackdrop").classList.toggle('open',open);$("detailsPanel").setAttribute('aria-hidden',String(!open));document.body.style.overflow=open?'hidden':'';if(open)$("detailsPanel").focus({preventScroll:true})}
+
+buildDoctors();syncControls();render();
+$("doctorList").onclick=e=>{const b=e.target.closest('[data-doctor]');if(!b)return;const v=b.dataset.doctor;if(v==='all')state.doctors=[];else state.doctors=state.doctors.includes(v)?state.doctors.filter(x=>x!==v):[...state.doctors,v].sort((a,b)=>+a-+b);syncControls();render()};
+$("eraList").onclick=e=>{const b=e.target.closest('[data-era]');if(!b)return;state.era=state.era===b.dataset.era?null:b.dataset.era;state.seasons=state.seasons.filter(s=>!state.era||getEra(s)===state.era);syncControls();render()};
+$("seasonList").onclick=e=>{const b=e.target.closest('[data-season]');if(!b)return;const v=b.dataset.season;state.seasons=state.seasons.includes(v)?state.seasons.filter(x=>x!==v):[...state.seasons,v];syncControls();render()};
+$("searchInput").oninput=e=>{state.search=e.target.value;render()};
+$("clearAll").onclick=()=>{state.doctors=[];state.seasons=[];state.era=null;state.search='';$("searchInput").value='';syncControls();render()};
+$("gridView").onclick=()=>{state.view='grid';$("gridView").classList.add('active');$("listView").classList.remove('active');render()};
+$("listView").onclick=()=>{state.view='list';$("listView").classList.add('active');$("gridView").classList.remove('active');render()};
+$("randomButton").onclick=()=>{const pool=state.filtered.length?state.filtered:episodes;openEpisode(pool[Math.floor(Math.random()*pool.length)].id,true)};
+$("detailsPrev").onclick=()=>offset(-1);$("detailsNext").onclick=()=>offset(1);$("previousEpisode").onclick=()=>offset(-1);$("nextEpisode").onclick=()=>offset(1);$("inspectorToggle").onclick=()=>setModal(false);$("detailsBackdrop").onclick=()=>setModal(false);
+document.addEventListener('keydown',e=>{if(!$("detailsPanel").classList.contains('open'))return;if(e.key==='Escape')setModal(false);if(e.key==='ArrowLeft')offset(-1);if(e.key==='ArrowRight')offset(1)});
+</script>
+</body>
+</html>
