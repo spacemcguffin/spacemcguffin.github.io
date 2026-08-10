@@ -6,6 +6,7 @@
 
 <title>South Park Episode Archive</title>
 
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&display=swap">
 
 <style>
@@ -5458,6 +5459,15 @@ body.modal-open .current-season-scrap {
 .guide-logo > span:nth-child(9) { transform: rotate(.38deg) translateY(-.35px); }
 .guide-logo > span:nth-child(10) { transform: rotate(-.49deg) translateY(.3px); }
 
+
+/* Current-season sticky scrap: remove decorative coloured line/accent */
+.current-season-scrap::before,
+.current-season-scrap::after {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
 </style>
 </head>
 
@@ -5859,7 +5869,7 @@ const episodes = [
   type: "special",
   special: 1,
   betweenSeasons: [24, 25],
-  title: "South Park: Post COVID",
+  title: "South Park: Post Covid",
   date: "25 November 2021",
   year: 2021,
   image: "/sp/img/pc.png",
