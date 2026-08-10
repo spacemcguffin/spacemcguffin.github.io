@@ -4545,6 +4545,89 @@ body {
   }
 }
 
+
+/* =========================================================
+   MODAL TOP BAR — ARROW PLACEMENT FIX
+========================================================= */
+
+.modal-topbar {
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 48px !important;
+  padding: 6px 8px !important;
+}
+
+.modal-topbar .modal-prev,
+.modal-topbar .modal-next,
+.modal-topbar button[data-modal-prev],
+.modal-topbar button[data-modal-next] {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  align-self: center !important;
+  justify-self: center !important;
+  line-height: 1 !important;
+}
+
+.modal-topbar .modal-prev,
+.modal-topbar button[data-modal-prev] {
+  grid-column: 1 !important;
+}
+
+.modal-topbar .modal-next,
+.modal-topbar button[data-modal-next] {
+  grid-column: 3 !important;
+}
+
+.modal-topbar .modal-position,
+.modal-topbar .modal-counter,
+.modal-topbar [data-modal-position] {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  justify-self: center !important;
+  align-self: center !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+/* Centre arrow glyphs themselves, including SVG/icon implementations. */
+.modal-topbar .modal-prev svg,
+.modal-topbar .modal-next svg,
+.modal-topbar button[data-modal-prev] svg,
+.modal-topbar button[data-modal-next] svg {
+  display: block !important;
+  width: 17px !important;
+  height: 17px !important;
+  margin: auto !important;
+}
+
+@media (max-width: 760px) {
+  .modal-topbar {
+    grid-template-columns: 40px minmax(0, 1fr) 40px !important;
+    min-height: 46px !important;
+    padding: 5px 7px !important;
+    gap: 5px !important;
+  }
+
+  .modal-topbar .modal-prev,
+  .modal-topbar .modal-next,
+  .modal-topbar button[data-modal-prev],
+  .modal-topbar button[data-modal-next] {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+  }
+}
+
 </style>
 </head>
 
