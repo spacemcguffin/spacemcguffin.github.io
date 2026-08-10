@@ -6,6 +6,7 @@
 
 <title>South Park Episode Archive</title>
 
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&display=swap">
 
 <style>
@@ -4635,6 +4636,42 @@ body.modal-open .paper-back-to-top {
   .modal-episode {
     font-size: .63rem !important;
     padding: 5px 8px !important;
+  }
+}
+
+
+/* =========================================================
+   LIST VIEW ARROW — FIXED VERTICAL POSITION
+========================================================= */
+
+/* Keep the arrow absolutely centred in the row at all times. */
+.archive.list-view .list-arrow {
+  position: absolute !important;
+  right: 17px !important;
+  top: 50% !important;
+  bottom: auto !important;
+  margin: 0 !important;
+  align-self: auto !important;
+  transform: translateY(-50%) !important;
+}
+
+/* The previous hover rule removed translateY(-50%), which made the
+   button visibly drop downward. Preserve centring on hover/focus. */
+.archive.list-view .episode-card:hover .list-arrow,
+.archive.list-view .episode-card:focus-within .list-arrow {
+  transform: translateY(-50%) !important;
+}
+
+/* Also prevent any generic button hover movement affecting it. */
+.archive.list-view .list-arrow:hover {
+  transform: translateY(-50%) !important;
+}
+
+@media (max-width: 760px) {
+  .archive.list-view .list-arrow {
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
   }
 }
 
