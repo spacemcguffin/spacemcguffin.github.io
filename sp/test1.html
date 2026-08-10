@@ -5242,6 +5242,111 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* =========================================================
+   REFINEMENTS V5
+   Fix all season underlines + replace visible year with
+   paper-style season episode count.
+========================================================= */
+
+/* Keep season-year data/markup intact, but don't display it in the archive. */
+.archive .season-year {
+  display: none !important;
+}
+
+/* Header is now left-aligned because the count has moved beneath the title. */
+.season-header {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.season-heading-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+
+/* Force the underline onto every numbered season as well as Specials.
+   The hue is placed directly on the H2 so it cannot be lost through
+   section-level custom-property overrides elsewhere in the stylesheet. */
+.archive .season-section .season-name {
+  position: relative !important;
+  display: inline-block !important;
+  width: max-content !important;
+  padding-bottom: 11px !important;
+  overflow: visible !important;
+}
+
+.archive .season-section .season-name::after {
+  content: "" !important;
+  position: absolute !important;
+  display: block !important;
+  left: 1px !important;
+  bottom: 1px !important;
+  width: 118px !important;
+  height: 5px !important;
+  border-radius: 999px 48% 999px 42% !important;
+  background: hsl(var(--season-heading-hue), 88%, 68%) !important;
+  box-shadow:
+    0 0 10px hsla(var(--season-heading-hue), 88%, 60%, .22) !important;
+  clip-path: polygon(
+    0 24%, 15% 8%, 31% 22%, 48% 5%, 64% 23%,
+    81% 6%, 100% 20%, 98% 78%, 76% 93%, 57% 76%,
+    36% 94%, 16% 78%, 1% 90%
+  ) !important;
+  transform: rotate(-1deg) !important;
+  opacity: .98 !important;
+  pointer-events: none !important;
+}
+
+/* Episode count now occupies the former year-scrap position. */
+.archive .season-count {
+  display: inline-grid !important;
+  place-items: center !important;
+  align-self: flex-start !important;
+  margin-top: 7px !important;
+  padding: 6px 10px 5px !important;
+  border: 1px solid rgba(40,43,48,.16) !important;
+  border-radius: 3px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246,244,235,.97),
+      rgba(214,215,209,.95)
+    ) !important;
+  color: #2c3139 !important;
+  font-size: .71rem !important;
+  font-weight: 790 !important;
+  line-height: 1 !important;
+  letter-spacing: .065em !important;
+  text-transform: uppercase !important;
+  box-shadow:
+    0 3px 9px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.7) !important;
+  clip-path: polygon(
+    2% 10%, 26% 3%, 50% 8%, 75% 2%, 98% 11%,
+    96% 89%, 73% 97%, 48% 93%, 23% 99%, 1% 90%
+  ) !important;
+  transform: rotate(-.55deg);
+  white-space: nowrap;
+}
+
+.archive .season-section:nth-of-type(even) .season-count {
+  transform: rotate(.45deg);
+}
+
+@media (max-width: 760px) {
+  .archive .season-section .season-name::after {
+    width: 98px !important;
+    height: 4px !important;
+  }
+
+  .archive .season-count {
+    padding: 5px 8px !important;
+    font-size: .66rem !important;
+  }
+}
+
 </style>
 </head>
 
@@ -7055,15 +7160,22 @@ function renderArchive() {
       >
 
         <header class="season-header">
-          <div>
-            <h2 class="season-name">
+          <div class="season-heading-copy">
+            <h2
+              class="season-name"
+              style="--season-heading-hue:${isSpecialGroup ? 322 : (205 + (Number(group) * 37)) % 360}"
+            >
               ${heading}
               ${continuesFromPreviousPage ? `<span class="season-continuation">continued</span>` : ""}
             </h2>
+
             ${subheading ? `<div class="season-year">${escapeHTML(subheading)}</div>` : ""}
             ${isSpecialGroup && yearText ? `<div class="season-year">${escapeHTML(yearText)}</div>` : ""}
+
+            <div class="season-count">
+              ${getFullGroupCount(group)} ${getFullGroupCount(group) === 1 ? "episode" : "episodes"}
+            </div>
           </div>
-          <div class="season-count">${getFullGroupCount(group)} ${getFullGroupCount(group) === 1 ? "episode" : "episodes"}</div>
         </header>
 
         <div class="episode-grid">
