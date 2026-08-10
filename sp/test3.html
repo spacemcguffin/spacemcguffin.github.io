@@ -2477,13 +2477,138 @@ a {
 /* =========================================================
    EPISODE DATA
 
-   ADD NEW EPISODES HERE.
+   ADD NEW EPISODES OR SPECIALS HERE.
 
+   Normal episodes can keep using season + episode.
+
+   Specials can use:
+
+   {
+     type: "special",
+     special: 1,
+     betweenSeasons: [26, 27],
+     order: 2650,
+     title: "Special title",
+     date: "...",
+     year: 2024,
+     image: "/sp/img/special.png",
+     description: "..."
+   }
+
+   `order` controls where the special sits chronologically.
    Everything else on the page is generated automatically.
 
 ========================================================= */
 
 const episodes = [
+
+
+  {
+    season: 26,
+    episode: 1,
+    title: "Cupid Ye",
+    date: "8 February 2023",
+    year: 2023,
+    image: "/sp/img/cy.png",
+    description:
+      "Cartman is jealous of the friendship that’s developed between Kyle and Tolkien and decides to do something about it.",
+    featured: false
+  },
+
+  {
+    season: 26,
+    episode: 2,
+    title: "The Worldwide Privacy Tour",
+    date: "15 February 2023",
+    year: 2023,
+    image: "/sp/img/wwpt.png",
+    description:
+      "The prince of Canada and his wife try to find privacy and seclusion in a small mountain town.",
+    featured: false
+  },
+
+  {
+    season: 26,
+    episode: 3,
+    title: "Japanese Toilet",
+    date: "1 March 2023",
+    year: 2023,
+    image: "/sp/img/jt.png",
+    description:
+      "South Park learns about the wonders of Japanese toliets.",
+    featured: false
+  },
+
+  {
+    season: 26,
+    episode: 4,
+    title: "Deep Learning",
+    date: "8 March 2023",
+    year: 2023,
+    image: "/sp/img/TITLE.png",
+    description:
+      "Stan is reeling when a cheating scandal hits the school.",
+    featured: false
+  },
+
+  {
+    season: 26,
+    episode: 5,
+    title: "DikinBaus Hot Dogs",
+    date: "22 March 2023",
+    year: 2023,
+    image: "/sp/img/dh.png",
+    description:
+      "The South Park boys renovate and open an historic restaurant in Colorado.",
+    featured: false
+  },
+
+  {
+    season: 26,
+    episode: 6,
+    title: "Spring Break",
+    date: "29 March 2023",
+    year: 2023,
+    image: "/sp/img/sb.png",
+    description:
+      "Spring Break is an excuse for Garrison to jump back into his former depraved lifestyle.",
+    featured: false
+  },
+
+
+   
+{
+  type: "special",
+  special: 1,
+  betweenSeasons: [26, 27],
+  title: "South Park: Joining the Panderverse",
+  date: "27 October 2023",
+  year: 2023,
+  image: "/sp/img/jtp.png",
+  description: "Cartman's deeply disturbing dreams portend the end of the life he knows and loves. The adults in South Park are also wrestling with their own life decisions as the advent of AI is turning their world upside down."
+},
+   
+{
+  type: "special",
+  special: 2,
+  betweenSeasons: [26, 27],
+  title: "South Park (Not Suitable For Children)",
+  date: "20 December 2023",
+  year: 2023,
+  image: "/sp/img/nsfc.png",
+  description: "After it's discovered that a teacher at South Park Elementary has an OnlyFans page, Randy is compelled to take a closer look at the seedy underbelly of the world of on-line influencers."
+},
+   
+   {
+  type: "special",
+  special: 3,
+  betweenSeasons: [26, 27],
+  title: "South Park: The End of Obesity",
+  date: "24 May 2024",
+  year: 2024,
+  image: "/sp/img/teoo.png",
+  description: "The advent of new weight loss drugs has a huge impact on everyone in South Park. When Cartman is denied access to the life-changing medicine, the kids jump into action."
+},
 
   {
     season: 27,
@@ -2679,9 +2804,72 @@ const listViewButton = document.getElementById("listViewButton");
    HELPERS
 ========================================================= */
 
+function itemType(item) {
+
+  return item && item.type === "special"
+    ? "special"
+    : "episode";
+
+}
+
+
+function specialGroupKey(item) {
+
+  if (!item || itemType(item) !== "special") return "";
+
+  if (item.specialGroup) {
+    return String(item.specialGroup);
+  }
+
+  if (
+    Array.isArray(item.betweenSeasons)
+    && item.betweenSeasons.length >= 2
+  ) {
+    return `${item.betweenSeasons[0]}-${item.betweenSeasons[1]}`;
+  }
+
+  return "specials";
+
+}
+
+
+function itemOrder(item) {
+
+  if (Number.isFinite(Number(item.order))) {
+    return Number(item.order);
+  }
+
+  if (itemType(item) === "special") {
+    if (
+      Array.isArray(item.betweenSeasons)
+      && item.betweenSeasons.length >= 2
+    ) {
+      const lowerSeason = Math.min(
+        Number(item.betweenSeasons[0]),
+        Number(item.betweenSeasons[1])
+      );
+
+      return lowerSeason * 100 + 50 + (Number(item.special) || 0) / 100;
+    }
+
+    return (Number(item.year) || 0) * 10 + (Number(item.special) || 0) / 100;
+  }
+
+  return (
+    Number(item.season || 0) * 100
+    + Number(item.episode || 0)
+  );
+
+}
+
+
 function episodeCode(
   episode
 ) {
+
+  if (itemType(episode) === "special") {
+    return `SPECIAL ${String(episode.special || 1).padStart(2, "0")}`;
+  }
 
   return (
     "S"
@@ -2710,10 +2898,12 @@ function uniqueSeasons() {
 
   return [
     ...new Set(
-      episodes.map(
-        episode =>
-          episode.season
-      )
+      episodes
+        .filter(item => itemType(item) === "episode")
+        .map(
+          episode =>
+            episode.season
+        )
     )
   ].sort(
     (a, b) =>
@@ -2723,7 +2913,43 @@ function uniqueSeasons() {
 }
 
 
+function hasSpecials() {
+
+  return episodes.some(
+    item => itemType(item) === "special"
+  );
+
+}
+
+
+function specialSectionLabel(item) {
+
+  if (
+    Array.isArray(item?.betweenSeasons)
+    && item.betweenSeasons.length >= 2
+  ) {
+    const low = Math.min(
+      Number(item.betweenSeasons[0]),
+      Number(item.betweenSeasons[1])
+    );
+    const high = Math.max(
+      Number(item.betweenSeasons[0]),
+      Number(item.betweenSeasons[1])
+    );
+
+    return `Between Seasons ${low} & ${high}`;
+  }
+
+  return "Special releases";
+
+}
+
+
 function episodeSlug(episode) {
+
+  if (itemType(episode) === "special") {
+    return `special-${specialGroupKey(episode)}-${episode.special || 1}`;
+  }
 
   return `s${episode.season}e${episode.episode}`;
 
@@ -2734,6 +2960,20 @@ function findEpisodeIndexBySlug(slug) {
 
   if (!slug) return -1;
 
+  const specialMatch = /^special-(.+)-(\d+)$/i.exec(slug.trim());
+
+  if (specialMatch) {
+    const group = specialMatch[1];
+    const specialNumber = Number(specialMatch[2]);
+
+    return episodes.findIndex(
+      item =>
+        itemType(item) === "special"
+        && specialGroupKey(item) === group
+        && Number(item.special || 1) === specialNumber
+    );
+  }
+
   const match = /^s(\d+)e(\d+)$/i.exec(slug.trim());
 
   if (!match) return -1;
@@ -2743,9 +2983,9 @@ function findEpisodeIndexBySlug(slug) {
 
   return episodes.findIndex(
     episode =>
-      episode.season === season
-      &&
-      episode.episode === episodeNumber
+      itemType(episode) === "episode"
+      && episode.season === season
+      && episode.episode === episodeNumber
   );
 
 }
@@ -2757,9 +2997,32 @@ function getSeasonEpisodeIndexes(index = activeEpisodeIndex) {
 
   if (!current) return [];
 
+  if (itemType(current) === "special") {
+    const group = specialGroupKey(current);
+
+    return episodes
+      .map((episode, episodeIndex) => ({ episode, episodeIndex }))
+      .filter(
+        item =>
+          itemType(item.episode) === "special"
+          && specialGroupKey(item.episode) === group
+      )
+      .sort(
+        (a, b) =>
+          (Number(a.episode.special) || 0)
+          -
+          (Number(b.episode.special) || 0)
+      )
+      .map(item => item.episodeIndex);
+  }
+
   return episodes
     .map((episode, episodeIndex) => ({ episode, episodeIndex }))
-    .filter(item => item.episode.season === current.season)
+    .filter(
+      item =>
+        itemType(item.episode) === "episode"
+        && item.episode.season === current.season
+    )
     .sort((a, b) => a.episode.episode - b.episode.episode)
     .map(item => item.episodeIndex);
 
@@ -2806,7 +3069,11 @@ function syncURL() {
     params.set(
       "seasons",
       [...selectedSeasons]
-        .sort((a, b) => b - a)
+        .sort((a, b) => {
+          if (a === "specials") return -1;
+          if (b === "specials") return 1;
+          return Number(b) - Number(a);
+        })
         .join(",")
     );
   }
@@ -2846,9 +3113,19 @@ function readURLState() {
   if (seasonsParam) {
     seasonsParam
       .split(",")
-      .map(value => Number(value))
-      .filter(value => Number.isFinite(value) && uniqueSeasons().includes(value))
-      .forEach(value => selectedSeasons.add(value));
+      .map(value => value.trim().toLowerCase())
+      .forEach(value => {
+        if (value === "specials" && hasSpecials()) {
+          selectedSeasons.add("specials");
+          return;
+        }
+
+        const season = Number(value);
+
+        if (Number.isFinite(season) && uniqueSeasons().includes(season)) {
+          selectedSeasons.add(season);
+        }
+      });
   }
 
   const q = params.get("q") || "";
@@ -2935,6 +3212,32 @@ function renderSeasonRail() {
   const allActive =
     selectedSeasons.size === 0;
 
+  const entries = seasons.map(
+    season => ({
+      type: "season",
+      value: season,
+      label: String(season),
+      order: season * 100
+    })
+  );
+
+  if (hasSpecials()) {
+    const latestSpecialOrder = Math.max(
+      ...episodes
+        .filter(item => itemType(item) === "special")
+        .map(itemOrder)
+    );
+
+    entries.push({
+      type: "specials",
+      value: "specials",
+      label: "SPECIALS",
+      order: latestSpecialOrder
+    });
+  }
+
+  entries.sort((a, b) => b.order - a.order);
+
   seasonRail.innerHTML =
     `
       <button
@@ -2945,14 +3248,14 @@ function renderSeasonRail() {
       </button>
 
       ${
-        seasons
+        entries
           .map(
-            season => `
+            entry => `
               <button
-                class="season-button ${selectedSeasons.has(season) ? "active" : ""}"
-                data-season="${season}"
+                class="season-button ${selectedSeasons.has(entry.value) ? "active" : ""}"
+                data-season="${entry.value}"
               >
-                ${season}
+                ${entry.label}
               </button>
             `
           )
@@ -2969,14 +3272,18 @@ function renderSeasonRail() {
 
 function renderActiveFilters() {
 
-  const seasons =
+  const filters =
     [...selectedSeasons]
-      .sort((a, b) => b - a);
+      .sort((a, b) => {
+        if (a === "specials") return -1;
+        if (b === "specials") return 1;
+        return Number(b) - Number(a);
+      });
 
   const hasSearch =
     Boolean(searchInput.value.trim());
 
-  if (!seasons.length && !hasSearch) {
+  if (!filters.length && !hasSearch) {
     activeFilters.classList.remove("visible");
     activeFilters.innerHTML = "";
     return;
@@ -2990,17 +3297,23 @@ function renderActiveFilters() {
         Active
       </span>
 
-      ${seasons.map(season => `
-        <button
-          type="button"
-          class="active-filter-chip"
-          data-filter-season="${season}"
-          aria-label="Remove Season ${season} filter"
-        >
-          Season ${season}
-          <span class="filter-x">×</span>
-        </button>
-      `).join("")}
+      ${filters.map(filter => {
+        const label = filter === "specials"
+          ? "Specials"
+          : `Season ${filter}`;
+
+        return `
+          <button
+            type="button"
+            class="active-filter-chip"
+            data-filter-season="${filter}"
+            aria-label="Remove ${label} filter"
+          >
+            ${label}
+            <span class="filter-x">×</span>
+          </button>
+        `;
+      }).join("")}
 
       ${hasSearch ? `
         <button
@@ -3034,10 +3347,17 @@ function getFilteredEpisodes() {
   return episodes.filter(
     episode => {
 
+      const isSpecial =
+        itemType(episode) === "special";
+
       const matchesSeason =
         selectedSeasons.size === 0
         ||
-        selectedSeasons.has(episode.season);
+        (
+          isSpecial
+          ? selectedSeasons.has("specials")
+          : selectedSeasons.has(episode.season)
+        );
 
       const haystack =
         (
@@ -3047,9 +3367,10 @@ function getFilteredEpisodes() {
           + " "
           + episode.date
           + " "
-          + episode.season
+          + (isSpecial ? "special specials " : `season ${episode.season} episode ${episode.episode} `)
+          + (episode.special || "")
           + " "
-          + episode.episode
+          + (episode.year || "")
         )
         .toLowerCase();
 
@@ -3132,7 +3453,8 @@ function renderArchive() {
 
   const filtered = getFilteredEpisodes()
     .slice()
-    .sort((a, b) => b.season - a.season || a.episode - b.episode);
+    .sort((a, b) => itemOrder(b) - itemOrder(a));
+
   const totalPages = Math.max(1, Math.ceil(filtered.length / EPISODES_PER_PAGE));
 
   if (currentPage > totalPages) currentPage = totalPages;
@@ -3143,19 +3465,25 @@ function renderArchive() {
   resultsCount.textContent = `${filtered.length} ${filtered.length === 1 ? "episode" : "episodes"}`;
   browseCount.textContent = `${filtered.length} found`;
 
-  const activeSeasonList = [...selectedSeasons].sort((a,b) => b - a);
+  const activeFiltersList = [...selectedSeasons]
+    .sort((a, b) => {
+      if (a === "specials") return -1;
+      if (b === "specials") return 1;
+      return Number(b) - Number(a);
+    })
+    .map(value => value === "specials" ? "Specials" : `Season ${value}`);
 
   if (selectedSeasons.size === 0 && !searchQuery) {
     resultsStatus.textContent = "Showing all episodes";
   }
   else if (selectedSeasons.size > 0 && !searchQuery) {
-    resultsStatus.textContent = `Seasons ${activeSeasonList.join(", ")}`;
+    resultsStatus.textContent = activeFiltersList.join(" · ");
   }
   else if (selectedSeasons.size === 0 && searchQuery) {
     resultsStatus.textContent = `Search: “${searchInput.value.trim()}”`;
   }
   else {
-    resultsStatus.textContent = `Seasons ${activeSeasonList.join(", ")} · “${searchInput.value.trim()}”`;
+    resultsStatus.textContent = `${activeFiltersList.join(" · ")} · “${searchInput.value.trim()}”`;
   }
 
   renderViewToggle();
@@ -3165,7 +3493,7 @@ function renderArchive() {
     archive.innerHTML = `
       <div class="empty-state">
         <strong>No episodes found</strong>
-        Try another search or season.
+        Try another search or filter.
       </div>
     `;
     return;
@@ -3173,18 +3501,42 @@ function renderArchive() {
 
   const grouped = new Map();
 
-  pageEpisodes.forEach(episode => {
-    if (!grouped.has(episode.season)) grouped.set(episode.season, []);
-    grouped.get(episode.season).push(episode);
+  pageEpisodes.forEach(item => {
+    const isSpecial = itemType(item) === "special";
+    const key = isSpecial
+      ? `special:${specialGroupKey(item)}`
+      : `season:${item.season}`;
+
+    if (!grouped.has(key)) {
+      grouped.set(key, {
+        key,
+        type: isSpecial ? "special" : "season",
+        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
+        season: isSpecial ? null : item.season,
+        specialExample: isSpecial ? item : null,
+        items: []
+      });
+    }
+
+    grouped.get(key).items.push(item);
   });
 
-  const seasons = [...grouped.keys()].sort((a,b) => b - a);
+  const groups = [...grouped.values()]
+    .sort((a, b) => b.order - a.order);
 
-  archive.innerHTML = seasons.map(season => {
+  archive.innerHTML = groups.map(group => {
 
-    const seasonEpisodes = grouped.get(season).sort((a,b) => a.episode - b.episode);
+    const isSpecialGroup = group.type === "special";
 
-    const years = [...new Set(seasonEpisodes.map(episode => episode.year))]
+    const groupItems = group.items.sort((a, b) => {
+      if (isSpecialGroup) {
+        return (Number(a.special) || 0) - (Number(b.special) || 0);
+      }
+
+      return Number(a.episode) - Number(b.episode);
+    });
+
+    const years = [...new Set(groupItems.map(item => item.year))]
       .filter(Boolean)
       .sort();
 
@@ -3192,40 +3544,49 @@ function renderArchive() {
     if (years.length === 1) yearText = String(years[0]);
     else if (years.length > 1) yearText = `${years[0]} — ${years[years.length - 1]}`;
 
+    const heading = isSpecialGroup
+      ? "Specials"
+      : `Season ${group.season}`;
+
+    const subheading = isSpecialGroup
+      ? specialSectionLabel(group.specialExample)
+      : yearText;
+
     return `
-      <section class="season-section">
+      <section class="season-section ${isSpecialGroup ? "specials-section" : ""}">
 
         <header class="season-header">
           <div>
-            <h2 class="season-name">Season ${season}</h2>
-            ${yearText ? `<div class="season-year">${yearText}</div>` : ""}
+            <h2 class="season-name">${heading}</h2>
+            ${subheading ? `<div class="season-year">${escapeHTML(subheading)}</div>` : ""}
+            ${isSpecialGroup && yearText ? `<div class="season-year">${escapeHTML(yearText)}</div>` : ""}
           </div>
-          <div class="season-count">${seasonEpisodes.length} on this page</div>
+          <div class="season-count">${groupItems.length} on this page</div>
         </header>
 
         <div class="episode-grid">
-          ${seasonEpisodes.map(episode => {
-            const index = episodes.indexOf(episode);
+          ${groupItems.map(item => {
+            const index = episodes.indexOf(item);
             return `
               <article
-                class="episode-card"
+                class="episode-card ${itemType(item) === "special" ? "special-card" : ""}"
                 data-index="${index}"
                 tabindex="0"
                 role="button"
-                aria-label="Open ${escapeHTML(episode.title)}"
+                aria-label="Open ${escapeHTML(item.title)}"
               >
                 <div class="grid-image">
                   <img
-                    src="${escapeHTML(episode.image)}"
-                    alt="${escapeHTML(episode.title)}"
+                    src="${escapeHTML(item.image)}"
+                    alt="${escapeHTML(item.title)}"
                     loading="lazy"
                     decoding="async"
                   >
-                  <span class="grid-number">${episodeCode(episode)}</span>
+                  <span class="grid-number">${episodeCode(item)}</span>
                 </div>
                 <div class="grid-copy">
-                  <h3 class="grid-title">${escapeHTML(episode.title)}</h3>
-                  <div class="list-description">${escapeHTML(episode.description)}</div>
+                  <h3 class="grid-title">${escapeHTML(item.title)}</h3>
+                  <div class="list-description">${escapeHTML(item.description)}</div>
                   <span class="list-arrow" aria-hidden="true">→</span>
                 </div>
               </article>
@@ -3395,13 +3756,17 @@ function updateModal(
     episode.date;
 
   modalSeason.textContent =
-    `Season ${episode.season}`;
+    itemType(episode) === "special"
+      ? specialSectionLabel(episode)
+      : `Season ${episode.season}`;
 
   modalDescription.textContent =
     episode.description;
 
   modalCounter.innerHTML =
-    `<strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`;
+    itemType(episode) === "special"
+      ? `<span>Special</span> <strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`
+      : `<strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`;
 
   previousTitle.textContent =
     episodes[
@@ -3517,20 +3882,22 @@ document.addEventListener(
 
       else {
 
-        const season =
-          Number(value);
+        const filterValue =
+          value === "specials"
+            ? "specials"
+            : Number(value);
 
         if (
-          selectedSeasons.has(season)
+          selectedSeasons.has(filterValue)
         ) {
 
-          selectedSeasons.delete(season);
+          selectedSeasons.delete(filterValue);
 
         }
 
         else {
 
-          selectedSeasons.add(season);
+          selectedSeasons.add(filterValue);
 
         }
 
@@ -3558,8 +3925,13 @@ document.addEventListener(
       );
 
     if (filterSeason) {
+      const filterValue =
+        filterSeason.dataset.filterSeason === "specials"
+          ? "specials"
+          : Number(filterSeason.dataset.filterSeason);
+
       selectedSeasons.delete(
-        Number(filterSeason.dataset.filterSeason)
+        filterValue
       );
 
       currentPage = 1;
