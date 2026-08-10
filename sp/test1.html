@@ -3909,23 +3909,21 @@ body {
 
 
 /* =========================================================
-   ARCHIVE READABILITY OVER BACKGROUND
-   Keeps the landscape visible while calming detail behind episodes.
+   CURRENT SOUTH PARK REFINEMENTS
 ========================================================= */
 
+/* Archive readability */
 .archive {
   position: relative;
   isolation: isolate;
 }
 
-/* Soft full-width shadow that gradually develops behind the archive.
-   No hard panel edge: it fades in above the results row. */
 .archive::before {
   content: "";
   position: absolute;
   z-index: -1;
   top: -105px;
-  bottom: -120px;
+  bottom: 72px;
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
@@ -3933,101 +3931,32 @@ body {
   background:
     radial-gradient(
       ellipse 95% 42% at 50% 5%,
-      rgba(5, 13, 31, .05) 0%,
-      rgba(4, 10, 25, .18) 42%,
-      rgba(3, 9, 22, .38) 72%,
-      rgba(2, 7, 18, .50) 100%
+      rgba(5,13,31,.05) 0%,
+      rgba(4,10,25,.18) 42%,
+      rgba(3,9,22,.38) 72%,
+      rgba(2,7,18,.50) 100%
     ),
     linear-gradient(
       to bottom,
-      rgba(3, 9, 22, 0) 0%,
-      rgba(3, 9, 22, .18) 9%,
-      rgba(3, 9, 22, .38) 24%,
-      rgba(3, 9, 22, .52) 48%,
-      rgba(3, 9, 22, .56) 78%,
-      rgba(3, 9, 22, .48) 100%
+      rgba(3,9,22,0) 0%,
+      rgba(3,9,22,.18) 9%,
+      rgba(3,9,22,.38) 24%,
+      rgba(3,9,22,.52) 48%,
+      rgba(3,9,22,.56) 78%,
+      rgba(3,9,22,.48) 100%
     );
 }
 
-/* Slightly calmer glass behind each episode title/image without
-   turning the cards into opaque boxes. */
-.episode-card {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(10, 20, 40, .62),
-      rgba(5, 12, 28, .50)
-    ) !important;
-  border-color: rgba(154, 183, 222, .18) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.035),
-    0 12px 30px rgba(0,0,0,.14) !important;
-}
-
-/* Give titles a stable dark falloff even when bright town lights
-   happen to sit directly behind a card. */
-.grid-content {
-  position: relative;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(5, 12, 27, .12),
-      rgba(5, 12, 27, .34)
-    );
-}
-
-/* Season boundaries stay readable while still allowing scenery through. */
-.season-section {
-  position: relative;
-}
-
-.season-heading {
-  text-shadow: 0 2px 16px rgba(0,0,0,.42);
-}
-
-@media (max-width: 760px) {
-  .archive::before {
-    top: -70px;
-    bottom: -80px;
-    background:
-      linear-gradient(
-        to bottom,
-        rgba(3, 9, 22, .10) 0%,
-        rgba(3, 9, 22, .42) 18%,
-        rgba(3, 9, 22, .58) 55%,
-        rgba(3, 9, 22, .54) 100%
-      );
-  }
-
-  .episode-card {
-    background:
-      linear-gradient(
-        145deg,
-        rgba(9, 19, 38, .68),
-        rgba(4, 11, 26, .56)
-      ) !important;
-  }
-}
-
-
-/* =========================================================
-   SOUTH PARK TITLE — CUT-PAPER TRIPLE UNDERLINE
-========================================================= */
-
-/* Replace the earlier thin multicolour stroke with the chunkier,
-   separated yellow / red / blue marks from the mockup. */
+/* Main title underline */
 .guide-logo {
   padding-bottom: 18px !important;
 }
 
 .guide-logo::after {
-  content: "" !important;
-  position: absolute !important;
   left: 5px !important;
   bottom: 2px !important;
   width: 238px !important;
   height: 9px !important;
-
   background:
     linear-gradient(
       90deg,
@@ -4037,169 +3966,23 @@ body {
       transparent 64% 68%,
       #4fa3d9 68% 100%
     ) !important;
-
-  /* Rough individual-looking paper strokes rather than one neat line. */
-  clip-path: polygon(
-    0 30%, 5% 12%, 14% 20%, 23% 7%, 31% 18%,
-    31% 78%, 23% 88%, 14% 76%, 5% 92%, 0 76%,
-
-    35% 26%, 40% 10%, 48% 19%, 56% 5%, 64% 17%,
-    64% 80%, 56% 91%, 48% 77%, 40% 90%, 35% 74%,
-
-    68% 27%, 75% 8%, 83% 20%, 92% 5%, 100% 18%,
-    100% 77%, 92% 91%, 83% 75%, 75% 89%, 68% 76%
-  ) !important;
-
   transform: rotate(-.7deg) !important;
-  filter:
-    drop-shadow(0 2px 0 rgba(0,0,0,.20))
-    drop-shadow(0 0 5px rgba(255,255,255,.025)) !important;
   opacity: 1 !important;
 }
 
-@media (max-width: 760px) {
-  .guide-logo {
-    padding-bottom: 15px !important;
-  }
-
-  .guide-logo::after {
-    left: 3px !important;
-    width: 190px !important;
-    height: 7px !important;
-  }
-}
-
-
-/* =========================================================
-   RESULTS STATUS + EPISODE COUNT REFINEMENT
-========================================================= */
-
-/* Remove the "SHOWING ... EPISODES / results status" strip entirely. */
-.results-status,
-.result-status,
-.results-summary,
-.guide-results-status,
-.archive-results-status,
+/* Hide duplicate results display */
 #resultsStatus,
-#resultStatus {
-  display: none !important;
-}
-
-/* Use the warm orange accent already present elsewhere in the guide
-   for the large X in "X EPISODES FOUND". */
-.guide-count-number,
-.episode-count-number,
-.count-number,
-#episodeCount,
-#resultCount,
-#resultsCount {
-  color: #f0a044 !important;
-}
-
-
-/* =========================================================
-   COUNT + GRID NUMBER REFINEMENT
-========================================================= */
-
-/* Ensure the actual guide count uses the warm orange accent too. */
-.guide-count {
-  color: #f0a044 !important;
-}
-
-/* Make the pasted-paper episode number sticker slightly larger. */
-.grid-number {
-  font-size: .62rem !important;
-  padding: 5px 9px !important;
-}
-
-@media (max-width: 760px) {
-  .grid-number {
-    font-size: .60rem !important;
-  }
-}
-
-
-/* =========================================================
-   SPECIALS AS A GLOBAL CONTENT FILTER
-========================================================= */
-
-/* ALL + S are global controls; the divider separates them from chronology. */
-.who-season-rail .season-button.specials-rail-button {
-  width: 52px !important;
-  min-width: 52px !important;
-  padding: 0 !important;
-  border-radius: 50% !important;
-}
-
-.season-rail-divider {
-  flex: 0 0 1px;
-  width: 1px;
-  height: 28px;
-  margin: 0 5px;
-  align-self: center;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(180, 198, 224, .32) 20%,
-    rgba(180, 198, 224, .32) 80%,
-    transparent
-  );
-}
-
-/* Keep the global controls visually attached on smaller rails. */
-@media (max-width: 760px) {
-  .who-season-rail .season-button.specials-rail-button {
-    width: 42px !important;
-    min-width: 42px !important;
-    height: 42px !important;
-  }
-
-  .season-rail-divider {
-    height: 24px;
-    margin-inline: 3px;
-  }
-}
-
-
-/* =========================================================
-   SPECIALS FILTER + RESULTS CLEANUP
-========================================================= */
-
-/* Specials is a global filter, but its bubble is visually identical
-   to every numbered season circle. */
-.who-season-rail .season-button.specials-rail-button,
-.who-season-rail .season-button[data-season="specials"] {
-  width: 42px !important;
-  min-width: 42px !important;
-  height: 42px !important;
-  padding: 0 !important;
-  border-radius: 50% !important;
-  font-size: .76rem !important;
-}
-
-/* Remove the duplicate results count beneath the active-filter area.
-   The large "X EPISODES FOUND" box remains the single count display. */
 #resultsCount,
-.results-count {
+.results-count,
+.results-separator {
   display: none !important;
 }
 
-@media (max-width: 760px) {
-  .who-season-rail .season-button.specials-rail-button,
-  .who-season-rail .season-button[data-season="specials"] {
-    width: 36px !important;
-    min-width: 36px !important;
-    height: 36px !important;
-    font-size: .69rem !important;
-  }
+.guide-count strong {
+  color: #f0a044 !important;
 }
 
-
-/* =========================================================
-   TYPOGRAPHY + TOP CONTROL REFINEMENT
-========================================================= */
-
-/* Episode titles */
+/* Typography */
 .grid-title {
   font-size: 1.28rem !important;
   line-height: 1.16 !important;
@@ -4209,50 +3992,33 @@ body {
   font-size: 1.22rem !important;
 }
 
-/* Larger synopsis copy in list mode */
 .archive.list-view .list-description {
   font-size: .86rem !important;
   line-height: 1.48 !important;
 }
 
-/* Larger pasted episode-number sticker text */
 .grid-number {
   font-size: .68rem !important;
   padding: 6px 9px !important;
 }
 
-/* Slightly larger season year */
 .season-year {
   font-size: .71rem !important;
-  letter-spacing: .085em !important;
 }
 
-/* Subtle glass panel around the guide introduction */
+/* Intro glass */
 .guide-intro {
   display: inline-block;
-  max-width: 680px;
   padding: 11px 14px;
   border: 1px solid rgba(255,255,255,.09);
   border-radius: 12px;
   background:
-    linear-gradient(
-      145deg,
-      rgba(10, 20, 39, .34),
-      rgba(4, 12, 28, .20)
-    );
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.025),
-    0 8px 24px rgba(0,0,0,.08);
+    linear-gradient(145deg, rgba(10,20,39,.34), rgba(4,12,28,.20));
   backdrop-filter: blur(10px) saturate(115%);
   -webkit-backdrop-filter: blur(10px) saturate(115%);
 }
 
-/* Use the warm orange accent consistently for the big result number */
-.guide-count strong {
-  color: #f0a044 !important;
-}
-
-/* Random Episode: orange border + soft orange glass on hover */
+/* Random episode orange treatment */
 .guide-surprise-button {
   border-color: rgba(240,160,68,.38) !important;
 }
@@ -4260,18 +4026,11 @@ body {
 .guide-surprise-button:hover {
   border-color: rgba(240,160,68,.82) !important;
   background:
-    linear-gradient(
-      145deg,
-      rgba(240,160,68,.20),
-      rgba(128,72,24,.16)
-    ) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    0 7px 20px rgba(240,160,68,.12) !important;
+    linear-gradient(145deg, rgba(240,160,68,.20), rgba(128,72,24,.16)) !important;
   color: #ffe3bf !important;
 }
 
-/* Make search exactly match the count card's visible height. */
+/* Search sizing / icon */
 .guide-count,
 .guide-search-wrap,
 .guide-search-input {
@@ -4285,7 +4044,6 @@ body {
   align-items: center;
 }
 
-/* Better vertical alignment for the magnifying glass */
 .guide-search-icon {
   left: 17px !important;
   top: 50% !important;
@@ -4293,7 +4051,6 @@ body {
   height: 21px !important;
   display: grid !important;
   place-items: center !important;
-  margin: 0 !important;
   transform: translateY(-50%) !important;
   color: rgba(177,187,202,.88) !important;
 }
@@ -4309,25 +4066,14 @@ body {
 .guide-search-input {
   padding-left: 50px !important;
   padding-right: 46px !important;
-  line-height: normal !important;
-  box-sizing: border-box !important;
 }
 
-/* Hide browser-native clear controls so we can use the orange X. */
 .guide-search-input::-webkit-search-cancel-button,
 .guide-search-input::-webkit-search-decoration {
   -webkit-appearance: none;
   appearance: none;
 }
 
-.guide-search-input::-ms-clear,
-.guide-search-input::-ms-reveal {
-  display: none;
-  width: 0;
-  height: 0;
-}
-
-/* Custom orange search clear X */
 .guide-search-clear {
   position: absolute;
   right: 13px;
@@ -4347,85 +4093,35 @@ body {
   font-weight: 700;
   line-height: 1;
   transform: translateY(-50%);
-  transition:
-    color .18s ease,
-    background .18s ease,
-    transform .18s ease;
 }
 
 .guide-search-wrap.has-value .guide-search-clear {
   display: grid;
 }
 
-.guide-search-clear:hover {
-  color: #ffc077;
-  background: rgba(240,160,68,.18);
-  transform: translateY(-50%) scale(1.05);
+/* Specials global filter */
+.who-season-rail .season-button.specials-rail-button,
+.who-season-rail .season-button[data-season="specials"] {
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  font-size: .76rem !important;
 }
 
-@media (max-width: 760px) {
-  .grid-title {
-    font-size: 1.20rem !important;
-  }
-
-  .archive.list-view .grid-title {
-    font-size: 1.10rem !important;
-  }
-
-  .archive.list-view .list-description {
-    font-size: .82rem !important;
-  }
-
-  .grid-number {
-    font-size: .64rem !important;
-  }
-
-  .season-year {
-    font-size: .67rem !important;
-  }
-
-  .guide-count,
-  .guide-search-wrap,
-  .guide-search-input {
-    height: 52px !important;
-    min-height: 52px !important;
-  }
-
-  .guide-search-icon {
-    left: 15px !important;
-    width: 20px !important;
-    height: 20px !important;
-  }
-
-  .guide-search-icon svg {
-    width: 20px !important;
-    height: 20px !important;
-  }
-
-  .guide-search-input {
-    padding-left: 45px !important;
-    padding-right: 43px !important;
-  }
-
-  .guide-search-clear {
-    right: 10px;
-    width: 27px;
-    height: 27px;
-  }
+.season-rail-divider {
+  flex: 0 0 1px;
+  width: 1px;
+  height: 28px;
+  margin: 0 5px;
+  align-self: center;
+  background:
+    linear-gradient(to bottom, transparent, rgba(180,198,224,.32) 20%,
+    rgba(180,198,224,.32) 80%, transparent);
 }
 
-
-/* =========================================================
-   PAGINATION VISIBILITY + ARCHIVE GRADIENT HANDOFF
-========================================================= */
-
-/* Stop the archive readability wash before pagination so controls
-   don't look buried under the darkening layer. */
-.archive::before {
-  bottom: 72px !important;
-}
-
-/* Keep pagination above any archive/background treatment. */
+/* Pagination clarity */
 .archive-pagination {
   position: relative !important;
   z-index: 8 !important;
@@ -4435,583 +4131,219 @@ body {
   border-top: 1px solid rgba(255,255,255,.10) !important;
 }
 
-/* Previous / Next */
 .archive-pagination .page-nav {
   min-height: 40px !important;
   padding: 0 14px !important;
   border: 1px solid rgba(240,160,68,.28) !important;
   border-radius: 11px !important;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(9,18,36,.74),
-      rgba(5,12,27,.62)
-    ) !important;
+  background: rgba(8,17,34,.72) !important;
   color: rgba(238,242,249,.9) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.045),
-    0 7px 22px rgba(0,0,0,.16) !important;
-  backdrop-filter: blur(12px) saturate(115%);
-  -webkit-backdrop-filter: blur(12px) saturate(115%);
   opacity: 1 !important;
-}
-
-.archive-pagination .page-nav:hover:not(:disabled) {
-  border-color: rgba(240,160,68,.72) !important;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(240,160,68,.18),
-      rgba(94,52,18,.13)
-    ) !important;
-  color: #fff !important;
-  transform: translateY(-1px);
 }
 
 .archive-pagination .page-nav:disabled {
   opacity: .34 !important;
-  color: rgba(220,226,237,.48) !important;
-  border-color: rgba(255,255,255,.08) !important;
-  background: rgba(6,13,28,.46) !important;
-  box-shadow: none !important;
 }
 
-/* Page circles */
 .archive-pagination .page-number {
   width: 38px !important;
   height: 38px !important;
   border: 1px solid rgba(255,255,255,.10) !important;
   background: rgba(8,17,34,.68) !important;
   color: rgba(235,240,248,.82) !important;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.035),
-    0 5px 16px rgba(0,0,0,.12) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
-.archive-pagination .page-number:hover {
-  border-color: rgba(240,160,68,.45) !important;
-  background: rgba(240,160,68,.11) !important;
-  color: #fff !important;
-}
-
-.archive-pagination .page-number.active,
 .archive-pagination .page-number[aria-current="page"] {
   border-color: #f6b663 !important;
-  background:
-    linear-gradient(
-      145deg,
-      #f0a044,
-      #d88a31
-    ) !important;
+  background: linear-gradient(145deg,#f0a044,#d88a31) !important;
   color: #172033 !important;
-  box-shadow:
-    0 0 0 2px rgba(5,12,26,.72),
-    0 0 18px rgba(240,160,68,.20) !important;
 }
 
-/* Current page position, e.g. 2 / 2 */
 .archive-pagination .page-position {
   color: rgba(220,228,240,.72) !important;
-  font-size: .66rem !important;
-  font-weight: 700 !important;
-  letter-spacing: .085em !important;
-  text-shadow: 0 1px 10px rgba(0,0,0,.28);
 }
 
-/* Ellipsis should remain readable too. */
-.archive-pagination .page-ellipsis {
-  color: rgba(220,228,240,.48) !important;
-}
-
-@media (max-width: 760px) {
-  .archive::before {
-    bottom: 58px !important;
-  }
-
-  .archive-pagination {
-    margin-top: 22px !important;
-    padding-top: 15px !important;
-  }
-
-  .archive-pagination .page-nav {
-    min-height: 38px !important;
-    padding-inline: 12px !important;
-  }
-
-  .archive-pagination .page-position {
-    color: rgba(226,233,243,.78) !important;
-  }
-}
-
-
-/* =========================================================
-   MODAL TOP BAR — ARROW PLACEMENT FIX
-========================================================= */
-
-.modal-topbar {
-  display: grid !important;
-  grid-template-columns: 42px minmax(0, 1fr) 42px !important;
-  align-items: center !important;
-  gap: 8px !important;
-  min-height: 48px !important;
-  padding: 6px 8px !important;
-}
-
-.modal-topbar .modal-prev,
-.modal-topbar .modal-next,
-.modal-topbar button[data-modal-prev],
-.modal-topbar button[data-modal-next] {
-  position: static !important;
-  inset: auto !important;
-  transform: none !important;
-  margin: 0 !important;
-  width: 36px !important;
-  min-width: 36px !important;
-  height: 36px !important;
-  padding: 0 !important;
-  display: grid !important;
-  place-items: center !important;
-  align-self: center !important;
-  justify-self: center !important;
-  line-height: 1 !important;
-}
-
-.modal-topbar .modal-prev,
-.modal-topbar button[data-modal-prev] {
-  grid-column: 1 !important;
-}
-
-.modal-topbar .modal-next,
-.modal-topbar button[data-modal-next] {
-  grid-column: 3 !important;
-}
-
-.modal-topbar .modal-position,
-.modal-topbar .modal-counter,
-.modal-topbar [data-modal-position] {
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  justify-self: center !important;
-  align-self: center !important;
-  margin: 0 !important;
-  text-align: center !important;
-}
-
-/* Centre arrow glyphs themselves, including SVG/icon implementations. */
-.modal-topbar .modal-prev svg,
-.modal-topbar .modal-next svg,
-.modal-topbar button[data-modal-prev] svg,
-.modal-topbar button[data-modal-next] svg {
-  display: block !important;
-  width: 17px !important;
-  height: 17px !important;
-  margin: auto !important;
-}
-
-@media (max-width: 760px) {
-  .modal-topbar {
-    grid-template-columns: 40px minmax(0, 1fr) 40px !important;
-    min-height: 46px !important;
-    padding: 5px 7px !important;
-    gap: 5px !important;
-  }
-
-  .modal-topbar .modal-prev,
-  .modal-topbar .modal-next,
-  .modal-topbar button[data-modal-prev],
-  .modal-topbar button[data-modal-next] {
-    width: 34px !important;
-    min-width: 34px !important;
-    height: 34px !important;
-  }
-}
-
-
-/* =========================================================
-   LIST VIEW — ORANGE HOVER BORDER
-========================================================= */
-
-.archive.list-view .episode-card {
-  transition:
-    border-color .22s ease,
-    box-shadow .22s ease,
-    transform .22s ease !important;
-}
-
+/* Orange list-view hover */
 .archive.list-view .episode-card:hover {
-  border-color: rgba(240, 160, 68, .78) !important;
+  border-color: rgba(240,160,68,.90) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.045),
-    0 0 0 1px rgba(240,160,68,.12),
-    0 10px 28px rgba(240,160,68,.10) !important;
-}
-
-
-/* =========================================================
-   SOUTH PARK CUT-PAPER CARD SHAPES
-   Keeps the existing dark glass styling, but makes each episode
-   card feel like a subtly hand-cut piece of construction paper.
-========================================================= */
-
-.episode-card {
-  position: relative !important;
-  isolation: isolate;
-  overflow: hidden !important;
-
-  /* Tiny asymmetry: deliberately restrained so the grid stays polished. */
-  clip-path: polygon(
-    0.8% 1.2%,
-    98.6% 0.4%,
-    99.8% 2.1%,
-    99.4% 97.4%,
-    97.8% 99.5%,
-    1.1% 98.8%,
-    0.2% 96.7%,
-    0.4% 3.1%
-  );
-
-  transition:
-    border-color .22s ease,
-    box-shadow .22s ease,
-    transform .22s ease,
-    filter .22s ease !important;
-}
-
-/* Alternate the cut very slightly so the cards don't look stamped
-   from one identical digital template. */
-.episode-card:nth-child(2n) {
-  clip-path: polygon(
-    0.4% 1.8%,
-    2.2% 0.5%,
-    98.9% 0.9%,
-    99.7% 3.0%,
-    99.2% 98.1%,
-    97.1% 99.6%,
-    1.0% 99.0%,
-    0.1% 96.8%
-  );
-}
-
-.episode-card:nth-child(3n) {
-  clip-path: polygon(
-    1.3% 0.3%,
-    97.9% 0.8%,
-    99.6% 2.3%,
-    99.9% 96.6%,
-    98.0% 99.7%,
-    0.7% 98.5%,
-    0.2% 3.0%
-  );
-}
-
-/* Fine translucent fibre/noise layer over the glass. */
-.episode-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-
-  background:
-    repeating-radial-gradient(
-      circle at 18% 22%,
-      rgba(255,255,255,.30) 0 .45px,
-      transparent .55px 3.5px
-    ),
-    repeating-linear-gradient(
-      103deg,
-      rgba(255,255,255,.018) 0 1px,
-      transparent 1px 5px
-    );
-
-  opacity: .12;
-  mix-blend-mode: soft-light;
-}
-
-/* Keep all real card content above the underlying card surface while
-   allowing the paper texture to remain a very light top-layer grain. */
-.episode-card > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* A faint irregular inner edge makes the cut shape easier to perceive
-   without changing the established glass/card colour. */
-.episode-card::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  z-index: 1;
-  pointer-events: none;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.025),
-      transparent 26%,
-      transparent 74%,
-      rgba(255,255,255,.015)
-    );
-
-  clip-path: inherit;
-}
-
-/* Grid hover: retain the existing restrained lift but let the paper
-   silhouette catch a little more light. */
-.archive:not(.list-view) .episode-card:hover {
-  filter: brightness(1.035);
-}
-
-/* List view keeps the orange hover treatment added previously,
-   now following the cut-paper silhouette. */
-.archive.list-view .episode-card:hover {
-  border-color: rgba(240,160,68,.82) !important;
-  filter: brightness(1.035);
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
     0 0 0 1px rgba(240,160,68,.14),
     0 11px 30px rgba(240,160,68,.11) !important;
 }
 
-@media (max-width: 760px) {
-  /* Reduce the irregularity slightly on narrow cards so edges remain clean. */
-  .episode-card,
-  .episode-card:nth-child(2n),
-  .episode-card:nth-child(3n) {
-    clip-path: polygon(
-      .6% 1%,
-      98.8% .5%,
-      99.6% 2%,
-      99.5% 97.6%,
-      98% 99.2%,
-      .8% 98.8%,
-      .2% 2.5%
-    );
-  }
-
-  .episode-card::before {
-    opacity: .09;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .episode-card {
-    transition:
-      border-color .15s ease,
-      box-shadow .15s ease,
-      filter .15s ease !important;
-  }
-}
-
-
-/* =========================================================
-   CUT-PAPER CARDS — STRONGER, CLEARLY VISIBLE VERSION
-========================================================= */
-
-/* Override the earlier ultra-subtle version. */
+/* Stronger cut-paper card silhouette */
 .episode-card,
 .episode-card:nth-child(2n),
 .episode-card:nth-child(3n) {
   border-radius: 3px !important;
-  border: 1px solid rgba(210,220,233,.20) !important;
-
   clip-path: polygon(
-    1.3% 0.4%,
-    25% 1.1%,
-    49% 0.2%,
-    74% 1%,
-    98.7% 0.5%,
-    99.6% 24%,
-    99.1% 51%,
-    99.8% 76%,
-    98.5% 99.1%,
-    73% 98.5%,
-    49% 99.7%,
-    25% 98.9%,
-    0.8% 99.4%,
-    0.2% 75%,
-    0.7% 49%,
-    0.1% 24%
+    1.3% .4%, 25% 1.1%, 49% .2%, 74% 1%, 98.7% .5%,
+    99.6% 24%, 99.1% 51%, 99.8% 76%, 98.5% 99.1%,
+    73% 98.5%, 49% 99.7%, 25% 98.9%, .8% 99.4%,
+    .2% 75%, .7% 49%, .1% 24%
   ) !important;
-
-  filter:
-    drop-shadow(0 10px 22px rgba(0,0,0,.18)) !important;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(12,23,43,.74),
-      rgba(5,13,29,.61)
-    ) !important;
 }
 
-/* Slightly different "scissor cuts" on alternating cards. */
 .episode-card:nth-child(2n) {
   clip-path: polygon(
-    .5% 1.1%,
-    24% .3%,
-    51% 1%,
-    76% .2%,
-    99.3% 1.2%,
-    98.8% 26%,
-    99.7% 50%,
-    99% 75%,
-    99.5% 98.4%,
-    75% 99.4%,
-    50% 98.7%,
-    24% 99.6%,
-    1% 98.6%,
-    .4% 74%,
-    1% 50%,
-    .2% 25%
+    .5% 1.1%, 24% .3%, 51% 1%, 76% .2%, 99.3% 1.2%,
+    98.8% 26%, 99.7% 50%, 99% 75%, 99.5% 98.4%,
+    75% 99.4%, 50% 98.7%, 24% 99.6%, 1% 98.6%,
+    .4% 74%, 1% 50%, .2% 25%
   ) !important;
 }
 
-.episode-card:nth-child(3n) {
-  clip-path: polygon(
-    1% .2%,
-    26% 1.2%,
-    50% .6%,
-    75% 1.3%,
-    98.9% .4%,
-    99.7% 25%,
-    99.2% 52%,
-    99.6% 76%,
-    98.8% 99.5%,
-    76% 98.7%,
-    48% 99.2%,
-    23% 98.6%,
-    .4% 99.3%,
-    1% 74%,
-    .2% 48%,
-    .8% 23%
-  ) !important;
-}
-
-/* Paper fibre/grain — more visible than before, but still dark. */
-.episode-card::before {
-  content: "" !important;
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 5 !important;
-  pointer-events: none !important;
-
-  background:
-    repeating-radial-gradient(
-      circle at 18% 26%,
-      rgba(255,255,255,.24) 0 .55px,
-      transparent .7px 3.2px
-    ),
-    repeating-linear-gradient(
-      96deg,
-      rgba(255,255,255,.025) 0 1px,
-      transparent 1px 5px
-    ) !important;
-
-  opacity: .17 !important;
-  mix-blend-mode: soft-light !important;
-}
-
-/* Thin lighter "paper edge" running around the cut silhouette. */
-.episode-card::after {
-  content: "" !important;
-  position: absolute !important;
-  inset: 2px !important;
-  z-index: 4 !important;
-  pointer-events: none !important;
-
-  border: 1px solid rgba(255,255,255,.10) !important;
-  border-radius: 2px !important;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.045),
-      transparent 18%,
-      transparent 80%,
-      rgba(255,255,255,.02)
-    ) !important;
-
-  clip-path: inherit !important;
-}
-
-/* Make the inner image feel cut/pasted too, instead of a perfect rounded tile. */
 .grid-image {
   border-radius: 4px !important;
+  clip-path: polygon(.7% 1.1%,99% .3%,99.6% 98.2%,98.4% 99.3%,.5% 98.8%,.2% 2.1%) !important;
+}
 
+/* =========================================================
+   MODAL TOPBAR — RIGHT ARROW + CLOSE FLUSH RIGHT
+========================================================= */
+
+.modal-topbar {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  min-height: 58px !important;
+  padding: 8px 16px !important;
+  gap: 8px !important;
+}
+
+.modal-topbar > #modalTopPrevious {
+  grid-column: 1 !important;
+  justify-self: start !important;
+  position: static !important;
+  transform: none !important;
+}
+
+.modal-topbar .modal-counter {
+  position: absolute !important;
+  left: 50% !important;
+  top: 50% !important;
+  transform: translate(-50%,-50%) !important;
+  margin: 0 !important;
+  width: max-content;
+  pointer-events: none;
+}
+
+.modal-topbar-actions {
+  grid-column: 3 !important;
+  justify-self: end !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 9px !important;
+  margin-left: auto !important;
+}
+
+.modal-topbar-actions #modalTopNext,
+.modal-topbar-actions #modalClose {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  flex: 0 0 auto !important;
+}
+
+.modal-topbar .modal-top-arrow,
+.modal-topbar .modal-close {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+}
+
+/* =========================================================
+   PAPER SCRAP BACK-TO-TOP BUTTON
+========================================================= */
+
+.paper-back-to-top {
+  position: fixed;
+  z-index: 850;
+  right: 22px;
+  bottom: 22px;
+  width: 42px;
+  height: 39px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(40,43,48,.20);
+  background:
+    linear-gradient(145deg, rgba(246,244,235,.97), rgba(213,214,207,.95));
+  color: #222832;
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
   clip-path: polygon(
-    .7% 1.1%,
-    99% .3%,
-    99.6% 98.2%,
-    98.4% 99.3%,
-    .5% 98.8%,
-    .2% 2.1%
-  ) !important;
+    3% 8%, 28% 2%, 52% 7%, 76% 1%, 98% 9%,
+    96% 91%, 74% 98%, 48% 94%, 24% 100%, 2% 92%
+  );
+  box-shadow:
+    0 6px 18px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.75);
+  transform: translateY(12px) rotate(-1.5deg);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity .2s ease,
+    transform .2s ease,
+    filter .2s ease;
 }
 
-/* Tiny physical variation helps sell the paper-card effect. */
-.archive:not(.list-view) .episode-card:nth-child(3n + 1) {
-  transform: rotate(-0.12deg);
+.paper-back-to-top.visible {
+  opacity: .92;
+  pointer-events: auto;
+  transform: translateY(0) rotate(-1.5deg);
 }
 
-.archive:not(.list-view) .episode-card:nth-child(3n + 2) {
-  transform: rotate(0.10deg);
+.paper-back-to-top:hover {
+  opacity: 1;
+  filter: brightness(1.05);
+  transform: translateY(-2px) rotate(.6deg);
 }
 
-.archive:not(.list-view) .episode-card:hover {
-  transform: translateY(-4px) rotate(0deg) !important;
-  filter:
-    brightness(1.04)
-    drop-shadow(0 13px 28px rgba(0,0,0,.22)) !important;
-}
-
-/* List cards get a less aggressive cut, but it remains clearly visible. */
-.archive.list-view .episode-card,
-.archive.list-view .episode-card:nth-child(2n),
-.archive.list-view .episode-card:nth-child(3n) {
-  clip-path: polygon(
-    .4% 1.3%,
-    24% .4%,
-    51% 1.1%,
-    76% .3%,
-    99.4% 1.2%,
-    99% 49%,
-    99.6% 98.1%,
-    75% 99.3%,
-    49% 98.7%,
-    23% 99.5%,
-    .5% 98.4%,
-    .9% 51%
-  ) !important;
-}
-
-.archive.list-view .episode-card:hover {
-  border-color: rgba(240,160,68,.9) !important;
-  filter:
-    brightness(1.045)
-    drop-shadow(0 10px 22px rgba(240,160,68,.10)) !important;
+body.modal-open .paper-back-to-top {
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 @media (max-width: 760px) {
-  .episode-card,
-  .episode-card:nth-child(2n),
-  .episode-card:nth-child(3n) {
-    clip-path: polygon(
-      .8% .5%,
-      50% 1%,
-      99% .5%,
-      99.5% 49%,
-      99% 99%,
-      50% 98.6%,
-      .5% 99%,
-      .4% 50%
-    ) !important;
+  .modal-topbar {
+    grid-template-columns: 36px minmax(0,1fr) auto !important;
+    padding: 7px 10px !important;
   }
 
-  .episode-card::before {
-    opacity: .13 !important;
+  .modal-topbar-actions {
+    gap: 6px !important;
+  }
+
+  .modal-topbar .modal-top-arrow,
+  .modal-topbar .modal-close {
+    width: 32px !important;
+    min-width: 32px !important;
+    height: 32px !important;
+  }
+
+  .paper-back-to-top {
+    right: 14px;
+    bottom: 14px;
+    width: 39px;
+    height: 36px;
+  }
+
+  .who-season-rail .season-button.specials-rail-button,
+  .who-season-rail .season-button[data-season="specials"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    font-size: .69rem !important;
   }
 }
 
@@ -5177,6 +4509,17 @@ body {
 
 </main>
 
+
+
+<button
+  type="button"
+  class="paper-back-to-top"
+  id="paperBackToTop"
+  aria-label="Back to top"
+  title="Back to top"
+>
+  ↑
+</button>
 
 
 <!-- =========================================================
@@ -7909,9 +7252,7 @@ mobileFilterButton?.addEventListener("click", () => {
 function syncSearchClearButton() {
 
   const wrap =
-    searchInput?.closest(
-      ".guide-search-wrap"
-    );
+    searchInput?.closest(".guide-search-wrap");
 
   wrap?.classList.toggle(
     "has-value",
@@ -7919,7 +7260,6 @@ function syncSearchClearButton() {
   );
 
 }
-
 
 guideSearchClear?.addEventListener(
   "click",
@@ -7939,11 +7279,43 @@ guideSearchClear?.addEventListener(
   }
 );
 
-
 searchInput?.addEventListener(
   "input",
   syncSearchClearButton
 );
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+const paperBackToTop =
+  document.getElementById("paperBackToTop");
+
+function syncBackToTop() {
+  paperBackToTop?.classList.toggle(
+    "visible",
+    window.scrollY > 520
+  );
+}
+
+window.addEventListener(
+  "scroll",
+  syncBackToTop,
+  { passive: true }
+);
+
+paperBackToTop?.addEventListener(
+  "click",
+  () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+);
+
+syncBackToTop();
 
 
 /* =========================================================
