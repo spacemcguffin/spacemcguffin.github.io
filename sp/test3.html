@@ -1446,6 +1446,25 @@ a {
     rgba(255,255,255,0.22);
 }
 
+.modal-nav:disabled,
+.modal-top-arrow:disabled {
+  opacity: 0.28;
+  cursor: default;
+  pointer-events: none;
+  transform: none;
+}
+
+.modal-nav:disabled {
+  background: rgba(255,255,255,0.025);
+  border-color: rgba(255,255,255,0.07);
+}
+
+.modal-nav:disabled .nav-title,
+.modal-nav:disabled .nav-label,
+.modal-nav:disabled .nav-circle {
+  color: rgba(255,255,255,0.25);
+}
+
 .modal-nav.next {
   justify-content:
     flex-end;
@@ -3038,22 +3057,20 @@ function getSeasonNavigation(index = activeEpisodeIndex) {
     return {
       seasonIndexes: [index],
       localIndex: 0,
-      previousIndex: index,
-      nextIndex: index
+      previousIndex: null,
+      nextIndex: null
     };
   }
 
   return {
     seasonIndexes,
     localIndex,
-    previousIndex:
-      seasonIndexes[
-        (localIndex - 1 + seasonIndexes.length) % seasonIndexes.length
-      ],
-    nextIndex:
-      seasonIndexes[
-        (localIndex + 1) % seasonIndexes.length
-      ]
+    previousIndex: localIndex > 0
+      ? seasonIndexes[localIndex - 1]
+      : null,
+    nextIndex: localIndex < seasonIndexes.length - 1
+      ? seasonIndexes[localIndex + 1]
+      : null
   };
 
 }
@@ -3449,11 +3466,46 @@ function renderPagination(totalItems) {
 }
 
 
+function getArchiveDisplayOrder(items) {
+
+  const grouped = new Map();
+
+  items.forEach(item => {
+    const isSpecial = itemType(item) === "special";
+    const key = isSpecial
+      ? `special:${specialGroupKey(item)}`
+      : `season:${item.season}`;
+
+    if (!grouped.has(key)) {
+      grouped.set(key, {
+        type: isSpecial ? "special" : "season",
+        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
+        items: []
+      });
+    }
+
+    grouped.get(key).items.push(item);
+  });
+
+  return [...grouped.values()]
+    .sort((a, b) => b.order - a.order)
+    .flatMap(group =>
+      group.items.sort((a, b) => {
+        if (group.type === "special") {
+          return (Number(a.special) || 0) - (Number(b.special) || 0);
+        }
+
+        return Number(a.episode) - Number(b.episode);
+      })
+    );
+}
+
+
 function renderArchive() {
 
-  const filtered = getFilteredEpisodes()
-    .slice()
-    .sort((a, b) => itemOrder(b) - itemOrder(a));
+  const filtered = getArchiveDisplayOrder(
+    getFilteredEpisodes().slice()
+  );
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / EPISODES_PER_PAGE));
 
@@ -3768,27 +3820,40 @@ function updateModal(
       ? `<span>Special</span> <strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`
       : `<strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`;
 
-  previousTitle.textContent =
-    episodes[
-      previousIndex
-    ].title;
+  const hasPrevious = previousIndex !== null;
+  const hasNext = nextIndex !== null;
 
-  nextTitle.textContent =
-    episodes[
-      nextIndex
-    ].title;
+  previousTitle.textContent = hasPrevious
+    ? episodes[previousIndex].title
+    : "Start of season";
 
-  modalPrevious.dataset.targetIndex =
-    previousIndex;
+  nextTitle.textContent = hasNext
+    ? episodes[nextIndex].title
+    : "End of season";
 
-  modalNext.dataset.targetIndex =
-    nextIndex;
+  [modalPrevious, modalTopPrevious].forEach(button => {
+    button.disabled = !hasPrevious;
+    button.setAttribute("aria-disabled", String(!hasPrevious));
 
-  modalTopPrevious.dataset.targetIndex =
-    previousIndex;
+    if (hasPrevious) {
+      button.dataset.targetIndex = previousIndex;
+    }
+    else {
+      delete button.dataset.targetIndex;
+    }
+  });
 
-  modalTopNext.dataset.targetIndex =
-    nextIndex;
+  [modalNext, modalTopNext].forEach(button => {
+    button.disabled = !hasNext;
+    button.setAttribute("aria-disabled", String(!hasNext));
+
+    if (hasNext) {
+      button.dataset.targetIndex = nextIndex;
+    }
+    else {
+      delete button.dataset.targetIndex;
+    }
+  });
 
   modalScroll.scrollTop = 0;
 
@@ -4215,6 +4280,8 @@ modal.addEventListener(
 
 
 function goToModalTarget(button) {
+
+  if (button.disabled || !button.dataset.targetIndex) return;
 
   const index =
     Number(
