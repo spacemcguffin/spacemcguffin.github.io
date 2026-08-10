@@ -5099,41 +5099,41 @@ body.modal-open .current-season-scrap {
   }
 }
 
-/* Orange arrow button in list view. */
-.archive.list-view .list-arrow {
-  border-color: rgba(240,160,68,.52) !important;
+/* List-view arrow bubble follows the season's own colour. */
+.archive.list-view .season-section .list-arrow {
+  border-color: hsla(var(--season-hue), 82%, 70%, .56) !important;
   background:
     radial-gradient(
       circle at 35% 25%,
-      rgba(255,197,125,.25),
+      hsla(var(--season-hue), 95%, 82%, .28),
       transparent 44%
     ),
     linear-gradient(
       145deg,
-      rgba(190,103,27,.52),
-      rgba(112,57,13,.56)
+      hsla(var(--season-hue), 62%, 48%, .58),
+      hsla(var(--season-hue), 58%, 24%, .62)
     ) !important;
-  color: #ffe5c2 !important;
+  color: hsl(var(--season-hue), 92%, 88%) !important;
   box-shadow:
-    0 0 0 1px rgba(240,160,68,.10),
-    0 5px 16px rgba(99,48,8,.20) !important;
+    0 0 0 1px hsla(var(--season-hue), 88%, 64%, .12),
+    0 5px 16px hsla(var(--season-hue), 70%, 18%, .24) !important;
 }
 
-.archive.list-view .episode-card:hover .list-arrow,
-.archive.list-view .episode-card:focus-within .list-arrow,
-.archive.list-view .list-arrow:hover {
-  border-color: rgba(255,181,92,.90) !important;
+.archive.list-view .season-section .episode-card:hover .list-arrow,
+.archive.list-view .season-section .episode-card:focus-within .list-arrow,
+.archive.list-view .season-section .list-arrow:hover {
+  border-color: hsla(var(--season-hue), 92%, 76%, .94) !important;
   background:
     linear-gradient(
       145deg,
-      rgba(240,160,68,.80),
-      rgba(169,82,17,.74)
+      hsla(var(--season-hue), 82%, 64%, .86),
+      hsla(var(--season-hue), 70%, 39%, .80)
     ) !important;
-  color: #fff7eb !important;
+  color: #fff !important;
   box-shadow:
-    0 0 0 2px rgba(28,13,2,.82),
-    0 0 0 4px rgba(240,160,68,.26),
-    0 7px 20px rgba(98,46,7,.24) !important;
+    0 0 0 2px rgba(5,8,16,.82),
+    0 0 0 4px hsla(var(--season-hue), 90%, 66%, .28),
+    0 7px 20px hsla(var(--season-hue), 72%, 18%, .28) !important;
 }
 
 /* Slightly larger EPISODE GUIDE paper lettering. */
