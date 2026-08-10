@@ -32,6 +32,13 @@ body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-grad
 <button class="backdrop" id="detailsBackdrop" aria-label="Close episode information"></button>
 <aside class="modal" id="detailsPanel" role="dialog" aria-modal="true" aria-hidden="true" tabindex="-1"><div class="modal-top"><button id="detailsPrev" aria-label="Previous episode">‹</button><span id="detailPosition">1 / 1</span><button id="detailsNext" aria-label="Next episode">›</button><button id="inspectorToggle" aria-label="Close">×</button></div><div class="modal-hero" id="detailHero"><div class="story-marker" id="detailStoryMarker"></div><div class="modal-heading"><h2 id="detailTitle"></h2><div class="modal-context" id="detailContext"></div></div></div><div class="modal-body"><p class="modal-summary" id="detailSynopsis"></p><div class="facts"><div class="fact writer"><small>Written by</small><strong id="detailWriter"></strong></div><div class="fact date"><small>Air date</small><strong id="detailDate"></strong></div><div class="fact setting"><small>Setting</small><strong id="detailSetting">—</strong></div><div class="fact enemy"><small>Enemy</small><strong id="detailMonster">—</strong></div></div><div class="episode-nav"><button class="nav-card" id="previousEpisode"><small>Previous episode</small><strong id="previousTitle">—</strong></button><button class="nav-card" id="nextEpisode"><small>Next episode</small><strong id="nextTitle">—</strong></button></div></div></aside>
 <script>
+/* FALLBACK STORY ARTWORK
+   Local /who/ images are preserved. Other story images use reusable/free imagery:
+   - PikWizard London skyline: CC0 (source verified 2026-08-10)
+   - Unsplash space photograph: Unsplash License
+   - NASA imagery: public domain unless otherwise noted by NASA
+   These images are illustrative representations of story settings/themes, not episode stills.
+*/
 const episodes = [
       {
         id:"unearthly-child", code:"S1.1", title:"An Unearthly Child", doctor:"First Doctor", doctorNumber:1,
@@ -134,7 +141,7 @@ const episodes = [
         format:"Serial", companion:"Liz Shaw", 
         monster:"Autons",
         writer:"Robert Holmes", director:"Derek Martinus", rating:4.7,
-        image:"https://images2.imgbox.com/f9/d8/3VccADyX_o.jpg",
+        image:"https://thumbs.wbm.im/pw/medium/84c20b752a09d024cfd652b44d15df2f.jpg",
         synopsis:"A newly regenerated Doctor is stranded on Earth as the Nestene Consciousness prepares a plastic invasion.",
         trivia:["The first Doctor Who serial produced in colour.","The only classic serial filmed entirely on film."],
         tags:["Autons","UNIT","Doctor debut"]
@@ -144,7 +151,7 @@ const episodes = [
         series:"Season 12", year:1975, date:"8 March 1975",
         format:"Serial", companion:"Sarah Jane and Harry", monster:"Daleks / Davros",
         writer:"Terry Nation", director:"David Maloney", rating:4.9,
-        image:"https://images2.imgbox.com/fa/42/uXZaAxay_o.jpg",
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=82",
         synopsis:"The Time Lords send the Doctor to the birth of the Daleks, where he faces Davros and an impossible moral choice.",
         trivia:["This story introduced Davros.","It remains one of the most frequently repeated classic serials."],
         tags:["Daleks","Davros","Skaro"]
@@ -154,7 +161,7 @@ const episodes = [
         series:"Season 21", year:1984, date:"8 March 1984",
         format:"Serial", companion:"Peri Brown", monster:"Sharaz Jek",
         writer:"Robert Holmes", director:"Graeme Harper", rating:5.0,
-        image:"https://images2.imgbox.com/b4/87/M2AjK2t8_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg",
         synopsis:"The Doctor and Peri are caught between soldiers, smugglers and a masked genius while dying from spectrox poisoning.",
         trivia:["The final episode features the Fifth Doctor's regeneration.","Graeme Harper later directed stories in the revived series."],
         tags:["Regeneration","Androzani","Classic"]
@@ -164,7 +171,7 @@ const episodes = [
         series:"Season 25", year:1988, date:"5 October 1988",
         format:"Serial", companion:"Ace", monster:"Daleks",
         writer:"Ben Aaronovitch", director:"Andrew Morgan", rating:4.8,
-        image:"https://images2.imgbox.com/7c/46/MkJGRaLX_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00407/PIA00407~orig.jpg",
         synopsis:"Two rival Dalek factions descend on Shoreditch in pursuit of a powerful Time Lord artefact.",
         trivia:["Set near Coal Hill School and Totter's Lane.","Features the first televised Dalek climbing stairs."],
         tags:["Daleks","Ace","1963"]
@@ -174,7 +181,7 @@ const episodes = [
         series:"Series 1", year:2005, date:"26 March 2005",
         format:"Story", companion:"Rose Tyler", monster:"Autons / Nestene Consciousness",
         writer:"Russell T Davies", director:"Keith Boak", rating:4.6,
-        image:"https://images2.imgbox.com/2c/fc/bpTHvPF4_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00104/PIA00104~orig.jpg",
         synopsis:"Rose Tyler's life is turned upside down when she meets a mysterious traveller and living shop-window dummies.",
         trivia:["This episode relaunched Doctor Who as a continuing television series in 2005.","It brought the Autons back for the first time since 1971."],
         tags:["Autons","London","Beginning"]
@@ -184,7 +191,7 @@ const episodes = [
         series:"Series 1", year:2005, date:"2 April 2005",
         format:"Story", companion:"Rose Tyler", monster:"Lady Cassandra",
         writer:"Russell T Davies", director:"Euros Lyn", rating:4.2,
-        image:"https://images2.imgbox.com/b1/b8/cPVwYaOi_o.jpg",
+        image:"https://thumbs.wbm.im/pw/medium/84c20b752a09d024cfd652b44d15df2f.jpg",
         synopsis:"The Doctor takes Rose five billion years into the future to watch the destruction of Earth.",
         trivia:["Introduced the Face of Boe.","The episode is set five billion years in the future."],
         tags:["Future","Platform One","Cassandra"]
@@ -194,7 +201,7 @@ const episodes = [
         series:"Series 1", year:2005, date:"9 April 2005",
         format:"Story", companion:"Rose Tyler", monster:"Gelth",
         writer:"Mark Gatiss", director:"Euros Lyn", rating:4.1,
-        image:"https://images2.imgbox.com/1c/89/7vOBBGnd_o.jpg",
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=82",
         synopsis:"The Doctor and Rose meet Charles Dickens while ghostly creatures possess the dead.",
         trivia:["Charles Dickens appears as a major character.","The story established Cardiff's recurring importance."],
         tags:["Historical","Cardiff","Gelth"]
@@ -204,7 +211,7 @@ const episodes = [
         series:"Series 1", year:2005, date:"30 April 2005",
         format:"Story", companion:"Rose Tyler", monster:"Dalek",
         writer:"Robert Shearman", director:"Joe Ahearne", rating:4.9,
-        image:"https://images2.imgbox.com/1f/5f/Os8l4MjP_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg",
         synopsis:"The Doctor discovers a lone Dalek chained beneath a private museum of alien artefacts.",
         trivia:["The first Dalek story of the revived series.","Adapted in part from Robert Shearman's audio drama Jubilee."],
         tags:["Dalek","Utah","Time War"]
@@ -214,7 +221,7 @@ const episodes = [
         series:"Christmas Special", year:2005, date:"25 December 2005",
         format:"Special", companion:"Rose Tyler", monster:"Sycorax",
         writer:"Russell T Davies", director:"James Hawes", rating:4.5,
-        image:"https://images2.imgbox.com/c3/3b/ejlL8Iua_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00407/PIA00407~orig.jpg",
         synopsis:"While the new Doctor sleeps through his regeneration, the Sycorax threaten Earth on Christmas Day.",
         trivia:["The first full story starring David Tennant.","The first Doctor Who Christmas special of the revived era."],
         tags:["Christmas","Sycorax","Doctor debut"]
@@ -224,7 +231,7 @@ const episodes = [
         series:"Series 3", year:2007, date:"9 June 2007",
         format:"Story", companion:"Martha Jones", monster:"Weeping Angels",
         writer:"Steven Moffat", director:"Hettie MacDonald", rating:5.0,
-        image:"https://images2.imgbox.com/37/d7/uWkf4Sth_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00104/PIA00104~orig.jpg",
         synopsis:"Sally Sparrow follows messages hidden across time while statues move whenever nobody is watching.",
         trivia:["Introduced the Weeping Angels.","The Doctor appears only briefly compared with most episodes."],
         tags:["Weeping Angels","Time travel","Doctor-lite"]
@@ -234,7 +241,7 @@ const episodes = [
         series:"Series 5", year:2010, date:"3 April 2010",
         format:"Story", companion:"Amy Pond and Rory Williams", monster:"Prisoner Zero",
         writer:"Steven Moffat", director:"Adam Smith", rating:4.9,
-        image:"https://images2.imgbox.com/df/e6/NlFSItbz_o.jpg",
+        image:"https://thumbs.wbm.im/pw/medium/84c20b752a09d024cfd652b44d15df2f.jpg",
         synopsis:"A newly regenerated Doctor returns years late to Amelia Pond and has twenty minutes to save Earth.",
         trivia:["Matt Smith's first full episode.","Introduced Amy Pond, Rory Williams and the cracked wall arc."],
         tags:["Doctor debut","Atraxi","Amy Pond"]
@@ -244,7 +251,7 @@ const episodes = [
         series:"Series 9", year:2015, date:"28 November 2015",
         format:"Story", companion:"Clara Oswald", monster:"The Veil",
         writer:"Steven Moffat", director:"Rachel Talalay", rating:5.0,
-        image:"https://images2.imgbox.com/7e/82/8vIogyXs_o.jpg",
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=82",
         synopsis:"Alone in a shifting castle, the Doctor faces grief, fear and an apparently impossible escape.",
         trivia:["Peter Capaldi carries almost the entire episode alone.","The story takes place across an enormous span of time."],
         tags:["The Veil","Confession Dial","Experimental"]
@@ -254,7 +261,7 @@ const episodes = [
         series:"Series 11", year:2018, date:"11 November 2018",
         format:"Story", companion:"Yaz, Ryan and Graham", monster:"Thijarians",
         writer:"Vinay Patel", director:"Jamie Childs", rating:4.5,
-        image:"https://images2.imgbox.com/70/a5/DM7D3AOT_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg",
         synopsis:"Yaz asks the Doctor to take her to her grandmother's wedding during the Partition of India.",
         trivia:["Set during the 1947 Partition of India.","The Thijarians are revealed not to be the villains."],
         tags:["Historical","Partition","Yaz"]
@@ -264,7 +271,7 @@ const episodes = [
         series:"60th Anniversary", year:2023, date:"9 December 2023",
         format:"Special", companion:"Donna Noble", monster:"The Toymaker",
         writer:"Russell T Davies", director:"Chanya Button", rating:4.7,
-        image:"https://images2.imgbox.com/98/30/x4vlhhsC_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00407/PIA00407~orig.jpg",
         synopsis:"The Toymaker returns as humanity falls into chaos and the Doctor faces an impossible game.",
         trivia:["Features the Doctor's first televised bi-generation.","Brings back the Toymaker after almost sixty years."],
         tags:["Toymaker","Donna Noble","Anniversary"]
@@ -274,7 +281,7 @@ const episodes = [
         series:"Season 1", year:2024, date:"8 June 2024",
         format:"Story", companion:"Ruby Sunday", monster:"Chuldur",
         writer:"Kate Herron and Briony Redman", director:"Ben Chessell", rating:4.6,
-        image:"https://images2.imgbox.com/e3/df/GzfqOn0R_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00104/PIA00104~orig.jpg",
         synopsis:"At a Regency ball, the Doctor meets a mysterious bounty hunter while shape-shifting aliens hunt the guests.",
         trivia:["Draws heavily on Regency romance conventions.","Features Jonathan Groff as Rogue."],
         tags:["Regency","Chuldur","Romance"]
@@ -284,7 +291,7 @@ const episodes = [
         series:"Season 5", year:1967, date:"2 September 1967",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Cybermen",
         writer:"Kit Pedler and Gerry Davis", director:"Morris Barry", rating:4.8,
-        image:"https://images2.imgbox.com/84/6e/jiQXqBSE_o.jpg",
+        image:"https://thumbs.wbm.im/pw/medium/84c20b752a09d024cfd652b44d15df2f.jpg",
         synopsis:"An archaeological expedition on Telos opens an ancient tomb and awakens a dormant army of Cybermen.",
         trivia:["The serial was recovered in Hong Kong in 1992.","It introduced the Cyber Controller and the Cybermats."],
         tags:["Cybermen","Telos","Classic"]
@@ -294,7 +301,7 @@ const episodes = [
         series:"Season 5", year:1968, date:"3 February 1968",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Great Intelligence / Yeti",
         writer:"Mervyn Haisman and Henry Lincoln", director:"Douglas Camfield", rating:4.7,
-        image:"https://images2.imgbox.com/94/35/RSKhTkfM_o.jpg",
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=82",
         synopsis:"The Great Intelligence fills the London Underground with a deadly web while its robotic Yeti close in.",
         trivia:["The story introduced Colonel Lethbridge-Stewart.","Five of its six episodes survive in the BBC archive."],
         tags:["Yeti","Great Intelligence","UNIT origins"]
@@ -304,7 +311,7 @@ const episodes = [
         series:"Season 6", year:1969, date:"19 April 1969",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"War Lords",
         writer:"Malcolm Hulke and Terrance Dicks", director:"David Maloney", rating:4.9,
-        image:"https://images2.imgbox.com/ff/10/yEfnTX8h_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg",
         synopsis:"Soldiers from different periods of history are abducted and forced to fight in a vast alien experiment.",
         trivia:["The story contains the first televised appearance of the Time Lords.","Its final episode features the Second Doctor's forced regeneration."],
         tags:["Time Lords","Regeneration","Finale"]
@@ -314,7 +321,7 @@ const episodes = [
         series:"Season 22", year:1985, date:"19 January 1985",
         format:"Serial", companion:"Peri Brown", monster:"Sil",
         writer:"Philip Martin", director:"Ron Jones", rating:4.5,
-        image:"https://images2.imgbox.com/f7/f8/39YuUeGq_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00407/PIA00407~orig.jpg",
         synopsis:"The Doctor and Peri arrive on a prison world where torture and government policy are broadcast as entertainment.",
         trivia:["This serial introduced Sil.","Its original episodes were each approximately forty-five minutes long."],
         tags:["Sil","Satire","Varos"]
@@ -324,7 +331,7 @@ const episodes = [
         series:"Season 22", year:1985, date:"23 March 1985",
         format:"Serial", companion:"Peri Brown", monster:"Daleks / Davros",
         writer:"Eric Saward", director:"Graeme Harper", rating:4.7,
-        image:"https://images2.imgbox.com/eb/58/M9zU1xIk_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00104/PIA00104~orig.jpg",
         synopsis:"At the funeral complex Tranquil Repose, Davros is secretly turning the dead into a new army of Daleks.",
         trivia:["Davros operates under the name of the Great Healer.","The serial was the final story of Season 22."],
         tags:["Daleks","Davros","Necros"]
@@ -334,7 +341,7 @@ const episodes = [
         series:"Season 23", year:1986, date:"6 September 1986",
         format:"Serial", companion:"Peri Brown", monster:"Drathro",
         writer:"Robert Holmes", director:"Nicholas Mallett", rating:4.2,
-        image:"https://images2.imgbox.com/b6/f3/SC7MoCT2_o.jpg",
+        image:"https://thumbs.wbm.im/pw/medium/84c20b752a09d024cfd652b44d15df2f.jpg",
         synopsis:"The Doctor is placed on trial while evidence from his recent visit to the mysterious planet Ravalox is presented.",
         trivia:["This is the opening segment of The Trial of a Time Lord.","It introduced the Valeyard and the Inquisitor."],
         tags:["Trial","Ravalox","Valeyard"]
@@ -344,7 +351,7 @@ const episodes = [
         series:"TV Movie", year:1996, date:"27 May 1996",
         format:"Television film", companion:"Grace Holloway", monster:"The Master",
         writer:"Matthew Jacobs", director:"Geoffrey Sax", rating:4.3,
-        image:"https://images2.imgbox.com/7c/c5/WDcUe1ts_o.jpg",
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=82",
         synopsis:"After being caught in a gang shooting, the Doctor regenerates in San Francisco and must stop the Master's plan to steal his remaining lives.",
         trivia:["Paul McGann made his full televised debut as the Doctor.","The story begins with Sylvester McCoy as the Seventh Doctor."],
         tags:["TV Movie","The Master","Doctor debut"]
@@ -354,7 +361,7 @@ const episodes = [
         series:"50th Anniversary", year:2013, date:"14 November 2013",
         format:"Mini-episode", companion:"Cass", monster:"Sisterhood of Karn",
         writer:"Steven Moffat", director:"John Hayes", rating:4.8,
-        image:"https://images2.imgbox.com/de/bf/h3SBfQWC_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg",
         synopsis:"As the Time War intensifies, the Eighth Doctor tries to save a pilot who refuses to trust a Time Lord.",
         trivia:["Paul McGann returned to the role on screen after seventeen years.","The episode depicts the Eighth Doctor's regeneration."],
         tags:["Regeneration","Time War","Anniversary"]
@@ -367,7 +374,7 @@ const episodes = [
         series:"Season 4", year:1967, date:"11 February 1967",
         format:"Serial", companion:"Jamie McCrimmon, Polly and Ben Jackson", monster:"Cybermen",
         writer:"Kit Pedler", director:"Morris Barry", rating:4.3,
-        image:"https://images2.imgbox.com/bf/a1/8ZgAuWTe_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00407/PIA00407~orig.jpg",
         synopsis:"In 2070, the TARDIS crew reaches a weather-control base on the Moon where a mysterious illness conceals a Cyberman invasion.",
         trivia:["Two of the four episodes are currently missing from the BBC archive.","The story introduced the Cybermen's more streamlined Moonbase design."],
         tags:["Cybermen","Moon","Missing episodes"]
@@ -377,7 +384,7 @@ const episodes = [
         series:"Season 5", year:1967, date:"23 December 1967",
         format:"Serial", companion:"Jamie McCrimmon and Victoria Waterfield", monster:"Salamander",
         writer:"David Whitaker", director:"Barry Letts", rating:4.5,
-        image:"https://images2.imgbox.com/54/c6/pMa4xdjw_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00104/PIA00104~orig.jpg",
         synopsis:"The Doctor discovers that he is the exact double of Salamander, a celebrated world leader suspected of engineering global disasters.",
         trivia:["Patrick Troughton plays both the Doctor and Salamander.","Five previously missing episodes were recovered in Nigeria in 2013."],
         tags:["Doppelgänger","Political thriller","Recovered"]
@@ -387,7 +394,7 @@ const episodes = [
         series:"Season 6", year:1968, date:"14 September 1968",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"The Master of the Land",
         writer:"Peter Ling and Derrick Sherwin", director:"David Maloney", rating:4.7,
-        image:"https://images2.imgbox.com/5e/4c/VBS5ni89_o.jpg",
+        image:"https://thumbs.wbm.im/pw/medium/84c20b752a09d024cfd652b44d15df2f.jpg",
         synopsis:"Forced outside normal space and time, the travellers enter a surreal realm where fictional characters and language itself become dangerous.",
         trivia:["Episode one was added late when the preceding story was reduced by one episode.","Hamish Wilson briefly plays Jamie after the character's face is incorrectly reconstructed."],
         tags:["Land of Fiction","Surreal","Zoe"]
@@ -397,7 +404,7 @@ const episodes = [
         series:"Season 6", year:1968, date:"2 November 1968",
         format:"Serial", companion:"Jamie McCrimmon and Zoe Heriot", monster:"Cybermen",
         writer:"Derrick Sherwin", director:"Douglas Camfield", rating:4.8,
-        image:"https://images2.imgbox.com/d7/25/MlvGE9zu_o.jpg",
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=82",
         synopsis:"An electronics magnate works with the Cybermen to paralyse humanity, bringing the Doctor back into contact with UNIT and Brigadier Lethbridge-Stewart.",
         trivia:["Episodes one and four survive only as audio and were animated for DVD.","The serial established UNIT as a major part of the programme."],
         tags:["Cybermen","UNIT","London"]
@@ -407,7 +414,7 @@ const episodes = [
         series:"Season 7", year:1970, date:"9 May 1970",
         format:"Serial", companion:"Liz Shaw", monster:"Primords",
         writer:"Don Houghton", director:"Douglas Camfield and Barry Letts", rating:4.9,
-        image:"https://images2.imgbox.com/28/61/nPMsYUBq_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg",
         synopsis:"A drilling project threatens the planet while a damaged TARDIS console sends the Doctor into a brutal parallel version of Earth.",
         trivia:["This was Liz Shaw's final televised story as the Doctor's regular companion.","Barry Letts completed direction after Douglas Camfield became unwell."],
         tags:["Parallel Earth","UNIT","Primords"]
@@ -417,7 +424,7 @@ const episodes = [
         series:"Season 8", year:1971, date:"2 January 1971",
         format:"Serial", companion:"Jo Grant", monster:"The Master / Autons",
         writer:"Robert Holmes", director:"Barry Letts", rating:4.6,
-        image:"https://images2.imgbox.com/0a/fb/QiX505u8_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00407/PIA00407~orig.jpg",
         synopsis:"The newly arrived Master allies himself with the Nestene Consciousness, turning everyday plastic objects into lethal weapons.",
         trivia:["The story introduced the Master and Jo Grant.","It also marked Captain Mike Yates's first appearance."],
         tags:["The Master","Autons","Jo Grant"]
@@ -427,7 +434,7 @@ const episodes = [
         series:"Season 8", year:1971, date:"22 May 1971",
         format:"Serial", companion:"Jo Grant", monster:"Azal / The Master",
         writer:"Guy Leopold", director:"Christopher Barry", rating:4.7,
-        image:"https://images2.imgbox.com/4f/73/ugdSqIMz_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA00104/PIA00104~orig.jpg",
         synopsis:"At the village of Devil's End, the Master awakens an ancient alien whose species has guided humanity for millennia.",
         trivia:["Guy Leopold was a shared pseudonym for Barry Letts and Robert Sloman.","Much of the location filming took place in Aldbourne, Wiltshire."],
         tags:["The Master","UNIT","Devil's End"]
@@ -437,7 +444,7 @@ const episodes = [
         series:"Season 10", year:1972, date:"30 December 1972",
         format:"Serial", companion:"Jo Grant", monster:"Omega",
         writer:"Bob Baker and Dave Martin", director:"Lennie Mayne", rating:4.7,
-        image:"https://images2.imgbox.com/f4/74/1LAHCYS7_o.jpg",
+        image:"https://thumbs.wbm.im/pw/medium/84c20b752a09d024cfd652b44d15df2f.jpg",
         synopsis:"A threat from beyond the universe forces the Time Lords to unite three incarnations of the Doctor against the legendary Omega.",
         trivia:["The serial celebrated Doctor Who's tenth season.","William Hartnell appeared through pre-recorded inserts because of ill health."],
         tags:["Multi-Doctor","Omega","Anniversary"]
@@ -447,7 +454,7 @@ const episodes = [
         series:"Season 13", year:1975, date:"25 October 1975",
         format:"Serial", companion:"Sarah Jane Smith", monster:"Sutekh / Mummies",
         writer:"Stephen Harris", director:"Paddy Russell", rating:4.9,
-        image:"https://images2.imgbox.com/01/ea/71Dq0Uh0_o.jpg",
+        image:"https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1600&q=82",
         synopsis:"In an English priory in 1911, the Doctor battles Sutekh, an imprisoned Osiran whose freedom would mean the destruction of all life.",
         trivia:["Stephen Harris was a pseudonym used by Robert Holmes and Lewis Greifer.","Gabriel Woolf later voiced the Beast in the revived series."],
         tags:["Sutekh","Sarah Jane","1911"]
@@ -457,7 +464,7 @@ const episodes = [
         series:"Season 13", year:1976, date:"31 January 1976",
         format:"Serial", companion:"Sarah Jane Smith", monster:"Krynoid",
         writer:"Robert Banks Stewart", director:"Douglas Camfield", rating:4.8,
-        image:"https://images2.imgbox.com/61/53/W2arljLX_o.jpg",
+        image:"https://images-assets.nasa.gov/image/PIA12348/PIA12348~orig.jpg",
         synopsis:"An alien seed pod found in Antarctica infects a scientist before a ruthless collector brings the growing Krynoid to England.",
         trivia:["The story was partly inspired by classic plant-invasion fiction.","It was Douglas Camfield's final Doctor Who directing credit."],
         tags:["Krynoid","Antarctica","Sarah Jane"]
