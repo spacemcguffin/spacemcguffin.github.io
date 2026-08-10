@@ -2300,7 +2300,7 @@ a {
 }
 
 .guide-count strong {
-  color: #58a8ff;
+  color: #f4c522;
   font-size: 2.05rem;
   font-weight: 760;
   line-height: 1;
@@ -4069,6 +4069,97 @@ body {
   }
 }
 
+
+/* =========================================================
+   RESULTS STATUS + EPISODE COUNT REFINEMENT
+========================================================= */
+
+/* Remove the "SHOWING ... EPISODES / results status" strip entirely. */
+.results-status,
+.result-status,
+.results-summary,
+.guide-results-status,
+.archive-results-status,
+#resultsStatus,
+#resultStatus {
+  display: none !important;
+}
+
+/* Use the warm orange accent already present elsewhere in the guide
+   for the large X in "X EPISODES FOUND". */
+.guide-count-number,
+.episode-count-number,
+.count-number,
+#episodeCount,
+#resultCount,
+#resultsCount {
+  color: #f0a044 !important;
+}
+
+
+/* =========================================================
+   COUNT + GRID NUMBER REFINEMENT
+========================================================= */
+
+/* Ensure the actual guide count uses the warm orange accent too. */
+.guide-count {
+  color: #f0a044 !important;
+}
+
+/* Make the pasted-paper episode number sticker slightly larger. */
+.grid-number {
+  font-size: .62rem !important;
+  padding: 5px 9px !important;
+}
+
+@media (max-width: 760px) {
+  .grid-number {
+    font-size: .60rem !important;
+  }
+}
+
+
+/* =========================================================
+   SPECIALS AS A GLOBAL CONTENT FILTER
+========================================================= */
+
+/* ALL + S are global controls; the divider separates them from chronology. */
+.who-season-rail .season-button.specials-rail-button {
+  width: 52px !important;
+  min-width: 52px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+}
+
+.season-rail-divider {
+  flex: 0 0 1px;
+  width: 1px;
+  height: 28px;
+  margin: 0 5px;
+  align-self: center;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(180, 198, 224, .32) 20%,
+    rgba(180, 198, 224, .32) 80%,
+    transparent
+  );
+}
+
+/* Keep the global controls visually attached on smaller rails. */
+@media (max-width: 760px) {
+  .who-season-rail .season-button.specials-rail-button {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+  }
+
+  .season-rail-divider {
+    height: 24px;
+    margin-inline: 3px;
+  }
+}
+
 </style>
 </head>
 
@@ -5352,36 +5443,32 @@ function renderSeasonRail() {
   const seasons = uniqueSeasons();
   const allActive = selectedSeasons.size === 0;
 
-  const entries = seasons.map(season => ({
-    type: "season",
-    value: season,
-    label: String(season),
-    name: `Season ${season}`,
-    order: season * 100,
-    hue: (205 + (season * 37)) % 360
-  }));
-
-  if (hasSpecials()) {
-    const latestSpecialOrder = Math.max(
-      ...episodes
-        .filter(item => itemType(item) === "special")
-        .map(itemOrder)
-    );
-
-    entries.push({
-      type: "specials",
-      value: "specials",
-      label: "SPECIALS",
-      name: "Specials",
-      order: latestSpecialOrder,
-      hue: 322
-    });
-  }
-
-  entries.sort((a, b) => b.order - a.order);
+  const entries = seasons
+    .map(season => ({
+      type: "season",
+      value: season,
+      label: String(season),
+      name: `Season ${season}`,
+      order: season * 100,
+      hue: (205 + (season * 37)) % 360
+    }))
+    .sort((a, b) => b.order - a.order);
 
   const railEntries = [
     `<button class="season-button ${allActive ? "active" : ""}" data-season="all" data-tooltip="All Seasons" style="--season-hue:210">ALL</button>`,
+
+    ...(hasSpecials()
+      ? [
+          `<button
+            class="season-button specials-rail-button ${selectedSeasons.has("specials") ? "active" : ""}"
+            data-season="specials"
+            style="--season-hue:322"
+            data-tooltip="Specials"
+          >S</button>`,
+          `<span class="season-rail-divider" aria-hidden="true"></span>`
+        ]
+      : []),
+
     ...entries.map(entry => `
       <button
         class="season-button ${selectedSeasons.has(entry.value) ? "active" : ""}"
@@ -5618,14 +5705,19 @@ function getArchiveDisplayOrder(items) {
 
   items.forEach(item => {
     const isSpecial = itemType(item) === "special";
+    const specialsOnly =
+      selectedSeasons.size === 1
+      && selectedSeasons.has("specials");
+
     const key = isSpecial
-      ? `special:${specialGroupKey(item)}`
+      ? (specialsOnly ? "special:all" : `special:${specialGroupKey(item)}`)
       : `season:${item.season}`;
 
     if (!grouped.has(key)) {
       grouped.set(key, {
         type: isSpecial ? "special" : "season",
-        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
+        aggregateSpecials: isSpecial && specialsOnly,
+        order: isSpecial && specialsOnly ? 999999 : (isSpecial ? itemOrder(item) : Number(item.season) * 100),
         items: []
       });
     }
@@ -5650,6 +5742,10 @@ function getArchiveDisplayOrder(items) {
 function getFullGroupCount(group) {
 
   if (group.type === "special") {
+    if (group.aggregateSpecials) {
+      return episodes.filter(item => itemType(item) === "special").length;
+    }
+
     return episodes.filter(item =>
       itemType(item) === "special"
       && specialGroupKey(item) === specialGroupKey(group.specialExample)
@@ -5769,15 +5865,20 @@ function renderArchive() {
 
   pageEpisodes.forEach(item => {
     const isSpecial = itemType(item) === "special";
+    const specialsOnly =
+      selectedSeasons.size === 1
+      && selectedSeasons.has("specials");
+
     const key = isSpecial
-      ? `special:${specialGroupKey(item)}`
+      ? (specialsOnly ? "special:all" : `special:${specialGroupKey(item)}`)
       : `season:${item.season}`;
 
     if (!grouped.has(key)) {
       grouped.set(key, {
         key,
         type: isSpecial ? "special" : "season",
-        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
+        aggregateSpecials: isSpecial && specialsOnly,
+        order: isSpecial && specialsOnly ? 999999 : (isSpecial ? itemOrder(item) : Number(item.season) * 100),
         season: isSpecial ? null : item.season,
         specialExample: isSpecial ? item : null,
         items: []
@@ -5796,6 +5897,9 @@ function renderArchive() {
 
     const groupItems = group.items.sort((a, b) => {
       if (isSpecialGroup) {
+        if (group.aggregateSpecials) {
+          return itemOrder(b) - itemOrder(a);
+        }
         return (Number(a.special) || 0) - (Number(b.special) || 0);
       }
 
@@ -5815,12 +5919,16 @@ function renderArchive() {
       : `Season ${group.season}`;
 
     const subheading = isSpecialGroup
-      ? specialSectionLabel(group.specialExample)
+      ? (group.aggregateSpecials ? "Special releases across all seasons" : specialSectionLabel(group.specialExample))
       : yearText;
 
     const fullGroupItems = episodes
       .filter(item => {
         if (isSpecialGroup) {
+          if (group.aggregateSpecials) {
+            return itemType(item) === "special";
+          }
+
           return itemType(item) === "special"
             && specialGroupKey(item) === specialGroupKey(group.specialExample);
         }
