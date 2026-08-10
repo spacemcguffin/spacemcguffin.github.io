@@ -6,6 +6,7 @@
 
 <title>South Park Episode Archive</title>
 
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&display=swap">
 
 <style>
@@ -4801,6 +4802,216 @@ body {
       border-color .15s ease,
       box-shadow .15s ease,
       filter .15s ease !important;
+  }
+}
+
+
+/* =========================================================
+   CUT-PAPER CARDS — STRONGER, CLEARLY VISIBLE VERSION
+========================================================= */
+
+/* Override the earlier ultra-subtle version. */
+.episode-card,
+.episode-card:nth-child(2n),
+.episode-card:nth-child(3n) {
+  border-radius: 3px !important;
+  border: 1px solid rgba(210,220,233,.20) !important;
+
+  clip-path: polygon(
+    1.3% 0.4%,
+    25% 1.1%,
+    49% 0.2%,
+    74% 1%,
+    98.7% 0.5%,
+    99.6% 24%,
+    99.1% 51%,
+    99.8% 76%,
+    98.5% 99.1%,
+    73% 98.5%,
+    49% 99.7%,
+    25% 98.9%,
+    0.8% 99.4%,
+    0.2% 75%,
+    0.7% 49%,
+    0.1% 24%
+  ) !important;
+
+  filter:
+    drop-shadow(0 10px 22px rgba(0,0,0,.18)) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(12,23,43,.74),
+      rgba(5,13,29,.61)
+    ) !important;
+}
+
+/* Slightly different "scissor cuts" on alternating cards. */
+.episode-card:nth-child(2n) {
+  clip-path: polygon(
+    .5% 1.1%,
+    24% .3%,
+    51% 1%,
+    76% .2%,
+    99.3% 1.2%,
+    98.8% 26%,
+    99.7% 50%,
+    99% 75%,
+    99.5% 98.4%,
+    75% 99.4%,
+    50% 98.7%,
+    24% 99.6%,
+    1% 98.6%,
+    .4% 74%,
+    1% 50%,
+    .2% 25%
+  ) !important;
+}
+
+.episode-card:nth-child(3n) {
+  clip-path: polygon(
+    1% .2%,
+    26% 1.2%,
+    50% .6%,
+    75% 1.3%,
+    98.9% .4%,
+    99.7% 25%,
+    99.2% 52%,
+    99.6% 76%,
+    98.8% 99.5%,
+    76% 98.7%,
+    48% 99.2%,
+    23% 98.6%,
+    .4% 99.3%,
+    1% 74%,
+    .2% 48%,
+    .8% 23%
+  ) !important;
+}
+
+/* Paper fibre/grain — more visible than before, but still dark. */
+.episode-card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 5 !important;
+  pointer-events: none !important;
+
+  background:
+    repeating-radial-gradient(
+      circle at 18% 26%,
+      rgba(255,255,255,.24) 0 .55px,
+      transparent .7px 3.2px
+    ),
+    repeating-linear-gradient(
+      96deg,
+      rgba(255,255,255,.025) 0 1px,
+      transparent 1px 5px
+    ) !important;
+
+  opacity: .17 !important;
+  mix-blend-mode: soft-light !important;
+}
+
+/* Thin lighter "paper edge" running around the cut silhouette. */
+.episode-card::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 2px !important;
+  z-index: 4 !important;
+  pointer-events: none !important;
+
+  border: 1px solid rgba(255,255,255,.10) !important;
+  border-radius: 2px !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.045),
+      transparent 18%,
+      transparent 80%,
+      rgba(255,255,255,.02)
+    ) !important;
+
+  clip-path: inherit !important;
+}
+
+/* Make the inner image feel cut/pasted too, instead of a perfect rounded tile. */
+.grid-image {
+  border-radius: 4px !important;
+
+  clip-path: polygon(
+    .7% 1.1%,
+    99% .3%,
+    99.6% 98.2%,
+    98.4% 99.3%,
+    .5% 98.8%,
+    .2% 2.1%
+  ) !important;
+}
+
+/* Tiny physical variation helps sell the paper-card effect. */
+.archive:not(.list-view) .episode-card:nth-child(3n + 1) {
+  transform: rotate(-0.12deg);
+}
+
+.archive:not(.list-view) .episode-card:nth-child(3n + 2) {
+  transform: rotate(0.10deg);
+}
+
+.archive:not(.list-view) .episode-card:hover {
+  transform: translateY(-4px) rotate(0deg) !important;
+  filter:
+    brightness(1.04)
+    drop-shadow(0 13px 28px rgba(0,0,0,.22)) !important;
+}
+
+/* List cards get a less aggressive cut, but it remains clearly visible. */
+.archive.list-view .episode-card,
+.archive.list-view .episode-card:nth-child(2n),
+.archive.list-view .episode-card:nth-child(3n) {
+  clip-path: polygon(
+    .4% 1.3%,
+    24% .4%,
+    51% 1.1%,
+    76% .3%,
+    99.4% 1.2%,
+    99% 49%,
+    99.6% 98.1%,
+    75% 99.3%,
+    49% 98.7%,
+    23% 99.5%,
+    .5% 98.4%,
+    .9% 51%
+  ) !important;
+}
+
+.archive.list-view .episode-card:hover {
+  border-color: rgba(240,160,68,.9) !important;
+  filter:
+    brightness(1.045)
+    drop-shadow(0 10px 22px rgba(240,160,68,.10)) !important;
+}
+
+@media (max-width: 760px) {
+  .episode-card,
+  .episode-card:nth-child(2n),
+  .episode-card:nth-child(3n) {
+    clip-path: polygon(
+      .8% .5%,
+      50% 1%,
+      99% .5%,
+      99.5% 49%,
+      99% 99%,
+      50% 98.6%,
+      .5% 99%,
+      .4% 50%
+    ) !important;
+  }
+
+  .episode-card::before {
+    opacity: .13 !important;
   }
 }
 
