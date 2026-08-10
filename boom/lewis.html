@@ -1,42 +1,44 @@
+
+<!-- inspired by https://tympanus.net/codrops/2025/04/21/mastering-carousels-with-gsap-from-basics-to-advanced-animation/ -->
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>lewis.lc — boom</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
-
-<style>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pen</title>
+  <style>
 :root {
-  --color-brand: #4d8dff;
-  --color-brand-strong: #2d6ef0;
-  --color-brand-soft: #9fc2ff;
-  --color-brand-glow: rgba(77, 141, 255, 0.35);
-
-  --color-bg: #07101c;
-  --color-bg-deep: #030810;
-  --color-surface: #0c1624;
+  /* Color Palette */
+  --color-brand: #4285f4;
+  --color-brand-glow: rgba(66, 133, 244, 0.4);
+  --color-bg: #0b0b0b;
+  --color-surface: #141414;
   --color-text-primary: #ffffff;
-  --color-text-secondary: #d7e2f0;
-  --color-text-muted: #8ea1b8;
+  --color-text-secondary: #d1d1d1;
+  --color-text-muted: #a3a3a3;
+  --color-match: #46d369;
 
+  /* Dimensions & Spacing */
   --slide-width: 76vw;
   --slide-max-width: 1280px;
   --slide-height: 78vh;
   --slide-gap: 32px;
   --header-height: 80px;
-
   --border-radius-lg: 20px;
   --border-radius-sm: 8px;
 
+  /* Transitions & Easing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --transition-fast: 0.25s var(--ease-out-expo);
+  --transition-normal: 0.5s var(--ease-out-expo);
 }
 
 *,
@@ -52,26 +54,16 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 50% 46%, rgba(34, 73, 125, 0.18), transparent 34%),
-    linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
+  background-color: var(--color-bg);
   color: var(--color-text-primary);
-  font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    "Outfit",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.2;
-  background-image:
-    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
-  background-size: 70px 70px;
-  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
 }
 
 .header {
@@ -85,7 +77,11 @@ body::before {
   align-items: center;
   justify-content: space-between;
   z-index: 100;
-  background: linear-gradient(to bottom, rgba(3, 8, 16, 0.94) 0%, rgba(3, 8, 16, 0) 100%);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
   pointer-events: none;
 }
 
@@ -93,26 +89,22 @@ body::before {
 .header__right {
   display: flex;
   align-items: center;
-  gap: 34px;
+  gap: 32px;
   pointer-events: auto;
 }
 
 .brand-logo {
-  color: #fff;
-  font-size: 27px;
-  line-height: 1;
-  font-weight: 800;
-  letter-spacing: -1.1px;
-  text-decoration: none;
-}
-
-.brand-logo span {
-  color: var(--color-brand-soft);
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--color-brand);
+  letter-spacing: 2px;
+  text-shadow: 0 4px 12px var(--color-brand-glow);
+  cursor: pointer;
 }
 
 .nav-links {
   display: flex;
-  gap: 22px;
+  gap: 20px;
   list-style: none;
 }
 
@@ -129,7 +121,7 @@ body::before {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -8px;
+  bottom: -6px;
   width: 100%;
   height: 2px;
   background: var(--color-brand);
@@ -140,7 +132,8 @@ body::before {
 
 .nav-links__link:hover,
 .nav-links__link--active {
-  color: #fff;
+  color: var(--color-text-primary);
+  font-weight: 600;
 }
 
 .nav-links__link:hover::after,
@@ -148,34 +141,29 @@ body::before {
   transform: scaleX(1);
 }
 
-.profile-mark {
-  width: 38px;
-  height: 38px;
+.user-profile {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(159, 194, 255, 0.28);
-  background:
-    radial-gradient(circle at 35% 30%, rgba(159,194,255,.38), transparent 35%),
-    rgba(12, 22, 36, 0.72);
-  display: grid;
-  place-items: center;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,.03) inset,
-    0 8px 24px rgba(0,0,0,.34);
-  color: #dce9ff;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 1px;
+  background: var(--color-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-container {
   position: relative;
-  z-index: 1;
   width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: radial-gradient(circle at center, #181818 0%, #080808 100%);
 }
 
 .carousel-track {
@@ -207,21 +195,11 @@ body::before {
   overflow: hidden;
   flex-shrink: 0;
   box-shadow:
-    0 34px 80px rgba(0, 0, 0, 0.62),
-    0 0 0 1px rgba(145, 188, 255, 0.09);
+    0 30px 60px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
   transform-origin: center center;
   will-change: transform, opacity, filter;
   cursor: pointer;
-}
-
-.slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.035);
 }
 
 .slide__img-wrap {
@@ -240,7 +218,7 @@ body::before {
   object-fit: cover;
   object-position: center;
   will-change: transform;
-  filter: brightness(0.82) saturate(0.82) contrast(1.06);
+  filter: brightness(0.9) contrast(1.05);
 }
 
 .slide__overlay {
@@ -249,31 +227,18 @@ body::before {
   background:
     linear-gradient(
       to top,
-      rgba(4, 10, 18, 0.99) 0%,
-      rgba(4, 10, 18, 0.76) 31%,
-      rgba(4, 10, 18, 0.22) 66%,
-      rgba(4, 10, 18, 0.05) 100%
+      rgba(11, 11, 11, 0.98) 0%,
+      rgba(11, 11, 11, 0.6) 40%,
+      rgba(11, 11, 11, 0.05) 100%
     ),
     linear-gradient(
       to right,
-      rgba(3, 8, 15, 0.96) 0%,
-      rgba(3, 8, 15, 0.67) 34%,
-      rgba(3, 8, 15, 0.18) 66%,
-      transparent 88%
+      rgba(11, 11, 11, 0.9) 0%,
+      rgba(11, 11, 11, 0.4) 45%,
+      transparent 80%
     );
   pointer-events: none;
   z-index: 2;
-}
-
-.slide__wash {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 78% 28%, rgba(72, 132, 238, .20), transparent 32%),
-    linear-gradient(135deg, rgba(29, 75, 150, .10), transparent 45%);
-  mix-blend-mode: screen;
 }
 
 .slide__content {
@@ -283,142 +248,144 @@ body::before {
   width: 100%;
   padding: 60px 64px;
   z-index: 3;
-  max-width: 720px;
+  max-width: 680px;
   pointer-events: auto;
 }
 
-.slide__eyebrow {
+.slide__badge {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-  font-size: 11px;
+  gap: 8px;
+  font-size: 12px;
   font-weight: 800;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--color-brand-soft);
+  color: var(--color-brand);
+  margin-bottom: 12px;
 }
 
-.slide__eyebrow::before {
+.slide__badge::before {
   content: "";
-  width: 26px;
-  height: 1px;
-  background: linear-gradient(90deg, var(--color-brand), transparent);
-  box-shadow: 0 0 12px var(--color-brand-glow);
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--color-brand);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--color-brand);
 }
 
 .slide__title {
-  font-size: clamp(42px, 5vw, 72px);
+  font-size: 56px;
   font-weight: 900;
-  line-height: 0.96;
-  letter-spacing: -2.8px;
-  margin-bottom: 18px;
-  max-width: 680px;
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 16px;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  background: linear-gradient(180deg, #ffffff 0%, #d1d1d1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .slide__meta {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 10px 14px;
+  gap: 14px;
   margin-bottom: 16px;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--color-text-muted);
 }
 
-.slide__meta span {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
+.match-score {
+  color: var(--color-match);
+  font-weight: 700;
 }
 
-.slide__meta span + span::before {
-  content: "•";
-  color: rgba(159,194,255,.45);
-  margin-right: 1px;
+.age-badge {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 12px;
 }
 
-.slide__meta .meta-accent {
-  color: var(--color-brand-soft);
+.quality-badge {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 11px;
+  color: #888;
 }
 
 .slide__synopsis {
-  max-width: 620px;
   font-size: 15px;
-  line-height: 1.65;
+  line-height: 1.6;
   color: var(--color-text-secondary);
   margin-bottom: 28px;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .btn-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  min-height: 47px;
-  padding: 13px 22px;
+  gap: 10px;
+  padding: 14px 28px;
   border-radius: var(--border-radius-sm);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   border: none;
   cursor: pointer;
-  transition:
-    transform var(--transition-fast),
-    background var(--transition-fast),
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+  transition: all var(--transition-fast);
   text-decoration: none;
 }
 
 .btn--primary {
-  background: #f4f8ff;
-  color: #08111e;
-  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+  background: #ffffff;
+  color: #000000;
 }
 
 .btn--primary:hover {
-  transform: translateY(-2px);
-  background: #ffffff;
-  box-shadow:
-    0 14px 30px rgba(0,0,0,.28),
-    0 0 24px rgba(120, 169, 255, .12);
+  background: #e6e6e6;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
 }
 
 .btn--secondary {
-  background: rgba(18, 37, 63, 0.56);
-  color: #fff;
-  border: 1px solid rgba(151, 190, 255, 0.17);
-  backdrop-filter: blur(14px);
+  background: rgba(109, 109, 110, 0.4);
+  color: #ffffff;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .btn--secondary:hover {
-  transform: translateY(-2px);
-  background: rgba(34, 66, 108, 0.66);
-  border-color: rgba(151, 190, 255, 0.34);
+  background: rgba(109, 109, 110, 0.6);
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
 .btn svg {
-  width: 17px;
-  height: 17px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
 }
 
 .hud-controls {
   position: absolute;
-  bottom: 38px;
+  bottom: 40px;
   right: 48px;
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 24px;
   z-index: 100;
 }
 
@@ -426,68 +393,70 @@ body::before {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1.4px;
-  color: rgba(226, 237, 255, 0.82);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .progress-bar-wrap {
-  width: 132px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.13);
-  border-radius: 2px;
+  width: 120px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
   overflow: hidden;
   position: relative;
 }
 
 .progress-bar-fill {
   position: absolute;
-  inset: 0 auto 0 0;
+  top: 0;
+  left: 0;
+  height: 100%;
   width: 20%;
-  background: linear-gradient(90deg, var(--color-brand-strong), var(--color-brand-soft));
-  box-shadow: 0 0 12px var(--color-brand-glow);
+  background: var(--color-brand);
+  border-radius: 3px;
   will-change: width;
 }
 
 .nav-buttons {
   display: flex;
-  gap: 9px;
+  gap: 10px;
 }
 
 .nav-btn {
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 1px solid rgba(159, 194, 255, 0.15);
-  background: rgba(9, 21, 36, 0.68);
-  backdrop-filter: blur(12px);
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all .28s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-btn:hover {
-  background: rgba(42, 89, 158, .88);
-  border-color: rgba(159, 194, 255, .34);
-  transform: scale(1.08);
-  box-shadow: 0 0 20px rgba(77, 141, 255, .18);
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--color-brand-glow);
 }
 
 .nav-btn:focus-visible {
-  outline: 2px solid #d8e7ff;
+  outline: 2px solid #ffffff;
   outline-offset: 2px;
 }
 
 .nav-btn svg {
-  width: 19px;
-  height: 19px;
+  width: 20px;
+  height: 20px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2.25;
+  stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -497,347 +466,359 @@ body::before {
     --slide-width: 85vw;
     --slide-height: 75vh;
   }
-
+  .slide__title {
+    font-size: 42px;
+  }
   .slide__content {
     padding: 40px;
   }
-
   .header {
     padding: 0 24px;
   }
-
   .hud-controls {
     right: 24px;
     bottom: 24px;
   }
 }
 
-@media (max-width: 760px) {
-  .header {
-    height: 68px;
-  }
-
-  .nav-links {
-    display: none;
-  }
-
-  .brand-logo {
-    font-size: 23px;
-  }
-
-  .slide__title {
-    font-size: 39px;
-    letter-spacing: -1.9px;
-  }
-
-  .slide__synopsis {
-    font-size: 14px;
-    line-height: 1.55;
-  }
-
-  .slide__content {
-    padding: 30px;
-  }
-
-  .hud-controls {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    bottom: 18px;
-  }
-}
-
-@media (max-width: 540px) {
+@media (max-width: 640px) {
   :root {
-    --slide-width: 91vw;
-    --slide-height: 71vh;
-    --slide-gap: 18px;
+    --slide-width: 90vw;
+    --slide-height: 70vh;
   }
-
-  .header {
-    padding: 0 18px;
+  .slide__title {
+    font-size: 32px;
   }
-
-  .profile-mark {
-    width: 34px;
-    height: 34px;
-  }
-
-  .slide {
-    border-radius: 16px;
-  }
-
   .slide__content {
     padding: 24px;
   }
-
-  .slide__eyebrow {
-    font-size: 9px;
-    letter-spacing: 2.2px;
-    margin-bottom: 11px;
-  }
-
-  .slide__title {
-    font-size: 34px;
-    margin-bottom: 14px;
-  }
-
-  .slide__meta {
-    gap: 7px 10px;
-    font-size: 11px;
-    margin-bottom: 12px;
-  }
-
   .slide__synopsis {
     font-size: 13px;
     margin-bottom: 20px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
   }
-
   .btn {
-    min-height: 42px;
-    padding: 11px 16px;
-    font-size: 12px;
+    padding: 10px 18px;
+    font-size: 13px;
   }
-
+  .nav-links {
+    display: none;
+  }
+  .hud-controls {
+    bottom: 20px;
+    right: 20px;
+    gap: 12px;
+  }
   .progress-bar-wrap {
-    width: 74px;
-  }
-
-  .nav-btn {
-    width: 42px;
-    height: 42px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
+    width: 60px;
   }
 }
 </style>
-</head>
-
-<body>
-
-<header class="header" role="banner">
-  <div class="header__left">
-    <a href="https://lewis.lc/" class="brand-logo" aria-label="lewis.lc home">lewis<span>.lc</span></a>
-
-    <nav aria-label="Main navigation">
-      <ul class="nav-links">
-        <li><a href="https://lewis.lc/diary/" class="nav-links__link nav-links__link--active">Diary</a></li>
-        <li><a href="https://lewis.lc/who/" class="nav-links__link">Doctor Who</a></li>
-        <li><a href="https://lewis.lc/archive/" class="nav-links__link">Archive</a></li>
-        <li><a href="https://lewis.lc/profile/" class="nav-links__link">About</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="header__right">
-    <div class="profile-mark" aria-hidden="true">LC</div>
-  </div>
-</header>
-
-<main class="hero-container" role="region" aria-label="lewis.lc featured sections carousel">
-  <div class="carousel-track" id="carouselTrack">
-
-    <article class="slide" aria-roledescription="slide" aria-label="1 of 5: The Diary">
-      <div class="slide__img-wrap">
-        <img
-          class="slide__img"
-          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=2200&q=85"
-          alt="Notebook and personal writing atmosphere"
-        />
+  </head>
+  <body>
+    <header class="header" role="banner">
+      <div class="header__left">
+        <div class="brand-logo" tabindex="0">lewis.lc</div>
+        <nav aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li>
+              <a href="#" class="nav-links__link nav-links__link--active">
+                Home
+              </a>
+            </li>
+            <li><a href="#" class="nav-links__link">TV Shows</a></li>
+            <li><a href="#" class="nav-links__link">Movies</a></li>
+            <li><a href="#" class="nav-links__link">New & Popular</a></li>
+            <li><a href="#" class="nav-links__link">My List</a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="slide__overlay"></div>
-      <div class="slide__wash"></div>
-      <div class="slide__content">
-        <div class="slide__eyebrow">Featured archive</div>
-        <h1 class="slide__title">THE DIARY</h1>
-        <div class="slide__meta">
-          <span class="meta-accent">2007—2026</span>
-          <span>ongoing</span>
-          <span>personal archive</span>
-        </div>
-        <p class="slide__synopsis">
-          Years of entries, fragments, titles, memories and recurring characters — a personal record arranged one year at a time.
-        </p>
-        <div class="btn-group">
-          <a class="btn btn--primary" href="https://lewis.lc/diary/2026">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            Read 2026
-          </a>
-          <a class="btn btn--secondary" href="https://lewis.lc/diary/">
-            Explore archive
-          </a>
-        </div>
+      <div class="header__right">
+        <div class="user-profile" aria-label="User Profile">LC</div>
       </div>
-    </article>
+    </header>
 
-    <article class="slide" aria-roledescription="slide" aria-label="2 of 5: Doctor Who">
-      <div class="slide__img-wrap">
-        <img
-          class="slide__img"
-          src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=2200&q=85"
-          alt="Stars and space"
-        />
-      </div>
-      <div class="slide__overlay"></div>
-      <div class="slide__wash"></div>
-      <div class="slide__content">
-        <div class="slide__eyebrow">Time &amp; space</div>
-        <h1 class="slide__title">DOCTOR WHO</h1>
-        <div class="slide__meta">
-          <span class="meta-accent">1963—2026</span>
-          <span>episode guide</span>
-          <span>classic + modern</span>
-        </div>
-        <p class="slide__synopsis">
-          Stories, Doctors, eras and adventures gathered into a visual episode guide built for browsing rather than box-ticking.
-        </p>
-        <div class="btn-group">
-          <a class="btn btn--primary" href="https://lewis.lc/who/4">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            Open guide
-          </a>
-          <a class="btn btn--secondary" href="https://lewis.lc/who/">
-            Browse Who
-          </a>
-        </div>
-      </div>
-    </article>
+    <main
+      class="hero-container"
+      role="region"
+      aria-label="Featured Titles Carousel"
+    >
+      <div class="carousel-track" id="carouselTrack">
+        <!-- SLIDE 1 -->
+        <article
+          class="slide"
+          aria-roledescription="slide"
+          aria-label="1 of 5: Cyberpunk 2099"
+        >
+          <div class="slide__img-wrap">
+            <img
+              class="slide__img"
+              src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=2000&q=80"
+              alt="Cyberpunk City"
+            />
+          </div>
+          <div class="slide__overlay"></div>
+          <div class="slide__content">
+            <div class="slide__badge">GSAP Flix Original</div>
+            <h1 class="slide__title">CYBERPUNK 2099</h1>
+            <div class="slide__meta">
+              <span class="match-score">98% Match</span>
+              <span>2026</span>
+              <span class="age-badge">18+</span>
+              <span class="quality-badge">4K Ultra HD</span>
+            </div>
+            <p class="slide__synopsis">
+              In a megacity controlled by synthetic artificial intelligence, a
+              rogue mercenary uncovers a dark network conspiracy that threatens
+              to erase humanity's last remaining memories.
+            </p>
+            <div class="btn-group">
+              <button class="btn btn--primary" aria-label="Play Cyberpunk 2099">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                Play
+              </button>
+              <button
+                class="btn btn--secondary"
+                aria-label="More Info Cyberpunk 2099"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                  />
+                </svg>
+                More Info
+              </button>
+            </div>
+          </div>
+        </article>
 
-    <article class="slide" aria-roledescription="slide" aria-label="3 of 5: The Archive">
-      <div class="slide__img-wrap">
-        <img
-          class="slide__img"
-          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=2200&q=85"
-          alt="Old computer and digital archive atmosphere"
-        />
-      </div>
-      <div class="slide__overlay"></div>
-      <div class="slide__wash"></div>
-      <div class="slide__content">
-        <div class="slide__eyebrow">Recovered fragments</div>
-        <h1 class="slide__title">THE ARCHIVE</h1>
-        <div class="slide__meta">
-          <span class="meta-accent">2006—present</span>
-          <span>digital archaeology</span>
-          <span>old web</span>
-        </div>
-        <p class="slide__synopsis">
-          Lost pages, old usernames, surviving snapshots and half-recovered corners of a much earlier internet.
-        </p>
-        <div class="btn-group">
-          <a class="btn btn--primary" href="https://lewis.lc/archive/">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            Enter archive
-          </a>
-          <a class="btn btn--secondary" href="https://lewis.lc/livejournal/">
-            LiveJournal
-          </a>
-        </div>
-      </div>
-    </article>
+        <!-- SLIDE 2 -->
+        <article
+          class="slide"
+          aria-roledescription="slide"
+          aria-label="2 of 5: Interstellar Void"
+        >
+          <div class="slide__img-wrap">
+            <img
+              class="slide__img"
+              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80"
+              alt="Deep Space Nebula"
+            />
+          </div>
+          <div class="slide__overlay"></div>
+          <div class="slide__content">
+            <div class="slide__badge">Trending #1</div>
+            <h1 class="slide__title">INTERSTELLAR VOID</h1>
+            <div class="slide__meta">
+              <span class="match-score">99% Match</span>
+              <span>2026</span>
+              <span class="age-badge">16+</span>
+              <span class="quality-badge">HDR10+</span>
+            </div>
+            <p class="slide__synopsis">
+              When a deep-space research vessel encounters a mysterious anomaly
+              at the edge of the galaxy, the crew must navigate temporal shifts
+              and unearthly perils to make it back alive.
+            </p>
+            <div class="btn-group">
+              <button
+                class="btn btn--primary"
+                aria-label="Play Interstellar Void"
+              >
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                Play
+              </button>
+              <button
+                class="btn btn--secondary"
+                aria-label="More Info Interstellar Void"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                  />
+                </svg>
+                More Info
+              </button>
+            </div>
+          </div>
+        </article>
 
-    <article class="slide" aria-roledescription="slide" aria-label="4 of 5: Music">
-      <div class="slide__img-wrap">
-        <img
-          class="slide__img"
-          src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=2200&q=85"
-          alt="Live music performance"
-        />
-      </div>
-      <div class="slide__overlay"></div>
-      <div class="slide__wash"></div>
-      <div class="slide__content">
-        <div class="slide__eyebrow">Now playing</div>
-        <h1 class="slide__title">MUSIC</h1>
-        <div class="slide__meta">
-          <span class="meta-accent">listening archive</span>
-          <span>songs</span>
-          <span>albums</span>
-        </div>
-        <p class="slide__synopsis">
-          The records, songs and artists attached to different years, moods and memories — an evolving soundtrack rather than a static list.
-        </p>
-        <div class="btn-group">
-          <a class="btn btn--primary" href="https://lewis.lc/">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            Explore
-          </a>
-          <a class="btn btn--secondary" href="https://lewis.lc/">
-            More
-          </a>
-        </div>
-      </div>
-    </article>
+        <!-- SLIDE 3 -->
+        <article
+          class="slide"
+          aria-roledescription="slide"
+          aria-label="3 of 5: The Silent Realm"
+        >
+          <div class="slide__img-wrap">
+            <img
+              class="slide__img"
+              src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=80"
+              alt="Misty Forest"
+            />
+          </div>
+          <div class="slide__overlay"></div>
+          <div class="slide__content">
+            <div class="slide__badge">New Release</div>
+            <h1 class="slide__title">THE SILENT REALM</h1>
+            <div class="slide__meta">
+              <span class="match-score">95% Match</span>
+              <span>2025</span>
+              <span class="age-badge">13+</span>
+              <span class="quality-badge">5.1 Audio</span>
+            </div>
+            <p class="slide__synopsis">
+              Deep within an ancient Nordic mist forest, a forgotten lineage of
+              guardians awakens to protect the realm from an impending mythical
+              shadow that consumes all sound.
+            </p>
+            <div class="btn-group">
+              <button
+                class="btn btn--primary"
+                aria-label="Play The Silent Realm"
+              >
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                Play
+              </button>
+              <button
+                class="btn btn--secondary"
+                aria-label="More Info The Silent Realm"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                  />
+                </svg>
+                More Info
+              </button>
+            </div>
+          </div>
+        </article>
 
-    <article class="slide" aria-roledescription="slide" aria-label="5 of 5: Lewis">
-      <div class="slide__img-wrap">
-        <img
-          class="slide__img"
-          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=85"
-          alt="Atmospheric blue landscape"
-        />
-      </div>
-      <div class="slide__overlay"></div>
-      <div class="slide__wash"></div>
-      <div class="slide__content">
-        <div class="slide__eyebrow">About this place</div>
-        <h1 class="slide__title">LEWIS</h1>
-        <div class="slide__meta">
-          <span class="meta-accent">profile</span>
-          <span>projects</span>
-          <span>lewis.lc</span>
-        </div>
-        <p class="slide__synopsis">
-          The person behind the diary, the Doctor Who pages, the recovered web fragments and everything else collected here.
-        </p>
-        <div class="btn-group">
-          <a class="btn btn--primary" href="https://lewis.lc/profile/">
-            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            About me
-          </a>
-          <a class="btn btn--secondary" href="https://lewis.lc/">
-            Home
-          </a>
-        </div>
-      </div>
-    </article>
+        <!-- SLIDE 4 -->
+        <article
+          class="slide"
+          aria-roledescription="slide"
+          aria-label="4 of 5: Neon Velocity"
+        >
+          <div class="slide__img-wrap">
+            <img
+              class="slide__img"
+              src="https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?auto=format&fit=crop&w=2000&q=80"
+              alt="Neon Highway"
+            />
+          </div>
+          <div class="slide__overlay"></div>
+          <div class="slide__content">
+            <div class="slide__badge">Critically Acclaimed</div>
+            <h1 class="slide__title">NEON VELOCITY</h1>
+            <div class="slide__meta">
+              <span class="match-score">96% Match</span>
+              <span>2026</span>
+              <span class="age-badge">18+</span>
+              <span class="quality-badge">Dolby Atmos</span>
+            </div>
+            <p class="slide__synopsis">
+              High stakes, underground anti-gravity racing, and illegal
+              augmentations collide in this heart-pounding adrenaline thriller
+              set in Tokyo's sub-level corridors.
+            </p>
+            <div class="btn-group">
+              <button class="btn btn--primary" aria-label="Play Neon Velocity">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                Play
+              </button>
+              <button
+                class="btn btn--secondary"
+                aria-label="More Info Neon Velocity"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                  />
+                </svg>
+                More Info
+              </button>
+            </div>
+          </div>
+        </article>
 
-  </div>
-</main>
+        <!-- SLIDE 5 -->
+        <article
+          class="slide"
+          aria-roledescription="slide"
+          aria-label="5 of 5: Dune Chronicles"
+        >
+          <div class="slide__img-wrap">
+            <img
+              class="slide__img"
+              src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=2000&q=80"
+              alt="Desert Dunes"
+            />
+          </div>
+          <div class="slide__overlay"></div>
+          <div class="slide__content">
+            <div class="slide__badge">Must Watch</div>
+            <h1 class="slide__title">DUNE CHRONICLES</h1>
+            <div class="slide__meta">
+              <span class="match-score">97% Match</span>
+              <span>2025</span>
+              <span class="age-badge">16+</span>
+              <span class="quality-badge">IMAX Enhanced</span>
+            </div>
+            <p class="slide__synopsis">
+              Across infinite sand sea oceans, nomadic tribes fight for control
+              over the universe's most coveted natural element while surviving
+              behemoth subterranean leviathans.
+            </p>
+            <div class="btn-group">
+              <button
+                class="btn btn--primary"
+                aria-label="Play Dune Chronicles"
+              >
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+                Play
+              </button>
+              <button
+                class="btn btn--secondary"
+                aria-label="More Info Dune Chronicles"
+              >
+                <svg viewBox="0 0 24 24">
+                  <path
+                    d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"
+                  />
+                </svg>
+                More Info
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
 
-<div class="hud-controls">
-  <div class="progress-box" aria-live="polite">
-    <span id="currentCounter">01</span>
-    <div class="progress-bar-wrap">
-      <div class="progress-bar-fill" id="progressBar"></div>
+    <div class="hud-controls">
+      <div class="progress-box" aria-live="polite">
+        <span id="currentCounter">01</span>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <span id="totalCounter">05</span>
+      </div>
+      <div class="nav-buttons">
+        <button class="nav-btn" id="prevBtn" aria-label="Previous Slide">
+          <svg viewBox="0 0 24 24">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="nav-btn" id="nextBtn" aria-label="Next Slide">
+          <svg viewBox="0 0 24 24">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
     </div>
-    <span id="totalCounter">05</span>
-  </div>
-
-  <div class="nav-buttons">
-    <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-    <button class="nav-btn" id="nextBtn" aria-label="Next slide">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
-  </div>
-</div>
-
-<script>
+  <script>
 class HeroCarousel {
   constructor() {
-    gsap.registerPlugin(Draggable);
+    gsap.registerPlugin(Draggable, window.InertiaPlugin ?? []);
 
     this.slides = gsap.utils.toArray(".slide");
     if (!this.slides.length) return;
@@ -877,8 +858,10 @@ class HeroCarousel {
 
   alignTrackToCenter() {
     const slide = this.slides[0];
-    const marginLeft = parseFloat(window.getComputedStyle(slide).marginLeft) || 0;
-    const centerOffset = window.innerWidth / 2 - (marginLeft + slide.offsetWidth / 2);
+    const marginLeft =
+      parseFloat(window.getComputedStyle(slide).marginLeft) || 0;
+    const centerOffset =
+      window.innerWidth / 2 - (marginLeft + slide.offsetWidth / 2);
     gsap.set(this.el.track, { left: `${centerOffset}px` });
   }
 
@@ -904,7 +887,6 @@ class HeroCarousel {
 
     if (this.el.progress) {
       const fillPercent = ((index + 1) / this.slides.length) * 100;
-
       gsap.to(this.el.progress, {
         width: `${fillPercent}%`,
         duration: 0.6,
@@ -914,14 +896,14 @@ class HeroCarousel {
 
     this.slides.forEach((slide, i) => {
       const isCurrent = i === index;
-      slide.setAttribute("aria-selected", String(isCurrent));
+      slide.setAttribute("aria-selected", isCurrent);
 
       gsap.to(slide, {
         scale: isCurrent ? 1 : 0.86,
         opacity: isCurrent ? 1 : 0.32,
         filter: isCurrent
           ? "brightness(1) blur(0px)"
-          : "brightness(0.42) blur(1px)",
+          : "brightness(0.4) blur(1px)",
         duration: 0.8,
         ease: "expo.out"
       });
@@ -929,31 +911,35 @@ class HeroCarousel {
       if (!isCurrent) {
         gsap.set(
           slide.querySelectorAll(
-            ".slide__eyebrow, .slide__title, .slide__meta, .slide__synopsis, .btn"
+            ".slide__badge, .slide__title, .slide__meta, .slide__synopsis, .btn"
           ),
-          { y: 40, opacity: 0 }
+          {
+            y: 40,
+            opacity: 0
+          }
         );
       }
     });
 
     this.activeContentTimeline?.kill();
-
     const content = activeSlide.querySelectorAll(
-      ".slide__eyebrow, .slide__title, .slide__meta, .slide__synopsis, .btn"
+      ".slide__badge, .slide__title, .slide__meta, .slide__synopsis, .btn"
     );
 
-    this.activeContentTimeline = gsap.timeline().fromTo(
-      content,
-      { y: 45, opacity: 0 },
-      {
-        y: 0,
-        opacity: 1,
-        duration: 0.9,
-        ease: "expo.out",
-        stagger: 0.08,
-        delay: 0.1
-      }
-    );
+    this.activeContentTimeline = gsap
+      .timeline()
+      .fromTo(
+        content,
+        { y: 45, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: "expo.out",
+          stagger: 0.08,
+          delay: 0.1
+        }
+      );
   }
 
   bindEvents() {
@@ -964,16 +950,9 @@ class HeroCarousel {
 
     this.slides.forEach((slide, i) => {
       slide.addEventListener("click", (e) => {
-        const clickedInteractive = e.target.closest("a, button");
-
         if (i !== this.loop.tl.current()) {
           e.preventDefault();
           this.loop.toIndex(i, { duration: 1.2, ease: "expo.out" });
-          return;
-        }
-
-        if (!clickedInteractive) {
-          e.preventDefault();
         }
       });
     });
@@ -991,7 +970,6 @@ class HeroCarousel {
 
   createHorizontalLoop(items, config = {}) {
     items = gsap.utils.toArray(items);
-
     const {
       onChange,
       onUpdate,
@@ -1002,14 +980,12 @@ class HeroCarousel {
       paddingRight = 0,
       draggable = false
     } = config;
-
     const len = items.length;
     const startX = items[0].offsetLeft;
     const times = [];
     const widths = [];
     const xPercents = [];
     let curIndex = 0;
-
     const pixelsPerSecond = speed * 100;
     const snap = snapVal === false ? (v) => v : gsap.utils.snap(snapVal);
 
@@ -1029,17 +1005,15 @@ class HeroCarousel {
     gsap.set(items, {
       xPercent: (i, el) => {
         const w = (widths[i] = parseFloat(gsap.getProperty(el, "width", "px")));
-
         return (xPercents[i] = snap(
           (parseFloat(gsap.getProperty(el, "x", "px")) / w) * 100 +
-          gsap.getProperty(el, "xPercent")
+            gsap.getProperty(el, "xPercent")
         ));
       },
       x: 0
     });
 
     const last = items[len - 1];
-
     const totalWidth =
       last.offsetLeft +
       (xPercents[len - 1] / 100) * widths[len - 1] -
@@ -1061,43 +1035,38 @@ class HeroCarousel {
         },
         0
       )
-      .fromTo(
-        item,
-        {
-          xPercent: snap(((curX - distLoop + totalWidth) / widths[i]) * 100)
-        },
-        {
-          xPercent: xPercents[i],
-          duration: (totalWidth - distLoop) / pixelsPerSecond,
-          immediateRender: false
-        },
-        distLoop / pixelsPerSecond
-      )
-      .add(`label${i}`, distStart / pixelsPerSecond);
+        .fromTo(
+          item,
+          {
+            xPercent: snap(((curX - distLoop + totalWidth) / widths[i]) * 100)
+          },
+          {
+            xPercent: xPercents[i],
+            duration: (totalWidth - distLoop) / pixelsPerSecond,
+            immediateRender: false
+          },
+          distLoop / pixelsPerSecond
+        )
+        .add(`label${i}`, distStart / pixelsPerSecond);
 
       times[i] = distStart / pixelsPerSecond;
     });
 
     const toIndex = (index, vars = {}) => {
-      if (Math.abs(index - curIndex) > len / 2) {
+      if (Math.abs(index - curIndex) > len / 2)
         index += index > curIndex ? -len : len;
-      }
-
       const newIndex = gsap.utils.wrap(0, len, index);
       let time = times[newIndex];
 
-      if ((time > tl.time()) !== (index > curIndex)) {
+      if (time > tl.time() !== index > curIndex) {
         vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
         time += tl.duration() * (index > curIndex ? 1 : -1);
       }
-
       if (time < 0) time += tl.duration();
 
       curIndex = newIndex;
       vars.overwrite = true;
-
       onChange?.(items[curIndex], curIndex);
-
       return tl.tweenTo(time, vars);
     };
 
@@ -1105,15 +1074,12 @@ class HeroCarousel {
     tl.previous = (vars) => toIndex(curIndex - 1, vars);
     tl.toIndex = (index, vars) => toIndex(index, vars);
     tl.current = () => curIndex;
-
     tl.progress(1, true).progress(0, true);
 
     if (draggable && typeof Draggable === "function") {
       const proxy = document.createElement("div");
-
       proxy.style.cssText =
         "position:absolute;top:0;left:0;width:1px;height:1px;visibility:hidden;";
-
       document.body.appendChild(proxy);
 
       const wrap = gsap.utils.wrap(0, 1);
@@ -1129,10 +1095,7 @@ class HeroCarousel {
         let minDist = Infinity;
 
         times.forEach((t, idx) => {
-          const direct = Math.abs(t - normP);
-          const wrapped = tl.duration() - direct;
-          const dist = Math.min(direct, wrapped);
-
+          const dist = Math.abs(t - normP);
           if (dist < minDist) {
             minDist = dist;
             closestIdx = idx;
@@ -1150,33 +1113,24 @@ class HeroCarousel {
         type: "x",
         inertia: typeof InertiaPlugin !== "undefined",
         allowNativeTouchScrolling: false,
-
         onPress() {
           startProgress = tl.progress();
+          tl.progress(0);
           ratio = 1 / totalWidth;
+          tl.progress(startProgress);
           gsap.killTweensOf(tl);
         },
-
         onDrag: align,
         onThrowUpdate: align,
-
-        onRelease: () => {
-          toIndex(curIndex, { duration: 1, ease: "expo.out" });
-        }
+        onRelease: () => toIndex(curIndex, { duration: 1.0, ease: "expo.out" })
       })[0];
     }
 
-    return {
-      tl,
-      toIndex,
-      next: tl.next,
-      previous: tl.previous
-    };
+    return { tl, toIndex, next: tl.next, previous: tl.previous };
   }
 }
 
 document.addEventListener("DOMContentLoaded", () => new HeroCarousel());
 </script>
-
-</body>
+  </body>
 </html>
