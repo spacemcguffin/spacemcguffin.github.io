@@ -3687,6 +3687,1124 @@ a {
   }
 }
 
+
+/* =========================================================
+   SOUTH PARK IDENTITY PASS
+========================================================= */
+
+/* Dark Colorado mountain/town silhouette behind the guide header. */
+.guide-hero {
+  isolation: isolate;
+  overflow: visible;
+}
+
+.guide-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4,10,23,.06) 0%,
+      rgba(4,10,23,.18) 42%,
+      rgba(3,9,21,.68) 100%
+    ),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201600%20430%22%20preserveAspectRatio%3D%22none%22%3E%0A%20%20%3Crect%20width%3D%221600%22%20height%3D%22430%22%20fill%3D%22none%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20270%20L130%20145%20L210%20230%20L355%2075%20L500%20235%20L620%20125%20L755%20245%20L890%20105%20L1040%20235%20L1180%20130%20L1310%20238%20L1460%2095%20L1600%20240%20L1600%20430%20L0%20430%20Z%22%0A%20%20%20%20%20%20%20%20fill%3D%22%230b1730%22%20fill-opacity%3D%22.76%22/%3E%0A%20%20%3Cpath%20d%3D%22M0%20318%20L175%20215%20L300%20300%20L450%20190%20L590%20306%20L730%20212%20L870%20307%20L1020%20198%20L1170%20300%20L1320%20215%20L1470%20305%20L1600%20225%20L1600%20430%20L0%20430%20Z%22%0A%20%20%20%20%20%20%20%20fill%3D%22%23071226%22%20fill-opacity%3D%22.94%22/%3E%0A%20%20%3Cg%20fill%3D%22%2313233a%22%20fill-opacity%3D%22.8%22%3E%0A%20%20%20%20%3Crect%20x%3D%2290%22%20y%3D%22320%22%20width%3D%2242%22%20height%3D%2228%22/%3E%3Cpath%20d%3D%22M84%20320%20111%20301%20138%20320Z%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22177%22%20y%3D%22329%22%20width%3D%2258%22%20height%3D%2234%22/%3E%3Cpath%20d%3D%22M169%20329%20206%20304%20243%20329Z%22/%3E%0A%20%20%20%20%3Crect%20x%3D%22290%22%20y%3D%22314%22%20width%3D%2249%22%20height%3D%2237%22/%3E%3Cpath%20d%3D%22M282%20314%20315%20289%20347%20314Z%22/%3E%0A%20%20%20%20%3Crect%20x%3D%221160%22%20y%3D%22325%22%20width%3D%2252%22%20height%3D%2230%22/%3E%3Cpath%20d%3D%22M1152%20325%201186%20301%201220%20325Z%22/%3E%0A%20%20%20%20%3Crect%20x%3D%221260%22%20y%3D%22313%22%20width%3D%2244%22%20height%3D%2235%22/%3E%3Cpath%20d%3D%22M1253%20313%201282%20291%201311%20313Z%22/%3E%0A%20%20%20%20%3Crect%20x%3D%221370%22%20y%3D%22327%22%20width%3D%2261%22%20height%3D%2235%22/%3E%3Cpath%20d%3D%22M1361%20327%201401%20299%201440%20327Z%22/%3E%0A%20%20%3C/g%3E%0A%20%20%3Cg%20fill%3D%22%23d7e4ff%22%20fill-opacity%3D%22.16%22%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22170%22%20cy%3D%2288%22%20r%3D%222.2%22/%3E%3Ccircle%20cx%3D%22310%22%20cy%3D%2252%22%20r%3D%221.8%22/%3E%3Ccircle%20cx%3D%22510%22%20cy%3D%22110%22%20r%3D%222%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%22770%22%20cy%3D%2268%22%20r%3D%221.6%22/%3E%3Ccircle%20cx%3D%22980%22%20cy%3D%2256%22%20r%3D%222.1%22/%3E%3Ccircle%20cx%3D%221240%22%20cy%3D%2292%22%20r%3D%221.8%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%221430%22%20cy%3D%2262%22%20r%3D%222%22/%3E%0A%20%20%3C/g%3E%0A%3C/svg%3E") center bottom / 100% 92% no-repeat;
+  opacity: .92;
+}
+
+.guide-hero-copy,
+.guide-surprise-button,
+.guide-search-row {
+  position: relative;
+  z-index: 1;
+}
+
+/* Rough, cut-paper accent under SOUTH PARK. */
+.guide-logo {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 14px;
+}
+
+.guide-logo::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  bottom: 1px;
+  width: min(215px, 64%);
+  height: 7px;
+  background:
+    linear-gradient(90deg,
+      #f3c64a 0 42%,
+      transparent 42% 45%,
+      #d85b51 45% 72%,
+      transparent 72% 75%,
+      #62a8df 75% 100%);
+  clip-path: polygon(0 28%, 14% 8%, 30% 22%, 47% 0, 61% 18%, 78% 5%, 100% 23%, 98% 75%, 78% 88%, 58% 70%, 41% 94%, 20% 74%, 2% 91%);
+  transform: rotate(-1deg);
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.18));
+  opacity: .92;
+}
+
+/* Smaller hand-made accent beneath season headings. */
+.season-name {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 7px;
+}
+
+.season-name::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  bottom: 0;
+  width: 58px;
+  height: 4px;
+  background: #f1bd42;
+  clip-path: polygon(0 20%, 16% 5%, 31% 24%, 48% 8%, 65% 25%, 82% 4%, 100% 20%, 98% 78%, 75% 94%, 57% 75%, 36% 93%, 16% 76%, 1% 90%);
+  transform: rotate(-1.2deg);
+  opacity: .8;
+}
+
+/* Episode number becomes a slightly crooked pasted paper sticker. */
+.grid-number {
+  padding: 5px 8px !important;
+  border: 1px solid rgba(35,42,52,.18) !important;
+  border-radius: 4px 6px 5px 3px !important;
+  background:
+    linear-gradient(145deg, rgba(246,244,235,.96), rgba(215,216,211,.93)) !important;
+  color: #20252d !important;
+  font-size: .57rem !important;
+  font-weight: 760 !important;
+  letter-spacing: .055em !important;
+  box-shadow:
+    0 2px 7px rgba(0,0,0,.24),
+    inset 0 1px 0 rgba(255,255,255,.7) !important;
+  backdrop-filter: none !important;
+  clip-path: polygon(2% 8%, 97% 0, 100% 88%, 95% 100%, 4% 96%, 0 17%);
+  transform: rotate(-1.25deg);
+}
+
+.episode-card:nth-child(even) .grid-number {
+  transform: rotate(.9deg);
+}
+
+.episode-card:nth-child(3n) .grid-number {
+  transform: rotate(-.45deg);
+}
+
+/* More playful Random Episode control. */
+.guide-surprise-button {
+  transform-origin: 50% 50%;
+}
+
+.guide-surprise-button .random-icon {
+  width: 17px;
+  height: 17px;
+  display: grid;
+  place-items: center;
+}
+
+.guide-surprise-button .random-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.guide-surprise-button:hover .random-icon {
+  transform: rotate(-5deg);
+}
+
+.guide-surprise-button.is-shuffling {
+  animation: randomEpisodeWiggle .28s cubic-bezier(.2,.9,.3,1);
+}
+
+.guide-surprise-button.is-shuffling .random-icon {
+  animation: randomEpisodeIcon .28s ease;
+}
+
+@keyframes randomEpisodeWiggle {
+  0%   { transform: rotate(0) scale(1); }
+  25%  { transform: rotate(-2deg) scale(.985); }
+  55%  { transform: rotate(1.8deg) scale(1.025); }
+  78%  { transform: rotate(-.7deg) scale(1.01); }
+  100% { transform: rotate(0) scale(1); }
+}
+
+@keyframes randomEpisodeIcon {
+  0%   { transform: translateX(0) rotate(0); }
+  45%  { transform: translateX(2px) rotate(8deg); }
+  100% { transform: translateX(0) rotate(0); }
+}
+
+@media (max-width: 760px) {
+  .guide-hero::before {
+    background-size: auto 78%;
+    background-position: center bottom;
+    opacity: .82;
+  }
+
+  .guide-logo {
+    padding-bottom: 11px;
+  }
+
+  .guide-logo::after {
+    height: 5px;
+    width: min(170px, 62%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-surprise-button.is-shuffling,
+  .guide-surprise-button.is-shuffling .random-icon {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   GENERATED SOUTH PARK BACKGROUND
+========================================================= */
+
+body {
+  background-color: #071225 !important;
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(4, 10, 23, .12) 0%,
+      rgba(4, 10, 23, .34) 46%,
+      rgba(3, 8, 19, .68) 100%
+    ),
+    url("/sp/img/background.png") !important;
+  background-repeat: no-repeat, no-repeat !important;
+  background-position: center top, center top !important;
+  background-size: cover, cover !important;
+  background-attachment: fixed, fixed !important;
+}
+
+/* The generated full-page background now supplies the mountains, so suppress
+   the earlier vector mountain layer to avoid doubling the scenery. */
+.guide-hero::before {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  body {
+    background-attachment: scroll, scroll !important;
+    background-size: auto 100vh, auto 100vh !important;
+    background-position: center top, center top !important;
+  }
+}
+
+
+/* =========================================================
+   ARCHIVE READABILITY OVER BACKGROUND
+   Keeps the landscape visible while calming detail behind episodes.
+========================================================= */
+
+.archive {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Soft full-width shadow that gradually develops behind the archive.
+   No hard panel edge: it fades in above the results row. */
+.archive::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -105px;
+  bottom: -120px;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 95% 42% at 50% 5%,
+      rgba(5, 13, 31, .05) 0%,
+      rgba(4, 10, 25, .18) 42%,
+      rgba(3, 9, 22, .38) 72%,
+      rgba(2, 7, 18, .50) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(3, 9, 22, 0) 0%,
+      rgba(3, 9, 22, .18) 9%,
+      rgba(3, 9, 22, .38) 24%,
+      rgba(3, 9, 22, .52) 48%,
+      rgba(3, 9, 22, .56) 78%,
+      rgba(3, 9, 22, .48) 100%
+    );
+}
+
+/* Slightly calmer glass behind each episode title/image without
+   turning the cards into opaque boxes. */
+.episode-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 20, 40, .62),
+      rgba(5, 12, 28, .50)
+    ) !important;
+  border-color: rgba(154, 183, 222, .18) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 12px 30px rgba(0,0,0,.14) !important;
+}
+
+/* Give titles a stable dark falloff even when bright town lights
+   happen to sit directly behind a card. */
+.grid-content {
+  position: relative;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(5, 12, 27, .12),
+      rgba(5, 12, 27, .34)
+    );
+}
+
+/* Season boundaries stay readable while still allowing scenery through. */
+.season-section {
+  position: relative;
+}
+
+.season-heading {
+  text-shadow: 0 2px 16px rgba(0,0,0,.42);
+}
+
+@media (max-width: 760px) {
+  .archive::before {
+    top: -70px;
+    bottom: -80px;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(3, 9, 22, .10) 0%,
+        rgba(3, 9, 22, .42) 18%,
+        rgba(3, 9, 22, .58) 55%,
+        rgba(3, 9, 22, .54) 100%
+      );
+  }
+
+  .episode-card {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(9, 19, 38, .68),
+        rgba(4, 11, 26, .56)
+      ) !important;
+  }
+}
+
+
+/* =========================================================
+   SOUTH PARK TITLE — CUT-PAPER TRIPLE UNDERLINE
+========================================================= */
+
+/* Replace the earlier thin multicolour stroke with the chunkier,
+   separated yellow / red / blue marks from the mockup. */
+.guide-logo {
+  padding-bottom: 18px !important;
+}
+
+.guide-logo::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 5px !important;
+  bottom: 2px !important;
+  width: 238px !important;
+  height: 9px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f4c522 0 31%,
+      transparent 31% 35%,
+      #d94a48 35% 64%,
+      transparent 64% 68%,
+      #4fa3d9 68% 100%
+    ) !important;
+
+  /* Rough individual-looking paper strokes rather than one neat line. */
+  clip-path: polygon(
+    0 30%, 5% 12%, 14% 20%, 23% 7%, 31% 18%,
+    31% 78%, 23% 88%, 14% 76%, 5% 92%, 0 76%,
+
+    35% 26%, 40% 10%, 48% 19%, 56% 5%, 64% 17%,
+    64% 80%, 56% 91%, 48% 77%, 40% 90%, 35% 74%,
+
+    68% 27%, 75% 8%, 83% 20%, 92% 5%, 100% 18%,
+    100% 77%, 92% 91%, 83% 75%, 75% 89%, 68% 76%
+  ) !important;
+
+  transform: rotate(-.7deg) !important;
+  filter:
+    drop-shadow(0 2px 0 rgba(0,0,0,.20))
+    drop-shadow(0 0 5px rgba(255,255,255,.025)) !important;
+  opacity: 1 !important;
+}
+
+@media (max-width: 760px) {
+  .guide-logo {
+    padding-bottom: 15px !important;
+  }
+
+  .guide-logo::after {
+    left: 3px !important;
+    width: 190px !important;
+    height: 7px !important;
+  }
+}
+
+
+/* =========================================================
+   RESULTS STATUS + EPISODE COUNT REFINEMENT
+========================================================= */
+
+/* Remove the "SHOWING ... EPISODES / results status" strip entirely. */
+.results-status,
+.result-status,
+.results-summary,
+.guide-results-status,
+.archive-results-status,
+#resultsStatus,
+#resultStatus {
+  display: none !important;
+}
+
+/* Use the warm orange accent already present elsewhere in the guide
+   for the large X in "X EPISODES FOUND". */
+.guide-count-number,
+.episode-count-number,
+.count-number,
+#episodeCount,
+#resultCount,
+#resultsCount {
+  color: #f0a044 !important;
+}
+
+
+/* =========================================================
+   COUNT + GRID NUMBER REFINEMENT
+========================================================= */
+
+/* Ensure the actual guide count uses the warm orange accent too. */
+.guide-count {
+  color: #f0a044 !important;
+}
+
+/* Make the pasted-paper episode number sticker slightly larger. */
+.grid-number {
+  font-size: .62rem !important;
+  padding: 5px 9px !important;
+}
+
+@media (max-width: 760px) {
+  .grid-number {
+    font-size: .60rem !important;
+  }
+}
+
+
+/* =========================================================
+   SPECIALS AS A GLOBAL CONTENT FILTER
+========================================================= */
+
+/* ALL + S are global controls; the divider separates them from chronology. */
+.who-season-rail .season-button.specials-rail-button {
+  width: 52px !important;
+  min-width: 52px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+}
+
+.season-rail-divider {
+  flex: 0 0 1px;
+  width: 1px;
+  height: 28px;
+  margin: 0 5px;
+  align-self: center;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(180, 198, 224, .32) 20%,
+    rgba(180, 198, 224, .32) 80%,
+    transparent
+  );
+}
+
+/* Keep the global controls visually attached on smaller rails. */
+@media (max-width: 760px) {
+  .who-season-rail .season-button.specials-rail-button {
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+  }
+
+  .season-rail-divider {
+    height: 24px;
+    margin-inline: 3px;
+  }
+}
+
+
+/* =========================================================
+   SPECIALS FILTER + RESULTS CLEANUP
+========================================================= */
+
+/* Specials is a global filter, but its bubble is visually identical
+   to every numbered season circle. */
+.who-season-rail .season-button.specials-rail-button,
+.who-season-rail .season-button[data-season="specials"] {
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  font-size: .76rem !important;
+}
+
+/* Remove the duplicate results count beneath the active-filter area.
+   The large "X EPISODES FOUND" box remains the single count display. */
+#resultsCount,
+.results-count {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .who-season-rail .season-button.specials-rail-button,
+  .who-season-rail .season-button[data-season="specials"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    font-size: .69rem !important;
+  }
+}
+
+
+/* =========================================================
+   TYPOGRAPHY + TOP CONTROL REFINEMENT
+========================================================= */
+
+/* Episode titles */
+.grid-title {
+  font-size: 1.28rem !important;
+  line-height: 1.16 !important;
+}
+
+.archive.list-view .grid-title {
+  font-size: 1.22rem !important;
+}
+
+/* Larger synopsis copy in list mode */
+.archive.list-view .list-description {
+  font-size: .86rem !important;
+  line-height: 1.48 !important;
+}
+
+/* Larger pasted episode-number sticker text */
+.grid-number {
+  font-size: .68rem !important;
+  padding: 6px 9px !important;
+}
+
+/* Slightly larger season year */
+.season-year {
+  font-size: .71rem !important;
+  letter-spacing: .085em !important;
+}
+
+/* Subtle glass panel around the guide introduction */
+.guide-intro {
+  display: inline-block;
+  max-width: 680px;
+  padding: 11px 14px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 20, 39, .34),
+      rgba(4, 12, 28, .20)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 8px 24px rgba(0,0,0,.08);
+  backdrop-filter: blur(10px) saturate(115%);
+  -webkit-backdrop-filter: blur(10px) saturate(115%);
+}
+
+/* Use the warm orange accent consistently for the big result number */
+.guide-count strong {
+  color: #f0a044 !important;
+}
+
+/* Random Episode: orange border + soft orange glass on hover */
+.guide-surprise-button {
+  border-color: rgba(240,160,68,.38) !important;
+}
+
+.guide-surprise-button:hover {
+  border-color: rgba(240,160,68,.82) !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(240,160,68,.20),
+      rgba(128,72,24,.16)
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 7px 20px rgba(240,160,68,.12) !important;
+  color: #ffe3bf !important;
+}
+
+/* Make search exactly match the count card's visible height. */
+.guide-count,
+.guide-search-wrap,
+.guide-search-input {
+  height: 56px !important;
+  min-height: 56px !important;
+}
+
+.guide-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Better vertical alignment for the magnifying glass */
+.guide-search-icon {
+  left: 17px !important;
+  top: 50% !important;
+  width: 21px !important;
+  height: 21px !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 !important;
+  transform: translateY(-50%) !important;
+  color: rgba(177,187,202,.88) !important;
+}
+
+.guide-search-icon svg {
+  width: 21px !important;
+  height: 21px !important;
+  display: block !important;
+  stroke: currentColor !important;
+  stroke-width: 2.1 !important;
+}
+
+.guide-search-input {
+  padding-left: 50px !important;
+  padding-right: 46px !important;
+  line-height: normal !important;
+  box-sizing: border-box !important;
+}
+
+/* Hide browser-native clear controls so we can use the orange X. */
+.guide-search-input::-webkit-search-cancel-button,
+.guide-search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.guide-search-input::-ms-clear,
+.guide-search-input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Custom orange search clear X */
+.guide-search-clear {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  z-index: 4;
+  width: 28px;
+  height: 28px;
+  display: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(240,160,68,.10);
+  color: #f0a044;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-50%);
+  transition:
+    color .18s ease,
+    background .18s ease,
+    transform .18s ease;
+}
+
+.guide-search-wrap.has-value .guide-search-clear {
+  display: grid;
+}
+
+.guide-search-clear:hover {
+  color: #ffc077;
+  background: rgba(240,160,68,.18);
+  transform: translateY(-50%) scale(1.05);
+}
+
+@media (max-width: 760px) {
+  .grid-title {
+    font-size: 1.20rem !important;
+  }
+
+  .archive.list-view .grid-title {
+    font-size: 1.10rem !important;
+  }
+
+  .archive.list-view .list-description {
+    font-size: .82rem !important;
+  }
+
+  .grid-number {
+    font-size: .64rem !important;
+  }
+
+  .season-year {
+    font-size: .67rem !important;
+  }
+
+  .guide-count,
+  .guide-search-wrap,
+  .guide-search-input {
+    height: 52px !important;
+    min-height: 52px !important;
+  }
+
+  .guide-search-icon {
+    left: 15px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .guide-search-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .guide-search-input {
+    padding-left: 45px !important;
+    padding-right: 43px !important;
+  }
+
+  .guide-search-clear {
+    right: 10px;
+    width: 27px;
+    height: 27px;
+  }
+}
+
+
+/* =========================================================
+   PAGINATION VISIBILITY + ARCHIVE GRADIENT HANDOFF
+========================================================= */
+
+/* Stop the archive readability wash before pagination so controls
+   don't look buried under the darkening layer. */
+.archive::before {
+  bottom: 72px !important;
+}
+
+/* Keep pagination above any archive/background treatment. */
+.archive-pagination {
+  position: relative !important;
+  z-index: 8 !important;
+  margin-top: 28px !important;
+  padding-top: 18px !important;
+  padding-bottom: 8px !important;
+  border-top: 1px solid rgba(255,255,255,.10) !important;
+}
+
+/* Previous / Next */
+.archive-pagination .page-nav {
+  min-height: 40px !important;
+  padding: 0 14px !important;
+  border: 1px solid rgba(240,160,68,.28) !important;
+  border-radius: 11px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(9,18,36,.74),
+      rgba(5,12,27,.62)
+    ) !important;
+  color: rgba(238,242,249,.9) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 7px 22px rgba(0,0,0,.16) !important;
+  backdrop-filter: blur(12px) saturate(115%);
+  -webkit-backdrop-filter: blur(12px) saturate(115%);
+  opacity: 1 !important;
+}
+
+.archive-pagination .page-nav:hover:not(:disabled) {
+  border-color: rgba(240,160,68,.72) !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(240,160,68,.18),
+      rgba(94,52,18,.13)
+    ) !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+}
+
+.archive-pagination .page-nav:disabled {
+  opacity: .34 !important;
+  color: rgba(220,226,237,.48) !important;
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(6,13,28,.46) !important;
+  box-shadow: none !important;
+}
+
+/* Page circles */
+.archive-pagination .page-number {
+  width: 38px !important;
+  height: 38px !important;
+  border: 1px solid rgba(255,255,255,.10) !important;
+  background: rgba(8,17,34,.68) !important;
+  color: rgba(235,240,248,.82) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 5px 16px rgba(0,0,0,.12) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.archive-pagination .page-number:hover {
+  border-color: rgba(240,160,68,.45) !important;
+  background: rgba(240,160,68,.11) !important;
+  color: #fff !important;
+}
+
+.archive-pagination .page-number.active,
+.archive-pagination .page-number[aria-current="page"] {
+  border-color: #f6b663 !important;
+  background:
+    linear-gradient(
+      145deg,
+      #f0a044,
+      #d88a31
+    ) !important;
+  color: #172033 !important;
+  box-shadow:
+    0 0 0 2px rgba(5,12,26,.72),
+    0 0 18px rgba(240,160,68,.20) !important;
+}
+
+/* Current page position, e.g. 2 / 2 */
+.archive-pagination .page-position {
+  color: rgba(220,228,240,.72) !important;
+  font-size: .66rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .085em !important;
+  text-shadow: 0 1px 10px rgba(0,0,0,.28);
+}
+
+/* Ellipsis should remain readable too. */
+.archive-pagination .page-ellipsis {
+  color: rgba(220,228,240,.48) !important;
+}
+
+@media (max-width: 760px) {
+  .archive::before {
+    bottom: 58px !important;
+  }
+
+  .archive-pagination {
+    margin-top: 22px !important;
+    padding-top: 15px !important;
+  }
+
+  .archive-pagination .page-nav {
+    min-height: 38px !important;
+    padding-inline: 12px !important;
+  }
+
+  .archive-pagination .page-position {
+    color: rgba(226,233,243,.78) !important;
+  }
+}
+
+
+/* =========================================================
+   MODAL TOP BAR — ARROW PLACEMENT FIX
+========================================================= */
+
+.modal-topbar {
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 48px !important;
+  padding: 6px 8px !important;
+}
+
+.modal-topbar .modal-prev,
+.modal-topbar .modal-next,
+.modal-topbar button[data-modal-prev],
+.modal-topbar button[data-modal-next] {
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  margin: 0 !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  align-self: center !important;
+  justify-self: center !important;
+  line-height: 1 !important;
+}
+
+.modal-topbar .modal-prev,
+.modal-topbar button[data-modal-prev] {
+  grid-column: 1 !important;
+}
+
+.modal-topbar .modal-next,
+.modal-topbar button[data-modal-next] {
+  grid-column: 3 !important;
+}
+
+.modal-topbar .modal-position,
+.modal-topbar .modal-counter,
+.modal-topbar [data-modal-position] {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  justify-self: center !important;
+  align-self: center !important;
+  margin: 0 !important;
+  text-align: center !important;
+}
+
+/* Centre arrow glyphs themselves, including SVG/icon implementations. */
+.modal-topbar .modal-prev svg,
+.modal-topbar .modal-next svg,
+.modal-topbar button[data-modal-prev] svg,
+.modal-topbar button[data-modal-next] svg {
+  display: block !important;
+  width: 17px !important;
+  height: 17px !important;
+  margin: auto !important;
+}
+
+@media (max-width: 760px) {
+  .modal-topbar {
+    grid-template-columns: 40px minmax(0, 1fr) 40px !important;
+    min-height: 46px !important;
+    padding: 5px 7px !important;
+    gap: 5px !important;
+  }
+
+  .modal-topbar .modal-prev,
+  .modal-topbar .modal-next,
+  .modal-topbar button[data-modal-prev],
+  .modal-topbar button[data-modal-next] {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+  }
+}
+
+
+/* =========================================================
+   LIST VIEW — ORANGE HOVER BORDER
+========================================================= */
+
+.archive.list-view .episode-card {
+  transition:
+    border-color .22s ease,
+    box-shadow .22s ease,
+    transform .22s ease !important;
+}
+
+.archive.list-view .episode-card:hover {
+  border-color: rgba(240, 160, 68, .78) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 0 0 1px rgba(240,160,68,.12),
+    0 10px 28px rgba(240,160,68,.10) !important;
+}
+
+
+/* =========================================================
+   SOUTH PARK CUT-PAPER CARD SHAPES
+   Keeps the existing dark glass styling, but makes each episode
+   card feel like a subtly hand-cut piece of construction paper.
+========================================================= */
+
+.episode-card {
+  position: relative !important;
+  isolation: isolate;
+  overflow: hidden !important;
+
+  /* Tiny asymmetry: deliberately restrained so the grid stays polished. */
+  clip-path: polygon(
+    0.8% 1.2%,
+    98.6% 0.4%,
+    99.8% 2.1%,
+    99.4% 97.4%,
+    97.8% 99.5%,
+    1.1% 98.8%,
+    0.2% 96.7%,
+    0.4% 3.1%
+  );
+
+  transition:
+    border-color .22s ease,
+    box-shadow .22s ease,
+    transform .22s ease,
+    filter .22s ease !important;
+}
+
+/* Alternate the cut very slightly so the cards don't look stamped
+   from one identical digital template. */
+.episode-card:nth-child(2n) {
+  clip-path: polygon(
+    0.4% 1.8%,
+    2.2% 0.5%,
+    98.9% 0.9%,
+    99.7% 3.0%,
+    99.2% 98.1%,
+    97.1% 99.6%,
+    1.0% 99.0%,
+    0.1% 96.8%
+  );
+}
+
+.episode-card:nth-child(3n) {
+  clip-path: polygon(
+    1.3% 0.3%,
+    97.9% 0.8%,
+    99.6% 2.3%,
+    99.9% 96.6%,
+    98.0% 99.7%,
+    0.7% 98.5%,
+    0.2% 3.0%
+  );
+}
+
+/* Fine translucent fibre/noise layer over the glass. */
+.episode-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+
+  background:
+    repeating-radial-gradient(
+      circle at 18% 22%,
+      rgba(255,255,255,.30) 0 .45px,
+      transparent .55px 3.5px
+    ),
+    repeating-linear-gradient(
+      103deg,
+      rgba(255,255,255,.018) 0 1px,
+      transparent 1px 5px
+    );
+
+  opacity: .12;
+  mix-blend-mode: soft-light;
+}
+
+/* Keep all real card content above the underlying card surface while
+   allowing the paper texture to remain a very light top-layer grain. */
+.episode-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* A faint irregular inner edge makes the cut shape easier to perceive
+   without changing the established glass/card colour. */
+.episode-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.025),
+      transparent 26%,
+      transparent 74%,
+      rgba(255,255,255,.015)
+    );
+
+  clip-path: inherit;
+}
+
+/* Grid hover: retain the existing restrained lift but let the paper
+   silhouette catch a little more light. */
+.archive:not(.list-view) .episode-card:hover {
+  filter: brightness(1.035);
+}
+
+/* List view keeps the orange hover treatment added previously,
+   now following the cut-paper silhouette. */
+.archive.list-view .episode-card:hover {
+  border-color: rgba(240,160,68,.82) !important;
+  filter: brightness(1.035);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 0 0 1px rgba(240,160,68,.14),
+    0 11px 30px rgba(240,160,68,.11) !important;
+}
+
+@media (max-width: 760px) {
+  /* Reduce the irregularity slightly on narrow cards so edges remain clean. */
+  .episode-card,
+  .episode-card:nth-child(2n),
+  .episode-card:nth-child(3n) {
+    clip-path: polygon(
+      .6% 1%,
+      98.8% .5%,
+      99.6% 2%,
+      99.5% 97.6%,
+      98% 99.2%,
+      .8% 98.8%,
+      .2% 2.5%
+    );
+  }
+
+  .episode-card::before {
+    opacity: .09;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .episode-card {
+    transition:
+      border-color .15s ease,
+      box-shadow .15s ease,
+      filter .15s ease !important;
+  }
+}
+
 </style>
 </head>
 
@@ -3718,7 +4836,15 @@ a {
         class="guide-surprise-button"
         id="randomEpisode"
       >
-        <span aria-hidden="true">⤨</span>
+        <span class="random-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M4 7h2.8c2.1 0 3.1 1 4.7 3.4l1 1.5c1.6 2.4 2.6 3.4 4.7 3.4H20"></path>
+            <path d="m17 12.5 3 2.8-3 2.8"></path>
+            <path d="M4 17h2.8c1.5 0 2.5-.6 3.5-1.8"></path>
+            <path d="M14 8.8c1-1.2 2-1.8 3.2-1.8H20"></path>
+            <path d="m17 4.2 3 2.8-3 2.8"></path>
+          </svg>
+        </span>
         Random episode
       </button>
 
@@ -3741,6 +4867,13 @@ a {
             placeholder="Search episodes..."
             autocomplete="off"
           >
+          <button
+            type="button"
+            class="guide-search-clear"
+            id="guideSearchClear"
+            aria-label="Clear search"
+            title="Clear search"
+          >×</button>
         </div>
       </div>
 
@@ -4448,6 +5581,11 @@ const searchInput =
     "searchInput"
   );
 
+const guideSearchClear =
+  document.getElementById(
+    "guideSearchClear"
+  );
+
 const resultsStatus =
   document.getElementById(
     "resultsStatus"
@@ -4962,36 +6100,32 @@ function renderSeasonRail() {
   const seasons = uniqueSeasons();
   const allActive = selectedSeasons.size === 0;
 
-  const entries = seasons.map(season => ({
-    type: "season",
-    value: season,
-    label: String(season),
-    name: `Season ${season}`,
-    order: season * 100,
-    hue: (205 + (season * 37)) % 360
-  }));
-
-  if (hasSpecials()) {
-    const latestSpecialOrder = Math.max(
-      ...episodes
-        .filter(item => itemType(item) === "special")
-        .map(itemOrder)
-    );
-
-    entries.push({
-      type: "specials",
-      value: "specials",
-      label: "SPECIALS",
-      name: "Specials",
-      order: latestSpecialOrder,
-      hue: 322
-    });
-  }
-
-  entries.sort((a, b) => b.order - a.order);
+  const entries = seasons
+    .map(season => ({
+      type: "season",
+      value: season,
+      label: String(season),
+      name: `Season ${season}`,
+      order: season * 100,
+      hue: (205 + (season * 37)) % 360
+    }))
+    .sort((a, b) => b.order - a.order);
 
   const railEntries = [
     `<button class="season-button ${allActive ? "active" : ""}" data-season="all" data-tooltip="All Seasons" style="--season-hue:210">ALL</button>`,
+
+    ...(hasSpecials()
+      ? [
+          `<button
+            class="season-button specials-rail-button ${selectedSeasons.has("specials") ? "active" : ""}"
+            data-season="specials"
+            style="--season-hue:322"
+            data-tooltip="Specials"
+          >S</button>`,
+          `<span class="season-rail-divider" aria-hidden="true"></span>`
+        ]
+      : []),
+
     ...entries.map(entry => `
       <button
         class="season-button ${selectedSeasons.has(entry.value) ? "active" : ""}"
@@ -6220,14 +7354,12 @@ randomEpisodeButton
       const candidates =
         getFilteredEpisodes();
 
-
       const pool =
         candidates.length
           ?
           candidates
           :
           episodes;
-
 
       const selected =
         pool[
@@ -6238,15 +7370,38 @@ randomEpisodeButton
           )
         ];
 
-
       const index =
         episodes.indexOf(
           selected
         );
 
+      randomEpisodeButton.classList.remove(
+        "is-shuffling"
+      );
 
-      openModal(
-        index
+      void randomEpisodeButton.offsetWidth;
+
+      randomEpisodeButton.classList.add(
+        "is-shuffling"
+      );
+
+      window.setTimeout(
+        () => {
+          randomEpisodeButton.classList.remove(
+            "is-shuffling"
+          );
+
+          openModal(
+            index
+          );
+        },
+        window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches
+          ?
+          0
+          :
+          230
       );
 
     }
@@ -6540,6 +7695,47 @@ mobileFilterButton?.addEventListener("click", () => {
 });
 
 
+
+function syncSearchClearButton() {
+
+  const wrap =
+    searchInput?.closest(
+      ".guide-search-wrap"
+    );
+
+  wrap?.classList.toggle(
+    "has-value",
+    Boolean(searchInput?.value)
+  );
+
+}
+
+
+guideSearchClear?.addEventListener(
+  "click",
+  () => {
+
+    searchInput.value = "";
+    searchQuery = "";
+    currentPage = 1;
+
+    syncSearchClearButton();
+    renderActiveFilters();
+    renderArchive();
+    syncURL();
+
+    searchInput.focus();
+
+  }
+);
+
+
+searchInput?.addEventListener(
+  "input",
+  syncSearchClearButton
+);
+
+
 /* =========================================================
    URL STATE / BACK-FORWARD
 ========================================================= */
@@ -6597,6 +7793,7 @@ if (seasonRailNext) {
 const initialEpisodeIndex =
   readURLState();
 
+syncSearchClearButton();
 renderPage();
 
 
