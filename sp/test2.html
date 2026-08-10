@@ -4194,6 +4194,226 @@ body {
   }
 }
 
+
+/* =========================================================
+   TYPOGRAPHY + TOP CONTROL REFINEMENT
+========================================================= */
+
+/* Episode titles */
+.grid-title {
+  font-size: 1.28rem !important;
+  line-height: 1.16 !important;
+}
+
+.archive.list-view .grid-title {
+  font-size: 1.22rem !important;
+}
+
+/* Larger synopsis copy in list mode */
+.archive.list-view .list-description {
+  font-size: .86rem !important;
+  line-height: 1.48 !important;
+}
+
+/* Larger pasted episode-number sticker text */
+.grid-number {
+  font-size: .68rem !important;
+  padding: 6px 9px !important;
+}
+
+/* Slightly larger season year */
+.season-year {
+  font-size: .71rem !important;
+  letter-spacing: .085em !important;
+}
+
+/* Subtle glass panel around the guide introduction */
+.guide-intro {
+  display: inline-block;
+  max-width: 680px;
+  padding: 11px 14px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 12px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10, 20, 39, .34),
+      rgba(4, 12, 28, .20)
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 8px 24px rgba(0,0,0,.08);
+  backdrop-filter: blur(10px) saturate(115%);
+  -webkit-backdrop-filter: blur(10px) saturate(115%);
+}
+
+/* Use the warm orange accent consistently for the big result number */
+.guide-count strong {
+  color: #f0a044 !important;
+}
+
+/* Random Episode: orange border + soft orange glass on hover */
+.guide-surprise-button {
+  border-color: rgba(240,160,68,.38) !important;
+}
+
+.guide-surprise-button:hover {
+  border-color: rgba(240,160,68,.82) !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(240,160,68,.20),
+      rgba(128,72,24,.16)
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 7px 20px rgba(240,160,68,.12) !important;
+  color: #ffe3bf !important;
+}
+
+/* Make search exactly match the count card's visible height. */
+.guide-count,
+.guide-search-wrap,
+.guide-search-input {
+  height: 56px !important;
+  min-height: 56px !important;
+}
+
+.guide-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Better vertical alignment for the magnifying glass */
+.guide-search-icon {
+  left: 17px !important;
+  top: 50% !important;
+  width: 21px !important;
+  height: 21px !important;
+  display: grid !important;
+  place-items: center !important;
+  margin: 0 !important;
+  transform: translateY(-50%) !important;
+  color: rgba(177,187,202,.88) !important;
+}
+
+.guide-search-icon svg {
+  width: 21px !important;
+  height: 21px !important;
+  display: block !important;
+  stroke: currentColor !important;
+  stroke-width: 2.1 !important;
+}
+
+.guide-search-input {
+  padding-left: 50px !important;
+  padding-right: 46px !important;
+  line-height: normal !important;
+  box-sizing: border-box !important;
+}
+
+/* Hide browser-native clear controls so we can use the orange X. */
+.guide-search-input::-webkit-search-cancel-button,
+.guide-search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.guide-search-input::-ms-clear,
+.guide-search-input::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Custom orange search clear X */
+.guide-search-clear {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  z-index: 4;
+  width: 28px;
+  height: 28px;
+  display: none;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(240,160,68,.10);
+  color: #f0a044;
+  cursor: pointer;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1;
+  transform: translateY(-50%);
+  transition:
+    color .18s ease,
+    background .18s ease,
+    transform .18s ease;
+}
+
+.guide-search-wrap.has-value .guide-search-clear {
+  display: grid;
+}
+
+.guide-search-clear:hover {
+  color: #ffc077;
+  background: rgba(240,160,68,.18);
+  transform: translateY(-50%) scale(1.05);
+}
+
+@media (max-width: 760px) {
+  .grid-title {
+    font-size: 1.20rem !important;
+  }
+
+  .archive.list-view .grid-title {
+    font-size: 1.10rem !important;
+  }
+
+  .archive.list-view .list-description {
+    font-size: .82rem !important;
+  }
+
+  .grid-number {
+    font-size: .64rem !important;
+  }
+
+  .season-year {
+    font-size: .67rem !important;
+  }
+
+  .guide-count,
+  .guide-search-wrap,
+  .guide-search-input {
+    height: 52px !important;
+    min-height: 52px !important;
+  }
+
+  .guide-search-icon {
+    left: 15px !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .guide-search-icon svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+
+  .guide-search-input {
+    padding-left: 45px !important;
+    padding-right: 43px !important;
+  }
+
+  .guide-search-clear {
+    right: 10px;
+    width: 27px;
+    height: 27px;
+  }
+}
+
 </style>
 </head>
 
@@ -4256,6 +4476,13 @@ body {
             placeholder="Search episodes..."
             autocomplete="off"
           >
+          <button
+            type="button"
+            class="guide-search-clear"
+            id="guideSearchClear"
+            aria-label="Clear search"
+            title="Clear search"
+          >×</button>
         </div>
       </div>
 
@@ -4961,6 +5188,11 @@ const archive =
 const searchInput =
   document.getElementById(
     "searchInput"
+  );
+
+const guideSearchClear =
+  document.getElementById(
+    "guideSearchClear"
   );
 
 const resultsStatus =
@@ -7072,6 +7304,47 @@ mobileFilterButton?.addEventListener("click", () => {
 });
 
 
+
+function syncSearchClearButton() {
+
+  const wrap =
+    searchInput?.closest(
+      ".guide-search-wrap"
+    );
+
+  wrap?.classList.toggle(
+    "has-value",
+    Boolean(searchInput?.value)
+  );
+
+}
+
+
+guideSearchClear?.addEventListener(
+  "click",
+  () => {
+
+    searchInput.value = "";
+    searchQuery = "";
+    currentPage = 1;
+
+    syncSearchClearButton();
+    renderActiveFilters();
+    renderArchive();
+    syncURL();
+
+    searchInput.focus();
+
+  }
+);
+
+
+searchInput?.addEventListener(
+  "input",
+  syncSearchClearButton
+);
+
+
 /* =========================================================
    URL STATE / BACK-FORWARD
 ========================================================= */
@@ -7129,6 +7402,7 @@ if (seasonRailNext) {
 const initialEpisodeIndex =
   readURLState();
 
+syncSearchClearButton();
 renderPage();
 
 
