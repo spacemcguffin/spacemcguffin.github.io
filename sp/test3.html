@@ -4639,6 +4639,214 @@ body.modal-open
   }
 }
 
+
+/* =========================================================
+   NEUTRAL CARD COLOUR + CLEAN CLIPPING FIX
+========================================================= */
+
+/* Remove season-derived colour identity from archive sections. */
+.season-section {
+  --season-accent: #f0a044 !important;
+}
+
+.season-name::after {
+  background: #f0a044 !important;
+  box-shadow: 0 0 12px rgba(240,160,68,.14) !important;
+}
+
+.season-count {
+  border-color: rgba(255,255,255,.12) !important;
+  color: rgba(229,236,246,.72) !important;
+}
+
+/* Neutral construction-paper backing behind grid cards. */
+.archive:not(.list-view) .episode-card-shell::before {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(29,43,67,.94),
+      rgba(10,18,32,.96)
+    ) !important;
+  box-shadow:
+    0 8px 20px rgba(0,0,0,.24) !important;
+  filter: none !important;
+}
+
+.archive:not(.list-view) .episode-card-shell:hover::before {
+  opacity: .88 !important;
+  filter: brightness(1.06) !important;
+}
+
+/* Keep every visual layer strictly inside the card silhouette. */
+.episode-card-shell {
+  position: relative !important;
+  min-width: 0 !important;
+  isolation: isolate !important;
+}
+
+.episode-card {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10,20,39,.80),
+      rgba(5,12,27,.70)
+    ) !important;
+
+  border-color: rgba(154,183,222,.16) !important;
+}
+
+/* Ensure pseudo layers cannot spill outside the card. */
+.episode-card::before,
+.episode-card::after {
+  inset: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Image and copy are clipped cleanly to the card body. */
+.grid-image {
+  overflow: hidden !important;
+  background: rgba(5,12,27,.48) !important;
+}
+
+.grid-copy {
+  position: relative !important;
+  overflow: hidden !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7,15,30,.08),
+      rgba(7,15,30,.34)
+    ) !important;
+}
+
+/* Neutral grid card border/hover. */
+.archive:not(.list-view) .episode-card:hover {
+  border-color: rgba(116,169,226,.30) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.04),
+    0 10px 28px rgba(0,0,0,.20) !important;
+}
+
+/* List view stays consistently blue rather than inheriting season colour. */
+.archive.list-view .episode-card:hover {
+  border-color: rgba(105,161,220,.20) !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(51,112,178,.17) 0%,
+      rgba(38,86,142,.13) 48%,
+      rgba(22,54,96,.10) 100%
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 8px 24px rgba(15,48,92,.12) !important;
+}
+
+/* List arrow uses one consistent blue treatment. */
+.archive.list-view .list-arrow {
+  border-color: rgba(112,174,234,.42) !important;
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      rgba(108,177,242,.20),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(48,94,143,.34),
+      rgba(16,37,67,.46)
+    ) !important;
+}
+
+.archive.list-view .episode-card:hover .list-arrow,
+.archive.list-view .episode-card:focus-within .list-arrow,
+.archive.list-view .list-arrow:hover {
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.88),
+    0 0 0 4px rgba(89,164,235,.34),
+    0 5px 16px rgba(24,111,200,.16) !important;
+}
+
+/* Modal accent becomes the global orange instead of per-season colour. */
+.episode-modal .modal-title::after,
+.modal .modal-title::after {
+  background: #f0a044 !important;
+}
+
+/* Sticky season scrap uses the global orange accent line. */
+.current-season-scrap::before {
+  background: #f0a044 !important;
+}
+
+/* Prevent any inherited season hue from tinting nested elements. */
+.season-section .episode-card,
+.season-section .episode-card-shell,
+.season-section .grid-copy,
+.season-section .list-arrow {
+  --season-hue: 210 !important;
+}
+
+
+/* =========================================================
+   STICKY SCRAP + MODAL TITLE + RANDOM LABEL REFINEMENT
+========================================================= */
+
+/* Slightly larger current-season sticky paper scrap. */
+.current-season-scrap {
+  min-width: 132px !important;
+  padding: 10px 13px 9px !important;
+}
+
+.current-season-scrap strong {
+  font-size: .70rem !important;
+}
+
+.current-season-scrap span {
+  font-size: .55rem !important;
+}
+
+/* Remove the episode-title underline/accent inside modals. */
+.episode-modal .modal-title::after,
+.modal .modal-title::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Make the temporary Random Episode paper label larger. */
+.guide-surprise-button::after {
+  min-width: 78px !important;
+  padding: 6px 10px !important;
+  font-size: .64rem !important;
+  letter-spacing: .06em !important;
+}
+
+@media (max-width: 760px) {
+  .current-season-scrap {
+    min-width: 112px !important;
+    padding: 8px 10px 7px !important;
+  }
+
+  .current-season-scrap strong {
+    font-size: .66rem !important;
+  }
+
+  .current-season-scrap span {
+    font-size: .52rem !important;
+  }
+
+  .guide-surprise-button::after {
+    min-width: 72px !important;
+    font-size: .61rem !important;
+  }
+}
+
 </style>
 </head>
 
