@@ -4347,6 +4347,215 @@ body.modal-open .paper-back-to-top {
   }
 }
 
+
+/* =========================================================
+   LIST VIEW + SEASON YEAR + PAGINATION REFINEMENT
+========================================================= */
+
+/* ---------------------------------------------------------
+   LIST VIEW: faded blue strip hover, no orange outline
+--------------------------------------------------------- */
+
+.archive.list-view .episode-card {
+  border-color: rgba(154,183,222,.16) !important;
+  transition:
+    background .22s ease,
+    border-color .22s ease,
+    box-shadow .22s ease,
+    transform .22s ease,
+    filter .22s ease !important;
+}
+
+.archive.list-view .episode-card:hover {
+  border-color: rgba(154,183,222,.18) !important;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(51,112,178,.17) 0%,
+      rgba(38,86,142,.13) 42%,
+      rgba(22,54,96,.10) 100%
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.045),
+    0 8px 24px rgba(15,48,92,.12) !important;
+  filter: brightness(1.035) !important;
+}
+
+/* List-view trailing arrow circles echo the season-filter bubbles. */
+.archive.list-view .list-arrow,
+.archive.list-view .card-arrow,
+.archive.list-view .grid-arrow,
+.archive.list-view .episode-arrow {
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: 1px solid hsla(210, 75%, 72%, .42) !important;
+  border-radius: 50% !important;
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      hsla(210, 88%, 72%, .20),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      hsla(210, 48%, 38%, .34),
+      hsla(210, 48%, 18%, .42)
+    ) !important;
+  color: rgba(226,238,252,.88) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.18),
+    0 4px 12px rgba(0,0,0,.18) !important;
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    transform .2s ease,
+    background .2s ease !important;
+}
+
+.archive.list-view .episode-card:hover .list-arrow,
+.archive.list-view .episode-card:hover .card-arrow,
+.archive.list-view .episode-card:hover .grid-arrow,
+.archive.list-view .episode-card:hover .episode-arrow {
+  border-color: hsla(210, 82%, 72%, .72) !important;
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.88),
+    0 0 0 4px hsla(210, 85%, 66%, .38),
+    0 5px 16px rgba(24,111,200,.18) !important;
+  transform: translateX(2px);
+}
+
+/* ---------------------------------------------------------
+   SEASON YEAR: little paper scrap label
+--------------------------------------------------------- */
+
+.season-year {
+  display: inline-grid !important;
+  place-items: center !important;
+  margin-top: 7px !important;
+  padding: 5px 9px !important;
+  border: 1px solid rgba(40,43,48,.16) !important;
+  border-radius: 3px !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246,244,235,.96),
+      rgba(214,215,209,.94)
+    ) !important;
+  color: #2c3139 !important;
+  font-size: .66rem !important;
+  font-weight: 760 !important;
+  line-height: 1 !important;
+  letter-spacing: .075em !important;
+  text-transform: uppercase;
+  box-shadow:
+    0 3px 9px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.68) !important;
+  clip-path: polygon(
+    2% 10%,
+    26% 3%,
+    50% 8%,
+    75% 2%,
+    98% 11%,
+    96% 89%,
+    73% 97%,
+    48% 93%,
+    23% 99%,
+    1% 90%
+  );
+  transform: rotate(-.55deg);
+}
+
+/* Slight alternating variation to keep the paper treatment handmade. */
+.season-section:nth-of-type(even) .season-year {
+  transform: rotate(.45deg);
+}
+
+/* ---------------------------------------------------------
+   PAGINATION: stronger hover + active ring
+--------------------------------------------------------- */
+
+.archive-pagination .page-nav,
+.archive-pagination .page-number {
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease !important;
+}
+
+.archive-pagination .page-nav:hover:not(:disabled) {
+  border-color: rgba(240,160,68,.78) !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(240,160,68,.18),
+      rgba(92,52,20,.14)
+    ) !important;
+  color: #fff !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 0 14px rgba(240,160,68,.18),
+    0 7px 22px rgba(0,0,0,.14) !important;
+  transform: translateY(-1px);
+}
+
+.archive-pagination .page-number:hover:not([aria-current="page"]) {
+  border-color: rgba(240,160,68,.55) !important;
+  background: rgba(240,160,68,.11) !important;
+  color: #fff !important;
+  box-shadow:
+    0 0 12px rgba(240,160,68,.14),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+  transform: translateY(-1px);
+}
+
+/* Active page gets the same "outer ring" logic as active season filters. */
+.archive-pagination .page-number[aria-current="page"],
+.archive-pagination .page-number.active {
+  border-color: #f4aa55 !important;
+  background:
+    linear-gradient(
+      145deg,
+      #f0a044,
+      #d9892e
+    ) !important;
+  color: #172033 !important;
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.94),
+    0 0 0 4px rgba(240,160,68,.78),
+    0 0 15px rgba(240,160,68,.18),
+    0 5px 15px rgba(0,0,0,.18) !important;
+}
+
+.archive-pagination .page-number[aria-current="page"]:hover,
+.archive-pagination .page-number.active:hover {
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.94),
+    0 0 0 4px rgba(240,160,68,.92),
+    0 0 20px rgba(240,160,68,.26),
+    0 6px 18px rgba(0,0,0,.20) !important;
+}
+
+@media (max-width: 760px) {
+  .season-year {
+    font-size: .63rem !important;
+    padding: 5px 8px !important;
+  }
+
+  .archive.list-view .list-arrow,
+  .archive.list-view .card-arrow,
+  .archive.list-view .grid-arrow,
+  .archive.list-view .episode-arrow {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+  }
+}
+
 </style>
 </head>
 
