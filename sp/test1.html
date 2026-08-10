@@ -4906,6 +4906,141 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* =========================================================
+   REFINEMENTS V2
+   Desktop list thumbnails, card contrast, season underline
+   colours, larger guide scrap, larger sticky-season copy.
+========================================================= */
+
+/* Stronger card/background separation in both views. */
+.episode-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.145),
+      rgba(255,255,255,.075)
+    ) !important;
+  border-color: rgba(255,255,255,.20) !important;
+  box-shadow:
+    0 18px 42px rgba(0,0,0,.26),
+    0 1px 0 rgba(255,255,255,.05),
+    inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+
+.episode-card:hover {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.19),
+      rgba(255,255,255,.095)
+    ) !important;
+  border-color: rgba(255,255,255,.31) !important;
+  box-shadow:
+    0 22px 48px rgba(0,0,0,.31),
+    inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+
+/* Larger list thumbnails on desktop. */
+@media (min-width: 761px) {
+  .archive.list-view .episode-card {
+    grid-template-columns: 210px minmax(0,1fr) !important;
+    min-height: 122px !important;
+  }
+
+  .archive.list-view .grid-image img {
+    min-height: 110px !important;
+  }
+
+  .archive.list-view .grid-copy {
+    padding: 18px 58px 18px 18px !important;
+  }
+}
+
+/* Put EPISODE GUIDE directly beneath SOUTH PARK and enlarge the scrap. */
+.guide-hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.guide-subtitle {
+  margin-top: 13px !important;
+  padding: 9px 16px 8px !important;
+  font-size: .76rem !important;
+  letter-spacing: .23em !important;
+}
+
+/* Larger sticky season text. */
+.current-season-scrap strong {
+  font-size: .78rem !important;
+}
+
+.current-season-scrap span {
+  font-size: .61rem !important;
+}
+
+/* Season heading underline inherits each section's season colour. */
+.season-section {
+  --season-accent: #f0a044;
+}
+
+.season-section .season-name::after {
+  background: var(--season-accent) !important;
+}
+
+/* Per-season accent palette matching the season filter buttons. */
+.season-section[data-section-label="Season 1"]  { --season-accent: #f2b94b; }
+.season-section[data-section-label="Season 2"]  { --season-accent: #e98d4a; }
+.season-section[data-section-label="Season 3"]  { --season-accent: #df6658; }
+.season-section[data-section-label="Season 4"]  { --season-accent: #cf5d83; }
+.season-section[data-section-label="Season 5"]  { --season-accent: #b962a6; }
+.season-section[data-section-label="Season 6"]  { --season-accent: #936cc4; }
+.season-section[data-section-label="Season 7"]  { --season-accent: #747bd2; }
+.season-section[data-section-label="Season 8"]  { --season-accent: #648bd6; }
+.season-section[data-section-label="Season 9"]  { --season-accent: #5a9fd6; }
+.season-section[data-section-label="Season 10"] { --season-accent: #51aec9; }
+.season-section[data-section-label="Season 11"] { --season-accent: #4cb7ae; }
+.season-section[data-section-label="Season 12"] { --season-accent: #59ba8b; }
+.season-section[data-section-label="Season 13"] { --season-accent: #79b96d; }
+.season-section[data-section-label="Season 14"] { --season-accent: #9eb65d; }
+.season-section[data-section-label="Season 15"] { --season-accent: #b8aa55; }
+.season-section[data-section-label="Season 16"] { --season-accent: #cb9753; }
+.season-section[data-section-label="Season 17"] { --season-accent: #d6815a; }
+.season-section[data-section-label="Season 18"] { --season-accent: #dc6f68; }
+.season-section[data-section-label="Season 19"] { --season-accent: #d56b83; }
+.season-section[data-section-label="Season 20"] { --season-accent: #c46f9d; }
+.season-section[data-section-label="Season 21"] { --season-accent: #ad78b5; }
+.season-section[data-section-label="Season 22"] { --season-accent: #9383c7; }
+.season-section[data-section-label="Season 23"] { --season-accent: #798ed0; }
+.season-section[data-section-label="Season 24"] { --season-accent: #659bd0; }
+.season-section[data-section-label="Season 25"] { --season-accent: #58a8c7; }
+.season-section[data-section-label="Season 26"] { --season-accent: #52b2b2; }
+.season-section[data-section-label="Season 27"] { --season-accent: #58b996; }
+.season-section[data-section-label="Specials"]  { --season-accent: #f0a044; }
+
+@media (max-width: 760px) {
+  .guide-subtitle {
+    padding: 7px 12px 6px !important;
+    font-size: .68rem !important;
+  }
+
+  .current-season-scrap strong {
+    font-size: .72rem !important;
+  }
+
+  .current-season-scrap span {
+    font-size: .56rem !important;
+  }
+}
+
+
+/* Exact season-heading/button colour link. */
+.season-section .season-name::after {
+  background: hsl(var(--season-hue), 88%, 68%) !important;
+  box-shadow: 0 0 10px hsla(var(--season-hue), 88%, 60%, .18);
+}
+
 </style>
 </head>
 
@@ -6715,6 +6850,7 @@ function renderArchive() {
         class="season-section ${isSpecialGroup ? "specials-section" : ""}"
         data-section-label="${escapeHTML(heading)}"
         data-section-count="${getFullGroupCount(group)}"
+        style="--season-hue:${isSpecialGroup ? 322 : (205 + (Number(group) * 37)) % 360}"
       >
 
         <header class="season-header">
