@@ -2463,105 +2463,6 @@ a {
   border-radius: 999px;
 }
 
-.season-browser {
-  position: relative;
-  margin-inline: calc(50% - 50vw);
-  padding: 15px max(24px, calc((100vw - 1240px) / 2)) 18px;
-  border-bottom: 1px solid rgba(98, 127, 177, .18);
-  background: linear-gradient(180deg, rgba(12, 24, 48, .72), rgba(5, 13, 28, .72));
-}
-
-.season-browser-label {
-  margin-bottom: 10px;
-}
-
-.season-browser-toggle {
-  width: 100%;
-  height: 39px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  border: 1px solid rgba(56, 122, 217, .75);
-  border-radius: 11px;
-  background: linear-gradient(180deg, #3778cf, #2861ae);
-  color: #fff;
-  cursor: pointer;
-  font-size: .71rem;
-  font-weight: 760;
-  letter-spacing: .035em;
-  text-transform: uppercase;
-  box-shadow: 0 0 0 4px rgba(2, 8, 18, .45), inset 0 1px 0 rgba(255,255,255,.18);
-}
-
-.season-browser-chevron {
-  transition: transform .22s ease;
-}
-
-.season-browser-toggle[aria-expanded="false"] .season-browser-chevron {
-  transform: rotate(180deg);
-}
-
-.season-browser-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 9px;
-  margin-top: 17px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(98, 127, 177, .13);
-}
-
-.season-browser-grid[hidden] {
-  display: none;
-}
-
-.season-picker-card {
-  --season-hue: 210;
-  min-height: 61px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 7px 11px;
-  border: 1px solid rgba(83, 116, 166, .2);
-  border-radius: 15px;
-  background: rgba(6, 16, 34, .52);
-  color: rgba(244, 247, 255, .88);
-  cursor: pointer;
-  text-align: left;
-  transition: transform .2s ease, border-color .2s ease, background .2s ease;
-}
-
-.season-picker-card:hover {
-  transform: translateY(-2px);
-  border-color: hsla(var(--season-hue), 75%, 67%, .45);
-  background: rgba(12, 28, 53, .72);
-}
-
-.season-picker-card.active {
-  border-color: hsla(var(--season-hue), 85%, 68%, .72);
-  background: hsla(var(--season-hue), 52%, 27%, .34);
-}
-
-.season-picker-orb {
-  flex: 0 0 auto;
-  width: 42px;
-  height: 42px;
-  display: grid;
-  place-items: center;
-  border: 2px solid hsla(var(--season-hue), 82%, 70%, .88);
-  border-radius: 50%;
-  background: linear-gradient(145deg, hsla(var(--season-hue), 77%, 64%, .92), hsla(var(--season-hue), 58%, 38%, .95));
-  color: #fff;
-  font-size: .77rem;
-  font-weight: 760;
-  box-shadow: 0 0 0 3px hsla(var(--season-hue), 60%, 50%, .13), inset 0 1px 0 rgba(255,255,255,.3);
-}
-
-.season-picker-name {
-  font-size: .75rem;
-  font-weight: 700;
-}
-
 .who-archive-section {
   margin-top: 0;
 }
@@ -2688,6 +2589,81 @@ a {
 
 }
 
+
+/* =========================================================
+   TOP FILTER / LIST REFINEMENTS
+========================================================= */
+
+/* More breathing room around the circular season controls so
+   the active rings and marker are never clipped. */
+.who-season-rail {
+  gap: 12px;
+  padding: 8px 8px 14px;
+}
+
+.who-season-rail .season-button {
+  min-width: 46px;
+  width: 46px;
+  height: 46px;
+  font-size: .74rem;
+}
+
+.who-season-rail .season-button.active {
+  box-shadow:
+    0 0 0 2px rgba(5, 14, 29, .95),
+    0 0 0 4px #52aaff,
+    0 6px 18px rgba(26, 132, 235, .25);
+}
+
+.who-season-rail .season-button.active::after {
+  bottom: -9px;
+  width: 5px;
+  height: 5px;
+}
+
+.who-season-rail .season-button[data-season="specials"] {
+  min-width: 74px;
+  width: auto;
+  height: 44px;
+  padding-inline: 12px;
+  font-size: .64rem;
+}
+
+/* Give list mode a stronger visual thumbnail. */
+.archive.list-view .episode-card {
+  grid-template-columns: 180px minmax(0,1fr);
+  min-height: 108px;
+}
+
+.archive.list-view .grid-image img {
+  min-height: 96px;
+}
+
+@media (max-width: 760px) {
+  .who-season-rail {
+    gap: 10px;
+    padding: 7px 7px 13px;
+  }
+
+  .who-season-rail .season-button {
+    min-width: 43px;
+    width: 43px;
+    height: 43px;
+    font-size: .7rem;
+  }
+
+  .archive.list-view .episode-card {
+    grid-template-columns: 132px minmax(0,1fr);
+    min-height: 98px;
+  }
+}
+
+@media (max-width: 480px) {
+  .archive.list-view .episode-card {
+    grid-template-columns: 116px minmax(0,1fr);
+  }
+}
+
 </style>
 </head>
 
@@ -2720,7 +2696,7 @@ a {
         id="randomEpisode"
       >
         <span aria-hidden="true">⤨</span>
-        Surprise me
+        Random episode
       </button>
 
       <div id="heroStats" hidden></div>
@@ -2762,30 +2738,6 @@ a {
       </div>
 
       <div class="season-rail who-season-rail" id="seasonRail"></div>
-
-    </section>
-
-
-    <!-- =====================================================
-         EXPANDED SEASON BROWSER
-    ====================================================== -->
-
-    <section class="season-browser">
-
-      <div class="season-browser-label">SEASONS</div>
-
-      <button
-        type="button"
-        class="season-browser-toggle"
-        id="seasonBrowserToggle"
-        aria-expanded="true"
-        aria-controls="seasonBrowseGrid"
-      >
-        <span>Browse</span>
-        <span class="season-browser-chevron" aria-hidden="true">⌃</span>
-      </button>
-
-      <div class="season-browser-grid" id="seasonBrowseGrid"></div>
 
     </section>
 
@@ -3282,8 +3234,6 @@ const seasonRail =
     "seasonRail"
   );
 
-const seasonBrowseGrid = document.getElementById("seasonBrowseGrid");
-const seasonBrowserToggle = document.getElementById("seasonBrowserToggle");
 const seasonRailPrevious = document.getElementById("seasonRailPrevious");
 const seasonRailNext = document.getElementById("seasonRailNext");
 const seasonStripStatus = document.getElementById("seasonStripStatus");
@@ -3757,24 +3707,6 @@ function renderSeasonRail() {
 
   seasonRail.innerHTML = railEntries.join("");
 
-  if (seasonBrowseGrid) {
-    seasonBrowseGrid.innerHTML = entries
-      .filter(entry => entry.type === "season")
-      .sort((a, b) => Number(a.value) - Number(b.value))
-      .map(entry => `
-        <button
-          type="button"
-          class="season-picker-card ${selectedSeasons.has(entry.value) ? "active" : ""}"
-          data-season="${entry.value}"
-          style="--season-hue:${entry.hue}"
-        >
-          <span class="season-picker-orb">${entry.label}</span>
-          <span class="season-picker-name">${escapeHTML(entry.name)}</span>
-        </button>
-      `)
-      .join("");
-  }
-
   if (seasonStripStatus) {
     if (selectedSeasons.size === 0) {
       seasonStripStatus.textContent = "All Seasons";
@@ -4119,7 +4051,7 @@ function renderArchive() {
             ${subheading ? `<div class="season-year">${escapeHTML(subheading)}</div>` : ""}
             ${isSpecialGroup && yearText ? `<div class="season-year">${escapeHTML(yearText)}</div>` : ""}
           </div>
-          <div class="season-count">${groupItems.length} on this page</div>
+          <div class="season-count">${groupItems.length} ${groupItems.length === 1 ? "episode" : "episodes"}</div>
         </header>
 
         <div class="episode-grid">
@@ -4976,14 +4908,6 @@ window.addEventListener(
 /* =========================================================
    TOP SEASON BROWSER CONTROLS
 ========================================================= */
-
-if (seasonBrowserToggle && seasonBrowseGrid) {
-  seasonBrowserToggle.addEventListener("click", () => {
-    const expanded = seasonBrowserToggle.getAttribute("aria-expanded") === "true";
-    seasonBrowserToggle.setAttribute("aria-expanded", String(!expanded));
-    seasonBrowseGrid.hidden = expanded;
-  });
-}
 
 if (seasonRailPrevious) {
   seasonRailPrevious.addEventListener("click", () => {
