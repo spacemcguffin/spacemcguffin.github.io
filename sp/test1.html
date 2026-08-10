@@ -3198,6 +3198,125 @@ a {
   }
 }
 
+
+/* =========================================================
+   MODAL PROPORTION REFINEMENT
+========================================================= */
+
+/* Smaller hero artwork so metadata/navigation arrives sooner. */
+.modal-hero {
+  aspect-ratio: 16 / 7.2 !important;
+  max-height: 330px !important;
+}
+
+.modal-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Cross-season action becomes a compact centered pill/card. */
+.modal-cross-season.visible {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.modal-cross-link {
+  width: auto !important;
+  min-width: 220px;
+  max-width: min(360px, 82%);
+  min-height: 46px;
+  padding: 9px 15px;
+  border-radius: 12px;
+}
+
+.modal-cross-link.previous,
+.modal-cross-link.next {
+  text-align: center !important;
+  justify-content: center;
+}
+
+.modal-cross-link.previous > span:first-child,
+.modal-cross-link.next > span:last-child {
+  flex: 0 0 auto;
+}
+
+.modal-cross-title {
+  font-size: .73rem;
+}
+
+.modal-cross-label {
+  font-size: .48rem;
+}
+
+@media (max-width: 760px) {
+  .modal-hero {
+    aspect-ratio: 16 / 8.3 !important;
+    max-height: 250px !important;
+  }
+
+  .modal-cross-link {
+    min-width: 0;
+    width: min(300px, 88%) !important;
+    max-width: 88%;
+  }
+}
+
+
+/* UNIFIED TOP SEARCH ROW */
+:root { --guide-control-height: 54px; }
+
+.episode-count-box, .count-box, .who-count-box,
+.search-input, .who-search-input,
+.random-button, .who-random-button {
+  height: var(--guide-control-height) !important;
+  min-height: var(--guide-control-height) !important;
+  border-radius: 12px !important;
+  border-color: rgba(72,116,170,.28) !important;
+  background: rgba(5,15,29,.58) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.025), 0 7px 22px rgba(0,0,0,.08) !important;
+}
+
+.episode-count-box, .count-box, .who-count-box {
+  padding: 0 14px !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.search-input, .who-search-input {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.search-box, .search-wrap, .who-search-box {
+  min-height: var(--guide-control-height) !important;
+}
+
+.search-box .search-input, .search-wrap .search-input, .who-search-box .who-search-input {
+  height: 100% !important;
+}
+
+.random-button, .who-random-button {
+  padding: 0 15px !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.toolbar, .who-toolbar, .search-row, .guide-search-row {
+  gap: 10px !important;
+  align-items: stretch !important;
+}
+
+@media (max-width: 760px) {
+  :root { --guide-control-height: 48px; }
+  .episode-count-box, .count-box, .who-count-box { padding-inline: 11px !important; }
+  .random-button, .who-random-button { padding-inline: 12px !important; }
+}
+
 </style>
 </head>
 
