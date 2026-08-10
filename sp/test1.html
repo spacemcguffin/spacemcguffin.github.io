@@ -3136,6 +3136,68 @@ a {
   }
 }
 
+
+/* =========================================================
+   TOP AREA REFINEMENT
+========================================================= */
+
+/* Smaller masthead */
+.hero h1,
+.who-hero h1,
+.guide-hero h1 {
+  font-size: clamp(1.95rem, 3.8vw, 3.15rem) !important;
+  line-height: .94 !important;
+}
+
+/* More compact count / search / random row */
+.episode-count-box,
+.count-box,
+.who-count-box {
+  min-height: 58px !important;
+  padding: 8px 14px !important;
+}
+
+.search-input,
+.who-search-input {
+  height: 40px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.random-button,
+.who-random-button {
+  height: 40px !important;
+  padding-inline: 13px !important;
+}
+
+.toolbar,
+.who-toolbar,
+.search-row {
+  gap: 8px !important;
+}
+
+/* Slightly larger desktop season bubbles */
+@media (min-width: 761px) {
+  .who-season-rail .season-button {
+    min-width: 42px !important;
+    width: 42px !important;
+    height: 42px !important;
+    font-size: .7rem !important;
+  }
+
+  .who-season-rail .season-button[data-season="specials"] {
+    min-width: 70px !important;
+    width: auto !important;
+    height: 40px !important;
+    padding-inline: 11px !important;
+    font-size: .6rem !important;
+  }
+
+  .who-season-rail {
+    gap: 10px !important;
+  }
+}
+
 </style>
 </head>
 
