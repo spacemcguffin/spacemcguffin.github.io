@@ -956,6 +956,99 @@ a {
 
 
 /* =========================================================
+   ACTIVE FILTERS
+========================================================= */
+
+.active-filters {
+  display: none;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+
+  margin-top: 13px;
+  padding-top: 13px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,0.08);
+}
+
+.active-filters.visible {
+  display: flex;
+}
+
+.active-filters-label {
+  margin-right: 2px;
+
+  color: var(--text-faint);
+
+  font-size: 0.56rem;
+  font-weight: 700;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.active-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  min-height: 29px;
+  padding: 0 9px 0 10px;
+
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.065);
+  color: rgba(255,255,255,0.72);
+
+  cursor: pointer;
+
+  font-size: 0.61rem;
+  font-weight: 650;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.active-filter-chip:hover {
+  background: rgba(255,255,255,0.11);
+  border-color: rgba(255,255,255,0.24);
+  color: #fff;
+}
+
+.active-filter-chip .filter-x {
+  color: rgba(255,255,255,0.42);
+  font-size: 0.82rem;
+  line-height: 1;
+}
+
+.clear-active-filters {
+  margin-left: auto;
+
+  border: 0;
+  background: transparent;
+
+  color: rgba(255,255,255,0.42);
+
+  cursor: pointer;
+
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  transition: color 0.2s ease;
+}
+
+.clear-active-filters:hover {
+  color: #fff;
+}
+
+/* =========================================================
    RESULTS STATUS
 ========================================================= */
 
@@ -1442,6 +1535,11 @@ a {
   color: #111;
 }
 
+
+/* directional episode-change motion is applied with the Web Animations API */
+.modal-scroll {
+  will-change: transform, opacity;
+}
 
 /* =========================================================
    MODAL HERO
@@ -2074,11 +2172,6 @@ a {
         South <span>Park</span>
       </h1>
 
-      <p class="hero-description">
-        Browse episodes from four boys, one quiet mountain town,
-        and several decades of increasingly terrible decisions.
-      </p>
-
       <div
         class="hero-stats"
         id="heroStats"
@@ -2218,6 +2311,12 @@ a {
           ></div>
 
         </div>
+
+        <div
+          class="active-filters"
+          id="activeFilters"
+          aria-live="polite"
+        ></div>
 
       </div>
 
@@ -2593,6 +2692,11 @@ const randomEpisodeButton =
     "randomEpisode"
   );
 
+const activeFilters =
+  document.getElementById(
+    "activeFilters"
+  );
+
 const browsePanel =
   document.querySelector(
     ".browse-panel"
@@ -2888,6 +2992,8 @@ function renderFeatured() {
                 <img
                   src="${escapeHTML(episode.image)}"
                   alt="${escapeHTML(episode.title)}"
+                  loading="lazy"
+                  decoding="async"
                 >
 
                 <span class="episode-pill">
@@ -3032,6 +3138,68 @@ function renderSeasonRail() {
 
 }
 
+
+/* =========================================================
+   ACTIVE FILTER CHIPS
+========================================================= */
+
+function renderActiveFilters() {
+
+  const seasons =
+    [...selectedSeasons]
+      .sort((a, b) => b - a);
+
+  const hasSearch =
+    Boolean(searchInput.value.trim());
+
+  if (!seasons.length && !hasSearch) {
+    activeFilters.classList.remove("visible");
+    activeFilters.innerHTML = "";
+    return;
+  }
+
+  activeFilters.classList.add("visible");
+
+  activeFilters.innerHTML =
+    `
+      <span class="active-filters-label">
+        Active
+      </span>
+
+      ${seasons.map(season => `
+        <button
+          type="button"
+          class="active-filter-chip"
+          data-filter-season="${season}"
+          aria-label="Remove Season ${season} filter"
+        >
+          Season ${season}
+          <span class="filter-x">×</span>
+        </button>
+      `).join("")}
+
+      ${hasSearch ? `
+        <button
+          type="button"
+          class="active-filter-chip"
+          data-clear-search="true"
+          aria-label="Clear search filter"
+        >
+          “${escapeHTML(searchInput.value.trim())}”
+          <span class="filter-x">×</span>
+        </button>
+      ` : ""}
+
+      <button
+        type="button"
+        class="clear-active-filters"
+        data-clear-filters="true"
+      >
+        Clear all
+      </button>
+    `;
+
+}
 
 /* =========================================================
    FILTERING
@@ -3330,6 +3498,8 @@ function renderArchive() {
                               <img
                                 src="${escapeHTML(episode.image)}"
                                 alt="${escapeHTML(episode.title)}"
+                                loading="lazy"
+                                decoding="async"
                               >
 
                               <span class="grid-number">
@@ -3376,6 +3546,8 @@ function renderPage() {
   renderStats();
 
   renderSeasonRail();
+
+  renderActiveFilters();
 
   renderArchive();
 
@@ -3684,12 +3856,66 @@ document.addEventListener(
 
       renderSeasonRail();
 
+      renderActiveFilters();
+
       renderArchive();
 
       syncURL();
 
       return;
 
+    }
+
+
+    const filterSeason =
+      event.target.closest(
+        "[data-filter-season]"
+      );
+
+    if (filterSeason) {
+      selectedSeasons.delete(
+        Number(filterSeason.dataset.filterSeason)
+      );
+
+      renderSeasonRail();
+      renderActiveFilters();
+      renderArchive();
+      syncURL();
+      return;
+    }
+
+
+    const clearSearch =
+      event.target.closest(
+        "[data-clear-search]"
+      );
+
+    if (clearSearch) {
+      searchInput.value = "";
+      searchQuery = "";
+
+      renderActiveFilters();
+      renderArchive();
+      syncURL();
+      return;
+    }
+
+
+    const clearFilters =
+      event.target.closest(
+        "[data-clear-filters]"
+      );
+
+    if (clearFilters) {
+      selectedSeasons.clear();
+      searchInput.value = "";
+      searchQuery = "";
+
+      renderSeasonRail();
+      renderActiveFilters();
+      renderArchive();
+      syncURL();
+      return;
     }
 
 
@@ -3822,6 +4048,8 @@ searchInput.addEventListener(
         .trim()
         .toLowerCase();
 
+    renderActiveFilters();
+
     renderArchive();
 
     syncURL();
@@ -3909,9 +4137,69 @@ function goToModalTarget(button) {
       button.dataset.targetIndex
     );
 
-  if (!Number.isNaN(index)) {
+  if (Number.isNaN(index)) return;
+
+  const isPrevious =
+    button === modalPrevious
+    ||
+    button === modalTopPrevious;
+
+  const direction =
+    isPrevious ? "previous" : "next";
+
+  animateModalChange(index, direction);
+
+}
+
+
+function animateModalChange(index, direction) {
+
+  const reducedMotion =
+    window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+  if (reducedMotion) {
     updateModal(index);
+    return;
   }
+
+  const outgoingX =
+    direction === "next" ? -22 : 22;
+
+  const incomingX =
+    direction === "next" ? 22 : -22;
+
+  const outgoing =
+    modalScroll.animate(
+      [
+        { transform: "translateX(0)", opacity: 1 },
+        { transform: `translateX(${outgoingX}px)`, opacity: 0 }
+      ],
+      {
+        duration: 135,
+        easing: "cubic-bezier(.4,0,1,1)",
+        fill: "forwards"
+      }
+    );
+
+  outgoing.finished
+    .catch(() => {})
+    .then(() => {
+      updateModal(index);
+
+      modalScroll.animate(
+        [
+          { transform: `translateX(${incomingX}px)`, opacity: 0 },
+          { transform: "translateX(0)", opacity: 1 }
+        ],
+        {
+          duration: 220,
+          easing: "cubic-bezier(.2,.8,.2,1)",
+          fill: "both"
+        }
+      );
+    });
 
 }
 
@@ -4033,6 +4321,7 @@ function applyURLState() {
     readURLState();
 
   renderSeasonRail();
+  renderActiveFilters();
   renderArchive();
 
   if (episodeIndex >= 0) {
