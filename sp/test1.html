@@ -5347,6 +5347,55 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* =========================================================
+   SPECIALS — BETWEEN-SEASONS PAPER
+========================================================= */
+
+/* Only Specials display this extra context scrap. The original
+   .season-year markup remains present but hidden on the archive. */
+.archive .specials-between-paper {
+  display: inline-grid;
+  place-items: center;
+  align-self: flex-start;
+  margin-top: 7px;
+  padding: 6px 10px 5px;
+  border: 1px solid rgba(40,43,48,.16);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246,244,235,.97),
+      rgba(214,215,209,.95)
+    );
+  color: #2c3139;
+  font-size: .68rem;
+  font-weight: 760;
+  line-height: 1;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  box-shadow:
+    0 3px 9px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.7);
+  clip-path: polygon(
+    2% 10%, 26% 3%, 50% 8%, 75% 2%, 98% 11%,
+    96% 89%, 73% 97%, 48% 93%, 23% 99%, 1% 90%
+  );
+  transform: rotate(.45deg);
+  white-space: nowrap;
+}
+
+/* Keep the episode-count paper immediately beneath it. */
+.archive .specials-between-paper + .season-count {
+  margin-top: 6px !important;
+}
+
+@media (max-width: 760px) {
+  .archive .specials-between-paper {
+    padding: 5px 8px 4px;
+    font-size: .63rem;
+  }
+}
+
 </style>
 </head>
 
@@ -7171,6 +7220,10 @@ function renderArchive() {
 
             ${subheading ? `<div class="season-year">${escapeHTML(subheading)}</div>` : ""}
             ${isSpecialGroup && yearText ? `<div class="season-year">${escapeHTML(yearText)}</div>` : ""}
+
+            ${isSpecialGroup && subheading ? `
+              <div class="specials-between-paper">${escapeHTML(subheading)}</div>
+            ` : ""}
 
             <div class="season-count">
               ${getFullGroupCount(group)} ${getFullGroupCount(group) === 1 ? "episode" : "episodes"}
