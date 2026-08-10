@@ -7205,14 +7205,14 @@ function renderArchive() {
         class="season-section ${isSpecialGroup ? "specials-section" : ""}"
         data-section-label="${escapeHTML(heading)}"
         data-section-count="${getFullGroupCount(group)}"
-        style="--season-hue:${isSpecialGroup ? 322 : (205 + (Number(group) * 37)) % 360}"
+        style="--season-hue:${isSpecialGroup ? 322 : (205 + (Number(group.season) * 37)) % 360}"
       >
 
         <header class="season-header">
           <div class="season-heading-copy">
             <h2
               class="season-name"
-              style="--season-heading-hue:${isSpecialGroup ? 322 : (205 + (Number(group) * 37)) % 360}"
+              style="--season-heading-hue:${isSpecialGroup ? 322 : (205 + (Number(group.season) * 37)) % 360}"
             >
               ${heading}
               ${continuesFromPreviousPage ? `<span class="season-continuation">continued</span>` : ""}
