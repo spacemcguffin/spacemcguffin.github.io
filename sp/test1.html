@@ -966,8 +966,10 @@ a {
 
   z-index: 2;
 
-  right: 9px;
-  bottom: 9px;
+  left: 9px;
+  top: 9px;
+  right: auto;
+  bottom: auto;
 
   padding:
     5px
@@ -1005,7 +1007,7 @@ a {
 
   font-family: "Google Sans Flex", sans-serif;
 
-  font-size: 1.12rem;
+  font-size: 1.2rem;
   font-weight: 570;
 
   line-height: 1.15;
@@ -2035,8 +2037,10 @@ a {
 }
 
 .archive.list-view .grid-number {
-  right: 7px;
-  bottom: 7px;
+  left: 7px;
+  top: 7px;
+  right: auto;
+  bottom: auto;
 }
 
 .archive.list-view .grid-copy {
@@ -2609,16 +2613,24 @@ a {
 }
 
 .who-season-rail .season-button.active {
+  color: #fff;
+  border-color: hsla(var(--season-hue), 88%, 72%, .9);
+  background:
+    radial-gradient(circle at 35% 25%, hsla(var(--season-hue), 92%, 76%, .5), transparent 40%),
+    linear-gradient(145deg, hsla(var(--season-hue), 68%, 54%, .72), hsla(var(--season-hue), 62%, 26%, .72));
   box-shadow:
     0 0 0 2px rgba(5, 14, 29, .95),
-    0 0 0 4px #52aaff,
-    0 6px 18px rgba(26, 132, 235, .25);
+    0 0 0 4px hsla(var(--season-hue), 92%, 68%, .88),
+    0 0 18px hsla(var(--season-hue), 88%, 60%, .34),
+    0 7px 20px rgba(0,0,0,.24);
 }
 
 .who-season-rail .season-button.active::after {
   bottom: -9px;
   width: 5px;
   height: 5px;
+  background: hsla(var(--season-hue), 92%, 68%, 1);
+  box-shadow: 0 0 8px hsla(var(--season-hue), 92%, 68%, .8);
 }
 
 .who-season-rail .season-button[data-season="specials"] {
@@ -3939,6 +3951,23 @@ function getArchiveDisplayOrder(items) {
 }
 
 
+function getFullGroupCount(group) {
+
+  if (group.type === "special") {
+    return episodes.filter(item =>
+      itemType(item) === "special"
+      && specialGroupKey(item) === specialGroupKey(group.specialExample)
+    ).length;
+  }
+
+  return episodes.filter(item =>
+    itemType(item) === "episode"
+    && Number(item.season) === Number(group.season)
+  ).length;
+
+}
+
+
 function renderArchive() {
 
   const filtered = getArchiveDisplayOrder(
@@ -4051,7 +4080,7 @@ function renderArchive() {
             ${subheading ? `<div class="season-year">${escapeHTML(subheading)}</div>` : ""}
             ${isSpecialGroup && yearText ? `<div class="season-year">${escapeHTML(yearText)}</div>` : ""}
           </div>
-          <div class="season-count">${groupItems.length} ${groupItems.length === 1 ? "episode" : "episodes"}</div>
+          <div class="season-count">${getFullGroupCount(group)} ${getFullGroupCount(group) === 1 ? "episode" : "episodes"}</div>
         </header>
 
         <div class="episode-grid">
