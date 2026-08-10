@@ -2981,6 +2981,161 @@ a {
   }
 }
 
+
+/* =========================================================
+   COMPACT SEASON RAIL + CLEAR CROSS-SEASON CTA
+========================================================= */
+
+/* Compress the whole selector vertically while retaining room
+   for the active coloured ring and small marker underneath. */
+.season-strip {
+  padding-top: 14px;
+  padding-bottom: 12px;
+}
+
+.season-strip-heading {
+  margin-bottom: 9px;
+}
+
+.season-strip-title {
+  gap: 10px;
+}
+
+.season-strip-title > span {
+  font-size: .62rem;
+}
+
+.season-strip-title strong {
+  font-size: .68rem;
+}
+
+.season-strip-arrows {
+  gap: 6px;
+}
+
+.season-strip-arrows button {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  font-size: 1.05rem;
+}
+
+.who-season-rail {
+  gap: 10px;
+  padding: 6px 7px 11px;
+}
+
+.who-season-rail .season-button {
+  min-width: 38px;
+  width: 38px;
+  height: 38px;
+  font-size: .66rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 4px 12px rgba(0,0,0,.2);
+}
+
+.who-season-rail .season-button:hover {
+  transform: translateY(-1px) scale(1.035);
+}
+
+.who-season-rail .season-button.active {
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.96),
+    0 0 0 4px hsla(var(--season-hue),92%,68%,.86),
+    0 0 14px hsla(var(--season-hue),88%,60%,.3),
+    0 5px 14px rgba(0,0,0,.22);
+}
+
+.who-season-rail .season-button.active::after {
+  bottom: -8px;
+  width: 4px;
+  height: 4px;
+}
+
+.who-season-rail .season-button[data-season="specials"] {
+  min-width: 64px;
+  width: auto;
+  height: 36px;
+  padding-inline: 10px;
+  font-size: .58rem;
+}
+
+/* Make a single cross-season action read as a deliberate
+   continuation CTA rather than half of a two-column nav. */
+.modal-cross-season.visible {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-cross-link {
+  width: 100%;
+  min-height: 50px;
+  padding: 11px 14px;
+  border-color: rgba(90,151,225,.17);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(41,91,150,.10),
+      rgba(255,255,255,.035)
+    );
+  color: rgba(229,239,252,.7);
+}
+
+.modal-cross-link:hover {
+  border-color: rgba(94,164,248,.34);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(46,111,188,.17),
+      rgba(255,255,255,.055)
+    );
+  color: #fff;
+}
+
+.modal-cross-link.next {
+  text-align: right;
+}
+
+.modal-cross-label {
+  color: rgba(154,195,241,.56);
+}
+
+.modal-cross-title {
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .season-strip {
+    padding-top: 11px;
+    padding-bottom: 9px;
+  }
+
+  .season-strip-heading {
+    margin-bottom: 7px;
+  }
+
+  .who-season-rail {
+    gap: 8px;
+    padding: 6px 7px 10px;
+  }
+
+  .who-season-rail .season-button {
+    min-width: 36px;
+    width: 36px;
+    height: 36px;
+    font-size: .63rem;
+  }
+
+  .who-season-rail .season-button[data-season="specials"] {
+    min-width: 60px;
+    height: 34px;
+    padding-inline: 9px;
+    font-size: .55rem;
+  }
+}
+
 </style>
 </head>
 
@@ -4914,7 +5069,7 @@ function updateModal(
       >
         <span aria-hidden="true">←</span>
         <span>
-          <span class="modal-cross-label">Before this season</span>
+          <span class="modal-cross-label">Previous section</span>
           <span class="modal-cross-title">
             Back to ${escapeHTML(groupDisplayName(previousGroupEpisode))}
           </span>
@@ -4935,7 +5090,7 @@ function updateModal(
         data-cross-direction="next"
       >
         <span>
-          <span class="modal-cross-label">Continue archive</span>
+          <span class="modal-cross-label">End of season</span>
           <span class="modal-cross-title">
             Continue to ${escapeHTML(groupDisplayName(nextGroupEpisode))}
           </span>
