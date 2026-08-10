@@ -15,13 +15,13 @@
   <style>
 :root {
   /* Color Palette */
-  --color-brand: #4285f4;
-  --color-brand-glow: rgba(66, 133, 244, 0.4);
-  --color-bg: #0b0b0b;
-  --color-surface: #141414;
+  --color-brand: #6ea8ff;
+  --color-brand-glow: rgba(110, 168, 255, 0.28);
+  --color-bg: #07111f;
+  --color-surface: #0d1a2a;
   --color-text-primary: #ffffff;
-  --color-text-secondary: #d1d1d1;
-  --color-text-muted: #a3a3a3;
+  --color-text-secondary: #d6e2f1;
+  --color-text-muted: #8fa4bd;
   --color-match: #46d369;
 
   /* Dimensions & Spacing */
@@ -52,7 +52,9 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background-color: var(--color-bg);
+  background:
+    radial-gradient(circle at 50% 45%, rgba(54, 104, 173, 0.14) 0%, rgba(7, 17, 31, 0) 42%),
+    var(--color-bg);
   color: var(--color-text-primary);
   font-family:
     "Outfit",
@@ -77,8 +79,8 @@ body {
   z-index: 100;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.85) 0%,
-    rgba(0, 0, 0, 0) 100%
+    rgba(5, 13, 25, 0.94) 0%,
+    rgba(5, 13, 25, 0) 100%
   );
   pointer-events: none;
 }
@@ -94,10 +96,14 @@ body {
 .brand-logo {
   font-size: 28px;
   font-weight: 900;
-  color: var(--color-brand);
-  letter-spacing: 2px;
-  text-shadow: 0 4px 12px var(--color-brand-glow);
+  letter-spacing: 1.5px;
   cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(105deg, #3f82ff 0%, #75afff 38%, #cfe3ff 72%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 22px rgba(92, 151, 255, 0.16);
 }
 
 .nav-links {
@@ -140,17 +146,81 @@ body {
 }
 
 .user-profile {
-  width: 36px;
+  position: relative;
+  isolation: isolate;
+  width: 44px;
   height: 36px;
-  border-radius: 50%;
-  background: var(--color-brand);
+  border-radius: 999px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(91, 151, 238, 0.34) 0%, rgba(33, 74, 126, 0.42) 46%, rgba(10, 27, 48, 0.88) 100%);
+  border: 1px solid rgba(157, 198, 255, 0.32);
+  color: #eef6ff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 700;
-  font-size: 14px;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.8px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -1px 0 rgba(66, 123, 197, 0.18),
+    0 0 0 1px rgba(56, 118, 202, 0.06);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.42);
+  transition:
+    transform var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.user-profile::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 2px;
+  left: 5px;
+  right: 5px;
+  height: 42%;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.34) 0%,
+    rgba(255, 255, 255, 0.10) 55%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.user-profile::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    110deg,
+    rgba(255, 255, 255, 0.10),
+    transparent 34%,
+    rgba(109, 169, 255, 0.08) 72%,
+    rgba(255, 255, 255, 0.05)
+  );
+  pointer-events: none;
+}
+
+.user-profile:hover {
+  transform: translateY(-1px);
+  border-color: rgba(177, 211, 255, 0.52);
+  background:
+    linear-gradient(180deg, rgba(111, 171, 255, 0.42) 0%, rgba(39, 86, 145, 0.50) 46%, rgba(12, 33, 58, 0.90) 100%);
+  box-shadow:
+    0 9px 22px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30),
+    0 0 18px rgba(81, 145, 240, 0.18);
 }
 
 .hero-container {
@@ -161,7 +231,8 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: radial-gradient(circle at center, #181818 0%, #080808 100%);
+  background:
+    radial-gradient(circle at center, #122238 0%, #07111f 56%, #040b14 100%);
 }
 
 .carousel-track {
@@ -193,8 +264,8 @@ body {
   overflow: hidden;
   flex-shrink: 0;
   box-shadow:
-    0 30px 60px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(255, 255, 255, 0.08);
+    0 30px 60px rgba(0, 0, 0, 0.62),
+    0 0 0 1px rgba(145, 183, 230, 0.12);
   transform-origin: center center;
   will-change: transform, opacity, filter;
   cursor: pointer;
@@ -225,14 +296,14 @@ body {
   background:
     linear-gradient(
       to top,
-      rgba(11, 11, 11, 0.98) 0%,
-      rgba(11, 11, 11, 0.6) 40%,
-      rgba(11, 11, 11, 0.05) 100%
+      rgba(6, 14, 26, 0.98) 0%,
+      rgba(7, 18, 33, 0.64) 40%,
+      rgba(7, 18, 33, 0.06) 100%
     ),
     linear-gradient(
       to right,
-      rgba(11, 11, 11, 0.9) 0%,
-      rgba(11, 11, 11, 0.4) 45%,
+      rgba(6, 14, 26, 0.92) 0%,
+      rgba(8, 22, 40, 0.42) 45%,
       transparent 80%
     );
   pointer-events: none;
@@ -273,7 +344,7 @@ body {
 }
 
 .slide__title {
-  font-size: 56px;
+  font-size: clamp(42px, 4.4vw, 56px);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -1.5px;
@@ -338,7 +409,7 @@ body {
   justify-content: center;
   gap: 10px;
   padding: 14px 28px;
-  border-radius: var(--border-radius-sm);
+  border-radius: 999px;
   font-size: 15px;
   font-weight: 700;
   border: none;
@@ -348,25 +419,25 @@ body {
 }
 
 .btn--primary {
-  background: #ffffff;
-  color: #000000;
+  background: #eef5ff;
+  color: #07111f;
 }
 
 .btn--primary:hover {
-  background: #e6e6e6;
+  background: #ffffff;
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
 }
 
 .btn--secondary {
-  background: rgba(109, 109, 110, 0.4);
+  background: rgba(18, 40, 68, 0.68);
   color: #ffffff;
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(133, 177, 230, 0.18);
 }
 
 .btn--secondary:hover {
-  background: rgba(109, 109, 110, 0.6);
+  background: rgba(37, 73, 116, 0.82);
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
@@ -426,8 +497,8 @@ body {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(137, 179, 230, 0.18);
+  background: rgba(10, 27, 47, 0.72);
   backdrop-filter: blur(10px);
   color: #ffffff;
   display: flex;
@@ -545,38 +616,36 @@ body {
         <article
           class="slide"
           aria-roledescription="slide"
-          aria-label="1 of 5: Cyberpunk 2099"
+          aria-label="1 of 5: An Unearthly Child"
         >
           <div class="slide__img-wrap">
             <img
               class="slide__img"
-              src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=2000&q=80"
-              alt="Cyberpunk City"
+              src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=2000&q=80"
+              alt="Star field and night sky"
             />
           </div>
           <div class="slide__overlay"></div>
           <div class="slide__content">
-            <div class="slide__badge">GSAP Flix Original</div>
-            <h1 class="slide__title">CYBERPUNK 2099</h1>
+            <div class="slide__badge">The First Doctor</div>
+            <h1 class="slide__title">AN UNEARTHLY CHILD</h1>
             <div class="slide__meta">
-              <span class="match-score">98% Match</span>
-              <span>2026</span>
-              <span class="age-badge">18+</span>
-              <span class="quality-badge">4K Ultra HD</span>
+              <span class="match-score">Classic</span>
+              <span>1963</span>
+              <span class="age-badge">1st Doctor</span>
+              <span class="quality-badge">4 Parts</span>
             </div>
             <p class="slide__synopsis">
-              In a megacity controlled by synthetic artificial intelligence, a
-              rogue mercenary uncovers a dark network conspiracy that threatens
-              to erase humanity's last remaining memories.
+              Two schoolteachers follow their mysterious pupil home and discover that her grandfather owns a police box that is much more than it appears.
             </p>
             <div class="btn-group">
-              <button class="btn btn--primary" aria-label="Play Cyberpunk 2099">
+              <button class="btn btn--primary" aria-label="Watch An Unearthly Child">
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                Play
+                Watch
               </button>
               <button
                 class="btn btn--secondary"
-                aria-label="More Info Cyberpunk 2099"
+                aria-label="More Info An Unearthly Child"
               >
                 <svg viewBox="0 0 24 24">
                   <path
@@ -593,41 +662,39 @@ body {
         <article
           class="slide"
           aria-roledescription="slide"
-          aria-label="2 of 5: Interstellar Void"
+          aria-label="2 of 5: Genesis of the Daleks"
         >
           <div class="slide__img-wrap">
             <img
               class="slide__img"
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80"
-              alt="Deep Space Nebula"
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2000&q=80"
+              alt="Dramatic rocky landscape"
             />
           </div>
           <div class="slide__overlay"></div>
           <div class="slide__content">
-            <div class="slide__badge">Trending #1</div>
-            <h1 class="slide__title">INTERSTELLAR VOID</h1>
+            <div class="slide__badge">The Fourth Doctor</div>
+            <h1 class="slide__title">GENESIS OF THE DALEKS</h1>
             <div class="slide__meta">
-              <span class="match-score">99% Match</span>
-              <span>2026</span>
-              <span class="age-badge">16+</span>
-              <span class="quality-badge">HDR10+</span>
+              <span class="match-score">Classic</span>
+              <span>1975</span>
+              <span class="age-badge">4th Doctor</span>
+              <span class="quality-badge">6 Parts</span>
             </div>
             <p class="slide__synopsis">
-              When a deep-space research vessel encounters a mysterious anomaly
-              at the edge of the galaxy, the crew must navigate temporal shifts
-              and unearthly perils to make it back alive.
+              The Time Lords send the Doctor to Skaro at the birth of the Daleks, where Davros is preparing his most terrible creation.
             </p>
             <div class="btn-group">
               <button
                 class="btn btn--primary"
-                aria-label="Play Interstellar Void"
+                aria-label="Watch Genesis of the Daleks"
               >
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                 Play
               </button>
               <button
                 class="btn btn--secondary"
-                aria-label="More Info Interstellar Void"
+                aria-label="More Info Genesis of the Daleks"
               >
                 <svg viewBox="0 0 24 24">
                   <path
@@ -644,41 +711,39 @@ body {
         <article
           class="slide"
           aria-roledescription="slide"
-          aria-label="3 of 5: The Silent Realm"
+          aria-label="3 of 5: The Caves of Androzani"
         >
           <div class="slide__img-wrap">
             <img
               class="slide__img"
-              src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=80"
-              alt="Misty Forest"
+              src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=2000&q=80"
+              alt="Dark rocky terrain"
             />
           </div>
           <div class="slide__overlay"></div>
           <div class="slide__content">
-            <div class="slide__badge">New Release</div>
-            <h1 class="slide__title">THE SILENT REALM</h1>
+            <div class="slide__badge">The Fifth Doctor</div>
+            <h1 class="slide__title">THE CAVES OF ANDROZANI</h1>
             <div class="slide__meta">
-              <span class="match-score">95% Match</span>
-              <span>2025</span>
-              <span class="age-badge">13+</span>
-              <span class="quality-badge">5.1 Audio</span>
+              <span class="match-score">Classic</span>
+              <span>1984</span>
+              <span class="age-badge">5th Doctor</span>
+              <span class="quality-badge">4 Parts</span>
             </div>
             <p class="slide__synopsis">
-              Deep within an ancient Nordic mist forest, a forgotten lineage of
-              guardians awakens to protect the realm from an impending mythical
-              shadow that consumes all sound.
+              Caught in a brutal conflict over a precious substance, the Doctor and Peri are poisoned and drawn into a race against time beneath Androzani Minor.
             </p>
             <div class="btn-group">
               <button
                 class="btn btn--primary"
-                aria-label="Play The Silent Realm"
+                aria-label="Watch The Caves of Androzani"
               >
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                 Play
               </button>
               <button
                 class="btn btn--secondary"
-                aria-label="More Info The Silent Realm"
+                aria-label="More Info The Caves of Androzani"
               >
                 <svg viewBox="0 0 24 24">
                   <path
@@ -695,38 +760,36 @@ body {
         <article
           class="slide"
           aria-roledescription="slide"
-          aria-label="4 of 5: Neon Velocity"
+          aria-label="4 of 5: Blink"
         >
           <div class="slide__img-wrap">
             <img
               class="slide__img"
-              src="https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?auto=format&fit=crop&w=2000&q=80"
-              alt="Neon Highway"
+              src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=2000&q=80"
+              alt="Dark atmospheric woodland"
             />
           </div>
           <div class="slide__overlay"></div>
           <div class="slide__content">
-            <div class="slide__badge">Critically Acclaimed</div>
-            <h1 class="slide__title">NEON VELOCITY</h1>
+            <div class="slide__badge">The Tenth Doctor</div>
+            <h1 class="slide__title">BLINK</h1>
             <div class="slide__meta">
-              <span class="match-score">96% Match</span>
-              <span>2026</span>
-              <span class="age-badge">18+</span>
-              <span class="quality-badge">Dolby Atmos</span>
+              <span class="match-score">Modern</span>
+              <span>2007</span>
+              <span class="age-badge">10th Doctor</span>
+              <span class="quality-badge">Weeping Angels</span>
             </div>
             <p class="slide__synopsis">
-              High stakes, underground anti-gravity racing, and illegal
-              augmentations collide in this heart-pounding adrenaline thriller
-              set in Tokyo's sub-level corridors.
+              Sally Sparrow discovers messages hidden across time as the Weeping Angels close in — creatures that can only move when nobody is looking.
             </p>
             <div class="btn-group">
-              <button class="btn btn--primary" aria-label="Play Neon Velocity">
+              <button class="btn btn--primary" aria-label="Watch Blink">
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
-                Play
+                Watch
               </button>
               <button
                 class="btn btn--secondary"
-                aria-label="More Info Neon Velocity"
+                aria-label="More Info Blink"
               >
                 <svg viewBox="0 0 24 24">
                   <path
@@ -743,41 +806,39 @@ body {
         <article
           class="slide"
           aria-roledescription="slide"
-          aria-label="5 of 5: Dune Chronicles"
+          aria-label="5 of 5: Heaven Sent"
         >
           <div class="slide__img-wrap">
             <img
               class="slide__img"
-              src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=2000&q=80"
-              alt="Desert Dunes"
+              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80"
+              alt="Deep blue space and stars"
             />
           </div>
           <div class="slide__overlay"></div>
           <div class="slide__content">
-            <div class="slide__badge">Must Watch</div>
-            <h1 class="slide__title">DUNE CHRONICLES</h1>
+            <div class="slide__badge">The Twelfth Doctor</div>
+            <h1 class="slide__title">HEAVEN SENT</h1>
             <div class="slide__meta">
-              <span class="match-score">97% Match</span>
-              <span>2025</span>
-              <span class="age-badge">16+</span>
-              <span class="quality-badge">IMAX Enhanced</span>
+              <span class="match-score">Modern</span>
+              <span>2015</span>
+              <span class="age-badge">12th Doctor</span>
+              <span class="quality-badge">Confession Dial</span>
             </div>
             <p class="slide__synopsis">
-              Across infinite sand sea oceans, nomadic tribes fight for control
-              over the universe's most coveted natural element while surviving
-              behemoth subterranean leviathans.
+              Alone inside a shifting castle, the Doctor is pursued by a relentless creature while slowly uncovering the truth of the trap built around him.
             </p>
             <div class="btn-group">
               <button
                 class="btn btn--primary"
-                aria-label="Play Dune Chronicles"
+                aria-label="Watch Heaven Sent"
               >
                 <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                 Play
               </button>
               <button
                 class="btn btn--secondary"
-                aria-label="More Info Dune Chronicles"
+                aria-label="More Info Heaven Sent"
               >
                 <svg viewBox="0 0 24 24">
                   <path
