@@ -5008,6 +5008,215 @@ body.modal-open
   }
 }
 
+
+/* =========================================================
+   READABILITY PASS — LIST HOVER / STICKY SCRAP / ARCHIVE FADE
+========================================================= */
+
+/* ---------------------------------------------------------
+   LIST VIEW: darker blue hover strip for stronger contrast
+--------------------------------------------------------- */
+
+.archive.list-view .episode-card:hover {
+  border-color: rgba(103,157,214,.24) !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10,29,54,.92) 0%,
+      rgba(11,31,58,.88) 46%,
+      rgba(8,22,43,.84) 100%
+    ) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.035),
+    0 8px 24px rgba(0,0,0,.24) !important;
+
+  filter: none !important;
+}
+
+.archive.list-view .episode-card:hover .grid-title {
+  color: rgba(255,255,255,.98) !important;
+}
+
+.archive.list-view .episode-card:hover .list-description {
+  color: rgba(222,231,244,.78) !important;
+}
+
+/* Keep the circular arrow readable against the darker hover strip. */
+.archive.list-view .episode-card:hover .list-arrow,
+.archive.list-view .episode-card:focus-within .list-arrow {
+  background:
+    radial-gradient(
+      circle at 35% 25%,
+      rgba(120,188,248,.24),
+      transparent 42%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(42,91,141,.58),
+      rgba(16,37,67,.72)
+    ) !important;
+
+  border-color: rgba(117,182,242,.56) !important;
+
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.90),
+    0 0 0 4px rgba(89,164,235,.26),
+    0 5px 16px rgba(0,0,0,.18) !important;
+}
+
+/* ---------------------------------------------------------
+   STICKY CURRENT-SEASON SCRAP: larger and easier to glance at
+--------------------------------------------------------- */
+
+.current-season-scrap {
+  min-width: 154px !important;
+  padding: 12px 15px 11px !important;
+}
+
+.current-season-scrap strong {
+  font-size: .78rem !important;
+  letter-spacing: .055em !important;
+}
+
+.current-season-scrap span {
+  margin-top: 2px !important;
+  font-size: .59rem !important;
+}
+
+.current-season-scrap::before {
+  height: 4px !important;
+  width: 46% !important;
+}
+
+/* ---------------------------------------------------------
+   ARCHIVE BACKDROP: fade scenery into darkness behind content
+--------------------------------------------------------- */
+
+.archive {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+/* Stronger full-width readability wash behind season sections. */
+.archive::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -2 !important;
+
+  left: 50% !important;
+  top: -130px !important;
+  bottom: -180px !important;
+
+  width: 100vw !important;
+  transform: translateX(-50%) !important;
+
+  pointer-events: none !important;
+
+  background:
+    radial-gradient(
+      ellipse 110% 45% at 50% 0%,
+      rgba(4,11,24,.05) 0%,
+      rgba(4,11,24,.22) 42%,
+      rgba(3,9,21,.52) 72%,
+      rgba(2,7,17,.74) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(3,9,21,.06) 0%,
+      rgba(3,9,21,.28) 12%,
+      rgba(3,9,21,.48) 31%,
+      rgba(3,8,19,.66) 58%,
+      rgba(2,6,15,.82) 82%,
+      rgba(1,4,11,.94) 100%
+    ) !important;
+}
+
+/* Additional bottom-of-page fade so scenery naturally disappears. */
+.page::after {
+  content: "" !important;
+  position: fixed !important;
+  z-index: -1 !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: 42vh !important;
+
+  pointer-events: none !important;
+
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(2,7,17,0) 0%,
+      rgba(2,6,15,.22) 32%,
+      rgba(1,5,12,.58) 68%,
+      rgba(1,4,10,.86) 100%
+    ) !important;
+}
+
+/* Give each season a faint local shadow bed as an extra safety net
+   behind headings and cards without looking like a solid panel. */
+.season-section {
+  position: relative !important;
+}
+
+.season-section::before {
+  content: "" !important;
+  position: absolute !important;
+  z-index: -1 !important;
+
+  inset: -24px -18px -28px !important;
+
+  border-radius: 26px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(4,12,27,.08),
+      rgba(3,10,23,.20) 35%,
+      rgba(3,9,21,.32) 100%
+    ) !important;
+
+  filter: blur(.1px);
+  pointer-events: none !important;
+}
+
+@media (max-width: 760px) {
+
+  .current-season-scrap {
+    min-width: 126px !important;
+    padding: 9px 11px 8px !important;
+  }
+
+  .current-season-scrap strong {
+    font-size: .70rem !important;
+  }
+
+  .current-season-scrap span {
+    font-size: .54rem !important;
+  }
+
+  .archive::before {
+    top: -90px !important;
+    bottom: -120px !important;
+
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(3,9,21,.14) 0%,
+        rgba(3,9,21,.44) 22%,
+        rgba(3,8,19,.68) 58%,
+        rgba(1,5,12,.88) 100%
+      ) !important;
+  }
+
+  .page::after {
+    height: 34vh !important;
+  }
+}
+
 </style>
 </head>
 
