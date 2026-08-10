@@ -3317,6 +3317,125 @@ a {
   .random-button, .who-random-button { padding-inline: 12px !important; }
 }
 
+
+/* =========================================================
+   TYPE SCALE REFINEMENT
+========================================================= */
+
+/* Keep the existing season-circle dimensions; enlarge only labels. */
+@media (min-width: 761px) {
+  .who-season-rail .season-button {
+    font-size: .76rem !important;
+  }
+
+  .who-season-rail .season-button[data-season="specials"] {
+    font-size: .64rem !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .who-season-rail .season-button {
+    font-size: .69rem !important;
+  }
+
+  .who-season-rail .season-button[data-season="specials"] {
+    font-size: .59rem !important;
+  }
+}
+
+/* Slightly stronger episode titles in both grid and list presentations. */
+.episode-card .episode-title,
+.grid-card .grid-title,
+.grid-title {
+  font-size: 1.08rem !important;
+  line-height: 1.22 !important;
+}
+
+.archive.list-view .grid-title,
+.archive.list .grid-title,
+.list-view .grid-title {
+  font-size: 1.12rem !important;
+}
+
+
+/* =========================================================
+   SEARCH ICON + RESULT COUNT ALIGNMENT
+========================================================= */
+
+/* Result count: remove excess internal vertical space so its
+   visible box aligns precisely with the search control. */
+.episode-count-box,
+.count-box,
+.who-count-box {
+  height: var(--guide-control-height) !important;
+  min-height: 0 !important;
+  padding: 0 11px !important;
+  box-sizing: border-box !important;
+  align-self: stretch;
+}
+
+/* Centre and refine the magnifying-glass icon. */
+.search-box,
+.search-wrap,
+.who-search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon,
+.who-search-icon,
+.search-box > svg,
+.search-wrap > svg,
+.who-search-box > svg {
+  position: absolute;
+  left: 15px;
+  top: 50% !important;
+  width: 19px !important;
+  height: 19px !important;
+  margin: 0 !important;
+  transform: translateY(-50%) !important;
+  stroke-width: 2.15;
+  opacity: .76;
+  pointer-events: none;
+}
+
+/* Give the slightly larger icon clean breathing room. */
+.search-box input,
+.search-wrap input,
+.who-search-box input,
+.search-input,
+.who-search-input {
+  padding-left: 44px !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 760px) {
+  .episode-count-box,
+  .count-box,
+  .who-count-box {
+    padding-inline: 9px !important;
+  }
+
+  .search-icon,
+  .who-search-icon,
+  .search-box > svg,
+  .search-wrap > svg,
+  .who-search-box > svg {
+    left: 13px;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .search-box input,
+  .search-wrap input,
+  .who-search-box input,
+  .search-input,
+  .who-search-input {
+    padding-left: 40px !important;
+  }
+}
+
 </style>
 </head>
 
