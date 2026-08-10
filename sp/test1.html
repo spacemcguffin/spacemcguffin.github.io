@@ -5192,6 +5192,56 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* =========================================================
+   REFINEMENTS V4
+   Restore season-name underline + larger season count.
+========================================================= */
+
+/* Restore a clear hand-drawn-style underline beneath every season heading.
+   The section's --season-hue is generated from the exact same hue formula
+   used by the matching season filter button. */
+.season-section .season-name {
+  position: relative !important;
+  display: inline-block !important;
+  padding-bottom: 10px !important;
+}
+
+.season-section .season-name::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  left: 1px !important;
+  bottom: 1px !important;
+  width: 118px !important;
+  height: 5px !important;
+  border-radius: 999px 45% 999px 40% !important;
+  background: hsl(var(--season-hue), 88%, 68%) !important;
+  box-shadow:
+    0 0 9px hsla(var(--season-hue), 88%, 60%, .20) !important;
+  transform: rotate(-1deg) skewX(-8deg) !important;
+  transform-origin: left center !important;
+  opacity: .96 !important;
+}
+
+/* Slightly larger episode count on the right of each season heading. */
+.season-count {
+  font-size: .78rem !important;
+  font-weight: 760 !important;
+  letter-spacing: .055em !important;
+}
+
+@media (max-width: 760px) {
+  .season-section .season-name::after {
+    width: 98px !important;
+    height: 4px !important;
+  }
+
+  .season-count {
+    font-size: .72rem !important;
+  }
+}
+
 </style>
 </head>
 
