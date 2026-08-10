@@ -5396,6 +5396,47 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* SOUTH PARK logo: tiny paper distress + subtly irregular letters */
+.guide-logo {
+  display: flex !important;
+  align-items: baseline;
+  width: max-content;
+  letter-spacing: 0 !important;
+}
+
+.guide-logo > span:not(.logo-gap) {
+  display: inline-block;
+  margin-right: -.045em;
+  transform-origin: 50% 72%;
+  -webkit-mask-image:
+    radial-gradient(circle at 18% 24%, transparent 0 1px, #000 1.35px),
+    radial-gradient(circle at 72% 38%, transparent 0 .8px, #000 1.1px),
+    radial-gradient(circle at 42% 76%, transparent 0 .9px, #000 1.2px),
+    linear-gradient(#000, #000);
+  mask-image:
+    radial-gradient(circle at 18% 24%, transparent 0 1px, #000 1.35px),
+    radial-gradient(circle at 72% 38%, transparent 0 .8px, #000 1.1px),
+    radial-gradient(circle at 42% 76%, transparent 0 .9px, #000 1.2px),
+    linear-gradient(#000, #000);
+}
+
+.guide-logo .logo-gap {
+  display: inline-block;
+  width: .25em;
+  flex: 0 0 .25em;
+}
+
+.guide-logo > span:nth-child(1) { transform: rotate(-.38deg) translateY(.3px); }
+.guide-logo > span:nth-child(2) { transform: rotate(.24deg) translateY(-.2px); }
+.guide-logo > span:nth-child(3) { transform: rotate(-.16deg) translateY(.15px); }
+.guide-logo > span:nth-child(4) { transform: rotate(.34deg) translateY(-.25px); }
+.guide-logo > span:nth-child(5) { transform: rotate(-.22deg) translateY(.2px); }
+.guide-logo > span:nth-child(7) { transform: rotate(.28deg) translateY(-.15px); }
+.guide-logo > span:nth-child(8) { transform: rotate(-.31deg) translateY(.25px); }
+.guide-logo > span:nth-child(9) { transform: rotate(.18deg) translateY(-.2px); }
+.guide-logo > span:nth-child(10) { transform: rotate(-.26deg) translateY(.15px); }
+
 </style>
 </head>
 
@@ -5413,7 +5454,7 @@ body.modal-open .current-season-scrap {
     <header class="guide-hero">
 
       <div class="guide-hero-copy">
-        <h1 class="guide-logo">SOUTH PARK</h1>
+        <h1 class="guide-logo" aria-label="SOUTH PARK"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></h1>
         <div class="guide-subtitle">EPISODE GUIDE</div>
 
         <p class="guide-intro">
