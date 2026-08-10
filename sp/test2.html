@@ -2300,7 +2300,7 @@ a {
 }
 
 .guide-count strong {
-  color: #f4c522;
+  color: #58a8ff;
   font-size: 2.05rem;
   font-weight: 760;
   line-height: 1;
@@ -4160,6 +4160,40 @@ body {
   }
 }
 
+
+/* =========================================================
+   SPECIALS FILTER + RESULTS CLEANUP
+========================================================= */
+
+/* Specials is a global filter, but its bubble is visually identical
+   to every numbered season circle. */
+.who-season-rail .season-button.specials-rail-button,
+.who-season-rail .season-button[data-season="specials"] {
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  font-size: .76rem !important;
+}
+
+/* Remove the duplicate results count beneath the active-filter area.
+   The large "X EPISODES FOUND" box remains the single count display. */
+#resultsCount,
+.results-count {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .who-season-rail .season-button.specials-rail-button,
+  .who-season-rail .season-button[data-season="specials"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    font-size: .69rem !important;
+  }
+}
+
 </style>
 </head>
 
@@ -5705,19 +5739,14 @@ function getArchiveDisplayOrder(items) {
 
   items.forEach(item => {
     const isSpecial = itemType(item) === "special";
-    const specialsOnly =
-      selectedSeasons.size === 1
-      && selectedSeasons.has("specials");
-
     const key = isSpecial
-      ? (specialsOnly ? "special:all" : `special:${specialGroupKey(item)}`)
+      ? `special:${specialGroupKey(item)}`
       : `season:${item.season}`;
 
     if (!grouped.has(key)) {
       grouped.set(key, {
         type: isSpecial ? "special" : "season",
-        aggregateSpecials: isSpecial && specialsOnly,
-        order: isSpecial && specialsOnly ? 999999 : (isSpecial ? itemOrder(item) : Number(item.season) * 100),
+        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
         items: []
       });
     }
@@ -5742,10 +5771,6 @@ function getArchiveDisplayOrder(items) {
 function getFullGroupCount(group) {
 
   if (group.type === "special") {
-    if (group.aggregateSpecials) {
-      return episodes.filter(item => itemType(item) === "special").length;
-    }
-
     return episodes.filter(item =>
       itemType(item) === "special"
       && specialGroupKey(item) === specialGroupKey(group.specialExample)
@@ -5865,20 +5890,15 @@ function renderArchive() {
 
   pageEpisodes.forEach(item => {
     const isSpecial = itemType(item) === "special";
-    const specialsOnly =
-      selectedSeasons.size === 1
-      && selectedSeasons.has("specials");
-
     const key = isSpecial
-      ? (specialsOnly ? "special:all" : `special:${specialGroupKey(item)}`)
+      ? `special:${specialGroupKey(item)}`
       : `season:${item.season}`;
 
     if (!grouped.has(key)) {
       grouped.set(key, {
         key,
         type: isSpecial ? "special" : "season",
-        aggregateSpecials: isSpecial && specialsOnly,
-        order: isSpecial && specialsOnly ? 999999 : (isSpecial ? itemOrder(item) : Number(item.season) * 100),
+        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
         season: isSpecial ? null : item.season,
         specialExample: isSpecial ? item : null,
         items: []
@@ -5897,9 +5917,6 @@ function renderArchive() {
 
     const groupItems = group.items.sort((a, b) => {
       if (isSpecialGroup) {
-        if (group.aggregateSpecials) {
-          return itemOrder(b) - itemOrder(a);
-        }
         return (Number(a.special) || 0) - (Number(b.special) || 0);
       }
 
@@ -5919,16 +5936,12 @@ function renderArchive() {
       : `Season ${group.season}`;
 
     const subheading = isSpecialGroup
-      ? (group.aggregateSpecials ? "Special releases across all seasons" : specialSectionLabel(group.specialExample))
+      ? specialSectionLabel(group.specialExample)
       : yearText;
 
     const fullGroupItems = episodes
       .filter(item => {
         if (isSpecialGroup) {
-          if (group.aggregateSpecials) {
-            return itemType(item) === "special";
-          }
-
           return itemType(item) === "special"
             && specialGroupKey(item) === specialGroupKey(group.specialExample);
         }
