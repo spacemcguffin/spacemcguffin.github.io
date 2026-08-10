@@ -400,37 +400,10 @@ a {
 ========================================================= */
 
 .browse-panel {
-  position: sticky;
-  top: 14px;
-  z-index: 80;
-
   padding:
     18px;
 
   border-radius: 24px;
-
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.browse-panel.is-stuck {
-  border-color: rgba(255,255,255,0.23);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(30,35,58,0.88),
-      rgba(18,22,40,0.78)
-    );
-
-  box-shadow:
-    0 18px 48px rgba(0,0,0,0.28),
-    inset 0 1px 0 rgba(255,255,255,0.14);
-
-  backdrop-filter: blur(26px) saturate(145%);
-  -webkit-backdrop-filter: blur(26px) saturate(145%);
 }
 
 .toolbar {
@@ -654,16 +627,33 @@ a {
 
 .active-filters {
   display: none;
+  position: sticky;
+  top: 14px;
+  z-index: 80;
+
   align-items: center;
   flex-wrap: wrap;
   gap: 7px;
 
-  margin-top: 13px;
-  padding-top: 13px;
+  margin-top: 12px;
+  padding: 10px 12px;
 
-  border-top:
-    1px solid
-    rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30,35,58,0.88),
+      rgba(18,22,40,0.78)
+    );
+
+  box-shadow:
+    0 14px 38px rgba(0,0,0,0.24),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
 }
 
 .active-filters.visible {
@@ -2286,13 +2276,13 @@ a {
 
         </div>
 
-        <div
-          class="active-filters"
-          id="activeFilters"
-          aria-live="polite"
-        ></div>
-
       </div>
+
+      <div
+        class="active-filters"
+        id="activeFilters"
+        aria-live="polite"
+      ></div>
 
 
       <div class="results-line">
@@ -2677,11 +2667,6 @@ const randomEpisodeButton =
 const activeFilters =
   document.getElementById(
     "activeFilters"
-  );
-
-const browsePanel =
-  document.querySelector(
-    ".browse-panel"
   );
 
 const browseCount = document.getElementById("browseCount");
@@ -4008,32 +3993,6 @@ modalScroll.addEventListener(
   },
   { passive: true }
 );
-
-
-/* =========================================================
-   STICKY BROWSE STATE
-========================================================= */
-
-const browseSentinel = document.createElement("div");
-browseSentinel.setAttribute("aria-hidden", "true");
-browseSentinel.style.height = "1px";
-browseSentinel.style.pointerEvents = "none";
-browsePanel.parentNode.insertBefore(browseSentinel, browsePanel);
-
-const stickyObserver = new IntersectionObserver(
-  entries => {
-    browsePanel.classList.toggle(
-      "is-stuck",
-      !entries[0].isIntersecting
-    );
-  },
-  {
-    threshold: 0,
-    rootMargin: "-14px 0px 0px 0px"
-  }
-);
-
-stickyObserver.observe(browseSentinel);
 
 
 /* =========================================================
