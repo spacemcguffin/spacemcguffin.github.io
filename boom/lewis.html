@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>lewis.lc — boom</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+
+<style>
+:root {
+  --color-brand: #4d8dff;
+  --color-brand-strong: #2d6ef0;
+  --color-brand-soft: #9fc2ff;
+  --color-brand-glow: rgba(77, 141, 255, 0.35);
+
+  --color-bg: #07101c;
+  --color-bg-deep: #030810;
+  --color-surface: #0c1624;
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #d7e2f0;
+  --color-text-muted: #8ea1b8;
+
+  --slide-width: 76vw;
+  --slide-max-width: 1280px;
+  --slide-height: 78vh;
+  --slide-gap: 32px;
+  --header-height: 80px;
+
+  --border-radius-lg: 20px;
+  --border-radius-sm: 8px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.25s var(--ease-out-expo);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(34, 73, 125, 0.18), transparent 34%),
+    linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
+  color: var(--color-text-primary);
+  font-family: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.012) 1px, transparent 1px);
+  background-size: 70px 70px;
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+}
+
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: var(--header-height);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  background: linear-gradient(to bottom, rgba(3, 8, 16, 0.94) 0%, rgba(3, 8, 16, 0) 100%);
+  pointer-events: none;
+}
+
+.header__left,
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 34px;
+  pointer-events: auto;
+}
+
+.brand-logo {
+  color: #fff;
+  font-size: 27px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -1.1px;
+  text-decoration: none;
+}
+
+.brand-logo span {
+  color: var(--color-brand-soft);
+}
+
+.nav-links {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+}
+
+.nav-links__link {
+  position: relative;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.nav-links__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 100%;
+  height: 2px;
+  background: var(--color-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-fast);
+}
+
+.nav-links__link:hover,
+.nav-links__link--active {
+  color: #fff;
+}
+
+.nav-links__link:hover::after,
+.nav-links__link--active::after {
+  transform: scaleX(1);
+}
+
+.profile-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(159, 194, 255, 0.28);
+  background:
+    radial-gradient(circle at 35% 30%, rgba(159,194,255,.38), transparent 35%),
+    rgba(12, 22, 36, 0.72);
+  display: grid;
+  place-items: center;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.03) inset,
+    0 8px 24px rgba(0,0,0,.34);
+  color: #dce9ff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.hero-container {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: max-content;
+  height: var(--slide-height);
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  will-change: transform;
+}
+
+.carousel-track:active {
+  cursor: grabbing;
+}
+
+.slide {
+  position: relative;
+  width: var(--slide-width);
+  max-width: var(--slide-max-width);
+  height: var(--slide-height);
+  margin: 0 calc(var(--slide-gap) / 2);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow:
+    0 34px 80px rgba(0, 0, 0, 0.62),
+    0 0 0 1px rgba(145, 188, 255, 0.09);
+  transform-origin: center center;
+  will-change: transform, opacity, filter;
+  cursor: pointer;
+}
+
+.slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.035);
+}
+
+.slide__img-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.slide__img {
+  position: absolute;
+  top: 0;
+  left: -20%;
+  width: 140%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  will-change: transform;
+  filter: brightness(0.82) saturate(0.82) contrast(1.06);
+}
+
+.slide__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(4, 10, 18, 0.99) 0%,
+      rgba(4, 10, 18, 0.76) 31%,
+      rgba(4, 10, 18, 0.22) 66%,
+      rgba(4, 10, 18, 0.05) 100%
+    ),
+    linear-gradient(
+      to right,
+      rgba(3, 8, 15, 0.96) 0%,
+      rgba(3, 8, 15, 0.67) 34%,
+      rgba(3, 8, 15, 0.18) 66%,
+      transparent 88%
+    );
+  pointer-events: none;
+  z-index: 2;
+}
+
+.slide__wash {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 78% 28%, rgba(72, 132, 238, .20), transparent 32%),
+    linear-gradient(135deg, rgba(29, 75, 150, .10), transparent 45%);
+  mix-blend-mode: screen;
+}
+
+.slide__content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 60px 64px;
+  z-index: 3;
+  max-width: 720px;
+  pointer-events: auto;
+}
+
+.slide__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-brand-soft);
+}
+
+.slide__eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-brand), transparent);
+  box-shadow: 0 0 12px var(--color-brand-glow);
+}
+
+.slide__title {
+  font-size: clamp(42px, 5vw, 72px);
+  font-weight: 900;
+  line-height: 0.96;
+  letter-spacing: -2.8px;
+  margin-bottom: 18px;
+  max-width: 680px;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+}
+
+.slide__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.slide__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.slide__meta span + span::before {
+  content: "•";
+  color: rgba(159,194,255,.45);
+  margin-right: 1px;
+}
+
+.slide__meta .meta-accent {
+  color: var(--color-brand-soft);
+}
+
+.slide__synopsis {
+  max-width: 620px;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin-bottom: 28px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.72);
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 47px;
+  padding: 13px 22px;
+  border-radius: var(--border-radius-sm);
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: #f4f8ff;
+  color: #08111e;
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+}
+
+.btn--primary:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow:
+    0 14px 30px rgba(0,0,0,.28),
+    0 0 24px rgba(120, 169, 255, .12);
+}
+
+.btn--secondary {
+  background: rgba(18, 37, 63, 0.56);
+  color: #fff;
+  border: 1px solid rgba(151, 190, 255, 0.17);
+  backdrop-filter: blur(14px);
+}
+
+.btn--secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(34, 66, 108, 0.66);
+  border-color: rgba(151, 190, 255, 0.34);
+}
+
+.btn svg {
+  width: 17px;
+  height: 17px;
+  fill: currentColor;
+}
+
+.hud-controls {
+  position: absolute;
+  bottom: 38px;
+  right: 48px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  z-index: 100;
+}
+
+.progress-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  color: rgba(226, 237, 255, 0.82);
+}
+
+.progress-bar-wrap {
+  width: 132px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.13);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 20%;
+  background: linear-gradient(90deg, var(--color-brand-strong), var(--color-brand-soft));
+  box-shadow: 0 0 12px var(--color-brand-glow);
+  will-change: width;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 9px;
+}
+
+.nav-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(159, 194, 255, 0.15);
+  background: rgba(9, 21, 36, 0.68);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .28s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(42, 89, 158, .88);
+  border-color: rgba(159, 194, 255, .34);
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(77, 141, 255, .18);
+}
+
+.nav-btn:focus-visible {
+  outline: 2px solid #d8e7ff;
+  outline-offset: 2px;
+}
+
+.nav-btn svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --slide-width: 85vw;
+    --slide-height: 75vh;
+  }
+
+  .slide__content {
+    padding: 40px;
+  }
+
+  .header {
+    padding: 0 24px;
+  }
+
+  .hud-controls {
+    right: 24px;
+    bottom: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    height: 68px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .brand-logo {
+    font-size: 23px;
+  }
+
+  .slide__title {
+    font-size: 39px;
+    letter-spacing: -1.9px;
+  }
+
+  .slide__synopsis {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .slide__content {
+    padding: 30px;
+  }
+
+  .hud-controls {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 18px;
+  }
+}
+
+@media (max-width: 540px) {
+  :root {
+    --slide-width: 91vw;
+    --slide-height: 71vh;
+    --slide-gap: 18px;
+  }
+
+  .header {
+    padding: 0 18px;
+  }
+
+  .profile-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .slide {
+    border-radius: 16px;
+  }
+
+  .slide__content {
+    padding: 24px;
+  }
+
+  .slide__eyebrow {
+    font-size: 9px;
+    letter-spacing: 2.2px;
+    margin-bottom: 11px;
+  }
+
+  .slide__title {
+    font-size: 34px;
+    margin-bottom: 14px;
+  }
+
+  .slide__meta {
+    gap: 7px 10px;
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .slide__synopsis {
+    font-size: 13px;
+    margin-bottom: 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .btn {
+    min-height: 42px;
+    padding: 11px 16px;
+    font-size: 12px;
+  }
+
+  .progress-bar-wrap {
+    width: 74px;
+  }
+
+  .nav-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="header" role="banner">
+  <div class="header__left">
+    <a href="https://lewis.lc/" class="brand-logo" aria-label="lewis.lc home">lewis<span>.lc</span></a>
+
+    <nav aria-label="Main navigation">
+      <ul class="nav-links">
+        <li><a href="https://lewis.lc/diary/" class="nav-links__link nav-links__link--active">Diary</a></li>
+        <li><a href="https://lewis.lc/who/" class="nav-links__link">Doctor Who</a></li>
+        <li><a href="https://lewis.lc/archive/" class="nav-links__link">Archive</a></li>
+        <li><a href="https://lewis.lc/profile/" class="nav-links__link">About</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="header__right">
+    <div class="profile-mark" aria-hidden="true">LC</div>
+  </div>
+</header>
+
+<main class="hero-container" role="region" aria-label="lewis.lc featured sections carousel">
+  <div class="carousel-track" id="carouselTrack">
+
+    <article class="slide" aria-roledescription="slide" aria-label="1 of 5: The Diary">
+      <div class="slide__img-wrap">
+        <img
+          class="slide__img"
+          src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=2200&q=85"
+          alt="Notebook and personal writing atmosphere"
+        />
+      </div>
+      <div class="slide__overlay"></div>
+      <div class="slide__wash"></div>
+      <div class="slide__content">
+        <div class="slide__eyebrow">Featured archive</div>
+        <h1 class="slide__title">THE DIARY</h1>
+        <div class="slide__meta">
+          <span class="meta-accent">2007—2026</span>
+          <span>ongoing</span>
+          <span>personal archive</span>
+        </div>
+        <p class="slide__synopsis">
+          Years of entries, fragments, titles, memories and recurring characters — a personal record arranged one year at a time.
+        </p>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="https://lewis.lc/diary/2026">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Read 2026
+          </a>
+          <a class="btn btn--secondary" href="https://lewis.lc/diary/">
+            Explore archive
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" aria-roledescription="slide" aria-label="2 of 5: Doctor Who">
+      <div class="slide__img-wrap">
+        <img
+          class="slide__img"
+          src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=2200&q=85"
+          alt="Stars and space"
+        />
+      </div>
+      <div class="slide__overlay"></div>
+      <div class="slide__wash"></div>
+      <div class="slide__content">
+        <div class="slide__eyebrow">Time &amp; space</div>
+        <h1 class="slide__title">DOCTOR WHO</h1>
+        <div class="slide__meta">
+          <span class="meta-accent">1963—2026</span>
+          <span>episode guide</span>
+          <span>classic + modern</span>
+        </div>
+        <p class="slide__synopsis">
+          Stories, Doctors, eras and adventures gathered into a visual episode guide built for browsing rather than box-ticking.
+        </p>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="https://lewis.lc/who/4">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Open guide
+          </a>
+          <a class="btn btn--secondary" href="https://lewis.lc/who/">
+            Browse Who
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" aria-roledescription="slide" aria-label="3 of 5: The Archive">
+      <div class="slide__img-wrap">
+        <img
+          class="slide__img"
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=2200&q=85"
+          alt="Old computer and digital archive atmosphere"
+        />
+      </div>
+      <div class="slide__overlay"></div>
+      <div class="slide__wash"></div>
+      <div class="slide__content">
+        <div class="slide__eyebrow">Recovered fragments</div>
+        <h1 class="slide__title">THE ARCHIVE</h1>
+        <div class="slide__meta">
+          <span class="meta-accent">2006—present</span>
+          <span>digital archaeology</span>
+          <span>old web</span>
+        </div>
+        <p class="slide__synopsis">
+          Lost pages, old usernames, surviving snapshots and half-recovered corners of a much earlier internet.
+        </p>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="https://lewis.lc/archive/">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Enter archive
+          </a>
+          <a class="btn btn--secondary" href="https://lewis.lc/livejournal/">
+            LiveJournal
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" aria-roledescription="slide" aria-label="4 of 5: Music">
+      <div class="slide__img-wrap">
+        <img
+          class="slide__img"
+          src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=2200&q=85"
+          alt="Live music performance"
+        />
+      </div>
+      <div class="slide__overlay"></div>
+      <div class="slide__wash"></div>
+      <div class="slide__content">
+        <div class="slide__eyebrow">Now playing</div>
+        <h1 class="slide__title">MUSIC</h1>
+        <div class="slide__meta">
+          <span class="meta-accent">listening archive</span>
+          <span>songs</span>
+          <span>albums</span>
+        </div>
+        <p class="slide__synopsis">
+          The records, songs and artists attached to different years, moods and memories — an evolving soundtrack rather than a static list.
+        </p>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="https://lewis.lc/">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            Explore
+          </a>
+          <a class="btn btn--secondary" href="https://lewis.lc/">
+            More
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <article class="slide" aria-roledescription="slide" aria-label="5 of 5: Lewis">
+      <div class="slide__img-wrap">
+        <img
+          class="slide__img"
+          src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=85"
+          alt="Atmospheric blue landscape"
+        />
+      </div>
+      <div class="slide__overlay"></div>
+      <div class="slide__wash"></div>
+      <div class="slide__content">
+        <div class="slide__eyebrow">About this place</div>
+        <h1 class="slide__title">LEWIS</h1>
+        <div class="slide__meta">
+          <span class="meta-accent">profile</span>
+          <span>projects</span>
+          <span>lewis.lc</span>
+        </div>
+        <p class="slide__synopsis">
+          The person behind the diary, the Doctor Who pages, the recovered web fragments and everything else collected here.
+        </p>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="https://lewis.lc/profile/">
+            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            About me
+          </a>
+          <a class="btn btn--secondary" href="https://lewis.lc/">
+            Home
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</main>
+
+<div class="hud-controls">
+  <div class="progress-box" aria-live="polite">
+    <span id="currentCounter">01</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+    <span id="totalCounter">05</span>
+  </div>
+
+  <div class="nav-buttons">
+    <button class="nav-btn" id="prevBtn" aria-label="Previous slide">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="nav-btn" id="nextBtn" aria-label="Next slide">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+class HeroCarousel {
+  constructor() {
+    gsap.registerPlugin(Draggable);
+
+    this.slides = gsap.utils.toArray(".slide");
+    if (!this.slides.length) return;
+
+    this.el = {
+      track: document.getElementById("carouselTrack"),
+      current: document.getElementById("currentCounter"),
+      total: document.getElementById("totalCounter"),
+      progress: document.getElementById("progressBar"),
+      prev: document.getElementById("prevBtn"),
+      next: document.getElementById("nextBtn")
+    };
+
+    this.activeContentTimeline = null;
+    this.init();
+  }
+
+  init() {
+    if (this.el.total) {
+      this.el.total.textContent = String(this.slides.length).padStart(2, "0");
+    }
+
+    this.alignTrackToCenter();
+
+    this.loop = this.createHorizontalLoop(this.slides, {
+      paused: true,
+      draggable: true,
+      speed: 1,
+      onChange: (slide, i) => this.handleSlideChange(slide, i),
+      onUpdate: () => this.handleParallaxUpdate()
+    });
+
+    this.loop.toIndex(0, { duration: 0 });
+    this.handleParallaxUpdate();
+    this.bindEvents();
+  }
+
+  alignTrackToCenter() {
+    const slide = this.slides[0];
+    const marginLeft = parseFloat(window.getComputedStyle(slide).marginLeft) || 0;
+    const centerOffset = window.innerWidth / 2 - (marginLeft + slide.offsetWidth / 2);
+    gsap.set(this.el.track, { left: `${centerOffset}px` });
+  }
+
+  handleParallaxUpdate() {
+    const halfViewport = window.innerWidth / 2;
+
+    this.slides.forEach((slide) => {
+      const img = slide.querySelector(".slide__img");
+      if (!img) return;
+
+      const { left, width } = slide.getBoundingClientRect();
+      const progress = (left + width / 2 - halfViewport) / halfViewport;
+      const clamped = gsap.utils.clamp(-1.5, 1.5, progress);
+
+      gsap.set(img, { xPercent: clamped * -16 });
+    });
+  }
+
+  handleSlideChange(activeSlide, index) {
+    if (this.el.current) {
+      this.el.current.textContent = String(index + 1).padStart(2, "0");
+    }
+
+    if (this.el.progress) {
+      const fillPercent = ((index + 1) / this.slides.length) * 100;
+
+      gsap.to(this.el.progress, {
+        width: `${fillPercent}%`,
+        duration: 0.6,
+        ease: "power2.out"
+      });
+    }
+
+    this.slides.forEach((slide, i) => {
+      const isCurrent = i === index;
+      slide.setAttribute("aria-selected", String(isCurrent));
+
+      gsap.to(slide, {
+        scale: isCurrent ? 1 : 0.86,
+        opacity: isCurrent ? 1 : 0.32,
+        filter: isCurrent
+          ? "brightness(1) blur(0px)"
+          : "brightness(0.42) blur(1px)",
+        duration: 0.8,
+        ease: "expo.out"
+      });
+
+      if (!isCurrent) {
+        gsap.set(
+          slide.querySelectorAll(
+            ".slide__eyebrow, .slide__title, .slide__meta, .slide__synopsis, .btn"
+          ),
+          { y: 40, opacity: 0 }
+        );
+      }
+    });
+
+    this.activeContentTimeline?.kill();
+
+    const content = activeSlide.querySelectorAll(
+      ".slide__eyebrow, .slide__title, .slide__meta, .slide__synopsis, .btn"
+    );
+
+    this.activeContentTimeline = gsap.timeline().fromTo(
+      content,
+      { y: 45, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.9,
+        ease: "expo.out",
+        stagger: 0.08,
+        delay: 0.1
+      }
+    );
+  }
+
+  bindEvents() {
+    const nav = (dir) => this.loop[dir]({ duration: 1.2, ease: "expo.out" });
+
+    this.el.prev?.addEventListener("click", () => nav("previous"));
+    this.el.next?.addEventListener("click", () => nav("next"));
+
+    this.slides.forEach((slide, i) => {
+      slide.addEventListener("click", (e) => {
+        const clickedInteractive = e.target.closest("a, button");
+
+        if (i !== this.loop.tl.current()) {
+          e.preventDefault();
+          this.loop.toIndex(i, { duration: 1.2, ease: "expo.out" });
+          return;
+        }
+
+        if (!clickedInteractive) {
+          e.preventDefault();
+        }
+      });
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") nav("previous");
+      if (e.key === "ArrowRight") nav("next");
+    });
+
+    window.addEventListener("resize", () => {
+      this.alignTrackToCenter();
+      this.handleParallaxUpdate();
+    });
+  }
+
+  createHorizontalLoop(items, config = {}) {
+    items = gsap.utils.toArray(items);
+
+    const {
+      onChange,
+      onUpdate,
+      repeat,
+      paused,
+      snap: snapVal = 1,
+      speed = 1,
+      paddingRight = 0,
+      draggable = false
+    } = config;
+
+    const len = items.length;
+    const startX = items[0].offsetLeft;
+    const times = [];
+    const widths = [];
+    const xPercents = [];
+    let curIndex = 0;
+
+    const pixelsPerSecond = speed * 100;
+    const snap = snapVal === false ? (v) => v : gsap.utils.snap(snapVal);
+
+    const tl = gsap.timeline({
+      repeat,
+      onUpdate,
+      paused,
+      defaults: { ease: "none" },
+      onReverseComplete: () => tl.totalTime(tl.rawTime() + tl.duration() * 100)
+    });
+
+    const style = window.getComputedStyle(items[0]);
+    const totalMargin =
+      (parseFloat(style.marginRight) || 0) +
+      (parseFloat(style.marginLeft) || 0);
+
+    gsap.set(items, {
+      xPercent: (i, el) => {
+        const w = (widths[i] = parseFloat(gsap.getProperty(el, "width", "px")));
+
+        return (xPercents[i] = snap(
+          (parseFloat(gsap.getProperty(el, "x", "px")) / w) * 100 +
+          gsap.getProperty(el, "xPercent")
+        ));
+      },
+      x: 0
+    });
+
+    const last = items[len - 1];
+
+    const totalWidth =
+      last.offsetLeft +
+      (xPercents[len - 1] / 100) * widths[len - 1] -
+      startX +
+      last.offsetWidth * gsap.getProperty(last, "scaleX") +
+      (parseFloat(paddingRight) || 0) +
+      totalMargin;
+
+    items.forEach((item, i) => {
+      const curX = (xPercents[i] / 100) * widths[i];
+      const distStart = item.offsetLeft + curX - startX;
+      const distLoop = distStart + widths[i] * gsap.getProperty(item, "scaleX");
+
+      tl.to(
+        item,
+        {
+          xPercent: snap(((curX - distLoop) / widths[i]) * 100),
+          duration: distLoop / pixelsPerSecond
+        },
+        0
+      )
+      .fromTo(
+        item,
+        {
+          xPercent: snap(((curX - distLoop + totalWidth) / widths[i]) * 100)
+        },
+        {
+          xPercent: xPercents[i],
+          duration: (totalWidth - distLoop) / pixelsPerSecond,
+          immediateRender: false
+        },
+        distLoop / pixelsPerSecond
+      )
+      .add(`label${i}`, distStart / pixelsPerSecond);
+
+      times[i] = distStart / pixelsPerSecond;
+    });
+
+    const toIndex = (index, vars = {}) => {
+      if (Math.abs(index - curIndex) > len / 2) {
+        index += index > curIndex ? -len : len;
+      }
+
+      const newIndex = gsap.utils.wrap(0, len, index);
+      let time = times[newIndex];
+
+      if ((time > tl.time()) !== (index > curIndex)) {
+        vars.modifiers = { time: gsap.utils.wrap(0, tl.duration()) };
+        time += tl.duration() * (index > curIndex ? 1 : -1);
+      }
+
+      if (time < 0) time += tl.duration();
+
+      curIndex = newIndex;
+      vars.overwrite = true;
+
+      onChange?.(items[curIndex], curIndex);
+
+      return tl.tweenTo(time, vars);
+    };
+
+    tl.next = (vars) => toIndex(curIndex + 1, vars);
+    tl.previous = (vars) => toIndex(curIndex - 1, vars);
+    tl.toIndex = (index, vars) => toIndex(index, vars);
+    tl.current = () => curIndex;
+
+    tl.progress(1, true).progress(0, true);
+
+    if (draggable && typeof Draggable === "function") {
+      const proxy = document.createElement("div");
+
+      proxy.style.cssText =
+        "position:absolute;top:0;left:0;width:1px;height:1px;visibility:hidden;";
+
+      document.body.appendChild(proxy);
+
+      const wrap = gsap.utils.wrap(0, 1);
+      let ratio = 1 / totalWidth;
+      let startProgress = 0;
+
+      const align = () => {
+        const p = wrap(startProgress + (drag.startX - drag.x) * ratio);
+        tl.progress(p);
+
+        const normP = p * tl.duration();
+        let closestIdx = 0;
+        let minDist = Infinity;
+
+        times.forEach((t, idx) => {
+          const direct = Math.abs(t - normP);
+          const wrapped = tl.duration() - direct;
+          const dist = Math.min(direct, wrapped);
+
+          if (dist < minDist) {
+            minDist = dist;
+            closestIdx = idx;
+          }
+        });
+
+        if (closestIdx !== curIndex) {
+          curIndex = closestIdx;
+          onChange?.(items[curIndex], curIndex);
+        }
+      };
+
+      const drag = Draggable.create(proxy, {
+        trigger: items[0].parentNode,
+        type: "x",
+        inertia: typeof InertiaPlugin !== "undefined",
+        allowNativeTouchScrolling: false,
+
+        onPress() {
+          startProgress = tl.progress();
+          ratio = 1 / totalWidth;
+          gsap.killTweensOf(tl);
+        },
+
+        onDrag: align,
+        onThrowUpdate: align,
+
+        onRelease: () => {
+          toIndex(curIndex, { duration: 1, ease: "expo.out" });
+        }
+      })[0];
+    }
+
+    return {
+      tl,
+      toIndex,
+      next: tl.next,
+      previous: tl.previous
+    };
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => new HeroCarousel());
+</script>
+
+</body>
+</html>
