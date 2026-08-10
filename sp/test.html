@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>South Park Episode Archive</title>
+
+  <!-- Swiper -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  >
+
+  <!-- Fonts -->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&family=Stack+Sans+Text:wght@200..700&display=swap"
+  >
+
+  <style>
+    /* =========================================
+       RESET
+    ========================================= */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      color: #fff;
+
+      background-color: #2A2F4A;
+      background-image:
+        linear-gradient(
+          180deg,
+          rgba(17, 22, 43, 0.15),
+          rgba(15, 18, 35, 0.45)
+        ),
+        url("/images/nebula.png");
+
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center top;
+
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: #cfd8e4;
+      color: #000;
+      text-shadow: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* =========================================
+       PAGE
+    ========================================= */
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 70px 0 55px;
+    }
+
+    .container {
+      position: relative;
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .archive-header {
+      max-width: 1100px;
+      margin: 0 auto 28px;
+      padding: 0 18px;
+    }
+
+    .archive-kicker {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 9px;
+
+      font-size: 0.67rem;
+      font-weight: 650;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+
+      color: rgba(255,255,255,0.66);
+    }
+
+    .archive-kicker::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      border-radius: 100px;
+      background: #f5b041;
+    }
+
+    .archive-title {
+      font-family: "Stack Sans Text", sans-serif;
+      font-size: clamp(2.35rem, 6vw, 5rem);
+      font-weight: 620;
+      line-height: 0.95;
+      letter-spacing: -0.055em;
+
+      color: #fff;
+    }
+
+    .archive-title span {
+      position: relative;
+      display: inline-block;
+    }
+
+    .archive-title span::after {
+      content: "";
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: -8px;
+
+      height: 4px;
+      border-radius: 50%;
+
+      background: #f5b041;
+
+      transform: rotate(-1deg);
+    }
+
+    .archive-description {
+      max-width: 620px;
+
+      margin-top: 24px;
+
+      font-size: 0.92rem;
+      line-height: 1.6;
+
+      color: rgba(255,255,255,0.65);
+    }
+
+
+    /* =========================================
+       SWIPER
+    ========================================= */
+
+    .wrapper {
+      position: relative;
+
+      max-width: 1140px;
+
+      padding: 22px 20px 70px;
+
+      margin: 0 auto;
+
+      overflow: hidden;
+    }
+
+    .swiper-wrapper {
+      align-items: stretch;
+    }
+
+    .swiper-slide {
+      height: auto;
+    }
+
+
+    /* =========================================
+       CARD
+    ========================================= */
+
+    .card {
+      height: 100%;
+
+      background: #fbfbfb;
+
+      display: flex;
+      flex-direction: column;
+
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.15),
+        0 2px 8px rgba(0, 0, 0, 0.08);
+
+      transform: translateY(0) scale(1);
+
+      transition:
+        transform 0.45s cubic-bezier(.2,.8,.2,1),
+        box-shadow 0.45s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.23),
+        0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .card-link {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      color: inherit;
+    }
+
+
+    /* =========================================
+       IMAGE
+    ========================================= */
+
+    .card-image {
+      position: relative;
+
+      margin: 10px 10px 0;
+
+      border-radius: 15px;
+
+      overflow: hidden;
+
+      background: #ddd;
+    }
+
+    .card-image img {
+      width: 100%;
+      display: block;
+
+      aspect-ratio: 4 / 3;
+
+      object-fit: cover;
+
+      transform: scale(1);
+
+      transition:
+        transform 0.7s cubic-bezier(.2,.8,.2,1),
+        filter 0.4s ease;
+    }
+
+    .card:hover .card-image img {
+      transform: scale(1.035);
+    }
+
+    .card-image-overlay {
+      position: absolute;
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0, 0, 0, 0.25) 0%,
+          rgba(0, 0, 0, 0.04) 35%,
+          transparent 65%
+        );
+    }
+
+
+    /* =========================================
+       EPISODE TAG
+    ========================================= */
+
+    .card-tag {
+      position: absolute;
+
+      top: 11px;
+      left: 11px;
+
+      z-index: 2;
+
+      padding: 6px 9px;
+
+      border: 1px solid rgba(255,255,255,0.62);
+      border-radius: 999px;
+
+      color: #303030;
+
+      font-family: "Inter", sans-serif;
+      font-size: 0.62rem;
+      font-weight: 650;
+
+      letter-spacing: 0.08em;
+
+      text-transform: uppercase;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(255,255,255,0.96),
+          rgba(245,245,245,0.89)
+        );
+
+      box-shadow:
+        0 4px 14px rgba(0,0,0,0.13),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+
+    /* =========================================
+       CARD CONTENT
+    ========================================= */
+
+    .card-content {
+      flex: 1;
+
+      display: flex;
+      flex-direction: column;
+
+      padding: 19px 22px 21px;
+    }
+
+    .card-meta {
+      margin-bottom: 8px;
+
+      color: #8a8a8a;
+
+      font-size: 0.65rem;
+      font-weight: 650;
+
+      letter-spacing: 0.095em;
+
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      position: relative;
+
+      width: fit-content;
+
+      margin-bottom: 20px;
+
+      color: #111;
+
+      font-family: "Stack Sans Text", sans-serif;
+
+      font-size: 1.28rem;
+      font-weight: 570;
+
+      line-height: 1.14;
+      letter-spacing: -0.025em;
+    }
+
+    .card-title::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -9px;
+
+      width: 100%;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background: #f5b041;
+
+      transform:
+        scaleX(0.87)
+        rotate(-1deg);
+
+      transform-origin: left;
+
+      transition:
+        transform 0.45s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .card:hover .card-title::after {
+      transform:
+        scaleX(1)
+        rotate(-1deg);
+    }
+
+    .card-text {
+      color: #555;
+
+      font-size: 0.89rem;
+      line-height: 1.52;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+
+      overflow: hidden;
+    }
+
+
+    /* =========================================
+       CARD FOOTER
+    ========================================= */
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-top: auto;
+      padding-top: 24px;
+    }
+
+    .card-season {
+      color: #868686;
+
+      font-size: 0.7rem;
+      font-weight: 600;
+
+      letter-spacing: 0.04em;
+
+      text-transform: uppercase;
+    }
+
+    .card-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 34px;
+      height: 34px;
+
+      border-radius: 50%;
+
+      background: #f1f1f1;
+
+      color: #222;
+
+      font-size: 1.08rem;
+      line-height: 1;
+
+      transition:
+        transform 0.35s cubic-bezier(.2,.8,.2,1),
+        background 0.35s ease,
+        color 0.35s ease;
+    }
+
+    .card:hover .card-arrow {
+      transform: translateX(3px);
+
+      background: #f5b041;
+      color: #111;
+    }
+
+
+    /* =========================================
+       SWIPER NAVIGATION
+    ========================================= */
+
+    .swiper-slide-button {
+      width: 42px;
+      height: 42px;
+
+      margin-top: -42px;
+
+      border: 1px solid rgba(255,255,255,0.24);
+      border-radius: 50%;
+
+      color: #fff;
+
+      background: rgba(20, 22, 38, 0.55);
+
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .swiper-slide-button:hover {
+      transform: scale(1.08);
+
+      background: #fff;
+      border-color: #fff;
+
+      color: #171717;
+    }
+
+    .swiper-button-prev {
+      left: 1px;
+    }
+
+    .swiper-button-next {
+      right: 1px;
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+      font-size: 0.85rem;
+      font-weight: 900;
+    }
+
+
+    /* =========================================
+       PAGINATION
+    ========================================= */
+
+    .wrapper .swiper-pagination {
+      bottom: 17px;
+    }
+
+    .wrapper .swiper-pagination-bullet {
+      position: relative;
+
+      width: 8px;
+      height: 8px;
+
+      margin: 0 6px !important;
+
+      opacity: 1;
+
+      background: rgba(255,255,255,0.34);
+
+      overflow: hidden;
+
+      transition:
+        width 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .wrapper .swiper-pagination-bullet-active {
+      width: 35px;
+
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.25);
+    }
+
+    .wrapper .swiper-pagination-bullet-active::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background: #f5b041;
+
+      transform-origin: left center;
+      transform: scaleX(0);
+
+      animation:
+        autoplay-loading 5.5s linear forwards;
+    }
+
+    .container:hover
+    .swiper-pagination-bullet-active::before {
+      animation-play-state: paused;
+    }
+
+    @keyframes autoplay-loading {
+      from {
+        transform: scaleX(0);
+      }
+
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+
+    /* =========================================
+       SMALL DECORATIVE FOOTER
+    ========================================= */
+
+    .archive-footer {
+      max-width: 1100px;
+
+      margin: -22px auto 0;
+
+      padding: 0 20px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      color: rgba(255,255,255,0.38);
+
+      font-size: 0.62rem;
+
+      letter-spacing: 0.1em;
+
+      text-transform: uppercase;
+    }
+
+    .archive-footer-line {
+      flex: 1;
+
+      height: 1px;
+
+      margin-left: 15px;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,0.19),
+          transparent
+        );
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 1150px) {
+      .archive-header {
+        padding-inline: 40px;
+      }
+
+      .wrapper {
+        margin-inline: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .page {
+        align-items: flex-start;
+        padding-top: 45px;
+      }
+
+      .archive-header {
+        padding-inline: 20px;
+        margin-bottom: 14px;
+      }
+
+      .archive-title {
+        font-size: clamp(2.7rem, 15vw, 4.2rem);
+      }
+
+      .archive-description {
+        max-width: 90%;
+
+        font-size: 0.86rem;
+      }
+
+      .wrapper {
+        margin: 0;
+
+        padding:
+          20px
+          18px
+          63px;
+      }
+
+      .swiper-slide-button {
+        display: none;
+      }
+
+      .card-content {
+        padding:
+          18px
+          20px
+          20px;
+      }
+
+      .card-title {
+        font-size: 1.24rem;
+      }
+
+      .card-text {
+        font-size: 0.87rem;
+      }
+
+      .archive-footer {
+        padding-inline: 20px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .archive-kicker {
+        font-size: 0.61rem;
+      }
+
+      .archive-description {
+        max-width: 100%;
+      }
+
+      .wrapper {
+        padding-inline: 15px;
+      }
+
+      .card {
+        border-radius: 20px;
+      }
+    }
+
+
+    /* =========================================
+       REDUCED MOTION
+    ========================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <div class="container">
+
+      <!-- =====================================
+           HEADER
+      ====================================== -->
+
+      <header class="archive-header">
+
+        <div class="archive-kicker">
+          Episode archive · 1997 — present
+        </div>
+
+        <h1 class="archive-title">
+          South <span>Park</span>
+        </h1>
+
+        <p class="archive-description">
+          Episodes from four boys, one quiet mountain town,
+          and several decades of increasingly terrible decisions.
+        </p>
+
+      </header>
+
+
+      <!-- =====================================
+           CAROUSEL
+      ====================================== -->
+
+      <div class="swiper wrapper">
+
+        <div class="swiper-wrapper">
+
+
+          <!-- =================================
+               EPISODE 1
+          ================================== -->
+
+          <div class="card swiper-slide">
+
+            <a href="#" class="card-link">
+
+              <div class="card-image">
+
+                <img
+                  src="/sp/img/sotm.png"
+                  alt="Sermon on the 'Mount"
+                >
+
+                <div class="card-image-overlay"></div>
+
+                <div class="card-tag">
+                  S27 · E01
+                </div>
+
+              </div>
+
+
+              <div class="card-content">
+
+                <div class="card-meta">
+                  23 July 2025
+                </div>
+
+                <h3 class="card-title">
+                  Sermon on the 'Mount
+                </h3>
+
+                <p class="card-text">
+                  When the residents of South Park face their possible
+                  demise, Jesus returns to give them an important message.
+                </p>
+
+                <div class="card-footer">
+
+                  <span class="card-season">
+                    Season 27
+                  </span>
+
+                  <span class="card-arrow">
+                    →
+                  </span>
+
+                </div>
+
+              </div>
+
+            </a>
+
+          </div>
+
+
+          <!-- =================================
+               EPISODE 2
+          ================================== -->
+
+          <div class="card swiper-slide">
+
+            <a href="#" class="card-link">
+
+              <div class="card-image">
+
+                <img
+                  src="/sp/img/gan.png"
+                  alt="Got a Nut"
+                >
+
+                <div class="card-image-overlay"></div>
+
+                <div class="card-tag">
+                  S27 · E02
+                </div>
+
+              </div>
+
+
+              <div class="card-content">
+
+                <div class="card-meta">
+                  30 July 2025
+                </div>
+
+                <h3 class="card-title">
+                  Got a Nut
+                </h3>
+
+                <p class="card-text">
+                  When Mr. Mackey loses his job, he desperately tries
+                  to find a new way to make a living.
+                </p>
+
+                <div class="card-footer">
+
+                  <span class="card-season">
+                    Season 27
+                  </span>
+
+                  <span class="card-arrow">
+                    →
+                  </span>
+
+                </div>
+
+              </div>
+
+            </a>
+
+          </div>
+
+
+          <!-- =================================
+               EPISODE 3
+          ================================== -->
+
+          <div class="card swiper-slide">
+
+            <a href="#" class="card-link">
+
+              <div class="card-image">
+
+                <img
+                  src="/sp/img/sickofancy.png"
+                  alt="Sickofancy"
+                >
+
+                <div class="card-image-overlay"></div>
+
+                <div class="card-tag">
+                  S27 · E03
+                </div>
+
+              </div>
+
+
+              <div class="card-content">
+
+                <div class="card-meta">
+                  6 August 2025
+                </div>
+
+                <h3 class="card-title">
+                  Sickofancy
+                </h3>
+
+                <p class="card-text">
+                  Towelie goes to Washington, DC.
+                </p>
+
+                <div class="card-footer">
+
+                  <span class="card-season">
+                    Season 27
+                  </span>
+
+                  <span class="card-arrow">
+                    →
+                  </span>
+
+                </div>
+
+              </div>
+
+            </a>
+
+          </div>
+
+
+          <!-- =================================
+               EPISODE 4
+          ================================== -->
+
+          <div class="card swiper-slide">
+
+            <a href="#" class="card-link">
+
+              <div class="card-image">
+
+                <img
+                  src="/sp/img/wid.png"
+                  alt="Wok is Dead"
+                >
+
+                <div class="card-image-overlay"></div>
+
+                <div class="card-tag">
+                  S27 · E04
+                </div>
+
+              </div>
+
+
+              <div class="card-content">
+
+                <div class="card-meta">
+                  13 August 2025
+                </div>
+
+                <h3 class="card-title">
+                  Wok is Dead
+                </h3>
+
+                <p class="card-text">
+                  Butters experiences the reality of tariffs when he
+                  has to buy a Labubu doll for his girlfriend's birthday.
+                </p>
+
+                <div class="card-footer">
+
+                  <span class="card-season">
+                    Season 27
+                  </span>
+
+                  <span class="card-arrow">
+                    →
+                  </span>
+
+                </div>
+
+              </div>
+
+            </a>
+
+          </div>
+
+
+          <!-- =================================
+               EPISODE 5
+          ================================== -->
+
+          <div class="card swiper-slide">
+
+            <a href="#" class="card-link">
+
+              <div class="card-image">
+
+                <img
+                  src="/sp/img/coi.png"
+                  alt="Conflict of Interest"
+                >
+
+                <div class="card-image-overlay"></div>
+
+                <div class="card-tag">
+                  S27 · E05
+                </div>
+
+              </div>
+
+
+              <div class="card-content">
+
+                <div class="card-meta">
+                  20 August 2025
+                </div>
+
+                <h3 class="card-title">
+                  Conflict of Interest
+                </h3>
+
+                <p class="card-text">
+                  Kyle and Cartman are at odds when a prediction markets
+                  app gets popular with their fellow students.
+                </p>
+
+                <div class="card-footer">
+
+                  <span class="card-season">
+                    Season 27
+                  </span>
+
+                  <span class="card-arrow">
+                    →
+                  </span>
+
+                </div>
+
+              </div>
+
+            </a>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- Pagination -->
+
+        <div class="swiper-pagination"></div>
+
+
+        <!-- Navigation -->
+
+        <div
+          class="swiper-slide-button swiper-button-prev"
+          aria-label="Previous episode"
+        ></div>
+
+        <div
+          class="swiper-slide-button swiper-button-next"
+          aria-label="Next episode"
+        ></div>
+
+
+      </div>
+
+
+      <!-- =====================================
+           FOOTER DETAIL
+      ====================================== -->
+
+      <div class="archive-footer">
+
+        <span>
+          Season 27
+        </span>
+
+        <div class="archive-footer-line"></div>
+
+      </div>
+
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================================
+       SWIPER
+  ========================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+  <!-- =========================================
+       JAVASCRIPT
+  ========================================== -->
+
+  <script>
+
+    const swiper = new Swiper(".wrapper", {
+
+      loop: true,
+
+      speed: 650,
+
+      spaceBetween: 28,
+
+      grabCursor: true,
+
+      watchSlidesProgress: true,
+
+
+      /* ---------------------------------------
+         AUTOPLAY
+      ---------------------------------------- */
+
+      autoplay: {
+
+        delay: 5500,
+
+        disableOnInteraction: false,
+
+        pauseOnMouseEnter: true
+
+      },
+
+
+      /* ---------------------------------------
+         PAGINATION
+      ---------------------------------------- */
+
+      pagination: {
+
+        el: ".swiper-pagination",
+
+        clickable: true,
+
+        dynamicBullets: true
+
+      },
+
+
+      /* ---------------------------------------
+         NAVIGATION
+      ---------------------------------------- */
+
+      navigation: {
+
+        nextEl: ".swiper-button-next",
+
+        prevEl: ".swiper-button-prev"
+
+      },
+
+
+      /* ---------------------------------------
+         KEYBOARD
+      ---------------------------------------- */
+
+      keyboard: {
+
+        enabled: true,
+
+        onlyInViewport: true
+
+      },
+
+
+      /* ---------------------------------------
+         ACCESSIBILITY
+      ---------------------------------------- */
+
+      a11y: {
+
+        enabled: true,
+
+        prevSlideMessage: "Previous episode",
+
+        nextSlideMessage: "Next episode",
+
+        paginationBulletMessage:
+          "Go to episode {{index}}"
+
+      },
+
+
+      /* ---------------------------------------
+         RESPONSIVE
+      ---------------------------------------- */
+
+      breakpoints: {
+
+        0: {
+
+          slidesPerView: 1.08,
+
+          spaceBetween: 14
+
+        },
+
+        600: {
+
+          slidesPerView: 1.5,
+
+          spaceBetween: 20
+
+        },
+
+        768: {
+
+          slidesPerView: 2,
+
+          spaceBetween: 24
+
+        },
+
+        1024: {
+
+          slidesPerView: 3,
+
+          spaceBetween: 28
+
+        }
+
+      }
+
+    });
+
+
+    /* =========================================
+       RESTART PAGINATION TIMER
+       when slide changes
+    ========================================== */
+
+    swiper.on("slideChangeTransitionStart", () => {
+
+      const bullets =
+        document.querySelectorAll(
+          ".swiper-pagination-bullet"
+        );
+
+      bullets.forEach(bullet => {
+
+        const replacement =
+          bullet.cloneNode(true);
+
+        bullet.parentNode.replaceChild(
+          replacement,
+          bullet
+        );
+
+      });
+
+    });
+
+
+    /* =========================================
+       PREVENT EMPTY CARD LINKS
+       FROM JUMPING TO TOP
+    ========================================== */
+
+    document.querySelectorAll(".card-link")
+      .forEach(card => {
+
+        card.addEventListener("click", event => {
+
+          event.preventDefault();
+
+        });
+
+      });
+
+  </script>
+
+</body>
+</html>
