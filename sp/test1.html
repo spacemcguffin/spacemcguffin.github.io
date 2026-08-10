@@ -3531,6 +3531,101 @@ a {
   }
 }
 
+
+/* =========================================================
+   SEARCH / CLEAR ICON REFINEMENT
+========================================================= */
+
+/* Search magnifier: neutral grey, crisp, and vertically centred. */
+.search-icon,
+.who-search-icon,
+.search-box > svg,
+.search-wrap > svg,
+.who-search-box > svg {
+  color: #9aa8b9 !important;
+  stroke: currentColor !important;
+  opacity: 1 !important;
+  width: 20px !important;
+  height: 20px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.22));
+}
+
+/* Clear-search X: make it look intentional rather than faint text. */
+.search-clear,
+.clear-search,
+.search-box button[type="reset"],
+.search-wrap button[type="reset"],
+.who-search-box button[type="reset"] {
+  color: #a8b3c1 !important;
+  opacity: 1 !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50% !important;
+  transition:
+    color .18s ease,
+    background .18s ease,
+    border-color .18s ease,
+    transform .18s ease !important;
+}
+
+.search-clear:hover,
+.clear-search:hover,
+.search-box button[type="reset"]:hover,
+.search-wrap button[type="reset"]:hover,
+.who-search-box button[type="reset"]:hover {
+  color: #eef4fb !important;
+  background: rgba(255,255,255,.09) !important;
+}
+
+/* Active-filter chip X buttons: clearer neutral grey and stronger hover. */
+.filter-chip button,
+.active-filter-chip button,
+.active-chip button,
+[data-remove-filter] {
+  color: #9eabb9 !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  transition:
+    color .18s ease,
+    background .18s ease,
+    transform .18s ease !important;
+}
+
+.filter-chip button:hover,
+.active-filter-chip button:hover,
+.active-chip button:hover,
+[data-remove-filter]:hover {
+  color: #f2f6fb !important;
+  background: rgba(255,255,255,.09) !important;
+}
+
+/* Clear-all control should also read as a deliberate action. */
+.clear-all,
+.clear-filters,
+[data-clear-filters] {
+  color: #aab6c4 !important;
+}
+
+.clear-all:hover,
+.clear-filters:hover,
+[data-clear-filters]:hover {
+  color: #f1f6fc !important;
+}
+
+@media (max-width: 760px) {
+  .search-icon,
+  .who-search-icon,
+  .search-box > svg,
+  .search-wrap > svg,
+  .who-search-box > svg {
+    width: 19px !important;
+    height: 19px !important;
+  }
+}
+
 </style>
 </head>
 
