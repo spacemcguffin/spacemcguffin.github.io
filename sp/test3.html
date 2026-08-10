@@ -707,10 +707,37 @@ a {
 ========================================================= */
 
 .browse-panel {
+  position: sticky;
+  top: 14px;
+  z-index: 80;
+
   padding:
     18px;
 
   border-radius: 24px;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.browse-panel.is-stuck {
+  border-color: rgba(255,255,255,0.23);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(30,35,58,0.88),
+      rgba(18,22,40,0.78)
+    );
+
+  box-shadow:
+    0 18px 48px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.14);
+
+  backdrop-filter: blur(26px) saturate(145%);
+  -webkit-backdrop-filter: blur(26px) saturate(145%);
 }
 
 .toolbar {
@@ -1056,7 +1083,7 @@ a {
 
   grid-template-columns:
     repeat(
-      4,
+      3,
       minmax(0,1fr)
     );
 
@@ -1885,6 +1912,8 @@ a {
   }
 
   .browse-panel {
+    top: 8px;
+
     padding: 14px;
 
     border-radius: 20px;
@@ -2203,18 +2232,17 @@ a {
 
       </div>
 
+
+      <!-- =====================================================
+           ARCHIVE GRID
+      ====================================================== -->
+
+      <div
+        class="archive"
+        id="archive"
+      ></div>
+
     </section>
-
-
-
-    <!-- =====================================================
-         ARCHIVE GRID
-    ====================================================== -->
-
-    <div
-      class="archive"
-      id="archive"
-    ></div>
 
 
   </div>
@@ -2515,6 +2543,10 @@ let selectedSeasons = new Set();
 let searchQuery = "";
 let activeEpisodeIndex = 0;
 let featuredSwiper;
+let touchStartX = 0;
+let touchStartY = 0;
+let touchTracking = false;
+let suppressURLSync = false;
 
 
 /* =========================================================
@@ -2559,6 +2591,11 @@ const resultsCount =
 const randomEpisodeButton =
   document.getElementById(
     "randomEpisode"
+  );
+
+const browsePanel =
+  document.querySelector(
+    ".browse-panel"
   );
 
 
@@ -2606,6 +2643,135 @@ function uniqueSeasons() {
     (a, b) =>
       b - a
   );
+
+}
+
+
+function episodeSlug(episode) {
+
+  return `s${episode.season}e${episode.episode}`;
+
+}
+
+
+function findEpisodeIndexBySlug(slug) {
+
+  if (!slug) return -1;
+
+  const match = /^s(\d+)e(\d+)$/i.exec(slug.trim());
+
+  if (!match) return -1;
+
+  const season = Number(match[1]);
+  const episodeNumber = Number(match[2]);
+
+  return episodes.findIndex(
+    episode =>
+      episode.season === season
+      &&
+      episode.episode === episodeNumber
+  );
+
+}
+
+
+function getSeasonEpisodeIndexes(index = activeEpisodeIndex) {
+
+  const current = episodes[index];
+
+  if (!current) return [];
+
+  return episodes
+    .map((episode, episodeIndex) => ({ episode, episodeIndex }))
+    .filter(item => item.episode.season === current.season)
+    .sort((a, b) => a.episode.episode - b.episode.episode)
+    .map(item => item.episodeIndex);
+
+}
+
+
+function getSeasonNavigation(index = activeEpisodeIndex) {
+
+  const seasonIndexes = getSeasonEpisodeIndexes(index);
+  const localIndex = seasonIndexes.indexOf(index);
+
+  if (!seasonIndexes.length || localIndex === -1) {
+    return {
+      seasonIndexes: [index],
+      localIndex: 0,
+      previousIndex: index,
+      nextIndex: index
+    };
+  }
+
+  return {
+    seasonIndexes,
+    localIndex,
+    previousIndex:
+      seasonIndexes[
+        (localIndex - 1 + seasonIndexes.length) % seasonIndexes.length
+      ],
+    nextIndex:
+      seasonIndexes[
+        (localIndex + 1) % seasonIndexes.length
+      ]
+  };
+
+}
+
+
+function syncURL() {
+
+  if (suppressURLSync) return;
+
+  const params = new URLSearchParams();
+
+  if (selectedSeasons.size) {
+    params.set(
+      "seasons",
+      [...selectedSeasons]
+        .sort((a, b) => b - a)
+        .join(",")
+    );
+  }
+
+  if (searchInput.value.trim()) {
+    params.set("q", searchInput.value.trim());
+  }
+
+  if (modal.classList.contains("active")) {
+    params.set("episode", episodeSlug(episodes[activeEpisodeIndex]));
+  }
+
+  const query = params.toString();
+  const url = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+
+  history.replaceState(null, "", url);
+
+}
+
+
+function readURLState() {
+
+  const params = new URLSearchParams(window.location.search);
+
+  selectedSeasons.clear();
+
+  const seasonsParam = params.get("seasons");
+
+  if (seasonsParam) {
+    seasonsParam
+      .split(",")
+      .map(value => Number(value))
+      .filter(value => Number.isFinite(value) && uniqueSeasons().includes(value))
+      .forEach(value => selectedSeasons.add(value));
+  }
+
+  const q = params.get("q") || "";
+  searchInput.value = q;
+  searchQuery = q.trim().toLowerCase();
+
+  return findEpisodeIndexBySlug(params.get("episode"));
 
 }
 
@@ -3322,34 +3488,21 @@ function updateModal(
     %
     episodes.length;
 
-
   const episode =
     episodes[
       activeEpisodeIndex
     ];
 
+  const navigation =
+    getSeasonNavigation(
+      activeEpisodeIndex
+    );
 
   const previousIndex =
-    (
-      activeEpisodeIndex
-      -
-      1
-      +
-      episodes.length
-    )
-    %
-    episodes.length;
-
+    navigation.previousIndex;
 
   const nextIndex =
-    (
-      activeEpisodeIndex
-      +
-      1
-    )
-    %
-    episodes.length;
-
+    navigation.nextIndex;
 
   modalImage.src =
     episode.image;
@@ -3375,8 +3528,7 @@ function updateModal(
     episode.description;
 
   modalCounter.innerHTML =
-    `<strong>${activeEpisodeIndex + 1}</strong> of ${episodes.length}`;
-
+    `<strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`;
 
   previousTitle.textContent =
     episodes[
@@ -3388,8 +3540,21 @@ function updateModal(
       nextIndex
     ].title;
 
+  modalPrevious.dataset.targetIndex =
+    previousIndex;
+
+  modalNext.dataset.targetIndex =
+    nextIndex;
+
+  modalTopPrevious.dataset.targetIndex =
+    previousIndex;
+
+  modalTopNext.dataset.targetIndex =
+    nextIndex;
 
   modalScroll.scrollTop = 0;
+
+  syncURL();
 
 }
 
@@ -3405,6 +3570,8 @@ function openModal(
   modal.classList.add(
     "active"
   );
+
+  syncURL();
 
   modal.setAttribute(
     "aria-hidden",
@@ -3450,6 +3617,8 @@ function closeModal() {
   document.body.classList.remove(
     "modal-open"
   );
+
+  syncURL();
 
 
   if (
@@ -3520,6 +3689,8 @@ document.addEventListener(
       renderSeasonRail();
 
       renderArchive();
+
+      syncURL();
 
       return;
 
@@ -3621,8 +3792,8 @@ document.addEventListener(
       event.key === "ArrowLeft"
     ) {
 
-      updateModal(
-        activeEpisodeIndex - 1
+      goToModalTarget(
+        modalTopPrevious
       );
 
     }
@@ -3632,8 +3803,8 @@ document.addEventListener(
       event.key === "ArrowRight"
     ) {
 
-      updateModal(
-        activeEpisodeIndex + 1
+      goToModalTarget(
+        modalTopNext
       );
 
     }
@@ -3656,6 +3827,8 @@ searchInput.addEventListener(
         .toLowerCase();
 
     renderArchive();
+
+    syncURL();
 
   }
 );
@@ -3733,75 +3906,176 @@ modal.addEventListener(
 );
 
 
+function goToModalTarget(button) {
+
+  const index =
+    Number(
+      button.dataset.targetIndex
+    );
+
+  if (!Number.isNaN(index)) {
+    updateModal(index);
+  }
+
+}
+
+
 modalPrevious
   .addEventListener(
     "click",
-    () => {
-
-      updateModal(
-        activeEpisodeIndex
-        -
-        1
-      );
-
-    }
+    () => goToModalTarget(modalPrevious)
   );
 
 
 modalNext
   .addEventListener(
     "click",
-    () => {
-
-      updateModal(
-        activeEpisodeIndex
-        +
-        1
-      );
-
-    }
+    () => goToModalTarget(modalNext)
   );
 
 
 modalTopPrevious
   .addEventListener(
     "click",
-    () => {
-
-      updateModal(
-        activeEpisodeIndex
-        -
-        1
-      );
-
-    }
+    () => goToModalTarget(modalTopPrevious)
   );
 
 
 modalTopNext
   .addEventListener(
     "click",
-    () => {
-
-      updateModal(
-        activeEpisodeIndex
-        +
-        1
-      );
-
-    }
+    () => goToModalTarget(modalTopNext)
   );
+
+
+/* =========================================================
+   MOBILE MODAL SWIPE
+========================================================= */
+
+modalScroll.addEventListener(
+  "touchstart",
+  event => {
+
+    if (event.touches.length !== 1) return;
+
+    touchStartX = event.touches[0].clientX;
+    touchStartY = event.touches[0].clientY;
+    touchTracking = true;
+
+  },
+  { passive: true }
+);
+
+
+modalScroll.addEventListener(
+  "touchend",
+  event => {
+
+    if (!touchTracking || !modal.classList.contains("active")) return;
+
+    touchTracking = false;
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStartX;
+    const deltaY = touch.clientY - touchStartY;
+
+    if (
+      Math.abs(deltaX) < 55
+      ||
+      Math.abs(deltaX) <= Math.abs(deltaY) * 1.15
+    ) {
+      return;
+    }
+
+    if (deltaX > 0) {
+      goToModalTarget(modalTopPrevious);
+    }
+    else {
+      goToModalTarget(modalTopNext);
+    }
+
+  },
+  { passive: true }
+);
+
+
+/* =========================================================
+   STICKY BROWSE STATE
+========================================================= */
+
+const browseSentinel = document.createElement("div");
+browseSentinel.setAttribute("aria-hidden", "true");
+browseSentinel.style.height = "1px";
+browseSentinel.style.pointerEvents = "none";
+browsePanel.parentNode.insertBefore(browseSentinel, browsePanel);
+
+const stickyObserver = new IntersectionObserver(
+  entries => {
+    browsePanel.classList.toggle(
+      "is-stuck",
+      !entries[0].isIntersecting
+    );
+  },
+  {
+    threshold: 0,
+    rootMargin: "-14px 0px 0px 0px"
+  }
+);
+
+stickyObserver.observe(browseSentinel);
+
+
+/* =========================================================
+   URL STATE / BACK-FORWARD
+========================================================= */
+
+function applyURLState() {
+
+  suppressURLSync = true;
+
+  const episodeIndex =
+    readURLState();
+
+  renderSeasonRail();
+  renderArchive();
+
+  if (episodeIndex >= 0) {
+    openModal(episodeIndex);
+  }
+  else if (modal.classList.contains("active")) {
+    closeModal();
+  }
+
+  suppressURLSync = false;
+
+}
+
+
+window.addEventListener(
+  "popstate",
+  applyURLState
+);
 
 
 /* =========================================================
    INITIALISE
 ========================================================= */
 
+const initialEpisodeIndex =
+  readURLState();
+
 renderPage();
 
 renderFeatured();
 
+if (initialEpisodeIndex >= 0) {
+  openModal(initialEpisodeIndex);
+}
+else {
+  syncURL();
+}
+
 </script>
 
 </body>
-</html>
+</html> 
