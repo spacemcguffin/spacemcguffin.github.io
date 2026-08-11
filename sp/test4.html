@@ -6439,6 +6439,25 @@ body.modal-open #activeFilters {
   display: contents;
 }
 
+
+/* =========================================================
+   ACTIVE FILTER PINNING — ONLY WHEN FILTERS ARE ACTIVE
+========================================================= */
+.who-archive-section > .active-filters {
+  position: relative !important;
+  top: auto !important;
+}
+
+.who-archive-section > .active-filters.has-active-filters {
+  position: sticky !important;
+  top: 0 !important;
+}
+
+/* When the toolbar is genuinely pinned, it sits above archive papers. */
+.who-archive-section > .active-filters.is-pinned {
+  z-index: 170 !important;
+}
+
 @media (max-width: 760px) {
   .who-archive-section > .active-filters.visible {
     display: flex !important;
@@ -6480,6 +6499,115 @@ body.modal-open #activeFilters {
 
   .active-filter-chip {
     flex: 0 0 auto;
+  }
+}
+
+/* =========================================================
+   ACTIVE FILTER TOOLBAR — STACKED CHIPS + VIEW SWITCH
+========================================================= */
+.who-archive-section > .active-filters.visible {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px !important;
+}
+
+.active-filters-head {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.active-filters-heading-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.active-filters-head .clear-active-filters {
+  position: static !important;
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+}
+
+.active-filter-chips {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.active-filter-chips:empty {
+  display: none !important;
+}
+
+.active-filters-head .view-toggle {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.active-filters-head .view-button {
+  width: 42px;
+  height: 39px;
+  border: 1px solid rgba(95,130,183,.27);
+  border-radius: 10px;
+  background: rgba(16,29,49,.65);
+  color: rgba(209,221,241,.72);
+}
+
+.active-filters-head .view-button.active {
+  border-color: #55adff;
+  background: rgba(9,43,75,.76);
+  color: #73d8ff;
+}
+
+.active-filters-head .view-button:hover {
+  border-color: rgba(85,173,255,.72);
+  color: #fff;
+}
+
+/* The results strip is now just status/count information. */
+.results-line {
+  min-height: 58px !important;
+}
+
+@media (max-width: 760px) {
+  .who-archive-section > .active-filters.visible {
+    gap: 8px !important;
+    overflow: visible !important;
+  }
+
+  .active-filters-head {
+    gap: 10px;
+  }
+
+  .active-filters-heading-group {
+    gap: 9px;
+  }
+
+  .active-filters-head .view-toggle {
+    gap: 6px;
+  }
+
+  .active-filters-head .view-button {
+    width: 36px;
+    height: 34px;
+  }
+
+  .active-filter-chips {
+    gap: 7px;
   }
 }
 </style>
@@ -6635,14 +6763,6 @@ body.modal-open #activeFilters {
           <span id="resultsCount"></span>
         </div>
 
-        <div class="view-toggle" aria-label="Episode display">
-          <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" title="Grid view">
-            <span aria-hidden="true">▦</span>
-          </button>
-          <button type="button" class="view-button" id="listViewButton" data-view="list" aria-label="List view" title="List view">
-            <span aria-hidden="true">☷</span>
-          </button>
-        </div>
 
       </div>
 
@@ -11656,28 +11776,39 @@ function renderActiveFilters() {
   const hasSearch =
     Boolean(searchInput.value.trim());
 
-  if (!filters.length && !hasSearch) {
-    activeFilters.classList.remove("visible");
-    activeFilters.innerHTML = "";
-    return;
-  }
+  const hasActiveFilters = filters.length > 0 || hasSearch;
 
+  /* Keep this control bar present so the grid/list switch is always available. */
   activeFilters.classList.add("visible");
+  activeFilters.classList.toggle("has-active-filters", hasActiveFilters);
 
   activeFilters.innerHTML =
     `
       <div class="active-filters-head">
-        <span class="active-filters-label">
-          Active filters:
-        </span>
+        <div class="active-filters-heading-group">
+          <span class="active-filters-label">
+            Active filters:
+          </span>
 
-        <button
-          type="button"
-          class="clear-active-filters"
-          data-clear-filters="true"
-        >
-          Clear all
-        </button>
+          ${hasActiveFilters ? `
+            <button
+              type="button"
+              class="clear-active-filters"
+              data-clear-filters="true"
+            >
+              Clear all
+            </button>
+          ` : ""}
+        </div>
+
+        <div class="view-toggle" aria-label="Episode display">
+          <button type="button" class="view-button ${viewMode === "grid" ? "active" : ""}" id="gridViewButton" data-view="grid" aria-label="Grid view" title="Grid view">
+            <span aria-hidden="true">▦</span>
+          </button>
+          <button type="button" class="view-button ${viewMode === "list" ? "active" : ""}" id="listViewButton" data-view="list" aria-label="List view" title="List view">
+            <span aria-hidden="true">☷</span>
+          </button>
+        </div>
       </div>
 
       <div class="active-filter-chips">
@@ -11713,7 +11844,34 @@ function renderActiveFilters() {
       </div>
     `;
 
+  requestAnimationFrame(syncActiveFilterPinState);
 }
+
+
+function syncActiveFilterPinState() {
+  if (!activeFilters) return;
+
+  const canPin =
+    activeFilters.classList.contains("has-active-filters")
+    && activeFilters.classList.contains("visible")
+    && !document.body.classList.contains("modal-open");
+
+  if (!canPin) {
+    activeFilters.classList.remove("is-pinned");
+    syncCurrentSeasonScrap?.();
+    return;
+  }
+
+  /* A sticky element is pinned once its viewport top reaches the sticky inset. */
+  const pinned = activeFilters.getBoundingClientRect().top <= 0.5;
+  activeFilters.classList.toggle("is-pinned", pinned);
+
+  /* Keep the season paper in sync immediately when the toolbar pins/unpins. */
+  syncCurrentSeasonScrap?.();
+}
+
+window.addEventListener("scroll", syncActiveFilterPinState, { passive: true });
+window.addEventListener("resize", syncActiveFilterPinState);
 
 /* =========================================================
    FILTERING
@@ -11758,8 +11916,11 @@ function getFilteredEpisodes() {
 
 function renderViewToggle() {
 
-  gridViewButton.classList.toggle("active", viewMode === "grid");
-  listViewButton.classList.toggle("active", viewMode === "list");
+  const currentGridViewButton = document.getElementById("gridViewButton");
+  const currentListViewButton = document.getElementById("listViewButton");
+
+  currentGridViewButton?.classList.toggle("active", viewMode === "grid");
+  currentListViewButton?.classList.toggle("active", viewMode === "list");
   archive.classList.toggle("list-view", viewMode === "list");
 
 }
@@ -13565,8 +13726,11 @@ function syncCurrentSeasonScrap() {
     !currentSeasonScrap
     ||
     document.body.classList.contains("modal-open")
+    ||
+    activeFilters?.classList.contains("is-pinned")
   ) {
     currentSeasonScrap?.classList.remove("visible");
+    currentSeasonScrap?.setAttribute("aria-hidden", "true");
     return;
   }
 
