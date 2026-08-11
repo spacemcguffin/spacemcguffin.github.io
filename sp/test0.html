@@ -7678,7 +7678,12 @@ function renderArchive() {
       ? specialSectionLabel(group.specialExample)
       : yearText;
 
-    const fullGroupItems = episodes
+    /* Continuation labels must follow the CURRENT filtered result set,
+       not the complete season catalogue. This prevents a lone search match
+       from being marked "continued" simply because it is not episode 1,
+       and prevents false "continues on the next page" notices when later
+       episodes in the full season do not match the current search/filter. */
+    const fullGroupItems = filtered
       .filter(item => {
         if (isSpecialGroup) {
           return itemType(item) === "special"
@@ -7686,7 +7691,7 @@ function renderArchive() {
         }
 
         return itemType(item) === "episode"
-          && item.season === group.season;
+          && Number(item.season) === Number(group.season);
       })
       .sort((a, b) => itemOrder(a) - itemOrder(b));
 
