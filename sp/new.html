@@ -10,7 +10,7 @@
 <title>South Park Episode Archive</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&display=swap">
-
+  
 <style>
 
 /* =========================================================
@@ -6900,10 +6900,41 @@ body.modal-open #activeFilters {
   display: none !important;
 }
 
-/* Remove the old temporary shuffle ticker entirely. */
+/* Shuffle ticker now lives inside the paper strip itself. */
+.guide-surprise-button {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
 .guide-surprise-button::after {
-  content: none !important;
-  display: none !important;
+  content: attr(data-shuffle-label) !important;
+  display: block !important;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) translateX(3px) rotate(.6deg);
+  min-width: 48px;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: rgba(49,44,34,.08);
+  color: rgba(37,34,28,.78);
+  font-size: .61rem;
+  font-weight: 820;
+  letter-spacing: .055em;
+  line-height: 1;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .1s ease, transform .1s ease;
+}
+
+.guide-surprise-button.show-shuffle-label {
+  padding-right: 72px !important;
+}
+
+.guide-surprise-button.show-shuffle-label::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) rotate(-.4deg);
 }
 
 .guide-surprise-button.paper-jump {
@@ -6922,10 +6953,16 @@ body.modal-open #activeFilters {
   .guide-surprise-button.paper-jump { animation: none !important; }
 }
 
+.paper-back-to-top {
+  font-weight: 900 !important;
+  font-size: 1.45rem !important;
+  line-height: 1 !important;
+}
+
 @media (max-width: 760px) {
-  /* Let the count/random row meet the season band with no dead space. */
+  /* Keep a small breathing space between count/random and the season band. */
   .guide-hero {
-    padding-bottom: 0 !important;
+    padding-bottom: 8px !important;
   }
 
   .guide-hero-secondary {
@@ -6939,14 +6976,63 @@ body.modal-open #activeFilters {
     margin-bottom: 0 !important;
   }
 
+  /* Keep the torn-paper random control inside its mobile grid cell.
+     The slight rotation/jitter otherwise lets the paper edge and shadow
+     bleed into the divider below on narrow screens. */
   .guide-surprise-button-mobile {
-    min-height: 56px !important;
-    height: 56px !important;
-    align-self: stretch !important;
+    min-height: 50px !important;
+    height: 50px !important;
+    align-self: center !important;
+    margin: 3px 4px 3px 0 !important;
+    transform-origin: center center !important;
+    box-shadow:
+      0 2px 1px rgba(0,0,0,.10),
+      0 5px 11px rgba(0,0,0,.13),
+      inset 0 1px 0 rgba(255,255,255,.72) !important;
+  }
+
+  .guide-surprise-button-mobile.show-shuffle-label {
+    padding-right: 68px !important;
   }
 
   .season-strip {
-    margin-top: 0 !important;
+    margin-top: 6px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE SEASON FILTER LAYER CONTAINMENT — OVERLAY FIX
+   Keeps the collapsible season band from painting upward over
+   the episode-count / random-episode controls when closed.
+========================================================= */
+@media (max-width: 760px) {
+  /* The header must remain above the following full-width season band.
+     This prevents the later-painted strip from covering any tiny paper/
+     control edges that extend beyond the hero's visual bounds. */
+  .guide-hero {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+  }
+
+  /* Confine all painting/compositing from the collapsible filter area to
+     the strip itself. This also stops the collapsing rail from leaving a
+     translucent layer over the controls above it. */
+  .season-strip {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    contain: paint;
+    isolation: isolate;
+  }
+
+  .season-strip:not(.mobile-open) .who-season-rail {
+    visibility: hidden;
+  }
+
+  .season-strip.mobile-open .who-season-rail {
+    visibility: visible;
   }
 }
 
@@ -7160,7 +7246,7 @@ body.modal-open #activeFilters {
   aria-label="Back to top"
   title="Back to top"
 >
-  ↑
+  ⌃
 </button>
 
 
@@ -13596,7 +13682,8 @@ function triggerRandomEpisode(button) {
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  button.classList.remove("paper-jump");
+  button.classList.remove("paper-jump", "show-shuffle-label");
+  button.dataset.shuffleLabel = "";
   void button.offsetWidth;
 
   if (reduceMotion) {
@@ -13604,12 +13691,25 @@ function triggerRandomEpisode(button) {
     return;
   }
 
-  button.classList.add("paper-jump");
+  button.classList.add("paper-jump", "show-shuffle-label");
 
-  window.setTimeout(() => {
-    button.classList.remove("paper-jump");
-    openModal(index);
-  }, 180);
+  let tick = 0;
+  const shuffleTimer = window.setInterval(() => {
+    const preview = pool[Math.floor(Math.random() * pool.length)];
+    button.dataset.shuffleLabel = episodeCode(preview);
+    tick += 1;
+
+    if (tick >= 6) {
+      window.clearInterval(shuffleTimer);
+      button.dataset.shuffleLabel = episodeCode(selected);
+
+      window.setTimeout(() => {
+        button.classList.remove("paper-jump", "show-shuffle-label");
+        button.dataset.shuffleLabel = "";
+        openModal(index);
+      }, 150);
+    }
+  }, 48);
 
 }
 
