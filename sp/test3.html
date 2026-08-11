@@ -11425,25 +11425,13 @@ function getFilteredEpisodes() {
           : selectedSeasons.has(episode.season)
         );
 
-      const haystack =
-        (
-          episode.title
-          + " "
-          + episode.description
-          + " "
-          + episode.date
-          + " "
-          + (isSpecial ? "special specials " : `season ${episode.season} episode ${episode.episode} `)
-          + (episode.special || "")
-          + " "
-          + (episode.year || "")
-        )
-        .toLowerCase();
+      const title =
+        episode.title.toLowerCase();
 
       const matchesSearch =
         !searchQuery
         ||
-        haystack.includes(searchQuery);
+        title.includes(searchQuery);
 
       return matchesSeason && matchesSearch;
 
