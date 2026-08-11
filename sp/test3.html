@@ -6072,6 +6072,49 @@ body.modal-open #activeFilters {
   }
 }
 
+
+/* =========================================================
+   MOBILE LIST VIEW — EPISODE LABEL + SMALLER TITLES
+========================================================= */
+@media (max-width: 760px) {
+  .archive.list-view .grid-title {
+    font-size: .94rem !important;
+    line-height: 1.14;
+  }
+
+  .archive.list-view .grid-image .grid-number {
+    display: none !important;
+  }
+
+  .archive.list-view .grid-copy::before {
+    content: attr(data-episode-label);
+    display: block;
+    margin-bottom: 4px;
+    color: rgba(255,255,255,.46);
+    font-size: .56rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: .085em;
+    text-transform: uppercase;
+  }
+}
+
+/* =========================================================
+   PAPER EFFECTS — SUBTLE DEPTH
+========================================================= */
+.season-year,
+.season-count,
+.modal-episode,
+.modal-season,
+.paper-back-to-top,
+.guide-subtitle,
+.random-paper,
+.random-message,
+[class*="paper-"],
+[class*="scrap-"] {
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.14));
+}
+
 </style>
 </head>
 
@@ -11757,7 +11800,7 @@ function renderArchive() {
                   >
                   <span class="grid-number">${episodeCode(item)}</span>
                 </div>
-                <div class="grid-copy">
+                <div class="grid-copy" data-episode-label="${episodeCode(item)}">
                   <h3 class="grid-title">${escapeHTML(item.title)}</h3>
                   <div class="list-description">${item.description}</div>
                   <span class="list-arrow" aria-hidden="true">→</span>
@@ -12242,6 +12285,8 @@ function resetEpisodeGuideFromLogo() {
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+
 
 /* =========================================================
    EVENT DELEGATION
