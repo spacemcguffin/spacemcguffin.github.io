@@ -6019,17 +6019,6 @@ body.modal-open .current-season-scrap {
 
 /* Season underline draws in only when its section enters the viewport. */
 .archive .season-section .season-name::after {
-  transform: rotate(-1deg) scaleX(0) !important;
-  transform-origin: left center !important;
-  transition: transform .42s cubic-bezier(.2,.8,.2,1), opacity .25s ease !important;
-  opacity: .35 !important;
-}
-
-.archive .season-section.season-heading-visible .season-name::after {
-  transform: rotate(-1deg) scaleX(1) !important;
-  opacity: .98 !important;
-}
-
 /* Pagination colour is supplied per render from the first visible season. */
 .archive-pagination {
   --page-accent-h: 32;
@@ -6066,12 +6055,6 @@ body.modal-open .current-season-scrap {
     0 0 20px hsla(var(--page-accent-h), 88%, 60%, .29),
     0 6px 18px rgba(0,0,0,.20) !important;
 }
-
-/* Active-filter chips get a brief exit motion when Clear all is used. */
-.active-filter-chip.filter-chip-exit {
-  pointer-events: none !important;
-}
-
 /* On phones the filter bar normally sits very high for reliable hit-testing.
    While a modal is open, explicitly place it behind/away from the modal. */
 @media (max-width: 760px) {
@@ -9405,7 +9388,7 @@ const episodes = [
     title: "Taming Strange",
     date: "30 October 2013",
     year: 2013,
-    image: "/sp/img/ts.png",
+    image: "/sp/img/tamingstrange.png",
     description:
       "When Ike suddenly hits puberty, Kyle struggles with their changing relationship and takes him to see <em>Yo Gabba Gabba!</em> live.",
     featured: false
@@ -11505,16 +11488,12 @@ function setPaginationAccent(pageEpisodes) {
 
   const firstVisible = pageEpisodes[0];
   if (!firstVisible) {
-    archivePagination.style.setProperty("--page-accent-h", "32");
-    return;
+return;
   }
 
   const hue = itemType(firstVisible) === "special"
     ? 322
     : (205 + (Number(firstVisible.season) * 37)) % 360;
-
-  archivePagination.style.setProperty("--page-accent-h", String(hue));
-
 }
 
 
@@ -11522,88 +11501,14 @@ function changeArchivePage(nextPage) {
 
   if (nextPage === currentPage) return;
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  currentPage = nextPage;
+  renderArchive();
+  syncURL();
 
-  const commit = () => {
-    currentPage = nextPage;
-    renderArchive();
-    syncURL();
-
-    document.querySelector(".results-line")?.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      block: "start"
-    });
-
-    if (!reduceMotion) {
-      archive.animate(
-        [
-          { opacity: .25, transform: "translateY(9px)" },
-          { opacity: 1, transform: "translateY(0)" }
-        ],
-        { duration: 230, easing: "cubic-bezier(.2,.8,.2,1)" }
-      );
-    }
-  };
-
-  if (reduceMotion || !archive.animate) {
-    commit();
-    return;
-  }
-
-  const outgoing = archive.animate(
-    [
-      { opacity: 1, transform: "translateY(0)" },
-      { opacity: .18, transform: "translateY(-7px)" }
-    ],
-    { duration: 125, easing: "ease-out" }
-  );
-
-  outgoing.finished.then(commit).catch(commit);
-
-}
-
-
-function animateClearAllFilters() {
-
-  const chips = [...activeFilters.querySelectorAll(".active-filter-chip")];
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const clearNow = () => {
-    selectedSeasons.clear();
-    searchInput.value = "";
-    searchQuery = "";
-    currentPage = 1;
-    syncSearchClearButton();
-    renderSeasonRail();
-    renderActiveFilters();
-    renderArchive();
-    syncURL();
-  };
-
-  if (reduceMotion || !chips.length || !chips[0].animate) {
-    clearNow();
-    return;
-  }
-
-  activeFilters.querySelector(".clear-active-filters")?.setAttribute("disabled", "");
-
-  const animations = chips.map((chip, index) => {
-    chip.classList.add("filter-chip-exit");
-    return chip.animate(
-      [
-        { opacity: 1, transform: "translateY(0) scale(1)" },
-        { opacity: 0, transform: "translateY(-5px) scale(.92)" }
-      ],
-      {
-        duration: 155,
-        delay: index * 28,
-        easing: "cubic-bezier(.4,0,.2,1)",
-        fill: "forwards"
-      }
-    ).finished.catch(() => {});
+  document.querySelector(".results-line")?.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
   });
-
-  Promise.all(animations).then(clearNow);
 
 }
 
@@ -12427,7 +12332,16 @@ document.addEventListener(
       );
 
     if (clearFilters) {
-      animateClearAllFilters();
+      selectedSeasons.clear();
+      searchInput.value = "";
+      searchQuery = "";
+
+      currentPage = 1;
+      syncSearchClearButton();
+      renderSeasonRail();
+      renderActiveFilters();
+      renderArchive();
+      syncURL();
       return;
     }
 
