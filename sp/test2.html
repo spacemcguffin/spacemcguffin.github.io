@@ -7,7 +7,7 @@
 <title>South Park Episode Archive</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&display=swap">
-   
+  
 <style>
 
 /* =========================================================
@@ -6168,6 +6168,34 @@ body.modal-open .active-filters {
   }
 }
 
+
+
+/* =========================================================
+   MOBILE MODAL — SLIDE-UP ENTRY + SWIPE-DOWN DISMISS
+========================================================= */
+@media (max-width: 760px) {
+  .episode-modal .modal-panel {
+    transform: translateY(100%) !important;
+    opacity: 1 !important;
+    transition: transform .38s cubic-bezier(.22,.82,.22,1) !important;
+    will-change: transform;
+  }
+
+  .episode-modal.active .modal-panel {
+    transform: translateY(0) !important;
+  }
+
+  .episode-modal .modal-panel.is-dragging {
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .episode-modal .modal-panel {
+    transition-duration: .01ms !important;
+  }
+}
+
 </style>
 </head>
 
@@ -10681,6 +10709,11 @@ let activeEpisodeIndex = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 let touchTracking = false;
+let dismissTouchStartX = 0;
+let dismissTouchStartY = 0;
+let dismissDragY = 0;
+let dismissTracking = false;
+let dismissDragging = false;
 let suppressURLSync = false;
 let currentPage = 1;
 let viewMode = "grid";
@@ -11931,6 +11964,11 @@ const modalScroll =
     "modalScroll"
   );
 
+const modalPanel =
+  modal.querySelector(
+    ".modal-panel"
+  );
+
 const modalClose =
   document.getElementById(
     "modalClose"
@@ -12246,6 +12284,15 @@ function openModal(
 
 
 function closeModal() {
+
+  if (modalPanel) {
+    modalPanel.classList.remove("is-dragging");
+    modalPanel.style.transform = "";
+  }
+
+  dismissTracking = false;
+  dismissDragging = false;
+  dismissDragY = 0;
 
   modal.classList.remove(
     "active"
@@ -12939,6 +12986,130 @@ modalTopNext
     "click",
     () => goToModalTarget(modalTopNext)
   );
+
+
+/* =========================================================
+   MOBILE MODAL — SWIPE DOWN TO CLOSE
+========================================================= */
+
+modalPanel?.addEventListener(
+  "touchstart",
+  event => {
+
+    if (
+      window.innerWidth > 760 ||
+      !modal.classList.contains("active") ||
+      event.touches.length !== 1 ||
+      modalScroll.scrollTop > 1
+    ) {
+      dismissTracking = false;
+      return;
+    }
+
+    const touch = event.touches[0];
+    dismissTouchStartX = touch.clientX;
+    dismissTouchStartY = touch.clientY;
+    dismissDragY = 0;
+    dismissTracking = true;
+    dismissDragging = false;
+
+  },
+  { passive: true }
+);
+
+modalPanel?.addEventListener(
+  "touchmove",
+  event => {
+
+    if (
+      !dismissTracking ||
+      window.innerWidth > 760 ||
+      event.touches.length !== 1
+    ) return;
+
+    const touch = event.touches[0];
+    const deltaX = touch.clientX - dismissTouchStartX;
+    const deltaY = touch.clientY - dismissTouchStartY;
+
+    if (!dismissDragging) {
+      if (deltaY < 8) return;
+
+      /* Leave predominantly horizontal gestures to episode navigation. */
+      if (Math.abs(deltaX) > Math.abs(deltaY) * .8) {
+        dismissTracking = false;
+        return;
+      }
+
+      if (modalScroll.scrollTop > 1) {
+        dismissTracking = false;
+        return;
+      }
+
+      dismissDragging = true;
+      touchTracking = false;
+      modalPanel.classList.add("is-dragging");
+    }
+
+    dismissDragY = Math.max(0, deltaY);
+
+    /* Slight resistance keeps a short pull feeling controlled. */
+    const resistedY = dismissDragY < 180
+      ? dismissDragY * .86
+      : 155 + (dismissDragY - 180) * .62;
+
+    modalPanel.style.transform = `translateY(${resistedY}px)`;
+    event.preventDefault();
+
+  },
+  { passive: false }
+);
+
+function finishModalDismissGesture() {
+
+  if (!dismissTracking && !dismissDragging) return;
+
+  const shouldClose =
+    dismissDragging &&
+    dismissDragY >= Math.min(150, window.innerHeight * .18);
+
+  dismissTracking = false;
+
+  if (!dismissDragging) return;
+
+  dismissDragging = false;
+  modalPanel.classList.remove("is-dragging");
+
+  if (shouldClose) {
+    modalPanel.style.transform = `translateY(${window.innerHeight}px)`;
+
+    requestAnimationFrame(() => {
+      closeModal();
+    });
+  }
+  else {
+    modalPanel.style.transform = "translateY(0)";
+
+    window.setTimeout(() => {
+      if (modal.classList.contains("active")) {
+        modalPanel.style.transform = "";
+      }
+    }, 390);
+  }
+
+  dismissDragY = 0;
+}
+
+modalPanel?.addEventListener(
+  "touchend",
+  finishModalDismissGesture,
+  { passive: true }
+);
+
+modalPanel?.addEventListener(
+  "touchcancel",
+  finishModalDismissGesture,
+  { passive: true }
+);
 
 
 /* =========================================================
