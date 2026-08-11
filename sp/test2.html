@@ -6196,6 +6196,99 @@ body.modal-open .active-filters {
   }
 }
 
+
+
+/* =========================================================
+   FINAL MOBILE POLISH — MODAL STACKING / MOTION / TOPBAR / LOGO
+========================================================= */
+
+/* Explicit JS suppression class: remove the sticky filter bar from layout
+   while an episode modal is open, regardless of mobile stacking rules. */
+.active-filters.modal-suppressed {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 760px) {
+  /* Keep the reset logo above the mobile hero/search layers and make taps reliable. */
+  #guideLogoReset {
+    position: relative !important;
+    z-index: 60 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #guideLogoReset > span {
+    pointer-events: none;
+  }
+
+  /* Shorter mobile placeholder so it never awkwardly clips mid-word. */
+  .guide-search-input {
+    text-overflow: ellipsis;
+  }
+
+  /* Full-height mobile sheet with square top corners. */
+  .episode-modal .modal-panel {
+    border-radius: 0 !important;
+    transform: translate3d(0, 102%, 0) !important;
+    transition: transform .52s cubic-bezier(.16,1,.3,1) !important;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    will-change: transform;
+  }
+
+  .episode-modal.active .modal-panel {
+    transform: translate3d(0, 0, 0) !important;
+  }
+
+  .episode-modal .modal-panel.is-dragging {
+    transition: none !important;
+  }
+
+  /* Slightly larger, easier-to-hit topbar navigation. */
+  .modal-topbar {
+    flex: 0 0 62px !important;
+    min-height: 62px !important;
+    grid-template-columns: 40px minmax(0,1fr) auto !important;
+    gap: 8px !important;
+    padding: 9px 12px !important;
+    border-radius: 0 !important;
+  }
+
+  .modal-topbar #modalTopPrevious,
+  .modal-topbar #modalTopNext,
+  .modal-topbar #modalClose {
+    flex: 0 0 38px !important;
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 38px !important;
+    font-size: 1.1rem !important;
+  }
+
+  .modal-topbar .modal-counter {
+    font-size: .64rem !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .modal-topbar {
+    grid-template-columns: 38px minmax(0,1fr) auto !important;
+    gap: 6px !important;
+    padding-inline: 9px !important;
+  }
+
+  .modal-topbar #modalTopPrevious,
+  .modal-topbar #modalTopNext,
+  .modal-topbar #modalClose {
+    flex-basis: 36px !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+  }
+}
 </style>
 </head>
 
@@ -11969,6 +12062,21 @@ const modalPanel =
     ".modal-panel"
   );
 
+
+function syncModalFilterSuppression(isOpen) {
+  activeFilters?.classList.toggle("modal-suppressed", Boolean(isOpen));
+}
+
+function syncMobileSearchPlaceholder() {
+  if (!searchInput) return;
+  searchInput.placeholder = window.innerWidth <= 760
+    ? "Search epis..."
+    : "Search episodes...";
+}
+
+syncMobileSearchPlaceholder();
+window.addEventListener("resize", syncMobileSearchPlaceholder, { passive: true });
+
 const modalClose =
   document.getElementById(
     "modalClose"
@@ -12273,6 +12381,8 @@ function openModal(
     "modal-open"
   );
 
+  syncModalFilterSuppression(true);
+
 
   setTimeout(
     () =>
@@ -12306,6 +12416,8 @@ function closeModal() {
   document.body.classList.remove(
     "modal-open"
   );
+
+  syncModalFilterSuppression(false);
 
   syncURL();
 
@@ -12712,6 +12824,18 @@ activeFilters.addEventListener(
 
 
 guideLogoReset?.addEventListener(
+  "touchend",
+  event => {
+    if (window.innerWidth > 760) return;
+    event.preventDefault();
+    event.stopPropagation();
+    guideLogoReset.click();
+  },
+  { passive: false }
+);
+
+
+guideLogoReset?.addEventListener(
   "keydown",
   event => {
 
@@ -13057,7 +13181,10 @@ modalPanel?.addEventListener(
       ? dismissDragY * .86
       : 155 + (dismissDragY - 180) * .62;
 
-    modalPanel.style.transform = `translateY(${resistedY}px)`;
+    const nextTransform = `translate3d(0, ${resistedY}px, 0)`;
+    requestAnimationFrame(() => {
+      if (dismissDragging) modalPanel.style.transform = nextTransform;
+    });
     event.preventDefault();
 
   },
@@ -13080,20 +13207,20 @@ function finishModalDismissGesture() {
   modalPanel.classList.remove("is-dragging");
 
   if (shouldClose) {
-    modalPanel.style.transform = `translateY(${window.innerHeight}px)`;
+    modalPanel.style.transform = `translate3d(0, ${window.innerHeight}px, 0)`;
 
     requestAnimationFrame(() => {
       closeModal();
     });
   }
   else {
-    modalPanel.style.transform = "translateY(0)";
+    modalPanel.style.transform = "translate3d(0, 0, 0)";
 
     window.setTimeout(() => {
       if (modal.classList.contains("active")) {
         modalPanel.style.transform = "";
       }
-    }, 390);
+    }, 540);
   }
 
   dismissDragY = 0;
