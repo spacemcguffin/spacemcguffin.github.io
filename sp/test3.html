@@ -5985,10 +5985,14 @@ body.modal-open #activeFilters {
    FINAL MODAL SIZING + MOBILE TAP POLISH
 ========================================================= */
 
-/* Wider desktop modal. */
+/* More compact desktop modal. */
 @media (min-width: 761px) {
   .modal-panel {
-    width: min(1040px, calc(100vw - 56px)) !important;
+    width: min(900px, calc(100vw - 56px)) !important;
+  }
+
+  .modal-image {
+    height: clamp(300px, 36vw, 390px) !important;
   }
 }
 
