@@ -6680,6 +6680,121 @@ body.modal-open #activeFilters {
     height: 28px;
   }
 }
+
+
+/* =========================================================
+   LOGO ACCENT + SIDE TOOLTIP REFINEMENT
+========================================================= */
+
+/* Four separate scuffed marker strokes under SOUTH PARK. */
+.guide-logo {
+  padding-bottom: 25px !important;
+}
+
+.guide-logo::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 5px !important;
+  bottom: 1px !important;
+  width: min(315px, 78%) !important;
+  height: 18px !important;
+  background:
+    linear-gradient(91deg, transparent 0 1%, #5161AC 2% 97%, transparent 99%) 0 0 / 96% 3px no-repeat,
+    linear-gradient(89deg, transparent 0 2%, #009B67 3% 98%, transparent 100%) 5px 5px / 92% 3px no-repeat,
+    linear-gradient(91.5deg, transparent 0 1%, #59C0D5 2% 96%, transparent 99%) 1px 10px / 98% 3px no-repeat,
+    linear-gradient(88.5deg, transparent 0 2%, #F47321 3% 98%, transparent 100%) 8px 15px / 90% 3px no-repeat !important;
+  clip-path: polygon(
+    0 8%, 8% 1%, 17% 10%, 27% 2%, 38% 9%, 49% 0, 60% 8%, 72% 2%, 84% 10%, 100% 3%,
+    99% 91%, 88% 98%, 76% 90%, 64% 99%, 52% 91%, 40% 100%, 28% 90%, 15% 98%, 1% 91%
+  ) !important;
+  transform: rotate(-.55deg) !important;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.16)) !important;
+  opacity: .98 !important;
+  pointer-events: none;
+}
+
+/* Logo tooltip sits to the right, with its pointer aimed back at the logo. */
+.season-tooltip.tooltip-right {
+  transform: translate(0, -50%) translateX(8px);
+}
+
+.season-tooltip.tooltip-right.visible {
+  transform: translate(0, -50%) translateX(0);
+}
+
+.season-tooltip.tooltip-right::after {
+  left: -5px;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+@media (max-width: 760px) {
+  .guide-logo {
+    padding-bottom: 22px !important;
+  }
+
+  .guide-logo::after {
+    width: min(260px, 82%) !important;
+    height: 16px !important;
+    background:
+      linear-gradient(91deg, transparent 0 1%, #5161AC 2% 97%, transparent 99%) 0 0 / 96% 2.5px no-repeat,
+      linear-gradient(89deg, transparent 0 2%, #009B67 3% 98%, transparent 100%) 4px 4.5px / 92% 2.5px no-repeat,
+      linear-gradient(91.5deg, transparent 0 1%, #59C0D5 2% 96%, transparent 99%) 1px 9px / 98% 2.5px no-repeat,
+      linear-gradient(88.5deg, transparent 0 2%, #F47321 3% 98%, transparent 100%) 7px 13.5px / 90% 2.5px no-repeat !important;
+  }
+}
+
+
+/* =========================================================
+   LOGO ACCENT — COMPACT FOUR-COLOUR SCRAP BLOCKS
+========================================================= */
+/* Restore the original short, single-strip feel: four colours sit side-by-side
+   as small rough blocks rather than separate horizontal strokes. */
+.guide-logo {
+  padding-bottom: 14px !important;
+}
+
+.guide-logo::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 3px !important;
+  bottom: 1px !important;
+  width: min(218px, 64%) !important;
+  height: 7px !important;
+  background: linear-gradient(
+    90deg,
+    #5161AC 0 24%,
+    transparent 24% 25.5%,
+    #009B67 25.5% 49%,
+    transparent 49% 50.5%,
+    #59C0D5 50.5% 74%,
+    transparent 74% 75.5%,
+    #F47321 75.5% 100%
+  ) !important;
+  clip-path: polygon(
+    0 28%, 7% 13%, 14% 24%, 21% 8%, 29% 20%, 37% 3%,
+    45% 18%, 53% 7%, 61% 22%, 69% 5%, 77% 19%, 86% 9%, 100% 24%,
+    98% 76%, 90% 88%, 81% 72%, 72% 91%, 63% 76%, 54% 94%,
+    45% 77%, 36% 91%, 27% 73%, 18% 89%, 9% 75%, 2% 91%
+  ) !important;
+  transform: rotate(-1deg) !important;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.18)) !important;
+  opacity: .94 !important;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .guide-logo {
+    padding-bottom: 13px !important;
+  }
+
+  .guide-logo::after {
+    width: min(184px, 66%) !important;
+    height: 6px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -6705,7 +6820,8 @@ body.modal-open #activeFilters {
             role="button"
             tabindex="0"
             aria-label="Reset South Park episode guide"
-            title="Reset episode guide"
+            data-tooltip="Reset episode guide"
+            data-tooltip-position="right"
           ><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></h1>
           <div class="guide-subtitle">EPISODE GUIDE</div>
         </div>
@@ -6792,6 +6908,7 @@ body.modal-open #activeFilters {
           id="mobileFilterButton"
           aria-expanded="false"
           aria-controls="seasonRail"
+          data-tooltip="Click to search"
         >
           <span>Filters</span>
           <strong id="mobileFilterCount">All</strong>
@@ -6804,10 +6921,10 @@ body.modal-open #activeFilters {
           </div>
 
           <div class="view-toggle" aria-label="Episode display">
-            <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" title="Grid view">
+            <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" data-tooltip="Grid view">
               <span aria-hidden="true">▦</span>
             </button>
-            <button type="button" class="view-button" id="listViewButton" data-view="list" aria-label="List view" title="List view">
+            <button type="button" class="view-button" id="listViewButton" data-view="list" aria-label="List view" data-tooltip="List view">
               <span aria-hidden="true">☷</span>
             </button>
           </div>
@@ -13610,15 +13727,19 @@ function showSeasonTooltip(button) {
   if (!seasonTooltip || !button?.dataset.tooltip) return;
 
   const rect = button.getBoundingClientRect();
+  const position = button.dataset.tooltipPosition || "top";
 
-  seasonTooltip.textContent =
-    button.dataset.tooltip;
+  seasonTooltip.textContent = button.dataset.tooltip;
+  seasonTooltip.classList.toggle("tooltip-right", position === "right");
 
-  seasonTooltip.style.left =
-    `${rect.left + rect.width / 2}px`;
-
-  seasonTooltip.style.top =
-    `${rect.top}px`;
+  if (position === "right") {
+    seasonTooltip.style.left = `${rect.right + 14}px`;
+    seasonTooltip.style.top = `${rect.top + rect.height / 2}px`;
+  }
+  else {
+    seasonTooltip.style.left = `${rect.left + rect.width / 2}px`;
+    seasonTooltip.style.top = `${rect.top}px`;
+  }
 
   seasonTooltip.classList.add("visible");
   seasonTooltip.setAttribute("aria-hidden", "false");
@@ -13667,6 +13788,52 @@ seasonRail.addEventListener("focusin", event => {
 
 
 seasonRail.addEventListener("focusout", hideSeasonTooltip);
+
+
+/* Reuse the same styled tooltip for the grid/list view controls. */
+const viewToggle = document.querySelector(".season-strip-actions .view-toggle");
+
+viewToggle?.addEventListener("pointerover", event => {
+  const button = event.target.closest(".view-button[data-tooltip]");
+  if (button) showSeasonTooltip(button);
+});
+
+viewToggle?.addEventListener("pointerout", event => {
+  const button = event.target.closest(".view-button[data-tooltip]");
+  if (button) hideSeasonTooltip();
+});
+
+viewToggle?.addEventListener("focusin", event => {
+  const button = event.target.closest(".view-button[data-tooltip]");
+  if (button) showSeasonTooltip(button);
+});
+
+viewToggle?.addEventListener("focusout", hideSeasonTooltip);
+
+
+/* Reuse the same tooltip for the clickable South Park logo. */
+guideLogoReset?.addEventListener("pointerenter", () => {
+  if (guideLogoReset.dataset.tooltip) showSeasonTooltip(guideLogoReset);
+});
+
+guideLogoReset?.addEventListener("pointerleave", hideSeasonTooltip);
+guideLogoReset?.addEventListener("focus", () => {
+  if (guideLogoReset.dataset.tooltip) showSeasonTooltip(guideLogoReset);
+});
+guideLogoReset?.addEventListener("blur", hideSeasonTooltip);
+
+
+/* On compact layouts, explain the collapsed Filters control on hover/focus. */
+function showMobileFilterTooltip() {
+  if (!mobileFilterButton?.dataset.tooltip) return;
+  if (!window.matchMedia("(max-width: 760px)").matches) return;
+  showSeasonTooltip(mobileFilterButton);
+}
+
+mobileFilterButton?.addEventListener("pointerenter", showMobileFilterTooltip);
+mobileFilterButton?.addEventListener("pointerleave", hideSeasonTooltip);
+mobileFilterButton?.addEventListener("focus", showMobileFilterTooltip);
+mobileFilterButton?.addEventListener("blur", hideSeasonTooltip);
 
 
 window.addEventListener("scroll", hideSeasonTooltip, { passive: true });
