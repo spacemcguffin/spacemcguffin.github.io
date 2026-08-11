@@ -8457,22 +8457,33 @@ function updateModal(
     delete modalNext.dataset.targetIndex;
   }
 
-  /* Keep the compact top arrows season-local, as before. */
-  modalTopPrevious.disabled = !hasPrevious;
-  modalTopPrevious.setAttribute("aria-disabled", String(!hasPrevious));
+  /*
+   * Keep modal navigation continuous across season/section boundaries.
+   * The compact top arrows are also the targets used by keyboard arrows
+   * and swipe gestures, so give them the same chronological destinations
+   * as the large previous/next controls.
+   */
+  modalTopPrevious.disabled = previousTargetIndex === null;
+  modalTopPrevious.setAttribute(
+    "aria-disabled",
+    String(previousTargetIndex === null)
+  );
 
-  if (hasPrevious) {
-    modalTopPrevious.dataset.targetIndex = previousIndex;
+  if (previousTargetIndex !== null) {
+    modalTopPrevious.dataset.targetIndex = previousTargetIndex;
   }
   else {
     delete modalTopPrevious.dataset.targetIndex;
   }
 
-  modalTopNext.disabled = !hasNext;
-  modalTopNext.setAttribute("aria-disabled", String(!hasNext));
+  modalTopNext.disabled = nextTargetIndex === null;
+  modalTopNext.setAttribute(
+    "aria-disabled",
+    String(nextTargetIndex === null)
+  );
 
-  if (hasNext) {
-    modalTopNext.dataset.targetIndex = nextIndex;
+  if (nextTargetIndex !== null) {
+    modalTopNext.dataset.targetIndex = nextTargetIndex;
   }
   else {
     delete modalTopNext.dataset.targetIndex;
