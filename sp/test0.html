@@ -5547,6 +5547,344 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* =========================================================
+   HERO REBALANCE — SEARCH + COUNT IN TOP-RIGHT SPACE
+========================================================= */
+.guide-hero {
+  display: block !important;
+  min-height: 0 !important;
+  padding: 38px 12px 30px !important;
+}
+
+.guide-hero-primary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(470px, .92fr);
+  gap: 44px;
+  align-items: start;
+}
+
+.guide-hero-copy {
+  align-self: start !important;
+  max-width: 690px;
+}
+
+.guide-hero-tools {
+  align-self: start;
+  padding-top: 2px;
+}
+
+.guide-hero-tools .guide-search-row {
+  grid-column: auto !important;
+  display: grid !important;
+  grid-template-columns: 150px minmax(0, 1fr) !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+  width: 100%;
+}
+
+.guide-hero-secondary {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: minmax(0, 650px) auto;
+  justify-content: space-between;
+  gap: 32px;
+  align-items: end;
+}
+
+.guide-hero-secondary .guide-intro {
+  margin-top: 0 !important;
+}
+
+.guide-hero-secondary .guide-surprise-button {
+  align-self: end !important;
+  justify-self: end !important;
+}
+
+@media (max-width: 1050px) {
+  .guide-hero-primary {
+    grid-template-columns: minmax(0, 1fr) minmax(390px, .85fr);
+    gap: 30px;
+  }
+}
+
+@media (max-width: 880px) {
+  .guide-hero-primary {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .guide-hero-tools {
+    padding-top: 0;
+  }
+
+  .guide-hero-secondary {
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 760px) {
+  .guide-hero {
+    padding: 27px 0 23px !important;
+  }
+
+  .guide-hero-primary,
+  .guide-hero-secondary {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .guide-hero-secondary {
+    margin-top: 18px;
+  }
+
+  .guide-hero-tools .guide-search-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  .guide-hero-secondary .guide-surprise-button {
+    width: 100%;
+    justify-self: stretch !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL-SCREEN HERO SEARCH — COUNT BOX + SEARCH INLINE
+========================================================= */
+@media (max-width: 760px) {
+  .guide-hero-tools .guide-search-row {
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    gap: 10px !important;
+    align-items: stretch !important;
+  }
+
+  .guide-hero-tools .guide-count {
+    width: auto !important;
+    min-width: 118px;
+    max-width: 138px;
+    padding-inline: 11px !important;
+    flex: 0 0 auto;
+  }
+
+  .guide-hero-tools .guide-search-wrap {
+    min-width: 0;
+  }
+
+  .guide-hero-tools .guide-search-input {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .guide-hero-tools .guide-search-row {
+    gap: 8px !important;
+  }
+
+  .guide-hero-tools .guide-count {
+    min-width: 106px;
+    max-width: 122px;
+    padding-inline: 9px !important;
+  }
+
+  .guide-hero-tools .guide-count strong {
+    font-size: 1.55rem !important;
+  }
+
+  .guide-hero-tools .guide-count span {
+    font-size: .54rem !important;
+  }
+}
+
+
+/* =========================================================
+   HERO INTRO — ABOVE COUNT + SEARCH
+========================================================= */
+.guide-hero-tools .guide-intro {
+  max-width: none !important;
+  margin: 0 0 14px !important;
+}
+
+.guide-hero-secondary {
+  grid-template-columns: 1fr auto !important;
+  min-height: 49px;
+}
+
+@media (max-width: 880px) {
+  .guide-hero-tools .guide-intro {
+    margin-bottom: 14px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .guide-hero-tools .guide-intro {
+    margin: 0 0 13px !important;
+  }
+
+  .guide-hero-secondary {
+    margin-top: 16px !important;
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE GUIDE INTRO PLACEMENT
+   Desktop: beneath logo/search row.
+   Small screens: above episode count + search.
+========================================================= */
+.guide-intro-mobile {
+  display: none !important;
+}
+
+.guide-intro-desktop {
+  display: block !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 760px) {
+  .guide-intro-mobile {
+    display: block !important;
+    margin: 0 0 13px !important;
+  }
+
+  .guide-intro-desktop {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   MODAL TOPBAR — MOBILE STABILITY FIX
+   Keep bar visible and controls pinned while modal body scrolls.
+========================================================= */
+@media (max-width: 760px) {
+  .modal-panel {
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  .modal-topbar {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 100 !important;
+
+    flex: 0 0 50px !important;
+    width: 100% !important;
+    min-height: 50px !important;
+    box-sizing: border-box !important;
+
+    display: grid !important;
+    grid-template-columns: 32px minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 6px !important;
+    padding: 7px 10px !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+
+    border-bottom: 1px solid rgba(255,255,255,.09) !important;
+    background: rgba(18,22,40,.94) !important;
+    backdrop-filter: blur(18px) !important;
+    -webkit-backdrop-filter: blur(18px) !important;
+  }
+
+  .modal-scroll {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    height: auto !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+
+  #modalTopPrevious {
+    grid-column: 1 !important;
+    justify-self: start !important;
+  }
+
+  .modal-topbar .modal-counter {
+    position: static !important;
+    grid-column: 2 !important;
+    justify-self: center !important;
+    align-self: center !important;
+    transform: none !important;
+    left: auto !important;
+    top: auto !important;
+
+    width: auto !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 5px !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+
+    font-size: .61rem !important;
+    letter-spacing: .065em !important;
+    text-align: center !important;
+  }
+
+  .modal-topbar-actions {
+    position: static !important;
+    grid-column: 3 !important;
+    justify-self: end !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin: 0 !important;
+  }
+
+  .modal-topbar #modalTopPrevious,
+  .modal-topbar #modalTopNext,
+  .modal-topbar #modalClose {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    display: grid !important;
+    place-items: center !important;
+    flex: 0 0 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+    height: 30px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .modal-topbar {
+    grid-template-columns: 30px minmax(0, 1fr) auto !important;
+    gap: 5px !important;
+    padding-inline: 8px !important;
+  }
+
+  .modal-topbar .modal-counter {
+    font-size: .57rem !important;
+    letter-spacing: .045em !important;
+    padding-inline: 3px !important;
+  }
+
+  .modal-topbar-actions {
+    gap: 5px !important;
+  }
+
+  .modal-topbar #modalTopPrevious,
+  .modal-topbar #modalTopNext,
+  .modal-topbar #modalClose {
+    flex-basis: 28px !important;
+    width: 28px !important;
+    min-width: 28px !important;
+    height: 28px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -5563,61 +5901,73 @@ body.modal-open .current-season-scrap {
 
     <header class="guide-hero">
 
-      <div class="guide-hero-copy">
-        <h1 class="guide-logo" aria-label="SOUTH PARK"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></h1>
-        <div class="guide-subtitle">EPISODE GUIDE</div>
+      <div class="guide-hero-primary">
 
-        <p class="guide-intro">
+        <div class="guide-hero-copy">
+          <h1 class="guide-logo" aria-label="SOUTH PARK"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></h1>
+          <div class="guide-subtitle">EPISODE GUIDE</div>
+        </div>
+
+        <div class="guide-hero-tools">
+          <p class="guide-intro guide-intro-mobile">
+            Your complete guide to South Park. Search episodes, filter by season,
+            and open any card to see full information.
+          </p>
+
+          <div class="guide-search-row">
+            <div class="guide-count" id="browseCount" aria-live="polite"></div>
+
+            <div class="guide-search-wrap">
+              <span class="guide-search-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                  <circle cx="11" cy="11" r="6.75"></circle>
+                  <path d="M16.1 16.1 21 21"></path>
+                </svg>
+              </span>
+              <input
+                type="search"
+                class="search-input guide-search-input"
+                id="searchInput"
+                placeholder="Search episodes..."
+                autocomplete="off"
+              >
+              <button
+                type="button"
+                class="guide-search-clear"
+                id="guideSearchClear"
+                aria-label="Clear search"
+                title="Clear search"
+              >×</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="guide-hero-secondary">
+        <p class="guide-intro guide-intro-desktop">
           Your complete guide to South Park. Search episodes, filter by season,
           and open any card to see full information.
-        </p>
-      </div>
-
-      <button
-        type="button"
-        class="guide-surprise-button"
-        id="randomEpisode"
-      >
-        <span class="random-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" focusable="false">
-            <path d="M4 7h2.8c2.1 0 3.1 1 4.7 3.4l1 1.5c1.6 2.4 2.6 3.4 4.7 3.4H20"></path>
-            <path d="m17 12.5 3 2.8-3 2.8"></path>
-            <path d="M4 17h2.8c1.5 0 2.5-.6 3.5-1.8"></path>
-            <path d="M14 8.8c1-1.2 2-1.8 3.2-1.8H20"></path>
-            <path d="m17 4.2 3 2.8-3 2.8"></path>
-          </svg>
-        </span>
-        Random episode
-      </button>
-
-      <div id="heroStats" hidden></div>
-
-      <div class="guide-search-row">
-        <div class="guide-count" id="browseCount" aria-live="polite"></div>
-
-        <div class="guide-search-wrap">
-          <span class="guide-search-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-              <circle cx="11" cy="11" r="6.75"></circle>
-              <path d="M16.1 16.1 21 21"></path>
+        </p><button
+          type="button"
+          class="guide-surprise-button"
+          id="randomEpisode"
+        >
+          <span class="random-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M4 7h2.8c2.1 0 3.1 1 4.7 3.4l1 1.5c1.6 2.4 2.6 3.4 4.7 3.4H20"></path>
+              <path d="m17 12.5 3 2.8-3 2.8"></path>
+              <path d="M4 17h2.8c1.5 0 2.5-.6 3.5-1.8"></path>
+              <path d="M14 8.8c1-1.2 2-1.8 3.2-1.8H20"></path>
+              <path d="m17 4.2 3 2.8-3 2.8"></path>
             </svg>
           </span>
-          <input
-            type="search"
-            class="search-input guide-search-input"
-            id="searchInput"
-            placeholder="Search episodes..."
-            autocomplete="off"
-          >
-          <button
-            type="button"
-            class="guide-search-clear"
-            id="guideSearchClear"
-            aria-label="Clear search"
-            title="Clear search"
-          >×</button>
-        </div>
+          Random episode
+        </button>
+
       </div>
+
+      <div id="heroStats" hidden></div>
 
     </header>
 
