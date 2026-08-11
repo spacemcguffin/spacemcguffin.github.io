@@ -5885,6 +5885,41 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* =========================================================
+   MOBILE ACTIVE FILTERS — KEEP CHIPS/CLEAR-ALL CLICKABLE
+========================================================= */
+@media (max-width: 760px) {
+  .active-filters {
+    z-index: 900 !important;
+    isolation: isolate;
+    pointer-events: auto !important;
+  }
+
+  .active-filter-chip,
+  .active-filter-chip *,
+  .clear-active-filters {
+    position: relative;
+    z-index: 2;
+    pointer-events: auto !important;
+    touch-action: manipulation;
+  }
+
+  /* The fixed current-season paper occupies the same top-right area as
+     the sticky active-filter bar on phones. It isn't needed while filters
+     are active, so remove that overlap entirely. */
+  body:has(.active-filters.visible) .current-season-scrap {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+
+  .current-season-scrap,
+  .current-season-scrap * {
+    pointer-events: none !important;
+  }
+}
+
 </style>
 </head>
 
