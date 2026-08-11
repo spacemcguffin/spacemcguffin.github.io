@@ -13678,38 +13678,7 @@ function triggerRandomEpisode(button) {
   const selected = pool[Math.floor(Math.random() * pool.length)];
   const index = episodes.indexOf(selected);
 
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  button.classList.remove("paper-jump", "show-shuffle-label");
-  button.dataset.shuffleLabel = "";
-  void button.offsetWidth;
-
-  if (reduceMotion) {
-    openModal(index);
-    return;
-  }
-
-  button.classList.add("paper-jump", "show-shuffle-label");
-
-  let tick = 0;
-  const shuffleTimer = window.setInterval(() => {
-    const preview = pool[Math.floor(Math.random() * pool.length)];
-    button.dataset.shuffleLabel = episodeCode(preview);
-    tick += 1;
-
-    if (tick >= 6) {
-      window.clearInterval(shuffleTimer);
-      button.dataset.shuffleLabel = episodeCode(selected);
-
-      window.setTimeout(() => {
-        button.classList.remove("paper-jump", "show-shuffle-label");
-        button.dataset.shuffleLabel = "";
-        openModal(index);
-      }, 150);
-    }
-  }, 48);
+  openModal(index);
 
 }
 
