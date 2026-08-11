@@ -5350,6 +5350,25 @@ body.modal-open .current-season-scrap {
 .guide-logo > span:nth-child(10) { transform: rotate(-.49deg) translateY(.3px); }
 
 
+/* SOUTH PARK logo — subtle letter jump on reset */
+.guide-logo.logo-jump > span:not(.logo-gap) {
+  animation: logoLetterJump 320ms cubic-bezier(.2,.8,.2,1);
+}
+
+.guide-logo.logo-jump > span:nth-child(2n):not(.logo-gap) { animation-delay: 18ms; }
+.guide-logo.logo-jump > span:nth-child(3n):not(.logo-gap) { animation-delay: 32ms; }
+
+@keyframes logoLetterJump {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  35% { translate: 0 -4px; rotate: -1.5deg; }
+  65% { translate: 0 1px; rotate: 1deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-logo.logo-jump > span:not(.logo-gap) { animation: none !important; }
+}
+
+
 /* Current-season sticky scrap: remove decorative coloured line/accent */
 .current-season-scrap::before,
 .current-season-scrap::after {
@@ -12183,6 +12202,14 @@ document.addEventListener(
       );
 
     if (logoReset) {
+      // Brief tactile feedback before/while resetting the guide.
+      logoReset.classList.remove("logo-jump");
+      void logoReset.offsetWidth;
+      logoReset.classList.add("logo-jump");
+      window.setTimeout(() => {
+        logoReset.classList.remove("logo-jump");
+      }, 420);
+
       selectedSeasons.clear();
       searchInput.value = "";
       searchQuery = "";
