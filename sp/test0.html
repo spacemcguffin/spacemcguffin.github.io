@@ -8376,94 +8376,111 @@ function updateModal(
   const hasPrevious = previousIndex !== null;
   const hasNext = nextIndex !== null;
 
-  previousTitle.textContent = hasPrevious
-    ? episodes[previousIndex].title
-    : "Start of season";
-
-  nextTitle.textContent = hasNext
-    ? episodes[nextIndex].title
-    : "End of season";
-
-  [modalPrevious, modalTopPrevious].forEach(button => {
-    button.disabled = !hasPrevious;
-    button.setAttribute("aria-disabled", String(!hasPrevious));
-
-    if (hasPrevious) {
-      button.dataset.targetIndex = previousIndex;
-    }
-    else {
-      delete button.dataset.targetIndex;
-    }
-  });
-
-  [modalNext, modalTopNext].forEach(button => {
-    button.disabled = !hasNext;
-    button.setAttribute("aria-disabled", String(!hasNext));
-
-    if (hasNext) {
-      button.dataset.targetIndex = nextIndex;
-    }
-    else {
-      delete button.dataset.targetIndex;
-    }
-  });
-
   const crossGroup =
     getCrossGroupNavigation(activeEpisodeIndex);
 
-  const crossLinks = [];
+  /*
+   * At a season/section boundary, reuse the normal navigation slot
+   * for cross-season navigation instead of showing a disabled button
+   * plus a second button underneath.
+   */
+  const previousCrossIndex =
+    !hasPrevious ? crossGroup.previousIndex : null;
 
-  if (!hasPrevious && crossGroup.previousIndex !== null) {
-    const previousGroupEpisode =
-      episodes[crossGroup.previousIndex];
+  const nextCrossIndex =
+    !hasNext ? crossGroup.nextIndex : null;
 
-    crossLinks.push(`
-      <button
-        type="button"
-        class="modal-cross-link previous"
-        data-cross-target-index="${crossGroup.previousIndex}"
-        data-cross-direction="previous"
-      >
-        <span aria-hidden="true">←</span>
-        <span>
-          <span class="modal-cross-label">Previous section</span>
-          <span class="modal-cross-title">
-            Back to ${escapeHTML(groupDisplayName(previousGroupEpisode))}
-          </span>
-        </span>
-      </button>
-    `);
+  const previousTargetIndex =
+    hasPrevious ? previousIndex : previousCrossIndex;
+
+  const nextTargetIndex =
+    hasNext ? nextIndex : nextCrossIndex;
+
+  const previousLabel =
+    modalPrevious.querySelector(".nav-label");
+
+  const nextLabel =
+    modalNext.querySelector(".nav-label");
+
+  if (hasPrevious) {
+    previousLabel.textContent = "Previous episode";
+    previousTitle.textContent = episodes[previousIndex].title;
+  }
+  else if (previousCrossIndex !== null) {
+    previousLabel.textContent = "Previous section";
+    previousTitle.textContent =
+      `Back to ${groupDisplayName(episodes[previousCrossIndex])}`;
+  }
+  else {
+    previousLabel.textContent = "Previous episode";
+    previousTitle.textContent = "Start of archive";
   }
 
-  if (!hasNext && crossGroup.nextIndex !== null) {
-    const nextGroupEpisode =
-      episodes[crossGroup.nextIndex];
-
-    crossLinks.push(`
-      <button
-        type="button"
-        class="modal-cross-link next"
-        data-cross-target-index="${crossGroup.nextIndex}"
-        data-cross-direction="next"
-      >
-        <span>
-          <span class="modal-cross-label">End of season</span>
-          <span class="modal-cross-title">
-            Continue to ${escapeHTML(groupDisplayName(nextGroupEpisode))}
-          </span>
-        </span>
-        <span aria-hidden="true">→</span>
-      </button>
-    `);
+  if (hasNext) {
+    nextLabel.textContent = "Next episode";
+    nextTitle.textContent = episodes[nextIndex].title;
+  }
+  else if (nextCrossIndex !== null) {
+    nextLabel.textContent = "Next section";
+    nextTitle.textContent =
+      `Continue to ${groupDisplayName(episodes[nextCrossIndex])}`;
+  }
+  else {
+    nextLabel.textContent = "Next episode";
+    nextTitle.textContent = "End of archive";
   }
 
-  modalCrossSeason.innerHTML =
-    crossLinks.join("");
-
-  modalCrossSeason.classList.toggle(
-    "visible",
-    crossLinks.length > 0
+  /* Bottom buttons can cross season/section boundaries. */
+  modalPrevious.disabled = previousTargetIndex === null;
+  modalPrevious.setAttribute(
+    "aria-disabled",
+    String(previousTargetIndex === null)
   );
+
+  if (previousTargetIndex !== null) {
+    modalPrevious.dataset.targetIndex = previousTargetIndex;
+  }
+  else {
+    delete modalPrevious.dataset.targetIndex;
+  }
+
+  modalNext.disabled = nextTargetIndex === null;
+  modalNext.setAttribute(
+    "aria-disabled",
+    String(nextTargetIndex === null)
+  );
+
+  if (nextTargetIndex !== null) {
+    modalNext.dataset.targetIndex = nextTargetIndex;
+  }
+  else {
+    delete modalNext.dataset.targetIndex;
+  }
+
+  /* Keep the compact top arrows season-local, as before. */
+  modalTopPrevious.disabled = !hasPrevious;
+  modalTopPrevious.setAttribute("aria-disabled", String(!hasPrevious));
+
+  if (hasPrevious) {
+    modalTopPrevious.dataset.targetIndex = previousIndex;
+  }
+  else {
+    delete modalTopPrevious.dataset.targetIndex;
+  }
+
+  modalTopNext.disabled = !hasNext;
+  modalTopNext.setAttribute("aria-disabled", String(!hasNext));
+
+  if (hasNext) {
+    modalTopNext.dataset.targetIndex = nextIndex;
+  }
+  else {
+    delete modalTopNext.dataset.targetIndex;
+  }
+
+  /* The old separate cross-season row is no longer needed. */
+  modalCrossSeason.innerHTML = "";
+  modalCrossSeason.classList.remove("visible");
 
   modalScroll.scrollTop = 0;
 
