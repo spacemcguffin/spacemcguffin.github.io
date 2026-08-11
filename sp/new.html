@@ -4182,6 +4182,13 @@ body {
     filter .2s ease;
 }
 
+
+.paper-back-to-top .back-to-top-chevron {
+  display: block;
+  transform: translateY(2px);
+  line-height: 1;
+}
+
 .paper-back-to-top.visible {
   opacity: .92;
   pointer-events: auto;
@@ -7246,7 +7253,7 @@ body.modal-open #activeFilters {
   aria-label="Back to top"
   title="Back to top"
 >
-  ⌃
+  <span class="back-to-top-chevron">⌃</span>
 </button>
 
 
