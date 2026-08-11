@@ -6347,6 +6347,56 @@ body.modal-open .active-filters {
   }
 }
 
+
+/* =========================================================
+   MOBILE FIXES V2 — FILTER SUPPRESSION / SQUARE SHEET / LOGO HIT AREA
+========================================================= */
+
+/* The JS also toggles the hidden attribute; this is the final CSS failsafe. */
+#activeFilters[hidden],
+body.modal-open #activeFilters,
+body.modal-open .who-archive-section > .active-filters {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@media (max-width: 760px) {
+  #guideLogoReset {
+    position: relative !important;
+    z-index: 200 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    isolation: isolate;
+  }
+
+  #guideLogoReset::before {
+    content: "";
+    position: absolute;
+    inset: -12px -10px;
+    z-index: -1;
+    pointer-events: auto;
+  }
+
+  #guideLogoReset > span {
+    pointer-events: none !important;
+  }
+
+  .episode-modal,
+  .episode-modal .modal-panel,
+  .episode-modal .modal-topbar,
+  .episode-modal .modal-scroll {
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+  }
+
+  .episode-modal .modal-panel {
+    border-radius: 0 !important;
+    clip-path: none !important;
+  }
+}
+
 </style>
 </head>
 
@@ -11500,6 +11550,11 @@ function renderSeasonRail() {
 
 function renderActiveFilters() {
 
+  /* Never allow a rerender to resurface this bar over an open modal. */
+  if (document.body.classList.contains("modal-open")) {
+    syncModalFilterSuppression(true);
+  }
+
   const filters =
     [...selectedSeasons]
       .sort((a, b) => {
@@ -12119,7 +12174,18 @@ const modalPanel =
 
 
 function syncModalFilterSuppression(isOpen) {
-  activeFilters?.classList.toggle("modal-suppressed", Boolean(isOpen));
+  if (!activeFilters) return;
+
+  const suppress = Boolean(isOpen);
+  activeFilters.classList.toggle("modal-suppressed", suppress);
+  activeFilters.hidden = suppress;
+  activeFilters.setAttribute("aria-hidden", suppress ? "true" : "false");
+
+  if (suppress) {
+    activeFilters.style.setProperty("display", "none", "important");
+  } else {
+    activeFilters.style.removeProperty("display");
+  }
 }
 
 function syncMobileSearchPlaceholder() {
@@ -12475,6 +12541,33 @@ function closeModal() {
 }
 
 
+function resetEpisodeGuideFromLogo() {
+  if (!guideLogoReset) return;
+
+  guideLogoReset.classList.remove("logo-jump");
+  void guideLogoReset.offsetWidth;
+  guideLogoReset.classList.add("logo-jump");
+  window.setTimeout(() => guideLogoReset.classList.remove("logo-jump"), 420);
+
+  selectedSeasons.clear();
+  searchInput.value = "";
+  searchQuery = "";
+  currentPage = 1;
+  viewMode = "grid";
+
+  if (modal.classList.contains("active")) {
+    closeModal();
+  }
+
+  syncSearchClearButton();
+  renderSeasonRail();
+  renderActiveFilters();
+  renderArchive();
+  syncURL();
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 /* =========================================================
    EVENT DELEGATION
 ========================================================= */
@@ -12489,35 +12582,7 @@ document.addEventListener(
       );
 
     if (logoReset) {
-      // Brief tactile feedback before/while resetting the guide.
-      logoReset.classList.remove("logo-jump");
-      void logoReset.offsetWidth;
-      logoReset.classList.add("logo-jump");
-      window.setTimeout(() => {
-        logoReset.classList.remove("logo-jump");
-      }, 420);
-
-      selectedSeasons.clear();
-      searchInput.value = "";
-      searchQuery = "";
-      currentPage = 1;
-      viewMode = "grid";
-
-      if (modal.classList.contains("active")) {
-        closeModal();
-      }
-
-      syncSearchClearButton();
-      renderSeasonRail();
-      renderActiveFilters();
-      renderArchive();
-      syncURL();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
+      resetEpisodeGuideFromLogo();
       return;
     }
 
@@ -12875,14 +12940,13 @@ activeFilters.addEventListener(
 
 
 guideLogoReset?.addEventListener(
-  "touchend",
+  "pointerup",
   event => {
-    if (window.innerWidth > 760) return;
+    if (window.innerWidth > 760 || event.pointerType === "mouse") return;
     event.preventDefault();
     event.stopPropagation();
-    guideLogoReset.click();
-  },
-  { passive: false }
+    resetEpisodeGuideFromLogo();
+  }
 );
 
 
@@ -12893,7 +12957,7 @@ guideLogoReset?.addEventListener(
     if (event.key !== "Enter" && event.key !== " ") return;
 
     event.preventDefault();
-    guideLogoReset.click();
+    resetEpisodeGuideFromLogo();
 
   }
 );
