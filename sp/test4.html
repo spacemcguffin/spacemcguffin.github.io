@@ -6833,20 +6833,7 @@ body.modal-open #activeFilters {
         aria-live="polite"
       ></div>
 
-
-      <div class="results-line">
-
-        <div class="results-copy">
-          <span id="resultsStatus">Showing all episodes</span>
-          <span class="results-separator">·</span>
-          <span id="resultsCount"></span>
-        </div>
-
-
-      </div>
-
-
-      <!-- =====================================================
+<!-- =====================================================
            ARCHIVE GRID
       ====================================================== -->
 
@@ -11241,16 +11228,6 @@ const guideSearchClear =
     "guideSearchClear"
   );
 
-const resultsStatus =
-  document.getElementById(
-    "resultsStatus"
-  );
-
-const resultsCount =
-  document.getElementById(
-    "resultsCount"
-  );
-
 const randomEpisodeButton =
   document.getElementById(
     "randomEpisode"
@@ -12177,30 +12154,7 @@ function renderArchive() {
   const pageEpisodes = filtered.slice(pageStart, pageStart + EPISODES_PER_PAGE);
 
   setPaginationAccent(pageEpisodes);
-
-  resultsCount.textContent = `${filtered.length} ${filtered.length === 1 ? "episode" : "episodes"}`;
   browseCount.innerHTML = `<strong>${filtered.length}</strong><span>EPISODES<br>FOUND</span>`;
-
-  const activeFiltersList = [...selectedSeasons]
-    .sort((a, b) => {
-      if (a === "specials") return -1;
-      if (b === "specials") return 1;
-      return Number(b) - Number(a);
-    })
-    .map(value => value === "specials" ? "Specials" : `Season ${value}`);
-
-  if (selectedSeasons.size === 0 && !searchQuery) {
-    resultsStatus.textContent = "Showing all episodes";
-  }
-  else if (selectedSeasons.size > 0 && !searchQuery) {
-    resultsStatus.textContent = activeFiltersList.join(" · ");
-  }
-  else if (selectedSeasons.size === 0 && searchQuery) {
-    resultsStatus.textContent = `Search: “${searchInput.value.trim()}”`;
-  }
-  else {
-    resultsStatus.textContent = `${activeFiltersList.join(" · ")} · “${searchInput.value.trim()}”`;
-  }
 
   renderViewToggle();
   renderPagination(filtered.length);
