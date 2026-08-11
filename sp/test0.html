@@ -7,7 +7,7 @@
 <title>South Park Episode Archive</title>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&display=swap">
-   
+  
 <style>
 
 /* =========================================================
@@ -2804,55 +2804,36 @@ a {
 .season-boundary-note {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-
-  margin-top: 18px;
-  padding: 13px 16px;
-
+  justify-content: flex-start;
+  gap: 7px;
+  margin-top: 15px;
+  padding: 8px 10px;
   border: 1px solid color-mix(in srgb, var(--season-color, #58a8ff) 38%, transparent);
-  border-left: 3px solid var(--season-color, #58a8ff);
-  border-radius: 12px;
-
+  border-radius: 10px;
   background:
     linear-gradient(
       90deg,
-      color-mix(in srgb, var(--season-color, #58a8ff) 10%, transparent),
-      rgba(255,255,255,.035)
+      color-mix(in srgb, var(--season-color, #58a8ff) 9%, transparent),
+      rgba(255,255,255,.03)
     );
-
   color: rgba(255,255,255,.72);
-
-  font-size: .68rem;
+  font-size: .67rem;
   font-weight: 720;
-  letter-spacing: .065em;
+  letter-spacing: .06em;
   text-transform: uppercase;
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.05),
-    0 8px 24px rgba(0,0,0,.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
 }
 
 .season-boundary-note .boundary-arrow {
   flex: 0 0 auto;
-
-  width: 27px;
-  height: 27px;
-
+  width: 23px;
+  height: 23px;
   display: grid;
   place-items: center;
-
   border-radius: 50%;
-
-  background: color-mix(
-    in srgb,
-    var(--season-color, #58a8ff) 18%,
-    transparent
-  );
-
+  background: color-mix(in srgb, var(--season-color, #58a8ff) 16%, transparent);
   color: var(--season-color, #8bbfff);
-
-  font-size: .9rem;
+  font-size: .78rem;
   font-weight: 800;
 }
 
@@ -7431,7 +7412,7 @@ const episodes = [
     title: "Professor Chaos",
     date: "10 April 2002",
     year: 2002,
-    image: "/sp/img/professorchaos.png",
+    image: "/sp/img/pc.png",
     description:
       "After the boys dismiss him as their replacement for Kenny, Butters becomes the supervillain Professor Chaos while the others audition candidates for a new fourth friend.",
     featured: false
@@ -8467,7 +8448,7 @@ const episodes = [
     title: "Major Boobage",
     date: "26 March 2008",
     year: 2008,
-    image: "/sp/img/majorboobage.png",
+    image: "/sp/img/mb.png",
     description:
       "Kenny becomes addicted to a bizarre new way of getting high, transporting him into a fantasy world inspired by <em>Heavy Metal</em>.",
     featured: false
@@ -8785,7 +8766,7 @@ const episodes = [
     title: "Sexual Healing",
     date: "17 March 2010",
     year: 2010,
-    image: "/sp/img/sexualhealing.png",
+    image: "/sp/img/sh.png",
     description:
       "The latest in scientific testing reveals that some of the boys at South Park Elementary have a sex addiction problem.",
     featured: false
@@ -9345,7 +9326,7 @@ const episodes = [
     title: "Taming Strange",
     date: "30 October 2013",
     year: 2013,
-    image: "/sp/img/tamingstrange.png",
+    image: "/sp/img/ts.png",
     description:
       "When Ike suddenly hits puberty, Kyle struggles with their changing relationship and takes him to see <em>Yo Gabba Gabba!</em> live.",
     featured: false
