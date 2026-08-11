@@ -5848,89 +5848,95 @@ body.modal-open .current-season-scrap {
 
 
 /* =========================================================
-   MODAL TOPBAR — MOBILE STABILITY FIX
-   Keep bar visible and controls pinned while modal body scrolls.
+   MOBILE INTERACTION + FULL-SCREEN MODAL — AUTHORITATIVE
 ========================================================= */
+
+/* Hide sticky filters while a modal is open. */
+.active-filters.modal-suppressed,
+#activeFilters[hidden],
+body.modal-open #activeFilters {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 @media (max-width: 760px) {
-  .modal-panel {
+  /* Make the logo a reliable touch target without blocking its children. */
+  #guideLogoReset {
+    position: relative !important;
+    z-index: 200 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent;
+    isolation: isolate;
+  }
+
+  #guideLogoReset > span {
+    pointer-events: none !important;
+  }
+
+  /* Back-to-top must sit above archive/sticky UI when visible. */
+  #paperBackToTop {
+    z-index: 950 !important;
+    pointer-events: none !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #paperBackToTop.visible {
+    pointer-events: auto !important;
+  }
+
+  /* True edge-to-edge mobile modal. */
+  .episode-modal {
+    align-items: stretch !important;
+    justify-content: stretch !important;
+    padding: 0 !important;
+  }
+
+  .episode-modal .modal-panel {
+    width: 100vw !important;
     height: 100dvh !important;
-    max-height: 100dvh !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    clip-path: none !important;
     display: flex !important;
     flex-direction: column !important;
     overflow: hidden !important;
+    opacity: 1 !important;
+    transform: translate3d(0, 100%, 0) !important;
+    transition: transform .46s cubic-bezier(.16,1,.3,1) !important;
+    will-change: transform;
+  }
+
+  .episode-modal.active .modal-panel {
+    transform: translate3d(0, 0, 0) !important;
   }
 
   .modal-topbar {
     position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    right: auto !important;
     z-index: 100 !important;
-
-    flex: 0 0 50px !important;
+    flex: 0 0 62px !important;
+    min-height: 62px !important;
     width: 100% !important;
-    min-height: 50px !important;
-    box-sizing: border-box !important;
-
-    display: grid !important;
-    grid-template-columns: 32px minmax(0, 1fr) auto !important;
-    align-items: center !important;
-    gap: 6px !important;
-    padding: 7px 10px !important;
-
-    visibility: visible !important;
-    opacity: 1 !important;
-    transform: none !important;
-
-    border-bottom: 1px solid rgba(255,255,255,.09) !important;
-    background: rgba(18,22,40,.94) !important;
-    backdrop-filter: blur(18px) !important;
-    -webkit-backdrop-filter: blur(18px) !important;
-  }
-
-  .modal-scroll {
-    flex: 1 1 auto !important;
-    min-height: 0 !important;
-    height: auto !important;
-    overflow-y: auto !important;
-    overscroll-behavior: contain;
-  }
-
-  #modalTopPrevious {
-    grid-column: 1 !important;
-    justify-self: start !important;
-  }
-
-  .modal-topbar .modal-counter {
-    position: static !important;
-    grid-column: 2 !important;
-    justify-self: center !important;
-    align-self: center !important;
-    transform: none !important;
-    left: auto !important;
-    top: auto !important;
-
-    width: auto !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 5px !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-
-    font-size: .61rem !important;
-    letter-spacing: .065em !important;
-    text-align: center !important;
+    grid-template-columns: 40px minmax(0,1fr) auto !important;
+    gap: 8px !important;
+    padding: 9px 12px !important;
+    border-radius: 0 !important;
   }
 
   .modal-topbar-actions {
     position: static !important;
-    grid-column: 3 !important;
     justify-self: end !important;
     display: flex !important;
     align-items: center !important;
-    gap: 6px !important;
-    margin: 0 !important;
+    gap: 7px !important;
   }
 
   .modal-topbar #modalTopPrevious,
@@ -5938,255 +5944,33 @@ body.modal-open .current-season-scrap {
   .modal-topbar #modalClose {
     position: static !important;
     inset: auto !important;
-    transform: none !important;
-    display: grid !important;
-    place-items: center !important;
-    flex: 0 0 30px !important;
-    width: 30px !important;
-    min-width: 30px !important;
-    height: 30px !important;
+    flex: 0 0 40px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
     margin: 0 !important;
     padding: 0 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .modal-topbar {
-    grid-template-columns: 30px minmax(0, 1fr) auto !important;
-    gap: 5px !important;
-    padding-inline: 8px !important;
+    transform: none !important;
   }
 
-  .modal-topbar .modal-counter {
-    font-size: .57rem !important;
-    letter-spacing: .045em !important;
-    padding-inline: 3px !important;
+  .modal-counter {
+    justify-self: center !important;
+    min-width: 106px !important;
+    font-size: .74rem !important;
   }
 
-  .modal-topbar-actions {
-    gap: 5px !important;
+  .modal-scroll {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    overscroll-behavior: contain;
+    touch-action: pan-y !important;
   }
 
-  .modal-topbar #modalTopPrevious,
-  .modal-topbar #modalTopNext,
-  .modal-topbar #modalClose {
-    flex-basis: 28px !important;
-    width: 28px !important;
-    min-width: 28px !important;
-    height: 28px !important;
-  }
-}
-
-
-/* =========================================================
-   MOBILE ACTIVE FILTERS — KEEP CHIPS/CLEAR-ALL CLICKABLE
-========================================================= */
-@media (max-width: 760px) {
-  .active-filters {
-    z-index: 900 !important;
-    isolation: isolate;
-    pointer-events: auto !important;
-  }
-
-  .active-filter-chip,
-  .active-filter-chip *,
-  .clear-active-filters {
-    position: relative;
-    z-index: 2;
-    pointer-events: auto !important;
-    touch-action: manipulation;
-  }
-
-  /* The fixed current-season paper occupies the same top-right area as
-     the sticky active-filter bar on phones. It isn't needed while filters
-     are active, so remove that overlap entirely. */
-  body:has(.active-filters.visible) .current-season-scrap {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-
-  .current-season-scrap,
-  .current-season-scrap * {
-    pointer-events: none !important;
-  }
-}
-
-
-/* =========================================================
-   MOBILE ACTIVE FILTERS — RELIABLE TOUCH / HIT TESTING
-========================================================= */
-@media (max-width: 760px) {
-  .active-filters.visible {
-    position: sticky !important;
-    top: 8px !important;
-    z-index: 5000 !important;
-
-    /* Avoid mobile WebKit hit-testing glitches caused by a sticky
-       backdrop-filter layer sitting over independently composited content. */
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-
-    transform: translateZ(0);
-    -webkit-transform: translateZ(0);
-    will-change: transform;
-
-    pointer-events: auto !important;
-    touch-action: pan-y;
-  }
-
-  .active-filters.visible .active-filter-chip,
-  .active-filters.visible .clear-active-filters {
-    position: relative !important;
-    z-index: 5001 !important;
-    pointer-events: auto !important;
-    touch-action: manipulation !important;
-    -webkit-tap-highlight-color: rgba(255,255,255,.08);
-  }
-
-  .active-filters.visible .filter-x {
-    pointer-events: none !important;
-  }
-
-  /* Nothing fixed on the right should ever sit in front of the filter bar. */
-  .current-season-scrap,
-  .current-season-scrap *,
-  .paper-back-to-top {
-    pointer-events: none !important;
-  }
-
-  body:has(.active-filters.visible) .current-season-scrap {
-    display: none !important;
-  }
-}
-
-
-/* =========================================================
-   MOTION + PAGINATION POLISH
-========================================================= */
-
-/* Season underline draws in only when its section enters the viewport. */
-.archive .season-section .season-name::after {
-/* Pagination colour is supplied per render from the first visible season. */
-.archive-pagination {
-  --page-accent-h: 32;
-}
-
-.archive-pagination .page-number:hover:not([aria-current="page"]) {
-  border-color: hsla(var(--page-accent-h), 88%, 68%, .68) !important;
-  background: hsla(var(--page-accent-h), 88%, 58%, .13) !important;
-  box-shadow:
-    0 0 12px hsla(var(--page-accent-h), 88%, 60%, .18),
-    inset 0 1px 0 rgba(255,255,255,.045) !important;
-}
-
-.archive-pagination .page-number[aria-current="page"],
-.archive-pagination .page-number.active {
-  border-color: hsl(var(--page-accent-h), 88%, 70%) !important;
-  background: linear-gradient(
-    145deg,
-    hsl(var(--page-accent-h), 82%, 67%),
-    hsl(var(--page-accent-h), 72%, 53%)
-  ) !important;
-  box-shadow:
-    0 0 0 2px rgba(5,14,29,.94),
-    0 0 0 4px hsla(var(--page-accent-h), 88%, 66%, .78),
-    0 0 15px hsla(var(--page-accent-h), 88%, 60%, .20),
-    0 5px 15px rgba(0,0,0,.18) !important;
-}
-
-.archive-pagination .page-number[aria-current="page"]:hover,
-.archive-pagination .page-number.active:hover {
-  box-shadow:
-    0 0 0 2px rgba(5,14,29,.94),
-    0 0 0 4px hsla(var(--page-accent-h), 88%, 68%, .94),
-    0 0 20px hsla(var(--page-accent-h), 88%, 60%, .29),
-    0 6px 18px rgba(0,0,0,.20) !important;
-}
-/* On phones the filter bar normally sits very high for reliable hit-testing.
-   While a modal is open, explicitly place it behind/away from the modal. */
-@media (max-width: 760px) {
-  body.modal-open .active-filters.visible {
-    z-index: 0 !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .archive .season-section .season-name::after {
-    transition: none !important;
-  }
-}
-
-
-
-/* =========================================================
-   MOBILE MODAL / FILTER STACKING + TOPBAR SIZE REFINEMENTS
-========================================================= */
-
-/* Active search/filter bar must never sit over an open modal.
-   body.modal-open is already toggled by the modal logic, so this restores
-   the bar automatically as soon as the modal closes. */
-body.modal-open .active-filters {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* Slightly larger modal topbar and navigation controls. */
-.modal-topbar {
-  flex-basis: 58px !important;
-  padding-inline: 15px !important;
-}
-
-.modal-top-arrow,
-.modal-topbar .modal-close {
-  width: 36px !important;
-  height: 36px !important;
-  font-size: 1.05rem !important;
-}
-
-.modal-counter {
-  font-size: .69rem !important;
-}
-
-@media (max-width: 760px) {
-  .modal-topbar {
-    flex-basis: 56px !important;
-    padding-inline: 13px !important;
-  }
-
-  .modal-top-arrow,
-  .modal-topbar .modal-close {
-    width: 37px !important;
-    height: 37px !important;
-    font-size: 1.08rem !important;
-  }
-}
-
-
-
-/* =========================================================
-   MOBILE MODAL — SLIDE-UP ENTRY + SWIPE-DOWN DISMISS
-========================================================= */
-@media (max-width: 760px) {
-  .episode-modal .modal-panel {
-    transform: translateY(100%) !important;
-    opacity: 1 !important;
-    transition: transform .38s cubic-bezier(.22,.82,.22,1) !important;
-    will-change: transform;
-  }
-
-  .episode-modal.active .modal-panel {
-    transform: translateY(0) !important;
-  }
-
-  .episode-modal .modal-panel.is-dragging {
-    transition: none !important;
+  .modal-image {
+    height: 270px !important;
+    border-radius: 0 !important;
   }
 }
 
@@ -6195,208 +5979,6 @@ body.modal-open .active-filters {
     transition-duration: .01ms !important;
   }
 }
-
-
-
-/* =========================================================
-   FINAL MOBILE POLISH — MODAL STACKING / MOTION / TOPBAR / LOGO
-========================================================= */
-
-/* Explicit JS suppression class: remove the sticky filter bar from layout
-   while an episode modal is open, regardless of mobile stacking rules. */
-.active-filters.modal-suppressed {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-@media (max-width: 760px) {
-  /* Keep the reset logo above the mobile hero/search layers and make taps reliable. */
-  #guideLogoReset {
-    position: relative !important;
-    z-index: 60 !important;
-    pointer-events: auto !important;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  #guideLogoReset > span {
-    pointer-events: none;
-  }
-
-  /* Shorter mobile placeholder so it never awkwardly clips mid-word. */
-  .guide-search-input {
-    text-overflow: ellipsis;
-  }
-
-  /* Full-height mobile sheet with square top corners. */
-  .episode-modal .modal-panel {
-    border-radius: 0 !important;
-    transform: translate3d(0, 102%, 0) !important;
-    transition: transform .52s cubic-bezier(.16,1,.3,1) !important;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    will-change: transform;
-  }
-
-  .episode-modal.active .modal-panel {
-    transform: translate3d(0, 0, 0) !important;
-  }
-
-  .episode-modal .modal-panel.is-dragging {
-    transition: none !important;
-  }
-
-  /* Slightly larger, easier-to-hit topbar navigation. */
-  .modal-topbar {
-    flex: 0 0 62px !important;
-    min-height: 62px !important;
-    grid-template-columns: 40px minmax(0,1fr) auto !important;
-    gap: 8px !important;
-    padding: 9px 12px !important;
-    border-radius: 0 !important;
-  }
-
-  .modal-topbar #modalTopPrevious,
-  .modal-topbar #modalTopNext,
-  .modal-topbar #modalClose {
-    flex: 0 0 38px !important;
-    width: 38px !important;
-    min-width: 38px !important;
-    height: 38px !important;
-    font-size: 1.1rem !important;
-  }
-
-  .modal-topbar .modal-counter {
-    font-size: .64rem !important;
-  }
-}
-
-@media (max-width: 420px) {
-  .modal-topbar {
-    grid-template-columns: 38px minmax(0,1fr) auto !important;
-    gap: 6px !important;
-    padding-inline: 9px !important;
-  }
-
-  .modal-topbar #modalTopPrevious,
-  .modal-topbar #modalTopNext,
-  .modal-topbar #modalClose {
-    flex-basis: 36px !important;
-    width: 36px !important;
-    min-width: 36px !important;
-    height: 36px !important;
-  }
-}
-
-
-/* =========================================================
-   WHO/4-STYLE MOBILE MODAL — FINAL OVERRIDES
-========================================================= */
-@media (max-width: 760px) {
-  /* Modal enters from the bottom but is never drag-dismissable. */
-  .episode-modal .modal-panel {
-    border-radius: 0 !important;
-    transform: translate3d(0, 100%, 0) !important;
-    transition: transform .46s cubic-bezier(.16,1,.3,1), opacity .24s ease !important;
-    touch-action: pan-y;
-  }
-
-  .episode-modal.active .modal-panel {
-    transform: translate3d(0, 0, 0) !important;
-  }
-
-  /* Keep the topbar square and roomy. */
-  .modal-topbar {
-    position: relative !important;
-    min-height: 62px !important;
-    border-radius: 0 !important;
-    padding: 9px 12px !important;
-  }
-
-  /* The X becomes a dedicated corner close control, like /who/4. */
-  .modal-topbar-actions {
-    padding-right: 48px !important;
-  }
-
-  .modal-topbar #modalClose {
-    position: absolute !important;
-    top: 11px !important;
-    right: 11px !important;
-    z-index: 50 !important;
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important;
-    background: rgba(10,14,26,.78) !important;
-    border: 1px solid rgba(255,255,255,.22) !important;
-    color: #fff !important;
-    font-size: 1.32rem !important;
-    line-height: 1 !important;
-    box-shadow: 0 6px 20px rgba(0,0,0,.2) !important;
-  }
-
-  .modal-topbar #modalClose:active {
-    transform: scale(.94) !important;
-  }
-
-  /* Horizontal swiping is the only modal drag gesture. */
-  .modal-scroll {
-    touch-action: pan-y !important;
-    will-change: transform, opacity;
-  }
-}
-
-
-/* =========================================================
-   MOBILE FIXES V2 — FILTER SUPPRESSION / SQUARE SHEET / LOGO HIT AREA
-========================================================= */
-
-/* The JS also toggles the hidden attribute; this is the final CSS failsafe. */
-#activeFilters[hidden],
-body.modal-open #activeFilters,
-body.modal-open .who-archive-section > .active-filters {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-@media (max-width: 760px) {
-  #guideLogoReset {
-    position: relative !important;
-    z-index: 200 !important;
-    pointer-events: auto !important;
-    touch-action: manipulation !important;
-    isolation: isolate;
-  }
-
-  #guideLogoReset::before {
-    content: "";
-    position: absolute;
-    inset: -12px -10px;
-    z-index: -1;
-    pointer-events: auto;
-  }
-
-  #guideLogoReset > span {
-    pointer-events: none !important;
-  }
-
-  .episode-modal,
-  .episode-modal .modal-panel,
-  .episode-modal .modal-topbar,
-  .episode-modal .modal-scroll {
-    border-top-left-radius: 0 !important;
-    border-top-right-radius: 0 !important;
-  }
-
-  .episode-modal .modal-panel {
-    border-radius: 0 !important;
-    clip-path: none !important;
-  }
-}
-
 
 
 /* =========================================================
@@ -6442,13 +6024,43 @@ body.modal-open .who-archive-section > .active-filters {
     font-size: 1.12rem !important;
   }
 
-  /* Ensure reset logo and back-to-top stay genuinely tappable. */
-  #guideLogoReset,
-  #backToTop,
-  .back-to-top {
+}
+
+
+/* =========================================================
+   MOBILE TAP TARGETS — FINAL FIX
+========================================================= */
+@media (max-width: 760px) {
+  .guide-hero,
+  .guide-hero-primary,
+  .guide-hero-copy {
+    position: relative !important;
+  }
+
+  .guide-hero-primary {
+    z-index: 1200 !important;
+  }
+
+  #guideLogoReset {
+    z-index: 1201 !important;
     pointer-events: auto !important;
     touch-action: manipulation !important;
-    -webkit-tap-highlight-color: transparent;
+  }
+
+  #guideLogoReset::before,
+  #guideLogoReset::after,
+  #guideLogoReset > * {
+    pointer-events: none !important;
+  }
+
+  #paperBackToTop {
+    z-index: 10000 !important;
+    pointer-events: none !important;
+    touch-action: manipulation !important;
+  }
+
+  #paperBackToTop.visible {
+    pointer-events: auto !important;
   }
 }
 
@@ -12999,7 +12611,7 @@ guideLogoReset?.addEventListener(
   event => {
     if (window.innerWidth > 760 || event.pointerType === "mouse") return;
     event.preventDefault();
-    event.stopPropagation();
+    event.stopImmediatePropagation();
     resetEpisodeGuideFromLogo();
   }
 );
@@ -13650,6 +13262,19 @@ paperBackToTop?.addEventListener(
   }
 );
 
+/* Direct touch/pointer activation for mobile browsers where a sticky or
+   transformed layer can suppress the synthetic click event. */
+paperBackToTop?.addEventListener(
+  "pointerup",
+  event => {
+    if (window.innerWidth > 760 || event.pointerType === "mouse") return;
+    event.preventDefault();
+    event.stopPropagation();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  },
+  { passive: false }
+);
+
 syncBackToTop();
 syncCurrentSeasonScrap();
 
@@ -13725,21 +13350,6 @@ else {
 </script>
 
 
-<script>
-(() => {
-  const back = document.getElementById("backToTop") || document.querySelector(".back-to-top");
-
-  if (back && !back.dataset.mobileTapBound) {
-    back.dataset.mobileTapBound = "1";
-    back.addEventListener("pointerup", (event) => {
-      if (event.pointerType === "mouse") return;
-      event.preventDefault();
-      event.stopPropagation();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }, { passive: false });
-  }
-})();
-</script>
 
 </body>
 </html>
