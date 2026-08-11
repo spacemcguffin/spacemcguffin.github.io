@@ -13811,22 +13811,28 @@ viewToggle?.addEventListener("focusin", event => {
 viewToggle?.addEventListener("focusout", hideSeasonTooltip);
 
 
-/* Reuse the same tooltip for the clickable South Park logo. */
+/* Reuse the same tooltip for the clickable South Park logo on wider views only. */
+function compactTooltipView() {
+  return window.matchMedia("(max-width: 760px)").matches;
+}
+
 guideLogoReset?.addEventListener("pointerenter", () => {
+  if (compactTooltipView()) return;
   if (guideLogoReset.dataset.tooltip) showSeasonTooltip(guideLogoReset);
 });
 
 guideLogoReset?.addEventListener("pointerleave", hideSeasonTooltip);
 guideLogoReset?.addEventListener("focus", () => {
+  if (compactTooltipView()) return;
   if (guideLogoReset.dataset.tooltip) showSeasonTooltip(guideLogoReset);
 });
 guideLogoReset?.addEventListener("blur", hideSeasonTooltip);
 
 
-/* On compact layouts, explain the collapsed Filters control on hover/focus. */
+/* Keep the compact Filters control tooltip-free on smaller/mobile views. */
 function showMobileFilterTooltip() {
   if (!mobileFilterButton?.dataset.tooltip) return;
-  if (!window.matchMedia("(max-width: 760px)").matches) return;
+  if (compactTooltipView()) return;
   showSeasonTooltip(mobileFilterButton);
 }
 
