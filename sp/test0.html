@@ -5920,6 +5920,54 @@ body.modal-open .current-season-scrap {
   }
 }
 
+
+/* =========================================================
+   MOBILE ACTIVE FILTERS — RELIABLE TOUCH / HIT TESTING
+========================================================= */
+@media (max-width: 760px) {
+  .active-filters.visible {
+    position: sticky !important;
+    top: 8px !important;
+    z-index: 5000 !important;
+
+    /* Avoid mobile WebKit hit-testing glitches caused by a sticky
+       backdrop-filter layer sitting over independently composited content. */
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+
+    pointer-events: auto !important;
+    touch-action: pan-y;
+  }
+
+  .active-filters.visible .active-filter-chip,
+  .active-filters.visible .clear-active-filters {
+    position: relative !important;
+    z-index: 5001 !important;
+    pointer-events: auto !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: rgba(255,255,255,.08);
+  }
+
+  .active-filters.visible .filter-x {
+    pointer-events: none !important;
+  }
+
+  /* Nothing fixed on the right should ever sit in front of the filter bar. */
+  .current-season-scrap,
+  .current-season-scrap *,
+  .paper-back-to-top {
+    pointer-events: none !important;
+  }
+
+  body:has(.active-filters.visible) .current-season-scrap {
+    display: none !important;
+  }
+}
+
 </style>
 </head>
 
@@ -8488,6 +8536,63 @@ document.addEventListener(
     }
 
   }
+);
+
+
+
+/* =========================================================
+   MOBILE ACTIVE FILTERS — DIRECT TOUCH FALLBACK
+========================================================= */
+
+activeFilters.addEventListener(
+  "touchend",
+  event => {
+
+    if (window.innerWidth > 760) return;
+
+    const filterSeason =
+      event.target.closest("[data-filter-season]");
+
+    const clearSearch =
+      event.target.closest("[data-clear-search]");
+
+    const clearFilters =
+      event.target.closest("[data-clear-filters]");
+
+    if (!filterSeason && !clearSearch && !clearFilters) return;
+
+    /* Stop the delayed synthetic click from performing the same action twice. */
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (filterSeason) {
+      const filterValue =
+        filterSeason.dataset.filterSeason === "specials"
+          ? "specials"
+          : Number(filterSeason.dataset.filterSeason);
+
+      selectedSeasons.delete(filterValue);
+    }
+
+    if (clearSearch) {
+      searchInput.value = "";
+      searchQuery = "";
+    }
+
+    if (clearFilters) {
+      selectedSeasons.clear();
+      searchInput.value = "";
+      searchQuery = "";
+    }
+
+    currentPage = 1;
+    renderSeasonRail();
+    renderActiveFilters();
+    renderArchive();
+    syncURL();
+
+  },
+  { passive: false }
 );
 
 
