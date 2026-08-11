@@ -6610,6 +6610,76 @@ body.modal-open #activeFilters {
     gap: 7px;
   }
 }
+
+
+/* =========================================================
+   FILTER CONTROLS — V7 RECONFIGURATION
+========================================================= */
+
+/* Grid/list lives permanently beside the season navigation arrows. */
+.season-strip-actions .view-toggle {
+  display: inline-flex !important;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,.045);
+}
+
+.season-strip-actions .view-button {
+  width: 33px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(255,255,255,.45);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.season-strip-actions .view-button:hover {
+  color: #fff;
+}
+
+.season-strip-actions .view-button.active {
+  background: rgba(255,255,255,.13);
+  color: #fff;
+}
+
+/* Active-filter bar is completely absent until something is active. */
+.who-archive-section > .active-filters:not(.visible) {
+  display: none !important;
+}
+
+.who-archive-section > .active-filters.visible {
+  display: flex !important;
+}
+
+/* No secondary view toggle belongs in the results/active-filter area anymore. */
+.results-line .view-toggle,
+.active-filters .view-toggle {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .season-strip-actions {
+    display: flex !important;
+    align-items: center;
+    gap: 6px !important;
+  }
+
+  .season-strip-actions .view-toggle {
+    display: inline-flex !important;
+    padding: 2px;
+  }
+
+  .season-strip-actions .view-button {
+    width: 31px;
+    height: 28px;
+  }
+}
 </style>
 </head>
 
@@ -6731,6 +6801,15 @@ body.modal-open #activeFilters {
           <div class="season-strip-arrows">
             <button type="button" id="seasonRailPrevious" aria-label="Scroll seasons left">‹</button>
             <button type="button" id="seasonRailNext" aria-label="Scroll seasons right">›</button>
+          </div>
+
+          <div class="view-toggle" aria-label="Episode display">
+            <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" title="Grid view">
+              <span aria-hidden="true">▦</span>
+            </button>
+            <button type="button" class="view-button" id="listViewButton" data-view="list" aria-label="List view" title="List view">
+              <span aria-hidden="true">☷</span>
+            </button>
           </div>
         </div>
       </div>
@@ -11778,9 +11857,16 @@ function renderActiveFilters() {
 
   const hasActiveFilters = filters.length > 0 || hasSearch;
 
-  /* Keep this control bar present so the grid/list switch is always available. */
-  activeFilters.classList.add("visible");
+  /* The active-filter bar should not exist visually until a filter is active. */
+  activeFilters.classList.toggle("visible", hasActiveFilters);
   activeFilters.classList.toggle("has-active-filters", hasActiveFilters);
+
+  if (!hasActiveFilters) {
+    activeFilters.classList.remove("is-pinned");
+    activeFilters.innerHTML = "";
+    syncCurrentSeasonScrap?.();
+    return;
+  }
 
   activeFilters.innerHTML =
     `
@@ -11790,23 +11876,12 @@ function renderActiveFilters() {
             Active filters:
           </span>
 
-          ${hasActiveFilters ? `
-            <button
-              type="button"
-              class="clear-active-filters"
-              data-clear-filters="true"
-            >
-              Clear all
-            </button>
-          ` : ""}
-        </div>
-
-        <div class="view-toggle" aria-label="Episode display">
-          <button type="button" class="view-button ${viewMode === "grid" ? "active" : ""}" id="gridViewButton" data-view="grid" aria-label="Grid view" title="Grid view">
-            <span aria-hidden="true">▦</span>
-          </button>
-          <button type="button" class="view-button ${viewMode === "list" ? "active" : ""}" id="listViewButton" data-view="list" aria-label="List view" title="List view">
-            <span aria-hidden="true">☷</span>
+          <button
+            type="button"
+            class="clear-active-filters"
+            data-clear-filters="true"
+          >
+            Clear all
           </button>
         </div>
       </div>
