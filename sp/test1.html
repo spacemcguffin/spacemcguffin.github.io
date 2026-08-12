@@ -12857,11 +12857,15 @@ function changeArchivePage(nextPage) {
 
 function renderArchive() {
 
-  const filtered = getArchiveDisplayOrder(
-    getFilteredEpisodes().slice()
-  );
-
   const searchActive = Boolean(searchInput.value.trim());
+  const filteredItems = getFilteredEpisodes().slice();
+
+  /* When searching, show every match in true reverse chronological order
+     rather than preserving the archive's season grouping. Normal browsing
+     keeps the existing grouped display order. */
+  const filtered = searchActive
+    ? filteredItems.sort((a, b) => itemOrder(b) - itemOrder(a))
+    : getArchiveDisplayOrder(filteredItems);
   const totalPages = Math.max(1, Math.ceil(filtered.length / EPISODES_PER_PAGE));
 
   if (currentPage > totalPages) currentPage = totalPages;
