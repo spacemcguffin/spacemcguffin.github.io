@@ -7384,22 +7384,8 @@ body.modal-open #activeFilters {
   font-size: .76rem !important;
 }
 
-.archive:not(.list-view) .episode-card.movie-card {
-  grid-column: span 2;
-}
-
-.archive.list-view .episode-card.movie-card {
-  grid-column: auto;
-}
-
 .archive .movie-feature-paper {
   transform: rotate(-.45deg);
-}
-
-@media (max-width: 760px) {
-  .archive:not(.list-view) .episode-card.movie-card {
-    grid-column: 1 / -1;
-  }
 }
 </style>
 </head>
@@ -8170,7 +8156,7 @@ const episodes = [
     title: "South Park: Bigger, Longer & Uncut",
     date: "30 June 1999",
     year: 1999,
-    image: "/sp/img/movie.png",
+    image: "/sp/img/blau.png",
     description:
       "When Stan, Kyle, Cartman and Kenny sneak into an R-rated Terrance and Phillip movie, their parents launch a campaign that escalates into war with Canada."
   },
@@ -12990,7 +12976,8 @@ function renderArchive() {
     : filtered.slice(pageStart, pageStart + EPISODES_PER_PAGE);
 
   setPaginationAccent(pageEpisodes);
-  browseCount.innerHTML = `<strong>${filtered.length}</strong><span>EPISODES<br>FOUND</span>`;
+  const episodeResultCount = filtered.filter(item => itemType(item) !== "movie").length;
+  browseCount.innerHTML = `<strong>${episodeResultCount}</strong><span>EPISODES<br>FOUND</span>`;
 
   renderViewToggle();
 
@@ -13069,7 +13056,11 @@ function renderArchive() {
       <section class="search-results-section">
         <header class="search-results-header">
           <h2 class="search-results-paper">
-            ${filtered.length} ${filtered.length === 1 ? "EPISODE FOUND" : "EPISODES FOUND"}
+            ${episodeResultCount > 0
+              ? `${episodeResultCount} ${episodeResultCount === 1 ? "EPISODE FOUND" : "EPISODES FOUND"}`
+              : filtered.some(item => itemType(item) === "movie")
+                ? "MOVIE FOUND"
+                : "0 EPISODES FOUND"}
           </h2>
         </header>
 
