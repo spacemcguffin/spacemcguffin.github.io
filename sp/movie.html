@@ -4225,7 +4225,9 @@ body.modal-open .paper-back-to-top {
   }
 
   .who-season-rail .season-button.specials-rail-button,
-  .who-season-rail .season-button[data-season="specials"] {
+  .who-season-rail .season-button[data-season="specials"],
+  .who-season-rail .season-button.movie-rail-button,
+  .who-season-rail .season-button[data-season="movie"] {
     width: 36px !important;
     min-width: 36px !important;
     height: 36px !important;
@@ -7386,6 +7388,20 @@ body.modal-open #activeFilters {
 
 .archive .movie-feature-paper {
   transform: rotate(-.45deg);
+}
+
+/* Mobile: keep Movie filter exactly the same size as Specials.
+   This must come AFTER the global 42px Movie rule above. */
+@media (max-width: 760px) {
+  .who-season-rail .season-button.movie-rail-button,
+  .who-season-rail .season-button[data-season="movie"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: .69rem !important;
+  }
 }
 </style>
 </head>
