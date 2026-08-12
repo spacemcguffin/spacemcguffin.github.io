@@ -4182,6 +4182,13 @@ body {
     filter .2s ease;
 }
 
+
+.paper-back-to-top .back-to-top-chevron {
+  display: block;
+  transform: translateY(2px);
+  line-height: 1;
+}
+
 .paper-back-to-top.visible {
   opacity: .92;
   pointer-events: auto;
@@ -5748,29 +5755,52 @@ body.modal-open .current-season-scrap {
 
 
 /* =========================================================
-   SMALL-SCREEN HERO SEARCH — COUNT BOX + SEARCH INLINE
+   SMALL-SCREEN HERO SEARCH — SEARCH ABOVE, COUNT + RANDOM BELOW
 ========================================================= */
+.guide-surprise-button-mobile {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .guide-hero-tools .guide-search-row {
-    grid-template-columns: auto minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-areas:
+      "search search"
+      "count random" !important;
     gap: 10px !important;
     align-items: stretch !important;
   }
 
-  .guide-hero-tools .guide-count {
-    width: auto !important;
-    min-width: 118px;
-    max-width: 138px;
-    padding-inline: 11px !important;
-    flex: 0 0 auto;
-  }
-
   .guide-hero-tools .guide-search-wrap {
+    grid-area: search;
     min-width: 0;
+    width: 100%;
   }
 
   .guide-hero-tools .guide-search-input {
     width: 100% !important;
+  }
+
+  .guide-hero-tools .guide-count {
+    grid-area: count;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    padding-inline: 11px !important;
+  }
+
+  .guide-surprise-button-mobile {
+    grid-area: random;
+    display: inline-flex;
+    width: auto !important;
+    min-height: 56px;
+    justify-self: end;
+    align-self: stretch;
+    white-space: nowrap;
+  }
+
+  .guide-hero-secondary .guide-surprise-button {
+    display: none !important;
   }
 }
 
@@ -5780,8 +5810,6 @@ body.modal-open .current-season-scrap {
   }
 
   .guide-hero-tools .guide-count {
-    min-width: 106px;
-    max-width: 122px;
     padding-inline: 9px !important;
   }
 
@@ -5791,6 +5819,11 @@ body.modal-open .current-season-scrap {
 
   .guide-hero-tools .guide-count span {
     font-size: .54rem !important;
+  }
+
+  .guide-surprise-button-mobile {
+    padding-inline: 12px !important;
+    font-size: .68rem !important;
   }
 }
 
@@ -6180,6 +6213,1357 @@ body.modal-open #activeFilters {
   font-size: 1.08rem !important;
 }
 
+
+
+/* =========================================================
+   SCREENSHOT-STYLE FILTER LAYOUT — AUTHORITATIVE
+========================================================= */
+
+/* Keep the season selector as its own full-width band. */
+.season-strip {
+  padding-top: 18px !important;
+  padding-bottom: 20px !important;
+  background: rgba(2, 8, 20, .78) !important;
+  border-top: 1px solid rgba(98, 127, 177, .12);
+  border-bottom: 1px solid rgba(98, 127, 177, .18) !important;
+}
+
+.season-strip-heading {
+  margin-bottom: 14px !important;
+}
+
+.season-strip-title {
+  min-width: 0;
+  gap: 14px !important;
+}
+
+.season-strip-title > span {
+  flex: 0 0 auto;
+  color: rgba(188, 207, 237, .86) !important;
+  font-size: .72rem !important;
+  letter-spacing: .17em !important;
+}
+
+.season-strip-title strong {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(248,250,255,.96) !important;
+  font-size: .79rem !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* The view toggle now lives with the result count, like the reference. */
+.season-strip-actions .view-toggle {
+  display: none !important;
+}
+
+.who-archive-section {
+  position: relative;
+}
+
+/* Active filters become a full-width sticky toolbar. */
+.who-archive-section > .active-filters {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 350 !important;
+  width: 100vw;
+  margin: 0 calc(50% - 50vw) !important;
+  min-height: 82px;
+  padding: 18px max(20px, calc((100vw - 1240px) / 2)) !important;
+  align-items: center;
+  gap: 10px !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(97,130,182,.22) !important;
+  border-radius: 0 !important;
+  background: rgba(3, 9, 21, .94) !important;
+  box-shadow: 0 14px 35px rgba(0,0,0,.2) !important;
+  backdrop-filter: blur(20px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(130%) !important;
+}
+
+.who-archive-section > .active-filters:not(.visible) {
+  display: none !important;
+}
+
+.active-filters-label {
+  flex: 0 0 auto;
+  margin-right: 2px !important;
+  color: rgba(188,207,237,.86) !important;
+  font-size: .7rem !important;
+  font-weight: 720 !important;
+  letter-spacing: .12em !important;
+  white-space: nowrap;
+}
+
+.active-filter-chip {
+  min-height: 37px !important;
+  padding: 0 12px !important;
+  gap: 7px !important;
+  border-color: rgba(103,137,190,.3) !important;
+  background: rgba(20,34,57,.62) !important;
+  color: rgba(224,233,248,.86) !important;
+  font-size: .72rem !important;
+}
+
+.active-filter-chip:hover {
+  border-color: rgba(102,169,255,.58) !important;
+  background: rgba(28,49,80,.8) !important;
+}
+
+.active-filter-chip .filter-x {
+  color: rgba(190,205,228,.62) !important;
+  font-size: .9rem !important;
+}
+
+.clear-active-filters {
+  margin-left: auto !important;
+  padding: 8px 0 8px 14px;
+  color: #68b7ff !important;
+  font-size: .72rem !important;
+  font-weight: 620 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Results row sits beneath the sticky filter toolbar. */
+.results-line {
+  min-height: 84px !important;
+  margin: 0 calc(50% - 50vw) !important;
+  padding: 18px max(20px, calc((100vw - 1240px) / 2)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 18px;
+  border-bottom: 1px solid rgba(97,130,182,.2) !important;
+  background: rgba(3, 9, 21, .79);
+}
+
+.results-copy {
+  gap: 0 !important;
+  color: rgba(180,199,228,.8);
+  font-size: .76rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.results-copy #resultsStatus:not(:empty) + .results-separator {
+  margin-inline: 7px;
+}
+
+.results-line .view-toggle {
+  flex: 0 0 auto;
+  gap: 9px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.results-line .view-button {
+  width: 46px;
+  height: 42px;
+  border: 1px solid rgba(95,130,183,.27);
+  border-radius: 11px;
+  background: rgba(16,29,49,.65);
+  color: rgba(209,221,241,.72);
+}
+
+.results-line .view-button.active {
+  border-color: #55adff;
+  background: rgba(9,43,75,.76);
+  color: #73d8ff;
+}
+
+.results-line .view-button:hover {
+  border-color: rgba(85,173,255,.72);
+  color: #fff;
+}
+
+.archive {
+  margin-top: 0 !important;
+  padding-top: 24px;
+}
+
+@media (max-width: 760px) {
+  .season-strip {
+    padding-top: 12px !important;
+    padding-bottom: 13px !important;
+  }
+
+  .season-strip-heading {
+    margin-bottom: 9px !important;
+  }
+
+  .season-strip-title {
+    gap: 8px !important;
+  }
+
+  .season-strip-title > span {
+    font-size: .61rem !important;
+  }
+
+  .season-strip-title strong {
+    font-size: .67rem !important;
+  }
+
+  .who-archive-section > .active-filters {
+    min-height: 0;
+    padding: 10px 16px !important;
+    gap: 7px !important;
+    overflow-x: auto;
+    flex-wrap: nowrap !important;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .who-archive-section > .active-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .active-filters-label {
+    font-size: .58rem !important;
+  }
+
+  .active-filter-chip {
+    flex: 0 0 auto;
+    min-height: 32px !important;
+    padding: 0 10px !important;
+    font-size: .65rem !important;
+  }
+
+  .clear-active-filters {
+    position: sticky;
+    right: 0;
+    flex: 0 0 auto;
+    margin-left: auto !important;
+    padding: 8px 2px 8px 12px;
+    background: linear-gradient(90deg, transparent, rgba(3,9,21,.98) 28%);
+    font-size: .65rem !important;
+  }
+
+  .results-line {
+    min-height: 66px !important;
+    padding: 12px 16px !important;
+  }
+
+  .results-copy {
+    min-width: 0;
+    font-size: .67rem;
+  }
+
+  .results-line .view-toggle {
+    gap: 6px;
+  }
+
+  .results-line .view-button {
+    width: 38px;
+    height: 36px;
+  }
+}
+
+
+/* =========================================================
+   ACTIVE FILTER GROUPING + MOBILE CLEAR POSITION
+========================================================= */
+.active-filters-head,
+.active-filter-chips {
+  display: contents;
+}
+
+
+/* =========================================================
+   ACTIVE FILTER PINNING — ONLY WHEN FILTERS ARE ACTIVE
+========================================================= */
+.who-archive-section > .active-filters {
+  position: relative !important;
+  top: auto !important;
+}
+
+.who-archive-section > .active-filters.has-active-filters {
+  position: sticky !important;
+  top: 0 !important;
+}
+
+/* When the toolbar is genuinely pinned, it sits above archive papers. */
+.who-archive-section > .active-filters.is-pinned {
+  z-index: 170 !important;
+}
+
+@media (max-width: 760px) {
+  .who-archive-section > .active-filters.visible {
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    flex-wrap: nowrap !important;
+    overflow-x: visible;
+  }
+
+  .active-filters-head {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 11px;
+    width: 100%;
+  }
+
+  .active-filters-label {
+    flex: 0 0 auto;
+    margin-right: 0 !important;
+  }
+
+  .clear-active-filters {
+    position: static;
+    flex: 0 0 auto;
+    margin-left: 0 !important;
+    padding: 0 !important;
+    background: none;
+    text-align: left;
+  }
+
+  .active-filter-chips {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    width: 100%;
+  }
+
+  .active-filter-chip {
+    flex: 0 0 auto;
+  }
+}
+
+/* =========================================================
+   ACTIVE FILTER TOOLBAR — STACKED CHIPS + VIEW SWITCH
+========================================================= */
+.who-archive-section > .active-filters.visible {
+  display: flex !important;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px !important;
+}
+
+.active-filters-head {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.active-filters-heading-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  min-width: 0;
+}
+
+.active-filters-head .clear-active-filters {
+  position: static !important;
+  flex: 0 0 auto;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+}
+
+.active-filter-chips {
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
+}
+
+.active-filter-chips:empty {
+  display: none !important;
+}
+
+.active-filters-head .view-toggle {
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.active-filters-head .view-button {
+  width: 42px;
+  height: 39px;
+  border: 1px solid rgba(95,130,183,.27);
+  border-radius: 10px;
+  background: rgba(16,29,49,.65);
+  color: rgba(209,221,241,.72);
+}
+
+.active-filters-head .view-button.active {
+  border-color: #55adff;
+  background: rgba(9,43,75,.76);
+  color: #73d8ff;
+}
+
+.active-filters-head .view-button:hover {
+  border-color: rgba(85,173,255,.72);
+  color: #fff;
+}
+
+/* The results strip is now just status/count information. */
+.results-line {
+  min-height: 58px !important;
+}
+
+@media (max-width: 760px) {
+  .who-archive-section > .active-filters.visible {
+    gap: 8px !important;
+    overflow: visible !important;
+  }
+
+  .active-filters-head {
+    gap: 10px;
+  }
+
+  .active-filters-heading-group {
+    gap: 9px;
+  }
+
+  .active-filters-head .view-toggle {
+    gap: 6px;
+  }
+
+  .active-filters-head .view-button {
+    width: 36px;
+    height: 34px;
+  }
+
+  .active-filter-chips {
+    gap: 7px;
+  }
+}
+
+
+/* =========================================================
+   FILTER CONTROLS — V7 RECONFIGURATION
+========================================================= */
+
+/* Grid/list lives permanently beside the season navigation arrows. */
+.season-strip-actions .view-toggle {
+  display: inline-flex !important;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  background: rgba(255,255,255,.045);
+}
+
+.season-strip-actions .view-button {
+  width: 33px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: rgba(255,255,255,.45);
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.season-strip-actions .view-button:hover {
+  color: #fff;
+}
+
+.season-strip-actions .view-button.active {
+  background: rgba(255,255,255,.13);
+  color: #fff;
+}
+
+/* Active-filter bar is completely absent until something is active. */
+.who-archive-section > .active-filters:not(.visible) {
+  display: none !important;
+}
+
+.who-archive-section > .active-filters.visible {
+  display: flex !important;
+}
+
+/* No secondary view toggle belongs in the results/active-filter area anymore. */
+.results-line .view-toggle,
+.active-filters .view-toggle {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .season-strip-actions {
+    display: flex !important;
+    align-items: center;
+    gap: 6px !important;
+  }
+
+  .season-strip-actions .view-toggle {
+    display: inline-flex !important;
+    padding: 2px;
+  }
+
+  .season-strip-actions .view-button {
+    width: 31px;
+    height: 28px;
+  }
+}
+
+
+/* =========================================================
+   LOGO ACCENT + SIDE TOOLTIP REFINEMENT
+========================================================= */
+
+/* Four separate scuffed marker strokes under SOUTH PARK. */
+.guide-logo {
+  padding-bottom: 25px !important;
+}
+
+.guide-logo::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 5px !important;
+  bottom: 1px !important;
+  width: min(315px, 78%) !important;
+  height: 18px !important;
+  background:
+    linear-gradient(91deg, transparent 0 1%, #5161AC 2% 97%, transparent 99%) 0 0 / 96% 3px no-repeat,
+    linear-gradient(89deg, transparent 0 2%, #009B67 3% 98%, transparent 100%) 5px 5px / 92% 3px no-repeat,
+    linear-gradient(91.5deg, transparent 0 1%, #59C0D5 2% 96%, transparent 99%) 1px 10px / 98% 3px no-repeat,
+    linear-gradient(88.5deg, transparent 0 2%, #F47321 3% 98%, transparent 100%) 8px 15px / 90% 3px no-repeat !important;
+  clip-path: polygon(
+    0 8%, 8% 1%, 17% 10%, 27% 2%, 38% 9%, 49% 0, 60% 8%, 72% 2%, 84% 10%, 100% 3%,
+    99% 91%, 88% 98%, 76% 90%, 64% 99%, 52% 91%, 40% 100%, 28% 90%, 15% 98%, 1% 91%
+  ) !important;
+  transform: rotate(-.55deg) !important;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.16)) !important;
+  opacity: .98 !important;
+  pointer-events: none;
+}
+
+/* Logo tooltip sits to the right, with its pointer aimed back at the logo. */
+.season-tooltip.tooltip-right {
+  transform: translate(0, -50%) translateX(8px);
+}
+
+.season-tooltip.tooltip-right.visible {
+  transform: translate(0, -50%) translateX(0);
+}
+
+.season-tooltip.tooltip-right::after {
+  left: -5px;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+@media (max-width: 760px) {
+  .guide-logo {
+    padding-bottom: 22px !important;
+  }
+
+  .guide-logo::after {
+    width: min(260px, 82%) !important;
+    height: 16px !important;
+    background:
+      linear-gradient(91deg, transparent 0 1%, #5161AC 2% 97%, transparent 99%) 0 0 / 96% 2.5px no-repeat,
+      linear-gradient(89deg, transparent 0 2%, #009B67 3% 98%, transparent 100%) 4px 4.5px / 92% 2.5px no-repeat,
+      linear-gradient(91.5deg, transparent 0 1%, #59C0D5 2% 96%, transparent 99%) 1px 9px / 98% 2.5px no-repeat,
+      linear-gradient(88.5deg, transparent 0 2%, #F47321 3% 98%, transparent 100%) 7px 13.5px / 90% 2.5px no-repeat !important;
+  }
+}
+
+
+/* =========================================================
+   LOGO ACCENT — COMPACT FOUR-COLOUR SCRAP BLOCKS
+========================================================= */
+/* Restore the original short, single-strip feel: four colours sit side-by-side
+   as small rough blocks rather than separate horizontal strokes. */
+.guide-logo {
+  padding-bottom: 14px !important;
+}
+
+.guide-logo::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 3px !important;
+  bottom: 1px !important;
+  width: min(218px, 64%) !important;
+  height: 7px !important;
+  background: linear-gradient(
+    90deg,
+    #5161AC 0 24%,
+    transparent 24% 25.5%,
+    #009B67 25.5% 49%,
+    transparent 49% 50.5%,
+    #59C0D5 50.5% 74%,
+    transparent 74% 75.5%,
+    #F47321 75.5% 100%
+  ) !important;
+  clip-path: polygon(
+    0 28%, 7% 13%, 14% 24%, 21% 8%, 29% 20%, 37% 3%,
+    45% 18%, 53% 7%, 61% 22%, 69% 5%, 77% 19%, 86% 9%, 100% 24%,
+    98% 76%, 90% 88%, 81% 72%, 72% 91%, 63% 76%, 54% 94%,
+    45% 77%, 36% 91%, 27% 73%, 18% 89%, 9% 75%, 2% 91%
+  ) !important;
+  transform: rotate(-1deg) !important;
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,.18)) !important;
+  opacity: .94 !important;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .guide-logo {
+    padding-bottom: 13px !important;
+  }
+
+  .guide-logo::after {
+    width: min(184px, 66%) !important;
+    height: 6px !important;
+  }
+}
+
+
+
+/* =========================================================
+   V8 — RESET ON REFRESH / MUTED SEASON COLOURS / PAPER RANDOM
+========================================================= */
+
+/* Slightly duller season filter bubbles while keeping each season distinct. */
+.who-season-rail .season-button {
+  border-color: hsla(var(--season-hue), 48%, 66%, .46) !important;
+  background:
+    radial-gradient(circle at 35% 25%, hsla(var(--season-hue), 55%, 70%, .28), transparent 42%),
+    linear-gradient(145deg, hsla(var(--season-hue), 42%, 44%, .52), hsla(var(--season-hue), 38%, 22%, .58)) !important;
+}
+
+.who-season-rail .season-button.active {
+  border-color: hsla(var(--season-hue), 58%, 68%, .78) !important;
+  background:
+    radial-gradient(circle at 35% 25%, hsla(var(--season-hue), 62%, 72%, .34), transparent 42%),
+    linear-gradient(145deg, hsla(var(--season-hue), 52%, 50%, .68), hsla(var(--season-hue), 45%, 27%, .72)) !important;
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.95),
+    0 0 0 4px hsla(var(--season-hue), 56%, 62%, .58),
+    0 0 12px hsla(var(--season-hue), 50%, 52%, .20),
+    0 5px 14px rgba(0,0,0,.22) !important;
+}
+
+.who-season-rail .season-button.active::after {
+  background: hsla(var(--season-hue), 58%, 64%, .88) !important;
+  box-shadow: 0 0 6px hsla(var(--season-hue), 52%, 58%, .44) !important;
+}
+
+/* Match the archive heading underline to the softer season palette. */
+.archive .season-section .season-name::after {
+  background: hsl(var(--season-heading-hue), 58%, 62%) !important;
+  box-shadow: 0 0 7px hsla(var(--season-heading-hue), 52%, 54%, .14) !important;
+  opacity: .88 !important;
+}
+
+/* Random Episode becomes a cut-paper strip instead of a glossy button. */
+.guide-surprise-button {
+  min-height: 43px !important;
+  padding: 8px 15px !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  background:
+    linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.03)),
+    #ece6d7 !important;
+  color: #25221c !important;
+  font-size: .72rem !important;
+  font-weight: 780 !important;
+  letter-spacing: .055em !important;
+  text-transform: uppercase;
+  box-shadow:
+    0 2px 1px rgba(0,0,0,.12),
+    0 8px 18px rgba(0,0,0,.16),
+    inset 0 1px 0 rgba(255,255,255,.72) !important;
+  clip-path: polygon(
+    1% 6%, 12% 2%, 25% 5%, 39% 1%, 53% 4%, 68% 2%, 82% 5%, 99% 1%,
+    98% 25%, 100% 47%, 98% 68%, 100% 96%, 85% 99%, 70% 96%, 54% 100%,
+    39% 97%, 25% 100%, 12% 96%, 1% 99%, 2% 73%, 0 49%, 2% 27%
+  ) !important;
+  transform: rotate(-.45deg);
+  transition: filter .18s ease, box-shadow .18s ease !important;
+}
+
+.guide-surprise-button:hover {
+  background:
+    linear-gradient(rgba(255,255,255,.16), rgba(255,255,255,.04)),
+    #f2ecdc !important;
+  color: #1f1d18 !important;
+  border: 0 !important;
+  transform: rotate(-.45deg) !important;
+  filter: brightness(1.02);
+}
+
+.guide-surprise-button .random-icon {
+  display: none !important;
+}
+
+/* Shuffle ticker now lives inside the paper strip itself. */
+.guide-surprise-button {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.guide-surprise-button::after {
+  content: attr(data-shuffle-label) !important;
+  display: block !important;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) translateX(3px) rotate(.6deg);
+  min-width: 48px;
+  padding: 3px 6px;
+  border-radius: 2px;
+  background: rgba(49,44,34,.08);
+  color: rgba(37,34,28,.78);
+  font-size: .61rem;
+  font-weight: 820;
+  letter-spacing: .055em;
+  line-height: 1;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .1s ease, transform .1s ease;
+}
+
+.guide-surprise-button.show-shuffle-label {
+  padding-right: 72px !important;
+}
+
+.guide-surprise-button.show-shuffle-label::after {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0) rotate(-.4deg);
+}
+
+.guide-surprise-button.paper-jump {
+  animation: randomPaperJump .22s steps(2, end) both !important;
+}
+
+@keyframes randomPaperJump {
+  0%   { transform: translate(0,0) rotate(-.45deg); }
+  28%  { transform: translate(-1px,-2px) rotate(-1.2deg); }
+  55%  { transform: translate(1px,0) rotate(.25deg); }
+  78%  { transform: translate(-.5px,-1px) rotate(-.8deg); }
+  100% { transform: translate(0,0) rotate(-.45deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .guide-surprise-button.paper-jump { animation: none !important; }
+}
+
+.paper-back-to-top {
+  font-weight: 900 !important;
+  font-size: 1.45rem !important;
+  line-height: 1 !important;
+}
+
+@media (max-width: 760px) {
+  /* Keep a small breathing space between count/random and the season band. */
+  .guide-hero {
+    padding-bottom: 8px !important;
+  }
+
+  .guide-hero-secondary {
+    display: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+  }
+
+  .guide-hero-tools .guide-search-row {
+    row-gap: 8px !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Keep the torn-paper random control inside its mobile grid cell.
+     The slight rotation/jitter otherwise lets the paper edge and shadow
+     bleed into the divider below on narrow screens. */
+  .guide-surprise-button-mobile {
+    min-height: 50px !important;
+    height: 50px !important;
+    align-self: center !important;
+    margin: 3px 4px 3px 0 !important;
+    transform-origin: center center !important;
+    box-shadow:
+      0 2px 1px rgba(0,0,0,.10),
+      0 5px 11px rgba(0,0,0,.13),
+      inset 0 1px 0 rgba(255,255,255,.72) !important;
+  }
+
+  .guide-surprise-button-mobile.show-shuffle-label {
+    padding-right: 68px !important;
+  }
+
+  .season-strip {
+    margin-top: 6px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE SEASON FILTER LAYER CONTAINMENT — OVERLAY FIX
+   Keeps the collapsible season band from painting upward over
+   the episode-count / random-episode controls when closed.
+========================================================= */
+@media (max-width: 760px) {
+  /* The header must remain above the following full-width season band.
+     This prevents the later-painted strip from covering any tiny paper/
+     control edges that extend beyond the hero's visual bounds. */
+  .guide-hero {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+  }
+
+  /* Confine all painting/compositing from the collapsible filter area to
+     the strip itself. This also stops the collapsing rail from leaving a
+     translucent layer over the controls above it. */
+  .season-strip {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    contain: paint;
+    isolation: isolate;
+  }
+
+  .season-strip:not(.mobile-open) .who-season-rail {
+    visibility: hidden;
+  }
+
+  .season-strip.mobile-open .who-season-rail {
+    visibility: visible;
+  }
+}
+
+
+/* =========================================================
+   FLAT SEARCH RESULTS
+   Search mode removes season groupings and pagination, then
+   presents every match beneath one paper-style result heading.
+========================================================= */
+
+.search-results-section {
+  margin-bottom: 62px;
+}
+
+.search-results-header {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.search-results-paper {
+  display: inline-grid;
+  place-items: center;
+  margin: 0;
+  padding: 9px 14px 8px;
+  border: 1px solid rgba(40,43,48,.18);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(246,244,235,.98),
+      rgba(214,215,209,.96)
+    );
+  color: #242a33;
+  font-size: .86rem;
+  font-weight: 840;
+  line-height: 1;
+  letter-spacing: .075em;
+  text-transform: uppercase;
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.78);
+  clip-path: polygon(
+    1% 10%, 17% 3%, 34% 8%, 51% 2%, 70% 7%, 98% 4%,
+    99% 88%, 82% 96%, 61% 91%, 42% 98%, 20% 92%, 2% 97%
+  );
+  transform: rotate(-.55deg);
+}
+
+.search-results-grid {
+  margin-top: 0;
+}
+
+.archive.list-view .search-results-section .episode-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.archive.list-view .search-results-section .episode-card {
+  display: grid;
+  grid-template-columns: 150px minmax(0,1fr);
+  align-items: stretch;
+  min-height: 92px;
+  border-radius: 15px;
+}
+
+.archive.list-view .search-results-section .grid-image {
+  margin: 6px;
+  border-radius: 10px;
+}
+
+.archive.list-view .search-results-section .grid-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 80px;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.archive.list-view .search-results-section .grid-copy {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 15px 52px 15px 15px;
+}
+
+.archive.list-view .search-results-section .grid-title {
+  margin-bottom: 5px;
+  font-size: 1.16rem;
+}
+
+.archive.list-view .search-results-section .list-description {
+  display: -webkit-box;
+  max-width: 760px;
+  overflow: hidden;
+  color: var(--text-soft);
+  font-size: .78rem;
+  line-height: 1.4;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.archive.list-view .search-results-section .list-arrow {
+  position: absolute;
+  right: 17px;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 29px;
+  height: 29px;
+  transform: translateY(-50%);
+  border: 1px solid hsla(var(--season-hue), 80%, 70%, .58);
+  border-radius: 50%;
+  background: hsla(var(--season-hue), 58%, 36%, .52);
+  color: hsl(var(--season-hue), 88%, 88%);
+}
+
+@media (max-width: 760px) {
+  .search-results-header {
+    margin-bottom: 16px;
+  }
+
+  .search-results-paper {
+    padding: 8px 12px 7px;
+    font-size: .78rem;
+  }
+
+  .archive.list-view .search-results-section .episode-card {
+    grid-template-columns: 112px minmax(0,1fr);
+  }
+
+  .archive.list-view .search-results-section .list-description {
+    -webkit-line-clamp: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .archive.list-view .search-results-section .episode-card {
+    grid-template-columns: 100px minmax(0,1fr);
+  }
+
+  .archive.list-view .search-results-section .grid-title {
+    font-size: 1rem;
+  }
+
+  .archive.list-view .search-results-section .list-description {
+    display: none;
+  }
+}
+
+
+
+/* =========================================================
+   FILTER RAIL — OVERFLOW CUES + PAPER DETAILS
+========================================================= */
+
+/* Paper scrap treatment for the SEASONS label. */
+.season-strip-title > span {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 11px 5px 10px;
+  color: #252a31 !important;
+  font-size: .64rem !important;
+  font-weight: 790 !important;
+  letter-spacing: .15em !important;
+  background:
+    linear-gradient(145deg, rgba(247,245,236,.98), rgba(215,216,209,.96));
+  border: 1px solid rgba(44,48,54,.15);
+  box-shadow:
+    0 4px 12px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.76);
+  clip-path: polygon(
+    2% 10%, 18% 3%, 36% 7%, 54% 1%, 72% 6%, 98% 2%,
+    96% 91%, 79% 97%, 61% 93%, 42% 100%, 21% 94%, 1% 98%
+  );
+  transform: rotate(-.65deg);
+}
+
+/* Keep the scrolling rail itself clean; the shell owns the visual fades. */
+.season-rail-shell {
+  position: relative;
+  min-width: 0;
+}
+
+.season-rail-shell::before,
+.season-rail-shell::after {
+  content: "";
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  bottom: 0;
+  width: 42px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.season-rail-shell::before {
+  left: 0;
+  background: linear-gradient(
+    to right,
+    rgba(2,8,20,.98) 0%,
+    rgba(2,8,20,.82) 34%,
+    rgba(2,8,20,0) 100%
+  );
+}
+
+.season-rail-shell::after {
+  right: 0;
+  background: linear-gradient(
+    to left,
+    rgba(2,8,20,.98) 0%,
+    rgba(2,8,20,.82) 34%,
+    rgba(2,8,20,0) 100%
+  );
+}
+
+.season-rail-shell.can-scroll-left::before,
+.season-rail-shell.can-scroll-right::after {
+  opacity: 1;
+}
+
+/* Turn the existing Specials/season divider into a little torn-paper seam. */
+.season-rail-divider {
+  position: relative;
+  flex: 0 0 12px !important;
+  width: 12px !important;
+  height: 38px !important;
+  margin: 0 3px !important;
+  align-self: center;
+  background: transparent !important;
+}
+
+.season-rail-divider::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  width: 6px;
+  height: 34px;
+  transform: translateX(-50%) rotate(1.5deg);
+  background: linear-gradient(180deg, rgba(239,237,227,.88), rgba(191,194,191,.72));
+  box-shadow: 1px 0 0 rgba(255,255,255,.15), 2px 2px 5px rgba(0,0,0,.17);
+  clip-path: polygon(
+    42% 0, 76% 7%, 48% 14%, 71% 22%, 37% 31%, 67% 39%,
+    43% 48%, 72% 57%, 40% 66%, 66% 76%, 35% 85%, 58% 93%, 44% 100%,
+    18% 93%, 39% 84%, 13% 75%, 36% 65%, 10% 55%, 35% 46%,
+    12% 36%, 40% 27%, 16% 17%, 38% 9%
+  );
+}
+
+@media (max-width: 760px) {
+  .season-rail-shell::before,
+  .season-rail-shell::after {
+    width: 34px;
+  }
+
+  .season-strip-title > span {
+    min-height: 26px;
+    padding: 4px 9px;
+    font-size: .59rem !important;
+  }
+
+  .season-rail-divider {
+    flex-basis: 10px !important;
+    width: 10px !important;
+    height: 34px !important;
+    margin-inline: 2px !important;
+  }
+
+  .season-rail-divider::before {
+    height: 31px;
+  }
+}
+
+
+
+/* =========================================================
+   CONSTRUCTION-PAPER SEASON STRIP
+   Keeps the existing order and filter behaviour; changes only
+   the rail presentation from bubbles to adjoining paper blocks.
+========================================================= */
+
+/* Let the paper pieces visually meet as one continuous strip. */
+.who-season-rail {
+  gap: 0 !important;
+  padding: 8px 9px 15px !important;
+  align-items: center;
+  scroll-padding-inline: 26px;
+}
+
+.who-season-rail .season-button {
+  --paper-hue: var(--season-hue, 210);
+  position: relative !important;
+  flex: 0 0 auto !important;
+  min-width: 57px !important;
+  width: 57px !important;
+  height: 54px !important;
+  margin: 0 -1px 0 0 !important;
+  padding: 0 10px !important;
+  border: 1px solid hsla(var(--paper-hue), 38%, 22%, .56) !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(155deg,
+      hsla(var(--paper-hue), 46%, 49%, .98),
+      hsla(var(--paper-hue), 42%, 36%, .98)
+    ) !important;
+  color: rgba(247,241,220,.94) !important;
+  font-size: .82rem !important;
+  font-weight: 790 !important;
+  letter-spacing: -.02em !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    inset 0 -1px 0 rgba(0,0,0,.14),
+    0 5px 12px rgba(0,0,0,.16) !important;
+  clip-path: polygon(
+    0 5%, 14% 2%, 31% 4%, 49% 1%, 67% 4%, 84% 2%, 100% 5%,
+    99% 22%, 100% 40%, 98% 58%, 100% 77%, 98% 96%,
+    83% 98%, 66% 96%, 48% 100%, 31% 97%, 15% 99%, 1% 95%,
+    2% 78%, 0 61%, 2% 43%, 0 24%
+  ) !important;
+  transform: translateY(0) rotate(0deg) !important;
+  isolation: isolate;
+  overflow: visible;
+  transition:
+    transform .18s ease,
+    filter .18s ease,
+    box-shadow .18s ease !important;
+}
+
+/* Very small alternation keeps it handmade without making the line messy. */
+.who-season-rail .season-button:nth-of-type(3n + 1) {
+  transform: translateY(1px) rotate(-.35deg) !important;
+}
+
+.who-season-rail .season-button:nth-of-type(3n + 2) {
+  transform: translateY(0) rotate(.28deg) !important;
+}
+
+.who-season-rail .season-button:hover {
+  z-index: 5;
+  filter: brightness(1.08) saturate(1.04);
+  transform: translateY(-4px) rotate(0deg) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.22),
+    0 9px 17px rgba(0,0,0,.25) !important;
+}
+
+/* ALL stays neutral, like a charcoal piece of construction paper. */
+.who-season-rail .season-button[data-season="all"] {
+  min-width: 67px !important;
+  width: 67px !important;
+  background:
+    linear-gradient(155deg, rgba(70,68,72,.99), rgba(43,43,48,.99)) !important;
+  border-color: rgba(15,16,20,.45) !important;
+  color: rgba(246,240,220,.96) !important;
+}
+
+/* Specials remains in its current position, but gets its own purple paper. */
+.who-season-rail .season-button.specials-rail-button,
+.who-season-rail .season-button[data-season="specials"] {
+  min-width: 57px !important;
+  width: 57px !important;
+  height: 54px !important;
+  padding: 0 10px !important;
+  border-radius: 0 !important;
+  background:
+    linear-gradient(155deg, rgba(111,72,142,.98), rgba(72,47,95,.99)) !important;
+  border-color: rgba(48,29,64,.55) !important;
+  color: rgba(244,230,250,.96) !important;
+  font-size: .82rem !important;
+}
+
+/* Selected paper lifts out of the strip, matching the mockup. */
+.who-season-rail .season-button.active,
+.who-season-rail .season-button[data-season="all"].active,
+.who-season-rail .season-button.specials-rail-button.active,
+.who-season-rail .season-button[data-season="specials"].active {
+  z-index: 10;
+  min-height: 62px !important;
+  height: 62px !important;
+  margin-top: -4px !important;
+  margin-bottom: -4px !important;
+  border: 1px solid rgba(79,68,51,.30) !important;
+  background:
+    linear-gradient(150deg, rgba(247,239,213,.99), rgba(220,205,168,.99)) !important;
+  color: #20242a !important;
+  text-shadow: none !important;
+  filter: none !important;
+  transform: translateY(-3px) rotate(-.45deg) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 9px 18px rgba(0,0,0,.30) !important;
+}
+
+/* Replace the old active dot/ring with a rough coloured marker stroke. */
+.who-season-rail .season-button.active::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: 7px !important;
+  width: 25px !important;
+  height: 4px !important;
+  transform: translateX(-50%) rotate(-1.5deg) !important;
+  border-radius: 40% 60% 45% 55% !important;
+  background: hsla(var(--paper-hue), 68%, 43%, 1) !important;
+  box-shadow: none !important;
+  clip-path: polygon(0 30%, 14% 12%, 31% 24%, 48% 8%, 68% 22%, 84% 10%, 100% 31%, 96% 76%, 79% 91%, 58% 78%, 39% 94%, 18% 79%, 2% 88%) !important;
+}
+
+.who-season-rail .season-button[data-season="all"].active::after {
+  background: rgba(76,91,114,.86) !important;
+}
+
+/* The existing divider now reads as a ripped seam between Specials and seasons. */
+.who-season-rail .season-rail-divider {
+  position: relative;
+  z-index: 4;
+  flex: 0 0 15px !important;
+  width: 15px !important;
+  height: 56px !important;
+  margin: 0 -2px 0 -1px !important;
+  background: transparent !important;
+  overflow: visible;
+}
+
+.who-season-rail .season-rail-divider::before {
+  top: 0 !important;
+  width: 9px !important;
+  height: 56px !important;
+  background:
+    linear-gradient(180deg, rgba(242,235,216,.98), rgba(205,195,170,.96)) !important;
+  box-shadow:
+    1px 0 0 rgba(255,255,255,.18),
+    2px 3px 7px rgba(0,0,0,.24) !important;
+  clip-path: polygon(
+    43% 0, 78% 7%, 44% 13%, 73% 21%, 37% 29%, 70% 38%,
+    39% 47%, 75% 56%, 42% 65%, 69% 75%, 35% 84%, 61% 93%, 43% 100%,
+    13% 93%, 36% 84%, 8% 75%, 34% 65%, 9% 55%, 35% 46%,
+    10% 36%, 37% 27%, 11% 18%, 39% 9%
+  ) !important;
+}
+
+/* Fade overlays remain on top of the paper strip to signal horizontal overflow. */
+.season-rail-shell::before,
+.season-rail-shell::after {
+  z-index: 30 !important;
+  width: 48px;
+}
+
+@media (max-width: 760px) {
+  .who-season-rail {
+    gap: 0 !important;
+    padding: 7px 8px 13px !important;
+  }
+
+  .who-season-rail .season-button,
+  .who-season-rail .season-button.specials-rail-button,
+  .who-season-rail .season-button[data-season="specials"] {
+    min-width: 49px !important;
+    width: 49px !important;
+    height: 47px !important;
+    padding-inline: 7px !important;
+    font-size: .72rem !important;
+  }
+
+  .who-season-rail .season-button[data-season="all"] {
+    min-width: 58px !important;
+    width: 58px !important;
+  }
+
+  .who-season-rail .season-button.active,
+  .who-season-rail .season-button[data-season="all"].active,
+  .who-season-rail .season-button.specials-rail-button.active,
+  .who-season-rail .season-button[data-season="specials"].active {
+    height: 55px !important;
+    min-height: 55px !important;
+    margin-top: -4px !important;
+    margin-bottom: -4px !important;
+    transform: translateY(-2px) rotate(-.35deg) !important;
+  }
+
+  .who-season-rail .season-button.active::after {
+    bottom: 6px !important;
+    width: 21px !important;
+    height: 3px !important;
+  }
+
+  .who-season-rail .season-rail-divider {
+    flex-basis: 13px !important;
+    width: 13px !important;
+    height: 49px !important;
+  }
+
+  .who-season-rail .season-rail-divider::before {
+    height: 49px !important;
+    width: 8px !important;
+  }
+
+  .season-rail-shell::before,
+  .season-rail-shell::after {
+    width: 37px !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .who-season-rail .season-button,
+  .who-season-rail .season-button.specials-rail-button,
+  .who-season-rail .season-button[data-season="specials"] {
+    min-width: 46px !important;
+    width: 46px !important;
+  }
+
+  .who-season-rail .season-button[data-season="all"] {
+    min-width: 55px !important;
+    width: 55px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -6205,7 +7589,8 @@ body.modal-open #activeFilters {
             role="button"
             tabindex="0"
             aria-label="Reset South Park episode guide"
-            title="Reset episode guide"
+            data-tooltip="Reset episode guide"
+            data-tooltip-position="right"
           ><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></h1>
           <div class="guide-subtitle">EPISODE GUIDE</div>
         </div>
@@ -6241,6 +7626,23 @@ body.modal-open #activeFilters {
                 title="Clear search"
               >×</button>
             </div>
+
+            <button
+              type="button"
+              class="guide-surprise-button guide-surprise-button-mobile"
+              id="randomEpisodeMobile"
+            >
+              <span class="random-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M4 7h2.8c2.1 0 3.1 1 4.7 3.4l1 1.5c1.6 2.4 2.6 3.4 4.7 3.4H20"></path>
+                  <path d="m17 12.5 3 2.8-3 2.8"></path>
+                  <path d="M4 17h2.8c1.5 0 2.5-.6 3.5-1.8"></path>
+                  <path d="M14 8.8c1-1.2 2-1.8 3.2-1.8H20"></path>
+                  <path d="m17 4.2 3 2.8-3 2.8"></path>
+                </svg>
+              </span>
+              Random episode
+            </button>
           </div>
         </div>
 
@@ -6292,6 +7694,7 @@ body.modal-open #activeFilters {
           id="mobileFilterButton"
           aria-expanded="false"
           aria-controls="seasonRail"
+          data-tooltip="Click to search"
         >
           <span>Filters</span>
           <strong id="mobileFilterCount">All</strong>
@@ -6304,17 +7707,19 @@ body.modal-open #activeFilters {
           </div>
 
           <div class="view-toggle" aria-label="Episode display">
-            <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" title="Grid view">
+            <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" data-tooltip="Grid view">
               <span aria-hidden="true">▦</span>
             </button>
-            <button type="button" class="view-button" id="listViewButton" data-view="list" aria-label="List view" title="List view">
+            <button type="button" class="view-button" id="listViewButton" data-view="list" aria-label="List view" data-tooltip="List view">
               <span aria-hidden="true">☷</span>
             </button>
           </div>
         </div>
       </div>
 
-      <div class="season-rail who-season-rail" id="seasonRail"></div>
+      <div class="season-rail-shell" id="seasonRailShell">
+        <div class="season-rail who-season-rail" id="seasonRail"></div>
+      </div>
 
       <div class="season-tooltip" id="seasonTooltip" role="tooltip" aria-hidden="true"></div>
 
@@ -6333,19 +7738,7 @@ body.modal-open #activeFilters {
         aria-live="polite"
       ></div>
 
-
-      <div class="results-line">
-
-        <div class="results-copy">
-          <span id="resultsStatus">Showing all episodes</span>
-          <span class="results-separator">·</span>
-          <span id="resultsCount"></span>
-        </div>
-
-      </div>
-
-
-      <!-- =====================================================
+<!-- =====================================================
            ARCHIVE GRID
       ====================================================== -->
 
@@ -6383,7 +7776,7 @@ body.modal-open #activeFilters {
   aria-label="Back to top"
   title="Back to top"
 >
-  ↑
+  <span class="back-to-top-chevron">⌃</span>
 </button>
 
 
@@ -10740,19 +12133,14 @@ const guideSearchClear =
     "guideSearchClear"
   );
 
-const resultsStatus =
-  document.getElementById(
-    "resultsStatus"
-  );
-
-const resultsCount =
-  document.getElementById(
-    "resultsCount"
-  );
-
 const randomEpisodeButton =
   document.getElementById(
     "randomEpisode"
+  );
+
+const randomEpisodeMobileButton =
+  document.getElementById(
+    "randomEpisodeMobile"
   );
 
 const activeFilters =
@@ -11297,6 +12685,11 @@ function renderSeasonRail() {
       seasonStripStatus.textContent = "All Seasons";
     } else {
       const labels = [...selectedSeasons]
+        .sort((a, b) => {
+          if (a === "specials") return -1;
+          if (b === "specials") return 1;
+          return Number(b) - Number(a);
+        })
         .map(value => value === "specials" ? "Specials" : `Season ${value}`)
         .join(" + ");
       seasonStripStatus.textContent = labels;
@@ -11349,60 +12742,98 @@ function renderActiveFilters() {
   const hasSearch =
     Boolean(searchInput.value.trim());
 
-  if (!filters.length && !hasSearch) {
-    activeFilters.classList.remove("visible");
+  const hasActiveFilters = filters.length > 0 || hasSearch;
+
+  /* The active-filter bar should not exist visually until a filter is active. */
+  activeFilters.classList.toggle("visible", hasActiveFilters);
+  activeFilters.classList.toggle("has-active-filters", hasActiveFilters);
+
+  if (!hasActiveFilters) {
+    activeFilters.classList.remove("is-pinned");
     activeFilters.innerHTML = "";
+    syncCurrentSeasonScrap?.();
     return;
   }
 
-  activeFilters.classList.add("visible");
-
   activeFilters.innerHTML =
     `
-      <span class="active-filters-label">
-        Active
-      </span>
+      <div class="active-filters-head">
+        <div class="active-filters-heading-group">
+          <span class="active-filters-label">
+            Active filters:
+          </span>
 
-      ${filters.map(filter => {
-        const label = filter === "specials"
-          ? "Specials"
-          : `Season ${filter}`;
+          <button
+            type="button"
+            class="clear-active-filters"
+            data-clear-filters="true"
+          >
+            Clear all
+          </button>
+        </div>
+      </div>
 
-        return `
+      <div class="active-filter-chips">
+        ${filters.map(filter => {
+          const label = filter === "specials"
+            ? "Specials"
+            : `Season ${filter}`;
+
+          return `
+            <button
+              type="button"
+              class="active-filter-chip"
+              data-filter-season="${filter}"
+              aria-label="Remove ${label} filter"
+            >
+              ${label}
+              <span class="filter-x">×</span>
+            </button>
+          `;
+        }).join("")}
+
+        ${hasSearch ? `
           <button
             type="button"
             class="active-filter-chip"
-            data-filter-season="${filter}"
-            aria-label="Remove ${label} filter"
+            data-clear-search="true"
+            aria-label="Clear search filter"
           >
-            ${label}
+            “${escapeHTML(searchInput.value.trim())}”
             <span class="filter-x">×</span>
           </button>
-        `;
-      }).join("")}
-
-      ${hasSearch ? `
-        <button
-          type="button"
-          class="active-filter-chip"
-          data-clear-search="true"
-          aria-label="Clear search filter"
-        >
-          “${escapeHTML(searchInput.value.trim())}”
-          <span class="filter-x">×</span>
-        </button>
-      ` : ""}
-
-      <button
-        type="button"
-        class="clear-active-filters"
-        data-clear-filters="true"
-      >
-        Clear all
-      </button>
+        ` : ""}
+      </div>
     `;
 
+  requestAnimationFrame(syncActiveFilterPinState);
 }
+
+
+function syncActiveFilterPinState() {
+  if (!activeFilters) return;
+
+  const canPin =
+    activeFilters.classList.contains("has-active-filters")
+    && activeFilters.classList.contains("visible")
+    && !document.body.classList.contains("modal-open");
+
+  if (!canPin) {
+    activeFilters.classList.remove("is-pinned");
+    syncCurrentSeasonScrap?.();
+    return;
+  }
+
+  /* A sticky element is pinned once its viewport top reaches the sticky inset. */
+  const pinned = activeFilters.getBoundingClientRect().top <= 0.5;
+  activeFilters.classList.toggle("is-pinned", pinned);
+
+  /* Keep the season paper in sync immediately when the toolbar pins/unpins. */
+  syncCurrentSeasonScrap?.();
+}
+
+window.addEventListener("scroll", syncActiveFilterPinState, { passive: true });
+window.addEventListener("resize", syncActiveFilterPinState);
 
 /* =========================================================
    FILTERING
@@ -11447,8 +12878,11 @@ function getFilteredEpisodes() {
 
 function renderViewToggle() {
 
-  gridViewButton.classList.toggle("active", viewMode === "grid");
-  listViewButton.classList.toggle("active", viewMode === "list");
+  const currentGridViewButton = document.getElementById("gridViewButton");
+  const currentListViewButton = document.getElementById("listViewButton");
+
+  currentGridViewButton?.classList.toggle("active", viewMode === "grid");
+  currentListViewButton?.classList.toggle("active", viewMode === "list");
   archive.classList.toggle("list-view", viewMode === "list");
 
 }
@@ -11622,41 +13056,31 @@ function renderArchive() {
     getFilteredEpisodes().slice()
   );
 
+  const searchActive = Boolean(searchInput.value.trim());
   const totalPages = Math.max(1, Math.ceil(filtered.length / EPISODES_PER_PAGE));
 
   if (currentPage > totalPages) currentPage = totalPages;
 
   const pageStart = (currentPage - 1) * EPISODES_PER_PAGE;
-  const pageEpisodes = filtered.slice(pageStart, pageStart + EPISODES_PER_PAGE);
+
+  /* Search results are deliberately shown as one continuous archive.
+     Normal browsing remains paginated and grouped into seasons. */
+  const pageEpisodes = searchActive
+    ? filtered
+    : filtered.slice(pageStart, pageStart + EPISODES_PER_PAGE);
 
   setPaginationAccent(pageEpisodes);
-
-  resultsCount.textContent = `${filtered.length} ${filtered.length === 1 ? "episode" : "episodes"}`;
   browseCount.innerHTML = `<strong>${filtered.length}</strong><span>EPISODES<br>FOUND</span>`;
 
-  const activeFiltersList = [...selectedSeasons]
-    .sort((a, b) => {
-      if (a === "specials") return -1;
-      if (b === "specials") return 1;
-      return Number(b) - Number(a);
-    })
-    .map(value => value === "specials" ? "Specials" : `Season ${value}`);
+  renderViewToggle();
 
-  if (selectedSeasons.size === 0 && !searchQuery) {
-    resultsStatus.textContent = "Showing all episodes";
-  }
-  else if (selectedSeasons.size > 0 && !searchQuery) {
-    resultsStatus.textContent = activeFiltersList.join(" · ");
-  }
-  else if (selectedSeasons.size === 0 && searchQuery) {
-    resultsStatus.textContent = `Search: “${searchInput.value.trim()}”`;
+  if (searchActive) {
+    archivePagination.innerHTML = "";
+    archivePagination.hidden = true;
   }
   else {
-    resultsStatus.textContent = `${activeFiltersList.join(" · ")} · “${searchInput.value.trim()}”`;
+    renderPagination(filtered.length);
   }
-
-  renderViewToggle();
-  renderPagination(filtered.length);
 
   if (!filtered.length) {
 
@@ -11716,6 +13140,59 @@ function renderArchive() {
         </div>
       </div>
     `;
+    return;
+  }
+
+  if (searchActive) {
+
+    archive.innerHTML = `
+      <section class="search-results-section">
+        <header class="search-results-header">
+          <h2 class="search-results-paper">
+            ${filtered.length} ${filtered.length === 1 ? "EPISODE" : "EPISODES"}
+          </h2>
+        </header>
+
+        <div class="episode-grid search-results-grid">
+          ${pageEpisodes.map(item => {
+            const index = episodes.indexOf(item);
+            const isSpecial = itemType(item) === "special";
+            const seasonHue = isSpecial
+              ? 322
+              : (205 + (Number(item.season) * 37)) % 360;
+
+            return `
+              <article
+                class="episode-card ${isSpecial ? "special-card" : ""}"
+                data-index="${index}"
+                tabindex="0"
+                role="button"
+                aria-label="Open ${escapeHTML(item.title)}"
+                style="--season-hue:${seasonHue}"
+              >
+                <div class="grid-image">
+                  <img
+                    src="${escapeHTML(item.image)}"
+                    alt="${escapeHTML(item.title)}"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                  <span class="grid-number">${episodeCode(item)}</span>
+                </div>
+                <div class="grid-copy" data-episode-label="${episodeCode(item)}">
+                  <h3 class="grid-title">${escapeHTML(item.title)}</h3>
+                  <div class="list-description">${item.description}</div>
+                  <span class="list-arrow" aria-hidden="true">›</span>
+                </div>
+              </article>
+            `;
+          }).join("")}
+        </div>
+      </section>
+    `;
+
+    initImageSkeletons();
+    requestAnimationFrame(syncCurrentSeasonScrap);
     return;
   }
 
@@ -11961,13 +13438,38 @@ function syncModalFilterSuppression(isOpen) {
 
 function syncMobileSearchPlaceholder() {
   if (!searchInput) return;
-  searchInput.placeholder = window.innerWidth <= 760
-    ? "Search epis..."
-    : "Search episodes...";
+
+  const fullPlaceholder = "Search episodes...";
+  const shortPlaceholder = "Search epis...";
+  const styles = window.getComputedStyle(searchInput);
+  const canvas = syncMobileSearchPlaceholder.canvas
+    || (syncMobileSearchPlaceholder.canvas = document.createElement("canvas"));
+  const context = canvas.getContext("2d");
+
+  if (!context) {
+    searchInput.placeholder = fullPlaceholder;
+    return;
+  }
+
+  context.font = styles.font;
+
+  const paddingLeft = parseFloat(styles.paddingLeft) || 0;
+  const paddingRight = parseFloat(styles.paddingRight) || 0;
+  const availableWidth = searchInput.clientWidth - paddingLeft - paddingRight;
+  const requiredWidth = context.measureText(fullPlaceholder).width + 8;
+
+  searchInput.placeholder = availableWidth < requiredWidth
+    ? shortPlaceholder
+    : fullPlaceholder;
 }
 
 syncMobileSearchPlaceholder();
 window.addEventListener("resize", syncMobileSearchPlaceholder, { passive: true });
+
+if (window.ResizeObserver && searchInput) {
+  const searchPlaceholderObserver = new ResizeObserver(syncMobileSearchPlaceholder);
+  searchPlaceholderObserver.observe(searchInput);
+}
 
 const modalClose =
   document.getElementById(
@@ -12765,108 +14267,22 @@ searchInput.addEventListener(
    RANDOM EPISODE
 ========================================================= */
 
-randomEpisodeButton
-  .addEventListener(
-    "click",
-    () => {
+function triggerRandomEpisode(button) {
 
-      const candidates =
-        getFilteredEpisodes();
+  const candidates = getFilteredEpisodes();
+  const pool = candidates.length ? candidates : episodes;
+  const selected = pool[Math.floor(Math.random() * pool.length)];
+  const index = episodes.indexOf(selected);
 
-      const pool =
-        candidates.length
-          ? candidates
-          : episodes;
+  openModal(index);
 
-      const selected =
-        pool[
-          Math.floor(
-            Math.random()
-            *
-            pool.length
-          )
-        ];
+}
 
-      const index =
-        episodes.indexOf(
-          selected
-        );
-
-      const reduceMotion =
-        window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches;
-
-      randomEpisodeButton.classList.remove(
-        "is-shuffling"
-      );
-
-      void randomEpisodeButton.offsetWidth;
-
-      randomEpisodeButton.classList.add(
-        "is-shuffling"
-      );
-
-      if (reduceMotion) {
-        randomEpisodeButton.dataset.shuffleLabel = "";
-        randomEpisodeButton.classList.remove("show-shuffle-label");
-        openModal(index);
-        return;
-      }
-
-      randomEpisodeButton.classList.add(
-        "show-shuffle-label"
-      );
-
-      let tick = 0;
-
-      const shuffleTimer =
-        window.setInterval(
-          () => {
-
-            const preview =
-              pool[
-                Math.floor(
-                  Math.random()
-                  *
-                  pool.length
-                )
-              ];
-
-            randomEpisodeButton.dataset.shuffleLabel =
-              episodeCode(preview);
-
-            tick += 1;
-
-            if (tick >= 6) {
-              window.clearInterval(
-                shuffleTimer
-              );
-
-              randomEpisodeButton.dataset.shuffleLabel =
-                episodeCode(selected);
-
-              window.setTimeout(
-                () => {
-                  randomEpisodeButton.classList.remove(
-                    "is-shuffling",
-                    "show-shuffle-label"
-                  );
-
-                  randomEpisodeButton.dataset.shuffleLabel = "";
-
-                  openModal(index);
-                },
-                150
-              );
-            }
-
-          },
-          58
-        );
-
-    }
-  );
+[randomEpisodeButton, randomEpisodeMobileButton]
+  .filter(Boolean)
+  .forEach((button) => {
+    button.addEventListener("click", () => triggerRandomEpisode(button));
+  });
 
 
 /* =========================================================
@@ -13084,15 +14500,19 @@ function showSeasonTooltip(button) {
   if (!seasonTooltip || !button?.dataset.tooltip) return;
 
   const rect = button.getBoundingClientRect();
+  const position = button.dataset.tooltipPosition || "top";
 
-  seasonTooltip.textContent =
-    button.dataset.tooltip;
+  seasonTooltip.textContent = button.dataset.tooltip;
+  seasonTooltip.classList.toggle("tooltip-right", position === "right");
 
-  seasonTooltip.style.left =
-    `${rect.left + rect.width / 2}px`;
-
-  seasonTooltip.style.top =
-    `${rect.top}px`;
+  if (position === "right") {
+    seasonTooltip.style.left = `${rect.right + 14}px`;
+    seasonTooltip.style.top = `${rect.top + rect.height / 2}px`;
+  }
+  else {
+    seasonTooltip.style.left = `${rect.left + rect.width / 2}px`;
+    seasonTooltip.style.top = `${rect.top}px`;
+  }
 
   seasonTooltip.classList.add("visible");
   seasonTooltip.setAttribute("aria-hidden", "false");
@@ -13141,6 +14561,58 @@ seasonRail.addEventListener("focusin", event => {
 
 
 seasonRail.addEventListener("focusout", hideSeasonTooltip);
+
+
+/* Reuse the same styled tooltip for the grid/list view controls. */
+const viewToggle = document.querySelector(".season-strip-actions .view-toggle");
+
+viewToggle?.addEventListener("pointerover", event => {
+  const button = event.target.closest(".view-button[data-tooltip]");
+  if (button) showSeasonTooltip(button);
+});
+
+viewToggle?.addEventListener("pointerout", event => {
+  const button = event.target.closest(".view-button[data-tooltip]");
+  if (button) hideSeasonTooltip();
+});
+
+viewToggle?.addEventListener("focusin", event => {
+  const button = event.target.closest(".view-button[data-tooltip]");
+  if (button) showSeasonTooltip(button);
+});
+
+viewToggle?.addEventListener("focusout", hideSeasonTooltip);
+
+
+/* Reuse the same tooltip for the clickable South Park logo on wider views only. */
+function compactTooltipView() {
+  return window.matchMedia("(max-width: 760px)").matches;
+}
+
+guideLogoReset?.addEventListener("pointerenter", () => {
+  if (compactTooltipView()) return;
+  if (guideLogoReset.dataset.tooltip) showSeasonTooltip(guideLogoReset);
+});
+
+guideLogoReset?.addEventListener("pointerleave", hideSeasonTooltip);
+guideLogoReset?.addEventListener("focus", () => {
+  if (compactTooltipView()) return;
+  if (guideLogoReset.dataset.tooltip) showSeasonTooltip(guideLogoReset);
+});
+guideLogoReset?.addEventListener("blur", hideSeasonTooltip);
+
+
+/* Keep the compact Filters control tooltip-free on smaller/mobile views. */
+function showMobileFilterTooltip() {
+  if (!mobileFilterButton?.dataset.tooltip) return;
+  if (compactTooltipView()) return;
+  showSeasonTooltip(mobileFilterButton);
+}
+
+mobileFilterButton?.addEventListener("pointerenter", showMobileFilterTooltip);
+mobileFilterButton?.addEventListener("pointerleave", hideSeasonTooltip);
+mobileFilterButton?.addEventListener("focus", showMobileFilterTooltip);
+mobileFilterButton?.addEventListener("blur", hideSeasonTooltip);
 
 
 window.addEventListener("scroll", hideSeasonTooltip, { passive: true });
@@ -13229,8 +14701,11 @@ function syncCurrentSeasonScrap() {
     !currentSeasonScrap
     ||
     document.body.classList.contains("modal-open")
+    ||
+    activeFilters?.classList.contains("is-pinned")
   ) {
     currentSeasonScrap?.classList.remove("visible");
+    currentSeasonScrap?.setAttribute("aria-hidden", "true");
     return;
   }
 
@@ -13439,19 +14914,65 @@ if (seasonRailNext) {
    INITIALISE
 ========================================================= */
 
-const initialEpisodeIndex =
-  readURLState();
+/* Always begin from a completely clean guide after a page load/refresh.
+   URL state is still updated while browsing, but it is deliberately ignored
+   and removed the next time the document loads. */
+history.replaceState(null, "", window.location.pathname);
+selectedSeasons.clear();
+searchInput.value = "";
+searchQuery = "";
+currentPage = 1;
+viewMode = "grid";
+activeEpisodeIndex = -1;
+
+const initialEpisodeIndex = -1;
 
 syncSearchClearButton();
 renderPage();
+syncURL();
 
 
-if (initialEpisodeIndex >= 0) {
-  openModal(initialEpisodeIndex);
+
+/* =========================================================
+   SEASON RAIL OVERFLOW CUES
+========================================================= */
+
+const seasonRailShell = document.getElementById("seasonRailShell");
+
+function syncSeasonRailOverflowCues() {
+  if (!seasonRail || !seasonRailShell) return;
+
+  const maxScroll = Math.max(0, seasonRail.scrollWidth - seasonRail.clientWidth);
+  const tolerance = 2;
+
+  seasonRailShell.classList.toggle(
+    "can-scroll-left",
+    seasonRail.scrollLeft > tolerance
+  );
+
+  seasonRailShell.classList.toggle(
+    "can-scroll-right",
+    maxScroll > tolerance && seasonRail.scrollLeft < maxScroll - tolerance
+  );
 }
-else {
-  syncURL();
+
+seasonRail?.addEventListener(
+  "scroll",
+  syncSeasonRailOverflowCues,
+  { passive: true }
+);
+
+window.addEventListener("resize", syncSeasonRailOverflowCues);
+
+/* The rail is rebuilt whenever filters/state render, so observe its children
+   and re-check once layout has settled. */
+if (seasonRail) {
+  new MutationObserver(() => {
+    requestAnimationFrame(syncSeasonRailOverflowCues);
+  }).observe(seasonRail, { childList: true });
 }
+
+requestAnimationFrame(syncSeasonRailOverflowCues);
 
 </script>
 
