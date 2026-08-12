@@ -12944,9 +12944,16 @@ function changeArchivePage(nextPage) {
   renderArchive();
   syncURL();
 
-  document.querySelector(".results-line")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
+  requestAnimationFrame(() => {
+    const gridTop =
+      archive.querySelector(".season-section") ||
+      archive.querySelector(".episode-grid") ||
+      archive;
+
+    gridTop?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
   });
 
 }
