@@ -3000,15 +3000,9 @@ a {
     opacity: 1;
   }
 
+  /* Mobile filter drawer: horizontal swiping replaces the desktop nav arrows. */
   .season-strip.mobile-open .season-strip-arrows {
-    display: flex;
-    gap: 5px;
-  }
-
-  .season-strip.mobile-open .season-strip-arrows button {
-    width: 30px;
-    height: 30px;
-    font-size: 1.05rem;
+    display: none !important;
   }
 
   .modal-cross-season.visible {
@@ -7288,13 +7282,13 @@ body.modal-open #activeFilters {
   z-index: 2;
 }
 
-/* Specials / numbered-season divider — a small, irregular torn-paper offcut. */
+/* Specials / numbered-season divider — simple, clearer separator. */
 .season-rail-divider {
   position: relative;
-  flex: 0 0 16px !important;
-  width: 16px !important;
+  flex: 0 0 15px !important;
+  width: 15px !important;
   height: 38px !important;
-  margin: 0 4px !important;
+  margin: 0 3px !important;
   align-self: center;
   background: transparent !important;
   pointer-events: none;
@@ -7304,40 +7298,19 @@ body.modal-open #activeFilters {
   content: "";
   position: absolute;
   left: 50%;
-  top: 1px;
-  width: 10px;
-  height: 36px;
-  transform: translateX(-50%) rotate(-1.3deg);
-  background:
-    linear-gradient(92deg,
-      rgba(255,255,255,.28) 0 10%,
-      transparent 11% 45%,
-      rgba(72,72,68,.08) 46% 55%,
-      transparent 56% 100%
-    ),
-    linear-gradient(180deg, #f1eee3 0%, #d8d5ca 54%, #ece8dc 100%);
-  border: 1px solid rgba(50,48,43,.10);
+  top: 4px;
+  width: 2px;
+  height: 30px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(229,236,247,.38);
   box-shadow:
-    1px 1px 0 rgba(255,255,255,.18),
-    2px 3px 6px rgba(0,0,0,.20);
-  clip-path: polygon(
-    31% 0, 74% 3%, 91% 10%, 72% 18%, 94% 27%, 76% 36%,
-    96% 46%, 70% 55%, 91% 65%, 73% 74%, 95% 84%, 68% 92%,
-    80% 100%, 37% 97%, 15% 91%, 29% 82%, 8% 72%, 26% 63%,
-    5% 53%, 28% 44%, 7% 34%, 29% 25%, 10% 16%, 30% 8%
-  );
+    0 0 0 1px rgba(255,255,255,.035),
+    0 0 6px rgba(156,188,235,.09);
 }
 
 .season-rail-divider::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 7px;
-  width: 1px;
-  height: 24px;
-  transform: translateX(-50%) rotate(1deg);
-  background: rgba(72,69,61,.14);
-  box-shadow: 1px 0 rgba(255,255,255,.18);
+  content: none;
 }
 
 @media (max-width: 760px) {
@@ -7353,25 +7326,47 @@ body.modal-open #activeFilters {
   }
 
   .season-rail-divider {
-    flex-basis: 14px !important;
-    width: 14px !important;
+    flex-basis: 13px !important;
+    width: 13px !important;
     height: 34px !important;
-    margin-inline: 3px !important;
+    margin-inline: 2px !important;
   }
 
   .season-rail-divider::before {
-    width: 9px;
-    height: 32px;
-  }
-
-  .season-rail-divider::after {
-    top: 6px;
-    height: 22px;
+    top: 4px;
+    width: 2px;
+    height: 26px;
   }
 
   .season-strip-heading {
     margin-bottom: 12px !important;
   }
+}
+
+
+
+/* =========================================================
+   FINAL MICRO-REFINEMENTS — BACK TO TOP + SEARCH COUNT
+========================================================= */
+
+/* Geometric SVG chevron: centred by its viewBox rather than font metrics. */
+.paper-back-to-top .back-to-top-chevron {
+  position: absolute !important;
+  inset: 50% auto auto 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  width: 18px !important;
+  height: 18px !important;
+  line-height: 0 !important;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: none;
+}
+
+.paper-back-to-top .back-to-top-chevron svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
 
 </style>
@@ -7586,7 +7581,7 @@ body.modal-open #activeFilters {
   aria-label="Back to top"
   title="Back to top"
 >
-  <span class="back-to-top-chevron">⌃</span>
+  <span class="back-to-top-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" focusable="false"><path d="M4.25 12.25 10 6.5l5.75 5.75" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
 </button>
 
 
@@ -12959,7 +12954,7 @@ function renderArchive() {
       <section class="search-results-section">
         <header class="search-results-header">
           <h2 class="search-results-paper">
-            ${filtered.length} ${filtered.length === 1 ? "EPISODE" : "EPISODES"}
+            ${filtered.length} ${filtered.length === 1 ? "EPISODE FOUND" : "EPISODES FOUND"}
           </h2>
         </header>
 
