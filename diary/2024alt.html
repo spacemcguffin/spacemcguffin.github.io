@@ -1991,9 +1991,9 @@ html[data-theme="dark"] {
 html[data-alt-titles="true"] .alt-title-toggle{color:#fff;background:var(--brand);border-color:color-mix(in srgb,var(--brand) 72%,var(--line));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 3px color-mix(in srgb,var(--brand) 12%,transparent),0 7px 22px color-mix(in srgb,var(--brand) 24%,transparent)}
 html[data-alt-titles="true"] .alt-title-toggle::before{opacity:1;transform:scale(1.15)}
 html[data-alt-titles="true"] .alt-title-toggle .alt-title-symbol{transform:translateY(-1px) rotate(180deg)}
-.eptitles,.removed{transition:opacity .12s ease,transform .18s ease}
-.eptitles.title-swapping,.removed.title-swapping{opacity:0;transform:translateY(3px)}
-@media(prefers-reduced-motion:reduce){.eptitles,.removed,.alt-title-toggle,.alt-title-toggle::before,.alt-title-toggle .alt-title-symbol{transition:none!important}}
+.eptitles{transition:opacity .12s ease,transform .18s ease}
+.eptitles.title-swapping{opacity:0;transform:translateY(3px)}
+@media(prefers-reduced-motion:reduce){.eptitles,.alt-title-toggle,.alt-title-toggle::before,.alt-title-toggle .alt-title-symbol{transition:none!important}}
 </style>
 
 </head>
@@ -3189,7 +3189,7 @@ if (galleryLinks.length) {
     "christmas day": "presents, penguins and prosecco",
     "x o": "suddenly, erika"
   };
-  const titleEls=Array.from(document.querySelectorAll(".maintable .eptitles, .maintable .removed"));
+  const titleEls=Array.from(document.querySelectorAll(".maintable .eptitles"));
   titleEls.forEach(el=>{const original=el.textContent.trim();el.dataset.originalTitle=original;el.dataset.altTitle=alternateTitles[original.toLocaleLowerCase()]||original;});
   function syncToggle(enabled){if(!toggle)return;toggle.setAttribute("aria-pressed",String(enabled));toggle.setAttribute("aria-label",enabled?"Show original titles":"Show alternative titles");toggle.setAttribute("title",enabled?"Show original titles":"Show alternative titles");}
   function applyMode(enabled,persist=true){root.dataset.altTitles=enabled?"true":"false";const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;titleEls.forEach(el=>{el.classList.add("title-swapping");window.setTimeout(()=>{el.textContent=enabled?el.dataset.altTitle:el.dataset.originalTitle;el.classList.remove("title-swapping");},reduced?0:115);});syncToggle(enabled);if(persist)localStorage.setItem("diary-2024-alt-titles",enabled?"true":"false");window.setTimeout(()=>{const search=document.getElementById("diarySearch");if(search)search.dispatchEvent(new Event("input",{bubbles:true}));},130);}
@@ -3285,6 +3285,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 </script>
+
+
 
 </body>
 </html>
