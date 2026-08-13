@@ -2266,6 +2266,474 @@ body.alt-title-mode .month {
 }
 </style>
 
+
+<style id="alt-mode-original-green-final">
+html.alt-title-mode,
+html[data-alt-titles="true"],
+body.alt-title-mode {
+  --page: #132419;
+  --surface: #1a3021;
+  --surface-2: #213b29;
+  --surface-3: #294832;
+  --text: #e8f2e9;
+  --muted: #aac4ad;
+  --line: rgba(201, 236, 205, .18);
+  --brand: #6a9b72;
+  --brand-dark: #8fbd96;
+  --accent: #7fae86;
+  --hoverback-color: #24442d;
+  --shadow: 0 24px 70px rgba(7, 20, 10, .32);
+
+  --diary-ui-bg: rgba(26, 48, 33, .92);
+  --diary-ui-border: rgba(157, 205, 163, .28);
+  --diary-ui-text: rgba(238, 248, 239, .97);
+  --diary-ui-muted: rgba(198, 222, 201, .66);
+  --diary-ui-focus: #8fc497;
+  --diary-ui-ring: rgba(126, 184, 135, .22);
+  --diary-ui-hover: rgba(126, 184, 135, .13);
+  --diary-ui-shadow: 0 12px 32px rgba(5, 17, 8, .28);
+}
+
+html.alt-title-mode body,
+html[data-alt-titles="true"] body,
+body.alt-title-mode {
+  background:
+    radial-gradient(circle at 82% 4%, rgba(91, 151, 101, .14), transparent 30rem),
+    var(--page);
+}
+
+html.alt-title-mode .site-header,
+html[data-alt-titles="true"] .site-header,
+body.alt-title-mode .site-header {
+  background: color-mix(in srgb, var(--page) 90%, transparent);
+}
+
+html.alt-title-mode .top-strip,
+html[data-alt-titles="true"] .top-strip,
+body.alt-title-mode .top-strip {
+  background: #4d7855;
+  color: #fff;
+}
+
+html.alt-title-mode .brand-block,
+html[data-alt-titles="true"] .brand-block,
+body.alt-title-mode .brand-block {
+  background: #567f5d;
+}
+
+html.alt-title-mode .tab-button.active::after,
+html[data-alt-titles="true"] .tab-button.active::after,
+body.alt-title-mode .tab-button.active::after {
+  background: #75a77d;
+}
+
+html.alt-title-mode .month,
+html[data-alt-titles="true"] .month,
+body.alt-title-mode .month {
+  color: #e0eee2;
+}
+
+/* Replace the original purple month-row treatment with green. */
+html.alt-title-mode .maintable tr:has(.month) > td,
+html[data-alt-titles="true"] .maintable tr:has(.month) > td,
+body.alt-title-mode .maintable tr:has(.month) > td {
+  background-color: #294832 !important;
+  background-image: linear-gradient(to right, #456e4d, rgba(69,110,77,0)) !important;
+}
+
+/* Green alternate-mode controls, including the lightning toggle. */
+html.alt-title-mode #altTitleToggle,
+html[data-alt-titles="true"] #altTitleToggle,
+body.alt-title-mode #altTitleToggle {
+  color: #dff2e2 !important;
+  background: #294832 !important;
+  border-color: rgba(151, 204, 159, .30) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 8px 25px rgba(0,0,0,.28),
+    0 0 22px rgba(82, 143, 92, .14) !important;
+}
+
+html.alt-title-mode #altTitleToggle::before,
+html[data-alt-titles="true"] #altTitleToggle::before,
+body.alt-title-mode #altTitleToggle::before {
+  background: color-mix(in srgb, #6fa879 20%, transparent) !important;
+}
+
+html.alt-title-mode #altTitleToggle svg,
+html[data-alt-titles="true"] #altTitleToggle svg,
+body.alt-title-mode #altTitleToggle svg {
+  color: #dff2e2 !important;
+  stroke: #dff2e2 !important;
+  filter: none !important;
+}
+
+html.alt-title-mode #altTitleToggle:focus-visible,
+html[data-alt-titles="true"] #altTitleToggle:focus-visible,
+body.alt-title-mode #altTitleToggle:focus-visible {
+  outline-color: rgba(112, 171, 122, .55) !important;
+}
+</style>
+
+
+<style id="alt-mode-faded-light-green-final">
+/* Lighter, faded-green alternate-title palette */
+html.alt-title-mode,
+html[data-alt-titles="true"],
+body.alt-title-mode {
+  --page: #cbd6c8;
+  --surface: #e5ebe2;
+  --surface-2: #d6e0d2;
+  --surface-3: #c1d0bd;
+  --text: #171b17;
+  --muted: #59675a;
+  --line: rgba(44, 67, 46, .18);
+  --brand: #64866a;
+  --brand-dark: #496d50;
+  --accent: #75977a;
+  --hoverback-color: #c5d3c2;
+  --shadow: 0 20px 54px rgba(41, 62, 43, .12);
+
+  --diary-ui-bg: rgba(232, 238, 229, .95);
+  --diary-ui-border: rgba(80, 113, 84, .24);
+  --diary-ui-text: #171b17;
+  --diary-ui-muted: rgba(54, 72, 56, .64);
+  --diary-ui-focus: #648d6b;
+  --diary-ui-ring: rgba(91, 143, 100, .22);
+  --diary-ui-hover: rgba(91, 143, 100, .11);
+  --diary-ui-shadow: 0 8px 24px rgba(39, 60, 41, .10);
+}
+
+html.alt-title-mode body,
+html[data-alt-titles="true"] body,
+body.alt-title-mode {
+  background:
+    radial-gradient(circle at 82% 4%, rgba(129, 164, 132, .24), transparent 30rem),
+    linear-gradient(180deg, #d8e1d5 0%, #c8d4c5 100%);
+}
+
+html.alt-title-mode .site-header,
+html[data-alt-titles="true"] .site-header,
+body.alt-title-mode .site-header {
+  background: rgba(211, 222, 208, .92);
+}
+
+html.alt-title-mode .top-strip,
+html[data-alt-titles="true"] .top-strip,
+body.alt-title-mode .top-strip {
+  background: #688b6e;
+  color: #fff;
+}
+
+html.alt-title-mode .brand-block,
+html[data-alt-titles="true"] .brand-block,
+body.alt-title-mode .brand-block {
+  background: #6e9174;
+}
+
+/* Make the year marker green in alternate mode. */
+html.alt-title-mode .year,
+html[data-alt-titles="true"] .year,
+body.alt-title-mode .year,
+html.alt-title-mode .subtitle,
+html[data-alt-titles="true"] .subtitle,
+body.alt-title-mode .subtitle {
+  color: #47744f !important;
+}
+
+/* Black titles for maximum readability against the faded green. */
+html.alt-title-mode .eptitles,
+html[data-alt-titles="true"] .eptitles,
+body.alt-title-mode .eptitles {
+  color: #000 !important;
+  text-shadow: none !important;
+}
+
+/* Faded-green month headers */
+html.alt-title-mode .maintable tr:has(.month) > td,
+html[data-alt-titles="true"] .maintable tr:has(.month) > td,
+body.alt-title-mode .maintable tr:has(.month) > td {
+  background-color: #a9bda6 !important;
+  background-image: linear-gradient(
+    90deg,
+    #78977d 0%,
+    #9bb29a 42%,
+    #cbd7c8 100%
+  ) !important;
+}
+
+html.alt-title-mode .maintable .month,
+html[data-alt-titles="true"] .maintable .month,
+body.alt-title-mode .maintable .month {
+  color: #172419 !important;
+}
+
+/* Active bolt: gentle green glow, no purple remnants. */
+html.alt-title-mode #altTitleToggle,
+html[data-alt-titles="true"] #altTitleToggle,
+body.alt-title-mode #altTitleToggle {
+  color: #f7fff8 !important;
+  background: #4d7555 !important;
+  border-color: #416749 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 0 3px rgba(100, 155, 110, .10),
+    0 0 18px rgba(83, 153, 95, .28),
+    0 7px 18px rgba(43, 75, 49, .17) !important;
+}
+
+html.alt-title-mode #altTitleToggle::before,
+html[data-alt-titles="true"] #altTitleToggle::before,
+body.alt-title-mode #altTitleToggle::before {
+  background: rgba(111, 171, 121, .14) !important;
+  box-shadow: 0 0 16px rgba(89, 158, 101, .20) !important;
+}
+
+html.alt-title-mode #altTitleToggle svg,
+html[data-alt-titles="true"] #altTitleToggle svg,
+body.alt-title-mode #altTitleToggle svg {
+  color: #fff !important;
+  stroke: #fff !important;
+  filter: drop-shadow(0 0 3px rgba(105, 181, 117, .30)) !important;
+}
+
+html.alt-title-mode #altTitleToggle:hover,
+html[data-alt-titles="true"] #altTitleToggle:hover,
+body.alt-title-mode #altTitleToggle:hover {
+  background: #456c4d !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 0 3px rgba(100, 155, 110, .11),
+    0 0 20px rgba(83, 153, 95, .32),
+    0 8px 20px rgba(43, 75, 49, .19) !important;
+}
+</style>
+
+
+<style id="alt-green-remove-purple-final">
+/* Remove any remaining purple from table number cells. */
+html.alt-title-mode .maintable tr:not(:has(.month)) td:first-child,
+html[data-alt-titles="true"] .maintable tr:not(:has(.month)) td:first-child,
+body.alt-title-mode .maintable tr:not(:has(.month)) td:first-child {
+  color: #405744 !important;
+  background: #b8c8b5 !important;
+  border-right-color: rgba(54, 83, 59, .22) !important;
+}
+
+/* Removed/crossed-out entries: neutral faded green-grey, never purple. */
+html.alt-title-mode .removed,
+html[data-alt-titles="true"] .removed,
+body.alt-title-mode .removed,
+html.alt-title-mode .removed *,
+html[data-alt-titles="true"] .removed *,
+body.alt-title-mode .removed * {
+  color: #6c786c !important;
+  text-decoration-color: #667466 !important;
+}
+
+html.alt-title-mode tr.removed td,
+html[data-alt-titles="true"] tr.removed td,
+body.alt-title-mode tr.removed td,
+html.alt-title-mode .removed-row td,
+html[data-alt-titles="true"] .removed-row td,
+body.alt-title-mode .removed-row td {
+  color: #6c786c !important;
+  background-color: #c5d0c2 !important;
+}
+
+/* If the strike is drawn with a pseudo-element, make that green-grey too. */
+html.alt-title-mode .removed::before,
+html.alt-title-mode .removed::after,
+html[data-alt-titles="true"] .removed::before,
+html[data-alt-titles="true"] .removed::after,
+body.alt-title-mode .removed::before,
+body.alt-title-mode .removed::after,
+html.alt-title-mode tr.removed::before,
+html.alt-title-mode tr.removed::after,
+html[data-alt-titles="true"] tr.removed::before,
+html[data-alt-titles="true"] tr.removed::after,
+body.alt-title-mode tr.removed::before,
+body.alt-title-mode tr.removed::after {
+  background-color: #657365 !important;
+  border-color: #657365 !important;
+  color: #657365 !important;
+}
+
+/* Alt toggle: green-only palette, including glow/ring/focus/pseudo states. */
+html.alt-title-mode #altTitleToggle,
+html[data-alt-titles="true"] #altTitleToggle,
+body.alt-title-mode #altTitleToggle {
+  color: #fff !important;
+  background: #4c7454 !important;
+  border-color: #3f6547 !important;
+  outline-color: rgba(67, 112, 76, .42) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.16),
+    0 0 0 3px rgba(83, 139, 94, .10),
+    0 0 18px rgba(70, 132, 82, .26),
+    0 7px 18px rgba(38, 72, 44, .17) !important;
+}
+
+html.alt-title-mode #altTitleToggle::before,
+html.alt-title-mode #altTitleToggle::after,
+html[data-alt-titles="true"] #altTitleToggle::before,
+html[data-alt-titles="true"] #altTitleToggle::after,
+body.alt-title-mode #altTitleToggle::before,
+body.alt-title-mode #altTitleToggle::after {
+  background: rgba(91, 150, 102, .13) !important;
+  border-color: rgba(73, 126, 83, .20) !important;
+  box-shadow: 0 0 16px rgba(68, 132, 80, .18) !important;
+}
+
+html.alt-title-mode #altTitleToggle svg,
+html[data-alt-titles="true"] #altTitleToggle svg,
+body.alt-title-mode #altTitleToggle svg {
+  color: #fff !important;
+  stroke: #fff !important;
+  filter: drop-shadow(0 0 3px rgba(73, 139, 85, .25)) !important;
+}
+
+html.alt-title-mode #altTitleToggle:focus-visible,
+html[data-alt-titles="true"] #altTitleToggle:focus-visible,
+body.alt-title-mode #altTitleToggle:focus-visible {
+  outline: 3px solid rgba(65, 112, 74, .38) !important;
+  outline-offset: 3px;
+}
+</style>
+
+
+<style id="v3-green-refined-final">
+/* Restore the richer faded-dark-green palette from v3. */
+html.alt-title-mode,
+html[data-alt-titles="true"],
+body.alt-title-mode {
+  --page: #aeb8ad;
+  --surface: #d8ded6;
+  --surface-2: #c4cec2;
+  --surface-3: #aab8a8;
+  --text: #202820;
+  --muted: #5d695d;
+  --line: rgba(39, 57, 40, .19);
+  --brand: #586f59;
+  --brand-dark: #3f5541;
+  --accent: #708671;
+  --hoverback-color: #bdc8bb;
+  --shadow: 0 22px 58px rgba(34, 51, 36, .14);
+
+  --diary-ui-bg: rgba(220, 226, 218, .95);
+  --diary-ui-border: rgba(76, 101, 78, .25);
+  --diary-ui-text: #202a21;
+  --diary-ui-muted: rgba(55, 72, 56, .64);
+  --diary-ui-focus: #627b63;
+  --diary-ui-ring: rgba(88, 111, 89, .18);
+  --diary-ui-hover: rgba(88, 111, 89, .11);
+  --diary-ui-shadow: 0 8px 24px rgba(35, 52, 37, .10);
+}
+
+html.alt-title-mode body,
+html[data-alt-titles="true"] body,
+body.alt-title-mode {
+  background:
+    radial-gradient(circle at 82% 3%, rgba(128, 151, 127, .20), transparent 30rem),
+    linear-gradient(180deg, #bec8bc 0%, #aeb8ad 100%);
+}
+
+html.alt-title-mode .site-header,
+html[data-alt-titles="true"] .site-header,
+body.alt-title-mode .site-header {
+  background: rgba(184, 195, 182, .92);
+}
+
+html.alt-title-mode .top-strip,
+html[data-alt-titles="true"] .top-strip,
+body.alt-title-mode .top-strip {
+  background: #526a54;
+}
+
+html.alt-title-mode .brand-block,
+html[data-alt-titles="true"] .brand-block,
+body.alt-title-mode .brand-block {
+  background: #596f5a;
+}
+
+/* v3 month-row greens. */
+html.alt-title-mode .maintable tr:has(.month) > td,
+html[data-alt-titles="true"] .maintable tr:has(.month) > td,
+body.alt-title-mode .maintable tr:has(.month) > td {
+  background-color: #617f65 !important;
+  background-image: linear-gradient(
+    90deg,
+    #3f5d43 0%,
+    #617f65 30%,
+    #8fa590 62%,
+    #c2cec0 100%
+  ) !important;
+}
+
+/* Keep table details green-only. */
+html.alt-title-mode .maintable tr:not(:has(.month)) td:first-child,
+html[data-alt-titles="true"] .maintable tr:not(:has(.month)) td:first-child,
+body.alt-title-mode .maintable tr:not(:has(.month)) td:first-child {
+  color: #405744 !important;
+  background: #b2c0b0 !important;
+  border-right-color: rgba(55, 78, 57, .22) !important;
+}
+
+html.alt-title-mode .removed,
+html[data-alt-titles="true"] .removed,
+body.alt-title-mode .removed,
+html.alt-title-mode .removed *,
+html[data-alt-titles="true"] .removed *,
+body.alt-title-mode .removed * {
+  color: #637064 !important;
+  text-decoration-color: #59695b !important;
+}
+
+/* Dark green date/year next to the main heading. */
+html.alt-title-mode .year,
+html[data-alt-titles="true"] .year,
+body.alt-title-mode .year,
+html.alt-title-mode .subtitle,
+html[data-alt-titles="true"] .subtitle,
+body.alt-title-mode .subtitle {
+  color: #294b31 !important;
+}
+
+/* Remove shadow from the diary artwork/cover image in alternate mode. */
+html.alt-title-mode .cover-frame,
+html[data-alt-titles="true"] .cover-frame,
+body.alt-title-mode .cover-frame,
+html.alt-title-mode .cover-frame img,
+html[data-alt-titles="true"] .cover-frame img,
+body.alt-title-mode .cover-frame img {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Keep the cleaned green-only toggle treatment. */
+html.alt-title-mode #altTitleToggle,
+html[data-alt-titles="true"] #altTitleToggle,
+body.alt-title-mode #altTitleToggle {
+  color: #fff !important;
+  background: #3f5842 !important;
+  border-color: #344b37 !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.15),
+    0 0 0 3px rgba(72, 132, 82, .10),
+    0 0 18px rgba(60, 121, 71, .22),
+    0 7px 18px rgba(35, 55, 38, .20) !important;
+}
+</style>
+
+
+<style id="release-number-dark-green">
+html.alt-title-mode span.release-number,
+html[data-alt-titles="true"] span.release-number,
+body.alt-title-mode span.release-number {
+  color: #294b31 !important;
+}
+</style>
+
 </head>
 <body>
   <div class="top-strip" id="topStripStatus">This page is currently being updated.</div>
