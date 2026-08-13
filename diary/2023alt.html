@@ -2200,9 +2200,75 @@ html[data-alt-titles="true"] ::selection {
 }
 
 </style>
+
+<style id="alt-mode-softened">
+html.alt-title-mode,
+html[data-alt-titles="true"],
+body.alt-title-mode {
+  --page: #1b1324;
+  --surface: #261a32;
+  --surface-2: #31213f;
+  --surface-3: #3a294a;
+  --text: #eee8f4;
+  --muted: #b9aac9;
+  --line: rgba(224, 201, 246, .18);
+  --brand: #8f6ab1;
+  --brand-dark: #b28bd0;
+  --accent: #a87bc8;
+  --hoverback-color: #352445;
+  --diary-ui-bg: rgba(42, 29, 55, .92);
+  --diary-ui-border: rgba(194, 157, 226, .28);
+  --diary-ui-text: rgba(244, 238, 249, .97);
+  --diary-ui-muted: rgba(214, 198, 227, .66);
+  --diary-ui-focus: #bb8fe0;
+  --diary-ui-ring: rgba(187, 143, 224, .22);
+  --diary-ui-hover: rgba(187, 143, 224, .13);
+  --diary-ui-shadow: 0 12px 32px rgba(18, 10, 25, .24);
+}
+
+html.alt-title-mode body,
+html[data-alt-titles="true"] body,
+body.alt-title-mode {
+  background:
+    radial-gradient(circle at 82% 4%, rgba(145, 99, 185, .12), transparent 30rem),
+    var(--page);
+}
+
+html.alt-title-mode .site-header,
+html[data-alt-titles="true"] .site-header,
+body.alt-title-mode .site-header {
+  background: color-mix(in srgb, var(--page) 90%, transparent);
+}
+
+html.alt-title-mode .top-strip,
+html[data-alt-titles="true"] .top-strip,
+body.alt-title-mode .top-strip {
+  background: #6f4c8d;
+  color: #fff;
+}
+
+html.alt-title-mode .brand-block,
+html[data-alt-titles="true"] .brand-block,
+body.alt-title-mode .brand-block {
+  background: #7f5ca0;
+}
+
+html.alt-title-mode .tab-button.active::after,
+html[data-alt-titles="true"] .tab-button.active::after,
+body.alt-title-mode .tab-button.active::after {
+  background: #a875cf;
+}
+
+html.alt-title-mode .month,
+html[data-alt-titles="true"] .month,
+body.alt-title-mode .month {
+  color: #eadff3;
+}
+</style>
+
 </head>
 <body>
-  <div class="top-strip">This page is currently being updated.</div>
+  <div class="top-strip" id="topStripStatus">This page is currently being updated.</div>
 
   <header class="site-header">
     <div class="nav-shell">
@@ -2297,10 +2363,7 @@ html[data-alt-titles="true"] ::selection {
         <article class="details-column">
 
           <h1>northern soul <span class="release-number">(2023)</span></h1>
-          <div class="alt-archive-label" id="altArchiveLabel" aria-live="polite">alternate archive</div>
-
-
-          <section class="tabs">
+<section class="tabs">
             <div class="tab-list" role="tablist" aria-label="Release information">
               <button class="tab-button active" role="tab" aria-selected="true" data-tab="entries">Entries</button>
               <button class="tab-button" role="tab" aria-selected="false" data-tab="notes">Notes</button>
@@ -4110,6 +4173,51 @@ document.addEventListener("DOMContentLoaded", function () {
     updateBackToTop();
   }
 });
+</script>
+
+
+<script id="alt-title-strip-status">
+(function () {
+  const normalText = "This page is currently being updated.";
+  const altText = "alternative titles";
+
+  function altModeIsActive() {
+    return document.documentElement.classList.contains("alt-title-mode") ||
+           document.documentElement.getAttribute("data-alt-titles") === "true" ||
+           document.body.classList.contains("alt-title-mode");
+  }
+
+  function syncAltStrip() {
+    const strip = document.getElementById("topStripStatus");
+    if (!strip) return;
+    strip.textContent = altModeIsActive() ? altText : normalText;
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    syncAltStrip();
+
+    const bolt = document.getElementById("altTitleToggle") ||
+                 document.getElementById("alternateTitleToggle") ||
+                 document.querySelector("[data-alt-title-toggle]");
+
+    if (bolt) {
+      bolt.addEventListener("click", function () {
+        requestAnimationFrame(syncAltStrip);
+        setTimeout(syncAltStrip, 50);
+      });
+    }
+
+    const observer = new MutationObserver(syncAltStrip);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class", "data-alt-titles"]
+    });
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"]
+    });
+  });
+})();
 </script>
 
 </body>
