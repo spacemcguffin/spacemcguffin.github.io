@@ -1984,13 +1984,16 @@ html[data-theme="dark"] {
 
 
 <style id="alternative-title-styles">
-.alt-title-toggle{position:relative;font-size:1.18rem;font-weight:650;line-height:1}
-.alt-title-toggle span{display:block;transition:transform .32s cubic-bezier(.22,1,.36,1)}
-.alt-title-toggle:hover span{transform:rotate(180deg)}
-.alt-title-toggle[aria-pressed="true"]{border-color:color-mix(in srgb,var(--brand) 48%,var(--line));background:color-mix(in srgb,var(--brand) 12%,var(--surface));color:var(--brand)}
-.eptitles{transition:opacity .14s ease,transform .14s ease}
-.eptitles.alt-title-out{opacity:0;transform:translateY(2px)}
-@media(prefers-reduced-motion:reduce){.eptitles,.alt-title-toggle span{transition:none!important}}
+.alt-title-toggle{position:relative;overflow:hidden;isolation:isolate;font-family:"Google Sans Flex","Inter",sans-serif;font-size:1.18rem;font-weight:600;line-height:1}
+.alt-title-toggle::before{content:"";position:absolute;inset:5px;z-index:-1;border-radius:inherit;background:color-mix(in srgb,var(--brand) 15%,transparent);opacity:0;transform:scale(.72);transition:opacity .28s ease,transform .34s cubic-bezier(.22,1,.36,1)}
+.alt-title-toggle .alt-title-symbol{display:block;transform:translateY(-1px);transition:transform .28s cubic-bezier(.22,1,.36,1)}
+.alt-title-toggle:hover .alt-title-symbol{transform:translateY(-1px) rotate(-8deg) scale(1.07)}
+.alt-title-toggle[aria-pressed="true"]{color:#fff;background:var(--brand);border-color:color-mix(in srgb,var(--brand) 72%,var(--line));box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 0 0 3px color-mix(in srgb,var(--brand) 12%,transparent),0 7px 22px color-mix(in srgb,var(--brand) 24%,transparent)}
+.alt-title-toggle[aria-pressed="true"]::before{opacity:1;transform:scale(1.15)}
+.alt-title-toggle[aria-pressed="true"] .alt-title-symbol{transform:translateY(-1px) rotate(180deg)}
+.eptitles{transition:opacity .12s ease,transform .18s ease}
+.eptitles.alt-title-out{opacity:0;transform:translateY(3px)}
+@media(prefers-reduced-motion:reduce){.eptitles,.alt-title-toggle,.alt-title-toggle::before,.alt-title-toggle .alt-title-symbol{transition:none!important}}
 </style>
 
 </head>
@@ -2034,7 +2037,7 @@ html[data-theme="dark"] {
         
         <button class="icon-btn alt-title-toggle" id="altTitleToggle" type="button"
                 aria-label="Show alternative titles" title="Show alternative titles" aria-pressed="false">
-          <span aria-hidden="true">⇄</span>
+          <span class="alt-title-symbol" aria-hidden="true">⇄</span>
         </button>
 <button class="icon-btn menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
       </div>
@@ -2137,22 +2140,22 @@ html[data-theme="dark"] {
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="snowfall" data-alternative="snow day, apparently">snowfall</div></td>
+<td><div class="eptitles">snowfall</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="respawn" data-alternative="back from the dead">respawn</div></td>
+<td><div class="eptitles">respawn</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="vibe check" data-alternative="the vibes are questionable">vibe check</div></td>
+<td><div class="eptitles">vibe check</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles" data-original="false start" data-alternative="well that lasted">false start</div></td>
+<td><div class="eptitles">false start</div></td>
 </tr>
 
 <tr>
@@ -2182,7 +2185,7 @@ html[data-theme="dark"] {
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="spaced out" data-alternative="lost in space">spaced out</div></td>
+<td><div class="eptitles">spaced out</div></td>
 </tr>
 
 <tr>
@@ -2197,12 +2200,12 @@ html[data-theme="dark"] {
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="crazy frog" data-alternative="ring ding ding">crazy frog</div></td>
+<td><div class="eptitles">crazy frog</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="12,000 days" data-alternative="twelve thousand bloody days">12,000 days</div></td>
+<td><div class="eptitles">green and blue</div></td>
 </tr>
 
 <tr>
@@ -2217,7 +2220,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="new season" data-alternative="previously on lewis">new season</div></td>
+<td><div class="eptitles">new season</div></td>
 </tr>
 
 <tr>
@@ -2227,7 +2230,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="head above water" data-alternative="still floating">head above water</div></td>
+<td><div class="eptitles">head above water</div></td>
 </tr>
 
 <tr>
@@ -2242,12 +2245,12 @@ html[data-theme="dark"] {
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="contentment" data-alternative="this’ll do nicely">contentment</div></td>
+<td><div class="eptitles">contentment</div></td>
 </tr>
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles" data-original="and breathe" data-alternative="oxygen restored">and breathe</div></td>
+<td><div class="eptitles">and breathe</div></td>
 </tr>
 
 <tr>
@@ -2262,7 +2265,7 @@ html[data-theme="dark"] {
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles" data-original="decades apart" data-alternative="fifteen years in the making">decades apart</div></td>
+<td><div class="eptitles">decades apart</div></td>
 </tr>
 
 <tr>
@@ -2282,12 +2285,12 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="fifteen years ago" data-alternative="2010 called">fifteen years ago</div></td>
+<td><div class="eptitles">fifteen years ago</div></td>
 </tr>
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="eclipse" data-alternative="the sun has left the chat">eclipse</div></td>
+<td><div class="eptitles">eclipse</div></td>
 </tr>
 
 <tr>
@@ -2307,12 +2310,12 @@ html[data-theme="dark"] {
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="fading lights" data-alternative="lights out">fading lights</div></td>
+<td><div class="eptitles">fading lights</div></td>
 </tr>
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles" data-original="love for sophie" data-alternative="sophie appreciation society">love for sophie</div></td>
+<td><div class="eptitles">love for sophie</div></td>
 </tr>
 
 <tr>
@@ -2332,57 +2335,57 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="brophie" data-alternative="the brophie agenda">brophie</div></td>
+<td><div class="eptitles">brophie</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="evermore" data-alternative="and then some">evermore</div></td>
+<td><div class="eptitles">evermore</div></td>
 </tr>	
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="angels and demons" data-alternative="heaven, hell &amp; everything between">angels and demons</div></td>
+<td><div class="eptitles">angels and demons</div></td>
 </tr>	
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles" data-original="the world is mine" data-alternative="main character syndrome">the world is mine</div></td>
+<td><div class="eptitles">the world is mine</div></td>
 </tr>	
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles" data-original="love for bron" data-alternative="bronwyn appreciation society">love for bron</div></td>
+<td><div class="eptitles">love for bron</div></td>
 </tr>	
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">6</td>
-<td><div class="eptitles" data-original="blonde and blue" data-alternative="blonde behaviour">blonde and blue</div></td>
+<td><div class="eptitles">blonde and blue</div></td>
 </tr>
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">7</td>
-<td><div class="eptitles" data-original="reunion" data-alternative="the gang’s back together">reunion</div></td>
+<td><div class="eptitles">reunion</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">8</td>
-<td><div class="eptitles" data-original="sanctuary 🌻" data-alternative="safe here 🌻">sanctuary 🌻</div></td>
+<td><div class="eptitles">sanctuary 🌻</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">9</td>
-<td><div class="eptitles" data-original="the end is nigh" data-alternative="we’re all doomed">the end is nigh</div></td>
+<td><div class="eptitles">the end is nigh</div></td>
 </tr>
 	
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">10</td>
-<td><div class="eptitles" data-original="queen of hearts" data-alternative="off with their heads">queen of hearts</div></td>
+<td><div class="eptitles">queen of hearts</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">11</td>
-<td><div class="eptitles" data-original="clusterfuck" data-alternative="everything everywhere all at once">clusterfuck</div></td>
+<td><div class="eptitles">clusterfuck</div></td>
 </tr>
 
 <tr>
@@ -2396,7 +2399,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="shattered" data-alternative="pieces everywhere">shattered</div></td>
+<td><div class="eptitles">shattered</div></td>
 </tr>
 
 <tr>
@@ -2406,12 +2409,12 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="dear bronwyn" data-alternative="a letter to bron">dear bronwyn</div></td>
+<td><div class="eptitles">dear bronwyn</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="lone wolf" data-alternative="party of one">lone wolf</div></td>
+<td><div class="eptitles">lone wolf</div></td>
 </tr>
 
 <tr>
@@ -2420,7 +2423,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="midpoint" data-alternative="halfway to somewhere">midpoint</div></td>
+<td><div class="eptitles">midpoint</div></td>
 </tr>
 
 <tr>
@@ -2435,7 +2438,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="moments of calm" data-alternative="nothing happened. lovely.">moments of calm</div></td>
+<td><div class="eptitles">moments of calm</div></td>
 </tr>
 
 <tr>
@@ -2445,7 +2448,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="day goes dark" data-alternative="someone turn the sun back on">day goes dark</div></td>
+<td><div class="eptitles">day goes dark</div></td>
 </tr>
 
 <tr>
@@ -2455,7 +2458,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles" data-original="beauty and the beast" data-alternative="tale as old as time">beauty and the beast</div></td>
+<td><div class="eptitles">beauty and the beast</div></td>
 </tr>
 
 <tr>
@@ -2474,27 +2477,27 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="autumn ready" data-alternative="deploy the jumpers">autumn ready</div></td>
+<td><div class="eptitles">autumn ready</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="work daze" data-alternative="professionally unconscious">work daze</div></td>
+<td><div class="eptitles">work daze</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="404" data-alternative="lewis not found">404</div></td>
+<td><div class="eptitles">404</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles" data-original="energy shift" data-alternative="the vibes have moved">energy shift</div></td>
+<td><div class="eptitles">energy shift</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles" data-original="overcast skies" data-alternative="grey, with a chance of feelings">overcast skies</div></td>
+<td><div class="eptitles">overcast skies</div></td>
 </tr>
 
 <tr>
@@ -2504,7 +2507,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">6</td>
-<td><div class="eptitles" data-original="seasons of change" data-alternative="everything keeps moving">seasons of change</div></td>
+<td><div class="eptitles">seasons of change</div></td>
 </tr>
 
 <tr>
@@ -2534,7 +2537,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="in between the rain" data-alternative="briefly not pissing down">in between the rain</div></td>
+<td><div class="eptitles">in between the rain</div></td>
 </tr>
 
 <tr>
@@ -2564,7 +2567,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="heart to hearts" data-alternative="feelings, unfortunately">heart to hearts</div></td>
+<td><div class="eptitles">heart to hearts</div></td>
 </tr>
 
 <tr>
@@ -2584,7 +2587,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="wake me up when december ends" data-alternative="december can fuck off">wake me up when december ends</div></td>
+<td><div class="eptitles">wake me up when december ends</div></td>
 </tr>
 
 <tr>
@@ -2599,7 +2602,7 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="weight of the world" data-alternative="heavy is the head">weight of the world</div></td>
+<td><div class="eptitles">weight of the world</div></td>
 </tr>
 
 <tr>
@@ -2614,42 +2617,42 @@ html[data-theme="dark"] {
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles" data-original="so long, and thanks for all the fish" data-alternative="goodbye and good luck">so long, and thanks for all the fish</div></td>
+<td><div class="eptitles">so long, and thanks for all the fish</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles" data-original="that’s a wrap" data-alternative="roll credits">that’s a wrap</div></td>
+<td><div class="eptitles">that’s a wrap</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles" data-original="shitmas" data-alternative="merry fucking christmas">shitmas</div></td>
+<td><div class="eptitles">shitmas</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles" data-original="zoe and gem" data-alternative="the zoe &amp; gem show">zoe and gem</div></td>
+<td><div class="eptitles">zoe and gem</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles" data-original="just another day" data-alternative="nothing to report">just another day</div></td>
+<td><div class="eptitles">just another day</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">6</td>
-<td><div class="eptitles" data-original="SOS" data-alternative="send help">SOS</div></td>
+<td><div class="eptitles">SOS</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">7</td>
-<td><div class="eptitles" data-original="lift my spirit" data-alternative="up we go">lift my spirit</div></td>
+<td><div class="eptitles">lift my spirit</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">8</td>
-<td><div class="eptitles" data-original="final words" data-alternative="and that’s all i wrote">final words</div></td>
+<td><div class="eptitles">final words</div></td>
 </tr>
 
 
@@ -3210,79 +3213,126 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <script id="alternative-title-system">
 (() => {
-  const STORAGE_KEY="diary-2025-alternative-titles";
+  const KEY="diary-2025-alternative-titles";
+  const alternateTitles = {
+    "snowfall": "snow day, apparently",
+    "respawn": "back from the dead",
+    "vibe check": "the vibes are questionable",
+    "false start": "well that lasted",
+    "spaced out": "lost in space",
+    "crazy frog": "ring ding ding",
+    "green and blue": "twelve thousand bloody days",
+    "new season": "previously on lewis",
+    "head above water": "still floating",
+    "contentment": "this’ll do nicely",
+    "and breathe": "oxygen restored",
+    "decades apart": "fifteen years in the making",
+    "fifteen years ago": "2010 called",
+    "eclipse": "the sun has left the chat",
+    "fading lights": "lights out",
+    "love for sophie": "sophie appreciation society",
+    "brophie": "the brophie agenda",
+    "evermore": "and then some",
+    "angels and demons": "heaven, hell & everything between",
+    "the world is mine": "main character syndrome",
+    "love for bron": "bronwyn appreciation society",
+    "blonde and blue": "blonde behaviour",
+    "reunion": "the gang’s back together",
+    "sanctuary 🌻": "safe here 🌻",
+    "the end is nigh": "we’re all doomed",
+    "queen of hearts": "off with their heads",
+    "clusterfuck": "everything everywhere all at once",
+    "shattered": "pieces everywhere",
+    "dear bronwyn": "a letter to bron",
+    "lone wolf": "party of one",
+    "midpoint": "halfway to somewhere",
+    "moments of calm": "nothing happened. lovely.",
+    "day goes dark": "someone turn the sun back on",
+    "beauty and the beast": "tale as old as time",
+    "autumn ready": "deploy the jumpers",
+    "work daze": "professionally unconscious",
+    "404": "lewis not found",
+    "energy shift": "the vibes have moved",
+    "overcast skies": "grey, with a chance of feelings",
+    "seasons of change": "everything keeps moving",
+    "in between the rain": "briefly not pissing down",
+    "heart to hearts": "feelings, unfortunately",
+    "wake me up when december ends": "december can fuck off",
+    "weight of the world": "heavy is the head",
+    "so long, and thanks for all the fish": "goodbye and good luck",
+    "that’s a wrap": "roll credits",
+    "shitmas": "merry fucking christmas",
+    "zoe and gem": "the zoe & gem show",
+    "just another day": "nothing to report",
+    "SOS": "send help",
+    "lift my spirit": "up we go",
+    "final words": "and that’s all i wrote"
+  };
   const toggle=document.getElementById("altTitleToggle");
   const search=document.getElementById("diarySearch");
   const clear=document.getElementById("clearDiarySearch");
   const wrap=document.getElementById("diarySearchWrap");
   const count=document.getElementById("searchCount");
   const noResults=document.getElementById("diaryNoResults");
-  const liveTitles=[...document.querySelectorAll(".maintable .eptitles")];
-  let alternativeMode=localStorage.getItem(STORAGE_KEY)==="true";
+  const live=[...document.querySelectorAll(".maintable .eptitles")];
+  live.forEach(el => {
+    el.dataset.originalTitle = (el.textContent || "").trim();
+  });
+  let alt=localStorage.getItem(KEY)==="true";
 
   function applySearch(){
     if(!search)return;
     const q=search.value.trim().toLowerCase();
     let matches=0;
     const rows=[...document.querySelectorAll(".maintable tr")];
-
     rows.forEach(row=>{
       const title=row.querySelector(".eptitles, .removed");
-      const month=row.querySelector(".month");
-      if(month){row.hidden=false;return}
+      if(row.querySelector(".month")){row.hidden=false;return}
       if(!title)return;
       const show=!q||(title.textContent||"").trim().toLowerCase().includes(q);
       row.hidden=!show;
       if(show)matches++;
     });
-
     if(wrap)wrap.classList.toggle("has-text",!!search.value);
-    if(count)count.textContent=q?`${matches} found`:`${rows.filter(row=>row.querySelector(".eptitles, .removed")).length} entries`;
+    const total=rows.filter(row=>row.querySelector(".eptitles, .removed")).length;
+    if(count)count.textContent=q?`${matches} found`:`${total} entries`;
     if(noResults)noResults.hidden=!q||matches>0;
-
     rows.forEach((row,i)=>{
       if(!row.querySelector(".month"))return;
-      let hasVisible=false;
+      let visible=false;
       for(let j=i+1;j<rows.length&&!rows[j].querySelector(".month");j++){
-        if(!rows[j].hidden&&rows[j].querySelector(".eptitles, .removed")){hasVisible=true;break}
+        if(!rows[j].hidden&&rows[j].querySelector(".eptitles, .removed")){visible=true;break}
       }
-      row.hidden=!!q&&!hasVisible;
+      row.hidden=!!q&&!visible;
     });
   }
 
-  function setButtonState(){
+  function sync(){
     if(!toggle)return;
-    toggle.setAttribute("aria-pressed",String(alternativeMode));
-    const label=alternativeMode?"Show original titles":"Show alternative titles";
-    toggle.setAttribute("aria-label",label);
-    toggle.title=label;
+    toggle.setAttribute("aria-pressed",String(alt));
+    const label=alt?"Show original titles":"Show alternative titles";
+    toggle.setAttribute("aria-label",label); toggle.title=label;
   }
 
-  function swapTitles(animate=true){
+  function swap(animate=true){
     const change=()=>{
-      liveTitles.forEach(el=>{el.textContent=alternativeMode?el.dataset.alternative:el.dataset.original});
+      live.forEach(el => {
+        const original = el.dataset.originalTitle;
+        el.textContent = alt ? (alternateTitles[original] || original) : original;
+      });
       applySearch();
     };
     if(!animate||matchMedia("(prefers-reduced-motion: reduce)").matches){change();return}
-    liveTitles.forEach(el=>el.classList.add("alt-title-out"));
-    setTimeout(()=>{
-      change();
-      requestAnimationFrame(()=>liveTitles.forEach(el=>el.classList.remove("alt-title-out")));
-    },140);
+    live.forEach(el=>el.classList.add("alt-title-out"));
+    setTimeout(()=>{change();requestAnimationFrame(()=>live.forEach(el=>el.classList.remove("alt-title-out")))},120);
   }
 
   if(toggle)toggle.addEventListener("click",()=>{
-    alternativeMode=!alternativeMode;
-    localStorage.setItem(STORAGE_KEY,String(alternativeMode));
-    setButtonState();
-    swapTitles(true);
+    alt=!alt; localStorage.setItem(KEY,String(alt)); sync(); swap(true);
   });
-
   if(search)search.addEventListener("input",()=>setTimeout(applySearch,0));
   if(clear)clear.addEventListener("click",()=>setTimeout(applySearch,0));
-
-  setButtonState();
-  swapTitles(false);
+  sync(); swap(false);
 })();
 </script>
 
