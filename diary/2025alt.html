@@ -3237,7 +3237,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if(wrap)wrap.classList.toggle("has-text",!!search.value);
-    if(count)count.textContent=q?`${matches} found`:"";
+    if(count)count.textContent=q?`${matches} found`:`${rows.filter(row=>row.querySelector(".eptitles, .removed")).length} entries`;
     if(noResults)noResults.hidden=!q||matches>0;
 
     rows.forEach((row,i)=>{
