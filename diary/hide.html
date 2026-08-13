@@ -1772,7 +1772,61 @@ html:not([data-theme="dark"]) .theme-star {
 }
 
 /* Deleted diary entry visibility toggle */
-html:not(.show-deleted) .deleted-entry-row { display: none; }
+
+.deleted-entry-row > td {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.deleted-row-inner {
+  max-height: 4rem;
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  overflow: hidden;
+  opacity: 1;
+  transform: translateY(0) scaleY(1);
+  transform-origin: top;
+  transition:
+    max-height .72s cubic-bezier(.16,1,.3,1),
+    padding .72s cubic-bezier(.16,1,.3,1),
+    opacity .46s ease,
+    transform .72s cubic-bezier(.16,1,.3,1);
+}
+
+.deleted-entry-row.is-collapsing .deleted-row-inner {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  transform: translateY(-4px) scaleY(.82);
+}
+
+/* Deleted rows animate through their inner wrapper, then leave the table layout entirely. */
+.deleted-entry-row.is-collapsing {
+  border-bottom-color: transparent;
+}
+
+.deleted-entry-row.is-collapsing > td {
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.deleted-entry-row.is-hidden {
+  display: none !important;
+}
+
+.deleted-entry-row.search-hidden {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deleted-row-inner {
+    transition: none;
+  }
+}
+
 
 .deleted-toggle {
   position: relative; overflow: hidden; isolation: isolate; width: 44px; height: 44px;
@@ -2022,7 +2076,7 @@ html[data-theme="dark"] {
 
 </head>
 <body>
-  <div class="top-strip">This page is currently being updated.</div>
+  <div class="top-strip" id="topStrip">This page is currently being updated.</div>
 
   <header class="site-header">
     <div class="nav-shell">
@@ -2182,18 +2236,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the colour of the past</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the colour of the past</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">keep on dancing</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">keep on dancing</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">feel the music</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">feel the music</div></div></td>
 </tr>
 
 <tr>
@@ -2202,8 +2256,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">signal fade</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">signal fade</div></div></td>
 </tr>
 
 <tr>
@@ -2227,18 +2281,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">perspective</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">perspective</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">upbeat and hopeful</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">upbeat and hopeful</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">preserving the magic</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">preserving the magic</div></div></td>
 </tr>
 
 
@@ -2247,8 +2301,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">down the rabbit hole</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">down the rabbit hole</div></div></td>
 </tr>
   
 <tr>
@@ -2272,8 +2326,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">quicksand</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">quicksand</div></div></td>
 </tr>
 
 <tr>
@@ -2287,8 +2341,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">climbing the wall</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">climbing the wall</div></div></td>
 </tr>
 
 
@@ -2317,23 +2371,23 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">curtain call</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">curtain call</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">bittersweet blues</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">bittersweet blues</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">striking the balance</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">striking the balance</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">eight since nine</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">eight since nine</div></div></td>
 </tr>
 
 <tr>
@@ -2352,63 +2406,63 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">hope, heart and hurt</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">hope, heart and hurt</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">interludes</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">interludes</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">unshackled</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">unshackled</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">talk and squeeze</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">talk and squeeze</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">partners in crime</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">partners in crime</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">life stream</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">life stream</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">spring blossom</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">spring blossom</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">yellow gradients</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">yellow gradients</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">pillow talk</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">pillow talk</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">while the cat’s away</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">while the cat’s away</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">good vibes</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">good vibes</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">lightning in a bottle</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">lightning in a bottle</div></div></td>
 </tr>
 	
 <tr>
@@ -2417,8 +2471,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">creature of the night</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">creature of the night</div></div></td>
 </tr>
   
 <tr>
@@ -2427,43 +2481,43 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the reign of camp</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the reign of camp</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">two and ‘fro</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">two and ‘fro</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">waltzing solo</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">waltzing solo</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">of guys and gals</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">of guys and gals</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">teenage dreams</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">teenage dreams</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">art and soul</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">art and soul</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">déjà vu</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">déjà vu</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">gold nuggets</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">gold nuggets</div></div></td>
 </tr>
 	
 <tr>
@@ -2472,8 +2526,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">eyes plugged in</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">eyes plugged in</div></div></td>
 </tr>
 
 
@@ -2487,33 +2541,33 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">catalogue recovery</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">catalogue recovery</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">fake and fortune</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">fake and fortune</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">clip tease</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">clip tease</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">walking on sunshine</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">walking on sunshine</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">into the abyss</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">into the abyss</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">heartbreak</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">heartbreak</div></div></td>
 </tr>
 	  
 <tr>
@@ -2522,8 +2576,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">wild blue yonder</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">wild blue yonder</div></div></td>
 </tr>
 	
 <tr>
@@ -2532,18 +2586,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">camden flashback</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">camden flashback</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">lost in fire</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">lost in fire</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">amateur fanfic</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">amateur fanfic</div></div></td>
 </tr>
 	
 <tr>
@@ -2557,28 +2611,28 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">scatterbrain</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">scatterbrain</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">end of the blog</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">end of the blog</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">small press</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">small press</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">parting of the ways</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">parting of the ways</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">sex on the beach</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">sex on the beach</div></div></td>
 </tr>
 	
 <tr>
@@ -2587,28 +2641,28 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">impossible dreams</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">impossible dreams</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">black and yellow</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">black and yellow</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">set me free</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">set me free</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">dance alone</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">dance alone</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the best day</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the best day</div></div></td>
 </tr>
 
 <tr>
@@ -2627,88 +2681,88 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">zero percent</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">zero percent</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">space and tech</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">space and tech</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">visual variety</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">visual variety</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">rumours and revivals</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">rumours and revivals</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">camp sight</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">camp sight</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the imposter</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the imposter</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">smash the weekend</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">smash the weekend</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">through the looking glass</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">through the looking glass</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">retrospectives</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">retrospectives</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">friends with benefits</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">friends with benefits</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">mid-week blues</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">mid-week blues</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">bad omens</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">bad omens</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">upcoming titles</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">upcoming titles</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">three hundred</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">three hundred</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">rocket man</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">rocket man</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">threads unstitched</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">threads unstitched</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">pulling focus</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">pulling focus</div></div></td>
 </tr>
 	
 <tr>
@@ -2716,13 +2770,13 @@ html[data-theme="dark"] {
 </tr>  
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">red and blue</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">red and blue</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">journeys</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">journeys</div></div></td>
 </tr>
 
 <tr>
@@ -2731,18 +2785,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">sunflowers 🌻</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">sunflowers 🌻</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">winter feast</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">winter feast</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">special preview</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">special preview</div></div></td>
 </tr>
 
 <tr>
@@ -2751,23 +2805,23 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">niche and nerdy</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">niche and nerdy</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">fan indulgence</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">fan indulgence</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">vindication</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">vindication</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">in moderation</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">in moderation</div></div></td>
 </tr>
 
 <tr>
@@ -2776,13 +2830,13 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">brand new escapism</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">brand new escapism</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">first impressions</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">first impressions</div></div></td>
 </tr>
 
 <tr>
@@ -2796,18 +2850,18 @@ html[data-theme="dark"] {
 </tr>  
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">happy hour</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">happy hour</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">five star pals</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">five star pals</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">time goes by</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">time goes by</div></div></td>
 </tr>
 	
 <tr>
@@ -2821,33 +2875,33 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">chalk and cheese</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">chalk and cheese</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the reign of terror</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the reign of terror</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">nowhere left to hide</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">nowhere left to hide</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">out of the blue</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">out of the blue</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">midnight melodies</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">midnight melodies</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the yearbook</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the yearbook</div></div></td>
 </tr>
 
 <tr>
@@ -2856,23 +2910,23 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">sunday rumours</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">sunday rumours</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">letters unsent</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">letters unsent</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">where it all began</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">where it all began</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">overwhelmed</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">overwhelmed</div></div></td>
 </tr>
 
 <tr>
@@ -2881,8 +2935,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">chain reaction</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">chain reaction</div></div></td>
 </tr>
 
 	
@@ -2891,18 +2945,18 @@ html[data-theme="dark"] {
 </tr>  
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">holding on</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">holding on</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">energy shift</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">energy shift</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">summer hangover</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">summer hangover</div></div></td>
 </tr>
 
 <tr>
@@ -2911,18 +2965,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">creative pop</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">creative pop</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">hype train</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">hype train</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">reality bites</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">reality bites</div></div></td>
 </tr>
 
 <tr>
@@ -2931,38 +2985,38 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">a rose between two thorns</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">a rose between two thorns</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">edging closer</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">edging closer</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">still to come</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">still to come</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">to hold in my hands</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">to hold in my hands</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">wheels in motion</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">wheels in motion</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">friends and phantoms</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">friends and phantoms</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">square eyes</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">square eyes</div></div></td>
 </tr>	
 
 <tr>
@@ -2971,13 +3025,13 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the climax</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the climax</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">future nostalgia</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">future nostalgia</div></div></td>
 </tr>
 
 <tr>
@@ -2986,18 +3040,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">guest stars</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">guest stars</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">distant blurs</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">distant blurs</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">harmony unleashed</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">harmony unleashed</div></div></td>
 </tr>
 
 <tr>
@@ -3011,23 +3065,23 @@ html[data-theme="dark"] {
 </tr>  
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the project</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the project</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">rescue mission</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">rescue mission</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">snowball</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">snowball</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">home comforts</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">home comforts</div></div></td>
 </tr>
 
 <tr>
@@ -3041,43 +3095,43 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">second chances</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">second chances</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">extra special feast</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">extra special feast</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">doctor’s notes</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">doctor’s notes</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">unearthly souls</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">unearthly souls</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">three of a kind</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">three of a kind</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">world to rights</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">world to rights</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">origin story</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">origin story</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">through the motions</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">through the motions</div></div></td>
 </tr>
 
 <tr>
@@ -3086,8 +3140,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">vacant daze</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">vacant daze</div></div></td>
 </tr>
 
 <tr>
@@ -3096,8 +3150,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">tales of the unexpected</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">tales of the unexpected</div></div></td>
 </tr>
 
 
@@ -3111,8 +3165,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">calmer tides</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">calmer tides</div></div></td>
 </tr>
 
 <tr>
@@ -3121,23 +3175,23 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">one night in london</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">one night in london</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">fourteen</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">fourteen</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">word salad</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">word salad</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">diamond gems</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">diamond gems</div></div></td>
 </tr>
 
 <tr>
@@ -3146,18 +3200,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">grim and tonic</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">grim and tonic</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">hibernation</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">hibernation</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">skaro’s lament</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">skaro’s lament</div></div></td>
 </tr>
 
 <tr>
@@ -3166,8 +3220,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">fizzy lifting</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">fizzy lifting</div></div></td>
 </tr>
 
 <tr>
@@ -3185,23 +3239,23 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">journey’s end</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">journey’s end</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">vibe check</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">vibe check</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">winter blues</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">winter blues</div></div></td>
 </tr>
 	
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the producers</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the producers</div></div></td>
 </tr>
 	
 <tr>
@@ -3210,13 +3264,13 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">bits and whole</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">bits and whole</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">in joy and sorrow</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">in joy and sorrow</div></div></td>
 </tr>
 
 <tr>
@@ -3225,23 +3279,23 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">end of the line</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">end of the line</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">silent night</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">silent night</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">christmas delivery</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">christmas delivery</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">solstice</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">solstice</div></div></td>
 </tr>
 
 <tr>
@@ -3250,8 +3304,8 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the day before</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">the day before</div></div></td>
 </tr>
 
 <tr>
@@ -3260,18 +3314,18 @@ html[data-theme="dark"] {
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">extra nibbles</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">extra nibbles</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">change of pace</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">change of pace</div></div></td>
 </tr>
 
 <tr class="deleted-entry-row">
-<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">music shift</div></td>
+<td style="width: 10%;border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;"><div class="deleted-row-inner">x</div></td>
+	<td><div class="deleted-row-inner"><div class="removed">music shift</div></div></td>
 </tr>
 
 <tr>
@@ -3441,6 +3495,7 @@ html[data-theme="dark"] {
     const root = document.documentElement;
     const themeToggle = document.getElementById('themeToggle');
     const deletedToggle = document.getElementById('deletedToggle');
+    const topStrip = document.getElementById('topStrip');
     const menuToggle = document.getElementById('menuToggle');
     const mobilePanel = document.getElementById('mobilePanel');
     const toast = document.getElementById('toast');
@@ -3449,16 +3504,66 @@ html[data-theme="dark"] {
     if (savedTheme) root.dataset.theme = savedTheme;
     updateThemeIcon();
 
+    const deletedRows = Array.from(document.querySelectorAll('.deleted-entry-row'));
+    const deletedAnimationMs = 720;
     const savedDeletedVisibility = localStorage.getItem('diary-show-deleted') === 'true';
+
     root.classList.toggle('show-deleted', savedDeletedVisibility);
+
+    if (savedDeletedVisibility) {
+      deletedRows.forEach(row => {
+        row.classList.remove('is-hidden', 'is-collapsing');
+      });
+    } else {
+      deletedRows.forEach(row => {
+        row.classList.add('is-hidden');
+        row.classList.remove('is-collapsing');
+      });
+    }
+
     updateDeletedToggle();
+
+    function setDeletedRowsVisible(showDeleted, animate = true) {
+      root.classList.toggle('show-deleted', showDeleted);
+
+      deletedRows.forEach((row, index) => {
+        const stagger = animate ? Math.min(index * 3, 120) : 0;
+
+        if (showDeleted) {
+          row.classList.remove('is-hidden');
+          row.classList.add('is-collapsing');
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setTimeout(() => {
+                row.classList.remove('is-collapsing');
+              }, stagger);
+            });
+          });
+        } else {
+          setTimeout(() => {
+            row.classList.add('is-collapsing');
+
+            setTimeout(() => {
+              if (!root.classList.contains('show-deleted')) {
+                row.classList.add('is-hidden');
+                row.classList.remove('is-collapsing');
+              }
+            }, deletedAnimationMs);
+          }, stagger);
+        }
+      });
+    }
 
     deletedToggle.addEventListener('click', () => {
       const showDeleted = !root.classList.contains('show-deleted');
-      root.classList.toggle('show-deleted', showDeleted);
+      setDeletedRowsVisible(showDeleted, true);
       localStorage.setItem('diary-show-deleted', String(showDeleted));
       updateDeletedToggle();
-      document.getElementById('diarySearch')?.dispatchEvent(new Event('input', { bubbles: true }));
+
+      setTimeout(() => {
+        document.getElementById('diarySearch')?.dispatchEvent(new Event('input', { bubbles: true }));
+      }, showDeleted ? 0 : deletedAnimationMs + 130);
     });
 
     function updateDeletedToggle() {
@@ -3467,6 +3572,12 @@ html[data-theme="dark"] {
       deletedToggle.setAttribute('aria-label', label);
       deletedToggle.setAttribute('title', label);
       deletedToggle.setAttribute('aria-pressed', String(showDeleted));
+
+      if (topStrip) {
+        topStrip.textContent = showDeleted
+          ? 'now showing deleted entries'
+          : 'This page is currently being updated.';
+      }
     }
 
     themeToggle.addEventListener('click', () => {
@@ -3804,7 +3915,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const allowedByDeletedToggle = showDeleted || !isDeleted;
         const matchesText = !query || titleCell.textContent.toLocaleLowerCase().includes(query);
         const matches = allowedByDeletedToggle && matchesText;
-        row.hidden = !matches;
+
+        // Deleted rows stay in the table when merely collapsed so their height can animate.
+        // Search mismatches are still removed outright.
+        row.classList.toggle('search-hidden', !matchesText);
+        row.hidden = !isDeleted && !matchesText;
+
         if (matches) visibleCount += 1;
       });
 
@@ -3815,8 +3931,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
         while (row && row !== nextMonth) {
           if (!row.querySelector(".month") && row.cells.length >= 2 && !row.hidden) {
-            hasVisibleEntry = true;
-            break;
+            const rowIsDeleted = row.classList.contains('deleted-entry-row');
+            const rowSearchHidden = row.classList.contains('search-hidden');
+            if (!rowSearchHidden && (showDeleted || !rowIsDeleted)) {
+              hasVisibleEntry = true;
+              break;
+            }
           }
           row = row.nextElementSibling;
         }
