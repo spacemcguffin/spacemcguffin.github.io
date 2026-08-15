@@ -38,7 +38,6 @@ button,input{font:inherit} button{color:inherit}
 .main{min-width:0;padding:0 42px 60px}
 .episode-nav{height:54px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-size:.77rem;color:var(--muted)}.episode-nav a{color:var(--ink)}.episode-nav .next{text-align:right}.episode-nav strong{font:650 .68rem 'Google Sans Flex',sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
 .hero{padding:38px 0 25px;border-bottom:1px solid var(--line)}.eyebrow{display:flex;gap:6px;flex-wrap:wrap}.chip{font:650 .61rem 'Google Sans Flex',sans-serif;text-transform:uppercase;letter-spacing:.09em;border:1px solid var(--line);background:var(--surface2);border-radius:999px;padding:5px 8px}h1{font:720 clamp(3rem,7vw,5.35rem)/.9 'Google Sans Flex',sans-serif;letter-spacing:-.075em;margin:12px 0 12px;color:var(--ink)}.hero-meta{font-size:.8rem;color:var(--muted)}
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);margin-bottom:28px}.tabbtn{border:0;border-bottom:2px solid transparent;background:transparent;padding:12px 16px 10px;cursor:pointer;font:600 .77rem 'Google Sans Flex',sans-serif;color:var(--muted)}.tabbtn.active{border-bottom-color:var(--accent);color:var(--accent)}.tabpanel{display:none}.tabpanel.active{display:block}
 .article-top{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:34px;align-items:start}.lede{font-size:1.02rem;line-height:1.8;margin:0 0 24px;max-width:720px}.infobox{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface2)}.infobox img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#ccc}.info-badge{padding:7px 10px;background:var(--accent);color:white;font:650 .65rem 'Google Sans Flex',sans-serif;text-transform:uppercase;letter-spacing:.09em;text-align:center}.info-table{display:grid}.info-row{display:grid;grid-template-columns:42% 58%;border-top:1px solid var(--line);font-size:.76rem}.info-row b,.info-row span{padding:8px 10px}.info-row b{font-weight:600}
 .section{padding:28px 0;border-top:1px solid var(--line);scroll-margin-top:72px}.section.first{border-top:0;padding-top:0}h2{font:680 1.5rem 'Google Sans Flex',sans-serif;letter-spacing:-.03em;margin:0 0 17px;display:flex;align-items:center;gap:8px}.anchor{opacity:0;font-size:.8rem;font-weight:500;color:var(--accent)}h2:hover .anchor{opacity:.55}.section p{font-size:.94rem;line-height:1.82;margin:0 0 1.2em;max-width:760px}sup a{font-size:.72em}
 .quote{max-width:670px;margin:2px 0 22px;padding:12px 16px;border-left:3px solid var(--accent);background:var(--accent-soft);font-style:italic;font-size:.96rem;line-height:1.55}.quote span{font-style:normal;font-size:.78rem;font-weight:600;color:var(--muted);margin-left:6px}
@@ -72,9 +71,7 @@ html.dark a{color:var(--link)}
 html.dark .section-title,html.dark h1,html.dark h2,html.dark h3,html.dark h4,html.dark .rail-title{color:#fff!important}
 html.dark .infobox,html.dark .season-module,html.dark .episode-nav-strip{border-color:var(--line)!important;background:var(--sheet)!important}
 html.dark .info-row{border-color:var(--line)!important}
-html.dark .tabbtn{color:var(--link)!important}
-html.dark .tabbtn.active{color:#08101b!important;background:var(--accent)!important}
-html.dark .quote{background:#121c29!important;border-color:var(--accent)!important}
+html.dark html.dark html.dark .quote{background:#121c29!important;border-color:var(--accent)!important}
 html.dark .gallery-item{background:#101925!important;border-color:var(--line)!important}
 
 body{background-position:center top!important;background-size:cover!important;background-attachment:fixed!important}
@@ -96,13 +93,12 @@ body{background-position:center top!important;background-size:cover!important;ba
 .hero h1{font-size:clamp(2.6rem,4.5vw,4.7rem)!important;letter-spacing:-.06em!important;font-weight:650!important;color:var(--text)!important}
 .episode-nav-strip{display:grid;grid-template-columns:1fr minmax(220px,.8fr) 1fr;align-items:stretch;margin:4px 0 0;border:1px solid var(--line);background:var(--sheet)}
 .episode-nav-strip>a,.ep-current{padding:10px 14px;min-height:58px;display:flex;flex-direction:column;justify-content:center;text-decoration:none!important}.ep-current{text-align:center;background:var(--accent);color:#fff}.ep-current span{font-size:.65rem;opacity:.78;text-transform:uppercase;letter-spacing:.08em}.ep-current strong{font-size:.9rem}.ep-prev{border-right:1px solid var(--line)}.ep-next{border-left:1px solid var(--line);text-align:right}.nav-small{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.episode-nav-strip strong{font-size:.82rem;color:inherit}
-.tabs{margin:0 0 22px!important;border-bottom:1px solid var(--accent)!important;gap:0!important}.tabbtn{border:0!important;border-radius:0!important;min-width:150px!important;width:auto!important;padding:12px 24px!important;background:transparent!important;color:var(--link)!important;font-weight:650!important}.tabbtn.active{background:var(--accent)!important;color:#fff!important}
 .infobox{float:right!important;width:320px!important;margin:0 0 26px 30px!important;border:1px solid var(--line)!important;border-radius:0!important;background:var(--sheet)!important;box-shadow:none!important}.infobox-title{background:var(--accent);color:#fff;text-align:center;padding:12px 10px;font:750 1.15rem "Google Sans Flex","Inter",sans-serif}.infobox img{border-radius:0!important}.info-row{border-color:var(--line)!important;padding:8px 10px!important}.info-row b{color:var(--text)!important}.info-row span{color:var(--text)!important}
 .section-heading{border-bottom:1px solid var(--accent)!important;background:none!important;border-radius:0!important;padding:0 0 7px!important;margin-top:30px!important}.section-heading h2,.section-heading h3{color:var(--text)!important}
 .prose p{font-size:.98rem!important;line-height:1.82!important;color:var(--text)!important}.quote{background:var(--soft)!important;color:var(--text)!important;border-left:3px solid var(--accent)!important;border-radius:0 5px 5px 0!important}
 .gallery-grid{gap:10px!important}.gallery-item{border:1px solid var(--line)!important;border-radius:2px!important;background:var(--sheet)!important;padding:3px!important}
 .season-module{clear:both;margin:42px 0 0;border:1px solid var(--line);background:var(--sheet)}.season-module-head{display:flex;align-items:end;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}.season-module-head>div>span{font-size:.61rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700}.season-module-head h2{margin:2px 0 0!important;font-size:1.35rem!important;color:var(--text)!important}.season-module-head>a{font-size:.76rem}.season-list{display:grid;grid-template-columns:repeat(5,1fr)}.season-list a{min-height:74px;padding:11px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;text-decoration:none!important;color:var(--text)!important}.season-list a:last-child{border-right:0}.season-list b{font-size:.63rem;color:var(--muted)}.season-list span{font-size:.78rem}.season-list em{margin-top:auto;font-size:.54rem;font-style:normal;text-transform:uppercase;letter-spacing:.1em}.season-list .current{background:var(--accent)!important;color:#fff!important}.season-list .current b{color:rgba(255,255,255,.75)!important}html.dark .season-list .current{color:#08101b!important}html.dark .season-list .current b{color:#243448!important}
-@media(max-width:850px){.page-shell,.main-layout{width:100%!important}.content{padding:0 17px 38px!important}.episode-nav-strip{grid-template-columns:1fr 1fr}.ep-current{grid-column:1/-1;grid-row:1}.ep-prev{grid-row:2;border-right:1px solid var(--line)}.ep-next{grid-row:2;border-left:0}.infobox{float:none!important;width:100%!important;margin:0 0 22px!important}.season-list{grid-template-columns:1fr}.season-list a{min-height:auto;border-right:0;border-bottom:1px solid var(--line);flex-direction:row;align-items:center}.season-list em{margin:0 0 0 auto}.tabbtn{min-width:110px!important;padding:11px 16px!important}}
+@media(max-width:850px){.page-shell,.main-layout{width:100%!important}.content{padding:0 17px 38px!important}.episode-nav-strip{grid-template-columns:1fr 1fr}.ep-current{grid-column:1/-1;grid-row:1}.ep-prev{grid-row:2;border-right:1px solid var(--line)}.ep-next{grid-row:2;border-left:0}.infobox{float:none!important;width:100%!important;margin:0 0 22px!important}.season-list{grid-template-columns:1fr}.season-list a{min-height:auto;border-right:0;border-bottom:1px solid var(--line);flex-direction:row;align-items:center}.season-list em{margin:0 0 0 auto}}
 </style><style>
 /* ===== Tightened layout — corrected pass ===== */
 :root{
@@ -177,15 +173,6 @@ body{background-position:center top!important;background-size:cover!important;ba
 }
 
 /* Tabs */
-.tabs{
-  margin:0 0 18px!important;
-}
-.tabbtn{
-  min-width:120px!important;
-  padding:10px 18px!important;
-  font-size:.75rem!important;
-}
-
 /* Main article density */
 .article-top{
   grid-template-columns:minmax(0,1fr) 300px!important;
@@ -264,10 +251,7 @@ html.dark .main,
 html.dark .content,
 html.dark .section,
 html.dark .article-top,
-html.dark .tabpanel{
-  color:#eef2f7!important;
-}
-html.dark h1,
+html.dark html.dark h1,
 html.dark h2,
 html.dark h3,
 html.dark .lede,
@@ -321,24 +305,659 @@ html.dark .season-card{
     margin-top:10px!important;
   }
 }
+</style><style>
+/* ===== Layout refinement pass ===== */
+:root{
+  --shell-max: 1180px;
+  --rail-w: 218px;
+  --topbar-h: 54px;
+}
+
+/* show more South Park background */
+.page-shell,
+.main-layout,
+.site-shell,
+.shell-wrap{
+  width:min(var(--shell-max),calc(100% - 96px))!important;
+  max-width:var(--shell-max)!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+/* fixed header aligns exactly to shell */
+header,
+.topbar,
+.site-header,
+.navbar{
+  width:min(var(--shell-max),calc(100% - 96px))!important;
+  max-width:var(--shell-max)!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  box-sizing:border-box!important;
+}
+body{
+  padding-top:var(--topbar-h);
+}
+
+/* if header is already in normal flow, avoid double-space on non-fixed versions */
+header:not([style*="fixed"]),
+.navbar:not([style*="fixed"]){
+  box-sizing:border-box!important;
+}
+
+/* rail / content proportions */
+.shell,
+.main-grid,
+.wiki-shell{
+  grid-template-columns:var(--rail-w) minmax(0,1fr)!important;
+}
+.sidebar,
+.left-rail{
+  width:var(--rail-w)!important;
+}
+
+/* compact main content */
+.main,
+.content,
+.content-wrapper,
+.wiki-content{
+  padding-left:24px!important;
+  padding-right:24px!important;
+}
+
+/* true floating right-hand infobox so article wraps beside it */
+.article-top{
+  display:block!important;
+}
+.infobox,
+.articleRightInner{
+  float:right!important;
+  width:286px!important;
+  margin:0 0 18px 24px!important;
+}
+.article-body,
+.prose,
+#plot,
+.section[id="plot"],
+.plot-section{
+  clear:none!important;
+}
+.section,
+.article-section{
+  overflow:visible!important;
+}
+.section::after,
+.article-section::after{
+  content:"";
+  display:table;
+  clear:none;
+}
+.gallery-section,
+#gallery{
+  clear:both!important;
+}
+
+/* headings */
+.section h2,
+.article h2,
+.wiki-heading{
+  clear:none!important;
+}
+
+/* gallery: 3 real cards on desktop, fewer as width shrinks */
+.gallery{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin:12px 0 24px!important;
+}
+.gallery-item,
+.gallery > img,
+.gallery > a{
+  min-width:0!important;
+  width:100%!important;
+}
+.gallery-item{
+  background:var(--paper,var(--wiki-paper,#fff));
+  border:1px solid var(--line,var(--wiki-line,#ccc));
+  padding:3px!important;
+  border-radius:5px!important;
+  overflow:hidden;
+}
+.gallery-item img,
+.gallery > img{
+  width:100%!important;
+  aspect-ratio:16/9!important;
+  object-fit:cover!important;
+  display:block!important;
+  border-radius:3px!important;
+}
+@media (max-width:1050px){
+  .page-shell,.main-layout,.site-shell,.shell-wrap,
+  header,.topbar,.site-header,.navbar{
+    width:min(100% - 44px, var(--shell-max))!important;
+  }
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media (max-width:760px){
+  body{padding-top:var(--topbar-h)}
+  .page-shell,.main-layout,.site-shell,.shell-wrap,
+  header,.topbar,.site-header,.navbar{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .main,.content,.content-wrapper,.wiki-content{
+    padding-left:14px!important;
+    padding-right:14px!important;
+  }
+  .infobox,.articleRightInner{
+    float:none!important;
+    width:100%!important;
+    margin:0 0 18px!important;
+  }
+  .gallery{
+    grid-template-columns:1fr!important;
+    gap:9px!important;
+  }
+}
+
+/* bottom episode nav — numbered titles */
+.episode-list a,
+.season-card .episode-list a{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+.ep-num{
+  display:inline-grid;
+  place-items:center;
+  min-width:22px;
+  height:22px;
+  padding:0 5px;
+  border-radius:4px;
+  background:var(--soft,var(--wiki-soft,#eee));
+  border:1px solid var(--line,var(--wiki-line,#ccc));
+  color:var(--muted,var(--wiki-muted,#666));
+  font-size:.62rem;
+  font-weight:700;
+  line-height:1;
+  flex:0 0 auto;
+}
+html.dark .ep-num{
+  background:#192433;
+  border-color:#344255;
+  color:#d9e3ef;
+}
+
+/* restored tooltip styling */
+.hover-content{
+  box-shadow:0 8px 28px rgba(0,0,0,.28);
+  box-sizing:border-box;
+  color:var(--text,var(--wiki-text,#222));
+  background:var(--paper,var(--wiki-paper,#fff));
+  width:270px;
+  padding:11px 12px;
+  border:1px solid var(--line,var(--wiki-line,#ccc));
+  border-radius:6px;
+  z-index:99999;
+}
+.hover-content > p{
+  font-size:.8rem!important;
+  margin:0!important;
+  line-height:1.5!important;
+  color:inherit!important;
+  background:transparent!important;
+}
+[data-hover-wrapper]{
+  z-index:99999;
+  pointer-events:none;
+  transition:opacity .15s ease, transform .15s ease;
+}
+html.dark .hover-content{
+  background:#111a27;
+  color:#eef2f7;
+  border-color:#344255;
+}
+
+/* tighter visual rhythm */
+.hero{padding-top:18px!important;padding-bottom:15px!important}
+.section{padding-top:18px!important;padding-bottom:18px!important}
+</style><style>
+/* ===== Section navigation replaces content tabs ===== */
+.section-tabs{
+  display:flex;
+  align-items:stretch;
+  gap:0;
+  width:100%;
+  margin:0 0 16px;
+  border-bottom:1px solid var(--accent,#456291);
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.section-tabs::-webkit-scrollbar{display:none}
+.section-tab{
+  flex:0 0 auto;
+  min-width:108px;
+  padding:10px 17px;
+  text-align:center;
+  color:var(--accent,#456291)!important;
+  background:transparent;
+  border-right:1px solid var(--line,#d1d7df);
+  font-size:.75rem;
+  font-weight:650;
+  text-decoration:none!important;
+  text-transform:uppercase;
+  letter-spacing:.035em;
+  transition:background .15s,color .15s;
+}
+.section-tab:first-child{border-left:1px solid var(--line,#d1d7df)}
+.section-tab:hover{
+  background:var(--soft,#eef1f5);
+}
+.section-tab.active{
+  background:var(--accent,#456291);
+  color:#fff!important;
+}
+html.dark .section-tab{
+  color:#a9cef6!important;
+  border-color:#344255;
+}
+html.dark .section-tab:hover{
+  background:#182333;
+}
+html.dark .section-tab.active{
+  background:#456291;
+  color:#fff!important;
+}
+#top,#synopsis,#plot,#gallery{
+  scroll-margin-top:76px;
+}
+@media(max-width:600px){
+  .section-tab{
+    min-width:auto;
+    flex:1 0 auto;
+    padding:9px 12px;
+    font-size:.68rem;
+  }
+}
+</style><style id="final-clean-ui">
+/* ===== Final clean UI / no conflicting legacy behavior ===== */
+:root{
+  --shell-max:1180px;
+  --rail-w:218px;
+  --topbar-h:54px;
+  --paper:#fbfbfb;
+  --paper-2:#f2f4f7;
+  --text:#24282e;
+  --muted:#6d7580;
+  --line:#ccd3dc;
+  --accent:#456291;
+  --link:#456291;
+  --shadow:0 0 34px rgba(20,28,40,.15);
+}
+html.dark{
+  --paper:#0d1520;
+  --paper-2:#151f2c;
+  --text:#eef3f8;
+  --muted:#aab5c3;
+  --line:#344255;
+  --accent:#82a9d7;
+  --link:#9fc7f1;
+  --shadow:0 0 38px rgba(0,0,0,.34);
+}
+html{scroll-behavior:smooth}
+body{color:var(--text)}
+a{color:var(--link)}
+
+header,.topbar,.navbar,.site-header{
+  position:fixed!important;
+  top:0!important;
+  left:50%!important;
+  transform:translateX(-50%)!important;
+  width:min(var(--shell-max),calc(100% - 96px))!important;
+  max-width:var(--shell-max)!important;
+  height:var(--topbar-h)!important;
+  z-index:1200!important;
+  background:var(--paper)!important;
+  color:var(--text)!important;
+  border-bottom:1px solid var(--line)!important;
+  box-sizing:border-box!important;
+}
+body{padding-top:var(--topbar-h)!important}
+
+.page-shell,.main-layout,.site-shell,.shell-wrap{
+  width:min(var(--shell-max),calc(100% - 96px))!important;
+  max-width:var(--shell-max)!important;
+  margin:0 auto!important;
+  background:var(--paper)!important;
+  color:var(--text)!important;
+  box-shadow:var(--shadow)!important;
+}
+.shell,.main-grid,.wiki-shell{
+  display:grid!important;
+  grid-template-columns:var(--rail-w) minmax(0,1fr)!important;
+}
+.sidebar,.left-rail{
+  width:auto!important;
+  min-width:0!important;
+  background:var(--paper)!important;
+  color:var(--text)!important;
+  border-right:1px solid var(--line)!important;
+}
+.main,.content,.content-wrapper,.wiki-content{
+  min-width:0!important;
+  background:var(--paper)!important;
+  color:var(--text)!important;
+}
+
+.menu-toggle,.theme-toggle{
+  width:38px;height:38px;border:0;background:transparent;color:var(--text);
+  display:grid;place-items:center;border-radius:50%;cursor:pointer;flex:0 0 auto
+}
+.menu-toggle:hover,.theme-toggle:hover{background:var(--paper-2)}
+.menu-toggle svg,.theme-toggle svg{width:20px;height:20px;display:block}
+.menu-toggle{display:none}
+.theme-icon{display:grid}
+html:not(.dark) .theme-icon-sun{display:none}
+html.dark .theme-icon-moon{display:none}
+
+/* Sticky section nav */
+.section-tabs{
+  position:sticky!important;
+  top:var(--topbar-h)!important;
+  z-index:900!important;
+  display:flex!important;
+  width:100%!important;
+  margin:0 0 16px!important;
+  background:color-mix(in srgb,var(--paper) 95%,transparent)!important;
+  border-bottom:1px solid var(--accent)!important;
+  backdrop-filter:blur(12px);
+  overflow-x:auto!important;
+  scrollbar-width:none;
+}
+.section-tabs::-webkit-scrollbar{display:none}
+.section-tab{
+  min-width:112px!important;
+  padding:9px 14px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:7px!important;
+  background:transparent!important;
+  color:var(--link)!important;
+  border:0!important;
+  border-right:1px solid var(--line)!important;
+  text-decoration:none!important;
+  text-transform:uppercase;
+  letter-spacing:.035em;
+  font-size:.72rem!important;
+  font-weight:650!important;
+}
+.section-tab:first-child{border-left:1px solid var(--line)!important}
+.section-tab:hover{background:var(--paper-2)!important}
+.section-tab.active{background:var(--accent)!important;color:#fff!important}
+.section-tab-icon{width:15px;height:15px;display:grid;place-items:center;flex:0 0 15px}
+.section-tab-icon svg{width:15px;height:15px;display:block}
+#top,#synopsis,#plot,#gallery{scroll-margin-top:calc(var(--topbar-h) + 46px)!important}
+
+/* Mobile menu overlay */
+.menu-overlay{
+  display:none;
+  position:fixed;inset:var(--topbar-h) 0 0;z-index:1040;border:0;
+  background:rgba(0,0,0,.42);padding:0
+}
+
+/* dark-mode readability */
+html.dark body,
+html.dark .page-shell,
+html.dark .main-layout,
+html.dark .sidebar,
+html.dark .main,
+html.dark .content,
+html.dark .content-wrapper,
+html.dark .wiki-content,
+html.dark .section,
+html.dark .article-top,
+html.dark .infobox{
+  background-color:var(--paper)!important;
+  color:var(--text)!important;
+}
+html.dark h1,html.dark h2,html.dark h3,html.dark h4,
+html.dark p,html.dark li,html.dark td,html.dark th,
+html.dark .lede,html.dark .rail-title,html.dark .rail-link,
+html.dark .info-row b,html.dark .info-row span{
+  color:var(--text)!important;
+}
+html.dark .muted,html.dark .rail-sub,html.dark .nav-label{color:var(--muted)!important}
+html.dark .infobox,html.dark .gallery-item,html.dark .season-card{border-color:var(--line)!important}
+
+/* ensure old tab UI cannot reappear */
+.tab,.tabs:not(.section-tabs),.tabcontent,.tabpanel[hidden]{display:none!important}
+
+@media(max-width:850px){
+  header,.topbar,.navbar,.site-header,
+  .page-shell,.main-layout,.site-shell,.shell-wrap{
+    width:100%!important;
+    max-width:none!important;
+  }
+  .menu-toggle{display:grid!important}
+  .shell,.main-grid,.wiki-shell{display:block!important}
+  .sidebar,.left-rail{
+    position:fixed!important;
+    top:var(--topbar-h)!important;
+    left:0!important;
+    bottom:0!important;
+    width:min(290px,86vw)!important;
+    z-index:1100!important;
+    transform:translateX(-105%);
+    transition:transform .24s ease;
+    overflow-y:auto!important;
+    box-shadow:18px 0 44px rgba(0,0,0,.25);
+  }
+  body.menu-open .sidebar,
+  body.menu-open .left-rail{transform:translateX(0)}
+  body.menu-open .menu-overlay{display:block}
+  .main,.content,.content-wrapper,.wiki-content{margin-left:0!important}
+  .section-tabs{top:var(--topbar-h)!important}
+}
+@media(max-width:560px){
+  .section-tab{min-width:auto!important;flex:1 0 auto!important;padding:9px 10px!important}
+  .section-tab-label{font-size:.65rem}
+}
+</style><style id="mobile-toolbar-streamline">
+/* ===== Unified mobile control bar ===== */
+.unified-mobile-bar{
+  display:none;
+}
+
+/* desktop keeps existing header + section strip */
+@media(max-width:850px){
+  :root{ --mobile-bar-h:54px; }
+
+  /* one bar only */
+  header,.topbar,.navbar,.site-header{
+    height:var(--mobile-bar-h)!important;
+    min-height:var(--mobile-bar-h)!important;
+    padding:0!important;
+  }
+
+  /* hide any desktop-style header children except our unified bar */
+  header > *:not(.unified-mobile-bar),
+  .topbar > *:not(.unified-mobile-bar),
+  .navbar > *:not(.unified-mobile-bar),
+  .site-header > *:not(.unified-mobile-bar){
+    display:none!important;
+  }
+
+  .unified-mobile-bar{
+    display:grid!important;
+    grid-template-columns:44px minmax(0,1fr) 44px;
+    align-items:stretch;
+    width:100%;
+    height:var(--mobile-bar-h);
+    background:var(--paper);
+    color:var(--text);
+  }
+
+  .unified-icon-button{
+    border:0;
+    background:transparent;
+    color:var(--text);
+    display:grid;
+    place-items:center;
+    cursor:pointer;
+    padding:0;
+  }
+  .unified-icon-button:hover,
+  .unified-icon-button:focus-visible{
+    background:var(--paper-2);
+    outline:none;
+  }
+  .unified-icon-button svg{
+    width:19px;
+    height:19px;
+    display:block;
+  }
+
+  .unified-section-links{
+    min-width:0;
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    border-left:1px solid var(--line);
+    border-right:1px solid var(--line);
+  }
+
+  .unified-section-link{
+    min-width:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    padding:4px 2px;
+    color:var(--muted)!important;
+    text-decoration:none!important;
+    border-right:1px solid var(--line);
+    font-size:.58rem;
+    line-height:1;
+    text-transform:uppercase;
+    letter-spacing:.02em;
+    font-weight:650;
+  }
+  .unified-section-link:last-child{border-right:0}
+  .unified-section-link svg{
+    width:15px;
+    height:15px;
+    display:block;
+  }
+  .unified-section-link:hover{
+    background:var(--paper-2);
+    color:var(--text)!important;
+  }
+  .unified-section-link.active{
+    background:var(--accent);
+    color:#fff!important;
+  }
+
+  .theme-icon{display:grid;place-items:center}
+  html:not(.dark) .theme-icon-sun{display:none}
+  html.dark .theme-icon-moon{display:none}
+
+  /* prevent duplicate sticky strip on mobile */
+  .section-tabs{
+    display:none!important;
+  }
+
+  body{
+    padding-top:var(--mobile-bar-h)!important;
+  }
+
+  .sidebar,.left-rail{
+    top:var(--mobile-bar-h)!important;
+  }
+  .menu-overlay{
+    inset:var(--mobile-bar-h) 0 0!important;
+  }
+
+  #top,#synopsis,#plot,#gallery{
+    scroll-margin-top:calc(var(--mobile-bar-h) + 8px)!important;
+  }
+}
+
+@media(max-width:470px){
+  .unified-mobile-bar{
+    grid-template-columns:42px minmax(0,1fr) 42px;
+  }
+  .unified-section-link span{
+    display:none;
+  }
+  .unified-section-link svg{
+    width:17px;
+    height:17px;
+  }
+}
 </style></head>
 <body>
 <div aria-hidden="true" class="progress"><i></i></div>
 <header class="site-header">
-<div class="header-actions"><button aria-label="Open navigation" class="iconbtn menu" id="menuBtn"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button><a class="brand" href="#top"><img alt="" src="/wiki/img/fractalavatar.png"/><span>South Park Wiki</span></a></div>
-<div class="header-actions"><button aria-label="Toggle dark mode" class="iconbtn" data-icon="moon" id="themeBtn" title="Toggle light/dark mode"><svg aria-hidden="true" class="moon-icon" viewbox="0 0 24 24"><path d="M20 15.3A8.5 8.5 0 0 1 8.7 4a8.5 8.5 0 1 0 11.3 11.3Z"></path></svg></button></div>
-</header>
+
+
+<div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation">
+<button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button" data-menu-toggle="" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M4.5 7h15M4.5 12h15M4.5 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+</svg>
+</button>
+<div class="unified-section-links">
+<a aria-label="Top" class="unified-section-link active" data-section="top" href="#top">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M12 19V5m0 0-5 5m5-5 5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg><span>Top</span>
+</a>
+<a aria-label="Synopsis" class="unified-section-link" data-section="synopsis" href="#synopsis">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<rect fill="none" height="15" rx="1.5" stroke="currentColor" stroke-width="1.7" width="14" x="5" y="4.5"></rect>
+<path d="M8 8h8M8 11.5h8M8 15h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"></path>
+</svg><span>Synopsis</span>
+</a>
+<a aria-label="Plot" class="unified-section-link" data-section="plot" href="#plot">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<circle cx="6.2" cy="6.2" fill="none" r="2.1" stroke="currentColor" stroke-width="1.7"></circle>
+<circle cx="17.8" cy="17.8" fill="none" r="2.1" stroke="currentColor" stroke-width="1.7"></circle>
+<path d="M7.7 7.7c2 2 1.9 4.1 4 5.4 1.5.9 2.8.5 4.5 2.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"></path>
+</svg><span>Plot</span>
+</a>
+<a aria-label="Gallery" class="unified-section-link" data-section="gallery" href="#gallery">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<rect fill="none" height="14" rx="1.8" stroke="currentColor" stroke-width="1.7" width="17" x="3.5" y="5"></rect>
+<circle cx="8.2" cy="9.4" fill="currentColor" r="1.2"></circle>
+<path d="m5.6 17 4.2-4.2 3 2.8 2.2-2.2 3.5 3.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path>
+</svg><span>Gallery</span>
+</a>
+</div>
+<button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
+<span class="theme-icon theme-icon-moon">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg></span>
+<span class="theme-icon theme-icon-sun">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8"></circle>
+<path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+</svg></span>
+</button>
+</div></header>
 <div class="shell">
-<aside class="sidebar" id="sidebar"><div class="rail-brand"><p class="rail-title">South Park Wiki</p><p class="rail-sub">episode archive</p></div><div class="rail-section"><div class="nav-label">Contents</div><nav class="rail-nav" id="toc"><a class="rail-link active" data-id="top" href="#top"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path></svg><span>Top</span></a><a class="rail-link" data-id="synopsis" href="#synopsis"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h4"></path></svg><span>Synopsis</span></a><a class="rail-link" data-id="plot" href="#plot"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h10"></path></svg><span>Plot</span></a><a class="rail-link" data-id="gallery" href="#gallery"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="14" rx="1.5" width="16" x="4" y="5"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="m6 17 4-4 3 3 2-2 3 3"></path></svg><span>Gallery</span></a></nav></div><div class="rail-section"><div class="nav-label">Explore</div><nav class="rail-nav"><a class="rail-link" href="/sp/"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="14" rx="1.5" width="16" x="4" y="5"></rect><path d="M8 9h3M8 13h3M14 9h2M14 13h2"></path></svg><span>Episodes</span></a><a class="rail-link" href="/sp/"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4 8-4Z"></path><path d="m4 12 8 4 8-4M4 17l8 4 8-4"></path></svg><span>Seasons</span></a><a class="rail-link" href="#"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><circle cx="9" cy="9" r="3"></circle><circle cx="16.5" cy="10" r="2.5"></circle><path d="M3.5 20c.5-4 2.5-6 5.5-6s5 2 5.5 6M14 15c3 0 5 1.7 5.5 5"></path></svg><span>Characters</span></a><a class="rail-link" href="#"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle></svg><span>Locations</span></a><a class="rail-link" href="/sp/"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.9L12 3Z"></path></svg><span>Specials</span></a><a class="rail-link" href="/sp/movie"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="6"></rect><path d="M7 6 9 3h3l-2 3M13 6l2-3h3l-2 3M3 10h18"></path></svg><span>Movie</span></a></nav></div><div class="rail-section"><div class="nav-label">Recent seasons</div><div class="season-grid"><a class="current" href="#">28</a><a href="#">27</a><a href="#">26</a><a href="/sp/">All</a></div></div></aside>
+<aside class="sidebar" id="sidebar"><div class="rail-brand"><p class="rail-title">South Park Wiki</p><p class="rail-sub">episode archive</p></div><div class="rail-section"><div class="nav-label">Contents</div><nav class="rail-nav" id="toc"><a class="rail-link active" data-id="top" href="#top"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path></svg><span>Top</span></a><a class="rail-link" data-id="synopsis" href="#synopsis"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h4"></path></svg><span>Synopsis</span></a><a class="rail-link" data-id="plot" href="#plot"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h10"></path></svg><span>Plot</span></a><a class="rail-link" data-id="gallery" href="#gallery"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="14" rx="1.5" width="16" x="4" y="5"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="m6 17 4-4 3 3 2-2 3 3"></path></svg><span>Gallery</span></a></nav></div><div class="rail-section"><div class="nav-label">Explore</div><nav class="rail-nav"><a class="rail-link" href="/sp/"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="14" rx="1.5" width="16" x="4" y="5"></rect><path d="M8 9h3M8 13h3M14 9h2M14 13h2"></path></svg><span>Episodes</span></a><a class="rail-link" href="#"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><circle cx="9" cy="9" r="3"></circle><circle cx="16.5" cy="10" r="2.5"></circle><path d="M3.5 20c.5-4 2.5-6 5.5-6s5 2 5.5 6M14 15c3 0 5 1.7 5.5 5"></path></svg><span>Characters</span></a><a class="rail-link" href="#"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle></svg><span>Locations</span></a></nav></div><div class="rail-section"><div class="nav-label">Recent seasons</div><div class="season-grid"><a class="current" href="#">28</a><a href="#">27</a><a href="#">26</a><a href="/sp/">All</a></div></div></aside>
 <div class="overlay" id="overlay"></div>
 <main class="main" id="main">
-
 <nav aria-label="Episode navigation" class="episode-nav-strip">
 <a class="ep-prev" href="#"><span class="nav-small">Previous</span><strong>← Turkey Trot</strong></a>
 <div class="ep-current"><span>Season 28 · Episode 5</span><strong>The Crap Out</strong></div>
 <a class="ep-next" href="#"><span class="nav-small">Next</span><strong>TBA →</strong></a>
 </nav><section class="hero" id="top"><div class="eyebrow"><span class="chip">Season 28</span><span class="chip">Episode 5</span></div><h1>The Crap Out</h1></section>
-<div class="tabs" role="tablist"><button aria-controls="general" aria-selected="true" class="tabbtn active" data-tab="general" role="tab">Article</button><button aria-controls="trivia" aria-selected="false" class="tabbtn" data-tab="trivia" role="tab">Trivia</button><button aria-selected="false" class="tabbtn" data-tab="gallery" role="tab">Gallery</button></div>
+<div aria-label="Article sections" class="section-tabs" role="tablist"><a class="section-tab" data-section="top" href="#top"><span class="section-tab-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 19V5m0 0-5 5m5-5 5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9"></path></svg></span><span class="section-tab-label">Top</span></a><a class="section-tab" data-section="synopsis" href="#synopsis"><span class="section-tab-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 4.5h14v15H5zM8 8h8M8 11.5h8M8 15h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></span><span class="section-tab-label">Synopsis</span></a><a class="section-tab" data-section="plot" href="#plot"><span class="section-tab-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="6" cy="6" fill="none" r="2.2" stroke="currentColor" stroke-width="1.7"></circle><circle cx="18" cy="18" fill="none" r="2.2" stroke="currentColor" stroke-width="1.7"></circle><path d="M7.6 7.6c2.1 2.1 1.8 4.3 4 5.6 1.4.8 2.8.4 4.7 2.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"></path></svg></span><span class="section-tab-label">Plot</span></a><a class="section-tab" data-section="gallery" href="#gallery"><span class="section-tab-icon"><svg aria-hidden="true" viewbox="0 0 24 24"><rect fill="none" height="14" rx="1.8" stroke="currentColor" stroke-width="1.7" width="17" x="3.5" y="5"></rect><circle cx="8.2" cy="9.4" fill="currentColor" r="1.3"></circle><path d="m5.5 17 4.2-4.2 3.1 2.8 2.1-2.1 3.6 3.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path></svg></span><span class="section-tab-label">Gallery</span></a></div>
 <section class="tabpanel active" id="general" role="tabpanel">
 <div class="article-top">
 <div><p class="lede"><strong>The Crap Out</strong> is the fifth episode of Season 28, and the 338th overall episode of South Park. It aired on December 10, 2025.</p>
@@ -348,9 +967,7 @@ html.dark .season-card{
 </div>
 <section class="section" id="plot"><h2>Plot <a aria-label="Link to Plot" class="anchor" href="#plot">#</a></h2><div class="quote">“We need some goddamn Christmas magic!” <span>— Stan</span></div><p>At South Park Elementary, Stan is seeing the school counsellor
 
-	  <sup><a data-hover-content="&lt;div class='hover-content'&gt;
-    &lt;p&gt;In this episode, the counsellor is Jesus Christ, following the sacking of Mr Mackey in the previous season.&lt;/p&gt;
-    &lt;/div&gt;" href="#">[1]</a> </sup>
+	  <sup><a data-hover-content="&lt;div class='hover-content'&gt;&lt;p&gt;In this episode, the counsellor is Jesus Christ, following the sacking of Mr Mackey in the previous season.&lt;/p&gt;&lt;/div&gt;" href="#">[1]</a> </sup>
 	
 	and talking about how tough the last few months have been, mentioning ICE raids, his dad's company going out of business, and losing their home and moving in with his grandfather at Shady Acres and admits he isn't able to cope with all of the change around them. Jesus Christ, having fully embraced the 'Power Christian' lifestyle now, strums an electric guitar and questions what has changed so much. Stan points out people aren't so kind and giving anymore, and admits he is considering sharing the Saudi Arabian money he won in the Turkey Trot race because he feels like that's what everyone needs, comparing it to a Christmas miracle. Jesus calls this "socialist bullshit" and Stan expresses frustration at how Jesus has changed, reminding him he doesn't want to live in an old folks' home anymore and needs some Christmas magic. Peggy Rockbottom then enters the counsellor's office with Pinot Grigio to which Jesus protests what took her so long and tells her to shut up, while she explains to him and Stan she is only late because she went to sing to the needy for charity work. Jesus tells Stan at this time of year, everyone wishes things were better, but that nothing miraculous will happen to anyone.</p>
 <p>At the White House, Satan is decorating the nursey and crib with Christmas decorations while singing to himself about the incoming arrival of his new baby, listening to a Fox News special report on the baby's upcoming arrival, with the report mentioning that no one is aware how the baby will be born, but that the "crap out" is coming. Satan's decorations include a 'Baby's First Christmas' and Labubu ornaments. but when singing a verse about the baby's dad, Satan realizes Donald Trump, the baby's father, is not present, and questions Dan Scavino and Pam Bondi about his whereabouts, explaining they planned to spend the day singing and decorating together. Scavino informs him Trump had to fly to Colorado on an "urgent matter", insisting it is "high-level classified" and that even they don't have the security clearance to know what's going on, to Satan's anger. After he leaves, Scavino dismisses Satan's concern as pregnancy hormones while Bondi admits she does find it strange that Trump hasn't informed her why he visited Colorado, and Scavino suggests as Trump claimed only he and the Vice President were allowed to know, it must be a covert military operation. Trump and Vance, however, are on Main Street South Park across from the Park County Police Station, dressed as Santa Claus and an elf and pretending to collect donations for the Salvation Army charity organization for Christmas. Vance explains to Trump that Peter Thiel is being held at the station and confirms only Thiel can prevent the unholy birth. Mr. Mackey apologizes for not donating to the Salvation Army, recounting how he lost his job due to a lack of government funding for schools, as well as his health care, and the high cost of tariffs. Trump expresses no concern and wishes him a merry Christmas. As he leaves, Vance warns Trump they need to hurry before the "crap out" can take place, and they synchronize watches to enact 'Operation Kill My Own Baby'.</p>
@@ -361,29 +978,137 @@ html.dark .season-card{
 <section class="section" id="gallery"><h2>Gallery <a aria-label="Link to Gallery" class="anchor" href="#gallery">#</a></h2><div class="gallery"><button class="gallery-item" type="button"><img alt="Episode gallery image" loading="lazy" src="/wiki/img/episodes/sotm.png"/></button>
 <button class="gallery-item" type="button"><img alt="Episode gallery image" loading="lazy" src="/wiki/img/episodes/gan.png"/></button>
 <button class="gallery-item" type="button"><img alt="Episode gallery image" loading="lazy" src="/wiki/img/episodes/sickofancy.png"/></button></div></section>
-<section class="section" id="season-navigation"><h2>Season 28</h2><div class="season-card"><div class="season-head"><span>Episode navigation</span><span>5 episodes</span></div><div class="episode-list"><a href="#">Twisted Christian</a><a href="#">The Woman in the Hat</a><a href="#">Sora Not Sorry</a><a href="#">Turkey Trot</a><a class="current" href="#top">The Crap Out</a></div></div></section>
+<section class="section" id="season-navigation"><h2>Season 28</h2><div class="season-card"><div class="season-head"><span>Episode navigation</span><span>5 episodes</span></div><div class="episode-list"><a href="#"><span class="ep-num">1</span>Twisted Christian</a><a href="#"><span class="ep-num">2</span>The Woman in the Hat</a><a href="#"><span class="ep-num">3</span>Sora Not Sorry</a><a href="#"><span class="ep-num">4</span>Turkey Trot</a><a class="current" href="#top"><span class="ep-num">5</span>The Crap Out</a></div></div></section>
 <div class="categories"><a href="#">Episodes</a><a href="#">Season 28</a></div><p class="footer">Created by Lewis</p>
 </section>
-<section class="tabpanel" id="trivia" role="tabpanel"><div class="trivia-card"><h2>Trivia</h2><p>The original title was <strong>The Spawn of Satan</strong> before being changed three days prior to air.</p></div></section>
 </main>
 </div>
 <div aria-label="Gallery image" aria-modal="true" class="lightbox" id="lightbox" role="dialog"><button aria-label="Close" id="lightboxClose">×</button><img alt="" id="lightboxImg"/></div><div class="toast" id="toast">Link copied</div>
 <script>
-(()=>{
- const root=document.documentElement, body=document.body, themeBtn=document.getElementById('themeBtn');
- const moon=`<svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.3A8.5 8.5 0 0 1 8.7 4a8.5 8.5 0 1 0 11.3 11.3Z"/></svg>`;
- const sun=`<svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>`;
- if(localStorage.getItem('darkMode')==='enabled') root.classList.add('dark');
- const syncTheme=()=>{themeBtn.innerHTML=root.classList.contains('dark')?sun:moon;themeBtn.setAttribute('aria-label',root.classList.contains('dark')?'Switch to light mode':'Switch to dark mode')};syncTheme();
- themeBtn.addEventListener('click',()=>{root.classList.toggle('dark');localStorage.setItem('darkMode',root.classList.contains('dark')?'enabled':'disabled');syncTheme()});
- const menuBtn=document.getElementById('menuBtn'),overlay=document.getElementById('overlay'); const closeNav=()=>body.classList.remove('nav-open');
- menuBtn?.addEventListener('click',()=>body.classList.toggle('nav-open'));overlay?.addEventListener('click',closeNav);document.querySelectorAll('#sidebar a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<=850)closeNav()}));
- const activateTab=(target)=>{document.querySelectorAll('.tabbtn').forEach(b=>{const active=b.dataset.tab===target;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active))});document.querySelectorAll('.tabpanel').forEach(p=>p.classList.toggle('active',p.id===target));};
- document.querySelectorAll('.tabbtn').forEach(btn=>btn.addEventListener('click',()=>{if(btn.dataset.tab==='gallery'){activateTab('general');requestAnimationFrame(()=>document.getElementById('gallery')?.scrollIntoView({behavior:'smooth',block:'start'}));return;}activateTab(btn.dataset.tab)}));
- const bar=document.querySelector('.progress i'); const updateProgress=()=>{if(!bar)return;const max=document.documentElement.scrollHeight-innerHeight;bar.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'};addEventListener('scroll',updateProgress,{passive:true});updateProgress();
- const ids=['top','synopsis','plot','gallery'];const toc=[...document.querySelectorAll('#toc .rail-link')];const setActive=id=>toc.forEach(a=>a.classList.toggle('active',a.dataset.id===id));const obs=new IntersectionObserver(entries=>{const hit=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(hit)setActive(hit.target.id)},{rootMargin:'-15% 0px -70% 0px',threshold:[0,.2,.6]});ids.map(id=>document.getElementById(id)).filter(Boolean).forEach(el=>obs.observe(el));
- const toast=document.getElementById('toast');document.querySelectorAll('.anchor').forEach(a=>a.addEventListener('click',async e=>{e.preventDefault();history.replaceState(null,'',a.getAttribute('href'));try{await navigator.clipboard.writeText(location.href)}catch{}toast?.classList.add('show');setTimeout(()=>toast?.classList.remove('show'),900);document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})}));
- const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');document.querySelectorAll('.gallery-item').forEach(b=>b.addEventListener('click',()=>{const i=b.querySelector('img');if(!i||!lb||!lbImg)return;lbImg.src=i.src;lbImg.alt=i.alt;lb.classList.add('open')}));const closeLb=()=>lb?.classList.remove('open');document.getElementById('lightboxClose')?.addEventListener('click',closeLb);lb?.addEventListener('click',e=>{if(e.target===lb)closeLb()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLb();closeNav()}});
-})();
-</script>
-</body></html>
+document.addEventListener("DOMContentLoaded", () => {
+  const removeTip = (el) => {
+    const id = el?.dataset?.hoverId;
+    if (!id) return;
+    const wrapper = document.getElementById(id);
+    if (wrapper) wrapper.remove();
+    delete el.dataset.hoverId;
+  };
+
+  const placeTip = (e, wrapper) => {
+    const pad = 12;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const w = wrapper.offsetWidth || 270;
+    const h = wrapper.offsetHeight || 90;
+    let left = Math.min(window.innerWidth - w - pad, Math.max(pad, rect.left + rect.width / 2 - w / 2));
+    let top = rect.bottom + 8;
+    if (top + h > window.innerHeight - pad) top = Math.max(pad, rect.top - h - 8);
+    wrapper.style.left = `${left}px`;
+    wrapper.style.top = `${top}px`;
+  };
+
+  document.querySelectorAll("[data-hover-content]").forEach(el => {
+    el.addEventListener("mouseenter", e => {
+      removeTip(el);
+      const wrapper = document.createElement("div");
+      const id = "hover-" + Math.random().toString(36).slice(2,10);
+      wrapper.id = id;
+      wrapper.setAttribute("data-hover-wrapper","");
+      wrapper.style.position = "fixed";
+      wrapper.style.opacity = "0";
+      wrapper.style.transform = "translateY(3px)";
+      wrapper.innerHTML = el.getAttribute("data-hover-content");
+      document.body.appendChild(wrapper);
+      el.dataset.hoverId = id;
+      placeTip(e, wrapper);
+      requestAnimationFrame(() => {
+        wrapper.style.opacity = "1";
+        wrapper.style.transform = "translateY(0)";
+      });
+    });
+    el.addEventListener("mousemove", e => {
+      const id = el.dataset.hoverId;
+      const wrapper = id ? document.getElementById(id) : null;
+      if (wrapper) placeTip(e, wrapper);
+    });
+    el.addEventListener("mouseleave", () => removeTip(el));
+  });
+
+  window.addEventListener("scroll", () => {
+    document.querySelectorAll("[data-hover-wrapper]").forEach(el => el.remove());
+    document.querySelectorAll("[data-hover-id]").forEach(el => el.removeAttribute("data-hover-id"));
+  }, {passive:true});
+});
+</script><button aria-label="Close navigation" class="menu-overlay" type="button"></button><script id="unified-mobile-controller">
+document.addEventListener("DOMContentLoaded", () => {
+  const root = document.documentElement;
+  const body = document.body;
+  const menuBtn = document.querySelector("[data-menu-toggle]");
+  const overlay = document.querySelector(".menu-overlay");
+  const themeBtn = document.querySelector("[data-theme-toggle]");
+
+  // Theme
+  const savedTheme = localStorage.getItem("wikiTheme");
+  const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+  root.classList.toggle("dark", savedTheme ? savedTheme === "dark" : !!prefersDark);
+
+  const syncThemeLabel = () => {
+    if (!themeBtn) return;
+    const dark = root.classList.contains("dark");
+    themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    themeBtn.setAttribute("title", dark ? "Light mode" : "Dark mode");
+  };
+  syncThemeLabel();
+
+  themeBtn?.addEventListener("click", () => {
+    const dark = root.classList.toggle("dark");
+    localStorage.setItem("wikiTheme", dark ? "dark" : "light");
+    syncThemeLabel();
+  });
+
+  // Mobile sidebar
+  const setMenu = open => {
+    body.classList.toggle("menu-open", open);
+    menuBtn?.setAttribute("aria-expanded", String(open));
+    body.style.overflow = open && innerWidth <= 850 ? "hidden" : "";
+  };
+
+  menuBtn?.addEventListener("click", () => {
+    setMenu(!body.classList.contains("menu-open"));
+  });
+  overlay?.addEventListener("click", () => setMenu(false));
+
+  document.querySelectorAll(".sidebar a, .left-rail a").forEach(a => {
+    a.addEventListener("click", () => {
+      if (innerWidth <= 850) setMenu(false);
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    if (innerWidth > 850) setMenu(false);
+  }, {passive:true});
+
+  // Active section state for both desktop and unified mobile nav
+  const navLinks = [...document.querySelectorAll(".section-tab, .unified-section-link")];
+  const ids = ["top","synopsis","plot","gallery"];
+  const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+
+  const setActive = id => {
+    navLinks.forEach(link => {
+      link.classList.toggle("active", link.dataset.section === id);
+    });
+  };
+  setActive("top");
+
+  const observer = new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(e => e.isIntersecting)
+      .sort((a,b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) setActive(visible.target.id);
+  }, {
+    rootMargin:"-20% 0px -65% 0px",
+    threshold:[0,.1,.35]
+  });
+
+  sections.forEach(section => observer.observe(section));
+});
+</script></body></html>
