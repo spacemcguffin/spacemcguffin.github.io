@@ -1337,6 +1337,7 @@ html.dark .plot-location-scrap{
      </svg>
     </button>
     <div class="unified-section-links">
+     
      <a aria-label="Top" class="unified-section-link active" data-section="top" href="#top">
       <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
        <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -1346,6 +1347,7 @@ html.dark .plot-location-scrap{
        Top
       </span>
      </a>
+     
      <a aria-label="Appearance" class="unified-section-link" data-section="appearance" href="#appearance">
       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
        <path d="M9 4h6l-.8 5.1 2.8 2.8v1.6H7v-1.6l2.8-2.8L9 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
@@ -1357,15 +1359,7 @@ html.dark .plot-location-scrap{
        Appearance
       </span>
      </a>
-     <a aria-label="Rooms" class="unified-section-link" data-section="rooms" href="#rooms">
-      <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
-       <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-       </path>
-      </svg>
-      <span>
-       Rooms
-      </span>
-     </a>
+     
      <a aria-label="Trivia" class="unified-section-link" data-section="trivia" href="#trivia">
       <svg aria-hidden="true" class="nav-svg trivia-book-icon" viewbox="0 0 24 24">
        <path d="M4.5 5.5h5.8c1.1 0 1.7.3 1.7 1.2v11.8c0-.9-.6-1.3-1.7-1.3H4.5V5.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
@@ -1377,6 +1371,7 @@ html.dark .plot-location-scrap{
        Trivia
       </span>
      </a>
+     
      <a aria-label="Gallery" class="unified-section-link" data-section="gallery" href="#gallery">
       <svg aria-hidden="true" viewbox="0 0 24 24">
        <rect fill="none" height="14" rx="1.8" stroke="currentColor" stroke-width="1.7" width="17" x="3.5" y="5">
@@ -1390,6 +1385,7 @@ html.dark .plot-location-scrap{
        Gallery
       </span>
      </a>
+     
     </div>
     <button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
      <span aria-hidden="true" class="theme-icon-slot">
@@ -1563,17 +1559,9 @@ html.dark .plot-location-scrap{
        Appearance
       </span>
      </a>
-     <a class="section-tab" data-section="rooms" href="#rooms">
-      <span class="section-tab-icon">
-       <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
-        <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-        </path>
-       </svg>
-      </span>
-      <span class="section-tab-label">
-       Rooms
-      </span>
-     </a>
+     
+
+     
      <a class="section-tab" data-section="trivia" href="#trivia">
       <span class="section-tab-icon">
        <svg aria-hidden="true" class="nav-svg trivia-book-icon" viewbox="0 0 24 24">
@@ -1736,51 +1724,10 @@ html.dark .plot-location-scrap{
        </section>
       </div>
      </div>
-     <!-- ==================== ROOMS ==================== -->
-     <section class="section" id="rooms">
-      <h2>
-       Rooms
-      </h2>
 
-      <div class="plot-location-scrap">
-       Interior
-      </div>
+     
 
-      <ul class="trivia-list">
-        <li>Reception</li>
-        <li>Main Corridor</li>
-        <li>Headteacher's Office</li>
-        <li>Room 1</li>
-        <li>English Classroom</li>
-        <li>Maths Classroom</li>
-        <li>Science Labs</li>
-        <li>ICT Suite</li>
-        <li>Humanities Classroom</li>
-        <li>Art Room</li>
-        <li>Music Room</li>
-        <li>Technology Block</li>
-        <li>Special Needs Classroom</li>
-        <li>Assembly Hall</li>
-        <li>Gymnasium</li>
-        <li>Library</li>
-        <li>Food Hall</li>
-        <li>Staff Room</li>
-      </ul>
-      
-      <p></p>
-      
-      <div class="plot-location-scrap">
-       Exterior
-      </div>
-
-      <ul class="trivia-list">
-        <li>Car Park</li>
-        <li>School Fields</li>
-        <li>Quadrangles</li>
-      </ul>
-      
-     </section>
-     <!-- ==================== GALLERY ==================== -->
+     <!-- ==================== TRIVIA AND GALLERY ==================== -->
      <section class="section" id="trivia">
       <h2>
        Trivia
@@ -1797,6 +1744,8 @@ html.dark .plot-location-scrap{
        </li>
       </ul>
      </section>
+
+     
      <section class="section" id="gallery">
       <h2>
        Gallery
@@ -1924,7 +1873,7 @@ html.dark .plot-location-scrap{
   }
 
   /* stable section tracking: no IntersectionObserver switching */
-  const sectionIds = ["top","appearance","rooms","trivia","gallery"];
+  const sectionIds = ["top","appearance","trivia","gallery"];
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const sectionLinks = [
     ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
