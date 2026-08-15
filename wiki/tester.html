@@ -818,6 +818,11 @@ html.dark .season-head{background:#567aa6}
   font-weight:650;
 }
 
+/* Small top buffer for wider views; mobile remains flush */
+@media(min-width:851px){
+  .episode-nav-strip{margin-top:10px}
+}
+
 /* ---------- tablet ---------- */
 @media(max-width:1050px) and (min-width:851px){
   .shell{width:calc(100% - 42px)}
