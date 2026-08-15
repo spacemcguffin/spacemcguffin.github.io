@@ -1458,6 +1458,368 @@ html.dark .section-tab.active:hover{
     line-height:.96!important;
   }
 }
+  
+
+/* ============================================================
+   DESKTOP COLLAPSIBLE SIDEBAR
+   Sidebar is visible by default. Collapsing lets main fill shell.
+   ============================================================ */
+@media (min-width:851px){
+
+  .shell{
+    position:relative!important;
+    transition:grid-template-columns .22s ease!important;
+  }
+
+  .desktop-sidebar-toggle{
+    position:absolute;
+    top:18px;
+    left:calc(205px - 16px);
+    z-index:120;
+    width:32px;
+    height:32px;
+    display:grid;
+    place-items:center;
+    padding:0;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--text);
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+    cursor:pointer;
+    transition:
+      left .22s ease,
+      background .15s ease,
+      color .15s ease,
+      transform .15s ease;
+  }
+
+  .desktop-sidebar-toggle:hover{
+    background:var(--panel);
+    transform:translateY(-1px);
+  }
+
+  .desktop-sidebar-toggle svg{
+    width:16px;
+    height:16px;
+    display:block;
+  }
+
+  .sidebar-toggle-open{
+    display:none;
+  }
+
+  .shell.sidebar-collapsed{
+    grid-template-columns:0 minmax(0,1fr)!important;
+  }
+
+  .shell.sidebar-collapsed > .sidebar{
+    width:0!important;
+    min-width:0!important;
+    overflow:hidden!important;
+    opacity:0;
+    pointer-events:none;
+    border-right:0!important;
+  }
+
+  .shell.sidebar-collapsed > .main{
+    grid-column:2!important;
+    width:100%!important;
+    max-width:none!important;
+  }
+
+  .shell.sidebar-collapsed .desktop-sidebar-toggle{
+    left:10px;
+  }
+
+  .shell.sidebar-collapsed .sidebar-toggle-close{
+    display:none;
+  }
+
+  .shell.sidebar-collapsed .sidebar-toggle-open{
+    display:grid;
+  }
+
+  .sidebar{
+    transition:
+      opacity .16s ease,
+      width .22s ease;
+  }
+}
+
+/* Mobile keeps using the existing drawer/menu system. */
+@media (max-width:850px){
+  .desktop-sidebar-toggle{
+    display:none!important;
+  }
+}
+  
+
+/* ============================================================
+   CLEAN DESKTOP CONTROL PLACEMENT
+   ============================================================ */
+@media (min-width:851px){
+  .sidebar{
+    display:flex!important;
+    flex-direction:column!important;
+  }
+
+  .sidebar-footer-controls{
+    margin-top:auto;
+    padding:12px 11px 14px;
+    border-top:1px solid var(--line);
+    background:var(--panel-solid);
+  }
+
+  .sidebar-footer-label{
+    display:block;
+    margin:0 0 7px 5px;
+    color:var(--muted);
+    font-size:.56rem;
+    font-weight:720;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+  }
+
+  .sidebar-theme-toggle{
+    width:100%;
+    min-height:36px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 9px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--paper);
+    color:var(--text);
+    cursor:pointer;
+    text-align:left;
+  }
+
+  .sidebar-theme-toggle:hover{
+    background:var(--panel);
+  }
+
+  .sidebar-theme-toggle svg,
+  .collapsed-theme-toggle svg{
+    width:16px;
+    height:16px;
+  }
+
+  .sidebar-theme-text{
+    flex:1;
+    font-size:.7rem;
+    font-weight:600;
+  }
+
+  .collapsed-theme-toggle{
+    display:none;
+    position:absolute;
+    top:18px;
+    right:18px;
+    z-index:110;
+    width:34px;
+    height:34px;
+    place-items:center;
+    padding:0;
+    border:1px solid var(--line);
+    border-radius:50%;
+    background:var(--paper);
+    color:var(--text);
+    box-shadow:0 2px 8px rgba(0,0,0,.11);
+    cursor:pointer;
+  }
+
+  .collapsed-theme-toggle:hover{
+    background:var(--panel);
+  }
+
+  .shell.sidebar-collapsed .collapsed-theme-toggle{
+    display:grid;
+  }
+
+  /* Keep collapse control isolated on the sidebar seam. */
+  .desktop-sidebar-toggle{
+    top:18px!important;
+  }
+}
+
+@media (max-width:850px){
+  .sidebar-footer-controls,
+  .collapsed-theme-toggle{
+    display:none!important;
+  }
+}
+  
+
+/* ============================================================
+   SIDEBAR APPEARANCE CONTROL — moved near top
+   ============================================================ */
+@media (min-width:851px){
+  .sidebar-appearance-row{
+    padding:9px 11px 10px;
+    border-bottom:1px solid var(--line);
+    background:var(--panel-solid);
+  }
+
+  .sidebar-theme-toggle{
+    width:100%;
+    min-height:34px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 9px;
+    border:1px solid var(--line);
+    border-radius:5px;
+    background:var(--paper);
+    color:var(--text);
+    cursor:pointer;
+    text-align:left;
+  }
+
+  .sidebar-theme-toggle:hover{
+    background:var(--panel);
+  }
+
+  .sidebar-theme-toggle svg{
+    width:16px;
+    height:16px;
+  }
+
+  .sidebar-theme-text{
+    flex:1;
+    font-size:.69rem;
+    font-weight:600;
+  }
+
+  /* Old footer placement is no longer used. */
+  .sidebar-footer-controls{
+    display:none!important;
+  }
+}
+
+@media(max-width:850px){
+  .sidebar-appearance-row{
+    display:none!important;
+  }
+}
+  
+
+/* ============================================================
+   FIXED THEME ICON POSITION
+   ============================================================ */
+.theme-icon-slot{
+  position:relative;
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  display:grid;
+  place-items:center;
+}
+
+.theme-icon-slot .theme-icon{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+}
+
+.theme-icon-slot svg{
+  width:16px;
+  height:16px;
+}
+
+html:not(.dark) .theme-icon-slot .theme-icon-sun{
+  display:none!important;
+}
+
+html.dark .theme-icon-slot .theme-icon-moon{
+  display:none!important;
+}
+
+/* Labeled sidebar button: icon always stays on the left. */
+.sidebar-theme-toggle{
+  justify-content:flex-start!important;
+}
+
+.sidebar-theme-text{
+  flex:1;
+  text-align:left;
+}
+
+/* Icon-only controls: icon stays centered in exactly the same spot. */
+.collapsed-theme-toggle .theme-icon-slot,
+[data-theme-toggle] .theme-icon-slot{
+  margin:auto;
+}
+  
+
+/* ============================================================
+   WIDE VIEW — INDIVIDUAL FADED PAPER COLOURS
+   Colours remain constant until the button is active.
+   ============================================================ */
+@media (min-width:851px){
+
+  .section-tab:nth-child(4n + 1){
+    background:#ddd8c7!important; /* faded parchment */
+  }
+
+  .section-tab:nth-child(4n + 2){
+    background:#cfded9!important; /* faded sage / aqua */
+  }
+
+  .section-tab:nth-child(4n + 3){
+    background:#dfd0c7!important; /* faded peach */
+  }
+
+  .section-tab:nth-child(4n + 4){
+    background:#d4d8c5!important; /* faded olive */
+  }
+
+  /* Hover keeps each scrap's own paper colour. */
+  .section-tab:hover:not(.active){
+    filter:brightness(1.025)!important;
+  }
+
+  /* Active always overrides its individual colour with blue. */
+  .section-tab.active,
+  .section-tab:nth-child(4n + 1).active,
+  .section-tab:nth-child(4n + 2).active,
+  .section-tab:nth-child(4n + 3).active,
+  .section-tab:nth-child(4n + 4).active,
+  .section-tab.active:hover{
+    background:#456291!important;
+    color:#fff!important;
+    filter:none!important;
+  }
+
+  /* Dark mode still uses faded coloured paper rather than dark buttons. */
+  html.dark .section-tab:nth-child(4n + 1):not(.active){
+    background:#d2cdbd!important;
+    color:#202832!important;
+  }
+
+  html.dark .section-tab:nth-child(4n + 2):not(.active){
+    background:#c5d4cf!important;
+    color:#202832!important;
+  }
+
+  html.dark .section-tab:nth-child(4n + 3):not(.active){
+    background:#d4c5bc!important;
+    color:#202832!important;
+  }
+
+  html.dark .section-tab:nth-child(4n + 4):not(.active){
+    background:#c9ceba!important;
+    color:#202832!important;
+  }
+
+  html.dark .section-tab.active,
+  html.dark .section-tab.active:hover{
+    background:#5f82ad!important;
+    color:#fff!important;
+  }
+}
   </style>
  </head>
  <body>
@@ -1518,19 +1880,21 @@ html.dark .section-tab.active:hover{
      </a>
     </div>
     <button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
-     <span class="theme-icon theme-icon-moon">
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-       <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
-       </path>
-      </svg>
-     </span>
-     <span class="theme-icon theme-icon-sun">
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-       <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
-       </circle>
-       <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-       </path>
-      </svg>
+     <span aria-hidden="true" class="theme-icon-slot">
+      <span class="theme-icon theme-icon-moon">
+       <svg viewbox="0 0 24 24">
+        <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
+        </path>
+       </svg>
+      </span>
+      <span class="theme-icon theme-icon-sun">
+       <svg viewbox="0 0 24 24">
+        <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
+        </circle>
+        <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+        </path>
+       </svg>
+      </span>
      </span>
     </button>
    </div>
@@ -1546,6 +1910,20 @@ html.dark .section-tab.active:hover{
    </div>
   </div>
   <div class="shell">
+   <button aria-expanded="true" aria-label="Collapse sidebar" class="desktop-sidebar-toggle" data-desktop-sidebar-toggle="" title="Collapse sidebar" type="button">
+    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-close">
+     <svg viewbox="0 0 24 24">
+      <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+      </path>
+     </svg>
+    </span>
+    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-open">
+     <svg viewbox="0 0 24 24">
+      <path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+      </path>
+     </svg>
+    </span>
+   </button>
    <aside class="sidebar" id="sidebar">
     <div class="rail-brand">
      <p class="rail-title">
@@ -1554,20 +1932,27 @@ html.dark .section-tab.active:hover{
      <p class="rail-sub">
       episode archive
      </p>
-     <button aria-label="Switch theme" class="desktop-theme-toggle" data-desktop-theme-toggle="" title="Dark mode" type="button">
-      <span class="theme-icon theme-icon-moon">
-       <svg aria-hidden="true" viewbox="0 0 24 24">
-        <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
-        </path>
-       </svg>
+    </div>
+    <div class="sidebar-appearance-row">
+     <button aria-label="Switch to dark mode" class="sidebar-theme-toggle" data-desktop-theme-toggle="" title="Dark mode" type="button">
+      <span aria-hidden="true" class="theme-icon-slot">
+       <span class="theme-icon theme-icon-moon">
+        <svg viewbox="0 0 24 24">
+         <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
+         </path>
+        </svg>
+       </span>
+       <span class="theme-icon theme-icon-sun">
+        <svg viewbox="0 0 24 24">
+         <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
+         </circle>
+         <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+         </path>
+        </svg>
+       </span>
       </span>
-      <span class="theme-icon theme-icon-sun">
-       <svg aria-hidden="true" viewbox="0 0 24 24">
-        <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
-        </circle>
-        <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-        </path>
-       </svg>
+      <span class="sidebar-theme-text">
+       Dark mode
       </span>
      </button>
     </div>
@@ -1681,6 +2066,24 @@ html.dark .section-tab.active:hover{
     </div>
    </aside>
    <main class="main" id="main">
+    <button aria-label="Switch to dark mode" class="collapsed-theme-toggle" data-collapsed-theme-toggle="" title="Dark mode" type="button">
+     <span aria-hidden="true" class="theme-icon-slot">
+      <span class="theme-icon theme-icon-moon">
+       <svg viewbox="0 0 24 24">
+        <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
+        </path>
+       </svg>
+      </span>
+      <span class="theme-icon theme-icon-sun">
+       <svg viewbox="0 0 24 24">
+        <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
+        </circle>
+        <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+        </path>
+       </svg>
+      </span>
+     </span>
+    </button>
     <nav aria-label="Episode navigation" class="episode-nav-strip">
      <a class="ep-prev" href="#">
       <span class="nav-small">
@@ -2000,6 +2403,11 @@ html.dark .section-tab.active:hover{
       button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
       button.setAttribute("title", dark ? "Light mode" : "Dark mode");
     });
+
+    const desktopThemeText = document.querySelector(".sidebar-theme-text");
+    if (desktopThemeText) {
+      desktopThemeText.textContent = dark ? "Light mode" : "Dark mode";
+    }
   }
 
   function toggleTheme(){
@@ -2254,6 +2662,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("resize", () => {
     setSeasonAccordion(window.innerWidth >= 851 ? true : seasonCard.classList.contains("is-open"));
+  }, { passive: true });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const shell = document.querySelector(".shell");
+  const sidebarToggle = document.querySelector("[data-desktop-sidebar-toggle]");
+
+  if (!shell || !sidebarToggle) return;
+
+  const setDesktopSidebar = (collapsed) => {
+    shell.classList.toggle("sidebar-collapsed", collapsed);
+    sidebarToggle.setAttribute("aria-expanded", String(!collapsed));
+    sidebarToggle.setAttribute(
+      "aria-label",
+      collapsed ? "Show sidebar" : "Collapse sidebar"
+    );
+    sidebarToggle.setAttribute(
+      "title",
+      collapsed ? "Show sidebar" : "Collapse sidebar"
+    );
+  };
+
+  // Wide view always starts with the sidebar visible by default.
+  setDesktopSidebar(false);
+
+  sidebarToggle.addEventListener("click", () => {
+    if (window.innerWidth <= 850) return;
+    setDesktopSidebar(!shell.classList.contains("sidebar-collapsed"));
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 850) {
+      // Prevent desktop collapsed state from interfering with mobile drawer.
+      shell.classList.remove("sidebar-collapsed");
+      sidebarToggle.setAttribute("aria-expanded", "true");
+    }
   }, { passive: true });
 });
   </script>
