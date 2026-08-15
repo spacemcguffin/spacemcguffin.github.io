@@ -80,7 +80,7 @@ svg{display:block}
   margin:0 auto;
   background:var(--paper);
   box-shadow:var(--shadow);
-  transition:grid-template-columns .22s ease;
+  transition:grid-template-columns .2s ease;
 }
 
 .sidebar{
@@ -89,7 +89,7 @@ svg{display:block}
   overflow:hidden;
   border-right:1px solid var(--line);
   background:var(--panel-solid);
-  transition:opacity .16s ease;
+  transition:opacity .15s ease;
 }
 
 .main{
@@ -99,7 +99,7 @@ svg{display:block}
   background:var(--paper);
 }
 
-/* ---------- desktop sidebar ---------- */
+/* ---------- sidebar ---------- */
 .rail-brand{
   padding:20px 16px 15px;
   border-bottom:1px solid var(--line);
@@ -108,8 +108,12 @@ svg{display:block}
 .rail-title{
   margin:0;
   color:var(--text);
-  font:760 1.02rem/1.05 "Google Sans Flex","Inter",sans-serif;
-  letter-spacing:-.03em;
+  font:650 1.08rem/1.05 "Google Sans Flex","Inter",sans-serif;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
+  transform:rotate(-.5deg);
+  transform-origin:left center;
+  display:inline-block;
 }
 
 .rail-sub{
@@ -121,8 +125,7 @@ svg{display:block}
   text-transform:uppercase;
 }
 
-.rail-section,
-.sidebar-appearance-row{
+.rail-section{
   padding:9px 10px;
   border-bottom:1px solid var(--line);
   background:var(--panel-solid);
@@ -198,47 +201,6 @@ svg{display:block}
   text-decoration:none;
 }
 
-/* sidebar theme */
-.sidebar-appearance-row .nav-label{padding:0 0 7px 5px}
-
-.sidebar-theme-toggle{
-  width:100%;
-  min-height:36px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:7px 9px;
-  border:1px solid var(--line);
-  border-radius:5px;
-  background:var(--paper);
-  color:var(--text);
-  cursor:pointer;
-  text-align:left;
-}
-
-.sidebar-theme-toggle:hover{background:var(--panel)}
-.sidebar-theme-text{flex:1;font-size:.7rem;font-weight:600;text-align:left}
-
-.theme-icon-slot{
-  position:relative;
-  width:16px;
-  height:16px;
-  flex:0 0 16px;
-  display:grid;
-  place-items:center;
-}
-
-.theme-icon-slot .theme-icon{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-}
-
-.theme-icon-slot svg{width:16px;height:16px}
-html:not(.dark) .theme-icon-slot .theme-icon-sun{display:none!important}
-html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
-
 /* ---------- sidebar collapse ---------- */
 .desktop-sidebar-toggle{
   position:absolute;
@@ -272,10 +234,7 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
   border-right:0;
 }
 
-.shell.sidebar-collapsed .desktop-sidebar-toggle{
-  left:10px;
-}
-
+.shell.sidebar-collapsed .desktop-sidebar-toggle{left:10px}
 .shell.sidebar-collapsed .sidebar-toggle-close{display:none}
 .shell.sidebar-collapsed .sidebar-toggle-open{display:grid}
 
@@ -378,8 +337,8 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
 .hero h1{
   margin:7px 0 0;
   color:var(--text);
-  font:720 clamp(2rem,3.35vw,3.2rem)/.95 "Google Sans Flex","Inter",sans-serif;
-  letter-spacing:-.06em;
+  font:560 clamp(2rem,3.35vw,3.2rem)/.96 "Google Sans Flex","Inter",sans-serif;
+  letter-spacing:-.05em;
 }
 
 /* ---------- sticky scrap navigation ---------- */
@@ -415,38 +374,61 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
   border:0;
   clip-path:polygon(2% 3%,97% 0,100% 91%,94% 100%,3% 96%,0 12%);
   box-shadow:0 2px 4px rgba(0,0,0,.14);
-  transform:rotate(-.3deg);
   font-size:.64rem;
   font-weight:720;
   letter-spacing:.04em;
   text-transform:uppercase;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .12s ease,color .12s ease,box-shadow .12s ease;
 }
 
-.section-tab:nth-child(4n + 1){background:#ddd8c7}
-.section-tab:nth-child(4n + 2){background:#cfded9;transform:rotate(.25deg)}
-.section-tab:nth-child(4n + 3){background:#dfd0c7}
-.section-tab:nth-child(4n + 4){background:#d4d8c5;transform:rotate(.35deg)}
+.section-tab:nth-of-type(1){background:#ddd8c7}
+.section-tab:nth-of-type(2){background:#cfded9}
+.section-tab:nth-of-type(3){background:#dfd0c7}
+.section-tab[data-section="trivia"]{background:#d9cddd}
+.section-tab[data-section="gallery"]{background:#d4d8c5}
 
-.section-tab:hover{
-  transform:rotate(0) translateY(-1px);
+/* Crucial flicker fix: no transform/filter changes between normal/hover/active */
+.section-tab:hover,
+.section-tab:focus-visible{
   text-decoration:none;
+  box-shadow:0 3px 6px rgba(0,0,0,.16);
+}
+
+.section-tab:active{
+  box-shadow:0 2px 4px rgba(0,0,0,.14);
 }
 
 .section-tab.active,
-.section-tab.active:hover{
+.section-tab.active:hover,
+.section-tab.active:active{
   background:#456291!important;
   color:#fff!important;
+  box-shadow:0 2px 4px rgba(0,0,0,.18);
 }
 
 html.dark .section-tab:not(.active){color:#202832}
-html.dark .section-tab:nth-child(4n + 1):not(.active){background:#d2cdbd}
-html.dark .section-tab:nth-child(4n + 2):not(.active){background:#c5d4cf}
-html.dark .section-tab:nth-child(4n + 3):not(.active){background:#d4c5bc}
-html.dark .section-tab:nth-child(4n + 4):not(.active){background:#c9ceba}
+html.dark .section-tab:nth-of-type(1):not(.active){background:#d2cdbd}
+html.dark .section-tab:nth-of-type(2):not(.active){background:#c5d4cf}
+html.dark .section-tab:nth-of-type(3):not(.active){background:#d4c5bc}
+html.dark .section-tab[data-section="trivia"]:not(.active){background:#cec2d2}
+html.dark .section-tab[data-section="gallery"]:not(.active){background:#c9ceba}
 html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
 
 .section-tab-icon,
 .section-tab-icon svg{width:14px;height:14px}
+
+.top-chevron-svg{
+  width:14px!important;
+  height:14px!important;
+  flex:0 0 14px;
+}
+
+.trivia-book-icon{
+  width:15px!important;
+  height:15px!important;
+  flex:0 0 15px!important;
+}
 
 .sticky-sidebar-control,
 .sticky-theme-control{
@@ -465,8 +447,7 @@ html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
 
 .sticky-sidebar-control{display:none;margin-right:2px}
 .section-tabs.is-stuck .sticky-sidebar-control{display:grid}
-.sticky-theme-control{display:none;margin-left:auto}
-.shell.sidebar-collapsed .sticky-theme-control{display:grid}
+.sticky-theme-control{display:grid;margin-left:auto}
 
 .sticky-sidebar-control:hover,
 .sticky-theme-control:hover{background:var(--panel)}
@@ -476,8 +457,29 @@ html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
 
 .shell.sidebar-collapsed .sticky-sidebar-control svg{transform:rotate(180deg)}
 
+.theme-icon-slot{
+  position:relative;
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  display:grid;
+  place-items:center;
+}
+
+.theme-icon-slot .theme-icon{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+}
+
+.theme-icon-slot svg{width:16px;height:16px}
+html:not(.dark) .theme-icon-slot .theme-icon-sun{display:none!important}
+html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
+
 /* ---------- article / infobox ---------- */
 .article-content{display:block}
+
 .infobox{
   float:right;
   width:268px;
@@ -501,8 +503,8 @@ html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
   display:grid;
   grid-template-columns:42% 58%;
   border-top:1px solid var(--line);
-  font-size:.71rem;
-  line-height:1.35;
+  font-size:.76rem;
+  line-height:1.4;
 }
 
 .info-row b,
@@ -553,6 +555,21 @@ html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
   font-size:.87rem;
   font-style:italic;
 }
+
+.trivia-list{
+  margin:0;
+  padding-left:1.25rem;
+}
+
+.trivia-list li{
+  margin:0 0 .38rem;
+  padding-left:.15rem;
+  color:var(--text);
+  font-size:.9rem;
+  line-height:1.65;
+}
+
+.trivia-list li:last-child{margin-bottom:0}
 
 /* ---------- gallery ---------- */
 #gallery{clear:both}
@@ -785,9 +802,7 @@ html.dark .season-head{background:#567aa6}
 
 /* ---------- mobile ---------- */
 @media(max-width:850px){
-  body{
-    background-attachment:scroll;
-  }
+  body{background-attachment:scroll}
 
   .site-header{
     display:block;
@@ -827,28 +842,30 @@ html.dark .season-head{background:#567aa6}
   .unified-section-links{
     min-width:0;
     display:flex;
+    flex-wrap:nowrap;
     overflow-x:auto;
     overflow-y:hidden;
     background:var(--paper);
     scrollbar-width:none;
     -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
   }
 
   .unified-section-links::-webkit-scrollbar{display:none}
 
   .unified-section-link{
     flex:0 0 auto;
-    min-width:76px;
+    min-width:78px;
     height:var(--mobile-bar);
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:2px;
-    padding:0 9px;
+    gap:3px;
+    padding:0 10px;
     border-right:1px solid var(--line);
     color:var(--muted);
-    font-size:.55rem;
+    font-size:.53rem;
     font-weight:680;
     text-transform:uppercase;
     white-space:nowrap;
@@ -857,6 +874,7 @@ html.dark .season-head{background:#567aa6}
   .unified-section-link:hover{text-decoration:none;background:var(--panel)}
   .unified-section-link.active{background:var(--accent);color:#fff}
   .unified-section-link svg{width:15px;height:15px}
+  .unified-section-link span{display:block;line-height:1;white-space:nowrap}
 
   .mobile-wiki-identity{
     display:flex;
@@ -871,8 +889,11 @@ html.dark .season-head{background:#567aa6}
   .mobile-wiki-identity strong{
     display:block;
     color:var(--text);
-    font:800 1.28rem/.98 "Google Sans Flex","Inter",sans-serif;
-    letter-spacing:-.04em;
+    font:650 1.34rem/.98 "Google Sans Flex","Inter",sans-serif;
+    letter-spacing:-.055em;
+    text-transform:uppercase;
+    transform:rotate(-.5deg);
+    transform-origin:left center;
   }
 
   .mobile-wiki-identity span{
@@ -912,8 +933,6 @@ html.dark .season-head{background:#567aa6}
   }
 
   body.menu-open .sidebar{transform:translateX(0)}
-
-  .sidebar-appearance-row{display:none}
 
   .menu-overlay{
     position:fixed;
@@ -978,6 +997,7 @@ html.dark .season-head{background:#567aa6}
   .section h2{font-size:1.25rem}
   .section p{font-size:.9rem;line-height:1.67}
   .quote{font-size:.87rem;padding:9px 11px}
+  .trivia-list li{font-size:.9rem;line-height:1.67}
 
   .gallery{
     grid-template-columns:1fr;
@@ -1016,7 +1036,7 @@ html.dark .season-head{background:#567aa6}
 
   .episode-list a:last-child{border-bottom:0}
 
-  #top,#synopsis,#plot,#gallery{
+  #top,#synopsis,#plot,#trivia,#gallery{
     scroll-margin-top:calc(var(--mobile-bar) + 8px);
   }
 
@@ -1030,249 +1050,13 @@ html.dark .season-head{background:#567aa6}
 @media(max-width:470px){
   .unified-mobile-bar{grid-template-columns:42px minmax(0,1fr) 42px}
   .unified-icon-button{width:42px}
-  .unified-section-link{min-width:54px;padding:0 8px}
-  .unified-section-link span{display:none}
-  .unified-section-link svg{width:17px;height:17px}
+  .unified-section-link{min-width:72px;padding:0 8px}
 }
 
 @media(min-width:1400px){
   .shell{
     width:min(1080px,calc(100% - 180px));
     max-width:1080px;
-  }
-}
-  
-
-/* Prevent any legacy close control from leaking into the page */
-body > .lightbox-close,
-body > .close-button,
-body > .close,
-body > .modal-close{
-  display:none!important;
-}
-  
-
-/* ============================================================
-   THEME TOGGLE — PAPER NAV ONLY ON DESKTOP
-   ============================================================ */
-.sidebar-appearance-row,
-.sidebar-theme-toggle{
-  display:none!important;
-}
-
-@media(min-width:851px){
-  .sticky-theme-control{
-    display:grid!important;
-    margin-left:auto!important;
-    flex:0 0 34px!important;
-    width:34px!important;
-    height:34px!important;
-  }
-}
-
-@media(max-width:850px){
-  .sticky-theme-control{
-    display:none!important;
-  }
-}
-  
-
-/* ============================================================
-   TRIVIA / RUGGED WIKI BRAND / TYPOGRAPHY REFINEMENTS
-   ============================================================ */
-
-/* Rugged / hand-cut SOUTH PARK WIKI masthead */
-.rail-title,
-.mobile-wiki-identity strong{
-  font-family:"Google Sans Flex","Inter",sans-serif!important;
-  font-weight:650!important;
-  text-transform:uppercase!important;
-  letter-spacing:-.055em!important;
-  transform:rotate(-.7deg);
-  transform-origin:left center;
-  display:inline-block!important;
-  text-shadow:
-    .5px 0 0 currentColor,
-    -.35px .2px 0 currentColor;
-}
-
-.rail-title{
-  font-size:1.08rem!important;
-}
-
-.mobile-wiki-identity strong{
-  font-size:1.34rem!important;
-}
-
-/* A slightly irregular cut-paper feel without changing the text itself */
-.rail-title::after,
-.mobile-wiki-identity strong::after{
-  content:"";
-  display:block;
-  width:72%;
-  height:2px;
-  margin-top:3px;
-  background:currentColor;
-  opacity:.2;
-  transform:rotate(.8deg) skewX(-12deg);
-  clip-path:polygon(0 25%,8% 8%,20% 36%,35% 12%,50% 42%,65% 10%,78% 34%,100% 15%,98% 88%,0 100%);
-}
-
-/* Softer, more editorial episode title */
-.hero h1{
-  font-weight:560!important;
-  letter-spacing:-.05em!important;
-}
-
-/* Slightly larger infobox table text */
-.info-row{
-  font-size:.76rem!important;
-}
-
-.info-row b,
-.info-row span{
-  line-height:1.4!important;
-}
-
-/* Trivia */
-.trivia-list{
-  margin:0;
-  padding-left:1.25rem;
-}
-
-.trivia-list li{
-  margin:0 0 .65rem;
-  padding-left:.15rem;
-  color:var(--text);
-  font-size:.9rem;
-  line-height:1.65;
-}
-
-.trivia-list li:last-child{
-  margin-bottom:0;
-}
-
-/* Keep newly added Trivia scrap in the faded-colour cycle */
-.section-tab[data-section="trivia"]:not(.active){
-  background:#d9cddd!important;
-}
-
-html.dark .section-tab[data-section="trivia"]:not(.active){
-  background:#cec2d2!important;
-  color:#202832!important;
-}
-
-.section-tab[data-section="trivia"].active{
-  background:#456291!important;
-  color:#fff!important;
-}
-
-html.dark .section-tab[data-section="trivia"].active{
-  background:#5f82ad!important;
-  color:#fff!important;
-}
-
-#trivia{
-  scroll-margin-top:64px;
-}
-
-@media(max-width:850px){
-  #trivia{
-    scroll-margin-top:calc(var(--mobile-bar) + 8px);
-  }
-
-  .trivia-list li{
-    font-size:.9rem;
-    line-height:1.67;
-  }
-}
-  
-
-/* Top navigation chevron */
-.top-chevron-svg{
-  width:14px!important;
-  height:14px!important;
-  flex:0 0 14px;
-}
-.unified-section-link .top-chevron-svg{
-  width:15px!important;
-  height:15px!important;
-}
-  
-
-/* ============================================================
-   PAPER NAV INTERACTION POLISH / TRIVIA / MOBILE RAIL
-   ============================================================ */
-
-/* Prevent paper scraps from visually flickering/jumping on click */
-.section-tab{
-  transition:
-    background-color .12s ease,
-    color .12s ease,
-    box-shadow .12s ease!important;
-  will-change:auto!important;
-  -webkit-tap-highlight-color:transparent;
-}
-
-.section-tab:hover,
-.section-tab:active,
-.section-tab:focus-visible{
-  transform:none!important;
-}
-
-.section-tab:active{
-  filter:none!important;
-  box-shadow:0 2px 4px rgba(0,0,0,.14)!important;
-}
-
-.section-tab.active,
-.section-tab.active:hover,
-.section-tab.active:active{
-  transform:none!important;
-}
-
-/* Slightly tighter Trivia bullets */
-.trivia-list li{
-  margin-bottom:.38rem!important;
-}
-
-.trivia-list li:last-child{
-  margin-bottom:0!important;
-}
-
-/* Trivia book icon sizing */
-.trivia-book-icon{
-  width:15px!important;
-  height:15px!important;
-  flex:0 0 15px!important;
-}
-
-/* Mobile section bar must remain horizontally scrollable as tabs grow */
-@media(max-width:850px){
-  .unified-section-links{
-    display:flex!important;
-    flex-wrap:nowrap!important;
-    overflow-x:auto!important;
-    overflow-y:hidden!important;
-    scroll-behavior:smooth;
-    scrollbar-width:none!important;
-    -webkit-overflow-scrolling:touch;
-    overscroll-behavior-x:contain;
-  }
-
-  .unified-section-links::-webkit-scrollbar{
-    display:none!important;
-  }
-
-  .unified-section-link{
-    flex:0 0 auto!important;
-    min-width:76px!important;
-  }
-}
-
-@media(max-width:470px){
-  .unified-section-link{
-    min-width:54px!important;
   }
 }
   </style>
@@ -1905,14 +1689,13 @@ html.dark .section-tab[data-section="trivia"].active{
   const sectionTabs = document.querySelector(".section-tabs");
   const stickySentinel = document.querySelector(".sticky-nav-sentinel");
 
-  /* ---------- theme ---------- */
+  /* theme */
   const storedTheme = localStorage.getItem("wikiTheme");
   const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
   root.classList.toggle("dark", storedTheme ? storedTheme === "dark" : !!systemDark);
 
   function syncTheme(){
     const dark = root.classList.contains("dark");
-
     [stickyTheme, mobileTheme].forEach(button => {
       if (!button) return;
       button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
@@ -1926,11 +1709,12 @@ html.dark .section-tab[data-section="trivia"].active{
     localStorage.setItem("wikiTheme", dark ? "dark" : "light");
     syncTheme();
   }
+
   stickyTheme?.addEventListener("click", toggleTheme);
   mobileTheme?.addEventListener("click", toggleTheme);
   syncTheme();
 
-  /* ---------- mobile menu ---------- */
+  /* mobile drawer */
   function setMenu(open){
     body.classList.toggle("menu-open", open);
     menuButton?.setAttribute("aria-expanded", String(open));
@@ -1946,7 +1730,7 @@ html.dark .section-tab[data-section="trivia"].active{
     });
   });
 
-  /* ---------- desktop sidebar ---------- */
+  /* desktop sidebar */
   function syncSidebar(){
     if (!shell) return;
     const collapsed = shell.classList.contains("sidebar-collapsed");
@@ -1976,65 +1760,79 @@ html.dark .section-tab[data-section="trivia"].active{
     stickyObserver.observe(stickySentinel);
   }
 
-  /* ---------- active section navigation ---------- */
+  /* stable section tracking: no IntersectionObserver switching */
+  const sectionIds = ["top","synopsis","plot","trivia","gallery"];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const sectionLinks = [
     ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
   ];
-  const sectionIds = ["top","synopsis","plot","trivia","gallery"];
-  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+
+  let activeSection = "";
 
   function setActiveSection(id){
+    if (!id || id === activeSection) return;
+    activeSection = id;
+
     sectionLinks.forEach(link => {
       const target = link.dataset.id || link.dataset.section;
       link.classList.toggle("active", target === id);
     });
+
+    // On mobile, keep active tab visible without changing scroll position vertically.
+    if (innerWidth <= 850){
+      const activeMobile = document.querySelector(`.unified-section-link[data-section="${id}"]`);
+      activeMobile?.scrollIntoView({behavior:"smooth", block:"nearest", inline:"nearest"});
+    }
   }
 
   function updateActiveSection(){
     if (!sections.length) return;
 
-    const stickyOffset = innerWidth <= 850 ? 72 : 64;
-    let activeId = sections[0].id;
+    // A fixed threshold beneath the sticky rail makes transitions deterministic.
+    const threshold = innerWidth <= 850 ? 74 : 58;
+    let id = sections[0].id;
 
     for (const section of sections){
       const top = section.getBoundingClientRect().top;
-      if (top <= stickyOffset){
-        activeId = section.id;
+      if (top <= threshold){
+        id = section.id;
       } else {
         break;
       }
     }
 
-    // Near the very bottom, make sure Gallery can become active.
-    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8){
-      activeId = sections[sections.length - 1].id;
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4){
+      id = sections[sections.length - 1].id;
     }
 
-    setActiveSection(activeId);
+    setActiveSection(id);
   }
 
-  let activeSectionTicking = false;
-  function requestActiveSectionUpdate(){
-    if (activeSectionTicking) return;
-    activeSectionTicking = true;
+  let ticking = false;
+  function requestSectionUpdate(){
+    if (ticking) return;
+    ticking = true;
     requestAnimationFrame(() => {
       updateActiveSection();
-      activeSectionTicking = false;
+      ticking = false;
     });
   }
 
-  window.addEventListener("scroll", requestActiveSectionUpdate, {passive:true});
-  window.addEventListener("resize", requestActiveSectionUpdate, {passive:true});
+  window.addEventListener("scroll", requestSectionUpdate, {passive:true});
+  window.addEventListener("resize", requestSectionUpdate, {passive:true});
+
+  // Clicking a tab sets it immediately; scroll tracking takes over afterward.
   sectionLinks.forEach(link => {
     link.addEventListener("click", () => {
       const target = link.dataset.id || link.dataset.section;
       if (target) setActiveSection(target);
-      setTimeout(requestActiveSectionUpdate, 250);
+      setTimeout(requestSectionUpdate, 180);
     });
   });
+
   updateActiveSection();
 
-  /* ---------- tooltips ---------- */
+  /* tooltips */
   function removeTooltip(target){
     const id = target?.dataset?.tooltipId;
     if (!id) return;
@@ -2096,7 +1894,7 @@ html.dark .section-tab[data-section="trivia"].active{
     document.querySelectorAll("[data-hover-wrapper]").forEach(el => el.remove());
   }, {passive:true});
 
-  /* ---------- gallery lightbox ---------- */
+  /* gallery lightbox */
   const galleryButtons = [...document.querySelectorAll(".gallery-item")];
 
   if (galleryButtons.length){
@@ -2129,8 +1927,6 @@ html.dark .section-tab[data-section="trivia"].active{
     const image = lightbox.querySelector("img");
     const counter = lightbox.querySelector(".wiki-lightbox-counter");
     const closeButton = lightbox.querySelector(".wiki-lightbox-close");
-    const prevButton = lightbox.querySelector(".wiki-lightbox-prev");
-    const nextButton = lightbox.querySelector(".wiki-lightbox-next");
 
     function showImage(index){
       currentIndex = (index + galleryButtons.length) % galleryButtons.length;
@@ -2159,8 +1955,8 @@ html.dark .section-tab[data-section="trivia"].active{
     });
 
     closeButton.addEventListener("click", closeLightbox);
-    prevButton.addEventListener("click", () => showImage(currentIndex - 1));
-    nextButton.addEventListener("click", () => showImage(currentIndex + 1));
+    lightbox.querySelector(".wiki-lightbox-prev").addEventListener("click", () => showImage(currentIndex - 1));
+    lightbox.querySelector(".wiki-lightbox-next").addEventListener("click", () => showImage(currentIndex + 1));
 
     lightbox.addEventListener("click", event => {
       if (event.target === lightbox) closeLightbox();
@@ -2168,7 +1964,6 @@ html.dark .section-tab[data-section="trivia"].active{
 
     document.addEventListener("keydown", event => {
       if (!lightbox.classList.contains("open")) return;
-
       if (event.key === "Escape") closeLightbox();
       if (event.key === "ArrowLeft"){
         event.preventDefault();
@@ -2181,7 +1976,7 @@ html.dark .section-tab[data-section="trivia"].active{
     });
   }
 
-  /* ---------- mobile season accordion ---------- */
+  /* mobile season accordion */
   const seasonCard = document.querySelector(".season-card");
   const seasonToggle = document.querySelector(".season-accordion-toggle");
 
@@ -2215,37 +2010,3 @@ html.dark .section-tab[data-section="trivia"].active{
   </script>
  </body>
 </html>
-
-<style id="mobile-nav-label-fix">
-@media(max-width:850px){
-  .unified-section-link{
-    min-width:78px!important;
-    padding:0 10px!important;
-    gap:3px!important;
-  }
-
-  .unified-section-link span{
-    display:block!important;
-    font-size:.53rem!important;
-    line-height:1!important;
-    white-space:nowrap!important;
-  }
-
-  .unified-section-link svg{
-    width:15px!important;
-    height:15px!important;
-    flex:0 0 15px!important;
-  }
-}
-
-@media(max-width:470px){
-  .unified-section-link{
-    min-width:72px!important;
-    padding:0 8px!important;
-  }
-
-  .unified-section-link span{
-    display:block!important;
-  }
-}
-</style>
