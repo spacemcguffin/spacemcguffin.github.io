@@ -1075,6 +1075,129 @@ body > .modal-close{
     display:none!important;
   }
 }
+  
+
+/* ============================================================
+   TRIVIA / RUGGED WIKI BRAND / TYPOGRAPHY REFINEMENTS
+   ============================================================ */
+
+/* Rugged / hand-cut SOUTH PARK WIKI masthead */
+.rail-title,
+.mobile-wiki-identity strong{
+  font-family:"Google Sans Flex","Inter",sans-serif!important;
+  font-weight:650!important;
+  text-transform:uppercase!important;
+  letter-spacing:-.055em!important;
+  transform:rotate(-.7deg);
+  transform-origin:left center;
+  display:inline-block!important;
+  text-shadow:
+    .5px 0 0 currentColor,
+    -.35px .2px 0 currentColor;
+}
+
+.rail-title{
+  font-size:1.08rem!important;
+}
+
+.mobile-wiki-identity strong{
+  font-size:1.34rem!important;
+}
+
+/* A slightly irregular cut-paper feel without changing the text itself */
+.rail-title::after,
+.mobile-wiki-identity strong::after{
+  content:"";
+  display:block;
+  width:72%;
+  height:2px;
+  margin-top:3px;
+  background:currentColor;
+  opacity:.2;
+  transform:rotate(.8deg) skewX(-12deg);
+  clip-path:polygon(0 25%,8% 8%,20% 36%,35% 12%,50% 42%,65% 10%,78% 34%,100% 15%,98% 88%,0 100%);
+}
+
+/* Softer, more editorial episode title */
+.hero h1{
+  font-weight:560!important;
+  letter-spacing:-.05em!important;
+}
+
+/* Slightly larger infobox table text */
+.info-row{
+  font-size:.76rem!important;
+}
+
+.info-row b,
+.info-row span{
+  line-height:1.4!important;
+}
+
+/* Trivia */
+.trivia-list{
+  margin:0;
+  padding-left:1.25rem;
+}
+
+.trivia-list li{
+  margin:0 0 .65rem;
+  padding-left:.15rem;
+  color:var(--text);
+  font-size:.9rem;
+  line-height:1.65;
+}
+
+.trivia-list li:last-child{
+  margin-bottom:0;
+}
+
+/* Keep newly added Trivia scrap in the faded-colour cycle */
+.section-tab[data-section="trivia"]:not(.active){
+  background:#d9cddd!important;
+}
+
+html.dark .section-tab[data-section="trivia"]:not(.active){
+  background:#cec2d2!important;
+  color:#202832!important;
+}
+
+.section-tab[data-section="trivia"].active{
+  background:#456291!important;
+  color:#fff!important;
+}
+
+html.dark .section-tab[data-section="trivia"].active{
+  background:#5f82ad!important;
+  color:#fff!important;
+}
+
+#trivia{
+  scroll-margin-top:64px;
+}
+
+@media(max-width:850px){
+  #trivia{
+    scroll-margin-top:calc(var(--mobile-bar) + 8px);
+  }
+
+  .trivia-list li{
+    font-size:.9rem;
+    line-height:1.67;
+  }
+}
+  
+
+/* Top navigation chevron */
+.top-chevron-svg{
+  width:14px!important;
+  height:14px!important;
+  flex:0 0 14px;
+}
+.unified-section-link .top-chevron-svg{
+  width:15px!important;
+  height:15px!important;
+}
   </style>
  </head>
  <body>
@@ -1088,8 +1211,8 @@ body > .modal-close{
     </button>
     <div class="unified-section-links">
      <a aria-label="Top" class="unified-section-link active" data-section="top" href="#top">
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-       <path d="M12 19V5m0 0-5 5m5-5 5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8">
+      <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
+       <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
        </path>
       </svg>
       <span>
@@ -1097,10 +1220,10 @@ body > .modal-close{
       </span>
      </a>
      <a aria-label="Synopsis" class="unified-section-link" data-section="synopsis" href="#synopsis">
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-       <rect fill="none" height="15" rx="1.5" stroke="currentColor" stroke-width="1.7" width="14" x="5" y="4.5">
-       </rect>
-       <path d="M8 8h8M8 11.5h8M8 15h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+      <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
+       <path d="M9 4h6l-.8 5.1 2.8 2.8v1.6H7v-1.6l2.8-2.8L9 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+       </path>
+       <path d="M12 13.5V21" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
        </path>
       </svg>
       <span>
@@ -1114,6 +1237,17 @@ body > .modal-close{
       </svg>
       <span>
        Plot
+      </span>
+     </a>
+     <a aria-label="Trivia" class="unified-section-link" data-section="trivia" href="#trivia">
+      <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
+       <path d="M9.4 8.3A3.1 3.1 0 0 1 12.5 5c2 0 3.5 1.2 3.5 3 0 2.4-2.6 2.7-3.5 4.4-.3.5-.4 1-.4 1.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+       </path>
+       <circle cx="12" cy="18" fill="currentColor" r="1">
+       </circle>
+      </svg>
+      <span>
+       Trivia
       </span>
      </a>
      <a aria-label="Gallery" class="unified-section-link" data-section="gallery" href="#gallery">
@@ -1153,7 +1287,7 @@ body > .modal-close{
   <div class="mobile-wiki-identity">
    <div>
     <strong>
-     South Park Wiki
+     SOUTH PARK WIKI
     </strong>
     <span>
      episode archive
@@ -1178,7 +1312,7 @@ body > .modal-close{
    <aside class="sidebar" id="sidebar">
     <div class="rail-brand">
      <p class="rail-title">
-      South Park Wiki
+      SOUTH PARK WIKI
      </p>
      <p class="rail-sub">
       episode archive
@@ -1190,8 +1324,8 @@ body > .modal-close{
      </div>
      <nav class="rail-nav" id="toc">
       <a class="rail-link active" data-id="top" href="#top">
-       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
-        <path d="M12 19V5M6.5 10.5 12 5l5.5 5.5">
+       <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
+        <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
         </path>
        </svg>
        <span>
@@ -1200,7 +1334,9 @@ body > .modal-close{
       </a>
       <a class="rail-link" data-id="synopsis" href="#synopsis">
        <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
-        <path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h4">
+        <path d="M9 4h6l-.8 5.1 2.8 2.8v1.6H7v-1.6l2.8-2.8L9 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+        <path d="M12 13.5V21" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
         </path>
        </svg>
        <span>
@@ -1214,6 +1350,17 @@ body > .modal-close{
        </svg>
        <span>
         Plot
+       </span>
+      </a>
+      <a class="rail-link" data-id="trivia" href="#trivia">
+       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
+        <path d="M9.4 8.3A3.1 3.1 0 0 1 12.5 5c2 0 3.5 1.2 3.5 3 0 2.4-2.6 2.7-3.5 4.4-.3.5-.4 1-.4 1.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+        </path>
+        <circle cx="12" cy="18" fill="currentColor" r="1">
+        </circle>
+       </svg>
+       <span>
+        Trivia
        </span>
       </a>
       <a class="rail-link" data-id="gallery" href="#gallery">
@@ -1365,8 +1512,8 @@ body > .modal-close{
      </button>
      <a class="section-tab" data-section="top" href="#top">
       <span class="section-tab-icon">
-       <svg aria-hidden="true" viewbox="0 0 24 24">
-        <path d="M12 19V5m0 0-5 5m5-5 5 5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+       <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
+        <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
         </path>
        </svg>
       </span>
@@ -1376,8 +1523,10 @@ body > .modal-close{
      </a>
      <a class="section-tab" data-section="synopsis" href="#synopsis">
       <span class="section-tab-icon">
-       <svg aria-hidden="true" viewbox="0 0 24 24">
-        <path d="M5 4.5h14v15H5zM8 8h8M8 11.5h8M8 15h5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
+        <path d="M9 4h6l-.8 5.1 2.8 2.8v1.6H7v-1.6l2.8-2.8L9 4Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
+        </path>
+        <path d="M12 13.5V21" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
         </path>
        </svg>
       </span>
@@ -1394,6 +1543,19 @@ body > .modal-close{
       </span>
       <span class="section-tab-label">
        Plot
+      </span>
+     </a>
+     <a class="section-tab" data-section="trivia" href="#trivia">
+      <span class="section-tab-icon">
+       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
+        <path d="M9.4 8.3A3.1 3.1 0 0 1 12.5 5c2 0 3.5 1.2 3.5 3 0 2.4-2.6 2.7-3.5 4.4-.3.5-.4 1-.4 1.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+        </path>
+        <circle cx="12" cy="18" fill="currentColor" r="1">
+        </circle>
+       </svg>
+      </span>
+      <span class="section-tab-label">
+       Trivia
       </span>
      </a>
      <a class="section-tab" data-section="gallery" href="#gallery">
@@ -1555,6 +1717,22 @@ body > .modal-close{
       </p>
      </section>
      <!-- ==================== GALLERY ==================== -->
+     <section class="section" id="trivia">
+      <h2>
+       Trivia
+      </h2>
+      <ul class="trivia-list">
+       <li>
+        This is placeholder trivia text for an interesting production detail about the episode.
+       </li>
+       <li>
+        Add behind-the-scenes notes, references, continuity details, or small observations here.
+       </li>
+       <li>
+        This section can also be used for alternate titles, visual gags, callbacks, or broadcast notes.
+       </li>
+      </ul>
+     </section>
      <section class="section" id="gallery">
       <h2>
        Gallery
@@ -1613,6 +1791,10 @@ body > .modal-close{
          Turkey Trot
         </a>
         <a class="current" href="#top">
+         <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
+          <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          </path>
+         </svg>
          <span class="ep-num">
           5
          </span>
@@ -1721,7 +1903,7 @@ body > .modal-close{
   const sectionLinks = [
     ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
   ];
-  const sectionIds = ["top","synopsis","plot","gallery"];
+  const sectionIds = ["top","synopsis","plot","trivia","gallery"];
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
 
   function setActiveSection(id){
