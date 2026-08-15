@@ -387,6 +387,7 @@ svg{display:block}
 .section-tab:nth-of-type(3){background:#dfd0c7}
 .section-tab[data-section="trivia"]{background:#d9cddd}
 .section-tab[data-section="gallery"]{background:#d4d8c5}
+.section-tab[data-section="behind-the-scenes"]{background:#ddd6c8}
 
 /* Crucial flicker fix: no transform/filter changes between normal/hover/active */
 .section-tab:hover,
@@ -413,6 +414,7 @@ html.dark .section-tab:nth-of-type(2):not(.active){background:#c5d4cf}
 html.dark .section-tab:nth-of-type(3):not(.active){background:#d4c5bc}
 html.dark .section-tab[data-section="trivia"]:not(.active){background:#cec2d2}
 html.dark .section-tab[data-section="gallery"]:not(.active){background:#c9ceba}
+html.dark .section-tab[data-section="behind-the-scenes"]:not(.active){background:#d2cbbc}
 html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
 
 .section-tab-icon,
@@ -1066,7 +1068,7 @@ html.dark .season-head{background:#567aa6}
 
   .episode-list a:last-child{border-bottom:0}
 
-  #top,#synopsis,#plot,#trivia,#gallery{
+  #top,#synopsis,#plot,#trivia,#gallery,#behind-the-scenes{
     scroll-margin-top:calc(var(--mobile-bar) + 8px);
   }
 
@@ -1128,6 +1130,9 @@ html.dark .season-head{background:#567aa6}
 }
 .section-tab[data-section="gallery"]{
   clip-path:polygon(3% 1%,99% 5%,100% 93%,94% 98%,2% 100%,0 11%);
+}
+.section-tab[data-section="behind-the-scenes"]{
+  clip-path:polygon(1% 5%,96% 0,100% 10%,98% 95%,91% 100%,3% 97%,0 13%);
 }
 .section-tab::after{
   content:"";
@@ -1388,6 +1393,13 @@ html.dark .plot-location-scrap{
        Gallery
       </span>
      </a>
+     <a aria-label="Behind the Scenes" class="unified-section-link" data-section="behind-the-scenes" href="#behind-the-scenes">
+      <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
+       <rect x="4" y="7" width="11" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"></rect>
+       <path d="m15 10 5-2.5v9L15 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path>
+      </svg>
+      <span>Behind the Scenes</span>
+     </a>
     </div>
     <button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
      <span aria-hidden="true" class="theme-icon-slot">
@@ -1639,6 +1651,15 @@ html.dark .plot-location-scrap{
        Gallery
       </span>
      </a>
+     <a class="section-tab" data-section="behind-the-scenes" href="#behind-the-scenes">
+      <span class="section-tab-icon">
+       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
+        <rect x="4" y="7" width="11" height="10" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"></rect>
+        <path d="m15 10 5-2.5v9L15 14" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"></path>
+       </svg>
+      </span>
+      <span class="section-tab-label">Behind the Scenes</span>
+     </a>
      <button aria-label="Switch to dark mode" class="sticky-theme-control" data-sticky-theme-toggle="" title="Dark mode" type="button">
       <span aria-hidden="true" class="theme-icon-slot">
        <span class="theme-icon theme-icon-moon">
@@ -1838,7 +1859,20 @@ html.dark .plot-location-scrap{
        </button>
       </div>
      </section>
-     <section class="section" id="season-navigation">
+     <section class="section" id="behind-the-scenes">
+       <h2>
+        Behind the Scenes
+       </h2>
+       <ul class="trivia-list">
+        <li>
+         Add behind-the-scenes information here.
+        </li>
+        <li>
+         Add production notes, deleted material, or other making-of details here.
+        </li>
+       </ul>
+      </section>
+      <section class="section" id="season-navigation">
       <!-- ==================== SEASON / EPISODE NAVIGATION ==================== -->
       <div class="season-card">
        <div class="season-head season-accordion-head">
@@ -1987,7 +2021,7 @@ html.dark .plot-location-scrap{
   }
 
   /* stable section tracking: no IntersectionObserver switching */
-  const sectionIds = ["top","synopsis","plot","trivia","gallery"];
+  const sectionIds = ["top","synopsis","plot","trivia","gallery","behind-the-scenes"];
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const sectionLinks = [
     ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
