@@ -723,35 +723,41 @@ html.dark .season-head{background:#567aa6}
   inset:0;
   z-index:3000;
   display:none;
-  place-items:center;
-  padding:56px 70px;
   background:rgba(5,8,12,.9);
   backdrop-filter:blur(8px);
+  overflow:hidden;
 }
 
-.wiki-lightbox.open{display:grid}
+.wiki-lightbox.open{display:block}
 
+/* Full-viewport media layer. Controls/caption/counter are positioned
+   independently and therefore cannot push the image off centre. */
 .wiki-lightbox-stage{
-  width:min(1100px,100%);
-  height:min(72vh,700px);
-  display:grid;
-  place-items:center;
-  transform:translateY(-24px);
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:72px 84px;
+  pointer-events:none;
 }
 
 .wiki-lightbox img{
-  max-width:100%;
-  max-height:100%;
+  display:block;
   width:auto;
   height:auto;
+  max-width:calc(100vw - 168px);
+  max-height:calc(100vh - 144px);
   object-fit:contain;
   border-radius:5px;
   box-shadow:0 18px 60px rgba(0,0,0,.42);
+  pointer-events:auto;
 }
 
 .wiki-lightbox-close,
 .wiki-lightbox-nav{
   position:absolute;
+  z-index:2;
   display:grid;
   place-items:center;
   border:0;
@@ -782,8 +788,25 @@ html.dark .season-head{background:#567aa6}
 .wiki-lightbox-next{right:14px}
 .wiki-lightbox-nav svg{width:21px;height:21px}
 
+.wiki-lightbox-caption{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  bottom:48px;
+  transform:translateX(-50%);
+  max-width:min(720px,calc(100vw - 40px));
+  padding:6px 10px;
+  border-radius:4px;
+  background:rgba(13,21,32,.78);
+  color:#fff;
+  font-size:.72rem;
+  line-height:1.35;
+  text-align:center;
+}
+
 .wiki-lightbox-counter{
   position:absolute;
+  z-index:2;
   left:50%;
   bottom:18px;
   transform:translateX(-50%);
@@ -1041,8 +1064,15 @@ html.dark .season-head{background:#567aa6}
     scroll-margin-top:calc(var(--mobile-bar) + 8px);
   }
 
-  .wiki-lightbox{padding:54px 10px 48px}
-  .wiki-lightbox-stage{height:72vh}
+  .wiki-lightbox-stage{
+    padding:62px 12px 72px;
+  }
+
+  .wiki-lightbox img{
+    max-width:calc(100vw - 24px);
+    max-height:calc(100vh - 134px);
+  }
+
   .wiki-lightbox-nav{width:42px;height:42px}
   .wiki-lightbox-prev{left:6px}
   .wiki-lightbox-next{right:6px}
@@ -1143,22 +1173,6 @@ html.dark .plot-location-scrap{
 .gallery-item{overflow:hidden}
 .gallery-item img{transition:transform .22s ease}
 .gallery-item:hover img{transform:scale(1.035)}
-
-/* Lightbox captions */
-.wiki-lightbox-caption{
-  position:absolute;
-  left:50%;
-  bottom:48px;
-  transform:translateX(-50%);
-  max-width:min(720px,calc(100vw - 40px));
-  padding:6px 10px;
-  border-radius:4px;
-  background:rgba(13,21,32,.78);
-  color:#fff;
-  font-size:.72rem;
-  line-height:1.35;
-  text-align:center;
-}
 
 /* Smooth seam chevron movement */
 .desktop-sidebar-toggle svg{transition:transform .22s ease}
