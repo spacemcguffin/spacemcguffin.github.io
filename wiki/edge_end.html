@@ -1036,7 +1036,7 @@ html.dark .season-head{background:#567aa6}
 
   .episode-list a:last-child{border-bottom:0}
 
-  #top,#appearance,#plot,#trivia,#gallery{
+  #top,#appearance,#background,#trivia,#gallery{
     scroll-margin-top:calc(var(--mobile-bar) + 8px);
   }
 
@@ -1091,7 +1091,7 @@ html.dark .season-head{background:#567aa6}
 .section-tab[data-section="appearance"]{
   clip-path:polygon(1% 2%,98% 5%,96% 98%,5% 100%,0 89%);
 }
-.section-tab[data-section="plot"]{
+.section-tab[data-section="background"]{
   clip-path:polygon(4% 0,100% 7%,98% 91%,92% 100%,1% 96%,0 8%);
 }
 .section-tab[data-section="trivia"]{
@@ -1342,13 +1342,13 @@ html.dark .plot-location-scrap{
        Appearance
       </span>
      </a>
-     <a aria-label="Plot" class="unified-section-link" data-section="plot" href="#plot">
+     <a aria-label="Background" class="unified-section-link" data-section="background" href="#background">
       <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
        <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
        </path>
       </svg>
       <span>
-       Plot
+       Background
       </span>
      </a>
      <a aria-label="Trivia" class="unified-section-link" data-section="trivia" href="#trivia">
@@ -1446,13 +1446,13 @@ html.dark .plot-location-scrap{
         Appearance
        </span>
       </a>
-      <a class="rail-link" data-id="plot" href="#plot">
+      <a class="rail-link" data-id="background" href="#background">
        <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
         <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
         </path>
        </svg>
        <span>
-        Plot
+        Background
        </span>
       </a>
       <a class="rail-link" data-id="trivia" href="#trivia">
@@ -1594,7 +1594,7 @@ html.dark .plot-location-scrap{
        Appearance
       </span>
      </a>
-     <a class="section-tab" data-section="plot" href="#plot">
+     <a class="section-tab" data-section="background" href="#background">
       <span class="section-tab-icon">
        <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
         <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
@@ -1602,7 +1602,7 @@ html.dark .plot-location-scrap{
        </svg>
       </span>
       <span class="section-tab-label">
-       Plot
+       background
       </span>
      </a>
      <a class="section-tab" data-section="trivia" href="#trivia">
@@ -1669,26 +1669,26 @@ html.dark .plot-location-scrap{
         <div class="infobox-image-switcher">
          <div aria-label="Infobox images" class="infobox-image-tabs" role="tablist">
          </div>
-         <div class="infobox-image-panels">
-
-          <div class="infobox-image-panel" data-label="Current">
-           <img loading="eager" src="img/locations/edgeend5.png"/>
-          </div>     
+         <div class="infobox-image-panels">   
            
-           <div class="infobox-image-panel" data-label="Former">
-           <img loading="eager" src="img/locations/edgeend4.png"/>
-          </div>           
+           <div class="infobox-image-panel" data-label="Current">
+           <img alt="Current" loading="lazy" src="img/locations/edgeend4.png"/>
+          </div>    
 
-          <div class="infobox-image-panel" data-label="Season 2">
-           <img loading="eager" src="img/locations/edgeend3.png"/>
+          <div class="infobox-image-panel" data-label="Night">
+           <img alt="Night" loading="lazy" src="img/locations/edgeend5.png"/>
+          </div>            
+
+          <div class="infobox-image-panel" data-label="Former">
+           <img alt="Former" loading="lazy" src="img/locations/edgeend3.png"/>
           </div>
            
            <div class="infobox-image-panel" data-label="Season 1 (destroyed)">
-           <img loading="eager" src="img/locations/edgeend2.png"/>
+           <img alt="Season 1 (destroyed)" loading="lazy" src="img/locations/edgeend2.png"/>
           </div>
            
           <div class="infobox-image-panel" data-label="Debut (destroyed)">
-           <img loading="eager" src="img/locations/edgeend1.png"/>
+           <img alt="Debut (destroyed)" loading="lazy" src="img/locations/edgeend1.png"/>
           </div>
 
          </div>
@@ -1720,7 +1720,7 @@ html.dark .plot-location-scrap{
          </div>
          <div class="info-row">
           <b>
-           headteacher
+           Headteacher
           </b>
           <span>
            Mr. M Burgess
@@ -1745,52 +1745,71 @@ html.dark .plot-location-scrap{
          Appearance
         </h2>
         <p>
-         The school has undergone two major redesigns. The second of which resulted from the school being accidentally burnt down by the boys.
+         Edge End High School is a predominantly single-storey school, but with staffrooms and a library area on an upper floor. 
         </p>
+
+      <div class="plot-location-scrap">
+       IN RUINS
+      </div>
+
+        <p>
+         The first appearance of Edge End is in the pilot episode, where it has been destroyed and delapidated for multiple years. It remains in this state for the majority of Season 1, before the townsfolk of Nelson band together to rebuild and restore the school to its former glory.
+        </p>    
+
+      <div class="plot-location-scrap">
+       REBUILT
+      </div>
+
+        <p>
+         The school is built with red and brown bricks, and has two predominant chimneys as a focal feature. To the rear is a giant playing field where the kids hang out during break times.
+        </p>           
+        
        </section>
       </div>
      </div>
-     <!-- ==================== PLOT ==================== -->
-     <section class="section" id="plot">
+     <!-- ==================== BACKGROUND ==================== -->
+     <section class="section" id="background">
       <h2>
-       Plot
+       Background
       </h2>
-      <div class="quote">
-       &ldquo;We need some goddamn Christmas magic!&rdquo;
-       <span>
-        &mdash; Stan
-       </span>
-      </div>
+
       <div class="plot-location-scrap">
-       AT SOUTH PARK ELEMENTARY
+       Interior
       </div>
-      <p>
-       At South Park Elementary, Stan is seeing the school counsellor
-       <sup>
-        <a data-hover-content="&lt;div class='hover-content'&gt;&lt;p&gt;In this episode, the counsellor is Jesus Christ, following the sacking of Mr Mackey in the previous season.&lt;/p&gt;&lt;/div&gt;" href="#">
-         [1]
-        </a>
-       </sup>
-       and talking about how tough the last few months have been, mentioning ICE raids, his dad's company going out of business, and losing their home and moving in with his grandfather at Shady Acres and admits he isn't able to cope with all of the change around them. Jesus Christ, having fully embraced the 'Power Christian' lifestyle now, strums an electric guitar and questions what has changed so much. Stan points out people aren't so kind and giving anymore, and admits he is considering sharing the Saudi Arabian money he won in the Turkey Trot race because he feels like that's what everyone needs, comparing it to a Christmas miracle. Jesus calls this "socialist bullshit" and Stan expresses frustration at how Jesus has changed, reminding him he doesn't want to live in an old folks' home anymore and needs some Christmas magic. Peggy Rockbottom then enters the counsellor's office with Pinot Grigio to which Jesus protests what took her so long and tells her to shut up, while she explains to him and Stan she is only late because she went to sing to the needy for charity work. Jesus tells Stan at this time of year, everyone wishes things were better, but that nothing miraculous will happen to anyone.
-      </p>
+
+      <ul class="trivia-list">
+        <li>Reception</li>
+        <li>Main Corridor</li>
+        <li>Headteacher's Office</li>
+        <li>Room 1</li>
+        <li>English Classroom</li>
+        <li>Maths Classroom</li>
+        <li>Science Labs</li>
+        <li>ICT Suite</li>
+        <li>Humanities Classroom</li>
+        <li>Art Room</li>
+        <li>Music Room</li>
+        <li>Technology Block</li>
+        <li>Special Needs Classroom</li>
+        <li>Assembly Hall</li>
+        <li>Gymnasium</li>
+        <li>Library</li>
+        <li>Food Hall</li>
+        <li>Staff Room</li>
+      </ul>
+      
+      
       <div class="plot-location-scrap">
-       THE WHITE HOUSE
+       Exterior
       </div>
-      <p>
-       At the White House, Satan is decorating the nursey and crib with Christmas decorations while singing to himself about the incoming arrival of his new baby, listening to a Fox News special report on the baby's upcoming arrival, with the report mentioning that no one is aware how the baby will be born, but that the "crap out" is coming. Satan's decorations include a 'Baby's First Christmas' and Labubu ornaments. but when singing a verse about the baby's dad, Satan realizes Donald Trump, the baby's father, is not present, and questions Dan Scavino and Pam Bondi about his whereabouts, explaining they planned to spend the day singing and decorating together. Scavino informs him Trump had to fly to Colorado on an "urgent matter", insisting it is "high-level classified" and that even they don't have the security clearance to know what's going on, to Satan's anger. After he leaves, Scavino dismisses Satan's concern as pregnancy hormones while Bondi admits she does find it strange that Trump hasn't informed her why he visited Colorado, and Scavino suggests as Trump claimed only he and the Vice President were allowed to know, it must be a covert military operation. Trump and Vance, however, are on Main Street South Park across from the Park County Police Station, dressed as Santa Claus and an elf and pretending to collect donations for the Salvation Army charity organization for Christmas. Vance explains to Trump that Peter Thiel is being held at the station and confirms only Thiel can prevent the unholy birth. Mr. Mackey apologizes for not donating to the Salvation Army, recounting how he lost his job due to a lack of government funding for schools, as well as his health care, and the high cost of tariffs. Trump expresses no concern and wishes him a merry Christmas. As he leaves, Vance warns Trump they need to hurry before the "crap out" can take place, and they synchronize watches to enact 'Operation Kill My Own Baby'.
-      </p>
-      <p>
-       At the Park County Police Station, Trump and Vance arrive in their disguises, wishing everyone a merry Christmas and happy holidays and confronting Detective Harris, claiming they are Salvation Army members with food for the prisoners, justifying it as the time of year to give to the needy, including a cake. Pete Hegseth begins to protest they don't need any cake because the President will be coming for them before Peter Thiel, noticing the ruse, elbows him. Harris tells Mitch Murphy to let them in. Meanwhile outside the The Cheesecake Factory, Stan and the Christmas Critters are walking together as the Critters sing a song about the upcoming crap out. Stan stops and points out they told him Satan was in Washington DC, but they let him know that Satan is on his way to South Park and he needs to just get on board with the crap out. Foxy explains that nothing will stop the Anti-Christ's arrival, except for Peter Thiel. Stan recognizes Thiel as the man who gave a presentation at the school, and the Critters express surprise he has met him and horror that Thiel is already in South Park, asking Stan what he intends to do about this, with Squirrely asking if he might kill and eat him. Stan claims he won't be onboard with the crap out unless it makes "a little bit" of sense, and Beary assures him they will make sure it "all lines up perfectly" for him and the Critters celebrate.
-      </p>
-      <p>
-       At Hell's Pass Hospital, the Critters, Towelie and Stan gather around Satan in his hospital bed waiting for the baby to be born when a doctor comes in and explains they will just need another quick ultrasound and will then move Satan to the operating room. Satan warns him there are evil forces at work and they may need to hurry. Back at the Police Station, Jesus uses his electric guitar to break through the Police Station's main hall and let Trump and Vance in, then to free Peter Thiel and Pete Hegseth from the jail. They greet Trump, who gladly says he's gotten "another Christians dipshit" to help him get what he wants. Thiel warns him there is very little time to stop the Anti-Christ's arrival, and Vance speaks up to say that he doesn't care if his asshole is now filled with genital warts, he still loves Trump. Back at the hospital though, Satan is telling the critters he can't believe how terrible Trump turned out to be, admitting he falls for the worst kinds of guys and calling himself stupid, as the Critters reassure him to save his strength and tell him he's not stupid, pushing Stan to help reassure him. Trump admits he knew how terrible Trump was and how terrible he treated everyone but looked the other way in hopes of a Christmas miracle, his little baby, the only thing in his life that could stull turn out good. Satan worries he will never be free if Trump has Jesus on his side, and the Critters are concerned if he can be stopped, but believe Stan can help them stop him.
-      </p>
-      <p>
-       As the confrontation ends, the doctor comes into the hallway and says he is sorry to interrupt but informs everyone he has really bad news, explaining that according to the ultrasound, at some point when "nobody was watching", the baby hung itself and took it's own life, saying it can all be seen in a video, noting the baby managed to get "a hold of some bed sheets, there's a couple minutes missing from the ultrasound but it's definitely a suicide". Trump is overjoyed with this outcome, and Vance refers to it as a miracle, but Beary is disappointed there will not be a crap out after all. Fox News then reports that the unborn child of Satan and President Trump has indeed "taken the easy way out" by committing suicide and "lacked mental toughness", with Sean Hannity showing the ultrasound of the baby initially appearing fine, "a few minutes missing" represented by a black screen, and then the baby inside the womb having already hung itself, a small chair visible, and refers to it as "just something babies do sometimes, while the Fox and Friends hosts urge viewers who know a fetus contemplating suicide to call up Fox News as much as they can. The anchor mentions a funeral will be held for the unborn child at the White House.
-      </p>
-      <p>
-       Back at Shady Acres, one of the employees calls out for Christmas mail and letters from home, finding one for Stan and offering it to him. Stan notices on the envelope it is from Jesus and opens it, and Jesus tells him he owes him an apology and a thank you, noting that Stan asked for a Christmas miracle and that Jesus didn't listen, telling him to go to an address, which Stan recognizes with surprise, saying "no way" before running through the town and coming back to the old Marsh Residence, with 'Merry Christmas Stan' written in holiday lights. Stan finds a key from Jesus and opens the house, seeing a Christmas tree already set up and the same familiar furniture including his old living room couch, a photo of his family, and heads up to his room to see his old toy box, bed and more all in place. After leaving, he looks up to the stars and says "thank you" to Jesus, who appears in the stars and promises he will be up there, watching everybody, telling Stan to be good and never give up on the things he commits to, before being joined by Peggy Rockbottom, who praises Jesus and begins singing the same song she sang to the seniors earlier about getting punched in the face, and Stan sings along happily as he heads back into his home.
-      </p>
+
+      <ul class="trivia-list">
+        <li>Car Park</li>
+        <li>School Fields</li>
+        <li>Quadrangles</li>
+        <li>Standalone Science Block</li>
+      </ul>
+      
      </section>
      <!-- ==================== GALLERY ==================== -->
      <section class="section" id="trivia">
@@ -1966,7 +1985,7 @@ html.dark .plot-location-scrap{
   }
 
   /* stable section tracking: no IntersectionObserver switching */
-  const sectionIds = ["top","appearance","plot","trivia","gallery"];
+  const sectionIds = ["top","appearance","background","trivia","gallery"];
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const sectionLinks = [
     ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
