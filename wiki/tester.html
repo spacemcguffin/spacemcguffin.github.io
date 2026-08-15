@@ -1253,6 +1253,211 @@ html.dark .hover-content{
   .wiki-lightbox-prev{left:6px}
   .wiki-lightbox-next{right:6px}
 }
+  
+
+/* ============================================================
+   MOBILE SEASON ACCORDION
+   ============================================================ */
+.season-accordion-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:default;
+}
+
+.season-accordion-chevron{
+  display:none;
+  width:18px;
+  height:18px;
+  flex:0 0 18px;
+}
+
+.season-accordion-chevron svg{
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+@media(max-width:850px){
+  .season-head{
+    padding:0!important;
+  }
+
+  .season-accordion-toggle{
+    min-height:42px;
+    padding:9px 11px;
+    cursor:pointer;
+    color:#fff;
+  }
+
+  .season-accordion-chevron{
+    display:block;
+    transition:transform .2s ease;
+  }
+
+  .season-accordion-toggle[aria-expanded="true"] .season-accordion-chevron{
+    transform:rotate(180deg);
+  }
+
+  .season-card .episode-list{
+    display:none!important;
+  }
+
+  .season-card.is-open .episode-list{
+    display:grid!important;
+    grid-template-columns:1fr!important;
+  }
+
+  .season-card .episode-list a{
+    min-height:44px!important;
+  }
+
+  .season-card .episode-list a.current{
+    background:var(--accent)!important;
+    color:#fff!important;
+    font-weight:700;
+  }
+
+  .season-card .episode-list a.current .ep-num{
+    border-color:rgba(255,255,255,.4)!important;
+    background:rgba(255,255,255,.12)!important;
+    color:#fff!important;
+  }
+}
+
+/* Desktop stays permanently expanded */
+@media(min-width:851px){
+  .season-card .episode-list{
+    display:grid!important;
+  }
+}
+  
+
+/* ============================================================
+   Final icon / active scrap / title refinements
+   ============================================================ */
+
+/* All Plot icons use the same geometry and visual sizing */
+.rail-link .nav-svg,
+.section-tab[data-section="plot"] svg,
+.unified-section-link[data-section="plot"] svg{
+  width:16px!important;
+  height:16px!important;
+  flex:0 0 16px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+}
+
+/* Make active construction-paper tabs clearly blue */
+.section-tab.active,
+.section-tab.active:hover,
+.section-tab:nth-child(2n).active,
+.section-tab:nth-child(3n).active,
+.section-tab:nth-child(4n).active{
+  background:#456291!important;
+  color:#fff!important;
+  filter:none!important;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,.18) inset,
+    0 4px 7px rgba(22,31,43,.24)!important;
+}
+
+html.dark .section-tab.active,
+html.dark .section-tab.active:hover{
+  background:#5f82ad!important;
+  color:#fff!important;
+}
+
+/* Slightly smaller main episode heading */
+.hero h1{
+  font-size:clamp(2.15rem,3.55vw,3.4rem)!important;
+}
+
+/* Larger mobile wiki identity */
+@media(max-width:850px){
+  .mobile-wiki-identity{
+    min-height:54px!important;
+    padding-top:9px!important;
+    padding-bottom:9px!important;
+  }
+
+  .mobile-wiki-identity strong{
+    font-size:1.16rem!important;
+    line-height:1!important;
+    font-weight:790!important;
+    letter-spacing:-.035em!important;
+  }
+
+  .mobile-wiki-identity span{
+    margin-top:4px!important;
+    font-size:.61rem!important;
+    line-height:1!important;
+    font-weight:680!important;
+    letter-spacing:.105em!important;
+  }
+
+  .hero h1{
+    font-size:clamp(1.95rem,10.8vw,2.8rem)!important;
+  }
+}
+  
+
+/* ============================================================
+   Plot paragraph icon + final mobile typography
+   ============================================================ */
+
+.plot-lines-icon,
+.rail-link .plot-lines-icon,
+.section-tab[data-section="plot"] .plot-lines-icon,
+.unified-section-link[data-section="plot"] .plot-lines-icon{
+  width:16px!important;
+  height:16px!important;
+  flex:0 0 16px!important;
+  fill:none!important;
+  stroke:currentColor!important;
+}
+
+/* Slightly smaller episode title */
+.hero h1{
+  font-size:clamp(2rem,3.35vw,3.2rem)!important;
+}
+
+@media(max-width:850px){
+  /* Larger mobile identity */
+  .mobile-wiki-identity{
+    min-height:58px!important;
+    padding:10px 14px!important;
+  }
+
+  .mobile-wiki-identity strong{
+    font-size:1.28rem!important;
+    line-height:.98!important;
+    font-weight:800!important;
+    letter-spacing:-.04em!important;
+  }
+
+  .mobile-wiki-identity span{
+    margin-top:5px!important;
+    font-size:.64rem!important;
+    line-height:1!important;
+    font-weight:700!important;
+    letter-spacing:.11em!important;
+  }
+
+  /* Smaller main episode heading under eyebrow */
+  .hero h1{
+    font-size:clamp(1.85rem,10vw,2.65rem)!important;
+    line-height:.96!important;
+  }
+}
   </style>
  </head>
  <body>
@@ -1290,12 +1495,8 @@ html.dark .hover-content{
       </span>
      </a>
      <a aria-label="Plot" class="unified-section-link" data-section="plot" href="#plot">
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-       <circle cx="6.2" cy="6.2" fill="none" r="2.1" stroke="currentColor" stroke-width="1.7">
-       </circle>
-       <circle cx="17.8" cy="17.8" fill="none" r="2.1" stroke="currentColor" stroke-width="1.7">
-       </circle>
-       <path d="M7.7 7.7c2 2 1.9 4.1 4 5.4 1.5.9 2.8.5 4.5 2.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+      <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
+       <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
        </path>
       </svg>
       <span>
@@ -1394,8 +1595,8 @@ html.dark .hover-content{
        </span>
       </a>
       <a class="rail-link" data-id="plot" href="#plot">
-       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
-        <path d="M5 6h14M5 12h14M5 18h10">
+       <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
+        <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
         </path>
        </svg>
        <span>
@@ -1416,7 +1617,6 @@ html.dark .hover-content{
        </span>
       </a>
      </nav>
-
     </div>
     <div class="rail-section">
      <div class="nav-label">
@@ -1459,7 +1659,6 @@ html.dark .hover-content{
        </span>
       </a>
      </nav>
-
     </div>
     <div class="rail-section">
      <div class="nav-label">
@@ -1481,7 +1680,6 @@ html.dark .hover-content{
      </div>
     </div>
    </aside>
-
    <main class="main" id="main">
     <nav aria-label="Episode navigation" class="episode-nav-strip">
      <a class="ep-prev" href="#">
@@ -1509,11 +1707,8 @@ html.dark .hover-content{
       </strong>
      </a>
     </nav>
-
-
     <!-- ==================== EPISODE TITLE / HERO ==================== -->
-
-<section class="hero" id="top">
+    <section class="hero" id="top">
      <div class="eyebrow">
       <span class="chip">
        Season 28
@@ -1526,7 +1721,6 @@ html.dark .hover-content{
       The Crap Out
      </h1>
     </section>
-
     <div aria-label="Article sections" class="section-tabs">
      <a class="section-tab" data-section="top" href="#top">
       <span class="section-tab-icon">
@@ -1552,12 +1746,8 @@ html.dark .hover-content{
      </a>
      <a class="section-tab" data-section="plot" href="#plot">
       <span class="section-tab-icon">
-       <svg aria-hidden="true" viewbox="0 0 24 24">
-        <circle cx="6" cy="6" fill="none" r="2.2" stroke="currentColor" stroke-width="1.7">
-        </circle>
-        <circle cx="18" cy="18" fill="none" r="2.2" stroke="currentColor" stroke-width="1.7">
-        </circle>
-        <path d="M7.6 7.6c2.1 2.1 1.8 4.3 4 5.6 1.4.8 2.8.4 4.7 2.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7">
+       <svg aria-hidden="true" class="nav-svg plot-lines-icon" viewbox="0 0 24 24">
+        <path d="M5 7h14M5 12h14M5 17h10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
         </path>
        </svg>
       </span>
@@ -1590,10 +1780,8 @@ html.dark .hover-content{
         </strong>
         is the fifth episode of Season 28, and the 338th overall episode of South Park. It aired on December 10, 2025.
        </p>
-
        <!-- ==================== SYNOPSIS ==================== -->
-
-<section class="section first" id="synopsis">
+       <section class="section first" id="synopsis">
         <h2>
          Synopsis
         </h2>
@@ -1601,7 +1789,6 @@ html.dark .hover-content{
          Satan's due, Stan's praying, and only a Christmas miracle can deliver the Antichrist on time.
         </p>
        </section>
-
       </div>
       <aside aria-label="Episode information" class="infobox">
        <div class="infobox-title">
@@ -1671,12 +1858,9 @@ html.dark .hover-content{
         </div>
        </div>
       </aside>
-
      </div>
-
      <!-- ==================== PLOT ==================== -->
-
-<section class="section" id="plot">
+     <section class="section" id="plot">
       <h2>
        Plot
       </h2>
@@ -1711,11 +1895,8 @@ html.dark .hover-content{
        Back at Shady Acres, one of the employees calls out for Christmas mail and letters from home, finding one for Stan and offering it to him. Stan notices on the envelope it is from Jesus and opens it, and Jesus tells him he owes him an apology and a thank you, noting that Stan asked for a Christmas miracle and that Jesus didn't listen, telling him to go to an address, which Stan recognizes with surprise, saying "no way" before running through the town and coming back to the old Marsh Residence, with 'Merry Christmas Stan' written in holiday lights. Stan finds a key from Jesus and opens the house, seeing a Christmas tree already set up and the same familiar furniture including his old living room couch, a photo of his family, and heads up to his room to see his old toy box, bed and more all in place. After leaving, he looks up to the stars and says "thank you" to Jesus, who appears in the stars and promises he will be up there, watching everybody, telling Stan to be good and never give up on the things he commits to, before being joined by Peggy Rockbottom, who praises Jesus and begins singing the same song she sang to the seniors earlier about getting punched in the face, and Stan sings along happily as he heads back into his home.
       </p>
      </section>
-
-
      <!-- ==================== GALLERY ==================== -->
-
-<section class="section" id="gallery">
+     <section class="section" id="gallery">
       <h2>
        Gallery
       </h2>
@@ -1731,24 +1912,23 @@ html.dark .hover-content{
        </button>
       </div>
      </section>
-
      <section class="section" id="season-navigation">
-      <h2>
-       Season 28
-      </h2>
-
       <!-- ==================== SEASON / EPISODE NAVIGATION ==================== -->
-
-<div class="season-card">
-       <div class="season-head">
-        <span>
-         Episode navigation
-        </span>
-        <span>
-         5 episodes
-        </span>
+      <div class="season-card">
+       <div class="season-head season-accordion-head">
+        <button aria-controls="season-28-episodes" aria-expanded="false" class="season-accordion-toggle" type="button">
+         <span class="season-accordion-label">
+          Season 28 episodes
+         </span>
+         <span aria-hidden="true" class="season-accordion-chevron">
+          <svg viewbox="0 0 24 24">
+           <path d="m7 9 5 5 5-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+           </path>
+          </svg>
+         </span>
+        </button>
        </div>
-       <div class="episode-list">
+       <div class="episode-list" id="season-28-episodes">
         <a href="#">
          <span class="ep-num">
           1
@@ -1782,12 +1962,10 @@ html.dark .hover-content{
        </div>
       </div>
      </section>
-
      <p class="footer">
       Created by Lewis
      </p>
     </section>
-
    </main>
   </div>
   <div aria-label="Gallery image" aria-modal="true" class="lightbox" id="lightbox" role="dialog">
@@ -2053,6 +2231,30 @@ html.dark .hover-content{
       }
     });
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const seasonCard = document.querySelector(".season-card");
+  const seasonToggle = document.querySelector(".season-accordion-toggle");
+
+  if (!seasonCard || !seasonToggle) return;
+
+  const setSeasonAccordion = (open) => {
+    seasonCard.classList.toggle("is-open", open);
+    seasonToggle.setAttribute("aria-expanded", String(open));
+  };
+
+  // Collapsed by default on mobile, expanded on desktop.
+  setSeasonAccordion(window.innerWidth >= 851);
+
+  seasonToggle.addEventListener("click", () => {
+    if (window.innerWidth >= 851) return;
+    setSeasonAccordion(!seasonCard.classList.contains("is-open"));
+  });
+
+  window.addEventListener("resize", () => {
+    setSeasonAccordion(window.innerWidth >= 851 ? true : seasonCard.classList.contains("is-open"));
+  }, { passive: true });
 });
   </script>
  </body>
