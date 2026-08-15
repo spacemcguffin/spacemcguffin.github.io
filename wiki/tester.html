@@ -1820,6 +1820,41 @@ html.dark .theme-icon-slot .theme-icon-moon{
     color:#fff!important;
   }
 }
+  
+
+/* ============================================================
+   WIDE VIEW — HIGHER FLOATING EPISODE INFOBOX
+   Begins just after title; Synopsis wraps alongside it.
+   ============================================================ */
+@media (min-width:851px){
+  .infobox{
+    float:right!important;
+    width:268px!important;
+    margin:0 0 18px 22px!important;
+  }
+
+  #synopsis{
+    clear:none!important;
+    padding-top:0!important;
+    border-top:0!important;
+  }
+
+  #plot{
+    clear:none!important;
+  }
+
+  #gallery{
+    clear:both!important;
+  }
+}
+
+@media (max-width:850px){
+  .infobox{
+    float:none!important;
+    width:100%!important;
+    margin:0 0 17px!important;
+  }
+}
   </style>
  </head>
  <body>
@@ -2184,6 +2219,74 @@ html.dark .theme-icon-slot .theme-icon-moon{
         is the fifth episode of Season 28, and the 338th overall episode of South Park. It aired on December 10, 2025.
        </p>
        <!-- ==================== SYNOPSIS ==================== -->
+       <aside aria-label="Episode information" class="infobox">
+        <div class="infobox-title">
+         The Crap Out
+        </div>
+        <img alt="The Crap Out episode image" src="/sp/img/tco.png"/>
+        <div class="info-table">
+         <div class="info-row">
+          <b>
+           Episode no.
+          </b>
+          <span>
+           Season 28
+           <br/>
+           Episode 5
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Written by
+          </b>
+          <span>
+           Trey Parker
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Directed by
+          </b>
+          <span>
+           Trey Parker
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Production code
+          </b>
+          <span>
+           2805
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Original air date
+          </b>
+          <span>
+           December 10, 2025
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Previous
+          </b>
+          <span>
+           <a href="#">
+            Turkey Trot
+           </a>
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Next
+          </b>
+          <span>
+           TBA
+          </span>
+         </div>
+        </div>
+       </aside>
        <section class="section first" id="synopsis">
         <h2>
          Synopsis
@@ -2193,74 +2296,6 @@ html.dark .theme-icon-slot .theme-icon-moon{
         </p>
        </section>
       </div>
-      <aside aria-label="Episode information" class="infobox">
-       <div class="infobox-title">
-        The Crap Out
-       </div>
-       <img alt="The Crap Out episode image" src="/sp/img/tco.png"/>
-       <div class="info-table">
-        <div class="info-row">
-         <b>
-          Episode no.
-         </b>
-         <span>
-          Season 28
-          <br/>
-          Episode 5
-         </span>
-        </div>
-        <div class="info-row">
-         <b>
-          Written by
-         </b>
-         <span>
-          Trey Parker
-         </span>
-        </div>
-        <div class="info-row">
-         <b>
-          Directed by
-         </b>
-         <span>
-          Trey Parker
-         </span>
-        </div>
-        <div class="info-row">
-         <b>
-          Production code
-         </b>
-         <span>
-          2805
-         </span>
-        </div>
-        <div class="info-row">
-         <b>
-          Original air date
-         </b>
-         <span>
-          December 10, 2025
-         </span>
-        </div>
-        <div class="info-row">
-         <b>
-          Previous
-         </b>
-         <span>
-          <a href="#">
-           Turkey Trot
-          </a>
-         </span>
-        </div>
-        <div class="info-row">
-         <b>
-          Next
-         </b>
-         <span>
-          TBA
-         </span>
-        </div>
-       </div>
-      </aside>
      </div>
      <!-- ==================== PLOT ==================== -->
      <section class="section" id="plot">
