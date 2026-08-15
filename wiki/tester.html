@@ -2215,3 +2215,37 @@ html.dark .section-tab[data-section="trivia"].active{
   </script>
  </body>
 </html>
+
+<style id="mobile-nav-label-fix">
+@media(max-width:850px){
+  .unified-section-link{
+    min-width:78px!important;
+    padding:0 10px!important;
+    gap:3px!important;
+  }
+
+  .unified-section-link span{
+    display:block!important;
+    font-size:.53rem!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+
+  .unified-section-link svg{
+    width:15px!important;
+    height:15px!important;
+    flex:0 0 15px!important;
+  }
+}
+
+@media(max-width:470px){
+  .unified-section-link{
+    min-width:72px!important;
+    padding:0 8px!important;
+  }
+
+  .unified-section-link span{
+    display:block!important;
+  }
+}
+</style>
