@@ -1,13 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light dark">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
 <title>The Crap Out — South Park Wiki</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
 :root{
  --bg:#eef2f5;--surface:#fbfbfa;--surface2:#f2f4f5;--ink:#202124;--muted:#6f747a;--line:#d8dde2;
@@ -53,45 +54,299 @@ button,input{font:inherit} button{color:inherit}
 @media(max-width:520px){.main{padding-inline:15px}.episode-nav{grid-template-columns:1fr 1fr;height:50px}.episode-nav strong{display:none}.hero{padding-top:28px}h1{font-size:clamp(3rem,18vw,4.7rem)}.article-top{gap:24px}.section p{font-size:.91rem;line-height:1.78}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
-</head>
+<style id="wiki-fix-style">
+/* ===== Fixed wiki enhancement layer ===== */
+:root{
+  --sheet:#fbfbfc;--text:#272b31;--muted:#6d7580;--line:#d2d8e0;--soft:#f0f3f7;
+  --accent:#456291;--link:#365f9b;--sidebar:#f5f7f9;--header:#fbfbfc;
+}
+html.dark{
+  --sheet:#0b111b;--text:#f0f4f8;--muted:#b8c2cf;--line:#344154;--soft:#141d2a;
+  --accent:#91b9e7;--link:#a8cdf5;--sidebar:#0f1723;--header:#0b111b;
+}
+html.dark body{color:var(--text)!important}
+html.dark .page-shell,html.dark .main-layout,html.dark .content,html.dark .article-card{background:var(--sheet)!important}
+html.dark p,html.dark li,html.dark td,html.dark th,html.dark .intro,html.dark .episode-meta,html.dark .info-row,html.dark .quote{color:var(--text)!important}
+html.dark .muted,html.dark .rail-sub,html.dark .nav-label,html.dark .episode-kicker,html.dark .nav-small{color:var(--muted)!important}
+html.dark a{color:var(--link)}
+html.dark .section-title,html.dark h1,html.dark h2,html.dark h3,html.dark h4,html.dark .rail-title{color:#fff!important}
+html.dark .infobox,html.dark .season-module,html.dark .episode-nav-strip{border-color:var(--line)!important;background:var(--sheet)!important}
+html.dark .info-row{border-color:var(--line)!important}
+html.dark .tabbtn{color:var(--link)!important}
+html.dark .tabbtn.active{color:#08101b!important;background:var(--accent)!important}
+html.dark .quote{background:#121c29!important;border-color:var(--accent)!important}
+html.dark .gallery-item{background:#101925!important;border-color:var(--line)!important}
+
+body{background-position:center top!important;background-size:cover!important;background-attachment:fixed!important}
+.page-shell,.main-layout{max-width:1480px!important;width:min(1480px,calc(100% - 72px))!important;margin-inline:auto!important;background:var(--sheet)!important;box-shadow:0 0 45px rgba(0,0,0,.14)}
+.site-header{background:var(--header)!important;border-color:var(--line)!important}
+.iconbtn svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block}
+#themeBtn .sun-icon{display:none}html.dark #themeBtn .moon-icon{display:none}html.dark #themeBtn .sun-icon{display:block}
+.sidebar{background:var(--sidebar)!important;border-color:var(--line)!important}
+.rail-brand{padding:25px 20px 20px;border-bottom:1px solid var(--line)}
+.rail-title{margin:0!important;font:750 1.15rem/1.1 "Google Sans Flex","Inter",sans-serif!important;letter-spacing:-.035em;color:var(--text)}
+.rail-sub{margin:.28rem 0 0!important;font-size:.68rem!important;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)!important}
+.rail-section{padding:10px 12px;border-bottom:1px solid var(--line)}
+.nav-label{padding:5px 7px 7px!important;margin:0!important;font-size:.64rem!important;letter-spacing:.13em!important;color:var(--muted)!important;background:none!important;text-align:left!important}
+.rail-nav{display:grid;gap:2px}.rail-link{display:flex!important;align-items:center;gap:9px;padding:7px 8px!important;border-radius:5px;color:var(--text)!important;font-size:.82rem!important;text-decoration:none!important}
+.rail-link:hover,.rail-link.active{background:var(--soft)!important;color:var(--link)!important}.rail-link.active{font-weight:650}
+.nav-svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:0 0 17px}
+.season-grid{padding:2px 5px 6px!important}.season-grid a{border-color:var(--line)!important;background:var(--sheet)!important;color:var(--text)!important}.season-grid a.current{background:var(--accent)!important;border-color:var(--accent)!important;color:#fff!important}html.dark .season-grid a.current{color:#08101b!important}
+.content{max-width:none!important;padding:0 36px 54px!important}
+.hero h1{font-size:clamp(2.6rem,4.5vw,4.7rem)!important;letter-spacing:-.06em!important;font-weight:650!important;color:var(--text)!important}
+.episode-nav-strip{display:grid;grid-template-columns:1fr minmax(220px,.8fr) 1fr;align-items:stretch;margin:4px 0 0;border:1px solid var(--line);background:var(--sheet)}
+.episode-nav-strip>a,.ep-current{padding:10px 14px;min-height:58px;display:flex;flex-direction:column;justify-content:center;text-decoration:none!important}.ep-current{text-align:center;background:var(--accent);color:#fff}.ep-current span{font-size:.65rem;opacity:.78;text-transform:uppercase;letter-spacing:.08em}.ep-current strong{font-size:.9rem}.ep-prev{border-right:1px solid var(--line)}.ep-next{border-left:1px solid var(--line);text-align:right}.nav-small{font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.episode-nav-strip strong{font-size:.82rem;color:inherit}
+.tabs{margin:0 0 22px!important;border-bottom:1px solid var(--accent)!important;gap:0!important}.tabbtn{border:0!important;border-radius:0!important;min-width:150px!important;width:auto!important;padding:12px 24px!important;background:transparent!important;color:var(--link)!important;font-weight:650!important}.tabbtn.active{background:var(--accent)!important;color:#fff!important}
+.infobox{float:right!important;width:320px!important;margin:0 0 26px 30px!important;border:1px solid var(--line)!important;border-radius:0!important;background:var(--sheet)!important;box-shadow:none!important}.infobox-title{background:var(--accent);color:#fff;text-align:center;padding:12px 10px;font:750 1.15rem "Google Sans Flex","Inter",sans-serif}.infobox img{border-radius:0!important}.info-row{border-color:var(--line)!important;padding:8px 10px!important}.info-row b{color:var(--text)!important}.info-row span{color:var(--text)!important}
+.section-heading{border-bottom:1px solid var(--accent)!important;background:none!important;border-radius:0!important;padding:0 0 7px!important;margin-top:30px!important}.section-heading h2,.section-heading h3{color:var(--text)!important}
+.prose p{font-size:.98rem!important;line-height:1.82!important;color:var(--text)!important}.quote{background:var(--soft)!important;color:var(--text)!important;border-left:3px solid var(--accent)!important;border-radius:0 5px 5px 0!important}
+.gallery-grid{gap:10px!important}.gallery-item{border:1px solid var(--line)!important;border-radius:2px!important;background:var(--sheet)!important;padding:3px!important}
+.season-module{clear:both;margin:42px 0 0;border:1px solid var(--line);background:var(--sheet)}.season-module-head{display:flex;align-items:end;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}.season-module-head>div>span{font-size:.61rem;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);font-weight:700}.season-module-head h2{margin:2px 0 0!important;font-size:1.35rem!important;color:var(--text)!important}.season-module-head>a{font-size:.76rem}.season-list{display:grid;grid-template-columns:repeat(5,1fr)}.season-list a{min-height:74px;padding:11px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:4px;text-decoration:none!important;color:var(--text)!important}.season-list a:last-child{border-right:0}.season-list b{font-size:.63rem;color:var(--muted)}.season-list span{font-size:.78rem}.season-list em{margin-top:auto;font-size:.54rem;font-style:normal;text-transform:uppercase;letter-spacing:.1em}.season-list .current{background:var(--accent)!important;color:#fff!important}.season-list .current b{color:rgba(255,255,255,.75)!important}html.dark .season-list .current{color:#08101b!important}html.dark .season-list .current b{color:#243448!important}
+@media(max-width:850px){.page-shell,.main-layout{width:100%!important}.content{padding:0 17px 38px!important}.episode-nav-strip{grid-template-columns:1fr 1fr}.ep-current{grid-column:1/-1;grid-row:1}.ep-prev{grid-row:2;border-right:1px solid var(--line)}.ep-next{grid-row:2;border-left:0}.infobox{float:none!important;width:100%!important;margin:0 0 22px!important}.season-list{grid-template-columns:1fr}.season-list a{min-height:auto;border-right:0;border-bottom:1px solid var(--line);flex-direction:row;align-items:center}.season-list em{margin:0 0 0 auto}.tabbtn{min-width:110px!important;padding:11px 16px!important}}
+</style><style>
+/* ===== Tightened layout — corrected pass ===== */
+:root{
+  --tight-sidebar:228px;
+}
+.page-shell,.main-layout{
+  max-width:1400px!important;
+  width:min(1400px,calc(100% - 56px))!important;
+}
+.shell{
+  grid-template-columns:var(--tight-sidebar) minmax(0,1fr)!important;
+}
+.sidebar{
+  width:auto!important;
+  padding:18px 12px 16px!important;
+}
+.rail-brand{
+  padding:20px 16px 16px!important;
+}
+.rail-section{
+  padding:8px 10px!important;
+}
+.rail-link{
+  padding:6px 8px!important;
+  min-height:32px!important;
+  font-size:.79rem!important;
+}
+.nav-label{
+  padding:4px 6px 6px!important;
+  font-size:.61rem!important;
+}
+.season-grid a{
+  height:29px!important;
+  font-size:.71rem!important;
+}
+.main,.content{
+  padding:0 28px 42px!important;
+}
+
+/* New episode navigator sits above title */
+.episode-nav-strip{
+  margin:14px 0 0!important;
+  min-height:52px!important;
+}
+.episode-nav-strip>a,.ep-current{
+  min-height:52px!important;
+  padding:8px 12px!important;
+}
+.ep-current strong{
+  font-size:.84rem!important;
+}
+.nav-small,.ep-current span{
+  font-size:.58rem!important;
+}
+
+/* Title area */
+.hero{
+  padding:22px 0 18px!important;
+  border-bottom:1px solid var(--line)!important;
+}
+.hero h1{
+  margin:9px 0 0!important;
+  font-size:clamp(2.45rem,4.2vw,4.25rem)!important;
+  line-height:.94!important;
+}
+.eyebrow{
+  gap:5px!important;
+}
+.chip{
+  padding:4px 7px!important;
+  font-size:.58rem!important;
+}
+
+/* Tabs */
+.tabs{
+  margin:0 0 18px!important;
+}
+.tabbtn{
+  min-width:120px!important;
+  padding:10px 18px!important;
+  font-size:.75rem!important;
+}
+
+/* Main article density */
+.article-top{
+  grid-template-columns:minmax(0,1fr) 300px!important;
+  gap:26px!important;
+}
+.lede{
+  font-size:.97rem!important;
+  line-height:1.7!important;
+  margin-bottom:18px!important;
+}
+.infobox{
+  width:300px!important;
+}
+.infobox-title{
+  padding:10px 9px!important;
+  font-size:1rem!important;
+}
+.info-row{
+  font-size:.74rem!important;
+}
+.info-row b,.info-row span{
+  padding:7px 8px!important;
+}
+.section{
+  padding:22px 0!important;
+}
+.section.first{
+  padding-top:0!important;
+}
+h2{
+  font-size:1.38rem!important;
+  margin-bottom:13px!important;
+}
+.section p,.prose p{
+  font-size:.92rem!important;
+  line-height:1.72!important;
+  margin-bottom:1em!important;
+}
+.quote{
+  margin:0 0 17px!important;
+  padding:10px 13px!important;
+  font-size:.91rem!important;
+}
+.gallery{
+  gap:7px!important;
+}
+.gallery-item{
+  border-radius:4px!important;
+  padding:2px!important;
+}
+
+/* Preserve and tighten the OLDER blue-heading season box */
+.season-card{
+  margin-top:24px!important;
+  border-radius:4px!important;
+}
+.season-head{
+  padding:8px 10px!important;
+  font-size:.66rem!important;
+  background:#456291!important;
+  color:#fff!important;
+}
+html.dark .season-head{
+  background:#456291!important;
+  color:#fff!important;
+}
+.episode-list a{
+  min-height:50px!important;
+  padding:9px 8px!important;
+  font-size:.69rem!important;
+}
+
+/* Stronger readable dark mode */
+html.dark body,
+html.dark .main,
+html.dark .content,
+html.dark .section,
+html.dark .article-top,
+html.dark .tabpanel{
+  color:#eef2f7!important;
+}
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark .lede,
+html.dark .section p,
+html.dark .prose p,
+html.dark .info-row b,
+html.dark .info-row span,
+html.dark .rail-title,
+html.dark .rail-link{
+  color:#eef2f7!important;
+}
+html.dark .hero,
+html.dark .section,
+html.dark .tabs,
+html.dark .infobox,
+html.dark .season-card{
+  border-color:#344255!important;
+}
+html.dark .muted,
+html.dark .nav-small,
+html.dark .rail-sub,
+html.dark .nav-label{
+  color:#aeb9c7!important;
+}
+html.dark a{
+  color:#9fc5ef;
+}
+html.dark .infobox,
+html.dark .gallery-item,
+html.dark .season-card{
+  background:#111a27!important;
+}
+
+@media(max-width:850px){
+  .page-shell,.main-layout{
+    width:100%!important;
+  }
+  .main,.content{
+    padding:0 15px 34px!important;
+  }
+  .article-top{
+    grid-template-columns:1fr!important;
+  }
+  .infobox{
+    width:100%!important;
+  }
+  .hero{
+    padding-top:18px!important;
+  }
+  .episode-nav-strip{
+    margin-top:10px!important;
+  }
+}
+</style></head>
 <body>
-<div class="progress" aria-hidden="true"><i></i></div>
+<div aria-hidden="true" class="progress"><i></i></div>
 <header class="site-header">
- <div class="header-actions"><button class="iconbtn menu" id="menuBtn" aria-label="Open navigation">☰</button><a class="brand" href="#top"><img src="/wiki/img/fractalavatar.png" alt=""><span>South Park Wiki</span></a></div>
- <div class="header-actions"><button class="iconbtn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light/dark mode">☾</button></div>
+<div class="header-actions"><button aria-label="Open navigation" class="iconbtn menu" id="menuBtn"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button><a class="brand" href="#top"><img alt="" src="/wiki/img/fractalavatar.png"/><span>South Park Wiki</span></a></div>
+<div class="header-actions"><button aria-label="Toggle dark mode" class="iconbtn" data-icon="moon" id="themeBtn" title="Toggle light/dark mode"><svg aria-hidden="true" class="moon-icon" viewbox="0 0 24 24"><path d="M20 15.3A8.5 8.5 0 0 1 8.7 4a8.5 8.5 0 1 0 11.3 11.3Z"></path></svg></button></div>
 </header>
 <div class="shell">
- <aside class="sidebar" id="sidebar">
-   <p class="rail-kicker">Lewis.lc</p><p class="rail-title">South Park Wiki</p><p class="rail-sub">episode archive</p>
-   <div class="nav-label">Article</div>
-   <nav class="rail-nav" id="toc">
-    <a class="rail-link active" href="#top" data-id="top"><span class="dot"></span>Top</a>
-    <a class="rail-link" href="#synopsis" data-id="synopsis"><span class="dot"></span>Synopsis</a>
-    <a class="rail-link" href="#plot" data-id="plot"><span class="dot"></span>Plot</a>
-    <a class="rail-link" href="#gallery" data-id="gallery"><span class="dot"></span>Gallery</a>
-   </nav>
-   <div class="nav-label">Browse</div>
-   <nav class="rail-nav">
-    <a class="rail-link" href="/sp/">▦ Episodes</a><a class="rail-link" href="/sp/">▤ Seasons</a><a class="rail-link" href="/sp/">★ Specials</a><a class="rail-link" href="/sp/movie">▶ Movie</a>
-   </nav>
-   <div class="nav-label">Recent seasons</div>
-   <div class="season-grid"><a class="current" href="#">28</a><a href="#">27</a><a href="#">26</a><a href="/sp/">All</a></div>
-   <hr class="rail-divider">
-   <div class="rail-bottom"><div class="nav-label">Main site</div><nav class="rail-nav"><a class="rail-link" href="/diary/2026">Current diary</a><a class="rail-link" href="/diary">Diary archive</a><a class="rail-link" href="/">← lewis.lc</a></nav></div>
- </aside>
- <div class="overlay" id="overlay"></div>
- <main class="main" id="main">
-  <nav class="episode-nav" aria-label="Episode navigation"><a href="#">‹ Turkey Trot</a><strong>Season 28 · Episode 5</strong><a class="next" href="#">Next episode ›</a></nav>
-  <section class="hero" id="top"><div class="eyebrow"><span class="chip">Season 28</span><span class="chip">Episode 5</span><span class="chip">338 overall</span></div><h1>The Crap Out</h1><div class="hero-meta">South Park · December 10, 2025 · Production 2805</div></section>
-  <div class="tabs" role="tablist"><button class="tabbtn active" role="tab" aria-selected="true" aria-controls="general" data-tab="general">General</button><button class="tabbtn" role="tab" aria-selected="false" aria-controls="trivia" data-tab="trivia">Trivia</button></div>
-  <section class="tabpanel active" id="general" role="tabpanel">
-   <div class="article-top">
-    <div><p class="lede"><strong>The Crap Out</strong> is the fifth episode of Season 28, and the 338th overall episode of South Park. It aired on December 10, 2025.</p>
-     <section class="section first" id="synopsis"><h2>Synopsis <a class="anchor" href="#synopsis" aria-label="Link to Synopsis">#</a></h2><p>Satan&#x27;s due, Stan&#x27;s praying, and only a Christmas miracle can deliver the Antichrist on time.</p></section>
-    </div>
-    <aside class="infobox" aria-label="Episode information"><div class="info-badge">Episode file</div><img src="/wiki/img/episodes/tco.png" alt="The Crap Out episode image"><div class="info-table"><div class="info-row"><b>Episode no.</b><span>Season 28<br>Episode 5</span></div><div class="info-row"><b>Written by</b><span>Trey Parker</span></div><div class="info-row"><b>Directed by</b><span>Trey Parker</span></div><div class="info-row"><b>Production code</b><span>2805</span></div><div class="info-row"><b>Original air date</b><span>December 10, 2025</span></div><div class="info-row"><b>Previous</b><span><a href="#">Turkey Trot</a></span></div><div class="info-row"><b>Next</b><span>TBA</span></div></div></aside>
-   </div>
-   <section class="section" id="plot"><h2>Plot <a class="anchor" href="#plot" aria-label="Link to Plot">#</a></h2><div class="quote">“We need some goddamn Christmas magic!” <span>— Stan</span></div><p>At South Park Elementary, Stan is seeing the school counsellor
+<aside class="sidebar" id="sidebar"><div class="rail-brand"><p class="rail-title">South Park Wiki</p><p class="rail-sub">episode archive</p></div><div class="rail-section"><div class="nav-label">Contents</div><nav class="rail-nav" id="toc"><a class="rail-link active" data-id="top" href="#top"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M12 19V5M6.5 10.5 12 5l5.5 5.5"></path></svg><span>Top</span></a><a class="rail-link" data-id="synopsis" href="#synopsis"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h4"></path></svg><span>Synopsis</span></a><a class="rail-link" data-id="plot" href="#plot"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M5 6h14M5 12h14M5 18h10"></path></svg><span>Plot</span></a><a class="rail-link" data-id="gallery" href="#gallery"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="14" rx="1.5" width="16" x="4" y="5"></rect><circle cx="9" cy="10" r="1.5"></circle><path d="m6 17 4-4 3 3 2-2 3 3"></path></svg><span>Gallery</span></a></nav></div><div class="rail-section"><div class="nav-label">Explore</div><nav class="rail-nav"><a class="rail-link" href="/sp/"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="14" rx="1.5" width="16" x="4" y="5"></rect><path d="M8 9h3M8 13h3M14 9h2M14 13h2"></path></svg><span>Episodes</span></a><a class="rail-link" href="/sp/"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4 8-4Z"></path><path d="m4 12 8 4 8-4M4 17l8 4 8-4"></path></svg><span>Seasons</span></a><a class="rail-link" href="#"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><circle cx="9" cy="9" r="3"></circle><circle cx="16.5" cy="10" r="2.5"></circle><path d="M3.5 20c.5-4 2.5-6 5.5-6s5 2 5.5 6M14 15c3 0 5 1.7 5.5 5"></path></svg><span>Characters</span></a><a class="rail-link" href="#"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path><circle cx="12" cy="10" r="2"></circle></svg><span>Locations</span></a><a class="rail-link" href="/sp/"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><path d="m12 3 2.6 5.3 5.9.9-4.3 4.2 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.2 5.9-.9L12 3Z"></path></svg><span>Specials</span></a><a class="rail-link" href="/sp/movie"><svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24"><rect height="13" rx="2" width="18" x="3" y="6"></rect><path d="M7 6 9 3h3l-2 3M13 6l2-3h3l-2 3M3 10h18"></path></svg><span>Movie</span></a></nav></div><div class="rail-section"><div class="nav-label">Recent seasons</div><div class="season-grid"><a class="current" href="#">28</a><a href="#">27</a><a href="#">26</a><a href="/sp/">All</a></div></div></aside>
+<div class="overlay" id="overlay"></div>
+<main class="main" id="main">
+
+<nav aria-label="Episode navigation" class="episode-nav-strip">
+<a class="ep-prev" href="#"><span class="nav-small">Previous</span><strong>← Turkey Trot</strong></a>
+<div class="ep-current"><span>Season 28 · Episode 5</span><strong>The Crap Out</strong></div>
+<a class="ep-next" href="#"><span class="nav-small">Next</span><strong>TBA →</strong></a>
+</nav><section class="hero" id="top"><div class="eyebrow"><span class="chip">Season 28</span><span class="chip">Episode 5</span></div><h1>The Crap Out</h1></section>
+<div class="tabs" role="tablist"><button aria-controls="general" aria-selected="true" class="tabbtn active" data-tab="general" role="tab">Article</button><button aria-controls="trivia" aria-selected="false" class="tabbtn" data-tab="trivia" role="tab">Trivia</button><button aria-selected="false" class="tabbtn" data-tab="gallery" role="tab">Gallery</button></div>
+<section class="tabpanel active" id="general" role="tabpanel">
+<div class="article-top">
+<div><p class="lede"><strong>The Crap Out</strong> is the fifth episode of Season 28, and the 338th overall episode of South Park. It aired on December 10, 2025.</p>
+<section class="section first" id="synopsis"><h2>Synopsis <a aria-label="Link to Synopsis" class="anchor" href="#synopsis">#</a></h2><p>Satan's due, Stan's praying, and only a Christmas miracle can deliver the Antichrist on time.</p></section>
+</div>
+<aside aria-label="Episode information" class="infobox"><div class="infobox-title">The Crap Out</div><img alt="The Crap Out episode image" src="/wiki/img/episodes/tco.png"/><div class="info-table"><div class="info-row"><b>Episode no.</b><span>Season 28<br/>Episode 5</span></div><div class="info-row"><b>Written by</b><span>Trey Parker</span></div><div class="info-row"><b>Directed by</b><span>Trey Parker</span></div><div class="info-row"><b>Production code</b><span>2805</span></div><div class="info-row"><b>Original air date</b><span>December 10, 2025</span></div><div class="info-row"><b>Previous</b><span><a href="#">Turkey Trot</a></span></div><div class="info-row"><b>Next</b><span>TBA</span></div></div></aside>
+</div>
+<section class="section" id="plot"><h2>Plot <a aria-label="Link to Plot" class="anchor" href="#plot">#</a></h2><div class="quote">“We need some goddamn Christmas magic!” <span>— Stan</span></div><p>At South Park Elementary, Stan is seeing the school counsellor
 
 	  <sup><a data-hover-content="&lt;div class='hover-content'&gt;
     &lt;p&gt;In this episode, the counsellor is Jesus Christ, following the sacking of Mr Mackey in the previous season.&lt;/p&gt;
@@ -103,28 +358,32 @@ button,input{font:inherit} button{color:inherit}
 <p>At Hell's Pass Hospital, the Critters, Towelie and Stan gather around Satan in his hospital bed waiting for the baby to be born when a doctor comes in and explains they will just need another quick ultrasound and will then move Satan to the operating room. Satan warns him there are evil forces at work and they may need to hurry. Back at the Police Station, Jesus uses his electric guitar to break through the Police Station's main hall and let Trump and Vance in, then to free Peter Thiel and Pete Hegseth from the jail. They greet Trump, who gladly says he's gotten "another Christians dipshit" to help him get what he wants. Thiel warns him there is very little time to stop the Anti-Christ's arrival, and Vance speaks up to say that he doesn't care if his asshole is now filled with genital warts, he still loves Trump. Back at the hospital though, Satan is telling the critters he can't believe how terrible Trump turned out to be, admitting he falls for the worst kinds of guys and calling himself stupid, as the Critters reassure him to save his strength and tell him he's not stupid, pushing Stan to help reassure him. Trump admits he knew how terrible Trump was and how terrible he treated everyone but looked the other way in hopes of a Christmas miracle, his little baby, the only thing in his life that could stull turn out good. Satan worries he will never be free if Trump has Jesus on his side, and the Critters are concerned if he can be stopped, but believe Stan can help them stop him.</p>
 <p>As the confrontation ends, the doctor comes into the hallway and says he is sorry to interrupt but informs everyone he has really bad news, explaining that according to the ultrasound, at some point when "nobody was watching", the baby hung itself and took it's own life, saying it can all be seen in a video, noting the baby managed to get "a hold of some bed sheets, there's a couple minutes missing from the ultrasound but it's definitely a suicide". Trump is overjoyed with this outcome, and Vance refers to it as a miracle, but Beary is disappointed there will not be a crap out after all. Fox News then reports that the unborn child of Satan and President Trump has indeed "taken the easy way out" by committing suicide and "lacked mental toughness", with Sean Hannity showing the ultrasound of the baby initially appearing fine, "a few minutes missing" represented by a black screen, and then the baby inside the womb having already hung itself, a small chair visible, and refers to it as "just something babies do sometimes, while the Fox and Friends hosts urge viewers who know a fetus contemplating suicide to call up Fox News as much as they can. The anchor mentions a funeral will be held for the unborn child at the White House.</p>
 <p>Back at Shady Acres, one of the employees calls out for Christmas mail and letters from home, finding one for Stan and offering it to him. Stan notices on the envelope it is from Jesus and opens it, and Jesus tells him he owes him an apology and a thank you, noting that Stan asked for a Christmas miracle and that Jesus didn't listen, telling him to go to an address, which Stan recognizes with surprise, saying "no way" before running through the town and coming back to the old Marsh Residence, with 'Merry Christmas Stan' written in holiday lights. Stan finds a key from Jesus and opens the house, seeing a Christmas tree already set up and the same familiar furniture including his old living room couch, a photo of his family, and heads up to his room to see his old toy box, bed and more all in place. After leaving, he looks up to the stars and says "thank you" to Jesus, who appears in the stars and promises he will be up there, watching everybody, telling Stan to be good and never give up on the things he commits to, before being joined by Peggy Rockbottom, who praises Jesus and begins singing the same song she sang to the seniors earlier about getting punched in the face, and Stan sings along happily as he heads back into his home.</p></section>
-   <section class="section" id="gallery"><h2>Gallery <a class="anchor" href="#gallery" aria-label="Link to Gallery">#</a></h2><div class="gallery"><button class="gallery-item" type="button"><img src="/wiki/img/episodes/sotm.png" alt="Episode gallery image" loading="lazy"></button>
-<button class="gallery-item" type="button"><img src="/wiki/img/episodes/gan.png" alt="Episode gallery image" loading="lazy"></button>
-<button class="gallery-item" type="button"><img src="/wiki/img/episodes/sickofancy.png" alt="Episode gallery image" loading="lazy"></button></div></section>
-   <section class="section" id="season-navigation"><h2>Season 28</h2><div class="season-card"><div class="season-head"><span>Episode navigation</span><span>5 episodes</span></div><div class="episode-list"><a href="#">Twisted Christian</a><a href="#">The Woman in the Hat</a><a href="#">Sora Not Sorry</a><a href="#">Turkey Trot</a><a class="current" href="#top">The Crap Out</a></div></div></section>
-   <div class="categories"><a href="#">Episodes</a><a href="#">Season 28</a></div><p class="footer">Created by Lewis</p>
-  </section>
-  <section class="tabpanel" id="trivia" role="tabpanel"><div class="trivia-card"><h2>Trivia</h2><p>The original title was <strong>The Spawn of Satan</strong> before being changed three days prior to air.</p></div></section>
- </main>
+<section class="section" id="gallery"><h2>Gallery <a aria-label="Link to Gallery" class="anchor" href="#gallery">#</a></h2><div class="gallery"><button class="gallery-item" type="button"><img alt="Episode gallery image" loading="lazy" src="/wiki/img/episodes/sotm.png"/></button>
+<button class="gallery-item" type="button"><img alt="Episode gallery image" loading="lazy" src="/wiki/img/episodes/gan.png"/></button>
+<button class="gallery-item" type="button"><img alt="Episode gallery image" loading="lazy" src="/wiki/img/episodes/sickofancy.png"/></button></div></section>
+<section class="section" id="season-navigation"><h2>Season 28</h2><div class="season-card"><div class="season-head"><span>Episode navigation</span><span>5 episodes</span></div><div class="episode-list"><a href="#">Twisted Christian</a><a href="#">The Woman in the Hat</a><a href="#">Sora Not Sorry</a><a href="#">Turkey Trot</a><a class="current" href="#top">The Crap Out</a></div></div></section>
+<div class="categories"><a href="#">Episodes</a><a href="#">Season 28</a></div><p class="footer">Created by Lewis</p>
+</section>
+<section class="tabpanel" id="trivia" role="tabpanel"><div class="trivia-card"><h2>Trivia</h2><p>The original title was <strong>The Spawn of Satan</strong> before being changed three days prior to air.</p></div></section>
+</main>
 </div>
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery image"><button id="lightboxClose" aria-label="Close">×</button><img id="lightboxImg" alt=""></div><div class="toast" id="toast">Link copied</div>
+<div aria-label="Gallery image" aria-modal="true" class="lightbox" id="lightbox" role="dialog"><button aria-label="Close" id="lightboxClose">×</button><img alt="" id="lightboxImg"/></div><div class="toast" id="toast">Link copied</div>
 <script>
 (()=>{
  const root=document.documentElement, body=document.body, themeBtn=document.getElementById('themeBtn');
- const saved=localStorage.getItem('darkMode'); if(saved==='enabled') root.classList.add('dark');
- const syncTheme=()=>{themeBtn.textContent=root.classList.contains('dark')?'☀':'☾';themeBtn.setAttribute('aria-label',root.classList.contains('dark')?'Switch to light mode':'Switch to dark mode')};syncTheme();
+ const moon=`<svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 15.3A8.5 8.5 0 0 1 8.7 4a8.5 8.5 0 1 0 11.3 11.3Z"/></svg>`;
+ const sun=`<svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>`;
+ if(localStorage.getItem('darkMode')==='enabled') root.classList.add('dark');
+ const syncTheme=()=>{themeBtn.innerHTML=root.classList.contains('dark')?sun:moon;themeBtn.setAttribute('aria-label',root.classList.contains('dark')?'Switch to light mode':'Switch to dark mode')};syncTheme();
  themeBtn.addEventListener('click',()=>{root.classList.toggle('dark');localStorage.setItem('darkMode',root.classList.contains('dark')?'enabled':'disabled');syncTheme()});
- const menuBtn=document.getElementById('menuBtn'),overlay=document.getElementById('overlay'); const closeNav=()=>body.classList.remove('nav-open'); menuBtn.addEventListener('click',()=>body.classList.toggle('nav-open'));overlay.addEventListener('click',closeNav);document.querySelectorAll('#sidebar a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<=850)closeNav()}));
- document.querySelectorAll('.tabbtn').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tabbtn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false')});document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById(btn.dataset.tab).classList.add('active')}));
- const bar=document.querySelector('.progress i'); const updateProgress=()=>{const max=document.documentElement.scrollHeight-innerHeight;bar.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'};addEventListener('scroll',updateProgress,{passive:true});updateProgress();
+ const menuBtn=document.getElementById('menuBtn'),overlay=document.getElementById('overlay'); const closeNav=()=>body.classList.remove('nav-open');
+ menuBtn?.addEventListener('click',()=>body.classList.toggle('nav-open'));overlay?.addEventListener('click',closeNav);document.querySelectorAll('#sidebar a').forEach(a=>a.addEventListener('click',()=>{if(innerWidth<=850)closeNav()}));
+ const activateTab=(target)=>{document.querySelectorAll('.tabbtn').forEach(b=>{const active=b.dataset.tab===target;b.classList.toggle('active',active);b.setAttribute('aria-selected',String(active))});document.querySelectorAll('.tabpanel').forEach(p=>p.classList.toggle('active',p.id===target));};
+ document.querySelectorAll('.tabbtn').forEach(btn=>btn.addEventListener('click',()=>{if(btn.dataset.tab==='gallery'){activateTab('general');requestAnimationFrame(()=>document.getElementById('gallery')?.scrollIntoView({behavior:'smooth',block:'start'}));return;}activateTab(btn.dataset.tab)}));
+ const bar=document.querySelector('.progress i'); const updateProgress=()=>{if(!bar)return;const max=document.documentElement.scrollHeight-innerHeight;bar.style.width=(max>0?Math.min(100,scrollY/max*100):0)+'%'};addEventListener('scroll',updateProgress,{passive:true});updateProgress();
  const ids=['top','synopsis','plot','gallery'];const toc=[...document.querySelectorAll('#toc .rail-link')];const setActive=id=>toc.forEach(a=>a.classList.toggle('active',a.dataset.id===id));const obs=new IntersectionObserver(entries=>{const hit=entries.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];if(hit)setActive(hit.target.id)},{rootMargin:'-15% 0px -70% 0px',threshold:[0,.2,.6]});ids.map(id=>document.getElementById(id)).filter(Boolean).forEach(el=>obs.observe(el));
- const toast=document.getElementById('toast');document.querySelectorAll('.anchor').forEach(a=>a.addEventListener('click',async e=>{e.preventDefault();history.replaceState(null,'',a.getAttribute('href'));try{await navigator.clipboard.writeText(location.href)}catch{}toast.classList.add('show');setTimeout(()=>toast.classList.remove('show'),900);document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})}));
- const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');document.querySelectorAll('.gallery-item').forEach(b=>b.addEventListener('click',()=>{const i=b.querySelector('img');lbImg.src=i.src;lbImg.alt=i.alt;lb.classList.add('open')}));const closeLb=()=>lb.classList.remove('open');document.getElementById('lightboxClose').addEventListener('click',closeLb);lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLb();closeNav()}});
+ const toast=document.getElementById('toast');document.querySelectorAll('.anchor').forEach(a=>a.addEventListener('click',async e=>{e.preventDefault();history.replaceState(null,'',a.getAttribute('href'));try{await navigator.clipboard.writeText(location.href)}catch{}toast?.classList.add('show');setTimeout(()=>toast?.classList.remove('show'),900);document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})}));
+ const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');document.querySelectorAll('.gallery-item').forEach(b=>b.addEventListener('click',()=>{const i=b.querySelector('img');if(!i||!lb||!lbImg)return;lbImg.src=i.src;lbImg.alt=i.alt;lb.classList.add('open')}));const closeLb=()=>lb?.classList.remove('open');document.getElementById('lightboxClose')?.addEventListener('click',closeLb);lb?.addEventListener('click',e=>{if(e.target===lb)closeLb()});document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLb();closeNav()}});
 })();
 </script>
 </body></html>
