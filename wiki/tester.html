@@ -116,15 +116,6 @@ svg{display:block}
   display:inline-block;
 }
 
-.rail-sub{
-  margin:4px 0 0;
-  color:var(--muted);
-  font-size:.58rem;
-  font-weight:650;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-
 .rail-section{
   padding:9px 10px;
   border-bottom:1px solid var(--line);
@@ -162,17 +153,6 @@ svg{display:block}
 .rail-link.active{
   color:var(--link);
   font-weight:650;
-}
-
-.nav-svg{
-  width:16px;
-  height:16px;
-  flex:0 0 16px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.7;
-  stroke-linecap:round;
-  stroke-linejoin:round;
 }
 
 .season-grid{
@@ -276,18 +256,6 @@ svg{display:block}
 .episode-nav-content-next{justify-content:flex-end}
 .episode-nav-text{display:flex;flex-direction:column;justify-content:center}
 .episode-nav-content-next .episode-nav-text{text-align:right}
-
-.episode-nav-chevron{
-  width:18px;
-  height:18px;
-  flex:0 0 18px;
-  display:grid;
-  place-items:center;
-  color:var(--muted);
-}
-
-.episode-nav-chevron svg{width:18px;height:18px}
-.episode-nav-strip > a:hover .episode-nav-chevron{color:var(--link)}
 
 .ep-current{
   display:flex;
@@ -421,12 +389,6 @@ html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
   width:14px!important;
   height:14px!important;
   flex:0 0 14px;
-}
-
-.trivia-book-icon{
-  width:15px!important;
-  height:15px!important;
-  flex:0 0 15px!important;
 }
 
 .sticky-sidebar-control,
@@ -623,7 +585,7 @@ html.dark .season-head{background:#567aa6}
   min-height:40px;
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:flex-start;
   gap:10px;
   padding:8px 10px;
   border:0;
@@ -633,9 +595,6 @@ html.dark .season-head{background:#567aa6}
   text-align:left;
   cursor:default;
 }
-
-.season-accordion-chevron{display:none;width:18px;height:18px}
-.season-accordion-chevron svg{width:18px;height:18px}
 
 .episode-list{
   display:grid;
@@ -696,6 +655,7 @@ html.dark .season-head{background:#567aa6}
   color:var(--muted);
   font-size:.68rem;
   font-style:italic;
+  text-align:center;
 }
 
 /* ---------- tooltips ---------- */
@@ -902,7 +862,6 @@ html.dark .season-head{background:#567aa6}
 
   .unified-section-link:hover{text-decoration:none;background:var(--panel)}
   .unified-section-link.active{background:var(--accent);color:#fff}
-  .unified-section-link svg{width:15px;height:15px}
   .unified-section-link span{display:block;line-height:1;white-space:nowrap}
 
   .mobile-wiki-identity{
@@ -1041,15 +1000,6 @@ html.dark .season-head{background:#567aa6}
     cursor:pointer;
   }
 
-  .season-accordion-chevron{
-    display:block;
-    transition:transform .2s ease;
-  }
-
-  .season-accordion-toggle[aria-expanded="true"] .season-accordion-chevron{
-    transform:rotate(180deg);
-  }
-
   .season-card .episode-list{display:none}
   .season-card.is-open .episode-list{
     display:grid;
@@ -1087,7 +1037,6 @@ html.dark .season-head{background:#567aa6}
     max-width:1080px;
   }
 }
-  
 
 /* ============================================================
    DETAIL ENHANCEMENTS
@@ -1182,17 +1131,11 @@ html.dark .plot-location-scrap{
   .gallery-item:hover img{transform:none}
   
 }
-  
 
 /* Final small refinements */
 .infobox-title{
   font-weight:560!important;
 }
-
-.season-accordion-toggle{
-  justify-content:flex-start;
-}
-  
 
 /* ============================================================
    OPTIONAL INFOBOX MULTI-IMAGE TABS
@@ -1207,8 +1150,8 @@ html.dark .plot-location-scrap{
   display:none;
   flex-wrap:wrap;
   justify-content:center;
-  gap:0;
-  padding:0 8px;
+  gap:4px;
+  padding:6px 7px 0;
   background:var(--paper);
   border-bottom:1px solid var(--line);
 }
@@ -1227,6 +1170,7 @@ html.dark .plot-location-scrap{
   padding:6px 11px 5px;
   border:1px solid var(--line);
   border-bottom-color:var(--line);
+  border-radius:3px 3px 0 0;
   background:var(--panel);
   color:var(--text);
   cursor:pointer;
@@ -1237,7 +1181,7 @@ html.dark .plot-location-scrap{
 }
 
 .infobox-image-tab + .infobox-image-tab{
-  margin-left:-1px;
+  margin-left:0;
 }
 
 .infobox-image-tab:hover{
@@ -1299,27 +1243,6 @@ html.dark .plot-location-scrap{
     font-size:.68rem;
   }
 }
-  
-
-/* Make image tabs feel integrated with the infobox */
-.infobox-image-tabs{
-  padding:6px 7px 0;
-  gap:4px;
-  border-bottom:1px solid var(--line);
-}
-
-.infobox-image-tab,
-.infobox-image-tab + .infobox-image-tab{
-  margin:0 0 -1px;
-  border-radius:3px 3px 0 0;
-}
-
-.infobox-image-tab[aria-selected="true"]{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:#fff;
-}
-  
 
 /* Infobox images can open in the shared lightbox */
 .infobox-image-panel img{
@@ -1423,7 +1346,6 @@ html.dark .plot-location-scrap{
      </p>
     </div>
 
-    
     <div class="rail-section">
      <div class="nav-label">
       Explore
@@ -1814,17 +1736,13 @@ html.dark .plot-location-scrap{
       </div>
      </section>
 
-     
-     <p class="footer">
-      <center>
-       <div class="plot-location-scrap">
+     <div class="footer">
+      <div class="plot-location-scrap">
        CREATED BY LEWIS
       </div>
-      </center>
-     </p>
+     </div>
     </section>
 
-    
    </main>
   </div>
   <button aria-label="Close navigation" class="menu-overlay" type="button">
@@ -2050,8 +1968,6 @@ html.dark .plot-location-scrap{
   window.addEventListener("scroll", () => {
     document.querySelectorAll("[data-hover-wrapper]").forEach(el => el.remove());
   }, {passive:true});
-
-
 
   /* optional infobox multi-image switcher */
   document.querySelectorAll(".infobox-image-switcher").forEach(switcher => {
