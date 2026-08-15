@@ -1178,6 +1178,9 @@ html.dark .season-head{background:#567aa6}
 .section-tab[data-section="appearance"]{
   clip-path:polygon(1% 2%,98% 5%,96% 98%,5% 100%,0 89%);
 }
+.section-tab[data-section="staff"]{
+  clip-path:polygon(3% 1%,97% 4%,100% 92%,94% 100%,2% 96%,0 10%);
+}
 .section-tab[data-section="background"]{
   clip-path:polygon(4% 0,100% 7%,98% 91%,92% 100%,1% 96%,0 8%);
 }
@@ -1612,7 +1615,7 @@ html.dark .plot-location-scrap{
        Top
       </span>
      </a>
-     <a class="section-tab" data-section="Appearance" href="#appearance">
+     <a class="section-tab" data-section="appearance" href="#appearance">
       <span class="section-tab-icon">
        <svg aria-hidden="true" class="nav-svg appearance-eye-icon" viewbox="0 0 24 24">
         <path d="M2.8 12s3.4-5.2 9.2-5.2S21.2 12 21.2 12 17.8 17.2 12 17.2 2.8 12 2.8 12Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7">
@@ -1751,7 +1754,7 @@ html.dark .plot-location-scrap{
            Headteacher
           </b>
           <span>
-           Mr. Martin Burgess
+           Mr. M Burgess
           </span>
          </div>
 
@@ -1817,99 +1820,17 @@ html.dark .plot-location-scrap{
         </tr>
        </thead>
        <tbody>
-        
         <tr>
          <td>Mr. M Burgess</td>
          <td>Headteacher</td>
         </tr>
-        
+        <!-- Duplicate this row to add another member of staff:
         <tr>
-         <td>Mr. Adlington</td>
-         <td>Deputy Headteacher</td>
+         <td>Staff member</td>
+         <td>Role</td>
         </tr>
- 
-        <tr>
-         <td>Sheila</td>
-         <td>Receptionist / Admin</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Carradice</td>
-         <td>Caretaker</td>
-        </tr>
- 
-        <tr>
-         <td>Mrs. Haigh</td>
-         <td>English department</td>
-        </tr>
- 
-        <tr>
-         <td>Ms. MacLean</td>
-         <td>English department</td>
-        </tr>
- 
-        <tr>
-         <td>Mr. Colin Gilbert</td>
-         <td>Maths department</td>
-        </tr>
- 
-        <tr>
-         <td>Roger</td>
-         <td>Science department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Irving</td>
-         <td>History department</td>
-        </tr>
-
-        <tr>
-         <td>Susan Procter</td>
-         <td>Geography department</td>
-        </tr>        
- 
-        <tr>
-         <td>Mr. Maboob Master</td>
-         <td>IT department</td>
-        </tr>
-
-        <tr>
-         <td>Mrs. Whittaker</td>
-         <td>IT department</td>
-        </tr>        
- 
-        <tr>
-         <td>Ms. Dubois</td>
-         <td>French studies</td>
-        </tr>
- 
-        <tr>
-         <td>Mrs. Geldard</td>
-         <td>Design & Technology department</td>
-        </tr>
- 
-        <tr>
-         <td>Mr. Steven Price</td>
-         <td>Physical Education</td>
-        </tr>
- 
-        <tr>
-         <td>Mr. Baig</td>
-         <td>Substitute teacher</td>
-        </tr>
- 
-        <tr>
-         <td>Ms. Easterbrook</td>
-         <td>Welfare team</td>
-        </tr>
- 
-        <tr>
-         <td>Terry</td>
-         <td><i>Unknown</i></td>
-        </tr>
-     
-
-               </tbody>
+        -->
+       </tbody>
       </table>
      </section>
 
@@ -1959,11 +1880,7 @@ html.dark .plot-location-scrap{
 
      
      <p class="footer">
-      <center>
-       <div class="plot-location-scrap">
-       CREATED BY LEWIS
-      </div>
-      </center>
+      Created by Lewis
      </p>
     </section>
 
@@ -2063,7 +1980,7 @@ html.dark .plot-location-scrap{
   }
 
   /* stable section tracking: no IntersectionObserver switching */
-  const sectionIds = ["top","appearance","trivia","gallery"];
+  const sectionIds = ["top","appearance","staff","trivia","gallery"];
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const sectionLinks = [
     ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
