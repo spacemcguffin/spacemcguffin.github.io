@@ -1304,6 +1304,12 @@ html.dark .plot-location-scrap{
   border-color:var(--accent);
   color:#fff;
 }
+  
+
+/* Infobox images can open in the shared lightbox */
+.infobox-image-panel img{
+  cursor:zoom-in;
+}
   </style>
  </head>
  <body>
@@ -1715,7 +1721,6 @@ html.dark .plot-location-scrap{
           </div>
          </div>
         </div>
-
         <div class="info-table">
          <div class="info-row">
           <b>
@@ -2199,6 +2204,7 @@ html.dark .plot-location-scrap{
 
   /* gallery lightbox */
   const galleryButtons = [...document.querySelectorAll(".gallery-item")];
+  const infoboxImages = [...document.querySelectorAll(".infobox-image-panel img")];
 
   if (galleryButtons.length){
     let currentIndex = 0;
@@ -2232,7 +2238,22 @@ html.dark .plot-location-scrap{
     const caption = lightbox.querySelector(".wiki-lightbox-caption");
     const closeButton = lightbox.querySelector(".wiki-lightbox-close");
 
+    let lightboxMode = "gallery";
+
+    function showStandaloneImage(source){
+      lightboxMode = "standalone";
+      lightbox.querySelector(".wiki-lightbox-prev").style.display = "none";
+      lightbox.querySelector(".wiki-lightbox-next").style.display = "none";
+      image.src = source.src;
+      image.alt = source.alt || "Infobox image";
+      counter.textContent = "";
+      caption.textContent = source.alt || "";
+    }
+
     function showImage(index){
+      lightboxMode = "gallery";
+      lightbox.querySelector(".wiki-lightbox-prev").style.display = "";
+      lightbox.querySelector(".wiki-lightbox-next").style.display = "";
       currentIndex = (index + galleryButtons.length) % galleryButtons.length;
       const source = galleryButtons[currentIndex].querySelector("img");
       if (!source) return;
@@ -2259,9 +2280,22 @@ html.dark .plot-location-scrap{
       button.addEventListener("click", () => openLightbox(index));
     });
 
+    infoboxImages.forEach(source => {
+      source.addEventListener("click", () => {
+        showStandaloneImage(source);
+        lightbox.classList.add("open");
+        body.style.overflow = "hidden";
+        closeButton.focus();
+      });
+    });
+
     closeButton.addEventListener("click", closeLightbox);
-    lightbox.querySelector(".wiki-lightbox-prev").addEventListener("click", () => showImage(currentIndex - 1));
-    lightbox.querySelector(".wiki-lightbox-next").addEventListener("click", () => showImage(currentIndex + 1));
+    lightbox.querySelector(".wiki-lightbox-prev").addEventListener("click", () => {
+      if (lightboxMode === "gallery") showImage(currentIndex - 1);
+    });
+    lightbox.querySelector(".wiki-lightbox-next").addEventListener("click", () => {
+      if (lightboxMode === "gallery") showImage(currentIndex + 1);
+    });
 
     lightbox.addEventListener("click", event => {
       if (event.target === lightbox) closeLightbox();
@@ -2270,11 +2304,11 @@ html.dark .plot-location-scrap{
     document.addEventListener("keydown", event => {
       if (!lightbox.classList.contains("open")) return;
       if (event.key === "Escape") closeLightbox();
-      if (event.key === "ArrowLeft"){
+      if (lightboxMode === "gallery" && event.key === "ArrowLeft"){
         event.preventDefault();
         showImage(currentIndex - 1);
       }
-      if (event.key === "ArrowRight"){
+      if (lightboxMode === "gallery" && event.key === "ArrowRight"){
         event.preventDefault();
         showImage(currentIndex + 1);
       }
