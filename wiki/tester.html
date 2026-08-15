@@ -1855,6 +1855,187 @@ html.dark .theme-icon-slot .theme-icon-moon{
     margin:0 0 17px!important;
   }
 }
+  
+
+/* ============================================================
+   DESKTOP STICKY CONTROLS + EPISODE CARD EDGE FIX
+   ============================================================ */
+@media (min-width:851px){
+
+  /* Remove old seam toggle visually; sticky control now handles desktop collapse. */
+  .desktop-sidebar-toggle{
+    display:none!important;
+  }
+
+  .section-tabs{
+    position:sticky!important;
+    top:0!important;
+    z-index:900!important;
+    display:flex!important;
+    align-items:center!important;
+  }
+
+  .sticky-sidebar-control,
+  .sticky-theme-control{
+    flex:0 0 34px!important;
+    width:34px!important;
+    height:34px!important;
+    display:grid!important;
+    place-items:center!important;
+    padding:0!important;
+    border:1px solid var(--line)!important;
+    border-radius:50%!important;
+    background:var(--paper)!important;
+    color:var(--text)!important;
+    box-shadow:0 2px 7px rgba(0,0,0,.11)!important;
+    cursor:pointer!important;
+  }
+
+  .sticky-sidebar-control{
+    margin-right:2px!important;
+  }
+
+  .sticky-theme-control{
+    margin-left:auto!important;
+  }
+
+  .sticky-sidebar-control:hover,
+  .sticky-theme-control:hover{
+    background:var(--panel)!important;
+  }
+
+  .sticky-sidebar-control svg,
+  .sticky-theme-control svg{
+    width:16px!important;
+    height:16px!important;
+  }
+
+  .shell.sidebar-collapsed .sticky-sidebar-control svg{
+    transform:rotate(180deg);
+  }
+
+  /* Current episode reaches full cell width, no pale sliver on right. */
+  .episode-list{
+    gap:0!important;
+  }
+
+  .episode-list a{
+    margin:0!important;
+    box-sizing:border-box!important;
+  }
+
+  .episode-list a.current{
+    background:var(--accent)!important;
+    color:#fff!important;
+    border-right:0!important;
+    width:100%!important;
+  }
+
+  .episode-list a:last-child{
+    border-right:0!important;
+  }
+}
+
+@media (max-width:850px){
+  .sticky-sidebar-control,
+  .sticky-theme-control{
+    display:none!important;
+  }
+}
+  
+
+/* ============================================================
+   DESKTOP SIDEBAR CONTROL BEHAVIOUR
+   Seam at top; sticky-rail copy only after scrolling.
+   Theme only when sidebar is collapsed.
+   ============================================================ */
+@media (min-width:851px){
+
+  .desktop-sidebar-toggle{
+    display:grid!important;
+    position:absolute!important;
+    top:18px!important;
+    left:calc(205px - 16px)!important;
+    z-index:140!important;
+    width:32px!important;
+    height:32px!important;
+    place-items:center!important;
+    padding:0!important;
+    border:1px solid var(--line)!important;
+    border-radius:50%!important;
+    background:var(--paper)!important;
+    color:var(--text)!important;
+    box-shadow:0 2px 8px rgba(0,0,0,.12)!important;
+    cursor:pointer!important;
+  }
+
+  .desktop-sidebar-toggle:hover{
+    background:var(--panel)!important;
+  }
+
+  .desktop-sidebar-toggle svg{
+    width:16px!important;
+    height:16px!important;
+  }
+
+  .sidebar-toggle-open{
+    display:none!important;
+  }
+
+  .shell.sidebar-collapsed .desktop-sidebar-toggle{
+    left:10px!important;
+  }
+
+  .shell.sidebar-collapsed .desktop-sidebar-toggle .sidebar-toggle-close{
+    display:none!important;
+  }
+
+  .shell.sidebar-collapsed .desktop-sidebar-toggle .sidebar-toggle-open{
+    display:grid!important;
+  }
+
+  /* Once the paper rail is sticky, the seam control has naturally scrolled away;
+     show its compact rail version instead. */
+  .sticky-sidebar-control{
+    display:none!important;
+  }
+
+  .section-tabs.is-stuck .sticky-sidebar-control{
+    display:grid!important;
+  }
+
+  /* Theme is never shown while sidebar is open. */
+  .sticky-theme-control{
+    display:none!important;
+  }
+
+  .shell.sidebar-collapsed .sticky-theme-control{
+    display:grid!important;
+    margin-left:auto!important;
+  }
+
+  /* Remove any old sidebar theme placement. */
+  .sidebar-appearance-row,
+  .sidebar-theme-toggle,
+  .sidebar-footer-controls{
+    display:none!important;
+  }
+
+  .sticky-nav-sentinel{
+    height:1px;
+    width:100%;
+    pointer-events:none;
+  }
+}
+
+@media(max-width:850px){
+  .desktop-sidebar-toggle,
+  .sticky-sidebar-control,
+  .sticky-theme-control,
+  .sticky-nav-sentinel{
+    display:none!important;
+  }
+}
   </style>
  </head>
  <body>
@@ -1968,29 +2149,6 @@ html.dark .theme-icon-slot .theme-icon-moon{
       episode archive
      </p>
     </div>
-    <div class="sidebar-appearance-row">
-     <button aria-label="Switch to dark mode" class="sidebar-theme-toggle" data-desktop-theme-toggle="" title="Dark mode" type="button">
-      <span aria-hidden="true" class="theme-icon-slot">
-       <span class="theme-icon theme-icon-moon">
-        <svg viewbox="0 0 24 24">
-         <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
-         </path>
-        </svg>
-       </span>
-       <span class="theme-icon theme-icon-sun">
-        <svg viewbox="0 0 24 24">
-         <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
-         </circle>
-         <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-         </path>
-        </svg>
-       </span>
-      </span>
-      <span class="sidebar-theme-text">
-       Dark mode
-      </span>
-     </button>
-    </div>
     <div class="rail-section">
      <div class="nav-label">
       Contents
@@ -2101,24 +2259,6 @@ html.dark .theme-icon-slot .theme-icon-moon{
     </div>
    </aside>
    <main class="main" id="main">
-    <button aria-label="Switch to dark mode" class="collapsed-theme-toggle" data-collapsed-theme-toggle="" title="Dark mode" type="button">
-     <span aria-hidden="true" class="theme-icon-slot">
-      <span class="theme-icon theme-icon-moon">
-       <svg viewbox="0 0 24 24">
-        <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
-        </path>
-       </svg>
-      </span>
-      <span class="theme-icon theme-icon-sun">
-       <svg viewbox="0 0 24 24">
-        <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
-        </circle>
-        <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-        </path>
-       </svg>
-      </span>
-     </span>
-    </button>
     <nav aria-label="Episode navigation" class="episode-nav-strip">
      <a class="ep-prev" href="#">
       <span class="nav-small">
@@ -2159,7 +2299,15 @@ html.dark .theme-icon-slot .theme-icon-moon{
       The Crap Out
      </h1>
     </section>
+    <div aria-hidden="true" class="sticky-nav-sentinel">
+    </div>
     <div aria-label="Article sections" class="section-tabs">
+     <button aria-label="Collapse sidebar" class="sticky-sidebar-control" data-sticky-sidebar-toggle="" title="Collapse sidebar" type="button">
+      <svg aria-hidden="true" viewbox="0 0 24 24">
+       <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+       </path>
+      </svg>
+     </button>
      <a class="section-tab" data-section="top" href="#top">
       <span class="section-tab-icon">
        <svg aria-hidden="true" viewbox="0 0 24 24">
@@ -2208,6 +2356,24 @@ html.dark .theme-icon-slot .theme-icon-moon{
        Gallery
       </span>
      </a>
+     <button aria-label="Switch to dark mode" class="sticky-theme-control" data-sticky-theme-toggle="" title="Dark mode" type="button">
+      <span aria-hidden="true" class="theme-icon-slot">
+       <span class="theme-icon theme-icon-moon">
+        <svg viewbox="0 0 24 24">
+         <path d="M20 15.6A8.5 8.5 0 0 1 8.4 4a8.5 8.5 0 1 0 11.6 11.6Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.8">
+         </path>
+        </svg>
+       </span>
+       <span class="theme-icon theme-icon-sun">
+        <svg viewbox="0 0 24 24">
+         <circle cx="12" cy="12" fill="none" r="3.6" stroke="currentColor" stroke-width="1.8">
+         </circle>
+         <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.3 5.3 3.9 3.9M20.1 20.1l-1.4-1.4M18.7 5.3l1.4-1.4M3.9 20.1l1.4-1.4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+         </path>
+        </svg>
+       </span>
+      </span>
+     </button>
     </div>
     <section class="article-content" id="general">
      <div class="article-top">
@@ -2702,38 +2868,74 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   const shell = document.querySelector(".shell");
-  const sidebarToggle = document.querySelector("[data-desktop-sidebar-toggle]");
+  const seamToggle = document.querySelector("[data-desktop-sidebar-toggle]");
+  const stickyToggle = document.querySelector("[data-sticky-sidebar-toggle]");
+  const stickyTheme = document.querySelector("[data-sticky-theme-toggle]");
+  const sectionTabs = document.querySelector(".section-tabs");
+  const stickySentinel = document.querySelector(".sticky-nav-sentinel");
+  const root = document.documentElement;
 
-  if (!shell || !sidebarToggle) return;
+  if (!shell) return;
 
-  const setDesktopSidebar = (collapsed) => {
-    shell.classList.toggle("sidebar-collapsed", collapsed);
-    sidebarToggle.setAttribute("aria-expanded", String(!collapsed));
-    sidebarToggle.setAttribute(
-      "aria-label",
-      collapsed ? "Show sidebar" : "Collapse sidebar"
-    );
-    sidebarToggle.setAttribute(
-      "title",
-      collapsed ? "Show sidebar" : "Collapse sidebar"
-    );
+  const syncSidebarControls = () => {
+    const collapsed = shell.classList.contains("sidebar-collapsed");
+    [seamToggle, stickyToggle].forEach(button => {
+      if (!button) return;
+      button.setAttribute("aria-expanded", String(!collapsed));
+      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Collapse sidebar");
+      button.setAttribute("title", collapsed ? "Show sidebar" : "Collapse sidebar");
+    });
   };
 
-  // Wide view always starts with the sidebar visible by default.
-  setDesktopSidebar(false);
+  const setSidebarCollapsed = collapsed => {
+    shell.classList.toggle("sidebar-collapsed", collapsed);
+    syncSidebarControls();
+  };
 
-  sidebarToggle.addEventListener("click", () => {
+  seamToggle?.addEventListener("click", () => {
     if (window.innerWidth <= 850) return;
-    setDesktopSidebar(!shell.classList.contains("sidebar-collapsed"));
+    setSidebarCollapsed(!shell.classList.contains("sidebar-collapsed"));
   });
+
+  stickyToggle?.addEventListener("click", () => {
+    if (window.innerWidth <= 850) return;
+    setSidebarCollapsed(!shell.classList.contains("sidebar-collapsed"));
+  });
+
+  // Theme control only exists in the paper rail and only displays when collapsed.
+  const syncStickyTheme = () => {
+    if (!stickyTheme) return;
+    const dark = root.classList.contains("dark");
+    stickyTheme.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    stickyTheme.setAttribute("title", dark ? "Light mode" : "Dark mode");
+  };
+
+  stickyTheme?.addEventListener("click", () => {
+    const dark = root.classList.toggle("dark");
+    localStorage.setItem("wikiTheme", dark ? "dark" : "light");
+    syncStickyTheme();
+  });
+
+  // Show the rail sidebar control only once the paper menu has stuck to the viewport.
+  if (sectionTabs && stickySentinel) {
+    const observer = new IntersectionObserver(entries => {
+      const sentinelVisible = entries[0].isIntersecting;
+      sectionTabs.classList.toggle("is-stuck", !sentinelVisible);
+    }, { threshold: [0, 1] });
+
+    observer.observe(stickySentinel);
+  }
 
   window.addEventListener("resize", () => {
     if (window.innerWidth <= 850) {
-      // Prevent desktop collapsed state from interfering with mobile drawer.
       shell.classList.remove("sidebar-collapsed");
-      sidebarToggle.setAttribute("aria-expanded", "true");
+      sectionTabs?.classList.remove("is-stuck");
     }
-  }, { passive: true });
+    syncSidebarControls();
+  }, { passive:true });
+
+  syncSidebarControls();
+  syncStickyTheme();
 });
   </script>
  </body>
