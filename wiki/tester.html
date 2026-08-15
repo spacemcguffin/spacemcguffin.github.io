@@ -1177,6 +1177,133 @@ html.dark .plot-location-scrap{
 .season-accordion-toggle{
   justify-content:flex-start;
 }
+  
+
+/* ============================================================
+   OPTIONAL INFOBOX MULTI-IMAGE TABS
+   Tabs appear automatically only when 2+ image panels exist.
+   ============================================================ */
+.infobox-image-switcher{
+  width:100%;
+  background:var(--paper);
+}
+
+.infobox-image-tabs{
+  display:none;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:0;
+  padding:0 8px;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+
+.infobox-image-switcher.has-multiple .infobox-image-tabs{
+  display:flex;
+}
+
+.infobox-image-tab{
+  position:relative;
+  min-height:31px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 0 -1px;
+  padding:6px 11px 5px;
+  border:1px solid var(--line);
+  border-bottom-color:var(--line);
+  background:var(--panel);
+  color:var(--text);
+  cursor:pointer;
+  font-size:.66rem;
+  font-weight:560;
+  line-height:1;
+  white-space:nowrap;
+}
+
+.infobox-image-tab + .infobox-image-tab{
+  margin-left:-1px;
+}
+
+.infobox-image-tab:hover{
+  background:var(--paper);
+}
+
+.infobox-image-tab[aria-selected="true"]{
+  z-index:1;
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+  font-weight:650;
+}
+
+.infobox-image-panels{
+  position:relative;
+  width:100%;
+}
+
+.infobox-image-panel{
+  display:none;
+  width:100%;
+}
+
+.infobox-image-panel.is-active{
+  display:block;
+}
+
+.infobox-image-panel img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0;
+}
+
+/* One image: behaves exactly like the old infobox image */
+.infobox-image-switcher:not(.has-multiple) .infobox-image-tabs{
+  display:none;
+}
+
+@media(max-width:850px){
+  .infobox-image-tabs{
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding:0;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .infobox-image-tabs::-webkit-scrollbar{
+    display:none;
+  }
+
+  .infobox-image-tab{
+    flex:0 0 auto;
+    min-height:34px;
+    padding:7px 12px 6px;
+    font-size:.68rem;
+  }
+}
+  
+
+/* Make image tabs feel integrated with the infobox */
+.infobox-image-tabs{
+  padding:6px 7px 0;
+  gap:4px;
+  border-bottom:1px solid var(--line);
+}
+
+.infobox-image-tab,
+.infobox-image-tab + .infobox-image-tab{
+  margin:0 0 -1px;
+  border-radius:3px 3px 0 0;
+}
+
+.infobox-image-tab[aria-selected="true"]{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
   </style>
  </head>
  <body>
@@ -1576,7 +1703,19 @@ html.dark .plot-location-scrap{
         <div class="infobox-title">
          The Crap Out
         </div>
-        <img alt="The Crap Out episode image" src="/sp/img/tco.png"/>
+        <div class="infobox-image-switcher">
+         <div aria-label="Infobox images" class="infobox-image-tabs" role="tablist">
+         </div>
+         <div class="infobox-image-panels">
+          <div class="infobox-image-panel" data-label="sotm.png">
+           <img loading="eager" src="https://lewis.lc/sp/img/sotm.png"/>
+          </div>
+          <div class="infobox-image-panel" data-label="tco.png">
+           <img loading="eager" src="https://lewis.lc/sp/img/tco.png"/>
+          </div>
+         </div>
+        </div>
+
         <div class="info-table">
          <div class="info-row">
           <b>
@@ -2001,6 +2140,53 @@ html.dark .plot-location-scrap{
     document.querySelectorAll("[data-hover-wrapper]").forEach(el => el.remove());
   }, {passive:true});
 
+
+
+  /* optional infobox multi-image switcher */
+  document.querySelectorAll(".infobox-image-switcher").forEach(switcher => {
+    const tabsHost = switcher.querySelector(".infobox-image-tabs");
+    const panels = [...switcher.querySelectorAll(".infobox-image-panel")];
+
+    if (!tabsHost || !panels.length) return;
+
+    if (panels.length < 2){
+      switcher.classList.remove("has-multiple");
+      panels[0]?.classList.add("is-active");
+      return;
+    }
+
+    switcher.classList.add("has-multiple");
+    tabsHost.innerHTML = "";
+
+    const tabs = panels.map((panel, index) => {
+      const id = `infobox-image-${index + 1}-${Math.random().toString(36).slice(2,7)}`;
+      panel.id = id;
+      panel.setAttribute("role", "tabpanel");
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "infobox-image-tab";
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", id);
+      button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+      button.textContent = panel.dataset.label || `Image ${index + 1}`;
+
+      button.addEventListener("click", () => {
+        panels.forEach((item, itemIndex) => {
+          const active = itemIndex === index;
+          item.classList.toggle("is-active", active);
+          tabs[itemIndex]?.setAttribute("aria-selected", active ? "true" : "false");
+        });
+      });
+
+      tabsHost.appendChild(button);
+      return button;
+    });
+
+    panels.forEach((panel, index) => {
+      panel.classList.toggle("is-active", index === 0);
+    });
+  });
 
   /* clickable infobox Previous / Next rows */
   document.querySelectorAll(".info-row-nav[data-href]").forEach(row => {
