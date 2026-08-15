@@ -1198,6 +1198,83 @@ html.dark .section-tab[data-section="trivia"].active{
   width:15px!important;
   height:15px!important;
 }
+  
+
+/* ============================================================
+   PAPER NAV INTERACTION POLISH / TRIVIA / MOBILE RAIL
+   ============================================================ */
+
+/* Prevent paper scraps from visually flickering/jumping on click */
+.section-tab{
+  transition:
+    background-color .12s ease,
+    color .12s ease,
+    box-shadow .12s ease!important;
+  will-change:auto!important;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.section-tab:hover,
+.section-tab:active,
+.section-tab:focus-visible{
+  transform:none!important;
+}
+
+.section-tab:active{
+  filter:none!important;
+  box-shadow:0 2px 4px rgba(0,0,0,.14)!important;
+}
+
+.section-tab.active,
+.section-tab.active:hover,
+.section-tab.active:active{
+  transform:none!important;
+}
+
+/* Slightly tighter Trivia bullets */
+.trivia-list li{
+  margin-bottom:.38rem!important;
+}
+
+.trivia-list li:last-child{
+  margin-bottom:0!important;
+}
+
+/* Trivia book icon sizing */
+.trivia-book-icon{
+  width:15px!important;
+  height:15px!important;
+  flex:0 0 15px!important;
+}
+
+/* Mobile section bar must remain horizontally scrollable as tabs grow */
+@media(max-width:850px){
+  .unified-section-links{
+    display:flex!important;
+    flex-wrap:nowrap!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    scroll-behavior:smooth;
+    scrollbar-width:none!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+  }
+
+  .unified-section-links::-webkit-scrollbar{
+    display:none!important;
+  }
+
+  .unified-section-link{
+    flex:0 0 auto!important;
+    min-width:76px!important;
+  }
+}
+
+@media(max-width:470px){
+  .unified-section-link{
+    min-width:54px!important;
+  }
+}
   </style>
  </head>
  <body>
@@ -1240,11 +1317,11 @@ html.dark .section-tab[data-section="trivia"].active{
       </span>
      </a>
      <a aria-label="Trivia" class="unified-section-link" data-section="trivia" href="#trivia">
-      <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
-       <path d="M9.4 8.3A3.1 3.1 0 0 1 12.5 5c2 0 3.5 1.2 3.5 3 0 2.4-2.6 2.7-3.5 4.4-.3.5-.4 1-.4 1.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+      <svg aria-hidden="true" class="nav-svg trivia-book-icon" viewbox="0 0 24 24">
+       <path d="M4.5 5.5h5.8c1.1 0 1.7.3 1.7 1.2v11.8c0-.9-.6-1.3-1.7-1.3H4.5V5.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
        </path>
-       <circle cx="12" cy="18" fill="currentColor" r="1">
-       </circle>
+       <path d="M19.5 5.5h-5.8c-1.1 0-1.7.3-1.7 1.2v11.8c0-.9.6-1.3 1.7-1.3h5.8V5.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
+       </path>
       </svg>
       <span>
        Trivia
@@ -1353,11 +1430,11 @@ html.dark .section-tab[data-section="trivia"].active{
        </span>
       </a>
       <a class="rail-link" data-id="trivia" href="#trivia">
-       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
-        <path d="M9.4 8.3A3.1 3.1 0 0 1 12.5 5c2 0 3.5 1.2 3.5 3 0 2.4-2.6 2.7-3.5 4.4-.3.5-.4 1-.4 1.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+       <svg aria-hidden="true" class="nav-svg trivia-book-icon" viewbox="0 0 24 24">
+        <path d="M4.5 5.5h5.8c1.1 0 1.7.3 1.7 1.2v11.8c0-.9-.6-1.3-1.7-1.3H4.5V5.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
         </path>
-        <circle cx="12" cy="18" fill="currentColor" r="1">
-        </circle>
+        <path d="M19.5 5.5h-5.8c-1.1 0-1.7.3-1.7 1.2v11.8c0-.9.6-1.3 1.7-1.3h5.8V5.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
+        </path>
        </svg>
        <span>
         Trivia
@@ -1547,11 +1624,11 @@ html.dark .section-tab[data-section="trivia"].active{
      </a>
      <a class="section-tab" data-section="trivia" href="#trivia">
       <span class="section-tab-icon">
-       <svg aria-hidden="true" class="nav-svg" viewbox="0 0 24 24">
-        <path d="M9.4 8.3A3.1 3.1 0 0 1 12.5 5c2 0 3.5 1.2 3.5 3 0 2.4-2.6 2.7-3.5 4.4-.3.5-.4 1-.4 1.6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+       <svg aria-hidden="true" class="nav-svg trivia-book-icon" viewbox="0 0 24 24">
+        <path d="M4.5 5.5h5.8c1.1 0 1.7.3 1.7 1.2v11.8c0-.9-.6-1.3-1.7-1.3H4.5V5.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
         </path>
-        <circle cx="12" cy="18" fill="currentColor" r="1">
-        </circle>
+        <path d="M19.5 5.5h-5.8c-1.1 0-1.7.3-1.7 1.2v11.8c0-.9.6-1.3 1.7-1.3h5.8V5.5Z" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.7">
+        </path>
        </svg>
       </span>
       <span class="section-tab-label">
