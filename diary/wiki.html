@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A reusable wiki-style article template for lewis.lc">
+<title>LC Wiki — Article Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#f3f0ea;--surface:#fff;--surface-2:#e9e5dd;--surface-3:#dcd6cd;
+  --text:#1f1f1d;--muted:#6e6a64;--line:rgba(31,31,29,.14);
+  --brand:#4771a2;--brand-dark:#1e4470;--accent:#d66f2d;
+  --shadow:0 24px 70px rgba(40,33,28,.14);--radius:20px;--header-height:78px;
+}
+html[data-theme="dark"]{
+  --page:#11110f;--surface:#1a1a17;--surface-2:#24231f;--surface-3:#302f29;
+  --text:#d4d4d4;--muted:#b0aca3;--line:rgba(255,255,255,.12);
+  --brand:#1e4470;--brand-dark:#4771a2;--shadow:0 24px 70px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} html,body{max-width:100%;overflow-x:clip}
+body{margin:0;font-family:"Inter",system-ui,sans-serif;color:var(--text);background:radial-gradient(circle at 85% 4%,color-mix(in srgb,var(--page) 15%,transparent),transparent 30rem),var(--page);transition:background .25s ease,color .25s ease}
+::selection{background:#cfd8e4;color:#000;text-shadow:none} img{display:block;max-width:100%} button,input{font:inherit} a{color:inherit;text-decoration:none} button{color:inherit}
+.top-strip{min-height:38px;display:flex;align-items:center;justify-content:center;padding:8px 20px;color:#fff;background:#252522;font-size:.82rem;letter-spacing:.02em;text-align:center}
+.site-header{position:sticky;top:0;z-index:50;height:var(--header-height);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--page) 88%,transparent);backdrop-filter:blur(18px)}
+.nav-shell{width:min(1240px,calc(100% - 36px));height:100%;margin:auto;display:grid;grid-template-columns:auto 1fr auto;gap:34px;align-items:center}
+.brand{display:flex;align-items:center;gap:12px;min-width:max-content}.brand-block{width:75px;height:40px;padding:5px;display:grid;place-items:center;color:#fff;background:var(--brand);font-family:"Google Sans Flex",sans-serif;font-size:.88rem;font-weight:850;line-height:.82;text-align:center;letter-spacing:-.04em}
+.desktop-nav{display:flex;align-items:center;gap:30px}.desktop-nav a{position:relative;padding:12px 0;font-size:.93rem;font-weight:500}.desktop-nav a:after{content:"";position:absolute;left:0;right:100%;bottom:5px;height:2px;background:#4771a2;transition:right .2s ease}.desktop-nav a:hover:after,.desktop-nav a.active:after{right:0}
+.nav-actions{display:flex;align-items:center;gap:8px}.icon-btn{width:42px;height:42px;border:1px solid var(--line);border-radius:999px;display:grid;place-items:center;background:var(--surface);cursor:pointer;transition:transform .2s ease,background .2s ease}.icon-btn:hover{transform:translateY(-2px);background:var(--surface-2)}
+.theme-toggle{position:relative;overflow:hidden;isolation:isolate;width:44px;height:44px;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.72),transparent 34%),var(--surface);box-shadow:inset 0 1px 0 rgba(255,255,255,.52),0 8px 22px rgba(35,45,58,.10)}
+.theme-toggle:before{content:"";position:absolute;inset:5px;z-index:-1;border-radius:inherit;background:color-mix(in srgb,#f7c85c 18%,transparent);transition:.4s ease}
+.theme-icon-wrap{position:relative;display:block;width:23px;height:23px}.theme-icon{position:absolute;inset:0;width:23px;height:23px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .32s ease}.theme-icon-sun{color:#d78d13;opacity:1;transform:rotate(0) scale(1)}.theme-icon-sun circle{fill:#f6c24f}.theme-icon-moon{color:#dce6ff;opacity:0;transform:rotate(-90deg) scale(.35)}.theme-icon-moon>path:first-child{fill:#dce6ff;stroke:#6f86bd}.theme-star{opacity:0;transform-origin:center;transform:scale(.2);transition:opacity .25s ease .18s,transform .4s cubic-bezier(.22,1,.36,1) .18s}
+html[data-theme="dark"] .theme-toggle{background:radial-gradient(circle at 68% 72%,rgba(111,138,205,.22),transparent 38%),#171c28;border-color:rgba(170,190,230,.20)}html[data-theme="dark"] .theme-toggle:before{background:color-mix(in srgb,#5f76b1 16%,transparent)}html[data-theme="dark"] .theme-icon-sun{opacity:0;transform:rotate(90deg) scale(.35)}html[data-theme="dark"] .theme-icon-moon{opacity:1;transform:rotate(0) scale(1)}html[data-theme="dark"] .theme-star{opacity:1;transform:scale(1)}
+.menu-btn{display:none}.mobile-panel{display:none;position:fixed;inset:calc(var(--header-height) + 38px) 0 auto;z-index:45;padding:22px;border-bottom:1px solid var(--line);background:var(--surface);box-shadow:var(--shadow)}.mobile-panel.open{display:grid;gap:8px}.mobile-panel a{padding:14px 12px;border-radius:10px;font-weight:700}.mobile-panel a:hover{background:var(--surface-2)}
+.page-shell{width:min(1240px,calc(100% - 150px));margin:0 auto;min-width:0}.breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:20px 0;color:var(--muted);font-size:.86rem;font-weight:500}.breadcrumbs svg{flex:0 0 auto}
+.wiki-grid{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:clamp(36px,4vw,78px);align-items:start;padding-bottom:76px}.article-column,.info-column{min-width:0}.info-column{position:sticky;top:calc(var(--header-height) + 28px)}
+.article-title{max-width:790px;margin:0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(3rem,6vw,3.2rem);font-weight:500;line-height:1;letter-spacing:-.02em;text-wrap:balance}.article-title .type{color:#4771a2;font-size:1.5rem;vertical-align:middle;letter-spacing:-1px}.article-dek{max-width:760px;margin:16px 0 0;color:var(--muted);font-size:1rem;line-height:1.65}
+.tabs{margin-top:34px;border-top:1px solid var(--line)}.tab-list{position:relative;display:flex;gap:clamp(14px,3vw,32px);overflow-x:auto;overflow-y:hidden;border-bottom:1px solid var(--line);scrollbar-width:thin}.tab-list:after{content:"";position:absolute;left:0;bottom:-1px;width:var(--tab-indicator-width,0);height:3px;border-radius:999px 999px 0 0;background:#4771a2;transform:translateX(var(--tab-indicator-left,0));transition:transform .38s cubic-bezier(.22,1,.36,1),width .38s cubic-bezier(.22,1,.36,1);pointer-events:none}.tab-button{position:relative;min-width:max-content;padding:18px 0 15px;border:0;background:transparent;color:var(--muted);font-weight:600;cursor:pointer;transition:color .25s ease}.tab-button.active{color:var(--text)}.tab-panel{display:none;padding:30px 0 0;line-height:1.75}.tab-panel.active{display:block;animation:fade .25s ease}
+.lead{margin:0 0 28px;font-size:1.08rem;line-height:1.8}.lead strong{font-weight:720}.article-copy h2{margin:44px 0 15px;padding-bottom:11px;border-bottom:1px solid var(--line);font-family:"Google Sans Flex",sans-serif;font-size:clamp(1.8rem,3vw,2.45rem);font-weight:520;line-height:1.05;letter-spacing:-.025em}.article-copy h3{margin:30px 0 10px;font-family:"Google Sans Flex",sans-serif;font-size:1.25rem;font-weight:610;letter-spacing:-.015em}.article-copy p{margin:0 0 20px}.article-copy a{color:#4771a2;text-decoration:underline;text-underline-offset:3px}.article-image{margin:28px 0;border-radius:10px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line)}.article-image .placeholder{min-height:290px;display:grid;place-items:center;background:linear-gradient(135deg,var(--surface-2),var(--surface-3));font-family:"Geist Pixel",monospace;color:var(--muted);font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}.caption{padding:10px 12px;color:var(--muted);background:var(--surface);font-size:.78rem;border-top:1px solid var(--line)}
+.pullquote{margin:30px 0;padding:22px 24px;border-left:4px solid #4771a2;background:var(--surface);font-family:"Google Sans Flex",sans-serif;font-size:1.35rem;font-weight:560;line-height:1.4}.note-box{margin:24px 0;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.note-box small{display:block;margin-bottom:6px;color:#4771a2;font-family:"Geist Pixel",monospace;text-transform:uppercase;letter-spacing:.08em}.note-box p{margin:0}
+.infobox{overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--surface);box-shadow:0 14px 45px rgba(35,29,25,.06)}.info-art{aspect-ratio:16/10;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand-dark),#6e8ec1);color:rgba(255,255,255,.78);font-family:"Geist Pixel",monospace;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase}.info-head{padding:16px 16px 14px;border-bottom:1px solid var(--line)}.info-kicker{color:#4771a2;font-family:"Geist Pixel",monospace;font-size:.67rem;letter-spacing:.09em;text-transform:uppercase}.info-head h2{margin:5px 0 0;font-family:"Google Sans Flex",sans-serif;font-size:1.35rem;font-weight:600;line-height:1.05;letter-spacing:-.02em}.facts{display:grid;padding:8px 14px 12px}.fact-row{display:grid;grid-template-columns:88px minmax(0,1fr);gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.82rem;line-height:1.45}.fact-row:last-child{border-bottom:0}.fact-label{color:var(--muted)}.fact-value{font-weight:560}.info-links{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.info-links a{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font-size:.78rem;font-weight:560;text-align:center;transition:.2s ease}.info-links a:hover{background:var(--surface-2);transform:translateY(-2px)}
+.contents{margin-top:12px;padding:15px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}.contents-title{margin-bottom:8px;font-family:"Geist Pixel",monospace;color:var(--muted);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase}.contents a{display:block;padding:5px 0;font-size:.82rem}.contents a:hover{color:#4771a2}
+.timeline{border-left:1px solid var(--line);margin-left:7px;padding-left:24px}.event{position:relative;padding:0 0 28px}.event:before{content:"";position:absolute;left:-29px;top:.4em;width:9px;height:9px;border-radius:50%;background:#4771a2;box-shadow:0 0 0 4px var(--page)}.event-year{font-family:"Geist Pixel",monospace;color:#4771a2;font-size:.72rem;letter-spacing:.08em}.event h3{margin:4px 0 6px}.event p{margin:0;color:var(--muted)}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.gallery-item{aspect-ratio:4/3;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;background:linear-gradient(135deg,var(--surface-2),var(--surface-3));font-family:"Geist Pixel",monospace;color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}
+.related-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.related-card{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--surface);transition:.2s ease}.related-card:hover{transform:translateY(-3px);background:var(--surface-2)}.related-card small{color:#4771a2;font-family:"Geist Pixel",monospace;font-size:.65rem;letter-spacing:.08em;text-transform:uppercase}.related-card strong{display:block;margin-top:5px;font-family:"Google Sans Flex",sans-serif;font-size:1.05rem}
+footer{padding:48px 0;background:#242421;color:#f7f4ee}.footer-shell{width:min(1240px,calc(100% - 36px));margin:auto;display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px}.footer-brand{font-family:"Google Sans Flex",sans-serif;font-size:1.3rem;font-weight:650}.footer-shell h3{margin:0 0 14px;font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em}.footer-shell p,.footer-shell a{color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7}.footer-links{display:grid;gap:4px}
+.back-top{position:fixed;right:20px;bottom:20px;z-index:40;width:46px;height:46px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--text);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.16);opacity:0;transform:translateY(12px);pointer-events:none;transition:.22s ease}.back-top.show{opacity:1;transform:none;pointer-events:auto}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+@media(max-width:900px){.page-shell{width:min(100% - 36px,1240px)}.wiki-grid{grid-template-columns:minmax(0,1fr) 240px;gap:34px}.desktop-nav{gap:20px}}
+@media(max-width:740px){:root{--header-height:68px}.top-strip{min-height:34px}.nav-shell,.page-shell{width:min(100% - 24px,1240px)}.desktop-nav{display:none}.nav-shell{grid-template-columns:1fr auto}.menu-btn{display:grid}.mobile-panel{inset:calc(var(--header-height) + 34px) 0 auto}.wiki-grid{grid-template-columns:1fr;padding-bottom:48px}.article-column{display:flex;flex-direction:column}.info-column{position:static;order:2;margin-top:24px}.article-main{order:1}.tabs-and-content{order:3}.article-title{font-size:clamp(3rem,15vw,5.3rem)}.article-title .type{display:block;margin-top:6px;font-size:1.15rem}.article-dek{font-size:.94rem}.tabs{margin-top:26px}.gallery-grid,.related-grid{grid-template-columns:1fr}.footer-shell{grid-template-columns:1fr 1fr}.info-column{display:grid;grid-template-columns:1fr}.info-art{aspect-ratio:16/8}}
+@media(max-width:520px){.footer-shell{grid-template-columns:1fr}.fact-row{grid-template-columns:86px 1fr}.top-strip{font-size:.75rem}.article-copy h2{font-size:1.75rem}.pullquote{font-size:1.15rem}.info-links{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.theme-icon,.tab-list:after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top-strip">LEWIS.LC — personal archive &amp; reference</div>
+<header class="site-header">
+  <div class="nav-shell">
+    <a class="brand" href="#" aria-label="lewis.lc home"><span class="brand-block">LEWIS<br>.LC</span></a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="#" class="active">Wiki</a><a href="/diary">Diary Archive</a><a href="/myspace">MySpace</a><a href="/livejournal">LiveJournal</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <span class="theme-icon-wrap" aria-hidden="true">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path></svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24"><path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path><path class="theme-star" d="M18.5 3.5v3M17 5h3"></path><path class="theme-star" d="M20 8.7v2M19 9.7h2"></path></svg>
+        </span>
+      </button>
+      <button class="icon-btn menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation"><a href="#">Wiki</a><a href="/diary">Diary Archive</a><a href="/myspace">MySpace</a><a href="/livejournal">LiveJournal</a></nav>
+<main class="page-shell">
+  <div class="breadcrumbs" aria-label="Breadcrumb"><span><a href="/">Home</a></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg><span><a href="#">Wiki</a></span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"></path></svg><span>Example Article</span></div>
+  <section class="wiki-grid">
+    <article class="article-column">
+      <div class="article-main">
+        <h1 class="article-title">Example article <span class="type">(wiki)</span></h1>
+        <p class="article-dek">A reusable article layout built from the same visual system as the 2026 diary, adapted for long-form reference pages.</p>
+      </div>
+      <div class="tabs-and-content">
+        <section class="tabs">
+          <div class="tab-list" role="tablist" aria-label="Article information">
+            <button class="tab-button active" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="history">History</button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="gallery">Gallery</button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="notes">Notes</button>
+            <button class="tab-button" role="tab" aria-selected="false" data-tab="related">Related</button>
+          </div>
+          <div class="tab-panel active article-copy" id="overview" role="tabpanel">
+            <p class="lead"><strong>Example Article</strong> is a demonstration of how the diary design can become a broader wiki-like template without losing the visual character of lewis.lc.</p>
+            <p>The main column is deliberately simple and editorial. It can hold biography, episode information, places, projects, memories, websites, people or anything else that benefits from a reference-page structure.</p>
+            <h2 id="background">Background</h2>
+            <p>This area behaves like a conventional article rather than a table. The typography, spacing, borders and muted colours follow the same restrained language as the diary while giving the text more room to breathe.</p>
+            <div class="article-image"><div class="placeholder">article image</div><div class="caption">Optional image caption, source note or contextual description.</div></div>
+            <h2 id="details">Details</h2>
+            <p>Sections can be as long or short as necessary. Important phrases can link to <a href="#">other pages in the archive</a>, allowing the site to gradually grow into an interconnected personal encyclopaedia.</p>
+            <div class="pullquote">“The point is to feel like lewis.lc first, and a wiki second.”</div>
+            <h3 id="subsection">A smaller subsection</h3>
+            <p>Smaller headings are useful where an article needs more structure without turning every paragraph into a major section.</p>
+            <div class="note-box"><small>archive note</small><p>This kind of box can be used for citations, production notes, trivia, corrections or personal commentary.</p></div>
+            <h2 id="legacy">Legacy</h2>
+            <p>For content-heavy subjects, the tabs prevent the page becoming an endless wall of material: narrative text stays in Overview, chronology moves to History, images go in Gallery and scraps of information can live in Notes.</p>
+          </div>
+          <div class="tab-panel article-copy" id="history" role="tabpanel">
+            <div class="timeline"><div class="event"><div class="event-year">2008</div><h3>First event</h3><p>A short description of an important date or development.</p></div><div class="event"><div class="event-year">2014</div><h3>Something changes</h3><p>The timeline can expand indefinitely without changing the main article.</p></div><div class="event"><div class="event-year">2026</div><h3>Present day</h3><p>Current information, preservation notes or retrospective context.</p></div></div>
+          </div>
+          <div class="tab-panel" id="gallery" role="tabpanel"><div class="gallery-grid"><div class="gallery-item">image 01</div><div class="gallery-item">image 02</div><div class="gallery-item">image 03</div><div class="gallery-item">image 04</div></div></div>
+          <div class="tab-panel article-copy" id="notes" role="tabpanel"><h2 style="margin-top:0">Notes</h2><p>Use this tab for trivia, sources, loose fragments, external links and information that does not belong in the main narrative.</p><div class="note-box"><small>01</small><p>An example note with room for a short explanation.</p></div><div class="note-box"><small>02</small><p>Another note can link elsewhere or preserve a small piece of context.</p></div></div>
+          <div class="tab-panel" id="related" role="tabpanel"><div class="related-grid"><a class="related-card" href="#"><small>person</small><strong>Related article one</strong></a><a class="related-card" href="#"><small>place</small><strong>Related article two</strong></a><a class="related-card" href="#"><small>project</small><strong>Related article three</strong></a><a class="related-card" href="#"><small>archive</small><strong>Related article four</strong></a></div></div>
+        </section>
+      </div>
+    </article>
+    <aside class="info-column" aria-label="Article information">
+      <div class="infobox"><div class="info-art">hero / subject image</div><div class="info-head"><div class="info-kicker">reference page</div><h2>Example Article</h2></div><div class="facts"><div class="fact-row"><span class="fact-label">Type</span><span class="fact-value">Person / place / thing</span></div><div class="fact-row"><span class="fact-label">Years</span><span class="fact-value">2008–2026</span></div><div class="fact-row"><span class="fact-label">Status</span><span class="fact-value">Active</span></div><div class="fact-row"><span class="fact-label">Category</span><span class="fact-value">Example category</span></div><div class="fact-row"><span class="fact-label">Updated</span><span class="fact-value">16 Aug 2026</span></div></div></div>
+      <div class="info-links"><a href="#">← Previous</a><a href="#">Next →</a></div>
+      <nav class="contents" aria-label="On this page"><div class="contents-title">on this page</div><a href="#background">Background</a><a href="#details">Details</a><a href="#subsection">Subsection</a><a href="#legacy">Legacy</a></nav>
+    </aside>
+  </section>
+</main>
+<footer><div class="footer-shell"><div><div class="footer-brand">LEWIS.LC</div><p>written by lewis christian</p><p style="font-family:'Geist Pixel',monospace;font-size:.75rem">coded by an introvert hiding in a dark room on his laptop</p></div><div><h3>Explore</h3><div class="footer-links"><a href="/">Home</a><a href="#">Wiki</a><a href="/diary">Diary Archive</a></div></div><div><h3>Nostalgia</h3><div class="footer-links"><a href="/myspace">MySpace</a><a href="/livejournal">LiveJournal</a></div></div></div></footer>
+<button class="back-top" id="backTop" aria-label="Back to top">↑</button>
+<script>
+const root=document.documentElement,themeToggle=document.getElementById('themeToggle'),menuToggle=document.getElementById('menuToggle'),mobilePanel=document.getElementById('mobilePanel'),backTop=document.getElementById('backTop');
+const savedTheme=localStorage.getItem('release-theme');if(savedTheme)root.dataset.theme=savedTheme;updateThemeIcon();
+themeToggle.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';localStorage.setItem('release-theme',root.dataset.theme);updateThemeIcon()});
+function updateThemeIcon(){const next=root.dataset.theme==='dark'?'light':'dark';themeToggle.setAttribute('aria-label',`Switch to ${next} mode`);themeToggle.setAttribute('title',`Switch to ${next} mode`)}
+menuToggle.addEventListener('click',()=>{const open=mobilePanel.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(open));menuToggle.textContent=open?'×':'☰'});
+const tabList=document.querySelector('.tab-list');function updateIndicator(active=document.querySelector('.tab-button.active')){if(!tabList||!active)return;const lr=tabList.getBoundingClientRect(),tr=active.getBoundingClientRect();tabList.style.setProperty('--tab-indicator-left',`${tr.left-lr.left+tabList.scrollLeft}px`);tabList.style.setProperty('--tab-indicator-width',`${tr.width}px`)}
+document.querySelectorAll('.tab-button').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab-button').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById(btn.dataset.tab).classList.add('active');requestAnimationFrame(()=>updateIndicator(btn));window.scrollTo({top:Math.max(0,document.querySelector('.tabs').getBoundingClientRect().top+scrollY-100),behavior:'smooth'})}));
+tabList.addEventListener('scroll',()=>updateIndicator(),{passive:true});addEventListener('resize',()=>updateIndicator());addEventListener('load',()=>updateIndicator());requestAnimationFrame(()=>updateIndicator());
+addEventListener('scroll',()=>backTop.classList.toggle('show',scrollY>520),{passive:true});backTop.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+</script>
+</body></html>
