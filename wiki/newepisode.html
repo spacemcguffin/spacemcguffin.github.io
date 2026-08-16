@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="light dark" name="color-scheme"/>
+  <title>
+   The Crap Out - South Park Wiki
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <style id="wiki-styles">
+   :root{
+  --shell:1120px;
+  --rail:205px;
+  --mobile-bar:52px;
+
+  --bg:#dce5ec;
+  --paper:#fbfbfb;
+  --panel:#f1f3f6;
+  --panel-solid:#f5f6f8;
+  --text:#262b31;
+  --muted:#6f7781;
+  --line:#ccd3dc;
+  --accent:#456291;
+  --link:#456291;
+  --shadow:0 0 34px rgba(20,28,40,.16);
+  --background-image:url("img/daytime.png");
+}
+
+html.dark{
+  --bg:#17263a;
+  --paper:#1f3047;
+  --panel:#273a53;
+  --panel-solid:#24364d;
+  --text:#f1f5f9;
+  --muted:#c0cad6;
+  --line:#48607a;
+  --accent:#5f82ad;
+  --link:#b7d6f7;
+  --shadow:0 0 38px rgba(6,15,27,.34);
+  --background-image:url("img/nighttime.png");
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0;min-height:100%}
+
+body{
+  font-family:"Inter",system-ui,sans-serif;
+  color:var(--text);
+  background-color:var(--bg);
+  background-image:var(--background-image);
+  background-position:top center;
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+  overflow-x:hidden;
+}
+
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+button,input{font:inherit}
+svg{display:block}
+::selection{background:#cfd8e4;color:#111}
+
+/* ---------- desktop shell ---------- */
+.site-header,
+.mobile-wiki-identity,
+.menu-overlay{display:none}
+
+.shell{
+  position:relative;
+  display:grid;
+  grid-template-columns:var(--rail) minmax(0,1fr);
+  width:min(var(--shell),calc(100% - 120px));
+  max-width:var(--shell);
+  min-height:100vh;
+  margin:0 auto;
+  background:var(--paper);
+  box-shadow:var(--shadow);
+  transition:grid-template-columns .2s ease;
+}
+
+.sidebar{
+  grid-column:1;
+  min-width:0;
+  overflow:hidden;
+  border-right:1px solid var(--line);
+  background:var(--panel-solid);
+  transition:opacity .15s ease;
+}
+
+.main{
+  grid-column:2;
+  min-width:0;
+  padding:0 22px 38px;
+  background:var(--paper);
+}
+
+/* ---------- sidebar ---------- */
+.rail-brand{
+  padding:20px 16px 15px;
+  border-bottom:1px solid var(--line);
+}
+
+.rail-title{
+  margin:0;
+  color:var(--text);
+  font:650 1.08rem/1.05 "Google Sans Flex","Inter",sans-serif;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
+  transform:rotate(-.5deg);
+  transform-origin:left center;
+  display:inline-block;
+}
+
+.rail-section{
+  padding:9px 10px;
+  border-bottom:1px solid var(--line);
+  background:var(--panel-solid);
+}
+
+.nav-label{
+  padding:3px 7px 7px;
+  color:var(--muted);
+  font-size:.6rem;
+  font-weight:720;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+
+.rail-nav{display:grid;gap:2px}
+
+.rail-link{
+  min-height:30px;
+  display:flex;
+  align-items:center;
+  padding:5px 7px;
+  border-radius:5px;
+  color:var(--text);
+  font-size:.77rem;
+  font-weight:500;
+}
+
+.rail-link:hover,
+.rail-link.active{
+  background:var(--paper);
+  text-decoration:none;
+}
+
+.rail-link.active{
+  color:var(--link);
+  font-weight:650;
+}
+
+.season-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:4px;
+}
+
+.season-grid a{
+  min-height:27px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:var(--paper);
+  color:var(--text);
+  font-size:.65rem;
+  font-weight:650;
+}
+
+.season-grid a:hover,
+.season-grid a.active{
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+}
+
+/* ---------- sidebar collapse ---------- */
+.desktop-sidebar-toggle{
+  position:absolute;
+  top:18px;
+  left:calc(var(--rail) - 16px);
+  z-index:140;
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:var(--paper);
+  color:var(--text);
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  cursor:pointer;
+}
+
+.desktop-sidebar-toggle:hover{background:var(--panel)}
+.desktop-sidebar-toggle svg{width:16px;height:16px}
+.sidebar-toggle-open{display:none}
+
+.shell.sidebar-collapsed{
+  grid-template-columns:0 minmax(0,1fr);
+}
+
+.shell.sidebar-collapsed .sidebar{
+  opacity:0;
+  pointer-events:none;
+  border-right:0;
+}
+
+.shell.sidebar-collapsed .desktop-sidebar-toggle{left:10px}
+.shell.sidebar-collapsed .sidebar-toggle-close{display:none}
+.shell.sidebar-collapsed .sidebar-toggle-open{display:grid}
+
+/* ---------- episode nav ---------- */
+.episode-nav-strip{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  margin:0;
+  border:1px solid var(--line);
+  border-radius:4px;
+  overflow:hidden;
+  background:var(--paper);
+}
+
+.episode-nav-strip > a,
+.ep-current{
+  min-height:42px;
+  padding:5px 12px;
+}
+
+.episode-nav-strip > a{
+  display:block;
+  color:var(--text);
+  background:var(--paper);
+  cursor:pointer;
+}
+
+.episode-nav-strip > a:hover{
+  background:var(--panel);
+  text-decoration:none;
+}
+
+.episode-nav-strip > a:first-child{border-right:1px solid color-mix(in srgb,var(--line) 72%,transparent)}
+.episode-nav-strip > a:last-child{border-left:1px solid color-mix(in srgb,var(--line) 72%,transparent)}
+
+.episode-nav-content{
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  gap:7px;
+}
+
+.episode-nav-content::before,
+.episode-nav-content-next::after{
+  flex:0 0 auto;
+  color:var(--muted);
+  font-size:.9rem;
+  line-height:1;
+}
+
+.episode-nav-content::before{content:"‹"}
+.episode-nav-content-next::before{content:none}
+.episode-nav-content-next::after{content:"›"}
+
+.episode-nav-content-next{justify-content:flex-end}
+.episode-nav-text{display:flex;flex-direction:column;justify-content:center}
+.episode-nav-content-next .episode-nav-text{text-align:right}
+
+.ep-current{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+  color:var(--text);
+  background:color-mix(in srgb,var(--accent) 11%,var(--paper));
+}
+
+.nav-small,
+.ep-current span{
+  margin-bottom:2px;
+  color:var(--muted);
+  font-size:.53rem;
+  font-weight:650;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+}
+
+.ep-current strong,
+.episode-nav-strip a strong{
+  font-size:.77rem;
+  font-weight:580;
+}
+
+.ep-next[href="#"]{
+  color:var(--muted);
+  cursor:default;
+}
+
+.ep-next[href="#"]:hover{
+  background:var(--paper);
+}
+
+html.dark .ep-current{
+  background:color-mix(in srgb,var(--accent) 16%,var(--paper));
+}
+
+/* ---------- hero ---------- */
+.hero{
+  padding:17px 0 14px;
+  border-bottom:1px solid var(--line);
+}
+
+.eyebrow{display:flex;flex-wrap:wrap;gap:5px}
+
+.chip{
+  padding:4px 7px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:var(--panel);
+  color:var(--muted);
+  font-size:.56rem;
+  font-weight:720;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  margin:7px 0 0;
+  color:var(--text);
+  font:560 clamp(2rem,3.35vw,3.2rem)/.96 "Google Sans Flex","Inter",sans-serif;
+  letter-spacing:-.05em;
+}
+
+/* ---------- sticky scrap navigation ---------- */
+.sticky-nav-sentinel{height:1px;width:100%;pointer-events:none}
+
+.section-tabs{
+  position:sticky;
+  top:0;
+  z-index:900;
+  display:flex;
+  align-items:center;
+  flex-wrap:nowrap;
+  gap:8px;
+  overflow-x:auto;
+  margin:0 -2px 13px;
+  padding:8px 2px 9px;
+  border-bottom:1px solid var(--line);
+  background:color-mix(in srgb,var(--paper) 96%,transparent);
+  backdrop-filter:blur(10px);
+  scrollbar-width:none;
+}
+
+.section-tabs::-webkit-scrollbar{display:none}
+
+.section-tab{
+  flex:0 0 auto;
+  min-width:max-content;
+  display:flex;
+  align-items:center;
+  padding:7px 12px;
+  color:#2d3237;
+  border:0;
+  clip-path:polygon(2% 3%,97% 0,100% 91%,94% 100%,3% 96%,0 12%);
+  box-shadow:0 2px 4px rgba(0,0,0,.14);
+  font-size:.64rem;
+  font-weight:720;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  -webkit-tap-highlight-color:transparent;
+  transition:background-color .12s ease,color .12s ease,box-shadow .12s ease;
+}
+
+.section-tab:nth-of-type(1){background:#ddd8c7}
+.section-tab:nth-of-type(2){background:#cfded9}
+.section-tab:nth-of-type(3){background:#dfd0c7}
+.section-tab[data-section="trivia"]{background:#d9cddd}
+.section-tab[data-section="gallery"]{background:#d4d8c5}
+.section-tab[data-section="behind-the-scenes"]{background:#ddd6c8}
+
+/* Crucial flicker fix: no transform/filter changes between normal/hover/active */
+.section-tab:hover,
+.section-tab:focus-visible{
+  text-decoration:none;
+  box-shadow:0 3px 6px rgba(0,0,0,.16);
+}
+
+.section-tab:active{
+  box-shadow:0 2px 4px rgba(0,0,0,.14);
+}
+
+.section-tab.active,
+.section-tab.active:hover,
+.section-tab.active:active{
+  background:#456291!important;
+  color:#fff!important;
+  box-shadow:0 2px 4px rgba(0,0,0,.18);
+}
+
+html.dark .section-tab:not(.active){color:#202832}
+html.dark .section-tab:nth-of-type(1):not(.active){background:#d2cdbd}
+html.dark .section-tab:nth-of-type(2):not(.active){background:#c5d4cf}
+html.dark .section-tab:nth-of-type(3):not(.active){background:#d4c5bc}
+html.dark .section-tab[data-section="trivia"]:not(.active){background:#cec2d2}
+html.dark .section-tab[data-section="gallery"]:not(.active){background:#c9ceba}
+html.dark .section-tab[data-section="behind-the-scenes"]:not(.active){background:#d2cbbc}
+html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
+
+.section-tab-icon,
+.section-tab-icon svg{width:14px;height:14px}
+
+.top-chevron-svg{
+  width:14px!important;
+  height:14px!important;
+  flex:0 0 14px;
+}
+
+.sticky-sidebar-control,
+.sticky-theme-control{
+  flex:0 0 34px;
+  width:34px;
+  height:34px;
+  place-items:center;
+  padding:0;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:var(--paper);
+  color:var(--text);
+  box-shadow:0 2px 7px rgba(0,0,0,.11);
+  cursor:pointer;
+}
+
+.sticky-sidebar-control{display:none;margin-right:2px}
+.section-tabs.is-stuck .sticky-sidebar-control{display:grid}
+.sticky-theme-control{display:grid;margin-left:auto}
+
+.sticky-sidebar-control:hover,
+.sticky-theme-control:hover{background:var(--panel)}
+
+.sticky-sidebar-control svg,
+.sticky-theme-control svg{width:16px;height:16px}
+
+.shell.sidebar-collapsed .sticky-sidebar-control svg{transform:rotate(180deg)}
+
+.theme-icon-slot{
+  position:relative;
+  width:16px;
+  height:16px;
+  flex:0 0 16px;
+  display:grid;
+  place-items:center;
+}
+
+.theme-icon-slot .theme-icon{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+}
+
+.theme-icon-slot svg{width:16px;height:16px}
+.theme-icon svg{width:100%;height:100%;display:block;overflow:visible;}
+html:not(.dark) .theme-icon-slot .theme-icon-sun{display:none!important}
+html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
+
+/* ---------- article / infobox ---------- */
+.article-content{display:block}
+
+.infobox{
+  float:right;
+  width:268px;
+  margin:0 0 18px 22px;
+  border:1px solid var(--line);
+  background:var(--paper);
+}
+
+.infobox-title{
+  padding:8px 9px;
+  background:var(--accent);
+  color:#fff;
+  text-align:center;
+  font:700 .9rem "Google Sans Flex","Inter",sans-serif;
+}
+
+.infobox img{display:block;width:100%;height:auto}
+.info-table{display:grid}
+
+.info-row{
+  display:grid;
+  grid-template-columns:42% 58%;
+  border-top:1px solid var(--line);
+  font-size:.76rem;
+  line-height:1.4;
+}
+
+.info-row b,
+.info-row span{padding:6px 7px}
+
+.info-row b{background:var(--panel);font-weight:650}
+.info-row span{color:var(--text)}
+
+.lede{
+  margin:0 0 16px;
+  color:var(--text);
+  font-size:.92rem;
+  line-height:1.66;
+}
+
+.section{
+  padding:18px 0;
+  border-top:1px solid var(--line);
+  overflow:visible;
+}
+
+.section.first{
+  padding-top:0;
+  border-top:0;
+}
+
+.section h2{
+  margin:0 0 9px;
+  padding-bottom:5px;
+  border-bottom:1px solid var(--accent);
+  color:var(--text);
+  font:560 1.28rem "Google Sans Flex","Inter",sans-serif;
+}
+
+.section p{
+  margin:0 0 1em;
+  color:var(--text);
+  font-size:.9rem;
+  line-height:1.68;
+}
+
+.quote{
+  margin:0 0 13px;
+  padding:9px 11px;
+  border-left:3px solid var(--accent);
+  background:var(--panel);
+  color:var(--text);
+  font-size:.87rem;
+  font-style:italic;
+}
+
+.trivia-list{
+  margin:0;
+  padding-left:1.25rem;
+}
+
+.trivia-list li{
+  margin:0 0 .38rem;
+  padding-left:.15rem;
+  color:var(--text);
+  font-size:.9rem;
+  line-height:1.65;
+}
+
+.trivia-list li:last-child{margin-bottom:0}
+
+/* ---------- gallery ---------- */
+#gallery{clear:both}
+
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;
+}
+
+.gallery-item{
+  width:100%;
+  min-width:0;
+  padding:3px;
+  border:1px solid var(--line);
+  border-radius:5px;
+  background:var(--paper);
+  cursor:zoom-in;
+}
+
+.gallery-item img{
+  display:block;
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  border-radius:3px;
+}
+
+/* ---------- season navigation ---------- */
+.season-card{
+  clear:both;
+  overflow:hidden;
+  margin-top:20px;
+  border:1px solid var(--line);
+  border-radius:4px;
+}
+
+.season-head{
+  background:#456291;
+  color:#fff;
+  font-size:.74rem;
+  font-weight:700;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+}
+
+html.dark .season-head{background:#567aa6}
+
+.season-accordion-toggle{
+  width:100%;
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  padding:8px 10px;
+  border:0;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  text-align:left;
+  cursor:default;
+}
+
+.episode-list{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:0;
+}
+
+.episode-list a{
+  min-width:0;
+  min-height:46px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin:0;
+  padding:7px;
+  border-right:1px solid var(--line);
+  background:var(--paper);
+  color:var(--text);
+  font-size:.75rem;
+}
+
+.episode-list a:last-child{border-right:0}
+
+.episode-list a:hover{
+  background:var(--panel);
+  text-decoration:none;
+}
+
+.episode-list a.current{
+  width:100%;
+  border-right:0;
+  background:var(--accent);
+  color:#fff;
+}
+
+.ep-num{
+  width:22px;
+  height:22px;
+  flex:0 0 22px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:var(--panel);
+  color:var(--muted);
+  font-size:.66rem;
+  font-weight:700;
+}
+
+.episode-list a.current .ep-num{
+  border-color:rgba(255,255,255,.35);
+  background:rgba(255,255,255,.12);
+  color:#fff;
+}
+
+.footer{
+  margin:10px 0 0;
+  color:var(--muted);
+  font-size:.68rem;
+  text-align:center;
+}
+
+/* ---------- tooltips ---------- */
+.hover-content{
+  width:270px;
+  padding:11px 12px;
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:var(--panel-solid);
+  color:var(--text);
+  box-shadow:0 10px 30px rgba(0,0,0,.28);
+}
+
+.hover-content p{margin:0;font-size:.8rem;line-height:1.5}
+
+[data-hover-wrapper]{
+  z-index:2000;
+  pointer-events:none;
+  transition:opacity .12s ease,transform .12s ease;
+}
+
+.tooltip-trigger{
+  color:var(--link);
+  cursor:help;
+  text-decoration:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------- lightbox ---------- */
+.wiki-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  background:rgba(5,8,12,.9);
+  backdrop-filter:blur(8px);
+  overflow:hidden;
+}
+
+.wiki-lightbox.open{display:block}
+
+/* Full-viewport media layer. Controls/caption/counter are positioned
+   independently and therefore cannot push the image off centre. */
+.wiki-lightbox-stage{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:72px 84px;
+  pointer-events:none;
+}
+
+.wiki-lightbox img{
+  display:block;
+  width:auto;
+  height:auto;
+  max-width:calc(100vw - 168px);
+  max-height:calc(100vh - 144px);
+  object-fit:contain;
+  border-radius:5px;
+  box-shadow:0 18px 60px rgba(0,0,0,.42);
+  pointer-events:auto;
+}
+
+.wiki-lightbox-close,
+.wiki-lightbox-nav{
+  position:absolute;
+  z-index:2;
+  display:grid;
+  place-items:center;
+  border:0;
+  background:rgba(255,255,255,.94);
+  color:#111;
+  box-shadow:0 4px 18px rgba(0,0,0,.25);
+  cursor:pointer;
+}
+
+.wiki-lightbox-close{
+  top:18px;
+  right:18px;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  font-size:24px;
+}
+
+.wiki-lightbox-nav{
+  top:50%;
+  width:46px;
+  height:46px;
+  border-radius:50%;
+  transform:translateY(-50%);
+}
+
+.wiki-lightbox-prev{left:14px}
+.wiki-lightbox-next{right:14px}
+.wiki-lightbox-nav svg{width:21px;height:21px}
+
+.wiki-lightbox-caption{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  bottom:48px;
+  transform:translateX(-50%);
+  max-width:min(720px,calc(100vw - 40px));
+  padding:6px 10px;
+  border-radius:4px;
+  background:rgba(13,21,32,.78);
+  color:#fff;
+  font-size:.72rem;
+  line-height:1.35;
+  text-align:center;
+}
+
+.wiki-lightbox-counter{
+  position:absolute;
+  z-index:2;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  padding:6px 10px;
+  border-radius:999px;
+  background:rgba(13,21,32,.78);
+  color:#fff;
+  font-size:.68rem;
+  font-weight:650;
+}
+
+/* Small top buffer for wider views; mobile remains flush */
+@media(min-width:851px){
+  .episode-nav-strip{margin-top:10px}
+}
+
+/* ---------- tablet ---------- */
+@media(max-width:1050px) and (min-width:851px){
+  .shell{width:calc(100% - 42px)}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* ---------- mobile ---------- */
+@media(max-width:850px){
+  body{background-attachment:scroll}
+
+  .site-header{
+    display:block;
+    position:fixed;
+    inset:0 0 auto 0;
+    z-index:1200;
+    width:100%;
+    height:var(--mobile-bar);
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 1px 8px rgba(0,0,0,.1);
+  }
+
+  .unified-mobile-bar{
+    display:grid;
+    grid-template-columns:44px minmax(0,1fr) 44px;
+    width:100%;
+    height:100%;
+  }
+
+  .unified-icon-button{
+    width:44px;
+    height:100%;
+    display:grid;
+    place-items:center;
+    padding:0;
+    border:0;
+    background:var(--panel-solid);
+    color:var(--text);
+    cursor:pointer;
+  }
+
+  .unified-icon-button:first-child{border-right:1px solid var(--line)}
+  .unified-icon-button:last-child{border-left:1px solid var(--line)}
+  .unified-icon-button svg{width:19px;height:19px}
+
+  .unified-section-links{
+    min-width:0;
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+    background:var(--paper);
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+  }
+
+  .unified-section-links::-webkit-scrollbar{display:none}
+
+  .unified-section-link{
+    flex:0 0 auto;
+    min-width:78px;
+    height:var(--mobile-bar);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:3px;
+    padding:0 10px;
+    border-right:1px solid var(--line);
+    color:var(--muted);
+    font-size:.53rem;
+    font-weight:680;
+    text-transform:uppercase;
+    white-space:nowrap;
+  }
+
+  .unified-section-link:hover{text-decoration:none;background:var(--panel)}
+  .unified-section-link.active{background:var(--accent);color:#fff}
+  .unified-section-link span{display:block;line-height:1;white-space:nowrap}
+
+  .mobile-wiki-identity{
+    display:flex;
+    align-items:center;
+    min-height:58px;
+    margin:var(--mobile-bar) 0 0;
+    padding:10px 14px;
+    border-bottom:1px solid var(--line);
+    background:var(--paper);
+  }
+
+  .mobile-wiki-identity strong{
+    display:block;
+    color:var(--text);
+    font:650 1.34rem/.98 "Google Sans Flex","Inter",sans-serif;
+    letter-spacing:-.055em;
+    text-transform:uppercase;
+    transform:rotate(-.5deg);
+    transform-origin:left center;
+  }
+
+  .mobile-wiki-identity span{
+    display:block;
+    margin-top:5px;
+    color:var(--muted);
+    font-size:.64rem;
+    font-weight:700;
+    letter-spacing:.11em;
+    text-transform:uppercase;
+  }
+
+  .shell{
+    display:block;
+    width:100%;
+    max-width:none;
+    min-height:0;
+    margin:0;
+    box-shadow:none;
+  }
+
+  .sidebar{
+    position:fixed;
+    top:var(--mobile-bar);
+    bottom:0;
+    left:0;
+    z-index:1120;
+    width:min(292px,86vw);
+    overflow-y:auto;
+    opacity:1!important;
+    transform:translateX(-103%);
+    transition:transform .22s ease;
+    border-right:1px solid var(--line)!important;
+    background:var(--panel-solid);
+    box-shadow:18px 0 45px rgba(0,0,0,.28);
+    pointer-events:auto!important;
+  }
+
+  body.menu-open .sidebar{transform:translateX(0)}
+
+  .menu-overlay{
+    position:fixed;
+    inset:var(--mobile-bar) 0 0;
+    z-index:1110;
+    border:0;
+    background:rgba(0,0,0,.48);
+  }
+
+  body.menu-open .menu-overlay{display:block}
+
+  .desktop-sidebar-toggle,
+  .sticky-sidebar-control,
+  .sticky-theme-control,
+  .sticky-nav-sentinel,
+  .section-tabs{
+    display:none!important;
+  }
+
+  .main{
+    width:100%;
+    margin:0;
+    padding:0 14px 32px;
+  }
+
+  .episode-nav-strip{
+    grid-template-columns:1fr 1fr;
+    margin:0;
+  }
+
+  .ep-current{
+    grid-column:1/-1;
+    grid-row:1;
+    min-height:37px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .episode-nav-strip > a{
+    min-height:40px;
+    padding:5px 9px;
+  }
+
+  .episode-nav-strip > a:first-child{
+    border-right:1px solid color-mix(in srgb,var(--line) 72%,transparent);
+  }
+
+  .episode-nav-strip > a:last-child{border-left:0}
+
+  .hero{padding:15px 0 14px}
+
+  .hero h1{
+    margin-top:7px;
+    font-size:clamp(1.85rem,10vw,2.65rem);
+    line-height:.96;
+  }
+
+  .infobox{
+    float:none;
+    width:100%;
+    margin:0 0 17px;
+  }
+
+  .lede{font-size:.92rem;line-height:1.68}
+  .section{padding:17px 0}
+  .section h2{font-size:1.25rem}
+  .section p{font-size:.9rem;line-height:1.67}
+  .quote{font-size:.87rem;padding:9px 11px}
+  .trivia-list li{font-size:.9rem;line-height:1.67}
+
+  .gallery{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  .season-head{font-size:.72rem}
+
+  .season-accordion-toggle{
+    min-height:42px;
+    padding:9px 11px;
+    cursor:pointer;
+  }
+
+  .season-card .episode-list{display:none}
+  .season-card.is-open .episode-list{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .episode-list a{
+    min-height:44px;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+    font-size:.72rem;
+  }
+
+  .episode-list a:last-child{border-bottom:0}
+
+  #top,#synopsis,#plot,#trivia,#gallery,#behind-the-scenes{
+    scroll-margin-top:calc(var(--mobile-bar) + 8px);
+  }
+
+  .wiki-lightbox{padding:54px 10px 48px}
+  .wiki-lightbox-nav{width:42px;height:42px}
+  .wiki-lightbox-prev{left:6px}
+  .wiki-lightbox-next{right:6px}
+}
+
+@media(max-width:470px){
+  .unified-mobile-bar{grid-template-columns:42px minmax(0,1fr) 42px}
+  .unified-icon-button{width:42px}
+  .unified-section-link{min-width:72px;padding:0 8px}
+}
+
+@media(min-width:1400px){
+  .shell{
+    width:min(1080px,calc(100% - 180px));
+    max-width:1080px;
+  }
+}
+
+/* ============================================================
+   DETAIL ENHANCEMENTS
+   ============================================================ */
+
+/* Fully clickable Previous / Next infobox rows */
+.info-row-nav{
+  position:relative;
+  cursor:pointer;
+  transition:background-color .12s ease;
+}
+.info-row-nav:hover{background:var(--panel)}
+.info-row-nav .info-row-link{
+  color:var(--link);
+  font-weight:600;
+  text-decoration:none;
+}
+.info-row-nav:hover .info-row-link{text-decoration:underline}
+
+/* More individual cut-paper geometry and subtle fibre texture */
+.section-tab{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.section-tab[data-section="top"]{
+  clip-path:polygon(2% 7%,96% 1%,100% 87%,95% 100%,3% 95%,0 14%);
+}
+.section-tab[data-section="synopsis"]{
+  clip-path:polygon(1% 2%,98% 5%,96% 98%,5% 100%,0 89%);
+}
+.section-tab[data-section="plot"]{
+  clip-path:polygon(4% 0,100% 7%,98% 91%,92% 100%,1% 96%,0 8%);
+}
+.section-tab[data-section="trivia"]{
+  clip-path:polygon(0 8%,94% 1%,100% 10%,98% 97%,6% 100%,1% 91%);
+}
+.section-tab[data-section="gallery"]{
+  clip-path:polygon(3% 1%,99% 5%,100% 93%,94% 98%,2% 100%,0 11%);
+}
+.section-tab[data-section="behind-the-scenes"]{
+  clip-path:polygon(1% 5%,96% 0,100% 10%,98% 95%,91% 100%,3% 97%,0 13%);
+}
+.section-tab::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.15;
+  background-image:
+    radial-gradient(circle at 16% 22%,rgba(0,0,0,.22) 0 .45px,transparent .6px),
+    radial-gradient(circle at 72% 61%,rgba(255,255,255,.85) 0 .4px,transparent .6px),
+    radial-gradient(circle at 43% 82%,rgba(0,0,0,.14) 0 .35px,transparent .55px);
+  background-size:9px 11px,13px 12px,11px 14px;
+}
+
+/* Optional Plot subheadings */
+.plot-location-scrap{
+  display:inline-block;
+  margin:3px 0 9px;
+  padding:5px 8px 4px;
+  background:#ddd8c7;
+  color:#30343a;
+  font-size:.58rem;
+  font-weight:760;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  clip-path:polygon(2% 5%,97% 0,100% 90%,93% 100%,3% 96%,0 14%);
+  transform:rotate(-.25deg);
+  box-shadow:0 2px 3px rgba(0,0,0,.11);
+}
+.plot-location-scrap:nth-of-type(even){
+  background:#cfded9;
+  transform:rotate(.2deg);
+}
+html.dark .plot-location-scrap{
+  background:#d2cdbd;
+  color:#202832;
+}
+
+/* Gallery hover zoom */
+.gallery-item{overflow:hidden}
+.gallery-item img{transition:transform .22s ease}
+.gallery-item:hover img{transform:scale(1.035)}
+
+/* Smooth seam chevron movement */
+.desktop-sidebar-toggle svg{transition:transform .22s ease}
+.desktop-sidebar-toggle:active svg{transform:scale(.92)}
+
+@media(max-width:850px){
+  .gallery-item:hover img{transform:none}
+  
+}
+
+/* Final small refinements */
+.infobox-title{
+  font-weight:560!important;
+}
+
+/* ============================================================
+   OPTIONAL INFOBOX MULTI-IMAGE TABS
+   Tabs appear automatically only when 2+ image panels exist.
+   ============================================================ */
+.infobox-image-switcher{
+  width:100%;
+  background:var(--paper);
+}
+
+.infobox-image-tabs{
+  display:none;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:4px;
+  padding:6px 7px 0;
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+
+.infobox-image-switcher.has-multiple .infobox-image-tabs{
+  display:flex;
+}
+
+.infobox-image-tab{
+  position:relative;
+  min-height:31px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 0 -1px;
+  padding:6px 11px 5px;
+  border:1px solid var(--line);
+  border-bottom-color:var(--line);
+  border-radius:3px 3px 0 0;
+  background:var(--panel);
+  color:var(--text);
+  cursor:pointer;
+  font-size:.66rem;
+  font-weight:560;
+  line-height:1;
+  white-space:nowrap;
+}
+
+.infobox-image-tab + .infobox-image-tab{
+  margin-left:0;
+}
+
+.infobox-image-tab:hover{
+  background:var(--paper);
+}
+
+.infobox-image-tab[aria-selected="true"]{
+  z-index:1;
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+  font-weight:650;
+}
+
+.infobox-image-panels{
+  position:relative;
+  width:100%;
+}
+
+.infobox-image-panel{
+  display:none;
+  width:100%;
+}
+
+.infobox-image-panel.is-active{
+  display:block;
+}
+
+.infobox-image-panel img{
+  display:block;
+  width:100%;
+  height:auto;
+  margin:0;
+}
+
+/* One image: behaves exactly like the old infobox image */
+.infobox-image-switcher:not(.has-multiple) .infobox-image-tabs{
+  display:none;
+}
+
+@media(max-width:850px){
+  .infobox-image-tabs{
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding:0;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .infobox-image-tabs::-webkit-scrollbar{
+    display:none;
+  }
+
+  .infobox-image-tab{
+    flex:0 0 auto;
+    min-height:34px;
+    padding:7px 12px 6px;
+    font-size:.68rem;
+  }
+}
+
+/* Infobox images can open in the shared lightbox */
+.infobox-image-panel img{
+  cursor:zoom-in;
+}
+  </style>
+ </head>
+ <body>
+  <header class="site-header">
+   <div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation">
+    <button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button" data-menu-toggle="" type="button">
+     <svg aria-hidden="true" viewbox="0 0 24 24">
+      <path d="M4.5 7h15M4.5 12h15M4.5 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+      </path>
+     </svg>
+    </button>
+    <div class="unified-section-links">
+     <a aria-label="Top" class="unified-section-link active" data-section="top" href="#top">
+       <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
+        <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+       </svg>
+<span>
+       Top
+      </span>
+     </a>
+     <a aria-label="Synopsis" class="unified-section-link" data-section="synopsis" href="#synopsis">
+<span>
+       Synopsis
+      </span>
+     </a>
+     <a aria-label="Plot" class="unified-section-link" data-section="plot" href="#plot">
+<span>
+       Plot
+      </span>
+     </a>
+     <a aria-label="Trivia" class="unified-section-link" data-section="trivia" href="#trivia">
+<span>
+       Trivia
+      </span>
+     </a>
+     <a aria-label="Gallery" class="unified-section-link" data-section="gallery" href="#gallery">
+<span>
+       Gallery
+      </span>
+     </a>
+     <a aria-label="Behind the Scenes" class="unified-section-link" data-section="behind-the-scenes" href="#behind-the-scenes">
+<span>Behind the Scenes</span>
+     </a>
+    </div>
+    <button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
+     <span aria-hidden="true" class="theme-icon-slot">
+      <span class="theme-icon theme-icon-moon">
+       <svg viewbox="0 0 24 24">
+          <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"
+                fill="none" stroke="currentColor" stroke-width="1.65"
+                stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+      </span>
+      <span class="theme-icon theme-icon-sun">
+       <svg viewbox="0 0 24 24">
+          <circle cx="12" cy="12" r="3.4" fill="none"
+                  stroke="currentColor" stroke-width="1.65"/>
+          <path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1
+                   M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48
+                   M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"
+                fill="none" stroke="currentColor" stroke-width="1.65"
+                stroke-linecap="round"/>
+         </svg>
+      </span>
+     </span>
+    </button>
+   </div>
+  </header>
+  <div class="mobile-wiki-identity">
+   <div>
+    <strong>
+     SOUTH PARK WIKI
+    </strong>
+
+   </div>
+  </div>
+  <div class="shell">
+   <button aria-expanded="true" aria-label="Collapse sidebar" class="desktop-sidebar-toggle" data-desktop-sidebar-toggle="" title="Collapse sidebar" type="button">
+    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-close">
+     <svg viewbox="0 0 24 24">
+      <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+      </path>
+     </svg>
+    </span>
+    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-open">
+     <svg viewbox="0 0 24 24">
+      <path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+      </path>
+     </svg>
+    </span>
+   </button>
+   <aside class="sidebar" id="sidebar">
+    <div class="rail-brand">
+     <p class="rail-title">
+      SOUTH PARK WIKI
+     </p>
+    </div>
+
+    <div class="rail-section">
+     <div class="nav-label">
+      Explore
+     </div>
+     <nav class="rail-nav">
+      <a class="rail-link" href="/sp/">
+<span>
+        Episodes
+       </span>
+      </a>
+      <a class="rail-link" href="#">
+<span>
+        Characters
+       </span>
+      </a>
+      <a class="rail-link" href="#">
+<span>
+        Locations
+       </span>
+      </a>
+     </nav>
+    </div>
+    <div class="rail-section">
+     <div class="nav-label">
+      Recent seasons
+     </div>
+     <div class="season-grid">
+      <a class="current" href="#">
+       28
+      </a>
+      <a href="#">
+       27
+      </a>
+      <a href="#">
+       26
+      </a>
+      <a href="#">
+       25
+      </a>
+      <a href="#">
+       24
+      </a>
+      <a href="#">
+       23
+      </a>
+      <a href="#">
+       22
+      </a>
+      <a href="#">
+       21
+      </a>       
+      <a href="/sp/">
+       All
+      </a>
+     </div>
+    </div>
+   </aside>
+   <main class="main" id="main">
+    <nav aria-label="Episode navigation" class="episode-nav-strip">
+     <a class="ep-prev" href="turkey-trot">
+      <span class="episode-nav-content">
+<span class="episode-nav-text">
+        <span class="nav-small">
+         Previous
+        </span>
+        <strong>
+         Episode 1
+        </strong>
+       </span>
+      </span>
+     </a>
+     <div class="ep-current">
+      <span>
+       Season 1 · Episode 2
+      </span>
+      <strong>
+       Angel of the North
+      </strong>
+     </div>
+     <a class="ep-next" href="#">
+      <span class="episode-nav-content episode-nav-content-next">
+       <span class="episode-nav-text">
+        <span class="nav-small">
+         Next
+        </span>
+        <strong>
+         Episode 3
+        </strong>
+       </span>
+</span>
+     </a>
+    </nav>
+    <!-- ==================== EPISODE TITLE / HERO ==================== -->
+    <section class="hero" id="top">
+     <div class="eyebrow">
+      <span class="chip">
+       Season 1
+      </span>
+      <span class="chip">
+       Episode 2
+      </span>
+     </div>
+     <h1>
+      Angel of the North
+     </h1>
+    </section>
+    <div aria-hidden="true" class="sticky-nav-sentinel">
+    </div>
+    <div aria-label="Article sections" class="section-tabs">
+     <button aria-label="Collapse sidebar" class="sticky-sidebar-control" data-sticky-sidebar-toggle="" title="Collapse sidebar" type="button">
+      <svg aria-hidden="true" viewbox="0 0 24 24">
+       <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+       </path>
+      </svg>
+     </button>
+     <a class="section-tab" data-section="top" href="#top">
+       <span class="section-tab-icon">
+        <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
+         <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+        </svg>
+       </span>
+<span class="section-tab-label">
+       Top
+      </span>
+     </a>
+     <a class="section-tab" data-section="synopsis" href="#synopsis">
+<span class="section-tab-label">
+       Synopsis
+      </span>
+     </a>
+     <a class="section-tab" data-section="plot" href="#plot">
+<span class="section-tab-label">
+       Plot
+      </span>
+     </a>
+     <a class="section-tab" data-section="trivia" href="#trivia">
+<span class="section-tab-label">
+       Trivia
+      </span>
+     </a>
+     <a class="section-tab" data-section="gallery" href="#gallery">
+<span class="section-tab-label">
+       Gallery
+      </span>
+     </a>
+     <a class="section-tab" data-section="behind-the-scenes" href="#behind-the-scenes">
+<span class="section-tab-label">Behind the Scenes</span>
+     </a>
+     <button aria-label="Switch to dark mode" class="sticky-theme-control" data-sticky-theme-toggle="" title="Dark mode" type="button">
+      <span aria-hidden="true" class="theme-icon-slot">
+       <span class="theme-icon theme-icon-moon">
+        <svg viewbox="0 0 24 24">
+          <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"
+                fill="none" stroke="currentColor" stroke-width="1.65"
+                stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>
+       </span>
+       <span class="theme-icon theme-icon-sun">
+        <svg viewbox="0 0 24 24">
+          <circle cx="12" cy="12" r="3.4" fill="none"
+                  stroke="currentColor" stroke-width="1.65"/>
+          <path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1
+                   M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48
+                   M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"
+                fill="none" stroke="currentColor" stroke-width="1.65"
+                stroke-linecap="round"/>
+         </svg>
+       </span>
+      </span>
+     </button>
+    </div>
+    <section class="article-content" id="general">
+     <div class="article-top">
+      <div>
+       <aside aria-label="Episode information" class="infobox">
+        <div class="infobox-title">
+         Angel of the North
+        </div>
+        <div class="infobox-image-switcher">
+         <div aria-label="Infobox images" class="infobox-image-tabs" role="tablist">
+         </div>
+         <div class="infobox-image-panels">
+          <div class="infobox-image-panel" data-label="Angel of the North">
+           <img loading="eager" src="/diary/images/2024.png"/>
+          </div>
+         </div>
+        </div>
+        <div class="info-table">
+         <div class="info-row">
+          <b>
+           Episode no.
+          </b>
+          <span>
+           Season 1
+           <br/>
+           Episode 2
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Written by
+          </b>
+          <span>
+           Lewis Christian
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Directed by
+          </b>
+          <span>
+           Lewis Christian
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Production code
+          </b>
+          <span>
+           102
+          </span>
+         </div>
+         <div class="info-row">
+          <b>
+           Original air date
+          </b>
+          <span>
+           August 16, 2026
+          </span>
+         </div>
+         <div class="info-row info-row-nav" data-href="#">
+          <b>
+           Previous
+          </b>
+          <span>
+           <a class="info-row-link" href="#">
+            Episode 1
+           </a>
+          </span>
+         </div>
+         <div class="info-row info-row-nav" data-href="#">
+          <b>
+           Next
+          </b>
+          <span>
+           <a class="info-row-link" href="#">
+            Episode 3
+           </a>
+          </span>
+         </div>
+        </div>
+       </aside>
+       <!-- ==================== SYNOPSIS ==================== -->
+       <p class="lede">
+        <strong>
+         Lewis Christian
+        </strong>
+        is the second episode of Season 1, and the 2nd overall episode of South Park. It aired on August 16, 2026
+       </p>
+       <section class="section first" id="synopsis">
+        <h2>
+         Synopsis
+        </h2>
+        <p>
+         Satan's due, Stan's praying, and only a Christmas miracle can deliver the Antichrist on time.
+        </p>
+       </section>
+      </div>
+     </div>
+     <!-- ==================== PLOT ==================== -->
+     <section class="section" id="plot">
+      <h2>
+       Plot
+      </h2>
+      <div class="quote">
+       “We need some goddamn Christmas magic!” 
+       <span>
+        — Stan
+       </span>
+      </div>
+      <div class="plot-location-scrap">
+       AT SOUTH PARK ELEMENTARY
+      </div>
+      <p>
+       At South Park Elementary, Stan is seeing the school counsellor
+       <sup>
+        <span class="tooltip-trigger" data-hover-content="&lt;div class='hover-content'&gt;&lt;p&gt;In this episode, the counsellor is Jesus Christ, following the sacking of Mr Mackey in the previous season.&lt;/p&gt;&lt;/div&gt;" role="button" tabindex="0" aria-label="Show note">
+         [1]
+        </span>
+       </sup>
+       and talking about how tough the last few months have been, mentioning ICE raids, his dad's company going out of business, and losing their home and moving in with his grandfather at Shady Acres and admits he isn't able to cope with all of the change around them. Jesus Christ, having fully embraced the 'Power Christian' lifestyle now, strums an electric guitar and questions what has changed so much. Stan points out people aren't so kind and giving anymore, and admits he is considering sharing the Saudi Arabian money he won in the Turkey Trot race because he feels like that's what everyone needs, comparing it to a Christmas miracle. Jesus calls this "socialist bullshit" and Stan expresses frustration at how Jesus has changed, reminding him he doesn't want to live in an old folks' home anymore and needs some Christmas magic. Peggy Rockbottom then enters the counsellor's office with Pinot Grigio to which Jesus protests what took her so long and tells her to shut up, while she explains to him and Stan she is only late because she went to sing to the needy for charity work. Jesus tells Stan at this time of year, everyone wishes things were better, but that nothing miraculous will happen to anyone.
+      </p>
+      <div class="plot-location-scrap">
+       THE WHITE HOUSE
+      </div>
+      <p>
+       At the White House, Satan is decorating the nursey and crib with Christmas decorations while singing to himself about the incoming arrival of his new baby, listening to a Fox News special report on the baby's upcoming arrival, with the report mentioning that no one is aware how the baby will be born, but that the "crap out" is coming. Satan's decorations include a 'Baby's First Christmas' and Labubu ornaments. but when singing a verse about the baby's dad, Satan realizes Donald Trump, the baby's father, is not present, and questions Dan Scavino and Pam Bondi about his whereabouts, explaining they planned to spend the day singing and decorating together. Scavino informs him Trump had to fly to Colorado on an "urgent matter", insisting it is "high-level classified" and that even they don't have the security clearance to know what's going on, to Satan's anger. After he leaves, Scavino dismisses Satan's concern as pregnancy hormones while Bondi admits she does find it strange that Trump hasn't informed her why he visited Colorado, and Scavino suggests as Trump claimed only he and the Vice President were allowed to know, it must be a covert military operation. Trump and Vance, however, are on Main Street South Park across from the Park County Police Station, dressed as Santa Claus and an elf and pretending to collect donations for the Salvation Army charity organization for Christmas. Vance explains to Trump that Peter Thiel is being held at the station and confirms only Thiel can prevent the unholy birth. Mr. Mackey apologizes for not donating to the Salvation Army, recounting how he lost his job due to a lack of government funding for schools, as well as his health care, and the high cost of tariffs. Trump expresses no concern and wishes him a merry Christmas. As he leaves, Vance warns Trump they need to hurry before the "crap out" can take place, and they synchronize watches to enact 'Operation Kill My Own Baby'.
+      </p>
+      <p>
+       At the Park County Police Station, Trump and Vance arrive in their disguises, wishing everyone a merry Christmas and happy holidays and confronting Detective Harris, claiming they are Salvation Army members with food for the prisoners, justifying it as the time of year to give to the needy, including a cake. Pete Hegseth begins to protest they don't need any cake because the President will be coming for them before Peter Thiel, noticing the ruse, elbows him. Harris tells Mitch Murphy to let them in. Meanwhile outside the The Cheesecake Factory, Stan and the Christmas Critters are walking together as the Critters sing a song about the upcoming crap out. Stan stops and points out they told him Satan was in Washington DC, but they let him know that Satan is on his way to South Park and he needs to just get on board with the crap out. Foxy explains that nothing will stop the Anti-Christ's arrival, except for Peter Thiel. Stan recognizes Thiel as the man who gave a presentation at the school, and the Critters express surprise he has met him and horror that Thiel is already in South Park, asking Stan what he intends to do about this, with Squirrely asking if he might kill and eat him. Stan claims he won't be onboard with the crap out unless it makes "a little bit" of sense, and Beary assures him they will make sure it "all lines up perfectly" for him and the Critters celebrate.
+      </p>
+      <p>
+       At Hell's Pass Hospital, the Critters, Towelie and Stan gather around Satan in his hospital bed waiting for the baby to be born when a doctor comes in and explains they will just need another quick ultrasound and will then move Satan to the operating room. Satan warns him there are evil forces at work and they may need to hurry. Back at the Police Station, Jesus uses his electric guitar to break through the Police Station's main hall and let Trump and Vance in, then to free Peter Thiel and Pete Hegseth from the jail. They greet Trump, who gladly says he's gotten "another Christians dipshit" to help him get what he wants. Thiel warns him there is very little time to stop the Anti-Christ's arrival, and Vance speaks up to say that he doesn't care if his asshole is now filled with genital warts, he still loves Trump. Back at the hospital though, Satan is telling the critters he can't believe how terrible Trump turned out to be, admitting he falls for the worst kinds of guys and calling himself stupid, as the Critters reassure him to save his strength and tell him he's not stupid, pushing Stan to help reassure him. Trump admits he knew how terrible Trump was and how terrible he treated everyone but looked the other way in hopes of a Christmas miracle, his little baby, the only thing in his life that could stull turn out good. Satan worries he will never be free if Trump has Jesus on his side, and the Critters are concerned if he can be stopped, but believe Stan can help them stop him.
+      </p>
+      <p>
+       As the confrontation ends, the doctor comes into the hallway and says he is sorry to interrupt but informs everyone he has really bad news, explaining that according to the ultrasound, at some point when "nobody was watching", the baby hung itself and took it's own life, saying it can all be seen in a video, noting the baby managed to get "a hold of some bed sheets, there's a couple minutes missing from the ultrasound but it's definitely a suicide". Trump is overjoyed with this outcome, and Vance refers to it as a miracle, but Beary is disappointed there will not be a crap out after all. Fox News then reports that the unborn child of Satan and President Trump has indeed "taken the easy way out" by committing suicide and "lacked mental toughness", with Sean Hannity showing the ultrasound of the baby initially appearing fine, "a few minutes missing" represented by a black screen, and then the baby inside the womb having already hung itself, a small chair visible, and refers to it as "just something babies do sometimes, while the Fox and Friends hosts urge viewers who know a fetus contemplating suicide to call up Fox News as much as they can. The anchor mentions a funeral will be held for the unborn child at the White House.
+      </p>
+      <p>
+       Back at Shady Acres, one of the employees calls out for Christmas mail and letters from home, finding one for Stan and offering it to him. Stan notices on the envelope it is from Jesus and opens it, and Jesus tells him he owes him an apology and a thank you, noting that Stan asked for a Christmas miracle and that Jesus didn't listen, telling him to go to an address, which Stan recognizes with surprise, saying "no way" before running through the town and coming back to the old Marsh Residence, with 'Merry Christmas Stan' written in holiday lights. Stan finds a key from Jesus and opens the house, seeing a Christmas tree already set up and the same familiar furniture including his old living room couch, a photo of his family, and heads up to his room to see his old toy box, bed and more all in place. After leaving, he looks up to the stars and says "thank you" to Jesus, who appears in the stars and promises he will be up there, watching everybody, telling Stan to be good and never give up on the things he commits to, before being joined by Peggy Rockbottom, who praises Jesus and begins singing the same song she sang to the seniors earlier about getting punched in the face, and Stan sings along happily as he heads back into his home.
+      </p>
+     </section>
+     <!-- ==================== TRIVIA AND GALLERY ==================== -->
+     <section class="section" id="trivia">
+      <h2>
+       Trivia
+      </h2>
+      <ul class="trivia-list">
+       <li>
+        This is placeholder trivia text for an interesting production detail about the episode.
+       </li>
+       <li>
+        Add behind-the-scenes notes, references, continuity details, or small observations here.
+       </li>
+       <li>
+        This section can also be used for alternate titles, visual gags, callbacks, or broadcast notes.
+       </li>
+      </ul>
+     </section>
+     <section class="section" id="gallery">
+      <h2>
+       Gallery
+      </h2>
+      <div class="gallery">
+       <button class="gallery-item" data-caption="Episode gallery image" type="button">
+        <img alt="Episode gallery image" loading="lazy" src="/sp/img/sotm.png"/>
+       </button>
+       <button class="gallery-item" data-caption="Episode gallery image" type="button">
+        <img alt="Episode gallery image" loading="lazy" src="/sp/img/gan.png"/>
+       </button>
+       <button class="gallery-item" data-caption="Episode gallery image" type="button">
+        <img alt="Episode gallery image" loading="lazy" src="/sp/img/sickofancy.png"/>
+       </button>
+      </div>
+     </section>
+     <section class="section" id="behind-the-scenes">
+       <h2>
+        Behind the Scenes
+       </h2>
+       <ul class="trivia-list">
+        <li>
+         Add behind-the-scenes information here.
+        </li>
+        <li>
+         Add production notes, deleted material, or other making-of details here.
+        </li>
+       </ul>
+      </section>
+      <section class="section" id="season-navigation">
+      <!-- ==================== SEASON / EPISODE NAVIGATION ==================== -->
+      <div class="season-card">
+       <div class="season-head season-accordion-head">
+        <button aria-controls="season-1-episodes" aria-expanded="false" class="season-accordion-toggle" type="button">
+         <span class="season-accordion-label">
+          Season 1 episodes
+         </span>
+        </button>
+       </div>
+       <div class="episode-list" id="season-1-episodes">
+         
+        <a href="#">
+         <span class="ep-num">
+          1
+         </span>
+         Episode 1
+        </a>
+         
+        <a class="current" href="#top">
+         <span class="ep-num">
+          2
+         </span>
+         Angel of the North
+        </a>
+         
+        <a href="#">
+         <span class="ep-num">
+          3
+         </span>
+         Episode 3
+        </a>
+         
+        <a href="#">
+         <span class="ep-num">
+          4
+         </span>
+         The Queue
+        </a>
+         
+        <a href="#">
+         <span class="ep-num">
+          5
+         </span>
+         Clusterfunk
+        </a>
+
+        <a href="#">
+         <span class="ep-num">
+          6
+         </span>
+         Edge Enders
+        </a>
+
+        <a href="#">
+         <span class="ep-num">
+          7
+         </span>
+         Going Up Syke
+        </a>
+
+         
+
+
+         
+    
+       </div>
+      </div>
+     </section>
+
+     <div class="footer">
+      <div class="plot-location-scrap">
+       CREATED BY LEWIS
+      </div>
+     </div>
+    </section>
+
+   </main>
+  </div>
+  <button aria-label="Close navigation" class="menu-overlay" type="button">
+  </button>
+  <script id="wiki-controller">
+   document.addEventListener("DOMContentLoaded", () => {
+  const root = document.documentElement;
+  const body = document.body;
+  const shell = document.querySelector(".shell");
+
+  const menuButton = document.querySelector("[data-menu-toggle]");
+  const overlay = document.querySelector(".menu-overlay");
+
+  const seamToggle = document.querySelector("[data-desktop-sidebar-toggle]");
+  const stickySidebar = document.querySelector("[data-sticky-sidebar-toggle]");
+  const stickyTheme = document.querySelector("[data-sticky-theme-toggle]");
+  const mobileTheme = document.querySelector("[data-theme-toggle]");
+
+  const sectionTabs = document.querySelector(".section-tabs");
+  const stickySentinel = document.querySelector(".sticky-nav-sentinel");
+
+  /* theme */
+  const storedTheme = localStorage.getItem("wikiTheme");
+  const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+  root.classList.toggle("dark", storedTheme ? storedTheme === "dark" : !!systemDark);
+
+  function syncTheme(){
+    const dark = root.classList.contains("dark");
+    [stickyTheme, mobileTheme].forEach(button => {
+      if (!button) return;
+      button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+      button.setAttribute("title", dark ? "Light mode" : "Dark mode");
+    });
+  }
+
+  function toggleTheme(){
+    const dark = !root.classList.contains("dark");
+    root.classList.toggle("dark", dark);
+    localStorage.setItem("wikiTheme", dark ? "dark" : "light");
+    syncTheme();
+  }
+
+  stickyTheme?.addEventListener("click", toggleTheme);
+  mobileTheme?.addEventListener("click", toggleTheme);
+  syncTheme();
+
+  /* mobile drawer */
+  function setMenu(open){
+    body.classList.toggle("menu-open", open);
+    menuButton?.setAttribute("aria-expanded", String(open));
+    body.style.overflow = open && innerWidth <= 850 ? "hidden" : "";
+  }
+
+  menuButton?.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+  overlay?.addEventListener("click", () => setMenu(false));
+
+  document.querySelectorAll(".sidebar a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (innerWidth <= 850) setMenu(false);
+    });
+  });
+
+  /* desktop sidebar */
+  function syncSidebar(){
+    if (!shell) return;
+    const collapsed = shell.classList.contains("sidebar-collapsed");
+
+    [seamToggle, stickySidebar].forEach(button => {
+      if (!button) return;
+      button.setAttribute("aria-expanded", String(!collapsed));
+      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Collapse sidebar");
+      button.setAttribute("title", collapsed ? "Show sidebar" : "Collapse sidebar");
+    });
+  }
+
+  function toggleSidebar(){
+    if (!shell || innerWidth <= 850) return;
+    shell.classList.toggle("sidebar-collapsed");
+    syncSidebar();
+  }
+
+  seamToggle?.addEventListener("click", toggleSidebar);
+  stickySidebar?.addEventListener("click", toggleSidebar);
+  syncSidebar();
+
+  if (sectionTabs && stickySentinel){
+    const stickyObserver = new IntersectionObserver(entries => {
+      sectionTabs.classList.toggle("is-stuck", !entries[0].isIntersecting);
+    }, {threshold:[0,1]});
+    stickyObserver.observe(stickySentinel);
+  }
+
+  /* stable section tracking: no IntersectionObserver switching */
+  const sectionIds = ["top","synopsis","plot","trivia","gallery","behind-the-scenes"];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const sectionLinks = [
+    ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
+  ];
+
+  let activeSection = "";
+
+  function setActiveSection(id){
+    if (!id || id === activeSection) return;
+    activeSection = id;
+
+    sectionLinks.forEach(link => {
+      const target = link.dataset.id || link.dataset.section;
+      link.classList.toggle("active", target === id);
+    });
+
+    // On mobile, keep active tab visible without changing scroll position vertically.
+    if (innerWidth <= 850){
+      const activeMobile = document.querySelector(`.unified-section-link[data-section="${id}"]`);
+      activeMobile?.scrollIntoView({behavior:"smooth", block:"nearest", inline:"nearest"});
+    }
+  }
+
+  function updateActiveSection(){
+    if (!sections.length) return;
+
+    // A fixed threshold beneath the sticky rail makes transitions deterministic.
+    const threshold = innerWidth <= 850 ? 74 : 58;
+    let id = sections[0].id;
+
+    for (const section of sections){
+      const top = section.getBoundingClientRect().top;
+      if (top <= threshold){
+        id = section.id;
+      } else {
+        break;
+      }
+    }
+
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4){
+      id = sections[sections.length - 1].id;
+    }
+
+    setActiveSection(id);
+  }
+
+  let ticking = false;
+  function requestSectionUpdate(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateActiveSection();
+      ticking = false;
+    });
+  }
+
+  window.addEventListener("scroll", requestSectionUpdate, {passive:true});
+  window.addEventListener("resize", requestSectionUpdate, {passive:true});
+
+  // Clicking a tab sets it immediately; scroll tracking takes over afterward.
+  sectionLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const target = link.dataset.id || link.dataset.section;
+      if (target) setActiveSection(target);
+      setTimeout(requestSectionUpdate, 180);
+    });
+  });
+
+  updateActiveSection();
+
+  /* tooltips */
+  function removeTooltip(target){
+    const id = target?.dataset?.tooltipId;
+    if (!id) return;
+    document.getElementById(id)?.remove();
+    delete target.dataset.tooltipId;
+  }
+
+  function placeTooltip(target, wrapper){
+    const rect = target.getBoundingClientRect();
+    const pad = 12;
+    const width = wrapper.offsetWidth || 270;
+    const height = wrapper.offsetHeight || 80;
+
+    let left = rect.left + rect.width / 2 - width / 2;
+    left = Math.max(pad, Math.min(innerWidth - width - pad, left));
+
+    let top = rect.bottom + 8;
+    if (top + height > innerHeight - pad){
+      top = Math.max(pad, rect.top - height - 8);
+    }
+
+    wrapper.style.left = `${left}px`;
+    wrapper.style.top = `${top}px`;
+  }
+
+  document.querySelectorAll("[data-hover-content]").forEach(target => {
+    target.addEventListener("mouseenter", () => {
+      removeTooltip(target);
+
+      const wrapper = document.createElement("div");
+      const id = `tooltip-${Math.random().toString(36).slice(2,9)}`;
+
+      wrapper.id = id;
+      wrapper.setAttribute("data-hover-wrapper","");
+      wrapper.style.position = "fixed";
+      wrapper.style.opacity = "0";
+      wrapper.style.transform = "translateY(3px)";
+      wrapper.innerHTML = target.getAttribute("data-hover-content");
+
+      document.body.appendChild(wrapper);
+      target.dataset.tooltipId = id;
+      placeTooltip(target, wrapper);
+
+      requestAnimationFrame(() => {
+        wrapper.style.opacity = "1";
+        wrapper.style.transform = "translateY(0)";
+      });
+    });
+
+    target.addEventListener("mousemove", () => {
+      const wrapper = document.getElementById(target.dataset.tooltipId);
+      if (wrapper) placeTooltip(target, wrapper);
+    });
+
+    target.addEventListener("mouseleave", () => removeTooltip(target));
+
+    // Touch/mobile: tap the note marker to show/hide the same tooltip.
+    target.addEventListener("click", event => {
+      if (event.pointerType === "mouse") return;
+      event.preventDefault();
+      event.stopPropagation();
+
+      const existing = document.getElementById(target.dataset.tooltipId);
+      if (existing){
+        removeTooltip(target);
+        return;
+      }
+
+      document.querySelectorAll("[data-hover-content]").forEach(other => {
+        if (other !== target) removeTooltip(other);
+      });
+
+      const wrapper = document.createElement("div");
+      const id = `tooltip-${Math.random().toString(36).slice(2,9)}`;
+
+      wrapper.id = id;
+      wrapper.setAttribute("data-hover-wrapper","");
+      wrapper.style.position = "fixed";
+      wrapper.style.opacity = "0";
+      wrapper.style.transform = "translateY(3px)";
+      wrapper.innerHTML = target.getAttribute("data-hover-content");
+
+      document.body.appendChild(wrapper);
+      target.dataset.tooltipId = id;
+      placeTooltip(target, wrapper);
+
+      requestAnimationFrame(() => {
+        wrapper.style.opacity = "1";
+        wrapper.style.transform = "translateY(0)";
+      });
+    });
+
+    target.addEventListener("focus", () => target.dispatchEvent(new MouseEvent("mouseenter")));
+    target.addEventListener("blur", () => removeTooltip(target));
+  });
+
+  document.addEventListener("click", event => {
+    if (!event.target.closest("[data-hover-content]")){
+      document.querySelectorAll("[data-hover-content]").forEach(removeTooltip);
+    }
+  });
+
+  window.addEventListener("scroll", () => {
+    document.querySelectorAll("[data-hover-wrapper]").forEach(el => el.remove());
+  }, {passive:true});
+
+  /* optional infobox multi-image switcher */
+  document.querySelectorAll(".infobox-image-switcher").forEach(switcher => {
+    const tabsHost = switcher.querySelector(".infobox-image-tabs");
+    const panels = [...switcher.querySelectorAll(".infobox-image-panel")];
+
+    if (!tabsHost || !panels.length) return;
+
+    if (panels.length < 2){
+      switcher.classList.remove("has-multiple");
+      panels[0]?.classList.add("is-active");
+      return;
+    }
+
+    switcher.classList.add("has-multiple");
+    tabsHost.innerHTML = "";
+
+    const tabs = panels.map((panel, index) => {
+      const id = `infobox-image-${index + 1}-${Math.random().toString(36).slice(2,7)}`;
+      panel.id = id;
+      panel.setAttribute("role", "tabpanel");
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "infobox-image-tab";
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", id);
+      button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+      button.textContent = panel.dataset.label || `Image ${index + 1}`;
+
+      button.addEventListener("click", () => {
+        panels.forEach((item, itemIndex) => {
+          const active = itemIndex === index;
+          item.classList.toggle("is-active", active);
+          tabs[itemIndex]?.setAttribute("aria-selected", active ? "true" : "false");
+        });
+      });
+
+      tabsHost.appendChild(button);
+      return button;
+    });
+
+    panels.forEach((panel, index) => {
+      panel.classList.toggle("is-active", index === 0);
+    });
+  });
+
+  /* clickable infobox Previous / Next rows */
+  document.querySelectorAll(".info-row-nav[data-href]").forEach(row => {
+    row.addEventListener("click", event => {
+      if (event.target.closest("a")) return;
+      const href = row.dataset.href;
+      if (href) window.location.href = href;
+    });
+  });
+
+  /* shared gallery / infobox lightbox */
+  const galleryButtons = [...document.querySelectorAll(".gallery-item")];
+  const infoboxImages = [...document.querySelectorAll(".infobox-image-panel img")];
+
+  if (galleryButtons.length || infoboxImages.length){
+    let currentIndex = 0;
+    let lightboxMode = "gallery";
+
+    const lightbox = document.createElement("div");
+    lightbox.className = "wiki-lightbox";
+    lightbox.setAttribute("role","dialog");
+    lightbox.setAttribute("aria-modal","true");
+    lightbox.setAttribute("aria-label","Image viewer");
+
+    lightbox.innerHTML = `
+      <button class="wiki-lightbox-close" type="button" aria-label="Close image">×</button>
+      <button class="wiki-lightbox-nav wiki-lightbox-prev" type="button" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="wiki-lightbox-stage"><img alt=""></div>
+      <button class="wiki-lightbox-nav wiki-lightbox-next" type="button" aria-label="Next image">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="wiki-lightbox-caption"></div>
+      <div class="wiki-lightbox-counter" aria-live="polite"></div>
+    `;
+
+    document.body.appendChild(lightbox);
+
+    const image = lightbox.querySelector("img");
+    const counter = lightbox.querySelector(".wiki-lightbox-counter");
+    const caption = lightbox.querySelector(".wiki-lightbox-caption");
+    const closeButton = lightbox.querySelector(".wiki-lightbox-close");
+    const prevButton = lightbox.querySelector(".wiki-lightbox-prev");
+    const nextButton = lightbox.querySelector(".wiki-lightbox-next");
+
+    function currentItems(){
+      return lightboxMode === "infobox" ? infoboxImages : galleryButtons;
+    }
+
+    function sourceFor(item){
+      return lightboxMode === "infobox" ? item : item?.querySelector("img");
+    }
+
+    function captionFor(item, source){
+      if (lightboxMode === "infobox"){
+        return source?.closest(".infobox-image-panel")?.dataset.label || source?.alt || "";
+      }
+      return item?.dataset.caption || source?.alt || "";
+    }
+
+    function showImage(index){
+      const items = currentItems();
+      if (!items.length) return;
+
+      currentIndex = (index + items.length) % items.length;
+      const item = items[currentIndex];
+      const source = sourceFor(item);
+      if (!source) return;
+
+      image.src = source.src;
+      image.alt = source.alt || `Image ${currentIndex + 1}`;
+      counter.textContent = `${currentIndex + 1} / ${items.length}`;
+      caption.textContent = captionFor(item, source);
+
+      const hasMultiple = items.length > 1;
+      prevButton.style.display = hasMultiple ? "" : "none";
+      nextButton.style.display = hasMultiple ? "" : "none";
+    }
+
+    function openLightbox(mode, index){
+      lightboxMode = mode;
+      showImage(index);
+      lightbox.classList.add("open");
+      body.style.overflow = "hidden";
+      closeButton.focus();
+    }
+
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      body.style.overflow = "";
+    }
+
+    galleryButtons.forEach((button,index) => {
+      button.addEventListener("click", () => openLightbox("gallery", index));
+    });
+
+    infoboxImages.forEach((source,index) => {
+      source.addEventListener("click", () => openLightbox("infobox", index));
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+    prevButton.addEventListener("click", () => showImage(currentIndex - 1));
+    nextButton.addEventListener("click", () => showImage(currentIndex + 1));
+
+    lightbox.addEventListener("click", event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (!lightbox.classList.contains("open")) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft"){
+        event.preventDefault();
+        showImage(currentIndex - 1);
+      }
+      if (event.key === "ArrowRight"){
+        event.preventDefault();
+        showImage(currentIndex + 1);
+      }
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    lightbox.addEventListener("touchstart", event => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, {passive:true});
+
+    lightbox.addEventListener("touchend", event => {
+      const items = currentItems();
+      if (items.length < 2) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+      if (Math.abs(dx) < 45 || Math.abs(dx) <= Math.abs(dy)) return;
+      showImage(currentIndex + (dx < 0 ? 1 : -1));
+    }, {passive:true});
+  }
+
+  /* mobile season accordion */
+  const seasonCard = document.querySelector(".season-card");
+  const seasonToggle = document.querySelector(".season-accordion-toggle");
+
+  function setSeason(open){
+    if (!seasonCard || !seasonToggle) return;
+    seasonCard.classList.toggle("is-open", open);
+    seasonToggle.setAttribute("aria-expanded", String(open));
+  }
+
+  if (seasonCard && seasonToggle){
+    setSeason(innerWidth >= 851);
+
+    seasonToggle.addEventListener("click", () => {
+      if (innerWidth >= 851) return;
+      setSeason(!seasonCard.classList.contains("is-open"));
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    if (innerWidth > 850){
+      setMenu(false);
+      setSeason(true);
+    } else {
+      shell?.classList.remove("sidebar-collapsed");
+      sectionTabs?.classList.remove("is-stuck");
+      syncSidebar();
+      setSeason(false);
+    }
+  }, {passive:true});
+});
+  </script>
+ </body>
+</html>
+<style>.section-tab[data-section="top"] .section-tab-icon{margin-right:4px}</style>
