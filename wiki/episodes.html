@@ -1,665 +1,567 @@
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Episodes</title>
-    <!-- Linking Unicons For Icons -->
-    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
-    <link rel="stylesheet" href="episodes.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Onest:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link id="nordvpn-contentScript-extension-fonts" rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato"></head>
-  <body>
-	 
-    <div class="container">
-      <!-- Header / Navbar -->
-      <header>
-        <nav class="navbar">
-          <div class="nav-section nav-left">
-            <a href="#top" class="nav-logo">
-              <img src="img/fractalavatar.png" alt="Logo" class="logo-image" style="border-radius: 100%;">
-              <h2 class="logo-text">South Park</h2>
-            </a>
-          </div>
-
-          <div class="nav-section">
-            <button class="nav-button search-back-button" id="search-back-button">
-              <i class="uil uil-arrow-left"></i>
-            </button>
-          </div>
-
-					
-          <div class="nav-section nav-center">
-						
-          <div class="category-list">
-						
-            <a href="#top"><button class="category-button"> ↑ </button></a>
-            <a href="#synopsis"><button class="category-button">Synopsis</button></a>
-						<a href="#plot"><button class="category-button">Plot</button></a>
-						<a href="#gallery"><button class="category-button">Gallery</button></a>
-            </div>
-					
-					</div>
-					
-
-          <div class="nav-section nav-right">
-            <button class="nav-button search-button" id="search-button">
-              <i class="uil uil-search"></i>
-            </button>
-            <button class="nav-button theme-button">
-              <i class="uil uil-moon"></i>
-            </button>
-          </div>
-        </nav>
-    
-      </header>
-
-      <!-- Main Layout -->
-      <main class="main-layout">
-        <div class="screen-overlay"></div>
-
-        <!-- Sidebar -->
-
-
-
-
-
-
-				<aside class="sidebar">
-
-          <div class="links-container">
-         
-	
-			<ul class="link-section">
-
-
-				<div class="section-title">Contents</div>
-
-
-
-
-				              <div class="link-item dropdown">
-                <li class="link-item"><i class="uil uil-corner-down-right-alt"></i> Seasons 1 - 5 <i class="dropdown-icon uil uil-angle-down"></i></li>
-                <ul class="dropdown-menu">
-                  <li><a href="#s1" class="link-item">Season 1</a></li>
-                  <li><a href="#s2" class="link-item">Season 2</a></li>
-                  <li><a href="#s3" class="link-item">Season 3</a></li>
-                  <li><a href="#s4" class="link-item">Season 4</a></li>
-                  <li><a href="#s5" class="link-item">Season 5</a></li>
-                     </ul>
-              </div>
-
-				
-
-				              <div class="link-item dropdown">
-                <li class="link-item"><i class="uil uil-corner-down-right-alt"></i> Seasons 6 - 10 <i class="dropdown-icon uil uil-angle-down"></i></li>
-                <ul class="dropdown-menu">
-                  <li><a href="#s6" class="link-item">Season 6</a></li>
-                  <li><a href="#s7" class="link-item">Season 7</a></li>
-                  <li><a href="#s8" class="link-item">Season 8</a></li>
-                  <li><a href="#s9" class="link-item">Season 9</a></li>
-                  <li><a href="#s10" class="link-item">Season 10</a></li>
-                     </ul>
-              </div>
-
-
-
-				              <div class="link-item dropdown">
-                <li class="link-item"><i class="uil uil-corner-down-right-alt"></i> Seasons 11 - 15 <i class="dropdown-icon uil uil-angle-down"></i></li>
-                <ul class="dropdown-menu">
-                  <li><a href="#s11" class="link-item">Season 11</a></li>
-                  <li><a href="#s12" class="link-item">Season 12</a></li>
-                  <li><a href="#s13" class="link-item">Season 13</a></li>
-                  <li><a href="#s14" class="link-item">Season 14</a></li>
-                  <li><a href="#s15" class="link-item">Season 15</a></li>
-                     </ul>
-              </div>
-
-
-				
-				              <div class="link-item dropdown">
-                <li class="link-item"><i class="uil uil-corner-down-right-alt"></i> Seasons 16 - 20 <i class="dropdown-icon uil uil-angle-down"></i></li>
-                <ul class="dropdown-menu">
-                  <li><a href="#s16" class="link-item">Season 16</a></li>
-                  <li><a href="#s17" class="link-item">Season 17</a></li>
-                  <li><a href="#s18" class="link-item">Season 18</a></li>
-                  <li><a href="#s19" class="link-item">Season 19</a></li>
-                  <li><a href="#s20" class="link-item">Season 20</a></li>
-                     </ul>
-              </div>
-
-
-				
-
-
-				              <div class="link-item dropdown">
-                <li class="link-item"><i class="uil uil-corner-down-right-alt"></i> Seasons 21 - 25 <i class="dropdown-icon uil uil-angle-down"></i></li>
-                <ul class="dropdown-menu">
-                  <li><a href="#s21" class="link-item">Season 21</a></li>
-                  <li><a href="#s22" class="link-item">Season 22</a></li>
-                  <li><a href="#s23" class="link-item">Season 23</a></li>
-                  <li><a href="#s24" class="link-item">Season 24</a></li>
-                  <li><a href="#s24specials" class="link-item">Specials</a></li>
-                  <li><a href="#s25" class="link-item">Season 25</a></li>
-                  <li><a href="#s25specials" class="link-item">Specials</a></li>
-                     </ul>
-              </div>
-
-
-
-
-								              <div class="link-item dropdown">
-                <li class="link-item"><i class="uil uil-corner-down-right-alt"></i> Seasons 26 - 30 <i class="dropdown-icon uil uil-angle-down"></i></li>
-                <ul class="dropdown-menu">
-                  <li><a href="#s26" class="link-item">Season 26</a></li>
-                  <li><a href="#s26specials" class="link-item">Specials</a></li>
-                  <li><a href="#s27" class="link-item">Season 27</a></li>
-                  <li><a href="#s28" class="link-item">Season 28</a></li>
-                  <li><a href="#s29" class="link-item">Season 29</a></li>
-                  <li><a href="#s30" class="link-item">Season 30</a></li>
-                     </ul>
-              </div>
-
-				
-              <li>
-                <a href="/diary" class="link-item"><img src="/wiki/img/icons/kenny1.png" style="width: 35px;margin-right: 0.3rem;"> Archive </a>
-              </li>
-
-            </ul>			
-
-
-
-
-
-
-						          <div class="section-separator"></div>
-
-
-
-<ul class="link-section">
-
-              
-              
-<div class="section-title">Contents</div>
-	
-<li>
-<a href="#top" class="link-item"><i class="uil uil-arrow-up"></i> Top </a>
-</li>
-
-<li>
-<a href="#synopsis" class="link-item"><i class="uil uil-corner-down-right-alt"></i> Synopsis </a>
-</li>
-																			
-
-
-            </ul>
-
-		
-					
-					</div>
-        </aside>
-
-
-
-
-
-        <div class="content-wrapper">
-
-          <!-- Main Content -->
-
-
-    
-<div class="article">  
-
-
-
-
-
-
-
-<h1 id="s24">Season 24</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/tps.png">
-<span>
-<small>Season 24 · Episode 2</small>
-<a href="#" class="card-title">The Pandemic Special</a>
-</li>
-
-<li class="card"><img src="/wiki/img/episodes/spvs.png">
-<span>
-<small>Season 24 · Episode 2</small>
-<a href="#" class="card-title">South ParQ Vaccination Special</a>
-</li>
-
-</ul>
-
-
-
-
-	
-
-
-
-
-<h1 id="s24specials">Specials</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/pc.png">
-<span>
-<small>2021 · Special 1</small>
-<a href="#" class="card-title">Post COVID</a>
-</li>
-
-<li class="card"><img src="/wiki/img/episodes/pctroc.png">
-<span>
-<small>2021 · Special 2</small>
-<a href="#" class="card-title">Post COVID: The Return of COVID</a>
-</li>
-
-</ul>
-
-
-
-
-
-	
-
-
-<h1 id="s25">Season 25</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/pd.png">
-<span>
-<small>Season 25 · Episode 1</small>
-<a href="#" class="card-title">Pajama Day</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/tbf.png">
-<span>
-<small>Season 25 · Episode 2</small>
-<a href="#" class="card-title">The Big Fix</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/cp.png">
-<span>
-<small>Season 25 · Episode 3</small>
-<a href="#" class="card-title">City People</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/bttcw.png">
-<span>
-<small>Season 25 · Episode 4</small>
-<a href="#" class="card-title">Back to the Cold War</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/hmthm.png">
-<span>
-<small>Season 25 · Episode 5</small>
-<a href="#" class="card-title">Help, My Teenager Hates Me!</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/cwspds.png">
-<span>
-<small>Season 25 · Episode 6</small>
-<a href="#" class="card-title">Credigree Weed St. Patrick's Day Special</a>
-</li>
-
-</ul>
-
-
-
-
-
-	<h1 id="s25specials">Specials</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/tsw1.png">
-<span>
-<small>2022 · Special 1</small>
-<a href="#" class="card-title">The Streaming Wars - Part One</a>
-</li>
-
-<li class="card"><img src="/wiki/img/episodes/tsw2.png">
-<span>
-<small>2022 · Special 2</small>
-<a href="#" class="card-title">The Streaming Wars - Part Two</a>
-</li>
-
-</ul>
-
-	
-
-
-
-
-
-	
-
-<h1 id="s26">Season 26</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/cy.png">
-<span>
-<small>Season 26 · Episode 1</small>
-<a href="#" class="card-title">Cupid Ye</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/wwpt.png">
-<span>
-<small>Season 26 · Episode 2</small>
-<a href="#" class="card-title">The Worldwide Privacy Tour</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/jt.png">
-<span>
-<small>Season 26 · Episode 3</small>
-<a href="#" class="card-title">Japanese Toilet</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/dl.png">
-<span>
-<small>Season 26 · Episode 4</small>
-<a href="#" class="card-title">Deep Learning</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/dh.png">
-<span>
-<small>Season 26 · Episode 5</small>
-<a href="#" class="card-title">DikinBaus Hot Dogs</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/sb.png">
-<span>
-<small>Season 26 · Episode 6</small>
-<a href="#" class="card-title">Spring Break</a>
-</li>
-
-</ul>
-
-
-
-
-
-<h1 id="s26specials">Specials</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/jtp.png">
-<span>
-<small>2023 · Special 1</small>
-<a href="#" class="card-title">Joining the Panderverse</a>
-</li>
-
-<li class="card"><img src="/wiki/img/episodes/nsfc.png">
-<span>
-<small>2023 · Special 2</small>
-<a href="#" class="card-title">Not Suitable for Children</a>
-</li>
-
-<li class="card"><img src="/wiki/img/episodes/teoo.png">
-<span>
-<small>2024 · Special</small>
-<a href="#" class="card-title">The End of Obesity</a>
-</li>
-
-</ul>
-
-	
-
-
-
-
-	
-
-<h1 id="s27">Season 27</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/sotm.png">
-<span>
-<small>Season 27 · Episode 1</small>
-<a href="#" class="card-title">Sermon on the 'Mount</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/gan.png">
-<span>
-<small>Season 27 · Episode 2</small>
-<a href="#" class="card-title">Got a Nut</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/sickofancy.png">
-<span>
-<small>Season 27 · Episode 3</small>
-<a href="#" class="card-title">Sickofancy</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/wid.png">
-<span>
-<small>Season 27 · Episode 4</small>
-<a href="#" class="card-title">Wok is Dead</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/coi.png">
-<span>
-<small>Season 27 · Episode 5</small>
-<a href="#" class="card-title">Conflict of Interest</a>
-</li>
-
-</ul>		
-					
-
-
-
-	
-
-<h1 id="s28">Season 28</h1>
-
-<ul class="grid">
-
-<li class="card"><img src="/wiki/img/episodes/tc.png">
-<span>
-<small>Season 28 · Episode 1</small>
-<a href="#" class="card-title">Twisted Christian</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/twith.png">
-<span>
-<small>Season 28 · Episode 2</small>
-<a href="#" class="card-title">The Woman in the Hat</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/sns.png">
-<span>
-<small>Season 28 · Episode 3</small>
-<a href="#" class="card-title">Sora Not Sorry</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/tt.png">
-<span>
-<small>Season 28 · Episode 4</small>
-<a href="#" class="card-title">Turkey Trot</a>
-</li>
-
-
-<li class="card"><img src="/wiki/img/episodes/tco.png">
-<span>
-<small>Season 28 · Episode 5</small>
-<a href="#" class="card-title">The Crap Out</a>
-</li>
-
-</ul>		
-	
-
-
-
-
-
-				<div class="section-separator"></div>	
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="color-scheme" content="light dark"/>
+<title>Episodes - South Park Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --shell:1120px; --rail:205px;
+  --bg:#dce5ec; --paper:#fbfbfb; --panel:#f1f3f6; --panel-solid:#f5f6f8;
+  --text:#262b31; --muted:#6f7781; --line:#ccd3dc; --accent:#456291; --link:#456291;
+  --shadow:0 0 34px rgba(20,28,40,.16);
+  --background-image:url("https://lewis.lc/sp/img/daytime.png");
+}
+html.dark{
+  --bg:#17263a; --paper:#1f3047; --panel:#273a53; --panel-solid:#24364d;
+  --text:#f1f5f9; --muted:#c0cad6; --line:#48607a; --accent:#5f82ad; --link:#b7d6f7;
+  --shadow:0 0 38px rgba(6,15,27,.34);
+  --background-image:url("https://lewis.lc/sp/img/nighttime.png");
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:"Inter",system-ui,sans-serif; color:var(--text); background-color:var(--bg);
+  background-image:var(--background-image); background-position:top center; background-size:cover;
+  background-repeat:no-repeat; background-attachment:fixed;
+}
+a{color:var(--link);text-decoration:none}
+button,input,select{font:inherit}
+.shell{
+  display:grid; grid-template-columns:var(--rail) minmax(0,1fr);
+  width:min(var(--shell),calc(100% - 120px)); min-height:100vh; margin:auto;
+  background:var(--paper); box-shadow:var(--shadow);
+}
+.sidebar{border-right:1px solid var(--line);background:var(--panel-solid)}
+.rail-brand{padding:20px 16px 15px;border-bottom:1px solid var(--line)}
+.rail-title{
+  margin:0;color:var(--text);font:650 1.08rem/1.05 "Google Sans Flex","Inter",sans-serif;
+  letter-spacing:-.055em;text-transform:uppercase;transform:rotate(-.5deg);display:inline-block
+}
+.rail-section{padding:9px 10px;border-bottom:1px solid var(--line)}
+.nav-label{padding:3px 7px 7px;color:var(--muted);font-size:.6rem;font-weight:720;letter-spacing:.11em;text-transform:uppercase}
+.rail-nav{display:grid;gap:2px}
+.rail-link{min-height:30px;display:flex;align-items:center;padding:5px 7px;border-radius:5px;color:var(--text);font-size:.77rem;font-weight:500}
+.rail-link:hover,.rail-link.active{background:var(--paper);text-decoration:none}
+.rail-link.active{color:var(--link);font-weight:650}
+.season-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+.season-grid button{
+  min-height:27px;border:1px solid var(--line);border-radius:4px;background:var(--paper);
+  color:var(--text);font-size:.65rem;font-weight:650;cursor:pointer
+}
+.season-grid button.active{background:var(--accent);color:#fff}
+.main{min-width:0;padding:0 22px 38px;background:var(--paper)}
+.topbar{
+  min-height:47px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  border-bottom:1px solid var(--line)
+}
+.crumb{color:var(--muted);font-size:.68rem;font-weight:650;letter-spacing:.07em;text-transform:uppercase}
+.theme-toggle{
+  width:32px;height:32px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;
+  padding:0;background:var(--paper);color:var(--text);cursor:pointer
+}
+.theme-toggle svg{width:16px;height:16px}
+.theme-icon-slot{
+  position:relative;
+  width:16px;
+  height:16px;
+  display:grid;
+  place-items:center;
+}
+.theme-icon-slot .theme-icon{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+}
+.theme-icon-slot svg{width:16px;height:16px}
+html:not(.dark) .theme-icon-sun{display:none!important}
+html.dark .theme-icon-moon{display:none!important}
+
+.menu-overlay{display:none}
+
+.hero{padding:20px 0 17px;border-bottom:1px solid var(--line)}
+.hero h1{margin:0;color:var(--text);font:560 clamp(2rem,3.35vw,3.2rem)/.96 "Google Sans Flex","Inter",sans-serif;letter-spacing:-.05em}
+.hero p{max-width:650px;margin:9px 0 0;color:var(--muted);font-size:.85rem;line-height:1.55}
+
+.index-tools{
+  display:block;
+  padding:12px 0;border-bottom:1px solid var(--line)
+}
+.search-wrap{position:relative}
+.search-wrap svg{position:absolute;left:10px;top:50%;width:16px;height:16px;transform:translateY(-50%);color:var(--muted)}
+.search-input,.filter-select{
+  width:100%;height:38px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--text)
+}
+.search-input{
+  padding:0 38px 0 34px;
+}
+.search-input::-webkit-search-cancel-button{
+  -webkit-appearance:none;
+  appearance:none;
+}
+.search-clear{
+  position:absolute;
+  top:50%;
+  right:7px;
+  width:26px;
+  height:26px;
+  display:none;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  transform:translateY(-50%);
+  background:transparent;
+  color:#5f6872;
+  cursor:pointer;
+}
+.search-clear::before,
+.search-clear::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:12px;
+  height:1.7px;
+  border-radius:999px;
+  background:currentColor;
+  transform-origin:center;
+}
+.search-clear::before{
+  transform:translate(-50%,-50%) rotate(45deg);
+}
+.search-clear::after{
+  transform:translate(-50%,-50%) rotate(-45deg);
+}
+.search-clear:hover{background:var(--panel)}
+html.dark .search-clear{color:#d9e2ec}
+html.dark .search-clear:hover{background:rgba(255,255,255,.09)}
+.filter-select{min-width:145px;padding:0 30px 0 10px}
+.result-count{min-width:92px;color:var(--muted);font-size:.68rem;font-weight:700;text-align:right;text-transform:uppercase;letter-spacing:.055em}
+
+.season-section{padding:20px 0 3px}
+.season-heading{
+  display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:8px
+}
+.season-heading h2{
+  margin:0;color:var(--text);font:560 1.3rem "Google Sans Flex","Inter",sans-serif;letter-spacing:-.025em
+}
+.season-count{
+  padding:4px 7px;background:#d9d4c3;color:#30343a;
+  clip-path:polygon(2% 4%,97% 0,100% 88%,94% 100%,3% 96%,0 12%);
+  font-size:.57rem;font-weight:730;letter-spacing:.065em;text-transform:uppercase
+}
+html.dark .season-count{background:#d1cbb9;color:#222b34}
+
+.episode-index{
+  border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--paper)
+}
+.episode-row{
+  display:grid;grid-template-columns:54px 92px minmax(0,1fr) 118px;
+  min-height:62px;align-items:center;border-bottom:1px solid var(--line);
+  color:var(--text);background:var(--paper)
+}
+.episode-row:last-child{border-bottom:0}
+.episode-row:hover{background:var(--panel);text-decoration:none}
+.episode-thumb{
+  width:76px;height:43px;margin-left:0;border-radius:3px;overflow:hidden;background:var(--panel);
+  border:1px solid color-mix(in srgb,var(--line) 78%,transparent)
+}
+.episode-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.episode-code{
+  color:var(--muted);
+  font-size:.68rem;
+  font-weight:700;
+  letter-spacing:.035em;
+  text-align:center;
+}
+.episode-title{min-width:0;padding-right:12px}
+.episode-title strong{display:block;color:var(--text);font-size:.84rem;font-weight:580;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.episode-title span{display:block;margin-top:3px;color:var(--muted);font-size:.64rem}
+.episode-date{padding-right:11px;color:var(--muted);font-size:.68rem;text-align:right}
+.no-thumb .episode-thumb{visibility:hidden}
+
+.empty-state{display:none;padding:34px 10px;color:var(--muted);text-align:center;font-size:.82rem}
+.footer{padding:22px 0 0;color:var(--muted);font-size:.67rem;text-align:center}
+
+.mobile-header{display:none}
+@media(max-width:850px){
+  body{background-attachment:scroll}
+  .mobile-header{
+    position:sticky;top:0;z-index:20;height:52px;display:grid;grid-template-columns:48px 1fr 48px;
+    background:var(--paper);border-bottom:1px solid var(--line)
+  }
+  .mobile-header button{border:0;background:var(--panel-solid);color:var(--text)}
+  .mobile-title{display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:720;letter-spacing:.07em;text-transform:uppercase}
+  .shell{display:block;width:100%;min-height:100vh;box-shadow:none}
+  .sidebar{
+    display:block;
+    position:fixed;
+    top:52px;
+    bottom:0;
+    left:0;
+    z-index:1120;
+    width:min(292px,86vw);
+    overflow-y:auto;
+    transform:translateX(-103%);
+    transition:transform .22s ease;
+    border-right:1px solid var(--line);
+    background:var(--panel-solid);
+    box-shadow:18px 0 45px rgba(0,0,0,.28);
+  }
+  body.menu-open .sidebar{transform:translateX(0)}
+  .menu-overlay{
+    position:fixed;
+    inset:52px 0 0;
+    z-index:1110;
+    border:0;
+    background:rgba(0,0,0,.48);
+  }
+  body.menu-open .menu-overlay{display:block}
+  .mobile-menu-toggle,
+  .mobile-theme-toggle{
+    display:grid;
+    place-items:center;
+    padding:0;
+    border:0;
+    background:var(--panel-solid);
+    color:var(--text);
+    cursor:pointer;
+  }
+  .mobile-menu-toggle{border-right:1px solid var(--line)}
+  .mobile-theme-toggle{border-left:1px solid var(--line)}
+  .mobile-menu-toggle svg{width:19px;height:19px}
+  .main{padding:0 14px 30px}
+  .topbar{display:none}
+  .hero{padding:16px 0 14px}
+  .hero h1{font-size:2.25rem}
+  .hero p{font-size:.82rem}
+  .index-tools{padding:10px 0}
+  .season-section{padding-top:17px}
+  .episode-row{grid-template-columns:42px minmax(0,1fr) auto;min-height:52px;padding:0 9px}
+  .episode-thumb{display:none}
+  .episode-code{font-size:.63rem}
+  .episode-title{padding:0 8px}
+  .episode-title strong{font-size:.8rem}
+  .episode-title span{display:none}
+  .episode-date{padding:0;font-size:.62rem}
+}
+@media(max-width:470px){
+  .episode-row{grid-template-columns:38px minmax(0,1fr)}
+  .episode-date{display:none}
+
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-header">
+  <button class="mobile-menu-toggle" data-menu-toggle aria-label="Open navigation" aria-expanded="false">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4.5 7h15M4.5 12h15M4.5 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"/>
+    </svg>
+  </button>
+  <div class="mobile-title">Episode index</div>
+  <button class="theme-toggle mobile-theme-toggle" data-theme-toggle aria-label="Switch theme">
+    <span class="theme-icon-slot" aria-hidden="true">
+      <span class="theme-icon theme-icon-moon">
+        <svg viewBox="0 0 24 24">
+          <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"
+                fill="none" stroke="currentColor" stroke-width="1.65"
+                stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="theme-icon theme-icon-sun">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3.4" fill="none" stroke="currentColor" stroke-width="1.65"/>
+          <path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1
+                   M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48
+                   M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"
+                fill="none" stroke="currentColor" stroke-width="1.65"
+                stroke-linecap="round"/>
+        </svg>
+      </span>
+    </span>
+  </button>
 </div>
+<button class="menu-overlay" data-menu-overlay aria-label="Close navigation"></button>
 
-					<div class="article">
+<div class="shell">
+  <aside class="sidebar">
+    <div class="rail-brand"><p class="rail-title">SOUTH PARK WIKI</p></div>
+    <div class="rail-section">
+      <div class="nav-label">Explore</div>
+      <nav class="rail-nav">
+        <a class="rail-link active" href="#">Episodes</a>
+        <a class="rail-link" href="#">Characters</a>
+        <a class="rail-link" href="#">Locations</a>
+      </nav>
+    </div>
+    <div class="rail-section">
+      <div class="nav-label">Jump to season</div>
+      <div class="season-grid">
+        <button data-jump="1">1</button><button data-jump="2">2</button><button data-jump="26">26</button>
+        <button data-jump="27">27</button><button data-jump="28">28</button><button data-jump="all" class="active">All</button>
+      </div>
+    </div>
+  </aside>
 
-						
-<div id="boxcategory">
-<div style="color: var(--black-color);">Categories:</div>&nbsp; 
-
-<div><a>Episodes</a> 
-<span style="color: var(--black-color)">•</span></div>&nbsp; 
-<div><a>Season 27</a></div>
-
-</div>
-						
-						<p class="footer">Created by Lewis</p>
-					
-					</div>
-					
-
-
-		
-
-
-
-
-
-				</div>		</div>
-
-
-
-				
-      </main>
-			
+  <main class="main">
+    <div class="topbar">
+      <div class="crumb">South Park Wiki · Episodes</div>
+      <button class="theme-toggle" data-theme-toggle aria-label="Switch theme">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
 
-    <!-- Linking custom script -->
-    <script src="script.js"></script>
+    <section class="hero">
+      <h1>Episodes</h1>
+      <p>A complete, compact index of South Park episodes. Search by title, jump straight to a season, or scan the entire series in broadcast order.</p>
+    </section>
 
+    <div class="index-tools">
+      <label class="search-wrap">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <input class="search-input" id="episodeSearch" type="search" placeholder="Search episode titles…" aria-label="Search episode titles"/>
+        <button class="search-clear" id="searchClear" type="button" aria-label="Clear search"></button>
+      </label>
+    </div>
 
+    <div id="episodeSections">
 
-		
-<script> 
+      <section class="season-section" data-season="1" id="season-1">
+        <div class="season-heading"><h2>Season 1</h2><span class="season-count">8 episodes</span></div>
+        <div class="episode-index">
+          <a class="episode-row" href="#" data-title="Cartman Gets an Anal Probe">
+            <div class="episode-code">1</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>Cartman Gets an Anal Probe</strong><span>Season 1 · Episode 1</span></div>
+            <div class="episode-date">13 Aug 1997</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Weight Gain 4000">
+            <div class="episode-code">2</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Weight Gain 4000</strong><span>Season 1 · Episode 2</span></div>
+            <div class="episode-date">20 Aug 1997</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Volcano">
+            <div class="episode-code">3</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>Volcano</strong><span>Season 1 · Episode 3</span></div>
+            <div class="episode-date">27 Aug 1997</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Big Gay Al's Big Gay Boat Ride">
+            <div class="episode-code">4</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Big Gay Al's Big Gay Boat Ride</strong><span>Season 1 · Episode 4</span></div>
+            <div class="episode-date">3 Sep 1997</div>
+          </a>
+          <a class="episode-row" href="#" data-title="An Elephant Makes Love to a Pig">
+            <div class="episode-code">5</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>An Elephant Makes Love to a Pig</strong><span>Season 1 · Episode 5</span></div>
+            <div class="episode-date">10 Sep 1997</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Death">
+            <div class="episode-code">6</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Death</strong><span>Season 1 · Episode 6</span></div>
+            <div class="episode-date">17 Sep 1997</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Pinkeye">
+            <div class="episode-code">7</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>Pinkeye</strong><span>Season 1 · Episode 7</span></div>
+            <div class="episode-date">29 Oct 1997</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Starvin' Marvin">
+            <div class="episode-code">8</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Starvin' Marvin</strong><span>Season 1 · Episode 8</span></div>
+            <div class="episode-date">19 Nov 1997</div>
+          </a>
+        </div>
+      </section>
 
-const links = document.getElementsByTagName("a");
+      <section class="season-section" data-season="2" id="season-2">
+        <div class="season-heading"><h2>Season 2</h2><span class="season-count">5 episodes</span></div>
+        <div class="episode-index">
+          <a class="episode-row" href="#" data-title="Terrance and Phillip in Not Without My Anus">
+            <div class="episode-code">1</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Terrance and Phillip in Not Without My Anus</strong><span>Season 2 · Episode 1</span></div>
+            <div class="episode-date">1 Apr 1998</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Cartman's Mom Is Still a Dirty Slut">
+            <div class="episode-code">2</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>Cartman's Mom Is Still a Dirty Slut</strong><span>Season 2 · Episode 2</span></div>
+            <div class="episode-date">22 Apr 1998</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Ike's Wee Wee">
+            <div class="episode-code">3</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Ike's Wee Wee</strong><span>Season 2 · Episode 3</span></div>
+            <div class="episode-date">20 May 1998</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Chickenlover">
+            <div class="episode-code">4</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>Chickenlover</strong><span>Season 2 · Episode 4</span></div>
+            <div class="episode-date">27 May 1998</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Conjoined Fetus Lady">
+            <div class="episode-code">5</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Conjoined Fetus Lady</strong><span>Season 2 · Episode 5</span></div>
+            <div class="episode-date">3 Jun 1998</div>
+          </a>
+        </div>
+      </section>
 
-[...links].forEach(link => {
-  link.addEventListener("mouseover", handleMouseOver);
-  link.addEventListener("mousemove", handleMouseMove);
-  link.addEventListener("mouseleave", handleMouseLeave);
+      <section class="season-section" data-season="28" id="season-28">
+        <div class="season-heading"><h2>Season 28</h2><span class="season-count">5 episodes</span></div>
+        <div class="episode-index">
+          <a class="episode-row" href="#" data-title="Sermon on the 'Mount">
+            <div class="episode-code">1</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Sermon on the 'Mount</strong><span>Season 28 · Episode 1</span></div>
+            <div class="episode-date">23 Jul 2025</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Got a Nut">
+            <div class="episode-code">2</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>Got a Nut</strong><span>Season 28 · Episode 2</span></div>
+            <div class="episode-date">6 Aug 2025</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Sickofancy">
+            <div class="episode-code">3</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
+            <div class="episode-title"><strong>Sickofancy</strong><span>Season 28 · Episode 3</span></div>
+            <div class="episode-date">20 Aug 2025</div>
+          </a>
+          <a class="episode-row" href="#" data-title="Turkey Trot">
+            <div class="episode-code">4</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>Turkey Trot</strong><span>Season 28 · Episode 4</span></div>
+            <div class="episode-date">26 Nov 2025</div>
+          </a>
+          <a class="episode-row" href="#" data-title="The Crap Out">
+            <div class="episode-code">5</div>
+            <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
+            <div class="episode-title"><strong>The Crap Out</strong><span>Season 28 · Episode 5</span></div>
+            <div class="episode-date">10 Dec 2025</div>
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="empty-state" id="emptyState">No episode titles match that search.</div>
+    <div class="footer">South Park Wiki · master episode index mockup</div>
+  </main>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const root=document.documentElement;
+  const search=document.getElementById("episodeSearch");
+  const searchClear=document.getElementById("searchClear");
+
+  const empty=document.getElementById("emptyState");
+  const rows=[...document.querySelectorAll(".episode-row")];
+  const sections=[...document.querySelectorAll(".season-section")];
+
+  const stored=localStorage.getItem("wikiTheme");
+  const systemDark=window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+  root.classList.toggle("dark",stored?stored==="dark":!!systemDark);
+
+  document.querySelectorAll("[data-theme-toggle]").forEach(btn=>btn.addEventListener("click",()=>{
+    root.classList.toggle("dark");
+    localStorage.setItem("wikiTheme",root.classList.contains("dark")?"dark":"light");
+  }));
+
+  const menuToggle=document.querySelector("[data-menu-toggle]");
+  const menuOverlay=document.querySelector("[data-menu-overlay]");
+
+  function setMenu(open){
+    document.body.classList.toggle("menu-open",open);
+    if(menuToggle){
+      menuToggle.setAttribute("aria-expanded",String(open));
+      menuToggle.setAttribute("aria-label",open?"Close navigation":"Open navigation");
+    }
+  }
+
+  menuToggle?.addEventListener("click",()=>setMenu(!document.body.classList.contains("menu-open")));
+  menuOverlay?.addEventListener("click",()=>setMenu(false));
+
+  document.querySelectorAll(".sidebar a,.sidebar button[data-jump]").forEach(item=>{
+    item.addEventListener("click",()=>{
+      if(window.matchMedia("(max-width:850px)").matches) setMenu(false);
+    });
+  });
+
+  window.addEventListener("keydown",event=>{
+    if(event.key==="Escape") setMenu(false);
+  });
+
+  window.addEventListener("resize",()=>{
+    if(!window.matchMedia("(max-width:850px)").matches) setMenu(false);
+  });
+
+  function applyFilters(){
+    const q=search.value.trim().toLowerCase();
+    let visible=0;
+
+    sections.forEach(section=>{
+      let sectionVisible=0;
+      section.querySelectorAll(".episode-row").forEach(row=>{
+        const show=!q || row.dataset.title.toLowerCase().includes(q);
+        row.style.display=show?"grid":"none";
+        if(show){visible++;sectionVisible++;}
+      });
+      section.style.display=sectionVisible?"block":"none";
+    });
+
+    empty.style.display=visible?"none":"block";
+  }
+
+  function updateSearchClear(){
+    searchClear.style.display=search.value ? "flex" : "none";
+  }
+
+  search.addEventListener("input",()=>{
+    updateSearchClear();
+    applyFilters();
+  });
+
+  searchClear.addEventListener("click",()=>{
+    search.value="";
+    updateSearchClear();
+    applyFilters();
+    search.focus();
+  });
+
+  document.querySelectorAll("[data-jump]").forEach(button=>{
+    button.addEventListener("click",()=>{
+      document.querySelectorAll("[data-jump]").forEach(b=>b.classList.remove("active"));
+      button.classList.add("active");
+      const season=button.dataset.jump;
+      if(season==="all"){
+        window.scrollTo({top:0,behavior:"smooth"});
+      }else{
+        document.getElementById(`season-${season}`)?.scrollIntoView({behavior:"smooth",block:"start"});
+      }
+    });
+  });
+
+  updateSearchClear();
+  applyFilters();
 });
-
-function handlePosition(e) {
-  const ID = e.target.getAttribute("data-hover-id");
-  const wrapper = document.getElementById(ID);
-  let top = "";
-  if (
-    !(e.target.getBoundingClientRect().top + wrapper.offsetHeight > innerHeight)
-  ) {
-    top = `${e.clientY + e.target.offsetHeight}px`;
-  } else {
-    top = `${e.clientY - (wrapper.offsetHeight + e.target.offsetHeight)}px`;
-  }
-
-  return `position: fixed; left: ${e.clientX -
-    wrapper.offsetWidth / 2}px; top:${top}`;
-}
-
-function handleMouseOver(e) {
-  const hoverContent = e.target.getAttribute("data-hover-content");
-  const ID = Math.random()
-    .toString(36)
-    .substr(2, 9);
-  const wrapper = document.createElement("DIV");
-  e.target.setAttribute("data-hover-id", ID);
-  wrapper.setAttribute("data-hover-wrapper", "");
-  wrapper.setAttribute("id", ID);
-  wrapper.setAttribute("style", "opacity: 0; transform: scale(.8)");
-  wrapper.innerHTML = hoverContent;
-  document.body.append(wrapper);
-  wrapper.setAttribute("style", handlePosition(e));
-  
-
-  
-}
-
-function handleMouseLeave(e) {
-  const ID = e.target.getAttribute("data-hover-id");
-  document.getElementById(ID).style.opacity = 0;
-  document.getElementById(ID).style.transform = "scale(.8)";
-  setTimeout(() => {
-    document.getElementById(ID).remove();
-  }, 150);
-}
-
-function handleMouseMove(e) {
-  const ID = e.target.getAttribute("data-hover-id");
-  const wrapper = document.getElementById(ID);
-  wrapper.setAttribute("style", handlePosition(e));
-}
-
-window.addEventListener('scroll', () => {
-  const wrapper = document.querySelector('[data-hover-wrapper]');
-  if (wrapper) wrapper.remove();
-});
-
 </script>
-
-
-
-
-
-
-	  		  <script>
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
-</script>
-
-
-
-
-
-		
-  
-
-</body><z9c9d485c-6453-4353-840b-c8acb76aee56></z9c9d485c-6453-4353-840b-c8acb76aee56></html>
+</body>
+</html>
