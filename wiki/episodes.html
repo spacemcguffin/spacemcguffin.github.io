@@ -151,9 +151,9 @@ html.dark .search-clear:hover{background:rgba(255,255,255,.09)}
   margin:0;color:var(--text);font:560 1.3rem "Google Sans Flex","Inter",sans-serif;letter-spacing:-.025em
 }
 .season-count{
-  padding:4px 7px;background:#d9d4c3;color:#30343a;
+  padding:6px 10px;background:#d9d4c3;color:#30343a;
   clip-path:polygon(2% 4%,97% 0,100% 88%,94% 100%,3% 96%,0 12%);
-  font-size:.57rem;font-weight:730;letter-spacing:.065em;text-transform:uppercase
+  font-size:.70rem;font-weight:740;letter-spacing:.06em;text-transform:uppercase
 }
 html.dark .season-count{background:#d1cbb9;color:#222b34}
 
@@ -174,19 +174,85 @@ html.dark .season-count{background:#d1cbb9;color:#222b34}
 .episode-thumb img{display:block;width:100%;height:100%;object-fit:cover}
 .episode-code{
   color:var(--muted);
-  font-size:.68rem;
+  font-size:.74rem;
   font-weight:700;
   letter-spacing:.035em;
   text-align:center;
 }
 .episode-title{min-width:0;padding-right:12px}
-.episode-title strong{display:block;color:var(--text);font-size:.84rem;font-weight:580;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.episode-title span{display:block;margin-top:3px;color:var(--muted);font-size:.64rem}
-.episode-date{padding-right:11px;color:var(--muted);font-size:.68rem;text-align:right}
+.episode-title strong{display:block;color:var(--text);font-size:.94rem;font-weight:580;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.episode-title span{display:block;margin-top:3px;color:var(--muted);font-size:.70rem}
+.episode-date{padding-right:11px;color:var(--muted);font-size:.74rem;text-align:right}
 .no-thumb .episode-thumb{visibility:hidden}
 
 .empty-state{display:none;padding:34px 10px;color:var(--muted);text-align:center;font-size:.82rem}
 .footer{padding:22px 0 0;color:var(--muted);font-size:.67rem;text-align:center}
+
+/* /sp/ paper-scrap back-to-top control */
+.paper-back-to-top{
+  position:fixed;
+  z-index:850;
+  right:22px;
+  bottom:22px;
+  width:42px;
+  height:39px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:1px solid rgba(40,43,48,.20);
+  background:linear-gradient(145deg,rgba(246,244,235,.97),rgba(213,214,207,.95));
+  color:#111820;
+  cursor:pointer;
+  clip-path:polygon(
+    3% 8%,28% 2%,52% 7%,76% 1%,98% 9%,
+    96% 91%,74% 98%,48% 94%,24% 100%,2% 92%
+  );
+  box-shadow:
+    0 7px 20px rgba(0,0,0,.34),
+    inset 0 1px 0 rgba(255,255,255,.82);
+  transform:translateY(12px) rotate(-1.5deg);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease,transform .2s ease,filter .2s ease;
+}
+.paper-back-to-top.visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0) rotate(-1.5deg);
+}
+.paper-back-to-top:hover{
+  color:#000;
+  filter:brightness(1.08) contrast(1.03);
+  transform:translateY(-2px) rotate(.6deg);
+}
+.paper-back-to-top .back-to-top-chevron{
+  position:absolute;
+  inset:50% auto auto 50%;
+  display:grid;
+  place-items:center;
+  width:18px;
+  height:18px;
+  line-height:0;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.paper-back-to-top .back-to-top-chevron svg{
+  display:block;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+@media(max-width:760px){
+  .paper-back-to-top{
+    right:14px;
+    bottom:14px;
+    width:39px;
+    height:36px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .paper-back-to-top{transition:none}
+}
 
 .mobile-header{display:none}
 @media(max-width:850px){
@@ -244,11 +310,11 @@ html.dark .season-count{background:#d1cbb9;color:#222b34}
   .season-section{padding-top:17px}
   .episode-row{grid-template-columns:42px minmax(0,1fr) auto;min-height:52px;padding:0 9px}
   .episode-thumb{display:none}
-  .episode-code{font-size:.63rem}
+  .episode-code{font-size:.69rem}
   .episode-title{padding:0 8px}
-  .episode-title strong{font-size:.8rem}
+  .episode-title strong{font-size:.88rem}
   .episode-title span{display:none}
-  .episode-date{padding:0;font-size:.62rem}
+  .episode-date{padding:0;font-size:.68rem}
 }
 @media(max-width:470px){
   .episode-row{grid-template-columns:38px minmax(0,1fr)}
@@ -339,49 +405,49 @@ html.dark .season-count{background:#d1cbb9;color:#222b34}
           <a class="episode-row" href="#" data-title="Cartman Gets an Anal Probe">
             <div class="episode-code">1</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>Cartman Gets an Anal Probe</strong><span>Season 1 · Episode 1</span></div>
+            <div class="episode-title"><strong>Cartman Gets an Anal Probe</strong></div>
             <div class="episode-date">13 Aug 1997</div>
           </a>
           <a class="episode-row" href="#" data-title="Weight Gain 4000">
             <div class="episode-code">2</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Weight Gain 4000</strong><span>Season 1 · Episode 2</span></div>
+            <div class="episode-title"><strong>Weight Gain 4000</strong></div>
             <div class="episode-date">20 Aug 1997</div>
           </a>
           <a class="episode-row" href="#" data-title="Volcano">
             <div class="episode-code">3</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>Volcano</strong><span>Season 1 · Episode 3</span></div>
+            <div class="episode-title"><strong>Volcano</strong></div>
             <div class="episode-date">27 Aug 1997</div>
           </a>
           <a class="episode-row" href="#" data-title="Big Gay Al's Big Gay Boat Ride">
             <div class="episode-code">4</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Big Gay Al's Big Gay Boat Ride</strong><span>Season 1 · Episode 4</span></div>
+            <div class="episode-title"><strong>Big Gay Al's Big Gay Boat Ride</strong></div>
             <div class="episode-date">3 Sep 1997</div>
           </a>
           <a class="episode-row" href="#" data-title="An Elephant Makes Love to a Pig">
             <div class="episode-code">5</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>An Elephant Makes Love to a Pig</strong><span>Season 1 · Episode 5</span></div>
+            <div class="episode-title"><strong>An Elephant Makes Love to a Pig</strong></div>
             <div class="episode-date">10 Sep 1997</div>
           </a>
           <a class="episode-row" href="#" data-title="Death">
             <div class="episode-code">6</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Death</strong><span>Season 1 · Episode 6</span></div>
+            <div class="episode-title"><strong>Death</strong></div>
             <div class="episode-date">17 Sep 1997</div>
           </a>
           <a class="episode-row" href="#" data-title="Pinkeye">
             <div class="episode-code">7</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>Pinkeye</strong><span>Season 1 · Episode 7</span></div>
+            <div class="episode-title"><strong>Pinkeye</strong></div>
             <div class="episode-date">29 Oct 1997</div>
           </a>
           <a class="episode-row" href="#" data-title="Starvin' Marvin">
             <div class="episode-code">8</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Starvin' Marvin</strong><span>Season 1 · Episode 8</span></div>
+            <div class="episode-title"><strong>Starvin' Marvin</strong></div>
             <div class="episode-date">19 Nov 1997</div>
           </a>
         </div>
@@ -393,31 +459,31 @@ html.dark .season-count{background:#d1cbb9;color:#222b34}
           <a class="episode-row" href="#" data-title="Terrance and Phillip in Not Without My Anus">
             <div class="episode-code">1</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Terrance and Phillip in Not Without My Anus</strong><span>Season 2 · Episode 1</span></div>
+            <div class="episode-title"><strong>Terrance and Phillip in Not Without My Anus</strong></div>
             <div class="episode-date">1 Apr 1998</div>
           </a>
           <a class="episode-row" href="#" data-title="Cartman's Mom Is Still a Dirty Slut">
             <div class="episode-code">2</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>Cartman's Mom Is Still a Dirty Slut</strong><span>Season 2 · Episode 2</span></div>
+            <div class="episode-title"><strong>Cartman's Mom Is Still a Dirty Slut</strong></div>
             <div class="episode-date">22 Apr 1998</div>
           </a>
           <a class="episode-row" href="#" data-title="Ike's Wee Wee">
             <div class="episode-code">3</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Ike's Wee Wee</strong><span>Season 2 · Episode 3</span></div>
+            <div class="episode-title"><strong>Ike's Wee Wee</strong></div>
             <div class="episode-date">20 May 1998</div>
           </a>
           <a class="episode-row" href="#" data-title="Chickenlover">
             <div class="episode-code">4</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>Chickenlover</strong><span>Season 2 · Episode 4</span></div>
+            <div class="episode-title"><strong>Chickenlover</strong></div>
             <div class="episode-date">27 May 1998</div>
           </a>
           <a class="episode-row" href="#" data-title="Conjoined Fetus Lady">
             <div class="episode-code">5</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Conjoined Fetus Lady</strong><span>Season 2 · Episode 5</span></div>
+            <div class="episode-title"><strong>Conjoined Fetus Lady</strong></div>
             <div class="episode-date">3 Jun 1998</div>
           </a>
         </div>
@@ -429,31 +495,31 @@ html.dark .season-count{background:#d1cbb9;color:#222b34}
           <a class="episode-row" href="#" data-title="Sermon on the 'Mount">
             <div class="episode-code">1</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Sermon on the 'Mount</strong><span>Season 28 · Episode 1</span></div>
+            <div class="episode-title"><strong>Sermon on the 'Mount</strong></div>
             <div class="episode-date">23 Jul 2025</div>
           </a>
           <a class="episode-row" href="#" data-title="Got a Nut">
             <div class="episode-code">2</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>Got a Nut</strong><span>Season 28 · Episode 2</span></div>
+            <div class="episode-title"><strong>Got a Nut</strong></div>
             <div class="episode-date">6 Aug 2025</div>
           </a>
           <a class="episode-row" href="#" data-title="Sickofancy">
             <div class="episode-code">3</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt=""/></div>
-            <div class="episode-title"><strong>Sickofancy</strong><span>Season 28 · Episode 3</span></div>
+            <div class="episode-title"><strong>Sickofancy</strong></div>
             <div class="episode-date">20 Aug 2025</div>
           </a>
           <a class="episode-row" href="#" data-title="Turkey Trot">
             <div class="episode-code">4</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>Turkey Trot</strong><span>Season 28 · Episode 4</span></div>
+            <div class="episode-title"><strong>Turkey Trot</strong></div>
             <div class="episode-date">26 Nov 2025</div>
           </a>
           <a class="episode-row" href="#" data-title="The Crap Out">
             <div class="episode-code">5</div>
             <div class="episode-thumb"><img src="https://lewis.lc/sp/img/tco.png" alt=""/></div>
-            <div class="episode-title"><strong>The Crap Out</strong><span>Season 28 · Episode 5</span></div>
+            <div class="episode-title"><strong>The Crap Out</strong></div>
             <div class="episode-date">10 Dec 2025</div>
           </a>
         </div>
@@ -466,10 +532,19 @@ html.dark .season-count{background:#d1cbb9;color:#222b34}
   </main>
 </div>
 
+<button type="button" class="paper-back-to-top" id="paperBackToTop" aria-label="Back to top" title="Back to top">
+  <span class="back-to-top-chevron" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false">
+      <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"/>
+    </svg>
+  </span>
+</button>
+
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   const root=document.documentElement;
   const search=document.getElementById("episodeSearch");
+  const paperBackToTop=document.getElementById("paperBackToTop");
   const searchClear=document.getElementById("searchClear");
 
   const empty=document.getElementById("emptyState");
@@ -559,6 +634,16 @@ document.addEventListener("DOMContentLoaded",()=>{
     });
   });
 
+  function syncBackToTop(){
+    paperBackToTop?.classList.toggle("visible",window.scrollY>520);
+  }
+
+  window.addEventListener("scroll",syncBackToTop,{passive:true});
+  paperBackToTop?.addEventListener("click",()=>{
+    window.scrollTo({top:0,behavior:"smooth"});
+  });
+
+  syncBackToTop();
   updateSearchClear();
   applyFilters();
 });
