@@ -626,6 +626,22 @@ html.dark .season-head{background:#567aa6}
   cursor:default;
 }
 
+.season-accordion-toggle::after{
+  content:"";
+  width:7px;
+  height:7px;
+  margin-left:auto;
+  border-right:1.6px solid currentColor;
+  border-bottom:1.6px solid currentColor;
+  transform:rotate(45deg) translateY(-2px);
+  transform-origin:center;
+  transition:transform .18s ease;
+}
+
+.season-card.is-open .season-accordion-toggle::after{
+  transform:rotate(225deg) translate(-1px,-1px);
+}
+
 .episode-list{
   display:grid;
   grid-template-columns:repeat(5,1fr);
