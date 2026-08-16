@@ -670,6 +670,15 @@ html.dark .season-head{background:#567aa6}
 
 .episode-list a:last-child{border-right:0}
 
+/* Keep additional desktop rows of five visually separated */
+.episode-list a:nth-child(n+6){
+  border-top:1px solid var(--line);
+}
+
+.episode-list a:nth-child(5n){
+  border-right:0;
+}
+
 .episode-list a:hover{
   background:var(--panel);
   text-decoration:none;
@@ -1069,6 +1078,7 @@ html.dark .season-head{background:#567aa6}
 
   .episode-list a{
     min-height:44px;
+    border-top:0;
     border-right:0;
     border-bottom:1px solid var(--line);
     font-size:.72rem;
