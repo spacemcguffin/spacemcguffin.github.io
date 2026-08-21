@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lewis.lc — Retro Blog</title>
+<style>
+:root{
+  --desktop:#0b8f8a;
+  --win:#c0c0c0;
+  --light:#ffffff;
+  --mid:#dfdfdf;
+  --shadow:#808080;
+  --dark:#000000;
+  --blue:#000080;
+  --blue2:#0b6fba;
+  --text:#111;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:var(--desktop);color:var(--text)}
+body{
+  font-family:"MS Sans Serif","Tahoma","Geneva",Arial,sans-serif;
+  font-size:15px;
+  image-rendering:pixelated;
+}
+button,a{font:inherit}
+a{color:inherit;text-decoration:none}
+.desktop{
+  min-height:100vh;
+  padding:14px 28px 34px;
+  background:
+    linear-gradient(rgba(255,255,255,.025),rgba(255,255,255,.025)),
+    var(--desktop);
+}
+.shortcut-bar{
+  display:flex;
+  gap:54px;
+  align-items:flex-start;
+  padding:0 18px 28px;
+}
+.shortcut{
+  width:72px;
+  text-align:center;
+  color:#fff;
+  text-shadow:1px 1px #000;
+  cursor:pointer;
+  user-select:none;
+}
+.shortcut:focus{outline:1px dotted #fff;outline-offset:2px}
+.icon{
+  width:44px;height:44px;margin:0 auto 5px;position:relative;
+}
+.icon.computer:before{
+  content:"";
+  position:absolute;left:5px;top:3px;width:30px;height:22px;
+  background:#d9d9d9;border:2px solid #111;
+  box-shadow:inset 2px 2px #fff,inset -2px -2px #777;
+}
+.icon.computer:after{
+  content:"";
+  position:absolute;left:10px;top:8px;width:20px;height:12px;
+  background:#0f7480;border:2px inset #eee;
+  box-shadow:0 20px 0 -6px #bbb,8px 18px 0 -5px #555;
+}
+.icon.folder:before{
+  content:"";
+  position:absolute;left:3px;top:12px;width:38px;height:27px;
+  background:#f2d64b;border:1px solid #786d00;
+  transform:skew(-4deg);
+  box-shadow:inset 2px 2px #fff59e,inset -2px -2px #9e8b00;
+}
+.icon.folder:after{
+  content:"";
+  position:absolute;left:11px;top:3px;width:27px;height:24px;
+  background:
+    repeating-linear-gradient(150deg,#fff 0 3px,#ddd 3px 5px);
+  border:1px solid #777;
+  transform:rotate(8deg);
+}
+.icon.mail:before{
+  content:"";
+  position:absolute;left:5px;top:10px;width:34px;height:27px;
+  background:white;border:1px solid #111;
+  box-shadow:inset 2px 2px #eee,inset -2px -2px #777;
+}
+.icon.mail:after{
+  content:"↪";
+  position:absolute;left:7px;top:-7px;
+  color:#0049d8;font-size:31px;font-weight:700;
+  text-shadow:none;transform:rotate(-10deg);
+}
+.window{
+  max-width:1140px;
+  margin:0 auto;
+  background:var(--win);
+  border:2px solid;
+  border-color:#fff #111 #111 #fff;
+  box-shadow:1px 1px 0 #000, inset 1px 1px 0 var(--mid), inset -1px -1px 0 var(--shadow);
+}
+.titlebar{
+  height:31px;
+  padding:3px 4px 3px 7px;
+  color:#fff;
+  background:linear-gradient(90deg,var(--blue),var(--blue2));
+  display:flex;align-items:center;justify-content:space-between;
+  font-weight:700;
+}
+.title-text{letter-spacing:.1px}
+.window-controls{display:flex;gap:3px}
+.winbtn{
+  width:24px;height:22px;padding:0;
+  display:grid;place-items:center;
+  background:var(--win);
+  color:#111;
+  border:2px solid;
+  border-color:#fff #333 #333 #fff;
+  line-height:1;
+  font-weight:700;
+  cursor:pointer;
+}
+.winbtn:active{border-color:#333 #fff #fff #333;padding:1px 0 0 1px}
+.menu{
+  display:flex;gap:5px;padding:5px 8px 4px;
+  border-bottom:1px solid #888;
+}
+.menu button{
+  border:0;background:none;padding:1px 5px;cursor:pointer;
+}
+.menu button:hover,.menu button:focus{background:#000080;color:white;outline:none}
+.address-wrap{
+  padding:7px 10px;
+  border-top:1px solid #fff;
+  border-bottom:1px solid #888;
+}
+.address{
+  min-height:37px;
+  background:#fff;
+  border:2px solid;
+  border-color:#777 #fff #fff #777;
+  box-shadow:inset 1px 1px #222;
+  display:flex;align-items:center;gap:9px;
+  padding:5px 10px;
+  white-space:nowrap;overflow:hidden;
+}
+.address-label{color:#222}
+.mini-folder{
+  width:18px;height:13px;background:#f2d64b;border:1px solid #a58900;position:relative;flex:none
+}
+.mini-folder:before{
+  content:"";position:absolute;left:2px;top:-4px;width:8px;height:4px;background:#f2d64b;border:1px solid #a58900;border-bottom:0
+}
+.path{
+  overflow:hidden;text-overflow:ellipsis;
+  font-family:"Courier New",monospace;
+}
+.content-shell{
+  margin:0 10px 10px;
+  background:#fff;
+  border:2px solid;
+  border-color:#777 #fff #fff #777;
+  box-shadow:inset 1px 1px #222;
+  min-height:570px;
+}
+.list-head{
+  display:grid;grid-template-columns:minmax(0,1fr) 210px;
+  background:#c6c6c6;
+  border-bottom:1px solid #999;
+  font-weight:400;
+}
+.list-head > div{
+  padding:11px 14px;
+}
+.list-head > div:first-child{border-right:1px solid #aaa}
+.rows{padding:0 12px}
+.row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 210px;
+  min-height:44px;
+  align-items:center;
+  border-bottom:1px dotted #c8c8c8;
+  cursor:pointer;
+}
+.row:hover{background:#000080;color:white}
+.row:hover .file-icon{filter:brightness(1.12)}
+.name{
+  display:flex;align-items:center;gap:14px;
+  padding:7px 12px;
+  min-width:0;
+}
+.post-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.date{padding:7px 12px;white-space:nowrap}
+.file-icon{
+  width:22px;height:26px;position:relative;flex:none;
+  background:#fff;border:1px solid #444;
+  box-shadow:inset -2px -2px #bbb;
+}
+.file-icon:before{
+  content:"";position:absolute;right:-1px;top:-1px;
+  border-left:7px solid transparent;border-bottom:7px solid #bbb;width:0;height:0;
+}
+.file-icon:after{
+  content:"";
+  position:absolute;left:4px;right:4px;top:8px;height:10px;
+  background:
+    linear-gradient(#0c47d7 0 0) 0 0/100% 2px no-repeat,
+    linear-gradient(#f00 0 0) 0 4px/80% 2px no-repeat,
+    linear-gradient(#0c47d7 0 0) 0 8px/65% 2px no-repeat;
+}
+.folder-row .file-icon{
+  height:17px;width:24px;background:#f2d64b;border-color:#887700;
+  box-shadow:inset -2px -2px #a68e00;
+}
+.folder-row .file-icon:before{
+  content:"";position:absolute;left:2px;top:-5px;width:10px;height:5px;background:#f2d64b;border:1px solid #887700;border-bottom:0
+}
+.folder-row .file-icon:after{display:none}
+.statusbar{
+  display:grid;grid-template-columns:1fr 210px;
+  gap:4px;padding:4px 5px 5px;
+}
+.statusbar div{
+  min-height:25px;padding:4px 7px;
+  border:2px solid;border-color:#777 #fff #fff #777;
+}
+.hidden{display:none!important}
+.taskbar{
+  display:none;
+}
+.desktop-note{
+  max-width:1140px;margin:14px auto 0;color:#dff;
+  text-shadow:1px 1px #000;font-size:12px;
+}
+@media (max-width:760px){
+  .desktop{padding:8px 8px 22px}
+  .shortcut-bar{gap:18px;padding:0 2px 18px;overflow-x:auto}
+  .shortcut{width:60px;font-size:12px}
+  .window{width:100%}
+  .menu{overflow-x:auto}
+  .address{font-size:12px}
+  .content-shell{min-height:470px}
+  .list-head{grid-template-columns:minmax(0,1fr) 108px;font-size:12px}
+  .row{grid-template-columns:minmax(0,1fr) 108px;min-height:48px}
+  .rows{padding:0 5px}
+  .name{gap:8px;padding:7px 5px}
+  .date{font-size:11px;padding:7px 5px;text-align:right}
+  .statusbar{grid-template-columns:1fr}
+  .statusbar div:last-child{display:none}
+}
+@media (max-width:480px){
+  .shortcut-bar{gap:9px}
+  .shortcut{width:56px}
+  .titlebar{height:29px;font-size:13px}
+  .winbtn{width:22px;height:20px}
+  .menu{font-size:12px}
+  .list-head{grid-template-columns:1fr 88px}
+  .row{grid-template-columns:1fr 88px}
+  .post-title{white-space:normal;line-height:1.15}
+  .date{font-size:10px}
+}
+</style>
+</head>
+<body>
+<main class="desktop">
+  <nav class="shortcut-bar" aria-label="Desktop shortcuts">
+    <a class="shortcut" href="#" data-action="home">
+      <div class="icon computer" aria-hidden="true"></div>
+      <span>Home</span>
+    </a>
+    <a class="shortcut" href="#" data-action="blog">
+      <div class="icon folder" aria-hidden="true"></div>
+      <span>Blog</span>
+    </a>
+    <a class="shortcut" href="#" data-action="contact">
+      <div class="icon mail" aria-hidden="true"></div>
+      <span>Contact</span>
+    </a>
+  </nav>
+
+  <section class="window" id="explorerWindow" aria-label="Blog Explorer">
+    <header class="titlebar">
+      <div class="title-text">Explorer — Blog</div>
+      <div class="window-controls" aria-label="Window controls">
+        <button class="winbtn" type="button" title="Minimize" data-win="min">_</button>
+        <button class="winbtn" type="button" title="Maximize" data-win="max">□</button>
+        <button class="winbtn" type="button" title="Close" data-win="close">×</button>
+      </div>
+    </header>
+
+    <div class="menu" aria-label="Explorer menu">
+      <button type="button">File</button>
+      <button type="button">Edit</button>
+      <button type="button">View</button>
+      <button type="button">Go</button>
+      <button type="button">Help</button>
+    </div>
+
+    <div class="address-wrap">
+      <div class="address">
+        <span class="address-label">Address:</span>
+        <span class="mini-folder" aria-hidden="true"></span>
+        <span class="path">C:\Users\Lewis\Blog\</span>
+      </div>
+    </div>
+
+    <div class="content-shell">
+      <div class="list-head">
+        <div>Name</div>
+        <div>Date modified</div>
+      </div>
+
+      <div class="rows" id="postRows">
+        <div class="row folder-row" tabindex="0">
+          <div class="name"><span class="file-icon"></span><span class="post-title">2026</span></div>
+          <div class="date">21 Aug, 2026</div>
+        </div>
+
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">Old Websites, Old Friends and Old Versions of Me</span></div>
+          <div class="date">20 Aug, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">I Miss Websites Being Weird</span></div>
+          <div class="date">17 Aug, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">Doctor Who and the Internet Again</span></div>
+          <div class="date">12 Aug, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">Some Thoughts on Keeping Everything</span></div>
+          <div class="date">04 Aug, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">A Website, a Folder and Twenty Years</span></div>
+          <div class="date">29 Jul, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">Things That Used to Live on the Internet</span></div>
+          <div class="date">18 Jul, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">The Problem With Nostalgia</span></div>
+          <div class="date">09 Jul, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">Still Loading</span></div>
+          <div class="date">30 Jun, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">Why I Keep Old Files</span></div>
+          <div class="date">22 Jun, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">Somewhere Between Offline and Online</span></div>
+          <div class="date">11 Jun, 2026</div>
+        </a>
+        <a class="row" href="#">
+          <div class="name"><span class="file-icon"></span><span class="post-title">A Very Small Update</span></div>
+          <div class="date">02 Jun, 2026</div>
+        </a>
+      </div>
+    </div>
+
+    <footer class="statusbar">
+      <div><span id="objectCount">12 objects</span></div>
+      <div>My Computer</div>
+    </footer>
+  </section>
+
+  <div class="desktop-note">lewis.lc / blog — retro desktop mockup</div>
+</main>
+
+<script>
+const win = document.getElementById('explorerWindow');
+const rows = document.getElementById('postRows');
+const objectCount = document.getElementById('objectCount');
+let maximized = false;
+
+document.querySelector('[data-win="min"]').addEventListener('click', () => {
+  rows.closest('.content-shell').classList.toggle('hidden');
+  document.querySelector('.address-wrap').classList.toggle('hidden');
+  document.querySelector('.menu').classList.toggle('hidden');
+  document.querySelector('.statusbar').classList.toggle('hidden');
+});
+
+document.querySelector('[data-win="max"]').addEventListener('click', () => {
+  maximized = !maximized;
+  if(maximized){
+    win.style.maxWidth = 'none';
+    win.style.width = '100%';
+  } else {
+    win.style.maxWidth = '1140px';
+    win.style.width = '';
+  }
+});
+
+document.querySelector('[data-win="close"]').addEventListener('click', () => {
+  win.classList.add('hidden');
+});
+
+document.querySelector('[data-action="blog"]').addEventListener('click', e => {
+  e.preventDefault();
+  win.classList.remove('hidden');
+});
+
+document.querySelector('[data-action="home"]').addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelector('.path').textContent = 'C:\\Users\\Lewis\\';
+  document.querySelector('.title-text').textContent = 'Explorer — Home';
+});
+
+document.querySelector('[data-action="contact"]').addEventListener('click', e => {
+  e.preventDefault();
+  alert('Contact shortcut clicked. Replace this with your real contact page or email link.');
+});
+
+document.querySelectorAll('.row').forEach(row => {
+  row.addEventListener('dblclick', () => {
+    const title = row.querySelector('.post-title')?.textContent || 'Post';
+    alert('Open: ' + title + '\\n\\nHook this row up to the real blog post URL.');
+  });
+});
+
+const count = rows.querySelectorAll('.row').length;
+objectCount.textContent = count + (count === 1 ? ' object' : ' objects');
+</script>
+</body>
+</html>
