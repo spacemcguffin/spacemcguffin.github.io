@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Lewis Christian's diary archive" />
-  <title>2025 Diary</title>
+  <title>2027 Diary</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet"> 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Oswald:wght@400;500;600&amp;display=swap" rel="stylesheet">
 
-<style id="diary-main-css">
+    <style id="embedded-diary-css">
     :root {
       --page: #f3f0ea;
       --surface: #ffffff;
@@ -1771,8 +1771,9 @@ html:not([data-theme="dark"]) .theme-star {
   }
 }
  
-</style>
+</style>  
 	
+
 
 <style>
 .diary-search input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none;}
@@ -1986,42 +1987,180 @@ html[data-theme="dark"] {
 </style>
 
 
-<style id="diary-entry-media-styles">
-.diary-media-entry{display:flex;width:100%;align-items:center;justify-content:space-between;gap:1rem;cursor:pointer;position:relative;transition:color .18s ease,opacity .18s ease;outline:none}
-.diary-media-entry:focus-visible{border-radius:4px;box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 24%,transparent)}
-.diary-media-icon{width:17px;height:17px;margin-left:auto;display:inline-grid;place-items:center;color:var(--muted);opacity:.62;transition:opacity .18s ease,transform .2s ease,color .18s ease;flex:0 0 auto}
-.diary-media-icon svg{width:100%;height:100%;display:block}
-html[data-theme="dark"] .diary-media-icon{color:#7faeff;opacity:.9}
-html[data-theme="dark"] .diary-media-entry:hover .diary-media-icon,html[data-theme="dark"] .diary-media-entry:focus-visible .diary-media-icon{color:#9fc3ff;opacity:1}
-.diary-media-entry:hover .diary-media-icon,.diary-media-entry:focus-visible .diary-media-icon{opacity:1;color:var(--brand);transform:translateY(-1px) scale(1.05)}
-.diary-entry-lightbox{position:fixed;inset:0;z-index:3000;display:flex;align-items:center;justify-content:center;padding:clamp(18px,4vw,48px);background:rgba(7,9,13,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease}
-.diary-entry-lightbox.open{opacity:1;visibility:visible;pointer-events:auto}
-.diary-entry-lightbox-stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;max-width:min(1100px,92vw);max-height:92vh}
-.diary-entry-lightbox-image{display:block;max-width:min(1100px,92vw);max-height:78vh;object-fit:contain;border-radius:4px;box-shadow:0 22px 80px rgba(0,0,0,.5)}
-.diary-entry-lightbox-meta{width:100%;padding-top:14px;color:#fff;text-align:center}
-.diary-entry-lightbox-title{font-family:"Google Sans Flex",sans-serif;font-size:1rem;font-weight:600}
-.diary-entry-lightbox-caption{margin-top:3px;color:rgba(255,255,255,.7);font-size:.8rem}
-.diary-entry-lightbox-count{margin-top:5px;color:rgba(255,255,255,.48);font-size:.72rem}
-.diary-entry-lightbox-close,.diary-entry-lightbox-prev,.diary-entry-lightbox-next{position:fixed;z-index:2;border:1px solid rgba(255,255,255,.18);background:rgba(20,23,30,.58);color:#fff;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);transition:background .18s ease,transform .18s ease}
-.diary-entry-lightbox-close{top:22px;right:22px;width:44px;height:44px;border-radius:50%;font-size:1.55rem;line-height:1}
-.diary-entry-lightbox-prev,.diary-entry-lightbox-next{top:50%;width:48px;height:48px;border-radius:50%;transform:translateY(-50%);font-size:1.25rem}
-.diary-entry-lightbox-prev{left:22px}.diary-entry-lightbox-next{right:22px}
-.diary-entry-lightbox-close:hover{background:rgba(255,255,255,.16);transform:scale(1.04)}
-.diary-entry-lightbox-prev:hover,.diary-entry-lightbox-next:hover{background:rgba(255,255,255,.16);transform:translateY(-50%) scale(1.04)}
-.diary-entry-lightbox.single .diary-entry-lightbox-prev,.diary-entry-lightbox.single .diary-entry-lightbox-next,.diary-entry-lightbox.single .diary-entry-lightbox-count{display:none}
-body.diary-entry-lightbox-open{overflow:hidden}
-@media(max-width:700px){.diary-media-icon{width:18px;height:18px;opacity:.8}.diary-entry-lightbox{padding:58px 14px 72px}.diary-entry-lightbox-image{max-width:94vw;max-height:72vh}.diary-entry-lightbox-close{top:12px;right:12px}.diary-entry-lightbox-prev,.diary-entry-lightbox-next{top:auto;bottom:14px;transform:none}.diary-entry-lightbox-prev{left:calc(50% - 58px)}.diary-entry-lightbox-next{right:calc(50% - 58px)}.diary-entry-lightbox-prev:hover,.diary-entry-lightbox-next:hover{transform:scale(1.04)}}
-@media(prefers-reduced-motion:reduce){.diary-media-icon,.diary-entry-lightbox,.diary-entry-lightbox-close,.diary-entry-lightbox-prev,.diary-entry-lightbox-next{transition:none}}
+<style id="diary-entry-photo-system">
+.diary-photo-entry {
+  cursor: pointer;
+}
+
+.diary-photo-entry td:last-child {
+  cursor: pointer;
+}
+
+.diary-photo-title {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  min-width: 0;
+}
+
+.diary-photo-title > span:first-child {
+  min-width: 0;
+}
+
+.diary-photo-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  margin-left: auto;
+  color: #4771a2;
+  opacity: .72;
+  transition: opacity .18s ease, color .18s ease, transform .18s ease;
+}
+
+.diary-photo-entry:hover .diary-photo-icon,
+.diary-photo-entry:focus-visible .diary-photo-icon {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+html[data-theme="dark"] .diary-photo-icon {
+  color: #82b7ff;
+  opacity: .95;
+}
+
+html[data-theme="dark"] .diary-photo-entry:hover .diary-photo-icon,
+html[data-theme="dark"] .diary-photo-entry:focus-visible .diary-photo-icon {
+  color: #a7ceff;
+  opacity: 1;
+}
+
+.diary-photo-entry:focus-visible {
+  outline: 2px solid color-mix(in srgb, #4771a2 65%, transparent);
+  outline-offset: -2px;
+}
+
+.diary-entry-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: none;
+  place-items: center;
+  padding: 24px;
+  background: rgba(8, 10, 14, .86);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.diary-entry-lightbox.open {
+  display: grid;
+}
+
+.diary-entry-lightbox-stage {
+  position: relative;
+  width: min(1100px, 100%);
+  max-height: 90vh;
+  display: grid;
+  place-items: center;
+}
+
+.diary-entry-lightbox-image {
+  display: block;
+  max-width: 100%;
+  max-height: 82vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 22px 70px rgba(0,0,0,.45);
+}
+
+.diary-entry-lightbox-close,
+.diary-entry-lightbox-nav {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  border: 0;
+  color: #fff;
+  background: rgba(20, 24, 32, .62);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.diary-entry-lightbox-close {
+  top: -8px;
+  right: -8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  font-size: 1.5rem;
+}
+
+.diary-entry-lightbox-nav {
+  top: 50%;
+  width: 46px;
+  height: 58px;
+  transform: translateY(-50%);
+  border-radius: 12px;
+  font-size: 1.75rem;
+}
+
+.diary-entry-lightbox-prev { left: 12px; }
+.diary-entry-lightbox-next { right: 12px; }
+
+.diary-entry-lightbox-nav[hidden] {
+  display: none;
+}
+
+.diary-entry-lightbox-caption {
+  margin-top: 12px;
+  color: rgba(255,255,255,.96);
+  text-align: center;
+  font-size: .92rem;
+  font-weight: 700;
+}
+
+.diary-entry-lightbox-photo-caption {
+  margin-top: 4px;
+  color: rgba(255,255,255,.68);
+  text-align: center;
+  font-size: .84rem;
+}
+
+.diary-entry-lightbox-photo-caption:empty {
+  display: none;
+}
+
+body.diary-entry-lightbox-open {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .diary-photo-icon {
+    width: 17px;
+    height: 17px;
+    flex-basis: 17px;
+  }
+
+  .diary-entry-lightbox {
+    padding: 14px;
+  }
+
+  .diary-entry-lightbox-nav {
+    width: 40px;
+    height: 52px;
+  }
+}
 </style>
+
 </head>
 <body>
-  <div class="top-strip">This page is currently being updated.</div>
+  <div class="top-strip">This is a placeholder page.</div>
 
   <header class="site-header">
     <div class="nav-shell">
       <a class="brand" href="#" aria-label="home">
         <span class="brand-block">LEWIS<br>.LC</span>
-        <span class="brand-copy">2025 Diary</span>
+        <span class="brand-copy">2027 Diary</span>
       </a>
 
 
@@ -2078,7 +2217,7 @@ body.diary-entry-lightbox-open{overflow:hidden}
 	
 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-[var(--color-text-muted)] ml-1.5 md:ml-2" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
 	
-  <span>2025</span>
+  <span>2027</span>
 	
       </div>
 		  
@@ -2086,14 +2225,14 @@ body.diary-entry-lightbox-open{overflow:hidden}
       <section class="product-grid">
         <aside class="cover-column">
           <div class="cover-frame">
-            <img src="/diary/images/2025.png" alt="2025 Diary">
+            <img src="/images/stan.png" alt="2027 Diary">
           </div>
 
          
 
           <div class="release-nav">
-            <a href="/diary/2024">← 2024</a>
-            <a href="/diary/2026">2026 →</a>
+            <a href="/diary/2026">← 2026</a>
+            <a href="/diary/2028">2028 →</a>
           </div>
 
           <div class="release-nav1">
@@ -2104,7 +2243,7 @@ body.diary-entry-lightbox-open{overflow:hidden}
 
         <article class="details-column">
 
-          <h1>dark disquiet <span class="release-number">(2025)</span></h1>
+          <h1>diary title <span class="release-number">(2027)</span></h1> 
 
 
           <section class="tabs">
@@ -2147,524 +2286,67 @@ body.diary-entry-lightbox-open{overflow:hidden}
 <tbody>
 
 <tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">January 2025</div></td>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">January 2027</div></td>
+</tr>
+	
+<tr class="diary-photo-entry"
+    data-images="/diary/images/2026/ormskirkgirls.png"
+    data-photo-title="Elena Temnikova"
+    data-captions="Temnikova (middle) as part of Serebro, in 2007"
+    tabindex="0">
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
+<td>
+  <div class="eptitles diary-photo-title">
+    <span>elena temnikova was my sexual awakening</span>
+    <svg class="diary-photo-icon"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="currentColor"
+         stroke-width="1.8"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         aria-hidden="true">
+      <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+      <circle cx="8.5" cy="9" r="1.5"></circle>
+      <path d="m21 15-5-5L5 20"></path>
+    </svg>
+  </div>
+</td>
 </tr>
 	
 <tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">snowfall</div></td>
-</tr>
-
-<tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">aimless drifting</div></td>
+<td><div class="eptitles">placeholder title</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">vibe check</div></td>
+<td><div class="eptitles">placeholder title</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles">false start</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">crumbs</div></td>
-</tr>
-
-	
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">February 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">nostalgia phase</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">origin stories</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">fan indulgence</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">spaced out</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">cake and roses</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">out of the blue</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">sophie doesn’t know crazy frog</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">green and blue</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">escaping the rat race</div></td>
-</tr>
-
-	
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">March 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">new season</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">dumbledore and barrymore</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">head above water</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">starring david tennant</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">tidbits</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">contentment</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles">low battery</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">good vibes</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">there goes the pop</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles">decades apart</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">keeping up</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">ghibli and the girls</div></td>
-</tr>
-	
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">April 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">simpler times</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">therapy with tom</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">one star</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">digital footprints</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">shit² </div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">fading lights</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles">love for sophie</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">well tired</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">fireballs</div></td>
-</tr>
-
-	
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">May 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">brophie</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">evermore</div></td>
-</tr>	
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">angels and demons</div></td>
-</tr>	
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles">the world is mine</div></td>
-</tr>	
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles">love for bron</div></td>
-</tr>	
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">6</td>
-<td><div class="eptitles">blonde and blue</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">7</td>
-<td><div class="eptitles">reunion</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">8</td>
-<td><div class="eptitles">sanctuary 🌻</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">9</td>
-<td><div class="eptitles">the end is nigh</div></td>
-</tr>
-	
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">10</td>
-<td><div class="eptitles">queen of hearts</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">11</td>
-<td><div class="eptitles">clusterfuck</div></td>
-</tr>
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">June 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">on my own</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">shattered</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">autopilot</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">dear bronwyn</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">lone wolf</div></td>
-</tr>
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">July 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">midpoint</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">easy mode</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">shitposting</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">moments of calm</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the franchise of death</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">day goes dark</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">zoe, bron and kim</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles">beauty and the beast</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">forever numb</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">censorship and slop</div></td>
-</tr>
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">August 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">autumn ready</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">work daze</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">404</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles">energy shift</div></td>
+<td><div class="eptitles">placeholder title</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles">overcast skies</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">present with gem</div></td>
+<td><div class="eptitles">placeholder title</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">6</td>
-<td><div class="eptitles">seasons of change</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">out of tegridy</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">magic stars</div></td>
-</tr>
-
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">September 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">holidays are coming</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">butters and bitches</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">in between the rain</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">autumn retreat</div></td>
-</tr>
-
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">October 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">the shit elf</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">mental rainforest</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">ready to hibernate</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">heart to hearts</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">broken</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">everything is <i>meh</i></div></td>
-</tr>
-
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">November 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">wake me up when december ends</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">i don’t care</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">as yet unmentioned</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles">weight of the world</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
-	<td><div class="removed">freezing waters</div></td>
-</tr>
-
-
-<tr>
-<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">December 2025</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">1</td>
-<td><div class="eptitles">so long, and thanks for all the fish</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">2</td>
-<td><div class="eptitles diary-media-entry" tabindex="0" role="button" data-diary-images="/diary/images/2025/gemcandles.png|Candles I bought for Gemma">that’s a wrap <span class="diary-media-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="8.5" cy="9" r="1.5"></circle><path d="m21 15-5-5L5 20"></path></svg></span></div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">3</td>
-<td><div class="eptitles">shitmas</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">4</td>
-<td><div class="eptitles">zoe and gem</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">5</td>
-<td><div class="eptitles">just another day</div></td>
-</tr>
-
-<tr>
-<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">6</td>
-<td><div class="eptitles">SOS</div></td>
+<td><div class="eptitles">placeholder title</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">7</td>
-<td><div class="eptitles">lift my spirit</div></td>
+<td><div class="eptitles">placeholder title</div></td>
 </tr>
 
 <tr>
 <td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #5c7aa91f;">8</td>
-<td><div class="eptitles">final words</div></td>
+<td><div class="eptitles">placeholder title</div></td>
 </tr>
 
 
@@ -2682,8 +2364,7 @@ body.diary-entry-lightbox-open{overflow:hidden}
 
               <div class="credits-grid">
                 <div class="credit-card"><small>Written by</small><strong>Lewis Christian</strong></div>
-                <div class="credit-card"><small>No. of entries</small><strong>52</strong></div> 
-                <div class="credit-card"><small>No. of deleted entries</small><strong>41</strong></div> 
+                <div class="credit-card"><small>No. of entries</small><strong>TBA</strong></div> 
               </div>
 
 							
@@ -2699,12 +2380,12 @@ body.diary-entry-lightbox-open{overflow:hidden}
 
               
               <div class="gallery">
-                <a class="lightbox" href="/diary/images/2025/gemcandles.png" data-caption="Candles I bought for Gemma">
-                  <img src="/diary/images/2025/gemcandles.png" alt="Candles I bought for Gemma">
+                <a class="lightbox" href="/diary/images/newestprofile.png" data-caption="Profile photo">
+                  <img src="/diary/images/newestprofile.png" alt="Profile photo">
                 </a>
 
-                <a class="lightbox" href="/diary/images/2025/mumcandle.png" data-caption="Candle I bought for mum">
-                  <img src="/diary/images/2025/mumcandle.png" alt="Candle I bought for mum">
+                <a class="lightbox" href="/diary/images/newestprofile.png" data-caption="Profile photo">
+                  <img src="/diary/images/newestprofile.png" alt="Profile photo">
                 </a>
               </div>
             </div>
@@ -2769,7 +2450,7 @@ body.diary-entry-lightbox-open{overflow:hidden}
           <span class="brand-copy">written by<br>lewis christian</span>
         </a>
         
-        <p style="font-family: 'Geist Pixel', sans-serif;">diary title inspired by <span style="font-size: 14px;color: var(--accent);font-family: 'Google Sans Flex', 'Inter', sans-serif;">poets of the fall</span></p>
+        <p style="font-family: 'Geist Pixel', sans-serif;">this has not happened yet, for 2027 is in <span style="font-size: 14px;color: var(--accent);font-family: 'Google Sans Flex', 'Inter', sans-serif;">the future</span></p>
       </div>
       
       <div>
@@ -2820,21 +2501,43 @@ body.diary-entry-lightbox-open{overflow:hidden}
 
 
 
-  <div class="diary-entry-lightbox" id="diaryEntryLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Diary entry photos">
-  <button class="diary-entry-lightbox-close" type="button" aria-label="Close diary photo">×</button>
-  <button class="diary-entry-lightbox-prev" type="button" aria-label="Previous diary photo">←</button>
-  <div class="diary-entry-lightbox-stage">
-    <img class="diary-entry-lightbox-image" src="" alt="">
-    <div class="diary-entry-lightbox-meta">
-      <div class="diary-entry-lightbox-title"></div>
-      <div class="diary-entry-lightbox-caption"></div>
-      <div class="diary-entry-lightbox-count"></div>
+
+  <div class="diary-entry-lightbox"
+       id="diaryEntryLightbox"
+       role="dialog"
+       aria-modal="true"
+       aria-hidden="true">
+    <div class="diary-entry-lightbox-stage">
+      <button class="diary-entry-lightbox-close"
+              id="diaryEntryLightboxClose"
+              type="button"
+              aria-label="Close photo">×</button>
+
+      <button class="diary-entry-lightbox-nav diary-entry-lightbox-prev"
+              id="diaryEntryLightboxPrev"
+              type="button"
+              aria-label="Previous photo"
+              hidden>‹</button>
+
+      <img class="diary-entry-lightbox-image"
+           id="diaryEntryLightboxImage"
+           src=""
+           alt="">
+
+      <button class="diary-entry-lightbox-nav diary-entry-lightbox-next"
+              id="diaryEntryLightboxNext"
+              type="button"
+              aria-label="Next photo"
+              hidden>›</button>
+
+      <div class="diary-entry-lightbox-caption"
+           id="diaryEntryLightboxCaption"></div>
+      <div class="diary-entry-lightbox-photo-caption"
+           id="diaryEntryLightboxPhotoCaption"></div>
     </div>
   </div>
-  <button class="diary-entry-lightbox-next" type="button" aria-label="Next diary photo">→</button>
-</div>
 
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script>
     const root = document.documentElement;
@@ -3237,31 +2940,134 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 
-<script id="diary-entry-media-script">
+<script id="diary-entry-photo-script">
 (() => {
-  const entries = [...document.querySelectorAll('.diary-media-entry[data-diary-images]')];
-  const overlay = document.getElementById('diaryEntryLightbox');
-  if (!entries.length || !overlay) return;
-  const image = overlay.querySelector('.diary-entry-lightbox-image');
-  const title = overlay.querySelector('.diary-entry-lightbox-title');
-  const caption = overlay.querySelector('.diary-entry-lightbox-caption');
-  const count = overlay.querySelector('.diary-entry-lightbox-count');
-  const close = overlay.querySelector('.diary-entry-lightbox-close');
-  const prev = overlay.querySelector('.diary-entry-lightbox-prev');
-  const next = overlay.querySelector('.diary-entry-lightbox-next');
-  let items = [], index = 0, trigger = null, touchStartX = null;
-  const parse = el => el.dataset.diaryImages.split(';;').map(part => { const split = part.split('|'); return {src:(split.shift()||'').trim(), caption:split.join('|').trim()}; }).filter(x => x.src);
-  function render(){ const item=items[index]; if(!item)return; image.src=item.src; image.alt=item.caption || title.textContent || 'Diary photo'; caption.textContent=item.caption; count.textContent=`${index+1} / ${items.length}`; overlay.classList.toggle('single',items.length<2); }
-  function open(el){ trigger=el; items=parse(el); if(!items.length)return; index=0; title.textContent=el.childNodes[0].textContent.trim(); render(); overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false'); document.body.classList.add('diary-entry-lightbox-open'); close.focus(); }
-  function shut(){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); document.body.classList.remove('diary-entry-lightbox-open'); image.src=''; if(trigger)trigger.focus(); }
-  function move(dir){ if(items.length<2)return; index=(index+dir+items.length)%items.length; render(); }
-  entries.forEach(el => { el.addEventListener('click',()=>open(el)); el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open(el);}}); });
-  close.addEventListener('click',shut); prev.addEventListener('click',()=>move(-1)); next.addEventListener('click',()=>move(1));
-  overlay.addEventListener('click',e=>{if(e.target===overlay)shut();});
-  document.addEventListener('keydown',e=>{if(!overlay.classList.contains('open'))return; if(e.key==='Escape')shut(); if(e.key==='ArrowLeft')move(-1); if(e.key==='ArrowRight')move(1);});
-  overlay.addEventListener('touchstart',e=>{touchStartX=e.changedTouches[0].clientX;},{passive:true});
-  overlay.addEventListener('touchend',e=>{if(touchStartX===null)return; const dx=e.changedTouches[0].clientX-touchStartX; if(Math.abs(dx)>45)move(dx>0?-1:1); touchStartX=null;},{passive:true});
+  const entries = Array.from(document.querySelectorAll('.diary-photo-entry'));
+  const lightbox = document.getElementById('diaryEntryLightbox');
+  const image = document.getElementById('diaryEntryLightboxImage');
+  const caption = document.getElementById('diaryEntryLightboxCaption');
+  const photoCaption = document.getElementById('diaryEntryLightboxPhotoCaption');
+  const closeButton = document.getElementById('diaryEntryLightboxClose');
+  const prevButton = document.getElementById('diaryEntryLightboxPrev');
+  const nextButton = document.getElementById('diaryEntryLightboxNext');
+
+  if (!entries.length || !lightbox || !image || !closeButton) return;
+
+  let images = [];
+  let captions = [];
+  let index = 0;
+  let activeEntry = null;
+  let touchStartX = 0;
+
+  function getImages(entry) {
+    return (entry.dataset.images || '')
+      .split(',')
+      .map(path => path.trim())
+      .filter(Boolean);
+  }
+
+  function getCaptions(entry) {
+    return (entry.dataset.captions || '')
+      .split('||')
+      .map(text => text.trim());
+  }
+
+  function render() {
+    if (!images.length) return;
+
+    image.src = images[index];
+    image.alt = activeEntry?.dataset.photoTitle || 'Diary photo';
+
+    const title = activeEntry?.dataset.photoTitle || '';
+    caption.textContent = images.length > 1
+      ? `${title} · ${index + 1} / ${images.length}`
+      : title;
+
+    if (photoCaption) {
+      photoCaption.textContent = captions[index] || '';
+    }
+
+    const showNavigation = images.length > 1;
+    prevButton.hidden = !showNavigation;
+    nextButton.hidden = !showNavigation;
+  }
+
+  function open(entry) {
+    const entryImages = getImages(entry);
+    if (!entryImages.length) return;
+
+    activeEntry = entry;
+    images = entryImages;
+    captions = getCaptions(entry);
+    index = 0;
+    render();
+
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('diary-entry-lightbox-open');
+    closeButton.focus();
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('diary-entry-lightbox-open');
+    image.src = '';
+    if (photoCaption) photoCaption.textContent = '';
+
+    if (activeEntry) activeEntry.focus();
+  }
+
+  function previous() {
+    if (images.length < 2) return;
+    index = (index - 1 + images.length) % images.length;
+    render();
+  }
+
+  function next() {
+    if (images.length < 2) return;
+    index = (index + 1) % images.length;
+    render();
+  }
+
+  entries.forEach(entry => {
+    entry.addEventListener('click', () => open(entry));
+
+    entry.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        open(entry);
+      }
+    });
+  });
+
+  closeButton.addEventListener('click', close);
+  prevButton.addEventListener('click', previous);
+  nextButton.addEventListener('click', next);
+
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) close();
+  });
+
+  lightbox.addEventListener('touchstart', event => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+
+  lightbox.addEventListener('touchend', event => {
+    const delta = event.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(delta) < 50 || images.length < 2) return;
+    delta > 0 ? previous() : next();
+  }, { passive: true });
+
+  document.addEventListener('keydown', event => {
+    if (!lightbox.classList.contains('open')) return;
+
+    if (event.key === 'Escape') close();
+    if (event.key === 'ArrowLeft') previous();
+    if (event.key === 'ArrowRight') next();
+  });
 })();
 </script>
+
 </body>
 </html>
