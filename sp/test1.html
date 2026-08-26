@@ -936,8 +936,6 @@ a {
 
   width: 100%;
 
-  aspect-ratio: 16 / 10;
-
   object-fit: cover;
 
   transition:
@@ -4225,7 +4223,9 @@ body.modal-open .paper-back-to-top {
   }
 
   .who-season-rail .season-button.specials-rail-button,
-  .who-season-rail .season-button[data-season="specials"] {
+  .who-season-rail .season-button[data-season="specials"],
+  .who-season-rail .season-button.movie-rail-button,
+  .who-season-rail .season-button[data-season="movie"] {
     width: 36px !important;
     min-width: 36px !important;
     height: 36px !important;
@@ -7369,6 +7369,273 @@ body.modal-open #activeFilters {
   overflow: visible;
 }
 
+
+
+/* =========================================================
+   MOVIE — FEATURE FILM ARCHIVE TREATMENT
+========================================================= */
+.who-season-rail .season-button.movie-rail-button,
+.who-season-rail .season-button[data-season="movie"] {
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  border-radius: 50% !important;
+  font-size: .76rem !important;
+}
+
+.archive .movie-feature-paper {
+  transform: rotate(-.45deg);
+}
+
+/* Mobile: keep Movie filter exactly the same size as Specials.
+   This must come AFTER the global 42px Movie rule above. */
+@media (max-width: 760px) {
+  .who-season-rail .season-button.movie-rail-button,
+  .who-season-rail .season-button[data-season="movie"] {
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    font-size: .69rem !important;
+  }
+}
+
+
+/* =========================================================
+   SEASON RAIL EDGE NAVIGATION
+========================================================= */
+
+.season-rail-shell {
+  position: relative;
+}
+
+.season-rail-edge {
+  position: absolute;
+  top: 50%;
+  z-index: 8;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid rgba(91, 157, 245, .32);
+  border-radius: 50%;
+  background: rgba(6, 18, 36, .82);
+  color: rgba(225, 237, 255, .86);
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, opacity .2s ease;
+}
+
+.season-rail-edge-left {
+  left: -10px;
+}
+
+.season-rail-edge-right {
+  right: -10px;
+}
+
+.season-rail-edge:hover {
+  color: #fff;
+  border-color: rgba(92, 168, 255, .72);
+  background: rgba(19, 55, 98, .92);
+}
+
+.season-rail-edge-left:hover {
+  transform: translate(-2px, -50%);
+}
+
+.season-rail-edge-right:hover {
+  transform: translate(2px, -50%);
+}
+
+.season-rail-edge:disabled {
+  opacity: .24;
+  cursor: default;
+  pointer-events: none;
+}
+
+.season-rail-shell::before,
+.season-rail-shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  width: 40px;
+  pointer-events: none;
+}
+
+.season-rail-shell::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(2, 8, 20, .9), transparent);
+}
+
+.season-rail-shell::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(2, 8, 20, .9), transparent);
+}
+
+@media (max-width: 760px) {
+  .season-rail-edge {
+    display: none !important;
+  }
+
+  .season-rail-shell::before,
+  .season-rail-shell::after {
+    display: none;
+  }
+}
+
+
+
+/* =========================================================
+   SEASON RAIL — INLINE CIRCULAR NAV BOOKENDS
+========================================================= */
+
+.season-rail-shell {
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+  align-items: center !important;
+  gap: 10px !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.season-rail-viewport {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.season-rail-edge {
+  position: static !important;
+  z-index: auto !important;
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  transform: none !important;
+  border-radius: 50% !important;
+  border: 1px solid hsla(212, 48%, 66%, .46) !important;
+  background:
+    radial-gradient(circle at 35% 25%, hsla(212, 55%, 70%, .28), transparent 42%),
+    linear-gradient(145deg, hsla(212, 42%, 44%, .52), hsla(212, 38%, 22%, .58)) !important;
+  color: rgba(239, 246, 255, .92) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 4px 12px rgba(0,0,0,.2) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  font-size: 1.45rem !important;
+  font-weight: 670 !important;
+  line-height: 1 !important;
+}
+
+.season-rail-edge span {
+  display: block;
+  line-height: .8;
+  transform: translateY(-1px);
+}
+
+.season-rail-edge:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  border-color: hsla(212, 58%, 68%, .78) !important;
+  background:
+    radial-gradient(circle at 35% 25%, hsla(212, 62%, 72%, .34), transparent 42%),
+    linear-gradient(145deg, hsla(212, 52%, 50%, .68), hsla(212, 45%, 27%, .72)) !important;
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.95),
+    0 0 0 4px hsla(212, 56%, 62%, .38),
+    0 5px 14px rgba(0,0,0,.22) !important;
+}
+
+.season-rail-edge:disabled {
+  display: grid !important;
+  opacity: .28 !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  filter: saturate(.55);
+}
+
+/* The nav circles are now real rail items, so the old overlay fades are unnecessary. */
+.season-rail-shell::before,
+.season-rail-shell::after {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .season-rail-shell {
+    grid-template-columns: 36px minmax(0, 1fr) 36px !important;
+    gap: 7px !important;
+  }
+
+  .season-rail-edge {
+    display: grid !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .season-rail-viewport {
+    overflow: hidden;
+  }
+
+  .who-season-rail {
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
+/* Centered SVG chevrons for season rail navigation */
+.season-rail-edge svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .season-rail-edge svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* Keep rail navigation hidden with the collapsed Filters drawer. */
+  .season-strip:not(.mobile-open) .season-rail-edge {
+    display: none !important;
+  }
+
+  .season-strip:not(.mobile-open) .season-rail-shell {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0 !important;
+  }
+
+  /* When Filters opens, the arrows and season circles appear as one rail. */
+  .season-strip.mobile-open .season-rail-shell {
+    grid-template-columns: 36px minmax(0, 1fr) 36px !important;
+    gap: 7px !important;
+  }
+
+  .season-strip.mobile-open .season-rail-edge {
+    display: grid !important;
+  }
+}
 </style>
 </head>
 
@@ -7506,11 +7773,6 @@ body.modal-open #activeFilters {
         </button>
 
         <div class="season-strip-actions">
-          <div class="season-strip-arrows">
-            <button type="button" id="seasonRailPrevious" aria-label="Scroll seasons left">‹</button>
-            <button type="button" id="seasonRailNext" aria-label="Scroll seasons right">›</button>
-          </div>
-
           <div class="view-toggle" aria-label="Episode display">
             <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" data-tooltip="Grid view">
               <span aria-hidden="true">▦</span>
@@ -7523,7 +7785,11 @@ body.modal-open #activeFilters {
       </div>
 
       <div class="season-rail-shell" id="seasonRailShell">
-        <div class="season-rail who-season-rail" id="seasonRail"></div>
+        <button type="button" class="season-rail-edge season-rail-edge-left" id="seasonRailPrevious" aria-label="Scroll seasons left"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+        <div class="season-rail-viewport">
+          <div class="season-rail who-season-rail" id="seasonRail"></div>
+        </div>
+        <button type="button" class="season-rail-edge season-rail-edge-right" id="seasonRailNext" aria-label="Scroll seasons right"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
       </div>
 
       <div class="season-tooltip" id="seasonTooltip" role="tooltip" aria-hidden="true"></div>
@@ -8128,6 +8394,19 @@ const episodes = [
     description:
       "The boys' discovery of a man encased in ice threatens Stan and Kyle's friendship.",
     featured: false
+  },
+
+
+
+  {
+    type: "movie",
+    order: 250,
+    title: "South Park: Bigger, Longer & Uncut",
+    date: "30 June 1999",
+    year: 1999,
+    image: "/sp/img/blau.png",
+    description:
+      "When Stan, Kyle, Cartman and Kenny sneak into an R-rated Terrance and Phillip movie, their parents launch a campaign that escalates into war with Canada."
   },
 
 
@@ -9657,7 +9936,7 @@ const episodes = [
     title: "The Snuke",
     date: "28 March 2007",
     year: 2007,
-    image: "/sp/img/snuke.png",
+    image: "/sp/img/thesnuke.png",
     description:
       "When Hillary Clinton visits South Park for a campaign rally, Cartman becomes convinced that a new Muslim student is involved in a terrorist plot.",
     featured: false
@@ -9717,7 +9996,7 @@ const episodes = [
     title: "More Crap",
     date: "10 October 2007",
     year: 2007,
-    image: "/sp/img/mc.png",
+    image: "/sp/img/morecrap.png",
     description:
       "Randy becomes a town hero when everyone sees the size of his crap.",
     featured: false
@@ -9765,7 +10044,7 @@ const episodes = [
     title: "Guitar Queer-O",
     date: "7 November 2007",
     year: 2007,
-    image: "/sp/img/gqo.png",
+    image: "/sp/img/gq.png",
     description:
       "Stan and Kyle become obsessed with <em>Guitar Hero</em>, but Stan's superior ability at the game begins to threaten their friendship.",
     featured: false
@@ -9777,7 +10056,7 @@ const episodes = [
     title: "The List",
     date: "14 November 2007",
     year: 2007,
-    image: "/sp/img/tl.png",
+    image: "/sp/img/thelist.png",
     description:
       "The boys try to obtain the list that the girls have made rating how attractive the boys are.",
     featured: false
@@ -9912,7 +10191,7 @@ const episodes = [
     title: "Pandemic 2: The Startling",
     date: "29 October 2008",
     year: 2008,
-    image: "/sp/img/p2ts.png",
+    image: "/sp/img/pandemic2.png",
     description:
       "As giant guinea pigs wreak havoc across the world, Randy documents the disaster while desperately trying to keep his family alive.",
     featured: false
@@ -11876,7 +12155,24 @@ const episodes = [
     description:
       "Satan's due, Stan's praying, and only a Christmas miracle can deliver the Antichrist on time.",
     featured: true
+  },
+
+   {
+    season: 29,
+    episode: 1,
+    title: "TBA",
+    date: "16 September 2026",
+    year: 2026,
+    image: "/sp/img/titlecard.png",
+    description:
+      "TBA.",
+    featured: true
   }
+
+
+
+
+  
    
 ];
 
@@ -11965,9 +12261,9 @@ const listViewButton = document.getElementById("listViewButton");
 
 function itemType(item) {
 
-  return item && item.type === "special"
-    ? "special"
-    : "episode";
+  if (item && item.type === "special") return "special";
+  if (item && item.type === "movie") return "movie";
+  return "episode";
 
 }
 
@@ -11998,6 +12294,10 @@ function itemOrder(item) {
     return Number(item.order);
   }
 
+  if (itemType(item) === "movie") {
+    return 250;
+  }
+
   if (itemType(item) === "special") {
     if (
       Array.isArray(item.betweenSeasons)
@@ -12025,6 +12325,10 @@ function itemOrder(item) {
 function episodeCode(
   episode
 ) {
+
+  if (itemType(episode) === "movie") {
+    return "MOVIE";
+  }
 
   if (itemType(episode) === "special") {
     return `SPECIAL ${String(episode.special || 1).padStart(2, "0")}`;
@@ -12080,6 +12384,14 @@ function hasSpecials() {
 
 }
 
+function hasMovie() {
+
+  return episodes.some(
+    item => itemType(item) === "movie"
+  );
+
+}
+
 
 function specialSectionLabel(item) {
 
@@ -12106,6 +12418,10 @@ function specialSectionLabel(item) {
 
 function episodeSlug(episode) {
 
+  if (itemType(episode) === "movie") {
+    return "movie";
+  }
+
   if (itemType(episode) === "special") {
     return `special-${specialGroupKey(episode)}-${episode.special || 1}`;
   }
@@ -12118,6 +12434,10 @@ function episodeSlug(episode) {
 function findEpisodeIndexBySlug(slug) {
 
   if (!slug) return -1;
+
+  if (slug.trim().toLowerCase() === "movie") {
+    return episodes.findIndex(item => itemType(item) === "movie");
+  }
 
   const specialMatch = /^special-(.+)-(\d+)$/i.exec(slug.trim());
 
@@ -12156,6 +12476,10 @@ function getSeasonEpisodeIndexes(index = activeEpisodeIndex) {
 
   if (!current) return [];
 
+  if (itemType(current) === "movie") {
+    return [index];
+  }
+
   if (itemType(current) === "special") {
     const group = specialGroupKey(current);
 
@@ -12192,6 +12516,8 @@ function getSeasonEpisodeIndexes(index = activeEpisodeIndex) {
 function navigationGroupKey(item) {
 
   if (!item) return "";
+
+  if (itemType(item) === "movie") return "movie";
 
   return itemType(item) === "special"
     ? `special:${specialGroupKey(item)}`
@@ -12278,6 +12604,8 @@ function groupDisplayName(item) {
 
   if (!item) return "";
 
+  if (itemType(item) === "movie") return "Movie";
+
   return itemType(item) === "special"
     ? "Specials"
     : `Season ${item.season}`;
@@ -12326,6 +12654,8 @@ function syncURL() {
         .sort((a, b) => {
           if (a === "specials") return -1;
           if (b === "specials") return 1;
+          if (a === "movie") return -1;
+          if (b === "movie") return 1;
           return Number(b) - Number(a);
         })
         .join(",")
@@ -12371,6 +12701,11 @@ function readURLState() {
       .forEach(value => {
         if (value === "specials" && hasSpecials()) {
           selectedSeasons.add("specials");
+          return;
+        }
+
+        if (value === "movie" && hasMovie()) {
+          selectedSeasons.add("movie");
           return;
         }
 
@@ -12469,6 +12804,14 @@ function renderSeasonRail() {
             style="--season-hue:322"
             data-tooltip="Specials"
           >S</button>`,
+          ...(hasMovie() ? [
+            `<button
+              class="season-button movie-rail-button ${selectedSeasons.has("movie") ? "active" : ""}"
+              data-season="movie"
+              style="--season-hue:44"
+              data-tooltip="Movie"
+            >M</button>`
+          ] : []),
           `<span class="season-rail-divider" aria-hidden="true"></span>`
         ]
       : []),
@@ -12493,9 +12836,11 @@ function renderSeasonRail() {
         .sort((a, b) => {
           if (a === "specials") return -1;
           if (b === "specials") return 1;
+          if (a === "movie") return -1;
+          if (b === "movie") return 1;
           return Number(b) - Number(a);
         })
-        .map(value => value === "specials" ? "Specials" : `Season ${value}`)
+        .map(value => value === "specials" ? "Specials" : value === "movie" ? "Movie" : `Season ${value}`)
         .join(" + ");
       seasonStripStatus.textContent = labels;
     }
@@ -12541,6 +12886,8 @@ function renderActiveFilters() {
       .sort((a, b) => {
         if (a === "specials") return -1;
         if (b === "specials") return 1;
+        if (a === "movie") return -1;
+        if (b === "movie") return 1;
         return Number(b) - Number(a);
       });
 
@@ -12582,7 +12929,9 @@ function renderActiveFilters() {
         ${filters.map(filter => {
           const label = filter === "specials"
             ? "Specials"
-            : `Season ${filter}`;
+            : filter === "movie"
+              ? "Movie"
+              : `Season ${filter}`;
 
           return `
             <button
@@ -12649,8 +12998,9 @@ function getFilteredEpisodes() {
   return episodes.filter(
     episode => {
 
-      const isSpecial =
-        itemType(episode) === "special";
+      const type = itemType(episode);
+      const isSpecial = type === "special";
+      const isMovie = type === "movie";
 
       const matchesSeason =
         selectedSeasons.size === 0
@@ -12658,7 +13008,9 @@ function getFilteredEpisodes() {
         (
           isSpecial
           ? selectedSeasons.has("specials")
-          : selectedSeasons.has(episode.season)
+          : isMovie
+            ? selectedSeasons.has("movie")
+            : selectedSeasons.has(episode.season)
         );
 
       const title =
@@ -12747,15 +13099,19 @@ function getArchiveDisplayOrder(items) {
   const grouped = new Map();
 
   items.forEach(item => {
-    const isSpecial = itemType(item) === "special";
+    const type = itemType(item);
+    const isSpecial = type === "special";
+    const isMovie = type === "movie";
     const key = isSpecial
       ? `special:${specialGroupKey(item)}`
-      : `season:${item.season}`;
+      : isMovie
+        ? "movie"
+        : `season:${item.season}`;
 
     if (!grouped.has(key)) {
       grouped.set(key, {
-        type: isSpecial ? "special" : "season",
-        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
+        type: isSpecial ? "special" : isMovie ? "movie" : "season",
+        order: (isSpecial || isMovie) ? itemOrder(item) : Number(item.season) * 100,
         items: []
       });
     }
@@ -12771,6 +13127,8 @@ function getArchiveDisplayOrder(items) {
           return (Number(a.special) || 0) - (Number(b.special) || 0);
         }
 
+        if (group.type === "movie") return 0;
+
         return Number(a.episode) - Number(b.episode);
       })
     );
@@ -12778,6 +13136,10 @@ function getArchiveDisplayOrder(items) {
 
 
 function getFullGroupCount(group) {
+
+  if (group.type === "movie") {
+    return episodes.filter(item => itemType(item) === "movie").length;
+  }
 
   if (group.type === "special") {
     return episodes.filter(item =>
@@ -12847,9 +13209,16 @@ function changeArchivePage(nextPage) {
   renderArchive();
   syncURL();
 
-  document.querySelector(".results-line")?.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
+  requestAnimationFrame(() => {
+    const gridTop =
+      archive.querySelector(".season-section") ||
+      archive.querySelector(".episode-grid") ||
+      archive;
+
+    gridTop?.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
   });
 
 }
@@ -12879,7 +13248,8 @@ function renderArchive() {
     : filtered.slice(pageStart, pageStart + EPISODES_PER_PAGE);
 
   setPaginationAccent(pageEpisodes);
-  browseCount.innerHTML = `<strong>${filtered.length}</strong><span>EPISODES<br>FOUND</span>`;
+  const episodeResultCount = filtered.filter(item => itemType(item) !== "movie").length;
+  browseCount.innerHTML = `<strong>${episodeResultCount}</strong><span>EPISODES<br>FOUND</span>`;
 
   renderViewToggle();
 
@@ -12958,7 +13328,11 @@ function renderArchive() {
       <section class="search-results-section">
         <header class="search-results-header">
           <h2 class="search-results-paper">
-            ${filtered.length} ${filtered.length === 1 ? "EPISODE FOUND" : "EPISODES FOUND"}
+            ${episodeResultCount > 0
+              ? `${episodeResultCount} ${episodeResultCount === 1 ? "EPISODE FOUND" : "EPISODES FOUND"}`
+              : filtered.some(item => itemType(item) === "movie")
+                ? "MOVIE FOUND"
+                : "0 EPISODES FOUND"}
           </h2>
         </header>
 
@@ -12966,13 +13340,16 @@ function renderArchive() {
           ${pageEpisodes.map(item => {
             const index = episodes.indexOf(item);
             const isSpecial = itemType(item) === "special";
+            const isMovie = itemType(item) === "movie";
             const seasonHue = isSpecial
               ? 322
-              : (205 + (Number(item.season) * 37)) % 360;
+              : isMovie
+                ? 44
+                : (205 + (Number(item.season) * 37)) % 360;
 
             return `
               <article
-                class="episode-card ${isSpecial ? "special-card" : ""}"
+                class="episode-card ${isSpecial ? "special-card" : ""} ${isMovie ? "movie-card" : ""}"
                 data-index="${index}"
                 tabindex="0"
                 role="button"
@@ -13008,18 +13385,23 @@ function renderArchive() {
   const grouped = new Map();
 
   pageEpisodes.forEach(item => {
-    const isSpecial = itemType(item) === "special";
+    const type = itemType(item);
+    const isSpecial = type === "special";
+    const isMovie = type === "movie";
     const key = isSpecial
       ? `special:${specialGroupKey(item)}`
-      : `season:${item.season}`;
+      : isMovie
+        ? "movie"
+        : `season:${item.season}`;
 
     if (!grouped.has(key)) {
       grouped.set(key, {
         key,
-        type: isSpecial ? "special" : "season",
-        order: isSpecial ? itemOrder(item) : Number(item.season) * 100,
-        season: isSpecial ? null : item.season,
+        type: isSpecial ? "special" : isMovie ? "movie" : "season",
+        order: (isSpecial || isMovie) ? itemOrder(item) : Number(item.season) * 100,
+        season: (isSpecial || isMovie) ? null : item.season,
         specialExample: isSpecial ? item : null,
+        movieExample: isMovie ? item : null,
         items: []
       });
     }
@@ -13033,11 +13415,14 @@ function renderArchive() {
   archive.innerHTML = groups.map(group => {
 
     const isSpecialGroup = group.type === "special";
+    const isMovieGroup = group.type === "movie";
 
     const groupItems = group.items.sort((a, b) => {
       if (isSpecialGroup) {
         return (Number(a.special) || 0) - (Number(b.special) || 0);
       }
+
+      if (isMovieGroup) return 0;
 
       return Number(a.episode) - Number(b.episode);
     });
@@ -13050,13 +13435,17 @@ function renderArchive() {
     if (years.length === 1) yearText = String(years[0]);
     else if (years.length > 1) yearText = `${years[0]} — ${years[years.length - 1]}`;
 
-    const heading = isSpecialGroup
-      ? "Specials"
-      : `Season ${group.season}`;
+    const heading = isMovieGroup
+      ? "Movie"
+      : isSpecialGroup
+        ? "Specials"
+        : `Season ${group.season}`;
 
-    const subheading = isSpecialGroup
-      ? specialSectionLabel(group.specialExample)
-      : yearText;
+    const subheading = isMovieGroup
+      ? "1999 feature film"
+      : isSpecialGroup
+        ? specialSectionLabel(group.specialExample)
+        : yearText;
 
     /* Continuation labels must follow the CURRENT filtered result set,
        not the complete season catalogue. This prevents a lone search match
@@ -13065,6 +13454,10 @@ function renderArchive() {
        episodes in the full season do not match the current search/filter. */
     const fullGroupItems = filtered
       .filter(item => {
+        if (isMovieGroup) {
+          return itemType(item) === "movie";
+        }
+
         if (isSpecialGroup) {
           return itemType(item) === "special"
             && specialGroupKey(item) === specialGroupKey(group.specialExample);
@@ -13090,17 +13483,17 @@ function renderArchive() {
 
     return `
       <section
-        class="season-section ${isSpecialGroup ? "specials-section" : ""}"
+        class="season-section ${isSpecialGroup ? "specials-section" : ""} ${isMovieGroup ? "movie-section" : ""}"
         data-section-label="${escapeHTML(heading)}"
         data-section-count="${getFullGroupCount(group)}"
-        style="--season-hue:${isSpecialGroup ? 322 : (205 + (Number(group.season) * 37)) % 360}"
+        style="--season-hue:${isSpecialGroup ? 322 : isMovieGroup ? 44 : (205 + (Number(group.season) * 37)) % 360}"
       >
 
         <header class="season-header">
           <div class="season-heading-copy">
             <h2
               class="season-name"
-              style="--season-heading-hue:${isSpecialGroup ? 322 : (205 + (Number(group.season) * 37)) % 360}"
+              style="--season-heading-hue:${isSpecialGroup ? 322 : isMovieGroup ? 44 : (205 + (Number(group.season) * 37)) % 360}"
             >
               ${heading}
               ${continuesFromPreviousPage ? `<span class="season-continuation">continued</span>` : ""}
@@ -13109,13 +13502,15 @@ function renderArchive() {
             ${subheading ? `<div class="season-year">${escapeHTML(subheading)}</div>` : ""}
             ${isSpecialGroup && yearText ? `<div class="season-year">${escapeHTML(yearText)}</div>` : ""}
 
-            ${isSpecialGroup && subheading ? `
-              <div class="specials-between-paper">${escapeHTML(subheading)}</div>
+            ${(isSpecialGroup || isMovieGroup) && subheading ? `
+              <div class="specials-between-paper ${isMovieGroup ? "movie-feature-paper" : ""}">${escapeHTML(subheading)}</div>
             ` : ""}
 
-            <div class="season-count">
-              ${getFullGroupCount(group)} ${getFullGroupCount(group) === 1 ? "episode" : "episodes"}
-            </div>
+            ${!isMovieGroup ? `
+              <div class="season-count">
+                ${getFullGroupCount(group)} ${getFullGroupCount(group) === 1 ? "episode" : "episodes"}
+              </div>
+            ` : ""}
           </div>
         </header>
 
@@ -13124,7 +13519,7 @@ function renderArchive() {
             const index = episodes.indexOf(item);
             return `
               <article
-                class="episode-card ${itemType(item) === "special" ? "special-card" : ""}"
+                class="episode-card ${itemType(item) === "special" ? "special-card" : ""} ${itemType(item) === "movie" ? "movie-card" : ""}"
                 data-index="${index}"
                 tabindex="0"
                 role="button"
@@ -13411,9 +13806,9 @@ function updateModal(
     episode.title;
 
   modalEpisode.textContent =
-    episodeCode(
-      episode
-    );
+    itemType(episode) === "movie"
+      ? "feature film"
+      : episodeCode(episode);
 
   modalTitle.textContent =
     episode.title;
@@ -13422,17 +13817,21 @@ function updateModal(
     episode.date;
 
   modalSeason.textContent =
-    itemType(episode) === "special"
-      ? specialSectionLabel(episode)
-      : `Season ${episode.season}`;
+    itemType(episode) === "movie"
+      ? "Movie"
+      : itemType(episode) === "special"
+        ? specialSectionLabel(episode)
+        : `Season ${episode.season}`;
 
   modalDescription.innerHTML =
     episode.description;
 
   modalCounter.innerHTML =
-    itemType(episode) === "special"
-      ? `<span>Special</span> <strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`
-      : `<span>Episode</span> <strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`;
+    itemType(episode) === "movie"
+      ? `<strong>Movie</strong>`
+      : itemType(episode) === "special"
+        ? `<span>Special</span> <strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`
+        : `<span>Episode</span> <strong>${navigation.localIndex + 1}</strong> of ${navigation.seasonIndexes.length}`;
 
   const hasPrevious = previousIndex !== null;
   const hasNext = nextIndex !== null;
@@ -13697,7 +14096,9 @@ document.addEventListener(
         const filterValue =
           value === "specials"
             ? "specials"
-            : Number(value);
+            : value === "movie"
+              ? "movie"
+              : Number(value);
 
         if (
           selectedSeasons.has(filterValue)
@@ -13740,7 +14141,9 @@ document.addEventListener(
       const filterValue =
         filterSeason.dataset.filterSeason === "specials"
           ? "specials"
-          : Number(filterSeason.dataset.filterSeason);
+          : filterSeason.dataset.filterSeason === "movie"
+            ? "movie"
+            : Number(filterSeason.dataset.filterSeason);
 
       selectedSeasons.delete(
         filterValue
@@ -14759,10 +15162,14 @@ function syncSeasonRailOverflowCues() {
     seasonRail.scrollLeft > tolerance
   );
 
-  seasonRailShell.classList.toggle(
-    "can-scroll-right",
-    maxScroll > tolerance && seasonRail.scrollLeft < maxScroll - tolerance
-  );
+  const canScrollLeft = seasonRail.scrollLeft > tolerance;
+  const canScrollRight = maxScroll > tolerance && seasonRail.scrollLeft < maxScroll - tolerance;
+
+  seasonRailShell.classList.toggle("can-scroll-left", canScrollLeft);
+  seasonRailShell.classList.toggle("can-scroll-right", canScrollRight);
+
+  if (seasonRailPrevious) seasonRailPrevious.disabled = !canScrollLeft;
+  if (seasonRailNext) seasonRailNext.disabled = !canScrollRight;
 }
 
 seasonRail?.addEventListener(
