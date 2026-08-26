@@ -7610,13 +7610,21 @@ body.modal-open #activeFilters {
   pointer-events: none;
 }
 
-/* Optical correction: the right chevron sits fractionally high
-   so it appears centred alongside the season-number circles. */
-#seasonRailNext svg {
-  transform: translateY(-1px);
+/* Vertically align the rail bookends with the season circles.
+   Desktop nav circles are 42px vs 38px seasons, so 4px places
+   their centres on the same horizontal axis. */
+.season-rail-edge {
+  align-self: start !important;
+  margin-top: 4px !important;
 }
 
 @media (max-width: 760px) {
+  .season-rail-edge {
+    /* Mobile nav and season circles are both 36px; match the
+       season rail's 6px top padding exactly. */
+    margin-top: 6px !important;
+  }
+
   .season-rail-edge svg {
     width: 17px;
     height: 17px;
