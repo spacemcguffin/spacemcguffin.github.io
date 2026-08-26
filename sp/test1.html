@@ -7610,6 +7610,12 @@ body.modal-open #activeFilters {
   pointer-events: none;
 }
 
+/* Optical correction: the right chevron sits fractionally high
+   so it appears centred alongside the season-number circles. */
+#seasonRailNext svg {
+  transform: translateY(-1px);
+}
+
 @media (max-width: 760px) {
   .season-rail-edge svg {
     width: 17px;
