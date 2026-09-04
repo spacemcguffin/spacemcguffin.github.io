@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <title>myspace</title>
+      <style>
+/* =========================
+   MYSPACE — fresh style.css
+   (includes Scene/Emo mode)
+========================= */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:root{
+  --pageW: 820px;
+  --gap: 11px;
+  --pad: 12px;
+
+  /* Normal (default) theme */
+  --bg: #e5e5e5;
+  --paper: #fbfbfb;
+
+  --link: #003399;
+  --linkHover: #cc0000;
+
+  --navBG: #3367af;
+  --headerBG: #003399;
+
+  --blueBorder: #6799C5;
+  --blueHead: #6799C5;
+  --blueBox: #6699CC;
+  --blueTh: #B1D0EF;
+  --blueTd: #D5E7FF;
+  --blueThText: #336699;
+
+  --orangeBar: #fdcc92;
+  --orangeText: #ff6700;
+  --orangeTh: rgb(255, 153, 51);
+  --orangeTd: #f9d6b4;
+
+  --focus: #cc0000;
+  --hint: rgba(0,0,0,.6);
+}
+
+/* Scene/Emo theme */
+body.scene{
+  --bg: #07060d;
+  --paper: rgba(255,255,255,.06);
+
+  --link: #9fd3ff;
+  --linkHover: #ff6ad5;
+
+  --navBG: #1b2b55;
+  --headerBG: #101a38;
+
+  --blueBox: rgba(102,153,204,.25);
+  --blueHead: rgba(103,153,197,.35);
+  --blueBorder: rgba(255,255,255,.18);
+  --blueTh: rgba(177,208,239,.25);
+  --blueTd: rgba(213,231,255,.18);
+  --blueThText: rgba(255,255,255,.85);
+
+  --orangeBar: rgba(253,204,146,.20);
+  --orangeText: #ff8bd6;
+  --orangeTh: rgba(255,153,51,.35);
+  --orangeTd: rgba(249,214,180,.22);
+
+  --hint: rgba(255,255,255,.65);
+}
+
+body{
+  background: var(--bg);
+  font-family: 'Inter', Verdana, Tahoma, sans-serif;
+  font-size: 0.8rem;
+  color: #000;
+}
+
+body.scene{
+  color: rgba(255,255,255,.92);
+}
+
+b{ font-weight: 600; }
+
+::-moz-selection { background: #D5E7FF; text-shadow: none; color:#000; }
+::selection { background: #D5E7FF; text-shadow: none; color:#000; }
+
+a:link, a:visited{
+  color: var(--link);
+  text-decoration: none;
+}
+a:hover{
+  color: var(--linkHover);
+  text-decoration: underline;
+}
+
+a:focus-visible, button:focus-visible{
+  outline: 2px dashed var(--focus);
+  outline-offset: 2px;
+}
+
+img{ max-width: 100%;}
+
+/* page shell */
+.page{
+  max-width: var(--pageW);
+  margin: 0 auto;
+}
+
+/* HEADER */
+.header{
+  position: relative;
+  max-width: var(--pageW);
+  width: 100%;
+  height: 100px;
+  margin: 0 auto;
+  padding-top: 0;
+  background-color: var(--headerBG);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.header-content{
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+}
+
+.logo-link img,
+.home-banner{
+  user-select: none;
+  pointer-events: none;
+}
+
+/* NAV */
+#navigation{
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  background: var(--navBG);
+  max-width: var(--pageW);
+  width: 100%;
+}
+
+#navigation li{
+  display: inline-block;
+  padding: 8px 6px;
+  position: relative;
+}
+
+#navigation li:not(:last-child)::after{
+  content: "|";
+  color: rgba(255,255,255,.7);
+  margin-left: 12px;
+}
+
+#navigation li a{
+  color: #ffffff;
+  font-weight: 400;
+}
+
+#navigation li a:hover{
+  color: #cbb8e6;
+  text-decoration: none;
+  border-bottom: 1px solid #cbb8e6;
+}
+
+/* THEME ROW */
+.theme-row{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px var(--pad) 0;
+}
+
+.tinybtn{
+  font-size: 12px;
+  padding: 6px 10px;
+  border: 1px solid rgba(0,0,0,.25);
+  background: rgba(255,255,255,.75);
+  cursor: pointer;
+  border-radius: 3px;
+  font-family: 'Inter', sans-serif;
+}
+
+body.scene .tinybtn{
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.92);
+}
+
+.theme-hint{
+  font-size: 12px;
+  color: var(--hint);
+}
+
+/* TABLES */
+.tables-container{
+  display: flex;
+  gap: var(--gap);
+  max-width: var(--pageW);
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--paper);
+  padding: 0 var(--pad) 12px;
+  box-sizing: border-box;
+}
+
+.table-wrapper{
+  flex: 0 0 346px;
+  background-color: transparent;
+  padding-bottom: 10px;
+  margin: 0;
+}
+
+.table-wrapper-2{
+  flex: 1 1 auto;
+  min-width: 0;
+  background-color: transparent;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* EXTENDED NETWORK */
+#extended-network{
+  border: 1.5px solid rgba(0,0,0,.9);
+  padding: 1.2em;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2em;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 1rem;
+  letter-spacing: 0.3px;
+}
+
+body.scene #extended-network{
+  border-color: rgba(255,255,255,.45);
+}
+
+/* BLOG */
+.blog{
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 0.8rem;
+  line-height: 2;
+  padding-bottom: 6px;
+}
+.blog a{ color: var(--link); font-weight: 600; }
+.blog a:hover{ color: var(--linkHover); }
+
+.badges{
+  padding-bottom: 1rem;
+  display: flex;
+  gap: 6px;
+  margin-top: 1rem;
+}
+
+/* BLUE SECTION */
+.blue-section-wrapper{ font-family: 'Inter', Verdana, sans-serif; padding: 0; }
+
+.blue-table-container{
+  width: 300px;
+  margin: 0;
+  border: 2px solid var(--blueBorder);
+  background-color: var(--blueBox);
+}
+
+.blue-header{
+  background-color: var(--blueHead);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px;
+  margin-bottom: 2px;
+  word-wrap: break-word;
+}
+
+.blue-content-table{
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--paper);
+}
+
+.blue-content-table th,
+.blue-content-table td{
+  padding: 3px;
+  text-align: left;
+  border: 3px solid var(--paper);
+}
+
+.blue-content-table th{
+  width: 101px;
+  background-color: var(--blueTh);
+  color: var(--blueThText);
+  vertical-align: top;
+  font-size: 0.8rem;
+}
+
+.blue-content-table td{
+  background-color: var(--blueTd);
+  color: inherit;
+  font-size: 0.8rem;
+  word-wrap: break-word;
+}
+
+/* ORANGE BAR */
+.orange-bar{
+  height: 20px;
+  width: 100%;
+  max-width: 434px;
+  background-color: var(--orangeBar);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+  box-sizing: border-box;
+  margin-top: 1rem;
+}
+
+.orange-bar-text{
+  color: var(--orangeText);
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* ORANGE BODY */
+.orange-body-title{
+  color: var(--orangeText);
+  font-weight: 700;
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 0.8rem;
+  padding-left: 8px;
+}
+
+.orange-body-content{
+  color: inherit;
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 0.8rem;
+  display: inline-block;
+  padding-bottom: 10px;
+  padding-left: 8px;
+}
+
+/* FRIENDS */
+.friends-container{
+  width: 100%;
+  max-width: 434px;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 8px;
+  margin-top: 4px;
+}
+
+.friends{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 0px;
+  padding: 0 5px;
+}
+
+.friend{ text-align: center; }
+
+.friend-link{
+  color: var(--link);
+  font-weight: 600;
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 0.8rem;
+}
+
+.friend-img{
+  width: 85px;
+  height: 95px;
+  margin-top: 2px;
+  transition: transform 0.3s ease;
+}
+
+.friend-img:hover{
+  transform: rotate(-3deg);
+  cursor: cell;
+}
+
+.view-all{
+  text-align: right;
+  margin-top: 10px;
+}
+
+.view-all-link{
+  color: var(--linkHover) !important;
+  font-weight: 600;
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 0.8rem;
+}
+
+/* PROFILE */
+.profile-container{
+  font-family: 'Inter', Verdana, sans-serif;
+  max-width: 304px;
+  background-color: transparent;
+  margin: 0;
+  align-self: flex-start;
+}
+
+.profile-header{
+  text-align: left;
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 1.3em;
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+.profile-body{
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.profile-image{
+  flex: 0 0 181px;
+}
+
+.profile-image img{
+  width: 181px;
+  height: 173px;
+  border-radius: 0px;
+  object-fit: cover;
+}
+
+.profile-text{
+  flex: 1;
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
+.profile-mood{
+  margin-top: 8px;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.profile-links{
+  margin-top: 6px;
+  font-size: 0.8rem;
+}
+
+/* URL BOX */
+.myspace-url-box{
+  font-family: 'Inter', sans-serif;
+  border: 1px solid #6699cc;
+  height: 35px;
+  margin-bottom: 1rem;
+  width: 296px;
+  padding: 2px;
+  margin-top: 1rem;
+  background: rgba(255,255,255,.55);
+}
+
+body.scene .myspace-url-box{
+  border-color: rgba(255,255,255,.22);
+  background: rgba(255,255,255,.06);
+}
+
+.myspace-url-box h3{
+  font-size: 0.75rem;
+  padding-left: 2px;
+  margin: 2px 0;
+}
+.myspace-url-box p{
+  padding-left: 6px;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* AUDIO PLAYER */
+.audio-player{
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, #b0b0b0, #e0e0e0);
+  border: 2px solid #808080;
+  width: 288px;
+  padding: 6px;
+  font-family: Arial, sans-serif;
+  margin-top: 1rem;
+}
+
+body.scene .audio-player{
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.22);
+}
+
+.audio-player button{
+  background: linear-gradient(45deg, #444, #999);
+  color: white;
+  border: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.audio-player button:hover{
+  background: linear-gradient(45deg, #222, #777);
+}
+
+.audio-info{
+  flex-grow: 1;
+  margin-left: 10px;
+  text-align: left;
+  margin-bottom: -4px;
+}
+
+.audio-info .title{
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-family: 'Inter', sans-serif;
+}
+
+.audio-info .artist{
+  font-size: 0.8rem;
+  color: #4c4c4c;
+  font-family: 'Inter', sans-serif;
+}
+
+body.scene .audio-info .artist{
+  color: rgba(255,255,255,.7);
+}
+
+.volume-slider{ width: 100%; margin-top: 0; }
+
+.volume-slider input[type="range"]{
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: linear-gradient(to right, #ff9800 50%, #e67e00 50%);
+  border-radius: 5px;
+  outline: none;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ff9800;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb{
+  width: 12px;
+  height: 12px;
+  background: #ff9800;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* COMMENTS */
+#comment-counter{
+  margin-top: 0;
+  margin-left: 15px;
+  margin-bottom: 3px;
+}
+
+.comment-wall table{
+  margin: auto;
+  margin-bottom: 5px;
+}
+
+.comment-wall th{
+  background-color: var(--orangeTh);
+  width: 158px;
+  padding: 3px;
+  vertical-align: top;
+}
+
+.comment-wall td{
+  vertical-align: top;
+  background-color: var(--orangeTd);
+  width: 269px;
+  padding: 3px;
+}
+
+.comment-wall figcaption, .comment-wall figure{ margin: 0; }
+
+.comment-wall figcaption{
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+}
+
+.comment-wall figure{ margin-bottom: 49.33px; }
+
+.comment-wall h3{
+  font-size: 0.75rem;
+  margin: 0 0 1rem 0.2rem;
+}
+
+.comment-wall p{
+  font-weight: normal;
+  text-align: left;
+  margin: 0 0 0 0.2rem;
+}
+
+#add-comment{
+  text-align: right;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.focus-highlight{
+  color: var(--linkHover);
+  font-weight: normal;
+  font-size: 0.8rem;
+}
+
+.comment-wall figure img{ transition: transform 0.3s ease; }
+.comment-wall figure img:hover{ transform: rotate(-3deg); cursor: cell; }
+
+/* FOOTER */
+.footer{
+  text-align: center;
+  width: 100%;
+  background-color: transparent;
+  padding: 1rem 0;
+  position: relative;
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: 0.8rem;
+  font-weight: normal;
+  text-decoration: underline wavy;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #f5b041;
+}
+
+.footer p{
+  margin: 0 auto;
+  max-width: var(--pageW);
+}
+
+.footer a{
+  font-style: italic;
+  color: var(--link);
+  font-weight: 500;
+}
+
+footer a:hover{
+  color: inherit;
+  text-decoration: none;
+}
+
+
+
+
+/* =========================
+   SINGLE MYSPACE BLOG ENTRY
+========================= */
+.blog-page-shell{
+  max-width: var(--pageW);
+  width: 100%;
+  margin: 0 auto;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--paper);
+}
+
+.blog-topline{
+  padding: 3px 0 9px;
+  font-size: .78rem;
+  border-bottom: 1px solid rgba(0,0,0,.14);
+}
+body.scene .blog-topline{ border-bottom-color: rgba(255,255,255,.14); }
+.blog-topline span{ margin: 0 6px; opacity: .45; }
+
+.blog-layout{
+  display: grid;
+  grid-template-columns: 178px minmax(0,1fr);
+  gap: 14px;
+  padding-top: 12px;
+}
+
+.blog-profile-card{
+  align-self: start;
+  font-size: .75rem;
+  line-height: 1.35;
+}
+
+.blog-profile-name{
+  font-size: 1.12rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.blog-profile-photo{
+  display: block;
+  width: 160px;
+}
+.blog-profile-photo img{
+  display: block;
+  width: 160px;
+  height: 153px;
+  object-fit: cover;
+}
+
+.blog-profile-status{ margin: 7px 0 8px; }
+.blog-profile-details{ margin-bottom: 7px; }
+
+.blog-profile-mood{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 0;
+  border-top: 1px solid rgba(0,0,0,.12);
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
+body.scene .blog-profile-mood{
+  border-color: rgba(255,255,255,.14);
+}
+
+.blog-profile-actions{
+  line-height: 1.65;
+  padding-top: 7px;
+}
+
+.blog-theme-btn{
+  margin-top: 10px;
+  padding: 5px 7px;
+  font-size: 10px;
+}
+
+.single-blog{
+  min-width: 0;
+}
+
+.single-blog-header{
+  min-height: 25px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  background: var(--blueHead);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.single-blog-tools{
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 4px 6px;
+  font-size: .75rem;
+}
+
+.blog-entry{
+  border: 1px solid var(--blueBorder);
+  background: var(--paper);
+}
+
+.blog-entry h1{
+  margin: 0;
+  padding: 8px 10px 7px;
+  background: var(--blueTd);
+  color: var(--blueThText);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.blog-entry-meta{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 10px;
+  background: var(--blueTh);
+  color: var(--blueThText);
+  font-size: .72rem;
+}
+
+.blog-entry-body{
+  padding: 14px 13px 18px;
+  font-family: 'Inter', Verdana, sans-serif;
+  font-size: .82rem;
+  line-height: 1.58;
+}
+
+.blog-entry-body p{
+  margin: 0 0 1.05em;
+}
+.blog-entry-body p:last-child{ margin-bottom: 0; }
+
+.blog-entry-footer{
+  padding: 7px 10px;
+  border-top: 1px solid var(--blueBorder);
+  font-size: .72rem;
+  background: rgba(0,0,0,.025);
+}
+body.scene .blog-entry-footer{ background: rgba(255,255,255,.035); }
+
+.blog-entry-actions{ float: right; }
+
+.blog-comments-title{
+  max-width: none;
+  margin-top: 14px;
+  margin-bottom: 3px;
+}
+
+.blog-comment{
+  display: grid;
+  grid-template-columns: 120px minmax(0,1fr);
+  border-spacing: 2px;
+  gap: 3px;
+  margin-bottom: 3px;
+}
+
+.blog-comment-user{
+  min-height: 112px;
+  padding: 7px;
+  text-align: center;
+  background: var(--orangeTh);
+  box-sizing: border-box;
+  font-size: .72rem;
+  font-weight: 600;
+}
+
+.blog-comment-user img{
+  display: block;
+  width: 72px;
+  height: 80px;
+  object-fit: cover;
+  margin: 7px auto 0;
+}
+
+.blog-comment-content{
+  padding: 7px 9px;
+  background: var(--orangeTd);
+  box-sizing: border-box;
+  font-size: .78rem;
+}
+
+.blog-comment-date{
+  font-size: .69rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.blog-comment-content p{
+  margin: 0;
+  line-height: 1.45;
+}
+
+.blog-comment-bottom{
+  text-align: right;
+  padding: 5px 2px 8px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+.blog-bottom-nav{
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border-top: 1px solid rgba(0,0,0,.14);
+  margin-top: 7px;
+  padding-top: 8px;
+  font-size: .74rem;
+}
+body.scene .blog-bottom-nav{ border-top-color: rgba(255,255,255,.14); }
+
+/* Preserve the fixed-width, old-web feel, but avoid needless horizontal
+   overflow on genuinely narrow screens. */
+@media (max-width: 650px){
+  html{ min-width: 0; }
+  body{ margin: 0; }
+  .header, #navigation, .blog-page-shell, .footer p{
+    width: 100%;
+    max-width: 100%;
+  }
+  .header{ height: 86px; }
+  .header-content{ height: 86px; }
+  .logo-link img{ max-height: 82px; width: auto; }
+  .youtube-banner{ width: 92px !important; }
+
+  .blog-layout{
+    grid-template-columns: 1fr;
+  }
+
+  .blog-profile-card{
+    display: grid;
+    grid-template-columns: 112px minmax(0,1fr);
+    column-gap: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.14);
+  }
+  body.scene .blog-profile-card{ border-bottom-color: rgba(255,255,255,.14); }
+
+  .blog-profile-name{ grid-column: 1 / -1; }
+  .blog-profile-photo{
+    grid-row: 2 / span 5;
+    width: 112px;
+  }
+  .blog-profile-photo img{
+    width: 112px;
+    height: 107px;
+  }
+  .blog-profile-status,
+  .blog-profile-details,
+  .blog-profile-mood,
+  .blog-profile-actions,
+  .blog-theme-btn{
+    grid-column: 2;
+    margin-top: 0;
+  }
+
+  .blog-entry-meta{
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .blog-comment{
+    grid-template-columns: 92px minmax(0,1fr);
+  }
+
+  .blog-comment-user img{
+    width: 62px;
+    height: 69px;
+  }
+
+  .blog-bottom-nav{
+    flex-wrap: wrap;
+  }
+}
+
+</style>
+      <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+	   
+      <!-- FONT AWESOME MEDIA PLAYER ICON FIX -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+	   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+      <meta charset="UTF-8">
+<meta name="viewport" content="width=820">
+
+   </head>
+
+   <body>
+
+      <!-- HEADER SECTION -->
+      <div class="header">
+         <!-- HEADER CONTENT -->
+         <div class="header-content">
+            <a class="logo-link">
+               <img src="img/myspace.png" height="96px" draggable="false">
+           </a>
+            <a href="/" class="youtube-link">
+               <img src="img/homebutton.png" class="youtube-banner" style="width: 120px;">
+            </a>
+         </div>
+      </div>
+
+
+
+  <div class="nav">
+            <nav id="links">
+                <ul id="navigation">
+                    <li><a href="/">home</a></li> 
+                    <li><a href="/profile">about</a></li> 
+                    <li><a href="/diary">diary</a></li> 
+		                <li><a href="/myspace">myspace</a></li>
+                    <li><a href="/livejournal">livejournal</a></li> 
+									
+                </ul>
+            </nav>
+</div>
+      
+
+      
+      <!-- SINGLE BLOG POST -->
+      <div class="blog-page-shell">
+
+        <div class="blog-topline">
+          <a href="/myspace/">« Back to Lewishh :]'s Profile</a>
+          <span>|</span>
+          <a href="#">View All Blog Entries</a>
+        </div>
+
+        <div class="blog-layout">
+          <aside class="blog-profile-card">
+            <div class="blog-profile-name">Lewishh :]</div>
+            <a href="/myspace/" class="blog-profile-photo">
+              <img src="img/profile.gif" alt="Lewishh :]">
+            </a>
+
+            <div class="blog-profile-status"><b>"RAWRR ^.^"</b></div>
+
+            <div class="blog-profile-details">
+              Male<br>
+              33 years old<br>
+              UK<br><br>
+              <img src="img/onlinenow.gif" alt="Online Now">
+            </div>
+
+            <div class="blog-profile-mood">
+              <b>Mood:</b> Silly
+              <img src="img/silly.gif" alt="" height="16">
+            </div>
+
+            <div class="blog-profile-actions">
+              <a href="/myspace/">View My Profile</a><br>
+              <a href="#">View My Pics</a><br>
+              <a href="#">Send Message</a><br>
+              <a href="#">Add to Friends</a>
+            </div>
+
+            <button class="tinybtn blog-theme-btn" id="themeBtn" type="button">Switch to Scene Mode</button>
+          </aside>
+
+          <main class="single-blog">
+            <div class="single-blog-header">
+              <span>Lewis' Blog</span>
+            </div>
+
+            <div class="single-blog-tools">
+              <a href="#">« Previous Entry</a>
+              <a href="#">Next Entry »</a>
+            </div>
+
+            <article class="blog-entry">
+              <h1>rambling about the past</h1>
+
+              <div class="blog-entry-meta">
+                <div><b>Apr 22, 2009</b> &nbsp; 11:43 PM</div>
+                <div><b>Mood:</b> nostalgic</div>
+              </div>
+
+              <div class="blog-entry-body">
+                <p>i keep thinking about how weird it is that things disappear so gradually you barely notice them going.</p>
+
+                <p>like one day you're on msn every night talking absolute rubbish until stupid o'clock, changing your display name every five minutes and putting song lyrics in it because obviously everybody needs to know what you're listening to lol.</p>
+
+                <p>then somehow that just becomes something you <i>used</i> to do.</p>
+
+                <p>same with school, old websites, people you used to talk to every day, random photos you forgot existed, all of it. you never really get a big dramatic ending. stuff just quietly becomes the past while you're busy doing something else.</p>
+
+                <p>anyway this got way more emo than intended hahaha.</p>
+
+                <p>currently listening to HIM and avoiding doing anything useful. standard.</p>
+
+                <p>lew x</p>
+              </div>
+
+              <div class="blog-entry-footer">
+                Posted by <a href="/myspace/"><b>Lewishh :]</b></a>
+                <span class="blog-entry-actions">
+                  <a href="#">Permalink</a> |
+                  <a href="#blog-comments">2 Comments</a>
+                </span>
+              </div>
+            </article>
+
+            <section class="blog-comments" id="blog-comments">
+              <div class="orange-bar blog-comments-title">
+                <span class="orange-bar-text">Comments</span>
+              </div>
+
+              <div class="blog-comment">
+                <div class="blog-comment-user">
+                  <a href="#">Charlotte [: </a>
+                  <img src="img/charlie.png" alt="Charlotte [:">
+                </div>
+                <div class="blog-comment-content">
+                  <div class="blog-comment-date">23/4/2009 12:04 AM</div>
+                  <p>omg ur so deep lmao :P get on msn loser xx</p>
+                </div>
+              </div>
+
+              <div class="blog-comment">
+                <div class="blog-comment-user">
+                  <a href="#"> ~ Lara J ~ </a>
+                  <img src="img/lara.png" alt="Lara">
+                </div>
+                <div class="blog-comment-content">
+                  <div class="blog-comment-date">23/4/2009 12:17 AM</div>
+                  <p>haha i know what u mean tho!! feels like everythings changing atm :( xx</p>
+                </div>
+              </div>
+
+              <div class="blog-comment-bottom">
+                <a href="#">Add Comment</a>
+              </div>
+            </section>
+
+            <div class="blog-bottom-nav">
+              <a href="#">« Previous Entry</a>
+              <a href="#">View All Blog Entries</a>
+              <a href="#">Next Entry »</a>
+            </div>
+          </main>
+        </div>
+      </div>
+
+<!-- FOOTER -->
+      <footer class="footer">
+         <p><a href="/">Bodged together by Lewis</a></p>
+      </footer>
+
+                              
+
+
+
+
+
+     
+   
+
+<script>
+(() => {
+  const btn = document.getElementById("themeBtn");
+  if (!btn) return;
+  const key = "myspace_theme";
+  const apply = (isScene) => {
+    document.body.classList.toggle("scene", isScene);
+    btn.textContent = isScene ? "Switch to Normal Mode" : "Switch to Scene Mode";
+  };
+  apply(localStorage.getItem(key) === "scene");
+  btn.addEventListener("click", () => {
+    const next = !document.body.classList.contains("scene");
+    localStorage.setItem(key, next ? "scene" : "normal");
+    apply(next);
+  });
+})();
+</script>
+
+</body>
+</html>
