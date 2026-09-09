@@ -30,9 +30,7 @@ body{
   overflow-x:hidden;
   color:var(--text);
   font-family:"Google Sans Flex",Arial,sans-serif;
-  background:
-    linear-gradient(rgba(17,20,29,.88),rgba(17,20,29,.88)),
-    url("https://lewis.lc/wiki/img/nighttime.png") center top / cover fixed no-repeat;
+  background:var(--bg);
 }
 
 a{color:inherit;text-decoration:none}
@@ -885,6 +883,98 @@ footer{
   }
 }
 
+
+/* Top navigation beneath main logo: simple links with animated underline */
+.top-link-row{
+  margin-top:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:22px;
+}
+
+.top-link{
+  position:relative;
+  padding:5px 0;
+  color:#fff;
+  font-size:.62rem;
+  font-weight:760;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+
+.top-link::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  background:currentColor;
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .2s ease;
+}
+
+.top-link:hover::after{
+  transform:scaleX(1);
+}
+
+/* Slightly smaller main wordmark */
+.guide-logo{
+  font-size:clamp(2.1rem,4.15vw,3.9rem);
+}
+
+/* Hero date less bold */
+.hero-date{
+  font-weight:600;
+}
+
+/* SVG chevron in Read More */
+.cta-chevron{
+  width:12px;
+  height:12px;
+  flex:0 0 auto;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease;
+}
+
+.paper-cta:hover .cta-chevron{
+  transform:translateX(2px);
+}
+
+@media(max-width:760px){
+  .top-link-row{
+    margin-top:8px;
+    gap:16px;
+  }
+
+  .top-link{
+    font-size:.58rem;
+  }
+
+  .guide-logo{
+    font-size:clamp(1.85rem,8.2vw,2.9rem);
+  }
+}
+
+
+/* Latest News heading refinement */
+#news h2{
+  font-size:clamp(2.9rem,4.8vw,4.9rem);
+  font-weight:850;
+}
+
+/* Softer dates while retaining good contrast */
+.news-item .date{
+  color:rgba(23,34,51,.62);
+}
+
 </style>
 </head>
 <body>
@@ -920,10 +1010,10 @@ footer{
 <span aria-hidden="true" class="logo-gap"></span>
 <span>P</span><span>A</span><span>R</span><span>K</span>
 </h1>
-<div aria-label="Primary links" class="paper-link-row">
-<a class="paper-link paper-link-news" href="#news">News</a>
-<a class="paper-link paper-link-guide" href="/sp/">Episode Guide</a>
-<a class="paper-link paper-link-wiki" href="/wiki/">Wiki</a>
+<div aria-label="Primary links" class="top-link-row">
+<a class="top-link" href="#news">News</a>
+<a class="top-link" href="/sp/">Episode Guide</a>
+<a class="top-link" href="/wiki/">Wiki</a>
 </div>
 </div>
 </section>
@@ -934,7 +1024,10 @@ footer{
 <h1>South Park is back.</h1>
 <p class="hero-dek">A new season begins in South Park.</p>
 <div class="actions">
-      <a class="paper-cta" href="#news">Read More <span>→</span></a>
+      <a class="paper-cta" href="#news">Read More
+      <svg class="cta-chevron" viewBox="0 0 12 12" aria-hidden="true">
+        <path d="M4.25 2.25 8 6 4.25 9.75"></path>
+      </svg></a>
     </div>
 </div>
 </section>
