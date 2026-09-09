@@ -1,269 +1,91 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#10131d">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#10131d" name="theme-color"/>
 <title>South Park</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..800&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..800&amp;display=swap" rel="stylesheet"/>
 <style>
 :root{
   --bg:#11141d;
   --panel:#181c27;
   --text:#fff;
-  --muted:rgba(255,255,255,.65);
+  --muted:rgba(255,255,255,.68);
   --line:rgba(255,255,255,.13);
-  --yellow:#f5b041;
+  --ink:#172233;
   --shell:min(1240px,calc(100% - 40px));
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;background:var(--bg)}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--bg);
+}
+
 body{
   margin:0;
+  overflow-x:hidden;
   color:var(--text);
   font-family:"Google Sans Flex",Arial,sans-serif;
-  overflow-x:hidden;
   background:
     linear-gradient(rgba(17,20,29,.88),rgba(17,20,29,.88)),
     url("https://lewis.lc/wiki/img/nighttime.png") center top / cover fixed no-repeat;
 }
 
 a{color:inherit;text-decoration:none}
-button,input{font:inherit}
+button{font:inherit}
 img{display:block;max-width:100%}
 
-.top-strip{
-  min-height:44px;display:flex;align-items:center;justify-content:center;
-  background:#000;color:#fff;border-bottom:1px solid rgba(255,255,255,.12);
-  font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase
-}
-.top-strip a{display:flex;gap:8px;align-items:center}
-
-header{
-  position:sticky;top:0;z-index:100;
+/* Header */
+.scroll-header{
+  position:fixed;
+  inset:0 0 auto;
+  z-index:100;
   background:rgba(17,20,29,.95);
-  border-bottom:1px solid rgba(255,255,255,.1);
-  backdrop-filter:blur(14px)
+  border-bottom:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transform:translateY(-110%);
+  opacity:0;
+  pointer-events:none;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s ease;
 }
-.header-inner{
-  width:var(--shell);height:74px;margin:auto;
-  display:flex;align-items:center;justify-content:space-between;gap:24px
-}
-.logo{
-  font-size:1.7rem;font-weight:800;letter-spacing:-.06em;text-transform:uppercase
-}
-.logo span{display:block;font-size:.56rem;letter-spacing:.2em;color:var(--muted);margin-top:-2px}
-nav{display:flex;align-items:center;gap:28px;font-size:.7rem;font-weight:760;letter-spacing:.06em;text-transform:uppercase}
-nav a:hover{opacity:.65}
-.menu{display:none;border:0;background:transparent;color:#fff;font-size:1.4rem}
 
-.hero{
+.scroll-header.is-visible{
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:auto;
+}
+
+.header-inner{
   width:var(--shell);
-  min-height:610px;
-  position:relative;
-  overflow:hidden;
-  margin:0 auto 34px;
-  background:#202635;
-  border-radius:24px;
-  border:1px solid var(--line);
-  box-shadow:0 28px 70px rgba(0,0,0,.22);
-}
-.hero img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover
-}
-.hero:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(5,7,12,.85),rgba(5,7,12,.32) 50%,rgba(5,7,12,.06)),
-             linear-gradient(0deg,rgba(17,20,29,.4),transparent 45%)
-}
-.hero-copy{
-  position:relative;
-  z-index:2;
-  width:100%;
-  min-height:610px;
+  height:64px;
   margin:auto;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:flex-start;
-  padding:70px 54px;
-}
-.eyebrow{
-  margin-bottom:13px;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase
-}
-.hero h1{
-  margin:0;max-width:760px;font-size:clamp(4rem,8vw,7.7rem);
-  font-weight:800;line-height:.82;letter-spacing:-.075em;text-transform:uppercase
-}
-.hero p{
-  max-width:560px;margin:24px 0 0;color:rgba(255,255,255,.78);
-  font-size:1rem;line-height:1.6
-}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
-.btn{
-  min-height:46px;padding:0 18px;border:1px solid rgba(255,255,255,.28);
-  display:inline-flex;align-items:center;gap:9px;
-  background:#fff;color:#111;
-  font-size:.67rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase
-}
-.btn.secondary{background:rgba(0,0,0,.28);color:#fff}
-.btn:hover{transform:translateY(-1px)}
-
-.section{
-  width:var(--shell);
-  margin:0 auto;
-  padding:76px 0;
-}
-.section + .section{border-top:1px solid var(--line)}
-.section-title-row{
-  display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:26px
-}
-.section h2{
-  margin:0;font-size:clamp(2.2rem,4vw,3.8rem);line-height:.9;letter-spacing:-.055em;text-transform:uppercase
-}
-.section-link{
-  flex:0 0 auto;font-size:.64rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase
-}
-.section-link:hover{opacity:.65}
-
-.episode-rail{
-  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px
-}
-.episode img{
-  width:100%;aspect-ratio:16/9;object-fit:cover;background:#242936
-}
-.episode-copy{padding-top:11px}
-.episode-meta{
-  margin-bottom:5px;color:var(--muted);font-size:.57rem;font-weight:750;letter-spacing:.05em;text-transform:uppercase
-}
-.episode h3{margin:0;font-size:1.05rem;line-height:1.12;font-weight:700}
-.episode p{
-  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;
-  margin:7px 0 0;color:var(--muted);font-size:.72rem;line-height:1.4
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
 }
 
-.collection{
-  position:relative;min-height:430px;overflow:hidden;background:#202532
-}
-.collection img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.collection:after{
-  content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,6,10,.86),rgba(4,6,10,.25) 60%,transparent)
-}
-.collection-copy{
-  position:relative;z-index:2;min-height:430px;padding:54px;
-  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start
-}
-.collection-copy .small{
-  font-size:.62rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase
-}
-.collection-copy h3{
-  margin:10px 0 0;max-width:620px;font-size:clamp(3rem,6vw,6rem);line-height:.82;
-  letter-spacing:-.07em;text-transform:uppercase
-}
-.collection-copy p{max-width:510px;color:rgba(255,255,255,.76);line-height:1.55}
-
-.quote{
-  display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);
-  min-height:470px;background:#e6e6e6;color:#111
-}
-.quote-media{min-height:470px;background:#bcc6d0}
-.quote-media img{width:100%;height:100%;object-fit:cover}
-.quote-copy{
-  padding:52px;display:flex;flex-direction:column;justify-content:center
-}
-.quote-copy .label{
-  font-size:.61rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase
-}
-.quote blockquote{
-  margin:18px 0 0;font-size:clamp(2.4rem,4vw,4.5rem);line-height:.92;
-  font-weight:800;letter-spacing:-.055em
-}
-.quote cite{margin-top:18px;color:#555;font-style:normal;font-size:.7rem;font-weight:700;text-transform:uppercase}
-
-.news-grid{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px
-}
-.news-item img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#242936}
-.news-item .date{margin-top:11px;color:var(--muted);font-size:.57rem;font-weight:760;letter-spacing:.05em;text-transform:uppercase}
-.news-item h3{margin:6px 0 0;font-size:1.05rem;line-height:1.15}
-.load-wrap{text-align:center;margin-top:34px}
-.load{
-  min-height:44px;padding:0 24px;border:1px solid rgba(255,255,255,.35);
-  background:transparent;color:#fff;cursor:pointer;font-size:.63rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase
+.header-inner nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  font-size:.7rem;
+  font-weight:760;
+  letter-spacing:.06em;
+  text-transform:uppercase;
 }
 
-.about{
-  display:grid;grid-template-columns:.65fr 1.35fr;gap:70px;align-items:start
-}
-.about h2{font-size:2rem}
-.about p{margin:0;color:rgba(255,255,255,.72);font-size:1rem;line-height:1.7}
-
-.newsletter-wrap{
-  background:#090b10;border-top:1px solid rgba(255,255,255,.1)
-}
-.newsletter{
-  width:var(--shell);margin:auto;padding:72px 0;
-  display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:end
-}
-.newsletter h2{margin:0;font-size:clamp(2.4rem,4.8vw,4.7rem);line-height:.88;letter-spacing:-.06em;text-transform:uppercase}
-.newsletter p{color:var(--muted);line-height:1.55}
-.form{display:flex;gap:10px}
-.form input{
-  flex:1;min-width:0;height:48px;border:1px solid rgba(255,255,255,.24);
-  background:#11151d;color:#fff;padding:0 14px;outline:none
-}
-.form button{
-  height:48px;padding:0 20px;border:0;background:#fff;color:#111;
-  font-size:.65rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;cursor:pointer
-}
-
-footer{
-  background:#050609;border-top:1px solid rgba(255,255,255,.1)
-}
-.footer-inner{
-  width:var(--shell);min-height:110px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px;
-  color:rgba(255,255,255,.48);font-size:.62rem;text-transform:uppercase;letter-spacing:.06em
-}
-.footer-links{display:flex;gap:18px}
-
-@media(max-width:1050px){
-  .episode-rail{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:760px){
-  :root{--shell:min(100% - 28px,1240px)}
-  nav{display:none}.menu{display:block}
-  .header-inner{height:64px}
-  .hero,.hero-copy{min-height:560px}
-  .hero-copy{justify-content:flex-end;padding-bottom:52px}
-  .hero h1{font-size:clamp(3.5rem,18vw,5.7rem)}
-  .section{padding:56px 0}
-  .section-title-row{align-items:flex-start}
-  .episode-rail{
-    display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-right:calc(50% - 50vw);padding-right:14px;scrollbar-width:none
-  }
-  .episode-rail::-webkit-scrollbar{display:none}
-  .episode{flex:0 0 78vw;scroll-snap-align:start}
-  .collection,.collection-copy{min-height:440px}
-  .collection-copy{padding:28px}
-  .quote{grid-template-columns:1fr}
-  .quote-media{min-height:310px}
-  .quote-copy{padding:32px 24px}
-  .news-grid{grid-template-columns:1fr}
-  .about{grid-template-columns:1fr;gap:20px}
-  .newsletter{grid-template-columns:1fr;gap:30px}
-  .form{flex-direction:column}.form button{width:100%}
-  .footer-inner{padding:28px 0;align-items:flex-start;flex-direction:column}
-}
-
-.header-actions{display:flex;align-items:center;gap:8px}
-
-nav a{
+.header-inner nav a{
   position:relative;
   padding:7px 0;
 }
-nav a::after{
+
+.header-inner nav a::after{
   content:"";
   position:absolute;
   left:0;
@@ -272,47 +94,49 @@ nav a::after{
   height:2px;
   background:currentColor;
   transform:scaleX(0);
-  transform-origin:left center;
-  transition:transform .22s ease;
-  opacity:.72;
+  transform-origin:left;
+  transition:transform .2s ease;
 }
-nav a:hover{opacity:1}
-nav a:hover::after{transform:scaleX(1)}
 
+.header-inner nav a:hover::after{transform:scaleX(1)}
 
+.header-actions{margin-left:auto}
 
+.menu{
+  display:none;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:1.45rem;
+  cursor:pointer;
+}
 
-
-
-
-
-/* /sp/-style handmade logo */
-.mini-guide-logo{
+/* Small and large South Park wordmarks */
+.mini-guide-logo,
+.guide-logo{
   display:flex;
   align-items:baseline;
   width:max-content;
-  color:var(--text);
-  font-size:1.55rem;
+  margin:0;
+  color:#fff;
   font-weight:800;
-  line-height:.85;
+  line-height:.82;
   letter-spacing:0;
   text-transform:uppercase;
   user-select:none;
 }
-.mini-guide-logo>span:not(.logo-gap){
+
+.mini-guide-logo{font-size:1.55rem}
+.guide-logo{font-size:clamp(3.6rem,8vw,7.6rem)}
+
+.mini-guide-logo>span:not(.logo-gap),
+.guide-logo>span:not(.logo-gap){
   display:inline-block;
   margin-right:-.045em;
   transform-origin:50% 72%;
-  -webkit-mask-image:
-    radial-gradient(circle at 18% 24%,transparent 0 1px,#000 1.35px),
-    radial-gradient(circle at 72% 38%,transparent 0 .8px,#000 1.1px),
-    radial-gradient(circle at 42% 76%,transparent 0 .9px,#000 1.2px),
-    linear-gradient(#000,#000);
-  mask-image:
-    radial-gradient(circle at 18% 24%,transparent 0 1px,#000 1.35px),
-    radial-gradient(circle at 72% 38%,transparent 0 .8px,#000 1.1px),
-    radial-gradient(circle at 42% 76%,transparent 0 .9px,#000 1.2px),
-    linear-gradient(#000,#000);
   clip-path:polygon(
     1% 2%,13% 0%,25% 2%,38% .5%,51% 2.2%,64% .4%,77% 2%,89% .7%,99% 2.5%,
     98.5% 14%,100% 27%,98.7% 40%,100% 54%,98.4% 67%,100% 81%,98% 98%,
@@ -320,137 +144,340 @@ nav a:hover::after{transform:scaleX(1)}
     1.2% 85%,0% 72%,1.3% 59%,0% 45%,1.4% 31%,0% 17%
   );
 }
-.mini-guide-logo .logo-gap{width:.24em;flex:0 0 .24em}
-.mini-guide-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
-.mini-guide-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
-.mini-guide-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
-.mini-guide-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
-.mini-guide-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
-.mini-guide-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
-.mini-guide-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
-.mini-guide-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
-.mini-guide-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
 
-/* Diary-style theme toggle */
-.theme-toggle{
-  appearance:none;
-  -webkit-appearance:none;
-  width:40px;
-  height:40px;
-  flex:0 0 40px;
-  display:grid;
-  place-items:center;
-  padding:0;
-  border:0;
-  border-radius:50%;
-  background:transparent;
-  color:var(--text);
-  cursor:pointer;
-  transition:transform .22s ease,background-color .22s ease;
+.logo-gap{width:.22em;flex:0 0 .22em}
+
+.mini-guide-logo>span:nth-child(1),
+.guide-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
+.mini-guide-logo>span:nth-child(2),
+.guide-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
+.mini-guide-logo>span:nth-child(3),
+.guide-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
+.mini-guide-logo>span:nth-child(4),
+.guide-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
+.mini-guide-logo>span:nth-child(5),
+.guide-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
+.mini-guide-logo>span:nth-child(7),
+.guide-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
+.mini-guide-logo>span:nth-child(8),
+.guide-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
+.mini-guide-logo>span:nth-child(9),
+.guide-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
+.mini-guide-logo>span:nth-child(10),
+.guide-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
+
+/* Mobile navigation */
+.mobile-nav{display:none}
+
+/* Main brand */
+.show-brand-inner{
+  width:var(--shell);
+  margin:auto;
+  padding:42px 0 34px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 }
-.theme-toggle:hover{transform:translateY(-1px);background:rgba(255,255,255,.08)}
 
-.theme-toggle:active{transform:scale(.92)}
-.theme-icon-wrap{position:relative;display:block;width:24px;height:24px}
-.theme-icon{
-  position:absolute;
-  inset:0;
-  width:24px;
-  height:24px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.8;
-  stroke-linecap:round;
-  stroke-linejoin:round;
-  transform-origin:50% 50%;
-  transition:opacity .28s ease,transform .42s cubic-bezier(.2,.8,.2,1);
+.paper-link-row{
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
 }
-.theme-icon-moon{opacity:1;color:#dfe7ff;transform:rotate(0deg) scale(1)}
-.theme-icon-sun{opacity:0;color:#f2c84b;transform:rotate(-75deg) scale(.55)}
-.theme-star{stroke-width:1.6}
 
-
-
-/* Scrunched-paper episode guide CTA */
+.paper-link,
 .paper-cta{
-  position:relative;
-  min-height:46px;
-  padding:0 20px;
   display:inline-flex;
   align-items:center;
-  gap:10px;
-  color:#24272d;
-  background:
-    linear-gradient(145deg,rgba(247,245,235,.99),rgba(216,216,209,.98));
-  border:1px solid rgba(44,47,50,.18);
-  font-size:.67rem;
-  font-weight:830;
-  letter-spacing:.07em;
+  justify-content:center;
+  border:1px solid rgba(44,47,50,.16);
+  font-size:.68rem;
+  font-weight:820;
+  letter-spacing:.08em;
   text-transform:uppercase;
+  box-shadow:0 5px 12px rgba(0,0,0,.12);
   clip-path:polygon(
-    0 6%,8% 2%,17% 5%,27% 1%,37% 4%,47% 0,58% 4%,68% 1%,78% 5%,89% 2%,100% 6%,
-    98% 23%,100% 39%,98% 55%,100% 72%,98% 95%,88% 98%,77% 96%,67% 100%,
-    56% 97%,45% 100%,34% 96%,23% 99%,12% 96%,1% 99%,2% 78%,0 60%,2% 42%,0 22%
+    1% 7%,10% 2%,22% 5%,34% 1%,46% 4%,58% 0,70% 4%,82% 2%,99% 6%,
+    98% 94%,86% 99%,74% 96%,61% 100%,49% 97%,36% 100%,23% 96%,11% 99%,1% 95%
   );
-  box-shadow:0 7px 16px rgba(0,0,0,.18);
-  transform:rotate(-.45deg);
   transition:transform .18s ease,filter .18s ease;
 }
+
+.paper-link{
+  min-height:38px;
+  padding:0 14px;
+}
+
+.paper-link-news{
+  background:linear-gradient(145deg,#f3d55b,#dfbd3f);
+  color:#292612;
+  transform:rotate(-.8deg);
+}
+
+.paper-link-guide{
+  background:linear-gradient(145deg,#8fc5e8,#72a9cf);
+  color:#182631;
+  transform:rotate(.45deg);
+}
+
+.paper-link-wiki{
+  background:linear-gradient(145deg,#e99a8a,#d97c6f);
+  color:#2b1916;
+  transform:rotate(-.35deg);
+}
+
+.paper-link:hover{filter:brightness(1.035)}
+.paper-link-news:hover{transform:rotate(-.8deg) translateY(-2px)}
+.paper-link-guide:hover{transform:rotate(.45deg) translateY(-2px)}
+.paper-link-wiki:hover{transform:rotate(-.35deg) translateY(-2px)}
+
+/* Hero */
+.hero{
+  position:relative;
+  width:100%;
+  min-height:610px;
+  overflow:hidden;
+  background:#202635;
+}
+
+.hero>img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(5,7,12,.85),rgba(5,7,12,.32) 50%,rgba(5,7,12,.06)),
+    linear-gradient(0deg,rgba(17,20,29,.4),transparent 45%);
+}
+
+.hero-copy{
+  position:relative;
+  z-index:2;
+  width:var(--shell);
+  min-height:610px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:70px 0;
+}
+
+.eyebrow{
+  margin-bottom:13px;
+  font-size:.68rem;
+  font-weight:800;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.hero h1{
+  max-width:760px;
+  margin:0;
+  font-size:clamp(4rem,8vw,7.7rem);
+  font-weight:800;
+  line-height:.82;
+  letter-spacing:-.075em;
+  text-transform:uppercase;
+}
+
+.hero p{
+  max-width:560px;
+  margin:24px 0 0;
+  color:rgba(255,255,255,.78);
+  font-size:1rem;
+  line-height:1.6;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:28px;
+}
+
+.paper-cta{
+  min-height:46px;
+  padding:0 20px;
+  gap:10px;
+  background:linear-gradient(145deg,rgba(247,245,235,.99),rgba(216,216,209,.98));
+  color:#24272d;
+  transform:rotate(-.45deg);
+}
+
+.paper-cta-alt{
+  background:linear-gradient(145deg,rgba(226,231,236,.99),rgba(190,199,208,.97));
+  color:#202830;
+  transform:rotate(.35deg);
+}
+
 .paper-cta:hover{
   transform:rotate(-.45deg) translateY(-2px);
   filter:brightness(1.03);
 }
-.paper-cta span{font-size:1rem;line-height:1}
 
-/* News reveal */
-.news-hidden{display:none!important}
-.news-item.news-reveal{
-  animation:newsReveal .5s cubic-bezier(.22,.61,.36,1) both;
+.paper-cta-alt:hover{transform:rotate(.35deg) translateY(-2px)}
+
+/* Latest News */
+#news{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:70px max(28px,calc((100vw - 1240px)/2)) 78px;
+  background:#F8F8F8;
+  color:var(--ink);
 }
+
+.section-title-row{margin-bottom:34px}
+
+#news h2{
+  margin:0;
+  color:var(--ink);
+  font-size:clamp(3.2rem,5.3vw,5.4rem);
+  line-height:.9;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
+}
+
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+}
+
+.news-item{
+  min-width:0;
+  padding:12px 12px 18px;
+  background:#fff;
+  color:var(--ink);
+  outline:1px solid rgba(23,34,51,.06);
+  transition:transform .2s ease,outline-color .2s ease;
+}
+
+.news-item:hover{
+  transform:translateY(-3px);
+  outline-color:rgba(23,34,51,.20);
+}
+
+.news-item img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background:#e7ebee;
+  transition:transform .25s ease,filter .25s ease;
+}
+
+.news-item:hover img{
+  transform:scale(1.015);
+  filter:brightness(1.03);
+}
+
+.news-item .date{
+  margin:11px 0 8px;
+  color:var(--ink);
+  opacity:1;
+  visibility:visible;
+  font-size:.66rem;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.news-item h3{
+  margin:0;
+  color:var(--ink);
+  font-size:1.05rem;
+  line-height:1.25;
+}
+
+.news-hidden{display:none}
+
+.news-reveal{
+  animation:newsReveal .35s ease both;
+}
+
 @keyframes newsReveal{
-  from{opacity:0;transform:translateY(14px)}
+  from{opacity:0;transform:translateY(8px)}
   to{opacity:1;transform:translateY(0)}
 }
 
-
-.paper-cta-alt{
-  background:
-    linear-gradient(145deg,rgba(226,231,236,.99),rgba(190,199,208,.97));
-  color:#202830;
-  transform:rotate(.35deg);
-}
-.paper-cta-alt:hover{
-  transform:rotate(.35deg) translateY(-2px);
+.load-wrap{
+  display:flex;
+  justify-content:center;
+  margin-top:36px;
 }
 
-/* Mobile navigation */
-.mobile-nav{
-  display:none;
+.load{
+  min-height:44px;
+  padding:0 18px;
+  border:1px solid rgba(23,34,51,.18);
+  background:transparent;
+  color:var(--ink);
+  font-size:.65rem;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+
+.load:hover{background:rgba(23,34,51,.05)}
+
+/* Footer */
+footer{
+  background:rgba(5,6,9,.86);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.footer-inner{
+  width:var(--shell);
+  min-height:104px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  color:rgba(255,255,255,.55);
+  font-size:.68rem;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.footer-links a:hover{color:#fff}
+
+@media(max-width:1050px){
+  .news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 @media(max-width:760px){
-  .menu{
-    display:grid;
-    place-items:center;
-    width:40px;
-    height:40px;
-    padding:0;
-    border:0;
-    border-radius:50%;
-    background:transparent;
-    color:var(--text);
-    cursor:pointer;
+  .scroll-header{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
   }
 
-  .menu:hover{
-    background:rgba(255,255,255,.08);
-  }
-
-  
+  .header-inner{height:64px}
+  .header-inner nav{display:none}
+  .menu{display:grid;place-items:center}
 
   .mobile-nav{
     display:block;
-    position:absolute;
+    position:fixed;
     top:64px;
     left:0;
     right:0;
@@ -465,8 +492,6 @@ nav a:hover::after{transform:scaleX(1)}
     transition:max-height .28s ease,opacity .2s ease;
   }
 
-  
-
   .mobile-nav.open{
     max-height:260px;
     opacity:1;
@@ -480,676 +505,89 @@ nav a:hover::after{transform:scaleX(1)}
   }
 
   .mobile-nav a{
-    position:relative;
     padding:14px 2px;
-    border-bottom:1px solid var(--line);
+    border-bottom:1px solid rgba(255,255,255,.12);
     font-size:.78rem;
     font-weight:780;
     letter-spacing:.06em;
     text-transform:uppercase;
   }
 
-  .mobile-nav a:last-child{
-    border-bottom:0;
+  .show-brand-inner{
+    padding:94px 0 25px;
   }
 
-  .mobile-nav a::after{
-    content:"";
-    position:absolute;
-    left:2px;
-    bottom:10px;
-    width:34px;
-    height:2px;
-    background:currentColor;
-    transform:scaleX(0);
-    transform-origin:left;
-    transition:transform .2s ease;
-    opacity:.7;
+  .guide-logo{
+    font-size:clamp(2.75rem,13vw,4.9rem);
   }
 
-  .mobile-nav a:hover::after,
-  .mobile-nav a:focus-visible::after{
-    transform:scaleX(1);
-  }
-}
-
-
-.show-brand{
-  background:transparent;
-}
-.show-brand-inner{
-  width:var(--shell);
-  margin:auto;
-  padding:42px 0 34px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-}
-.guide-logo{
-  display:flex;
-  align-items:baseline;
-  margin:0;
-  color:var(--text);
-  font-size:clamp(3.6rem,8vw,7.6rem);
-  font-weight:800;
-  line-height:.8;
-  letter-spacing:0;
-  text-transform:uppercase;
-  user-select:none;
-}
-.guide-logo>span:not(.logo-gap){
-  display:inline-block;
-  margin-right:-.045em;
-  transform-origin:50% 72%;
-  clip-path:polygon(
-    1% 2%,13% 0%,25% 2%,38% .5%,51% 2.2%,64% .4%,77% 2%,89% .7%,99% 2.5%,
-    98.5% 14%,100% 27%,98.7% 40%,100% 54%,98.4% 67%,100% 81%,98% 98%,
-    85% 99.2%,72% 97.8%,59% 99.5%,46% 97.9%,33% 99.4%,20% 97.7%,2% 99%,
-    1.2% 85%,0% 72%,1.3% 59%,0% 45%,1.4% 31%,0% 17%
-  );
-}
-.guide-logo .logo-gap{width:.22em;flex:0 0 .22em}
-.guide-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
-.guide-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
-.guide-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
-.guide-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
-.guide-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
-.guide-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
-.guide-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
-.guide-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
-.guide-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
-.paper-subtitle{
-  margin-top:15px;
-  padding:7px 17px 8px;
-  background:linear-gradient(145deg,#efeee7,#d8d8d1);
-  color:#262a30;
-  font-size:.72rem;
-  font-weight:820;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transform:rotate(-.7deg);
-  clip-path:polygon(1% 5%,12% 2%,23% 5%,34% 1%,45% 4%,57% 1%,68% 5%,79% 2%,90% 5%,99% 2%,98% 96%,86% 99%,74% 96%,62% 100%,50% 97%,37% 100%,24% 96%,12% 99%,1% 96%);
-  box-shadow:0 6px 14px rgba(0,0,0,.14);
-}
-
-.section-kicker{
-  margin-bottom:8px;
-  color:var(--muted);
-  font-size:.62rem;
-  font-weight:800;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-.season-rail{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:16px;
-}
-.season-card{
-  display:block;
-}
-.season-card img{
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  background:#242936;
-  transition:transform .25s ease,filter .25s ease;
-}
-.season-card:hover img{
-  transform:scale(1.02);
-  filter:brightness(1.04);
-}
-.season-card-copy{
-  padding-top:12px;
-}
-.season-card h3{
-  margin:0;
-  font-size:1.08rem;
-  line-height:1.14;
-}
-
-.cinematic-break{
-  position:relative;
-  min-height:420px;
-  overflow:hidden;
-  background:#1a2230;
-}
-.cinematic-break img{
-  width:100%;
-  height:100%;
-  min-height:420px;
-  object-fit:cover;
-}
-.cinematic-break::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(180deg,transparent 48%,rgba(8,11,17,.62)),
-    linear-gradient(90deg,rgba(8,11,17,.15),transparent 50%);
-}
-.cinematic-break-overlay{
-  position:absolute;
-  z-index:2;
-  inset:auto 0 0 0;
-  width:var(--shell);
-  margin:auto;
-  padding:0 0 28px;
-}
-.cinematic-label{
-  display:inline-block;
-  padding:7px 11px 8px;
-  background:rgba(10,13,19,.68);
-  color:#fff;
-  font-size:.62rem;
-  font-weight:800;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  backdrop-filter:blur(8px);
-}
-
-
-
-
-@media(max-width:900px){
-  .season-rail{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:760px){
-  .show-brand-inner{padding:30px 0 25px}
-  .guide-logo{font-size:clamp(2.75rem,13vw,4.9rem)}
-  .paper-subtitle{margin-top:11px}
-  .season-rail{
-    display:flex;
-    overflow-x:auto;
-    gap:12px;
-    margin-right:calc(50% - 50vw);
-    padding-right:14px;
-    scroll-snap-type:x mandatory;
-    scrollbar-width:none;
-  }
-  .season-rail::-webkit-scrollbar{display:none}
-  .season-card{
-    flex:0 0 74vw;
-    scroll-snap-align:start;
-  }
-  .cinematic-break,
-  .cinematic-break img{
-    min-height:300px;
-  }
-  .cinematic-break-overlay{
-    padding-bottom:20px;
-  }
-}
-
-
-.current-season{
-  padding-top:82px;
-  padding-bottom:82px;
-}
-.season-shell{
-  padding:34px;
-  border:1px solid var(--line);
-  border-radius:26px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.008));
-}
-
-.season-heading{
-  display:flex;
-  justify-content:space-between;
-  gap:32px;
-  align-items:flex-end;
-  margin-bottom:26px;
-}
-.season-heading h2{
-  margin:12px 0 0;
-}
-.season-heading p{
-  max-width:520px;
-  margin:12px 0 0;
-  color:var(--muted);
-  line-height:1.55;
-}
-.season-paper-label{
-  display:inline-block;
-  padding:7px 13px 8px;
-  background:linear-gradient(145deg,#f1efe8,#d9d8d0);
-  color:#25292f;
-  font-size:.64rem;
-  font-weight:850;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  transform:rotate(-.6deg);
-  clip-path:polygon(1% 7%,10% 2%,22% 5%,34% 1%,46% 4%,58% 0,70% 4%,82% 2%,99% 6%,98% 94%,86% 99%,74% 96%,61% 100%,49% 97%,36% 100%,23% 96%,11% 99%,1% 95%);
-  box-shadow:0 5px 12px rgba(0,0,0,.12);
-}
-.season-feature-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.55fr) minmax(290px,.75fr);
-  gap:18px;
-}
-.season-feature{
-  min-width:0;
-  overflow:hidden;
-  border-radius:18px;
-  background:var(--panel);
-  border:1px solid var(--line);
-}
-.season-feature-media{
-  position:relative;
-  overflow:hidden;
-}
-.season-feature-media img{
-  width:100%;
-  aspect-ratio:16/8.7;
-  object-fit:cover;
-  transition:transform .3s ease,filter .3s ease;
-}
-.season-feature:hover .season-feature-media img{
-  transform:scale(1.018);
-  filter:brightness(1.04);
-}
-.season-feature-badge{
-  position:absolute;
-  left:16px;
-  bottom:16px;
-  padding:6px 10px 7px;
-  background:#f1eee5;
-  color:#22262c;
-  font-size:.58rem;
-  font-weight:850;
-  letter-spacing:.09em;
-  text-transform:uppercase;
-  transform:rotate(-.5deg);
-  clip-path:polygon(1% 8%,14% 2%,29% 6%,45% 1%,62% 5%,80% 2%,99% 7%,98% 94%,83% 99%,66% 95%,49% 100%,32% 96%,15% 99%,1% 94%);
-}
-.season-feature-copy{
-  padding:20px 22px 22px;
-}
-.season-feature-copy h3{
-  margin:5px 0 0;
-  font-size:clamp(1.8rem,3vw,3rem);
-  line-height:.95;
-  letter-spacing:-.045em;
-}
-.season-feature-copy p{
-  margin:10px 0 0;
-  color:var(--muted);
-  line-height:1.5;
-}
-.season-watch-link{
-  display:inline-block;
-  margin-top:16px;
-  font-size:.66rem;
-  font-weight:800;
-  letter-spacing:.07em;
-  text-transform:uppercase;
-}
-.season-side-list{
-  display:grid;
-  gap:12px;
-}
-.season-mini{
-  display:grid;
-  grid-template-columns:132px minmax(0,1fr);
-  gap:14px;
-  align-items:center;
-  min-height:104px;
-  padding:10px;
-  border:1px solid var(--line);
-  border-radius:16px;
-  background:var(--panel);
-  transition:transform .18s ease,border-color .18s ease;
-}
-.season-mini:hover{
-  transform:translateY(-2px);
-  border-color:rgba(255,255,255,.2);
-}
-
-.season-mini img{
-  width:132px;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  border-radius:10px;
-}
-.season-mini h3{
-  margin:5px 0 0;
-  font-size:1.05rem;
-  line-height:1.1;
-}
-
-@media(max-width:900px){
-  .season-feature-grid{
-    grid-template-columns:1fr;
-  }
-  .season-side-list{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
-  .season-mini{
-    display:block;
-    padding:0;
-    overflow:hidden;
-  }
-  .season-mini img{
-    width:100%;
-    border-radius:0;
-  }
-  .season-mini>div{
-    padding:12px 13px 14px;
-  }
-}
-@media(max-width:760px){
-  .current-season{
-    padding-top:60px;
-    padding-bottom:60px;
-  }
-  .season-shell{
-    margin-left:-6px;
-    margin-right:-6px;
-    padding:24px 18px;
-    border-radius:20px;
-  }
-  .season-heading{
-    align-items:flex-start;
-    flex-direction:column;
-    gap:14px;
-    margin-bottom:22px;
-  }
-  .season-side-list{
-    display:flex;
-    overflow-x:auto;
-    margin-right:-18px;
-    padding-right:18px;
-    gap:12px;
-    scroll-snap-type:x mandatory;
-    scrollbar-width:none;
-  }
-  .season-side-list::-webkit-scrollbar{display:none}
-  .season-mini{
-    flex:0 0 68vw;
-    scroll-snap-align:start;
-  }
-  .season-feature-copy{
-    padding:18px 18px 20px;
-  }
-  .season-feature-badge{
-    left:12px;
-    bottom:12px;
-  }
-}
-
-
-/* Scroll-only header */
-.scroll-header{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:100;
-  transform:translateY(-110%);
-  opacity:0;
-  pointer-events:none;
-  transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s ease;
-}
-.scroll-header.is-visible{
-  transform:translateY(0);
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* Main /sp/ letter wobble — exact transforms carried over */
-.guide-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
-.guide-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
-.guide-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
-.guide-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
-.guide-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
-.guide-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
-.guide-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
-.guide-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
-.guide-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
-
-.paper-nav{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-  justify-content:center;
-}
-.paper-nav a{
-  position:relative;
-  color:#262a30;
-}
-.paper-nav a::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-2px;
-  height:1.5px;
-  background:currentColor;
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .18s ease;
-}
-.paper-nav a:hover::after{transform:scaleX(1)}
-.paper-nav span{
-  opacity:.42;
-  color:#262a30;
-}
-
-main{
-  padding-bottom:30px;
-}
-
-/* Let the town backdrop remain visible between sections */
-#news{
-  background:rgba(17,20,29,.72);
-  border:1px solid var(--line);
-  border-radius:24px;
-  padding-left:28px;
-  padding-right:28px;
-  margin-bottom:42px;
-  backdrop-filter:blur(7px);
-  -webkit-backdrop-filter:blur(7px);
-}
-
-
-footer{
-  background:rgba(5,6,9,.82);
-  backdrop-filter:blur(8px);
-  -webkit-backdrop-filter:blur(8px);
-}
-
-
-
-@media(max-width:760px){
-  .hero{
-    width:calc(100% - 20px);
-    min-height:560px;
-    border-radius:18px;
-    margin-bottom:22px;
-  }
-  .hero-copy{
-    min-height:560px;
-    padding:36px 24px 44px;
-  }
-  #news{
-    width:calc(100% - 20px);
-    padding-left:18px;
-    padding-right:18px;
-  }
-}
-
-
-.paper-link-row{
-  margin-top:16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.paper-link{
-  appearance:none;
-  -webkit-appearance:none;
-  min-height:38px;
-  padding:0 14px;
-  border:1px solid rgba(44,47,50,.16);
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(145deg,#efeee7,#d8d8d1);
-  color:#262a30;
-  font:inherit;
-  font-size:.68rem;
-  font-weight:820;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  cursor:pointer;
-  box-shadow:0 5px 12px rgba(0,0,0,.12);
-  clip-path:polygon(
-    1% 7%,10% 2%,22% 5%,34% 1%,46% 4%,58% 0,70% 4%,82% 2%,99% 6%,
-    98% 94%,86% 99%,74% 96%,61% 100%,49% 97%,36% 100%,23% 96%,11% 99%,1% 95%
-  );
-  transition:transform .18s ease,filter .18s ease;
-}
-.paper-link-news{transform:rotate(-.8deg)}
-.paper-link-guide{transform:rotate(.45deg)}
-.paper-link-wiki{transform:rotate(-.35deg)}
-.paper-theme-toggle{
-  width:42px;
-  padding:0;
-  transform:rotate(.7deg);
-}
-.paper-link:hover{
-  filter:brightness(1.035);
-}
-.paper-link-news:hover{transform:rotate(-.8deg) translateY(-2px)}
-.paper-link-guide:hover{transform:rotate(.45deg) translateY(-2px)}
-.paper-link-wiki:hover{transform:rotate(-.35deg) translateY(-2px)}
-.paper-theme-toggle:hover{transform:rotate(.7deg) translateY(-2px)}
-.paper-theme-toggle .theme-icon-wrap{
-  width:21px;
-  height:21px;
-}
-.paper-theme-toggle .theme-icon{
-  width:21px;
-  height:21px;
-}
-.paper-theme-toggle .theme-icon-moon{
-  color:#303844;
-}
-
-
-/* Make the compact header menu reliable on small screens */
-@media(max-width:760px){
-  .header-inner{
-    position:relative;
-  }
-  .header-actions{
-    margin-left:auto;
-  }
-  .menu{
-    display:grid !important;
-    position:relative;
-    z-index:102;
-  }
-  .mobile-nav{
-    top:64px;
-    z-index:101;
-  }
-  .mobile-nav.open{
-    max-height:300px;
-  }
   .paper-link-row{
     gap:8px;
     margin-top:14px;
   }
+
   .paper-link{
     min-height:36px;
     padding:0 12px;
     font-size:.63rem;
   }
-  .paper-theme-toggle{
-    width:38px;
-    padding:0;
+
+  .hero{min-height:560px}
+
+  .hero-copy{
+    min-height:560px;
+    padding:36px 0 44px;
   }
-}
 
-
-/* Mobile: keep header visible so hamburger is always accessible */
-@media(max-width:760px){
-  .scroll-header{
-    transform:translateY(0) !important;
-    opacity:1 !important;
-    pointer-events:auto !important;
+  .hero h1{
+    font-size:clamp(3.5rem,17vw,5.8rem);
   }
-}
 
-
-/* Mobile header clearance: prevent fixed header overlapping the main logo */
-@media(max-width:760px){
-  .show-brand-inner{
-    padding-top:94px !important;
+  .hero p{
+    max-width:94%;
+    font-size:.95rem;
   }
-}
 
-
-/* Latest News: permanently light section */
-#news{
-  width:100%;
-  max-width:none;
-  margin:0;
-  padding:70px max(28px,calc((100vw - 1240px)/2)) 78px;
-  background:#F8F8F8 !important;
-  color:#172233;
-  border:0 !important;
-  border-radius:0 !important;
-  backdrop-filter:none !important;
-  -webkit-backdrop-filter:none !important;
-}
-#news .section-title-row{
-  margin-bottom:34px;
-}
-#news h2{
-  color:#172233;
-  font-size:clamp(3.2rem,5.3vw,5.4rem);
-  line-height:.9;
-  letter-spacing:-.055em;
-}
-#news .news-item{
-  color:#172233;
-}
-#news .news-item h3{
-  color:#172233;
-}
-#news .news-date,
-#news .news-meta{
-  color:rgba(23,34,51,.62);
-}
-#news .news-item img{
-  background:#e7ebee;
-}
-#news .load{
-  color:#172233;
-  border-color:rgba(23,34,51,.18);
-  background:transparent;
-}
-#news .load:hover{
-  background:rgba(23,34,51,.05);
-}
-#news .section-link{
-  color:#172233;
-}
-
-@media(max-width:760px){
   #news{
-    width:100%;
     padding:54px 16px 64px;
   }
+
   #news h2{
     font-size:clamp(2.75rem,13vw,4.2rem);
+  }
+
+  .news-grid{grid-template-columns:1fr}
+
+  .footer-inner{
+    min-height:130px;
+    padding:24px 0;
+    align-items:flex-start;
+    flex-direction:column;
+    justify-content:center;
+  }
+}
+
+/* Mobile: start hidden, reveal once scrolling begins */
+@media(max-width:760px){
+  .scroll-header{
+    transform:translateY(-110%);
+    opacity:0;
+    pointer-events:none;
+  }
+
+  .scroll-header.is-visible{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+}
+
+
+/* Mobile: reclaim the space previously reserved for the hidden header */
+@media(max-width:760px){
+  .show-brand-inner{
+    padding-top:34px;
+    padding-bottom:25px;
   }
 }
 
@@ -1157,154 +595,145 @@ footer{
 </head>
 <body>
 <header class="scroll-header" id="scrollHeader">
-  <div class="header-inner">
-    <a class="mini-guide-logo" href="/" aria-label="South Park">
-      <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
-      <span class="logo-gap" aria-hidden="true"></span>
-      <span>P</span><span>A</span><span>R</span><span>K</span>
-    </a>
-
-    <nav>
-      <a href="#news">News</a>
-      <a href="/sp/">Episode Guide</a>
-      <a href="/wiki/">Wiki</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="menu" id="menuButton" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
-    </div>
-  </div>
+<div class="header-inner">
+<a aria-label="South Park" class="mini-guide-logo" href="/">
+<span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
+<span aria-hidden="true" class="logo-gap"></span>
+<span>P</span><span>A</span><span>R</span><span>K</span>
+</a>
+<nav>
+<a href="#news">News</a>
+<a href="/sp/">Episode Guide</a>
+<a href="/wiki/">Wiki</a>
+</nav>
+<div class="header-actions">
+<button aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu" class="menu" id="menuButton">☰</button>
+</div>
+</div>
 </header>
 <div class="mobile-nav" id="mobileNav">
-  <div class="mobile-nav-inner">
-    <a href="#news">News</a>
-    <a href="/sp/">Episode Guide</a>
-    <a href="/wiki/">Wiki</a>
-  </div>
+<div class="mobile-nav-inner">
+<a href="#news">News</a>
+<a href="/sp/">Episode Guide</a>
+<a href="/wiki/">Wiki</a>
 </div>
-
-
+</div>
 <main>
-
-<section class="show-brand" aria-label="South Park fan archive">
-  <div class="show-brand-inner">
-    <h1 class="guide-logo" aria-label="South Park">
-      <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
-      <span class="logo-gap" aria-hidden="true"></span>
-      <span>P</span><span>A</span><span>R</span><span>K</span>
-    </h1>
-    <div class="paper-link-row" aria-label="Primary links">
-      <a class="paper-link paper-link-news" href="#news">News</a>
-      <a class="paper-link paper-link-guide" href="/sp/">Episode Guide</a>
-      <a class="paper-link paper-link-wiki" href="/wiki/">Wiki</a>
-    </div>
-  </div>
+<section aria-label="South Park fan archive" class="show-brand">
+<div class="show-brand-inner">
+<h1 aria-label="South Park" class="guide-logo">
+<span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
+<span aria-hidden="true" class="logo-gap"></span>
+<span>P</span><span>A</span><span>R</span><span>K</span>
+</h1>
+<div aria-label="Primary links" class="paper-link-row">
+<a class="paper-link paper-link-news" href="#news">News</a>
+<a class="paper-link paper-link-guide" href="/sp/">Episode Guide</a>
+<a class="paper-link paper-link-wiki" href="/wiki/">Wiki</a>
+</div>
+</div>
 </section>
-
-  <section class="hero">
-    <img src="https://lewis.lc/sp/img/titlecard.png" alt="South Park">
-    <div class="hero-copy">
-      <div class="eyebrow">Current Feature · Season 29</div>
-      <h1>South Park is back.</h1>
-      <p>The newest season takes over the homepage. Use this space for the latest episode, a new special, or whatever is happening in South Park right now.</p>
-      <div class="actions">
-        <a class="paper-cta" href="/sp/?season=29">Explore Season 29 <span>→</span></a>
-        <a class="paper-cta paper-cta-alt" href="/sp/">Episode Guide <span>→</span></a>
-      </div>
-    </div>
-  </section>
+<section class="hero">
+<img alt="South Park" src="https://lewis.lc/sp/img/titlecard.png"/>
+<div class="hero-copy">
+<div class="eyebrow">Current Feature · Season 29</div>
+<h1>South Park is back.</h1>
+<p>The newest season takes over the homepage. Use this space for the latest episode, a new special, or whatever is happening in South Park right now.</p>
+<div class="actions">
+<a class="paper-cta" href="/sp/?season=29">Explore Season 29 <span>→</span></a>
+<a class="paper-cta paper-cta-alt" href="/sp/">Episode Guide <span>→</span></a>
+</div>
+</div>
+</section>
 <section class="section" id="news">
-    <div class="section-title-row">
-      <h2>Latest News</h2>
-    </div>
-    <div class="news-grid">
-      <a class="news-item" href="#"><img src="https://lewis.lc/sp/img/sns.png" alt=""><div class="date">09/09/2026</div><h3>Collection: Happy Birthday Butters</h3></a>
-      <a class="news-item" href="#"><img src="https://lewis.lc/sp/img/titlecard.png" alt=""><div class="date">09/09/2026</div><h3>After 29 Years South Park Changes Its Name</h3></a>
-      <a class="news-item" href="#"><img src="https://lewis.lc/sp/img/tc.png" alt=""><div class="date">09/02/2026</div><h3>Collection: Hugs &amp; Kisses</h3></a>
-      <a class="news-item" href="#"><img src="https://lewis.lc/sp/img/twith.png" alt=""><div class="date">08/26/2026</div><h3>Collection: On the Job</h3></a>
-      <a class="news-item" href="#"><img src="https://lewis.lc/sp/img/tt.png" alt=""><div class="date">08/19/2026</div><h3>Collection: Dead Kennys</h3></a>
-      <a class="news-item" href="#"><img src="https://lewis.lc/sp/img/cgaap.png" alt=""><div class="date">08/12/2026</div><h3>Collection: Best of South Park</h3></a>
-      <a class="news-item news-hidden" href="#"><img src="https://lewis.lc/sp/img/dh.png" alt=""><div class="date">08/05/2026</div><h3>Collection: Best of Mr. Mackey</h3></a>
-      <a class="news-item news-hidden" href="#"><img src="https://lewis.lc/sp/img/jtp.png" alt=""><div class="date">07/29/2026</div><h3>Collection: Best Friends</h3></a>
-    </div>
-    <div class="load-wrap"><button class="load" id="loadMore" type="button">Load More</button></div>
-  </section>
+<div class="section-title-row">
+<h2>Latest News</h2>
+</div>
+<div class="news-grid">
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/sns.png"/><div class="date">09/09/2026</div><h3>Collection: Happy Birthday Butters</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/titlecard.png"/><div class="date">09/09/2026</div><h3>After 29 Years South Park Changes Its Name</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/tc.png"/><div class="date">09/02/2026</div><h3>Collection: Hugs &amp; Kisses</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/twith.png"/><div class="date">08/26/2026</div><h3>Collection: On the Job</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/tt.png"/><div class="date">08/19/2026</div><h3>Collection: Dead Kennys</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/cgaap.png"/><div class="date">08/12/2026</div><h3>Collection: Best of South Park</h3></a>
+<a class="news-item news-hidden" href="#"><img alt="" src="https://lewis.lc/sp/img/dh.png"/><div class="date">08/05/2026</div><h3>Collection: Best of Mr. Mackey</h3></a>
+<a class="news-item news-hidden" href="#"><img alt="" src="https://lewis.lc/sp/img/jtp.png"/><div class="date">07/29/2026</div><h3>Collection: Best Friends</h3></a>
+</div>
+<div class="load-wrap"><button class="load" id="loadMore" type="button">Load More</button></div>
+</section>
 </main>
 <footer>
-  <div class="footer-inner">
-    <div>Unofficial South Park fan archive.</div>
-    <div class="footer-links"><a href="/sp/">Episode Guide</a><a href="/wiki/">Wiki</a><a href="#news">News</a></div>
-  </div>
+<div class="footer-inner">
+<div>Unofficial South Park fan archive.</div>
+<div class="footer-links"><a href="/sp/">Episode Guide</a><a href="/wiki/">Wiki</a><a href="#news">News</a></div>
+</div>
 </footer>
-
-
 <script>
-const root = document.documentElement;
-
-
-
-
-
 const loadMore = document.getElementById('loadMore');
+
 if (loadMore) {
   loadMore.addEventListener('click', () => {
-    const hidden = [...document.querySelectorAll('.news-item.news-hidden')];
-    const batch = hidden.slice(0, 6);
-    batch.forEach((card, index) => {
+    const hiddenCards = [...document.querySelectorAll('.news-item.news-hidden')];
+    hiddenCards.slice(0, 6).forEach((card, index) => {
       card.classList.remove('news-hidden');
       card.classList.add('news-reveal');
       card.style.animationDelay = `${index * 55}ms`;
     });
+
     if (!document.querySelector('.news-item.news-hidden')) {
       loadMore.hidden = true;
     }
   });
 }
 
-const menuButton = document.querySelector('.menu');
+const menuButton = document.getElementById('menuButton');
 const mobileNav = document.getElementById('mobileNav');
 
-if (menuButton && mobileNav) {
+function closeMobileNav() {
+  if (!menuButton || !mobileNav) return;
+  mobileNav.classList.remove('open');
   menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-controls', 'mobileNav');
+  menuButton.setAttribute('aria-label', 'Open menu');
+  menuButton.textContent = '☰';
+}
 
+if (menuButton && mobileNav) {
   menuButton.addEventListener('click', () => {
-    const open = mobileNav.classList.toggle('open');
+    const open = !mobileNav.classList.contains('open');
+    mobileNav.classList.toggle('open', open);
     menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     menuButton.textContent = open ? '×' : '☰';
   });
 
   mobileNav.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileNav.classList.remove('open');
-      menuButton.setAttribute('aria-expanded', 'false');
-      menuButton.textContent = '☰';
-    });
+    link.addEventListener('click', closeMobileNav);
   });
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && mobileNav.classList.contains('open')) {
-      mobileNav.classList.remove('open');
-      menuButton.setAttribute('aria-expanded', 'false');
-      menuButton.textContent = '☰';
+      closeMobileNav();
       menuButton.focus();
     }
   });
-}
 
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 760) closeMobileNav();
+  });
+}
 
 const scrollHeader = document.getElementById('scrollHeader');
 
-function updateScrollHeader(){
+function updateScrollHeader() {
   if (!scrollHeader) return;
-  const shouldShow = window.scrollY > 120;
-  scrollHeader.classList.toggle('is-visible', shouldShow);
+
+  const threshold = window.innerWidth <= 760 ? 6 : 120;
+  scrollHeader.classList.toggle('is-visible', window.scrollY > threshold);
 }
 
 updateScrollHeader();
-window.addEventListener('scroll', updateScrollHeader, { passive:true });
-
+window.addEventListener('scroll', updateScrollHeader, {passive:true});
+window.addEventListener('resize', updateScrollHeader);
 </script>
-
 </body>
 </html>
