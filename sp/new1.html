@@ -719,6 +719,53 @@ footer{
     animation:none!important;
   }
 }
+
+/* Four-colour rough paper accent from the episode-guide wordmark. */
+.guide-logo{
+  position:relative;
+  padding-bottom:14px;
+}
+
+.guide-logo::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:1px;
+  width:min(270px,78%);
+  height:7px;
+  background:linear-gradient(
+    90deg,
+    #5161AC 0 24%,
+    transparent 24% 25.5%,
+    #009B67 25.5% 49%,
+    transparent 49% 50.5%,
+    #59C0D5 50.5% 74%,
+    transparent 74% 75.5%,
+    #F47321 75.5% 100%
+  );
+  clip-path:polygon(
+    0 28%,7% 13%,14% 24%,21% 8%,29% 20%,37% 3%,
+    45% 18%,53% 7%,61% 22%,69% 5%,77% 19%,86% 9%,100% 24%,
+    98% 76%,90% 88%,81% 72%,72% 91%,63% 76%,54% 94%,
+    45% 77%,36% 91%,27% 73%,18% 89%,9% 75%,2% 91%
+  );
+  transform:translateX(-50%) rotate(-1deg);
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.18));
+  opacity:.72;
+  pointer-events:none;
+}
+
+@media(max-width:760px){
+  .guide-logo{
+    padding-bottom:13px;
+  }
+
+  .guide-logo::after{
+    width:min(220px,78%);
+    height:6px;
+  }
+}
+
 </style>
 </head>
 <body id="top">
