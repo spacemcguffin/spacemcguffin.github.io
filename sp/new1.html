@@ -749,6 +749,148 @@ footer{
   }
 }
 
+
+/* Requested finishing pass */
+
+/* 3 — tighter hero now the copy is intentionally concise */
+.hero,
+.hero-copy{
+  min-height:545px;
+}
+
+/* 1 — editorial hero details */
+.hero-date{
+  margin:-5px 0 13px;
+  color:rgba(255,255,255,.76);
+  font-size:.63rem;
+  font-weight:760;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.hero-dek{
+  max-width:520px !important;
+  margin:17px 0 0 !important;
+  color:rgba(255,255,255,.82) !important;
+  font-size:1rem !important;
+  line-height:1.45 !important;
+}
+
+/* 6 — hard editorial handoff: hero directly into the light news page */
+#news{
+  border-top:0;
+}
+
+/* 9 — date reads through typography, not faded colour */
+.news-item .date{
+  color:var(--ink);
+  font-size:.64rem;
+  font-weight:850;
+  letter-spacing:.105em;
+  line-height:1.2;
+  text-transform:uppercase;
+}
+
+/* 11 — compact utility header */
+.header-inner{
+  height:54px;
+}
+
+@media(max-width:760px){
+  .header-inner{height:54px}
+  .mobile-nav{top:54px}
+}
+
+/* 13 — stronger footer identity */
+.footer-inner{
+  min-height:126px;
+}
+
+.footer-brand{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.footer-logo{
+  display:flex;
+  align-items:baseline;
+  width:max-content;
+  color:#fff;
+  font-size:1.15rem;
+  font-weight:800;
+  line-height:.82;
+  text-transform:uppercase;
+}
+
+.footer-logo>span:not(.footer-gap){
+  display:inline-block;
+  margin-right:-.045em;
+  transform-origin:50% 72%;
+}
+
+.footer-gap{
+  width:.22em;
+  flex:0 0 .22em;
+}
+
+.footer-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
+.footer-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
+.footer-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
+.footer-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
+.footer-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
+.footer-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
+.footer-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
+.footer-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
+.footer-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
+
+.footer-meta{
+  color:rgba(255,255,255,.48);
+  font-size:.6rem;
+  font-weight:720;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.footer-links a{
+  font-size:.64rem;
+  font-weight:760;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+@media(max-width:760px){
+  .hero,
+  .hero-copy{
+    min-height:510px;
+  }
+
+  .footer-inner{
+    min-height:150px;
+  }
+}
+
+
+/* Refined hero */
+.hero-date{
+  margin:0 0 14px;
+  font-size:.74rem;
+  font-weight:780;
+  letter-spacing:.08em;
+}
+
+.hero h1{
+  text-shadow:
+    0 2px 3px rgba(0,0,0,.34),
+    0 8px 22px rgba(0,0,0,.28);
+}
+
+@media(max-width:760px){
+  .hero-date{
+    font-size:.7rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -794,12 +936,12 @@ footer{
 <section class="hero">
 <img alt="South Park" src="https://lewis.lc/sp/img/titlecard.png"/>
 <div class="hero-copy">
-<div class="hero-paper-label">Latest News</div>
+<div class="hero-date">September 9, 2026</div>
 <h1>South Park is back.</h1>
+<p class="hero-dek">A new season begins in South Park.</p>
 <div class="actions">
-<a class="paper-cta" href="/sp/?season=29">Explore Season 29 <span>→</span></a>
-<a class="paper-cta paper-cta-alt" href="/sp/">Episode Guide <span>→</span></a>
-</div>
+      <a class="paper-cta" href="#news">Read More <span>→</span></a>
+    </div>
 </div>
 </section>
 <section class="section" id="news">
@@ -820,10 +962,21 @@ footer{
 </section>
 </main>
 <footer>
-<div class="footer-inner">
-<div>Unofficial South Park fan archive.</div>
-<div class="footer-links"><a href="/sp/">Episode Guide</a><a href="/wiki/">Wiki</a><a href="#news">News</a></div>
-</div>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo" aria-label="South Park">
+        <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
+        <span class="footer-gap" aria-hidden="true"></span>
+        <span>P</span><span>A</span><span>R</span><span>K</span>
+      </div>
+      <div class="footer-meta">Fan Archive · 1997—2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="#news">News</a>
+      <a href="/sp/">Episode Guide</a>
+      <a href="/wiki/">Wiki</a>
+    </div>
+  </div>
 </footer>
 <script>
 const loadMore = document.getElementById('loadMore');
@@ -888,17 +1041,28 @@ if (menuButton && mobileNav) {
 }
 
 const scrollHeader = document.getElementById('scrollHeader');
+let lastScrollY = window.scrollY;
 
 function updateScrollHeader() {
   if (!scrollHeader) return;
 
-  const threshold = window.innerWidth <= 760 ? 6 : 120;
-  scrollHeader.classList.toggle('is-visible', window.scrollY > threshold);
+  const currentY = window.scrollY;
+  const atTop = currentY <= 6;
+  const scrollingUp = currentY < lastScrollY;
+
+  if (atTop) {
+    scrollHeader.classList.remove('is-visible');
+    closeMobileNav();
+  } else {
+    scrollHeader.classList.toggle('is-visible', scrollingUp);
+    if (!scrollingUp) closeMobileNav();
+  }
+
+  lastScrollY = currentY;
 }
 
 updateScrollHeader();
 window.addEventListener('scroll', updateScrollHeader, {passive:true});
-window.addEventListener('resize', updateScrollHeader);
 </script>
 </body>
 </html>
