@@ -591,6 +591,63 @@ footer{
   }
 }
 
+
+/* Slightly smaller homepage branding */
+.guide-logo{
+  font-size:clamp(3.15rem,7vw,6.6rem);
+}
+
+.hero h1{
+  font-size:clamp(3.65rem,7.2vw,6.9rem);
+}
+
+/* Paper Load More button */
+.load{
+  min-height:44px;
+  padding:0 20px;
+  border:1px solid rgba(44,47,50,.16);
+  background:linear-gradient(145deg,#f3d55b,#dfbd3f);
+  color:#292612;
+  font-size:.65rem;
+  font-weight:820;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 5px 12px rgba(23,34,51,.10);
+  clip-path:polygon(
+    1% 7%,10% 2%,22% 5%,34% 1%,46% 4%,58% 0,70% 4%,82% 2%,99% 6%,
+    98% 94%,86% 99%,74% 96%,61% 100%,49% 97%,36% 100%,23% 96%,11% 99%,1% 95%
+  );
+  transform:rotate(-.35deg);
+  transition:transform .18s ease,filter .18s ease,opacity .18s ease;
+}
+
+.load:hover:not(:disabled){
+  background:linear-gradient(145deg,#f3d55b,#dfbd3f);
+  transform:rotate(-.35deg) translateY(-2px);
+  filter:brightness(1.035);
+}
+
+.load:disabled{
+  background:linear-gradient(145deg,#dedede,#c8c8c8);
+  color:#737373;
+  border-color:rgba(23,34,51,.10);
+  cursor:default;
+  box-shadow:none;
+  opacity:.82;
+  transform:rotate(-.35deg);
+}
+
+@media(max-width:760px){
+  .guide-logo{
+    font-size:clamp(2.45rem,11.5vw,4.15rem);
+  }
+
+  .hero h1{
+    font-size:clamp(3.15rem,15vw,5.15rem);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -672,6 +729,12 @@ footer{
 const loadMore = document.getElementById('loadMore');
 
 if (loadMore) {
+  if (!document.querySelector('.news-item.news-hidden')) {
+    loadMore.textContent = 'All Posts';
+    loadMore.disabled = true;
+    loadMore.setAttribute('aria-disabled', 'true');
+  }
+
   loadMore.addEventListener('click', () => {
     const hiddenCards = [...document.querySelectorAll('.news-item.news-hidden')];
     hiddenCards.slice(0, 6).forEach((card, index) => {
@@ -681,7 +744,9 @@ if (loadMore) {
     });
 
     if (!document.querySelector('.news-item.news-hidden')) {
-      loadMore.hidden = true;
+      loadMore.textContent = 'All Posts';
+      loadMore.disabled = true;
+      loadMore.setAttribute('aria-disabled', 'true');
     }
   });
 }
