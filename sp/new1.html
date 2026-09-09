@@ -393,7 +393,7 @@ img{display:block;max-width:100%}
 #news h2{
   margin:0;
   color:var(--ink);
-  font-size:clamp(2.9rem,4.8vw,4.9rem);
+  font-size:clamp(2.6rem,4.3vw,4.4rem);
   font-weight:850;
   line-height:.9;
   letter-spacing:-.055em;
@@ -446,8 +446,12 @@ img{display:block;max-width:100%}
 .news-item h3{
   margin:0;
   color:var(--ink);
-  font-size:1.2rem;
-  line-height:1.25;
+  font-family:"Google Sans Flex",sans-serif;
+  font-size:1.36rem;
+  font-weight:570;
+  line-height:1.16;
+  letter-spacing:-.02em;
+  text-wrap:balance;
 }
 
 .news-hidden{display:none}
@@ -708,6 +712,12 @@ footer{
   .mini-guide-logo.logo-jump>span:not(.logo-gap),
   .guide-logo.logo-jump>span:not(.logo-gap){
     animation-duration:300ms;
+  }
+}
+
+@media(max-width:760px){
+  #news h2{
+    font-size:clamp(2.2rem,10vw,3rem);
   }
 }
 
