@@ -9,6 +9,7 @@
 <style>
 :root{
   --bg:#11141d;
+  --town-bg:url("https://lewis.lc/wiki/img/nighttime.png");
   --panel:#181c27;
   --text:#fff;
   --muted:rgba(255,255,255,.65);
@@ -18,6 +19,7 @@
 }
 html[data-theme="light"]{
   --bg:#eef3f7;
+  --town-bg:url("https://lewis.lc/wiki/img/daytime.png");
   --panel:#ffffff;
   --text:#172233;
   --muted:rgba(23,34,51,.62);
@@ -25,7 +27,20 @@ html[data-theme="light"]{
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
-body{margin:0;background:var(--bg);color:var(--text);font-family:"Google Sans Flex",Arial,sans-serif;overflow-x:hidden}
+body{
+  margin:0;
+  color:var(--text);
+  font-family:"Google Sans Flex",Arial,sans-serif;
+  overflow-x:hidden;
+  background:
+    linear-gradient(rgba(17,20,29,.88),rgba(17,20,29,.88)),
+    var(--town-bg) center top / cover fixed no-repeat;
+}
+html[data-theme="light"] body{
+  background:
+    linear-gradient(rgba(238,243,247,.84),rgba(238,243,247,.84)),
+    var(--town-bg) center top / cover fixed no-repeat;
+}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 img{display:block;max-width:100%}
@@ -56,7 +71,15 @@ nav a:hover{opacity:.65}
 .menu{display:none;border:0;background:transparent;color:#fff;font-size:1.4rem}
 
 .hero{
-  width:100%;min-height:610px;position:relative;overflow:hidden;background:#202635
+  width:var(--shell);
+  min-height:610px;
+  position:relative;
+  overflow:hidden;
+  margin:0 auto 34px;
+  background:#202635;
+  border-radius:24px;
+  border:1px solid var(--line);
+  box-shadow:0 28px 70px rgba(0,0,0,.22);
 }
 .hero img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover
@@ -67,9 +90,16 @@ nav a:hover{opacity:.65}
              linear-gradient(0deg,rgba(17,20,29,.4),transparent 45%)
 }
 .hero-copy{
-  position:relative;z-index:2;width:var(--shell);min-height:610px;margin:auto;
-  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
-  padding:70px 0
+  position:relative;
+  z-index:2;
+  width:100%;
+  min-height:610px;
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:70px 54px;
 }
 .eyebrow{
   margin-bottom:13px;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase
@@ -93,7 +123,9 @@ nav a:hover{opacity:.65}
 .btn:hover{transform:translateY(-1px)}
 
 .section{
-  width:var(--shell);margin:0 auto;padding:76px 0
+  width:var(--shell);
+  margin:0 auto;
+  padding:76px 0;
 }
 .section + .section{border-top:1px solid var(--line)}
 .section-title-row{
@@ -514,7 +546,7 @@ html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scal
 
 
 .show-brand{
-  background:var(--bg);
+  background:transparent;
   border-bottom:1px solid var(--line);
 }
 .show-brand-inner{
@@ -650,7 +682,7 @@ html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scal
 }
 
 html[data-theme="light"] .show-brand{
-  background:var(--bg);
+  background:transparent;
 }
 html[data-theme="light"] .cinematic-break::after{
   background:
@@ -890,10 +922,118 @@ html[data-theme="light"] .season-mini:hover{
   }
 }
 
+
+/* Scroll-only header */
+.scroll-header{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:100;
+  transform:translateY(-110%);
+  opacity:0;
+  pointer-events:none;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s ease;
+}
+.scroll-header.is-visible{
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Main /sp/ letter wobble — exact transforms carried over */
+.guide-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
+.guide-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
+.guide-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
+.guide-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
+.guide-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
+.guide-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
+.guide-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
+.guide-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
+.guide-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
+
+.paper-nav{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.paper-nav a{
+  position:relative;
+  color:#262a30;
+}
+.paper-nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:-2px;
+  height:1.5px;
+  background:currentColor;
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .18s ease;
+}
+.paper-nav a:hover::after{transform:scaleX(1)}
+.paper-nav span{
+  opacity:.42;
+  color:#262a30;
+}
+
+main{
+  padding-bottom:30px;
+}
+
+/* Let the town backdrop remain visible between sections */
+#news{
+  background:rgba(17,20,29,.72);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding-left:28px;
+  padding-right:28px;
+  margin-bottom:42px;
+  backdrop-filter:blur(7px);
+  -webkit-backdrop-filter:blur(7px);
+}
+html[data-theme="light"] #news{
+  background:rgba(255,255,255,.72);
+}
+
+footer{
+  background:rgba(5,6,9,.82);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+html[data-theme="light"] footer{
+  background:rgba(238,243,247,.90);
+}
+html[data-theme="light"] .footer-inner{
+  color:rgba(23,34,51,.52);
+}
+
+@media(max-width:760px){
+  .hero{
+    width:calc(100% - 20px);
+    min-height:560px;
+    border-radius:18px;
+    margin-bottom:22px;
+  }
+  .hero-copy{
+    min-height:560px;
+    padding:36px 24px 44px;
+  }
+  #news{
+    width:calc(100% - 20px);
+    padding-left:18px;
+    padding-right:18px;
+  }
+}
+
 </style>
 </head>
 <body>
-<header>
+<header class="scroll-header" id="scrollHeader">
   <div class="header-inner">
     <a class="mini-guide-logo" href="/" aria-label="South Park">
       <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
@@ -943,7 +1083,13 @@ html[data-theme="light"] .season-mini:hover{
       <span class="logo-gap" aria-hidden="true"></span>
       <span>P</span><span>A</span><span>R</span><span>K</span>
     </h1>
-    <div class="paper-subtitle">Fan Archive</div>
+    <div class="paper-subtitle paper-nav" aria-label="Primary links">
+      <a href="#news">News</a>
+      <span aria-hidden="true">·</span>
+      <a href="/sp/">Episode Guide</a>
+      <span aria-hidden="true">·</span>
+      <a href="/wiki/">Wiki</a>
+    </div>
   </div>
 </section>
 
@@ -959,72 +1105,7 @@ html[data-theme="light"] .season-mini:hover{
       </div>
     </div>
   </section>
-
-
-<section class="section current-season" id="current-season">
-  <div class="season-shell">
-    <div class="season-heading">
-      <div>
-        <div class="season-paper-label">Season 29</div>
-        <h2>Current Season</h2>
-        <p>Catch up with the newest episodes, then jump into the full season archive.</p>
-      </div>
-      <a class="section-link" href="/sp/?season=29">View full season →</a>
-    </div>
-
-    <div class="season-feature-grid">
-      <a class="season-feature" href="/sp/?season=29">
-        <div class="season-feature-media">
-          <img src="https://lewis.lc/sp/img/titlecard.png" alt="">
-          <div class="season-feature-badge">Latest Episode</div>
-        </div>
-        <div class="season-feature-copy">
-          <div class="episode-meta">S29 · E4</div>
-          <h3>Episode Four</h3>
-          <p>The latest episode from the current season.</p>
-          <span class="season-watch-link">View episode →</span>
-        </div>
-      </a>
-
-      <div class="season-side-list">
-        <a class="season-mini" href="/sp/?season=29">
-          <img src="https://lewis.lc/sp/img/twith.png" alt="">
-          <div>
-            <div class="episode-meta">S29 · E3</div>
-            <h3>Episode Three</h3>
-          </div>
-        </a>
-
-        <a class="season-mini" href="/sp/?season=29">
-          <img src="https://lewis.lc/sp/img/sns.png" alt="">
-          <div>
-            <div class="episode-meta">S29 · E2</div>
-            <h3>Episode Two</h3>
-          </div>
-        </a>
-
-        <a class="season-mini" href="/sp/?season=29">
-          <img src="https://lewis.lc/sp/img/tt.png" alt="">
-          <div>
-            <div class="episode-meta">S29 · E1</div>
-            <h3>Season Premiere</h3>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="cinematic-break" aria-label="South Park feature image">
-  <img src="https://lewis.lc/wiki/img/nighttime.png" alt="">
-  <div class="cinematic-break-overlay">
-    <div class="cinematic-label">South Park, Colorado</div>
-  </div>
-</section>
-
-
-  <section class="section" id="news">
+<section class="section" id="news">
     <div class="section-title-row">
       <h2>Latest News</h2>
     </div>
@@ -1117,6 +1198,18 @@ if (menuButton && mobileNav) {
     }
   });
 }
+
+
+const scrollHeader = document.getElementById('scrollHeader');
+
+function updateScrollHeader(){
+  if (!scrollHeader) return;
+  const shouldShow = window.scrollY > 120;
+  scrollHeader.classList.toggle('is-visible', shouldShow);
+}
+
+updateScrollHeader();
+window.addEventListener('scroll', updateScrollHeader, { passive:true });
 
 </script>
 
