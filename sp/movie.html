@@ -904,8 +904,7 @@ a {
 }
 
 .episode-card:hover {
-  transform:
-    translateY(-5px);
+  transform: none;
 
   border-color:
     rgba(255,255,255,0.28);
@@ -7401,6 +7400,255 @@ body.modal-open #activeFilters {
     font-size: .69rem !important;
   }
 }
+
+
+/* =========================================================
+   SEASON RAIL EDGE NAVIGATION
+========================================================= */
+
+.season-rail-shell {
+  position: relative;
+}
+
+.season-rail-edge {
+  position: absolute;
+  top: 50%;
+  z-index: 8;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid rgba(91, 157, 245, .32);
+  border-radius: 50%;
+  background: rgba(6, 18, 36, .82);
+  color: rgba(225, 237, 255, .86);
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: 0 4px 14px rgba(0,0,0,.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, opacity .2s ease;
+}
+
+.season-rail-edge-left {
+  left: -10px;
+}
+
+.season-rail-edge-right {
+  right: -10px;
+}
+
+.season-rail-edge:hover {
+  color: #fff;
+  border-color: rgba(92, 168, 255, .72);
+  background: rgba(19, 55, 98, .92);
+}
+
+.season-rail-edge-left:hover {
+  transform: translate(-2px, -50%);
+}
+
+.season-rail-edge-right:hover {
+  transform: translate(2px, -50%);
+}
+
+.season-rail-edge:disabled {
+  opacity: .24;
+  cursor: default;
+  pointer-events: none;
+}
+
+.season-rail-shell::before,
+.season-rail-shell::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 5;
+  width: 40px;
+  pointer-events: none;
+}
+
+.season-rail-shell::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(2, 8, 20, .9), transparent);
+}
+
+.season-rail-shell::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(2, 8, 20, .9), transparent);
+}
+
+@media (max-width: 760px) {
+  .season-rail-edge {
+    display: none !important;
+  }
+
+  .season-rail-shell::before,
+  .season-rail-shell::after {
+    display: none;
+  }
+}
+
+
+
+/* =========================================================
+   SEASON RAIL — INLINE CIRCULAR NAV BOOKENDS
+========================================================= */
+
+.season-rail-shell {
+  display: grid !important;
+  grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+  align-items: center !important;
+  gap: 10px !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.season-rail-viewport {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.season-rail-edge {
+  position: static !important;
+  z-index: auto !important;
+  width: 42px !important;
+  min-width: 42px !important;
+  height: 42px !important;
+  padding: 0 !important;
+  display: grid !important;
+  place-items: center !important;
+  transform: none !important;
+  border-radius: 50% !important;
+  border: 1px solid hsla(212, 48%, 66%, .46) !important;
+  background:
+    radial-gradient(circle at 35% 25%, hsla(212, 55%, 70%, .28), transparent 42%),
+    linear-gradient(145deg, hsla(212, 42%, 44%, .52), hsla(212, 38%, 22%, .58)) !important;
+  color: rgba(239, 246, 255, .92) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.25),
+    0 4px 12px rgba(0,0,0,.2) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  font-size: 1.45rem !important;
+  font-weight: 670 !important;
+  line-height: 1 !important;
+}
+
+.season-rail-edge span {
+  display: block;
+  line-height: .8;
+  transform: translateY(-1px);
+}
+
+.season-rail-edge:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  border-color: hsla(212, 58%, 68%, .78) !important;
+  background:
+    radial-gradient(circle at 35% 25%, hsla(212, 62%, 72%, .34), transparent 42%),
+    linear-gradient(145deg, hsla(212, 52%, 50%, .68), hsla(212, 45%, 27%, .72)) !important;
+  box-shadow:
+    0 0 0 2px rgba(5,14,29,.95),
+    0 0 0 4px hsla(212, 56%, 62%, .38),
+    0 5px 14px rgba(0,0,0,.22) !important;
+}
+
+.season-rail-edge:disabled {
+  display: grid !important;
+  opacity: .28 !important;
+  cursor: default !important;
+  pointer-events: none !important;
+  filter: saturate(.55);
+}
+
+/* The nav circles are now real rail items, so the old overlay fades are unnecessary. */
+.season-rail-shell::before,
+.season-rail-shell::after {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .season-rail-shell {
+    grid-template-columns: 36px minmax(0, 1fr) 36px !important;
+    gap: 7px !important;
+  }
+
+  .season-rail-edge {
+    display: grid !important;
+    width: 36px !important;
+    min-width: 36px !important;
+    height: 36px !important;
+    font-size: 1.25rem !important;
+  }
+
+  .season-rail-viewport {
+    overflow: hidden;
+  }
+
+  .who-season-rail {
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
+/* Centered SVG chevrons for season rail navigation */
+.season-rail-edge svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* Vertically align the rail bookends with the season circles.
+   Desktop nav circles are 42px vs 38px seasons, so 4px places
+   their centres on the same horizontal axis. */
+.season-rail-edge {
+  align-self: start !important;
+  margin-top: 4px !important;
+}
+
+@media (max-width: 760px) {
+  .season-rail-edge {
+    /* Mobile nav and season circles are both 36px; match the
+       season rail's 6px top padding exactly. */
+    margin-top: 6px !important;
+  }
+
+  .season-rail-edge svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* Keep rail navigation hidden with the collapsed Filters drawer. */
+  .season-strip:not(.mobile-open) .season-rail-edge {
+    display: none !important;
+  }
+
+  .season-strip:not(.mobile-open) .season-rail-shell {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 0 !important;
+  }
+
+  /* When Filters opens, the arrows and season circles appear as one rail. */
+  .season-strip.mobile-open .season-rail-shell {
+    grid-template-columns: 36px minmax(0, 1fr) 36px !important;
+    gap: 7px !important;
+  }
+
+  .season-strip.mobile-open .season-rail-edge {
+    display: grid !important;
+  }
+}
 </style>
 </head>
 
@@ -7538,11 +7786,6 @@ body.modal-open #activeFilters {
         </button>
 
         <div class="season-strip-actions">
-          <div class="season-strip-arrows">
-            <button type="button" id="seasonRailPrevious" aria-label="Scroll seasons left">‹</button>
-            <button type="button" id="seasonRailNext" aria-label="Scroll seasons right">›</button>
-          </div>
-
           <div class="view-toggle" aria-label="Episode display">
             <button type="button" class="view-button active" id="gridViewButton" data-view="grid" aria-label="Grid view" data-tooltip="Grid view">
               <span aria-hidden="true">▦</span>
@@ -7555,7 +7798,11 @@ body.modal-open #activeFilters {
       </div>
 
       <div class="season-rail-shell" id="seasonRailShell">
-        <div class="season-rail who-season-rail" id="seasonRail"></div>
+        <button type="button" class="season-rail-edge season-rail-edge-left" id="seasonRailPrevious" aria-label="Scroll seasons left"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+        <div class="season-rail-viewport">
+          <div class="season-rail who-season-rail" id="seasonRail"></div>
+        </div>
+        <button type="button" class="season-rail-edge season-rail-edge-right" id="seasonRailNext" aria-label="Scroll seasons right"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9.5 5.5 6.5 6.5-6.5 6.5"/></svg></button>
       </div>
 
       <div class="season-tooltip" id="seasonTooltip" role="tooltip" aria-hidden="true"></div>
@@ -8825,7 +9072,7 @@ const episodes = [
     title: "Professor Chaos",
     date: "10 April 2002",
     year: 2002,
-    image: "/sp/img/pc.png",
+    image: "/sp/img/professorchaos.png",
     description:
       "After the boys dismiss him as their replacement for Kenny, Butters becomes the supervillain Professor Chaos while the others audition candidates for a new fourth friend.",
     featured: false
@@ -9520,7 +9767,7 @@ const episodes = [
     title: "Cartoon Wars Part I",
     date: "5 April 2006",
     year: 2006,
-    image: "/sp/img/cwpi.png",
+    image: "/sp/img/cw1.png",
     description:
       "South Park descends into panic when <em>Family Guy</em> plans to show an image of Mohammed, while Cartman sets out to have the episode stopped.",
     featured: false
@@ -9532,7 +9779,7 @@ const episodes = [
     title: "Cartoon Wars Part II",
     date: "12 April 2006",
     year: 2006,
-    image: "/sp/img/cwpii.png",
+    image: "/sp/img/cw2.png",
     description:
       "Cartman meets with the president of FOX in an attempt to cancel <em>Family Guy</em>.",
     featured: false
@@ -11679,7 +11926,7 @@ const episodes = [
   date: "1 June 2022",
   year: 2022,
   image: "/sp/img/tsw1.png",
-  description: "The Streaming Wars, Cartman locks horns with his mom in a battle of wills while an epic conflict unfolds that threatens South Park's very existence."
+  description: "Cartman locks horns with his mom in a battle of wills while an epic conflict unfolds that threatens South Park's very existence."
 },
    
 {
@@ -14928,10 +15175,14 @@ function syncSeasonRailOverflowCues() {
     seasonRail.scrollLeft > tolerance
   );
 
-  seasonRailShell.classList.toggle(
-    "can-scroll-right",
-    maxScroll > tolerance && seasonRail.scrollLeft < maxScroll - tolerance
-  );
+  const canScrollLeft = seasonRail.scrollLeft > tolerance;
+  const canScrollRight = maxScroll > tolerance && seasonRail.scrollLeft < maxScroll - tolerance;
+
+  seasonRailShell.classList.toggle("can-scroll-left", canScrollLeft);
+  seasonRailShell.classList.toggle("can-scroll-right", canScrollRight);
+
+  if (seasonRailPrevious) seasonRailPrevious.disabled = !canScrollLeft;
+  if (seasonRailNext) seasonRailNext.disabled = !canScrollRight;
 }
 
 seasonRail?.addEventListener(
