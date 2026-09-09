@@ -512,10 +512,163 @@ html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scal
   }
 }
 
+
+/* --- Requested homepage refinements --- */
+
+/* Header becomes a floating reveal on small viewports. */
+@media(max-width:760px){
+  header#siteHeader{
+    position:fixed;
+    inset:0 0 auto;
+    z-index:120;
+    transform:translateY(-110%);
+    opacity:0;
+    pointer-events:none;
+    transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .18s ease;
+  }
+
+  header#siteHeader.is-visible{
+    transform:translateY(0);
+    opacity:1;
+    pointer-events:auto;
+  }
+
+  .mobile-nav{
+    position:fixed;
+    top:64px;
+    z-index:119;
+  }
+}
+
+/* Keep hero visually dark even when the rest of the page is in light mode. */
+.hero{
+  color:#fff;
+}
+html[data-theme="light"] .hero{
+  color:#fff;
+}
+html[data-theme="light"] .hero:after{
+  background:
+    linear-gradient(90deg,rgba(5,7,12,.85),rgba(5,7,12,.32) 50%,rgba(5,7,12,.06)),
+    linear-gradient(0deg,rgba(17,20,29,.4),transparent 45%);
+}
+html[data-theme="light"] .hero p{
+  color:rgba(255,255,255,.78);
+}
+
+/* Hero headline contrast. */
+.hero h1{
+  text-shadow:
+    0 2px 3px rgba(0,0,0,.38),
+    0 9px 24px rgba(0,0,0,.30);
+}
+
+/* Orange paper CTA + SVG chevron. */
+.paper-cta{
+  background:linear-gradient(145deg,#f3b34b,#df8e2e);
+  color:#2a1b0d;
+  border-color:rgba(77,45,10,.20);
+}
+.cta-chevron{
+  width:12px;
+  height:12px;
+  flex:0 0 auto;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  transition:transform .18s ease;
+}
+.paper-cta:hover .cta-chevron{
+  transform:translateX(2px);
+}
+
+/* Latest News section */
+#news h2{
+  font-weight:850;
+}
+
+/* Never exceed three news cards per row. */
+.news-grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+}
+@media(max-width:1050px){
+  .news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .news-grid{grid-template-columns:1fr}
+}
+
+/* Give cards a distinct surface and a more tactile hover. */
+.news-item{
+  min-width:0;
+  padding:12px 12px 18px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  overflow:hidden;
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.news-item img{
+  transition:transform .25s ease,filter .25s ease;
+}
+.news-item:hover{
+  transform:translateY(-3px);
+  border-color:rgba(255,255,255,.28);
+  box-shadow:0 10px 24px rgba(0,0,0,.12);
+}
+.news-item:hover img{
+  transform:scale(1.025);
+}
+html[data-theme="light"] .news-item:hover{
+  border-color:rgba(23,34,51,.24);
+}
+
+/* Orange handmade load-more button. */
+.load{
+  min-height:44px;
+  padding:0 22px;
+  border:1px solid rgba(77,45,10,.20);
+  background:linear-gradient(145deg,#f3b34b,#df8e2e);
+  color:#2a1b0d;
+  cursor:pointer;
+  font-size:.63rem;
+  font-weight:830;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  box-shadow:0 6px 14px rgba(0,0,0,.14);
+  clip-path:polygon(
+    0 7%,9% 2%,18% 5%,29% 1%,40% 4%,51% 0,62% 4%,73% 1%,83% 5%,92% 2%,100% 6%,
+    98% 25%,100% 42%,98% 59%,100% 77%,98% 95%,88% 98%,76% 96%,64% 100%,
+    52% 97%,40% 100%,28% 96%,16% 99%,2% 97%,1% 79%,0 60%,2% 42%,0 24%
+  );
+  transform:rotate(-.35deg);
+  transition:transform .18s ease,filter .18s ease,opacity .18s ease;
+}
+.load:hover:not(:disabled){
+  transform:rotate(-.35deg) translateY(-2px);
+  filter:brightness(1.03);
+}
+.load:disabled{
+  background:linear-gradient(145deg,#d8d8d8,#bfc0c2);
+  color:#747474;
+  border-color:rgba(0,0,0,.08);
+  box-shadow:none;
+  cursor:default;
+  opacity:.82;
+}
+html[data-theme="light"] .load{
+  color:#2a1b0d;
+}
+html[data-theme="light"] .load:disabled{
+  color:#747474;
+}
+
 </style>
 </head>
 <body>
-<header>
+<header id="siteHeader">
   <div class="header-inner">
     <a class="mini-guide-logo" href="/" aria-label="South Park">
       <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
@@ -560,12 +713,14 @@ html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scal
   <section class="hero">
     <img src="https://lewis.lc/sp/img/titlecard.png" alt="South Park">
     <div class="hero-copy">
-      <div class="eyebrow">South Park Fan Archive</div>
       <h1>Welcome back to town.</h1>
       <p>Featured episodes, collections, news and highlights — with the full episode archive kept separately in the dedicated guide.</p>
       <div class="actions">
-        <a class="paper-cta" href="/sp/">Browse Episode Guide <span>→</span></a>
-        <a class="paper-cta paper-cta-alt" href="#news">Latest News <span>↓</span></a>
+        <a class="paper-cta" href="#news">Read More
+          <svg class="cta-chevron" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="M4.25 2.25 8 6 4.25 9.75"></path>
+          </svg>
+        </a>
       </div>
     </div>
   </section>
@@ -618,6 +773,12 @@ themeToggle.addEventListener('click', () => {
 
 const loadMore = document.getElementById('loadMore');
 if (loadMore) {
+  if (!document.querySelector('.news-item.news-hidden')) {
+    loadMore.textContent = 'All Posts';
+    loadMore.disabled = true;
+    loadMore.setAttribute('aria-disabled', 'true');
+  }
+
   loadMore.addEventListener('click', () => {
     const hidden = [...document.querySelectorAll('.news-item.news-hidden')];
     const batch = hidden.slice(0, 6);
@@ -627,7 +788,9 @@ if (loadMore) {
       card.style.animationDelay = `${index * 55}ms`;
     });
     if (!document.querySelector('.news-item.news-hidden')) {
-      loadMore.hidden = true;
+      loadMore.textContent = 'All Posts';
+      loadMore.disabled = true;
+      loadMore.setAttribute('aria-disabled', 'true');
     }
   });
 }
@@ -662,6 +825,33 @@ if (menuButton && mobileNav) {
     }
   });
 }
+
+
+
+const siteHeader = document.getElementById('siteHeader');
+
+function updateSmallViewHeader(){
+  if (!siteHeader) return;
+
+  if (window.innerWidth <= 760) {
+    const visible = window.scrollY > 6;
+    siteHeader.classList.toggle('is-visible', visible);
+
+    if (!visible && mobileNav) {
+      mobileNav.classList.remove('open');
+      if (menuButton) {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.textContent = '☰';
+      }
+    }
+  } else {
+    siteHeader.classList.remove('is-visible');
+  }
+}
+
+updateSmallViewHeader();
+window.addEventListener('scroll', updateSmallViewHeader, {passive:true});
+window.addEventListener('resize', updateSmallViewHeader);
 
 </script>
 
