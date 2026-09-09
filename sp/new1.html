@@ -1030,6 +1030,122 @@ html[data-theme="light"] .footer-inner{
   }
 }
 
+
+.paper-link-row{
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.paper-link{
+  appearance:none;
+  -webkit-appearance:none;
+  min-height:38px;
+  padding:0 14px;
+  border:1px solid rgba(44,47,50,.16);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(145deg,#efeee7,#d8d8d1);
+  color:#262a30;
+  font:inherit;
+  font-size:.68rem;
+  font-weight:820;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  cursor:pointer;
+  box-shadow:0 5px 12px rgba(0,0,0,.12);
+  clip-path:polygon(
+    1% 7%,10% 2%,22% 5%,34% 1%,46% 4%,58% 0,70% 4%,82% 2%,99% 6%,
+    98% 94%,86% 99%,74% 96%,61% 100%,49% 97%,36% 100%,23% 96%,11% 99%,1% 95%
+  );
+  transition:transform .18s ease,filter .18s ease;
+}
+.paper-link-news{transform:rotate(-.8deg)}
+.paper-link-guide{transform:rotate(.45deg)}
+.paper-link-wiki{transform:rotate(-.35deg)}
+.paper-theme-toggle{
+  width:42px;
+  padding:0;
+  transform:rotate(.7deg);
+}
+.paper-link:hover{
+  filter:brightness(1.035);
+}
+.paper-link-news:hover{transform:rotate(-.8deg) translateY(-2px)}
+.paper-link-guide:hover{transform:rotate(.45deg) translateY(-2px)}
+.paper-link-wiki:hover{transform:rotate(-.35deg) translateY(-2px)}
+.paper-theme-toggle:hover{transform:rotate(.7deg) translateY(-2px)}
+.paper-theme-toggle .theme-icon-wrap{
+  width:21px;
+  height:21px;
+}
+.paper-theme-toggle .theme-icon{
+  width:21px;
+  height:21px;
+}
+.paper-theme-toggle .theme-icon-moon{
+  color:#303844;
+}
+html[data-theme="light"] .paper-theme-toggle .theme-icon-sun{
+  color:#d59a14;
+}
+
+/* Make the compact header menu reliable on small screens */
+@media(max-width:760px){
+  .header-inner{
+    position:relative;
+  }
+  .header-actions{
+    margin-left:auto;
+  }
+  .menu{
+    display:grid !important;
+    position:relative;
+    z-index:102;
+  }
+  .mobile-nav{
+    top:64px;
+    z-index:101;
+  }
+  .mobile-nav.open{
+    max-height:300px;
+  }
+  .paper-link-row{
+    gap:8px;
+    margin-top:14px;
+  }
+  .paper-link{
+    min-height:36px;
+    padding:0 12px;
+    font-size:.63rem;
+  }
+  .paper-theme-toggle{
+    width:38px;
+    padding:0;
+  }
+}
+
+
+/* Mobile: keep header visible so hamburger is always accessible */
+@media(max-width:760px){
+  .scroll-header{
+    transform:translateY(0) !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+  }
+}
+
+
+/* Mobile header clearance: prevent fixed header overlapping the main logo */
+@media(max-width:760px){
+  .show-brand-inner{
+    padding-top:94px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1061,7 +1177,7 @@ html[data-theme="light"] .footer-inner{
           </svg>
         </span>
       </button>
-      <button class="menu" aria-label="Menu">☰</button>
+      <button class="menu" id="menuButton" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
     </div>
   </div>
 </header>
@@ -1083,12 +1199,23 @@ html[data-theme="light"] .footer-inner{
       <span class="logo-gap" aria-hidden="true"></span>
       <span>P</span><span>A</span><span>R</span><span>K</span>
     </h1>
-    <div class="paper-subtitle paper-nav" aria-label="Primary links">
-      <a href="#news">News</a>
-      <span aria-hidden="true">·</span>
-      <a href="/sp/">Episode Guide</a>
-      <span aria-hidden="true">·</span>
-      <a href="/wiki/">Wiki</a>
+    <div class="paper-link-row" aria-label="Primary links">
+      <a class="paper-link paper-link-news" href="#news">News</a>
+      <a class="paper-link paper-link-guide" href="/sp/">Episode Guide</a>
+      <a class="paper-link paper-link-wiki" href="/wiki/">Wiki</a>
+      <button class="paper-link paper-theme-toggle" id="heroThemeToggle" type="button" aria-label="Switch theme" title="Switch theme">
+        <span class="theme-icon-wrap" aria-hidden="true">
+          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+          </svg>
+          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24">
+            <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
+            <path class="theme-star" d="M18.5 3.5v3M17 5h3"></path>
+            <path class="theme-star" d="M20 8.7v2M19 9.7h2"></path>
+          </svg>
+        </span>
+      </button>
     </div>
   </div>
 </section>
@@ -1133,6 +1260,7 @@ html[data-theme="light"] .footer-inner{
 <script>
 const root = document.documentElement;
 const themeToggle = document.getElementById('themeToggle');
+const heroThemeToggle = document.getElementById('heroThemeToggle');
 
 const savedTheme = localStorage.getItem('southParkHomeTheme');
 if (savedTheme) root.dataset.theme = savedTheme;
@@ -1141,16 +1269,21 @@ else root.dataset.theme = 'dark';
 function updateThemeIcon(){
   const darkMode = root.dataset.theme === 'dark';
   const nextTheme = darkMode ? 'light' : 'dark';
-  themeToggle.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
-  themeToggle.setAttribute('title', `Switch to ${nextTheme} mode`);
+  [themeToggle, heroThemeToggle].forEach(btn => {
+    if (!btn) return;
+    btn.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
+    btn.setAttribute('title', `Switch to ${nextTheme} mode`);
+  });
 }
 updateThemeIcon();
 
-themeToggle.addEventListener('click', () => {
+function toggleTheme(){
   root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
   localStorage.setItem('southParkHomeTheme', root.dataset.theme);
   updateThemeIcon();
-});
+}
+if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+if (heroThemeToggle) heroThemeToggle.addEventListener('click', toggleTheme);
 
 const loadMore = document.getElementById('loadMore');
 if (loadMore) {
