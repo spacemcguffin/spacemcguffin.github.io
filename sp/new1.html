@@ -9,7 +9,6 @@
 <style>
 :root{
   --bg:#11141d;
-  --town-bg:url("https://lewis.lc/wiki/img/nighttime.png");
   --panel:#181c27;
   --text:#fff;
   --muted:rgba(255,255,255,.65);
@@ -17,14 +16,7 @@
   --yellow:#f5b041;
   --shell:min(1240px,calc(100% - 40px));
 }
-html[data-theme="light"]{
-  --bg:#eef3f7;
-  --town-bg:url("https://lewis.lc/wiki/img/daytime.png");
-  --panel:#ffffff;
-  --text:#172233;
-  --muted:rgba(23,34,51,.62);
-  --line:rgba(23,34,51,.13);
-}
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;background:var(--bg)}
 body{
@@ -34,13 +26,9 @@ body{
   overflow-x:hidden;
   background:
     linear-gradient(rgba(17,20,29,.88),rgba(17,20,29,.88)),
-    var(--town-bg) center top / cover fixed no-repeat;
+    url("https://lewis.lc/wiki/img/nighttime.png") center top / cover fixed no-repeat;
 }
-html[data-theme="light"] body{
-  background:
-    linear-gradient(rgba(238,243,247,.84),rgba(238,243,247,.84)),
-    var(--town-bg) center top / cover fixed no-repeat;
-}
+
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
 img{display:block;max-width:100%}
@@ -291,26 +279,12 @@ nav a::after{
 nav a:hover{opacity:1}
 nav a:hover::after{transform:scaleX(1)}
 
-html[data-theme="light"] header{
-  background:rgba(238,243,247,.94);
-  border-bottom-color:rgba(23,34,51,.10);
-}
-html[data-theme="light"] .menu{color:#172233}
-html[data-theme="light"] .hero:after{
-  background:
-    linear-gradient(90deg,rgba(238,243,247,.88),rgba(238,243,247,.38) 50%,rgba(238,243,247,.06)),
-    linear-gradient(0deg,rgba(238,243,247,.28),transparent 45%);
-}
-html[data-theme="light"] .hero p{color:rgba(23,34,51,.72)}
-html[data-theme="light"] .btn.secondary{
-  background:rgba(255,255,255,.52);
-  color:#172233;
-  border-color:rgba(23,34,51,.20);
-}
-html[data-theme="light"] .load{
-  color:#172233;
-  border-color:rgba(23,34,51,.28);
-}
+
+
+
+
+
+
 
 /* /sp/-style handmade logo */
 .mini-guide-logo{
@@ -375,7 +349,7 @@ html[data-theme="light"] .load{
   transition:transform .22s ease,background-color .22s ease;
 }
 .theme-toggle:hover{transform:translateY(-1px);background:rgba(255,255,255,.08)}
-html[data-theme="light"] .theme-toggle:hover{background:rgba(28,47,69,.08)}
+
 .theme-toggle:active{transform:scale(.92)}
 .theme-icon-wrap{position:relative;display:block;width:24px;height:24px}
 .theme-icon{
@@ -394,8 +368,8 @@ html[data-theme="light"] .theme-toggle:hover{background:rgba(28,47,69,.08)}
 .theme-icon-moon{opacity:1;color:#dfe7ff;transform:rotate(0deg) scale(1)}
 .theme-icon-sun{opacity:0;color:#f2c84b;transform:rotate(-75deg) scale(.55)}
 .theme-star{stroke-width:1.6}
-html[data-theme="light"] .theme-icon-sun{opacity:1;color:#e3ad24;transform:rotate(0deg) scale(1)}
-html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scale(.55)}
+
+
 
 /* Scrunched-paper episode guide CTA */
 .paper-cta{
@@ -472,9 +446,7 @@ html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scal
     background:rgba(255,255,255,.08);
   }
 
-  html[data-theme="light"] .menu:hover{
-    background:rgba(28,47,69,.08);
-  }
+  
 
   .mobile-nav{
     display:block;
@@ -493,10 +465,7 @@ html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scal
     transition:max-height .28s ease,opacity .2s ease;
   }
 
-  html[data-theme="light"] .mobile-nav{
-    background:rgba(238,243,247,.98);
-    border-bottom-color:rgba(23,34,51,.10);
-  }
+  
 
   .mobile-nav.open{
     max-height:260px;
@@ -681,14 +650,8 @@ html[data-theme="light"] .theme-icon-moon{opacity:0;transform:rotate(75deg) scal
   backdrop-filter:blur(8px);
 }
 
-html[data-theme="light"] .show-brand{
-  background:transparent;
-}
-html[data-theme="light"] .cinematic-break::after{
-  background:
-    linear-gradient(180deg,transparent 52%,rgba(23,34,51,.38)),
-    linear-gradient(90deg,rgba(23,34,51,.08),transparent 50%);
-}
+
+
 
 @media(max-width:900px){
   .season-rail{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -732,10 +695,7 @@ html[data-theme="light"] .cinematic-break::after{
   background:
     linear-gradient(145deg,rgba(255,255,255,.025),rgba(255,255,255,.008));
 }
-html[data-theme="light"] .season-shell{
-  background:rgba(255,255,255,.66);
-  box-shadow:0 18px 50px rgba(38,54,72,.06);
-}
+
 .season-heading{
   display:flex;
   justify-content:space-between;
@@ -847,9 +807,7 @@ html[data-theme="light"] .season-shell{
   transform:translateY(-2px);
   border-color:rgba(255,255,255,.2);
 }
-html[data-theme="light"] .season-mini:hover{
-  border-color:rgba(23,34,51,.18);
-}
+
 .season-mini img{
   width:132px;
   aspect-ratio:16/9;
@@ -996,21 +954,15 @@ main{
   backdrop-filter:blur(7px);
   -webkit-backdrop-filter:blur(7px);
 }
-html[data-theme="light"] #news{
-  background:rgba(255,255,255,.72);
-}
+
 
 footer{
   background:rgba(5,6,9,.82);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
 }
-html[data-theme="light"] footer{
-  background:rgba(238,243,247,.90);
-}
-html[data-theme="light"] .footer-inner{
-  color:rgba(23,34,51,.52);
-}
+
+
 
 @media(max-width:760px){
   .hero{
@@ -1089,9 +1041,7 @@ html[data-theme="light"] .footer-inner{
 .paper-theme-toggle .theme-icon-moon{
   color:#303844;
 }
-html[data-theme="light"] .paper-theme-toggle .theme-icon-sun{
-  color:#d59a14;
-}
+
 
 /* Make the compact header menu reliable on small screens */
 @media(max-width:760px){
@@ -1146,6 +1096,64 @@ html[data-theme="light"] .paper-theme-toggle .theme-icon-sun{
   }
 }
 
+
+/* Latest News: permanently light section */
+#news{
+  width:100%;
+  max-width:none;
+  margin:0;
+  padding:70px max(28px,calc((100vw - 1240px)/2)) 78px;
+  background:#F8F8F8 !important;
+  color:#172233;
+  border:0 !important;
+  border-radius:0 !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+#news .section-title-row{
+  margin-bottom:34px;
+}
+#news h2{
+  color:#172233;
+  font-size:clamp(3.2rem,5.3vw,5.4rem);
+  line-height:.9;
+  letter-spacing:-.055em;
+}
+#news .news-item{
+  color:#172233;
+}
+#news .news-item h3{
+  color:#172233;
+}
+#news .news-date,
+#news .news-meta{
+  color:rgba(23,34,51,.62);
+}
+#news .news-item img{
+  background:#e7ebee;
+}
+#news .load{
+  color:#172233;
+  border-color:rgba(23,34,51,.18);
+  background:transparent;
+}
+#news .load:hover{
+  background:rgba(23,34,51,.05);
+}
+#news .section-link{
+  color:#172233;
+}
+
+@media(max-width:760px){
+  #news{
+    width:100%;
+    padding:54px 16px 64px;
+  }
+  #news h2{
+    font-size:clamp(2.75rem,13vw,4.2rem);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1164,19 +1172,6 @@ html[data-theme="light"] .paper-theme-toggle .theme-icon-sun{
     </nav>
 
     <div class="header-actions">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
-        <span class="theme-icon-wrap" aria-hidden="true">
-          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
-          </svg>
-          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24">
-            <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
-            <path class="theme-star" d="M18.5 3.5v3M17 5h3"></path>
-            <path class="theme-star" d="M20 8.7v2M19 9.7h2"></path>
-          </svg>
-        </span>
-      </button>
       <button class="menu" id="menuButton" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">☰</button>
     </div>
   </div>
@@ -1203,19 +1198,6 @@ html[data-theme="light"] .paper-theme-toggle .theme-icon-sun{
       <a class="paper-link paper-link-news" href="#news">News</a>
       <a class="paper-link paper-link-guide" href="/sp/">Episode Guide</a>
       <a class="paper-link paper-link-wiki" href="/wiki/">Wiki</a>
-      <button class="paper-link paper-theme-toggle" id="heroThemeToggle" type="button" aria-label="Switch theme" title="Switch theme">
-        <span class="theme-icon-wrap" aria-hidden="true">
-          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
-          </svg>
-          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24">
-            <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
-            <path class="theme-star" d="M18.5 3.5v3M17 5h3"></path>
-            <path class="theme-star" d="M20 8.7v2M19 9.7h2"></path>
-          </svg>
-        </span>
-      </button>
     </div>
   </div>
 </section>
@@ -1259,31 +1241,10 @@ html[data-theme="light"] .paper-theme-toggle .theme-icon-sun{
 
 <script>
 const root = document.documentElement;
-const themeToggle = document.getElementById('themeToggle');
-const heroThemeToggle = document.getElementById('heroThemeToggle');
 
-const savedTheme = localStorage.getItem('southParkHomeTheme');
-if (savedTheme) root.dataset.theme = savedTheme;
-else root.dataset.theme = 'dark';
 
-function updateThemeIcon(){
-  const darkMode = root.dataset.theme === 'dark';
-  const nextTheme = darkMode ? 'light' : 'dark';
-  [themeToggle, heroThemeToggle].forEach(btn => {
-    if (!btn) return;
-    btn.setAttribute('aria-label', `Switch to ${nextTheme} mode`);
-    btn.setAttribute('title', `Switch to ${nextTheme} mode`);
-  });
-}
-updateThemeIcon();
 
-function toggleTheme(){
-  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('southParkHomeTheme', root.dataset.theme);
-  updateThemeIcon();
-}
-if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-if (heroThemeToggle) heroThemeToggle.addEventListener('click', toggleTheme);
+
 
 const loadMore = document.getElementById('loadMore');
 if (loadMore) {
