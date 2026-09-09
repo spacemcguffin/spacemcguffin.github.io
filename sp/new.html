@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -141,33 +140,44 @@ html[data-theme="light"] .site-background {
 }
 
 
-/* Diary-style animated light/dark button. */
+/* Single animated light/dark button. */
 .theme-toggle {
   appearance: none;
   -webkit-appearance: none;
+  position: relative;
+  flex: 0 0 auto;
   width: 40px;
   height: 40px;
-  flex: 0 0 40px;
   display: grid;
   place-items: center;
   padding: 0;
-  border: 0;
+  border: 1px solid rgba(255,255,255,.15);
   border-radius: 50%;
-  background: transparent;
-  color: var(--ink);
+  background: rgba(4,10,22,.36);
+  color: #fff;
   cursor: pointer;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.05),
+    0 5px 15px rgba(0,0,0,.10);
   transition:
     transform .22s ease,
-    background-color .22s ease;
+    background .24s ease,
+    border-color .24s ease,
+    box-shadow .24s ease;
 }
 
 .theme-toggle:hover {
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.08);
+  transform: translateY(-1px) rotate(4deg);
+  border-color: rgba(255,255,255,.28);
+  background: rgba(255,255,255,.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 7px 18px rgba(0,0,0,.16);
 }
 
 .theme-toggle:active {
-  transform: scale(.92);
+  transform: scale(.94) rotate(-3deg);
 }
 
 .theme-toggle:focus-visible {
@@ -177,58 +187,58 @@ html[data-theme="light"] .site-background {
 
 .theme-icon-wrap {
   position: relative;
+  width: 22px;
+  height: 22px;
   display: block;
-  width: 24px;
-  height: 24px;
 }
 
 .theme-icon {
   position: absolute;
   inset: 0;
-  width: 24px;
-  height: 24px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
   transform-origin: 50% 50%;
   transition:
-    opacity .28s ease,
+    opacity .34s cubic-bezier(.2,.8,.2,1),
     transform .42s cubic-bezier(.2,.8,.2,1);
 }
 
-/* In dark mode, show the diary's moon + stars. */
-.theme-icon-moon {
+.theme-sun {
+  color: #f4b83f;
+  opacity: 0;
+  transform: rotate(-80deg) scale(.55);
+}
+
+.theme-moon {
+  color: #dbe5ff;
   opacity: 1;
-  color: #dfe7ff;
   transform: rotate(0deg) scale(1);
 }
 
-.theme-icon-sun {
-  opacity: 0;
-  color: #f2c84b;
-  transform: rotate(-75deg) scale(.55);
-}
-
-.theme-star {
-  stroke-width: 1.6;
-}
-
-/* In light mode, switch to the diary's exact outlined sun. */
-html[data-theme="light"] .theme-icon-sun {
-  opacity: 1;
-  color: #e3ad24;
-  transform: rotate(0deg) scale(1);
-}
-
-html[data-theme="light"] .theme-icon-moon {
-  opacity: 0;
-  transform: rotate(75deg) scale(.55);
+html[data-theme="light"] .theme-toggle {
+  border-color: rgba(37,57,78,.14);
+  background: rgba(255,255,255,.52);
+  color: #17243a;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    0 4px 13px rgba(39,63,86,.09);
 }
 
 html[data-theme="light"] .theme-toggle:hover {
-  background: rgba(28,47,69,.08);
+  border-color: rgba(37,57,78,.24);
+  background: rgba(255,255,255,.72);
+}
+
+html[data-theme="light"] .theme-sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+html[data-theme="light"] .theme-moon {
+  opacity: 0;
+  transform: rotate(80deg) scale(.55);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -312,6 +322,9 @@ html[data-theme="light"] .theme-toggle {
 
 
 
+.theme-toggle .sun-icon { display: none; }
+html[data-theme="light"] .theme-toggle .moon-icon { display: none; }
+html[data-theme="light"] .theme-toggle .sun-icon { display: block; }
 
 .mobile-menu {
   display: none;
@@ -334,6 +347,45 @@ html[data-theme="light"] .theme-toggle {
 }
 
 /* =========================================================
+   SOUTH PARK / FAN ARCHIVE IDENTITY BANNER
+========================================================= */
+
+.brand-banner {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(7,15,31,.92), rgba(7,15,31,.82));
+}
+
+html[data-theme="light"] .brand-banner {
+  background:
+    linear-gradient(180deg, rgba(247,250,248,.94), rgba(242,248,246,.88));
+}
+
+.brand-banner-inner {
+  width: var(--shell);
+  min-height: 190px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 34px 0 30px;
+}
+
+.brand-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-banner .guide-logo {
+  font-size: clamp(3rem, 6.7vw, 5.2rem);
+}
+
+.brand-banner .paper-subtitle {
+  margin-top: 14px;
+}
+
+/* =========================================================
    MAIN / HERO
 ========================================================= */
 
@@ -343,16 +395,23 @@ main {
 
 .home-hero {
   position: relative;
-  min-height: min(650px, calc(100svh - var(--header-h)));
+  min-height: min(620px, calc(100svh - var(--header-h)));
   overflow: hidden;
   isolation: isolate;
   border-bottom: 1px solid var(--line);
-  background-color: #091327;
-  background-image: var(--town-night-image);
-  background-size: cover;
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  transition: background-color .3s ease, background-image .3s ease;
+}
+
+.home-hero-image {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+}
+
+.home-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
 }
 
 .home-hero::after {
@@ -371,35 +430,17 @@ html[data-theme="light"] .home-hero::after {
     linear-gradient(0deg, rgba(230,238,239,.76) 0%, rgba(230,238,239,.05) 50%);
 }
 
-html[data-theme="light"] .home-hero {
-  background-color: #cce9f6;
-  background-image: var(--town-day-image);
-}
-
-
 .hero-inner {
   width: var(--shell);
-  min-height: min(650px, calc(100svh - var(--header-h)));
+  min-height: min(620px, calc(100svh - var(--header-h)));
   margin: 0 auto;
-  padding: 46px 0 54px;
+  padding: 62px 0 56px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .hero-copy {
   width: min(730px, 100%);
-}
-
-.hero-brand-lockup {
-  margin-bottom: 28px;
-}
-
-.hero-brand-lockup .paper-subtitle {
-  margin-top: 13px;
-}
-
-.hero-brand-lockup + .hero-eyebrow {
-  margin-top: 0;
 }
 
 /* =========================================================
@@ -902,7 +943,17 @@ html[data-theme="light"] .footer {
     display: grid;
     place-items: center;
   }
-.home-hero,
+
+  .brand-banner-inner {
+    min-height: 152px;
+    padding: 26px 0 24px;
+  }
+
+  .brand-banner .guide-logo {
+    font-size: clamp(3rem, 16vw, 4.5rem);
+  }
+
+  .home-hero,
   .hero-inner {
     min-height: 520px;
   }
@@ -912,12 +963,8 @@ html[data-theme="light"] .footer {
   }
 
   .hero-inner {
-    padding: 38px 0 46px;
-    align-items: center;
-  }
-
-  .hero-brand-lockup {
-    margin-bottom: 23px;
+    padding: 52px 0 45px;
+    align-items: flex-end;
   }
 
   .guide-logo {
@@ -1029,17 +1076,10 @@ html[data-theme="light"] .footer {
       <a href="/wiki/">Wiki</a>
     </nav>
 
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
         <span class="theme-icon-wrap" aria-hidden="true">
-          <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="4"></circle>
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
-          </svg>
-          <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24">
-            <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
-            <path class="theme-star theme-star-one" d="M18.5 3.5v3M17 5h3"></path>
-            <path class="theme-star theme-star-two" d="M20 8.7v2M19 9.7h2"></path>
-          </svg>
+          <span class="theme-icon theme-sun">☀</span>
+          <span class="theme-icon theme-moon">☾</span>
         </span>
       </button>
 
@@ -1056,7 +1096,21 @@ html[data-theme="light"] .footer {
   <!-- =====================================================
        PROMOTIONAL HERO
   ====================================================== -->
-<section class="home-hero">
+
+  <section class="brand-banner">
+    <div class="brand-banner-inner">
+      <div class="brand-lockup">
+        <h1 class="guide-logo" aria-label="South Park">
+          <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
+          <span class="logo-gap" aria-hidden="true"></span>
+          <span>P</span><span>A</span><span>R</span><span>K</span>
+        </h1>
+        <div class="paper-subtitle">Fan Archive</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-hero">
     <!-- =====================================================
          EDIT THIS PROMO HERO OVER TIME:
          - image src
@@ -1065,16 +1119,13 @@ html[data-theme="light"] .footer {
          - description
          - button labels + hrefs
     ====================================================== -->
-<div class="hero-inner">
+
+    <div class="home-hero-image">
+      <img src="/sp/img/hero-placeholder.jpg" alt="South Park featured promotion">
+    </div>
+
+    <div class="hero-inner">
       <div class="hero-copy">
-        <div class="hero-brand-lockup">
-          <h1 class="guide-logo" aria-label="South Park">
-            <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
-            <span class="logo-gap" aria-hidden="true"></span>
-            <span>P</span><span>A</span><span>R</span><span>K</span>
-          </h1>
-          <div class="paper-subtitle">Fan Archive</div>
-        </div>
         <div class="hero-eyebrow">Featured</div>
 
         <h2 class="hero-heading">Welcome to South Park.</h2>
