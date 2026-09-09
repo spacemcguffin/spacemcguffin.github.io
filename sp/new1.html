@@ -465,12 +465,6 @@ footer{
 }
 
 @media(max-width:760px){
-  .scroll-header{
-    transform:translateY(0);
-    opacity:1;
-    pointer-events:auto;
-  }
-
   .header-inner{height:64px}
   .header-inner nav{display:none}
   .menu{display:grid;place-items:center}
@@ -1041,28 +1035,21 @@ if (menuButton && mobileNav) {
 }
 
 const scrollHeader = document.getElementById('scrollHeader');
-let lastScrollY = window.scrollY;
 
 function updateScrollHeader() {
   if (!scrollHeader) return;
 
-  const currentY = window.scrollY;
-  const atTop = currentY <= 6;
-  const scrollingUp = currentY < lastScrollY;
+  const threshold = window.innerWidth <= 760 ? 6 : 120;
+  const visible = window.scrollY > threshold;
 
-  if (atTop) {
-    scrollHeader.classList.remove('is-visible');
-    closeMobileNav();
-  } else {
-    scrollHeader.classList.toggle('is-visible', scrollingUp);
-    if (!scrollingUp) closeMobileNav();
-  }
+  scrollHeader.classList.toggle('is-visible', visible);
 
-  lastScrollY = currentY;
+  if (!visible) closeMobileNav();
 }
 
 updateScrollHeader();
 window.addEventListener('scroll', updateScrollHeader, {passive:true});
+window.addEventListener('resize', updateScrollHeader);
 </script>
 </body>
 </html>
