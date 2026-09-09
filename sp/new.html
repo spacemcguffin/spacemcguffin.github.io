@@ -665,12 +665,66 @@ html[data-theme="light"] .load:disabled{
   color:#747474;
 }
 
+
+/* SOUTH PARK wordmark — same letter-jump behaviour as /sp/ */
+.mini-guide-logo{
+  cursor:pointer;
+}
+
+.mini-guide-logo > span:not(.logo-gap){
+  position:relative;
+}
+
+.mini-guide-logo.logo-jump > span:not(.logo-gap){
+  animation:logoLetterJumpA 320ms cubic-bezier(.2,.8,.2,1);
+}
+
+.mini-guide-logo.logo-jump > span:nth-child(2n):not(.logo-gap){
+  animation-name:logoLetterJumpB;
+  animation-delay:14ms;
+}
+
+.mini-guide-logo.logo-jump > span:nth-child(3n):not(.logo-gap){
+  animation-name:logoLetterJumpC;
+  animation-delay:26ms;
+}
+
+@keyframes logoLetterJumpA{
+  0%,100%{top:0;left:0}
+  36%{top:-4px;left:-1px}
+  68%{top:1px;left:1px}
+}
+
+@keyframes logoLetterJumpB{
+  0%,100%{top:0;left:0}
+  34%{top:-3px;left:1px}
+  66%{top:1px;left:-1px}
+}
+
+@keyframes logoLetterJumpC{
+  0%,100%{top:0;left:0}
+  38%{top:-5px;left:0}
+  70%{top:1px;left:1px}
+}
+
+@media(max-width:760px){
+  .mini-guide-logo.logo-jump > span:not(.logo-gap){
+    animation-duration:300ms;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .mini-guide-logo.logo-jump > span:not(.logo-gap){
+    animation:none !important;
+  }
+}
+
 </style>
 </head>
-<body>
+<body id="top">
 <header id="siteHeader">
   <div class="header-inner">
-    <a class="mini-guide-logo" href="/" aria-label="South Park">
+    <a class="mini-guide-logo" id="homeLogoBackToTop" href="#top" aria-label="Back to top" title="Back to top">
       <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
       <span class="logo-gap" aria-hidden="true"></span>
       <span>P</span><span>A</span><span>R</span><span>K</span>
@@ -852,6 +906,33 @@ function updateSmallViewHeader(){
 updateSmallViewHeader();
 window.addEventListener('scroll', updateSmallViewHeader, {passive:true});
 window.addEventListener('resize', updateSmallViewHeader);
+
+
+
+const homeLogoBackToTop = document.getElementById('homeLogoBackToTop');
+
+function animateHomeLogoAndScrollTop(event){
+  if (!homeLogoBackToTop) return;
+
+  if (event) event.preventDefault();
+
+  homeLogoBackToTop.classList.remove('logo-jump');
+  void homeLogoBackToTop.offsetWidth;
+  homeLogoBackToTop.classList.add('logo-jump');
+
+  window.setTimeout(() => {
+    homeLogoBackToTop.classList.remove('logo-jump');
+  }, 420);
+
+  window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+  });
+}
+
+if (homeLogoBackToTop){
+  homeLogoBackToTop.addEventListener('click', animateHomeLogoAndScrollTop);
+}
 
 </script>
 
