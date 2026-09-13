@@ -247,11 +247,11 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
 .hero-media{position:absolute;inset:0}
 .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 39%}
 .hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,10,.88) 0%,rgba(5,8,10,.55) 34%,rgba(5,8,10,.08) 68%,rgba(5,8,10,.12) 100%)}
-.hero-copy{position:relative;z-index:2;width:min(560px,68%);min-height:390px;padding:55px 76px 48px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;color:#fff}
-.kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:10px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;color:#f0ce54}
+.hero-copy{position:relative;z-index:2;width:min(520px,60%);min-height:390px;padding:54px 76px 48px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;color:#fff}
+.kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:9px;font-size:10px;font-weight:760;text-transform:uppercase;letter-spacing:.12em;color:#f0ce54}
 .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:#f0ce54}
-.hero-slide h1{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(42px,5.5vw,70px);font-weight:760;line-height:.86;letter-spacing:-.055em;text-transform:uppercase;text-wrap:balance}
-.hero-slide p{max-width:430px;margin:17px 0 21px;font-size:15px;line-height:1.45;color:#eee}
+.hero-slide h1{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(46px,6vw,76px);font-weight:740;line-height:.84;letter-spacing:-.055em;text-transform:uppercase;text-wrap:balance}
+.hero-slide p{max-width:390px;margin:16px 0 21px;font-size:14.5px;line-height:1.48;color:#eee}
 .paper-button{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border:0;cursor:pointer;color:#111;background:#efc338;clip-path:polygon(1% 4%,98% 0,100% 93%,3% 100%,0 10%);font-family:"Google Sans Flex",sans-serif;font-size:13px;font-weight:900;text-transform:uppercase;transition:transform .16s ease,filter .16s ease}
 .paper-button:hover{transform:translateY(-2px) rotate(-.5deg);filter:brightness(1.04)}
 .hero-nav{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(255,255,255,.45);border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.42);color:#fff;font-size:28px;line-height:1;cursor:pointer;backdrop-filter:blur(4px);transition:background .16s ease,transform .16s ease}
@@ -285,18 +285,20 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
 .latest-item h3{margin:3px 0 0;font-family:"Google Sans Flex",sans-serif;font-size:18px;font-weight:620;line-height:1.1;letter-spacing:-.03em}
 
 /* =========================================================
-   NEWS
+   LATEST SEASON
    ========================================================= */
 .news{margin-top:18px}
-.news-layout{display:grid;grid-template-columns:280px 1fr;align-items:stretch}
-.news-image{min-height:230px;overflow:hidden;border-right:1px solid var(--line)}
-.news-image img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:opacity .18s ease}
-.news-list{padding:4px 18px}
-.news-row{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;padding:14px 12px;border-bottom:1px solid var(--line);transition:background .16s ease,color .16s ease}
+.news-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start}
+.news-image{position:relative;width:100%;min-width:0;aspect-ratio:16/9;overflow:hidden;border-right:1px solid var(--line)}
+.news-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:opacity .18s ease}
+.news-list{min-width:0;width:100%;padding:4px 18px}
+.news-row{position:relative;display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center;min-width:0;padding:14px 12px;border-bottom:1px solid var(--line);overflow:hidden;transition:background .16s ease,color .16s ease}
+.news-row::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:#6f9be8;opacity:0;transform:scaleY(.45);transition:opacity .16s ease,transform .16s ease}
 .news-row:last-child{border-bottom:0}
-.news-date{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.news-row h3{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:680;letter-spacing:-.02em}
+.news-date{font-size:10px;font-weight:720;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.news-row h3{min-width:0;margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:600;letter-spacing:-.02em;overflow-wrap:anywhere}
 .news-row:hover,.news-row:focus-visible,.news-row.is-active{background:color-mix(in srgb,#4f7fd8 12%,transparent)}
+.news-row:hover::before,.news-row:focus-visible::before,.news-row.is-active::before{opacity:1;transform:scaleY(1)}
 .news-row:hover h3,.news-row:focus-visible h3,.news-row.is-active h3{color:#6f9be8}
 
 /* =========================================================
@@ -338,7 +340,6 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
   .hero-slider,.hero-track,.hero-copy{min-height:330px}
   .hero-copy{padding:40px 64px 34px}
   .latest-grid{grid-template-columns:repeat(2,1fr)}
-  .news-layout{grid-template-columns:220px 1fr}
 }
 @media (max-width:680px){
   .site{width:100%;margin:0;border-left:0;border-right:0}
@@ -363,9 +364,9 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
   .latest-grid{grid-template-columns:1fr 1fr}
   .latest-item h3{font-size:16px}
   .news-layout{grid-template-columns:1fr}
-  .news-image{min-height:0;height:190px;border-right:0;border-bottom:1px solid var(--line)}
+  .news-image{aspect-ratio:16/9;border-right:0;border-bottom:1px solid var(--line)}
   .news-list{padding:2px 13px}
-  .news-row{grid-template-columns:1fr;gap:4px;padding:12px 8px}
+  .news-row{grid-template-columns:1fr;gap:4px;padding:12px 10px 12px 13px}
   .footer{align-items:flex-start;flex-direction:column;padding:15px}
   .section-bar{padding:7px 11px}
   .section-bar h2{font-size:14px}
@@ -382,56 +383,6 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
   .latest-item .text{padding:8px 10px}
   .latest-item h3{font-size:16px}
   .card-copy h3{font-size:19px}
-}
-
-/* Latest season */
-.news-image{
-  aspect-ratio:16/9;
-  min-height:0;
-}
-.news-image img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-
-/* Latest season layout fix */
-.news-layout{
-  display:grid;
-  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
-  align-items:start;
-}
-.news-image{
-  position:relative;
-  width:100%;
-  min-width:0;
-  aspect-ratio:16/9;
-  height:auto;
-  overflow:hidden;
-}
-.news-image img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-.news-list{
-  min-width:0;
-  width:100%;
-}
-.news-row{
-  min-width:0;
-  overflow:hidden;
-}
-.news-row h3{
-  min-width:0;
-  overflow-wrap:anywhere;
-}
-@media(max-width:680px){
-  .news-layout{grid-template-columns:1fr}
-  .news-image{aspect-ratio:16/9}
 }
 
 </style>
@@ -576,7 +527,7 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
     </section>
 
     <!-- ===================================================
-         CURRENT SEASON
+         LATEST SEASON
          =================================================== -->
     <section class="news section-shell">
       <div class="section-bar"><h2>Latest Season</h2><a href="/sp/movie">Previous seasons →</a></div>
