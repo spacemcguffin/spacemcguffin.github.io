@@ -63,7 +63,6 @@
   </article>
 
 
-  
 
   
 </div>
@@ -169,7 +168,8 @@ let heroTimer;
 let heroPaused = false;
 
 if (!hasMultipleHeroSlides && heroControls) {
-  heroControls.hidden = true;
+  heroControls.style.display = 'none';
+  heroControls.setAttribute('aria-hidden', 'true');
 }
 
 function showHeroSlide(index, restart = true) {
