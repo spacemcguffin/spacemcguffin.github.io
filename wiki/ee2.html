@@ -1,16 +1,17 @@
 <!DOCTYPE html>
+
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="light dark" name="color-scheme"/>
-  <title>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>
    Edge End High School - South Park Wiki
   </title>
-  <link href="https://fonts.googleapis.com/" rel="preconnect"/>
-  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <style id="wiki-styles">
+<link href="https://fonts.googleapis.com/" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style id="wiki-styles">
    :root{
   --shell:1120px;
   --rail:205px;
@@ -1489,7 +1490,6 @@ html.dark .categories-label{
 }
 
 </style>
- 
 <style id="requested-refinements">
 /* ===== Requested refinements ===== */
 
@@ -1618,8 +1618,6 @@ html.dark .categories-label{
   }
 }
 </style>
-
-
 <style id="gallery-chevron-and-type-refinements">
 /* Slightly tighter article copy */
 .lede{
@@ -1692,8 +1690,6 @@ html.dark .categories-label{
   }
 }
 </style>
-
-
 <style id="v11-fixes">
 /* Categories remain regular weight on hover/focus */
 .categories-links a,
@@ -1707,8 +1703,6 @@ html.dark .categories-label{
   opacity:.22;
 }
 </style>
-
-
 <style id="v12-theme-toggle-position">
 /* Keep the desktop light/dark toggle at the uppermost top-right of the page */
 @media(min-width:851px){
@@ -1733,8 +1727,6 @@ html.dark .categories-label{
   }
 }
 </style>
-
-
 <style id="v13-theme-toggle-title-alignment">
 /* Desktop: align the theme toggle with the article title/hero row */
 @media(min-width:851px){
@@ -1751,8 +1743,6 @@ html.dark .categories-label{
   }
 }
 </style>
-
-
 <style id="v14-title-toggle-and-article-type">
 /* Desktop theme toggle: genuinely aligned with the article title area */
 @media(min-width:851px){
@@ -1801,8 +1791,6 @@ html.dark .categories-label{
   }
 }
 </style>
-
-
 <style id="v15-infobox-tab-size">
 .infobox-image-tab{
   font-size:.73rem !important;
@@ -1813,8 +1801,6 @@ html.dark .categories-label{
   }
 }
 </style>
-
-
 <style id="v16-diary-theme-toggle">
 /* Diary-inspired theme toggle styling */
 .sticky-theme-control,
@@ -1905,8 +1891,6 @@ html.dark .unified-icon-button.theme-control:focus-visible{
   }
 }
 </style>
-
-
 <style id="requested-content-heading-refinements">
 /* Contents links: lighter and calmer */
 .toc a{
@@ -1950,220 +1934,15 @@ html.dark .unified-icon-button.theme-control:focus-visible{
   }
 }
 </style>
+<style id="clean-current-state">
+/* ===== CLEAN CURRENT-STATE OVERRIDES ===== */
 
-
-<style id="v3-toggle-heading-cleanup">
-/* Theme toggle: circular and shadowless */
-.sticky-theme-control,
-.unified-icon-button.theme-control,
-.hero .sticky-theme-control{
-  border-radius:50% !important;
-  box-shadow:none !important;
-}
-html.dark .sticky-theme-control,
-html.dark .unified-icon-button.theme-control,
-html.dark .hero .sticky-theme-control{
-  border-radius:50% !important;
-  box-shadow:none !important;
-}
-
-/* Remove the decorative accent rule below the main heading */
-.hero h1::after{
-  content:none !important;
-  display:none !important;
-}
-.hero h1{
-  padding-bottom:0 !important;
-}
-</style>
-
-
-<style id="v4-mobile-toggle-gallery">
-@media(max-width:850px){
-  /* Mobile theme toggle blends into the top rail instead of becoming a circle */
-  .unified-icon-button.theme-control,
-  html.dark .unified-icon-button.theme-control{
-    border-radius:0 !important;
-    box-shadow:none !important;
-  }
-
-  /* Smaller article gallery on small screens */
-  .gallery{
-    width:min(88%, 420px);
-    margin-left:auto;
-    margin-right:auto;
-    gap:8px;
-  }
-
-  .gallery-item{
-    padding:2px;
-  }
-}
-
-@media(max-width:470px){
-  .gallery{
-    width:84%;
-  }
-}
-</style>
-
-
-<style id="v5-article-gallery-tabs">
+/* Top-level page views */
 .page-view-switcher{
   display:flex;
   align-items:flex-end;
-  gap:18px;
-  margin:0;
-  padding:9px 0 0;
-  border-bottom:1px solid var(--line);
-}
-.page-view-button{
-  position:relative;
-  appearance:none;
-  border:0;
-  background:transparent;
-  color:var(--muted);
-  padding:8px 1px 10px;
-  font:600 .78rem "Inter",system-ui,sans-serif;
-  cursor:pointer;
-}
-.page-view-button:hover,
-.page-view-button:focus-visible{
-  color:var(--text);
-  outline:none;
-}
-.page-view-button.active{
-  color:var(--text);
-}
-.page-view-button.active::after{
-  content:"";
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:-1px;
-  height:2px;
-  background:var(--accent);
-}
-body.gallery-page-view .section-tabs,
-body.gallery-page-view .sticky-nav-sentinel{
-  display:none !important;
-}
-body.gallery-page-view .article-content > :not(.gallery-view-section){
-  display:none !important;
-}
-body.gallery-page-view .gallery-view-section{
-  display:block !important;
-  clear:both;
-  padding-top:20px;
-  border-top:0;
-}
-body.gallery-page-view .gallery-view-section h2{
-  font-size:1.55rem;
-  margin-bottom:14px;
-}
-body.gallery-page-view .gallery{
-  width:100% !important;
-  max-width:none !important;
-  margin:0 !important;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-}
-body.gallery-page-view .gallery-item{
-  padding:4px;
-}
-body:not(.gallery-page-view) .gallery-view-section{
-  display:none;
-}
-
-@media(max-width:850px){
-  .page-view-switcher{
-    margin:0;
-    padding-top:5px;
-    gap:20px;
-  }
-  .page-view-button{
-    padding:8px 1px 10px;
-    font-size:.76rem;
-  }
-  body.gallery-page-view .gallery-view-section{
-    padding-top:17px;
-  }
-  body.gallery-page-view .gallery{
-    width:100% !important;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:9px;
-  }
-}
-
-@media(max-width:520px){
-  body.gallery-page-view .gallery{
-    grid-template-columns:1fr;
-  }
-}
-</style>
-
-<script id="v5-article-gallery-tabs-script" type="application/x-disabled">
-document.addEventListener("DOMContentLoaded", function(){
-  const buttons = Array.from(document.querySelectorAll(".page-view-button"));
-  const gallerySection = document.querySelector(".gallery-view-section");
-  if (!buttons.length || !gallerySection) return;
-
-  function setView(view, updateHash){
-    const galleryMode = view === "gallery";
-    document.body.classList.toggle("gallery-page-view", galleryMode);
-
-    buttons.forEach(function(button){
-      const active = button.dataset.pageView === view;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-selected", active ? "true" : "false");
-    });
-
-    if (updateHash) {
-      if (galleryMode) {
-        history.replaceState(null, "", "#gallery");
-      } else if (location.hash === "#gallery") {
-        history.replaceState(null, "", location.pathname + location.search);
-      }
-    }
-
-    window.scrollTo({top:0, behavior:"smooth"});
-  }
-
-  buttons.forEach(function(button){
-    button.addEventListener("click", function(){
-      setView(button.dataset.pageView, true);
-    });
-  });
-
-  if (location.hash === "#gallery") {
-    setView("gallery", false);
-  }
-});
-</script>
-
-
-<style id="v6-gallery-exclusive-view">
-/* Full gallery exists exclusively in the Gallery view. */
-body:not(.gallery-page-view) .gallery-view-section{
-  display:none !important;
-}
-body.gallery-page-view .gallery-view-section{
-  display:block !important;
-}
-
-/* Gallery is no longer part of the article's in-page section navigation. */
-.section-tab[data-section="gallery"]{
-  display:none !important;
-}
-</style>
-
-
-<style id="v7-gallery-view-fix">
-.page-view-switcher{
-  display:flex;
-  align-items:flex-end;
-  gap:20px;
-  margin:0;
+  gap:22px;
+  margin:0 0 14px;
   padding:7px 0 0;
   border-bottom:1px solid var(--line);
 }
@@ -2178,47 +1957,38 @@ body.gallery-page-view .gallery-view-section{
   cursor:pointer;
 }
 .page-view-button:hover,
-.page-view-button:focus-visible{
-  color:var(--text);
-  outline:none;
-}
-.page-view-button.active{
-  color:var(--text);
-}
+.page-view-button:focus-visible{color:var(--text);outline:none}
+.page-view-button.active{color:var(--text)}
 .page-view-button.active::after{
   content:"";
   position:absolute;
-  left:0;
-  right:0;
-  bottom:-1px;
+  left:0;right:0;bottom:-1px;
   height:2px;
   background:var(--accent);
 }
 
-/* Article mode */
-body:not(.gallery-page-view) .gallery-view-section{
+/* Article / Trivia / Gallery separation */
+body:not(.trivia-page-view):not(.gallery-page-view) .trivia-view-section,
+body:not(.trivia-page-view):not(.gallery-page-view) .gallery-view-section{
   display:none !important;
 }
-
-/* Gallery mode */
-body.gallery-page-view .section-tabs,
-body.gallery-page-view .sticky-nav-sentinel,
+body.trivia-page-view .article-content > :not(.trivia-view-section),
 body.gallery-page-view .article-content > :not(.gallery-view-section){
   display:none !important;
 }
-body.gallery-page-view .article-content{
-  display:block !important;
-}
+body.trivia-page-view .article-content,
+body.gallery-page-view .article-content{display:block !important}
+body.trivia-page-view .trivia-view-section,
 body.gallery-page-view .gallery-view-section{
   display:block !important;
   clear:both;
-  padding:20px 0 0 !important;
+  padding-top:6px !important;
   border-top:0 !important;
 }
-body.gallery-page-view .gallery-view-section h2{
-  margin:0 0 14px;
-  font-size:1.5rem;
-}
+body.trivia-page-view .trivia-view-section h2,
+body.gallery-page-view .gallery-view-section h2{margin-top:0}
+
+/* Gallery */
 body.gallery-page-view .gallery{
   width:100% !important;
   max-width:none !important;
@@ -2226,80 +1996,6 @@ body.gallery-page-view .gallery{
   grid-template-columns:repeat(3,minmax(0,1fr)) !important;
   gap:12px !important;
 }
-body.gallery-page-view .gallery-item{
-  padding:4px;
-}
-
-/* Gallery is a page-level view, not an article section. */
-.section-tab[data-section="gallery"],
-.unified-section-link[data-section="gallery"]{
-  display:none !important;
-}
-
-@media(max-width:850px){
-  .page-view-switcher{
-    gap:22px;
-    padding-top:4px;
-  }
-  .page-view-button{
-    font-size:.76rem;
-    padding-top:9px;
-  }
-  body.gallery-page-view .gallery-view-section{
-    padding-top:17px !important;
-  }
-  body.gallery-page-view .gallery{
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    gap:9px !important;
-  }
-}
-@media(max-width:520px){
-  body.gallery-page-view .gallery{
-    grid-template-columns:1fr !important;
-  }
-}
-</style>
-
-<script id="v7-gallery-view-fix-script">
-document.addEventListener("DOMContentLoaded", function(){
-  const buttons = Array.from(document.querySelectorAll(".page-view-button"));
-  const gallerySection = document.querySelector(".gallery-view-section");
-  if (!buttons.length || !gallerySection) return;
-
-  function setView(view, updateHash){
-    const isGallery = view === "gallery";
-    document.body.classList.toggle("gallery-page-view", isGallery);
-
-    buttons.forEach(function(button){
-      const active = button.dataset.pageView === view;
-      button.classList.toggle("active", active);
-      button.setAttribute("aria-selected", active ? "true" : "false");
-    });
-
-    if (updateHash) {
-      if (isGallery) {
-        history.replaceState(null, "", "#gallery");
-      } else {
-        history.replaceState(null, "", location.pathname + location.search);
-      }
-    }
-
-    window.scrollTo({top:0, behavior:"smooth"});
-  }
-
-  buttons.forEach(function(button){
-    button.addEventListener("click", function(){
-      setView(button.dataset.pageView, true);
-    });
-  });
-
-  setView(location.hash === "#gallery" ? "gallery" : "article", false);
-});
-</script>
-
-
-<style id="v8-gallery-captions-back-to-top">
-/* Visible gallery captions */
 .gallery-item{
   display:flex !important;
   flex-direction:column;
@@ -2318,18 +2014,15 @@ document.addEventListener("DOMContentLoaded", function(){
   line-height:1.35;
 }
 body.gallery-page-view .gallery-visible-caption{
-  font-size:.74rem;
   padding:9px 9px 8px;
-}
-@media(max-width:850px){
-  .gallery-visible-caption,
-  body.gallery-page-view .gallery-visible-caption{
-    font-size:.72rem;
-    padding:8px 8px 7px;
-  }
+  font-size:.74rem;
 }
 
-/* Diary-style back to top */
+/* Heading cleanup */
+.hero h1::after{content:none !important;display:none !important}
+.hero h1{padding-bottom:0 !important}
+
+/* Back to top */
 #backToTop{
   position:fixed;
   right:1rem;
@@ -2353,13 +2046,7 @@ body.gallery-page-view .gallery-visible-caption{
   visibility:hidden;
   transform:translateY(.65rem);
   pointer-events:none;
-  transition:
-    opacity .2s ease,
-    transform .2s ease,
-    visibility .2s ease,
-    background-color .18s ease,
-    color .18s ease,
-    border-color .18s ease;
+  transition:opacity .2s ease,transform .2s ease,visibility .2s ease,background-color .18s ease;
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
 }
@@ -2369,581 +2056,747 @@ body.gallery-page-view .gallery-visible-caption{
   transform:translateY(0);
   pointer-events:auto;
 }
-#backToTop:hover,
-#backToTop:focus-visible{
+#backToTop:hover,#backToTop:focus-visible{
   transform:translateY(-2px);
   background:var(--panel);
   outline:none;
 }
-html.dark #backToTop{
-  background:color-mix(in srgb,var(--paper) 90%,transparent);
-}
+
+/* Drawer theme control is mobile-only */
+.mobile-drawer-theme{display:none}
+
+/* ===== MOBILE ===== */
 @media(max-width:850px){
+  :root{--mobile-bar-height:46px}
+
+  .site-header{
+    display:block !important;
+    position:fixed !important;
+    top:0;left:0;right:0;
+    z-index:1200;
+    width:100%;
+    height:var(--mobile-bar-height);
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 1px 8px rgba(0,0,0,.10);
+  }
+
+  .unified-mobile-bar{
+    display:grid !important;
+    grid-template-columns:38px minmax(0,1fr);
+    align-items:stretch;
+    width:100%;
+    height:100%;
+    padding:0;
+    overflow:hidden;
+  }
+
+  .mobile-menu-button{
+    display:grid !important;
+    place-items:center;
+    width:38px !important;
+    height:var(--mobile-bar-height) !important;
+    min-width:38px !important;
+    min-height:var(--mobile-bar-height) !important;
+    padding:0 !important;
+    margin:0 !important;
+    border:0 !important;
+    border-right:1px solid var(--line) !important;
+    border-radius:0 !important;
+    background:var(--panel-solid) !important;
+    color:var(--text) !important;
+    box-shadow:none !important;
+  }
+
+  .mobile-rail-wordmark{
+    display:flex !important;
+    flex-direction:column;
+    align-items:flex-start;
+    justify-content:center;
+    width:100%;
+    min-width:0;
+    height:var(--mobile-bar-height);
+    padding:0 13px;
+    color:var(--text) !important;
+    text-decoration:none !important;
+    box-sizing:border-box;
+  }
+  .mobile-rail-wordmark-main{
+    display:block;
+    font-size:.92rem !important;
+    font-weight:600 !important;
+    letter-spacing:-.035em !important;
+    line-height:.9 !important;
+    white-space:nowrap;
+  }
+  .mobile-rail-wordmark-wiki{
+    display:block;
+    margin-top:2px;
+    font-size:.40rem !important;
+    font-weight:600 !important;
+    letter-spacing:.15em !important;
+    line-height:1 !important;
+    white-space:nowrap;
+  }
+
+  /* Fixed header clearance */
+  .main{
+    padding-top:calc(var(--mobile-bar-height) + 10px) !important;
+  }
+  #top,#appearance,#staff,#trivia,#gallery{
+    scroll-margin-top:calc(var(--mobile-bar-height) + 10px) !important;
+  }
+
+  .page-view-switcher{
+    gap:20px;
+    margin-bottom:12px;
+    padding-top:4px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .page-view-switcher::-webkit-scrollbar{display:none}
+  .page-view-button{
+    flex:0 0 auto;
+    font-size:.76rem;
+  }
+
+  body.gallery-page-view .gallery{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:9px !important;
+  }
+  .gallery-visible-caption,
+  body.gallery-page-view .gallery-visible-caption{
+    padding:8px 8px 7px;
+    font-size:.72rem;
+  }
+
+  .mobile-drawer-theme{
+    display:flex !important;
+    justify-content:flex-start;
+    margin-top:16px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .drawer-theme-toggle{
+    display:grid !important;
+    place-items:center !important;
+    width:38px !important;
+    height:38px !important;
+    min-width:38px !important;
+    min-height:38px !important;
+    padding:0 !important;
+    border:1px solid var(--line) !important;
+    border-radius:50% !important;
+    background:var(--paper) !important;
+    color:var(--text) !important;
+    box-shadow:none !important;
+  }
+  .drawer-theme-toggle .theme-icon-slot{
+    width:20px;
+    height:20px;
+    display:grid;
+    place-items:center;
+  }
+  .drawer-theme-toggle .theme-icon{
+    width:18px;
+    height:18px;
+  }
+
   #backToTop{
     right:.85rem;
     bottom:.85rem;
   }
 }
+
+@media(max-width:520px){
+  .unified-mobile-bar{
+    grid-template-columns:36px minmax(0,1fr);
+  }
+  .mobile-menu-button{
+    width:36px !important;
+    min-width:36px !important;
+  }
+  .mobile-rail-wordmark{
+    padding-left:11px;
+    padding-right:11px;
+  }
+  .mobile-rail-wordmark-main{font-size:.84rem !important}
+  .mobile-rail-wordmark-wiki{font-size:.36rem !important}
+
+  body.gallery-page-view .gallery{
+    grid-template-columns:1fr !important;
+  }
+}
 </style>
+<style id="v3-categories-wordmark-toggle">
+/* Categories removed from the page. */
+.categories,
+.category-box,
+.categories-box,
+.categories-section{
+  display:none !important;
+}
 
-<script id="v8-back-to-top-script">
-document.addEventListener("DOMContentLoaded", function(){
-  const backToTop = document.getElementById("backToTop");
-  if (!backToTop) return;
+/* Earlier sun/moon theme button treatment beside the main heading */
+.hero{
+  position:relative;
+}
+.hero h1{
+  padding-right:54px !important;
+}
+.hero-theme-toggle,
+.sticky-theme-control{
+  position:absolute !important;
+  top:50% !important;
+  right:0 !important;
+  transform:translateY(-50%) !important;
+  display:grid !important;
+  place-items:center !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  border:1px solid var(--line) !important;
+  border-radius:50% !important;
+  background:var(--paper) !important;
+  color:var(--text) !important;
+  box-shadow:none !important;
+  cursor:pointer !important;
+}
+.hero-theme-toggle .theme-icon-slot,
+.sticky-theme-control .theme-icon-slot{
+  display:grid !important;
+  place-items:center !important;
+  width:21px !important;
+  height:21px !important;
+}
+.hero-theme-toggle .theme-icon,
+.sticky-theme-control .theme-icon{
+  width:19px !important;
+  height:19px !important;
+}
 
-  function updateBackToTop(){
-    backToTop.classList.toggle("visible", window.scrollY > 450);
+/* Larger mobile cut-paper South Park Wiki wordmark */
+@media(max-width:850px){
+  .mobile-rail-wordmark-main{
+    font-size:1.16rem !important;
+    font-weight:760 !important;
+    letter-spacing:-.068em !important;
+    line-height:.88 !important;
   }
 
-  window.addEventListener("scroll", updateBackToTop, {passive:true});
-  backToTop.addEventListener("click", function(){
-    window.scrollTo({top:0, behavior:"smooth"});
-  });
+  .mobile-rail-wordmark-wiki{
+    margin-top:2px !important;
+    font-size:.48rem !important;
+    font-weight:740 !important;
+    letter-spacing:.14em !important;
+    line-height:1 !important;
+  }
 
-  updateBackToTop();
-});
-</script>
+  .hero h1{
+    padding-right:48px !important;
+  }
+
+  .hero-theme-toggle,
+  .sticky-theme-control{
+    width:34px !important;
+    height:34px !important;
+    min-width:34px !important;
+    min-height:34px !important;
+  }
+}
+
+@media(max-width:520px){
+  .mobile-rail-wordmark-main{
+    font-size:1.06rem !important;
+  }
+  .mobile-rail-wordmark-wiki{
+    font-size:.43rem !important;
+  }
+}
+</style>
+
+
+<style id="v4-mobile-wordmark-horizontal">
+@media(max-width:850px){
+  .mobile-rail-wordmark{
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    gap:8px !important;
+    padding-left:14px !important;
+    padding-right:14px !important;
+  }
+
+  .mobile-rail-wordmark-main{
+    display:flex !important;
+    align-items:center !important;
+    font-size:1.08rem !important;
+    font-weight:700 !important;
+    letter-spacing:-.025em !important;
+    line-height:1 !important;
+    transform:scaleX(1.08);
+    transform-origin:left center;
+  }
+
+  .mobile-rail-wordmark-main .wm-letter{
+    padding:0 .035em !important;
+  }
+
+  .mobile-rail-wordmark-main .wm-gap{
+    width:.32em !important;
+  }
+
+  .mobile-rail-wordmark-wiki{
+    display:block !important;
+    margin:0 0 0 4px !important;
+    font-size:.55rem !important;
+    font-weight:700 !important;
+    letter-spacing:.12em !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+  }
+}
+
+@media(max-width:520px){
+  .mobile-rail-wordmark{
+    gap:7px !important;
+    padding-left:12px !important;
+  }
+
+  .mobile-rail-wordmark-main{
+    font-size:1rem !important;
+    transform:scaleX(1.07);
+  }
+
+  .mobile-rail-wordmark-wiki{
+    margin-left:3px !important;
+    font-size:.50rem !important;
+  }
+}
+</style>
+
+
+<style id="v5-heading-chip-wordmark">
+/* Remove the Location chip above the main heading. */
+.hero .eyebrow{
+  display:none !important;
+}
+
+/* Slightly larger, more open mobile wordmark. */
+@media(max-width:850px){
+  .mobile-rail-wordmark-main{
+    font-size:1.14rem !important;
+  }
+
+  .mobile-rail-wordmark-wiki{
+    margin-left:10px !important;
+    font-size:.57rem !important;
+  }
+}
+
+@media(max-width:520px){
+  .mobile-rail-wordmark-main{
+    font-size:1.06rem !important;
+  }
+
+  .mobile-rail-wordmark-wiki{
+    margin-left:8px !important;
+    font-size:.52rem !important;
+  }
+}
+</style>
 
 </head>
- <body>
-  <header class="site-header">
-   <div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation">
-    <button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button" data-menu-toggle="" type="button">
-     <svg aria-hidden="true" viewbox="0 0 24 24">
-      <path d="M4.5 7h15M4.5 12h15M4.5 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-      </path>
-     </svg>
-    </button>
-    <div class="unified-section-links">
-
-     <a aria-label="Top" class="unified-section-link active" data-section="top" href="https://lewis.lc/wiki/edge_end#top">
-      <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
-       <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-       </path>
-      </svg>
-      <span>
-       Top
-      </span>
-     </a>
-
-     <a aria-label="Appearance" class="unified-section-link" data-section="appearance" href="https://lewis.lc/wiki/edge_end#appearance">
-<span>
-       Appearance
-      </span>
-     </a>
-
-     <a aria-label="Staff" class="unified-section-link" data-section="staff" href="https://lewis.lc/wiki/edge_end#staff">
-<span>
-       Staff
-      </span>
-     </a>
-
-     <a aria-label="Trivia" class="unified-section-link" data-section="trivia" href="https://lewis.lc/wiki/edge_end#trivia">
-<span>
-       Trivia
-      </span>
-     </a>
-
-    </div>
-    <button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
-     <span aria-hidden="true" class="theme-icon-slot">
-      <span class="theme-icon theme-icon-moon">
-       <svg viewbox="0 0 24 24">
-          <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round" stroke-linejoin="round"/>
-         </svg>
-      </span>
-      <span class="theme-icon theme-icon-sun">
-       <svg viewbox="0 0 24 24">
-          <circle cx="12" cy="12" r="3.4" fill="none"
-                  stroke="currentColor" stroke-width="1.65"/>
-          <path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1
-                   M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48
-                   M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round"/>
-         </svg>
-      </span>
-     </span>
-    </button>
-   </div>
-  </header>
-  <div class="mobile-wiki-identity"><div><span class="wiki-wordmark" aria-label="South Park Wiki"><span class="wiki-wordmark-main" aria-hidden="true"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="wiki-logo-gap"></span><span>P</span><span>A</span><span>R</span><span>K</span></span><span class="wiki-wordmark-suffix" aria-hidden="true">Wiki</span></span></div></div>
-  <div class="shell">
-   <button aria-expanded="true" aria-label="Collapse sidebar" class="desktop-sidebar-toggle" data-desktop-sidebar-toggle="" title="Collapse sidebar" type="button">
-    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-close">
-     <svg viewbox="0 0 24 24">
-      <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-      </path>
-     </svg>
-    </span>
-    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-open">
-     <svg viewbox="0 0 24 24">
-      <path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-      </path>
-     </svg>
-    </span>
-   </button>
-   <aside class="sidebar" id="sidebar">
-    <div class="rail-brand"><span class="wiki-wordmark" aria-label="South Park Wiki"><span class="wiki-wordmark-main" aria-hidden="true"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="wiki-logo-gap"></span><span>P</span><span>A</span><span>R</span><span>K</span></span><span class="wiki-wordmark-suffix" aria-hidden="true">Wiki</span></span></div>
-
-    <div class="rail-section">
-     <div class="nav-label">
+<body>
+<header class="site-header"><div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation"><button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button mobile-menu-button" data-menu-toggle="" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M4.5 7h15M4.5 12h15M4.5 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8"></path>
+</svg>
+</button><a aria-label="South Park Wiki" class="mobile-rail-wordmark" href="#top"><span class="mobile-rail-wordmark-main wiki-wordmark-main"><span class="wm-letter">S</span><span class="wm-letter">O</span><span class="wm-letter">U</span><span class="wm-letter">T</span><span class="wm-letter">H</span><span class="wm-gap"></span><span class="wm-letter">P</span><span class="wm-letter">A</span><span class="wm-letter">R</span><span class="wm-letter">K</span></span><span class="mobile-rail-wordmark-wiki wiki-wordmark-suffix">WIKI</span></a></div></header>
+<div class="shell">
+<button aria-expanded="true" aria-label="Collapse sidebar" class="desktop-sidebar-toggle" data-desktop-sidebar-toggle="" title="Collapse sidebar" type="button">
+<span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-close">
+<svg viewbox="0 0 24 24">
+<path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+</path>
+</svg>
+</span>
+<span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-open">
+<svg viewbox="0 0 24 24">
+<path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+</path>
+</svg>
+</span>
+</button>
+<aside class="sidebar" id="sidebar">
+<div class="rail-brand"><span aria-label="South Park Wiki" class="wiki-wordmark"><span aria-hidden="true" class="wiki-wordmark-main"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="wiki-logo-gap"></span><span>P</span><span>A</span><span>R</span><span>K</span></span><span aria-hidden="true" class="wiki-wordmark-suffix">Wiki</span></span></div>
+<div class="rail-section">
+<div class="nav-label">
       Explore
      </div>
-     <nav class="rail-nav">
-      <a class="rail-link" href="https://lewis.lc/sp/">
+<nav class="rail-nav">
+<a class="rail-link" href="https://lewis.lc/sp/">
 <span>
         Episodes
        </span>
-      </a>
-      <a class="rail-link" href="https://lewis.lc/wiki/edge_end#">
+</a>
+<a class="rail-link" href="https://lewis.lc/wiki/edge_end#">
 <span>
         Characters
        </span>
-      </a>
-      <a class="rail-link" href="https://lewis.lc/wiki/edge_end#">
+</a>
+<a class="rail-link" href="https://lewis.lc/wiki/edge_end#">
 <span>
         Locations
        </span>
-      </a>
-     </nav>
-    </div>
-    <div class="rail-section">
-     <div class="nav-label">
+</a>
+</nav>
+</div>
+<div class="rail-section">
+<div class="nav-label">
       Recent seasons
      </div>
-     <div class="season-grid">
-      <a class="current" href="https://lewis.lc/wiki/edge_end#">
+<div class="season-grid">
+<a class="current" href="https://lewis.lc/wiki/edge_end#">
        28
       </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
+<a href="https://lewis.lc/wiki/edge_end#">
        27
       </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
+<a href="https://lewis.lc/wiki/edge_end#">
        26
       </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
+<a href="https://lewis.lc/wiki/edge_end#">
        25
       </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
+<a href="https://lewis.lc/wiki/edge_end#">
        24
       </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
+<a href="https://lewis.lc/wiki/edge_end#">
        23
       </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
+<a href="https://lewis.lc/wiki/edge_end#">
        22
       </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
+<a href="https://lewis.lc/wiki/edge_end#">
        21
       </a>
-      <a href="https://lewis.lc/sp/">
+<a href="https://lewis.lc/sp/">
        All
       </a>
-     </div>
-    </div>
-   </aside>
-
-   <main class="main" id="main">
-
-    <!-- ==================== LOCATION TITLE / HERO ==================== -->
-    <section class="hero" id="top">
-     <div class="eyebrow">
-      <span class="chip">
+</div>
+</div>
+</aside>
+<main class="main" id="main">
+<!-- ==================== LOCATION TITLE / HERO ==================== -->
+<section class="hero" id="top">
+<div class="eyebrow">
+<span class="chip">
        Location
       </span>
-
-     </div>
-     <h1>
+</div>
+<h1>
       Edge End High School
-     </h1>
-    </section>
-
-    <div class="page-view-switcher" role="tablist" aria-label="Page view">
-     <button aria-selected="true" class="page-view-button active" data-page-view="article" role="tab" type="button">Article</button>
-     <button aria-selected="false" class="page-view-button" data-page-view="gallery" role="tab" type="button">Gallery</button>
-    </div>
-
-
-    <div aria-hidden="true" class="sticky-nav-sentinel">
-    </div>
-    <div aria-label="Article sections" class="section-tabs">
-     <button aria-label="Collapse sidebar" class="sticky-sidebar-control" data-sticky-sidebar-toggle="" title="Collapse sidebar" type="button">
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-       <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-       </path>
-      </svg>
-     </button>
-     <a class="section-tab" data-section="appearance" href="https://lewis.lc/wiki/edge_end#appearance">
-<span class="section-tab-label">
-       Appearance
-      </span>
-     </a>
-
-     <a class="section-tab" data-section="staff" href="https://lewis.lc/wiki/edge_end#staff">
-<span class="section-tab-label">
-       Staff
-      </span>
-     </a>
-     <a class="section-tab" data-section="trivia" href="https://lewis.lc/wiki/edge_end#trivia">
-<span class="section-tab-label">
-       Trivia
-      </span>
-     </a>
-     <button aria-label="Switch to dark mode" class="sticky-theme-control" data-sticky-theme-toggle="" title="Dark mode" type="button">
-      <span aria-hidden="true" class="theme-icon-slot">
-       <span class="theme-icon theme-icon-moon">
-        <svg viewbox="0 0 24 24">
-          <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round" stroke-linejoin="round"/>
-         </svg>
-       </span>
-       <span class="theme-icon theme-icon-sun">
-        <svg viewbox="0 0 24 24">
-          <circle cx="12" cy="12" r="3.4" fill="none"
-                  stroke="currentColor" stroke-width="1.65"/>
-          <path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1
-                   M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48
-                   M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round"/>
-         </svg>
-       </span>
-      </span>
-     </button>
-    </div>
-    <section class="article-content" id="general">
-     <div class="article-top">
-      <div>
-       <!-- ==================== LOCATION INFOBOX ==================== -->
-       <aside aria-label="Location information" class="infobox">
-        <div class="infobox-title">
+     </h1><button aria-label="Switch theme" class="hero-theme-toggle theme-control sticky-theme-control" data-theme-toggle="" title="Switch theme" type="button">
+<span aria-hidden="true" class="theme-icon-slot">
+<span class="theme-icon theme-icon-moon">
+<svg viewbox="0 0 24 24">
+<path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.65"></path>
+</svg>
+</span>
+<span class="theme-icon theme-icon-sun">
+<svg viewbox="0 0 24 24">
+<circle cx="12" cy="12" fill="none" r="3.4" stroke="currentColor" stroke-width="1.65"></circle>
+<path d="M12 2.8v2.1M12 19.1v2.1M4.1 4.1l1.5 1.5M18.4 18.4l1.5 1.5M2.8 12h2.1M19.1 12h2.1M4.1 19.9l1.5-1.5M18.4 5.6l1.5-1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.65"></path>
+</svg>
+</span>
+</span>
+</button>
+</section>
+<div aria-label="Page view" class="page-view-switcher" role="tablist">
+<button aria-selected="true" class="page-view-button active" data-page-view="article" role="tab" type="button">Article</button>
+<button aria-selected="false" class="page-view-button" data-page-view="trivia" role="tab" type="button">Trivia</button>
+<button aria-selected="false" class="page-view-button" data-page-view="gallery" role="tab" type="button">Gallery</button>
+</div>
+<section class="article-content" id="general">
+<div class="article-top">
+<div>
+<!-- ==================== LOCATION INFOBOX ==================== -->
+<aside aria-label="Location information" class="infobox">
+<div class="infobox-title">
          Edge End High School
         </div>
-        <div class="infobox-image-switcher">
-         <div aria-label="Infobox images" class="infobox-image-tabs" role="tablist">
-         </div>
-         <div class="infobox-image-panels">
-
-           <div class="infobox-image-panel" data-label="Current">
-           <img alt="Current" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend4.png"/>
-          </div>
-
-          <div class="infobox-image-panel" data-label="Night">
-           <img alt="Night" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend5.png"/>
-          </div>
-
-          <div class="infobox-image-panel" data-label="Former">
-           <img alt="Former" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend3.png"/>
-          </div>
-
-           <div class="infobox-image-panel" data-label="Season 1 (destroyed)">
-           <img alt="Season 1 (destroyed)" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend2.png"/>
-          </div>
-
-          <div class="infobox-image-panel" data-label="Debut (destroyed)">
-           <img alt="Debut (destroyed)" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend1.png"/>
-          </div>
-
-         </div>
-        </div>
-        <div class="info-table">
-         <div class="info-row">
-          <b>
+<div class="infobox-image-switcher">
+<div aria-label="Infobox images" class="infobox-image-tabs" role="tablist">
+</div>
+<div class="infobox-image-panels">
+<div class="infobox-image-panel" data-label="Current">
+<img alt="Current" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend4.png"/>
+</div>
+<div class="infobox-image-panel" data-label="Night">
+<img alt="Night" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend5.png"/>
+</div>
+<div class="infobox-image-panel" data-label="Former">
+<img alt="Former" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend3.png"/>
+</div>
+<div class="infobox-image-panel" data-label="Season 1 (destroyed)">
+<img alt="Season 1 (destroyed)" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend2.png"/>
+</div>
+<div class="infobox-image-panel" data-label="Debut (destroyed)">
+<img alt="Debut (destroyed)" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend1.png"/>
+</div>
+</div>
+</div>
+<div class="info-table">
+<div class="info-row">
+<b>
            Type
           </b>
-          <span>
+<span>
            	Public School
           </span>
-         </div>
-         <div class="info-row">
-          <b>
+</div>
+<div class="info-row">
+<b>
            Established
           </b>
-          <span>
+<span>
            1932
           </span>
-         </div>
-         <div class="info-row">
-          <b>
+</div>
+<div class="info-row">
+<b>
            Motto
           </b>
-          <span>
-           <i>Mente Manibusque</i>
-          </span>
-         </div>
-         <div class="info-row">
-          <b>
+<span>
+<i>Mente Manibusque</i>
+</span>
+</div>
+<div class="info-row">
+<b>
            Headteacher
           </b>
-          <span>
+<span>
            Mr. Martin Burgess
           </span>
-         </div>
-
-         <div class="info-row info-row-nav" data-href="#">
-          <b>
+</div>
+<div class="info-row info-row-nav" data-href="#">
+<b>
            First appearance
           </b>
-          <span>
-           <a class="info-row-link" href="https://lewis.lc/wiki/edge_end#">
+<span>
+<a class="info-row-link" href="https://lewis.lc/wiki/edge_end#">
             Pilot Episode
            </a>
-          </span>
-         </div>
-
-        </div>
-       </aside>
-       <p class="lede">
-        <strong>
+</span>
+</div>
+</div>
+</aside>
+<p class="lede">
+<strong>
          Edge End High School
         </strong>
         is the main school in South Park. It is one of the oldest known locations on the show and has appeared in multiple incarnations.
        </p>
-
-       <aside class="wiki-notice" aria-label="Article status">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.8v5.7M12 16.8h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <div><strong>This article is incomplete.</strong><span>Some information may be missing. You can help the South Park Wiki by expanding it.</span></div>
-       </aside>
-
-       <nav class="toc" aria-label="Contents">
-        <div class="toc-head"><span class="toc-title">Contents</span><button class="toc-toggle" type="button" aria-expanded="true">hide</button></div>
-        <ol>
-         <li><a href="#appearance">Appearance</a></li>
-         <li><a href="#staff">Staff</a></li>
-         <li><a href="#trivia">Trivia</a></li>
-         <li><a href="#gallery">Gallery</a></li>
-        </ol>
-       </nav>
-
-       <section class="section first" id="appearance">
-        <h2>
+<aside aria-label="Article status" class="wiki-notice">
+<svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="12" cy="12" fill="none" r="8.25" stroke="currentColor" stroke-width="1.8"></circle><path d="M12 7.8v5.7M12 16.8h.01" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"></path></svg>
+<div><strong>This article is incomplete.</strong><span>Some information may be missing. You can help the South Park Wiki by expanding it.</span></div>
+</aside>
+<nav aria-label="Contents" class="toc">
+<div class="toc-head"><span class="toc-title">Contents</span><button aria-expanded="true" class="toc-toggle" type="button">hide</button></div>
+<ol><li><a href="#appearance">Appearance</a></li><li><a href="#staff">Staff</a></li></ol>
+</nav>
+<section class="section first" id="appearance">
+<h2>
          Appearance
         </h2>
-        <p>
+<p>
          Edge End High School is a predominantly single-storey school, but with staffrooms and a library area on an upper floor.
         </p>
-
-      <div class="plot-location-scrap">
+<div class="plot-location-scrap">
        IN RUINS
       </div>
-
-        <p>
+<p>
          The first appearance of Edge End is in the <span class="internal-wiki-link">pilot episode</span>, where it has been destroyed and delapidated for multiple years. It remains in this state for the majority of <span class="internal-wiki-link">Season 1</span>.
         </p>
-
-      <div class="plot-location-scrap">
+<div class="plot-location-scrap">
        REBUILT
       </div>
-
-        <p>
+<p>
          During <span class="internal-wiki-link">Season 2</span>, the school is rebuilt, and has two predominant chimneys as a focal feature. To the rear is a giant playing field where the kids hang out during break times.
         </p>
-
-        <p>
+<p>
          The rebuilt school becomes the standard version of Edge End seen throughout later episodes. Its exterior remains broadly consistent, although smaller background details, windows and surrounding features occasionally change between appearances.
         </p>
-
-        <p>
+<p>
          Inside, the building contains a mixture of classrooms, corridors, offices and communal areas. Different parts of the school can be introduced whenever a story requires them, allowing the location to function as one of the show's main recurring settings.
         </p>
-
-        <p>
+<p>
          The grounds surrounding Edge End are also used regularly as a meeting place for students. The playing field, entrances and paths around the building provide additional locations for scenes taking place before school, during breaks and at the end of the day.
         </p>
-
-       </section>
-      </div>
-     </div>
-
-     <!-- ==================== STAFF ==================== -->
-     <section class="section" id="staff">
-      <h2>
+</section>
+</div>
+</div>
+<!-- ==================== STAFF ==================== -->
+<section class="section" id="staff">
+<h2>
        Staff
       </h2>
 <div class="staff-collapse-head">
- <button class="staff-collapse-toggle" type="button" aria-expanded="false" aria-controls="staffCollapseBody">
-  <span>Show/hide staff</span>
-  <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 7.5 10 12.5 15 7.5"/></svg>
- </button>
+<button aria-controls="staffCollapseBody" aria-expanded="false" class="staff-collapse-toggle" type="button">
+<span>Show/hide staff</span>
+<svg aria-hidden="true" viewbox="0 0 20 20"><path d="M5 7.5 10 12.5 15 7.5"></path></svg>
+</button>
 </div>
-<div class="staff-collapse" id="staffCollapseBody" hidden>
-
-      <table class="staff-table">
-       <thead>
-        <tr>
-         <th scope="col">Name</th>
-         <th scope="col">Role</th>
-        </tr>
-       </thead>
-       <tbody>
-
-        <tr>
-         <td>Mr. M Burgess</td>
-         <td>Headteacher</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Adlington</td>
-         <td>Deputy Headteacher</td>
-        </tr>
-
-        <tr>
-         <td>Sheila</td>
-         <td>Receptionist / Admin</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Carradice</td>
-         <td>Caretaker</td>
-        </tr>
-
-        <tr>
-         <td>Mrs. Haigh</td>
-         <td>English department</td>
-        </tr>
-
-        <tr>
-         <td>Ms. MacLean</td>
-         <td>English department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Colin Gilbert</td>
-         <td>Maths department</td>
-        </tr>
-
-        <tr>
-         <td>Roger</td>
-         <td>Science department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Irving</td>
-         <td>History department</td>
-        </tr>
-
-        <tr>
-         <td>Susan Procter</td>
-         <td>Geography department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Maboob Master</td>
-         <td>IT department</td>
-        </tr>
-
-        <tr>
-         <td>Mrs. Whittaker</td>
-         <td>IT department</td>
-        </tr>
-
-        <tr>
-         <td>Ms. Dubois</td>
-         <td>French studies</td>
-        </tr>
-
-        <tr>
-         <td>Mrs. Geldard</td>
-         <td>Design & Technology department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Steven Price</td>
-         <td>Physical Education</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Baig</td>
-         <td>Substitute teacher</td>
-        </tr>
-
-        <tr>
-         <td>Ms. Easterbrook</td>
-         <td>Welfare team</td>
-        </tr>
-
-        <tr>
-         <td>Terry</td>
-         <td><i>Unknown</i></td>
-        </tr>
-
-       </tbody>
-      </table>
-     
+<div class="staff-collapse" hidden="" id="staffCollapseBody">
+<table class="staff-table">
+<thead>
+<tr>
+<th scope="col">Name</th>
+<th scope="col">Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mr. M Burgess</td>
+<td>Headteacher</td>
+</tr>
+<tr>
+<td>Mr. Adlington</td>
+<td>Deputy Headteacher</td>
+</tr>
+<tr>
+<td>Sheila</td>
+<td>Receptionist / Admin</td>
+</tr>
+<tr>
+<td>Mr. Carradice</td>
+<td>Caretaker</td>
+</tr>
+<tr>
+<td>Mrs. Haigh</td>
+<td>English department</td>
+</tr>
+<tr>
+<td>Ms. MacLean</td>
+<td>English department</td>
+</tr>
+<tr>
+<td>Mr. Colin Gilbert</td>
+<td>Maths department</td>
+</tr>
+<tr>
+<td>Roger</td>
+<td>Science department</td>
+</tr>
+<tr>
+<td>Mr. Irving</td>
+<td>History department</td>
+</tr>
+<tr>
+<td>Susan Procter</td>
+<td>Geography department</td>
+</tr>
+<tr>
+<td>Mr. Maboob Master</td>
+<td>IT department</td>
+</tr>
+<tr>
+<td>Mrs. Whittaker</td>
+<td>IT department</td>
+</tr>
+<tr>
+<td>Ms. Dubois</td>
+<td>French studies</td>
+</tr>
+<tr>
+<td>Mrs. Geldard</td>
+<td>Design &amp; Technology department</td>
+</tr>
+<tr>
+<td>Mr. Steven Price</td>
+<td>Physical Education</td>
+</tr>
+<tr>
+<td>Mr. Baig</td>
+<td>Substitute teacher</td>
+</tr>
+<tr>
+<td>Ms. Easterbrook</td>
+<td>Welfare team</td>
+</tr>
+<tr>
+<td>Terry</td>
+<td><i>Unknown</i></td>
+</tr>
+</tbody>
+</table>
 </div>
 </section>
-
-     <!-- ==================== TRIVIA AND GALLERY ==================== -->
-     <section class="section" id="trivia">
-      <h2>
+<!-- ==================== TRIVIA AND GALLERY ==================== -->
+<section class="section trivia-view-section" id="trivia">
+<h2>
        Trivia
       </h2>
-      <ul class="trivia-list">
-       <li>
+<ul class="trivia-list">
+<li>
         This is placeholder trivia text for an interesting production detail about the episode.
        </li>
-       <li>
+<li>
         Add behind-the-scenes notes, references, continuity details, or small observations here.
        </li>
-       <li>
+<li>
         This section can also be used for alternate titles, visual gags, callbacks, or broadcast notes.
        </li>
-      </ul>
-     </section>
-
-     <section class="section gallery-view-section" id="gallery">
-      <h2>
+</ul>
+</section>
+<section class="section gallery-view-section" id="gallery">
+<h2>
        Gallery
       </h2>
-      <div class="gallery">
-       <button class="gallery-item" data-caption="Season 1 (destroyed - Spring)" type="button">
-        <img alt="Season 1 (destroyed - Spring)" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend6.png"/>
-       <span class="gallery-visible-caption">Season 1 (destroyed - Spring)</span>
-       </button>
-       <button class="gallery-item" data-caption="School field / break area" type="button">
-        <img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend7.png"/>
-       <span class="gallery-visible-caption">School field / break area</span>
-       </button>
-       <button class="gallery-item" data-caption="School field / break area" type="button">
-        <img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend8.png"/>
-       <span class="gallery-visible-caption">School field / break area</span>
-       </button>
-       <button class="gallery-item" data-caption="Standalone Science Lab" type="button">
-        <img alt="Standalone Science Lab" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend9.png"/>
-       <span class="gallery-visible-caption">Standalone Science Lab</span>
-       </button>
-       <button class="gallery-item" data-caption="Rear buildings" type="button">
-        <img alt="Rear buildings" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend10.png"/>
-       <span class="gallery-visible-caption">Rear buildings</span>
-       </button>
-      </div>
-     </section>
-
-     <div class="categories-box" aria-label="Categories">
-      <div class="categories-row">
-       <div class="categories-label">Categories</div>
-       <div class="categories-links">
-        <a href="https://lewis.lc/wiki/edge_end#">Locations</a>
-        <a href="https://lewis.lc/wiki/edge_end#">Schools</a>
-        <a href="https://lewis.lc/wiki/edge_end#">Recurring locations</a>
-        <a href="https://lewis.lc/wiki/edge_end#">Season 1 locations</a>
-       </div>
-      </div>
-     </div>
-    </section>
-
-   </main>
-  </div>
-  <button aria-label="Close navigation" class="menu-overlay" type="button">
-  </button>
-
-  <button type="button" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
-
-  <script id="wiki-controller">
+<div class="gallery">
+<button class="gallery-item" data-caption="Season 1 (destroyed - Spring)" type="button">
+<img alt="Season 1 (destroyed - Spring)" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend6.png"/>
+<span class="gallery-visible-caption">Season 1 (destroyed - Spring)</span>
+</button>
+<button class="gallery-item" data-caption="School field / break area" type="button">
+<img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend7.png"/>
+<span class="gallery-visible-caption">School field / break area</span>
+</button>
+<button class="gallery-item" data-caption="School field / break area" type="button">
+<img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend8.png"/>
+<span class="gallery-visible-caption">School field / break area</span>
+</button>
+<button class="gallery-item" data-caption="Standalone Science Lab" type="button">
+<img alt="Standalone Science Lab" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend9.png"/>
+<span class="gallery-visible-caption">Standalone Science Lab</span>
+</button>
+<button class="gallery-item" data-caption="Rear buildings" type="button">
+<img alt="Rear buildings" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend10.png"/>
+<span class="gallery-visible-caption">Rear buildings</span>
+</button>
+</div>
+</section>
+<div aria-label="Categories" class="categories-box">
+<div class="categories-row">
+<div class="categories-label">Categories</div>
+<div class="categories-links">
+<a href="https://lewis.lc/wiki/edge_end#">Locations</a>
+<a href="https://lewis.lc/wiki/edge_end#">Schools</a>
+<a href="https://lewis.lc/wiki/edge_end#">Recurring locations</a>
+<a href="https://lewis.lc/wiki/edge_end#">Season 1 locations</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<button aria-label="Close navigation" class="menu-overlay" type="button">
+</button>
+<button aria-label="Back to top" id="backToTop" title="Back to top" type="button">↑</button>
+<script id="wiki-controller">
    document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
   const body = document.body;
@@ -3329,10 +3182,7 @@ document.addEventListener("DOMContentLoaded", function(){
   }, {passive:true});
 });
   </script>
-
-
 <div class="site-credit">Created by Lewis</div>
-
 <script>
 /* Desktop-friendly horizontal scrolling for infobox image tabs */
 document.querySelectorAll('.infobox-image-tabs').forEach(function(tabs){
@@ -3344,11 +3194,6 @@ document.querySelectorAll('.infobox-image-tabs').forEach(function(tabs){
   }, { passive:false });
 });
 </script>
-
-
-
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   document.querySelectorAll(".infobox-image-switcher").forEach(function(switcher){
@@ -3403,8 +3248,6 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 });
 </script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   const desktopTheme = document.querySelector(".sticky-theme-control");
@@ -3429,8 +3272,6 @@ document.addEventListener("DOMContentLoaded", function(){
   window.addEventListener("resize", placeDesktopTheme, {passive:true});
 });
 </script>
-
-
 <script>
 document.addEventListener("DOMContentLoaded", function(){
   document.querySelectorAll(".theme-icon-slot").forEach(function(slot){
@@ -3452,6 +3293,63 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 });
 </script>
+<script id="clean-view-controller">
+document.addEventListener("DOMContentLoaded", function(){
+  const buttons = Array.from(document.querySelectorAll(".page-view-button"));
+  const triviaSection = document.querySelector(".trivia-view-section");
+  const gallerySection = document.querySelector(".gallery-view-section");
 
-</body>
+  function setView(view, updateHash){
+    document.body.classList.remove("trivia-page-view","gallery-page-view");
+
+    if (view === "trivia" && triviaSection) {
+      document.body.classList.add("trivia-page-view");
+    } else if (view === "gallery" && gallerySection) {
+      document.body.classList.add("gallery-page-view");
+    } else {
+      view = "article";
+    }
+
+    buttons.forEach(function(button){
+      const active = button.dataset.pageView === view;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    if (updateHash) {
+      const next = view === "article"
+        ? location.pathname + location.search
+        : "#" + view;
+      history.replaceState(null, "", next);
+    }
+
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  buttons.forEach(function(button){
+    button.addEventListener("click", function(){
+      setView(button.dataset.pageView, true);
+    });
+  });
+
+  const initial = location.hash === "#trivia"
+    ? "trivia"
+    : location.hash === "#gallery"
+      ? "gallery"
+      : "article";
+  setView(initial, false);
+
+  const backToTop = document.getElementById("backToTop");
+  if (backToTop) {
+    const updateBackToTop = function(){
+      backToTop.classList.toggle("visible", window.scrollY > 450);
+    };
+    window.addEventListener("scroll", updateBackToTop, {passive:true});
+    backToTop.addEventListener("click", function(){
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+    updateBackToTop();
+  }
+});
+</script></body>
 </html>
