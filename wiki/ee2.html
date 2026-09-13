@@ -1,2110 +1,297 @@
-<!DOCTYPE html>
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="light dark" name="color-scheme"/>
-  <title>
-   Edge End High School - South Park Wiki
-  </title>
-  <link href="https://fonts.googleapis.com/" rel="preconnect"/>
-  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <style id="wiki-styles">
-   :root{
-  --shell:1120px;
-  --rail:205px;
-  --mobile-bar:52px;
-
-  --bg:#dce5ec;
-  --paper:#fbfbfb;
-  --panel:#f1f3f6;
-  --panel-solid:#f5f6f8;
-  --text:#262b31;
-  --muted:#6f7781;
-  --line:#ccd3dc;
-  --accent:#456291;
-  --link:#456291;
-  --shadow:0 0 34px rgba(20,28,40,.16);
-  --background-image:url("img/daytime.png");
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>South Park — News Archive</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400;6..144,500;6..144,600;6..144,700;6..144,800;6..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07131d;--panel:#0d1d29;--panel-2:#122735;--ink:#f5f2eb;--muted:#9db0bb;
+  --line:rgba(168,198,211,.18);--line-strong:#294555;--paper:#e3d9bf;--paper-ink:#172129;
+  --blue:#5161ac;--green:#009b67;--cyan:#59c0d5;--orange:#f47321;
+  --link:#7bbbe3;--shadow:0 18px 44px rgba(0,0,0,.22);--max:1180px;
 }
-
-html.dark{
-  --bg:#17263a;
-  --paper:#1f3047;
-  --panel:#273a53;
-  --panel-solid:#24364d;
-  --text:#f1f5f9;
-  --muted:#c0cad6;
-  --line:#48607a;
-  --accent:#5f82ad;
-  --link:#b7d6f7;
-  --shadow:0 0 38px rgba(6,15,27,.34);
-  --background-image:url("img/nighttime.png");
+html[data-theme="light"]{
+  --bg:#ece9df;--panel:#f8f4e9;--panel-2:#eee7d8;--ink:#17242b;--muted:#68777e;
+  --line:rgba(46,68,76,.14);--line-strong:#bcc4bf;--paper:#d9caa9;--paper-ink:#172129;
+  --link:#2f77aa;--shadow:0 14px 34px rgba(58,65,61,.10);
 }
-
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-html,body{margin:0;padding:0;min-height:100%}
-
 body{
-  font-family:"Inter",system-ui,sans-serif;
-  color:var(--text);
-  background-color:var(--bg);
-  background-image:var(--background-image);
-  background-position:top center;
-  background-size:cover;
-  background-repeat:no-repeat;
-  background-attachment:fixed;
-  overflow-x:hidden;
+  margin:0;min-height:100vh;font-family:Inter,sans-serif;color:var(--ink);background-color:var(--bg);
+  background-image:linear-gradient(rgba(5,16,24,.76),rgba(5,16,24,.92)),url("https://lewis.lc/wiki/img/nighttime.png");
+  background-size:cover;background-position:center top;background-attachment:fixed;
 }
-
-a{color:var(--link);text-decoration:none}
-a:hover{text-decoration:underline}
+html[data-theme="light"] body{
+  background-image:linear-gradient(rgba(247,244,235,.84),rgba(247,244,235,.95)),url("https://lewis.lc/wiki/img/daytime.png");
+}
+a{color:inherit;text-decoration:none}
 button,input{font:inherit}
-svg{display:block}
-::selection{background:#cfd8e4;color:#111}
-
-/* ---------- desktop shell ---------- */
-.site-header,
-.mobile-wiki-identity,
-.menu-overlay{display:none}
-
-.shell{
-  position:relative;
-  display:grid;
-  grid-template-columns:var(--rail) minmax(0,1fr);
-  width:min(var(--shell),calc(100% - 120px));
-  max-width:var(--shell);
-  min-height:100vh;
-  margin:0 auto;
-  background:var(--paper);
-  box-shadow:var(--shadow);
-  transition:grid-template-columns .2s ease;
-}
-
-.sidebar{
-  grid-column:1;
-  min-width:0;
-  overflow:hidden;
-  border-right:1px solid var(--line);
-  background:var(--panel-solid);
-  transition:opacity .15s ease;
-}
-
-.main{
-  grid-column:2;
-  min-width:0;
-  padding:0 22px 38px;
-  background:var(--paper);
-}
-
-/* ---------- sidebar ---------- */
-.rail-brand{
-  padding:20px 16px 15px;
-  border-bottom:1px solid var(--line);
-}
-
-.rail-section{
-  padding:9px 10px;
-  border-bottom:1px solid var(--line);
-  background:var(--panel-solid);
-}
-
-.nav-label{
-  padding:3px 7px 7px;
-  color:var(--muted);
-  font-size:.6rem;
-  font-weight:720;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-}
-
-.rail-nav{display:grid;gap:2px}
-
-.rail-link{
-  min-height:30px;
-  display:flex;
-  align-items:center;
-  padding:5px 7px;
-  border-radius:5px;
-  color:var(--text);
-  font-size:.77rem;
-  font-weight:500;
-}
-
-.rail-link:hover,
-.rail-link.active{
-  background:var(--paper);
-  text-decoration:none;
-}
-
-.rail-link.active{
-  color:var(--link);
-  font-weight:650;
-}
-
-.season-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:4px;
-}
-
-.season-grid a{
-  min-height:27px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--line);
-  border-radius:4px;
-  background:var(--paper);
-  color:var(--text);
-  font-size:.65rem;
-  font-weight:650;
-}
-
-.season-grid a:hover,
-.season-grid a.active{
-  background:var(--accent);
-  color:#fff;
-  text-decoration:none;
-}
-
-/* ---------- sidebar collapse ---------- */
-.desktop-sidebar-toggle{
-  position:absolute;
-  top:18px;
-  left:calc(var(--rail) - 16px);
-  z-index:140;
-  width:32px;
-  height:32px;
-  display:grid;
-  place-items:center;
-  padding:0;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:var(--paper);
-  color:var(--text);
-  box-shadow:0 2px 8px rgba(0,0,0,.12);
-  cursor:pointer;
-}
-
-.desktop-sidebar-toggle:hover{background:var(--panel)}
-.desktop-sidebar-toggle svg{width:16px;height:16px}
-.sidebar-toggle-open{display:none}
-
-.shell.sidebar-collapsed{
-  grid-template-columns:0 minmax(0,1fr);
-}
-
-.shell.sidebar-collapsed .sidebar{
-  opacity:0;
-  pointer-events:none;
-  border-right:0;
-}
-
-.shell.sidebar-collapsed .desktop-sidebar-toggle{left:10px}
-.shell.sidebar-collapsed .sidebar-toggle-close{display:none}
-.shell.sidebar-collapsed .sidebar-toggle-open{display:grid}
-
-/* ---------- hero ---------- */
-.hero{
-  padding:17px 0 14px;
-  border-bottom:1px solid var(--line);
-}
-
-.eyebrow{display:flex;flex-wrap:wrap;gap:5px}
-
-.chip{
-  padding:4px 7px;
-  border:1px solid var(--line);
-  border-radius:999px;
-  background:var(--panel);
-  color:var(--muted);
-  font-size:.56rem;
-  font-weight:720;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-}
-
-.hero h1{
-  margin:7px 0 0;
-  color:var(--text);
-  font:560 clamp(2rem,3.35vw,3.2rem)/.96 "Google Sans Flex","Inter",sans-serif;
-  letter-spacing:-.05em;
-}
-
-/* ---------- sticky scrap navigation ---------- */
-.sticky-nav-sentinel{height:1px;width:100%;pointer-events:none}
-
-.section-tabs{
-  position:sticky;
-  top:0;
-  z-index:900;
-  display:flex;
-  align-items:center;
-  flex-wrap:nowrap;
-  gap:8px;
-  overflow-x:auto;
-  margin:0 -2px 13px;
-  padding:8px 2px 9px;
-  border-bottom:1px solid var(--line);
-  background:color-mix(in srgb,var(--paper) 96%,transparent);
-  backdrop-filter:blur(10px);
-  scrollbar-width:none;
-}
-
-.section-tabs::-webkit-scrollbar{display:none}
-
-.section-tab{
-  flex:0 0 auto;
-  min-width:max-content;
-  display:flex;
-  align-items:center;
-  padding:7px 12px;
-  color:#2d3237;
-  border:0;
-  clip-path:polygon(2% 3%,97% 0,100% 91%,94% 100%,3% 96%,0 12%);
-  box-shadow:0 2px 4px rgba(0,0,0,.14);
-  font-size:.64rem;
-  font-weight:720;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  -webkit-tap-highlight-color:transparent;
-  transition:background-color .12s ease,color .12s ease,box-shadow .12s ease;
-}
-
-.section-tab:nth-of-type(1){background:#ddd8c7}
-.section-tab:nth-of-type(2){background:#cfded9}
-.section-tab:nth-of-type(3){background:#dfd0c7}
-.section-tab[data-section="trivia"]{background:#d9cddd}
-.section-tab[data-section="gallery"]{background:#d4d8c5}
-
-/* Crucial flicker fix: no transform/filter changes between normal/hover/active */
-.section-tab:hover,
-.section-tab:focus-visible{
-  text-decoration:none;
-  box-shadow:0 3px 6px rgba(0,0,0,.16);
-}
-
-.section-tab:active{
-  box-shadow:0 2px 4px rgba(0,0,0,.14);
-}
-
-.section-tab.active,
-.section-tab.active:hover,
-.section-tab.active:active{
-  background:#456291!important;
-  color:#fff!important;
-  box-shadow:0 2px 4px rgba(0,0,0,.18);
-}
-
-html.dark .section-tab:not(.active){color:#202832}
-html.dark .section-tab:nth-of-type(1):not(.active){background:#d2cdbd}
-html.dark .section-tab:nth-of-type(2):not(.active){background:#c5d4cf}
-html.dark .section-tab:nth-of-type(3):not(.active){background:#d4c5bc}
-html.dark .section-tab[data-section="trivia"]:not(.active){background:#cec2d2}
-html.dark .section-tab[data-section="gallery"]:not(.active){background:#c9ceba}
-html.dark .section-tab.active{background:#5f82ad!important;color:#fff!important}
-
-.section-tab-icon,
-.section-tab-icon svg{width:14px;height:14px}
-.section-tab[data-section="top"] .section-tab-icon{margin-right:4px}
-
-.top-chevron-svg{
-  width:14px!important;
-  height:14px!important;
-  flex:0 0 14px;
-}
-
-.sticky-sidebar-control,
-.sticky-theme-control{
-  flex:0 0 34px;
-  width:34px;
-  height:34px;
-  place-items:center;
-  padding:0;
-  border:1px solid var(--line);
-  border-radius:50%;
-  background:var(--paper);
-  color:var(--text);
-  box-shadow:0 2px 7px rgba(0,0,0,.11);
-  cursor:pointer;
-}
-
-.sticky-sidebar-control{display:none;margin-right:2px}
-.section-tabs.is-stuck .sticky-sidebar-control{display:grid}
-.sticky-theme-control{display:grid;margin-left:auto}
-
-.sticky-sidebar-control:hover,
-.sticky-theme-control:hover{background:var(--panel)}
-
-.sticky-sidebar-control svg,
-.sticky-theme-control svg{width:16px;height:16px}
-
-.shell.sidebar-collapsed .sticky-sidebar-control svg{transform:rotate(180deg)}
-
-.theme-icon-slot{
-  position:relative;
-  width:16px;
-  height:16px;
-  flex:0 0 16px;
-  display:grid;
-  place-items:center;
-}
-
-.theme-icon-slot .theme-icon{
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-}
-
-.theme-icon-slot svg{width:16px;height:16px}
-html:not(.dark) .theme-icon-slot .theme-icon-sun{display:none!important}
-html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
-
-/* ---------- article / infobox ---------- */
-.article-content{display:block}
-
-.infobox{
-  float:right;
-  width:268px;
-  margin:0 0 18px 22px;
-  border:1px solid var(--line);
-  background:var(--paper);
-}
-
-.infobox-title{
-  padding:8px 9px;
-  background:var(--accent);
-  color:#fff;
-  text-align:center;
-  font:700 .9rem "Google Sans Flex","Inter",sans-serif;
-}
-
-.infobox img{display:block;width:100%;height:auto}
-.info-table{display:grid}
-
-.info-row{
-  display:grid;
-  grid-template-columns:42% 58%;
-  border-top:1px solid var(--line);
-  font-size:.76rem;
-  line-height:1.4;
-}
-
-.info-row b,
-.info-row span{padding:6px 7px}
-
-.info-row b{background:var(--panel);font-weight:650}
-.info-row span{color:var(--text)}
-
-.lede{
-  margin:0 0 16px;
-  color:var(--text);
-  font-size:.96rem;
-  line-height:1.7;
-}
-
-.section{
-  padding:18px 0;
-  border-top:1px solid var(--line);
-  overflow:visible;
-}
-
-.section.first{
-  padding-top:0;
-  border-top:0;
-}
-
-.section h2{
-  margin:0 0 9px;
-  padding-bottom:5px;
-  border-bottom:1px solid var(--accent);
-  color:var(--text);
-  font:560 1.28rem "Google Sans Flex","Inter",sans-serif;
-}
-
-.section p{
-  margin:0 0 1em;
-  color:var(--text);
-  font-size:.94rem;
-  line-height:1.62;
-}
-
-.trivia-list{
-  margin:0;
-  padding-left:1.25rem;
-}
-
-.trivia-list li{
-  margin:0 0 .38rem;
-  padding-left:.15rem;
-  color:var(--text);
-  font-size:.9rem;
-  line-height:1.65;
-}
-
-.trivia-list li:last-child{margin-bottom:0}
-
-/* ---------- staff table ---------- */
-.staff-table{
-  width:100%;
-  margin:2px 0 0;
-  border:1px solid var(--line);
-  border-collapse:collapse;
-  background:var(--paper);
-  font-size:.84rem;
-}
-
-.staff-table th,
-.staff-table td{
-  padding:8px 10px;
-  border-bottom:1px solid var(--line);
-  text-align:left;
-  vertical-align:top;
-}
-
-.staff-table th{
-  background:var(--panel);
-  color:var(--muted);
-  font-size:.65rem;
-  font-weight:720;
-  letter-spacing:.055em;
-  text-transform:uppercase;
-}
-
-.staff-table th:first-child,
-.staff-table td:first-child{
-  width:48%;
-}
-
-.staff-table tbody tr:last-child td{
-  border-bottom:0;
-}
-
-.staff-table td:first-child{
-  font-weight:600;
-  color:var(--text);
-}
-
-.staff-table td:last-child{
-  color:var(--muted);
-}
-
-@media(max-width:850px){
-  .staff-table{
-    font-size:.82rem;
-  }
-
-  .staff-table th,
-  .staff-table td{
-    padding:8px;
-  }
-}
-
-/* ---------- gallery ---------- */
-#gallery{clear:both}
-
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:8px;
-}
-
-.gallery-item{
-  width:100%;
-  min-width:0;
-  padding:3px;
-  border:1px solid var(--line);
-  border-radius:5px;
-  background:var(--paper);
-  cursor:zoom-in;
-}
-
-.gallery-item img{
-  display:block;
-  width:100%;
-  aspect-ratio:16/9;
-  object-fit:cover;
-  border-radius:3px;
-}
-
-.footer{
-  margin:10px 0 0;
-  color:var(--muted);
-  font-size:.68rem;
-  text-align:center;
-}
-
-/* ---------- lightbox ---------- */
-.wiki-lightbox{
-  position:fixed;
-  inset:0;
-  z-index:3000;
-  display:none;
-  background:rgba(5,8,12,.9);
-  backdrop-filter:blur(8px);
-  overflow:hidden;
-}
-
-.wiki-lightbox.open{display:block}
-
-/* Full-viewport media layer. Controls/caption/counter are positioned
-   independently and therefore cannot push the image off centre. */
-.wiki-lightbox-stage{
-  position:absolute;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:72px 84px;
-  pointer-events:none;
-}
-
-.wiki-lightbox img{
-  display:block;
-  width:auto;
-  height:auto;
-  max-width:calc(100vw - 168px);
-  max-height:calc(100vh - 144px);
-  object-fit:contain;
-  border-radius:5px;
-  box-shadow:0 18px 60px rgba(0,0,0,.42);
-  pointer-events:auto;
-}
-
-.wiki-lightbox-close,
-.wiki-lightbox-nav{
-  position:absolute;
-  z-index:2;
-  display:grid;
-  place-items:center;
-  border:0;
-  background:rgba(255,255,255,.94);
-  color:#111;
-  box-shadow:0 4px 18px rgba(0,0,0,.25);
-  cursor:pointer;
-}
-
-.wiki-lightbox-close{
-  top:18px;
-  right:18px;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  font-size:24px;
-}
-
-.wiki-lightbox-nav{
-  top:50%;
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  transform:translateY(-50%);
-}
-
-.wiki-lightbox-prev{left:14px}
-.wiki-lightbox-next{right:14px}
-.wiki-lightbox-nav svg{width:21px;height:21px}
-
-.wiki-lightbox-caption{
-  position:absolute;
-  z-index:2;
-  left:50%;
-  bottom:48px;
-  transform:translateX(-50%);
-  max-width:min(720px,calc(100vw - 40px));
-  padding:6px 10px;
-  border-radius:4px;
-  background:rgba(13,21,32,.78);
-  color:#fff;
-  font-size:.72rem;
-  line-height:1.35;
-  text-align:center;
-}
-
-.wiki-lightbox-counter{
-  position:absolute;
-  z-index:2;
-  left:50%;
-  bottom:18px;
-  transform:translateX(-50%);
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(13,21,32,.78);
-  color:#fff;
-  font-size:.68rem;
-  font-weight:650;
-}
-
-/* ---------- tablet ---------- */
-@media(max-width:1050px) and (min-width:851px){
-  .shell{width:calc(100% - 42px)}
-  .gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-
-/* ---------- mobile ---------- */
-@media(max-width:850px){
-  body{background-attachment:scroll}
-
-  .site-header{
-    display:block;
-    position:fixed;
-    inset:0 0 auto 0;
-    z-index:1200;
-    width:100%;
-    height:var(--mobile-bar);
-    background:var(--paper);
-    border-bottom:1px solid var(--line);
-    box-shadow:0 1px 8px rgba(0,0,0,.1);
-  }
-
-  .unified-mobile-bar{
-    display:grid;
-    grid-template-columns:44px minmax(0,1fr) 44px;
-    width:100%;
-    height:100%;
-  }
-
-  .unified-icon-button{
-    width:44px;
-    height:100%;
-    display:grid;
-    place-items:center;
-    padding:0;
-    border:0;
-    background:var(--panel-solid);
-    color:var(--text);
-    cursor:pointer;
-  }
-
-  .unified-icon-button:first-child{border-right:1px solid var(--line)}
-  .unified-icon-button:last-child{border-left:1px solid var(--line)}
-  .unified-icon-button svg{width:19px;height:19px}
-
-  .unified-section-links{
-    min-width:0;
-    display:flex;
-    flex-wrap:nowrap;
-    overflow-x:auto;
-    overflow-y:hidden;
-    background:var(--paper);
-    scrollbar-width:none;
-    -webkit-overflow-scrolling:touch;
-    overscroll-behavior-x:contain;
-  }
-
-  .unified-section-links::-webkit-scrollbar{display:none}
-
-  .unified-section-link{
-    flex:0 0 auto;
-    min-width:78px;
-    height:var(--mobile-bar);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:3px;
-    padding:0 10px;
-    border-right:1px solid var(--line);
-    color:var(--muted);
-    font-size:.53rem;
-    font-weight:680;
-    text-transform:uppercase;
-    white-space:nowrap;
-  }
-
-  .unified-section-link:hover{text-decoration:none;background:var(--panel)}
-  .unified-section-link.active{background:var(--accent);color:#fff}
-  .unified-section-link svg{width:15px;height:15px}
-  .unified-section-link span{display:block;line-height:1;white-space:nowrap}
-
-  .mobile-wiki-identity{
-    display:flex;
-    align-items:center;
-    min-height:58px;
-    margin:var(--mobile-bar) 0 0;
-    padding:10px 14px;
-    border-bottom:1px solid var(--line);
-    background:var(--paper);
-  }
-
-  .mobile-wiki-identity span{
-    display:block;
-    margin-top:5px;
-    color:var(--muted);
-    font-size:.64rem;
-    font-weight:700;
-    letter-spacing:.11em;
-    text-transform:uppercase;
-  }
-
-  .shell{
-    display:block;
-    width:100%;
-    max-width:none;
-    min-height:0;
-    margin:0;
-    box-shadow:none;
-  }
-
-  .sidebar{
-    position:fixed;
-    top:var(--mobile-bar);
-    bottom:0;
-    left:0;
-    z-index:1120;
-    width:min(292px,86vw);
-    overflow-y:auto;
-    opacity:1!important;
-    transform:translateX(-103%);
-    transition:transform .22s ease;
-    border-right:1px solid var(--line)!important;
-    background:var(--panel-solid);
-    box-shadow:18px 0 45px rgba(0,0,0,.28);
-    pointer-events:auto!important;
-  }
-
-  body.menu-open .sidebar{transform:translateX(0)}
-
-  .menu-overlay{
-    position:fixed;
-    inset:var(--mobile-bar) 0 0;
-    z-index:1110;
-    border:0;
-    background:rgba(0,0,0,.48);
-  }
-
-  body.menu-open .menu-overlay{display:block}
-
-  .desktop-sidebar-toggle,
-  .sticky-sidebar-control,
-  .sticky-theme-control,
-  .sticky-nav-sentinel,
-  .section-tabs{
-    display:none!important;
-  }
-
-  .main{
-    width:100%;
-    margin:0;
-    padding:0 14px 32px;
-  }
-
-  .hero{padding:15px 0 14px}
-
-  .hero h1{
-    margin-top:7px;
-    font-size:clamp(1.85rem,10vw,2.65rem);
-    line-height:.96;
-  }
-
-  .infobox{
-    float:none;
-    width:100%;
-    margin:0 0 17px;
-  }
-
-  .lede{font-size:.95rem;line-height:1.7}
-  .section{padding:17px 0}
-  .section h2{font-size:1.25rem}
-  .section p{font-size:.93rem;line-height:1.7}
-  .quote{font-size:.87rem;padding:9px 11px}
-  .trivia-list li{font-size:.93rem;line-height:1.7}
-
-  .gallery{
-    grid-template-columns:1fr;
-    gap:10px;
-  }
-
-  #top,#appearance,#staff,#trivia,#gallery{
-    scroll-margin-top:calc(var(--mobile-bar) + 8px);
-  }
-
-  .wiki-lightbox-stage{
-    padding:62px 12px 72px;
-  }
-
-  .wiki-lightbox img{
-    max-width:calc(100vw - 24px);
-    max-height:calc(100vh - 134px);
-  }
-
-  .wiki-lightbox-nav{width:42px;height:42px}
-  .wiki-lightbox-prev{left:6px}
-  .wiki-lightbox-next{right:6px}
-}
-
-@media(max-width:470px){
-  .unified-mobile-bar{grid-template-columns:42px minmax(0,1fr) 42px}
-  .unified-icon-button{width:42px}
-  .unified-section-link{min-width:72px;padding:0 8px}
-}
-
-@media(min-width:1400px){
-  .shell{
-    width:min(1080px,calc(100% - 180px));
-    max-width:1080px;
-  }
-}
-
-/* ============================================================
-   DETAIL ENHANCEMENTS
-   ============================================================ */
-
-/* Fully clickable Previous / Next infobox rows */
-.info-row-nav{
-  position:relative;
-  cursor:pointer;
-  transition:background-color .12s ease;
-}
-.info-row-nav:hover{background:var(--panel)}
-.info-row-nav .info-row-link{
-  color:var(--link);
-  font-weight:600;
-  text-decoration:none;
-}
-.info-row-nav:hover .info-row-link{text-decoration:underline}
-
-/* More individual cut-paper geometry and subtle fibre texture */
-.section-tab{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-}
-.section-tab[data-section="top"]{
-  clip-path:polygon(2% 7%,96% 1%,100% 87%,95% 100%,3% 95%,0 14%);
-}
-.section-tab[data-section="appearance"]{
-  clip-path:polygon(1% 2%,98% 5%,96% 98%,5% 100%,0 89%);
-}
-.section-tab[data-section="staff"]{
-  clip-path:polygon(3% 1%,97% 4%,100% 92%,94% 100%,2% 96%,0 10%);
-}
-.section-tab[data-section="trivia"]{
-  clip-path:polygon(0 8%,94% 1%,100% 10%,98% 97%,6% 100%,1% 91%);
-}
-.section-tab[data-section="gallery"]{
-  clip-path:polygon(3% 1%,99% 5%,100% 93%,94% 98%,2% 100%,0 11%);
-}
-.section-tab::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  pointer-events:none;
-  opacity:.15;
-  background-image:
-    radial-gradient(circle at 16% 22%,rgba(0,0,0,.22) 0 .45px,transparent .6px),
-    radial-gradient(circle at 72% 61%,rgba(255,255,255,.85) 0 .4px,transparent .6px),
-    radial-gradient(circle at 43% 82%,rgba(0,0,0,.14) 0 .35px,transparent .55px);
-  background-size:9px 11px,13px 12px,11px 14px;
-}
-
-/* Optional Plot subheadings */
-.plot-location-scrap{
-  display:inline-block;
-  margin:3px 0 9px;
-  padding:5px 8px 4px;
-  background:#ddd8c7;
-  color:#30343a;
-  font-size:.66rem;
-  font-weight:760;
-  letter-spacing:.075em;
-  text-transform:uppercase;
-  clip-path:polygon(2% 5%,97% 0,100% 90%,93% 100%,3% 96%,0 14%);
-  transform:rotate(-.25deg);
-  box-shadow:0 2px 3px rgba(0,0,0,.11);
-}
-.plot-location-scrap:nth-of-type(even){
-  background:#cfded9;
-  transform:rotate(.2deg);
-}
-html.dark .plot-location-scrap{
-  background:#d2cdbd;
-  color:#202832;
-}
-
-/* Gallery hover zoom */
-.gallery-item{overflow:hidden}
-.gallery-item img{transition:transform .22s ease}
-.gallery-item:hover img{transform:scale(1.035)}
-
-/* Smooth seam chevron movement */
-.desktop-sidebar-toggle svg{transition:transform .22s ease}
-.desktop-sidebar-toggle:active svg{transform:scale(.92)}
-
-@media(max-width:850px){
-  .gallery-item:hover img{transform:none}
-  .wiki-lightbox-caption{bottom:44px;font-size:.68rem}
-}
-
-/* Final small refinements */
-.infobox-title{
-  font-weight:560!important;
-}
-
-/* ============================================================
-   INFOBOX IMAGE SCRAPS
-   Thumbnail paper tabs for location states / eras.
-   ============================================================ */
-.infobox-image-switcher{width:100%;background:var(--paper);overflow:hidden}
-.infobox-image-tabs{display:none;align-items:flex-end;flex-wrap:wrap;justify-content:center;gap:4px;padding:7px 7px 0;background:var(--paper);border-bottom:1px solid var(--line)}
-.infobox-image-switcher.has-multiple .infobox-image-tabs{display:flex}
-.infobox-image-tab{position:relative;flex:0 0 auto;min-height:35px;display:flex;align-items:center;justify-content:center;margin:0 0 -1px;padding:7px 11px 6px;border:0;background:#ddd8c7;color:#293039;cursor:pointer;font-size:.61rem;font-weight:680;line-height:1;white-space:nowrap;clip-path:polygon(2% 6%,96% 0,100% 89%,94% 100%,3% 96%,0 14%);box-shadow:0 2px 4px rgba(0,0,0,.13);transition:background-color .14s ease,color .14s ease,box-shadow .14s ease}
-.infobox-image-tab:nth-child(2){background:#cfded9;clip-path:polygon(1% 2%,98% 5%,96% 98%,5% 100%,0 89%)}
-.infobox-image-tab:nth-child(3){background:#dfd0c7;clip-path:polygon(3% 1%,97% 4%,100% 92%,94% 100%,2% 96%,0 10%)}
-.infobox-image-tab:nth-child(4){background:#d9cddd;clip-path:polygon(0 8%,94% 1%,100% 10%,98% 97%,6% 100%,1% 91%)}
-.infobox-image-tab:nth-child(5){background:#d4d8c5;clip-path:polygon(3% 1%,99% 5%,100% 93%,94% 98%,2% 100%,0 11%)}
-.infobox-image-tab::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.13;background-image:radial-gradient(circle at 16% 22%,rgba(0,0,0,.22) 0 .4px,transparent .6px),radial-gradient(circle at 72% 61%,rgba(255,255,255,.85) 0 .4px,transparent .6px),radial-gradient(circle at 43% 82%,rgba(0,0,0,.14) 0 .35px,transparent .55px);background-size:9px 11px,13px 12px,11px 14px}
-.infobox-image-tab-label{position:relative;z-index:1}
-.infobox-image-tab:hover{box-shadow:0 3px 6px rgba(0,0,0,.18)}
-.infobox-image-tab[aria-selected="true"]{z-index:2;margin-bottom:-4px;padding-bottom:8px;background:var(--accent)!important;color:#fff;font-weight:720;box-shadow:0 3px 7px rgba(0,0,0,.2)}
-html.dark .infobox-image-tab:not([aria-selected="true"]){color:#202832}
-html.dark .infobox-image-tab:nth-child(1):not([aria-selected="true"]){background:#d2cdbd}
-html.dark .infobox-image-tab:nth-child(2):not([aria-selected="true"]){background:#c5d4cf}
-html.dark .infobox-image-tab:nth-child(3):not([aria-selected="true"]){background:#d4c5bc}
-html.dark .infobox-image-tab:nth-child(4):not([aria-selected="true"]){background:#cec2d2}
-html.dark .infobox-image-tab:nth-child(5):not([aria-selected="true"]){background:#c9ceba}
-.infobox-image-panels{position:relative;width:100%}
-.infobox-image-panel{display:none;width:100%}
-.infobox-image-panel.is-active{display:block}
-.infobox-image-panel img{display:block;width:100%;height:auto;margin:0}
-.infobox-image-switcher:not(.has-multiple) .infobox-image-tabs{display:none}
-
-/* Infobox images can open in the shared lightbox */
-.infobox-image-panel img{
-  cursor:zoom-in;
-}
-
-
-/* ============================================================
-   WIKI STRUCTURE ENHANCEMENTS
-   ============================================================ */
-.wiki-notice{display:grid;grid-template-columns:28px minmax(0,1fr);gap:9px;align-items:start;margin:0 0 14px;padding:9px 10px;border:1px solid var(--line);border-left:5px solid var(--accent);background:color-mix(in srgb,var(--panel) 88%,#dceaff 12%);color:var(--text)}
-.wiki-notice svg{width:21px;height:21px;margin-top:1px;color:var(--accent)}
-html.dark .wiki-notice{border-left-color:#79a9d8;background:color-mix(in srgb,var(--panel) 91%,#7fb7ee 9%)}
-html.dark .wiki-notice svg{color:#9ecbf5}
-.wiki-notice strong{display:block;margin-bottom:2px;font-size:.76rem}
-.wiki-notice span{display:block;color:var(--muted);font-size:.72rem;line-height:1.45}
-
-.toc{width:min(330px,100%);margin:0 0 18px;border:1px solid var(--line);background:var(--panel-solid);font-size:.82rem;line-height:1.55}
-.toc-head{display:flex;align-items:center;justify-content:space-between;padding:7px 9px;border-bottom:1px solid var(--line);background:var(--panel);font-family:"Google Sans Flex","Inter",sans-serif}
-.toc-title{font-weight:700}
-.toc-toggle{border:0;padding:0;background:none;color:var(--link);font-size:.72rem;cursor:pointer}
-.toc-toggle:hover{text-decoration:underline}
-.toc ol{margin:0;padding:9px 10px 10px 31px}
-.toc li{margin:5px 0;color:var(--muted)}
-.toc a{color:var(--link);text-decoration:none}
-.toc a:hover{text-decoration:underline}
-.toc.is-collapsed ol{display:none}
-
-.internal-wiki-link{color:var(--link);text-decoration:none;font-weight:500}
-.internal-wiki-link:hover{text-decoration:underline}
-
-
-@media(max-width:850px){
-  .toc{width:100%;margin-bottom:16px}
-  .wiki-notice{grid-template-columns:24px minmax(0,1fr);padding:8px 9px}
-  .wiki-notice svg{width:19px;height:19px}
-}
-
-  
-/* ---------- South Park Wiki identity ----------
-   Compact version of the /sp/new cut-paper SOUTH PARK wordmark. */
-.wiki-wordmark{
-  display:inline-flex;
-  flex-direction:column;
-  align-items:flex-start;
-  width:max-content;
-  color:var(--text);
-  font-family:"Google Sans Flex","Inter",sans-serif;
-  user-select:none;
-  -webkit-user-select:none;
-}
-
-.wiki-wordmark-main{
-  position:relative;
-  display:flex;
-  align-items:baseline;
-  width:max-content;
-  padding:0 0 9px;
-  font-size:1.15rem;
-  font-weight:800;
-  line-height:.86;
-  letter-spacing:0;
-  text-transform:uppercase;
-}
-
-.wiki-wordmark-main > span:not(.wiki-logo-gap){
-  position:relative;
-  display:inline-block;
-  margin-right:-.045em;
-  transform-origin:50% 72%;
-  -webkit-mask-image:
-    radial-gradient(circle at 18% 24%,transparent 0 .65px,#000 .95px),
-    radial-gradient(circle at 72% 38%,transparent 0 .55px,#000 .85px),
-    radial-gradient(circle at 42% 76%,transparent 0 .6px,#000 .9px),
-    linear-gradient(#000,#000);
-  mask-image:
-    radial-gradient(circle at 18% 24%,transparent 0 .65px,#000 .95px),
-    radial-gradient(circle at 72% 38%,transparent 0 .55px,#000 .85px),
-    radial-gradient(circle at 42% 76%,transparent 0 .6px,#000 .9px),
-    linear-gradient(#000,#000);
-  clip-path:polygon(
-    1% 2%,13% 0%,25% 2%,38% .5%,51% 2.2%,64% .4%,77% 2%,89% .7%,99% 2.5%,
-    98.5% 14%,100% 27%,98.7% 40%,100% 54%,98.4% 67%,100% 81%,98% 98%,
-    85% 99.2%,72% 97.8%,59% 99.5%,46% 97.9%,33% 99.4%,20% 97.7%,2% 99%,
-    1.2% 85%,0 72%,1.3% 59%,0 45%,1.4% 31%,0 17%
-  );
-}
-
-.wiki-wordmark-main .wiki-logo-gap{
-  display:inline-block;
-  width:.24em;
-  flex:0 0 .24em;
-}
-
-.wiki-wordmark-main > span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
-.wiki-wordmark-main > span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
-.wiki-wordmark-main > span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
-.wiki-wordmark-main > span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
-.wiki-wordmark-main > span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
-.wiki-wordmark-main > span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
-.wiki-wordmark-main > span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
-.wiki-wordmark-main > span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
-.wiki-wordmark-main > span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
-
-.wiki-wordmark-main::after{
-  content:"";
-  position:absolute;
-  left:1px;
-  bottom:1px;
-  width:calc(100% - 2px);
-  height:5px;
-  background:linear-gradient(
-    90deg,
-    #5161AC 0 24%,
-    transparent 24% 25.5%,
-    #009B67 25.5% 49%,
-    transparent 49% 50.5%,
-    #59C0D5 50.5% 74%,
-    transparent 74% 75.5%,
-    #F47321 75.5% 100%
-  );
-  clip-path:polygon(
-    0 28%,7% 13%,14% 24%,21% 8%,29% 20%,37% 3%,
-    45% 18%,53% 7%,61% 22%,69% 5%,77% 19%,86% 9%,100% 24%,
-    98% 76%,90% 88%,81% 72%,72% 91%,63% 76%,54% 94%,
-    45% 77%,36% 91%,27% 73%,18% 89%,9% 75%,2% 91%
-  );
-  transform:rotate(-1deg);
-  filter:drop-shadow(0 1px 0 rgba(0,0,0,.15));
-  opacity:.94;
-  pointer-events:none;
-}
-
-.wiki-wordmark-suffix{
-  margin-top:2px;
-  color:var(--muted);
-  font-size:.54rem;
-  font-weight:800;
-  line-height:1;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-}
-
-/* Slightly larger treatment in the standalone mobile identity row. */
-.mobile-wiki-identity .wiki-wordmark-main{
-  font-size:1.42rem;
-  padding-bottom:10px;
-}
-.mobile-wiki-identity .wiki-wordmark-main::after{height:5px}
-.mobile-wiki-identity .wiki-wordmark-suffix{font-size:.58rem}
-
-/* ---------- categories as construction-paper scraps ---------- */
-.categories-box{
-  display:flex;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:7px 8px;
-  margin:19px 0 4px;
-  padding:0;
-  border:0;
-  background:none;
-  font-size:.73rem;
-}
-
-.categories-label{
-  margin-right:2px;
-  color:var(--muted);
-  font-size:.66rem;
-  font-weight:760;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-
-.categories-links{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:6px;
-}
-
-.categories-links a{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  min-height:29px;
-  padding:6px 10px 5px;
-  overflow:hidden;
-  color:#27313b;
-  background:#d4ddd4;
-  box-shadow:0 2px 4px rgba(0,0,0,.12);
-  font-weight:650;
-  line-height:1.1;
-  text-decoration:none;
-  isolation:isolate;
-  transition:filter .14s ease;
-}
-
-.categories-links a::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:-1;
-  opacity:.25;
-  pointer-events:none;
-  background:
-    radial-gradient(circle at 18% 22%,rgba(255,255,255,.75) 0 1px,transparent 1.3px),
-    radial-gradient(circle at 76% 66%,rgba(0,0,0,.15) 0 .7px,transparent 1px);
-  background-size:17px 19px,23px 21px;
-}
-
-.categories-links a:nth-child(1){
-  background:#d4ddd4;
-  clip-path:polygon(2% 5%,96% 0,100% 12%,98% 94%,88% 100%,4% 96%,0 18%);
-  transform:rotate(-.45deg);
-}
-.categories-links a:nth-child(2){
-  background:#d4ddd4;
-  clip-path:polygon(0 10%,8% 2%,96% 5%,100% 89%,92% 100%,3% 96%);
-  transform:rotate(.35deg);
-}
-.categories-links a:nth-child(3){
-  background:#d4ddd4;
-  clip-path:polygon(3% 1%,97% 5%,100% 91%,94% 100%,2% 96%,0 12%);
-  transform:rotate(-.3deg);
-}
-.categories-links a:nth-child(4){
-  background:#d4ddd4;
-  clip-path:polygon(0 8%,95% 1%,100% 13%,97% 97%,6% 100%,1% 90%);
-  transform:rotate(.42deg);
-}
-
-.categories-links a:hover{
-  filter:brightness(.96);
-  text-decoration:none;
-}
-
-html.dark .categories-links a{
-  color:#17202a;
-  box-shadow:0 2px 5px rgba(0,0,0,.25);
-}
-
-@media(max-width:850px){
-  .categories-box{align-items:flex-start;gap:8px;margin-top:18px}
-  .categories-label{width:100%;margin:0 0 1px}
-  .categories-links{gap:6px}
-}
-
+.site{width:min(var(--max),calc(100% - 28px));margin:18px auto 36px;background:color-mix(in srgb,var(--panel) 94%,transparent);border:1px solid var(--line-strong);box-shadow:var(--shadow);overflow:hidden}
+
+/* masthead — companion to /sp/movie */
+.masthead{position:relative;padding:22px 22px 17px;text-align:center;border-bottom:1px solid var(--line-strong);background:color-mix(in srgb,var(--panel) 95%,transparent)}
+.theme-button{
+  position:absolute;top:16px;right:17px;z-index:50;width:38px;height:38px;display:grid;place-items:center;padding:0;border:1px solid var(--line-strong);border-radius:50%;
+  color:var(--ink);background:var(--panel-2);cursor:pointer;pointer-events:auto;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  box-shadow:0 3px 10px rgba(0,0,0,.12);transition:transform .16s ease,border-color .16s ease,background .16s ease;
+}
+.theme-button *{pointer-events:none}
+.theme-button:hover{transform:translateY(-1px);border-color:color-mix(in srgb,var(--cyan) 58%,var(--line-strong))}
+.theme-button:active{transform:translateY(0) scale(.96)}
+.theme-button:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.theme-button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.theme-button .sun-icon{display:none}
+html[data-theme="light"] .theme-button .moon-icon{display:none}
+html[data-theme="light"] .theme-button .sun-icon{display:block}
+
+.movie-wordmark{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;gap:.34em;margin:2px auto 0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(34px,5.2vw,64px);font-weight:900;line-height:.9;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;filter:drop-shadow(0 2px 0 rgba(0,0,0,.16))}
+.movie-wordmark span{display:inline-block}.movie-wordmark span:nth-child(3n+1){transform:rotate(-1.4deg) translateY(1px)}.movie-wordmark span:nth-child(3n+2){transform:rotate(.8deg) translateY(-1px)}.movie-wordmark span:nth-child(3n){transform:rotate(-.4deg)}
+.wordmark-bars{position:relative;z-index:1;width:210px;height:5px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin:11px auto 0}.wordmark-bars i{display:block;clip-path:polygon(0 30%,8% 0,21% 46%,34% 12%,47% 54%,59% 7%,72% 48%,84% 14%,100% 33%,97% 76%,83% 59%,70% 98%,55% 63%,42% 100%,27% 58%,13% 92%,0 65%)}.wordmark-bars i:nth-child(1){background:var(--blue)}.wordmark-bars i:nth-child(2){background:var(--green)}.wordmark-bars i:nth-child(3){background:var(--cyan)}.wordmark-bars i:nth-child(4){background:var(--orange)}
+.archive-title{position:relative;z-index:1;margin:13px 0 4px;font:800 14px/1 "Google Sans Flex",sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+.archive-intro{position:relative;z-index:1;max-width:620px;margin:0 auto;color:var(--muted);font-size:11.5px;line-height:1.55}
+
+.toolbar{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:13px;border-top:1px solid var(--line)}
+.nav-links{display:flex;gap:5px;overflow:auto}.nav-links a{padding:7px 9px;font:700 11px/1 "Google Sans Flex",sans-serif;color:var(--muted);white-space:nowrap}.nav-links a:hover,.nav-links a.active{color:var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.back-guide{display:inline-flex;align-items:center;gap:6px;font:700 10.5px/1 "Google Sans Flex",sans-serif;color:var(--muted);white-space:nowrap}.back-guide:hover{color:var(--ink)}.back-guide svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.content{padding:20px 22px 28px}
+.archive-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;margin-bottom:22px}
+.search{position:relative}.search svg{position:absolute;left:12px;top:50%;width:16px;height:16px;transform:translateY(-50%);fill:none;stroke:var(--muted);stroke-width:1.8;stroke-linecap:round}.search input{width:100%;height:40px;padding:0 38px 0 37px;border:1px solid var(--line-strong);border-radius:3px;background:var(--panel-2);color:var(--ink);outline:none;font-size:11.5px}.search input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px color-mix(in srgb,var(--cyan) 16%,transparent)}.search-clear{position:absolute;right:5px;top:5px;width:30px;height:30px;border:0;background:transparent;color:var(--muted);cursor:pointer;font-size:18px;display:none}.search.has-value .search-clear{display:block}
+.year-select{height:40px;padding:0 12px;border:1px solid var(--line-strong);border-radius:3px;background:var(--panel-2);color:var(--ink);font:700 11px/1 "Google Sans Flex",sans-serif;cursor:pointer}
+
+.year-block{margin-top:26px}.year-block:first-of-type{margin-top:0}.year-heading{display:flex;align-items:center;gap:10px;margin:0 0 10px}.year-heading h2{margin:0;font:850 23px/1 "Google Sans Flex",sans-serif;letter-spacing:-.04em}.year-heading::after{content:"";height:1px;flex:1;background:var(--line-strong)}.year-count{font-size:10px;color:var(--muted)}
+.news-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+.post{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--panel);min-width:0;transition:border-color .16s ease,transform .16s ease}.post:hover{border-color:var(--line-strong);transform:translateY(-1px)}
+.post-image{aspect-ratio:16/9;overflow:hidden;background:var(--panel-2);border-bottom:1px solid var(--line)}.post-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .22s ease}.post:hover .post-image img{transform:scale(1.025)}
+.post-body{display:flex;flex-direction:column;flex:1;padding:12px}.post-meta{display:flex;align-items:center;gap:7px;margin-bottom:6px;color:var(--muted);font:700 8.5px/1.2 "Google Sans Flex",sans-serif;text-transform:uppercase;letter-spacing:.09em}.post-type{color:var(--cyan)}.post h3{margin:0 0 7px;font:800 16px/1.13 "Google Sans Flex",sans-serif;letter-spacing:-.025em}.post p{margin:0;color:var(--muted);font-size:10.5px;line-height:1.52}.post-read{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding-top:11px;color:var(--link);font:750 10px/1 "Google Sans Flex",sans-serif}.post-read svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.post:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.post.is-hidden,.year-block.is-hidden{display:none!important}
+.no-results{display:none;padding:28px 14px;text-align:center;border:1px dashed var(--line-strong);color:var(--muted);font-size:11px}.no-results.show{display:block}
+.search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none}
+.search-clear:hover{color:var(--ink)}
+.search-clear:focus-visible{outline:2px solid var(--cyan);outline-offset:-2px;border-radius:3px}
+
+.footer{display:flex;justify-content:space-between;gap:18px;padding:15px 22px;border-top:1px solid var(--line-strong);background:color-mix(in srgb,var(--panel) 96%,transparent);color:var(--muted);font-size:9.5px}.footer strong{color:var(--ink)}
+
+@media(max-width:900px){.news-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){body{background-attachment:scroll}.site{width:100%;margin:0;border-left:0;border-right:0}.masthead{padding:18px 14px 14px}.theme-button{top:12px;right:12px;width:36px;height:36px}.movie-wordmark{font-size:clamp(27px,8vw,39px);gap:.24em;padding:0 40px}.wordmark-bars{width:168px}.archive-title{margin-top:11px}.archive-intro{font-size:10.5px;padding:0 14px}.toolbar{align-items:flex-start;flex-direction:column}.content{padding:16px}.archive-tools{grid-template-columns:1fr}.year-select{width:100%}.news-list{grid-template-columns:1fr}.year-heading h2{font-size:21px}.footer{flex-direction:column;padding:14px 16px}}
 </style>
- </head>
- <body>
-  <header class="site-header">
-   <div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation">
-    <button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button" data-menu-toggle="" type="button">
-     <svg aria-hidden="true" viewbox="0 0 24 24">
-      <path d="M4.5 7h15M4.5 12h15M4.5 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
-      </path>
-     </svg>
+</head>
+<body>
+<div class="site">
+  <header class="masthead">
+    <button class="theme-button" id="themeButton" type="button" aria-label="Switch to light mode" title="Light mode">
+      <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"/></svg>
+      <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"/></svg>
     </button>
-    <div class="unified-section-links">
 
-     <a aria-label="Top" class="unified-section-link active" data-section="top" href="https://lewis.lc/wiki/edge_end#top">
-      <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
-       <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-       </path>
-      </svg>
-      <span>
-       Top
-      </span>
-     </a>
-
-     <a aria-label="Appearance" class="unified-section-link" data-section="appearance" href="https://lewis.lc/wiki/edge_end#appearance">
-<span>
-       Appearance
-      </span>
-     </a>
-
-     <a aria-label="Staff" class="unified-section-link" data-section="staff" href="https://lewis.lc/wiki/edge_end#staff">
-<span>
-       Staff
-      </span>
-     </a>
-
-     <a aria-label="Trivia" class="unified-section-link" data-section="trivia" href="https://lewis.lc/wiki/edge_end#trivia">
-<span>
-       Trivia
-      </span>
-     </a>
-
-     <a aria-label="Gallery" class="unified-section-link" data-section="gallery" href="https://lewis.lc/wiki/edge_end#gallery">
-<span>
-       Gallery
-      </span>
-     </a>
-
+    <div class="movie-wordmark" aria-label="South Park">
+      <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span>P</span><span>A</span><span>R</span><span>K</span>
     </div>
-    <button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
-     <span aria-hidden="true" class="theme-icon-slot">
-      <span class="theme-icon theme-icon-moon">
-       <svg viewbox="0 0 24 24">
-          <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round" stroke-linejoin="round"/>
-         </svg>
-      </span>
-      <span class="theme-icon theme-icon-sun">
-       <svg viewbox="0 0 24 24">
-          <circle cx="12" cy="12" r="3.4" fill="none"
-                  stroke="currentColor" stroke-width="1.65"/>
-          <path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1
-                   M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48
-                   M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round"/>
-         </svg>
-      </span>
-     </span>
-    </button>
-   </div>
+    <div class="wordmark-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="archive-title">News Archive</div>
+    <p class="archive-intro">News, updates, articles, old site discoveries and assorted South Park nonsense — collected in one place.</p>
+
+    <div class="toolbar">
+      <nav class="nav-links" aria-label="Archive navigation"><a class="active" href="#top">News archive</a><a href="#2026">2026</a><a href="#2025">2025</a><a href="#2024">2024</a><a href="#older">Older</a></nav>
+      <a class="back-guide" href="/sp/movie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>Episode guide</a>
+    </div>
   </header>
-  <div class="mobile-wiki-identity"><div><span class="wiki-wordmark" aria-label="South Park Wiki"><span class="wiki-wordmark-main" aria-hidden="true"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="wiki-logo-gap"></span><span>P</span><span>A</span><span>R</span><span>K</span></span><span class="wiki-wordmark-suffix" aria-hidden="true">Wiki</span></span></div></div>
-  <div class="shell">
-   <button aria-expanded="true" aria-label="Collapse sidebar" class="desktop-sidebar-toggle" data-desktop-sidebar-toggle="" title="Collapse sidebar" type="button">
-    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-close">
-     <svg viewbox="0 0 24 24">
-      <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-      </path>
-     </svg>
-    </span>
-    <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-open">
-     <svg viewbox="0 0 24 24">
-      <path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-      </path>
-     </svg>
-    </span>
-   </button>
-   <aside class="sidebar" id="sidebar">
-    <div class="rail-brand"><span class="wiki-wordmark" aria-label="South Park Wiki"><span class="wiki-wordmark-main" aria-hidden="true"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="wiki-logo-gap"></span><span>P</span><span>A</span><span>R</span><span>K</span></span><span class="wiki-wordmark-suffix" aria-hidden="true">Wiki</span></span></div>
 
-    <div class="rail-section">
-     <div class="nav-label">
-      Explore
-     </div>
-     <nav class="rail-nav">
-      <a class="rail-link" href="https://lewis.lc/sp/">
-<span>
-        Episodes
-       </span>
-      </a>
-      <a class="rail-link" href="https://lewis.lc/wiki/edge_end#">
-<span>
-        Characters
-       </span>
-      </a>
-      <a class="rail-link" href="https://lewis.lc/wiki/edge_end#">
-<span>
-        Locations
-       </span>
-      </a>
-     </nav>
+  <main class="content" id="top">
+    <div class="archive-tools">
+      <div class="search" id="searchWrap">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+        <input id="searchInput" type="search" placeholder="Search news archive..." autocomplete="off" aria-label="Search news archive">
+        <button class="search-clear" id="searchClear" type="button" aria-label="Clear search">×</button>
+      </div>
+      <select class="year-select" id="yearSelect" aria-label="Filter by year"><option value="all">All years</option><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option><option value="older">Older posts</option></select>
     </div>
-    <div class="rail-section">
-     <div class="nav-label">
-      Recent seasons
-     </div>
-     <div class="season-grid">
-      <a class="current" href="https://lewis.lc/wiki/edge_end#">
-       28
-      </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
-       27
-      </a>
-      <a href="https://lewis.lc/wiki/edge_end#">
-       26
-      </a>
-      <a href="https://lewis.lc/sp/">
-       All
-      </a>
-     </div>
-    </div>
-   </aside>
 
-   <main class="main" id="main">
+    <div class="no-results" id="noResults">No archive posts match that search.</div>
 
-    <!-- ==================== LOCATION TITLE / HERO ==================== -->
-    <section class="hero" id="top">
-     <div class="eyebrow">
-      <span class="chip">
-       Location
-      </span>
-
-     </div>
-     <h1>
-      Edge End High School
-     </h1>
+    <section class="year-block" id="2026" data-year="2026">
+      <div class="year-heading"><h2>2026</h2><span class="year-count">11 posts</span></div>
+      <div class="news-list">
+        <a class="post" href="#" data-search="south park news september episode updates comedy central 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>13 Sep 2026</span></div><h3>Another week in South Park</h3><p>Episode chatter, site updates and whatever else is happening in the quiet little mountain town.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="episode guide update construction paper site update 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>11 Sep 2026</span></div><h3>The episode guide gets a fresh coat of construction paper</h3><p>A cleaner layout, tighter season navigation and a few quality-of-life changes.</p><span class="post-read">Read update <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="comedy central archive old news south park studios history 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>10 Sep 2026</span></div><h3>Digging through old Comedy Central news</h3><p>Press releases, promos, wallpapers and forgotten scraps of South Park history.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="south park studios website retrospective internet archive 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>7 Sep 2026</span></div><h3>Remember South Park Studios?</h3><p>A trip back through downloads, news posts and the gloriously messy old South Park web.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="season 28 south park episodes news 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>2 Sep 2026</span></div><h3>Keeping track of Season 28</h3><p>New episodes, titles and everything added to the archive as the season continues.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="site launch news archive lewis south park fan site 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>28 Aug 2026</span></div><h3>A new home for South Park news</h3><p>The archive gets its own page for updates, articles and the things that don’t belong in the episode guide.</p><span class="post-read">Read update <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2026 archive early web south park history"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>22 Aug 2026</span></div><h3>From the archives: South Park on the early web</h3><p>A look at the strange, scrappy and surprisingly ambitious sites that surrounded the show online.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2026 anniversary history south park twenty nine years"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>8 Aug 2026</span></div><h3>Twenty-nine years in a quiet little mountain town</h3><p>Looking back at how South Park kept changing without ever becoming quite respectable.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2026 news roundup announcements south park"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>24 Jul 2026</span></div><h3>What’s happening in South Park?</h3><p>A round-up of the latest show news, announcements and additions to the site.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2026 site update episode archive"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>12 Jun 2026</span></div><h3>More episodes, fewer loose ends</h3><p>Another batch of episode pages has been cleaned up, connected and added to the archive.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2026 retrospective favourite episodes rewatch"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>3 May 2026</span></div><h3>The episodes we keep going back to</h3><p>A handful of stories that somehow remain just as funny, strange or uncomfortable years later.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+      </div>
     </section>
 
-    <div aria-hidden="true" class="sticky-nav-sentinel">
-    </div>
-    <div aria-label="Article sections" class="section-tabs">
-     <button aria-label="Collapse sidebar" class="sticky-sidebar-control" data-sticky-sidebar-toggle="" title="Collapse sidebar" type="button">
-      <svg aria-hidden="true" viewbox="0 0 24 24">
-       <path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
-       </path>
-      </svg>
-     </button>
-     <a class="section-tab" data-section="top" href="https://lewis.lc/wiki/edge_end#top">
-      <span class="section-tab-icon">
-       <svg aria-hidden="true" class="top-chevron-svg" viewbox="0 0 24 24">
-        <path d="m5 14.5 7-7 7 7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-        </path>
-       </svg>
-      </span>
-      <span class="section-tab-label">
-       Top
-      </span>
-     </a>
-     <a class="section-tab" data-section="appearance" href="https://lewis.lc/wiki/edge_end#appearance">
-<span class="section-tab-label">
-       Appearance
-      </span>
-     </a>
-
-     <a class="section-tab" data-section="staff" href="https://lewis.lc/wiki/edge_end#staff">
-<span class="section-tab-label">
-       Staff
-      </span>
-     </a>
-     <a class="section-tab" data-section="trivia" href="https://lewis.lc/wiki/edge_end#trivia">
-<span class="section-tab-label">
-       Trivia
-      </span>
-     </a>
-     <a class="section-tab" data-section="gallery" href="https://lewis.lc/wiki/edge_end#gallery">
-<span class="section-tab-label">
-       Gallery
-      </span>
-     </a>
-     <button aria-label="Switch to dark mode" class="sticky-theme-control" data-sticky-theme-toggle="" title="Dark mode" type="button">
-      <span aria-hidden="true" class="theme-icon-slot">
-       <span class="theme-icon theme-icon-moon">
-        <svg viewbox="0 0 24 24">
-          <path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round" stroke-linejoin="round"/>
-         </svg>
-       </span>
-       <span class="theme-icon theme-icon-sun">
-        <svg viewbox="0 0 24 24">
-          <circle cx="12" cy="12" r="3.4" fill="none"
-                  stroke="currentColor" stroke-width="1.65"/>
-          <path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1
-                   M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48
-                   M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"
-                fill="none" stroke="currentColor" stroke-width="1.65"
-                stroke-linecap="round"/>
-         </svg>
-       </span>
-      </span>
-     </button>
-    </div>
-    <section class="article-content" id="general">
-     <div class="article-top">
-      <div>
-       <!-- ==================== LOCATION INFOBOX ==================== -->
-       <aside aria-label="Location information" class="infobox">
-        <div class="infobox-title">
-         Edge End High School
-        </div>
-        <div class="infobox-image-switcher">
-         <div aria-label="Infobox images" class="infobox-image-tabs" role="tablist">
-         </div>
-         <div class="infobox-image-panels">
-
-           <div class="infobox-image-panel" data-label="Current">
-           <img alt="Current" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend4.png"/>
-          </div>
-
-          <div class="infobox-image-panel" data-label="Night">
-           <img alt="Night" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend5.png"/>
-          </div>
-
-          <div class="infobox-image-panel" data-label="Former">
-           <img alt="Former" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend3.png"/>
-          </div>
-
-           <div class="infobox-image-panel" data-label="Season 1 (destroyed)">
-           <img alt="Season 1 (destroyed)" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend2.png"/>
-          </div>
-
-          <div class="infobox-image-panel" data-label="Debut (destroyed)">
-           <img alt="Debut (destroyed)" loading="eager" src="https://lewis.lc/wiki/img/locations/edgeend1.png"/>
-          </div>
-
-         </div>
-        </div>
-        <div class="info-table">
-         <div class="info-row">
-          <b>
-           Type
-          </b>
-          <span>
-           	Public School
-          </span>
-         </div>
-         <div class="info-row">
-          <b>
-           Established
-          </b>
-          <span>
-           1932
-          </span>
-         </div>
-         <div class="info-row">
-          <b>
-           Motto
-          </b>
-          <span>
-           <i>Mente Manibusque</i>
-          </span>
-         </div>
-         <div class="info-row">
-          <b>
-           Headteacher
-          </b>
-          <span>
-           Mr. Martin Burgess
-          </span>
-         </div>
-
-         <div class="info-row info-row-nav" data-href="#">
-          <b>
-           First appearance
-          </b>
-          <span>
-           <a class="info-row-link" href="https://lewis.lc/wiki/edge_end#">
-            Pilot Episode
-           </a>
-          </span>
-         </div>
-
-        </div>
-       </aside>
-       <p class="lede">
-        <strong>
-         Edge End High School
-        </strong>
-        is the main school in South Park. It is one of the oldest known locations on the show and has appeared in multiple incarnations.
-       </p>
-
-       <aside class="wiki-notice" aria-label="Article status">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.8v5.7M12 16.8h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-        <div><strong>This article is incomplete.</strong><span>Some information may be missing. You can help the South Park Wiki by expanding it.</span></div>
-       </aside>
-
-       <nav class="toc" aria-label="Contents">
-        <div class="toc-head"><span class="toc-title">Contents</span><button class="toc-toggle" type="button" aria-expanded="true">hide</button></div>
-        <ol>
-         <li><a href="#appearance">Appearance</a></li>
-         <li><a href="#staff">Staff</a></li>
-         <li><a href="#trivia">Trivia</a></li>
-         <li><a href="#gallery">Gallery</a></li>
-        </ol>
-       </nav>
-
-       <section class="section first" id="appearance">
-        <h2>
-         Appearance
-        </h2>
-        <p>
-         Edge End High School is a predominantly single-storey school, but with staffrooms and a library area on an upper floor.
-        </p>
-
-      <div class="plot-location-scrap">
-       IN RUINS
+    <section class="year-block" id="2025" data-year="2025">
+      <div class="year-heading"><h2>2025</h2><span class="year-count">11 posts</span></div>
+      <div class="news-list">
+        <a class="post" href="#" data-search="2025 south park year review episodes"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>31 Dec 2025</span></div><h3>South Park in 2025</h3><p>A slightly chaotic look back at another year of the show and its ever-expanding archive.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="old internet south park website history 2025"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>18 Oct 2025</span></div><h3>Lost corners of the old South Park web</h3><p>Buttons, banners, downloads and half-forgotten pages rescued from the Wayback Machine.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="episode guide rebuild update 2025"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>4 Jul 2025</span></div><h3>Rebuilding the episode archive</h3><p>Why the guide changed, what moved around, and why there is now even more construction paper.</p><span class="post-read">Read update <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 summer news south park"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>14 Jun 2025</span></div><h3>Another South Park summer begins</h3><p>News, rumours and archive additions as another summer in South Park gets underway.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 article widescreen visual history"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>3 May 2025</span></div><h3>When South Park went widescreen</h3><p>Revisiting the show’s visual changes and the odd little details that came with them.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 archive downloads wallpapers website"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>19 Apr 2025</span></div><h3>A brief history of South Park downloads</h3><p>Wallpapers, icons, screensavers and all the things official websites used to give away.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 retrospective early seasons nostalgia"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>8 Mar 2025</span></div><h3>The strange comfort of old South Park</h3><p>Why revisiting the early seasons still feels like opening a very rude time capsule.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 article episodes rewatch list"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>15 Feb 2025</span></div><h3>Twenty-five episodes worth another look</h3><p>Not necessarily the best. Not necessarily the worst. Just twenty-five we wanted to talk about.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 site update archive navigation"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>28 Jan 2025</span></div><h3>The archive gets tidier</h3><p>Small changes to navigation, episode information and the growing pile of old material.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 new year news archive"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>12 Jan 2025</span></div><h3>Starting another year in South Park</h3><p>A new year, a refreshed archive and plenty more nonsense still to catalogue.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2025 archive history broadcasts announcements"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>2 Jan 2025</span></div><h3>This week in South Park history</h3><p>A rummage through old broadcasts, announcements and forgotten bits of site history.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
       </div>
-
-        <p>
-         The first appearance of Edge End is in the <span class="internal-wiki-link">pilot episode</span>, where it has been destroyed and delapidated for multiple years. It remains in this state for the majority of <span class="internal-wiki-link">Season 1</span>.
-        </p>
-
-      <div class="plot-location-scrap">
-       REBUILT
-      </div>
-
-        <p>
-         During <span class="internal-wiki-link">Season 2</span>, the school is rebuilt, and has two predominant chimneys as a focal feature. To the rear is a giant playing field where the kids hang out during break times.
-        </p>
-
-       </section>
-      </div>
-     </div>
-
-     <!-- ==================== STAFF ==================== -->
-     <section class="section" id="staff">
-      <h2>
-       Staff
-      </h2>
-      <table class="staff-table">
-       <thead>
-        <tr>
-         <th scope="col">Name</th>
-         <th scope="col">Role</th>
-        </tr>
-       </thead>
-       <tbody>
-
-        <tr>
-         <td>Mr. M Burgess</td>
-         <td>Headteacher</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Adlington</td>
-         <td>Deputy Headteacher</td>
-        </tr>
-
-        <tr>
-         <td>Sheila</td>
-         <td>Receptionist / Admin</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Carradice</td>
-         <td>Caretaker</td>
-        </tr>
-
-        <tr>
-         <td>Mrs. Haigh</td>
-         <td>English department</td>
-        </tr>
-
-        <tr>
-         <td>Ms. MacLean</td>
-         <td>English department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Colin Gilbert</td>
-         <td>Maths department</td>
-        </tr>
-
-        <tr>
-         <td>Roger</td>
-         <td>Science department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Irving</td>
-         <td>History department</td>
-        </tr>
-
-        <tr>
-         <td>Susan Procter</td>
-         <td>Geography department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Maboob Master</td>
-         <td>IT department</td>
-        </tr>
-
-        <tr>
-         <td>Mrs. Whittaker</td>
-         <td>IT department</td>
-        </tr>
-
-        <tr>
-         <td>Ms. Dubois</td>
-         <td>French studies</td>
-        </tr>
-
-        <tr>
-         <td>Mrs. Geldard</td>
-         <td>Design & Technology department</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Steven Price</td>
-         <td>Physical Education</td>
-        </tr>
-
-        <tr>
-         <td>Mr. Baig</td>
-         <td>Substitute teacher</td>
-        </tr>
-
-        <tr>
-         <td>Ms. Easterbrook</td>
-         <td>Welfare team</td>
-        </tr>
-
-        <tr>
-         <td>Terry</td>
-         <td><i>Unknown</i></td>
-        </tr>
-
-       </tbody>
-      </table>
-     </section>
-
-     <!-- ==================== TRIVIA AND GALLERY ==================== -->
-     <section class="section" id="trivia">
-      <h2>
-       Trivia
-      </h2>
-      <ul class="trivia-list">
-       <li>
-        This is placeholder trivia text for an interesting production detail about the episode.
-       </li>
-       <li>
-        Add behind-the-scenes notes, references, continuity details, or small observations here.
-       </li>
-       <li>
-        This section can also be used for alternate titles, visual gags, callbacks, or broadcast notes.
-       </li>
-      </ul>
-     </section>
-
-     <section class="section" id="gallery">
-      <h2>
-       Gallery
-      </h2>
-      <div class="gallery">
-       <button class="gallery-item" data-caption="Season 1 (destroyed - Spring)" type="button">
-        <img alt="Season 1 (destroyed - Spring)" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend6.png"/>
-       </button>
-       <button class="gallery-item" data-caption="School field / break area" type="button">
-        <img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend7.png"/>
-       </button>
-       <button class="gallery-item" data-caption="School field / break area" type="button">
-        <img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend8.png"/>
-       </button>
-       <button class="gallery-item" data-caption="Standalone Science Lab" type="button">
-        <img alt="Standalone Science Lab" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend9.png"/>
-       </button>
-       <button class="gallery-item" data-caption="Rear buildings" type="button">
-        <img alt="Rear buildings" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend10.png"/>
-       </button>
-      </div>
-     </section>
-
-     <div class="categories-box" aria-label="Categories">
-      <span class="categories-label">Categories</span>
-      <span class="categories-links">
-       <a href="https://lewis.lc/wiki/edge_end#">Locations</a>
-       <a href="https://lewis.lc/wiki/edge_end#">Schools</a>
-       <a href="https://lewis.lc/wiki/edge_end#">Recurring locations</a>
-       <a href="https://lewis.lc/wiki/edge_end#">Season 1 locations</a>
-      </span>
-     </div>
     </section>
 
-   </main>
-  </div>
-  <button aria-label="Close navigation" class="menu-overlay" type="button">
-  </button>
-  <script id="wiki-controller">
-   document.addEventListener("DOMContentLoaded", () => {
+    <section class="year-block" id="2024" data-year="2024">
+      <div class="year-heading"><h2>2024</h2><span class="year-count">9 posts</span></div>
+      <div class="news-list">
+        <a class="post" href="#" data-search="2024 retrospective year review"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>29 Dec 2024</span></div><h3>South Park in 2024</h3><p>A year-end rummage through the episodes, headlines and oddities worth remembering.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 archive website history"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>17 Nov 2024</span></div><h3>Remember when the website looked like this?</h3><p>Another dive into the old South Park web and the layouts that disappeared along the way.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 article title cards art construction paper"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>5 Oct 2024</span></div><h3>The art of a South Park title card</h3><p>Construction paper, crude lettering and the tiny visual details that make an episode feel instantly familiar.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 news archive update"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>21 Sep 2024</span></div><h3>South Park archive update</h3><p>New pages, corrected information and another pile of images added behind the scenes.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 retrospective episodes rewatch"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>10 Aug 2024</span></div><h3>Episodes that feel completely different now</h3><p>Revisiting stories whose jokes, targets or reputations shifted with time.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 archive internet 2000 flash"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>22 Jun 2024</span></div><h3>South Park on the internet, circa 2000</h3><p>Flash pages, tiny video clips and the wonderfully slow experience of being a fan online.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 article early seasons animation style"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>11 May 2024</span></div><h3>Why the early seasons still look so good</h3><p>The deliberately rough style gave old South Park a texture later television rarely has.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 archive promos press releases"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>16 Mar 2024</span></div><h3>From the vault: old promos and press releases</h3><p>A selection of forgotten publicity material from across the show’s long run.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="2024 site update launch archive"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>6 Jan 2024</span></div><h3>Welcome to the archive</h3><p>The first version of this little corner of the site, built for news, discoveries and South Park history.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+      </div>
+    </section>
+
+    <section class="year-block" id="older" data-year="older">
+      <div class="year-heading"><h2>Older posts</h2><span class="year-count">3 posts</span></div>
+      <div class="news-list">
+        <a class="post" href="#" data-search="south park studios classic website 2014 archive"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>12 Nov 2014</span></div><h3>From the South Park Studios archive</h3><p>News items, character pages and the bits of the official site worth remembering.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="season premiere promo comedy central 2009"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Old news</span><span>7 Oct 2009</span></div><h3>South Park returns tonight</h3><p>An archived-style news entry from the era of banners, promos and weekly episode hype.</p><span class="post-read">Read post <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+        <a class="post" href="#" data-search="website old south park internet 2004 downloads"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site history</span><span>3 Mar 2004</span></div><h3>When fan sites still had downloads pages</h3><p>Wallpapers, buddy icons, tiny GIFs and the glorious clutter of the early-2000s web.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><div><strong>SOUTH PARK</strong> · news archive</div><div>Created by Lewis · unofficial fan project</div></footer>
+</div>
+<script>
+(() => {
   const root = document.documentElement;
-  const body = document.body;
-  const shell = document.querySelector(".shell");
 
-  const menuButton = document.querySelector("[data-menu-toggle]");
-  const overlay = document.querySelector(".menu-overlay");
+  /* ---------- theme ---------- */
+  const themeButton = document.getElementById('themeButton');
 
-  const seamToggle = document.querySelector("[data-desktop-sidebar-toggle]");
-  const stickySidebar = document.querySelector("[data-sticky-sidebar-toggle]");
-  const stickyTheme = document.querySelector("[data-sticky-theme-toggle]");
-  const mobileTheme = document.querySelector("[data-theme-toggle]");
-
-  const sectionTabs = document.querySelector(".section-tabs");
-  const stickySentinel = document.querySelector(".sticky-nav-sentinel");
-
-  /* theme */
-  const storedTheme = localStorage.getItem("wikiTheme");
-  const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
-  root.classList.toggle("dark", storedTheme ? storedTheme === "dark" : !!systemDark);
-
-  function syncTheme(){
-    const dark = root.classList.contains("dark");
-    [stickyTheme, mobileTheme].forEach(button => {
-      if (!button) return;
-      button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-      button.setAttribute("title", dark ? "Light mode" : "Dark mode");
-    });
+  function safeGetTheme(){
+    try { return localStorage.getItem('sp-theme'); }
+    catch (_) { return null; }
   }
 
-  function toggleTheme(){
-    const dark = !root.classList.contains("dark");
-    root.classList.toggle("dark", dark);
-    localStorage.setItem("wikiTheme", dark ? "dark" : "light");
-    syncTheme();
+  function safeSaveTheme(theme){
+    try { localStorage.setItem('sp-theme', theme); }
+    catch (_) {}
   }
 
-  stickyTheme?.addEventListener("click", toggleTheme);
-  mobileTheme?.addEventListener("click", toggleTheme);
-  syncTheme();
-
-  /* mobile drawer */
-  function setMenu(open){
-    body.classList.toggle("menu-open", open);
-    menuButton?.setAttribute("aria-expanded", String(open));
-    body.style.overflow = open && innerWidth <= 850 ? "hidden" : "";
-  }
-
-  menuButton?.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
-  overlay?.addEventListener("click", () => setMenu(false));
-
-  document.querySelectorAll(".sidebar a").forEach(link => {
-    link.addEventListener("click", () => {
-      if (innerWidth <= 850) setMenu(false);
-    });
-  });
-
-  /* desktop sidebar */
-  function syncSidebar(){
-    if (!shell) return;
-    const collapsed = shell.classList.contains("sidebar-collapsed");
-
-    [seamToggle, stickySidebar].forEach(button => {
-      if (!button) return;
-      button.setAttribute("aria-expanded", String(!collapsed));
-      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Collapse sidebar");
-      button.setAttribute("title", collapsed ? "Show sidebar" : "Collapse sidebar");
-    });
-  }
-
-  function toggleSidebar(){
-    if (!shell || innerWidth <= 850) return;
-    shell.classList.toggle("sidebar-collapsed");
-    syncSidebar();
-  }
-
-  seamToggle?.addEventListener("click", toggleSidebar);
-  stickySidebar?.addEventListener("click", toggleSidebar);
-  syncSidebar();
-
-  if (sectionTabs && stickySentinel){
-    const stickyObserver = new IntersectionObserver(entries => {
-      sectionTabs.classList.toggle("is-stuck", !entries[0].isIntersecting);
-    }, {threshold:[0,1]});
-    stickyObserver.observe(stickySentinel);
-  }
-
-  /* stable section tracking: no IntersectionObserver switching */
-  const sectionIds = ["top","appearance","staff","trivia","gallery"];
-  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
-  const sectionLinks = [
-    ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
-  ];
-
-  let activeSection = "";
-
-  function setActiveSection(id){
-    if (!id || id === activeSection) return;
-    activeSection = id;
-
-    sectionLinks.forEach(link => {
-      const target = link.dataset.id || link.dataset.section;
-      link.classList.toggle("active", target === id);
-    });
-
-    // On mobile, keep active tab visible without changing scroll position vertically.
-    if (innerWidth <= 850){
-      const activeMobile = document.querySelector(`.unified-section-link[data-section="${id}"]`);
-      activeMobile?.scrollIntoView({behavior:"smooth", block:"nearest", inline:"nearest"});
+  function applyTheme(theme){
+    const next = theme === 'light' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    const isLight = next === 'light';
+    if (themeButton){
+      themeButton.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+      themeButton.setAttribute('aria-pressed', String(isLight));
+      themeButton.title = isLight ? 'Dark mode' : 'Light mode';
     }
   }
 
-  function updateActiveSection(){
-    if (!sections.length) return;
+  const storedTheme = safeGetTheme();
+  applyTheme(storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'dark');
 
-    // A fixed threshold beneath the sticky rail makes transitions deterministic.
-    const threshold = innerWidth <= 850 ? 74 : 58;
-    let id = sections[0].id;
-
-    for (const section of sections){
-      const top = section.getBoundingClientRect().top;
-      if (top <= threshold){
-        id = section.id;
-      } else {
-        break;
-      }
-    }
-
-    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4){
-      id = sections[sections.length - 1].id;
-    }
-
-    setActiveSection(id);
-  }
-
-  let ticking = false;
-  function requestSectionUpdate(){
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      updateActiveSection();
-      ticking = false;
+  if (themeButton){
+    themeButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const current = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      safeSaveTheme(next);
     });
   }
 
-  window.addEventListener("scroll", requestSectionUpdate, {passive:true});
-  window.addEventListener("resize", requestSectionUpdate, {passive:true});
+  /* ---------- archive search / filtering ---------- */
+  const searchInput = document.getElementById('searchInput');
+  const searchWrap = document.getElementById('searchWrap');
+  const searchClear = document.getElementById('searchClear');
+  const yearSelect = document.getElementById('yearSelect');
+  const noResults = document.getElementById('noResults');
+  const blocks = [...document.querySelectorAll('.year-block')];
 
-  // Clicking a tab sets it immediately; scroll tracking takes over afterward.
-  sectionLinks.forEach(link => {
-    link.addEventListener("click", () => {
-      const target = link.dataset.id || link.dataset.section;
-      if (target) setActiveSection(target);
-      setTimeout(requestSectionUpdate, 180);
-    });
-  });
+  const normalize = value => String(value || '')
+    .toLocaleLowerCase()
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
 
-  updateActiveSection();
+  function filterArchive(){
+    if (!searchInput || !yearSelect) return;
 
+    const rawQuery = normalize(searchInput.value);
+    const terms = rawQuery ? rawQuery.split(/\s+/).filter(Boolean) : [];
+    const selectedYear = yearSelect.value;
+    let visibleTotal = 0;
 
-  /* wiki contents */
-  document.querySelectorAll(".toc").forEach(toc => {
-    const toggle = toc.querySelector(".toc-toggle");
-    toggle?.addEventListener("click", () => {
-      const collapsed = toc.classList.toggle("is-collapsed");
-      toggle.textContent = collapsed ? "show" : "hide";
-      toggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
-    });
-  });
+    searchWrap?.classList.toggle('has-value', searchInput.value.length > 0);
 
-  /* tooltips */
-  /* optional infobox multi-image switcher */
-  document.querySelectorAll(".infobox-image-switcher").forEach(switcher => {
-    const tabsHost = switcher.querySelector(".infobox-image-tabs");
-    const panels = [...switcher.querySelectorAll(".infobox-image-panel")];
+    blocks.forEach(block => {
+      const yearMatches = selectedYear === 'all' || block.dataset.year === selectedYear;
+      let visibleInBlock = 0;
 
-    if (!tabsHost || !panels.length) return;
+      block.querySelectorAll('.post').forEach(post => {
+        const searchable = normalize(`${post.textContent} ${post.dataset.search || ''}`);
+        const queryMatches = terms.length === 0 || terms.every(term => searchable.includes(term));
+        const visible = yearMatches && queryMatches;
 
-    if (panels.length < 2){
-      switcher.classList.remove("has-multiple");
-      panels[0]?.classList.add("is-active");
-      return;
-    }
+        post.classList.toggle('is-hidden', !visible);
+        post.setAttribute('aria-hidden', visible ? 'false' : 'true');
 
-    switcher.classList.add("has-multiple");
-    tabsHost.innerHTML = "";
-
-    const tabs = panels.map((panel, index) => {
-      const id = `infobox-image-${index + 1}-${Math.random().toString(36).slice(2,7)}`;
-      panel.id = id;
-      panel.setAttribute("role", "tabpanel");
-
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "infobox-image-tab";
-      button.setAttribute("role", "tab");
-      button.setAttribute("aria-controls", id);
-      button.setAttribute("aria-selected", index === 0 ? "true" : "false");
-
-      const fullLabel = panel.dataset.label || `Image ${index + 1}`;
-      const visibleLabel = fullLabel.replace(/\s*\(destroyed\)\s*/i, "").trim();
-      button.setAttribute("aria-label", fullLabel);
-      button.innerHTML = `<span class="infobox-image-tab-label">${visibleLabel}</span>`;
-
-      button.addEventListener("click", () => {
-        panels.forEach((item, itemIndex) => {
-          const active = itemIndex === index;
-          item.classList.toggle("is-active", active);
-          tabs[itemIndex]?.setAttribute("aria-selected", active ? "true" : "false");
-        });
+        if (visible){
+          visibleInBlock += 1;
+          visibleTotal += 1;
+        }
       });
 
-      tabsHost.appendChild(button);
-      return button;
-    });
-
-    panels.forEach((panel, index) => {
-      panel.classList.toggle("is-active", index === 0);
-    });
-  });
-
-  /* clickable infobox Previous / Next rows */
-  document.querySelectorAll(".info-row-nav[data-href]").forEach(row => {
-    row.addEventListener("click", event => {
-      if (event.target.closest("a")) return;
-      const href = row.dataset.href;
-      if (href) window.location.href = href;
-    });
-  });
-
-  /* shared gallery / infobox lightbox */
-  const galleryButtons = [...document.querySelectorAll(".gallery-item")];
-  const infoboxImages = [...document.querySelectorAll(".infobox-image-panel img")];
-
-  if (galleryButtons.length || infoboxImages.length){
-    let currentIndex = 0;
-    let lightboxMode = "gallery";
-
-    const lightbox = document.createElement("div");
-    lightbox.className = "wiki-lightbox";
-    lightbox.setAttribute("role","dialog");
-    lightbox.setAttribute("aria-modal","true");
-    lightbox.setAttribute("aria-label","Image viewer");
-
-    lightbox.innerHTML = `
-      <button class="wiki-lightbox-close" type="button" aria-label="Close image">×</button>
-      <button class="wiki-lightbox-nav wiki-lightbox-prev" type="button" aria-label="Previous image">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <div class="wiki-lightbox-stage"><img alt=""></div>
-      <button class="wiki-lightbox-nav wiki-lightbox-next" type="button" aria-label="Next image">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <div class="wiki-lightbox-caption"></div>
-      <div class="wiki-lightbox-counter" aria-live="polite"></div>
-    `;
-
-    document.body.appendChild(lightbox);
-
-    const image = lightbox.querySelector("img");
-    const counter = lightbox.querySelector(".wiki-lightbox-counter");
-    const caption = lightbox.querySelector(".wiki-lightbox-caption");
-    const closeButton = lightbox.querySelector(".wiki-lightbox-close");
-    const prevButton = lightbox.querySelector(".wiki-lightbox-prev");
-    const nextButton = lightbox.querySelector(".wiki-lightbox-next");
-
-    function currentItems(){
-      return lightboxMode === "infobox" ? infoboxImages : galleryButtons;
-    }
-
-    function sourceFor(item){
-      return lightboxMode === "infobox" ? item : item?.querySelector("img");
-    }
-
-    function captionFor(item, source){
-      if (lightboxMode === "infobox"){
-        return source?.closest(".infobox-image-panel")?.dataset.label || source?.alt || "";
-      }
-      return item?.dataset.caption || source?.alt || "";
-    }
-
-    function showImage(index){
-      const items = currentItems();
-      if (!items.length) return;
-
-      currentIndex = (index + items.length) % items.length;
-      const item = items[currentIndex];
-      const source = sourceFor(item);
-      if (!source) return;
-
-      image.src = source.src;
-      image.alt = source.alt || `Image ${currentIndex + 1}`;
-      counter.textContent = `${currentIndex + 1} / ${items.length}`;
-      caption.textContent = captionFor(item, source);
-
-      const hasMultiple = items.length > 1;
-      prevButton.style.display = hasMultiple ? "" : "none";
-      nextButton.style.display = hasMultiple ? "" : "none";
-    }
-
-    function openLightbox(mode, index){
-      lightboxMode = mode;
-      showImage(index);
-      lightbox.classList.add("open");
-      body.style.overflow = "hidden";
-      closeButton.focus();
-    }
-
-    function closeLightbox(){
-      lightbox.classList.remove("open");
-      body.style.overflow = "";
-    }
-
-    galleryButtons.forEach((button,index) => {
-      button.addEventListener("click", () => openLightbox("gallery", index));
-    });
-
-    infoboxImages.forEach((source,index) => {
-      source.addEventListener("click", () => openLightbox("infobox", index));
-    });
-
-    closeButton.addEventListener("click", closeLightbox);
-    prevButton.addEventListener("click", () => showImage(currentIndex - 1));
-    nextButton.addEventListener("click", () => showImage(currentIndex + 1));
-
-    lightbox.addEventListener("click", event => {
-      if (event.target === lightbox) closeLightbox();
-    });
-
-    document.addEventListener("keydown", event => {
-      if (!lightbox.classList.contains("open")) return;
-      if (event.key === "Escape") closeLightbox();
-      if (event.key === "ArrowLeft"){
-        event.preventDefault();
-        showImage(currentIndex - 1);
-      }
-      if (event.key === "ArrowRight"){
-        event.preventDefault();
-        showImage(currentIndex + 1);
+      block.classList.toggle('is-hidden', visibleInBlock === 0);
+      const count = block.querySelector('.year-count');
+      if (count){
+        count.textContent = `${visibleInBlock} ${visibleInBlock === 1 ? 'post' : 'posts'}`;
       }
     });
 
-    let touchStartX = 0;
-    let touchStartY = 0;
-
-    lightbox.addEventListener("touchstart", event => {
-      const touch = event.changedTouches[0];
-      touchStartX = touch.clientX;
-      touchStartY = touch.clientY;
-    }, {passive:true});
-
-    lightbox.addEventListener("touchend", event => {
-      const items = currentItems();
-      if (items.length < 2) return;
-      const touch = event.changedTouches[0];
-      const dx = touch.clientX - touchStartX;
-      const dy = touch.clientY - touchStartY;
-      if (Math.abs(dx) < 45 || Math.abs(dx) <= Math.abs(dy)) return;
-      showImage(currentIndex + (dx < 0 ? 1 : -1));
-    }, {passive:true});
+    noResults?.classList.toggle('show', visibleTotal === 0);
   }
 
-  window.addEventListener("resize", () => {
-    if (innerWidth > 850){
-      setMenu(false);
-    } else {
-      shell?.classList.remove("sidebar-collapsed");
-      sectionTabs?.classList.remove("is-stuck");
-      syncSidebar();
+  searchInput?.addEventListener('input', filterArchive);
+  searchInput?.addEventListener('search', filterArchive);
+  searchInput?.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && searchInput.value){
+      event.preventDefault();
+      searchInput.value = '';
+      filterArchive();
     }
-  }, {passive:true});
-});
-  </script>
- </body>
+  });
+
+  yearSelect?.addEventListener('change', filterArchive);
+
+  searchClear?.addEventListener('click', () => {
+    if (!searchInput) return;
+    searchInput.value = '';
+    filterArchive();
+    searchInput.focus();
+  });
+
+  filterArchive();
+})();
+</script>
+</body>
 </html>
