@@ -1,23 +1,16 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>South Park — News Archive</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400;6..144,500;6..144,600;6..144,700;6..144,800;6..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>South Park — News Archive</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400;6..144,500;6..144,600;6..144,700;6..144,800;6..144,900&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/><style>
 :root{
   --bg:#07131d;--panel:#0d1d29;--panel-2:#122735;--ink:#f5f2eb;--muted:#9db0bb;
   --line:rgba(168,198,211,.18);--line-strong:#294555;--paper:#e3d9bf;--paper-ink:#172129;
   --blue:#5161ac;--green:#009b67;--cyan:#59c0d5;--orange:#f47321;
-  --link:#7bbbe3;--shadow:0 18px 44px rgba(0,0,0,.22);--max:1180px;
+  --link:#7bbbe3;--label-blue:#67aee0;--shadow:0 18px 44px rgba(0,0,0,.22);--max:1180px;
 }
 html[data-theme="light"]{
-  --bg:#ece9df;--panel:#f8f4e9;--panel-2:#eee7d8;--ink:#17242b;--muted:#68777e;
-  --line:rgba(46,68,76,.14);--line-strong:#bcc4bf;--paper:#d9caa9;--paper-ink:#172129;
-  --link:#2f77aa;--shadow:0 14px 34px rgba(58,65,61,.10);
+  --bg:#f3f5f6;--panel:#ffffff;--panel-2:#f5f7f8;--ink:#17242b;--muted:#66757d;
+  --line:rgba(46,68,76,.12);--line-strong:#d3dadd;--paper:#ebe7dc;--paper-ink:#172129;
+  --link:#2f77aa;--label-blue:#367da9;--shadow:0 14px 34px rgba(42,55,61,.09);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -27,7 +20,7 @@ body{
   background-size:cover;background-position:center top;background-attachment:fixed;
 }
 html[data-theme="light"] body{
-  background-image:linear-gradient(rgba(247,244,235,.84),rgba(247,244,235,.95)),url("https://lewis.lc/wiki/img/daytime.png");
+  background-image:linear-gradient(rgba(249,251,252,.86),rgba(249,251,252,.96)),url("https://lewis.lc/wiki/img/daytime.png");
 }
 a{color:inherit;text-decoration:none}
 button,input{font:inherit}
@@ -51,12 +44,18 @@ html[data-theme="light"] .theme-button .sun-icon{display:block}
 
 .movie-wordmark{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;flex-wrap:nowrap;gap:.34em;margin:2px auto 0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(34px,5.2vw,64px);font-weight:900;line-height:.9;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;filter:drop-shadow(0 2px 0 rgba(0,0,0,.16))}
 .movie-wordmark span{display:inline-block}.movie-wordmark span:nth-child(3n+1){transform:rotate(-1.4deg) translateY(1px)}.movie-wordmark span:nth-child(3n+2){transform:rotate(.8deg) translateY(-1px)}.movie-wordmark span:nth-child(3n){transform:rotate(-.4deg)}
-.wordmark-bars{position:relative;z-index:1;width:210px;height:5px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin:11px auto 0}.wordmark-bars i{display:block;clip-path:polygon(0 30%,8% 0,21% 46%,34% 12%,47% 54%,59% 7%,72% 48%,84% 14%,100% 33%,97% 76%,83% 59%,70% 98%,55% 63%,42% 100%,27% 58%,13% 92%,0 65%)}.wordmark-bars i:nth-child(1){background:var(--blue)}.wordmark-bars i:nth-child(2){background:var(--green)}.wordmark-bars i:nth-child(3){background:var(--cyan)}.wordmark-bars i:nth-child(4){background:var(--orange)}
-.archive-title{position:relative;z-index:1;margin:13px 0 4px;font:800 14px/1 "Google Sans Flex",sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--muted)}
+/* four-colour scruffed underline, matched to /sp/movie */
+.wordmark-bars{position:relative;z-index:1;width:210px;height:6px;display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin:11px auto 0;transform:rotate(-.15deg)}
+.wordmark-bars i{display:block;min-width:0}
+.wordmark-bars i:nth-child(1){background:#5161AC;clip-path:polygon(0 18%,7% 0,20% 34%,33% 9%,47% 43%,61% 7%,75% 37%,87% 13%,100% 28%,98% 76%,84% 62%,69% 91%,54% 67%,39% 100%,24% 66%,11% 88%,0 70%)}
+.wordmark-bars i:nth-child(2){background:#009B67;clip-path:polygon(0 25%,12% 7%,25% 31%,38% 0,52% 36%,66% 10%,80% 39%,92% 15%,100% 24%,97% 79%,83% 65%,68% 96%,52% 70%,36% 91%,22% 64%,9% 86%,0 73%)}
+.wordmark-bars i:nth-child(3){background:#59C0D5;clip-path:polygon(0 19%,10% 4%,23% 36%,36% 12%,50% 42%,64% 5%,77% 34%,89% 11%,100% 30%,96% 77%,82% 61%,67% 94%,51% 69%,37% 98%,21% 63%,8% 84%,0 72%)}
+.wordmark-bars i:nth-child(4){background:#F47321;clip-path:polygon(0 27%,9% 3%,22% 38%,35% 10%,48% 45%,62% 8%,76% 40%,90% 14%,100% 31%,98% 75%,85% 60%,70% 93%,55% 66%,40% 97%,25% 65%,11% 86%,0 68%)}
+ .archive-title{position:relative;z-index:1;display:table;margin:14px auto 7px;padding:7px 14px 6px;background:var(--paper);color:var(--paper-ink);font:850 13px/1 "Google Sans Flex",sans-serif;letter-spacing:.15em;text-transform:uppercase;clip-path:polygon(2% 10%,14% 3%,27% 8%,42% 1%,57% 7%,72% 2%,88% 9%,98% 5%,100% 88%,87% 94%,73% 89%,58% 97%,42% 91%,26% 98%,11% 91%,0 96%);transform:rotate(-.35deg);box-shadow:0 3px 8px rgba(0,0,0,.12)}
 .archive-intro{position:relative;z-index:1;max-width:620px;margin:0 auto;color:var(--muted);font-size:11.5px;line-height:1.55}
 
 .toolbar{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px;padding-top:13px;border-top:1px solid var(--line)}
-.nav-links{display:flex;gap:5px;overflow:auto}.nav-links a{padding:7px 9px;font:700 11px/1 "Google Sans Flex",sans-serif;color:var(--muted);white-space:nowrap}.nav-links a:hover,.nav-links a.active{color:var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.nav-links{display:flex;gap:5px;overflow:auto}.nav-links a{padding:7px 9px;font:700 11px/1 "Google Sans Flex",sans-serif;color:var(--muted);white-space:nowrap}.nav-links a:hover{color:var(--ink);background:color-mix(in srgb,var(--ink) 6%,transparent)}.nav-links a.active{color:var(--label-blue);background:color-mix(in srgb,var(--label-blue) 10%,transparent)}
 .back-guide{display:inline-flex;align-items:center;gap:6px;font:700 10.5px/1 "Google Sans Flex",sans-serif;color:var(--muted);white-space:nowrap}.back-guide:hover{color:var(--ink)}.back-guide svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 .content{padding:20px 22px 28px}
@@ -68,7 +67,7 @@ html[data-theme="light"] .theme-button .sun-icon{display:block}
 .news-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
 .post{display:flex;flex-direction:column;border:1px solid var(--line);background:var(--panel);min-width:0;transition:border-color .16s ease,transform .16s ease}.post:hover{border-color:var(--line-strong);transform:translateY(-1px)}
 .post-image{aspect-ratio:16/9;overflow:hidden;background:var(--panel-2);border-bottom:1px solid var(--line)}.post-image img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .22s ease}.post:hover .post-image img{transform:scale(1.025)}
-.post-body{display:flex;flex-direction:column;flex:1;padding:12px}.post-meta{display:flex;align-items:center;gap:7px;margin-bottom:6px;color:var(--muted);font:700 8.5px/1.2 "Google Sans Flex",sans-serif;text-transform:uppercase;letter-spacing:.09em}.post-type{color:var(--cyan)}.post h3{margin:0 0 7px;font:800 16px/1.13 "Google Sans Flex",sans-serif;letter-spacing:-.025em}.post p{margin:0;color:var(--muted);font-size:10.5px;line-height:1.52}.post-read{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding-top:11px;color:var(--link);font:750 10px/1 "Google Sans Flex",sans-serif}.post-read svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.post-body{display:flex;flex-direction:column;flex:1;padding:13px 12px 15px}.post-meta{display:flex;align-items:center;gap:7px;margin-bottom:8px;color:var(--muted);font:700 8.5px/1.2 "Google Sans Flex",sans-serif;text-transform:uppercase;letter-spacing:.09em}.post-type{color:var(--label-blue)}.post h3{margin:0;font:700 24px/1.03 "Google Sans Flex",sans-serif;letter-spacing:-.035em}
 .post:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 .post.is-hidden,.year-block.is-hidden{display:none!important}
 .no-results{display:none;padding:28px 14px;text-align:center;border:1px dashed var(--line-strong);color:var(--muted);font-size:11px}.no-results.show{display:block}
@@ -79,104 +78,13 @@ html[data-theme="light"] .theme-button .sun-icon{display:block}
 .footer{display:flex;justify-content:space-between;gap:18px;padding:15px 22px;border-top:1px solid var(--line-strong);background:color-mix(in srgb,var(--panel) 96%,transparent);color:var(--muted);font-size:9.5px}.footer strong{color:var(--ink)}
 
 @media(max-width:900px){.news-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:620px){body{background-attachment:scroll}.site{width:100%;margin:0;border-left:0;border-right:0}.masthead{padding:18px 14px 14px}.theme-button{top:12px;right:12px;width:36px;height:36px}.movie-wordmark{font-size:clamp(27px,8vw,39px);gap:.24em;padding:0 40px}.wordmark-bars{width:168px}.archive-title{margin-top:11px}.archive-intro{font-size:10.5px;padding:0 14px}.toolbar{align-items:flex-start;flex-direction:column}.content{padding:16px}.archive-tools{grid-template-columns:1fr}.year-select{width:100%}.news-list{grid-template-columns:1fr}.year-heading h2{font-size:21px}.footer{flex-direction:column;padding:14px 16px}}
-</style>
-</head>
-<body>
-<div class="site">
-  <header class="masthead">
-    <button class="theme-button" id="themeButton" type="button" aria-label="Switch to light mode" title="Light mode">
-      <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"/></svg>
-      <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.4"/><path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"/></svg>
-    </button>
+@media(max-width:620px){body{background-attachment:scroll}.site{width:100%;margin:0;border-left:0;border-right:0}.masthead{padding:18px 14px 14px}.theme-button{top:12px;right:12px;width:36px;height:36px}.movie-wordmark{font-size:clamp(27px,8vw,39px);gap:.24em;padding:0 40px}.wordmark-bars{width:168px;height:6px}.archive-title{margin-top:12px}.archive-intro{font-size:10.5px;padding:0 14px}.toolbar{align-items:flex-start;flex-direction:column}.content{padding:16px}.archive-tools{grid-template-columns:1fr}.year-select{width:100%}.news-list{grid-template-columns:1fr}.year-heading h2{font-size:21px}.post h3{font-size:22px}.footer{flex-direction:column;padding:14px 16px}}
 
-    <div class="movie-wordmark" aria-label="South Park">
-      <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span>P</span><span>A</span><span>R</span><span>K</span>
-    </div>
-    <div class="wordmark-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <div class="archive-title">News Archive</div>
-    <p class="archive-intro">News, updates, articles, old site discoveries and assorted South Park nonsense — collected in one place.</p>
+/* ---------- pagination ---------- */
+.pagination{display:flex;align-items:center;justify-content:center;gap:6px;margin:28px 0 4px;flex-wrap:wrap}.page-btn{min-width:34px;height:34px;padding:0 10px;border:1px solid color-mix(in srgb,var(--label-blue) 35%,var(--line-strong));border-radius:3px;background:var(--panel-2);color:var(--label-blue);font:700 11px/1 Inter,system-ui,sans-serif;cursor:pointer;display:grid;place-items:center;transition:background .16s ease,border-color .16s ease,color .16s ease,transform .16s ease}.page-btn:hover:not(:disabled){background:color-mix(in srgb,var(--label-blue) 10%,transparent);border-color:var(--label-blue);color:var(--label-blue)}.page-btn.active{background:var(--label-blue);border-color:var(--label-blue);color:#fff}.page-btn:disabled{opacity:.36;cursor:default}.page-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.pagination[hidden]{display:none}.pagination-status{width:100%;text-align:center;color:var(--muted);font-size:10.5px;margin-top:4px}.post.is-hidden{display:none!important}
 
-    <div class="toolbar">
-      <nav class="nav-links" aria-label="Archive navigation"><a class="active" href="#top">News archive</a><a href="#2026">2026</a><a href="#2025">2025</a><a href="#2024">2024</a><a href="#older">Older</a></nav>
-      <a class="back-guide" href="/sp/movie"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg>Episode guide</a>
-    </div>
-  </header>
-
-  <main class="content" id="top">
-    <div class="archive-tools">
-      <div class="search" id="searchWrap">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
-        <input id="searchInput" type="search" placeholder="Search news archive..." autocomplete="off" aria-label="Search news archive">
-        <button class="search-clear" id="searchClear" type="button" aria-label="Clear search">×</button>
-      </div>
-      <select class="year-select" id="yearSelect" aria-label="Filter by year"><option value="all">All years</option><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option><option value="older">Older posts</option></select>
-    </div>
-
-    <div class="no-results" id="noResults">No archive posts match that search.</div>
-
-    <section class="year-block" id="2026" data-year="2026">
-      <div class="year-heading"><h2>2026</h2><span class="year-count">11 posts</span></div>
-      <div class="news-list">
-        <a class="post" href="#" data-search="south park news september episode updates comedy central 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>13 Sep 2026</span></div><h3>Another week in South Park</h3><p>Episode chatter, site updates and whatever else is happening in the quiet little mountain town.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="episode guide update construction paper site update 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>11 Sep 2026</span></div><h3>The episode guide gets a fresh coat of construction paper</h3><p>A cleaner layout, tighter season navigation and a few quality-of-life changes.</p><span class="post-read">Read update <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="comedy central archive old news south park studios history 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>10 Sep 2026</span></div><h3>Digging through old Comedy Central news</h3><p>Press releases, promos, wallpapers and forgotten scraps of South Park history.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="south park studios website retrospective internet archive 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>7 Sep 2026</span></div><h3>Remember South Park Studios?</h3><p>A trip back through downloads, news posts and the gloriously messy old South Park web.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="season 28 south park episodes news 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>2 Sep 2026</span></div><h3>Keeping track of Season 28</h3><p>New episodes, titles and everything added to the archive as the season continues.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="site launch news archive lewis south park fan site 2026"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>28 Aug 2026</span></div><h3>A new home for South Park news</h3><p>The archive gets its own page for updates, articles and the things that don’t belong in the episode guide.</p><span class="post-read">Read update <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2026 archive early web south park history"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>22 Aug 2026</span></div><h3>From the archives: South Park on the early web</h3><p>A look at the strange, scrappy and surprisingly ambitious sites that surrounded the show online.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2026 anniversary history south park twenty nine years"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>8 Aug 2026</span></div><h3>Twenty-nine years in a quiet little mountain town</h3><p>Looking back at how South Park kept changing without ever becoming quite respectable.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2026 news roundup announcements south park"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>24 Jul 2026</span></div><h3>What’s happening in South Park?</h3><p>A round-up of the latest show news, announcements and additions to the site.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2026 site update episode archive"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>12 Jun 2026</span></div><h3>More episodes, fewer loose ends</h3><p>Another batch of episode pages has been cleaned up, connected and added to the archive.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2026 retrospective favourite episodes rewatch"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>3 May 2026</span></div><h3>The episodes we keep going back to</h3><p>A handful of stories that somehow remain just as funny, strange or uncomfortable years later.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-      </div>
-    </section>
-
-    <section class="year-block" id="2025" data-year="2025">
-      <div class="year-heading"><h2>2025</h2><span class="year-count">11 posts</span></div>
-      <div class="news-list">
-        <a class="post" href="#" data-search="2025 south park year review episodes"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>31 Dec 2025</span></div><h3>South Park in 2025</h3><p>A slightly chaotic look back at another year of the show and its ever-expanding archive.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="old internet south park website history 2025"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>18 Oct 2025</span></div><h3>Lost corners of the old South Park web</h3><p>Buttons, banners, downloads and half-forgotten pages rescued from the Wayback Machine.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="episode guide rebuild update 2025"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>4 Jul 2025</span></div><h3>Rebuilding the episode archive</h3><p>Why the guide changed, what moved around, and why there is now even more construction paper.</p><span class="post-read">Read update <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 summer news south park"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>14 Jun 2025</span></div><h3>Another South Park summer begins</h3><p>News, rumours and archive additions as another summer in South Park gets underway.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 article widescreen visual history"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>3 May 2025</span></div><h3>When South Park went widescreen</h3><p>Revisiting the show’s visual changes and the odd little details that came with them.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 archive downloads wallpapers website"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>19 Apr 2025</span></div><h3>A brief history of South Park downloads</h3><p>Wallpapers, icons, screensavers and all the things official websites used to give away.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 retrospective early seasons nostalgia"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>8 Mar 2025</span></div><h3>The strange comfort of old South Park</h3><p>Why revisiting the early seasons still feels like opening a very rude time capsule.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 article episodes rewatch list"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>15 Feb 2025</span></div><h3>Twenty-five episodes worth another look</h3><p>Not necessarily the best. Not necessarily the worst. Just twenty-five we wanted to talk about.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 site update archive navigation"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>28 Jan 2025</span></div><h3>The archive gets tidier</h3><p>Small changes to navigation, episode information and the growing pile of old material.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 new year news archive"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>12 Jan 2025</span></div><h3>Starting another year in South Park</h3><p>A new year, a refreshed archive and plenty more nonsense still to catalogue.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2025 archive history broadcasts announcements"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>2 Jan 2025</span></div><h3>This week in South Park history</h3><p>A rummage through old broadcasts, announcements and forgotten bits of site history.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-      </div>
-    </section>
-
-    <section class="year-block" id="2024" data-year="2024">
-      <div class="year-heading"><h2>2024</h2><span class="year-count">9 posts</span></div>
-      <div class="news-list">
-        <a class="post" href="#" data-search="2024 retrospective year review"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>29 Dec 2024</span></div><h3>South Park in 2024</h3><p>A year-end rummage through the episodes, headlines and oddities worth remembering.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 archive website history"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>17 Nov 2024</span></div><h3>Remember when the website looked like this?</h3><p>Another dive into the old South Park web and the layouts that disappeared along the way.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 article title cards art construction paper"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>5 Oct 2024</span></div><h3>The art of a South Park title card</h3><p>Construction paper, crude lettering and the tiny visual details that make an episode feel instantly familiar.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 news archive update"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>21 Sep 2024</span></div><h3>South Park archive update</h3><p>New pages, corrected information and another pile of images added behind the scenes.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 retrospective episodes rewatch"><div class="post-image"><img src="https://lewis.lc/sp/img/sickofancy.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>10 Aug 2024</span></div><h3>Episodes that feel completely different now</h3><p>Revisiting stories whose jokes, targets or reputations shifted with time.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 archive internet 2000 flash"><div class="post-image"><img src="https://lewis.lc/sp/img/coi.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>22 Jun 2024</span></div><h3>South Park on the internet, circa 2000</h3><p>Flash pages, tiny video clips and the wonderfully slow experience of being a fan online.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 article early seasons animation style"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>11 May 2024</span></div><h3>Why the early seasons still look so good</h3><p>The deliberately rough style gave old South Park a texture later television rarely has.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 archive promos press releases"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>16 Mar 2024</span></div><h3>From the vault: old promos and press releases</h3><p>A selection of forgotten publicity material from across the show’s long run.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="2024 site update launch archive"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>6 Jan 2024</span></div><h3>Welcome to the archive</h3><p>The first version of this little corner of the site, built for news, discoveries and South Park history.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-      </div>
-    </section>
-
-    <section class="year-block" id="older" data-year="older">
-      <div class="year-heading"><h2>Older posts</h2><span class="year-count">3 posts</span></div>
-      <div class="news-list">
-        <a class="post" href="#" data-search="south park studios classic website 2014 archive"><div class="post-image"><img src="https://lewis.lc/sp/img/wid.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>12 Nov 2014</span></div><h3>From the South Park Studios archive</h3><p>News items, character pages and the bits of the official site worth remembering.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="season premiere promo comedy central 2009"><div class="post-image"><img src="https://lewis.lc/sp/img/sotm.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Old news</span><span>7 Oct 2009</span></div><h3>South Park returns tonight</h3><p>An archived-style news entry from the era of banners, promos and weekly episode hype.</p><span class="post-read">Read post <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-        <a class="post" href="#" data-search="website old south park internet 2004 downloads"><div class="post-image"><img src="https://lewis.lc/sp/img/gan.png" alt="South Park episode still" loading="lazy"></div><div class="post-body"><div class="post-meta"><span class="post-type">Site history</span><span>3 Mar 2004</span></div><h3>When fan sites still had downloads pages</h3><p>Wallpapers, buddy icons, tiny GIFs and the glorious clutter of the early-2000s web.</p><span class="post-read">Read article <svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></span></div></a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer"><div><strong>SOUTH PARK</strong> · news archive</div><div>Created by Lewis · unofficial fan project</div></footer>
-</div>
-<script>
+</style></head>
+<body><div class="site"><header class="masthead"><button aria-label="Switch to light mode" class="theme-button" id="themeButton" title="Light mode" type="button"><svg aria-hidden="true" class="moon-icon" viewbox="0 0 24 24"><path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z"></path></svg><svg aria-hidden="true" class="sun-icon" viewbox="0 0 24 24"><circle cx="12" cy="12" r="3.4"></circle><path d="M12 2.75v2.1M12 19.15v2.1M2.75 12h2.1M19.15 12h2.1M5.46 5.46l1.48 1.48M17.06 17.06l1.48 1.48M18.54 5.46l-1.48 1.48M6.94 17.06l-1.48 1.48"></path></svg></button><div aria-label="South Park" class="movie-wordmark"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span>P</span><span>A</span><span>R</span><span>K</span></div><div aria-hidden="true" class="wordmark-bars"><i></i><i></i><i></i><i></i></div><div class="archive-title">News Archive</div><p class="archive-intro">News, updates, articles, old site discoveries and assorted South Park nonsense — collected in one place.</p><div class="toolbar"><nav aria-label="Archive navigation" class="nav-links"><a class="active" data-year-filter="all" href="#top">News archive</a><a data-year-filter="2026" href="#top">2026</a><a data-year-filter="2025" href="#top">2025</a><a data-year-filter="2024" href="#top">2024</a><a data-year-filter="older" href="#top">Older</a></nav><a class="back-guide" href="/sp/movie"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="m15 5-7 7 7 7"></path></svg>Episode guide</a></div></header><main class="content" id="top"><div class="archive-tools"><div class="search" id="searchWrap"><svg aria-hidden="true" viewbox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg><input aria-label="Search news archive" autocomplete="off" id="searchInput" placeholder="Search news archive..." type="search"/><button aria-label="Clear search" class="search-clear" id="searchClear" type="button">×</button></div><select aria-label="Filter by year" class="year-select" id="yearSelect"><option value="all">All years</option><option value="2026">2026</option><option value="2025">2025</option><option value="2024">2024</option><option value="older">Older posts</option></select></div><div class="no-results" id="noResults">No archive posts match that search.</div><section class="year-block" data-year="2026" id="2026"><div class="year-heading"><h2>2026</h2><span class="year-count">16 posts</span></div><div class="news-list"><a class="post" data-search="south park news september episode updates comedy central 2026" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>13 Sep 2026</span></div><h3>Another week in South Park</h3></div></a><a class="post" data-search="episode guide update construction paper site update 2026" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>11 Sep 2026</span></div><h3>The episode guide gets a fresh coat of construction paper</h3></div></a><a class="post" data-search="comedy central archive old news south park studios history 2026" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>10 Sep 2026</span></div><h3>Digging through old Comedy Central news</h3></div></a><a class="post" data-search="south park studios website retrospective internet archive 2026" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sickofancy.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>7 Sep 2026</span></div><h3>Remember South Park Studios?</h3></div></a><a class="post" data-search="season 28 south park episodes news 2026" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>2 Sep 2026</span></div><h3>Keeping track of Season 28</h3></div></a><a class="post" data-search="site launch news archive lewis south park fan site 2026" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>28 Aug 2026</span></div><h3>A new home for South Park news</h3></div></a><a class="post" data-search="2026 archive early web south park history" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>22 Aug 2026</span></div><h3>From the archives: South Park on the early web</h3></div></a><a class="post" data-search="2026 anniversary history south park twenty nine years" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>8 Aug 2026</span></div><h3>Twenty-nine years in a quiet little mountain town</h3></div></a><a class="post" data-search="2026 news roundup announcements south park" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>24 Jul 2026</span></div><h3>What’s happening in South Park?</h3></div></a><a class="post" data-search="2026 site update episode archive" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sickofancy.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>12 Jun 2026</span></div><h3>More episodes, fewer loose ends</h3></div></a><a class="post" data-search="2026 retrospective favourite episodes rewatch" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>3 May 2026</span></div><h3>The episodes we keep going back to</h3></div></a><a class="post" data-search="2026 article small stories kids classic episodes" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>18 Apr 2026</span></div><h3>Why South Park still works best when it gets small</h3></div></a><a class="post" data-search="2026 archive episode pages promos production extras" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>21 Mar 2026</span></div><h3>The forgotten extras hiding around old episode pages</h3></div></a><a class="post" data-search="2026 retrospective early seasons nostalgia comfort" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>14 Feb 2026</span></div><h3>The weird comfort of old South Park</h3></div></a><a class="post" data-search="2026 site update archive images metadata fixes" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sickofancy.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>24 Jan 2026</span></div><h3>A quieter sort of archive update</h3></div></a><a class="post" data-search="2026 new year news south park updates archive" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>3 Jan 2026</span></div><h3>Back in the mountain town</h3></div></a></div></section><section class="year-block" data-year="2025" id="2025"><div class="year-heading"><h2>2025</h2><span class="year-count">19 posts</span></div><div class="news-list"><a class="post" data-search="2025 south park year review episodes" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>31 Dec 2025</span></div><h3>South Park in 2025</h3></div></a><a class="post" data-search="2025 christmas archive festive episodes promos" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>21 Dec 2025</span></div><h3>Christmas in South Park, through the years</h3></div></a><a class="post" data-search="2025 article background characters town" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>29 Nov 2025</span></div><h3>The background characters who make South Park feel alive</h3></div></a><a class="post" data-search="old internet south park website history 2025" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>18 Oct 2025</span></div><h3>Lost corners of the old South Park web</h3></div></a><a class="post" data-search="2025 retrospective seasons fans debate" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>7 Sep 2025</span></div><h3>The seasons everyone argues about</h3></div></a><a class="post" data-search="2025 archive wallpapers gifs desktop themes downloads" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>16 Aug 2025</span></div><h3>Old wallpapers, tiny GIFs and very serious desktop themes</h3></div></a><a class="post" data-search="episode guide rebuild update 2025" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sickofancy.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>4 Jul 2025</span></div><h3>Rebuilding the episode archive</h3></div></a><a class="post" data-search="2025 summer news south park" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>14 Jun 2025</span></div><h3>Another South Park summer begins</h3></div></a><a class="post" data-search="2025 article emotional sincere episodes" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sickofancy.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>24 May 2025</span></div><h3>When South Park got unexpectedly sincere</h3></div></a><a class="post" data-search="2025 article widescreen visual history" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>3 May 2025</span></div><h3>When South Park went widescreen</h3></div></a><a class="post" data-search="2025 archive downloads wallpapers website" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>19 Apr 2025</span></div><h3>A brief history of South Park downloads</h3></div></a><a class="post" data-search="2025 news archive spring cleaning links images" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>12 Apr 2025</span></div><h3>Spring cleaning in the archive</h3></div></a><a class="post" data-search="2025 archive promo art history" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>9 Mar 2025</span></div><h3>A brief history of South Park promo art</h3></div></a><a class="post" data-search="2025 retrospective early seasons nostalgia" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>8 Mar 2025</span></div><h3>The strange comfort of old South Park</h3></div></a><a class="post" data-search="2025 article episodes rewatch list" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sickofancy.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>15 Feb 2025</span></div><h3>Twenty-five episodes worth another look</h3></div></a><a class="post" data-search="2025 article b plot side stories comedy" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>4 Feb 2025</span></div><h3>The joy of a completely pointless B-plot</h3></div></a><a class="post" data-search="2025 site update archive navigation" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>28 Jan 2025</span></div><h3>The archive gets tidier</h3></div></a><a class="post" data-search="2025 new year news archive" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>12 Jan 2025</span></div><h3>Starting another year in South Park</h3></div></a><a class="post" data-search="2025 archive history broadcasts announcements" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>2 Jan 2025</span></div><h3>This week in South Park history</h3></div></a></div></section><section class="year-block" data-year="2024" id="2024"><div class="year-heading"><h2>2024</h2><span class="year-count">13 posts</span></div><div class="news-list"><a class="post" data-search="2024 retrospective year review" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>29 Dec 2024</span></div><h3>South Park in 2024</h3></div></a><a class="post" data-search="2024 christmas episodes archive december" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>14 Dec 2024</span></div><h3>The Christmas episodes archive</h3></div></a><a class="post" data-search="2024 archive website history" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>17 Nov 2024</span></div><h3>Remember when the website looked like this?</h3></div></a><a class="post" data-search="2024 article cold open episodes" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>26 Oct 2024</span></div><h3>The best kind of South Park cold open</h3></div></a><a class="post" data-search="2024 article title cards art construction paper" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>5 Oct 2024</span></div><h3>The art of a South Park title card</h3></div></a><a class="post" data-search="2024 news archive update" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">News</span><span>21 Sep 2024</span></div><h3>South Park archive update</h3></div></a><a class="post" data-search="2024 retrospective episodes rewatch" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sickofancy.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>10 Aug 2024</span></div><h3>Episodes that feel completely different now</h3></div></a><a class="post" data-search="2024 retrospective town setting episodes" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Retrospective</span><span>13 Jul 2024</span></div><h3>When the town itself was the joke</h3></div></a><a class="post" data-search="2024 archive internet 2000 flash" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>22 Jun 2024</span></div><h3>South Park on the internet, circa 2000</h3></div></a><a class="post" data-search="2024 article early seasons animation style" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Article</span><span>11 May 2024</span></div><h3>Why the early seasons still look so good</h3></div></a><a class="post" data-search="2024 archive promos press releases" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>16 Mar 2024</span></div><h3>From the vault: old promos and press releases</h3></div></a><a class="post" data-search="2024 site update archive images links notes" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/coi.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>3 Feb 2024</span></div><h3>A few more boxes from the archive</h3></div></a><a class="post" data-search="2024 site update launch archive" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site update</span><span>6 Jan 2024</span></div><h3>Welcome to the archive</h3></div></a></div></section><section class="year-block" data-year="older" id="older"><div class="year-heading"><h2>Older posts</h2><span class="year-count">3 posts</span></div><div class="news-list"><a class="post" data-search="south park studios classic website 2014 archive" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/wid.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Archive</span><span>12 Nov 2014</span></div><h3>From the South Park Studios archive</h3></div></a><a class="post" data-search="season premiere promo comedy central 2009" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/sotm.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Old news</span><span>7 Oct 2009</span></div><h3>South Park returns tonight</h3></div></a><a class="post" data-search="website old south park internet 2004 downloads" href="#"><div class="post-image"><img alt="South Park episode still" loading="lazy" src="https://lewis.lc/sp/img/gan.png"/></div><div class="post-body"><div class="post-meta"><span class="post-type">Site history</span><span>3 Mar 2004</span></div><h3>When fan sites still had downloads pages</h3></div></a></div></section><nav aria-label="News archive pages" class="pagination" id="pagination"><button aria-label="Previous page" class="page-btn" id="pagePrev" type="button"><svg viewbox="0 0 24 24"><path d="m15 5-7 7 7 7"></path></svg></button><div id="pageNumbers" style="display:contents"></div><button aria-label="Next page" class="page-btn" id="pageNext" type="button"><svg viewbox="0 0 24 24"><path d="m9 5 7 7-7 7"></path></svg></button><div aria-live="polite" class="pagination-status" id="paginationStatus"></div></nav></main><footer class="footer"><div><strong>SOUTH PARK</strong> · news archive</div><div>Created by Lewis · unofficial fan project</div></footer></div><script>
 (() => {
   const root = document.documentElement;
 
@@ -218,13 +126,22 @@ html[data-theme="light"] .theme-button .sun-icon{display:block}
     });
   }
 
-  /* ---------- archive search / filtering ---------- */
+  /* ---------- archive search / filtering + pagination ---------- */
   const searchInput = document.getElementById('searchInput');
   const searchWrap = document.getElementById('searchWrap');
   const searchClear = document.getElementById('searchClear');
   const yearSelect = document.getElementById('yearSelect');
+  const yearNavLinks = [...document.querySelectorAll('.nav-links [data-year-filter]')];
   const noResults = document.getElementById('noResults');
+  const pagination = document.getElementById('pagination');
+  const pageNumbers = document.getElementById('pageNumbers');
+  const pagePrev = document.getElementById('pagePrev');
+  const pageNext = document.getElementById('pageNext');
+  const paginationStatus = document.getElementById('paginationStatus');
   const blocks = [...document.querySelectorAll('.year-block')];
+  const allPosts = [...document.querySelectorAll('.year-block .post')];
+  const postsPerPage = 12;
+  let currentPage = 1;
 
   const normalize = value => String(value || '')
     .toLocaleLowerCase()
@@ -233,65 +150,165 @@ html[data-theme="light"] .theme-button .sun-icon{display:block}
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
 
-  function filterArchive(){
-    if (!searchInput || !yearSelect) return;
+  function syncYearNavigation(){
+    if (!yearSelect) return;
+    const selectedYear = yearSelect.value;
+    yearNavLinks.forEach(link => {
+      const active = link.dataset.yearFilter === selectedYear;
+      link.classList.toggle('active', active);
+      if (active) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  }
 
+  function matchingPosts(){
+    if (!searchInput || !yearSelect) return [];
     const rawQuery = normalize(searchInput.value);
     const terms = rawQuery ? rawQuery.split(/\s+/).filter(Boolean) : [];
     const selectedYear = yearSelect.value;
-    let visibleTotal = 0;
 
-    searchWrap?.classList.toggle('has-value', searchInput.value.length > 0);
-
-    blocks.forEach(block => {
-      const yearMatches = selectedYear === 'all' || block.dataset.year === selectedYear;
-      let visibleInBlock = 0;
-
-      block.querySelectorAll('.post').forEach(post => {
-        const searchable = normalize(`${post.textContent} ${post.dataset.search || ''}`);
-        const queryMatches = terms.length === 0 || terms.every(term => searchable.includes(term));
-        const visible = yearMatches && queryMatches;
-
-        post.classList.toggle('is-hidden', !visible);
-        post.setAttribute('aria-hidden', visible ? 'false' : 'true');
-
-        if (visible){
-          visibleInBlock += 1;
-          visibleTotal += 1;
-        }
-      });
-
-      block.classList.toggle('is-hidden', visibleInBlock === 0);
-      const count = block.querySelector('.year-count');
-      if (count){
-        count.textContent = `${visibleInBlock} ${visibleInBlock === 1 ? 'post' : 'posts'}`;
-      }
+    return allPosts.filter(post => {
+      const block = post.closest('.year-block');
+      const yearMatches = selectedYear === 'all' || block?.dataset.year === selectedYear;
+      const searchable = normalize(`${post.textContent} ${post.dataset.search || ''}`);
+      const queryMatches = terms.length === 0 || terms.every(term => searchable.includes(term));
+      return yearMatches && queryMatches;
     });
-
-    noResults?.classList.toggle('show', visibleTotal === 0);
   }
 
-  searchInput?.addEventListener('input', filterArchive);
-  searchInput?.addEventListener('search', filterArchive);
+  function renderPagination(totalItems){
+    if (!pagination || !pageNumbers) return;
+    const totalPages = Math.max(1, Math.ceil(totalItems / postsPerPage));
+    currentPage = Math.min(currentPage, totalPages);
+    pagination.hidden = totalItems <= postsPerPage;
+    pageNumbers.innerHTML = '';
+
+    const addButton = (page, label = String(page)) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `page-btn${page === currentPage ? ' active' : ''}`;
+      button.textContent = label;
+      button.setAttribute('aria-label', `Page ${page}`);
+      if (page === currentPage) button.setAttribute('aria-current', 'page');
+      button.addEventListener('click', () => {
+        currentPage = page;
+        filterArchive(false);
+        document.querySelector('.archive-tools')?.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+      pageNumbers.appendChild(button);
+    };
+
+    const pages = [];
+    if (totalPages <= 7){
+      for (let i=1;i<=totalPages;i++) pages.push(i);
+    } else {
+      pages.push(1);
+      if (currentPage > 4) pages.push('…');
+      const from = Math.max(2,currentPage-1);
+      const to = Math.min(totalPages-1,currentPage+1);
+      for (let i=from;i<=to;i++) pages.push(i);
+      if (currentPage < totalPages-3) pages.push('…');
+      pages.push(totalPages);
+    }
+
+    pages.forEach(item => {
+      if (item === '…'){
+        const span=document.createElement('span');
+        span.textContent='…';
+        span.style.cssText='min-width:28px;text-align:center;color:var(--muted)';
+        pageNumbers.appendChild(span);
+      } else addButton(item);
+    });
+
+    if (pagePrev){
+      pagePrev.disabled = currentPage === 1;
+      pagePrev.onclick = () => { if (currentPage > 1){ currentPage--; filterArchive(false); document.querySelector('.archive-tools')?.scrollIntoView({behavior:'smooth',block:'start'}); } };
+    }
+    if (pageNext){
+      pageNext.disabled = currentPage === totalPages;
+      pageNext.onclick = () => { if (currentPage < totalPages){ currentPage++; filterArchive(false); document.querySelector('.archive-tools')?.scrollIntoView({behavior:'smooth',block:'start'}); } };
+    }
+    if (paginationStatus){
+      const first = totalItems ? (currentPage-1)*postsPerPage+1 : 0;
+      const last = Math.min(currentPage*postsPerPage,totalItems);
+      paginationStatus.textContent = totalItems ? `Showing ${first}–${last} of ${totalItems} posts` : '';
+    }
+  }
+
+  function filterArchive(resetPage = true){
+    if (!searchInput || !yearSelect) return;
+    if (resetPage) currentPage = 1;
+    searchWrap?.classList.toggle('has-value', searchInput.value.length > 0);
+    syncYearNavigation();
+
+    const matched = matchingPosts();
+    const matchedSet = new Set(matched);
+    const start = (currentPage - 1) * postsPerPage;
+    const pageSet = new Set(matched.slice(start, start + postsPerPage));
+
+    allPosts.forEach(post => {
+      const visible = pageSet.has(post);
+      post.classList.toggle('is-hidden', !visible);
+      post.setAttribute('aria-hidden', visible ? 'false' : 'true');
+    });
+
+    blocks.forEach(block => {
+      const posts = [...block.querySelectorAll('.post')];
+      const matchCount = posts.filter(post => matchedSet.has(post)).length;
+      const visibleCount = posts.filter(post => pageSet.has(post)).length;
+      block.classList.toggle('is-hidden', visibleCount === 0);
+      const count = block.querySelector('.year-count');
+      if (count) count.textContent = `${matchCount} ${matchCount === 1 ? 'post' : 'posts'}`;
+    });
+
+    noResults?.classList.toggle('show', matched.length === 0);
+    renderPagination(matched.length);
+  }
+
+  searchInput?.addEventListener('input', () => filterArchive(true));
+  searchInput?.addEventListener('search', () => filterArchive(true));
   searchInput?.addEventListener('keydown', event => {
     if (event.key === 'Escape' && searchInput.value){
       event.preventDefault();
       searchInput.value = '';
-      filterArchive();
+      filterArchive(true);
     }
   });
 
-  yearSelect?.addEventListener('change', filterArchive);
+  yearSelect?.addEventListener('change', () => {
+    filterArchive(true);
+    history.replaceState(null, '', yearSelect.value === 'all' ? '#top' : `#${yearSelect.value}`);
+  });
+
+  yearNavLinks.forEach(link => {
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      if (!yearSelect) return;
+      const year = link.dataset.yearFilter || 'all';
+      yearSelect.value = year;
+      filterArchive(true);
+      history.replaceState(null, '', year === 'all' ? '#top' : `#${year}`);
+      document.querySelector('.archive-tools')?.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
 
   searchClear?.addEventListener('click', () => {
     if (!searchInput) return;
     searchInput.value = '';
-    filterArchive();
+    filterArchive(true);
     searchInput.focus();
   });
 
-  filterArchive();
+  function applyYearFromHash(){
+    if (!yearSelect) return;
+    const hash = location.hash.replace('#','');
+    const valid = ['2026','2025','2024','older'];
+    yearSelect.value = valid.includes(hash) ? hash : 'all';
+    filterArchive(true);
+  }
+
+  window.addEventListener('hashchange', applyYearFromHash);
+  applyYearFromHash();
 })();
-</script>
-</body>
+</script></body>
 </html>
