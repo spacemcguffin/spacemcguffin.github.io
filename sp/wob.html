@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>South Park — lewis.lc</title>
+<meta name="description" content="A South Park fan homepage concept for lewis.lc.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400;6..144,500;6..144,600;6..144,700;6..144,800;6..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   ROOT / THEME
+   ========================================================= */
+:root{
+  --purple:#5161ac;
+  --green:#009b67;
+  --cyan:#59c0d5;
+  --orange:#f47321;
+  --yellow:#f4c842;
+  --red:#cf4b46;
+  --paper:#d8c69e;
+  --paper-dark:#b69e70;
+  --ink:#f4f4ef;
+  --muted:#aab1b5;
+  --bg:#07141c;
+  --panel:#101f27;
+  --panel-2:#172830;
+  --line:#2d3e46;
+  --line-strong:#42545c;
+  --shadow:0 20px 48px rgba(0,0,0,.24);
+  --max:1180px;
+}
+html[data-theme="light"]{
+  --ink:#142027;
+  --muted:#637078;
+  --bg:#eeeae0;
+  --panel:#f8f5ec;
+  --panel-2:#fffdf7;
+  --line:#d1cdc1;
+  --line-strong:#b8b3a5;
+  --shadow:0 18px 42px rgba(49,55,53,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  background-image:linear-gradient(rgba(5,15,22,.58),rgba(5,15,22,.93)),url("/wiki/img/nighttime.png");
+  background-size:cover;
+  background-position:center top;
+  background-attachment:fixed;
+}
+html[data-theme="light"] body{
+  background-image:linear-gradient(rgba(244,241,231,.76),rgba(244,241,231,.96)),url("/wiki/img/daytime.png");
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{color:inherit}
+img{display:block;max-width:100%}
+
+/* =========================================================
+   SITE SHELL
+   ========================================================= */
+.site{
+  width:min(var(--max),calc(100% - 28px));
+  margin:18px auto 40px;
+  overflow:hidden;
+  border:1px solid var(--line-strong);
+  background:color-mix(in srgb,var(--panel) 95%,transparent);
+  box-shadow:var(--shadow);
+}
+
+/* =========================================================
+   IMAGE MASTHEAD
+   ========================================================= */
+.masthead{
+  position:relative;
+  min-height:245px;
+  overflow:hidden;
+  border-bottom:1px solid var(--line-strong);
+  background:#10202a;
+}
+.masthead-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.masthead::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,10,18,.10),rgba(4,10,18,.18) 48%,rgba(4,10,18,.62));
+}
+.masthead-copy{
+  position:absolute;left:22px;right:22px;bottom:18px;z-index:2;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;color:#fff;
+}
+.masthead-wordmark{
+  margin:0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(34px,5vw,60px);
+  font-weight:900;line-height:.82;letter-spacing:-.055em;text-transform:uppercase;
+  text-shadow:0 3px 12px rgba(0,0,0,.45);
+}
+.tagline{
+  margin:0 0 4px;font-family:"Google Sans Flex",sans-serif;font-size:12px;font-weight:900;
+  letter-spacing:.12em;text-transform:uppercase;text-shadow:0 2px 5px rgba(0,0,0,.5);
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+.navbar{
+  position:relative;
+  z-index:4;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  min-height:62px;
+  gap:18px;
+  padding:9px 14px;
+  border-bottom:1px solid color-mix(in srgb,var(--yellow) 62%,#8d6d13);
+  background:#e9b82f;
+  color:#111;
+}
+.nav-links{display:flex;align-items:center;gap:5px}
+.nav-links a{
+  padding:11px 14px;
+  border-radius:2px;
+  font-family:"Google Sans Flex",sans-serif;
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  transition:background .16s ease,transform .16s ease;
+}
+.nav-links a:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
+.nav-links a.active{background:#111;color:#fff}
+.nav-wordmark{
+  justify-self:center;
+  display:flex;gap:4px;align-items:center;
+  font-family:"Google Sans Flex",sans-serif;
+  font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;
+  opacity:.76;
+}
+.nav-wordmark b{display:inline-block;width:9px;height:9px;border-radius:50%}
+.nav-wordmark b:nth-child(1){background:var(--purple)}
+.nav-wordmark b:nth-child(2){background:var(--green)}
+.nav-wordmark b:nth-child(3){background:var(--cyan)}
+.nav-wordmark b:nth-child(4){background:var(--orange)}
+.nav-tools{display:flex;align-items:center;gap:8px}
+.search{
+  width:220px;height:38px;display:flex;align-items:center;gap:7px;padding:0 11px;
+  border:1px solid rgba(0,0,0,.16);background:#f8f6ef;border-radius:4px;
+}
+.search-icon{font-size:16px;color:#555;line-height:1}
+.search input{width:100%;border:0;outline:0;background:transparent;color:#222;font-size:12px}
+.theme-toggle{
+  width:38px;height:38px;padding:0;border:1px solid rgba(0,0,0,.18);border-radius:50%;
+  display:grid;place-items:center;background:#f8f6ef;cursor:pointer;transition:transform .16s ease;
+}
+.theme-toggle:hover{transform:rotate(-5deg) scale(1.04)}
+.theme-toggle .sun{display:none}.theme-toggle .moon,.theme-toggle .sun{font-size:17px;line-height:1}html[data-theme="light"] .theme-toggle .moon{display:none}html[data-theme="light"] .theme-toggle .sun{display:block}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+.main{padding:18px}
+.section-shell{border:1px solid var(--line-strong);background:var(--panel-2);overflow:hidden}
+.section-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  min-height:38px;padding:7px 14px;background:#111;color:#fff;
+}
+.section-bar h2{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:900;letter-spacing:-.025em;text-transform:uppercase}
+.section-bar a{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;opacity:.75}
+.section-bar a:hover{opacity:1}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative;
+  min-height:390px;
+  overflow:hidden;
+  border:1px solid var(--line-strong);
+  background:#111;
+}
+.hero-media{position:absolute;inset:0}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 39%}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,10,.88) 0%,rgba(5,8,10,.55) 34%,rgba(5,8,10,.08) 68%,rgba(5,8,10,.12) 100%)}
+.hero-copy{
+  position:relative;z-index:2;width:min(520px,65%);min-height:390px;padding:55px 38px 48px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;color:#fff
+}
+.kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:10px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.13em;color:#f0ce54}
+.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:#f0ce54}
+.hero h1{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(42px,5.5vw,70px);font-weight:900;line-height:.86;letter-spacing:-.055em;text-transform:uppercase;text-wrap:balance}
+.hero p{max-width:430px;margin:17px 0 21px;font-size:15px;line-height:1.45;color:#eee}
+.paper-button{
+  display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border:0;cursor:pointer;color:#111;background:#efc338;
+  clip-path:polygon(1% 4%,98% 0,100% 93%,3% 100%,0 10%);
+  font-family:"Google Sans Flex",sans-serif;font-size:13px;font-weight:900;text-transform:uppercase;
+  transition:transform .16s ease,filter .16s ease;
+}
+.paper-button:hover{transform:translateY(-2px) rotate(-.5deg);filter:brightness(1.04)}
+.paper-button svg{width:14px;height:14px;fill:currentColor}
+.hero-dots{display:flex;gap:8px;margin-top:20px}.hero-dots span{width:9px;height:9px;border-radius:50%;background:#fff;opacity:.4}.hero-dots span:first-child{background:var(--yellow);opacity:1}
+
+/* =========================================================
+   FEATURE CARDS
+   ========================================================= */
+.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.feature-card{display:grid;grid-template-rows:auto 1fr}
+.card-media{position:relative;aspect-ratio:16/8.9;overflow:hidden;background:#0c1418}
+.card-media img{width:100%;height:100%;object-fit:cover;transition:transform .28s ease,filter .28s ease}
+.feature-card:hover .card-media img{transform:scale(1.018);filter:brightness(1.03)}
+.play{position:absolute;right:15px;bottom:15px;width:47px;height:47px;border:1px solid rgba(255,255,255,.8);border-radius:50%;display:grid;place-items:center;background:rgba(5,7,8,.66);backdrop-filter:blur(3px)}
+.play svg{width:17px;fill:#fff;margin-left:3px}
+.card-copy{padding:13px 15px 15px}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:7px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.card-meta .bubble{width:8px;height:8px;border-radius:50%;background:var(--cyan)}
+.card-copy h3{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:22px;font-weight:800;line-height:1.03;letter-spacing:-.035em}
+.card-copy p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+
+/* =========================================================
+   LATEST STRIP
+   ========================================================= */
+.latest{margin-top:18px}
+.latest-grid{display:grid;grid-template-columns:repeat(3,1fr)}
+.latest-item{position:relative;min-width:0;border-right:1px solid var(--line)}
+.latest-item:last-child{border-right:0}
+.latest-item .thumb{aspect-ratio:16/9;overflow:hidden;background:#0c1418}
+.latest-item .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .22s ease}
+.latest-item:hover .thumb img{transform:scale(1.025)}
+.latest-item .text{padding:11px 12px 13px}
+.latest-item .num{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+.latest-item h3{margin:5px 0 0;font-family:"Google Sans Flex",sans-serif;font-size:15px;font-weight:780;line-height:1.12;letter-spacing:-.025em}
+
+/* =========================================================
+   NEWS
+   ========================================================= */
+.news{margin-top:18px}
+.news-layout{display:grid;grid-template-columns:280px 1fr;min-height:254px}
+.news-image{overflow:hidden;border-right:1px solid var(--line)}
+.news-image img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.news-list{padding:4px 18px}
+.news-row{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.news-row:last-child{border-bottom:0}
+.news-date{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.news-row h3{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:760;letter-spacing:-.02em}
+.news-row p{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}
+.news-row:hover h3{color:var(--cyan)}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 20px;border-top:1px solid var(--line-strong);
+  color:var(--muted);font-size:11px;background:color-mix(in srgb,var(--panel) 98%,#000 2%);
+}
+.footer strong{color:var(--ink)}
+.footer-links{display:flex;gap:14px}.footer a:hover{color:var(--ink)}
+
+/* =========================================================
+   SEARCH STATE / MOTION
+   ========================================================= */
+[data-search-hidden="true"]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width:900px){
+  .masthead{min-height:205px}.navbar{grid-template-columns:1fr auto}.nav-wordmark{display:none}.search{width:180px}.hero{min-height:330px}.hero-copy{min-height:330px;padding:40px 28px 34px}.latest-grid{grid-template-columns:repeat(2,1fr)}.latest-item:nth-child(3n){border-right:0}.latest-item:nth-child(-n+3){border-bottom:1px solid var(--line)}.news-layout{grid-template-columns:220px 1fr}
+}
+@media (max-width:680px){
+  .site{width:100%;margin:0;border-left:0;border-right:0}.masthead{min-height:185px}.masthead-copy{left:14px;right:14px;bottom:13px}.masthead-wordmark{font-size:34px}.tagline{font-size:9px;letter-spacing:.09em}.navbar{display:flex;flex-wrap:wrap;gap:7px;padding:8px}.nav-links{width:100%;justify-content:space-between;gap:2px}.nav-links a{flex:1;text-align:center;padding:9px 7px;font-size:11px}.nav-tools{width:100%;display:grid;grid-template-columns:1fr 38px}.search{width:100%}.main{padding:10px}.hero{min-height:370px}.hero-media::after{background:linear-gradient(0deg,rgba(5,8,10,.93) 0%,rgba(5,8,10,.50) 54%,rgba(5,8,10,.08) 100%)}.hero-media img{object-position:center 30%}.hero-copy{width:100%;min-height:370px;padding:28px 21px 25px;justify-content:flex-end}.hero h1{font-size:43px}.hero p{font-size:13px}.feature-grid{grid-template-columns:1fr;gap:10px;margin-top:10px}.latest,.news{margin-top:10px}.latest-grid{grid-template-columns:1fr 1fr}.latest-item h3{font-size:13px}.news-layout{grid-template-columns:1fr}.news-image{height:190px;border-right:0;border-bottom:1px solid var(--line)}.news-list{padding:2px 13px}.news-row{grid-template-columns:1fr;gap:5px;padding:12px 0}.footer{align-items:flex-start;flex-direction:column;padding:15px}.section-bar{padding:7px 11px}.section-bar h2{font-size:14px}
+}
+@media (max-width:430px){
+  .masthead{min-height:165px}.masthead-wordmark{font-size:30px}.tagline{max-width:125px;text-align:right}.latest-grid{grid-template-columns:1fr}.latest-item{display:grid;grid-template-columns:42% 1fr;border-right:0;border-bottom:1px solid var(--line)!important}.latest-item:last-child{border-bottom:0!important}.latest-item .thumb{aspect-ratio:4/3}.latest-item .text{padding:10px}.card-copy h3{font-size:19px}
+}
+</style>
+</head>
+<body>
+<div class="site">
+  <!-- =====================================================
+       MASTHEAD
+       ===================================================== -->
+  <header class="masthead">
+    <img class="masthead-image" src="/sp/img/background.png" alt="South Park mountain town">
+    <div class="masthead-copy">
+      <a class="masthead-wordmark" href="/sp/">South Park</a>
+      <p class="tagline">small town. big problems.</p>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       NAVIGATION
+       ===================================================== -->
+  <nav class="navbar" aria-label="Primary navigation">
+    <div class="nav-links">
+      <a class="active" href="/sp/">Home</a>
+      <a href="/sp/movie">Episodes</a>
+      <a href="#characters">Characters</a>
+      <a href="/sp/news">News</a>
+    </div>
+    <div class="nav-wordmark" aria-hidden="true"><b></b><b></b><b></b><b></b><span>episode guide companion</span></div>
+    <div class="nav-tools">
+      <label class="search" aria-label="Search homepage">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="Search South Park…" autocomplete="off">
+      </label>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
+        <span class="moon" aria-hidden="true">☾</span>
+        <span class="sun" aria-hidden="true">☀</span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="main">
+    <!-- ===================================================
+         HERO
+         =================================================== -->
+    <section class="hero search-target" data-search="the crap out season 28 latest episode christmas satan stan new episode">
+      <div class="hero-media"><img src="/sp/img/tco.png" alt="South Park episode still from The Crap Out"></div>
+      <div class="hero-copy">
+        <div class="kicker">Latest episode</div>
+        <h1>The crap out</h1>
+        <p>Satan’s due, Stan’s praying, and only a Christmas miracle can deliver the Antichrist on time.</p>
+        <a class="paper-button" href="/sp/movie"><span>View episode</span><svg viewBox="0 0 24 24"><path d="m9 5 10 7-10 7z"></path></svg></a>
+        <div class="hero-dots" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         FEATURED
+         =================================================== -->
+    <div class="feature-grid">
+      <article class="feature-card section-shell search-target" data-search="sora not sorry butters ai season 28 latest episode">
+        <div class="section-bar"><h2>Latest episode</h2><a href="/sp/movie">All episodes →</a></div>
+        <a href="/sp/movie" class="card-media">
+          <img src="/sp/img/sns.png" alt="Episode still from Sora Not Sorry">
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"></path></svg></span>
+        </a>
+        <div class="card-copy">
+          <div class="card-meta"><span class="bubble"></span><span>Season 28 · Episode 3</span></div>
+          <h3>Sora Not Sorry</h3>
+          <p>Butters’ AI revenge plan backfires and South Park has to figure out what’s real before the fake videos take over.</p>
+        </div>
+      </article>
+
+      <article class="feature-card section-shell search-target" data-search="turkey trot cartman thanksgiving science feature video season 28">
+        <div class="section-bar"><h2>Featured story</h2><a href="/sp/news">More news →</a></div>
+        <a href="/sp/movie" class="card-media">
+          <img src="/sp/img/tt.png" alt="Episode still from Turkey Trot">
+          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"></path></svg></span>
+        </a>
+        <div class="card-copy">
+          <div class="card-meta"><span class="bubble" style="background:var(--orange)"></span><span>From the guide</span></div>
+          <h3>Cartman turns the Turkey Trot into a science experiment</h3>
+          <p>The annual town race gets exactly as sensible as you’d expect once Cartman decides winning normally isn’t enough.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- ===================================================
+         RECENT EPISODES
+         =================================================== -->
+    <section class="latest section-shell">
+      <div class="section-bar"><h2>More from South Park</h2><a href="/sp/movie">Browse the episode guide →</a></div>
+      <div class="latest-grid">
+        <a class="latest-item search-target" data-search="twisted christian cartman possessed season 28" href="/sp/movie">
+          <div class="thumb"><img src="/sp/img/tc.png" alt="Twisted Christian episode still"></div>
+          <div class="text"><span class="num">S28 E01</span><h3>Twisted Christian</h3></div>
+        </a>
+        <a class="latest-item search-target" data-search="the woman in the hat stan white house season 28" href="/sp/movie">
+          <div class="thumb"><img src="/sp/img/twith.png" alt="The Woman in the Hat episode still"></div>
+          <div class="text"><span class="num">S28 E02</span><h3>The Woman in the Hat</h3></div>
+        </a>
+        <a class="latest-item search-target" data-search="sermon on the mount jesus season 27" href="/sp/movie">
+          <div class="thumb"><img src="/sp/img/sotm.png" alt="Sermon on the Mount episode still"></div>
+          <div class="text"><span class="num">S27 E01</span><h3>Sermon on the ’Mount</h3></div>
+        </a>
+        <a class="latest-item search-target" data-search="got a nut mr mackey job season 27" href="/sp/movie">
+          <div class="thumb"><img src="/sp/img/gan.png" alt="Got a Nut episode still"></div>
+          <div class="text"><span class="num">S27 E02</span><h3>Got a Nut</h3></div>
+        </a>
+        <a class="latest-item search-target" data-search="bigger longer uncut movie 1999 archive" href="/sp/movie">
+          <div class="thumb"><img src="/sp/img/blau.png" alt="South Park: Bigger, Longer & Uncut artwork"></div>
+          <div class="text"><span class="num">1999 movie</span><h3>Bigger, Longer &amp; Uncut</h3></div>
+        </a>
+        <a class="latest-item search-target" data-search="cartman gets an anal probe season 1 classic archive" href="/sp/movie">
+          <div class="thumb"><img src="/sp/img/cgaap.png" alt="Cartman Gets an Anal Probe episode still"></div>
+          <div class="text"><span class="num">S01 E01</span><h3>Cartman Gets an Anal Probe</h3></div>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ===================================================
+         FROM THE ARCHIVE
+         =================================================== -->
+    <section class="latest section-shell">
+      <div class="section-bar"><h2>From the archive</h2><a href="/sp/movie">Jump back in time →</a></div>
+      <div class="latest-grid">
+        <a class="latest-item search-target" data-search="pinkeye halloween zombies classic" href="/sp/movie"><div class="thumb"><img src="/sp/img/pinkeye.png" alt="Pinkeye episode still"></div><div class="text"><span class="num">1997</span><h3>Halloween gets messy</h3></div></a>
+        <a class="latest-item search-target" data-search="chef aid music concert classic" href="/sp/movie"><div class="thumb"><img src="/sp/img/ca.png" alt="Chef Aid episode still"></div><div class="text"><span class="num">1998</span><h3>The night everybody showed up for Chef</h3></div></a>
+        <a class="latest-item search-target" data-search="rainforest shmainforest costa rica classic" href="/sp/movie"><div class="thumb"><img src="/sp/img/rs.png" alt="Rainforest Shmainforest episode still"></div><div class="text"><span class="num">1999</span><h3>South Park leaves Colorado</h3></div></a>
+        <a class="latest-item search-target" data-search="spookyfish halloween stan classic" href="/sp/movie"><div class="thumb"><img src="/sp/img/spookyfish.png" alt="Spookyfish episode still"></div><div class="text"><span class="num">1998</span><h3>The evil-fish problem</h3></div></a>
+        <a class="latest-item search-target" data-search="gnomes tweek underpants classic" href="/sp/movie"><div class="thumb"><img src="/sp/img/gnomes.png" alt="Gnomes episode still"></div><div class="text"><span class="num">1998</span><h3>Phase one: steal underpants</h3></div></a>
+        <a class="latest-item search-target" data-search="mecha streisand monster classic" href="/sp/movie"><div class="thumb"><img src="/sp/img/ms.png" alt="Mecha-Streisand episode still"></div><div class="text"><span class="num">1998</span><h3>When the town went full kaiju</h3></div></a>
+      </div>
+    </section>
+
+    <!-- ===================================================
+         NEWS
+         =================================================== -->
+    <section class="news section-shell">
+      <div class="section-bar"><h2>News from South Park</h2><a href="/sp/news">News archive →</a></div>
+      <div class="news-layout">
+        <div class="news-image"><img src="/sp/img/wid.png" alt="South Park episode artwork"></div>
+        <div class="news-list">
+          <a class="news-row search-target" data-search="season 28 guide update five episodes archive" href="/sp/movie">
+            <span class="news-date">Guide update</span>
+            <div><h3>Season 28 is now complete in the episode guide</h3><p>Five new episode pages, fresh imagery and the latest season details are now in place.</p></div>
+          </a>
+          <a class="news-row search-target" data-search="episode guide archive search filters season navigation" href="/sp/movie">
+            <span class="news-date">Site update</span>
+            <div><h3>The episode archive gets a fresh coat of construction paper</h3><p>Season navigation, search and episode cards have been tightened up across desktop and mobile.</p></div>
+          </a>
+          <a class="news-row search-target" data-search="wok is dead butters labubu tariffs season 27" href="/sp/movie">
+            <span class="news-date">From S27</span>
+            <div><h3>Revisit “Wok Is Dead” and the rest of Season 27</h3><p>Butters, tariffs, Labubu and five episodes of South Park’s latest run before the next chapter began.</p></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+  <footer class="footer">
+    <div><strong>SOUTH PARK</strong> · unofficial fan homepage · lewis.lc</div>
+    <div class="footer-links"><a href="/sp/movie">Episode guide</a><a href="/sp/news">News</a><a href="/">Main site</a></div>
+  </footer>
+</div>
+
+<script>
+(() => {
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  const search = document.getElementById('searchInput');
+
+  function setTheme(theme){
+    root.dataset.theme = theme === 'light' ? 'light' : 'dark';
+    try{ localStorage.setItem('sp-theme', root.dataset.theme); }catch(_){}
+  }
+
+  try{
+    const saved = localStorage.getItem('sp-theme');
+    if(saved === 'light' || saved === 'dark') root.dataset.theme = saved;
+  }catch(_){}
+
+  toggle.addEventListener('click', () => {
+    setTheme(root.dataset.theme === 'light' ? 'dark' : 'light');
+  });
+
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    document.querySelectorAll('.search-target').forEach(item => {
+      const haystack = `${item.dataset.search || ''} ${item.textContent}`.toLowerCase();
+      item.dataset.searchHidden = q && !haystack.includes(q) ? 'true' : 'false';
+    });
+  });
+})();
+</script>
+</body>
+</html>
