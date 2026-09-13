@@ -1489,7 +1489,226 @@ html.dark .categories-label{
 }
 
 </style>
- </head>
+ 
+<style id="requested-refinements">
+/* ===== Requested refinements ===== */
+
+/* Sidebar navigation: slightly larger labels/links */
+.nav-label{
+  font-size:.66rem;
+}
+.rail-link{
+  font-size:.82rem;
+}
+.season-grid a{
+  font-size:.70rem;
+}
+
+/* Wiki suffix: slightly larger */
+.wiki-wordmark-suffix{
+  font-size:.60rem;
+}
+.mobile-wiki-identity .wiki-wordmark-suffix{
+  font-size:.64rem;
+}
+
+/* Mobile wordmark: slightly smaller; black in light mode */
+@media(max-width:850px){
+  .mobile-wiki-identity .wiki-wordmark .wiki-wordmark-main{
+    font-size:1.68rem !important;
+  }
+  html:not(.dark) .mobile-wiki-identity .wiki-wordmark{
+    color:#000;
+  }
+  html:not(.dark) .mobile-wiki-identity .wiki-wordmark-suffix{
+    color:#000;
+  }
+}
+
+/* Infobox gallery tabs: clearer, roomier, horizontally scrollable on larger views */
+.infobox-image-tabs{
+  gap:2px;
+  padding:0 8px;
+  scroll-behavior:smooth;
+  overscroll-behavior-x:contain;
+  cursor:grab;
+}
+.infobox-image-tabs:active{
+  cursor:grabbing;
+}
+.infobox-image-tab{
+  min-height:38px;
+  padding:0 12px;
+  font-size:.69rem;
+  border-bottom-width:2px;
+}
+.infobox-image-tab:hover{
+  background:rgba(69,98,145,.08);
+}
+.infobox-image-tab[aria-selected="true"]{
+  background:rgba(69,98,145,.045);
+}
+.infobox-image-switcher.has-multiple .infobox-image-tabs{
+  display:flex;
+}
+
+/* Contents: more breathing room between entries */
+.toc ol{
+  padding-top:10px;
+  padding-bottom:11px;
+}
+.toc li{
+  margin:.20rem 0;
+  line-height:1.55;
+}
+.toc a{
+  line-height:1.55;
+}
+
+/* Categories: separated by dividers, regular weight, bold on hover */
+.categories-links{
+  gap:0;
+  padding:0;
+}
+.categories-links a{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  min-height:36px;
+  padding:0 11px;
+  color:var(--link);
+  font-weight:500;
+  text-decoration:none !important;
+  transition:color .14s ease,font-weight .14s ease,background-color .14s ease;
+}
+.categories-links a:not(:last-child)::after{
+  content:"";
+  position:absolute;
+  top:8px;
+  right:0;
+  bottom:8px;
+  width:1px;
+  background:var(--line);
+}
+.categories-links a:hover,
+.categories-links a:focus-visible{
+  color:var(--accent);
+  font-weight:700;
+  text-decoration:none !important;
+  background:rgba(69,98,145,.035);
+}
+@media(max-width:650px){
+  .categories-links{
+    display:block;
+    padding:2px 0;
+  }
+  .categories-links a{
+    display:flex;
+    width:100%;
+    min-height:34px;
+    padding:7px 11px;
+  }
+  .categories-links a:not(:last-child)::after{
+    top:auto;
+    left:11px;
+    right:11px;
+    bottom:0;
+    width:auto;
+    height:1px;
+  }
+}
+</style>
+
+
+<style id="gallery-chevron-and-type-refinements">
+/* Slightly tighter article copy */
+.lede{
+  line-height:1.60;
+}
+.section p{
+  line-height:1.54;
+}
+@media(max-width:850px){
+  .lede{line-height:1.60}
+  .section p{line-height:1.58}
+}
+
+/* Mobile wordmark refinements */
+@media(max-width:850px){
+  .mobile-wiki-identity .wiki-wordmark .wiki-wordmark-main{
+    font-size:1.58rem !important;
+  }
+  .mobile-wiki-identity .wiki-wordmark-suffix{
+    font-size:.70rem !important;
+  }
+  html:not(.dark) .mobile-wiki-identity .wiki-wordmark,
+  html:not(.dark) .mobile-wiki-identity .wiki-wordmark-main,
+  html:not(.dark) .mobile-wiki-identity .wiki-wordmark-main > span:not(.wiki-logo-gap){
+    color:#000 !important;
+  }
+}
+
+/* Infobox gallery tab chevrons */
+.infobox-image-switcher{
+  position:relative;
+}
+.infobox-tab-scroll-shell{
+  position:relative;
+  display:grid;
+  grid-template-columns:28px minmax(0,1fr) 28px;
+  align-items:stretch;
+  border-bottom:1px solid var(--line);
+  background:var(--paper);
+}
+.infobox-tab-scroll-shell .infobox-image-tabs{
+  min-width:0;
+  border-bottom:0;
+}
+.infobox-tab-scroll-btn{
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:0;
+  background:var(--panel);
+  color:var(--text);
+  cursor:pointer;
+  transition:background-color .14s ease,color .14s ease,opacity .14s ease;
+}
+.infobox-tab-scroll-btn:hover{
+  background:rgba(69,98,145,.12);
+  color:var(--accent);
+}
+.infobox-tab-scroll-btn:disabled{
+  opacity:.28;
+  cursor:default;
+}
+.infobox-tab-scroll-btn svg{
+  width:15px;
+  height:15px;
+}
+@media(max-width:850px){
+  .infobox-tab-scroll-shell{
+    grid-template-columns:30px minmax(0,1fr) 30px;
+  }
+}
+</style>
+
+
+<style id="v11-fixes">
+/* Categories remain regular weight on hover/focus */
+.categories-links a,
+.categories-links a:hover,
+.categories-links a:focus-visible{
+  font-weight:500 !important;
+}
+
+/* Gallery chevrons are only hidden when there is genuinely nothing to scroll */
+.infobox-tab-scroll-shell.no-overflow .infobox-tab-scroll-btn{
+  opacity:.22;
+}
+</style>
+
+</head>
  <body>
   <header class="site-header">
    <div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation">
@@ -2398,5 +2617,77 @@ html.dark .categories-label{
 
 
 <div class="site-credit">Created by Lewis</div>
+
+<script>
+/* Desktop-friendly horizontal scrolling for infobox image tabs */
+document.querySelectorAll('.infobox-image-tabs').forEach(function(tabs){
+  tabs.addEventListener('wheel', function(e){
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && tabs.scrollWidth > tabs.clientWidth) {
+      e.preventDefault();
+      tabs.scrollLeft += e.deltaY;
+    }
+  }, { passive:false });
+});
+</script>
+
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll(".infobox-image-switcher").forEach(function(switcher){
+    const tabs = switcher.querySelector(".infobox-image-tabs");
+    const panels = switcher.querySelectorAll(".infobox-image-panel");
+
+    if (!tabs || panels.length < 2 || tabs.closest(".infobox-tab-scroll-shell")) return;
+
+    const shell = document.createElement("div");
+    shell.className = "infobox-tab-scroll-shell";
+
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.className = "infobox-tab-scroll-btn infobox-tab-scroll-prev";
+    prev.setAttribute("aria-label", "Scroll gallery tabs left");
+    prev.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "infobox-tab-scroll-btn infobox-tab-scroll-next";
+    next.setAttribute("aria-label", "Scroll gallery tabs right");
+    next.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    tabs.parentNode.insertBefore(shell, tabs);
+    shell.append(prev, tabs, next);
+
+    function updateButtons(){
+      const max = Math.max(0, tabs.scrollWidth - tabs.clientWidth);
+      const noOverflow = max <= 3;
+      shell.classList.toggle("no-overflow", noOverflow);
+
+      prev.disabled = noOverflow || tabs.scrollLeft <= 2;
+      next.disabled = noOverflow || tabs.scrollLeft >= max - 2;
+    }
+
+    function scrollTabs(direction){
+      tabs.scrollBy({
+        left: direction * Math.max(120, tabs.clientWidth * 0.62),
+        behavior: "smooth"
+      });
+    }
+
+    prev.addEventListener("click", function(){ scrollTabs(-1); });
+    next.addEventListener("click", function(){ scrollTabs(1); });
+    tabs.addEventListener("scroll", updateButtons, {passive:true});
+    window.addEventListener("resize", updateButtons, {passive:true});
+
+    requestAnimationFrame(function(){
+      updateButtons();
+      setTimeout(updateButtons, 60);
+    });
+  });
+});
+</script>
+
 </body>
 </html>
