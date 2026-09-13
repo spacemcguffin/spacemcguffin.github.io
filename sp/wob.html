@@ -377,6 +377,17 @@ img{display:block;max-width:100%}
 
 .paper-cta:hover .cta-chevron{transform:translateX(2px)}
 
+
+.hero h1.hero-title-long{
+  font-size:clamp(3.35rem,6.2vw,5.9rem);
+  max-width:900px;
+}
+@media(max-width:760px){
+  .hero h1.hero-title-long{
+    font-size:clamp(2.75rem,12vw,4.35rem);
+  }
+}
+
 /* Latest News */
 #news{
   width:100%;
@@ -1264,7 +1275,7 @@ footer{
     <img alt="South Park" src="https://lewis.lc/sp/img/titlecard.png"/>
     <div class="hero-copy">
       <div class="hero-date">September 1, 2026</div>
-      <h1>Welcome to the South Park Guide!</h1>
+      <h1 class="hero-title-long">Welcome to the South Park Guide!</h1>
       <p class="hero-dek">The dawn of a new fansite.</p>
       <div class="actions">
         <a class="paper-cta" href="#news">Read More
