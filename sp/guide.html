@@ -15147,19 +15147,17 @@ if (seasonRailNext) {
    INITIALISE
 ========================================================= */
 
-/* Start the guide itself clean after a refresh, but preserve a directly linked
-   episode modal. This means URLs such as ?episode=s5e4 can be shared and will
-   reopen the correct episode immediately. */
-selectedSeasons.clear();
-searchInput.value = "";
-searchQuery = "";
-currentPage = 1;
-viewMode = "grid";
+/* Restore shareable URL state on first load.
+   Examples:
+   ?seasons=25
+   ?seasons=25,24
+   ?seasons=movie
+   ?seasons=specials
+   ?episode=s5e4
+   Filter/search/page/view state can also be combined with an episode URL. */
 activeEpisodeIndex = -1;
 
-const initialEpisodeIndex = findEpisodeIndexBySlug(
-  new URLSearchParams(window.location.search).get("episode")
-);
+const initialEpisodeIndex = readURLState();
 
 syncSearchClearButton();
 renderPage();
