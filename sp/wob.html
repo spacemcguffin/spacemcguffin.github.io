@@ -382,9 +382,16 @@ img{display:block;max-width:100%}
   font-size:clamp(3.35rem,6.2vw,5.9rem);
   max-width:900px;
 }
+.hero h1.hero-title-very-long{
+  font-size:clamp(2.8rem,5.2vw,4.9rem);
+  max-width:940px;
+}
 @media(max-width:760px){
   .hero h1.hero-title-long{
     font-size:clamp(2.75rem,12vw,4.35rem);
+  }
+  .hero h1.hero-title-very-long{
+    font-size:clamp(2.3rem,10.3vw,3.75rem);
   }
 }
 
@@ -1275,7 +1282,7 @@ footer{
     <img alt="South Park" src="https://lewis.lc/sp/img/titlecard.png"/>
     <div class="hero-copy">
       <div class="hero-date">September 1, 2026</div>
-      <h1 class="hero-title-long">Welcome to the South Park Guide!</h1>
+      <h1>Welcome to the South Park Guide!</h1>
       <p class="hero-dek">The dawn of a new fansite.</p>
       <div class="actions">
         <a class="paper-cta" href="#news">Read More
@@ -1386,6 +1393,20 @@ footer{
   </div>
 </footer>
 <script>
+
+const heroTitles = [...document.querySelectorAll('.hero-slide h1')];
+
+heroTitles.forEach(title => {
+  const length = title.textContent.trim().length;
+
+  title.classList.remove('hero-title-long', 'hero-title-very-long');
+
+  if (length >= 34) {
+    title.classList.add('hero-title-very-long');
+  } else if (length >= 24) {
+    title.classList.add('hero-title-long');
+  }
+});
 
 const heroSlides = [...document.querySelectorAll('.hero-slide')];
 const heroDots = document.getElementById('heroDots');
