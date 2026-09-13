@@ -1,845 +1,1253 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>South Park — lewis.lc</title>
-<meta name="description" content="A South Park fan homepage concept for lewis.lc.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400;6..144,500;6..144,600;6..144,700;6..144,800;6..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#10131d" name="theme-color"/>
+<title>South Park</title>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400..800&amp;display=swap" rel="stylesheet"/>
 <style>
-/* =========================================================
-   ROOT / THEME
-   ========================================================= */
 :root{
-  --yellow:#f4c842;
-  --ink:#f4f4ef;
-  --muted:#aab1b5;
-  --bg:#07141c;
-  --panel:#101f27;
-  --panel-2:#172830;
-  --line:#2d3e46;
-  --line-strong:#42545c;
-  --shadow:0 20px 48px rgba(0,0,0,.24);
-  --max:1180px;
+  --bg:#11141d;
+  --text:#fff;
+  --ink:#172233;
+  --shell:min(1240px,calc(100% - 40px));
+  --yellow:#f3d55b;
+  --guide-blue:#5A84BE;
+  --wiki-pink:#BC5B9B;
+  --surface:#171b27;
+  --surface-2:#202635;
+  --line:rgba(255,255,255,.12);
+  --muted:rgba(255,255,255,.62);
 }
-html[data-theme="light"]{
-  --ink:#142027;
-  --muted:#637078;
-  --bg:#eeeae0;
-  --panel:#f8f5ec;
-  --panel-2:#fffdf7;
-  --line:#d1cdc1;
-  --line-strong:#b8b3a5;
-  --shadow:0 18px 42px rgba(49,55,53,.12);
+
+::selection {
+  background: var(--yellow);
+  color: #111;
 }
+
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--bg);
+}
+
 body{
   margin:0;
-  min-height:100vh;
-  font-family:Inter,system-ui,sans-serif;
-  color:var(--ink);
+  overflow-x:hidden;
   background:var(--bg);
-  background-image:linear-gradient(rgba(5,15,22,.58),rgba(5,15,22,.93)),url("https://lewis.lc/wiki/img/nighttime.png");
-  background-size:cover;
-  background-position:center top;
-  background-attachment:fixed;
+  color:var(--text);
+  font-family:"Google Sans Flex",Arial,sans-serif;
 }
-html[data-theme="light"] body{
-  background-image:linear-gradient(rgba(244,241,231,.76),rgba(244,241,231,.96)),url("https://lewis.lc/wiki/img/daytime.png");
-}
+
 a{color:inherit;text-decoration:none}
 button{font:inherit}
-button{color:inherit}
 img{display:block;max-width:100%}
 
-/* =========================================================
-   SITE SHELL
-   ========================================================= */
-.site{
-  width:min(var(--max),calc(100% - 28px));
-  margin:18px auto 40px;
-  overflow:hidden;
-  border:1px solid var(--line-strong);
-  background:color-mix(in srgb,var(--panel) 95%,transparent);
-  box-shadow:var(--shadow);
+/* Header */
+.scroll-header{
+  position:fixed;
+  inset:0 0 auto;
+  z-index:100;
+  background:rgba(17,20,29,.82);
+  border-bottom:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(12px) saturate(115%);
+  -webkit-backdrop-filter:blur(12px) saturate(115%);
+  transform:translateY(-110%);
+  opacity:0;
+  pointer-events:none;
+  transition:transform .28s cubic-bezier(.2,.8,.2,1),opacity .2s ease;
 }
 
-/* =========================================================
-   IMAGE MASTHEAD
-   ========================================================= */
-.masthead{
+.scroll-header.is-visible{
+  transform:translateY(0);
+  opacity:1;
+  pointer-events:auto;
+}
+
+.header-inner{
+  width:var(--shell);
+  height:54px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+}
+
+.header-inner nav{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  font-size:.7rem;
+  font-weight:760;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.header-inner nav a,
+.top-link,
+.mobile-nav a{
   position:relative;
-  min-height:125px;
-  overflow:hidden;
-  border-bottom:1px solid var(--line-strong);
-  background:#10202a;
+  --underline-colour:var(--yellow);
 }
-.masthead-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
-.masthead::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(180deg,rgba(4,10,18,.10),rgba(4,10,18,.18) 48%,rgba(4,10,18,.62));
+
+.header-inner nav a:nth-child(2),
+.top-link:nth-child(2),
+.mobile-nav a:nth-child(2){--underline-colour:var(--guide-blue)}
+
+.header-inner nav a:nth-child(3),
+.top-link:nth-child(3),
+.mobile-nav a:nth-child(3){--underline-colour:var(--wiki-pink)}
+
+.header-inner nav a{
+  padding:7px 0;
 }
-.masthead-copy{
-  position:absolute;left:22px;right:22px;bottom:18px;z-index:2;
-  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;color:#fff;
+
+.header-inner nav a::after,
+.top-link::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:1px;
+  height:2px;
+  background:var(--underline-colour);
+  transform:scaleX(0);
+  transform-origin:left center;
+  transition:transform .2s ease;
 }
-.masthead-wordmark{
-  margin:0;
+
+.header-inner nav a:hover::after,
+.header-inner nav a:focus-visible::after,
+.top-link:hover::after,
+.top-link:focus-visible::after{
+  transform:scaleX(1);
+}
+
+.header-actions{margin-left:auto}
+
+.menu{
+  display:none;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:0;
+  background:transparent;
+  color:#fff;
+  font-size:1.45rem;
+  cursor:pointer;
+}
+
+/* South Park wordmarks */
+.mini-guide-logo,
+.guide-logo{
   display:flex;
   align-items:baseline;
   width:max-content;
-  font-family:"Google Sans Flex",sans-serif;
-  font-size:clamp(34px,5vw,60px);
-  font-weight:900;
+  margin:0;
+  color:#fff;
+  font-weight:800;
   line-height:.82;
   letter-spacing:0;
   text-transform:uppercase;
-  text-shadow:0 3px 12px rgba(0,0,0,.45);
   user-select:none;
-  -webkit-user-select:none;
 }
-.masthead-wordmark > span:not(.logo-gap){
+
+.mini-guide-logo{
+  font-size:1.55rem;
+}
+
+.guide-logo{
+  font-size:clamp(2rem,3.8vw,3.55rem);
+}
+
+.mini-guide-logo>span:not(.logo-gap),
+.guide-logo>span:not(.logo-gap){
   display:inline-block;
   position:relative;
   margin-right:-.045em;
   transform-origin:50% 72%;
-  clip-path:polygon(
-    1% 2%,13% 0%,25% 2%,38% .5%,51% 2.2%,64% .4%,77% 2%,89% .7%,99% 2.5%,
-    98.5% 14%,100% 27%,98.7% 40%,100% 54%,98.4% 67%,100% 81%,98% 98%,
-    85% 99.2%,72% 97.8%,59% 99.5%,46% 97.9%,33% 99.4%,20% 97.7%,2% 99%,
-    1.2% 85%,0% 72%,1.3% 59%,0% 45%,1.4% 31%,0% 17%
-  );
-  -webkit-mask-image:
-    radial-gradient(circle at 18% 24%,transparent 0 1px,#000 1.35px),
-    radial-gradient(circle at 72% 38%,transparent 0 .8px,#000 1.1px),
-    radial-gradient(circle at 42% 76%,transparent 0 .9px,#000 1.2px),
-    linear-gradient(#000,#000);
-}
-.masthead-wordmark .logo-gap{display:inline-block;width:.25em;flex:0 0 .25em}
-.masthead-wordmark > span:nth-child(1){transform:rotate(-.58deg) translateY(.4px)}
-.masthead-wordmark > span:nth-child(2){transform:rotate(.44deg) translateY(-.35px)}
-.masthead-wordmark > span:nth-child(3){transform:rotate(-.32deg) translateY(.25px)}
-.masthead-wordmark > span:nth-child(4){transform:rotate(.54deg) translateY(-.4px)}
-.masthead-wordmark > span:nth-child(5){transform:rotate(-.42deg) translateY(.35px)}
-.masthead-wordmark > span:nth-child(7){transform:rotate(.48deg) translateY(-.25px)}
-.masthead-wordmark > span:nth-child(8){transform:rotate(-.51deg) translateY(.4px)}
-.masthead-wordmark > span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
-.masthead-wordmark > span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
-.tagline{
-  margin:0 0 4px;font-family:"Google Sans Flex",sans-serif;font-size:12px;font-weight:900;
-  letter-spacing:.12em;text-transform:uppercase;text-shadow:0 2px 5px rgba(0,0,0,.5);
 }
 
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-.navbar{
-  position:relative;
-  z-index:4;
-  display:grid;
-  grid-template-columns:1fr auto;
+.logo-gap{
+  width:.22em;
+  flex:0 0 .22em;
+}
+
+.mini-guide-logo>span:nth-child(1),
+.guide-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
+.mini-guide-logo>span:nth-child(2),
+.guide-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
+.mini-guide-logo>span:nth-child(3),
+.guide-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
+.mini-guide-logo>span:nth-child(4),
+.guide-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
+.mini-guide-logo>span:nth-child(5),
+.guide-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
+.mini-guide-logo>span:nth-child(7),
+.guide-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
+.mini-guide-logo>span:nth-child(8),
+.guide-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
+.mini-guide-logo>span:nth-child(9),
+.guide-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
+.mini-guide-logo>span:nth-child(10),
+.guide-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
+
+.logo-back-to-top{cursor:pointer}
+
+.mini-guide-logo.logo-jump>span:not(.logo-gap),
+.guide-logo.logo-jump>span:not(.logo-gap){
+  animation:logoLetterJumpA 320ms cubic-bezier(.2,.8,.2,1);
+}
+
+.mini-guide-logo.logo-jump>span:nth-child(2n):not(.logo-gap),
+.guide-logo.logo-jump>span:nth-child(2n):not(.logo-gap){
+  animation-name:logoLetterJumpB;
+  animation-delay:14ms;
+}
+
+.mini-guide-logo.logo-jump>span:nth-child(3n):not(.logo-gap),
+.guide-logo.logo-jump>span:nth-child(3n):not(.logo-gap){
+  animation-name:logoLetterJumpC;
+  animation-delay:26ms;
+}
+
+@keyframes logoLetterJumpA{
+  0%,100%{top:0;left:0}
+  36%{top:-4px;left:-1px}
+  68%{top:1px;left:1px}
+}
+
+@keyframes logoLetterJumpB{
+  0%,100%{top:0;left:0}
+  34%{top:-3px;left:1px}
+  66%{top:1px;left:-1px}
+}
+
+@keyframes logoLetterJumpC{
+  0%,100%{top:0;left:0}
+  38%{top:-5px;left:0}
+  70%{top:1px;left:1px}
+}
+
+/* Masthead */
+.show-brand-inner{
+  width:var(--shell);
+  margin:auto;
+  padding:26px 0 24px;
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  min-height:50px;
-  gap:14px;
-  padding:5px 12px;
-  border-bottom:1px solid color-mix(in srgb,var(--yellow) 62%,#8d6d13);
-  background:#e9b82f;
-  color:#111;
+  justify-content:center;
 }
-.nav-links{display:flex;align-items:center;gap:5px}
-.nav-links a{
-  padding:8px 12px;
-  border-radius:2px;
-  font-family:"Google Sans Flex",sans-serif;
-  font-size:14px;
-  font-weight:900;
-  letter-spacing:-.02em;
+
+.top-link-row{
+  margin-top:9px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:22px;
+}
+
+.top-link{
+  padding:5px 0;
+  color:#fff;
+  font-size:.69rem;
+  font-weight:760;
+  letter-spacing:.07em;
   text-transform:uppercase;
-  transition:background .16s ease,transform .16s ease;
-}
-.nav-links a:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
-.nav-links a.active{background:#111;color:#fff}
-.nav-tools{display:flex;align-items:center;gap:8px}
-
-html[data-theme="dark"] .navbar{
-  background:#17233a;
-  border-bottom-color:#2a3b57;
-  color:#f4f7fb;
-}
-html[data-theme="dark"] .nav-links a{color:#eef4ff}
-html[data-theme="dark"] .nav-links a:hover,
-html[data-theme="dark"] .nav-links a:focus-visible{
-  background:rgba(255,255,255,.09);
-  color:#fff;
-}
-html[data-theme="dark"] .nav-links a.active{
-  background:#2b4164;
-  color:#fff;
-}
-html[data-theme="dark"] .theme-toggle{
-  border-color:rgba(255,255,255,.14);
 }
 
-.theme-toggle{
+/* Hero */
+.hero,
+.hero-copy{
+  min-height:585px;
+}
+
+.hero{
   position:relative;
-  isolation:isolate;
+  width:100%;
   overflow:hidden;
-  width:36px;
-  height:36px;
-  flex:0 0 36px;
-  padding:0;
-  border:1px solid rgba(0,0,0,.16);
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.72),transparent 34%),#f8f4df;
-  color:#7c5710;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.58),0 5px 14px rgba(72,52,6,.16);
-  cursor:pointer;
-  transition:transform .22s ease,background .35s ease,border-color .35s ease,box-shadow .35s ease;
+  background:#202635;
 }
-.theme-toggle::before{
+
+.hero>img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.hero::after{
   content:"";
   position:absolute;
-  inset:4px;
-  z-index:-1;
-  border-radius:inherit;
-  background:color-mix(in srgb,#f7c85c 20%,transparent);
-  transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1),background .35s ease;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(5,7,12,.85),rgba(5,7,12,.32) 50%,rgba(5,7,12,.06)),
+    linear-gradient(0deg,rgba(17,20,29,.4),transparent 45%);
 }
-.theme-toggle-icon{
-  width:21px;
-  height:21px;
-  overflow:visible;
+
+.hero-copy{
+  position:relative;
+  z-index:2;
+  width:var(--shell);
+  margin:auto;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:70px 0;
+}
+
+.hero-date{
+  margin:0 0 14px;
+  color:rgba(255,255,255,.76);
+  font-size:.74rem;
+  font-weight:600;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.hero h1{
+    max-width: 760px;
+    margin: 0;
+    font-size: clamp(4.1rem, 7.8vw, 7.4rem);
+    font-weight: 800;
+    line-height: 1;
+    text-wrap: balance;
+    letter-spacing: -.02em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, .34), 0 8px 22px rgba(0, 0, 0, .28);
+}
+
+.hero-dek{
+  max-width:520px;
+  margin:17px 0 0;
+  color:rgba(255,255,255,.82);
+  font-size:1rem;
+  line-height:1.45;
+}
+
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:28px;
+}
+
+.paper-cta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:46px;
+  padding:0 20px;
+  gap:10px;
+  border:1px solid rgba(44,47,50,.16);
+  background:linear-gradient(145deg,#f3d55b,#dfbd3f);
+  color:#292612;
+  font-size:.68rem;
+  font-weight:820;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  box-shadow:0 5px 12px rgba(0,0,0,.12);
+  clip-path:polygon(
+    1% 7%,10% 2%,22% 5%,34% 1%,46% 4%,58% 0,70% 4%,82% 2%,99% 6%,
+    98% 94%,86% 99%,74% 96%,61% 100%,49% 97%,36% 100%,23% 96%,11% 99%,1% 95%
+  );
+  transform:rotate(-.45deg);
+  transition:transform .18s ease,filter .18s ease;
+}
+
+.paper-cta:hover{
+  transform:rotate(-.45deg) translateY(-2px);
+  filter:brightness(1.03);
+}
+
+.cta-chevron{
+  width:12px;
+  height:12px;
+  flex:0 0 auto;
   fill:none;
   stroke:currentColor;
   stroke-width:1.8;
   stroke-linecap:round;
   stroke-linejoin:round;
-}
-.theme-sun,.theme-moon,.theme-stars{
-  transform-origin:12px 12px;
-  transition:opacity .32s ease,transform .52s cubic-bezier(.22,1,.36,1);
-}
-.theme-sun-core{fill:#f5b942;stroke:#d99718;transition:fill .35s ease,stroke .35s ease}
-.theme-sun-rays{stroke:#c9820d}
-.theme-moon{fill:#dfe8ff;stroke:#6680b8;opacity:0;transform:rotate(-70deg) scale(.35)}
-.theme-stars{stroke:#dce7ff;opacity:0;transform:rotate(24deg) scale(.45)}
-html[data-theme="dark"] .theme-toggle{
-  color:#eaf0ff;
-  background:radial-gradient(circle at 68% 72%,rgba(111,138,205,.22),transparent 38%),#171c28;
-  border-color:rgba(170,190,230,.20);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 6px 18px rgba(0,0,0,.25),0 0 18px rgba(89,112,176,.10);
-}
-html[data-theme="dark"] .theme-toggle::before{background:color-mix(in srgb,#7189c7 18%,transparent);opacity:.9;transform:scale(.9)}
-html[data-theme="dark"] .theme-sun{opacity:0;transform:rotate(95deg) scale(.35)}
-html:not([data-theme="dark"]) .theme-sun{opacity:1;transform:rotate(0) scale(1)}
-html[data-theme="dark"] .theme-moon{opacity:1;transform:rotate(0) scale(1)}
-html[data-theme="dark"] .theme-stars{opacity:1;transform:rotate(0) scale(1);transition-delay:.10s}
-html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
-.theme-toggle:hover{transform:translateY(-2px) rotate(4deg)}
-.theme-toggle:active{transform:translateY(0) scale(.94)}
-.theme-toggle:focus-visible{outline:2px solid rgba(17,17,17,.7);outline-offset:3px}
-
-/* =========================================================
-   MAIN CONTENT
-   ========================================================= */
-.main{padding:18px}
-.section-shell{border:1px solid var(--line-strong);background:var(--panel-2);overflow:hidden}
-.section-bar{
-  display:flex;align-items:center;justify-content:space-between;gap:14px;
-  min-height:38px;padding:7px 14px;background:#111;color:#fff;
-}
-.section-bar h2{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:650;letter-spacing:-.025em;text-transform:uppercase}
-.section-bar a{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;opacity:.75}
-.section-bar a:hover{opacity:1}
-
-/* =========================================================
-   HERO / LATEST NEWS SLIDER
-   ========================================================= */
-.hero-slider{position:relative;min-height:390px;overflow:hidden;border:1px solid var(--line-strong);background:#111}
-.hero-track{position:relative;min-height:390px}
-.hero-slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .34s ease,visibility .34s ease}
-.hero-slide.is-active{opacity:1;visibility:visible;z-index:1}
-.hero-media{position:absolute;inset:0}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 39%}
-.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,8,10,.88) 0%,rgba(5,8,10,.55) 34%,rgba(5,8,10,.08) 68%,rgba(5,8,10,.12) 100%)}
-.hero-copy{position:relative;z-index:2;width:min(520px,60%);min-height:390px;padding:54px 76px 48px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;color:#fff}
-.kicker{display:inline-flex;align-items:center;gap:7px;margin-bottom:9px;font-size:10px;font-weight:760;text-transform:uppercase;letter-spacing:.12em;color:#f0ce54}
-.kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:#f0ce54}
-.hero-slide h1{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:clamp(46px,6vw,76px);font-weight:740;line-height:.84;letter-spacing:-.055em;text-transform:uppercase;text-wrap:balance}
-.hero-slide p{max-width:390px;margin:16px 0 21px;font-size:14.5px;line-height:1.48;color:#eee}
-.paper-button{display:inline-flex;align-items:center;gap:9px;padding:11px 17px;border:0;cursor:pointer;color:#111;background:#efc338;clip-path:polygon(1% 4%,98% 0,100% 93%,3% 100%,0 10%);font-family:"Google Sans Flex",sans-serif;font-size:13px;font-weight:900;text-transform:uppercase;transition:transform .16s ease,filter .16s ease}
-.paper-button:hover{transform:translateY(-2px) rotate(-.5deg);filter:brightness(1.04)}
-.hero-nav{position:absolute;z-index:4;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid rgba(255,255,255,.45);border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.42);color:#fff;font-size:28px;line-height:1;cursor:pointer;backdrop-filter:blur(4px);transition:background .16s ease,transform .16s ease}
-.hero-nav:hover{background:rgba(0,0,0,.68);transform:translateY(-50%) scale(1.04)}
-.hero-prev{left:12px}.hero-next{right:12px}
-.hero-count{position:absolute;right:18px;bottom:15px;z-index:4;padding:5px 8px;border-radius:999px;background:rgba(0,0,0,.56);color:#fff;font-size:10px;font-weight:800;letter-spacing:.08em}
-
-/* =========================================================
-   FEATURE CARDS
-   ========================================================= */
-.feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-.feature-card{display:grid;grid-template-rows:auto auto 1fr}
-.card-media{position:relative;aspect-ratio:16/8.9;overflow:hidden;background:#0c1418}
-.card-media img{width:100%;height:100%;object-fit:cover;transition:transform .28s ease,filter .28s ease}
-.feature-card:hover .card-media img{transform:scale(1.018);filter:brightness(1.03)}
-.card-copy{padding:10px 15px 15px}
-.card-copy h3{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:22px;font-weight:620;line-height:1.03;letter-spacing:-.035em}
-.card-copy p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
-
-/* =========================================================
-   LATEST STRIP
-   ========================================================= */
-.latest{margin-top:18px}
-.latest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:14px}
-.latest-item{position:relative;min-width:0;border:1px solid var(--line);background:var(--panel)}
-.latest-item .thumb{aspect-ratio:16/9;overflow:hidden;background:#0c1418}
-.latest-item .thumb img{width:100%;height:100%;object-fit:cover;transition:transform .22s ease}
-.latest-item:hover .thumb img{transform:scale(1.025)}
-.latest-item .text{padding:6px 12px 12px}
-.latest-item .num{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.latest-item h3{margin:3px 0 0;font-family:"Google Sans Flex",sans-serif;font-size:18px;font-weight:620;line-height:1.1;letter-spacing:-.03em}
-
-/* =========================================================
-   LATEST SEASON
-   ========================================================= */
-.news{margin-top:18px}
-.news-layout{display:grid;grid-template-columns:minmax(0,43%) minmax(0,57%);align-items:stretch}
-.news-image{position:relative;min-width:0;overflow:hidden;border-right:1px solid var(--line);background:#0c1418}
-.news-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:opacity .18s ease}
-.news-list{min-width:0;width:100%;display:flex;flex-direction:column;padding:4px 18px}
-.news-row{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center;flex:1 1 0;min-height:54px;min-width:0;padding:10px 12px;border-bottom:1px solid var(--line);overflow:hidden;transition:background .16s ease,color .16s ease}
-.news-row::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:#6f9be8;opacity:0;transform:scaleY(.45);transition:opacity .16s ease,transform .16s ease}
-.news-row:last-child{border-bottom:0}
-.news-date{font-size:10px;font-weight:720;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-.news-row h3{min-width:0;margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:600;letter-spacing:-.02em;overflow-wrap:anywhere}
-.news-row:hover,.news-row:focus-visible,.news-row.is-active{background:color-mix(in srgb,#4f7fd8 12%,transparent)}
-.news-row:hover::before,.news-row:focus-visible::before,.news-row.is-active::before{opacity:1;transform:scaleY(1)}
-.news-row:hover h3,.news-row:focus-visible h3,.news-row.is-active h3{color:#6f9be8}
-
-/* =========================================================
-   BACK TO TOP
-   ========================================================= */
-#backToTop{
-  position:fixed;right:1rem;bottom:1rem;z-index:1000;display:grid;place-items:center;
-  width:2.65rem;height:2.65rem;padding:0;border:1px solid var(--line);border-radius:999px;
-  background:color-mix(in srgb,var(--panel-2) 90%,transparent);color:var(--ink);
-  font:inherit;font-size:1.2rem;line-height:1;cursor:pointer;box-shadow:var(--shadow);
-  opacity:0;visibility:hidden;transform:translateY(.65rem);pointer-events:none;
-  transition:opacity .2s ease,transform .2s ease,visibility .2s ease,background-color .18s ease,color .18s ease,border-color .18s ease;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-}
-#backToTop.visible{opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto}
-#backToTop:hover,#backToTop:focus-visible{transform:translateY(-2px);background:var(--panel);outline:none}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
-.footer{
-  display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 20px;border-top:1px solid var(--line-strong);
-  color:var(--muted);font-size:11px;background:color-mix(in srgb,var(--panel) 98%,#000 2%);
-}
-.footer strong{color:var(--ink)}
-.footer-links{display:flex;gap:14px}.footer a:hover{color:var(--ink)}
-
-/* =========================================================
-   MOTION
-   ========================================================= */
-@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
-@media (max-width:900px){
-  .masthead{min-height:105px}
-  .navbar{grid-template-columns:1fr auto}
-  .hero-slider,.hero-track,.hero-copy{min-height:330px}
-  .hero-copy{padding:40px 64px 34px}
-  .latest-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width:680px){
-  .site{width:100%;margin:0;border-left:0;border-right:0}
-  .masthead{min-height:92px}
-  .masthead-copy{left:14px;right:14px;bottom:13px}
-  .masthead-wordmark{font-size:34px}
-  .tagline{font-size:9px;letter-spacing:.09em}
-  .navbar{display:flex;gap:7px;padding:5px 7px}
-  .nav-links{width:100%;justify-content:space-between;gap:2px}
-  .nav-links a{flex:1;text-align:center;padding:7px 6px;font-size:11px}
-  .nav-tools{margin-left:auto}
-  .main{padding:10px}
-  .hero-slider,.hero-track{min-height:370px}
-  .hero-media::after{background:linear-gradient(0deg,rgba(5,8,10,.93),rgba(5,8,10,.50) 54%,rgba(5,8,10,.08))}
-  .hero-media img{object-position:center 30%}
-  .hero-copy{width:100%;min-height:370px;padding:28px 56px 25px;justify-content:flex-end}
-  .hero-slide h1{font-size:43px}
-  .hero-slide p{font-size:13px}
-  .hero-nav{width:36px;height:36px;font-size:24px}
-  .feature-grid{grid-template-columns:1fr;gap:10px;margin-top:10px}
-  .latest,.news{margin-top:10px}
-  .latest-grid{grid-template-columns:1fr 1fr}
-  .latest-item h3{font-size:16px}
-  .news-layout{grid-template-columns:1fr}
-  .news-image{aspect-ratio:16/9;border-right:0;border-bottom:1px solid var(--line)}
-  .news-list{padding:2px 13px}
-  .news-row{grid-template-columns:1fr;gap:4px;padding:12px 10px 12px 13px}
-  .footer{align-items:flex-start;flex-direction:column;padding:15px}
-  .section-bar{padding:7px 11px}
-  .section-bar h2{font-size:14px}
-  #backToTop{right:.85rem;bottom:.85rem}
-}
-@media (max-width:430px){
-  .hero-copy{padding-left:50px;padding-right:50px}
-  .masthead{min-height:82px}
-  .masthead-wordmark{font-size:30px}
-  .tagline{max-width:125px;text-align:right}
-  .latest-grid{grid-template-columns:1fr}
-  .latest-item{display:grid;grid-template-columns:42% 1fr}
-  .latest-item .thumb{aspect-ratio:4/3}
-  .latest-item .text{padding:8px 10px}
-  .latest-item h3{font-size:16px}
-  .card-copy h3{font-size:19px}
+  transition:transform .18s ease;
 }
 
+.paper-cta:hover .cta-chevron{transform:translateX(2px)}
 
-
-
-@media(min-width:681px){
-  .news-row-thumb{display:none}
-  .news-row-copy{display:contents}
-}
-
-/* Mobile latest-season thumbnails */
-.news-row-thumb{display:none}
-.news-row-copy{min-width:0}
-
-@media(max-width:680px){
-  .news-image{display:none}
-  .news-layout{grid-template-columns:1fr}
-  .news-list{padding:4px 12px 10px}
-  .news-row{
-    grid-template-columns:92px minmax(0,1fr);
-    gap:12px;
-    align-items:center;
-    padding:10px 8px;
-  }
-  .news-row-thumb{
-    display:block;
-    width:92px;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    border:1px solid var(--line);
-  }
-  .news-row-copy{display:block;min-width:0}
-  .news-row h3{margin-top:2px}
-}
-
-@media(max-width:430px){
-  .news-row{
-    grid-template-columns:78px minmax(0,1fr);
-    gap:10px;
-  }
-  .news-row-thumb{width:78px}
-}
-
-
-
-
-
-
-
-/* News cards */
-.latest-item .num{
-  font-size:10px;
-  font-weight:580;
-  letter-spacing:.055em;
-}
-.latest-item h3{
-  font-weight:590;
-  line-height:1.12;
-}
-
-
-
-/* News section */
-.latest-item h3{
-  font-size:20px;
-  font-weight:590;
-  line-height:1.1;
-}
-.latest-item .num{display:none}
-.news-image > a{
-  display:block;
+/* Latest News */
+#news{
   width:100%;
-  height:100%;
+  margin:0;
+  padding:70px max(28px,calc((100vw - 1240px)/2)) 78px;
+  background:#F8F8F8;
+  color:var(--ink);
 }
+
+.section-title-row{margin-bottom:34px}
+
+#news h2{
+    color: var(--ink);
+    font-size: clamp(3.4rem, 3vw, 7rem);
+    font-weight: 750;
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: -.01em;
+    text-wrap: balance;
+    margin: 0em 0em 0.5em 0em;
+    text-align: center;
+}
+
+.news-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+}
+
+.news-item{
+  min-width:0;
+  padding:12px 12px 18px;
+  background:#fff;
+  color:var(--ink);
+  outline:1px solid rgba(23,34,51,.06);
+  transition:outline-color .2s ease;
+}
+
+.news-item:hover{
+  outline-color:rgba(23,34,51,.20);
+}
+
+.news-item img{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background:#e7ebee;
+  transition:transform .25s ease,filter .25s ease;
+}
+
+.news-item:hover img{
+  transform:scale(1.015);
+  filter:brightness(1.03);
+}
+
+.news-item .date{
+  margin:11px 0 8px;
+  color:rgba(23,34,51,.62);
+  font-size:.64rem;
+  font-weight:850;
+  letter-spacing:.105em;
+  line-height:1.2;
+  text-transform:uppercase;
+}
+
+.news-item h3{
+  position:relative;
+  display:inline;
+  margin:0;
+  color:var(--ink);
+  font-family:"Google Sans Flex",sans-serif;
+  font-size:1.36rem;
+  font-weight:570;
+  line-height:1.16;
+  letter-spacing:-.02em;
+  text-wrap:balance;
+  background-image:linear-gradient(#000,#000);
+  background-repeat:no-repeat;
+  background-size:0 2px;
+  background-position:0 100%;
+  transition:background-size .5s cubic-bezier(.2,.8,.2,1);
+}
+
+.news-item:hover h3{
+  background-size:100% 2px;
+}
+
+
+
+/* Footer */
+footer{
+  background:rgba(5,6,9,.86);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.footer-inner{
+  width:var(--shell);
+  min-height:90px;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  color:rgba(255,255,255,.55);
+  font-size:.68rem;
+}
+
+.footer-brand{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.footer-logo{
+  display:flex;
+  align-items:baseline;
+  width:max-content;
+  color:#fff;
+  font-size:1.15rem;
+  font-weight:800;
+  line-height:.82;
+  text-transform:uppercase;
+}
+
+.footer-logo>span:not(.footer-gap){
+  display:inline-block;
+  margin-right:-.045em;
+  transform-origin:50% 72%;
+}
+
+.footer-gap{
+  width:.22em;
+  flex:0 0 .22em;
+}
+
+.footer-logo>span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
+.footer-logo>span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
+.footer-logo>span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
+.footer-logo>span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
+.footer-logo>span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
+.footer-logo>span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
+.footer-logo>span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
+.footer-logo>span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
+.footer-logo>span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
+
+.footer-meta{
+  color:rgba(255,255,255,.48);
+  font-size:.6rem;
+  font-weight:720;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.footer-links a{
+  font-size:.64rem;
+  font-weight:760;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+
+.footer-links a:hover{color:#fff}
+
+/* Mobile navigation */
+.mobile-nav{display:none}
+
+@media(max-width:1050px){
+  .news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:760px){
+  .header-inner nav{display:none}
+  .menu{display:grid;place-items:center}
+
+  .mobile-nav{
+    display:block;
+    position:fixed;
+    top:54px;
+    left:0;
+    right:0;
+    z-index:99;
+    max-height:0;
+    overflow:hidden;
+    opacity:0;
+    background:rgba(17,20,29,.98);
+    border-bottom:1px solid rgba(255,255,255,.10);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    transition:max-height .28s ease,opacity .2s ease;
+  }
+
+  .mobile-nav.open{
+    max-height:260px;
+    opacity:1;
+  }
+
+  .mobile-nav-inner{
+    width:var(--shell);
+    margin:auto;
+    padding:12px 0 18px;
+    display:grid;
+  }
+
+  .mobile-nav a{
+    padding:14px 2px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+    font-size:.78rem;
+    font-weight:780;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+
+  .mobile-nav a{
+    width:max-content;
+    max-width:100%;
+  }
+
+  .mobile-nav a::after{
+    content:"";
+    position:absolute;
+    left:2px;
+    right:2px;
+    bottom:8px;
+    height:2px;
+    background:var(--underline-colour);
+    transform:scaleX(0);
+    transform-origin:left center;
+    transition:transform .2s ease;
+  }
+
+  .mobile-nav a:hover::after,
+  .mobile-nav a:focus-visible::after{
+    transform:scaleX(1);
+  }
+
+  .show-brand-inner{
+    padding:22px 0 20px;
+  }
+
+  .guide-logo{
+    font-size:clamp(1.75rem,7.6vw,2.65rem);
+  }
+
+  .top-link-row{
+    margin-top:8px;
+    gap:16px;
+  }
+
+  .top-link{
+    font-size:.58rem;
+  }
+
+  .hero,
+  .hero-copy{
+    min-height:545px;
+  }
+
+  .hero-copy{
+    padding:36px 0 44px;
+  }
+
+  .hero-date{
+    font-size:.7rem;
+  }
+
+  .hero h1{
+    font-size:clamp(3.45rem,15.5vw,5.35rem);
+  }
+
+  #news{
+    padding:54px 16px 64px;
+  }
+
+  #news h2{
+    font-size:clamp(2.75rem,13vw,4.2rem);
+  }
+
+  .news-grid{grid-template-columns:1fr}
+
+  .footer-inner{
+    min-height:150px;
+    padding:24px 0;
+    align-items:flex-start;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .mini-guide-logo.logo-jump>span:not(.logo-gap),
+  .guide-logo.logo-jump>span:not(.logo-gap){
+    animation-duration:300ms;
+  }
+}
+
+@media(max-width:760px){
+  #news h2{
+    font-size:clamp(2.2rem,10vw,3rem);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+
+  .mini-guide-logo.logo-jump>span:not(.logo-gap),
+  .guide-logo.logo-jump>span:not(.logo-gap){
+    animation:none!important;
+  }
+}
+
+/* Four-colour rough paper accent from the episode-guide wordmark. */
+.guide-logo{
+  position:relative;
+  padding-bottom:14px;
+}
+
+.guide-logo::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:1px;
+  width:min(270px,78%);
+  height:7px;
+  background:linear-gradient(
+    90deg,
+    #5161AC 0 24%,
+    transparent 24% 25.5%,
+    #009B67 25.5% 49%,
+    transparent 49% 50.5%,
+    #59C0D5 50.5% 74%,
+    transparent 74% 75.5%,
+    #F47321 75.5% 100%
+  );
+  clip-path:polygon(
+    0 28%,7% 13%,14% 24%,21% 8%,29% 20%,37% 3%,
+    45% 18%,53% 7%,61% 22%,69% 5%,77% 19%,86% 9%,100% 24%,
+    98% 76%,90% 88%,81% 72%,72% 91%,63% 76%,54% 94%,
+    45% 77%,36% 91%,27% 73%,18% 89%,9% 75%,2% 91%
+  );
+  transform:translateX(-50%) rotate(-1deg);
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.18));
+  opacity:.72;
+  pointer-events:none;
+}
+
+@media(max-width:760px){
+  .guide-logo{
+    padding-bottom:13px;
+  }
+
+  .guide-logo::after{
+    width:min(220px,78%);
+    height:6px;
+  }
+}
+
 
 /* News pagination */
 .news-pagination{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:8px;
-  padding:4px 14px 18px;
+  gap:9px;
+  margin-top:36px;
 }
 .news-page{
-  width:34px;
-  height:34px;
-  border:1px solid var(--line-strong);
+  width:36px;
+  height:36px;
+  padding:0;
+  border:1px solid rgba(23,34,51,.20);
   border-radius:999px;
   display:grid;
   place-items:center;
-  background:var(--panel);
+  background:#fff;
   color:var(--ink);
-  font:600 13px/1 "Google Sans Flex",sans-serif;
+  font:650 .75rem/1 "Google Sans Flex",sans-serif;
   cursor:pointer;
-  transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease;
+  transition:transform .18s ease,background .18s ease,color .18s ease,border-color .18s ease;
 }
 .news-page:hover,
 .news-page:focus-visible{
-  transform:translateY(-1px);
-  border-color:#6f9be8;
+  transform:translateY(-2px);
+  border-color:var(--guide-blue);
   outline:none;
 }
 .news-page.is-active{
-  background:#6f9be8;
-  border-color:#6f9be8;
+  background:var(--guide-blue);
+  border-color:var(--guide-blue);
   color:#fff;
 }
-@media(max-width:680px){
-  .latest-item h3{font-size:18px}
+.news-item[hidden]{display:none!important}
+
+/* Latest Season */
+#latest-season{
+  width:100%;
+  padding:70px max(28px,calc((100vw - 1240px)/2)) 78px;
+  background:var(--surface);
+  color:var(--text);
+}
+.season-title-row{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:30px;
+}
+#latest-season h2{
+  margin:0;
+  font-size:clamp(2.5rem,4.4vw,4.9rem);
+  font-weight:690;
+  line-height:1;
+  text-transform:uppercase;
+  letter-spacing:-.025em;
+}
+.season-all{
+  position:relative;
+  padding:5px 0;
+  color:var(--muted);
+  font-size:.69rem;
+  font-weight:760;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+.season-all::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  background:var(--guide-blue);
+  transform:scaleX(.35);
+  transform-origin:left;
+  transition:transform .2s ease;
+}
+.season-all:hover::after,
+.season-all:focus-visible::after{transform:scaleX(1)}
+
+.season-layout{
+  display:grid;
+  grid-template-columns:minmax(0,44%) minmax(0,56%);
+  min-height:330px;
+  border:1px solid var(--line);
+  background:var(--surface-2);
+}
+.season-preview{
+  position:relative;
+  min-width:0;
+  overflow:hidden;
+  border-right:1px solid var(--line);
+  background:#0c1119;
+}
+.season-preview a{
+  display:block;
+  width:100%;
+  height:100%;
+}
+.season-preview img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 30%;
+  transition:opacity .18s ease,transform .3s ease;
+}
+.season-preview:hover img{transform:scale(1.015)}
+
+.season-list{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  padding:4px 18px;
+}
+.season-row{
+  position:relative;
+  display:grid;
+  grid-template-columns:94px minmax(0,1fr);
+  align-items:center;
+  gap:14px;
+  flex:1 1 0;
+  min-height:58px;
+  padding:10px 12px;
+  border-bottom:1px solid var(--line);
+  color:var(--text);
+  overflow:hidden;
+  transition:background .16s ease;
+}
+.season-row:last-child{border-bottom:0}
+.season-row::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:9px;
+  bottom:9px;
+  width:3px;
+  background:var(--guide-blue);
+  opacity:0;
+  transform:scaleY(.45);
+  transition:opacity .16s ease,transform .16s ease;
+}
+.season-row:hover,
+.season-row:focus-visible,
+.season-row.is-active{
+  background:color-mix(in srgb,var(--guide-blue) 12%,transparent);
+}
+.season-row:hover::before,
+.season-row:focus-visible::before,
+.season-row.is-active::before{
+  opacity:1;
+  transform:scaleY(1);
+}
+.season-row-thumb{display:none}
+.season-row-copy{display:contents}
+.season-ep{
+  color:var(--muted);
+  font-size:.64rem;
+  font-weight:760;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.season-row h3{
+  margin:0;
+  font-size:1.05rem;
+  font-weight:590;
+  line-height:1.15;
+  letter-spacing:-.02em;
+}
+.season-row:hover h3,
+.season-row:focus-visible h3,
+.season-row.is-active h3{color:#7fa3d5}
+
+@media(max-width:760px){
+  #latest-season{padding:54px 16px 62px}
+  .season-title-row{align-items:center;margin-bottom:20px}
+  #latest-season h2{font-size:clamp(2rem,10vw,3rem)}
+  .season-layout{
+    display:block;
+    min-height:0;
+    border:0;
+    background:transparent;
+  }
+  .season-preview{display:none}
+  .season-list{
+    padding:0;
+    border:1px solid var(--line);
+    background:var(--surface-2);
+  }
+  .season-row{
+    grid-template-columns:92px minmax(0,1fr);
+    gap:12px;
+    min-height:0;
+    padding:10px;
+  }
+  .season-row-thumb{
+    display:block;
+    width:92px;
+    aspect-ratio:16/9;
+    object-fit:cover;
+  }
+  .season-row-copy{
+    display:block;
+    min-width:0;
+  }
+  .season-row h3{
+    margin-top:3px;
+    font-size:1rem;
+  }
 }
 
+@media(max-width:430px){
+  .season-title-row{
+    align-items:flex-start;
+    flex-direction:column;
+    gap:8px;
+  }
+  .season-row{
+    grid-template-columns:78px minmax(0,1fr);
+    gap:10px;
+  }
+  .season-row-thumb{width:78px}
+}
 
-.latest-item[hidden]{display:none!important}
 </style>
 </head>
-<body>
-<div class="site">
-  <!-- =====================================================
-       MASTHEAD
-       ===================================================== -->
-  <header class="masthead">
-    <img class="masthead-image" src="https://lewis.lc/sp/img/background.png" alt="South Park mountain town">
-    <div class="masthead-copy">
-      <a class="masthead-wordmark" href="/sp/" aria-label="South Park"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></a>
-      <p class="tagline">small town. big problems.</p>
+<body id="top">
+<header class="scroll-header" id="scrollHeader">
+<div class="header-inner">
+<a aria-label="Back to top" class="mini-guide-logo logo-back-to-top" href="#top" id="miniLogoBackToTop" title="Back to top">
+<span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
+<span aria-hidden="true" class="logo-gap"></span>
+<span>P</span><span>A</span><span>R</span><span>K</span>
+</a>
+<nav>
+<a href="#news">News</a>
+<a href="/sp/">Episode Guide</a>
+<a href="/wiki/">Wiki</a>
+</nav>
+<div class="header-actions">
+<button aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu" class="menu" id="menuButton">☰</button>
+</div>
+</div>
+</header>
+<div class="mobile-nav" id="mobileNav">
+<div class="mobile-nav-inner">
+<a href="#news">News</a>
+<a href="/sp/">Episode Guide</a>
+<a href="/wiki/">Wiki</a>
+</div>
+</div>
+<main>
+<section aria-label="South Park fan archive" class="show-brand">
+<div class="show-brand-inner">
+<h1 aria-label="Back to top" class="guide-logo logo-back-to-top" id="mainLogoBackToTop" role="button" tabindex="0" title="Back to top">
+<span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
+<span aria-hidden="true" class="logo-gap"></span>
+<span>P</span><span>A</span><span>R</span><span>K</span>
+</h1>
+<div aria-label="Primary links" class="top-link-row">
+<a class="top-link" href="#news">News</a>
+<a class="top-link" href="/sp/">Episode Guide</a>
+<a class="top-link" href="/wiki/">Wiki</a>
+</div>
+</div>
+</section>
+<section class="hero">
+<img alt="South Park" src="https://lewis.lc/sp/img/titlecard.png"/>
+<div class="hero-copy">
+<div class="hero-date">September 9, 2026</div>
+<h1>South Park is back.</h1>
+<p class="hero-dek">A new season begins in South Park.</p>
+<div class="actions">
+      <a class="paper-cta" href="#news">Read More
+      <svg class="cta-chevron" viewBox="0 0 12 12" aria-hidden="true">
+        <path d="M4.25 2.25 8 6 4.25 9.75"></path>
+      </svg></a>
     </div>
-  </header>
-
-  <!-- =====================================================
-       NAVIGATION
-       ===================================================== -->
-  <nav class="navbar" aria-label="Primary navigation">
-    <div class="nav-links">
-      <a class="active" href="/sp/">Home</a>
-      <a href="/sp/movie">Episodes</a>
-      <a href="#characters">Characters</a>
-      <a href="/sp/news">News</a>
-    </div>
-    <div class="nav-tools">
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme">
-        <svg class="theme-toggle-icon" viewBox="0 0 24 24" aria-hidden="true">
-          <g class="theme-sun">
-            <circle class="theme-sun-core" cx="12" cy="12" r="4"></circle>
-            <path class="theme-sun-rays" d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
-          </g>
-          <path class="theme-moon" d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
-          <g class="theme-stars">
-            <path d="M18.5 4.2v2.4M17.3 5.4h2.4"></path>
-            <path d="M20 9.1v1.6M19.2 9.9h1.6"></path>
-          </g>
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <main class="main">
-    <!-- ===================================================
-         HERO
-         =================================================== -->
-    <section class="hero-slider" aria-label="Latest South Park news">
-      <div class="hero-track" id="heroTrack">
-        <article class="hero-slide is-active">
-          <div class="hero-media"><img src="https://lewis.lc/sp/img/tco.png" alt="South Park episode still from The Crap Out"></div>
-          <div class="hero-copy">
-            <div class="kicker">Latest episode</div>
-            <h1>The Crap Out</h1>
-            <p>Satan’s due, Stan’s praying, and only a Christmas miracle can deliver the Antichrist on time.</p>
-            <a class="paper-button" href="/sp/movie"><span>View episode</span> →</a>
-          </div>
-        </article>
-        <article class="hero-slide">
-          <div class="hero-media"><img src="https://lewis.lc/sp/img/sns.png" alt="Episode still from Sora Not Sorry"></div>
-          <div class="hero-copy">
-            <div class="kicker">Latest story</div>
-            <h1>Fake it till you break it</h1>
-            <p>Butters’ AI revenge plan turns South Park into a town where nobody can agree on what actually happened.</p>
-            <a class="paper-button" href="/sp/news"><span>Read story</span> →</a>
-          </div>
-        </article>
-        <article class="hero-slide">
-          <div class="hero-media"><img src="https://lewis.lc/sp/img/tt.png" alt="Episode still from Turkey Trot"></div>
-          <div class="hero-copy">
-            <div class="kicker">From the latest season</div>
-            <h1>Cartman goes scientific</h1>
-            <p>The Turkey Trot becomes considerably less sporting once Cartman decides normal training is for losers.</p>
-            <a class="paper-button" href="/sp/movie"><span>Explore Season 28</span> →</a>
-          </div>
-        </article>
-      </div>
-      <button class="hero-nav hero-prev" id="heroPrev" type="button" aria-label="Previous story">‹</button>
-      <button class="hero-nav hero-next" id="heroNext" type="button" aria-label="Next story">›</button>
-      <div class="hero-count" id="heroCount" aria-live="polite">1 / 3</div>
+</div>
+</section>
+<section class="section" id="news">
+<div class="section-title-row">
+<h2>Latest News</h2>
+</div>
+<div class="news-grid">
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/sns.png"/><div class="date">09/09/2026</div><h3>Collection: Happy Birthday Butters</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/titlecard.png"/><div class="date">09/09/2026</div><h3>After 29 Years South Park Changes Its Name</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/tc.png"/><div class="date">09/02/2026</div><h3>Collection: Hugs &amp; Kisses</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/twith.png"/><div class="date">08/26/2026</div><h3>Collection: On the Job</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/tt.png"/><div class="date">08/19/2026</div><h3>Collection: Dead Kennys</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/cgaap.png"/><div class="date">08/12/2026</div><h3>Collection: Best of South Park</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/dh.png"/><div class="date">08/05/2026</div><h3>Collection: Best of Mr. Mackey</h3></a>
+<a class="news-item" href="#"><img alt="" src="https://lewis.lc/sp/img/jtp.png"/><div class="date">07/29/2026</div><h3>Collection: Best Friends</h3></a>
+</div>
+<div class="news-pagination" id="newsPagination" aria-label="News pagination"></div>
 </section>
 
-    <!-- ===================================================
-         FEATURED
-         =================================================== -->
-    <div class="feature-grid">
-      <article class="feature-card section-shell">
-        <div class="section-bar"><h2>Latest episode</h2><a href="/sp/movie">All episodes →</a></div>
-        <a href="/sp/movie" class="card-media">
-          <img src="https://lewis.lc/sp/img/sns.png" alt="Episode still from Sora Not Sorry">
-        </a>
-        <div class="card-copy">
-          <h3>Sora Not Sorry</h3>
-          <p>Butters’ AI revenge plan backfires and South Park has to figure out what’s real before the fake videos take over.</p>
-        </div>
-      </article>
-
-      <article class="feature-card section-shell">
-        <div class="section-bar"><h2>Featured story</h2><a href="/sp/news">More news →</a></div>
-        <a href="/sp/movie" class="card-media">
-          <img src="https://lewis.lc/sp/img/tt.png" alt="Episode still from Turkey Trot">
-        </a>
-        <div class="card-copy">
-          <h3>Cartman turns the Turkey Trot into a science experiment</h3>
-          <p>The annual town race gets exactly as sensible as you’d expect once Cartman decides winning normally isn’t enough.</p>
-        </div>
-      </article>
+<section id="latest-season" aria-labelledby="latestSeasonTitle">
+  <div class="season-title-row">
+    <h2 id="latestSeasonTitle">Latest Season</h2>
+    <a class="season-all" href="/sp/movie">Previous seasons</a>
+  </div>
+  <div class="season-layout">
+    <div class="season-preview">
+      <a id="seasonPreviewLink" href="/sp/movie">
+        <img id="seasonPreview" src="https://lewis.lc/sp/img/tc.png" alt="Twisted Christian episode still">
+      </a>
     </div>
+    <div class="season-list">
+      <a class="season-row is-active" data-image="https://lewis.lc/sp/img/tc.png" href="/sp/movie">
+        <img class="season-row-thumb" src="https://lewis.lc/sp/img/tc.png" alt="">
+        <div class="season-row-copy"><span class="season-ep">Episode 1</span><h3>Twisted Christian</h3></div>
+      </a>
+      <a class="season-row" data-image="https://lewis.lc/sp/img/twith.png" href="/sp/movie">
+        <img class="season-row-thumb" src="https://lewis.lc/sp/img/twith.png" alt="">
+        <div class="season-row-copy"><span class="season-ep">Episode 2</span><h3>The Woman in the Hat</h3></div>
+      </a>
+      <a class="season-row" data-image="https://lewis.lc/sp/img/sns.png" href="/sp/movie">
+        <img class="season-row-thumb" src="https://lewis.lc/sp/img/sns.png" alt="">
+        <div class="season-row-copy"><span class="season-ep">Episode 3</span><h3>Sora Not Sorry</h3></div>
+      </a>
+      <a class="season-row" data-image="https://lewis.lc/sp/img/tt.png" href="/sp/movie">
+        <img class="season-row-thumb" src="https://lewis.lc/sp/img/tt.png" alt="">
+        <div class="season-row-copy"><span class="season-ep">Episode 4</span><h3>Turkey Trot</h3></div>
+      </a>
+      <a class="season-row" data-image="https://lewis.lc/sp/img/tco.png" href="/sp/movie">
+        <img class="season-row-thumb" src="https://lewis.lc/sp/img/tco.png" alt="">
+        <div class="season-row-copy"><span class="season-ep">Episode 5</span><h3>The Crap Out</h3></div>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <!-- ===================================================
-         NEWS
-         =================================================== -->
-    <section class="latest section-shell">
-      <div class="section-bar"><h2>News</h2></div>
-      <div class="latest-grid">
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/tco.png" alt="The Crap Out"></div>
-  <div class="text">
-    <h3>Season 28 wraps with “The Crap Out”</h3>
-  </div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/sns.png" alt="Sora Not Sorry"></div>
-  <div class="text">
-    <h3>New episode artwork added across the guide</h3>
-  </div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/wid.png" alt="Wok Is Dead"></div>
-  <div class="text">
-    <h3>Season 27 gets a refreshed archive page</h3>
-  </div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/blau.png" alt="South Park: Bigger, Longer & Uncut"></div>
-  <div class="text">
-    <h3>Bigger, Longer & Uncut joins the redesigned archive</h3>
-  </div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/cgaap.png" alt="Cartman Gets an Anal Probe"></div>
-  <div class="text">
-    <h3>Revisiting the episode that started it all</h3>
-  </div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/ms.png" alt="Mecha-Streisand"></div>
-  <div class="text">
-    <h3>Classic South Park picks worth another watch</h3>
-  </div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/tt.png" alt="Turkey Trot"></div>
-  <div class="text"><h3>Turkey Trot added to the Season 28 archive</h3></div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/twith.png" alt="The Woman in the Hat"></div>
-  <div class="text"><h3>The Woman in the Hat gets a new episode page</h3></div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt="Sermon on the ’Mount"></div>
-  <div class="text"><h3>Season 27 archive refreshed with new artwork</h3></div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/chickenlover.png" alt="Chickenlover"></div>
-  <div class="text"><h3>Classic episode pages get a cleaner layout</h3></div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/spookyfish.png" alt="Spookyfish"></div>
-  <div class="text"><h3>More early-season episodes join the archive refresh</h3></div>
-</a>
-<a class="latest-item" href="/sp/news">
-  <div class="thumb"><img src="https://lewis.lc/sp/img/rs.png" alt="Rainforest Shmainforest"></div>
-  <div class="text"><h3>Season 3 pages updated across the guide</h3></div>
-</a>
-</div>
-      <div class="news-pagination" aria-label="News pagination"></div>
-    </section>
-
-    <!-- ===================================================
-         LATEST SEASON
-         =================================================== -->
-    <section class="news section-shell">
-      <div class="section-bar"><h2>Latest Season</h2><a href="/sp/movie">Previous seasons →</a></div>
-      <div class="news-layout">
-        <div class="news-image"><a id="newsPreviewLink" href="/sp/movie"><img id="newsPreview" src="https://lewis.lc/sp/img/tc.png" alt="Twisted Christian episode still"></a></div>
-        <div class="news-list">
-          <a class="news-row is-active" data-image="https://lewis.lc/sp/img/tc.png" href="/sp/movie">
-  <img class="news-row-thumb" src="https://lewis.lc/sp/img/tc.png" alt="">
-  <div class="news-row-copy"><span class="news-date">Episode 1</span><h3>Twisted Christian</h3></div>
-</a>
-          <a class="news-row" data-image="https://lewis.lc/sp/img/twith.png" href="/sp/movie">
-  <img class="news-row-thumb" src="https://lewis.lc/sp/img/twith.png" alt="">
-  <div class="news-row-copy"><span class="news-date">Episode 2</span><h3>The Woman in the Hat</h3></div>
-</a>
-          <a class="news-row" data-image="https://lewis.lc/sp/img/sns.png" href="/sp/movie">
-  <img class="news-row-thumb" src="https://lewis.lc/sp/img/sns.png" alt="">
-  <div class="news-row-copy"><span class="news-date">Episode 3</span><h3>Sora Not Sorry</h3></div>
-</a>
-          <a class="news-row" data-image="https://lewis.lc/sp/img/tt.png" href="/sp/movie">
-  <img class="news-row-thumb" src="https://lewis.lc/sp/img/tt.png" alt="">
-  <div class="news-row-copy"><span class="news-date">Episode 4</span><h3>Turkey Trot</h3></div>
-</a>
-          <a class="news-row" data-image="https://lewis.lc/sp/img/tco.png" href="/sp/movie">
-  <img class="news-row-thumb" src="https://lewis.lc/sp/img/tco.png" alt="">
-  <div class="news-row-copy"><span class="news-date">Episode 5</span><h3>The Crap Out</h3></div>
-</a>
-        </div>
+</main>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo" aria-label="South Park">
+        <span>S</span><span>O</span><span>U</span><span>T</span><span>H</span>
+        <span class="footer-gap" aria-hidden="true"></span>
+        <span>P</span><span>A</span><span>R</span><span>K</span>
       </div>
-    </section>
-  </main>
-
-  <!-- =====================================================
-       FOOTER
-       ===================================================== -->
-  <footer class="footer">
-    <div><strong>SOUTH PARK</strong> · unofficial fan homepage · lewis.lc</div>
-    <div class="footer-links"><a href="/sp/movie">Episode guide</a><a href="/sp/news">News</a><a href="/">Main site</a></div>
-  </footer>
-</div>
-
-<button type="button" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
-
+      <div class="footer-meta">Fan Archive · 1997—2026</div>
+    </div>
+    <div class="footer-links">
+      <a href="#news">News</a>
+      <a href="/sp/">Episode Guide</a>
+      <a href="/wiki/">Wiki</a>
+    </div>
+  </div>
+</footer>
 <script>
-(() => {
-  const root = document.documentElement;
-  const toggle = document.getElementById('themeToggle');
-  const slides = [...document.querySelectorAll('.hero-slide')];
-  const prev = document.getElementById('heroPrev');
-  const next = document.getElementById('heroNext');
-  const count = document.getElementById('heroCount');
-  const preview = document.getElementById('newsPreview');
-  const previewLink = document.getElementById('newsPreviewLink');
-  const newsRows = [...document.querySelectorAll('.news-row')];
-  const backToTop = document.getElementById('backToTop');
-  let heroIndex = 0;
+const newsGrid = document.querySelector('.news-grid');
+const newsPagination = document.getElementById('newsPagination');
 
-  const applyTheme = theme => {
-    root.dataset.theme = theme === 'light' ? 'light' : 'dark';
-    try { localStorage.setItem('sp-theme', root.dataset.theme); } catch (_) {}
-  };
+if (newsGrid && newsPagination) {
+  const cards = [...newsGrid.querySelectorAll('.news-item')];
+  const perPage = 6;
+  const pageCount = Math.ceil(cards.length / perPage);
 
-  try {
-    const saved = localStorage.getItem('sp-theme');
-    if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
-  } catch (_) {}
+  function showNewsPage(page) {
+    cards.forEach((card, index) => {
+      card.hidden = Math.floor(index / perPage) !== page;
+    });
 
-  toggle?.addEventListener('click', () => {
-    applyTheme(root.dataset.theme === 'light' ? 'dark' : 'light');
-  });
-
-  const showSlide = index => {
-    heroIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => slide.classList.toggle('is-active', i === heroIndex));
-    if (count) count.textContent = `${heroIndex + 1} / ${slides.length}`;
-  };
-
-  prev?.addEventListener('click', () => showSlide(heroIndex - 1));
-  next?.addEventListener('click', () => showSlide(heroIndex + 1));
-
-  let touchStartX = 0;
-  const slider = document.querySelector('.hero-slider');
-  slider?.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, {passive:true});
-  slider?.addEventListener('touchend', e => {
-    const delta = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(delta) > 45) showSlide(heroIndex + (delta < 0 ? 1 : -1));
-  }, {passive:true});
-
-  const setNewsPreview = row => {
-    if (!row || !preview) return;
-    newsRows.forEach(item => item.classList.toggle('is-active', item === row));
-    const nextSrc = row.dataset.image;
-    if (nextSrc && preview.getAttribute('src') !== nextSrc) {
-      preview.style.opacity = '0';
-      const img = new Image();
-      img.onload = () => { preview.src = nextSrc; preview.style.opacity = '1'; };
-      img.src = nextSrc;
-    }
-  };
-
-  newsRows.forEach(row => {
-    row.addEventListener('mouseenter', () => setNewsPreview(row));
-    row.addEventListener('focus', () => setNewsPreview(row));
-    row.addEventListener('touchstart', () => setNewsPreview(row), {passive:true});
-  });
-
-  if (backToTop) {
-    const updateBackToTop = () => backToTop.classList.toggle('visible', window.scrollY > 450);
-    window.addEventListener('scroll', updateBackToTop, {passive:true});
-    backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-    updateBackToTop();
+    [...newsPagination.children].forEach((button, index) => {
+      const active = index === page;
+      button.classList.toggle('is-active', active);
+      if (active) button.setAttribute('aria-current', 'page');
+      else button.removeAttribute('aria-current');
+    });
   }
 
-  const newsGrid = document.querySelector('.latest-grid');
-  const newsPager = document.querySelector('.news-pagination');
-  if (newsGrid && newsPager) {
-    const cards = [...newsGrid.querySelectorAll('.latest-item')];
-    const perPage = 6;
-    const totalPages = Math.ceil(cards.length / perPage);
-
-    const showNewsPage = page => {
-      cards.forEach((card, index) => {
-        card.hidden = Math.floor(index / perPage) !== page;
-      });
-      [...newsPager.children].forEach((button, index) => {
-        button.classList.toggle('is-active', index === page);
-        button.setAttribute('aria-current', index === page ? 'page' : 'false');
-      });
-    };
-
-    for (let page = 0; page < totalPages; page++) {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'news-page';
-      button.textContent = page + 1;
-      button.setAttribute('aria-label', `News page ${page + 1}`);
-      button.addEventListener('click', () => showNewsPage(page));
-      newsPager.appendChild(button);
-    }
-
-    if (totalPages <= 1) newsPager.hidden = true;
-    showNewsPage(0);
+  for (let page = 0; page < pageCount; page++) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'news-page';
+    button.textContent = String(page + 1);
+    button.setAttribute('aria-label', `News page ${page + 1}`);
+    button.addEventListener('click', () => showNewsPage(page));
+    newsPagination.appendChild(button);
   }
 
-})();
+  if (pageCount <= 1) newsPagination.hidden = true;
+  showNewsPage(0);
+}
+
+const seasonPreview = document.getElementById('seasonPreview');
+const seasonPreviewLink = document.getElementById('seasonPreviewLink');
+const seasonRows = [...document.querySelectorAll('.season-row')];
+
+function setSeasonPreview(row) {
+  if (!row || !seasonPreview) return;
+
+  seasonRows.forEach(item => item.classList.toggle('is-active', item === row));
+
+  if (seasonPreviewLink) {
+    seasonPreviewLink.href = row.getAttribute('href') || '/sp/movie';
+  }
+
+  const src = row.dataset.image;
+  if (!src || seasonPreview.src === src) return;
+
+  seasonPreview.style.opacity = '0';
+
+  const image = new Image();
+  image.onload = () => {
+    seasonPreview.src = src;
+    seasonPreview.alt = `${row.querySelector('h3')?.textContent || 'South Park'} episode still`;
+    seasonPreview.style.opacity = '1';
+  };
+  image.src = src;
+}
+
+seasonRows.forEach(row => {
+  row.addEventListener('mouseenter', () => setSeasonPreview(row));
+  row.addEventListener('focus', () => setSeasonPreview(row));
+  row.addEventListener('touchstart', () => setSeasonPreview(row), { passive:true });
+});
+
+const menuButton = document.getElementById('menuButton');
+const mobileNav = document.getElementById('mobileNav');
+const scrollHeader = document.getElementById('scrollHeader');
+
+function closeMobileNav() {
+  if (!menuButton || !mobileNav) return;
+
+  mobileNav.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', 'Open menu');
+  menuButton.textContent = '☰';
+}
+
+if (menuButton && mobileNav) {
+  menuButton.addEventListener('click', () => {
+    const open = !mobileNav.classList.contains('open');
+
+    mobileNav.classList.toggle('open', open);
+    menuButton.setAttribute('aria-expanded', String(open));
+    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuButton.textContent = open ? '×' : '☰';
+  });
+
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && mobileNav.classList.contains('open')) {
+      closeMobileNav();
+      menuButton.focus();
+    }
+  });
+}
+
+function updateScrollHeader() {
+  if (!scrollHeader) return;
+
+  const threshold = window.innerWidth <= 760 ? 6 : 120;
+  const visible = window.scrollY > threshold;
+
+  scrollHeader.classList.toggle('is-visible', visible);
+
+  if (!visible) closeMobileNav();
+}
+
+updateScrollHeader();
+window.addEventListener('scroll', updateScrollHeader, {passive:true});
+window.addEventListener('resize', () => {
+  updateScrollHeader();
+  if (window.innerWidth > 760) closeMobileNav();
+});
+
+const backToTopLogos = [
+  document.getElementById('miniLogoBackToTop'),
+  document.getElementById('mainLogoBackToTop')
+].filter(Boolean);
+
+function jumpLogoAndBackToTop(logo, event) {
+  event?.preventDefault();
+
+  logo.classList.remove('logo-jump');
+  void logo.offsetWidth;
+  logo.classList.add('logo-jump');
+
+  window.setTimeout(() => logo.classList.remove('logo-jump'), 420);
+
+  window.scrollTo({
+    top:0,
+    behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+  });
+}
+
+backToTopLogos.forEach(logo => {
+  logo.addEventListener('click', event => jumpLogoAndBackToTop(logo, event));
+
+  if (logo.getAttribute('role') === 'button') {
+    logo.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        jumpLogoAndBackToTop(logo, event);
+      }
+    });
+  }
+});
 </script>
 </body>
 </html>
