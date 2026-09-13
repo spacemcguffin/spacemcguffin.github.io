@@ -163,6 +163,26 @@ img{display:block;max-width:100%}
 .nav-links a:hover{background:rgba(255,255,255,.2);transform:translateY(-1px)}
 .nav-links a.active{background:#111;color:#fff}
 .nav-tools{display:flex;align-items:center;gap:8px}
+
+html[data-theme="dark"] .navbar{
+  background:#17233a;
+  border-bottom-color:#2a3b57;
+  color:#f4f7fb;
+}
+html[data-theme="dark"] .nav-links a{color:#eef4ff}
+html[data-theme="dark"] .nav-links a:hover,
+html[data-theme="dark"] .nav-links a:focus-visible{
+  background:rgba(255,255,255,.09);
+  color:#fff;
+}
+html[data-theme="dark"] .nav-links a.active{
+  background:#2b4164;
+  color:#fff;
+}
+html[data-theme="dark"] .theme-toggle{
+  border-color:rgba(255,255,255,.14);
+}
+
 .theme-toggle{
   position:relative;
   isolation:isolate;
@@ -288,11 +308,11 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
    LATEST SEASON
    ========================================================= */
 .news{margin-top:18px}
-.news-layout{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);align-items:start}
-.news-image{position:relative;width:100%;min-width:0;aspect-ratio:16/9;overflow:hidden;border-right:1px solid var(--line)}
+.news-layout{display:grid;grid-template-columns:minmax(0,43%) minmax(0,57%);align-items:stretch}
+.news-image{position:relative;min-width:0;overflow:hidden;border-right:1px solid var(--line);background:#0c1418}
 .news-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;transition:opacity .18s ease}
-.news-list{min-width:0;width:100%;padding:4px 18px}
-.news-row{position:relative;display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center;min-width:0;padding:14px 12px;border-bottom:1px solid var(--line);overflow:hidden;transition:background .16s ease,color .16s ease}
+.news-list{min-width:0;width:100%;display:flex;flex-direction:column;padding:4px 18px}
+.news-row{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:center;flex:1 1 0;min-height:54px;min-width:0;padding:10px 12px;border-bottom:1px solid var(--line);overflow:hidden;transition:background .16s ease,color .16s ease}
 .news-row::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:3px;background:#6f9be8;opacity:0;transform:scaleY(.45);transition:opacity .16s ease,transform .16s ease}
 .news-row:last-child{border-bottom:0}
 .news-date{font-size:10px;font-weight:720;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
@@ -385,6 +405,117 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
   .card-copy h3{font-size:19px}
 }
 
+
+
+
+@media(min-width:681px){
+  .news-row-thumb{display:none}
+  .news-row-copy{display:contents}
+}
+
+/* Mobile latest-season thumbnails */
+.news-row-thumb{display:none}
+.news-row-copy{min-width:0}
+
+@media(max-width:680px){
+  .news-image{display:none}
+  .news-layout{grid-template-columns:1fr}
+  .news-list{padding:4px 12px 10px}
+  .news-row{
+    grid-template-columns:92px minmax(0,1fr);
+    gap:12px;
+    align-items:center;
+    padding:10px 8px;
+  }
+  .news-row-thumb{
+    display:block;
+    width:92px;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    border:1px solid var(--line);
+  }
+  .news-row-copy{display:block;min-width:0}
+  .news-row h3{margin-top:2px}
+}
+
+@media(max-width:430px){
+  .news-row{
+    grid-template-columns:78px minmax(0,1fr);
+    gap:10px;
+  }
+  .news-row-thumb{width:78px}
+}
+
+
+
+
+
+
+
+/* News cards */
+.latest-item .num{
+  font-size:10px;
+  font-weight:580;
+  letter-spacing:.055em;
+}
+.latest-item h3{
+  font-weight:590;
+  line-height:1.12;
+}
+
+
+
+/* News section */
+.latest-item h3{
+  font-size:20px;
+  font-weight:590;
+  line-height:1.1;
+}
+.latest-item .num{display:none}
+.news-image > a{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+/* News pagination */
+.news-pagination{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  padding:4px 14px 18px;
+}
+.news-page{
+  width:34px;
+  height:34px;
+  border:1px solid var(--line-strong);
+  border-radius:999px;
+  display:grid;
+  place-items:center;
+  background:var(--panel);
+  color:var(--ink);
+  font:600 13px/1 "Google Sans Flex",sans-serif;
+  cursor:pointer;
+  transition:transform .16s ease,background .16s ease,color .16s ease,border-color .16s ease;
+}
+.news-page:hover,
+.news-page:focus-visible{
+  transform:translateY(-1px);
+  border-color:#6f9be8;
+  outline:none;
+}
+.news-page.is-active{
+  background:#6f9be8;
+  border-color:#6f9be8;
+  color:#fff;
+}
+@media(max-width:680px){
+  .latest-item h3{font-size:18px}
+}
+
+
+.latest-item[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -464,7 +595,7 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
       <button class="hero-nav hero-prev" id="heroPrev" type="button" aria-label="Previous story">‹</button>
       <button class="hero-nav hero-next" id="heroNext" type="button" aria-label="Next story">›</button>
       <div class="hero-count" id="heroCount" aria-live="polite">1 / 3</div>
-    </section>
+</section>
 
     <!-- ===================================================
          FEATURED
@@ -494,36 +625,73 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
     </div>
 
     <!-- ===================================================
-         RECENT EPISODES
+         NEWS
          =================================================== -->
     <section class="latest section-shell">
-      <div class="section-bar"><h2>More from South Park</h2><a href="/sp/movie">Browse the episode guide →</a></div>
+      <div class="section-bar"><h2>News</h2></div>
       <div class="latest-grid">
-        <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/tc.png" alt="Twisted Christian episode still"></div>
-          <div class="text"><span class="num">S28 E01</span><h3>Twisted Christian</h3></div>
-        </a>
-        <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/chickenlover.png" alt="Chickenlover episode still"></div>
-          <div class="text"><span class="num">S02 E04</span><h3>Chickenlover</h3></div>
-        </a>
-        <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/spookyfish.png" alt="Spookyfish episode still"></div>
-          <div class="text"><span class="num">S02 E15</span><h3>Spookyfish</h3></div>
-        </a>
-        <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/rs.png" alt="Rainforest Shmainforest episode still"></div>
-          <div class="text"><span class="num">S03 E01</span><h3>Rainforest Shmainforest</h3></div>
-        </a>
-        <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/blau.png" alt="South Park: Bigger, Longer & Uncut artwork"></div>
-          <div class="text"><span class="num">1999 movie</span><h3>Bigger, Longer &amp; Uncut</h3></div>
-        </a>
-        <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/cgaap.png" alt="Cartman Gets an Anal Probe episode still"></div>
-          <div class="text"><span class="num">S01 E01</span><h3>Cartman Gets an Anal Probe</h3></div>
-        </a>
-      </div>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/tco.png" alt="The Crap Out"></div>
+  <div class="text">
+    <h3>Season 28 wraps with “The Crap Out”</h3>
+  </div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/sns.png" alt="Sora Not Sorry"></div>
+  <div class="text">
+    <h3>New episode artwork added across the guide</h3>
+  </div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/wid.png" alt="Wok Is Dead"></div>
+  <div class="text">
+    <h3>Season 27 gets a refreshed archive page</h3>
+  </div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/blau.png" alt="South Park: Bigger, Longer & Uncut"></div>
+  <div class="text">
+    <h3>Bigger, Longer & Uncut joins the redesigned archive</h3>
+  </div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/cgaap.png" alt="Cartman Gets an Anal Probe"></div>
+  <div class="text">
+    <h3>Revisiting the episode that started it all</h3>
+  </div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/ms.png" alt="Mecha-Streisand"></div>
+  <div class="text">
+    <h3>Classic South Park picks worth another watch</h3>
+  </div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/tt.png" alt="Turkey Trot"></div>
+  <div class="text"><h3>Turkey Trot added to the Season 28 archive</h3></div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/twith.png" alt="The Woman in the Hat"></div>
+  <div class="text"><h3>The Woman in the Hat gets a new episode page</h3></div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt="Sermon on the ’Mount"></div>
+  <div class="text"><h3>Season 27 archive refreshed with new artwork</h3></div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/chickenlover.png" alt="Chickenlover"></div>
+  <div class="text"><h3>Classic episode pages get a cleaner layout</h3></div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/spookyfish.png" alt="Spookyfish"></div>
+  <div class="text"><h3>More early-season episodes join the archive refresh</h3></div>
+</a>
+<a class="latest-item" href="/sp/news">
+  <div class="thumb"><img src="https://lewis.lc/sp/img/rs.png" alt="Rainforest Shmainforest"></div>
+  <div class="text"><h3>Season 3 pages updated across the guide</h3></div>
+</a>
+</div>
+      <div class="news-pagination" aria-label="News pagination"></div>
     </section>
 
     <!-- ===================================================
@@ -532,28 +700,28 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
     <section class="news section-shell">
       <div class="section-bar"><h2>Latest Season</h2><a href="/sp/movie">Previous seasons →</a></div>
       <div class="news-layout">
-        <div class="news-image"><img id="newsPreview" src="https://lewis.lc/sp/img/tc.png" alt="Twisted Christian episode still"></div>
+        <div class="news-image"><a id="newsPreviewLink" href="/sp/movie"><img id="newsPreview" src="https://lewis.lc/sp/img/tc.png" alt="Twisted Christian episode still"></a></div>
         <div class="news-list">
           <a class="news-row is-active" data-image="https://lewis.lc/sp/img/tc.png" href="/sp/movie">
-            <span class="news-date">Episode 1</span>
-            <div><h3>Twisted Christian</h3></div>
-          </a>
+  <img class="news-row-thumb" src="https://lewis.lc/sp/img/tc.png" alt="">
+  <div class="news-row-copy"><span class="news-date">Episode 1</span><h3>Twisted Christian</h3></div>
+</a>
           <a class="news-row" data-image="https://lewis.lc/sp/img/twith.png" href="/sp/movie">
-            <span class="news-date">Episode 2</span>
-            <div><h3>The Woman in the Hat</h3></div>
-          </a>
+  <img class="news-row-thumb" src="https://lewis.lc/sp/img/twith.png" alt="">
+  <div class="news-row-copy"><span class="news-date">Episode 2</span><h3>The Woman in the Hat</h3></div>
+</a>
           <a class="news-row" data-image="https://lewis.lc/sp/img/sns.png" href="/sp/movie">
-            <span class="news-date">Episode 3</span>
-            <div><h3>Sora Not Sorry</h3></div>
-          </a>
+  <img class="news-row-thumb" src="https://lewis.lc/sp/img/sns.png" alt="">
+  <div class="news-row-copy"><span class="news-date">Episode 3</span><h3>Sora Not Sorry</h3></div>
+</a>
           <a class="news-row" data-image="https://lewis.lc/sp/img/tt.png" href="/sp/movie">
-            <span class="news-date">Episode 4</span>
-            <div><h3>Turkey Trot</h3></div>
-          </a>
+  <img class="news-row-thumb" src="https://lewis.lc/sp/img/tt.png" alt="">
+  <div class="news-row-copy"><span class="news-date">Episode 4</span><h3>Turkey Trot</h3></div>
+</a>
           <a class="news-row" data-image="https://lewis.lc/sp/img/tco.png" href="/sp/movie">
-            <span class="news-date">Episode 5</span>
-            <div><h3>The Crap Out</h3></div>
-          </a>
+  <img class="news-row-thumb" src="https://lewis.lc/sp/img/tco.png" alt="">
+  <div class="news-row-copy"><span class="news-date">Episode 5</span><h3>The Crap Out</h3></div>
+</a>
         </div>
       </div>
     </section>
@@ -579,6 +747,7 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
   const next = document.getElementById('heroNext');
   const count = document.getElementById('heroCount');
   const preview = document.getElementById('newsPreview');
+  const previewLink = document.getElementById('newsPreviewLink');
   const newsRows = [...document.querySelectorAll('.news-row')];
   const backToTop = document.getElementById('backToTop');
   let heroIndex = 0;
@@ -638,6 +807,38 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
     backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
     updateBackToTop();
   }
+
+  const newsGrid = document.querySelector('.latest-grid');
+  const newsPager = document.querySelector('.news-pagination');
+  if (newsGrid && newsPager) {
+    const cards = [...newsGrid.querySelectorAll('.latest-item')];
+    const perPage = 6;
+    const totalPages = Math.ceil(cards.length / perPage);
+
+    const showNewsPage = page => {
+      cards.forEach((card, index) => {
+        card.hidden = Math.floor(index / perPage) !== page;
+      });
+      [...newsPager.children].forEach((button, index) => {
+        button.classList.toggle('is-active', index === page);
+        button.setAttribute('aria-current', index === page ? 'page' : 'false');
+      });
+    };
+
+    for (let page = 0; page < totalPages; page++) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'news-page';
+      button.textContent = page + 1;
+      button.setAttribute('aria-label', `News page ${page + 1}`);
+      button.addEventListener('click', () => showNewsPage(page));
+      newsPager.appendChild(button);
+    }
+
+    if (totalPages <= 1) newsPager.hidden = true;
+    showNewsPage(0);
+  }
+
 })();
 </script>
 </body>
