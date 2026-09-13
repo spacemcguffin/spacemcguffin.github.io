@@ -532,7 +532,7 @@ html.dark .theme-icon-slot .theme-icon-moon {
   display: grid;
   grid-template-columns: 42% 58%;
   border-top: 1px solid var(--line);
-  font-size: .76rem;
+  font-size: .82rem;
   line-height: 1.4;
 }
 
@@ -1126,7 +1126,7 @@ html.dark .toc-head {
 .wiki-notice span {
   display: block;
   color: var(--muted);
-  font-size: .76rem;
+  font-size: .82rem;
   line-height: 1.42;
 }
 
@@ -1250,7 +1250,7 @@ html.dark .wiki-notice svg {
   margin: 20px 0 4px;
   border: 1px solid var(--line);
   background: var(--paper);
-  font-size: .76rem;
+  font-size: .82rem;
   box-shadow: 0 1px 0 rgba(0,0,0,.03);
 }
 
@@ -1555,7 +1555,7 @@ html.dark .unified-icon-button.theme-control:focus-visible {
 .page-view-switcher {
   display: flex;
   align-items: flex-end;
-  gap: 22px;
+  gap: 30px;
   margin: 0 0 14px;
   padding: 7px 0 0;
   border-bottom: 1px solid var(--line);
@@ -1568,7 +1568,7 @@ html.dark .unified-icon-button.theme-control:focus-visible {
   background: transparent;
   color: var(--muted);
   padding: 9px 1px 10px;
-  font: 600 .78rem "Inter",system-ui,sans-serif;
+  font: 600 .84rem "Inter",system-ui,sans-serif;
   cursor: pointer;
 }
 
@@ -1721,8 +1721,10 @@ body.gallery-page-view .gallery-visible-caption {
 .sticky-theme-control .theme-icon-slot {
   display: grid !important;
   place-items: center !important;
-  width: 21px !important;
-  height: 21px !important;
+  width: 20px !important;
+  height: 20px !important;
+  margin: 0 !important;
+  line-height: 0 !important;
 }
 
 .hero-theme-toggle .theme-icon,
@@ -2184,7 +2186,7 @@ body.gallery-page-view .gallery-visible-caption {
   }
 
   .page-view-switcher {
-    gap: 20px;
+    gap: 27px;
     margin-bottom: 12px;
     padding-top: 4px;
     overflow-x: auto;
@@ -2197,7 +2199,7 @@ body.gallery-page-view .gallery-visible-caption {
 
   .page-view-button {
     flex: 0 0 auto;
-    font-size: .76rem;
+    font-size: .82rem;
   }
 
   body.gallery-page-view .gallery {
@@ -2396,21 +2398,93 @@ body.gallery-page-view .gallery-visible-caption {
     grid-template-columns: 1fr !important;
   }
 }
+
+.hero-theme-toggle .theme-icon svg,
+.sticky-theme-control .theme-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+
+@media (max-width: 850px) {
+
+  .hero-theme-toggle,
+  .sticky-theme-control {
+    top: 0.08em !important;
+    transform: none !important;
+  }
+
+
+
+  .hero-theme-toggle,
+  .sticky-theme-control {
+    display: grid !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+}
+
+/* Theme control positioning */
+@media (min-width: 851px) {
+  .hero-theme-toggle,
+  .sticky-theme-control {
+    top: auto !important;
+    right: 0 !important;
+    bottom: 0.18em !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .unified-mobile-bar {
+    grid-template-columns: 38px minmax(0, 1fr) 42px !important;
+  }
+
+  .hero-theme-toggle,
+  .sticky-theme-control {
+    position: fixed !important;
+    top: 6px !important;
+    right: 5px !important;
+    z-index: 1300 !important;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 34px !important;
+    min-height: 34px !important;
+    transform: none !important;
+    margin: 0 !important;
+    display: grid !important;
+  }
+
+  .mobile-rail-wordmark {
+    padding-right: 8px !important;
+  }
+
+  .hero h1 {
+    padding-right: 0 !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .unified-mobile-bar {
+    grid-template-columns: 36px minmax(0, 1fr) 40px !important;
+  }
+
+  .hero-theme-toggle,
+  .sticky-theme-control {
+    top: 6px !important;
+    right: 4px !important;
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+}
+
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </head>
 <body>
 <header class="site-header"><div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation"><button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button mobile-menu-button" data-menu-toggle="" type="button">
@@ -2493,7 +2567,6 @@ body.gallery-page-view .gallery-visible-caption {
 </div>
 </aside>
 <main class="main" id="main">
-
 <section class="hero" id="top">
 <div class="eyebrow">
 <span class="chip">
@@ -2502,7 +2575,7 @@ body.gallery-page-view .gallery-visible-caption {
 </div>
 <h1>
       Edge End High School
-     </h1><button aria-label="Switch theme" class="hero-theme-toggle theme-control sticky-theme-control" data-theme-toggle="" title="Switch theme" type="button">
+     </h1><button aria-label="Switch theme" class="sticky-theme-control hero-theme-toggle theme-control" data-theme-toggle="" title="Switch theme" type="button">
 <span aria-hidden="true" class="theme-icon-slot">
 <span class="theme-icon theme-icon-moon">
 <svg viewbox="0 0 24 24">
@@ -2526,7 +2599,6 @@ body.gallery-page-view .gallery-visible-caption {
 <section class="article-content" id="general">
 <div class="article-top">
 <div>
-
 <aside aria-label="Location information" class="infobox">
 <div class="infobox-title">
          Edge End High School
@@ -2642,7 +2714,6 @@ body.gallery-page-view .gallery-visible-caption {
 </section>
 </div>
 </div>
-
 <section class="section" id="staff">
 <h2>
        Staff
@@ -2738,7 +2809,6 @@ body.gallery-page-view .gallery-visible-caption {
 </table>
 </div>
 </section>
-
 <section class="section trivia-view-section" id="trivia">
 <h2>
        Trivia
@@ -2799,12 +2869,7 @@ body.gallery-page-view .gallery-visible-caption {
 <button aria-label="Close navigation" class="menu-overlay" type="button">
 </button>
 <button aria-label="Back to top" id="backToTop" title="Back to top" type="button">↑</button>
-
 <div class="site-credit">Created by Lewis</div>
-
-
-
-
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.documentElement;
