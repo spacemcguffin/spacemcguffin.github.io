@@ -1906,6 +1906,107 @@ html.dark .unified-icon-button.theme-control:focus-visible{
 }
 </style>
 
+
+<style id="requested-content-heading-refinements">
+/* Contents links: lighter and calmer */
+.toc a{
+  font-weight:450 !important;
+}
+
+/* Main article title: cleaner editorial/wiki treatment */
+.hero{
+  position:relative;
+}
+.hero h1{
+  position:relative;
+  width:fit-content;
+  max-width:100%;
+  margin-top:9px;
+  padding:0 0 10px;
+  font-weight:520;
+  letter-spacing:-.045em;
+  text-wrap:balance;
+}
+.hero h1::after{
+  content:"";
+  position:absolute;
+  left:1px;
+  bottom:0;
+  width:min(92px,32%);
+  height:4px;
+  border-radius:999px;
+  background:var(--accent);
+  opacity:.9;
+}
+@media(max-width:850px){
+  .hero h1{
+    padding-bottom:9px;
+    font-weight:520;
+    letter-spacing:-.04em;
+  }
+  .hero h1::after{
+    width:72px;
+    height:3px;
+  }
+}
+</style>
+
+
+<style id="v3-toggle-heading-cleanup">
+/* Theme toggle: circular and shadowless */
+.sticky-theme-control,
+.unified-icon-button.theme-control,
+.hero .sticky-theme-control{
+  border-radius:50% !important;
+  box-shadow:none !important;
+}
+html.dark .sticky-theme-control,
+html.dark .unified-icon-button.theme-control,
+html.dark .hero .sticky-theme-control{
+  border-radius:50% !important;
+  box-shadow:none !important;
+}
+
+/* Remove the decorative accent rule below the main heading */
+.hero h1::after{
+  content:none !important;
+  display:none !important;
+}
+.hero h1{
+  padding-bottom:0 !important;
+}
+</style>
+
+
+<style id="v4-mobile-toggle-gallery">
+@media(max-width:850px){
+  /* Mobile theme toggle blends into the top rail instead of becoming a circle */
+  .unified-icon-button.theme-control,
+  html.dark .unified-icon-button.theme-control{
+    border-radius:0 !important;
+    box-shadow:none !important;
+  }
+
+  /* Smaller article gallery on small screens */
+  .gallery{
+    width:min(88%, 420px);
+    margin-left:auto;
+    margin-right:auto;
+    gap:8px;
+  }
+
+  .gallery-item{
+    padding:2px;
+  }
+}
+
+@media(max-width:470px){
+  .gallery{
+    width:84%;
+  }
+}
+</style>
+
 </head>
  <body>
   <header class="site-header">
@@ -2031,6 +2132,21 @@ html.dark .unified-icon-button.theme-control:focus-visible{
       </a>
       <a href="https://lewis.lc/wiki/edge_end#">
        26
+      </a>
+      <a href="https://lewis.lc/wiki/edge_end#">
+       25
+      </a>
+      <a href="https://lewis.lc/wiki/edge_end#">
+       24
+      </a>
+      <a href="https://lewis.lc/wiki/edge_end#">
+       23
+      </a>
+      <a href="https://lewis.lc/wiki/edge_end#">
+       22
+      </a>
+      <a href="https://lewis.lc/wiki/edge_end#">
+       21
       </a>
       <a href="https://lewis.lc/sp/">
        All
@@ -2244,6 +2360,18 @@ html.dark .unified-icon-button.theme-control:focus-visible{
 
         <p>
          During <span class="internal-wiki-link">Season 2</span>, the school is rebuilt, and has two predominant chimneys as a focal feature. To the rear is a giant playing field where the kids hang out during break times.
+        </p>
+
+        <p>
+         The rebuilt school becomes the standard version of Edge End seen throughout later episodes. Its exterior remains broadly consistent, although smaller background details, windows and surrounding features occasionally change between appearances.
+        </p>
+
+        <p>
+         Inside, the building contains a mixture of classrooms, corridors, offices and communal areas. Different parts of the school can be introduced whenever a story requires them, allowing the location to function as one of the show's main recurring settings.
+        </p>
+
+        <p>
+         The grounds surrounding Edge End are also used regularly as a meeting place for students. The playing field, entrances and paths around the building provide additional locations for scenes taking place before school, during breaks and at the end of the day.
         </p>
 
        </section>
