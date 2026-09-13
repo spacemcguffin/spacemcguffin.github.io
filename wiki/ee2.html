@@ -105,17 +105,6 @@ svg{display:block}
   border-bottom:1px solid var(--line);
 }
 
-.rail-title{
-  margin:0;
-  color:var(--text);
-  font:650 1.08rem/1.05 "Google Sans Flex","Inter",sans-serif;
-  letter-spacing:-.055em;
-  text-transform:uppercase;
-  transform:rotate(-.5deg);
-  transform-origin:left center;
-  display:inline-block;
-}
-
 .rail-section{
   padding:9px 10px;
   border-bottom:1px solid var(--line);
@@ -413,8 +402,8 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
 .lede{
   margin:0 0 16px;
   color:var(--text);
-  font-size:.92rem;
-  line-height:1.66;
+  font-size:.96rem;
+  line-height:1.7;
 }
 
 .section{
@@ -439,8 +428,8 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
 .section p{
   margin:0 0 1em;
   color:var(--text);
-  font-size:.9rem;
-  line-height:1.68;
+  font-size:.94rem;
+  line-height:1.62;
 }
 
 .trivia-list{
@@ -741,16 +730,6 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
     background:var(--paper);
   }
 
-  .mobile-wiki-identity strong{
-    display:block;
-    color:var(--text);
-    font:650 1.34rem/.98 "Google Sans Flex","Inter",sans-serif;
-    letter-spacing:-.055em;
-    text-transform:uppercase;
-    transform:rotate(-.5deg);
-    transform-origin:left center;
-  }
-
   .mobile-wiki-identity span{
     display:block;
     margin-top:5px;
@@ -827,12 +806,12 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
     margin:0 0 17px;
   }
 
-  .lede{font-size:.92rem;line-height:1.68}
+  .lede{font-size:.95rem;line-height:1.7}
   .section{padding:17px 0}
   .section h2{font-size:1.25rem}
-  .section p{font-size:.9rem;line-height:1.67}
+  .section p{font-size:.93rem;line-height:1.7}
   .quote{font-size:.87rem;padding:9px 11px}
-  .trivia-list li{font-size:.9rem;line-height:1.67}
+  .trivia-list li{font-size:.93rem;line-height:1.7}
 
   .gallery{
     grid-template-columns:1fr;
@@ -1003,63 +982,244 @@ html.dark .infobox-image-tab:nth-child(5):not([aria-selected="true"]){background
 /* ============================================================
    WIKI STRUCTURE ENHANCEMENTS
    ============================================================ */
-.wiki-search{padding:10px;border-bottom:1px solid var(--line);background:var(--panel-solid)}
-.wiki-search-label{display:block;margin:0 0 6px;color:var(--muted);font-size:.58rem;font-weight:720;letter-spacing:.09em;text-transform:uppercase}
-.wiki-search-wrap{position:relative;display:flex}
-.wiki-search-input{width:100%;height:32px;padding:6px 30px 6px 9px;border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--text);font-size:.72rem;outline:none}
-.wiki-search-input:focus{border-color:var(--accent);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 18%,transparent)}
-.wiki-search-icon{position:absolute;right:8px;top:50%;width:14px;height:14px;transform:translateY(-50%);color:var(--muted);pointer-events:none}
-.wiki-search-results{display:none;margin-top:5px;border:1px solid var(--line);border-radius:4px;background:var(--paper);overflow:hidden}
-.wiki-search-results.open{display:block}
-.wiki-search-result{display:block;padding:7px 8px;border-bottom:1px solid var(--line);color:var(--text);font-size:.7rem;line-height:1.25;text-decoration:none}
-.wiki-search-result:last-child{border-bottom:0}
-.wiki-search-result:hover,.wiki-search-result:focus{background:var(--panel);text-decoration:none}
-.wiki-search-empty{padding:7px 8px;color:var(--muted);font-size:.68rem}
-
-.wiki-notice{display:grid;grid-template-columns:28px minmax(0,1fr);gap:9px;align-items:start;margin:0 0 14px;padding:9px 10px;border:1px solid var(--line);border-left:3px solid #b98c35;background:color-mix(in srgb,var(--panel) 76%,#fff3c7 24%);color:var(--text)}
-.wiki-notice svg{width:21px;height:21px;margin-top:1px;color:#9a7427}
+.wiki-notice{display:grid;grid-template-columns:28px minmax(0,1fr);gap:9px;align-items:start;margin:0 0 14px;padding:9px 10px;border:1px solid var(--line);border-left:5px solid var(--accent);background:color-mix(in srgb,var(--panel) 88%,#dceaff 12%);color:var(--text)}
+.wiki-notice svg{width:21px;height:21px;margin-top:1px;color:var(--accent)}
+html.dark .wiki-notice{border-left-color:#79a9d8;background:color-mix(in srgb,var(--panel) 91%,#7fb7ee 9%)}
+html.dark .wiki-notice svg{color:#9ecbf5}
 .wiki-notice strong{display:block;margin-bottom:2px;font-size:.76rem}
 .wiki-notice span{display:block;color:var(--muted);font-size:.72rem;line-height:1.45}
 
-.toc{width:min(330px,100%);margin:0 0 18px;border:1px solid var(--line);background:var(--panel-solid);font-size:.76rem}
+.toc{width:min(330px,100%);margin:0 0 18px;border:1px solid var(--line);background:var(--panel-solid);font-size:.82rem;line-height:1.55}
 .toc-head{display:flex;align-items:center;justify-content:space-between;padding:7px 9px;border-bottom:1px solid var(--line);background:var(--panel);font-family:"Google Sans Flex","Inter",sans-serif}
 .toc-title{font-weight:700}
-.toc-toggle{border:0;padding:0;background:none;color:var(--link);font-size:.68rem;cursor:pointer}
+.toc-toggle{border:0;padding:0;background:none;color:var(--link);font-size:.72rem;cursor:pointer}
 .toc-toggle:hover{text-decoration:underline}
-.toc ol{margin:0;padding:8px 10px 8px 31px}
-.toc li{margin:3px 0;color:var(--muted)}
+.toc ol{margin:0;padding:9px 10px 10px 31px}
+.toc li{margin:5px 0;color:var(--muted)}
 .toc a{color:var(--link);text-decoration:none}
 .toc a:hover{text-decoration:underline}
 .toc.is-collapsed ol{display:none}
 
-.wiki-ref{font-size:.7em;vertical-align:super;line-height:0;margin-left:1px}
-.wiki-ref a{font-weight:650;text-decoration:none}
-.wiki-ref a:hover{text-decoration:underline}
 .internal-wiki-link{color:var(--link);text-decoration:none;font-weight:500}
 .internal-wiki-link:hover{text-decoration:underline}
-.references-list{margin:.1rem 0 0;padding-left:1.55rem}
-.references-list li{margin:0 0 .6rem;padding-left:.15rem;color:var(--text);font-size:.82rem;line-height:1.5}
-.references-list li::marker{color:var(--muted);font-size:.76rem}
-.reference-back{margin-left:5px;color:var(--muted);font-size:.85em;text-decoration:none}
-.reference-back:hover{color:var(--link)}
-.categories-box{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;margin:17px 0 3px;padding:9px 10px;border:1px solid var(--line);background:var(--panel-solid);font-size:.74rem;line-height:1.5}
-.categories-label{color:var(--muted);font-weight:650}
-.categories-links{display:flex;flex-wrap:wrap;gap:0}
-.categories-links a{color:var(--link);text-decoration:none}
-.categories-links a:hover{text-decoration:underline}
-.categories-links a:not(:last-child)::after{content:" · ";color:var(--muted);white-space:pre}
-.section-tab[data-section="references"]{background:#cdd7df}
-html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd4;color:#202832}
+
 
 @media(max-width:850px){
-  .wiki-search{display:none}
   .toc{width:100%;margin-bottom:16px}
   .wiki-notice{grid-template-columns:24px minmax(0,1fr);padding:8px 9px}
   .wiki-notice svg{width:19px;height:19px}
-  #references{scroll-margin-top:calc(var(--mobile-bar) + 8px)}
 }
 
-  </style>
+  
+/* ---------- South Park Wiki identity ----------
+   Compact version of the /sp/new cut-paper SOUTH PARK wordmark. */
+.wiki-wordmark{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:flex-start;
+  width:max-content;
+  color:var(--text);
+  font-family:"Google Sans Flex","Inter",sans-serif;
+  user-select:none;
+  -webkit-user-select:none;
+}
+
+.wiki-wordmark-main{
+  position:relative;
+  display:flex;
+  align-items:baseline;
+  width:max-content;
+  padding:0 0 9px;
+  font-size:1.15rem;
+  font-weight:800;
+  line-height:.86;
+  letter-spacing:0;
+  text-transform:uppercase;
+}
+
+.wiki-wordmark-main > span:not(.wiki-logo-gap){
+  position:relative;
+  display:inline-block;
+  margin-right:-.045em;
+  transform-origin:50% 72%;
+  -webkit-mask-image:
+    radial-gradient(circle at 18% 24%,transparent 0 .65px,#000 .95px),
+    radial-gradient(circle at 72% 38%,transparent 0 .55px,#000 .85px),
+    radial-gradient(circle at 42% 76%,transparent 0 .6px,#000 .9px),
+    linear-gradient(#000,#000);
+  mask-image:
+    radial-gradient(circle at 18% 24%,transparent 0 .65px,#000 .95px),
+    radial-gradient(circle at 72% 38%,transparent 0 .55px,#000 .85px),
+    radial-gradient(circle at 42% 76%,transparent 0 .6px,#000 .9px),
+    linear-gradient(#000,#000);
+  clip-path:polygon(
+    1% 2%,13% 0%,25% 2%,38% .5%,51% 2.2%,64% .4%,77% 2%,89% .7%,99% 2.5%,
+    98.5% 14%,100% 27%,98.7% 40%,100% 54%,98.4% 67%,100% 81%,98% 98%,
+    85% 99.2%,72% 97.8%,59% 99.5%,46% 97.9%,33% 99.4%,20% 97.7%,2% 99%,
+    1.2% 85%,0 72%,1.3% 59%,0 45%,1.4% 31%,0 17%
+  );
+}
+
+.wiki-wordmark-main .wiki-logo-gap{
+  display:inline-block;
+  width:.24em;
+  flex:0 0 .24em;
+}
+
+.wiki-wordmark-main > span:nth-child(1){transform:rotate(-.62deg) translateY(.5px)}
+.wiki-wordmark-main > span:nth-child(2){transform:rotate(.48deg) translateY(-.35px)}
+.wiki-wordmark-main > span:nth-child(3){transform:rotate(-.34deg) translateY(.3px)}
+.wiki-wordmark-main > span:nth-child(4){transform:rotate(.58deg) translateY(-.4px)}
+.wiki-wordmark-main > span:nth-child(5){transform:rotate(-.44deg) translateY(.4px)}
+.wiki-wordmark-main > span:nth-child(7){transform:rotate(.52deg) translateY(-.3px)}
+.wiki-wordmark-main > span:nth-child(8){transform:rotate(-.57deg) translateY(.45px)}
+.wiki-wordmark-main > span:nth-child(9){transform:rotate(.38deg) translateY(-.35px)}
+.wiki-wordmark-main > span:nth-child(10){transform:rotate(-.49deg) translateY(.3px)}
+
+.wiki-wordmark-main::after{
+  content:"";
+  position:absolute;
+  left:1px;
+  bottom:1px;
+  width:calc(100% - 2px);
+  height:5px;
+  background:linear-gradient(
+    90deg,
+    #5161AC 0 24%,
+    transparent 24% 25.5%,
+    #009B67 25.5% 49%,
+    transparent 49% 50.5%,
+    #59C0D5 50.5% 74%,
+    transparent 74% 75.5%,
+    #F47321 75.5% 100%
+  );
+  clip-path:polygon(
+    0 28%,7% 13%,14% 24%,21% 8%,29% 20%,37% 3%,
+    45% 18%,53% 7%,61% 22%,69% 5%,77% 19%,86% 9%,100% 24%,
+    98% 76%,90% 88%,81% 72%,72% 91%,63% 76%,54% 94%,
+    45% 77%,36% 91%,27% 73%,18% 89%,9% 75%,2% 91%
+  );
+  transform:rotate(-1deg);
+  filter:drop-shadow(0 1px 0 rgba(0,0,0,.15));
+  opacity:.94;
+  pointer-events:none;
+}
+
+.wiki-wordmark-suffix{
+  margin-top:2px;
+  color:var(--muted);
+  font-size:.54rem;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+}
+
+/* Slightly larger treatment in the standalone mobile identity row. */
+.mobile-wiki-identity .wiki-wordmark-main{
+  font-size:1.42rem;
+  padding-bottom:10px;
+}
+.mobile-wiki-identity .wiki-wordmark-main::after{height:5px}
+.mobile-wiki-identity .wiki-wordmark-suffix{font-size:.58rem}
+
+/* ---------- categories as construction-paper scraps ---------- */
+.categories-box{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:7px 8px;
+  margin:19px 0 4px;
+  padding:0;
+  border:0;
+  background:none;
+  font-size:.73rem;
+}
+
+.categories-label{
+  margin-right:2px;
+  color:var(--muted);
+  font-size:.66rem;
+  font-weight:760;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.categories-links{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:6px;
+}
+
+.categories-links a{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  min-height:29px;
+  padding:6px 10px 5px;
+  overflow:hidden;
+  color:#27313b;
+  background:#d4ddd4;
+  box-shadow:0 2px 4px rgba(0,0,0,.12);
+  font-weight:650;
+  line-height:1.1;
+  text-decoration:none;
+  isolation:isolate;
+  transition:filter .14s ease;
+}
+
+.categories-links a::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  opacity:.25;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 18% 22%,rgba(255,255,255,.75) 0 1px,transparent 1.3px),
+    radial-gradient(circle at 76% 66%,rgba(0,0,0,.15) 0 .7px,transparent 1px);
+  background-size:17px 19px,23px 21px;
+}
+
+.categories-links a:nth-child(1){
+  background:#d4ddd4;
+  clip-path:polygon(2% 5%,96% 0,100% 12%,98% 94%,88% 100%,4% 96%,0 18%);
+  transform:rotate(-.45deg);
+}
+.categories-links a:nth-child(2){
+  background:#d4ddd4;
+  clip-path:polygon(0 10%,8% 2%,96% 5%,100% 89%,92% 100%,3% 96%);
+  transform:rotate(.35deg);
+}
+.categories-links a:nth-child(3){
+  background:#d4ddd4;
+  clip-path:polygon(3% 1%,97% 5%,100% 91%,94% 100%,2% 96%,0 12%);
+  transform:rotate(-.3deg);
+}
+.categories-links a:nth-child(4){
+  background:#d4ddd4;
+  clip-path:polygon(0 8%,95% 1%,100% 13%,97% 97%,6% 100%,1% 90%);
+  transform:rotate(.42deg);
+}
+
+.categories-links a:hover{
+  filter:brightness(.96);
+  text-decoration:none;
+}
+
+html.dark .categories-links a{
+  color:#17202a;
+  box-shadow:0 2px 5px rgba(0,0,0,.25);
+}
+
+@media(max-width:850px){
+  .categories-box{align-items:flex-start;gap:8px;margin-top:18px}
+  .categories-label{width:100%;margin:0 0 1px}
+  .categories-links{gap:6px}
+}
+
+</style>
  </head>
  <body>
   <header class="site-header">
@@ -1106,12 +1266,6 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
       </span>
      </a>
 
-     <a aria-label="References" class="unified-section-link" data-section="references" href="https://lewis.lc/wiki/edge_end#references">
-<span>
-       References
-      </span>
-     </a>
-
     </div>
     <button aria-label="Switch theme" class="unified-icon-button theme-control" data-theme-toggle="" type="button">
      <span aria-hidden="true" class="theme-icon-slot">
@@ -1137,15 +1291,7 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
     </button>
    </div>
   </header>
-  <div class="mobile-wiki-identity">
-   <div>
-
-    <strong>
-     SOUTH PARK WIKI
-    </strong>
-
-   </div>
-  </div>
+  <div class="mobile-wiki-identity"><div><span class="wiki-wordmark" aria-label="South Park Wiki"><span class="wiki-wordmark-main" aria-hidden="true"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="wiki-logo-gap"></span><span>P</span><span>A</span><span>R</span><span>K</span></span><span class="wiki-wordmark-suffix" aria-hidden="true">Wiki</span></span></div></div>
   <div class="shell">
    <button aria-expanded="true" aria-label="Collapse sidebar" class="desktop-sidebar-toggle" data-desktop-sidebar-toggle="" title="Collapse sidebar" type="button">
     <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-close">
@@ -1162,22 +1308,7 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
     </span>
    </button>
    <aside class="sidebar" id="sidebar">
-    <div class="rail-brand">
-
-     <p class="rail-title">
-      SOUTH PARK WIKI
-     </p>
-
-    </div>
-
-    <div class="wiki-search" role="search">
-     <label class="wiki-search-label" for="wiki-search-input">Search South Park Wiki</label>
-     <div class="wiki-search-wrap">
-      <input class="wiki-search-input" id="wiki-search-input" type="search" placeholder="Search..." autocomplete="off" aria-controls="wiki-search-results" aria-expanded="false"/>
-      <svg class="wiki-search-icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m15.5 15.5 4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-     </div>
-     <div class="wiki-search-results" id="wiki-search-results" aria-live="polite"></div>
-    </div>
+    <div class="rail-brand"><span class="wiki-wordmark" aria-label="South Park Wiki"><span class="wiki-wordmark-main" aria-hidden="true"><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="wiki-logo-gap"></span><span>P</span><span>A</span><span>R</span><span>K</span></span><span class="wiki-wordmark-suffix" aria-hidden="true">Wiki</span></span></div>
 
     <div class="rail-section">
      <div class="nav-label">
@@ -1276,11 +1407,6 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
      <a class="section-tab" data-section="gallery" href="https://lewis.lc/wiki/edge_end#gallery">
 <span class="section-tab-label">
        Gallery
-      </span>
-     </a>
-     <a class="section-tab" data-section="references" href="https://lewis.lc/wiki/edge_end#references">
-<span class="section-tab-label">
-       References
       </span>
      </a>
      <button aria-label="Switch to dark mode" class="sticky-theme-control" data-sticky-theme-toggle="" title="Dark mode" type="button">
@@ -1396,7 +1522,7 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
        </p>
 
        <aside class="wiki-notice" aria-label="Article status">
-        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3.5 21 19H3L12 3.5Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9v4.5M12 16.5h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7.8v5.7M12 16.8h.01" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         <div><strong>This article is incomplete.</strong><span>Some information may be missing. You can help the South Park Wiki by expanding it.</span></div>
        </aside>
 
@@ -1407,7 +1533,6 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
          <li><a href="#staff">Staff</a></li>
          <li><a href="#trivia">Trivia</a></li>
          <li><a href="#gallery">Gallery</a></li>
-         <li><a href="#references">References</a></li>
         </ol>
        </nav>
 
@@ -1424,7 +1549,7 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
       </div>
 
         <p>
-         The first appearance of Edge End is in the <a class="internal-wiki-link" href="#ref-1">pilot episode</a>, where it has been destroyed and delapidated for multiple years.<sup class="wiki-ref" id="cite-1"><a href="#ref-1">[1]</a></sup> It remains in this state for the majority of <a class="internal-wiki-link" href="#ref-1">Season 1</a>.
+         The first appearance of Edge End is in the <span class="internal-wiki-link">pilot episode</span>, where it has been destroyed and delapidated for multiple years. It remains in this state for the majority of <span class="internal-wiki-link">Season 1</span>.
         </p>
 
       <div class="plot-location-scrap">
@@ -1432,7 +1557,7 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
       </div>
 
         <p>
-         During <a class="internal-wiki-link" href="#ref-2">Season 2</a>, the school is rebuilt, and has two predominant chimneys as a focal feature.<sup class="wiki-ref" id="cite-2"><a href="#ref-2">[2]</a></sup> To the rear is a giant playing field where the kids hang out during break times.
+         During <span class="internal-wiki-link">Season 2</span>, the school is rebuilt, and has two predominant chimneys as a focal feature. To the rear is a giant playing field where the kids hang out during break times.
         </p>
 
        </section>
@@ -1588,28 +1713,14 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
       </div>
      </section>
 
-     <section class="section" id="references">
-      <h2>References</h2>
-      <ol class="references-list">
-       <li id="ref-1"><a class="internal-wiki-link" href="https://lewis.lc/wiki/edge_end#">Pilot Episode</a> — first appearance of Edge End High School and the destroyed Season 1 incarnation.<a class="reference-back" href="#cite-1" aria-label="Back to citation 1">↩</a></li>
-       <li id="ref-2"><a class="internal-wiki-link" href="https://lewis.lc/wiki/edge_end#">Season 2</a> — the school is shown rebuilt in its later incarnation.<a class="reference-back" href="#cite-2" aria-label="Back to citation 2">↩</a></li>
-      </ol>
-     </section>
-
      <div class="categories-box" aria-label="Categories">
-      <span class="categories-label">Categories:</span>
+      <span class="categories-label">Categories</span>
       <span class="categories-links">
        <a href="https://lewis.lc/wiki/edge_end#">Locations</a>
        <a href="https://lewis.lc/wiki/edge_end#">Schools</a>
        <a href="https://lewis.lc/wiki/edge_end#">Recurring locations</a>
        <a href="https://lewis.lc/wiki/edge_end#">Season 1 locations</a>
       </span>
-     </div>
-
-     <div class="footer">
-      <div class="plot-location-scrap">
-       CREATED BY LEWIS
-      </div>
      </div>
     </section>
 
@@ -1706,7 +1817,7 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
   }
 
   /* stable section tracking: no IntersectionObserver switching */
-  const sectionIds = ["top","appearance","staff","trivia","gallery","references"];
+  const sectionIds = ["top","appearance","staff","trivia","gallery"];
   const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
   const sectionLinks = [
     ...document.querySelectorAll(".rail-link[data-id], .section-tab[data-section], .unified-section-link[data-section]")
@@ -1786,56 +1897,6 @@ html.dark .section-tab[data-section="references"]:not(.active){background:#c2ccd
       toggle.textContent = collapsed ? "show" : "hide";
       toggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
     });
-  });
-
-  /* compact desktop wiki search */
-  const wikiSearchInput = document.getElementById("wiki-search-input");
-  const wikiSearchResults = document.getElementById("wiki-search-results");
-  const wikiSearchIndex = [
-    {label:"Edge End High School", type:"Location", href:"#top"},
-    {label:"Episodes", type:"Index", href:"https://lewis.lc/sp/"},
-    {label:"Locations", type:"Index", href:"#top"},
-    {label:"Characters", type:"Index", href:"#top"},
-    {label:"Season 28", type:"Season", href:"#top"},
-    {label:"Season 27", type:"Season", href:"#top"},
-    {label:"Season 26", type:"Season", href:"#top"},
-    {label:"Pilot Episode", type:"Episode", href:"#ref-1"}
-  ];
-
-  function renderWikiSearch(){
-    if (!wikiSearchInput || !wikiSearchResults) return;
-    const query = wikiSearchInput.value.trim().toLowerCase();
-    if (!query){
-      wikiSearchResults.classList.remove("open");
-      wikiSearchResults.innerHTML = "";
-      wikiSearchInput.setAttribute("aria-expanded","false");
-      return;
-    }
-    const matches = wikiSearchIndex.filter(item => item.label.toLowerCase().includes(query)).slice(0,6);
-    wikiSearchResults.innerHTML = matches.length
-      ? matches.map(item => `<a class="wiki-search-result" href="${item.href}"><strong>${item.label}</strong><br><span>${item.type}</span></a>`).join("")
-      : `<div class="wiki-search-empty">No pages found</div>`;
-    wikiSearchResults.classList.add("open");
-    wikiSearchInput.setAttribute("aria-expanded","true");
-  }
-
-  wikiSearchInput?.addEventListener("input", renderWikiSearch);
-  wikiSearchInput?.addEventListener("keydown", event => {
-    if (event.key === "Escape"){
-      wikiSearchInput.value = "";
-      renderWikiSearch();
-      wikiSearchInput.blur();
-    }
-    if (event.key === "Enter"){
-      const first = wikiSearchResults?.querySelector("a");
-      if (first){ event.preventDefault(); first.click(); }
-    }
-  });
-  document.addEventListener("click", event => {
-    if (!event.target.closest(".wiki-search")){
-      wikiSearchResults?.classList.remove("open");
-      wikiSearchInput?.setAttribute("aria-expanded","false");
-    }
   });
 
   /* tooltips */
