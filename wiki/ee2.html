@@ -10,7 +10,8 @@
   </title>
 <link href="https://fonts.googleapis.com/" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><style>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
 :root {
   --shell: 1120px;
   --rail: 205px;
@@ -1737,13 +1738,21 @@ body.gallery-page-view .gallery-visible-caption {
   display: none !important;
 }
 
+.hero-theme-toggle .theme-icon svg,
+.sticky-theme-control .theme-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
 @media (max-width:850px) {
   .staff-table {
     font-size: .82rem;
   }
 
   .staff-table th,
-    .staff-table td {
+      .staff-table td {
     padding: 8px;
   }
 
@@ -1919,10 +1928,10 @@ body.gallery-page-view .gallery-visible-caption {
   }
 
   .desktop-sidebar-toggle,
-    .sticky-sidebar-control,
-    .sticky-theme-control,
-    .sticky-nav-sentinel,
-    .section-tabs {
+      .sticky-sidebar-control,
+      .sticky-theme-control,
+      .sticky-nav-sentinel,
+      .section-tabs {
     display: none !important;
   }
 
@@ -2083,8 +2092,8 @@ body.gallery-page-view .gallery-visible-caption {
   }
 
   html:not(.dark) .mobile-wiki-identity .wiki-wordmark,
-    html:not(.dark) .mobile-wiki-identity .wiki-wordmark-main,
-    html:not(.dark) .mobile-wiki-identity .wiki-wordmark-main > span:not(.wiki-logo-gap) {
+      html:not(.dark) .mobile-wiki-identity .wiki-wordmark-main,
+      html:not(.dark) .mobile-wiki-identity .wiki-wordmark-main > span:not(.wiki-logo-gap) {
     color: #000 !important;
   }
 
@@ -2097,9 +2106,9 @@ body.gallery-page-view .gallery-visible-caption {
   }
 
   .article-content .lede,
-    .article-content .section p,
-    .article-content .trivia-list li,
-    .article-content .staff-table td {
+      .article-content .section p,
+      .article-content .trivia-list li,
+      .article-content .staff-table td {
     font-size: .90rem !important;
     line-height: 1.55 !important;
   }
@@ -2208,7 +2217,7 @@ body.gallery-page-view .gallery-visible-caption {
   }
 
   .gallery-visible-caption,
-    body.gallery-page-view .gallery-visible-caption {
+      body.gallery-page-view .gallery-visible-caption {
     padding: 8px 8px 7px;
     font-size: .72rem;
   }
@@ -2254,7 +2263,7 @@ body.gallery-page-view .gallery-visible-caption {
   }
 
   .hero-theme-toggle,
-    .sticky-theme-control {
+      .sticky-theme-control {
     width: 34px !important;
     height: 34px !important;
     min-width: 34px !important;
@@ -2399,64 +2408,27 @@ body.gallery-page-view .gallery-visible-caption {
   }
 }
 
-.hero-theme-toggle .theme-icon svg,
-.sticky-theme-control .theme-icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
-
-
 @media (max-width: 850px) {
-
   .hero-theme-toggle,
-  .sticky-theme-control {
-    top: 0.08em !important;
+    .sticky-theme-control {
+    top: 6px !important;
     transform: none !important;
-  }
-
-
-
-  .hero-theme-toggle,
-  .sticky-theme-control {
     display: grid !important;
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
-  }
-
-}
-
-/* Theme control positioning */
-@media (min-width: 851px) {
-  .hero-theme-toggle,
-  .sticky-theme-control {
-    top: auto !important;
-    right: 0 !important;
-    bottom: 0.18em !important;
-    transform: none !important;
-  }
-}
-
-@media (max-width: 850px) {
-  .unified-mobile-bar {
-    grid-template-columns: 38px minmax(0, 1fr) 42px !important;
-  }
-
-  .hero-theme-toggle,
-  .sticky-theme-control {
     position: fixed !important;
-    top: 6px !important;
     right: 5px !important;
     z-index: 1300 !important;
     width: 34px !important;
     height: 34px !important;
     min-width: 34px !important;
     min-height: 34px !important;
-    transform: none !important;
     margin: 0 !important;
-    display: grid !important;
+  }
+
+  .unified-mobile-bar {
+    grid-template-columns: 38px minmax(0, 1fr) 42px !important;
   }
 
   .mobile-rail-wordmark {
@@ -2468,13 +2440,23 @@ body.gallery-page-view .gallery-visible-caption {
   }
 }
 
+@media (min-width: 851px) {
+  .hero-theme-toggle,
+    .sticky-theme-control {
+    top: auto !important;
+    right: 0 !important;
+    bottom: 0.18em !important;
+    transform: none !important;
+  }
+}
+
 @media (max-width: 520px) {
   .unified-mobile-bar {
     grid-template-columns: 36px minmax(0, 1fr) 40px !important;
   }
 
   .hero-theme-toggle,
-  .sticky-theme-control {
+    .sticky-theme-control {
     top: 6px !important;
     right: 4px !important;
     width: 32px !important;
@@ -2483,9 +2465,7 @@ body.gallery-page-view .gallery-visible-caption {
     min-height: 32px !important;
   }
 }
-
-</style>
-</head>
+</style></head>
 <body>
 <header class="site-header"><div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation"><button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button mobile-menu-button" data-menu-toggle="" type="button">
 <svg aria-hidden="true" viewbox="0 0 24 24">
