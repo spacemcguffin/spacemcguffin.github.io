@@ -402,8 +402,8 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
 .lede{
   margin:0 0 16px;
   color:var(--text);
-  font-size:.93rem;
-  line-height:1.65;
+  font-size:.96rem;
+  line-height:1.7;
 }
 
 .section{
@@ -428,8 +428,8 @@ html.dark .theme-icon-slot .theme-icon-moon{display:none!important}
 .section p{
   margin:0 0 1em;
   color:var(--text);
-  font-size:.93rem;
-  line-height:1.65;
+  font-size:.94rem;
+  line-height:1.62;
 }
 
 .trivia-list{
@@ -1708,6 +1708,112 @@ html.dark .categories-label{
 }
 </style>
 
+
+<style id="v12-theme-toggle-position">
+/* Keep the desktop light/dark toggle at the uppermost top-right of the page */
+@media(min-width:851px){
+  .sticky-theme-control{
+    position:fixed !important;
+    top:14px !important;
+    right:14px !important;
+    z-index:1600 !important;
+    margin:0 !important;
+  }
+
+  /* It no longer occupies space at the end of the sticky section rail */
+  .section-tabs .sticky-theme-control{
+    flex:none;
+  }
+}
+
+/* On mobile, retain the existing top-bar toggle at the far right */
+@media(max-width:850px){
+  .unified-mobile-bar .theme-control{
+    grid-column:3;
+  }
+}
+</style>
+
+
+<style id="v13-theme-toggle-title-alignment">
+/* Desktop: align the theme toggle with the article title/hero row */
+@media(min-width:851px){
+  .sticky-theme-control{
+    position:absolute !important;
+    top:18px !important;
+    right:18px !important;
+    z-index:950 !important;
+    margin:0 !important;
+  }
+
+  .shell{
+    position:relative;
+  }
+}
+</style>
+
+
+<style id="v14-title-toggle-and-article-type">
+/* Desktop theme toggle: genuinely aligned with the article title area */
+@media(min-width:851px){
+  .hero{
+    position:relative;
+    padding-right:52px;
+  }
+
+  .hero .sticky-theme-control{
+    position:absolute !important;
+    top:auto !important;
+    right:0 !important;
+    bottom:14px !important;
+    z-index:20 !important;
+    display:grid !important;
+    margin:0 !important;
+  }
+
+  /* Stop older positioning rules from affecting it */
+  .section-tabs .sticky-theme-control{
+    position:static !important;
+  }
+}
+
+/* Consistent article typography */
+.article-content .lede,
+.article-content .section p,
+.article-content .trivia-list li,
+.article-content .staff-table td{
+  font-size:.90rem !important;
+  line-height:1.55 !important;
+}
+
+/* Keep table headings distinct, but compact */
+.article-content .staff-table th{
+  line-height:1.35;
+}
+
+@media(max-width:850px){
+  .article-content .lede,
+  .article-content .section p,
+  .article-content .trivia-list li,
+  .article-content .staff-table td{
+    font-size:.90rem !important;
+    line-height:1.55 !important;
+  }
+}
+</style>
+
+
+<style id="v15-infobox-tab-size">
+.infobox-image-tab{
+  font-size:.73rem !important;
+}
+@media(max-width:850px){
+  .infobox-image-tab{
+    font-size:.72rem !important;
+  }
+}
+</style>
+
 </head>
  <body>
   <header class="site-header">
@@ -2686,6 +2792,32 @@ document.addEventListener("DOMContentLoaded", function(){
       setTimeout(updateButtons, 60);
     });
   });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const desktopTheme = document.querySelector(".sticky-theme-control");
+  const hero = document.querySelector(".hero");
+
+  function placeDesktopTheme(){
+    if (!desktopTheme || !hero) return;
+
+    if (window.innerWidth > 850) {
+      if (desktopTheme.parentElement !== hero) {
+        hero.appendChild(desktopTheme);
+      }
+    } else {
+      const tabs = document.querySelector(".section-tabs");
+      if (tabs && desktopTheme.parentElement !== tabs) {
+        tabs.appendChild(desktopTheme);
+      }
+    }
+  }
+
+  placeDesktopTheme();
+  window.addEventListener("resize", placeDesktopTheme, {passive:true});
 });
 </script>
 
