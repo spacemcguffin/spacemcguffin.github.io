@@ -978,6 +978,130 @@ footer{
   .season-row-thumb{width:82px}
 }
 
+
+/* Hero slider */
+.hero{
+  min-height:585px;
+}
+.hero-track{
+  position:relative;
+  width:100%;
+  min-height:585px;
+}
+.hero-slide{
+  position:absolute;
+  inset:0;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity .55s ease,visibility .55s ease;
+}
+.hero-slide.is-active{
+  opacity:1;
+  visibility:visible;
+  z-index:1;
+}
+.hero-slide>img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.015);
+  transition:transform 7s ease;
+}
+.hero-slide.is-active>img{
+  transform:scale(1.055);
+}
+.hero-slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(5,7,12,.85),rgba(5,7,12,.32) 50%,rgba(5,7,12,.06)),
+    linear-gradient(0deg,rgba(17,20,29,.4),transparent 45%);
+}
+.hero-slide .hero-copy{
+  position:relative;
+  z-index:2;
+}
+.hero-controls{
+  position:absolute;
+  z-index:5;
+  left:50%;
+  bottom:22px;
+  width:var(--shell);
+  transform:translateX(-50%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  pointer-events:none;
+}
+.hero-dots{
+  display:flex;
+  gap:8px;
+  pointer-events:auto;
+}
+.hero-dot{
+  width:10px;
+  height:10px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.65);
+  border-radius:50%;
+  background:rgba(17,20,29,.35);
+  cursor:pointer;
+  transition:transform .18s ease,background .18s ease;
+}
+.hero-dot:hover,
+.hero-dot:focus-visible{
+  transform:scale(1.15);
+  outline:none;
+}
+.hero-dot.is-active{
+  background:#fff;
+}
+.hero-arrows{
+  display:flex;
+  gap:8px;
+  pointer-events:auto;
+}
+.hero-arrow{
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid rgba(255,255,255,.34);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:rgba(17,20,29,.45);
+  color:#fff;
+  font-size:1.15rem;
+  cursor:pointer;
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  transition:background .18s ease,transform .18s ease;
+}
+.hero-arrow:hover,
+.hero-arrow:focus-visible{
+  background:rgba(17,20,29,.72);
+  transform:translateY(-1px);
+  outline:none;
+}
+
+@media(max-width:760px){
+  .hero,
+  .hero-track,
+  .hero-slide{
+    min-height:545px;
+  }
+  .hero-controls{
+    bottom:18px;
+  }
+  .hero-arrow{
+    width:36px;
+    height:36px;
+  }
+}
+
 </style>
 </head>
 <body id="top">
@@ -1020,18 +1144,54 @@ footer{
 </div>
 </div>
 </section>
-<section class="hero">
-<img alt="South Park" src="https://lewis.lc/sp/img/titlecard.png"/>
-<div class="hero-copy">
-<div class="hero-date">September 9, 2026</div>
-<h1>South Park is back.</h1>
-<p class="hero-dek">A new season begins in South Park.</p>
-<div class="actions">
-      <a class="paper-cta" href="#news">Read More
-      <svg class="cta-chevron" viewBox="0 0 12 12" aria-hidden="true">
-        <path d="M4.25 2.25 8 6 4.25 9.75"></path>
-      </svg></a>
+<section class="hero" aria-label="Featured stories">
+<div class="hero-track" id="heroTrack">
+  <article class="hero-slide is-active">
+    <img alt="South Park" src="https://lewis.lc/sp/img/titlecard.png"/>
+    <div class="hero-copy">
+      <div class="hero-date">September 9, 2026</div>
+      <h1>South Park is back.</h1>
+      <p class="hero-dek">A new season begins in South Park.</p>
+      <div class="actions">
+        <a class="paper-cta" href="#news">Read More
+        <svg class="cta-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.25 2.25 8 6 4.25 9.75"></path></svg></a>
+      </div>
     </div>
+  </article>
+
+  <article class="hero-slide">
+    <img alt="Sora Not Sorry" src="https://lewis.lc/sp/img/sns.png"/>
+    <div class="hero-copy">
+      <div class="hero-date">September 9, 2026</div>
+      <h1>Sora Not Sorry.</h1>
+      <p class="hero-dek">Butters' AI revenge plan backfires in South Park.</p>
+      <div class="actions">
+        <a class="paper-cta" href="/sp/movie">Explore Episode
+        <svg class="cta-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.25 2.25 8 6 4.25 9.75"></path></svg></a>
+      </div>
+    </div>
+  </article>
+
+  <article class="hero-slide">
+    <img alt="Twisted Christian" src="https://lewis.lc/sp/img/tc.png"/>
+    <div class="hero-copy">
+      <div class="hero-date">Season 28</div>
+      <h1>Twisted Christian.</h1>
+      <p class="hero-dek">Cartman may be the key to stopping the Antichrist.</p>
+      <div class="actions">
+        <a class="paper-cta" href="/sp/movie">Latest Season
+        <svg class="cta-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="M4.25 2.25 8 6 4.25 9.75"></path></svg></a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<div class="hero-controls">
+  <div class="hero-dots" id="heroDots" aria-label="Featured story pagination"></div>
+  <div class="hero-arrows">
+    <button class="hero-arrow" id="heroPrev" type="button" aria-label="Previous featured story">‹</button>
+    <button class="hero-arrow" id="heroNext" type="button" aria-label="Next featured story">›</button>
+  </div>
 </div>
 </section>
 <section class="section" id="news">
@@ -1106,6 +1266,60 @@ footer{
   </div>
 </footer>
 <script>
+
+const heroSlides = [...document.querySelectorAll('.hero-slide')];
+const heroDots = document.getElementById('heroDots');
+const heroPrev = document.getElementById('heroPrev');
+const heroNext = document.getElementById('heroNext');
+let heroIndex = 0;
+let heroTimer;
+
+function showHeroSlide(index, restart = true) {
+  if (!heroSlides.length) return;
+
+  heroIndex = (index + heroSlides.length) % heroSlides.length;
+
+  heroSlides.forEach((slide, i) => {
+    const active = i === heroIndex;
+    slide.classList.toggle('is-active', active);
+    slide.setAttribute('aria-hidden', String(!active));
+  });
+
+  if (heroDots) {
+    [...heroDots.children].forEach((dot, i) => {
+      const active = i === heroIndex;
+      dot.classList.toggle('is-active', active);
+      if (active) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+  }
+
+  if (restart) startHeroAutoplay();
+}
+
+function startHeroAutoplay() {
+  window.clearInterval(heroTimer);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  heroTimer = window.setInterval(() => showHeroSlide(heroIndex + 1, false), 6500);
+}
+
+if (heroDots && heroSlides.length) {
+  heroSlides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'hero-dot';
+    dot.setAttribute('aria-label', `Featured story ${i + 1}`);
+    dot.addEventListener('click', () => showHeroSlide(i));
+    heroDots.appendChild(dot);
+  });
+
+  heroPrev?.addEventListener('click', () => showHeroSlide(heroIndex - 1));
+  heroNext?.addEventListener('click', () => showHeroSlide(heroIndex + 1));
+
+  showHeroSlide(0, false);
+  startHeroAutoplay();
+}
+
 const newsGrid = document.querySelector('.news-grid');
 const newsPagination = document.getElementById('newsPagination');
 
