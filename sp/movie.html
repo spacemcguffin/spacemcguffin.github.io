@@ -12654,7 +12654,7 @@ function getSeasonNavigation(index = activeEpisodeIndex) {
 }
 
 
-function syncURL() {
+function syncURL(historyMode = "replace") {
 
   if (suppressURLSync) return;
 
@@ -12694,7 +12694,14 @@ function syncURL() {
   const query = params.toString();
   const url = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
 
-  history.replaceState(null, "", url);
+  const method = historyMode === "push" ? "pushState" : "replaceState";
+
+  /* Avoid filling browser history with duplicate copies of the same URL. */
+  if (url === `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+    return;
+  }
+
+  history[method]({ southParkGuide: true }, "", url);
 
 }
 
@@ -13968,13 +13975,12 @@ function updateModal(
 
   modalScroll.scrollTop = 0;
 
-  syncURL();
-
 }
 
 
 function openModal(
-  index
+  index,
+  historyMode = "push"
 ) {
 
   updateModal(
@@ -13985,7 +13991,7 @@ function openModal(
     "active"
   );
 
-  syncURL();
+  syncURL(historyMode);
 
   modal.setAttribute(
     "aria-hidden",
@@ -14570,6 +14576,7 @@ function animateModalChange(index, direction) {
 
   if (reducedMotion) {
     updateModal(index);
+    syncURL("push");
     return;
   }
 
@@ -14596,6 +14603,7 @@ function animateModalChange(index, direction) {
     .catch(() => {})
     .then(() => {
       updateModal(index);
+      syncURL("push");
 
       modalScroll.animate(
         [
@@ -15139,10 +15147,9 @@ if (seasonRailNext) {
    INITIALISE
 ========================================================= */
 
-/* Always begin from a completely clean guide after a page load/refresh.
-   URL state is still updated while browsing, but it is deliberately ignored
-   and removed the next time the document loads. */
-history.replaceState(null, "", window.location.pathname);
+/* Start the guide itself clean after a refresh, but preserve a directly linked
+   episode modal. This means URLs such as ?episode=s5e4 can be shared and will
+   reopen the correct episode immediately. */
 selectedSeasons.clear();
 searchInput.value = "";
 searchQuery = "";
@@ -15150,11 +15157,19 @@ currentPage = 1;
 viewMode = "grid";
 activeEpisodeIndex = -1;
 
-const initialEpisodeIndex = -1;
+const initialEpisodeIndex = findEpisodeIndexBySlug(
+  new URLSearchParams(window.location.search).get("episode")
+);
 
 syncSearchClearButton();
 renderPage();
-syncURL();
+
+if (initialEpisodeIndex >= 0) {
+  openModal(initialEpisodeIndex, "replace");
+}
+else {
+  syncURL("replace");
+}
 
 
 
