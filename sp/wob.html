@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,400;6..144,500;6..144,600;6..144,700;6..144,800;6..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style> 
+<style>
 /* =========================================================
    ROOT / THEME
    ========================================================= */
@@ -72,7 +72,7 @@ img{display:block;max-width:100%}
    ========================================================= */
 .masthead{
   position:relative;
-  min-height:195px;
+  min-height:125px;
   overflow:hidden;
   border-bottom:1px solid var(--line-strong);
   background:#10202a;
@@ -233,7 +233,7 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
   display:flex;align-items:center;justify-content:space-between;gap:14px;
   min-height:38px;padding:7px 14px;background:#111;color:#fff;
 }
-.section-bar h2{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:760;letter-spacing:-.025em;text-transform:uppercase}
+.section-bar h2{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:16px;font-weight:650;letter-spacing:-.025em;text-transform:uppercase}
 .section-bar a{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;opacity:.75}
 .section-bar a:hover{opacity:1}
 
@@ -263,14 +263,12 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
    FEATURE CARDS
    ========================================================= */
 .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
-.feature-card{display:grid;grid-template-rows:auto 1fr}
+.feature-card{display:grid;grid-template-rows:auto auto 1fr}
 .card-media{position:relative;aspect-ratio:16/8.9;overflow:hidden;background:#0c1418}
 .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .28s ease,filter .28s ease}
 .feature-card:hover .card-media img{transform:scale(1.018);filter:brightness(1.03)}
-.play{position:absolute;right:15px;bottom:15px;width:47px;height:47px;border:1px solid rgba(255,255,255,.8);border-radius:50%;display:grid;place-items:center;background:rgba(5,7,8,.66);backdrop-filter:blur(3px)}
-.play svg{width:17px;fill:#fff;margin-left:3px}
-.card-copy{padding:13px 15px 15px}
-.card-copy h3{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:22px;font-weight:700;line-height:1.03;letter-spacing:-.035em}
+.card-copy{padding:10px 15px 15px}
+.card-copy h3{margin:0;font-family:"Google Sans Flex",sans-serif;font-size:22px;font-weight:620;line-height:1.03;letter-spacing:-.035em}
 .card-copy p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
 
 /* =========================================================
@@ -335,7 +333,7 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
    RESPONSIVE
    ========================================================= */
 @media (max-width:900px){
-  .masthead{min-height:170px}
+  .masthead{min-height:105px}
   .navbar{grid-template-columns:1fr auto}
   .hero-slider,.hero-track,.hero-copy{min-height:330px}
   .hero-copy{padding:40px 64px 34px}
@@ -344,7 +342,7 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
 }
 @media (max-width:680px){
   .site{width:100%;margin:0;border-left:0;border-right:0}
-  .masthead{min-height:150px}
+  .masthead{min-height:92px}
   .masthead-copy{left:14px;right:14px;bottom:13px}
   .masthead-wordmark{font-size:34px}
   .tagline{font-size:9px;letter-spacing:.09em}
@@ -375,7 +373,7 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
 }
 @media (max-width:430px){
   .hero-copy{padding-left:50px;padding-right:50px}
-  .masthead{min-height:138px}
+  .masthead{min-height:82px}
   .masthead-wordmark{font-size:30px}
   .tagline{max-width:125px;text-align:right}
   .latest-grid{grid-template-columns:1fr}
@@ -385,6 +383,57 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
   .latest-item h3{font-size:16px}
   .card-copy h3{font-size:19px}
 }
+
+/* Latest season */
+.news-image{
+  aspect-ratio:16/9;
+  min-height:0;
+}
+.news-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+
+/* Latest season layout fix */
+.news-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  align-items:start;
+}
+.news-image{
+  position:relative;
+  width:100%;
+  min-width:0;
+  aspect-ratio:16/9;
+  height:auto;
+  overflow:hidden;
+}
+.news-image img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.news-list{
+  min-width:0;
+  width:100%;
+}
+.news-row{
+  min-width:0;
+  overflow:hidden;
+}
+.news-row h3{
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+@media(max-width:680px){
+  .news-layout{grid-template-columns:1fr}
+  .news-image{aspect-ratio:16/9}
+}
+
 </style>
 </head>
 <body>
@@ -474,7 +523,6 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
         <div class="section-bar"><h2>Latest episode</h2><a href="/sp/movie">All episodes →</a></div>
         <a href="/sp/movie" class="card-media">
           <img src="https://lewis.lc/sp/img/sns.png" alt="Episode still from Sora Not Sorry">
-          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"></path></svg></span>
         </a>
         <div class="card-copy">
           <h3>Sora Not Sorry</h3>
@@ -486,7 +534,6 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
         <div class="section-bar"><h2>Featured story</h2><a href="/sp/news">More news →</a></div>
         <a href="/sp/movie" class="card-media">
           <img src="https://lewis.lc/sp/img/tt.png" alt="Episode still from Turkey Trot">
-          <span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7z"></path></svg></span>
         </a>
         <div class="card-copy">
           <h3>Cartman turns the Turkey Trot into a science experiment</h3>
@@ -506,16 +553,16 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
           <div class="text"><span class="num">S28 E01</span><h3>Twisted Christian</h3></div>
         </a>
         <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/twith.png" alt="The Woman in the Hat episode still"></div>
-          <div class="text"><span class="num">S28 E02</span><h3>The Woman in the Hat</h3></div>
+          <div class="thumb"><img src="https://lewis.lc/sp/img/chickenlover.png" alt="Chickenlover episode still"></div>
+          <div class="text"><span class="num">S02 E04</span><h3>Chickenlover</h3></div>
         </a>
         <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/sotm.png" alt="Sermon on the Mount episode still"></div>
-          <div class="text"><span class="num">S27 E01</span><h3>Sermon on the ’Mount</h3></div>
+          <div class="thumb"><img src="https://lewis.lc/sp/img/spookyfish.png" alt="Spookyfish episode still"></div>
+          <div class="text"><span class="num">S02 E15</span><h3>Spookyfish</h3></div>
         </a>
         <a class="latest-item" href="/sp/movie">
-          <div class="thumb"><img src="https://lewis.lc/sp/img/gan.png" alt="Got a Nut episode still"></div>
-          <div class="text"><span class="num">S27 E02</span><h3>Got a Nut</h3></div>
+          <div class="thumb"><img src="https://lewis.lc/sp/img/rs.png" alt="Rainforest Shmainforest episode still"></div>
+          <div class="text"><span class="num">S03 E01</span><h3>Rainforest Shmainforest</h3></div>
         </a>
         <a class="latest-item" href="/sp/movie">
           <div class="thumb"><img src="https://lewis.lc/sp/img/blau.png" alt="South Park: Bigger, Longer & Uncut artwork"></div>
@@ -529,28 +576,32 @@ html:not([data-theme="dark"]) .theme-stars{transition-delay:0s}
     </section>
 
     <!-- ===================================================
-         NEWS
+         CURRENT SEASON
          =================================================== -->
     <section class="news section-shell">
-      <div class="section-bar"><h2>News from South Park</h2><a href="/sp/news">News archive →</a></div>
+      <div class="section-bar"><h2>Latest Season</h2><a href="/sp/movie">Previous seasons →</a></div>
       <div class="news-layout">
-        <div class="news-image"><img id="newsPreview" src="https://lewis.lc/sp/img/tco.png" alt="South Park story artwork"></div>
+        <div class="news-image"><img id="newsPreview" src="https://lewis.lc/sp/img/tc.png" alt="Twisted Christian episode still"></div>
         <div class="news-list">
-          <a class="news-row is-active" data-image="https://lewis.lc/sp/img/tco.png" href="/sp/movie">
-            <span class="news-date">Guide update</span>
-            <div><h3>Season 28 is now complete in the episode guide</h3></div>
+          <a class="news-row is-active" data-image="https://lewis.lc/sp/img/tc.png" href="/sp/movie">
+            <span class="news-date">Episode 1</span>
+            <div><h3>Twisted Christian</h3></div>
+          </a>
+          <a class="news-row" data-image="https://lewis.lc/sp/img/twith.png" href="/sp/movie">
+            <span class="news-date">Episode 2</span>
+            <div><h3>The Woman in the Hat</h3></div>
           </a>
           <a class="news-row" data-image="https://lewis.lc/sp/img/sns.png" href="/sp/movie">
-            <span class="news-date">Site update</span>
-            <div><h3>The episode guide gets a fresh coat of construction paper</h3></div>
+            <span class="news-date">Episode 3</span>
+            <div><h3>Sora Not Sorry</h3></div>
           </a>
-          <a class="news-row" data-image="https://lewis.lc/sp/img/wid.png" href="/sp/movie">
-            <span class="news-date">From S27</span>
-            <div><h3>Revisit “Wok Is Dead” and the rest of Season 27</h3></div>
+          <a class="news-row" data-image="https://lewis.lc/sp/img/tt.png" href="/sp/movie">
+            <span class="news-date">Episode 4</span>
+            <div><h3>Turkey Trot</h3></div>
           </a>
-          <a class="news-row" data-image="https://lewis.lc/sp/img/coi.png" href="/sp/movie">
-            <span class="news-date">Episode guide</span>
-            <div><h3>Conflict of Interest joins the latest South Park archive</h3></div>
+          <a class="news-row" data-image="https://lewis.lc/sp/img/tco.png" href="/sp/movie">
+            <span class="news-date">Episode 5</span>
+            <div><h3>The Crap Out</h3></div>
           </a>
         </div>
       </div>
