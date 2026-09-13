@@ -180,9 +180,15 @@ const heroSlides = [...document.querySelectorAll('.hero-slide')];
 const heroDots = document.getElementById('heroDots');
 const heroPrev = document.getElementById('heroPrev');
 const heroNext = document.getElementById('heroNext');
+const heroControls = document.querySelector('.hero-controls');
+const hasMultipleHeroSlides = heroSlides.length > 1;
 let heroIndex = 0;
 let heroTimer;
 let heroPaused = false;
+
+if (!hasMultipleHeroSlides && heroControls) {
+  heroControls.hidden = true;
+}
 
 function showHeroSlide(index, restart = true) {
   if (!heroSlides.length) return;
@@ -209,7 +215,7 @@ function showHeroSlide(index, restart = true) {
 
 function startHeroAutoplay() {
   window.clearInterval(heroTimer);
-  if (heroPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!hasMultipleHeroSlides || heroPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   heroTimer = window.setInterval(() => showHeroSlide(heroIndex + 1, false), 8000);
 }
 
@@ -223,49 +229,51 @@ function resumeHeroAutoplay() {
   startHeroAutoplay();
 }
 
-if (heroDots && heroSlides.length) {
-  heroSlides.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.type = 'button';
-    dot.className = 'hero-dot';
-    dot.setAttribute('aria-label', `Featured story ${i + 1}`);
-    dot.addEventListener('click', () => showHeroSlide(i));
-    heroDots.appendChild(dot);
-  });
-
-  heroPrev?.addEventListener('click', () => showHeroSlide(heroIndex - 1));
-  heroNext?.addEventListener('click', () => showHeroSlide(heroIndex + 1));
-
-  const hero = document.querySelector('.hero');
-  if (hero) {
-    hero.addEventListener('mouseenter', pauseHeroAutoplay);
-    hero.addEventListener('mouseleave', resumeHeroAutoplay);
-    hero.addEventListener('focusin', pauseHeroAutoplay);
-    hero.addEventListener('focusout', event => {
-      if (!hero.contains(event.relatedTarget)) resumeHeroAutoplay();
+if (heroSlides.length) {
+  if (hasMultipleHeroSlides && heroDots) {
+    heroSlides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'hero-dot';
+      dot.setAttribute('aria-label', `Featured story ${i + 1}`);
+      dot.addEventListener('click', () => showHeroSlide(i));
+      heroDots.appendChild(dot);
     });
 
-    let touchStartX = 0;
-    let touchStartY = 0;
+    heroPrev?.addEventListener('click', () => showHeroSlide(heroIndex - 1));
+    heroNext?.addEventListener('click', () => showHeroSlide(heroIndex + 1));
 
-    hero.addEventListener('touchstart', event => {
-      const touch = event.changedTouches[0];
-      touchStartX = touch.clientX;
-      touchStartY = touch.clientY;
-      pauseHeroAutoplay();
-    }, {passive:true});
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('mouseenter', pauseHeroAutoplay);
+      hero.addEventListener('mouseleave', resumeHeroAutoplay);
+      hero.addEventListener('focusin', pauseHeroAutoplay);
+      hero.addEventListener('focusout', event => {
+        if (!hero.contains(event.relatedTarget)) resumeHeroAutoplay();
+      });
 
-    hero.addEventListener('touchend', event => {
-      const touch = event.changedTouches[0];
-      const deltaX = touch.clientX - touchStartX;
-      const deltaY = touch.clientY - touchStartY;
+      let touchStartX = 0;
+      let touchStartY = 0;
 
-      if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
-        showHeroSlide(deltaX < 0 ? heroIndex + 1 : heroIndex - 1, false);
-      }
+      hero.addEventListener('touchstart', event => {
+        const touch = event.changedTouches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+        pauseHeroAutoplay();
+      }, {passive:true});
 
-      resumeHeroAutoplay();
-    }, {passive:true});
+      hero.addEventListener('touchend', event => {
+        const touch = event.changedTouches[0];
+        const deltaX = touch.clientX - touchStartX;
+        const deltaY = touch.clientY - touchStartY;
+
+        if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {
+          showHeroSlide(deltaX < 0 ? heroIndex + 1 : heroIndex - 1, false);
+        }
+
+        resumeHeroAutoplay();
+      }, {passive:true});
+    }
   }
 
   showHeroSlide(0, false);
