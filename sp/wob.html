@@ -15,10 +15,6 @@
   --yellow:#f3d55b;
   --guide-blue:#5A84BE;
   --wiki-pink:#BC5B9B;
-  --surface:#171b27;
-  --surface-2:#202635;
-  --line:rgba(255,255,255,.12);
-  --muted:rgba(255,255,255,.62);
 }
 
 ::selection {
@@ -780,35 +776,36 @@ footer{
 /* Latest Season */
 #latest-season{
   width:100%;
-  padding:70px max(28px,calc((100vw - 1240px)/2)) 78px;
-  background:var(--surface);
-  color:var(--text);
+  padding:0 max(28px,calc((100vw - 1240px)/2)) 78px;
+  background:#F8F8F8;
+  color:var(--ink);
 }
 .season-title-row{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
   gap:20px;
-  margin-bottom:30px;
+  margin-bottom:28px;
 }
 #latest-season h2{
   margin:0;
-  font-size:clamp(2.5rem,4.4vw,4.9rem);
-  font-weight:690;
-  line-height:1;
+  color:var(--ink);
+  font-size:clamp(2.6rem,3vw,4.4rem);
+  font-weight:680;
+  line-height:1.05;
+  letter-spacing:-.02em;
   text-transform:uppercase;
-  letter-spacing:-.025em;
 }
-.season-all{
+.season-link{
   position:relative;
   padding:5px 0;
-  color:var(--muted);
-  font-size:.69rem;
+  color:rgba(23,34,51,.62);
+  font-size:.68rem;
   font-weight:760;
   letter-spacing:.07em;
   text-transform:uppercase;
 }
-.season-all::after{
+.season-link::after{
   content:"";
   position:absolute;
   left:0;
@@ -820,22 +817,22 @@ footer{
   transform-origin:left;
   transition:transform .2s ease;
 }
-.season-all:hover::after,
-.season-all:focus-visible::after{transform:scaleX(1)}
+.season-link:hover::after,
+.season-link:focus-visible::after{transform:scaleX(1)}
 
 .season-layout{
   display:grid;
   grid-template-columns:minmax(0,44%) minmax(0,56%);
   min-height:330px;
-  border:1px solid var(--line);
-  background:var(--surface-2);
+  border:1px solid rgba(23,34,51,.08);
+  background:#fff;
 }
 .season-preview{
   position:relative;
   min-width:0;
   overflow:hidden;
-  border-right:1px solid var(--line);
-  background:#0c1119;
+  border-right:1px solid rgba(23,34,51,.08);
+  background:#e7ebee;
 }
 .season-preview a{
   display:block;
@@ -849,7 +846,7 @@ footer{
   height:100%;
   object-fit:cover;
   object-position:center 30%;
-  transition:opacity .18s ease,transform .3s ease;
+  transition:opacity .18s ease,transform .25s ease;
 }
 .season-preview:hover img{transform:scale(1.015)}
 
@@ -868,8 +865,8 @@ footer{
   flex:1 1 0;
   min-height:58px;
   padding:10px 12px;
-  border-bottom:1px solid var(--line);
-  color:var(--text);
+  border-bottom:1px solid rgba(23,34,51,.08);
+  color:var(--ink);
   overflow:hidden;
   transition:background .16s ease;
 }
@@ -889,7 +886,7 @@ footer{
 .season-row:hover,
 .season-row:focus-visible,
 .season-row.is-active{
-  background:color-mix(in srgb,var(--guide-blue) 12%,transparent);
+  background:rgba(90,132,190,.08);
 }
 .season-row:hover::before,
 .season-row:focus-visible::before,
@@ -900,8 +897,8 @@ footer{
 .season-row-thumb{display:none}
 .season-row-copy{display:contents}
 .season-ep{
-  color:var(--muted);
-  font-size:.64rem;
+  color:rgba(23,34,51,.56);
+  font-size:.63rem;
   font-weight:760;
   letter-spacing:.08em;
   text-transform:uppercase;
@@ -915,12 +912,19 @@ footer{
 }
 .season-row:hover h3,
 .season-row:focus-visible h3,
-.season-row.is-active h3{color:#7fa3d5}
+.season-row.is-active h3{color:var(--guide-blue)}
 
 @media(max-width:760px){
-  #latest-season{padding:54px 16px 62px}
-  .season-title-row{align-items:center;margin-bottom:20px}
-  #latest-season h2{font-size:clamp(2rem,10vw,3rem)}
+  #latest-season{
+    padding:0 16px 64px;
+  }
+  .season-title-row{
+    align-items:center;
+    margin-bottom:20px;
+  }
+  #latest-season h2{
+    font-size:clamp(2.2rem,10vw,3rem);
+  }
   .season-layout{
     display:block;
     min-height:0;
@@ -929,19 +933,25 @@ footer{
   }
   .season-preview{display:none}
   .season-list{
+    display:grid;
+    gap:10px;
     padding:0;
-    border:1px solid var(--line);
-    background:var(--surface-2);
+    border:0;
+    background:transparent;
   }
   .season-row{
-    grid-template-columns:92px minmax(0,1fr);
+    grid-template-columns:96px minmax(0,1fr);
     gap:12px;
     min-height:0;
     padding:10px;
+    border:1px solid rgba(23,34,51,.08);
+    background:#fff;
   }
+  .season-row::before{display:none}
+  .season-row:last-child{border-bottom:1px solid rgba(23,34,51,.08)}
   .season-row-thumb{
     display:block;
-    width:92px;
+    width:96px;
     aspect-ratio:16/9;
     object-fit:cover;
   }
@@ -962,10 +972,10 @@ footer{
     gap:8px;
   }
   .season-row{
-    grid-template-columns:78px minmax(0,1fr);
+    grid-template-columns:82px minmax(0,1fr);
     gap:10px;
   }
-  .season-row-thumb{width:78px}
+  .season-row-thumb{width:82px}
 }
 
 </style>
@@ -1044,7 +1054,7 @@ footer{
 <section id="latest-season" aria-labelledby="latestSeasonTitle">
   <div class="season-title-row">
     <h2 id="latestSeasonTitle">Latest Season</h2>
-    <a class="season-all" href="/sp/movie">Previous seasons</a>
+    <a class="season-link" href="/sp/movie">Previous seasons</a>
   </div>
   <div class="season-layout">
     <div class="season-preview">
@@ -1123,7 +1133,16 @@ if (newsGrid && newsPagination) {
     button.className = 'news-page';
     button.textContent = String(page + 1);
     button.setAttribute('aria-label', `News page ${page + 1}`);
-    button.addEventListener('click', () => showNewsPage(page));
+    button.addEventListener('click', () => {
+      showNewsPage(page);
+      const newsSection = document.getElementById('news');
+      if (newsSection) {
+        newsSection.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      }
+    });
     newsPagination.appendChild(button);
   }
 
