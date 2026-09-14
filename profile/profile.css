@@ -28,13 +28,13 @@
 
 
 
-.marker{
+marker{
   position:relative;
   z-index:0;
   display:inline;
 }
 
-.marker::before{
+marker::before{
   content:"";
   position:absolute;
   z-index:-1;
