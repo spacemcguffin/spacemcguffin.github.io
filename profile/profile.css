@@ -23,6 +23,61 @@
 
 
 
+
+
+
+
+
+.marker{
+  position:relative;
+  z-index:0;
+  display:inline;
+}
+
+.marker::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:-.12em;
+  right:-.12em;
+  top:54%;
+  height:.92em;
+  transform:translateY(-50%) rotate(-.35deg);
+  background:rgba(213,174,191,.68);
+  border-radius:45% 38% 42% 34% / 35% 45% 38% 48%;
+  clip-path:polygon(
+    0 14%,
+    5% 7%,
+    13% 11%,
+    22% 5%,
+    32% 10%,
+    43% 4%,
+    55% 9%,
+    67% 5%,
+    78% 10%,
+    89% 4%,
+    97% 9%,
+    100% 20%,
+    99% 82%,
+    94% 91%,
+    83% 87%,
+    72% 94%,
+    60% 88%,
+    47% 95%,
+    35% 89%,
+    23% 94%,
+    12% 88%,
+    4% 93%,
+    0 79%
+  );
+}
+
+
+
+
+
+
+
 *{
     margin:0;
     padding:0;
