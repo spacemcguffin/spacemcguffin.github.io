@@ -271,25 +271,9 @@ html[data-theme="dark"] {
     linear-gradient(90deg, rgba(5,28,55,.18), transparent 32%, transparent 72%, rgba(255,255,255,.035));
 }
 
-.continuation-link{
-  display:block;
-  color:inherit;
-  text-decoration:none;
-}
-
 .continuation-shell{
   padding-top:52px;
   padding-bottom:48px;
-}
-
-.continuation-topline,
-.continuation-bottom{
-  font-family:"Inter",Arial,sans-serif;
-  font-size:.72rem;
-  font-weight:600;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color:rgba(224,239,255,.78);
 }
 
 .continuation-topline{
@@ -297,6 +281,12 @@ html[data-theme="dark"] {
   grid-template-columns:1fr auto;
   gap:30px;
   align-items:center;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(224,239,255,.78);
 }
 
 .continuation-rule{
@@ -331,15 +321,37 @@ html[data-theme="dark"] {
 }
 
 .continuation-year{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
   margin-top:.14em;
   color:#cfe8ff;
+  text-decoration:none;
 }
 
-.continuation-arrow{
-  display:inline-block;
-  margin-left:.08em;
-  font-weight:450;
+.continuation-chevron{
+  width:.55em;
+  height:.55em;
+  margin-left:.16em;
+  flex:0 0 auto;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:3.4;
+  stroke-linecap:square;
+  stroke-linejoin:miter;
   transition:transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.continuation-year:hover .continuation-chevron,
+.continuation-year:focus-visible .continuation-chevron{
+  transform:translateX(.12em);
+}
+
+.continuation-year:focus-visible{
+  outline:2px solid rgba(255,255,255,.85);
+  outline-offset:.08em;
+  border-radius:.03em;
 }
 
 .continuation-main p{
@@ -351,51 +363,19 @@ html[data-theme="dark"] {
   color:rgba(255,255,255,.92);
 }
 
-.continuation-bottom{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:26px 34px;
-  align-items:end;
-}
-
-.continuation-bottom .continuation-rule{
-  grid-column:1 / -1;
-}
-
-.continuation-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.55rem 1rem;
-}
-
-.continuation-still{
-  justify-self:end;
-  white-space:nowrap;
-}
-
-.continuation-link:hover .continuation-arrow,
-.continuation-link:focus-visible .continuation-arrow{
-  transform:translateX(.16em);
-}
-
-.continuation-link:focus-visible{
-  outline:3px solid rgba(255,255,255,.8);
-  outline-offset:-6px;
+.continuation-bottom-rule{
+  margin-top:0;
 }
 
 /* Small entrance motion; the section remains fully usable without JS. */
 .continuation-section.continuation-ready .continuation-end,
-.continuation-section.continuation-ready .continuation-main,
-.continuation-section.continuation-ready .continuation-meta,
-.continuation-section.continuation-ready .continuation-still{
+.continuation-section.continuation-ready .continuation-main{
   opacity:0;
   transform:translateY(14px);
 }
 
 .continuation-section.continuation-ready.is-visible .continuation-end,
-.continuation-section.continuation-ready.is-visible .continuation-main,
-.continuation-section.continuation-ready.is-visible .continuation-meta,
-.continuation-section.continuation-ready.is-visible .continuation-still{
+.continuation-section.continuation-ready.is-visible .continuation-main{
   opacity:1;
   transform:translateY(0);
   transition:
@@ -403,9 +383,9 @@ html[data-theme="dark"] {
     transform .65s cubic-bezier(.2,.8,.2,1);
 }
 
-.continuation-section.continuation-ready.is-visible .continuation-main{transition-delay:.06s;}
-.continuation-section.continuation-ready.is-visible .continuation-meta,
-.continuation-section.continuation-ready.is-visible .continuation-still{transition-delay:.12s;}
+.continuation-section.continuation-ready.is-visible .continuation-main{
+  transition-delay:.06s;
+}
 
 @media (max-width:800px){
   .continuation-shell{
@@ -452,33 +432,17 @@ html[data-theme="dark"] {
   .continuation-main h2{
     font-size:clamp(2.8rem,15vw,4.6rem);
   }
-
-  .continuation-bottom{
-    grid-template-columns:1fr;
-    gap:20px;
-  }
-
-  .continuation-still{
-    justify-self:start;
-  }
-
-  .continuation-meta{
-    gap:.45rem .7rem;
-    font-size:.66rem;
-  }
 }
 
 @media (prefers-reduced-motion:reduce){
   .continuation-section.continuation-ready .continuation-end,
-  .continuation-section.continuation-ready .continuation-main,
-  .continuation-section.continuation-ready .continuation-meta,
-  .continuation-section.continuation-ready .continuation-still{
+  .continuation-section.continuation-ready .continuation-main{
     opacity:1;
     transform:none;
     transition:none;
   }
 
-  .continuation-arrow{
+  .continuation-chevron{
     transition:none;
   }
 }
@@ -1418,34 +1382,27 @@ html[data-theme="dark"] {
     </div>
     </div>
     <section class="continuation-section" aria-labelledby="continuationTitle">
-      <a class="continuation-link" href="/diary/2027" aria-label="Continue to the 2027 diary">
-        <div class="page-shell continuation-shell">
-          <div class="continuation-topline">
-            <span class="continuation-rule" aria-hidden="true"></span>
-            <span class="continuation-end">// &nbsp;END OF 2026</span>
-          </div>
-
-          <div class="continuation-main">
-            <h2 id="continuationTitle">
-              <span>TO BE CONTINUED</span>
-              <span class="continuation-year">IN 2027 <span class="continuation-arrow" aria-hidden="true">→</span></span>
-            </h2>
-            <p>Same life. Another year.</p>
-          </div>
-
-          <div class="continuation-bottom">
-            <span class="continuation-rule" aria-hidden="true"></span>
-            <div class="continuation-meta">
-              <span>LEWIS CHRISTIAN</span>
-              <span aria-hidden="true">/</span>
-              <span>DIARY</span>
-              <span aria-hidden="true">/</span>
-              <span>2026</span>
-            </div>
-            <span class="continuation-still">STILL HERE.</span>
-          </div>
+      <div class="page-shell continuation-shell">
+        <div class="continuation-topline">
+          <span class="continuation-rule" aria-hidden="true"></span>
+          <span class="continuation-end">// &nbsp;END OF 2026</span>
         </div>
-      </a>
+
+        <div class="continuation-main">
+          <h2 id="continuationTitle">
+            <span>TO BE CONTINUED</span>
+            <a class="continuation-year" href="/diary/2027" aria-label="Continue to the 2027 diary">
+              <span>IN 2027</span>
+              <svg class="continuation-chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 4l8 8-8 8"/>
+              </svg>
+            </a>
+          </h2>
+          <p>Same life. Another year.</p>
+        </div>
+
+        <span class="continuation-rule continuation-bottom-rule" aria-hidden="true"></span>
+      </div>
     </section>
   </main>
 
