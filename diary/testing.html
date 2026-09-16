@@ -1,0 +1,1461 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Lewis Christian's diary archive" />
+  <title>2026 Diary</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,1..1000&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Pixel&display=swap" rel="stylesheet"> 
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Oswald:wght@400;500;600&amp;display=swap" rel="stylesheet">
+
+    <link href="diary.css" rel="stylesheet" type="text/css" media="all">  
+	
+
+
+<style>
+.diary-search input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none;display:none;}
+.diary-search input[type="search"]::-ms-clear{display:none;}
+#clearDiarySearch{position:absolute;right:42px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:none;border-radius:50%;background:transparent;color:var(--text);cursor:pointer;opacity:0;pointer-events:none;transition:.18s;font-size:18px;line-height:1}
+.diary-search{position:relative}
+.diary-search.has-text #clearDiarySearch{opacity:.7;pointer-events:auto}
+#clearDiarySearch:hover{opacity:1;background:rgba(255,255,255,.08)}
+</style>
+
+<style id="diary-search-repair">
+:root {
+  --diary-ui-bg: rgba(255,255,255,.86);
+  --diary-ui-border: rgba(80,105,145,.28);
+  --diary-ui-text: #182235;
+  --diary-ui-muted: rgba(24,34,53,.54);
+  --diary-ui-focus: #6e8ec1;
+  --diary-ui-ring: rgba(110,142,193,.18);
+  --diary-ui-hover: rgba(110,142,193,.13);
+  --diary-ui-shadow: 0 8px 24px rgba(42,57,82,.10);
+}
+
+html[data-theme="dark"] {
+  --diary-ui-bg: rgba(18,24,37,.9);
+  --diary-ui-border: rgba(154,181,226,.25);
+  --diary-ui-text: rgba(244,247,255,.96);
+  --diary-ui-muted: rgba(219,228,245,.6);
+  --diary-ui-focus: #9bbcff;
+  --diary-ui-ring: rgba(130,169,255,.22);
+  --diary-ui-hover: rgba(155,188,255,.14);
+  --diary-ui-shadow: 0 10px 30px rgba(0,0,0,.28);
+}
+
+.diary-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 0 1rem;
+  color: var(--diary-ui-text);
+}
+
+.diary-search-icon {
+  width:20px;
+  height:20px;
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  color: var(--diary-ui-muted);
+  pointer-events: none;
+  font-size: 1.05rem;
+}
+
+#diarySearch {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: .85rem 7.5rem .85rem 2.75rem;
+  border: 1px solid var(--diary-ui-border);
+  border-radius: 12px;
+  background: var(--diary-ui-bg);
+  color: var(--diary-ui-text);
+  font: inherit;
+  outline: none;
+  box-shadow: var(--diary-ui-shadow);
+  caret-color: var(--diary-ui-focus);
+  transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease, color .18s ease;
+}
+
+#diarySearch:focus {
+  border-color: var(--diary-ui-focus);
+  box-shadow: 0 0 0 3px var(--diary-ui-ring), var(--diary-ui-shadow);
+}
+
+#diarySearch::placeholder {
+  color: var(--diary-ui-muted);
+  opacity: 1;
+}
+
+#diarySearch::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+#diarySearch::-ms-clear,
+#diarySearch::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+#clearDiarySearch {
+  position: absolute;
+  right: 4.6rem;
+  top: 50%;
+  transform: translateY(-50%) scale(.9);
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--diary-ui-text);
+  font: inherit;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .18s ease, transform .18s ease, background-color .18s ease, color .18s ease;
+}
+
+.diary-search.has-text #clearDiarySearch {
+  opacity: .7;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1);
+}
+
+#clearDiarySearch:hover,
+#clearDiarySearch:focus-visible {
+  opacity: 1;
+  background: var(--diary-ui-hover);
+  outline: none;
+}
+
+#searchCount {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--diary-ui-muted);
+  white-space: nowrap;
+  font-size: .78rem;
+  pointer-events: none;
+}
+
+#diaryNoResults {
+  margin: 1rem 0;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid var(--diary-ui-border);
+  border-radius: 12px;
+  background: var(--diary-ui-bg);
+  color: var(--diary-ui-muted);
+  box-shadow: var(--diary-ui-shadow);
+}
+
+#backToTop {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  width: 2.65rem;
+  height: 2.65rem;
+  padding: 0;
+  border: 1px solid var(--diary-ui-border);
+  border-radius: 999px;
+  background: var(--diary-ui-bg);
+  color: var(--diary-ui-text);
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: var(--diary-ui-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(.65rem);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+#backToTop.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#backToTop:hover,
+#backToTop:focus-visible {
+  transform: translateY(-2px);
+  background: var(--diary-ui-hover);
+  outline: none;
+}
+
+@media (max-width: 600px) {
+  #diarySearch {
+    padding-right: 6.7rem;
+  }
+
+  #clearDiarySearch {
+    right: 4.15rem;
+  }
+
+  #searchCount {
+    right: .8rem;
+    font-size: .72rem;
+  }
+}
+</style>
+
+
+<style id="transmission-2026-styles">
+.transmission-2026{
+  --tx-blue:var(--accent,#6e8ec1);
+  --tx-text:var(--text,#182235);
+  --tx-line:rgba(110,142,193,.28);
+  --tx-panel:rgba(110,142,193,.055);
+  padding:72px 0;
+  border-top:1px solid var(--tx-line);
+}
+.transmission-2026 .transmission-grid{display:grid;grid-template-columns:minmax(250px,.72fr) minmax(0,1.35fr);gap:clamp(38px,6vw,88px);align-items:center}
+.transmission-2026 .transmission-copy{min-width:0}
+.transmission-kicker{margin-bottom:16px;color:var(--tx-blue);font-family:'Geist Pixel','Inter',monospace;font-size:.82rem;letter-spacing:.08em}
+.transmission-2026 .transmission-copy h2{margin:0;color:var(--tx-text);font-family:'Google Sans Flex','Inter',sans-serif;font-size:clamp(2.25rem,4vw,4.7rem);font-weight:600;line-height:.94;letter-spacing:-.045em;text-transform:uppercase}
+.transmission-2026 .transmission-copy p{max-width:500px;margin:24px 0 0;color:color-mix(in srgb,var(--tx-text) 68%,transparent);font-family:'Inter',sans-serif;font-size:1rem;line-height:1.75}
+.transmission-2026 .transmission-copy .transmission-aside{margin-top:22px;color:color-mix(in srgb,var(--tx-text) 56%,transparent);font-family:'Geist Pixel','Inter',monospace;font-size:.86rem}
+.transmission-prompt{display:block;margin-top:24px;color:var(--tx-blue);font-family:'Geist Pixel',monospace;animation:txBlink 1.05s steps(1,end) infinite}
+.transmission-terminal-wrap{display:flex;flex-direction:column;align-items:center;min-width:0}
+.transmission-2026 .transmission-console{position:relative;width:100%;min-height:330px;box-sizing:border-box;overflow:hidden;padding:34px 38px 26px;border:1px solid var(--tx-line);border-radius:26px;background:linear-gradient(145deg,rgba(110,142,193,.08),rgba(110,142,193,.025)),var(--tx-panel);box-shadow:inset 0 0 0 1px rgba(255,255,255,.025),0 22px 55px rgba(30,55,90,.08);isolation:isolate}
+.transmission-2026 .transmission-console::before{content:'';position:absolute;inset:14px;border-radius:18px;background:linear-gradient(180deg,rgba(110,142,193,.055),rgba(110,142,193,.015));border:1px solid rgba(110,142,193,.13);pointer-events:none;z-index:-1}
+.transmission-scanlines{position:absolute;inset:0;pointer-events:none;opacity:.2;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(110,142,193,.08) 4px);mix-blend-mode:multiply}
+.transmission-statusline,.transmission-meta{position:relative;z-index:1;display:flex;align-items:center;gap:12px;color:var(--tx-blue);font-family:'Geist Pixel','Inter',monospace;font-size:clamp(.68rem,1vw,.82rem);letter-spacing:.055em;text-transform:uppercase}
+.signal-dot{width:9px;height:9px;flex:0 0 9px;border-radius:50%;background:var(--tx-blue);box-shadow:0 0 0 4px rgba(110,142,193,.10),0 0 14px rgba(110,142,193,.38)}
+.status-separator{opacity:.55}
+.transmission-message{position:relative;z-index:1;display:flex;align-items:center;min-height:205px;padding:28px 0}
+.transmission-message p{margin:0;color:var(--tx-text);font-family:'Geist Pixel','Inter',monospace;font-size:clamp(1.55rem,3vw,3.05rem);font-weight:400;line-height:1.25;letter-spacing:-.025em;text-wrap:balance}
+.terminal-cursor{display:inline-block;width:.42em;height:.92em;margin-left:.12em;vertical-align:-.08em;background:var(--tx-blue);opacity:.8;animation:txBlink .9s steps(1,end) infinite}
+.transmission-meta{justify-content:space-between;margin-top:auto;opacity:.9}
+.transmission-scan{display:inline-flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;padding:12px 19px;border:1px solid var(--tx-blue);border-radius:12px;background:transparent;color:var(--tx-blue);font-family:'Google Sans Flex','Inter',sans-serif;font-size:.78rem;font-weight:650;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:transform .18s ease,background .18s ease,color .18s ease,box-shadow .18s ease}
+.transmission-scan svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.transmission-scan:hover,.transmission-scan:focus-visible{background:rgba(110,142,193,.11);box-shadow:0 8px 24px rgba(68,97,140,.10);outline:none;transform:translateY(-1px)}
+.transmission-scan:hover svg{transform:rotate(180deg)}
+.transmission-console.is-scanning .transmission-message{animation:txFlicker .42s ease}
+@keyframes txBlink{50%{opacity:0}}
+@keyframes txFlicker{0%{opacity:1;transform:none}20%{opacity:.18;transform:translateX(2px)}38%{opacity:.75;transform:translateX(-1px)}58%{opacity:.28}100%{opacity:1;transform:none}}
+html[data-theme='dark'] .transmission-2026{--tx-text:rgba(239,245,255,.94);--tx-line:rgba(155,188,255,.22);--tx-panel:rgba(11,23,41,.42)}
+html[data-theme='dark'] .transmission-2026 .transmission-console{background:linear-gradient(145deg,rgba(38,69,108,.18),rgba(10,20,35,.22)),var(--tx-panel);box-shadow:inset 0 0 0 1px rgba(255,255,255,.02),0 24px 70px rgba(0,0,0,.22)}
+@media(max-width:800px){.transmission-2026{padding:52px 0}.transmission-2026 .transmission-grid{grid-template-columns:1fr;gap:32px}.transmission-2026 .transmission-copy h2 br{display:none}.transmission-2026 .transmission-copy p{max-width:620px}.transmission-2026 .transmission-console{min-height:285px;padding:28px 25px 22px;border-radius:20px}.transmission-message{min-height:165px}.transmission-statusline{gap:8px;flex-wrap:wrap}.transmission-meta{font-size:.66rem}}
+@media(max-width:480px){.transmission-2026 .transmission-copy h2{font-size:2.45rem}.transmission-2026 .transmission-console{padding:24px 20px 20px}.transmission-statusline .status-separator:last-of-type,#transmissionTime{display:none}.transmission-message p{font-size:1.55rem}.transmission-scan{width:100%}}
+@media(prefers-reduced-motion:reduce){.terminal-cursor,.transmission-prompt{animation:none}.transmission-scan,.transmission-scan svg{transition:none}}
+</style>
+
+</head>
+<body>
+  <div class="top-strip">This page is currently being updated.</div>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="#" aria-label="home">
+        <span class="brand-block">LEWIS<br>.LC</span>
+        <span class="brand-copy">2026 Diary</span>
+      </a>
+
+
+			
+      <nav class="desktop-nav" aria-label="Primary navigation">
+         <a href="/">Home</a>
+         <a href="/profile">About</a>
+         <a href="/diary">Diary Archive</a>
+        <a href="/myspace">MySpace</a>
+        <a href="/livejournal">LiveJournal</a>
+      </nav>
+
+
+			
+
+      <div class="nav-actions">
+        <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <span class="theme-icon-wrap" aria-hidden="true"> 
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+            </svg>
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24">
+              <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
+              <path class="theme-star theme-star-one" d="M18.5 3.5v3M17 5h3"></path>
+              <path class="theme-star theme-star-two" d="M20 8.7v2M19 9.7h2"></path>
+            </svg>
+          </span>
+        </button>
+        <button class="icon-btn menu-btn" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-panel" id="mobilePanel" aria-label="Mobile navigation">
+         <a href="/">Home</a>
+         <a href="/profile">Profile</a>
+         <a href="/diary">Diary Archive</a>
+        <a href="/myspace">MySpace</a>
+        <a href="/livejournal">LiveJournal</a>
+      </nav>
+
+
+  <main>
+    <div class="page-shell">
+        
+<div class="breadcrumbs" aria-label="Breadcrumb">
+	
+        <span><a href="/">Home</a></span>
+	
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-[var(--color-text-muted)] ml-1.5 md:ml-2" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+	
+	<span>Diary</span>
+	
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-4 h-4 text-[var(--color-text-muted)] ml-1.5 md:ml-2" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+	
+  <span>2026</span>
+	
+      </div>
+		  
+
+      <section class="product-grid">
+        <aside class="cover-column">
+          <div class="cover-frame">
+            <img src="/diary/images/2026.png" alt="2026 Diary">
+          </div>
+
+         
+
+          <div class="release-nav">
+            <a href="/diary/2025">← 2025</a>
+            <a href="/diary/2027">2027 →</a>
+          </div>
+
+          <div class="release-nav1">
+            <a href="/diary">Diary Archive</a>
+          </div> 
+			
+        </aside>
+
+        <article class="details-column">
+
+          <h1>temporal orbit <span class="release-number">(2026)</span></h1>
+
+
+          <section class="tabs">
+            <div class="tab-list" role="tablist" aria-label="Release information">
+              <button class="tab-button active" role="tab" aria-selected="true" data-tab="entries">Entries</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="wilderness">Wilderness</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="notes">Notes</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="gallery">Gallery</button>
+              <button class="tab-button" role="tab" aria-selected="false" data-tab="farewell42">Farewell 42</button>
+            </div>
+
+
+
+            
+            <div class="tab-panel active" id="entries" role="tabpanel">
+              
+
+
+<div class="diary-search" id="diarySearchWrap" role="search">
+  
+<svg class="diary-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<circle cx="11" cy="11" r="7"></circle>
+<path d="M20 20l-3.5-3.5"></path>
+</svg>
+
+  <input
+    type="search"
+    id="diarySearch"
+    placeholder="Search diary titles..."
+    aria-label="Search diary titles"
+    autocomplete="off"
+    spellcheck="false">
+  <button type="button" id="clearDiarySearch" aria-label="Clear search">×</button>
+  <span id="searchCount" aria-live="polite"></span>
+</div>
+<div id="diaryNoResults" hidden>No matching diary entries found.</div>
+
+<div class="maintable">
+<table>
+<tbody>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">January 2026</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">everything changes in the end</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">the light of day</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">chilled out</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">trying to change</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">i've been playing pretend</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">6</td>
+<td><div class="eptitles">dead names</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">7</td>
+<td><div class="eptitles">a walk in the park</div></td>
+</tr>	
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">February 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">farewell 42</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">hello 33</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">pandora's box</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">triggers</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">A&E</div></td>
+</tr>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">March 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">never mind the paradox</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">memes and nukes</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">wobbly sets</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">lewis &amp; charlotte</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">devvo returns</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">6</td>
+<td><div class="eptitles">thanks for the memories</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">7</td>
+<td><div class="eptitles">hartnell fever</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">8</td>
+<td><div class="eptitles">day of the daleks</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">9</td>
+<td><div class="eptitles">mullet and the myrka</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">10</td>
+<td><div class="eptitles">waiting for bill</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">11</td>
+<td><div class="eptitles">back to hogwarts</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">all the things she said</div></td>
+</tr>
+
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">April 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">complicated feelings</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">the nightmare begins</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">fever dream</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">out of my mind</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">NSFW</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">nine years lost</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">affairs in order</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">into the wilderness</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">familiar faces</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">riding the waves</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">a little bit of kim</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">6</td>
+<td><div class="eptitles">lucky dip</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">you deserve the world</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">7</td>
+<td><div class="eptitles">child at heart</div></td>
+</tr>	
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">8</td>
+<td><div class="eptitles">hazy memories</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">a thorn between two roses</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">the moon and her magic</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">lovely stuff ^_^ </div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">guardian angels</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">closing chapter</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">you and me</div></td>
+</tr>
+
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">May 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">33% complete</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">secret santa</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">going in deep</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">fatherhood</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">about last night</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">cat with the cream</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">playing with fire</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">first kiss</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">vulnerability</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">moments of joy</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">sexy vanilla</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">breathless</div></td>
+</tr>
+
+ <tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">take me back</div></td>
+</tr>
+
+ <tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">late to the party</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">soul and steel</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">intoxication</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">temporal orbit</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">rest, in pieces</div></td>
+</tr>
+
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">June 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">waiting time</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">in her arms</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">chavs and goths</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%;border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;font-family: 'Geist Pixel', 'Inter', sans-serif;letter-spacing: 0.3px;opacity: 0.4;">x</td>
+	<td><div class="removed">no fucks given</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">doctor who is dead</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">inferno</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">and then there were none</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">6</td>
+<td><div class="eptitles">solstice</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">7</td>
+<td><div class="eptitles">teenage rebel</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">8</td>
+<td><div class="eptitles">zoe, amy and gem</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">9</td>
+<td><div class="eptitles">hotness prevails</div></td>
+</tr>
+
+	
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">July 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">slow and steady</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">preservation</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">ghosts of time</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">rhythm and blues</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">every single day</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">6</td>
+<td><div class="eptitles">timelordwannabe</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">7</td>
+<td><div class="eptitles">morning matters</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">8</td>
+<td><div class="eptitles">boys don't cry</div></td>
+</tr>
+	
+	
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">August 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">reclamation</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">autumn clearance</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">save space</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">ready to leave</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">sick of summer</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">6</td>
+<td><div class="eptitles">eclipse</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">7</td>
+<td><div class="eptitles">bring back the weird</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">8</td>
+<td><div class="eptitles">eye spy</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">9</td>
+<td><div class="eptitles">sweet dream</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">10</td>
+<td><div class="eptitles">shift happens (then you die)</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">11</td>
+<td><div class="eptitles">on the horizon</div></td>
+</tr>
+	
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #6e8ec1a1, #ffffff00);"><div class="month">September 2026</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">1</td>
+<td><div class="eptitles">the final forty</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">2</td>
+<td><div class="eptitles">artificial history</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">3</td>
+<td><div class="eptitles">back to vice city</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">4</td>
+<td><div class="eptitles">fading into autumn</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">5</td>
+<td><div class="eptitles">season's grievings</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">6</td>
+<td><div class="eptitles">launch night</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">7</td>
+<td><div class="eptitles">turbulence</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--line);text-align:center;background-color: #5c7aa91f;">8</td>
+<td><div class="eptitles"> </div></td>
+</tr>
+	
+
+
+
+	
+</tbody></table></div>
+              
+
+            
+            
+            
+            </div>
+
+
+
+
+            <div class="tab-panel" id="wilderness" role="tabpanel">
+
+<div class="maintable">
+<table>
+<tbody>
+
+<tr>
+<td colspan="2" style="text-align: center;background-image: linear-gradient(to right, #a66ec1a1, #ffffff00);"><div class="month">Wilderness Years</div></td>
+</tr>
+	
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">1</td>
+<td><div class="eptitles">out of sync</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">2</td>
+<td><div class="eptitles">leaving the mill</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">3</td>
+<td><div class="eptitles">from edge end to edge hill</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">4</td>
+<td><div class="eptitles">overdose</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">5</td>
+<td><div class="eptitles">summer sanctuary</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">6</td>
+<td><div class="eptitles">death at winter quay</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">7</td>
+<td><div class="eptitles">sophie and joedy</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">8</td>
+<td><div class="eptitles">long distance lover</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">9</td>
+<td><div class="eptitles">doctor who misadventures</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">10</td>
+<td><div class="eptitles">anniversary fever</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">11</td>
+<td><div class="eptitles">one night stand</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">12</td>
+<td><div class="eptitles">living and dying on the internet</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">13</td>
+<td><div class="eptitles">2:1 and 21</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">14</td>
+<td><div class="eptitles">kinky weekend</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">15</td>
+<td><div class="eptitles">busted with lara</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">16</td>
+<td><div class="eptitles">lucie, lara and voldemort</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">17</td>
+<td><div class="eptitles">never going back</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">18</td>
+<td><div class="eptitles">back to the mill</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">19</td>
+<td><div class="eptitles">lewis and amy</div></td>
+</tr>
+
+<tr>
+<td style="width: 10%; border-right: 1px solid var(--border-color);text-align:center;background-color: #8a54a426;">20</td>
+<td><div class="eptitles">retrospective</div></td>
+</tr>
+		
+</tbody></table></div>
+
+							
+            </div>
+
+
+
+
+
+
+
+
+
+
+						
+            <div class="tab-panel" id="notes" role="tabpanel">
+		
+
+              <div class="credits-grid">
+                <div class="credit-card"><small>Written by</small><strong>Lewis Christian</strong></div>
+                <div class="credit-card"><small>No. of entries</small><strong>(ongoing)</strong></div> 
+                <div class="credit-card"><small>No. of Wilderness entries</small><strong>20</strong></div> 
+                <div class="credit-card"><small>No. of deleted entries</small><strong>33</strong></div> 
+              </div>
+
+							
+            </div>
+
+
+
+						            <div class="tab-panel" id="gallery" role="tabpanel">
+
+              
+              <div class="gallery">
+								
+                <a class="lightbox" href="/diary/images/2026.png" data-caption="2026 Diary art">
+                  <img src="/diary/images/2026.png" alt="2026 Diary art">
+                </a>
+				  
+				  <a class="lightbox" href="/diary/images/2026/charliecard.png" data-caption="Old birthday card I sent Charlie">
+                  <img src="/diary/images/2026/charliecard.png" alt="Old birthday card I sent Charlie">
+                </a>
+
+                <a class="lightbox" href="/diary/images/2026/uniprofile.png" data-caption="(Wilderness) University-era profile photo">
+                  <img src="/diary/images/2026/uniprofile.png" alt="(Wilderness) University-era profile photo">
+                </a>
+
+	                <a class="lightbox" href="/diary/images/2026/ormskirkgirls.png" data-caption="(Wilderness) Emma, Jade, Sophie and Joedy">
+                  <img src="/diary/images/2026/ormskirkgirls.png" alt="(Wilderness) Emma, Jade, Sophie and Joedy">
+                </a>
+
+                <a class="lightbox" href="/diary/images/2026/joedytext.png" data-caption="(Wilderness) Texting Joedy">
+                  <img src="/diary/images/2026/joedytext.png" alt="(Wilderness) Texting Joedy">
+                </a>								
+
+								
+              </div>
+            </div>
+
+
+
+						
+            <div class="tab-panel" id="farewell42" role="tabpanel">
+
+
+     <section class="album-player" aria-label="Farewell 42 album player">
+            <header class="album-player-header">
+              <div>
+                <div class="album-player-kicker">EP</div>
+                <h2 class="album-player-heading">Farewell 42</h2>
+              </div>
+              <div class="album-player-summary" id="albumSummary">3 tracks</div>
+            </header>
+
+            <div class="album-track-list" id="albumTrackList" role="list" aria-label="Track listing"></div>
+
+            <div class="album-now-playing">
+              <div class="album-now-meta">
+                <div style="min-width:0">
+                  <div class="album-now-label">Now playing</div>
+                  <div class="album-now-title" id="albumNowTitle">Farewell 42</div>
+                </div>
+                <div class="album-time">
+                  <span id="albumCurrentTime">0:00</span>
+                  <span aria-hidden="true"> / </span>
+                  <span id="albumDuration">0:00</span>
+                </div>
+              </div>
+
+              <input class="album-progress" id="albumProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Playback position">
+
+              <div class="album-controls" aria-label="Playback controls">
+                <button class="album-control" id="albumPrevious" type="button" aria-label="Previous track">⏮</button>
+                <button class="album-control album-control-primary" id="albumPlay" type="button" aria-label="Play album">▶</button>
+                <button class="album-control" id="albumNext" type="button" aria-label="Next track">⏭</button>
+              </div>
+
+              <audio id="albumAudio" preload="metadata"></audio>
+            </div>		 
+          </section>
+
+
+
+<div class="gallery">
+
+  <a class="lightbox" href="/diary/images/f42album.png">
+    <img src="/diary/images/f42album.png" alt="Farewell 42 EP artwork">
+  </a>
+
+  <a class="lightbox" href="/diary/images/f42original.png">
+    <img src="/diary/images/f42original.png" alt="Original Farewell 42 single artwork">
+  </a>
+
+  <a class="lightbox" href="/diary/images/f42unused.png">
+    <img src="/diary/images/f42unused.png" alt="Unused Farewell 42 single artwork">
+  </a>
+  
+</div>
+
+
+							
+							
+            </div>
+          </section>
+        </article>
+      </section>
+    </div>
+    </div>
+
+
+
+
+
+    
+
+    <section class="transmission-section transmission-2026" aria-labelledby="transmissionTitle">
+      <div class="page-shell transmission-grid">
+        <div class="transmission-copy">
+          <div class="transmission-kicker">// 2026</div>
+          <h2 id="transmissionTitle">Transmission<br>from 2026</h2>
+          <p>A rotating signal from somewhere in 2026. Little observations, fragments and thoughts that didn’t quite become diary entries.</p>
+          <p class="transmission-aside">Different every time. Same year though.</p>
+          <span class="transmission-prompt" aria-hidden="true">_</span>
+        </div>
+
+        <div class="transmission-terminal-wrap">
+          <div class="transmission-console" aria-live="polite">
+            <div class="transmission-scanlines" aria-hidden="true"></div>
+            <div class="transmission-statusline">
+              <span class="signal-dot" aria-hidden="true"></span>
+              <span>SIGNAL RECEIVED</span>
+              <span class="status-separator">•</span>
+              <span id="transmissionDate">16 SEP 2026</span>
+              <span class="status-separator">•</span>
+              <span id="transmissionTime">23:12</span>
+            </div>
+
+            <div class="transmission-message">
+              <p id="transmissionText">still building things nobody asked for.<span class="terminal-cursor" aria-hidden="true"></span></p>
+            </div>
+
+            <div class="transmission-meta">
+              <span id="transmissionNumber">TRANSMISSION #01</span>
+              <span>2026.DIARY</span>
+            </div>
+          </div>
+
+          <button class="transmission-scan" id="transmissionScan" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6v5h-5M4 18v-5h5M6.1 9A7 7 0 0 1 18.7 6.3L20 8M4 16l1.3 1.7A7 7 0 0 0 17.9 15"/></svg>
+            <span>Scan again</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page-shell footer-grid">
+      <div>
+        
+        <a class="brand" href="#">
+          <span class="brand-block">LEWIS<br>.LC</span>
+          <span class="brand-copy">written by<br>lewis christian</span>
+        </a>
+        
+        <p style="font-family: 'Geist Pixel', sans-serif;">coded by an introvert hiding in a dark room on his laptop, listening to <span style="font-size: 14px;color: var(--accent);font-family: 'Google Sans Flex', 'Inter', sans-serif;">henry moodie</span></p>
+      </div>
+      
+      <div>
+        <h3>Explore</h3>
+        <div class="footer-links">
+          <a href="/">Home</a>
+          <a href="/profile">About</a>
+          <a href="/diary">Diary Archive</a>
+        </div>
+      </div>
+      
+      <div>
+        <h3>Nostalgia</h3>
+        <div class="footer-links">
+          <a href="/myspace">MySpace</a>
+          <a href="/livejournal">LiveJournal</a>
+        </div>
+      </div>
+			
+    </div>
+  </footer>
+
+
+  <div
+    class="cover-lightbox"
+    id="coverLightbox"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Enlarged cover artwork"
+    aria-hidden="true"
+  >
+    <button
+      class="cover-lightbox-close"
+      id="coverLightboxClose"
+      type="button"
+      aria-label="Close enlarged cover"
+    >×</button>
+
+    <img
+      class="cover-lightbox-image"
+      id="coverLightboxImage"
+      src=""
+      alt=""
+    >
+
+    <div class="cover-lightbox-caption" id="coverLightboxCaption"></div>
+  </div>
+
+
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  
+
+
+<button type="button" id="backToTop" aria-label="Back to top" title="Back to top">↑</button>
+
+<script id="diary-search-repair-script">
+document.addEventListener("DOMContentLoaded", function () {
+  const search = document.getElementById("diarySearch");
+  const wrapper = document.getElementById("diarySearchWrap") || document.querySelector(".diary-search");
+  const clearButton = document.getElementById("clearDiarySearch");
+  const count = document.getElementById("searchCount");
+  const noResults = document.getElementById("diaryNoResults");
+  const table = document.querySelector(".maintable table");
+  const backToTop = document.getElementById("backToTop");
+
+  if (search && wrapper && clearButton && table) {
+    const rows = Array.from(table.querySelectorAll("tbody > tr"));
+    const monthRows = rows.filter(row => row.querySelector(".month"));
+    const entryRows = rows.filter(row => !row.querySelector(".month") && row.cells.length >= 2);
+
+    function updateSearch() {
+      const query = search.value.trim().toLocaleLowerCase();
+      let visibleCount = 0;
+
+      entryRows.forEach(row => {
+        const titleCell = row.cells[row.cells.length - 1];
+        const matches = !query || titleCell.textContent.toLocaleLowerCase().includes(query);
+        row.hidden = !matches;
+        if (matches) visibleCount += 1;
+      });
+
+      monthRows.forEach((monthRow, index) => {
+        const nextMonth = monthRows[index + 1];
+        let row = monthRow.nextElementSibling;
+        let hasVisibleEntry = false;
+
+        while (row && row !== nextMonth) {
+          if (!row.querySelector(".month") && row.cells.length >= 2 && !row.hidden) {
+            hasVisibleEntry = true;
+            break;
+          }
+          row = row.nextElementSibling;
+        }
+
+        monthRow.hidden = query ? !hasVisibleEntry : false;
+      });
+
+      wrapper.classList.toggle("has-text", search.value.length > 0);
+
+      if (count) {
+        count.textContent = query
+          ? visibleCount + (visibleCount === 1 ? " result" : " results")
+          : entryRows.length + " entries";
+      }
+
+      if (noResults) {
+        noResults.hidden = !query || visibleCount !== 0;
+      }
+    }
+
+    search.addEventListener("input", updateSearch);
+
+    clearButton.addEventListener("click", function () {
+      search.value = "";
+      updateSearch();
+      search.focus();
+    });
+
+    updateSearch();
+  }
+
+  if (backToTop) {
+    function updateBackToTop() {
+      backToTop.classList.toggle("visible", window.scrollY > 450);
+    }
+
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    updateBackToTop();
+  }
+});
+</script>
+
+
+<script id="transmission-2026-script">
+(() => {
+  const messages = [
+    'still building things nobody asked for.',
+    'autumn has finally arrived.',
+    'currently somewhere between nostalgia and the future.',
+    'another website seemed like a good idea.',
+    'bring back the weird.',
+    'still here. still tinkering.',
+    'the internet used to be more fun.',
+    'probably thinking about 2008 again.',
+    'currently avoiding whatever I’m supposed to be doing.',
+    'somehow, it’s September already.'
+  ];
+
+  const consoleEl = document.querySelector('.transmission-2026 .transmission-console');
+  const textEl = document.getElementById('transmissionText');
+  const numberEl = document.getElementById('transmissionNumber');
+  const dateEl = document.getElementById('transmissionDate');
+  const timeEl = document.getElementById('transmissionTime');
+  const scanBtn = document.getElementById('transmissionScan');
+  if (!consoleEl || !textEl || !scanBtn) return;
+
+  let current = Math.floor(Math.random() * messages.length);
+
+  const stamp = () => {
+    const now = new Date();
+    dateEl.textContent = new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric'}).format(now).toUpperCase();
+    timeEl.textContent = new Intl.DateTimeFormat('en-GB',{hour:'2-digit',minute:'2-digit',hour12:false}).format(now);
+  };
+
+  const render = () => {
+    textEl.innerHTML = '';
+    textEl.append(document.createTextNode(messages[current]));
+    const cursor = document.createElement('span');
+    cursor.className = 'terminal-cursor';
+    cursor.setAttribute('aria-hidden','true');
+    textEl.append(cursor);
+    numberEl.textContent = `TRANSMISSION #${String(current + 1).padStart(2,'0')}`;
+    stamp();
+  };
+
+  render();
+
+  scanBtn.addEventListener('click', () => {
+    consoleEl.classList.remove('is-scanning');
+    void consoleEl.offsetWidth;
+    consoleEl.classList.add('is-scanning');
+    let next = current;
+    while (messages.length > 1 && next === current) next = Math.floor(Math.random() * messages.length);
+    current = next;
+    window.setTimeout(render, 170);
+    window.setTimeout(() => consoleEl.classList.remove('is-scanning'), 520);
+  });
+})();
+</script>
+
+</body>
+</html>
