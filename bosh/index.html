@@ -4,323 +4,374 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Doctor Who — Series Two</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Google+Sans+Flex:opsz,wght@6..144,400..800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#090909;--fg:#f5f2ec;--muted:rgba(245,242,236,.62);--line:rgba(245,242,236,.2)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}button,a,input{font:inherit}button{cursor:pointer}.shell{width:min(1640px,calc(100% - 72px));margin:auto}
-.topbar{position:fixed;z-index:40;inset:0 0 auto;height:78px;display:flex;align-items:center;transition:.3s}.topbar.scrolled{background:rgba(9,9,9,.8);backdrop-filter:blur(16px)}.topbar .shell{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}.brand{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase}.nav{display:flex;gap:30px}.nav a{color:#fff;text-decoration:none;font-size:.6rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;opacity:.65}.nav a:hover{opacity:1}.search{justify-self:end;border:0;background:none;color:#fff;font-size:.61rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:#111}.hero-bg{position:absolute;inset:0;transform:scale(1.02);background-image:linear-gradient(90deg,rgba(0,0,0,.78),rgba(0,0,0,.18) 60%,transparent),linear-gradient(0deg,#090909,transparent 48%),var(--hero-image);background-size:cover;background-position:center}.hero-content{position:relative;z-index:2;width:min(760px,75%);padding:160px 0 12vh}.eyebrow{text-transform:uppercase;letter-spacing:.2em;font-size:.61rem;font-weight:700;color:rgba(255,255,255,.68)}.series-title{margin:14px 0 0;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:clamp(5.5rem,12vw,12rem);line-height:.74;letter-spacing:-.075em;text-transform:none}.tagline{font-family:Georgia,'Times New Roman',serif;font-size:1.25rem;margin:30px 0 13px}.meta{display:flex;gap:10px;color:rgba(255,255,255,.58);font-size:.61rem;letter-spacing:.11em;text-transform:uppercase}.meta span+span:before{content:'/';margin-right:10px;color:#777}.synopsis{max-width:590px;color:rgba(255,255,255,.72);font-family:Georgia,'Times New Roman',serif;line-height:1.62;font-size:1rem}.actions{display:flex;gap:9px;margin-top:25px}.btn{border:1px solid #eee;border-radius:0;padding:11px 18px;background:#f5f2ec;color:#090909;font-size:.61rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase}.btn.secondary{background:transparent;color:#fff;border-color:rgba(255,255,255,.48);backdrop-filter:none}.btn:hover{background:transparent;color:#fff}.btn.secondary:hover{background:#fff;color:#090909}
-main{position:relative;z-index:4;margin:0;padding:70px 0 110px}.section{margin:0 0 90px;padding-top:18px;border-top:1px solid var(--line)}.section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:25px}.section h2{margin:0;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:clamp(1.7rem,2.8vw,2.8rem);letter-spacing:-.04em}.hint{color:var(--muted);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase}.rail{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(330px,31vw);gap:27px;overflow-x:auto;padding:0 0 20px;scroll-snap-type:x proximity;scrollbar-width:none}.rail::-webkit-scrollbar{display:none}.card{scroll-snap-align:start;cursor:pointer}.thumb{position:relative;aspect-ratio:16/9;background:#171717 center/cover;border-radius:0;overflow:hidden;filter:saturate(.8);transition:.35s}.card:hover .thumb{filter:saturate(1);transform:scale(.985)}.thumb:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.28),transparent 50%)}.episode-num{position:absolute;z-index:2;top:11px;left:11px;bottom:auto;padding:5px 7px;background:rgba(9,9,9,.72);font-size:.54rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}.card h3{margin:12px 0 4px;font-family:Georgia,'Times New Roman',serif;font-size:1.2rem;font-weight:400}.card p{margin:0;color:var(--muted);font-size:.58rem;letter-spacing:.11em;text-transform:uppercase}.series-card .thumb{aspect-ratio:16/10}.series-card h3{font-size:1.25rem}
-.modal{position:fixed;z-index:100;inset:0;display:none;background:#090909;overflow:auto}.modal.open{display:block}.modal-card{width:100%;min-height:100svh;background:#090909;border-radius:0;box-shadow:none}.modal-hero{height:68svh;min-height:460px;background:center/cover;position:relative}.modal-hero:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#090909,transparent 58%)}.close{position:fixed;z-index:5;right:30px;top:25px;border:0;background:none;color:#fff;font-size:1.7rem}.modal-body{width:min(850px,calc(100% - 72px));margin:-75px auto 0;padding:0 0 90px;position:relative;z-index:3}.modal-body h2{margin:0 0 16px;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:clamp(3rem,7vw,7rem);line-height:.9;letter-spacing:-.055em}.modal-body p{max-width:670px;color:rgba(255,255,255,.7);font-family:Georgia,'Times New Roman',serif;line-height:1.65}
-.search-panel{position:fixed;z-index:90;inset:0;display:none;background:rgba(9,9,9,.98)}.search-panel.open{display:block}.search-inner{width:min(1050px,calc(100% - 48px));margin:auto;padding-top:20vh}.search-label{display:block;margin-bottom:14px;color:var(--muted);font-size:.59rem;letter-spacing:.16em;text-transform:uppercase}.search-input{width:100%;border:0;border-bottom:1px solid #777;outline:0;padding:0 0 13px;background:none;color:#fff;font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:clamp(2.8rem,7vw,6rem)}.search-close{position:absolute;right:30px;top:25px;border:0;background:none;color:#fff;font-size:1.6rem}.search-results{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:0 30px}.search-result{padding:14px 0;border-bottom:1px solid var(--line);cursor:pointer}.search-result small{color:var(--muted);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase}
+:root{
+  --bg:#0a1118;
+  --surface:#111a23;
+  --surface-2:#202a35;
+  --text:#f4f7fb;
+  --muted:#a6b4c6;
+  --blue:#54c8ff;
+  --line:#283745;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:"Inter",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+button,select,input{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1690px,calc(100% - 150px));margin:auto}
 
-/* cinematic episode detail screen */
+/* header */
+.header{
+  position:absolute;z-index:20;top:0;left:0;right:0;height:88px;
+  display:flex;align-items:center;
+}
+.header-inner{display:flex;align-items:center;gap:44px}
+.logo{
+  color:#fff;text-decoration:none;font-family:"Google Sans Flex","Inter",sans-serif;
+  font-size:1.3rem;font-weight:800;letter-spacing:-.06em;white-space:nowrap
+}
+.logo span{color:var(--blue)}
+.nav{display:flex;align-items:center;gap:32px}
+.nav a{color:#aab7c8;text-decoration:none;font-size:.92rem;font-weight:600}
+.nav a:hover{color:#fff}
+.header-tools{margin-left:auto;display:flex;align-items:center;gap:20px}
+.search-open{
+  width:42px;height:42px;border:0;background:none;color:#fff;font-size:1.7rem
+}
+.signin{
+  border:0;border-radius:5px;padding:14px 20px;background:rgba(255,255,255,.14);
+  color:#fff;font-weight:700;backdrop-filter:blur(12px)
+}
+
+/* hero */
+.hero{
+  position:relative;height:800px;min-height:760px;display:flex;align-items:center;
+  overflow:hidden;
+}
+.hero-image{
+  position:absolute;inset:0;background:center/cover no-repeat;
+}
+.hero-image:after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(7,13,19,.98) 0%,rgba(7,13,19,.88) 21%,rgba(7,13,19,.58) 40%,rgba(7,13,19,.14) 72%),
+    linear-gradient(0deg,var(--bg) 0%,rgba(10,17,24,.42) 18%,transparent 47%),
+    linear-gradient(180deg,rgba(5,10,15,.2),transparent 24%);
+}
+.hero-content{position:relative;z-index:2;width:720px;padding-top:60px}
+.hero-meta{
+  display:flex;align-items:center;gap:12px;margin-bottom:42px;
+  color:#d4dce7;font-size:.83rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase
+}
+.hero-meta:before{content:"";display:block;width:5px;height:20px;background:var(--blue)}
+.hero h1{
+  margin:0 0 28px;font-family:"Google Sans Flex","Inter",sans-serif;
+  font-size:clamp(5rem,7vw,7.9rem);line-height:.85;font-weight:800;
+  letter-spacing:-.065em
+}
+.hero h1 span{display:block}
+.hero-copy{max-width:670px;margin:0;font-size:1.15rem;line-height:1.55;color:#f1f4f8}
+.hero-actions{display:flex;gap:13px;margin-top:36px}
+.hero-btn{
+  min-width:145px;height:62px;border:0;border-radius:4px;padding:0 26px;
+  background:#fff;color:#10151b;font-size:1rem;font-weight:800
+}
+.hero-btn.secondary{background:#4b5361;color:#fff}
+.hero-btn:hover{filter:brightness(.92)}
+.play{font-size:1.15rem;margin-right:11px}
+
+/* episodes */
+.episodes{padding:34px 0 130px}
+.episodes-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:38px}
+.episodes h2{
+  margin:0;font-family:"Google Sans Flex","Inter",sans-serif;
+  font-size:2rem;font-weight:750;letter-spacing:-.04em
+}
+.select-wrap{position:relative}
+.select-wrap:after{
+  content:"⌄";position:absolute;right:19px;top:17px;color:var(--blue);pointer-events:none
+}
+.series-select{
+  appearance:none;width:215px;height:58px;border:1px solid #2a3947;border-radius:5px;
+  padding:0 52px 0 20px;background:#111a23;color:var(--blue);
+  font-size:.77rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase
+}
+.list{display:flex;flex-direction:column;gap:44px}
+.episode{
+  display:grid;grid-template-columns:55px 345px minmax(0,1fr);
+  gap:28px;align-items:center;min-height:195px
+}
+.number{font-size:2.45rem;font-weight:700;color:#8da0b5;text-align:center}
+.thumb{
+  position:relative;aspect-ratio:16/9;border-radius:5px;overflow:hidden;
+  background:#15202a center/cover no-repeat;cursor:pointer
+}
+.thumb:after{
+  content:"▶";position:absolute;inset:0;display:grid;place-items:center;
+  background:rgba(5,10,15,.32);opacity:0;transition:.2s;font-size:1.8rem
+}
+.episode:hover .thumb:after{opacity:1}
+.details{align-self:center;max-width:1040px}
+.title-row{display:flex;align-items:center;flex-wrap:wrap;gap:13px;margin-bottom:10px}
+.title{
+  margin:0;font-family:"Google Sans Flex","Inter",sans-serif;
+  font-size:1.48rem;font-weight:750;letter-spacing:-.025em;cursor:pointer
+}
+.meta{font-size:.73rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#9bbbe0}
+.description{margin:0;max-width:980px;color:#d9e0e8;font-size:1rem;line-height:1.52}
+
+/* modal */
 .modal{
-  opacity:0;
-  visibility:hidden;
-  display:block;
-  pointer-events:none;
-  transition:opacity .34s ease,visibility .34s ease;
+  position:fixed;z-index:100;inset:0;background:var(--bg);overflow:auto;
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease
 }
-.modal.open{
-  opacity:1;
-  visibility:visible;
-  pointer-events:auto;
+.modal.open{opacity:1;visibility:visible;pointer-events:auto}
+.modal-art{height:68svh;min-height:520px;background:center/cover no-repeat;position:relative}
+.modal-art:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(0deg,var(--bg),transparent 65%),linear-gradient(90deg,rgba(8,14,20,.5),transparent 60%)
 }
-.modal-card{
-  opacity:0;
-  transform:translateY(18px);
-  transition:transform .48s cubic-bezier(.2,.8,.2,1),opacity .38s ease;
+.modal-body{position:relative;z-index:2;width:min(1000px,calc(100% - 120px));margin:-125px auto 0;padding-bottom:100px}
+.modal-label{color:var(--blue);font-size:.76rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.modal h3{
+  margin:14px 0 16px;font-family:"Google Sans Flex","Inter",sans-serif;
+  font-size:clamp(3.8rem,6vw,6.8rem);line-height:.9;letter-spacing:-.06em
 }
-.modal.open .modal-card{
-  opacity:1;
-  transform:none;
-}
-.modal-top{
-  position:fixed;
-  z-index:7;
-  top:0;left:0;right:0;
-  height:76px;
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  padding:0 34px;
-  background:linear-gradient(180deg,rgba(0,0,0,.55),transparent);
-  pointer-events:none;
-}
-.modal-count{
-  justify-self:center;
-  font-size:.57rem;
-  font-weight:700;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.72);
-}
+.modal-meta{color:#9bbbe0;font-size:.75rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase}
+.modal-text{max-width:760px;color:#d8e0e9;font-size:1.05rem;line-height:1.6}
 .close{
-  pointer-events:auto;
-  position:fixed;
+  position:fixed;z-index:7;right:27px;top:22px;width:46px;height:46px;
+  border:1px solid rgba(255,255,255,.12);border-radius:4px;background:rgba(10,17,24,.7);
+  color:#fff;font-size:1.6rem
 }
 .modal-nav{
-  position:fixed;
-  z-index:7;
-  top:50%;
-  transform:translateY(-50%);
-  width:46px;height:70px;
-  border:0;
-  background:transparent;
-  color:#fff;
-  opacity:.62;
-  font-family:Georgia,serif;
-  font-size:2.4rem;
-  font-weight:300;
-  transition:opacity .2s ease,transform .2s ease;
+  position:fixed;z-index:7;top:50%;transform:translateY(-50%);
+  width:48px;height:72px;border:1px solid rgba(255,255,255,.1);background:rgba(10,17,24,.7);
+  color:#fff;font-size:2rem
 }
-.modal-nav:hover{opacity:1}
-.modal-prev{left:20px}
-.modal-next{right:20px}
-.modal-prev:hover{transform:translate(-4px,-50%)}
-.modal-next:hover{transform:translate(4px,-50%)}
-.modal-nav:disabled{opacity:.12;cursor:default}
-.modal-kicker{
-  margin-bottom:13px;
-  color:rgba(255,255,255,.58);
-  font-size:.59rem;
-  font-weight:700;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-}
-.modal-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin:0 0 25px;
-  color:rgba(255,255,255,.54);
-  font-size:.59rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-}
-.modal-meta span+span:before{
-  content:"/";
-  margin-right:10px;
-  color:rgba(255,255,255,.24);
-}
-.modal-actions{display:flex;gap:9px;margin-top:28px}
-.modal-progress{
-  position:fixed;
-  z-index:8;
-  left:0;bottom:0;
-  height:2px;
-  background:#f5f2ec;
-  transition:width .35s cubic-bezier(.2,.8,.2,1);
-}
-@media(max-width:720px){
-  .modal-top{height:62px;padding:0 15px}
-  .modal-count{font-size:.52rem}
-  .modal-nav{
-    top:auto;
-    bottom:18px;
-    transform:none;
-    width:42px;height:42px;
-    background:rgba(9,9,9,.58);
-    font-size:1.8rem;
-  }
-  .modal-prev{left:15px}
-  .modal-next{right:15px}
-  .modal-prev:hover,.modal-next:hover{transform:none}
-  .modal-body{padding-bottom:90px}
-  .modal-actions{margin-top:22px}
+.prev{left:18px}.next{right:18px}.modal-nav:disabled{opacity:.2}
+.modal-count{
+  position:fixed;z-index:7;top:30px;left:50%;transform:translateX(-50%);
+  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase
 }
 
-@media(max-width:720px){.shell{width:calc(100% - 30px)}.topbar{height:66px}.topbar .shell{grid-template-columns:1fr auto}.nav{display:none}.hero{min-height:92svh}.hero-bg{background-image:linear-gradient(0deg,#090909,transparent 60%),linear-gradient(90deg,rgba(0,0,0,.55),transparent),var(--hero-image);background-position:62% center}.hero-content{width:100%;padding:105px 0 10vh}.series-title{font-size:clamp(4.6rem,25vw,8rem)}.synopsis{font-size:.92rem}.rail{grid-auto-columns:82vw;gap:13px}.hint{display:none}.section{margin-bottom:62px}.search-results{grid-template-columns:1fr}.modal-hero{height:55svh;min-height:370px}.modal-body{width:calc(100% - 30px);margin:-45px auto 0}}
-
-.image-credits{
-  width:min(1640px,calc(100% - 72px));
-  margin:10px auto 60px;
-  padding-top:18px;
-  border-top:1px solid var(--line);
-  color:var(--muted);
-  font-size:.58rem;
-  line-height:1.7;
-  letter-spacing:.06em;
+/* search */
+.search-panel{position:fixed;z-index:110;inset:0;background:rgba(8,14,20,.98);display:none}
+.search-panel.open{display:block}
+.search-box{width:min(1050px,calc(100% - 40px));margin:auto;padding-top:20vh}
+.search-input{
+  width:100%;border:0;border-bottom:1px solid #596776;outline:0;padding:0 0 15px;
+  background:none;color:#fff;font-family:"Google Sans Flex","Inter",sans-serif;
+  font-size:clamp(2.7rem,6vw,5.5rem);font-weight:700
 }
-.image-credits strong{
-  color:var(--fg);
-  text-transform:uppercase;
-  letter-spacing:.13em;
-}
-.image-credits a{color:inherit;text-underline-offset:3px}
-@media(max-width:720px){.image-credits{width:calc(100% - 30px);margin-bottom:40px}}
+.search-results{margin-top:28px}
+.search-result{padding:15px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.search-result small{color:var(--muted)}
+.search-x{position:absolute;right:28px;top:24px;border:0;background:none;color:#fff;font-size:2rem}
 
+footer{border-top:1px solid var(--line);padding:24px 0 50px;color:#738497;font-size:.7rem}
+
+@media(max-width:850px){
+  .wrap{width:calc(100% - 30px)}
+  .header{height:68px}.header-inner{gap:20px}.nav,.signin{display:none}
+  .logo{font-size:1.05rem}
+  .hero{height:86svh;min-height:700px;align-items:flex-end}
+  .hero-image:after{background:linear-gradient(0deg,var(--bg) 3%,rgba(8,14,20,.34) 62%,rgba(8,14,20,.08)),linear-gradient(90deg,rgba(6,12,18,.62),transparent)}
+  .hero-content{width:100%;padding:0 0 75px}
+  .hero-meta{margin-bottom:26px;font-size:.7rem}
+  .hero h1{font-size:clamp(4rem,19vw,6.2rem)}
+  .hero-copy{font-size:1rem}
+  .hero-btn{height:55px;min-width:125px;padding:0 19px}
+  .episodes-top{align-items:flex-start;gap:15px}
+  .series-select{width:150px;height:50px;padding-left:14px}
+  .select-wrap:after{top:13px}
+  .episode{grid-template-columns:38px 1fr;gap:12px 14px;align-items:start}
+  .number{grid-row:1;font-size:1.9rem;padding-top:24vw}
+  .thumb{grid-column:2}
+  .details{grid-column:2}
+  .title{font-size:1.3rem}
+  .description{font-size:.92rem}
+  .modal-art{height:52svh;min-height:360px}
+  .modal-body{width:calc(100% - 30px);margin:-45px auto 0}
+  .modal-nav{top:auto;bottom:16px;transform:none;width:44px;height:44px}
+  .prev{left:15px}.next{right:15px}
+}
 </style>
 </head>
 <body>
-<header class="topbar" id="topbar"><div class="shell"><div class="brand">Doctor Who Archive</div><nav class="nav"><a href="#episodes">Episodes</a><a href="#doctor">Doctors</a><a href="#series">Series</a></nav><button class="search" id="searchOpen" aria-label="Search">Search</button></div></header>
-<section class="hero"><div class="hero-bg placeholder" id="heroBg"></div><div class="shell"><div class="hero-content"><div class="eyebrow">Doctor Who · Series Two</div><h1 class="series-title">Series Two</h1><div class="tagline">The Doctor and Rose are back.</div><div class="meta"><span>2006</span><span>14 episodes</span><span>10th Doctor</span></div><p class="synopsis">Rose Tyler continues her travels through time and space with a newly regenerated Doctor, encountering impossible worlds, old enemies and the growing mystery of Torchwood.</p><div class="actions"><button class="btn" onclick="openEpisode(0)">Play</button><button class="btn secondary" onclick="openEpisode(1)">More info</button></div></div></div></section>
-<main class="shell"><section class="section" id="episodes"><div class="section-head"><h2>Episodes</h2><span class="hint">Scroll to explore →</span></div><div class="rail" id="episodeRail"></div></section><section class="section" id="doctor"><div class="section-head"><h2>More from the Tenth Doctor</h2></div><div class="rail" id="seriesRail"></div></section><section class="section" id="series"><div class="section-head"><h2>Explore Doctor Who</h2></div><div class="rail" id="exploreRail"></div></section></main>
-
-<footer class="image-credits">
-  <strong>Image credits</strong><br>
-  TARDIS photograph: PxHere, CC0. Space imagery: Iris Nebula and E Nebula (CC0);
-  Pa30 (CC0); N81 and Orion imagery (NASA/ESA/Hubble, public-domain material).
-  Images are used as atmospheric placeholder artwork and are not episode stills.
-</footer>
-
-<div class="search-panel" id="searchPanel" aria-hidden="true"><button class="search-close" id="searchClose" aria-label="Close search">×</button><div class="search-inner"><label class="search-label" for="siteSearch">Titles, Doctors, companions</label><input class="search-input" id="siteSearch" type="search" placeholder="Search" autocomplete="off"><div class="search-results" id="searchResults"></div></div></div><div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
-  <article class="modal-card" id="modalCard">
-    <div class="modal-top">
-      <div></div>
-      <div class="modal-count" id="modalCount">Episode</div>
-      <div></div>
+<header class="header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#">DOCTOR<span>WHO</span></a>
+    <nav class="nav">
+      <a href="#">Home</a>
+      <a href="#episodes">Series</a>
+      <a href="#episodes">Episodes</a>
+      <a href="#">Soundtracks and Music</a>
+      <a href="#">About</a>
+    </nav>
+    <div class="header-tools">
+      <button class="search-open" id="searchOpen" aria-label="Search">⌕</button>
+      <button class="signin">Sign in</button>
     </div>
+  </div>
+</header>
 
-    <button class="close" id="close" aria-label="Close">×</button>
-    <button class="modal-nav modal-prev" id="modalPrev" aria-label="Previous episode">‹</button>
-    <button class="modal-nav modal-next" id="modalNext" aria-label="Next episode">›</button>
-
-    <div class="modal-hero" id="modalHero"></div>
-
-    <div class="modal-body">
-      <div class="modal-kicker" id="modalKicker">Doctor Who / Series Two</div>
-      <h2 id="modalTitle"></h2>
-      <div class="modal-meta" id="modalMeta"></div>
-      <p id="modalText"></p>
-
-      <div class="modal-actions">
-        <button class="btn" id="modalPlay">Play episode</button>
-        <button class="btn secondary" id="modalBack">Back to episodes</button>
+<section class="hero">
+  <div class="hero-image" id="heroImage"></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <div class="hero-meta">Series · 2006 · 14 Episodes</div>
+      <h1><span>Doctor Who</span><span>Series Two</span></h1>
+      <p class="hero-copy">The Doctor and Rose travel together through time and space, encountering impossible worlds, old enemies and the growing mystery of Torchwood.</p>
+      <div class="hero-actions">
+        <button class="hero-btn" onclick="openEpisode(0)"><span class="play">▶</span>Play</button>
+        <button class="hero-btn secondary" onclick="document.querySelector('#episodes').scrollIntoView()">Episodes</button>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="modal-progress" id="modalProgress"></div>
-  </article>
+<main class="episodes wrap" id="episodes">
+  <div class="episodes-top">
+    <h2>Episodes</h2>
+    <div class="select-wrap">
+      <select class="series-select" aria-label="Series"><option>Series 2</option></select>
+    </div>
+  </div>
+  <div class="list" id="episodeList"></div>
+</main>
+
+<footer class="wrap">Doctor Who Series Two guide · generic space imagery used as placeholder artwork.</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <button class="close" id="close" aria-label="Close">×</button>
+  <button class="modal-nav prev" id="prev" aria-label="Previous">‹</button>
+  <button class="modal-nav next" id="next" aria-label="Next">›</button>
+  <div class="modal-count" id="modalCount"></div>
+  <div class="modal-art" id="modalArt"></div>
+  <div class="modal-body">
+    <div class="modal-label">Doctor Who · Series Two</div>
+    <h3 id="modalTitle"></h3>
+    <div class="modal-meta" id="modalMeta"></div>
+    <p class="modal-text" id="modalText"></p>
+    <button class="hero-btn"><span class="play">▶</span>Play episode</button>
+  </div>
 </div>
+
+<div class="search-panel" id="searchPanel">
+  <button class="search-x" id="searchClose">×</button>
+  <div class="search-box">
+    <input class="search-input" id="searchInput" placeholder="Search episodes">
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
 <script>
-function placeholder(label,wide=true){
-  const w=wide?1280:800,h=wide?720:900;
-  const safe=String(label).replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[m]));
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#152434"/><stop offset=".52" stop-color="#26394b"/><stop offset="1" stop-color="#080b10"/></linearGradient><radialGradient id="r"><stop stop-color="#73bdf0" stop-opacity=".25"/><stop offset="1" stop-color="#73bdf0" stop-opacity="0"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><circle cx="72%" cy="38%" r="32%" fill="url(#r)"/><path d="M0 ${h*.78} C ${w*.25} ${h*.62}, ${w*.52} ${h*.95}, ${w} ${h*.7} L ${w} ${h} L0 ${h}Z" fill="#05070a" opacity=".62"/><g fill="none" stroke="#fff" stroke-opacity=".16"><rect x="${w*.08}" y="${h*.12}" width="${w*.84}" height="${h*.76}"/><path d="M${w*.08} ${h*.5}H${w*.92}M${w*.5} ${h*.12}V${h*.88}"/></g><text x="50%" y="47%" fill="#fff" opacity=".95" text-anchor="middle" font-family="Arial,sans-serif" font-size="${wide?44:36}" font-weight="700" letter-spacing="5">DOCTOR WHO</text><text x="50%" y="56%" fill="#c6d2dd" text-anchor="middle" font-family="Arial,sans-serif" font-size="${wide?23:19}" letter-spacing="3">${safe.toUpperCase()}</text><text x="50%" y="64%" fill="#82909d" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" letter-spacing="2">PLACEHOLDER ARTWORK</text></svg>`;
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-const freeImages = ['https://c.pxhere.com/photos/b8/93/the_tardis_doctor_who_television_character_fiction_series_telephone_booth-990266.jpg!d', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Iris_Nebula.jpg?width=1600', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/ENebula.png?width=1600', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Nebula_pa30.jpg?width=1200', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Nebula_N_81_%28opo0030a%29.jpg?width=1400', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Great_Orion_Nebula_%281994-10-143%29.jpg?width=1600'];
-const imageFor = i => freeImages[i % freeImages.length];
-
-document.documentElement.style.setProperty('--hero-image',`url("${imageFor(0)}")`);
+const images=[
+"https://images-assets.nasa.gov/image/PIA13451/PIA13451~orig.jpg",
+"https://commons.wikimedia.org/wiki/Special:Redirect/file/Trifid_Nebula.jpg?width=1800",
+"https://commons.wikimedia.org/wiki/Special:Redirect/file/Heart_of_the_Rosette_Nebula.jpg?width=1800",
+"https://commons.wikimedia.org/wiki/Special:Redirect/file/Butterfly_Nebula_-_GPN-2000-000902.jpg?width=1800",
+"https://commons.wikimedia.org/wiki/Special:Redirect/file/Iris_Nebula.jpg?width=1800",
+"https://commons.wikimedia.org/wiki/Special:Redirect/file/Nebula_pa30.jpg?width=1800"
+];
 const episodes=[
-['The Christmas Invasion','Special · 60 min','The newly regenerated Doctor must recover in time to save Earth from the Sycorax.'],['New Earth','Episode 1 · 45 min','The Doctor and Rose travel billions of years into the future and discover a sinister secret beneath a gleaming hospital.'],['Tooth and Claw','Episode 2 · 45 min','Queen Victoria, a remote Scottish estate and a creature that emerges beneath the full moon.'],['School Reunion','Episode 3 · 45 min','An investigation at a school brings the Doctor face to face with someone from his past.'],['The Girl in the Fireplace','Episode 4 · 45 min','Clockwork figures stalk an eighteenth-century woman from a spaceship beyond the stars.'],['Rise of the Cybermen','Episode 5 · 45 min','The TARDIS crashes into a parallel world where a familiar enemy is being created anew.'],['The Age of Steel','Episode 6 · 45 min','The Cybermen begin their takeover as the Doctor searches for a way to stop them.'],['The Idiot’s Lantern','Episode 7 · 45 min','Television arrives in Britain — and something hungry is watching through the screen.'],['The Impossible Planet','Episode 8 · 45 min','The TARDIS lands on a planet impossibly orbiting a black hole.'],['The Satan Pit','Episode 9 · 45 min','Deep beneath the planet, the Doctor confronts an ancient terror.'],['Love & Monsters','Episode 10 · 45 min','A group fascinated by the Doctor discovers that searching for him can be dangerous.'],['Fear Her','Episode 11 · 45 min','On the eve of the 2012 Olympics, children are vanishing from a London street.'],['Army of Ghosts','Episode 12 · 45 min','Ghostly figures appear across the world as Torchwood reveals itself.'],['Doomsday','Episode 13 · 45 min','Two worlds collide and the Doctor and Rose face an impossible separation.']];
-const series=[['Series One','2005'],['Series Three','2007'],['Series Four','2008'],['The Specials','2008–10']];
-function epImage(i){return imageFor(i+1)}
-const er=document.querySelector('#episodeRail');episodes.forEach((e,i)=>{er.insertAdjacentHTML('beforeend',`<article class="card" onclick="openEpisode(${i})"><div class="thumb placeholder" style="background-image:url('${epImage(i)}')"><span class="episode-num">${e[1].split(' · ')[0]}</span></div><h3>${e[0]}</h3><p>${e[1]}</p></article>`)})
-const sr=document.querySelector('#seriesRail');series.forEach((s,i)=>sr.insertAdjacentHTML('beforeend',`<article class="card series-card"><div class="thumb placeholder" style="background-image:url('${imageFor(i+2)}')"></div><h3>${s[0]}</h3><p>${s[1]}</p></article>`));
-const xr=document.querySelector('#exploreRail');['Doctors','Companions','Monsters','Specials','Classic Who'].forEach((x,i)=>xr.insertAdjacentHTML('beforeend',`<article class="card series-card"><div class="thumb placeholder" style="background-image:url('${imageFor(i+3)}')"></div><h3>${x}</h3></article>`));
-const topbar=document.querySelector('#topbar');
-addEventListener('scroll',()=>topbar.classList.toggle('scrolled',scrollY>30),{passive:true});
-const searchPanel=document.querySelector('#searchPanel'),searchInput=document.querySelector('#siteSearch'),searchResults=document.querySelector('#searchResults');
-function renderSearch(q=''){const t=q.trim().toLowerCase();const rows=episodes.map((e,i)=>({e,i})).filter(x=>!t||(`${x.e[0]} ${x.e[1]} tenth doctor rose tyler`).toLowerCase().includes(t));searchResults.innerHTML=rows.slice(0,10).map(x=>`<div class="search-result" data-i="${x.i}"><div>${x.e[0]}</div><small>Series Two · ${x.e[1]}</small></div>`).join('');searchResults.querySelectorAll('.search-result').forEach(el=>el.onclick=()=>{closeSearch();openEpisode(+el.dataset.i)})}
-function openSearch(){searchPanel.classList.add('open');document.body.style.overflow='hidden';renderSearch();setTimeout(()=>searchInput.focus(),30)}
-function closeSearch(){searchPanel.classList.remove('open');document.body.style.overflow=''}
-document.querySelector('#searchOpen').onclick=openSearch;document.querySelector('#searchClose').onclick=closeSearch;searchInput.oninput=e=>renderSearch(e.target.value);
+["The Christmas Invasion","Special · 60 min","The newly regenerated Doctor must recover in time to save Earth from the Sycorax."],
+["New Earth","Episode 1 · 45 min","The Doctor and Rose travel billions of years into the future and discover a sinister secret beneath a gleaming hospital."],
+["Tooth and Claw","Episode 2 · 45 min","Queen Victoria, a remote Scottish estate and a creature that emerges beneath the full moon."],
+["School Reunion","Episode 3 · 45 min","An investigation at a school brings the Doctor face to face with someone from his past."],
+["The Girl in the Fireplace","Episode 4 · 45 min","Clockwork figures stalk an eighteenth-century woman from a spaceship beyond the stars."],
+["Rise of the Cybermen","Episode 5 · 45 min","The TARDIS crashes into a parallel world where a familiar enemy is being created anew."],
+["The Age of Steel","Episode 6 · 45 min","The Cybermen begin their takeover as the Doctor searches for a way to stop them."],
+["The Idiot’s Lantern","Episode 7 · 45 min","Television arrives in Britain — and something hungry is watching through the screen."],
+["The Impossible Planet","Episode 8 · 45 min","The TARDIS lands on a planet impossibly orbiting a black hole."],
+["The Satan Pit","Episode 9 · 45 min","Deep beneath the planet, the Doctor confronts an ancient terror."],
+["Love & Monsters","Episode 10 · 45 min","A group fascinated by the Doctor discovers that searching for him can be dangerous."],
+["Fear Her","Episode 11 · 45 min","On the eve of the 2012 Olympics, children are vanishing from a London street."],
+["Army of Ghosts","Episode 12 · 45 min","Ghostly figures appear across the world as Torchwood reveals itself."],
+["Doomsday","Episode 13 · 45 min","Two worlds collide and the Doctor and Rose face an impossible separation."]
+];
+const img=i=>images[i%images.length];
+document.querySelector("#heroImage").style.backgroundImage=`url("${img(0)}")`;
 
-let activeEpisode=0;
-let modalPushedHistory=false;
-const episodeSlugs=episodes.map(e=>e[0].toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,''));
+const list=document.querySelector("#episodeList");
+episodes.forEach((e,i)=>{
+  const bits=e[1].split(" · ");
+  list.insertAdjacentHTML("beforeend",`
+  <article class="episode">
+    <div class="number">${i+1}</div>
+    <div class="thumb" data-open="${i}" tabindex="0" style="background-image:url('${img(i+1)}')"></div>
+    <div class="details">
+      <div class="title-row">
+        <h3 class="title" data-open="${i}">${i+1}. ${e[0]}</h3>
+        <span class="meta">${bits[1]||bits[0]} · 2006</span>
+      </div>
+      <p class="description">${e[2]}</p>
+    </div>
+  </article>`);
+});
+document.querySelectorAll("[data-open]").forEach(x=>{
+  x.onclick=()=>openEpisode(+x.dataset.open);
+  x.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openEpisode(+x.dataset.open)}}
+});
 
-function setEpisodeURL(i,replace=false){
-  const u=new URL(location.href);
-  u.searchParams.set('episode',episodeSlugs[i]);
-  history[replace?'replaceState':'pushState']({episode:i},'',u);
-}
-function clearEpisodeURL(replace=false){
-  const u=new URL(location.href);
-  u.searchParams.delete('episode');
-  history[replace?'replaceState':'pushState']({},'',u.pathname+u.search+u.hash);
-}
-function renderEpisodeModal(i){
-  activeEpisode=Math.max(0,Math.min(episodes.length-1,i));
-  const e=episodes[activeEpisode];
-  const title=e[0], code=e[1]||`Episode ${activeEpisode+1}`;
-  const description=e[2]||`The Doctor and Rose continue their travels through time and space in ${title}.`;
-  const image=e[3]||epImage(activeEpisode);
-  document.querySelector('#modalHero').style.backgroundImage=`url("${image}")`;
-  document.querySelector('#modalTitle').textContent=title;
-  document.querySelector('#modalKicker').textContent='Doctor Who / Series Two';
-  document.querySelector('#modalCount').textContent=`Episode ${activeEpisode+1} of ${episodes.length}`;
-  document.querySelector('#modalMeta').innerHTML=`<span>${code}</span><span>2006</span><span>Tenth Doctor</span>`;
-  document.querySelector('#modalText').textContent=description;
-  document.querySelector('#modalPrev').disabled=activeEpisode===0;
-  document.querySelector('#modalNext').disabled=activeEpisode===episodes.length-1;
-  document.querySelector('#modalProgress').style.width=`${((activeEpisode+1)/episodes.length)*100}%`;
+let active=0;
+const modal=document.querySelector("#modal");
+const slugs=episodes.map(e=>e[0].toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""));
+function renderModal(i){
+  active=Math.max(0,Math.min(episodes.length-1,i));
+  const e=episodes[active];
+  document.querySelector("#modalArt").style.backgroundImage=`url("${img(active+1)}")`;
+  document.querySelector("#modalTitle").textContent=e[0];
+  document.querySelector("#modalMeta").textContent=`${e[1]} · 2006`;
+  document.querySelector("#modalText").textContent=e[2];
+  document.querySelector("#modalCount").textContent=`Episode ${active+1} of ${episodes.length}`;
+  document.querySelector("#prev").disabled=active===0;
+  document.querySelector("#next").disabled=active===episodes.length-1;
 }
 function openEpisode(i,fromHistory=false){
-  renderEpisodeModal(i);
-  const modal=document.querySelector('#modal');
-  modal.classList.add('open');
-  modal.setAttribute('aria-hidden','false');
-  document.body.style.overflow='hidden';
-  if(!fromHistory){
-    setEpisodeURL(activeEpisode);
-    modalPushedHistory=true;
-  }
+  renderModal(i);modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
+  if(!fromHistory){const u=new URL(location.href);u.searchParams.set("episode",slugs[active]);history.pushState({},'',u)}
 }
-function closeEpisode(fromHistory=false){
-  const modal=document.querySelector('#modal');
-  modal.classList.remove('open');
-  modal.setAttribute('aria-hidden','true');
-  document.body.style.overflow='';
-  if(!fromHistory){
-    if(modalPushedHistory){
-      modalPushedHistory=false;
-      history.back();
-    }else{
-      clearEpisodeURL(true);
-    }
-  }
+function closeModal(fromHistory=false){
+  modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";
+  if(!fromHistory){const u=new URL(location.href);u.searchParams.delete("episode");history.pushState({},'',u)}
 }
-function moveEpisode(delta){
-  const next=activeEpisode+delta;
-  if(next<0||next>=episodes.length)return;
-  renderEpisodeModal(next);
-  setEpisodeURL(next);
-}
-document.querySelector('#modal').addEventListener('click',e=>{
-  if(e.target.id==='modal') closeEpisode();
-});
-document.querySelector('#close').onclick=()=>closeEpisode();
-document.querySelector('#modalBack').onclick=()=>closeEpisode();
-document.querySelector('#modalPrev').onclick=()=>moveEpisode(-1);
-document.querySelector('#modalNext').onclick=()=>moveEpisode(1);
-document.addEventListener('keydown',e=>{
-  const modalOpen=document.querySelector('#modal').classList.contains('open');
-  const searchOpen=searchPanel.classList.contains('open');
+function move(d){const n=active+d;if(n>=0&&n<episodes.length)openEpisode(n)}
+document.querySelector("#close").onclick=()=>closeModal();
+document.querySelector("#prev").onclick=()=>move(-1);
+document.querySelector("#next").onclick=()=>move(1);
 
-  if(e.key==='Escape'){
-    if(modalOpen) closeEpisode();
-    else if(searchOpen) closeSearch();
-    return;
-  }
-
-  if(!modalOpen) return;
-  if(e.key==='ArrowLeft') moveEpisode(-1);
-  if(e.key==='ArrowRight') moveEpisode(1);
-});
-let touchX=null;
-document.querySelector('#modalCard').addEventListener('touchstart',e=>touchX=e.touches[0].clientX,{passive:true});
-document.querySelector('#modalCard').addEventListener('touchend',e=>{
-  if(touchX===null)return;
-  const dx=e.changedTouches[0].clientX-touchX;
-  touchX=null;
-  if(Math.abs(dx)>60)moveEpisode(dx>0?-1:1);
-},{passive:true});
-function episodeFromURL(){
-  const slug=new URL(location.href).searchParams.get('episode');
-  if(!slug)return -1;
-  return episodeSlugs.indexOf(slug);
+const panel=document.querySelector("#searchPanel"),input=document.querySelector("#searchInput"),results=document.querySelector("#searchResults");
+function renderSearch(q=""){
+  const s=q.trim().toLowerCase();
+  const found=episodes.map((e,i)=>({e,i})).filter(x=>!s||x.e.join(" ").toLowerCase().includes(s));
+  results.innerHTML=found.map(x=>`<div class="search-result" data-result="${x.i}"><strong>${x.e[0]}</strong><br><small>${x.e[1]}</small></div>`).join("");
+  document.querySelectorAll("[data-result]").forEach(x=>x.onclick=()=>{panel.classList.remove("open");openEpisode(+x.dataset.result)})
 }
-addEventListener('popstate',()=>{
-  const i=episodeFromURL();
-  if(i>=0)openEpisode(i,true); else closeEpisode(true);
-});
-const initialEpisode=episodeFromURL();
-if(initialEpisode>=0)openEpisode(initialEpisode,true);
+document.querySelector("#searchOpen").onclick=()=>{panel.classList.add("open");renderSearch();setTimeout(()=>input.focus(),20)};
+document.querySelector("#searchClose").onclick=()=>panel.classList.remove("open");
+input.oninput=e=>renderSearch(e.target.value);
 
+addEventListener("keydown",e=>{
+  if(e.key==="Escape"){if(modal.classList.contains("open"))closeModal();else panel.classList.remove("open")}
+  if(modal.classList.contains("open")&&e.key==="ArrowLeft")move(-1);
+  if(modal.classList.contains("open")&&e.key==="ArrowRight")move(1);
+});
+addEventListener("popstate",()=>{
+  const slug=new URL(location.href).searchParams.get("episode"),i=slugs.indexOf(slug);
+  if(i>=0)openEpisode(i,true);else closeModal(true)
+});
+const first=slugs.indexOf(new URL(location.href).searchParams.get("episode"));
+if(first>=0)openEpisode(first,true);
 </script>
 </body>
 </html>
