@@ -227,6 +227,226 @@ html[data-theme="dark"] {
 }
 </style>
 
+
+<style id="continued-in-next-year">
+/* -----------------------------------------------------------
+   END OF 2025 — CONTINUED IN 2026
+   ----------------------------------------------------------- */
+.continuation-section{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:
+    radial-gradient(circle at 76% 18%, rgba(125,184,239,.24), transparent 34%),
+    linear-gradient(112deg, #173f70 0%, #245b91 48%, #4d7faf 100%);
+  color:#fff;
+}
+
+.continuation-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  opacity:.22;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.025) 0,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+  mix-blend-mode:soft-light;
+}
+
+.continuation-section::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(5,28,55,.18), transparent 32%, transparent 72%, rgba(255,255,255,.035));
+}
+
+.continuation-shell{
+  padding-top:52px;
+  padding-bottom:48px;
+}
+
+.continuation-topline{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:30px;
+  align-items:center;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(224,239,255,.78);
+}
+
+.continuation-rule{
+  display:block;
+  width:100%;
+  height:1px;
+  background:rgba(224,239,255,.58);
+}
+
+.continuation-end{
+  white-space:nowrap;
+}
+
+.continuation-main{
+  padding:62px 0 54px;
+}
+
+.continuation-main h2{
+  max-width:1180px;
+  margin:0;
+  font-family:"Google Sans Flex","Inter",Arial,sans-serif;
+  font-size:clamp(4rem,7.7vw,8.6rem);
+  font-weight:760;
+  line-height:.86;
+  letter-spacing:-.052em;
+  text-transform:uppercase;
+  text-wrap:balance;
+}
+
+.continuation-main h2 > span{
+  display:block;
+}
+
+.continuation-year{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  margin-top:.14em;
+  color:#cfe8ff;
+  text-decoration:none;
+  letter-spacing:-.035em;
+}
+
+.continuation-chevron{
+  width:.55em;
+  height:.55em;
+  margin-left:.16em;
+  flex:0 0 auto;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:3.4;
+  stroke-linecap:square;
+  stroke-linejoin:miter;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.continuation-year:hover .continuation-chevron,
+.continuation-year:focus-visible .continuation-chevron{
+  transform:translateX(.12em);
+}
+
+.continuation-year:focus-visible{
+  outline:2px solid rgba(255,255,255,.85);
+  outline-offset:.08em;
+  border-radius:.03em;
+}
+
+.continuation-main p{
+  margin:34px 0 0;
+  font-family:"Inter",Arial,sans-serif;
+  font-size:clamp(1rem,1.35vw,1.35rem);
+  font-weight:450;
+  letter-spacing:-.02em;
+  color:rgba(255,255,255,.92);
+}
+
+.continuation-bottom-rule{
+  margin-top:0;
+}
+
+.continuation-section.continuation-ready .continuation-end,
+.continuation-section.continuation-ready .continuation-main{
+  opacity:0;
+  transform:translateY(14px);
+}
+
+.continuation-section.continuation-ready.is-visible .continuation-end,
+.continuation-section.continuation-ready.is-visible .continuation-main{
+  opacity:1;
+  transform:translateY(0);
+  transition:
+    opacity .65s ease,
+    transform .65s cubic-bezier(.2,.8,.2,1);
+}
+
+.continuation-section.continuation-ready.is-visible .continuation-main{
+  transition-delay:.06s;
+}
+
+@media (max-width:800px){
+  .continuation-shell{
+    padding-top:36px;
+    padding-bottom:34px;
+  }
+
+  .continuation-topline{
+    gap:18px;
+  }
+
+  .continuation-main{
+    padding:50px 0 44px;
+  }
+
+  .continuation-main h2{
+    font-size:clamp(3.15rem,14vw,6rem);
+    line-height:.9;
+    letter-spacing:-.045em;
+  }
+
+  .continuation-main p{
+    margin-top:25px;
+  }
+}
+
+@media (max-width:560px){
+  .continuation-topline{
+    grid-template-columns:1fr;
+  }
+
+  .continuation-topline .continuation-rule{
+    order:2;
+  }
+
+  .continuation-end{
+    justify-self:end;
+  }
+
+  .continuation-main{
+    padding:38px 0 36px;
+  }
+
+  .continuation-main h2{
+    font-size:clamp(2.8rem,15vw,4.6rem);
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .continuation-section.continuation-ready .continuation-end,
+  .continuation-section.continuation-ready .continuation-main{
+    opacity:1;
+    transform:none;
+    transition:none;
+  }
+
+  .continuation-chevron{
+    transition:none;
+  }
+}
+</style>
+
 </head>
 <body>
   <div class="top-strip">This page is currently being updated.</div>
@@ -931,45 +1151,26 @@ html[data-theme="dark"] {
       </section>
     </div>
     </div>
-
-
-
-
-
-    
-
-    <section class="transmission-section" aria-labelledby="transmissionTitle">
-      <div class="page-shell transmission-grid">
-        <div class="transmission-copy">
-          <h2 id="transmissionTitle">Nothing to see here</h2>
-          <p>Enter the password to reveal a message from Lewis.</p>
+    <section class="continuation-section" aria-labelledby="continuationTitle">
+      <div class="page-shell continuation-shell">
+        <div class="continuation-topline">
+          <span class="continuation-rule" aria-hidden="true"></span>
+          <span class="continuation-end">// &nbsp;END OF 2025</span>
         </div>
 
-        <div class="transmission-console">
-          <form class="transmission-form" id="transmissionForm">
-            <label for="transmissionCode">Enter password</label>
-            <div class="transmission-input-row">
-              <input
-                id="transmissionCode"
-                name="transmission-code"
-                type="text"
-                maxlength="20"
-                placeholder="Enter password..."
-                autocomplete="off"
-                spellcheck="false"
-              >
-              <button type="submit">Submit</button>
-            </div>
-          </form>
-
-          <p class="transmission-status" id="transmissionStatus" aria-live="polite">&gt; waiting for password</p>
-
-          <div class="transmission-message" id="transmissionMessage" hidden>
-            <small>Message unlocked</small>
-            <h3>Hello.</h3>
-            <p>There really is nothing to see here. Sorry about that.</p>
-          </div>
+        <div class="continuation-main">
+          <h2 id="continuationTitle">
+            <span>TO BE CONTINUED</span>
+            <a class="continuation-year" href="/diary/2026" aria-label="Continue to the 2026 diary">
+              <span>IN 2026</span>
+              <svg class="continuation-chevron" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 4l8 8-8 8"/>
+              </svg>
+            </a>
+          </h2>
         </div>
+
+        <span class="continuation-rule continuation-bottom-rule" aria-hidden="true"></span>
       </div>
     </section>
   </main>
@@ -1126,40 +1327,6 @@ if (basketButton) {
         showToast('Digital download added to basket.');
     });
 }
-    const transmissionForm = document.getElementById('transmissionForm');
-    const transmissionCode = document.getElementById('transmissionCode');
-    const transmissionStatus = document.getElementById('transmissionStatus');
-    const transmissionMessage = document.getElementById('transmissionMessage');
-
-    if (transmissionForm && transmissionCode && transmissionStatus && transmissionMessage) {
-      transmissionForm.addEventListener('submit', event => {
-        event.preventDefault();
-
-        const code = transmissionCode.value.trim().toUpperCase();
-        transmissionMessage.hidden = true;
-        transmissionMessage.classList.remove('is-visible');
-        transmissionStatus.className = 'transmission-status';
-        transmissionStatus.textContent = '> analysing password...';
-
-        window.setTimeout(() => {
-          if (code === 'HELLO') {
-            transmissionStatus.className = 'transmission-status is-success';
-            transmissionStatus.textContent = '> access granted.';
-            transmissionMessage.hidden = false;
-            requestAnimationFrame(() => transmissionMessage.classList.add('is-visible'));
-          } else if (!code) {
-            transmissionStatus.className = 'transmission-status is-error';
-            transmissionStatus.textContent = '> no password detected.';
-          } else {
-            transmissionStatus.className = 'transmission-status is-error';
-            transmissionStatus.textContent = '> access denied. Password not recognised.';
-          }
-
-          transmissionCode.focus();
-          transmissionCode.select();
-        }, 550);
-      });
-    }
 
     function showToast(message) {
       toast.textContent = message;
@@ -1434,6 +1601,26 @@ document.addEventListener("DOMContentLoaded", function () {
     updateBackToTop();
   }
 });
+</script>
+
+
+<script id="continued-in-next-year-script">
+(() => {
+  const section = document.querySelector(".continuation-section");
+  if (!section || !("IntersectionObserver" in window)) return;
+
+  section.classList.add("continuation-ready");
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      section.classList.add("is-visible");
+      observer.disconnect();
+    });
+  }, { threshold: 0.18 });
+
+  observer.observe(section);
+})();
 </script>
 
 </body>
