@@ -131,12 +131,39 @@ main{position:relative;z-index:4;margin:0;padding:70px 0 110px}.section{margin:0
 }
 
 @media(max-width:720px){.shell{width:calc(100% - 30px)}.topbar{height:66px}.topbar .shell{grid-template-columns:1fr auto}.nav{display:none}.hero{min-height:92svh}.hero-bg{background-image:linear-gradient(0deg,#090909,transparent 60%),linear-gradient(90deg,rgba(0,0,0,.55),transparent),var(--hero-image);background-position:62% center}.hero-content{width:100%;padding:105px 0 10vh}.series-title{font-size:clamp(4.6rem,25vw,8rem)}.synopsis{font-size:.92rem}.rail{grid-auto-columns:82vw;gap:13px}.hint{display:none}.section{margin-bottom:62px}.search-results{grid-template-columns:1fr}.modal-hero{height:55svh;min-height:370px}.modal-body{width:calc(100% - 30px);margin:-45px auto 0}}
+
+.image-credits{
+  width:min(1640px,calc(100% - 72px));
+  margin:10px auto 60px;
+  padding-top:18px;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:.58rem;
+  line-height:1.7;
+  letter-spacing:.06em;
+}
+.image-credits strong{
+  color:var(--fg);
+  text-transform:uppercase;
+  letter-spacing:.13em;
+}
+.image-credits a{color:inherit;text-underline-offset:3px}
+@media(max-width:720px){.image-credits{width:calc(100% - 30px);margin-bottom:40px}}
+
 </style>
 </head>
 <body>
 <header class="topbar" id="topbar"><div class="shell"><div class="brand">Doctor Who Archive</div><nav class="nav"><a href="#episodes">Episodes</a><a href="#doctor">Doctors</a><a href="#series">Series</a></nav><button class="search" id="searchOpen" aria-label="Search">Search</button></div></header>
 <section class="hero"><div class="hero-bg placeholder" id="heroBg"></div><div class="shell"><div class="hero-content"><div class="eyebrow">Doctor Who · Series Two</div><h1 class="series-title">Series Two</h1><div class="tagline">The Doctor and Rose are back.</div><div class="meta"><span>2006</span><span>14 episodes</span><span>10th Doctor</span></div><p class="synopsis">Rose Tyler continues her travels through time and space with a newly regenerated Doctor, encountering impossible worlds, old enemies and the growing mystery of Torchwood.</p><div class="actions"><button class="btn" onclick="openEpisode(0)">Play</button><button class="btn secondary" onclick="openEpisode(1)">More info</button></div></div></div></section>
 <main class="shell"><section class="section" id="episodes"><div class="section-head"><h2>Episodes</h2><span class="hint">Scroll to explore →</span></div><div class="rail" id="episodeRail"></div></section><section class="section" id="doctor"><div class="section-head"><h2>More from the Tenth Doctor</h2></div><div class="rail" id="seriesRail"></div></section><section class="section" id="series"><div class="section-head"><h2>Explore Doctor Who</h2></div><div class="rail" id="exploreRail"></div></section></main>
+
+<footer class="image-credits">
+  <strong>Image credits</strong><br>
+  TARDIS photograph: PxHere, CC0. Space imagery: Iris Nebula and E Nebula (CC0);
+  Pa30 (CC0); N81 and Orion imagery (NASA/ESA/Hubble, public-domain material).
+  Images are used as atmospheric placeholder artwork and are not episode stills.
+</footer>
+
 <div class="search-panel" id="searchPanel" aria-hidden="true"><button class="search-close" id="searchClose" aria-label="Close search">×</button><div class="search-inner"><label class="search-label" for="siteSearch">Titles, Doctors, companions</label><input class="search-input" id="siteSearch" type="search" placeholder="Search" autocomplete="off"><div class="search-results" id="searchResults"></div></div></div><div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
   <article class="modal-card" id="modalCard">
     <div class="modal-top">
@@ -173,14 +200,17 @@ function placeholder(label,wide=true){
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#152434"/><stop offset=".52" stop-color="#26394b"/><stop offset="1" stop-color="#080b10"/></linearGradient><radialGradient id="r"><stop stop-color="#73bdf0" stop-opacity=".25"/><stop offset="1" stop-color="#73bdf0" stop-opacity="0"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#g)"/><circle cx="72%" cy="38%" r="32%" fill="url(#r)"/><path d="M0 ${h*.78} C ${w*.25} ${h*.62}, ${w*.52} ${h*.95}, ${w} ${h*.7} L ${w} ${h} L0 ${h}Z" fill="#05070a" opacity=".62"/><g fill="none" stroke="#fff" stroke-opacity=".16"><rect x="${w*.08}" y="${h*.12}" width="${w*.84}" height="${h*.76}"/><path d="M${w*.08} ${h*.5}H${w*.92}M${w*.5} ${h*.12}V${h*.88}"/></g><text x="50%" y="47%" fill="#fff" opacity=".95" text-anchor="middle" font-family="Arial,sans-serif" font-size="${wide?44:36}" font-weight="700" letter-spacing="5">DOCTOR WHO</text><text x="50%" y="56%" fill="#c6d2dd" text-anchor="middle" font-family="Arial,sans-serif" font-size="${wide?23:19}" letter-spacing="3">${safe.toUpperCase()}</text><text x="50%" y="64%" fill="#82909d" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" letter-spacing="2">PLACEHOLDER ARTWORK</text></svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
-document.documentElement.style.setProperty('--hero-image',`url("${placeholder('Series Two hero')}")`);
+const freeImages = ['https://c.pxhere.com/photos/b8/93/the_tardis_doctor_who_television_character_fiction_series_telephone_booth-990266.jpg!d', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Iris_Nebula.jpg?width=1600', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/ENebula.png?width=1600', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Nebula_pa30.jpg?width=1200', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/Nebula_N_81_%28opo0030a%29.jpg?width=1400', 'https://commons.wikimedia.org/wiki/Special:Redirect/file/The_Great_Orion_Nebula_%281994-10-143%29.jpg?width=1600'];
+const imageFor = i => freeImages[i % freeImages.length];
+
+document.documentElement.style.setProperty('--hero-image',`url("${imageFor(0)}")`);
 const episodes=[
 ['The Christmas Invasion','Special · 60 min','The newly regenerated Doctor must recover in time to save Earth from the Sycorax.'],['New Earth','Episode 1 · 45 min','The Doctor and Rose travel billions of years into the future and discover a sinister secret beneath a gleaming hospital.'],['Tooth and Claw','Episode 2 · 45 min','Queen Victoria, a remote Scottish estate and a creature that emerges beneath the full moon.'],['School Reunion','Episode 3 · 45 min','An investigation at a school brings the Doctor face to face with someone from his past.'],['The Girl in the Fireplace','Episode 4 · 45 min','Clockwork figures stalk an eighteenth-century woman from a spaceship beyond the stars.'],['Rise of the Cybermen','Episode 5 · 45 min','The TARDIS crashes into a parallel world where a familiar enemy is being created anew.'],['The Age of Steel','Episode 6 · 45 min','The Cybermen begin their takeover as the Doctor searches for a way to stop them.'],['The Idiot’s Lantern','Episode 7 · 45 min','Television arrives in Britain — and something hungry is watching through the screen.'],['The Impossible Planet','Episode 8 · 45 min','The TARDIS lands on a planet impossibly orbiting a black hole.'],['The Satan Pit','Episode 9 · 45 min','Deep beneath the planet, the Doctor confronts an ancient terror.'],['Love & Monsters','Episode 10 · 45 min','A group fascinated by the Doctor discovers that searching for him can be dangerous.'],['Fear Her','Episode 11 · 45 min','On the eve of the 2012 Olympics, children are vanishing from a London street.'],['Army of Ghosts','Episode 12 · 45 min','Ghostly figures appear across the world as Torchwood reveals itself.'],['Doomsday','Episode 13 · 45 min','Two worlds collide and the Doctor and Rose face an impossible separation.']];
 const series=[['Series One','2005'],['Series Three','2007'],['Series Four','2008'],['The Specials','2008–10']];
-function epImage(i){return placeholder(episodes[i][0])}
+function epImage(i){return imageFor(i+1)}
 const er=document.querySelector('#episodeRail');episodes.forEach((e,i)=>{er.insertAdjacentHTML('beforeend',`<article class="card" onclick="openEpisode(${i})"><div class="thumb placeholder" style="background-image:url('${epImage(i)}')"><span class="episode-num">${e[1].split(' · ')[0]}</span></div><h3>${e[0]}</h3><p>${e[1]}</p></article>`)})
-const sr=document.querySelector('#seriesRail');series.forEach((s,i)=>sr.insertAdjacentHTML('beforeend',`<article class="card series-card"><div class="thumb placeholder" style="background-image:url('${placeholder(s[0])}')"></div><h3>${s[0]}</h3><p>${s[1]}</p></article>`));
-const xr=document.querySelector('#exploreRail');['Doctors','Companions','Monsters','Specials','Classic Who'].forEach((x,i)=>xr.insertAdjacentHTML('beforeend',`<article class="card series-card"><div class="thumb placeholder" style="background-image:url('${placeholder(x)}')"></div><h3>${x}</h3></article>`));
+const sr=document.querySelector('#seriesRail');series.forEach((s,i)=>sr.insertAdjacentHTML('beforeend',`<article class="card series-card"><div class="thumb placeholder" style="background-image:url('${imageFor(i+2)}')"></div><h3>${s[0]}</h3><p>${s[1]}</p></article>`));
+const xr=document.querySelector('#exploreRail');['Doctors','Companions','Monsters','Specials','Classic Who'].forEach((x,i)=>xr.insertAdjacentHTML('beforeend',`<article class="card series-card"><div class="thumb placeholder" style="background-image:url('${imageFor(i+3)}')"></div><h3>${x}</h3></article>`));
 const topbar=document.querySelector('#topbar');
 addEventListener('scroll',()=>topbar.classList.toggle('scrolled',scrollY>30),{passive:true});
 const searchPanel=document.querySelector('#searchPanel'),searchInput=document.querySelector('#siteSearch'),searchResults=document.querySelector('#searchResults');
@@ -208,7 +238,7 @@ function renderEpisodeModal(i){
   const e=episodes[activeEpisode];
   const title=e[0], code=e[1]||`Episode ${activeEpisode+1}`;
   const description=e[2]||`The Doctor and Rose continue their travels through time and space in ${title}.`;
-  const image=e[3]||placeholder(title,true);
+  const image=e[3]||epImage(activeEpisode);
   document.querySelector('#modalHero').style.backgroundImage=`url("${image}")`;
   document.querySelector('#modalTitle').textContent=title;
   document.querySelector('#modalKicker').textContent='Doctor Who / Series Two';
