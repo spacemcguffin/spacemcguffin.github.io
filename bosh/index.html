@@ -8,370 +8,125 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Google+Sans+Flex:opsz,wght@6..144,400..800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0a1118;
-  --surface:#111a23;
-  --surface-2:#202a35;
-  --text:#f4f7fb;
-  --muted:#a6b4c6;
-  --blue:#54c8ff;
-  --line:#283745;
-}
+:root{--bg:#07111b;--surface:#0d1823;--line:#203142;--text:#f6f8fb;--muted:#9eafc4;--blue:#63cfff}
 *{box-sizing:border-box}
+.icon{width:1.35em;height:1.35em;display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.icon .fill,.icon.fill{fill:currentColor;stroke:none}
+.icon-play{width:1.15em;height:1.15em}
 html{scroll-behavior:smooth}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font-family:"Inter",Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;
-}
-button,select,input{font:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",sans-serif;-webkit-font-smoothing:antialiased}
+button,a,select{font:inherit}.shell{width:min(1720px,calc(100% - 108px));margin:auto}
 button{cursor:pointer}
-.wrap{width:min(1690px,calc(100% - 150px));margin:auto}
 
-/* header */
-.header{
-  position:absolute;z-index:20;top:0;left:0;right:0;height:88px;
-  display:flex;align-items:center;
-}
-.header-inner{display:flex;align-items:center;gap:44px}
-.logo{
-  color:#fff;text-decoration:none;font-family:"Google Sans Flex","Inter",sans-serif;
-  font-size:1.3rem;font-weight:800;letter-spacing:-.06em;white-space:nowrap
-}
-.logo span{color:var(--blue)}
-.nav{display:flex;align-items:center;gap:32px}
-.nav a{color:#aab7c8;text-decoration:none;font-size:.92rem;font-weight:600}
-.nav a:hover{color:#fff}
-.header-tools{margin-left:auto;display:flex;align-items:center;gap:20px}
-.search-open{
-  width:42px;height:42px;border:0;background:none;color:#fff;font-size:1.7rem
-}
-.signin{
-  border:0;border-radius:5px;padding:14px 20px;background:rgba(255,255,255,.14);
-  color:#fff;font-weight:700;backdrop-filter:blur(12px)
-}
+/* top navigation */
+.topbar{position:absolute;z-index:20;inset:0 0 auto;height:82px;display:flex;align-items:center}
+.topbar-inner{display:flex;align-items:center;gap:42px}
+.wordmark{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.bbc{display:grid;grid-template-columns:repeat(3,14px);gap:2px}.bbc i{height:11px;background:#fff;color:#07111b;font-size:8px;font-style:normal;font-weight:900;display:grid;place-items:center}
+.dw{font-family:"Google Sans Flex",sans-serif;font-size:1.15rem;letter-spacing:.18em;font-weight:500}
+.nav{display:flex;gap:31px}.nav a{color:#c4cfdb;text-decoration:none;font-size:.84rem;padding:28px 0 23px;position:relative}
+.nav a.active,.nav a:hover{color:#fff}.nav a.active:after{content:"";position:absolute;left:0;right:0;bottom:13px;height:2px;background:var(--blue);box-shadow:0 0 13px var(--blue)}
+.tools{margin-left:auto;display:flex;align-items:center;gap:13px;color:#d8e0e9}.search-btn{border:0;background:none;color:#fff;width:42px;height:42px;padding:0;display:grid;place-items:center;font-size:1.15rem}.avatar{width:42px;height:42px;border:1px solid var(--blue);border-radius:50%;background:radial-gradient(circle at 55% 35%,#42b9ff55,transparent 28%),#081a2b}
 
 /* hero */
-.hero{
-  position:relative;height:800px;min-height:760px;display:flex;align-items:center;
-  overflow:hidden;
-}
-.hero-image{
-  position:absolute;inset:0;background:center/cover no-repeat;
-}
-.hero-image:after{
-  content:"";position:absolute;inset:0;
-  background:
-    linear-gradient(90deg,rgba(7,13,19,.98) 0%,rgba(7,13,19,.88) 21%,rgba(7,13,19,.58) 40%,rgba(7,13,19,.14) 72%),
-    linear-gradient(0deg,var(--bg) 0%,rgba(10,17,24,.42) 18%,transparent 47%),
-    linear-gradient(180deg,rgba(5,10,15,.2),transparent 24%);
-}
-.hero-content{position:relative;z-index:2;width:720px;padding-top:60px}
-.hero-meta{
-  display:flex;align-items:center;gap:12px;margin-bottom:42px;
-  color:#d4dce7;font-size:.83rem;font-weight:700;letter-spacing:.17em;text-transform:uppercase
-}
-.hero-meta:before{content:"";display:block;width:5px;height:20px;background:var(--blue)}
-.hero h1{
-  margin:0 0 28px;font-family:"Google Sans Flex","Inter",sans-serif;
-  font-size:clamp(5rem,7vw,7.9rem);line-height:.85;font-weight:800;
-  letter-spacing:-.065em
-}
-.hero h1 span{display:block}
-.hero-copy{max-width:670px;margin:0;font-size:1.15rem;line-height:1.55;color:#f1f4f8}
-.hero-actions{display:flex;gap:13px;margin-top:36px}
-.hero-btn{
-  min-width:145px;height:62px;border:0;border-radius:4px;padding:0 26px;
-  background:#fff;color:#10151b;font-size:1rem;font-weight:800
-}
-.hero-btn.secondary{background:#4b5361;color:#fff}
-.hero-btn:hover{filter:brightness(.92)}
-.play{font-size:1.15rem;margin-right:11px}
+.hero{height:540px;min-height:540px;position:relative;overflow:hidden;display:flex;align-items:center;border-bottom:1px solid var(--line)}
+.hero-art{position:absolute;inset:0;background:
+radial-gradient(circle at 70% 40%,#72b9ff33,transparent 24%),
+radial-gradient(circle at 47% 15%,#5b82ff25,transparent 28%),
+linear-gradient(115deg,#07111b 0 25%,#0b2137 47%,#112b47 68%,#07111b 100%)}
+.hero-art:before{content:"";position:absolute;inset:0;background-image:
+radial-gradient(circle at 8% 18%,#fff 0 1px,transparent 1.4px),
+radial-gradient(circle at 22% 38%,#8dd9ff 0 1px,transparent 1.5px),
+radial-gradient(circle at 43% 22%,#fff 0 1px,transparent 1.3px),
+radial-gradient(circle at 61% 13%,#fff 0 1px,transparent 1.4px),
+radial-gradient(circle at 78% 28%,#fff 0 1px,transparent 1.4px),
+radial-gradient(circle at 91% 18%,#9edaff 0 1px,transparent 1.5px);background-size:190px 150px}
+.hero-art:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,12,20,.98),rgba(5,12,20,.76) 31%,rgba(5,12,20,.18) 65%),linear-gradient(0deg,#07111b 0%,transparent 38%)}
+.planet{position:absolute;width:330px;height:330px;border-radius:50%;right:21%;top:-125px;background:radial-gradient(circle at 35% 35%,#7188a8,#1c2c43 47%,#07111b 72%);opacity:.72;box-shadow:0 0 60px #4f83bc33}
+.tardis{position:absolute;right:17%;top:95px;width:185px;height:330px;background:linear-gradient(90deg,#07192b,#12365c 45%,#061525);border:5px solid #061322;transform:perspective(600px) rotateY(-7deg);box-shadow:0 20px 50px #0009}
+.tardis:before{content:"POLICE  PUBLIC CALL  BOX";position:absolute;left:5px;right:5px;top:27px;height:28px;border:2px solid #0a0f16;background:#05080c;color:#f3e8c7;font-size:9px;letter-spacing:.08em;display:grid;place-items:center}
+.tardis:after{content:"";position:absolute;left:17px;right:17px;top:72px;bottom:22px;background:repeating-linear-gradient(90deg,transparent 0 47%,#07101b 48% 52%,transparent 53% 100%),repeating-linear-gradient(0deg,#183d67 0 21%,#07101b 22% 25%)}
+.hero-content{position:relative;z-index:3;width:620px;padding-top:45px}
+.eyebrow{display:flex;align-items:center;gap:11px;color:#d4dfeb;font-size:.72rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}.eyebrow:before{content:"";width:4px;height:17px;background:var(--blue)}
+.hero h1{margin:25px 0 17px;font-family:"Google Sans Flex",sans-serif;font-size:clamp(4rem,5.8vw,6.4rem);line-height:.83;letter-spacing:-.055em;font-weight:800;text-transform:uppercase}.hero h1 span{display:block;color:#cde1f7}
+.hero-copy{max-width:570px;color:#e2e8ef;font-size:.98rem;line-height:1.5}.hero-actions{display:flex;gap:12px;margin-top:25px}
+.btn{height:52px;border:0;border-radius:4px;padding:0 24px;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:10px}.btn.primary{background:#fff;color:#0b1117}.btn.secondary{background:#293442;color:#fff}
+.tagline{position:absolute;right:3%;top:215px;z-index:3;text-align:center;color:#fff;font-size:.66rem;line-height:3.1;letter-spacing:.48em;text-transform:uppercase;transform:rotate(-1deg)}
 
-/* episodes */
-.episodes{padding:34px 0 130px}
-.episodes-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:38px}
-.episodes h2{
-  margin:0;font-family:"Google Sans Flex","Inter",sans-serif;
-  font-size:2rem;font-weight:750;letter-spacing:-.04em
-}
-.select-wrap{position:relative}
-.select-wrap:after{
-  content:"⌄";position:absolute;right:19px;top:17px;color:var(--blue);pointer-events:none
-}
-.series-select{
-  appearance:none;width:215px;height:58px;border:1px solid #2a3947;border-radius:5px;
-  padding:0 52px 0 20px;background:#111a23;color:var(--blue);
-  font-size:.77rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase
-}
-.list{display:flex;flex-direction:column;gap:44px}
-.episode{
-  display:grid;grid-template-columns:55px 345px minmax(0,1fr);
-  gap:28px;align-items:center;min-height:195px
-}
-.number{font-size:2.45rem;font-weight:700;color:#8da0b5;text-align:center}
-.thumb{
-  position:relative;aspect-ratio:16/9;border-radius:5px;overflow:hidden;
-  background:#15202a center/cover no-repeat;cursor:pointer
-}
-.thumb:after{
-  content:"▶";position:absolute;inset:0;display:grid;place-items:center;
-  background:rgba(5,10,15,.32);opacity:0;transition:.2s;font-size:1.8rem
-}
-.episode:hover .thumb:after{opacity:1}
-.details{align-self:center;max-width:1040px}
-.title-row{display:flex;align-items:center;flex-wrap:wrap;gap:13px;margin-bottom:10px}
-.title{
-  margin:0;font-family:"Google Sans Flex","Inter",sans-serif;
-  font-size:1.48rem;font-weight:750;letter-spacing:-.025em;cursor:pointer
-}
-.meta{font-size:.73rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:#9bbbe0}
-.description{margin:0;max-width:980px;color:#d9e0e8;font-size:1rem;line-height:1.52}
+/* episode list */
+.episodes{padding:30px 0 70px}.episodes-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.episodes h2{font-family:"Google Sans Flex";font-size:1.85rem;margin:0;letter-spacing:-.035em}
+.select-wrap{position:relative}.select-wrap .select-chevron{position:absolute;right:15px;top:14px;color:var(--blue);pointer-events:none;width:18px;height:18px}
+select{appearance:none;width:185px;height:46px;border:1px solid #293a4c;border-radius:4px;background:#101b27;color:var(--blue);padding:0 42px 0 16px;font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+.episode{display:grid;grid-template-columns:50px 285px minmax(0,1fr) 55px;gap:25px;align-items:center;padding:12px 0;border-bottom:1px solid #1d2d3d;min-height:122px}
+.num{font-size:2.25rem;font-weight:700;color:#8499b8;text-align:center}.thumb{height:106px;border-radius:4px;background:center/cover;position:relative;overflow:hidden;cursor:pointer}
+.thumb:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#06111d55,transparent)}
+.info h3{margin:0 0 8px;font-family:"Google Sans Flex";font-size:1.23rem;letter-spacing:-.025em}.meta{color:#9fb7d4;font-size:.67rem;letter-spacing:.11em;text-transform:uppercase;margin-bottom:8px}.desc{margin:0;color:#b9c7d7;font-size:.82rem;line-height:1.42;max-width:720px}
+.play-round{width:42px;height:42px;border:1px solid #8294aa;border-radius:50%;background:none;color:#fff;font-size:1rem;display:grid;place-items:center;padding:0}.play-round .icon{width:18px;height:18px}.episode:hover .play-round{border-color:var(--blue);color:var(--blue)}
 
 /* modal */
-.modal{
-  position:fixed;z-index:100;inset:0;background:var(--bg);overflow:auto;
-  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease
-}
-.modal.open{opacity:1;visibility:visible;pointer-events:auto}
-.modal-art{height:68svh;min-height:520px;background:center/cover no-repeat;position:relative}
-.modal-art:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(0deg,var(--bg),transparent 65%),linear-gradient(90deg,rgba(8,14,20,.5),transparent 60%)
-}
-.modal-body{position:relative;z-index:2;width:min(1000px,calc(100% - 120px));margin:-125px auto 0;padding-bottom:100px}
-.modal-label{color:var(--blue);font-size:.76rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
-.modal h3{
-  margin:14px 0 16px;font-family:"Google Sans Flex","Inter",sans-serif;
-  font-size:clamp(3.8rem,6vw,6.8rem);line-height:.9;letter-spacing:-.06em
-}
-.modal-meta{color:#9bbbe0;font-size:.75rem;font-weight:600;letter-spacing:.11em;text-transform:uppercase}
-.modal-text{max-width:760px;color:#d8e0e9;font-size:1.05rem;line-height:1.6}
-.close{
-  position:fixed;z-index:7;right:27px;top:22px;width:46px;height:46px;
-  border:1px solid rgba(255,255,255,.12);border-radius:4px;background:rgba(10,17,24,.7);
-  color:#fff;font-size:1.6rem
-}
-.modal-nav{
-  position:fixed;z-index:7;top:50%;transform:translateY(-50%);
-  width:48px;height:72px;border:1px solid rgba(255,255,255,.1);background:rgba(10,17,24,.7);
-  color:#fff;font-size:2rem
-}
-.prev{left:18px}.next{right:18px}.modal-nav:disabled{opacity:.2}
-.modal-count{
-  position:fixed;z-index:7;top:30px;left:50%;transform:translateX(-50%);
-  font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase
-}
+.modal{position:fixed;z-index:100;inset:0;background:#07111b;opacity:0;visibility:hidden;pointer-events:none;transition:.25s;overflow:auto}.modal.open{opacity:1;visibility:visible;pointer-events:auto}
+.modal-art{height:62svh;min-height:430px;background:center/cover;position:relative}.modal-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#07111b,transparent 65%)}
+.modal-body{position:relative;width:min(920px,calc(100% - 80px));margin:-80px auto 0;padding-bottom:90px}.modal-label{color:var(--blue);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase}.modal h3{font-family:"Google Sans Flex";font-size:clamp(3rem,6vw,6rem);line-height:.9;letter-spacing:-.055em;margin:12px 0 15px}.modal-text{color:#c3d0dd;line-height:1.6;max-width:720px}
+.close{position:fixed;z-index:5;right:25px;top:20px;width:44px;height:44px;border:1px solid #506071;background:#101a25cc;color:#fff;border-radius:50%;font-size:1rem;display:grid;place-items:center;padding:0}.close .icon{width:20px;height:20px}.modal-nav{position:fixed;z-index:5;top:50%;width:44px;height:64px;background:#101a25cc;color:#fff;border:1px solid #506071;font-size:1rem;display:grid;place-items:center;padding:0}.modal-nav .icon{width:23px;height:23px}.prev{left:16px}.next{right:16px}.modal-nav:disabled{opacity:.2}
 
-/* search */
-.search-panel{position:fixed;z-index:110;inset:0;background:rgba(8,14,20,.98);display:none}
-.search-panel.open{display:block}
-.search-box{width:min(1050px,calc(100% - 40px));margin:auto;padding-top:20vh}
-.search-input{
-  width:100%;border:0;border-bottom:1px solid #596776;outline:0;padding:0 0 15px;
-  background:none;color:#fff;font-family:"Google Sans Flex","Inter",sans-serif;
-  font-size:clamp(2.7rem,6vw,5.5rem);font-weight:700
-}
-.search-results{margin-top:28px}
-.search-result{padding:15px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.search-result small{color:var(--muted)}
-.search-x{position:absolute;right:28px;top:24px;border:0;background:none;color:#fff;font-size:2rem}
-
-footer{border-top:1px solid var(--line);padding:24px 0 50px;color:#738497;font-size:.7rem}
-
-@media(max-width:850px){
-  .wrap{width:calc(100% - 30px)}
-  .header{height:68px}.header-inner{gap:20px}.nav,.signin{display:none}
-  .logo{font-size:1.05rem}
-  .hero{height:86svh;min-height:700px;align-items:flex-end}
-  .hero-image:after{background:linear-gradient(0deg,var(--bg) 3%,rgba(8,14,20,.34) 62%,rgba(8,14,20,.08)),linear-gradient(90deg,rgba(6,12,18,.62),transparent)}
-  .hero-content{width:100%;padding:0 0 75px}
-  .hero-meta{margin-bottom:26px;font-size:.7rem}
-  .hero h1{font-size:clamp(4rem,19vw,6.2rem)}
-  .hero-copy{font-size:1rem}
-  .hero-btn{height:55px;min-width:125px;padding:0 19px}
-  .episodes-top{align-items:flex-start;gap:15px}
-  .series-select{width:150px;height:50px;padding-left:14px}
-  .select-wrap:after{top:13px}
-  .episode{grid-template-columns:38px 1fr;gap:12px 14px;align-items:start}
-  .number{grid-row:1;font-size:1.9rem;padding-top:24vw}
-  .thumb{grid-column:2}
-  .details{grid-column:2}
-  .title{font-size:1.3rem}
-  .description{font-size:.92rem}
-  .modal-art{height:52svh;min-height:360px}
-  .modal-body{width:calc(100% - 30px);margin:-45px auto 0}
-  .modal-nav{top:auto;bottom:16px;transform:none;width:44px;height:44px}
-  .prev{left:15px}.next{right:15px}
-}
+/* mobile */
+@media(max-width:800px){
+.shell{width:calc(100% - 30px)}.nav{display:none}.topbar{height:66px}.dw{font-size:.9rem}.hero{height:720px;min-height:720px;align-items:flex-end}.hero-content{width:100%;padding:0 0 65px}.hero h1{font-size:clamp(3.7rem,18vw,5.8rem)}.hero-art:after{background:linear-gradient(0deg,#07111b 5%,rgba(7,17,27,.25) 64%),linear-gradient(90deg,#07111bbb,transparent)}.planet{right:-80px}.tardis{right:7%;top:90px;width:135px;height:245px;opacity:.78}.tagline{display:none}.episodes-head{align-items:flex-start}.episode{grid-template-columns:32px 1fr 42px;gap:12px}.num{font-size:1.7rem}.thumb{grid-column:2/4;height:auto;aspect-ratio:16/9}.info{grid-column:2}.play-round{grid-column:3}.modal-body{width:calc(100% - 30px)}}
 </style>
 </head>
 <body>
-<header class="header">
-  <div class="wrap header-inner">
-    <a class="logo" href="#">DOCTOR<span>WHO</span></a>
-    <nav class="nav">
-      <a href="#">Home</a>
-      <a href="#episodes">Series</a>
-      <a href="#episodes">Episodes</a>
-      <a href="#">Soundtracks and Music</a>
-      <a href="#">About</a>
-    </nav>
-    <div class="header-tools">
-      <button class="search-open" id="searchOpen" aria-label="Search">⌕</button>
-      <button class="signin">Sign in</button>
-    </div>
-  </div>
-</header>
+<header class="topbar"><div class="shell topbar-inner">
+<a class="wordmark" href="#"><span class="bbc"><i>B</i><i>B</i><i>C</i></span><span class="dw">DOCTOR W✦O</span></a>
+<nav class="nav"><a href="#">Home</a><a class="active" href="#episodes">Series</a><a href="#">Specials</a><a href="#">Movies</a><a href="#">Collections</a><a href="#">About</a></nav>
+<div class="tools"><button class="search-btn" aria-label="Search"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.2 4.2"/></svg></button><span>Search</span><div class="avatar"></div></div>
+</div></header>
 
 <section class="hero">
-  <div class="hero-image" id="heroImage"></div>
-  <div class="wrap">
-    <div class="hero-content">
-      <div class="hero-meta">Series · 2006 · 14 Episodes</div>
-      <h1><span>Doctor Who</span><span>Series Two</span></h1>
-      <p class="hero-copy">The Doctor and Rose travel together through time and space, encountering impossible worlds, old enemies and the growing mystery of Torchwood.</p>
-      <div class="hero-actions">
-        <button class="hero-btn" onclick="openEpisode(0)"><span class="play">▶</span>Play</button>
-        <button class="hero-btn secondary" onclick="document.querySelector('#episodes').scrollIntoView()">Episodes</button>
-      </div>
-    </div>
-  </div>
+<div class="hero-art"><div class="planet"></div><div class="tardis"></div></div>
+<div class="shell"><div class="hero-content">
+<div class="eyebrow">Series 2 · 2006 · 13 Episodes</div>
+<h1>Doctor Who <span>Series Two</span></h1>
+<p class="hero-copy">The Doctor and Rose return for a second series of adventure, danger and discovery, travelling to new worlds and facing old fears.</p>
+<div class="hero-actions"><button class="btn primary" onclick="openEpisode(0)"><svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true"><path class="fill" d="M8 5.5v13l10-6.5z"/></svg> Play</button><button class="btn secondary" onclick="document.querySelector('#episodes').scrollIntoView()">Episodes</button></div>
+</div></div>
+<div class="tagline">Somewhere<br>in time.<br>Anywhere<br>in space.</div>
 </section>
 
-<main class="episodes wrap" id="episodes">
-  <div class="episodes-top">
-    <h2>Episodes</h2>
-    <div class="select-wrap">
-      <select class="series-select" aria-label="Series"><option>Series 2</option></select>
-    </div>
-  </div>
-  <div class="list" id="episodeList"></div>
+<main class="episodes shell" id="episodes">
+<div class="episodes-head"><h2>Episodes</h2><div class="select-wrap"><select><option>Series 2</option></select><svg class="icon select-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"/></svg></div></div>
+<div id="episodeList"></div>
 </main>
 
-<footer class="wrap">Doctor Who Series Two guide · generic space imagery used as placeholder artwork.</footer>
-
-<div class="modal" id="modal" aria-hidden="true">
-  <button class="close" id="close" aria-label="Close">×</button>
-  <button class="modal-nav prev" id="prev" aria-label="Previous">‹</button>
-  <button class="modal-nav next" id="next" aria-label="Next">›</button>
-  <div class="modal-count" id="modalCount"></div>
-  <div class="modal-art" id="modalArt"></div>
-  <div class="modal-body">
-    <div class="modal-label">Doctor Who · Series Two</div>
-    <h3 id="modalTitle"></h3>
-    <div class="modal-meta" id="modalMeta"></div>
-    <p class="modal-text" id="modalText"></p>
-    <button class="hero-btn"><span class="play">▶</span>Play episode</button>
-  </div>
-</div>
-
-<div class="search-panel" id="searchPanel">
-  <button class="search-x" id="searchClose">×</button>
-  <div class="search-box">
-    <input class="search-input" id="searchInput" placeholder="Search episodes">
-    <div class="search-results" id="searchResults"></div>
-  </div>
+<div class="modal" id="modal">
+<button class="close" id="close" aria-label="Close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button><button class="modal-nav prev" id="prev" aria-label="Previous episode"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button><button class="modal-nav next" id="next" aria-label="Next episode"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+<div class="modal-art" id="modalArt"></div><div class="modal-body"><div class="modal-label" id="modalLabel"></div><h3 id="modalTitle"></h3><p class="modal-text" id="modalText"></p><button class="btn primary"><svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true"><path class="fill" d="M8 5.5v13l10-6.5z"/></svg> Play episode</button></div>
 </div>
 
 <script>
-const images=[
-"https://images-assets.nasa.gov/image/PIA13451/PIA13451~orig.jpg",
-"https://commons.wikimedia.org/wiki/Special:Redirect/file/Trifid_Nebula.jpg?width=1800",
-"https://commons.wikimedia.org/wiki/Special:Redirect/file/Heart_of_the_Rosette_Nebula.jpg?width=1800",
-"https://commons.wikimedia.org/wiki/Special:Redirect/file/Butterfly_Nebula_-_GPN-2000-000902.jpg?width=1800",
-"https://commons.wikimedia.org/wiki/Special:Redirect/file/Iris_Nebula.jpg?width=1800",
-"https://commons.wikimedia.org/wiki/Special:Redirect/file/Nebula_pa30.jpg?width=1800"
-];
 const episodes=[
-["The Christmas Invasion","Special · 60 min","The newly regenerated Doctor must recover in time to save Earth from the Sycorax."],
-["New Earth","Episode 1 · 45 min","The Doctor and Rose travel billions of years into the future and discover a sinister secret beneath a gleaming hospital."],
-["Tooth and Claw","Episode 2 · 45 min","Queen Victoria, a remote Scottish estate and a creature that emerges beneath the full moon."],
-["School Reunion","Episode 3 · 45 min","An investigation at a school brings the Doctor face to face with someone from his past."],
-["The Girl in the Fireplace","Episode 4 · 45 min","Clockwork figures stalk an eighteenth-century woman from a spaceship beyond the stars."],
-["Rise of the Cybermen","Episode 5 · 45 min","The TARDIS crashes into a parallel world where a familiar enemy is being created anew."],
-["The Age of Steel","Episode 6 · 45 min","The Cybermen begin their takeover as the Doctor searches for a way to stop them."],
-["The Idiot’s Lantern","Episode 7 · 45 min","Television arrives in Britain — and something hungry is watching through the screen."],
-["The Impossible Planet","Episode 8 · 45 min","The TARDIS lands on a planet impossibly orbiting a black hole."],
-["The Satan Pit","Episode 9 · 45 min","Deep beneath the planet, the Doctor confronts an ancient terror."],
-["Love & Monsters","Episode 10 · 45 min","A group fascinated by the Doctor discovers that searching for him can be dangerous."],
-["Fear Her","Episode 11 · 45 min","On the eve of the 2012 Olympics, children are vanishing from a London street."],
-["Army of Ghosts","Episode 12 · 45 min","Ghostly figures appear across the world as Torchwood reveals itself."],
-["Doomsday","Episode 13 · 45 min","Two worlds collide and the Doctor and Rose face an impossible separation."]
+["The Christmas Invasion","60 MIN · 2005 · 4,283 PLAYS","A new face arrives as the Doctor returns, and an ancient threat awakens beneath the Christmas snow."],
+["New Earth","45 MIN · 2006 · 3,912 PLAYS","The Doctor and Rose arrive at a luxury space hospital where something is very wrong beneath the surface."],
+["Tooth and Claw","45 MIN · 2006 · 3,441 PLAYS","A remote Scottish estate hides a terrifying secret as the Doctor discovers a werewolf prowling the grounds."],
+["School Reunion","45 MIN · 2006 · 3,219 PLAYS","Rose is reunited with an old friend, but a visit to a mysterious school brings back more than just memories."],
+["The Girl in the Fireplace","45 MIN · 2006 · 3,087 PLAYS","Clockwork figures stalk an eighteenth-century woman from a spaceship beyond the stars."],
+["Rise of the Cybermen","45 MIN · 2006 · 2,944 PLAYS","The TARDIS crashes into a parallel world where a familiar enemy is being created anew."]
 ];
-const img=i=>images[i%images.length];
-document.querySelector("#heroImage").style.backgroundImage=`url("${img(0)}")`;
-
+const art=[
+"linear-gradient(150deg,#152f50,#070f1b 65%),radial-gradient(circle at 70% 30%,#fff8,transparent 25%)",
+"linear-gradient(150deg,#91a5bb,#203954 45%,#07111b)",
+"linear-gradient(150deg,#0d2340,#07111b 65%),radial-gradient(circle at 25% 20%,#dbeaff,transparent 18%)",
+"linear-gradient(150deg,#111f35,#07111b 60%),radial-gradient(circle at 70% 30%,#547baf,transparent 30%)",
+"linear-gradient(150deg,#513d59,#101729 55%,#07111b)",
+"linear-gradient(150deg,#29394c,#07111b 65%)"
+];
 const list=document.querySelector("#episodeList");
-episodes.forEach((e,i)=>{
-  const bits=e[1].split(" · ");
-  list.insertAdjacentHTML("beforeend",`
-  <article class="episode">
-    <div class="number">${i+1}</div>
-    <div class="thumb" data-open="${i}" tabindex="0" style="background-image:url('${img(i+1)}')"></div>
-    <div class="details">
-      <div class="title-row">
-        <h3 class="title" data-open="${i}">${i+1}. ${e[0]}</h3>
-        <span class="meta">${bits[1]||bits[0]} · 2006</span>
-      </div>
-      <p class="description">${e[2]}</p>
-    </div>
-  </article>`);
-});
-document.querySelectorAll("[data-open]").forEach(x=>{
-  x.onclick=()=>openEpisode(+x.dataset.open);
-  x.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openEpisode(+x.dataset.open)}}
-});
-
-let active=0;
-const modal=document.querySelector("#modal");
-const slugs=episodes.map(e=>e[0].toLowerCase().replace(/&/g,"and").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""));
-function renderModal(i){
-  active=Math.max(0,Math.min(episodes.length-1,i));
-  const e=episodes[active];
-  document.querySelector("#modalArt").style.backgroundImage=`url("${img(active+1)}")`;
-  document.querySelector("#modalTitle").textContent=e[0];
-  document.querySelector("#modalMeta").textContent=`${e[1]} · 2006`;
-  document.querySelector("#modalText").textContent=e[2];
-  document.querySelector("#modalCount").textContent=`Episode ${active+1} of ${episodes.length}`;
-  document.querySelector("#prev").disabled=active===0;
-  document.querySelector("#next").disabled=active===episodes.length-1;
-}
-function openEpisode(i,fromHistory=false){
-  renderModal(i);modal.classList.add("open");modal.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";
-  if(!fromHistory){const u=new URL(location.href);u.searchParams.set("episode",slugs[active]);history.pushState({},'',u)}
-}
-function closeModal(fromHistory=false){
-  modal.classList.remove("open");modal.setAttribute("aria-hidden","true");document.body.style.overflow="";
-  if(!fromHistory){const u=new URL(location.href);u.searchParams.delete("episode");history.pushState({},'',u)}
-}
-function move(d){const n=active+d;if(n>=0&&n<episodes.length)openEpisode(n)}
-document.querySelector("#close").onclick=()=>closeModal();
-document.querySelector("#prev").onclick=()=>move(-1);
-document.querySelector("#next").onclick=()=>move(1);
-
-const panel=document.querySelector("#searchPanel"),input=document.querySelector("#searchInput"),results=document.querySelector("#searchResults");
-function renderSearch(q=""){
-  const s=q.trim().toLowerCase();
-  const found=episodes.map((e,i)=>({e,i})).filter(x=>!s||x.e.join(" ").toLowerCase().includes(s));
-  results.innerHTML=found.map(x=>`<div class="search-result" data-result="${x.i}"><strong>${x.e[0]}</strong><br><small>${x.e[1]}</small></div>`).join("");
-  document.querySelectorAll("[data-result]").forEach(x=>x.onclick=()=>{panel.classList.remove("open");openEpisode(+x.dataset.result)})
-}
-document.querySelector("#searchOpen").onclick=()=>{panel.classList.add("open");renderSearch();setTimeout(()=>input.focus(),20)};
-document.querySelector("#searchClose").onclick=()=>panel.classList.remove("open");
-input.oninput=e=>renderSearch(e.target.value);
-
-addEventListener("keydown",e=>{
-  if(e.key==="Escape"){if(modal.classList.contains("open"))closeModal();else panel.classList.remove("open")}
-  if(modal.classList.contains("open")&&e.key==="ArrowLeft")move(-1);
-  if(modal.classList.contains("open")&&e.key==="ArrowRight")move(1);
-});
-addEventListener("popstate",()=>{
-  const slug=new URL(location.href).searchParams.get("episode"),i=slugs.indexOf(slug);
-  if(i>=0)openEpisode(i,true);else closeModal(true)
-});
-const first=slugs.indexOf(new URL(location.href).searchParams.get("episode"));
-if(first>=0)openEpisode(first,true);
+episodes.forEach((e,i)=>list.insertAdjacentHTML("beforeend",`<article class="episode"><div class="num">${i+1}</div><div class="thumb" data-open="${i}" style="background:${art[i]}"></div><div class="info"><h3>${e[0]}</h3><div class="meta">${e[1]}</div><p class="desc">${e[2]}</p></div><button class="play-round" data-open="${i}" aria-label="Play ${e[0]}"><svg class="icon icon-play" viewBox="0 0 24 24" aria-hidden="true"><path class="fill" d="M8 5.5v13l10-6.5z"/></svg></button></article>`));
+let active=0,modal=document.querySelector("#modal");
+function openEpisode(i){active=i;let e=episodes[i];document.querySelector("#modalArt").style.background=art[i];document.querySelector("#modalLabel").textContent=`Series 2 · Episode ${i+1}`;document.querySelector("#modalTitle").textContent=e[0];document.querySelector("#modalText").textContent=e[2];document.querySelector("#prev").disabled=i===0;document.querySelector("#next").disabled=i===episodes.length-1;modal.classList.add("open");document.body.style.overflow="hidden"}
+function closeModal(){modal.classList.remove("open");document.body.style.overflow=""}
+document.querySelectorAll("[data-open]").forEach(x=>x.onclick=()=>openEpisode(+x.dataset.open));
+document.querySelector("#close").onclick=closeModal;document.querySelector("#prev").onclick=()=>active>0&&openEpisode(active-1);document.querySelector("#next").onclick=()=>active<episodes.length-1&&openEpisode(active+1);
+addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();if(modal.classList.contains("open")&&e.key==="ArrowLeft"&&active>0)openEpisode(active-1);if(modal.classList.contains("open")&&e.key==="ArrowRight"&&active<episodes.length-1)openEpisode(active+1)});
 </script>
 </body>
 </html>
