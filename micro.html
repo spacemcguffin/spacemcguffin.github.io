@@ -109,12 +109,19 @@
     }
 
     .update-title {
-      margin: 0 0 5px;
-      color: rgba(239, 239, 250, 0.96);
-      font-size: 12px;
-      font-weight: 500;
+      margin: 0 0 6px;
+      color: rgba(239, 239, 250, 0.58);
+      font-size: 11px;
+      font-weight: 450;
+      font-style: italic;
       line-height: 1.35;
-      letter-spacing: -0.01em;
+      letter-spacing: 0;
+    }
+
+    .update-title::before {
+      content: "—";
+      margin-right: 5px;
+      color: rgba(239, 239, 250, 0.30);
     }
 
     .message {
@@ -218,8 +225,7 @@
       <!--
         NEW UPDATE TEMPLATE
 
-        The title is optional.
-        Delete the <h2> line if an update doesn't need one.
+        Title is optional — remove the <h2> if not needed.
 
         <article class="update">
           <time class="date">24 SEP · 00:00AM</time>
