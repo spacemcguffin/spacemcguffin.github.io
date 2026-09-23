@@ -1,101 +1,168 @@
 <!DOCTYPE html>
-<html> 
-  <head>
-    <meta charset="UTF-8">
-    <title>lewis.lc is private</title>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>lewis.lc is private</title>
 
+  <!-- Google Sans Flex -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,100..1000&display=swap" rel="stylesheet">
 
-<style>
-  html {
-  height: 100%;
-}
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
 
-body {
-  background-image: radial-gradient(circle farthest-corner at center, #3C4B57 0%, #1C262B 100%);
-}
+    body {
+      background-image: radial-gradient(
+        circle farthest-corner at center,
+        #3C4B57 0%,
+        #1C262B 100%
+      );
 
-.loader {
-  position: absolute;
-  top: calc(50% - 32px);
-  left: calc(50% - 32px);
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  perspective: 800px;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-.inner {
-  position: absolute;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;  
-}
+    /* LOADER + LINK */
 
-.inner.one {
-  left: 0%;
-  top: 0%;
-  animation: rotate-one 1s linear infinite;
-  border-bottom: 3px solid #EFEFFA;
-}
+    .private-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
 
-.inner.two {
-  right: 0%;
-  top: 0%;
-  animation: rotate-two 1s linear infinite;
-  border-right: 3px solid #EFEFFA;
-}
+    /* LOADER */
 
-.inner.three {
-  right: 0%;
-  bottom: 0%;
-  animation: rotate-three 1s linear infinite;
-  border-top: 3px solid #EFEFFA;
-}
+    .loader {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      perspective: 800px;
+    }
 
-@keyframes rotate-one {
-  0% {
-    transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);
-  }
-}
+    .inner {
+      position: absolute;
+      box-sizing: border-box;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
 
-@keyframes rotate-two {
-  0% {
-    transform: rotateX(50deg) rotateY(10deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(50deg) rotateY(10deg) rotateZ(360deg);
-  }
-}
+    .inner.one {
+      left: 0;
+      top: 0;
+      animation: rotate-one 1s linear infinite;
+      border-bottom: 3px solid #EFEFFA;
+    }
 
-@keyframes rotate-three {
-  0% {
-    transform: rotateX(35deg) rotateY(55deg) rotateZ(0deg);
-  }
-  100% {
-    transform: rotateX(35deg) rotateY(55deg) rotateZ(360deg);
-  }
-}
-</style>
+    .inner.two {
+      right: 0;
+      top: 0;
+      animation: rotate-two 1s linear infinite;
+      border-right: 3px solid #EFEFFA;
+    }
 
+    .inner.three {
+      right: 0;
+      bottom: 0;
+      animation: rotate-three 1s linear infinite;
+      border-top: 3px solid #EFEFFA;
+    }
 
+    /* LINK */
 
+    .private-link {
+      color: rgba(239, 239, 250, 0.7);
+      font-family: "Google Sans Flex", sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+    }
 
+    .private-link:hover {
+      color: #EFEFFA;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes rotate-one {
+      0% {
+        transform:
+          rotateX(35deg)
+          rotateY(-45deg)
+          rotateZ(0deg);
+      }
+
+      100% {
+        transform:
+          rotateX(35deg)
+          rotateY(-45deg)
+          rotateZ(360deg);
+      }
+    }
+
+    @keyframes rotate-two {
+      0% {
+        transform:
+          rotateX(50deg)
+          rotateY(10deg)
+          rotateZ(0deg);
+      }
+
+      100% {
+        transform:
+          rotateX(50deg)
+          rotateY(10deg)
+          rotateZ(360deg);
+      }
+    }
+
+    @keyframes rotate-three {
+      0% {
+        transform:
+          rotateX(35deg)
+          rotateY(55deg)
+          rotateZ(0deg);
+      }
+
+      100% {
+        transform:
+          rotateX(35deg)
+          rotateY(55deg)
+          rotateZ(360deg);
+      }
+    }
+  </style>
 </head>
+
 <body>
 
+  <div class="private-wrap">
 
-  <div class="loader">
-  <div class="inner one"></div>
-  <div class="inner two"></div>
-  <div class="inner three"></div>
-</div>
+    <div class="loader">
+      <div class="inner one"></div>
+      <div class="inner two"></div>
+      <div class="inner three"></div>
+    </div>
 
+    <a class="private-link" href="#">
+      soon
+    </a>
 
+  </div>
 
 </body>
 </html>
