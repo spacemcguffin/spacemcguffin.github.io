@@ -88,6 +88,34 @@
       font-weight: 400;
     }
 
+    /* YEAR DIVIDERS */
+
+    .year-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 25px 4px 9px;
+
+      color: rgba(239, 239, 250, 0.32);
+
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+    }
+
+    .year-divider:first-child {
+      padding-top: 0;
+      color: rgba(239, 239, 250, 0.55);
+    }
+
+    .year-divider::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: var(--line);
+    }
+
     /* UPDATES */
 
     .update {
@@ -95,39 +123,22 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .update:first-child {
-      border-top: 1px solid var(--line);
-    }
-
     .date {
       display: block;
       margin-bottom: 10px;
+
       color: var(--muted);
+
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 0.1em;
-	  text-transform: uppercase;
-    }
-
-    .update-title {
-      margin: 0 0 6px;
-      color: rgba(239, 239, 250, 0.58);
-      font-size: 11px;
-      font-weight: 450;
-      font-style: italic;
-      line-height: 1.35;
-      letter-spacing: 0;
-    }
-
-    .update-title::before {
-      content: "—";
-      margin-right: 5px;
-      color: rgba(239, 239, 250, 0.30);
     }
 
     .message {
       margin: 0;
+
       color: rgba(239, 239, 250, 0.92);
+
       font-size: 12px;
       font-weight: 300;
       line-height: 1.5;
@@ -135,6 +146,7 @@
 
     .message a {
       color: inherit;
+
       text-decoration: underline;
       text-decoration-color: rgba(239, 239, 250, 0.28);
       text-underline-offset: 3px;
@@ -151,8 +163,11 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
+
       margin-top: 22px;
+
       color: var(--muted);
+
       font-size: 11px;
       font-weight: 400;
     }
@@ -178,8 +193,10 @@
 
     .chevron {
       display: block;
+
       width: 9px;
       height: 9px;
+
       flex: 0 0 auto;
 
       stroke: currentColor;
@@ -215,7 +232,13 @@
 
     <section class="updates">
 
-		
+
+
+      <!-- 2026 -->
+
+      <div class="year-divider">
+        <span>2026</span>
+      </div>
 
       <article class="update">
         <time class="date">24 Sep · 00:02am</time>
@@ -225,8 +248,16 @@
       </article>
 
 
-		
+      <!--
+        NEW UPDATE TEMPLATE
 
+        <article class="update">
+          <time class="date">24 SEP · 00:00AM</time>
+          <p class="message">
+            your update goes here.
+          </p>
+        </article>
+      -->
 
     </section>
 
@@ -243,6 +274,7 @@
 
       <a href="#top">
         <span>back to top</span>
+
         <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true">
           <path d="M2.5 7.5 6 4l3.5 3.5"/>
         </svg>
