@@ -112,8 +112,10 @@
     .year-divider::before,
     .year-divider::after {
       content: "";
+
       height: 1px;
       flex: 1;
+
       background: var(--line);
     }
 
@@ -122,6 +124,12 @@
     .update {
       padding: 17px 4px;
       border-bottom: 1px solid var(--line);
+    }
+
+    /* Remove border from the last update before a new year */
+
+    .update:has(+ .year-divider) {
+      border-bottom: none;
     }
 
     .date {
