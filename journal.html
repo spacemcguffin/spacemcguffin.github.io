@@ -21,20 +21,24 @@
       box-sizing: border-box;
     }
 
-    html,
-    body {
+    html {
       min-height: 100%;
-      margin: 0;
+      scroll-behavior: smooth;
     }
 
     body {
       min-height: 100vh;
-      background: radial-gradient(
-        circle farthest-corner at center,
-        #3C4B57 0%,
-        #1C262B 100%
-      );
+      margin: 0;
+
+      background:
+        radial-gradient(
+          circle farthest-corner at center,
+          #3C4B57 0%,
+          #1C262B 100%
+        );
+
       background-attachment: fixed;
+
       color: var(--text);
       font-family: "Google Sans Flex", sans-serif;
       -webkit-font-smoothing: antialiased;
@@ -44,10 +48,14 @@
       align-items: center;
     }
 
+    /* FEED */
+
     .feed {
       width: min(360px, calc(100% - 48px));
       padding: 60px 0;
     }
+
+    /* HEADER */
 
     .feed-header {
       margin-bottom: 26px;
@@ -57,7 +65,7 @@
     .feed-header h1 {
       margin: 0;
       font-size: 14px;
-      font-weight: 550;
+      font-weight: 600;
       letter-spacing: -0.01em;
     }
 
@@ -67,6 +75,8 @@
       font-size: 11px;
       font-weight: 400;
     }
+
+    /* UPDATES */
 
     .update {
       padding: 17px 4px;
@@ -80,7 +90,9 @@
     .date {
       display: block;
       margin-bottom: 5px;
+
       color: var(--muted);
+
       font-size: 10px;
       font-weight: 500;
       letter-spacing: 0.02em;
@@ -88,7 +100,9 @@
 
     .message {
       margin: 0;
+
       color: rgba(239, 239, 250, 0.92);
+
       font-size: 13px;
       font-weight: 400;
       line-height: 1.45;
@@ -97,30 +111,67 @@
 
     .message a {
       color: inherit;
+
       text-decoration: underline;
       text-decoration-color: rgba(239, 239, 250, 0.28);
       text-underline-offset: 3px;
     }
 
     .message a:hover {
-      text-decoration-color: #EFEFFA;
+      text-decoration-color: var(--text);
     }
 
+    /* FOOTER */
+
     .footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
       margin-top: 22px;
-      text-align: center;
+
+      color: var(--muted);
+
       font-size: 10px;
+      font-weight: 400;
     }
 
     .footer a {
-      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+
+      color: inherit;
       text-decoration: none;
+
       transition: color 0.2s ease;
     }
 
     .footer a:hover {
       color: var(--text);
     }
+
+    .footer-divider {
+      color: rgba(239, 239, 250, 0.22);
+    }
+
+    .chevron {
+      display: block;
+
+      width: 9px;
+      height: 9px;
+
+      flex: 0 0 auto;
+
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    /* MOBILE */
 
     @media (max-width: 500px) {
       body {
@@ -129,13 +180,13 @@
 
       .feed {
         width: calc(100% - 40px);
-        padding-top: 70px;
+        padding: 70px 0;
       }
     }
   </style>
 </head>
 
-<body>
+<body id="top">
 
   <main class="feed">
 
@@ -151,11 +202,27 @@
         <p class="message">made this place a little more private. you need to know the direct links to find anything beyond this page. feels cosy.</p>
       </article>
 
- 
+
     </section>
 
     <footer class="footer">
-      <a href="/">← back</a>
+
+      <a href="/">
+        <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M7.5 2.5 4 6l3.5 3.5"/>
+        </svg>
+        <span>back</span>
+      </a>
+
+      <span class="footer-divider">·</span>
+
+      <a href="#top">
+        <span>back to top</span>
+        <svg class="chevron" viewBox="0 0 12 12" aria-hidden="true">
+          <path d="M2.5 7.5 6 4l3.5 3.5"/>
+        </svg>
+      </a>
+
     </footer>
 
   </main>
