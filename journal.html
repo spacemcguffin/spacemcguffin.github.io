@@ -48,22 +48,17 @@
       align-items: center;
     }
 
+    ::-moz-selection {
+      background: #cfd8e4;
+      color: #000000;
+      text-shadow: none;
+    }
 
-                ::-moz-selection {
-	background: #cfd8e4;
-	text-shadow: none;
-  color:#000000;
-}
-
-::selection {
-	background: #cfd8e4;
-	text-shadow: none;
-  color:#000000;
-} 
-
-
-
-    
+    ::selection {
+      background: #cfd8e4;
+      color: #000000;
+      text-shadow: none;
+    }
 
     /* FEED */
 
@@ -80,10 +75,10 @@
     }
 
     .feed-header h1 {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: -0.01em;
+      margin: 0;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
     }
 
     .feed-header p {
@@ -105,25 +100,40 @@
     }
 
     .date {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--muted);
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+    }
+
+    .update-title {
+      margin: 0 0 6px;
+      color: rgba(239, 239, 250, 0.58);
+      font-size: 11px;
+      font-weight: 450;
+      font-style: italic;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .update-title::before {
+      content: "—";
+      margin-right: 5px;
+      color: rgba(239, 239, 250, 0.30);
     }
 
     .message {
-    margin: 0;
-    color: rgba(239, 239, 250, 0.92);
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.5;
+      margin: 0;
+      color: rgba(239, 239, 250, 0.92);
+      font-size: 12px;
+      font-weight: 300;
+      line-height: 1.5;
     }
 
     .message a {
       color: inherit;
-
       text-decoration: underline;
       text-decoration-color: rgba(239, 239, 250, 0.28);
       text-underline-offset: 3px;
@@ -136,14 +146,14 @@
     /* FOOTER */
 
     .footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 22px;
-    color: var(--muted);
-    font-size: 11px;
-    font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 400;
     }
 
     .footer a {
@@ -167,10 +177,8 @@
 
     .chevron {
       display: block;
-
       width: 9px;
       height: 9px;
-
       flex: 0 0 auto;
 
       stroke: currentColor;
@@ -206,10 +214,18 @@
 
     <section class="updates">
 
+		
+
       <article class="update">
         <time class="date">24 SEP · 00:02AM</time>
-        <p class="message">made this place a little more private. you need to know the direct links to find anything beyond this page. feels cosy.</p>
+        <h2 class="update-title">site update</h2>
+        <p class="message">
+          made this place a little more private. you need to know the direct links to find anything beyond this page. feels cosy.
+        </p>
       </article>
+
+
+		
 
 
     </section>
