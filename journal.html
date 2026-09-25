@@ -124,6 +124,13 @@
     .update {
       padding: 17px 4px;
       border-bottom: 1px solid var(--line);
+
+      scroll-margin-top: 40px;
+
+      transition:
+        background-color 0.4s ease,
+        padding 0.4s ease,
+        margin 0.4s ease;
     }
 
     /* Remove border from the last update before a new year */
@@ -132,8 +139,23 @@
       border-bottom: none;
     }
 
+    /* Direct-linked entry */
+
+    .update:target {
+      margin-left: -8px;
+      margin-right: -8px;
+      padding-left: 12px;
+      padding-right: 12px;
+
+      background: rgba(239, 239, 250, 0.035);
+      border-radius: 7px;
+    }
+
+    /* DATE / PERMALINK */
+
     .date {
       display: block;
+      width: fit-content;
       margin-bottom: 10px;
 
       color: var(--muted);
@@ -141,7 +163,21 @@
       font-size: 10px;
       font-weight: 400;
       letter-spacing: 0.1em;
+
+      text-decoration: none;
+
+      transition: color 0.2s ease;
     }
+
+    .date:hover {
+      color: var(--text);
+    }
+
+    .update:target .date {
+      color: rgba(239, 239, 250, 0.72);
+    }
+
+    /* MESSAGE */
 
     .message {
       margin: 0;
@@ -241,22 +277,27 @@
 
     <section class="updates">
 
-
-
       <!-- 2026 -->
 
       <div class="year-divider">
         <span>2026</span>
       </div>
 
-      <article class="update">
-        <time class="date">24 Sep · 00:02am</time>
+      <!-- #1 -->
+
+      <article class="update" id="1">
+
+        <a class="date" href="#1" aria-label="Permalink to entry 1">
+          <time datetime="2026-09-24T00:02">
+            24 Sep · 00:02am
+          </time>
+        </a>
+
         <p class="message">
           made this place a little more private. you need to know the direct links to find anything beyond this page. feels cosy.
         </p>
+
       </article>
-
-
 
     </section>
 
