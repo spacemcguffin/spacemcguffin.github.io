@@ -190,15 +190,20 @@
     }
 
     .message a {
-      color: inherit;
+      color: #AFC8D8;
 
       text-decoration: underline;
-      text-decoration-color: rgba(239, 239, 250, 0.28);
+      text-decoration-color: rgba(175, 200, 216, 0.32);
       text-underline-offset: 3px;
+
+      transition:
+        color 0.2s ease,
+        text-decoration-color 0.2s ease;
     }
 
     .message a:hover {
-      text-decoration-color: var(--text);
+      color: #D4E3EC;
+      text-decoration-color: #D4E3EC;
     }
 
     /* FOOTER */
@@ -283,44 +288,22 @@
         <span>2026</span>
       </div>
 
-
-
-      
       <article class="update" id="2">
-        <a class="date" href="#2">
-          <time datetime="2026-09-25T22:15">
-            25 Sep · 10:15PM
-          </time>
-        </a>
+        <a class="date" href="#2">25 Sep · 10:15PM</a>
 
         <p class="message">
           blasting music, in my own little world. working on <a href="https://southpark.guide/">South Park Guide</a>.
         </p>
       </article>
 
-
-
-      
       <article class="update" id="1">
-        <a class="date" href="#1">
-          <time datetime="2026-09-24T00:02">
-            24 Sep · 00:02am
-          </time>
-        </a>
+        <a class="date" href="#1">24 Sep · 00:02am</a>
 
         <p class="message">
           made this place a little more private. you need to know the direct links to find anything beyond this page. feels cosy.
         </p>
       </article>
 
-
-
-
-
-
-
-
-      
     </section>
 
     <footer class="footer">
