@@ -389,6 +389,7 @@ border-top: 0;
 
 
 
+/* Base paper-scrap H2 */
 .section h2 {
   display: table;
   position: relative;
@@ -398,51 +399,48 @@ border-top: 0;
   color: #2d3135;
   font: 650 1rem/1.15 "Google Sans Flex","Inter",sans-serif;
   letter-spacing: -.015em;
-  background: #ddd8c7;
 
-  /* rough cut-paper edges */
   clip-path: polygon(
-    2% 7%,
-    15% 2%,
-    31% 5%,
-    48% 1%,
-    65% 4%,
-    82% 0,
-    98% 5%,
-    100% 88%,
-    91% 96%,
-    73% 92%,
-    55% 98%,
-    36% 94%,
-    18% 100%,
-    1% 94%
+    2% 7%, 15% 2%, 31% 5%, 48% 1%,
+    65% 4%, 82% 0, 98% 5%, 100% 88%,
+    91% 96%, 73% 92%, 55% 98%, 36% 94%,
+    18% 100%, 1% 94%
   );
 
-  transform: rotate(-.25deg);
   box-shadow: 0 2px 3px rgba(0,0,0,.10);
 }
 
-/* Different scrap colours for each section */
-.section:nth-of-type(4n+1) h2 {
+/* Individual section colours */
+
+#synopsis h2 {
   background: #d7e3ee;
   transform: rotate(-.3deg);
 }
 
-.section:nth-of-type(4n+2) h2 {
+#plot h2 {
   background: #d8e4d8;
+  transform: rotate(.2deg);
+}
+
+#production h2 {
+  background: #eadccf;
+  transform: rotate(-.2deg);
+}
+
+#staff h2 {
+  background: #e3d9e8;
   transform: rotate(.25deg);
 }
 
-.section:nth-of-type(4n+3) h2 {
-  background: #eadccf;
-  transform: rotate(-.15deg);
+#trivia h2 {
+  background: #ead9d5;
+  transform: rotate(-.25deg);
 }
 
-.section:nth-of-type(4n+4) h2 {
-  background: #e3d9e8;
-  transform: rotate(.3deg);
+#gallery h2 {
+  background: #d9e4df;
+  transform: rotate(.2deg);
 }
-
 
 
 
