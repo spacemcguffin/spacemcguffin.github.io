@@ -20,7 +20,7 @@
 :root {
 --shell: 1120px;
 --rail: 205px;
---mobile-bar: 52px;
+--mobile-bar-height: 46px;
 --bg: #dce5ec;
 --paper: #fbfbfb;
 --panel: #f1f3f6;
@@ -1209,70 +1209,86 @@ opacity: .9;
 display: none !important;
 }
 .page-view-switcher {
-display: flex;
-align-items: flex-end;
-gap: 30px;
-margin: 0 0 14px;
-padding: 7px 0 0;
-border-bottom: 1px solid var(--line);
+  position: relative;
+  z-index: 2;
+  display: flex !important;
+  align-items: flex-end;
+  gap: 30px;
+  width: 100%;
+  margin: 0 0 14px;
+  padding: 7px 0 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  visibility: visible !important;
+  opacity: 1 !important;
 }
+
 .page-view-button {
-position: relative;
-appearance: none;
-border: 0;
-background: transparent;
-color: var(--muted);
-padding: 9px 1px 10px;
-font: 600 .84rem "Inter",system-ui,sans-serif;
-cursor: pointer;
+  position: relative;
+  flex: 0 0 auto;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 9px 1px 10px;
+  font: 600 .84rem "Inter",system-ui,sans-serif;
+  cursor: pointer;
 }
+
 .page-view-button:hover,
 .page-view-button:focus-visible {
-color: var(--text);
-outline: none;
+  color: var(--text);
+  outline: none;
 }
+
 .page-view-button.active {
-color: var(--text);
+  color: var(--text);
 }
+
 .page-view-button.active::after {
-content: "";
-position: absolute;
-left: 0;
-right: 0;
-bottom: -1px;
-height: 2px;
-background: var(--accent);
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
 }
-body:not(.trivia-page-view):not(.gallery-page-view) .trivia-view-section,
-body:not(.trivia-page-view):not(.gallery-page-view) .gallery-view-section {
-display: none !important;
+
+/* Article is the default view. Trivia and Gallery are only shown when selected. */
+.trivia-view-section,
+.gallery-view-section {
+  display: none !important;
 }
+
 body.trivia-page-view .article-content > :not(.trivia-view-section),
 body.gallery-page-view .article-content > :not(.gallery-view-section) {
-display: none !important;
+  display: none !important;
 }
-body.trivia-page-view .article-content,
-body.gallery-page-view .article-content {
-display: block !important;
-}
+
 body.trivia-page-view .trivia-view-section,
 body.gallery-page-view .gallery-view-section {
-display: block !important;
-clear: both;
-padding-top: 6px !important;
-border-top: 0 !important;
+  display: block !important;
+  clear: both;
+  padding-top: 6px !important;
+  border-top: 0 !important;
 }
+
 body.trivia-page-view .trivia-view-section h2,
 body.gallery-page-view .gallery-view-section h2 {
-margin-top: 0;
+  margin-top: 0;
 }
+
 body.gallery-page-view .gallery {
-width: 100% !important;
-max-width: none !important;
-margin: 0 !important;
-grid-template-columns: repeat(3,minmax(0,1fr)) !important;
-gap: 12px !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+  gap: 12px !important;
 }
+
 .gallery-visible-caption {
 display: block;
 padding: 8px 8px 7px;
@@ -1314,6 +1330,16 @@ transition: opacity .2s ease,transform .2s ease,visibility .2s ease,background-c
 backdrop-filter: blur(12px);
 -webkit-backdrop-filter: blur(12px);
 }
+#backToTop svg {
+width: 18px;
+height: 18px;
+fill: none;
+stroke: currentColor;
+stroke-width: 2.2;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+
 #backToTop.visible {
 opacity: 1;
 visibility: visible;
@@ -1441,7 +1467,7 @@ box-shadow: none;
 }
   .sidebar {
   position: fixed;
-top: var(--mobile-bar);
+top: var(--mobile-bar-height);
 bottom: 0;
 left: 0;
 z-index: 1120;
@@ -1460,7 +1486,7 @@ pointer-events: auto !important;
 }
   .menu-overlay {
   position: fixed;
-inset: var(--mobile-bar) 0 0;
+inset: var(--mobile-bar-height) 0 0;
 z-index: 1110;
 border: 0;
 background: rgba(0,0,0,.48);
@@ -1611,9 +1637,6 @@ transform: none !important;
   width: 72px;
 height: 3px;
 }
-  :root {
-  --mobile-bar-height: 46px;
-}
   .mobile-menu-button {
   display: grid !important;
 place-items: center;
@@ -1669,6 +1692,7 @@ margin: 0 0 0 4px !important;
 margin-left: 10px !important;
 }
   .page-view-switcher {
+  display: flex !important;
   gap: 27px;
 margin-bottom: 12px;
 padding-top: 4px;
@@ -1962,31 +1986,7 @@ min-height: 32px !important;
 </a>
 </nav>
 </div>
-<div class="rail-section">
-<div class="nav-label">
-      Recent seasons
-     </div>
-<div class="season-grid"> <a class="current" href="https://lewis.lc/wiki/edge_end#">
-       28
-      </a> <a href="https://lewis.lc/wiki/edge_end#">
-       27
-      </a> <a href="https://lewis.lc/wiki/edge_end#">
-       26
-      </a> <a href="https://lewis.lc/wiki/edge_end#">
-       25
-      </a> <a href="https://lewis.lc/wiki/edge_end#">
-       24
-      </a> <a href="https://lewis.lc/wiki/edge_end#">
-       23
-      </a> <a href="https://lewis.lc/wiki/edge_end#">
-       22
-      </a> <a href="https://lewis.lc/wiki/edge_end#">
-       21
-      </a> <a href="https://lewis.lc/sp/">
-       All
-      </a>
-</div>
-</div>
+
 </aside>
 
 
@@ -2018,13 +2018,13 @@ min-height: 32px !important;
 </button>
 </section>
 <div aria-label="Page view" class="page-view-switcher" role="tablist">
-<button aria-selected="true" class="page-view-button active" data-page-view="article" role="tab" type="button">
+<button aria-selected="true" class="page-view-button active" data-page-view="article" id="tab-article" aria-controls="general" role="tab" type="button">
       Article
      </button>
-<button aria-selected="false" class="page-view-button" data-page-view="trivia" role="tab" type="button">
+<button aria-selected="false" class="page-view-button" data-page-view="trivia" id="tab-trivia" aria-controls="trivia" role="tab" type="button">
       Trivia
      </button>
-<button aria-selected="false" class="page-view-button" data-page-view="gallery" role="tab" type="button">
+<button aria-selected="false" class="page-view-button" data-page-view="gallery" id="tab-gallery" aria-controls="gallery" role="tab" type="button">
       Gallery
      </button>
 </div>
@@ -2114,7 +2114,7 @@ min-height: 32px !important;
          </button>
 </div>
 <ol>
-<li> <a href="#synopsis">
+<li> <a href="#appearance">
            Synopsis
           </a>
 </li>
@@ -2177,11 +2177,6 @@ min-height: 32px !important;
 
   
 </section>
-</div>
-
-
-
-
 
 
 <!-- ==================== TRIVIA VIEW ==================== -->
@@ -2244,7 +2239,9 @@ min-height: 32px !important;
 <button aria-label="Close navigation" class="menu-overlay" type="button">
 </button>
 <button aria-label="Back to top" id="backToTop" title="Back to top" type="button">
-   ↑
+   <svg aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 15l6-6 6 6"/>
+   </svg>
   </button>
 <div class="site-credit">
    Created by Lewis
