@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="light dark" name="color-scheme"/>
+<title>
+   South American Biker Gangs - South Park Wiki
+  </title>
+<link href="https://fonts.googleapis.com/" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,300..800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+
+/* =========================================================
+   THEME & GLOBAL VARIABLES
+   ========================================================= */
+
+:root {
+--shell: 1120px;
+--rail: 205px;
+--mobile-bar: 52px;
+--bg: #dce5ec;
+--paper: #fbfbfb;
+--panel: #f1f3f6;
+--panel-solid: #f5f6f8;
+--text: #262b31;
+--muted: #6f7781;
+--line: #ccd3dc;
+--accent: #456291;
+--link: #456291;
+--shadow: 0 0 34px rgba(20,28,40,.16);
+--background-image: url("img/daytime.png");
+}
+html.dark {
+--bg: #17263a;
+--paper: #1f3047;
+--panel: #273a53;
+--panel-solid: #24364d;
+--text: #f1f5f9;
+--muted: #c0cad6;
+--line: #48607a;
+--accent: #5f82ad;
+--link: #b7d6f7;
+--shadow: 0 0 38px rgba(6,15,27,.34);
+--background-image: url("img/nighttime.png");
+}
+* {
+box-sizing: border-box;
+}
+html {
+scroll-behavior: smooth;
+}
+html,
+body {
+margin: 0;
+padding: 0;
+min-height: 100%;
+}
+body {
+font-family: "Inter",system-ui,sans-serif;
+color: var(--text);
+background-color: var(--bg);
+background-image: var(--background-image);
+background-position: top center;
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+overflow-x: hidden;
+}
+a {
+color: var(--link);
+text-decoration: none;
+}
+a:hover {
+text-decoration: underline;
+}
+button,
+input {
+font: inherit;
+}
+svg {
+display: block;
+}
+::selection {
+background: #cfd8e4;
+color: #111;
+}
+.site-header,
+.menu-overlay {
+display: none;
+}
+
+
+/* =========================================================
+   PAGE SHELL & SIDEBAR
+   ========================================================= */
+
+.shell {
+position: relative;
+display: grid;
+grid-template-columns: var(--rail) minmax(0,1fr);
+width: min(var(--shell),calc(100% - 120px));
+max-width: var(--shell);
+min-height: 100vh;
+margin: 0 auto;
+background: var(--paper);
+box-shadow: var(--shadow);
+transition: grid-template-columns .2s ease;
+}
+.sidebar {
+grid-column: 1;
+min-width: 0;
+overflow: hidden;
+border-right: 1px solid var(--line);
+background: var(--panel-solid);
+transition: opacity .15s ease;
+}
+.main {
+grid-column: 2;
+min-width: 0;
+padding: 0 22px 38px;
+background: var(--paper);
+}
+.rail-brand {
+padding: 20px 16px 15px;
+border-bottom: 1px solid var(--line);
+}
+.rail-section {
+padding: 9px 10px;
+border-bottom: 1px solid var(--line);
+background: var(--panel-solid);
+}
+.nav-label {
+padding: 3px 7px 7px;
+color: var(--muted);
+font-size: .66rem;
+font-weight: 720;
+letter-spacing: .11em;
+text-transform: uppercase;
+}
+.rail-nav {
+display: grid;
+gap: 2px;
+}
+.rail-link {
+min-height: 30px;
+display: flex;
+align-items: center;
+padding: 5px 7px;
+border-radius: 5px;
+color: var(--text);
+font-size: .82rem;
+font-weight: 500;
+}
+.rail-link:hover,
+.rail-link.active {
+background: var(--paper);
+text-decoration: none;
+}
+.rail-link.active {
+color: var(--link);
+font-weight: 650;
+}
+.season-grid {
+display: grid;
+grid-template-columns: repeat(3,1fr);
+gap: 4px;
+}
+.season-grid a {
+min-height: 27px;
+display: grid;
+place-items: center;
+border: 1px solid var(--line);
+border-radius: 4px;
+background: var(--paper);
+color: var(--text);
+font-size: .70rem;
+font-weight: 650;
+}
+.season-grid a:hover,
+.season-grid a.active {
+background: var(--accent);
+color: #fff;
+text-decoration: none;
+}
+.desktop-sidebar-toggle {
+position: absolute;
+top: 18px;
+left: calc(var(--rail) - 16px);
+z-index: 140;
+width: 32px;
+height: 32px;
+display: grid;
+place-items: center;
+padding: 0;
+border: 1px solid var(--line);
+border-radius: 50%;
+background: var(--paper);
+color: var(--text);
+box-shadow: 0 2px 8px rgba(0,0,0,.12);
+cursor: pointer;
+}
+.desktop-sidebar-toggle:hover {
+background: var(--panel);
+}
+.desktop-sidebar-toggle svg {
+width: 16px;
+height: 16px;
+transition: transform .22s ease;
+}
+.sidebar-toggle-open {
+display: none;
+}
+.shell.sidebar-collapsed {
+grid-template-columns: 0 minmax(0,1fr);
+}
+.shell.sidebar-collapsed .sidebar {
+opacity: 0;
+pointer-events: none;
+border-right: 0;
+}
+.shell.sidebar-collapsed .desktop-sidebar-toggle {
+left: 10px;
+}
+.shell.sidebar-collapsed .sidebar-toggle-close {
+display: none;
+}
+.shell.sidebar-collapsed .sidebar-toggle-open {
+display: grid;
+}
+
+
+/* =========================================================
+   ARTICLE HEADER & PAGE TABS
+   ========================================================= */
+
+.hero {
+padding: 17px 0 14px;
+border-bottom: 1px solid var(--line);
+position: relative;
+}
+.eyebrow {
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+}
+.chip {
+padding: 4px 7px;
+border: 1px solid var(--line);
+border-radius: 999px;
+background: var(--panel);
+color: var(--muted);
+font-size: .56rem;
+font-weight: 720;
+letter-spacing: .06em;
+text-transform: uppercase;
+}
+.hero h1 {
+margin: 7px 0 0;
+color: var(--text);
+font: 560 clamp(2rem,3.35vw,3.2rem)/.96 "Google Sans Flex","Inter",sans-serif;
+letter-spacing: -.045em;
+position: relative;
+width: fit-content;
+max-width: 100%;
+margin-top: 9px;
+padding: 0 0 10px;
+font-weight: 520;
+text-wrap: balance;
+padding-bottom: 0 !important;
+padding-right: 54px !important;
+}
+.sticky-theme-control {
+flex: 0 0 34px;
+width: 34px;
+height: 34px;
+place-items: center;
+padding: 0;
+border: 1px solid var(--line);
+border-radius: 50%;
+background: var(--paper);
+color: var(--text);
+box-shadow: 0 2px 7px rgba(0,0,0,.11);
+cursor: pointer;
+}
+.sticky-theme-control {
+display: grid;
+margin-left: auto;
+}
+.sticky-theme-control:hover {
+background: var(--panel);
+}
+.sticky-theme-control svg {
+width: 16px;
+height: 16px;
+}
+.theme-icon-slot {
+position: relative;
+width: 16px;
+height: 16px;
+flex: 0 0 16px;
+display: grid;
+place-items: center;
+}
+.theme-icon-slot .theme-icon {
+position: absolute;
+inset: 0;
+display: grid;
+place-items: center;
+}
+.theme-icon-slot svg {
+width: 16px;
+height: 16px;
+}
+html:not(.dark) .theme-icon-slot .theme-icon-sun {
+display: none !important;
+}
+html.dark .theme-icon-slot .theme-icon-moon {
+display: none !important;
+}
+.article-content {
+display: block;
+}
+
+
+/* =========================================================
+   INFOBOX
+   ========================================================= */
+
+.infobox {
+float: right;
+width: 268px;
+margin: 0 0 18px 22px;
+border: 1px solid var(--line);
+background: var(--paper);
+}
+.infobox-title {
+padding: 8px 9px;
+background: var(--accent);
+color: #fff;
+text-align: center;
+font: 700 .9rem "Google Sans Flex","Inter",sans-serif;
+font-weight: 560 !important;
+}
+.infobox img {
+display: block;
+width: 100%;
+height: auto;
+}
+.info-table {
+display: grid;
+}
+.info-row {
+display: grid;
+grid-template-columns: 42% 58%;
+border-top: 1px solid var(--line);
+font-size: .82rem;
+line-height: 1.4;
+}
+.info-row b,
+.info-row span {
+padding: 6px 7px;
+}
+.info-row b {
+background: var(--panel);
+font-weight: 650;
+}
+.info-row span {
+color: var(--text);
+}
+.lede {
+margin: 0 0 16px;
+color: var(--text);
+font-size: .96rem;
+line-height: 1.60;
+}
+.section {
+padding: 18px 0;
+border-top: 1px solid var(--line);
+overflow: visible;
+}
+.section.first {
+padding-top: 0;
+border-top: 0;
+}
+.section h2 {
+margin: 0 0 9px;
+padding-bottom: 5px;
+border-bottom: 1px solid var(--accent);
+color: var(--text);
+font: 560 1.28rem "Google Sans Flex","Inter",sans-serif;
+}
+.section p {
+margin: 0 0 1em;
+color: var(--text);
+font-size: .94rem;
+line-height: 1.54;
+}
+.trivia-list {
+margin: 0;
+padding-left: 1.25rem;
+}
+.trivia-list li {
+margin: 0 0 .38rem;
+padding-left: .15rem;
+color: var(--text);
+font-size: .9rem;
+line-height: 1.65;
+}
+.trivia-list li:last-child {
+margin-bottom: 0;
+}
+.staff-table {
+width: 100%;
+margin: 2px 0 0;
+border: 1px solid var(--line);
+border-collapse: collapse;
+background: var(--paper);
+font-size: .84rem;
+}
+.staff-table th,
+.staff-table td {
+padding: 8px 10px;
+border-bottom: 1px solid var(--line);
+text-align: left;
+vertical-align: top;
+}
+.staff-table th {
+background: var(--panel);
+color: var(--muted);
+font-size: .65rem;
+font-weight: 720;
+letter-spacing: .055em;
+text-transform: uppercase;
+}
+.staff-table th:first-child,
+.staff-table td:first-child {
+width: 48%;
+}
+.staff-table tbody tr:last-child td {
+border-bottom: 0;
+}
+.staff-table td:first-child {
+font-weight: 600;
+color: var(--text);
+}
+.staff-table td:last-child {
+color: var(--muted);
+}
+#gallery {
+clear: both;
+}
+.gallery {
+display: grid;
+grid-template-columns: repeat(3,minmax(0,1fr));
+gap: 8px;
+}
+.gallery-item {
+width: 100%;
+min-width: 0;
+padding: 3px;
+border: 1px solid var(--line);
+border-radius: 5px;
+background: var(--paper);
+cursor: zoom-in;
+overflow: hidden;
+display: flex !important;
+flex-direction: column;
+align-items: stretch;
+text-align: left;
+}
+.gallery-item img {
+display: block;
+width: 100%;
+aspect-ratio: 16/9;
+object-fit: cover;
+border-radius: 3px;
+transition: transform .22s ease;
+}
+
+
+/* =========================================================
+   GALLERY & LIGHTBOX
+   ========================================================= */
+
+.wiki-lightbox {
+position: fixed;
+inset: 0;
+z-index: 3000;
+display: none;
+background: rgba(5,8,12,.9);
+backdrop-filter: blur(8px);
+overflow: hidden;
+}
+.wiki-lightbox.open {
+display: block;
+}
+.wiki-lightbox-stage {
+position: absolute;
+inset: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 72px 84px;
+pointer-events: none;
+}
+.wiki-lightbox img {
+display: block;
+width: auto;
+height: auto;
+max-width: calc(100vw - 168px);
+max-height: calc(100vh - 144px);
+object-fit: contain;
+border-radius: 5px;
+box-shadow: 0 18px 60px rgba(0,0,0,.42);
+pointer-events: auto;
+}
+.wiki-lightbox-close,
+.wiki-lightbox-nav {
+position: absolute;
+z-index: 2;
+display: grid;
+place-items: center;
+border: 0;
+background: rgba(255,255,255,.94);
+color: #111;
+box-shadow: 0 4px 18px rgba(0,0,0,.25);
+cursor: pointer;
+}
+.wiki-lightbox-close {
+top: 18px;
+right: 18px;
+width: 40px;
+height: 40px;
+border-radius: 50%;
+font-size: 24px;
+}
+.wiki-lightbox-nav {
+top: 50%;
+width: 46px;
+height: 46px;
+border-radius: 50%;
+transform: translateY(-50%);
+}
+.wiki-lightbox-prev {
+left: 14px;
+}
+.wiki-lightbox-next {
+right: 14px;
+}
+.wiki-lightbox-nav svg {
+width: 21px;
+height: 21px;
+}
+.wiki-lightbox-caption {
+position: absolute;
+z-index: 2;
+left: 50%;
+bottom: 48px;
+transform: translateX(-50%);
+max-width: min(720px,calc(100vw - 40px));
+padding: 6px 10px;
+border-radius: 4px;
+background: rgba(13,21,32,.78);
+color: #fff;
+font-size: .72rem;
+line-height: 1.35;
+text-align: center;
+}
+.wiki-lightbox-counter {
+position: absolute;
+z-index: 2;
+left: 50%;
+bottom: 18px;
+transform: translateX(-50%);
+padding: 6px 10px;
+border-radius: 999px;
+background: rgba(13,21,32,.78);
+color: #fff;
+font-size: .68rem;
+font-weight: 650;
+}
+.info-row-nav {
+position: relative;
+cursor: pointer;
+transition: background-color .12s ease;
+}
+.info-row-nav:hover {
+background: var(--panel);
+}
+.info-row-nav .info-row-link {
+color: var(--link);
+font-weight: 600;
+text-decoration: none;
+}
+.info-row-nav:hover .info-row-link {
+text-decoration: underline;
+}
+.plot-location-scrap {
+display: inline-block;
+margin: 3px 0 9px;
+padding: 5px 8px 4px;
+background: #ddd8c7;
+color: #30343a;
+font-size: .66rem;
+font-weight: 760;
+letter-spacing: .075em;
+text-transform: uppercase;
+clip-path: polygon(2% 5%,97% 0,100% 90%,93% 100%,3% 96%,0 14%);
+transform: rotate(-.25deg);
+box-shadow: 0 2px 3px rgba(0,0,0,.11);
+}
+.plot-location-scrap:nth-of-type(even) {
+background: #cfded9;
+transform: rotate(.2deg);
+}
+html.dark .plot-location-scrap {
+background: #d2cdbd;
+color: #202832;
+}
+.gallery-item:hover img {
+transform: scale(1.035);
+}
+.desktop-sidebar-toggle:active svg {
+transform: scale(.92);
+}
+.wiki-wordmark {
+display: inline-flex;
+flex-direction: column;
+align-items: flex-start;
+width: max-content;
+color: var(--text);
+font-family: "Google Sans Flex","Inter",sans-serif;
+user-select: none;
+-webkit-user-select: none;
+}
+.wiki-wordmark-main {
+position: relative;
+display: flex;
+align-items: baseline;
+width: max-content;
+padding: 0 0 9px;
+font-size: 1.3rem;
+font-weight: 800;
+line-height: .86;
+letter-spacing: 0;
+text-transform: uppercase;
+}
+.wiki-wordmark-main > span:not(.wiki-logo-gap) {
+position: relative;
+display: inline-block;
+margin-right: -.045em;
+transform-origin: 50% 72%;
+-webkit-mask-image: radial-gradient(circle at 18% 24%,transparent 0 .65px,#000 .95px),
+    radial-gradient(circle at 72% 38%,transparent 0 .55px,#000 .85px),
+    radial-gradient(circle at 42% 76%,transparent 0 .6px,#000 .9px),
+    linear-gradient(#000,#000);
+mask-image: radial-gradient(circle at 18% 24%,transparent 0 .65px,#000 .95px),
+    radial-gradient(circle at 72% 38%,transparent 0 .55px,#000 .85px),
+    radial-gradient(circle at 42% 76%,transparent 0 .6px,#000 .9px),
+    linear-gradient(#000,#000);
+clip-path: polygon(
+    1% 2%,13% 0%,25% 2%,38% .5%,51% 2.2%,64% .4%,77% 2%,89% .7%,99% 2.5%,
+    98.5% 14%,100% 27%,98.7% 40%,100% 54%,98.4% 67%,100% 81%,98% 98%,
+    85% 99.2%,72% 97.8%,59% 99.5%,46% 97.9%,33% 99.4%,20% 97.7%,2% 99%,
+    1.2% 85%,0 72%,1.3% 59%,0 45%,1.4% 31%,0 17%
+  );
+}
+.wiki-wordmark-main .wiki-logo-gap {
+display: inline-block;
+width: .24em;
+flex: 0 0 .24em;
+}
+.wiki-wordmark-main > span:nth-child(1) {
+transform: rotate(-.62deg) translateY(.5px);
+}
+.wiki-wordmark-main > span:nth-child(2) {
+transform: rotate(.48deg) translateY(-.35px);
+}
+.wiki-wordmark-main > span:nth-child(3) {
+transform: rotate(-.34deg) translateY(.3px);
+}
+.wiki-wordmark-main > span:nth-child(4) {
+transform: rotate(.58deg) translateY(-.4px);
+}
+.wiki-wordmark-main > span:nth-child(5) {
+transform: rotate(-.44deg) translateY(.4px);
+}
+.wiki-wordmark-main > span:nth-child(7) {
+transform: rotate(.52deg) translateY(-.3px);
+}
+.wiki-wordmark-main > span:nth-child(8) {
+transform: rotate(-.57deg) translateY(.45px);
+}
+.wiki-wordmark-main > span:nth-child(9) {
+transform: rotate(.38deg) translateY(-.35px);
+}
+.wiki-wordmark-main > span:nth-child(10) {
+transform: rotate(-.49deg) translateY(.3px);
+}
+.wiki-wordmark-main::after {
+content: "";
+position: absolute;
+left: 1px;
+bottom: 1px;
+width: calc(100% - 2px);
+height: 5px;
+background: linear-gradient(
+    90deg,
+    #5161AC 0 24%,
+    transparent 24% 25.5%,
+    #009B67 25.5% 49%,
+    transparent 49% 50.5%,
+    #59C0D5 50.5% 74%,
+    transparent 74% 75.5%,
+    #F47321 75.5% 100%
+  );
+clip-path: polygon(
+    0 28%,7% 13%,14% 24%,21% 8%,29% 20%,37% 3%,
+    45% 18%,53% 7%,61% 22%,69% 5%,77% 19%,86% 9%,100% 24%,
+    98% 76%,90% 88%,81% 72%,72% 91%,63% 76%,54% 94%,
+    45% 77%,36% 91%,27% 73%,18% 89%,9% 75%,2% 91%
+  );
+transform: rotate(-1deg);
+filter: drop-shadow(0 1px 0 rgba(0,0,0,.15));
+opacity: .94;
+pointer-events: none;
+}
+.wiki-wordmark-suffix {
+margin-top: 2px;
+color: var(--muted);
+font-size: .60rem;
+font-weight: 800;
+line-height: 1;
+letter-spacing: .18em;
+text-transform: uppercase;
+}
+
+
+/* =========================================================
+   CONTENTS, NOTICES & ARTICLE COMPONENTS
+   ========================================================= */
+
+.toc {
+width: min(320px,100%);
+margin: 18px 0 22px;
+border: 1px solid var(--line);
+background: var(--panel);
+color: var(--text);
+line-height: 1.42;
+}
+.toc-head {
+min-height: 38px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+padding: 7px 10px;
+border-bottom: 1px solid var(--line);
+background: rgba(69,98,145,.06);
+}
+.toc-title {
+font-size: .78rem;
+font-weight: 780;
+letter-spacing: .025em;
+}
+.toc-toggle {
+padding: 2px 4px;
+border: 0;
+background: transparent;
+color: var(--link);
+cursor: pointer;
+font: inherit;
+font-size: .69rem;
+font-weight: 650;
+}
+.toc-toggle:hover {
+text-decoration: underline;
+}
+.toc ol {
+margin: 0;
+padding: 8px 12px 9px 31px;
+padding-top: 10px;
+padding-bottom: 11px;
+}
+.toc li {
+margin: .20rem 0;
+padding-left: 1px;
+color: var(--muted);
+font-size: .78rem;
+line-height: 1.55;
+}
+.toc a {
+color: var(--link);
+font-size: .84rem;
+font-weight: 450 !important;
+line-height: 1.55;
+text-decoration: none;
+}
+.toc a:hover {
+text-decoration: underline;
+}
+.toc.is-collapsed .toc-head {
+border-bottom: 0;
+}
+.toc.is-collapsed ol {
+display: none;
+}
+html.dark .toc-head {
+background: rgba(95,130,173,.09);
+}
+.wiki-notice {
+display: grid;
+grid-template-columns: 26px minmax(0,1fr);
+align-items: start;
+gap: 9px;
+margin: 17px 0 18px;
+padding: 10px 12px 10px 10px;
+border: 1px solid var(--line);
+border-left: 5px solid var(--accent);
+background: rgba(69,98,145,.055);
+color: var(--text);
+}
+.wiki-notice svg {
+width: 21px;
+height: 21px;
+margin-top: 1px;
+color: var(--accent);
+}
+.wiki-notice div {
+min-width: 0;
+}
+.wiki-notice strong {
+display: block;
+margin: 0 0 2px;
+font-size: .82rem;
+font-weight: 760;
+line-height: 1.25;
+}
+.wiki-notice span {
+display: block;
+color: var(--muted);
+font-size: .82rem;
+line-height: 1.42;
+}
+html.dark .wiki-notice {
+border-left-color: #79a9df;
+background: rgba(121,169,223,.07);
+}
+html.dark .wiki-notice svg {
+color: #8ebbf0;
+}
+.infobox-image-switcher {
+width: 100%;
+overflow: hidden;
+background: var(--paper);
+border-bottom: 1px solid var(--line);
+position: relative;
+}
+.infobox-image-tabs {
+display: none;
+align-items: stretch;
+justify-content: flex-start;
+flex-wrap: nowrap;
+gap: 2px;
+padding: 0 8px;
+overflow-x: auto;
+overflow-y: hidden;
+border-bottom: 1px solid var(--line);
+background: var(--paper);
+scrollbar-width: none;
+-webkit-overflow-scrolling: touch;
+scroll-behavior: smooth;
+overscroll-behavior-x: contain;
+cursor: grab;
+}
+.infobox-image-tabs::-webkit-scrollbar {
+display: none;
+}
+.infobox-image-switcher.has-multiple .infobox-image-tabs {
+display: flex;
+}
+.infobox-image-tab {
+position: relative;
+flex: 0 0 auto;
+min-height: 38px;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+margin: 0;
+padding: 0 12px;
+border: 0;
+border-bottom: 2px solid transparent;
+background: transparent;
+color: var(--muted);
+box-shadow: none;
+clip-path: none;
+transform: none;
+cursor: pointer;
+font: inherit;
+font-size: .73rem !important;
+font-weight: 630;
+line-height: 1;
+white-space: nowrap;
+transition: color .14s ease,border-color .14s ease,background-color .14s ease;
+border-bottom-width: 2px;
+}
+.infobox-image-tab:hover {
+color: var(--text);
+background: rgba(69,98,145,.08);
+}
+.infobox-image-tab:focus-visible {
+outline: 2px solid var(--accent);
+outline-offset: -2px;
+}
+.infobox-image-tab[aria-selected="true"] {
+color: var(--accent);
+border-bottom-color: var(--accent);
+background: rgba(69,98,145,.045);
+font-weight: 760;
+}
+.infobox-image-tab-label {
+display: block;
+}
+.infobox-image-panels {
+position: relative;
+width: 100%;
+background: var(--panel);
+}
+.infobox-image-panel {
+display: none;
+width: 100%;
+margin: 0;
+padding: 0;
+}
+.infobox-image-panel.is-active {
+display: block;
+}
+.infobox-image-panel img {
+display: block;
+width: 100%;
+height: auto;
+margin: 0;
+cursor: zoom-in;
+object-fit: cover;
+}
+.categories-row {
+display: grid;
+grid-template-columns: 104px minmax(0,1fr);
+align-items: stretch;
+}
+.categories-label {
+display: flex;
+align-items: center;
+padding: 9px 11px;
+border-right: 1px solid var(--line);
+background: color-mix(in srgb,var(--panel) 90%,var(--accent) 10%);
+color: var(--muted);
+font-size: .67rem;
+font-weight: 780;
+letter-spacing: .07em;
+text-transform: uppercase;
+}
+.categories-links {
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+padding: 0;
+gap: 0;
+}
+.categories-links a {
+color: var(--link);
+font-weight: 500;
+text-decoration: none !important;
+transition: color .14s ease,font-weight .14s ease,background-color .14s ease;
+position: relative;
+display: inline-flex;
+align-items: center;
+min-height: 36px;
+padding: 0 11px;
+}
+.categories-links a:hover {
+text-decoration: underline;
+}
+.categories-links a:not(:last-child)::after {
+content: "";
+color: var(--muted);
+white-space: pre;
+position: absolute;
+top: 8px;
+right: 0;
+bottom: 8px;
+width: 1px;
+background: var(--line);
+}
+html.dark .categories-label {
+background: color-mix(in srgb,var(--panel) 90%,#7da7d1 10%);
+}
+.site-credit {
+padding: 7px 12px 6px;
+text-align: center;
+color: #2a3138;
+font-size: .68rem;
+font-weight: 760;
+letter-spacing: .035em;
+width: max-content;
+margin: 18px auto 22px;
+position: relative;
+overflow: hidden;
+background: #d9d2b8;
+line-height: 1;
+text-transform: uppercase;
+clip-path: polygon(2% 8%,96% 0,100% 86%,94% 100%,4% 95%,0 16%);
+box-shadow: 0 2px 5px rgba(0,0,0,.14);
+transform: rotate(-.35deg);
+isolation: isolate;
+}
+.staff-collapse-head {
+margin: 8px 0 10px;
+}
+.staff-collapse-toggle {
+width: 100%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 10px;
+padding: 8px 10px;
+border: 1px solid var(--line);
+background: var(--panel);
+color: var(--text);
+cursor: pointer;
+font: inherit;
+font-size: .75rem;
+font-weight: 700;
+text-align: left;
+}
+.staff-collapse-toggle:hover {
+background: rgba(69,98,145,.06);
+}
+.staff-collapse-toggle svg {
+width: 17px;
+height: 17px;
+flex: 0 0 auto;
+fill: none;
+stroke: currentColor;
+stroke-width: 2;
+stroke-linecap: round;
+stroke-linejoin: round;
+transition: transform .16s ease;
+}
+.staff-collapse-toggle[aria-expanded="false"] svg {
+transform: rotate(-90deg);
+}
+.staff-collapse[hidden] {
+display: none;
+}
+.site-credit::after {
+content: "";
+position: absolute;
+inset: 0;
+z-index: -1;
+pointer-events: none;
+opacity: .24;
+background: radial-gradient(circle at 18% 32%,rgba(255,255,255,.55) 0 1px,transparent 1.4px),
+    radial-gradient(circle at 72% 64%,rgba(0,0,0,.10) 0 .8px,transparent 1.2px),
+    radial-gradient(circle at 40% 82%,rgba(255,255,255,.4) 0 .7px,transparent 1.1px);
+background-size: 19px 17px,23px 21px,29px 27px;
+}
+html.dark .site-credit {
+color: #1d252c;
+}
+.categories-links a:hover,
+.categories-links a:focus-visible {
+color: var(--accent);
+text-decoration: none !important;
+font-weight: 700;
+background: rgba(69,98,145,.035);
+}
+.infobox-image-tabs:active {
+cursor: grabbing;
+}
+.infobox-tab-scroll-shell {
+position: relative;
+display: grid;
+grid-template-columns: 28px minmax(0,1fr) 28px;
+align-items: stretch;
+border-bottom: 1px solid var(--line);
+background: var(--paper);
+}
+.infobox-tab-scroll-shell .infobox-image-tabs {
+min-width: 0;
+border-bottom: 0;
+}
+.infobox-tab-scroll-btn {
+display: grid;
+place-items: center;
+padding: 0;
+border: 0;
+background: var(--panel);
+color: var(--text);
+cursor: pointer;
+transition: background-color .14s ease,color .14s ease,opacity .14s ease;
+}
+.infobox-tab-scroll-btn:hover {
+background: rgba(69,98,145,.12);
+color: var(--accent);
+}
+.infobox-tab-scroll-btn:disabled {
+opacity: .28;
+cursor: default;
+}
+.infobox-tab-scroll-btn svg {
+width: 15px;
+height: 15px;
+}
+.categories-links a,
+.categories-links a:hover,
+.categories-links a:focus-visible {
+font-weight: 500 !important;
+}
+.infobox-tab-scroll-shell.no-overflow .infobox-tab-scroll-btn {
+opacity: .22;
+}
+.article-content .lede,
+.article-content .section p,
+.article-content .trivia-list li,
+.article-content .staff-table td {
+font-size: .90rem !important;
+line-height: 1.55 !important;
+}
+.article-content .staff-table th {
+line-height: 1.35;
+}
+.sticky-theme-control,
+.unified-icon-button.theme-control {
+width: 42px;
+height: 42px;
+min-width: 42px;
+display: grid;
+place-items: center;
+padding: 0;
+border: 1px solid rgba(80,105,145,.28) !important;
+border-radius: 12px !important;
+background: rgba(255,255,255,.86) !important;
+color: #182235 !important;
+box-shadow: 0 8px 24px rgba(42,57,82,.10) !important;
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+transition: background-color .18s ease,
+    color .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease;
+}
+html.dark .sticky-theme-control,
+html.dark .unified-icon-button.theme-control {
+border-color: rgba(154,181,226,.25) !important;
+background: rgba(18,24,37,.90) !important;
+color: rgba(244,247,255,.96) !important;
+box-shadow: 0 10px 30px rgba(0,0,0,.28) !important;
+}
+.sticky-theme-control:hover,
+.sticky-theme-control:focus-visible,
+.unified-icon-button.theme-control:hover,
+.unified-icon-button.theme-control:focus-visible {
+background: rgba(110,142,193,.13) !important;
+outline: none;
+transform: translateY(-1px);
+}
+html.dark .sticky-theme-control:hover,
+html.dark .sticky-theme-control:focus-visible,
+html.dark .unified-icon-button.theme-control:hover,
+html.dark .unified-icon-button.theme-control:focus-visible {
+background: rgba(155,188,255,.14) !important;
+}
+.sticky-theme-control .theme-icon-slot,
+.unified-icon-button.theme-control .theme-icon-slot {
+width: 20px;
+height: 20px;
+flex: 0 0 20px;
+}
+.sticky-theme-control .theme-icon,
+.unified-icon-button.theme-control .theme-icon {
+width: 20px;
+height: 20px;
+}
+.sticky-theme-control svg,
+.unified-icon-button.theme-control svg {
+width: 20px !important;
+height: 20px !important;
+fill: none;
+stroke: currentColor;
+stroke-width: 1.8;
+stroke-linecap: round;
+stroke-linejoin: round;
+}
+.hero h1::after {
+content: none !important;
+position: absolute;
+left: 1px;
+bottom: 0;
+width: min(92px,32%);
+height: 4px;
+border-radius: 999px;
+background: var(--accent);
+opacity: .9;
+display: none !important;
+}
+.page-view-switcher {
+display: flex;
+align-items: flex-end;
+gap: 30px;
+margin: 0 0 14px;
+padding: 7px 0 0;
+border-bottom: 1px solid var(--line);
+}
+.page-view-button {
+position: relative;
+appearance: none;
+border: 0;
+background: transparent;
+color: var(--muted);
+padding: 9px 1px 10px;
+font: 600 .84rem "Inter",system-ui,sans-serif;
+cursor: pointer;
+}
+.page-view-button:hover,
+.page-view-button:focus-visible {
+color: var(--text);
+outline: none;
+}
+.page-view-button.active {
+color: var(--text);
+}
+.page-view-button.active::after {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+bottom: -1px;
+height: 2px;
+background: var(--accent);
+}
+body:not(.trivia-page-view):not(.gallery-page-view) .trivia-view-section,
+body:not(.trivia-page-view):not(.gallery-page-view) .gallery-view-section {
+display: none !important;
+}
+body.trivia-page-view .article-content > :not(.trivia-view-section),
+body.gallery-page-view .article-content > :not(.gallery-view-section) {
+display: none !important;
+}
+body.trivia-page-view .article-content,
+body.gallery-page-view .article-content {
+display: block !important;
+}
+body.trivia-page-view .trivia-view-section,
+body.gallery-page-view .gallery-view-section {
+display: block !important;
+clear: both;
+padding-top: 6px !important;
+border-top: 0 !important;
+}
+body.trivia-page-view .trivia-view-section h2,
+body.gallery-page-view .gallery-view-section h2 {
+margin-top: 0;
+}
+body.gallery-page-view .gallery {
+width: 100% !important;
+max-width: none !important;
+margin: 0 !important;
+grid-template-columns: repeat(3,minmax(0,1fr)) !important;
+gap: 12px !important;
+}
+.gallery-visible-caption {
+display: block;
+padding: 8px 8px 7px;
+border-top: 1px solid var(--line);
+background: var(--paper);
+color: var(--text);
+font-size: .72rem;
+font-weight: 500;
+line-height: 1.35;
+}
+body.gallery-page-view .gallery-visible-caption {
+padding: 9px 9px 8px;
+font-size: .74rem;
+}
+#backToTop {
+position: fixed;
+right: 1rem;
+bottom: 1rem;
+z-index: 1800;
+display: grid;
+place-items: center;
+width: 2.65rem;
+height: 2.65rem;
+padding: 0;
+border: 1px solid var(--line);
+border-radius: 999px;
+background: color-mix(in srgb,var(--paper) 90%,transparent);
+color: var(--text);
+font: inherit;
+font-size: 1.2rem;
+line-height: 1;
+cursor: pointer;
+box-shadow: var(--shadow);
+opacity: 0;
+visibility: hidden;
+transform: translateY(.65rem);
+pointer-events: none;
+transition: opacity .2s ease,transform .2s ease,visibility .2s ease,background-color .18s ease;
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
+}
+#backToTop.visible {
+opacity: 1;
+visibility: visible;
+transform: translateY(0);
+pointer-events: auto;
+}
+#backToTop:hover,
+#backToTop:focus-visible {
+transform: translateY(-2px);
+background: var(--panel);
+outline: none;
+}
+.hero-theme-toggle,
+.sticky-theme-control {
+position: absolute !important;
+top: 50% !important;
+right: 0 !important;
+transform: translateY(-50%) !important;
+display: grid !important;
+place-items: center !important;
+width: 38px !important;
+height: 38px !important;
+min-width: 38px !important;
+min-height: 38px !important;
+padding: 0 !important;
+border: 1px solid var(--line) !important;
+border-radius: 50% !important;
+background: var(--paper) !important;
+color: var(--text) !important;
+box-shadow: none !important;
+cursor: pointer !important;
+}
+.hero-theme-toggle .theme-icon-slot,
+.sticky-theme-control .theme-icon-slot {
+display: grid !important;
+place-items: center !important;
+width: 20px !important;
+height: 20px !important;
+margin: 0 !important;
+line-height: 0 !important;
+}
+.hero-theme-toggle .theme-icon,
+.sticky-theme-control .theme-icon {
+width: 19px !important;
+height: 19px !important;
+}
+.hero .eyebrow {
+display: none !important;
+}
+.hero-theme-toggle .theme-icon svg,
+.sticky-theme-control .theme-icon svg {
+display: block;
+width: 100%;
+height: 100%;
+margin: 0;
+}
+
+
+/* =========================================================
+   RESPONSIVE / MOBILE
+   ========================================================= */
+
+@media (max-width:850px) {
+  .staff-table {
+  font-size: .82rem;
+}
+  .staff-table th,
+  .staff-table td {
+  padding: 8px;
+}
+  body {
+  background-attachment: scroll;
+}
+  .site-header {
+  display: block !important;
+position: fixed !important;
+inset: 0 0 auto 0;
+z-index: 1200;
+width: 100%;
+height: var(--mobile-bar-height);
+background: var(--paper);
+border-bottom: 1px solid var(--line);
+box-shadow: 0 1px 8px rgba(0,0,0,.10);
+top: 0;
+left: 0;
+right: 0;
+}
+  .unified-mobile-bar {
+  display: grid !important;
+grid-template-columns: 38px minmax(0,1fr);
+width: 100%;
+height: 100%;
+align-items: stretch;
+padding: 0;
+overflow: hidden;
+}
+  .unified-icon-button {
+  width: 44px;
+height: 100%;
+display: grid;
+place-items: center;
+padding: 0;
+border: 0;
+background: var(--panel-solid);
+color: var(--text);
+cursor: pointer;
+}
+  .unified-icon-button:first-child {
+  border-right: 1px solid var(--line);
+}
+  .unified-icon-button:last-child {
+  border-left: 1px solid var(--line);
+}
+  .unified-icon-button svg {
+  width: 19px;
+height: 19px;
+}
+  .shell {
+  display: block;
+width: 100%;
+max-width: none;
+min-height: 0;
+margin: 0;
+box-shadow: none;
+}
+  .sidebar {
+  position: fixed;
+top: var(--mobile-bar);
+bottom: 0;
+left: 0;
+z-index: 1120;
+width: min(292px,86vw);
+overflow-y: auto;
+opacity: 1 !important;
+transform: translateX(-103%);
+transition: transform .22s ease;
+border-right: 1px solid var(--line) !important;
+background: var(--panel-solid);
+box-shadow: 18px 0 45px rgba(0,0,0,.28);
+pointer-events: auto !important;
+}
+  body.menu-open .sidebar {
+  transform: translateX(0);
+}
+  .menu-overlay {
+  position: fixed;
+inset: var(--mobile-bar) 0 0;
+z-index: 1110;
+border: 0;
+background: rgba(0,0,0,.48);
+}
+  body.menu-open .menu-overlay {
+  display: block;
+}
+  .desktop-sidebar-toggle,
+  .sticky-theme-control {
+  display: none !important;
+}
+  .main {
+  width: 100%;
+margin: 0;
+padding: 0 14px 32px;
+padding-top: calc(var(--mobile-bar-height) + 10px) !important;
+}
+  .hero {
+  padding: 15px 0 14px;
+}
+  .hero h1 {
+  margin-top: 7px;
+font-size: clamp(1.85rem,10vw,2.65rem);
+line-height: .96;
+padding-bottom: 9px;
+font-weight: 520;
+letter-spacing: -.04em;
+padding-right: 48px !important;
+}
+  .infobox {
+  float: none;
+width: 100%;
+margin: 0 0 17px;
+}
+  .lede {
+  font-size: .95rem;
+line-height: 1.60;
+}
+  .section {
+  padding: 17px 0;
+}
+  .section h2 {
+  font-size: 1.25rem;
+}
+  .section p {
+  font-size: .93rem;
+line-height: 1.58;
+}
+  .quote {
+  font-size: .87rem;
+padding: 9px 11px;
+}
+  .trivia-list li {
+  font-size: .93rem;
+line-height: 1.7;
+}
+  .gallery {
+  grid-template-columns: 1fr;
+gap: 10px;
+}
+  #top,
+  #appearance,
+  #staff,
+  #trivia,
+  #gallery {
+  scroll-margin-top: calc(var(--mobile-bar-height) + 10px) !important;
+}
+  .wiki-lightbox-stage {
+  padding: 62px 12px 72px;
+}
+  .wiki-lightbox img {
+  max-width: calc(100vw - 24px);
+max-height: calc(100vh - 134px);
+}
+  .wiki-lightbox-nav {
+  width: 42px;
+height: 42px;
+}
+  .wiki-lightbox-prev {
+  left: 6px;
+}
+  .wiki-lightbox-next {
+  right: 6px;
+}
+  .gallery-item:hover img {
+  transform: none;
+}
+  .wiki-lightbox-caption {
+  bottom: 44px;
+font-size: .68rem;
+}
+  .toc {
+  width: 100%;
+max-width: 340px;
+}
+  .wiki-notice {
+  grid-template-columns: 24px minmax(0,1fr);
+padding: 9px 10px;
+border-left-width: 4px;
+}
+  .wiki-notice svg {
+  width: 20px;
+height: 20px;
+}
+  .infobox-image-tabs {
+  padding: 0 6px;
+flex-wrap: nowrap;
+overflow-x: auto;
+overflow-y: hidden;
+scrollbar-width: none;
+-webkit-overflow-scrolling: touch;
+}
+  .infobox-image-tab {
+  min-height: 36px;
+padding: 0 10px;
+font-size: .72rem !important;
+}
+  .infobox-image-tabs::-webkit-scrollbar {
+  display: none;
+}
+  .infobox-tab-scroll-shell {
+  grid-template-columns: 30px minmax(0,1fr) 30px;
+}
+  .unified-mobile-bar .theme-control {
+  grid-column: 3;
+}
+  .article-content .lede,
+  .article-content .section p,
+  .article-content .trivia-list li,
+  .article-content .staff-table td {
+  font-size: .90rem !important;
+line-height: 1.55 !important;
+}
+  .unified-icon-button.theme-control {
+  width: 44px;
+min-width: 44px;
+height: 100%;
+border-radius: 0 !important;
+border-top: 0 !important;
+border-right: 0 !important;
+border-bottom: 0 !important;
+box-shadow: none !important;
+backdrop-filter: none;
+-webkit-backdrop-filter: none;
+transform: none !important;
+}
+  .hero h1::after {
+  width: 72px;
+height: 3px;
+}
+  :root {
+  --mobile-bar-height: 46px;
+}
+  .mobile-menu-button {
+  display: grid !important;
+place-items: center;
+width: 38px !important;
+height: var(--mobile-bar-height) !important;
+min-width: 38px !important;
+min-height: var(--mobile-bar-height) !important;
+padding: 0 !important;
+margin: 0 !important;
+border: 0 !important;
+border-right: 1px solid var(--line) !important;
+border-radius: 0 !important;
+background: var(--panel-solid) !important;
+color: var(--text) !important;
+box-shadow: none !important;
+}
+  .mobile-rail-wordmark {
+  display: flex !important;
+flex-direction: row !important;
+align-items: center !important;
+justify-content: flex-start !important;
+width: 100%;
+min-width: 0;
+height: var(--mobile-bar-height);
+padding: 0 13px;
+color: var(--text) !important;
+text-decoration: none !important;
+box-sizing: border-box;
+gap: 8px !important;
+padding-left: 14px !important;
+padding-right: 14px !important;
+}
+  .mobile-rail-wordmark-main {
+  display: flex !important;
+font-size: 1.14rem !important;
+font-weight: 700 !important;
+letter-spacing: -.025em !important;
+line-height: 1 !important;
+white-space: nowrap;
+align-items: center !important;
+transform: scaleX(1.08);
+transform-origin: left center;
+}
+  .mobile-rail-wordmark-wiki {
+  display: block !important;
+margin-top: 2px !important;
+font-size: .57rem !important;
+font-weight: 700 !important;
+letter-spacing: .12em !important;
+line-height: 1 !important;
+white-space: nowrap !important;
+margin: 0 0 0 4px !important;
+margin-left: 10px !important;
+}
+  .page-view-switcher {
+  gap: 27px;
+margin-bottom: 12px;
+padding-top: 4px;
+overflow-x: auto;
+scrollbar-width: none;
+}
+  .page-view-switcher::-webkit-scrollbar {
+  display: none;
+}
+  .page-view-button {
+  flex: 0 0 auto;
+font-size: .82rem;
+}
+  body.gallery-page-view .gallery {
+  grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+gap: 9px !important;
+}
+  .gallery-visible-caption,
+  body.gallery-page-view .gallery-visible-caption {
+  padding: 8px 8px 7px;
+font-size: .72rem;
+}
+  #backToTop {
+  right: .85rem;
+bottom: .85rem;
+}
+  .hero-theme-toggle,
+  .sticky-theme-control {
+  width: 34px !important;
+height: 34px !important;
+min-width: 34px !important;
+min-height: 34px !important;
+}
+  .mobile-rail-wordmark-main .wm-letter {
+  padding: 0 .035em !important;
+}
+  .mobile-rail-wordmark-main .wm-gap {
+  width: .32em !important;
+}
+}
+@media (max-width:1050px) and (min-width:851px) {
+  .shell {
+  width: calc(100% - 42px);
+}
+  .gallery {
+  grid-template-columns: repeat(2,minmax(0,1fr));
+}
+}
+@media (max-width:470px) {
+  .unified-mobile-bar {
+  grid-template-columns: 42px minmax(0,1fr) 42px;
+}
+  .unified-icon-button {
+  width: 42px;
+}
+}
+@media (min-width:1400px) {
+  .shell {
+  width: min(1080px,calc(100% - 180px));
+max-width: 1080px;
+}
+}
+@media (max-width:650px) {
+  .categories-row {
+  grid-template-columns: 1fr;
+}
+  .categories-label {
+  border-right: 0;
+border-bottom: 1px solid var(--line);
+}
+  .categories-links {
+  display: block;
+padding: 2px 0;
+}
+  .categories-links a {
+  display: flex;
+width: 100%;
+min-height: 34px;
+padding: 7px 11px;
+}
+  .categories-links a:not(:last-child)::after {
+  top: auto;
+left: 11px;
+right: 11px;
+bottom: 0;
+width: auto;
+height: 1px;
+}
+}
+@media (min-width:851px) {
+  .sticky-theme-control {
+  position: absolute !important;
+top: 18px !important;
+right: 18px !important;
+z-index: 950 !important;
+margin: 0 !important;
+}
+  .shell {
+  position: relative;
+}
+  .hero {
+  position: relative;
+padding-right: 52px;
+}
+  .hero .sticky-theme-control {
+  position: absolute !important;
+top: auto !important;
+right: 0 !important;
+bottom: 14px !important;
+z-index: 20 !important;
+display: grid !important;
+margin: 0 !important;
+}
+}
+@media (max-width:520px) {
+  .unified-mobile-bar {
+  grid-template-columns: 36px minmax(0,1fr);
+}
+  .mobile-menu-button {
+  width: 36px !important;
+min-width: 36px !important;
+}
+  .mobile-rail-wordmark {
+  padding-left: 12px !important;
+padding-right: 11px;
+gap: 7px !important;
+}
+  .mobile-rail-wordmark-main {
+  font-size: 1.06rem !important;
+transform: scaleX(1.07);
+}
+  .mobile-rail-wordmark-wiki {
+  font-size: .52rem !important;
+margin-left: 8px !important;
+}
+  body.gallery-page-view .gallery {
+  grid-template-columns: 1fr !important;
+}
+}
+@media (max-width: 850px) {
+  .hero-theme-toggle,
+  .sticky-theme-control {
+  top: 6px !important;
+transform: none !important;
+display: grid !important;
+visibility: visible !important;
+opacity: 1 !important;
+pointer-events: auto !important;
+position: fixed !important;
+right: 5px !important;
+z-index: 1300 !important;
+width: 34px !important;
+height: 34px !important;
+min-width: 34px !important;
+min-height: 34px !important;
+margin: 0 !important;
+}
+  .unified-mobile-bar {
+  grid-template-columns: 38px minmax(0, 1fr) 42px !important;
+}
+  .mobile-rail-wordmark {
+  padding-right: 8px !important;
+}
+  .hero h1 {
+  padding-right: 0 !important;
+}
+}
+@media (min-width: 851px) {
+  .hero-theme-toggle,
+  .sticky-theme-control {
+  top: auto !important;
+right: 0 !important;
+bottom: 0.18em !important;
+transform: none !important;
+}
+}
+@media (max-width: 520px) {
+  .unified-mobile-bar {
+  grid-template-columns: 36px minmax(0, 1fr) 40px !important;
+}
+  .hero-theme-toggle,
+  .sticky-theme-control {
+  top: 6px !important;
+right: 4px !important;
+width: 32px !important;
+height: 32px !important;
+min-width: 32px !important;
+min-height: 32px !important;
+}
+}
+  </style>
+</head>
+<body>
+
+
+<!-- ==================== MOBILE HEADER ==================== -->
+
+<header class="site-header">
+<div aria-label="Wiki controls" class="unified-mobile-bar" role="navigation">
+<button aria-expanded="false" aria-label="Open navigation" class="unified-icon-button mobile-menu-button" data-menu-toggle="" type="button">
+<svg aria-hidden="true" viewbox="0 0 24 24">
+<path d="M4.5 7h15M4.5 12h15M4.5 17h15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8">
+</path>
+</svg>
+</button> <a aria-label="South Park Wiki" class="mobile-rail-wordmark" href="#top"> <span class="mobile-rail-wordmark-main wiki-wordmark-main"> <span class="wm-letter">
+       S
+      </span> <span class="wm-letter">
+       O
+      </span> <span class="wm-letter">
+       U
+      </span> <span class="wm-letter">
+       T
+      </span> <span class="wm-letter">
+       H
+      </span> <span class="wm-gap">
+</span> <span class="wm-letter">
+       P
+      </span> <span class="wm-letter">
+       A
+      </span> <span class="wm-letter">
+       R
+      </span> <span class="wm-letter">
+       K
+      </span>
+</span> <span class="mobile-rail-wordmark-wiki wiki-wordmark-suffix">
+      WIKI
+     </span>
+</a>
+</div>
+</header>
+
+
+<!-- ==================== WIKI LAYOUT ==================== -->
+
+<div class="shell">
+<button aria-expanded="true" aria-label="Collapse sidebar" class="desktop-sidebar-toggle" data-desktop-sidebar-toggle="" title="Collapse sidebar" type="button"> <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-close">
+<svg viewbox="0 0 24 24">
+<path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+</path>
+</svg>
+</span> <span aria-hidden="true" class="sidebar-toggle-icon sidebar-toggle-open">
+<svg viewbox="0 0 24 24">
+<path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9">
+</path>
+</svg>
+</span>
+</button>
+
+
+<!-- ==================== SIDEBAR ==================== -->
+
+<aside class="sidebar" id="sidebar">
+<div class="rail-brand"> <span aria-label="South Park Wiki" class="wiki-wordmark"> <span aria-hidden="true" class="wiki-wordmark-main"> <span>
+        S
+       </span> <span>
+        O
+       </span> <span>
+        U
+       </span> <span>
+        T
+       </span> <span>
+        H
+       </span> <span class="wiki-logo-gap">
+</span> <span>
+        P
+       </span> <span>
+        A
+       </span> <span>
+        R
+       </span> <span>
+        K
+       </span>
+</span> <span aria-hidden="true" class="wiki-wordmark-suffix">
+       Wiki
+      </span>
+</span>
+</div>
+<div class="rail-section">
+<div class="nav-label">
+      Explore
+     </div>
+<nav class="rail-nav"> <a class="rail-link" href="https://lewis.lc/sp/"> <span>
+        Episodes
+       </span>
+</a> <a class="rail-link" href="https://lewis.lc/wiki/edge_end#"> <span>
+        Characters
+       </span>
+</a> <a class="rail-link" href="https://lewis.lc/wiki/edge_end#"> <span>
+        Locations
+       </span>
+</a>
+</nav>
+</div>
+<div class="rail-section">
+<div class="nav-label">
+      Recent seasons
+     </div>
+<div class="season-grid"> <a class="current" href="https://lewis.lc/wiki/edge_end#">
+       28
+      </a> <a href="https://lewis.lc/wiki/edge_end#">
+       27
+      </a> <a href="https://lewis.lc/wiki/edge_end#">
+       26
+      </a> <a href="https://lewis.lc/wiki/edge_end#">
+       25
+      </a> <a href="https://lewis.lc/wiki/edge_end#">
+       24
+      </a> <a href="https://lewis.lc/wiki/edge_end#">
+       23
+      </a> <a href="https://lewis.lc/wiki/edge_end#">
+       22
+      </a> <a href="https://lewis.lc/wiki/edge_end#">
+       21
+      </a> <a href="https://lewis.lc/sp/">
+       All
+      </a>
+</div>
+</div>
+</aside>
+
+
+<!-- ==================== MAIN ARTICLE ==================== -->
+
+<main class="main" id="main">
+<section class="hero" id="top">
+<div class="eyebrow"> <span class="chip">
+       Location
+      </span>
+</div>
+<h1>
+      South American Biker Gangs
+     </h1>
+<button aria-label="Switch theme" class="sticky-theme-control hero-theme-toggle theme-control" data-theme-toggle="" title="Switch theme" type="button"> <span aria-hidden="true" class="theme-icon-slot"> <span class="theme-icon theme-icon-moon">
+<svg viewbox="0 0 24 24">
+<path d="M20.2 15.1A8.2 8.2 0 0 1 8.9 3.8 8.7 8.7 0 1 0 20.2 15.1Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.65">
+</path>
+</svg>
+</span> <span class="theme-icon theme-icon-sun">
+<svg viewbox="0 0 24 24">
+<circle cx="12" cy="12" fill="none" r="3.4" stroke="currentColor" stroke-width="1.65">
+</circle>
+<path d="M12 2.8v2.1M12 19.1v2.1M4.1 4.1l1.5 1.5M18.4 18.4l1.5 1.5M2.8 12h2.1M19.1 12h2.1M4.1 19.9l1.5-1.5M18.4 5.6l1.5-1.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.65">
+</path>
+</svg>
+</span>
+</span>
+</button>
+</section>
+<div aria-label="Page view" class="page-view-switcher" role="tablist">
+<button aria-selected="true" class="page-view-button active" data-page-view="article" role="tab" type="button">
+      Article
+     </button>
+<button aria-selected="false" class="page-view-button" data-page-view="trivia" role="tab" type="button">
+      Trivia
+     </button>
+<button aria-selected="false" class="page-view-button" data-page-view="gallery" role="tab" type="button">
+      Gallery
+     </button>
+</div>
+<section class="article-content" id="general">
+<div class="article-top">
+<div>
+
+
+<!-- ==================== INFOBOX ==================== -->
+
+<aside aria-label="Location information" class="infobox">
+<div class="infobox-title">
+         South American Biker Gangs
+        </div>
+<div class="infobox-image-switcher">
+<div aria-label="Infobox images" class="infobox-image-tabs" role="tablist">
+</div>
+  
+<div class="infobox-image-panels">
+<div class="infobox-image-panel" data-label="Current">
+<img alt="Current" loading="eager" src="https://southpark.guide/img/episodes/sabg.png"/>
+</div>
+</div>
+</div>
+  
+<div class="info-table">
+<div class="info-row">
+<b>
+           Episode No.
+          </b><span>
+           Season 29, Episode 1
+          </span></div>
+<div class="info-row">
+<b>
+           Production No.
+          </b><span>
+           2901
+          </span></div>
+<div class="info-row">
+<b>
+           Original airdate
+          </b><span>
+<i>
+            September 16, 2026
+           </i>
+</span></div>
+
+  
+<div class="info-row info-row-nav" data-href="#">
+<b>
+           Previous Episode
+          </b><span> <a class="info-row-link" href="https://lewis.lc/wiki/edge_end#">
+            The Crap Out
+           </a>
+            
+</span></div>
+
+<div class="info-row info-row-nav" data-href="#">
+<b>
+           Next Episode
+          </b><span> <a class="info-row-link" href="https://lewis.lc/wiki/edge_end#">
+            TBA
+           </a>
+            
+</span></div>
+  
+</div>
+</aside>
+<p class="lede">
+<strong>
+         South American Biker Gangs
+        </strong>
+        is the first episode of Season 29, and the 332nd overall episode of South Park. It aired on September 16, 2026.
+       </p>
+
+
+
+
+<!-- ==================== CONTENTS ==================== -->
+
+<nav aria-label="Contents" class="toc">
+<div class="toc-head"> <span class="toc-title">
+          Contents
+         </span>
+<button aria-expanded="true" class="toc-toggle" type="button">
+          hide
+         </button>
+</div>
+<ol>
+<li> <a href="#synopsis">
+           Synopsis
+          </a>
+</li>
+<li> <a href="#plot">
+           Plot
+          </a>
+</li>
+</ol>
+</nav>
+
+
+<!-- ==================== APPEARANCE ==================== -->
+
+<section class="section first" id="appearance">
+<h2>
+         Synopsis
+        </h2>
+<p>
+         When e-bikes arrive in South America, the boys take over the streets and the parents of South America can hardly recognize South America.
+        </p>
+
+  </section>
+</div>
+</div>
+
+<!-- ==================== PLOT ==================== -->
+
+<section class="section" id="plot">
+<h2>
+       Plot
+      </h2>  
+  
+<div class="plot-location-scrap">PLOT SPOILERS</div>
+
+<p>Liane Cartman is in the bathroom applying makeup as her son Eric sneaks up on her, only to begin sobbing loudly while huddling up on the floor. Hearing the noises outside, Liane rushes to Cartman to ask him what is wrong, to which he replies that he got bullied at school and called a "Chubby-Wubby". He proceeds that he wants to get a bicycle for exercise so the others see him doing so and stop badmouthing him. Liane agrees, making Cartman smile triumphantly out of her sight. The two then go to Keller's Bike Shop, where Cartman instantly runs towards the bike presented in the middle of the store - a "Voltracer", a "Class 3 E-Bike". His mom exclaims that the price for the vehicle is $2,000, to which Cartman asks her if she wants the kids to keep bullying him and him to be a "fat fuck" staying inside. The shopkeeper stresses that Cartman will have to abide by many rules if he does drive the bike, Cartman confirms that he will do so.</p>
+
+<p>Kyle, who is sitting inside doing schoolwork, hears e-bike noises outside alongside Cartman calling him. He walks up to his window and looks down at the street, where Cartman brags with his new bike by driving around with it in front of Kyle's house. Cartman then drives up to Kenny, who is playing with a toy truck, and purposefully flings mud at him while passing by directly in front of him. Next he pays a visit to Stan, who is now living in his old home again from before Randy's acquisition of Tegridy Farms. Stan opens the front door of his house and asks bewildered if Cartman's mom actually got him one. Cartman ecstatically asks "Isn't it sweet" and attempts to do a Wheelie, only for him to fall off the bike face first onto the street. He quickly gets up and remounts his bike, announcing that he will get himself a face-covering and hoodie to make everyone in town "suck his dick".</p>
+
+<p>Cartman proceeds to drive past the South America sign, now wearing a dark-grey hoodie, a red scarf covering his mouth, as well as a cap in his hat's colours, light blue and yellow. He recklessly drives along the streets and walkways, barely missing incoming cars and pedestrians as he tells them to suck his dick. He then crashes through the windows of a Denny's restaurant and falls off his bike again, hitting a customer with his vehicle and throwing over the table. He leaves the restaurant as if nothing happened and keeps on driving.</p>
+
+<p>At home, Stan asks his mother Sharon for an e-bike, only for her to decline his wish due to the costs as well as Randy's opinions on them. In that moment, Randy, wearing biker attire and holding a sports drink bottle, enters the house, furious about children going 40mph in the bike lane. When he complains about South America not being safe anymore, Stan suggests him to get himself an e-bike to be able to keep up with the speeds, but Randy refuses and draws a connection between e-bikes and slaves as they both do everything for someone. Stan mentions that friends of his also have e-bikes, but Randy is resolute about his stance, saying that they probably all are forming gangs, doing wheelies and smoking marijuana.</p>
+
+<p>Stan, Kyle and Kenny meet up on a bench near the playground, sharing the same decline from their parents due to lack of safety and the high costs. Butters halts in front of them with a newly acquired e-bike, wearing similar clothing to what Cartman wore, which just increases the frustration of the boys. Butters clarifies to them that he bought it from Tolkien for $400, who sold his old one after getting a newer replacement, and adds that he has not told his parents about it. After Stan tells Butters that not all can just spend $400, Butters suggests them to visit the Chinese bike shop. Kyle briefly questions the quality of the Chinese wares, with Butters responding that they would at least have something.</p>
+
+<p>The three boys go ahead and enter City E-Bike, where they are greeted by Tuong Lu Kim. When asked about the e-bikes, he calls them "very dependable" and mentions a risk of "only" 60% for the bikes to blow up in a garage. Stan tells Mr. Kim that he plans to spend $200 on three e-bikes, one for each of them. At first, Mr. Kim is taken aback by the small sum, however he quickly regains composure and offers Stan the "Super City E-Bike", which has the same speed as the other ones but may explode with a 92% chance. Stan happily agrees to the offer, with Kyle and Kenny thanking him. Mr. Kim then prompts the three to sign a waiver, effectively having them sign an agreement to not use the bikes anywhere and acknowledge its risk of explosion so he is not responsible for any people killed with the bikes he sells.</p>
+
+<p>Meanwhile, Randy is driving in the middle of the street, frustrating the car driver behind him, who honks at him. Randy orders him to drive by and claims he is just trying to be healthy. The car driver states that Randy can also do that without slowing him and others down, but Randy only brags about being able to drive all across South America in fifteen minutes. Just then, a kid riding an e-bike drives by, which enrages Randy so much that he starts pedalling as fast as he can to catch up. Completely unbothered, the kid, who is sitting calmly on the electric bike without pedalling, speeds up, leaving Randy behind, who crashes into an incoming car and falls off his vehicle.</p>
+
+<p>Randy lets his anger out at Stephen Stotch and Richard Tweak inside a Jamba shop. Stephen, sharing the mindset against the e-bikes, thinks that they should be made illegal. Richard adds that the parents are also not doing anything about their kids participating in gangs. Randy plans to ask Google about how they can change the laws accordingly to get e-bikes off the streets. As suggested by Google, they then visit the police station and propose Detective Harris their ban on e-bikes, offering him cash and cigars. Yates states he would like to help but cannot get the government to act, which is why he is hoping that the release of Grand Theft Auto VI will help improving the situation instead. Randy does not accept the answer and declares that instead the South American Cycling Club will take care of the matter.</p>
+
+<p>A news report is shown covering the kids and their e-bikes in the town of South America, showcasing multiple short interviews with people mad at the situation. The last person interviewed is then asked if she felt any outrage about the town's name change, but the question is only met with silence. In the meantime, Cartman is driving on the streets again with his e-bike, only to be joined by the other boys, much to his displeasure. As the three leave Cartman behind, he tries to catch up to them, but fails, making him stop in the middle of the road, tear up and cry loudly. Back at home, he continues sobbing in his room, when his mom approaches him, asking what happened. He explains how he pulled up at the others' houses the day before and that now they have faster e-bikes than him, demanding that she calls Kyle's parents to tell them to take Kyle's bike away. When Liane however refuses to do so, Cartman instead asks for a "Speed Unlock Dongle", with Liane not knowing what that is.</p>
+
+<p>Randy and a whole group of other adults pull up at the Donovan Residence to ask Roger Donovan to join their biker gang, complaining about how the bureaucrats refuse to do something against the kids on e-bikes. Roger shares his feelings, but also hopes that November will change things with the GTA VI release. Randy further elaborates that they want to take action themselves and that he knows who provides the kids with their e-bikes. Now convinced, Mr. Donovan swiftly changes into biker attire and the group cycles towards City E-Bikes. They confront Mr. Kim, who tries to talk himself out of the situation by bringing up the waiver, thinking this is about bikes having exploded, confusing the bikers. After having clarified that no bikes exploded, the adults proceed by demolishing the store and beating up Mr. Kim collectively.</p>
+
+<p>Stan, Kyle and Kenny hang out in the forest jumping off small, improvised ramps with their e-bikes. Stan mentions to Kyle how great he feels and points out how happy especially Kenny is, who is happily cheering while driving the e-bike. Stan thinks if Randy saw this aspect of the e-bikes, he would be alright with them driving it, and explains he feels "maturity", believing their parents can be convinced to be reasonable. Meanwhile, an ambulance has arrived for the severely injured Mr. Kim. Before fainting, Mr. Kim tells Yates that a biker gang is responsible for his injuries, driving the detective to ask Google "how the police can respond to gang violence in South America".</p>
+
+<p>Another news report now documents recent attacks on e-bike stores. Their special guest is an easily recognizable Eric Cartman under the nickname "El Gordo", who does not actually talk about the attacks but instead how people including Kyle have to suck his dick again now that he owns a "Speed Unlock Dongle". Upon being asked how he would respond to Kyle saying "That fat fuck can't even go fifteen 'cause of his fat ass", Cartman is taken aback, asking if they did talk to Kyle. The bikers under Randy all hang out at Jamba, when they are visited by one of the kids, completely masked, causing the entire group to stop what they are doing and focus on the child. The kid attempts to convey that the mayhem is all caused by a "small, fat minority", while they only want to have fun with their vehicles. Randy reluctantly agrees to having a chat about a potential agreement over some Jamba juice, but secretly asks one of the bikers to search on Google how South American biker gangs take care of one another. The kid later returns to Stan and Kyle waiting outside and is revealed to be Kenny. He tells them that they might be able to form an agreement with the adults. The trio splits up, only for Kenny's e-bike to suddenly explode, killing him. Stan and Kyle immediately turn around and look at the scene in shock.</p>
+
+<p>When Randy later returns home, Stan is sitting at the dinner table, depressed about Kenny's death. He confesses to both his parents that him and the others got e-bikes, with Kenny's having exploded. Randy, taken aback by the fact it was his son's friend who got killed on the e-bike shortly after their meeting, briefly shows remorse, but quickly snaps back into telling Stan that this danger is what he wanted to tell people all along. After Kenny's funeral, Mayor McDaniels then announces the "Kenny McCormick E-Bike Ordinance", banning all ownership of e-bikes within the town. Following this, the police confiscates all e-bikes in South America, visibly saddening the kids. They also come to the Cartman Residence to take Cartman's e-bike; Cartman desperately tries to take it back from the police but is held back by his mother. The adults with their regular bikes meanwhile are selling tees with the print "South America Strong". Randy first rides to the police station and hands over an envelope to Detective Yates containing dollar bills, then rides to the City Hall, giving Mayor McDaniels a box containing the head of the owner of Keller's Bike Shop. The episode concludes with Stan, Kyle and Cartman at the bus stop, Cartman still crying over the loss of his bike, and with sad students entering South America Elementary.</p>
+
+  
+</section>
+</div>
+</div>
+
+
+
+
+
+<!-- ==================== TRIVIA VIEW ==================== -->
+
+<section class="section trivia-view-section" id="trivia">
+<h2>
+       Trivia
+      </h2>
+<ul class="trivia-list">
+<li>
+        This is placeholder trivia text for an interesting production detail about the episode.
+       </li>
+<li>
+        Add behind-the-scenes notes, references, continuity details, or small observations here.
+       </li>
+<li>
+        This section can also be used for alternate titles, visual gags, callbacks, or broadcast notes.
+       </li>
+</ul>
+</section>
+
+
+<!-- ==================== GALLERY VIEW ==================== -->
+
+<section class="section gallery-view-section" id="gallery">
+<h2>
+       Gallery
+      </h2>
+<div class="gallery">
+<button class="gallery-item" data-caption="Season 1 (destroyed - Spring)" type="button">
+<img alt="Season 1 (destroyed - Spring)" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend6.png"/> <span class="gallery-visible-caption">
+         Season 1 (destroyed - Spring)
+        </span>
+</button>
+<button class="gallery-item" data-caption="School field / break area" type="button">
+<img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend7.png"/> <span class="gallery-visible-caption">
+         School field / break area
+        </span>
+</button>
+<button class="gallery-item" data-caption="School field / break area" type="button">
+<img alt="School field / break area" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend8.png"/> <span class="gallery-visible-caption">
+         School field / break area
+        </span>
+</button>
+<button class="gallery-item" data-caption="Standalone Science Lab" type="button">
+<img alt="Standalone Science Lab" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend9.png"/> <span class="gallery-visible-caption">
+         Standalone Science Lab
+        </span>
+</button>
+<button class="gallery-item" data-caption="Rear buildings" type="button">
+<img alt="Rear buildings" loading="lazy" src="https://lewis.lc/wiki/img/locations/edgeend10.png"/> <span class="gallery-visible-caption">
+         Rear buildings
+        </span>
+</button>
+</div>
+</section>
+</section>
+</main>
+</div>
+<button aria-label="Close navigation" class="menu-overlay" type="button">
+</button>
+<button aria-label="Back to top" id="backToTop" title="Back to top" type="button">
+   ↑
+  </button>
+<div class="site-credit">
+   Created by Lewis
+  </div>
+<script>
+   document.addEventListener("DOMContentLoaded", () => {
+  const root = document.documentElement;
+  const body = document.body;
+  const shell = document.querySelector(".shell");
+
+  const menuButton = document.querySelector("[data-menu-toggle]");
+  const overlay = document.querySelector(".menu-overlay");
+
+  const seamToggle = document.querySelector("[data-desktop-sidebar-toggle]");
+
+  const stickyTheme = document.querySelector("[data-sticky-theme-toggle]");
+  const mobileTheme = document.querySelector("[data-theme-toggle]");
+
+  /* theme */
+  const storedTheme = localStorage.getItem("wikiTheme");
+  const systemDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+  root.classList.toggle("dark", storedTheme ? storedTheme === "dark" : !!systemDark);
+
+  function syncTheme(){
+    const dark = root.classList.contains("dark");
+    [stickyTheme, mobileTheme].forEach(button => {
+      if (!button) return;
+      button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+      button.setAttribute("title", dark ? "Light mode" : "Dark mode");
+    });
+  }
+  function toggleTheme(){
+    const dark = !root.classList.contains("dark");
+    root.classList.toggle("dark", dark);
+    localStorage.setItem("wikiTheme", dark ? "dark" : "light");
+    syncTheme();
+  }
+  stickyTheme?.addEventListener("click", toggleTheme);
+  mobileTheme?.addEventListener("click", toggleTheme);
+  syncTheme();
+
+  /* mobile drawer */
+  function setMenu(open){
+    body.classList.toggle("menu-open", open);
+    menuButton?.setAttribute("aria-expanded", String(open));
+    body.style.overflow = open && innerWidth <= 850 ? "hidden" : "";
+  }
+  menuButton?.addEventListener("click", () => setMenu(!body.classList.contains("menu-open")));
+  overlay?.addEventListener("click", () => setMenu(false));
+
+  document.querySelectorAll(".sidebar a").forEach(link => {
+    link.addEventListener("click", () => {
+      if (innerWidth <= 850) setMenu(false);
+    });
+  });
+
+  /* desktop sidebar */
+  function syncSidebar(){
+    if (!shell) return;
+    const collapsed = shell.classList.contains("sidebar-collapsed");
+
+    [seamToggle].forEach(button => {
+      if (!button) return;
+      button.setAttribute("aria-expanded", String(!collapsed));
+      button.setAttribute("aria-label", collapsed ? "Show sidebar" : "Collapse sidebar");
+      button.setAttribute("title", collapsed ? "Show sidebar" : "Collapse sidebar");
+    });
+  }
+  function toggleSidebar(){
+    if (!shell || innerWidth <= 850) return;
+    shell.classList.toggle("sidebar-collapsed");
+    syncSidebar();
+  }
+  seamToggle?.addEventListener("click", toggleSidebar);
+
+  syncSidebar();
+/* sidebar section tracking */
+  const sectionIds = ["top","appearance","staff","trivia","gallery"];
+  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const sectionLinks = [
+    ...document.querySelectorAll(".rail-link[data-id]")
+  ];
+
+  let activeSection = "";
+
+  function setActiveSection(id){
+    if (!id || id === activeSection) return;
+    activeSection = id;
+
+    sectionLinks.forEach(link => {
+      const target = link.dataset.id || link.dataset.section;
+      link.classList.toggle("active", target === id);
+    });
+}
+  function updateActiveSection(){
+    if (!sections.length) return;
+
+    // A fixed threshold beneath the sticky rail makes transitions deterministic.
+    const threshold = innerWidth <= 850 ? 74 : 58;
+    let id = sections[0].id;
+
+    for (const section of sections){
+      const top = section.getBoundingClientRect().top;
+      if (top <= threshold){
+        id = section.id;
+      } else {
+        break;
+      }
+    }
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4){
+      id = sections[sections.length - 1].id;
+    }
+    setActiveSection(id);
+  }
+  let ticking = false;
+  function requestSectionUpdate(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      updateActiveSection();
+      ticking = false;
+    });
+  }
+  window.addEventListener("scroll", requestSectionUpdate, {passive:true});
+  window.addEventListener("resize", requestSectionUpdate, {passive:true});
+
+  // Clicking a section link updates it immediately; scroll tracking takes over afterward.
+  sectionLinks.forEach(link => {
+    link.addEventListener("click", () => {
+      const target = link.dataset.id || link.dataset.section;
+      if (target) setActiveSection(target);
+      setTimeout(requestSectionUpdate, 180);
+    });
+  });
+
+  updateActiveSection();
+
+  /* wiki contents */
+  document.querySelectorAll(".toc").forEach(toc => {
+    const toggle = toc.querySelector(".toc-toggle");
+    toggle?.addEventListener("click", () => {
+      const collapsed = toc.classList.toggle("is-collapsed");
+      toggle.textContent = collapsed ? "show" : "hide";
+      toggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+    });
+  });
+
+  /* tooltips */
+  /* optional infobox multi-image switcher */
+  document.querySelectorAll(".infobox-image-switcher").forEach(switcher => {
+    const tabsHost = switcher.querySelector(".infobox-image-tabs");
+    const panels = [...switcher.querySelectorAll(".infobox-image-panel")];
+
+    if (!tabsHost || !panels.length) return;
+
+    if (panels.length < 2){
+      switcher.classList.remove("has-multiple");
+      panels[0]?.classList.add("is-active");
+      return;
+    }
+    switcher.classList.add("has-multiple");
+    tabsHost.innerHTML = "";
+
+    const tabs = panels.map((panel, index) => {
+      const id = `infobox-image-${index + 1}-${Math.random().toString(36).slice(2,7)}`;
+      panel.id = id;
+      panel.setAttribute("role", "tabpanel");
+
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "infobox-image-tab";
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", id);
+      button.setAttribute("aria-selected", index === 0 ? "true" : "false");
+
+      const fullLabel = panel.dataset.label || `Image ${index + 1}`;
+      const visibleLabel = fullLabel.replace(/\s*\(destroyed\)\s*/i, "").trim();
+      button.setAttribute("aria-label", fullLabel);
+      button.innerHTML = `<span class="infobox-image-tab-label">${visibleLabel}</span>`;
+
+      button.addEventListener("click", () => {
+        panels.forEach((item, itemIndex) => {
+          const active = itemIndex === index;
+          item.classList.toggle("is-active", active);
+          tabs[itemIndex]?.setAttribute("aria-selected", active ? "true" : "false");
+        });
+      });
+
+      tabsHost.appendChild(button);
+      return button;
+    });
+
+    panels.forEach((panel, index) => {
+      panel.classList.toggle("is-active", index === 0);
+    });
+  });
+
+  /* clickable infobox Previous / Next rows */
+  document.querySelectorAll(".info-row-nav[data-href]").forEach(row => {
+    row.addEventListener("click", event => {
+      if (event.target.closest("a")) return;
+      const href = row.dataset.href;
+      if (href) window.location.href = href;
+    });
+  });
+
+  /* shared gallery / infobox lightbox */
+  const galleryButtons = [...document.querySelectorAll(".gallery-item")];
+  const infoboxImages = [...document.querySelectorAll(".infobox-image-panel img")];
+
+  if (galleryButtons.length || infoboxImages.length){
+    let currentIndex = 0;
+    let lightboxMode = "gallery";
+
+    const lightbox = document.createElement("div");
+    lightbox.className = "wiki-lightbox";
+    lightbox.setAttribute("role","dialog");
+    lightbox.setAttribute("aria-modal","true");
+    lightbox.setAttribute("aria-label","Image viewer");
+
+    lightbox.innerHTML = `
+      <button class="wiki-lightbox-close" type="button" aria-label="Close image">×</button>
+      <button class="wiki-lightbox-nav wiki-lightbox-prev" type="button" aria-label="Previous image">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 5-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="wiki-lightbox-stage"><img alt=""></div>
+      <button class="wiki-lightbox-nav wiki-lightbox-next" type="button" aria-label="Next image">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="wiki-lightbox-caption"></div>
+      <div class="wiki-lightbox-counter" aria-live="polite"></div>
+    `;
+
+    document.body.appendChild(lightbox);
+
+    const image = lightbox.querySelector("img");
+    const counter = lightbox.querySelector(".wiki-lightbox-counter");
+    const caption = lightbox.querySelector(".wiki-lightbox-caption");
+    const closeButton = lightbox.querySelector(".wiki-lightbox-close");
+    const prevButton = lightbox.querySelector(".wiki-lightbox-prev");
+    const nextButton = lightbox.querySelector(".wiki-lightbox-next");
+
+    function currentItems(){
+      return lightboxMode === "infobox" ? infoboxImages : galleryButtons;
+    }
+    function sourceFor(item){
+      return lightboxMode === "infobox" ? item : item?.querySelector("img");
+    }
+    function captionFor(item, source){
+      if (lightboxMode === "infobox"){
+        return source?.closest(".infobox-image-panel")?.dataset.label || source?.alt || "";
+      }
+      return item?.dataset.caption || source?.alt || "";
+    }
+    function showImage(index){
+      const items = currentItems();
+      if (!items.length) return;
+
+      currentIndex = (index + items.length) % items.length;
+      const item = items[currentIndex];
+      const source = sourceFor(item);
+      if (!source) return;
+
+      image.src = source.src;
+      image.alt = source.alt || `Image ${currentIndex + 1}`;
+      counter.textContent = `${currentIndex + 1} / ${items.length}`;
+      caption.textContent = captionFor(item, source);
+
+      const hasMultiple = items.length > 1;
+      prevButton.style.display = hasMultiple ? "" : "none";
+      nextButton.style.display = hasMultiple ? "" : "none";
+    }
+    function openLightbox(mode, index){
+      lightboxMode = mode;
+      showImage(index);
+      lightbox.classList.add("open");
+      body.style.overflow = "hidden";
+      closeButton.focus();
+    }
+    function closeLightbox(){
+      lightbox.classList.remove("open");
+      body.style.overflow = "";
+    }
+    galleryButtons.forEach((button,index) => {
+      button.addEventListener("click", () => openLightbox("gallery", index));
+    });
+
+    infoboxImages.forEach((source,index) => {
+      source.addEventListener("click", () => openLightbox("infobox", index));
+    });
+
+    closeButton.addEventListener("click", closeLightbox);
+    prevButton.addEventListener("click", () => showImage(currentIndex - 1));
+    nextButton.addEventListener("click", () => showImage(currentIndex + 1));
+
+    lightbox.addEventListener("click", event => {
+      if (event.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (!lightbox.classList.contains("open")) return;
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft"){
+        event.preventDefault();
+        showImage(currentIndex - 1);
+      }
+      if (event.key === "ArrowRight"){
+        event.preventDefault();
+        showImage(currentIndex + 1);
+      }
+    });
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    lightbox.addEventListener("touchstart", event => {
+      const touch = event.changedTouches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+    }, {passive:true});
+
+    lightbox.addEventListener("touchend", event => {
+      const items = currentItems();
+      if (items.length < 2) return;
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - touchStartX;
+      const dy = touch.clientY - touchStartY;
+      if (Math.abs(dx) < 45 || Math.abs(dx) <= Math.abs(dy)) return;
+      showImage(currentIndex + (dx < 0 ? 1 : -1));
+    }, {passive:true});
+  }
+  const staffToggle = document.querySelector(".staff-collapse-toggle");
+  const staffBody = document.getElementById("staffCollapseBody");
+  staffToggle?.addEventListener("click", () => {
+    const expanded = staffToggle.getAttribute("aria-expanded") === "true";
+    staffToggle.setAttribute("aria-expanded", String(!expanded));
+    if (staffBody) staffBody.hidden = expanded;
+  });
+
+  window.addEventListener("resize", () => {
+    if (innerWidth > 850){
+      setMenu(false);
+    } else {
+      shell?.classList.remove("sidebar-collapsed");
+      sectionTabs?.classList.remove("is-stuck");
+      syncSidebar();
+    }
+  }, {passive:true});
+});
+
+/* Desktop-friendly horizontal scrolling for infobox image tabs */
+document.querySelectorAll('.infobox-image-tabs').forEach(function(tabs){
+  tabs.addEventListener('wheel', function(e){
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && tabs.scrollWidth > tabs.clientWidth) {
+      e.preventDefault();
+      tabs.scrollLeft += e.deltaY;
+    }
+  }, { passive:false });
+});
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll(".infobox-image-switcher").forEach(function(switcher){
+    const tabs = switcher.querySelector(".infobox-image-tabs");
+    const panels = switcher.querySelectorAll(".infobox-image-panel");
+
+    if (!tabs || panels.length < 2 || tabs.closest(".infobox-tab-scroll-shell")) return;
+
+    const shell = document.createElement("div");
+    shell.className = "infobox-tab-scroll-shell";
+
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.className = "infobox-tab-scroll-btn infobox-tab-scroll-prev";
+    prev.setAttribute("aria-label", "Scroll gallery tabs left");
+    prev.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "infobox-tab-scroll-btn infobox-tab-scroll-next";
+    next.setAttribute("aria-label", "Scroll gallery tabs right");
+    next.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+    tabs.parentNode.insertBefore(shell, tabs);
+    shell.append(prev, tabs, next);
+
+    function updateButtons(){
+      const max = Math.max(0, tabs.scrollWidth - tabs.clientWidth);
+      const noOverflow = max <= 3;
+      shell.classList.toggle("no-overflow", noOverflow);
+
+      prev.disabled = noOverflow || tabs.scrollLeft <= 2;
+      next.disabled = noOverflow || tabs.scrollLeft >= max - 2;
+    }
+    function scrollTabs(direction){
+      tabs.scrollBy({
+        left: direction * Math.max(120, tabs.clientWidth * 0.62),
+        behavior: "smooth"
+      });
+    }
+    prev.addEventListener("click", function(){ scrollTabs(-1); });
+    next.addEventListener("click", function(){ scrollTabs(1); });
+    tabs.addEventListener("scroll", updateButtons, {passive:true});
+    window.addEventListener("resize", updateButtons, {passive:true});
+
+    requestAnimationFrame(function(){
+      updateButtons();
+      setTimeout(updateButtons, 60);
+    });
+  });
+});
+document.addEventListener("DOMContentLoaded", function(){
+  document.querySelectorAll(".theme-icon-slot").forEach(function(slot){
+    slot.innerHTML = `
+      <span class="theme-icon theme-icon-moon">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"></path>
+        </svg>
+      </span> <span class="theme-icon theme-icon-sun">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path>
+          <path d="M18.5 3.5v3M17 5h3"></path>
+          <path d="M20 8.7v2M19 9.7h2"></path>
+        </svg>
+      </span> `;
+  });
+});
+document.addEventListener("DOMContentLoaded", function(){
+  const buttons = Array.from(document.querySelectorAll(".page-view-button"));
+  const triviaSection = document.querySelector(".trivia-view-section");
+  const gallerySection = document.querySelector(".gallery-view-section");
+
+  function setView(view, updateHash){
+    document.body.classList.remove("trivia-page-view","gallery-page-view");
+
+    if (view === "trivia" && triviaSection) {
+      document.body.classList.add("trivia-page-view");
+    } else if (view === "gallery" && gallerySection) {
+      document.body.classList.add("gallery-page-view");
+    } else {
+      view = "article";
+    }
+    buttons.forEach(function(button){
+      const active = button.dataset.pageView === view;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-selected", active ? "true" : "false");
+    });
+
+    if (updateHash) {
+      const next = view === "article"
+        ? location.pathname + location.search
+        : "#" + view;
+      history.replaceState(null, "", next);
+    }
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  buttons.forEach(function(button){
+    button.addEventListener("click", function(){
+      setView(button.dataset.pageView, true);
+    });
+  });
+
+  const initial = location.hash === "#trivia"
+    ? "trivia"
+    : location.hash === "#gallery"
+      ? "gallery"
+      : "article";
+  setView(initial, false);
+
+  const backToTop = document.getElementById("backToTop");
+  if (backToTop) {
+    const updateBackToTop = function(){
+      backToTop.classList.toggle("visible", window.scrollY > 450);
+    };
+    window.addEventListener("scroll", updateBackToTop, {passive:true});
+    backToTop.addEventListener("click", function(){
+      window.scrollTo({top:0, behavior:"smooth"});
+    });
+    updateBackToTop();
+  }
+});
+  </script>
+</body>
+</html>
