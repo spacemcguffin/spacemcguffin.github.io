@@ -7,25 +7,14 @@
 <title>NORTH PARK — Stream</title>
 <style>
 :root{
-  --bg:#07090d;
-  --panel:#0d1016;
+  --bg:#11141d;
+  --panel:#171b26;
   --ink:#f7f7f4;
   --muted:#a7aab2;
   --line:rgba(255,255,255,.12);
   --accent:#f3f3ee;
   --header-h:74px;
 }
-
-
-@font-face {
-  font-family: "South Park";
-  src: url("http://lewis.lc/sp/south%20park.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-  
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -147,15 +136,15 @@ a{color:inherit;text-decoration:none}
   text-transform:uppercase;
 }
 .eyebrow b{color:#fff}
-.hero h1 {
-  margin: 0;
-  font-family: "South Park", sans-serif;
-  font-size: clamp(4.2rem, 9.8vw, 9rem);
-  font-weight: normal;
-  line-height: .82;
-  letter-spacing: normal;
-  text-transform: uppercase;
-  text-shadow: 0 5px 30px rgba(0,0,0,.35);
+.hero h1{
+  margin:0;
+  font-size:clamp(4.2rem,9.8vw,9rem);
+  font-weight:1000;
+  line-height:.74;
+  letter-spacing:-.09em;
+  text-transform:uppercase;
+  transform:skew(-3deg);
+  text-shadow:0 5px 30px rgba(0,0,0,.35);
 }
 .hero-copy{
   max-width:530px;
@@ -276,15 +265,51 @@ a{color:inherit;text-decoration:none}
   background:linear-gradient(0deg,rgba(0,0,0,.72),transparent 48%);
 }
 .card-number{
-  position:absolute;left:14px;bottom:12px;z-index:2;
-  font-size:.66rem;font-weight:950;letter-spacing:.09em;
+  position:absolute;
+  left:13px;
+  bottom:12px;
+  z-index:2;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:6px 9px 5px;
+  background:#5A84BE;
+  color:#fff;
+  font-size:.61rem;
+  font-weight:950;
+  line-height:1;
+  letter-spacing:.085em;
+  text-transform:uppercase;
+  box-shadow:0 3px 9px rgba(0,0,0,.22);
+  clip-path:polygon(
+    1% 10%,10% 3%,22% 7%,35% 2%,48% 6%,61% 1%,74% 6%,87% 3%,99% 9%,
+    98% 91%,87% 97%,74% 94%,61% 99%,48% 95%,35% 99%,22% 94%,10% 98%,1% 92%
+  );
+  transform:rotate(-1deg);
 }
 .card-play{
-  position:absolute;right:12px;bottom:10px;z-index:2;
-  width:31px;height:31px;border-radius:50%;
-  background:#fff;color:#000;display:grid;place-items:center;
-  opacity:0;transform:scale(.85);transition:.2s ease;
-  font-size:.7rem;padding-left:2px;
+  position:absolute;
+  right:12px;
+  bottom:10px;
+  z-index:2;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#fff;
+  color:#11141d;
+  display:grid;
+  place-items:center;
+  opacity:0;
+  transform:scale(.85);
+  transition:.2s ease;
+  box-shadow:0 3px 12px rgba(0,0,0,.28);
+}
+.card-play svg{
+  width:13px;
+  height:13px;
+  display:block;
+  fill:currentColor;
+  transform:translateX(1px);
 }
 .card:hover .card-play{opacity:1;transform:scale(1)}
 .card h3{
@@ -301,12 +326,12 @@ a{color:inherit;text-decoration:none}
 }
 .badge{
   display:inline-block;
-  margin-left:7px;
-  padding:3px 5px;
-  border:1px solid rgba(255,255,255,.32);
-  border-radius:3px;
-  font-size:.52rem;
-  vertical-align:1px;
+  margin-left:2px;
+  padding:2px 4px;
+  border:1px solid rgba(255,255,255,.48);
+  font-size:.48rem;
+  line-height:1;
+  vertical-align:middle;
 }
 
 /* PROMO */
@@ -350,8 +375,8 @@ a{color:inherit;text-decoration:none}
   max-height:min(850px,94dvh);
   display:flex;
   flex-direction:column;
-  background:#f1eee5;
-  color:#12151b;
+  background:#11141d;
+  color:#fff;
   border-radius:9px;
   overflow:hidden;
   box-shadow:0 35px 120px rgba(0,0,0,.68);
@@ -363,8 +388,8 @@ a{color:inherit;text-decoration:none}
   display:grid;
   grid-template-columns:50px 1fr 94px;
   align-items:center;
-  border-bottom:1px solid rgba(0,0,0,.12);
-  background:#f1eee5;
+  border-bottom:1px solid rgba(255,255,255,.09);
+  background:#11141d;
   position:relative;
   z-index:3;
 }
@@ -377,13 +402,13 @@ a{color:inherit;text-decoration:none}
 }
 .modal-nav,.modal-close{
   width:38px;height:38px;border:0;
-  background:transparent;color:#11151b;
+  background:transparent;color:#fff;
   display:grid;place-items:center;
   cursor:pointer;
   border-radius:50%;
   transition:.18s ease;
 }
-.modal-nav:hover,.modal-close:hover{background:rgba(0,0,0,.08)}
+.modal-nav:hover,.modal-close:hover{background:rgba(255,255,255,.09)}
 .modal-nav svg,.modal-close svg{width:18px;height:18px}
 .modal-actions{
   justify-self:end;
@@ -396,20 +421,40 @@ a{color:inherit;text-decoration:none}
 .modal-image{
   width:100%;
   aspect-ratio:16/7.2;
-  min-height:270px;
+  min-height:300px;
   position:relative;
-  background:linear-gradient(135deg,#344b60,#ba7852 62%,#1c2934);
+  background:#202635;
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:flex-end;
+  isolation:isolate;
 }
 .modal-image:after{
   content:"";
-  position:absolute;inset:auto 0 0;height:45%;
-  background:linear-gradient(transparent,rgba(0,0,0,.22));
+  position:absolute;
+  z-index:-0;
+  inset:0;
+  background:
+    linear-gradient(0deg,rgba(17,20,29,.98) 0%,rgba(17,20,29,.68) 22%,transparent 62%),
+    linear-gradient(90deg,rgba(17,20,29,.48),transparent 55%);
 }
-.modal-copy{padding:34px clamp(24px,5vw,58px) 44px}
+.modal-image-title{
+  position:relative;
+  z-index:2;
+  width:100%;
+  padding:32px clamp(24px,5vw,58px) 27px;
+}
+.modal-image-title .modal-title{
+  max-width:760px;
+  color:#fff;
+  text-shadow:0 3px 18px rgba(0,0,0,.55);
+}
+.modal-copy{padding:25px clamp(24px,5vw,58px) 40px}
 .modal-scraps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .modal-scrap{
   padding:7px 10px 6px;
-  background:#3478c8;
+  background:#5A84BE;
   color:#fff;
   font-size:.64rem;
   line-height:1;
@@ -419,7 +464,7 @@ a{color:inherit;text-decoration:none}
   transform:rotate(-.7deg);
 }
 .modal-scrap:nth-child(2){
-  background:#d56842;
+  background:#D66C47;
   transform:rotate(.55deg);
 }
 .modal-title{
@@ -433,7 +478,7 @@ a{color:inherit;text-decoration:none}
 .modal-description{
   max-width:720px;
   margin:22px 0 0;
-  color:#40444b;
+  color:rgba(255,255,255,.72);
   font-size:1rem;
   line-height:1.65;
 }
@@ -443,12 +488,12 @@ a{color:inherit;text-decoration:none}
   gap:12px;
   margin-top:30px;
   padding-top:22px;
-  border-top:1px solid rgba(0,0,0,.12);
+  border-top:1px solid rgba(255,255,255,.10);
 }
 .episode-jump{
   border:0;
   background:transparent;
-  color:#171a20;
+  color:rgba(255,255,255,.82);
   padding:0;
   cursor:pointer;
   font-weight:900;
@@ -482,7 +527,8 @@ a{color:inherit;text-decoration:none}
     top:0;
     grid-template-columns:45px 1fr 88px;
   }
-  .modal-image{aspect-ratio:16/9;min-height:0}
+  .modal-image{aspect-ratio:16/10;min-height:0}
+  .modal-image-title{padding:24px 21px 20px}
   .modal-copy{padding:27px 21px 40px}
   .modal-title{font-size:clamp(2.45rem,13vw,4rem)}
   .modal-description{font-size:.93rem}
@@ -500,7 +546,20 @@ a{color:inherit;text-decoration:none}
   .section-head{padding:0 20px}
   .arrows{display:none}
   .promo{margin-left:20px;margin-right:20px;min-height:360px}
-  .footer{padding-left:20px;padding-right:20px;flex-direction:column}
+  .footer{
+  min-height:46px;
+  padding:14px clamp(22px,5vw,78px);
+  border-top:1px solid rgba(255,255,255,.06);
+  color:rgba(255,255,255,.38);
+  font-size:.56rem;
+  font-weight:650;
+  line-height:1.4;
+  letter-spacing:.055em;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.55em;
+  text-align:center;
 }
 </style>
 </head>
@@ -567,7 +626,8 @@ a{color:inherit;text-decoration:none}
 </main>
 
 <footer class="footer">
-  <span>North Park © 2026</span>
+  <span>NORTH PARK © 2026</span>
+  <span aria-hidden="true">·</span>
   <span>Photography: Unsplash · Free to use under the Unsplash License</span>
 </footer>
 
@@ -589,13 +649,16 @@ a{color:inherit;text-decoration:none}
     </header>
 
     <div class="modal-body" id="modalBody">
-      <div class="modal-image" id="modalImage"></div>
+      <div class="modal-image" id="modalImage">
+        <div class="modal-image-title">
+          <h2 class="modal-title" id="modalTitle">Welcome to North Park</h2>
+        </div>
+      </div>
       <div class="modal-copy">
         <div class="modal-scraps">
           <span class="modal-scrap" id="modalEpisode">S01E01</span>
           <span class="modal-scrap" id="modalDate">26 SEP 2026</span>
         </div>
-        <h2 class="modal-title" id="modalTitle">Welcome to North Park</h2>
         <p class="modal-description" id="modalDescription"></p>
         <div class="modal-bottom">
           <button class="episode-jump" id="bottomPrev">← Previous episode</button>
@@ -630,7 +693,7 @@ episodes.forEach((ep,i)=>{
     <article class="card" data-open="${i}" tabindex="0" role="button" aria-label="Open ${ep[0]}">
       <div class="thumb"><img class="thumb-img" src="${ep[2]}" alt="" loading="lazy" referrerpolicy="no-referrer">
         <span class="card-number">EP ${String(i+1).padStart(2,"0")}${i===0?'<span class="badge">NEW</span>':""}</span>
-        <span class="card-play">＋</span>
+        <span class="card-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.6v12.8L18.5 12 8 5.6Z"/></svg></span>
       </div>
       <h3>${ep[0]}</h3>
       <p>${ep[1]}</p>
@@ -642,7 +705,7 @@ clips.forEach((cl,i)=>{
   clipsRail.insertAdjacentHTML("beforeend",`
     <article class="card">
       <div class="thumb"><img class="thumb-img" src="${cl[1]}" alt="" loading="lazy" referrerpolicy="no-referrer">
-        <span class="card-number">CLIP</span><span class="card-play">▶</span>
+        <span class="card-number">CLIP</span><span class="card-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.6v12.8L18.5 12 8 5.6Z"/></svg></span>
       </div>
       <h3>${cl[0]}</h3>
     </article>`);
