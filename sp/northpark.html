@@ -32,13 +32,21 @@ a{color:inherit;text-decoration:none}
 .site-header{
   height:var(--header-h);
   padding:0 clamp(20px,4vw,64px);
-  position:absolute;
+  position:fixed;
   inset:0 0 auto;
-  z-index:50;
+  z-index:1000;
   display:flex;
   align-items:center;
   gap:38px;
   background:linear-gradient(to bottom,rgba(0,0,0,.72),transparent);
+  border-bottom:1px solid transparent;
+  transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease,-webkit-backdrop-filter .25s ease;
+}
+.site-header.is-scrolled{
+  background:rgba(17,20,29,.94);
+  border-bottom-color:rgba(255,255,255,.08);
+  backdrop-filter:blur(14px) saturate(120%);
+  -webkit-backdrop-filter:blur(14px) saturate(120%);
 }
 .brand{
   font-size:clamp(1.15rem,2vw,1.65rem);
@@ -200,6 +208,60 @@ a{color:inherit;text-decoration:none}
   font-size:clamp(1.15rem,2vw,1.65rem);
   letter-spacing:-.035em;
   text-transform:uppercase;
+}
+
+.season-tabs{
+  display:flex;
+  align-items:center;
+  gap:22px;
+  margin:0 clamp(22px,5vw,78px) 16px;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.season-tabs::-webkit-scrollbar{display:none}
+.season-tab{
+  position:relative;
+  flex:0 0 auto;
+  padding:7px 1px 9px;
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,.48);
+  font-size:.68rem;
+  font-weight:820;
+  line-height:1;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:color .18s ease;
+}
+.season-tab:hover,
+.season-tab:focus-visible{
+  color:#fff;
+  outline:none;
+}
+.season-tab::after{
+  content:"";
+  position:absolute;
+  left:-3px;
+  right:-3px;
+  bottom:0;
+  height:5px;
+  background:#5A84BE;
+  clip-path:polygon(
+    0 30%,8% 10%,17% 25%,28% 5%,39% 22%,51% 2%,63% 20%,
+    75% 7%,87% 24%,100% 10%,98% 78%,88% 92%,76% 74%,
+    64% 95%,52% 77%,40% 94%,28% 73%,16% 91%,4% 76%
+  );
+  opacity:0;
+  transform:scaleX(.45) rotate(-1deg);
+  transition:opacity .18s ease,transform .18s ease;
+}
+.season-tab.is-active{
+  color:#fff;
+}
+.season-tab.is-active::after{
+  opacity:.9;
+  transform:scaleX(1) rotate(-1deg);
 }
 .arrows{display:flex;gap:7px}
 .arrow{
@@ -544,6 +606,8 @@ a{color:inherit;text-decoration:none}
   .content{margin-top:-82px}
   .rail{grid-auto-columns:82vw;gap:12px;padding-left:20px;padding-right:20px}
   .section-head{padding:0 20px}
+  .season-tabs{margin:0 20px 14px;gap:18px}
+  .season-tab{font-size:.64rem}
   .arrows{display:none}
   .promo{margin-left:20px;margin-right:20px;min-height:360px}
   .footer{
@@ -561,6 +625,57 @@ a{color:inherit;text-decoration:none}
   gap:.55em;
   text-align:center;
 }
+
+/* Keep episode rail navigation visible on tablets and mobile */
+@media(max-width:760px){
+  .rail-arrows{
+    display:flex !important;
+    align-items:center;
+    gap:7px;
+    flex:0 0 auto;
+  }
+
+  .arrow{
+    display:grid !important;
+    place-items:center;
+    width:34px;
+    height:34px;
+    min-width:34px;
+    padding:0;
+  }
+
+  .arrow svg{
+    width:16px;
+    height:16px;
+  }
+
+  .section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+  }
+
+  .section-head h2{
+    min-width:0;
+  }
+}
+
+@media(max-width:430px){
+  .rail-arrows{gap:5px}
+
+  .arrow{
+    width:32px;
+    height:32px;
+    min-width:32px;
+  }
+
+  .arrow svg{
+    width:15px;
+    height:15px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -570,7 +685,6 @@ a{color:inherit;text-decoration:none}
   <nav class="nav">
     <a href="#">Home</a>
     <a href="#episodes">Episodes</a>
-    <a href="#clips">Clips</a>
     <a href="#about">About</a>
   </nav>
   <div class="header-right">
@@ -603,18 +717,8 @@ a{color:inherit;text-decoration:none}
           <button class="arrow" data-rail="episodesRail" data-dir="1" aria-label="Scroll right">›</button>
         </div>
       </div>
+      <div class="season-tabs" id="seasonTabs" aria-label="Choose season"></div>
       <div class="rail" id="episodesRail"></div>
-    </section>
-
-    <section class="rail-section" id="clips">
-      <div class="section-head">
-        <h2>Clips</h2>
-        <div class="arrows">
-          <button class="arrow" data-rail="clipsRail" data-dir="-1" aria-label="Scroll left">‹</button>
-          <button class="arrow" data-rail="clipsRail" data-dir="1" aria-label="Scroll right">›</button>
-        </div>
-      </div>
-      <div class="rail" id="clipsRail"></div>
     </section>
 
     <section class="promo" id="about">
@@ -670,54 +774,39 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <script>
-const episodes = [
-  ["Welcome to North Park","A perfectly ordinary school day collapses before first period.","https://images.unsplash.com/photo-1743341723052-a58a1f781e24?auto=format&fit=crop&w=1400&q=80","26 SEP 2026"],
-  ["The Snow Day Economy","A cancelled school day accidentally creates a functioning black market. By lunchtime, half the school owes somebody money and the headteacher has somehow become a loan shark.","https://images.unsplash.com/photo-1769788873355-b65eab5deb55?auto=format&fit=crop&w=1400&q=80","3 OCT 2026"],
-  ["Terms and Conditions","Nobody reads them. This turns out to be a problem when the boys agree to several hundred pages of increasingly specific nonsense.","https://images.unsplash.com/photo-1550084281-983b134f8eeb?auto=format&fit=crop&w=1400&q=80","10 OCT 2026"],
-  ["The Great Northern Wi-Fi Outage","The town loses internet access for eleven horrifying minutes, forcing everyone to experience the outside world against their will.","https://images.unsplash.com/photo-1773574696860-9065c09d4275?auto=format&fit=crop&w=1400&q=80","17 OCT 2026"],
-  ["Mum Said No","One parental decision brings the entire local government to its knees and creates the most unnecessary constitutional crisis in North Park history.","https://images.unsplash.com/photo-1674987999828-639513a726cc?auto=format&fit=crop&w=1400&q=80","24 OCT 2026"],
-  ["Definitely Not a Cult","The boys join an after-school club with an unusually expensive uniform, a suspiciously charismatic leader and absolutely no refunds.","https://images.unsplash.com/photo-1517280505364-812954fffdbb?auto=format&fit=crop&w=1400&q=80","31 OCT 2026"]
-];
+const seasons = {
+  3: [
+    ["Back to North Park","The town celebrates another year of surviving itself. This lasts until approximately 8:14am.","https://images.unsplash.com/photo-1743341723052-a58a1f781e24?auto=format&fit=crop&w=1400&q=80","26 SEP 2028"],
+    ["Snow Business","A harmless school fundraiser becomes a hostile corporate takeover before lunch.","https://images.unsplash.com/photo-1769788873355-b65eab5deb55?auto=format&fit=crop&w=1400&q=80","3 OCT 2028"],
+    ["Verified","One blue tick causes irreversible damage to several friendships and most of the local economy.","https://images.unsplash.com/photo-1550084281-983b134f8eeb?auto=format&fit=crop&w=1400&q=80","10 OCT 2028"],
+    ["The Long Weekend","Nobody can remember why Monday is off, but everyone is prepared to defend it violently.","https://images.unsplash.com/photo-1773574696860-9065c09d4275?auto=format&fit=crop&w=1400&q=80","17 OCT 2028"],
+    ["Parent Portal","The school's new app gives parents far too much information and children nowhere left to hide.","https://images.unsplash.com/photo-1674987999828-639513a726cc?auto=format&fit=crop&w=1400&q=80","24 OCT 2028"],
+    ["Terms Apply","The season ends with an offer nobody understands, several signatures nobody remembers making, and one extremely avoidable fire.","https://images.unsplash.com/photo-1517280505364-812954fffdbb?auto=format&fit=crop&w=1400&q=80","31 OCT 2028"]
+  ],
+  2: [
+    ["Second Coming","North Park returns to normal, which is immediately revealed to have been a terrible idea.","https://images.unsplash.com/photo-1674987999828-639513a726cc?auto=format&fit=crop&w=1400&q=80","28 SEP 2027"],
+    ["The Algorithm","A recommendation engine decides what everybody likes. Resistance proves embarrassingly difficult.","https://images.unsplash.com/photo-1550084281-983b134f8eeb?auto=format&fit=crop&w=1400&q=80","5 OCT 2027"],
+    ["Parents' Evening","The children discover that adults have been comparing notes.","https://images.unsplash.com/photo-1743341723052-a58a1f781e24?auto=format&fit=crop&w=1400&q=80","12 OCT 2027"],
+    ["No Signal","A mobile outage forces the town to communicate using methods last seen in 2004.","https://images.unsplash.com/photo-1773574696860-9065c09d4275?auto=format&fit=crop&w=1400&q=80","19 OCT 2027"],
+    ["The Group Chat","Somebody takes a screenshot. Civilisation ends shortly afterwards.","https://images.unsplash.com/photo-1769788873355-b65eab5deb55?auto=format&fit=crop&w=1400&q=80","26 OCT 2027"],
+    ["Season Finale (Probably)","Everybody learns a valuable lesson and then immediately forgets it.","https://images.unsplash.com/photo-1517280505364-812954fffdbb?auto=format&fit=crop&w=1400&q=80","2 NOV 2027"]
+  ],
+  1: [
+    ["Welcome to North Park","A perfectly ordinary school day collapses before first period.","https://images.unsplash.com/photo-1743341723052-a58a1f781e24?auto=format&fit=crop&w=1400&q=80","26 SEP 2026"],
+    ["The Snow Day Economy","A cancelled school day accidentally creates a functioning black market. By lunchtime, half the school owes somebody money and the headteacher has somehow become a loan shark.","https://images.unsplash.com/photo-1769788873355-b65eab5deb55?auto=format&fit=crop&w=1400&q=80","3 OCT 2026"],
+    ["Terms and Conditions","Nobody reads them. This turns out to be a problem when the boys agree to several hundred pages of increasingly specific nonsense.","https://images.unsplash.com/photo-1550084281-983b134f8eeb?auto=format&fit=crop&w=1400&q=80","10 OCT 2026"],
+    ["The Great Northern Wi-Fi Outage","The town loses internet access for eleven horrifying minutes, forcing everyone to experience the outside world against their will.","https://images.unsplash.com/photo-1773574696860-9065c09d4275?auto=format&fit=crop&w=1400&q=80","17 OCT 2026"],
+    ["Mum Said No","One parental decision brings the entire local government to its knees and creates the most unnecessary constitutional crisis in North Park history.","https://images.unsplash.com/photo-1674987999828-639513a726cc?auto=format&fit=crop&w=1400&q=80","24 OCT 2026"],
+    ["Definitely Not a Cult","The boys join an after-school club with an unusually expensive uniform, a suspiciously charismatic leader and absolutely no refunds.","https://images.unsplash.com/photo-1517280505364-812954fffdbb?auto=format&fit=crop&w=1400&q=80","31 OCT 2026"]
+  ]
+};
 
-const clips = [
-  ["Bus Stop Philosophy","https://images.unsplash.com/photo-1517280505364-812954fffdbb?auto=format&fit=crop&w=1400&q=80"],
-  ["Cafeteria Justice","https://images.unsplash.com/photo-1550084281-983b134f8eeb?auto=format&fit=crop&w=1400&q=80"],
-  ["Emergency Assembly","https://images.unsplash.com/photo-1769788873355-b65eab5deb55?auto=format&fit=crop&w=1400&q=80"],
-  ["The Substitute","https://images.unsplash.com/photo-1674987999828-639513a726cc?auto=format&fit=crop&w=1400&q=80"],
-  ["Absolutely Grounded","https://images.unsplash.com/photo-1773574696860-9065c09d4275?auto=format&fit=crop&w=1400&q=80"]
-];
+const seasonNumbers = Object.keys(seasons).map(Number).sort((a,b)=>a-b);
+let currentSeason = 1;
+let currentEpisode = 0;
 
+const seasonTabs = document.querySelector("#seasonTabs");
 const episodeRail = document.querySelector("#episodesRail");
-episodes.forEach((ep,i)=>{
-  episodeRail.insertAdjacentHTML("beforeend",`
-    <article class="card" data-open="${i}" tabindex="0" role="button" aria-label="Open ${ep[0]}">
-      <div class="thumb"><img class="thumb-img" src="${ep[2]}" alt="" loading="lazy" referrerpolicy="no-referrer">
-        <span class="card-number">EP ${String(i+1).padStart(2,"0")}${i===0?'<span class="badge">NEW</span>':""}</span>
-        <span class="card-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.6v12.8L18.5 12 8 5.6Z"/></svg></span>
-      </div>
-      <h3>${ep[0]}</h3>
-      <p>${ep[1]}</p>
-    </article>`);
-});
-
-const clipsRail = document.querySelector("#clipsRail");
-clips.forEach((cl,i)=>{
-  clipsRail.insertAdjacentHTML("beforeend",`
-    <article class="card">
-      <div class="thumb"><img class="thumb-img" src="${cl[1]}" alt="" loading="lazy" referrerpolicy="no-referrer">
-        <span class="card-number">CLIP</span><span class="card-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.6v12.8L18.5 12 8 5.6Z"/></svg></span>
-      </div>
-      <h3>${cl[0]}</h3>
-    </article>`);
-});
-
-document.querySelectorAll(".arrow").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    const rail=document.getElementById(btn.dataset.rail);
-    rail.scrollBy({left:rail.clientWidth*.78*Number(btn.dataset.dir),behavior:"smooth"});
-  });
-});
-
 const modal = document.querySelector("#modal");
 const episodeModal = document.querySelector("#episodeModal");
 const modalBody = document.querySelector("#modalBody");
@@ -727,26 +816,69 @@ const modalDate = document.querySelector("#modalDate");
 const modalTitle = document.querySelector("#modalTitle");
 const modalDescription = document.querySelector("#modalDescription");
 const modalImage = document.querySelector("#modalImage");
-let currentEpisode = 0;
 
-function renderEpisode(index, direction=0){
-  currentEpisode=(index+episodes.length)%episodes.length;
-  const ep=episodes[currentEpisode];
+function activeEpisodes(){
+  return seasons[currentSeason];
+}
+
+function renderSeasonTabs(){
+  seasonTabs.innerHTML = seasonNumbers.map(season=>`
+    <button
+      class="season-tab${season===currentSeason ? " is-active" : ""}"
+      type="button"
+      data-season="${season}"
+      aria-pressed="${season===currentSeason}"
+    >Season ${season}</button>
+  `).join("");
+}
+
+function renderEpisodeRail(){
+  const episodes = activeEpisodes();
+
+  episodeRail.innerHTML = episodes.map((ep,i)=>`
+    <article class="card" data-open="${i}" tabindex="0" role="button" aria-label="Open ${ep[0]}">
+      <div class="thumb">
+        <img class="thumb-img" src="${ep[2]}" alt="" loading="lazy" referrerpolicy="no-referrer">
+        <span class="card-number">EP ${String(i+1).padStart(2,"0")}${i===0 && currentSeason===Math.max(...seasonNumbers) ? '<span class="badge">NEW</span>' : ""}</span>
+        <span class="card-play" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8 5.6v12.8L18.5 12 8 5.6Z"/></svg>
+        </span>
+      </div>
+      <h3>${ep[0]}</h3>
+      <p>${ep[1]}</p>
+    </article>
+  `).join("");
+
+  episodeRail.scrollTo({left:0,behavior:"auto"});
+}
+
+function selectSeason(season){
+  if(!seasons[season]) return;
+  currentSeason = Number(season);
+  currentEpisode = 0;
+  renderSeasonTabs();
+  renderEpisodeRail();
+}
+
+function renderEpisode(index,direction=0){
+  const episodes = activeEpisodes();
+  currentEpisode = (index + episodes.length) % episodes.length;
+  const ep = episodes[currentEpisode];
 
   episodeModal.classList.remove("modal-animate-next","modal-animate-prev");
   void episodeModal.offsetWidth;
   if(direction>0) episodeModal.classList.add("modal-animate-next");
   if(direction<0) episodeModal.classList.add("modal-animate-prev");
 
-  modalCount.textContent=`EPISODE ${currentEpisode+1} OF ${episodes.length}`;
-  modalEpisode.textContent=`S01E${String(currentEpisode+1).padStart(2,"0")}`;
-  modalDate.textContent=ep[3];
-  modalTitle.textContent=ep[0];
-  modalDescription.textContent=ep[1];
-  modalImage.style.backgroundImage=`url("${ep[2]}")`;
-  modalImage.style.backgroundSize="cover";
-  modalImage.style.backgroundPosition="center";
-  modalBody.scrollTop=0;
+  modalCount.textContent = `EPISODE ${currentEpisode+1} OF ${episodes.length}`;
+  modalEpisode.textContent = `S${String(currentSeason).padStart(2,"0")}E${String(currentEpisode+1).padStart(2,"0")}`;
+  modalDate.textContent = ep[3];
+  modalTitle.textContent = ep[0];
+  modalDescription.textContent = ep[1];
+  modalImage.style.backgroundImage = `url("${ep[2]}")`;
+  modalImage.style.backgroundSize = "cover";
+  modalImage.style.backgroundPosition = "center";
+  modalBody.scrollTop = 0;
 }
 
 function openModal(index){
@@ -755,17 +887,40 @@ function openModal(index){
   modal.setAttribute("aria-hidden","false");
   document.body.style.overflow="hidden";
 }
+
 function closeModal(){
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden","true");
   document.body.style.overflow="";
 }
-function moveEpisode(dir){ renderEpisode(currentEpisode+dir,dir); }
+
+function moveEpisode(direction){
+  renderEpisode(currentEpisode + direction,direction);
+}
+
+renderSeasonTabs();
+renderEpisodeRail();
+
+seasonTabs.addEventListener("click",e=>{
+  const tab = e.target.closest("[data-season]");
+  if(tab) selectSeason(Number(tab.dataset.season));
+});
+
+document.querySelectorAll(".arrow").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const rail=document.getElementById(btn.dataset.rail);
+    rail.scrollBy({
+      left:rail.clientWidth*.78*Number(btn.dataset.dir),
+      behavior:"smooth"
+    });
+  });
+});
 
 document.addEventListener("click",e=>{
   const card=e.target.closest("[data-open]");
   if(card) openModal(Number(card.dataset.open));
 });
+
 document.addEventListener("keydown",e=>{
   const card=e.target.closest?.("[data-open]");
   if(card && (e.key==="Enter" || e.key===" ")){
@@ -773,11 +928,13 @@ document.addEventListener("keydown",e=>{
     openModal(Number(card.dataset.open));
     return;
   }
+
   if(!modal.classList.contains("open")) return;
   if(e.key==="Escape") closeModal();
   if(e.key==="ArrowLeft") moveEpisode(-1);
   if(e.key==="ArrowRight") moveEpisode(1);
 });
+
 document.querySelector("#closeModal").addEventListener("click",closeModal);
 document.querySelector("#prevEpisode").addEventListener("click",()=>moveEpisode(-1));
 document.querySelector("#nextEpisode").addEventListener("click",()=>moveEpisode(1));
@@ -785,18 +942,32 @@ document.querySelector("#bottomPrev").addEventListener("click",()=>moveEpisode(-
 document.querySelector("#bottomNext").addEventListener("click",()=>moveEpisode(1));
 modal.addEventListener("click",e=>{if(e.target===modal) closeModal()});
 
-let touchStartX=0, touchStartY=0;
+let touchStartX=0;
+let touchStartY=0;
+
 episodeModal.addEventListener("touchstart",e=>{
   touchStartX=e.changedTouches[0].clientX;
   touchStartY=e.changedTouches[0].clientY;
 },{passive:true});
+
 episodeModal.addEventListener("touchend",e=>{
   const dx=e.changedTouches[0].clientX-touchStartX;
   const dy=e.changedTouches[0].clientY-touchStartY;
+
   if(Math.abs(dx)>65 && Math.abs(dx)>Math.abs(dy)*1.25){
-    moveEpisode(dx<0?1:-1);
+    moveEpisode(dx<0 ? 1 : -1);
   }
 },{passive:true});
+
+// Fixed streaming-style header: transparent over hero, solid after scrolling.
+const siteHeader=document.querySelector(".site-header");
+
+function updateSiteHeader(){
+  siteHeader.classList.toggle("is-scrolled",window.scrollY>40);
+}
+
+window.addEventListener("scroll",updateSiteHeader,{passive:true});
+updateSiteHeader();
 </script>
 </body>
 </html>
