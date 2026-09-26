@@ -1927,6 +1927,45 @@ a{color:inherit;text-decoration:none}
   }
 }
 
+
+/* ===== Episode rail sizing refinement ===== */
+#episodes .rail{
+  width:min(1180px,calc(100% - 72px));
+  grid-auto-columns:minmax(285px,calc((100% - 30px)/3));
+}
+
+#episodes .section-head,
+#episodes .season-tabs{
+  width:min(1180px,calc(100% - 72px));
+}
+
+#episodes .card h3{
+  margin-top:13px;
+  margin-bottom:6px;
+  font-size:1.08rem;
+  line-height:1.2;
+}
+
+#episodes .card p{
+  font-size:.84rem;
+  line-height:1.5;
+}
+
+@media(max-width:760px){
+  #episodes .section-head,
+  #episodes .season-tabs,
+  #episodes .rail{
+    width:calc(100% - 40px);
+  }
+
+  #episodes .rail{
+    grid-auto-columns:min(84vw,365px);
+  }
+
+  #episodes .card h3{font-size:1.05rem;}
+  #episodes .card p{font-size:.82rem;}
+}
+
 </style>
 </head>
 <body>
