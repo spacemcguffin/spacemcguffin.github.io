@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07090d">
+<title>NORTH PARK — Stream</title>
+<style>
+:root{
+  --bg:#07090d;
+  --panel:#0d1016;
+  --ink:#f7f7f4;
+  --muted:#a7aab2;
+  --line:rgba(255,255,255,.12);
+  --accent:#f3f3ee;
+  --header-h:74px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+button,a{font:inherit}
+button{color:inherit}
+a{color:inherit;text-decoration:none}
+
+/* HEADER */
+.site-header{
+  height:var(--header-h);
+  padding:0 clamp(20px,4vw,64px);
+  position:absolute;
+  inset:0 0 auto;
+  z-index:50;
+  display:flex;
+  align-items:center;
+  gap:38px;
+  background:linear-gradient(to bottom,rgba(0,0,0,.72),transparent);
+}
+.brand{
+  font-size:clamp(1.15rem,2vw,1.65rem);
+  font-weight:1000;
+  letter-spacing:-.07em;
+  transform:skew(-3deg);
+  white-space:nowrap;
+}
+.brand span{display:inline-block}
+.nav{display:flex;gap:27px;align-items:center}
+.nav a{
+  color:rgba(255,255,255,.72);
+  font-size:.82rem;
+  font-weight:800;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  transition:.2s ease;
+}
+.nav a:hover{color:#fff}
+.header-right{margin-left:auto}
+.header-pill{
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;
+  padding:10px 15px;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.07em;
+  text-transform:uppercase;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  min-height:min(850px,91vh);
+  display:flex;
+  align-items:flex-end;
+  isolation:isolate;
+  overflow:hidden;
+}
+.hero-art{
+  position:absolute;
+  inset:0;
+  z-index:-4;
+  background-image:url("https://images.unsplash.com/photo-1547131303-543b40443e96?auto=format&fit=crop&w=1800&q=82");
+  background-size:cover;
+  background-position:center 48%;
+  transform:scale(1.015);
+}
+.mountains{
+  display:none;
+  position:absolute;
+  inset:0;
+  z-index:-3;
+  opacity:.95;
+  background:
+    linear-gradient(145deg,transparent 0 47%,#17212c 47.2% 63%,transparent 63.2%) 63% 40%/43% 54% no-repeat,
+    linear-gradient(215deg,transparent 0 48%,#202b37 48.2% 66%,transparent 66.2%) 87% 37%/42% 57% no-repeat,
+    linear-gradient(150deg,transparent 0 49%,#35414c 49.2% 66%,transparent 66.2%) 48% 45%/45% 52% no-repeat;
+}
+.town{
+  display:none;
+  position:absolute;
+  left:35%; right:-4%; bottom:12%;
+  height:31%;
+  z-index:-2;
+  opacity:.72;
+  background:
+    linear-gradient(27deg,transparent 47%,#15191d 48% 62%,transparent 63%) 4% 100%/180px 120px repeat-x;
+}
+.hero:before{
+  content:"";
+  position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(90deg,rgba(7,9,13,.96) 0%,rgba(7,9,13,.72) 27%,rgba(7,9,13,.14) 61%,rgba(7,9,13,.1)),
+    linear-gradient(0deg,var(--bg) 0%,rgba(7,9,13,.83) 7%,transparent 37%);
+}
+.hero:after{
+  content:"";
+  position:absolute;inset:auto 0 0;height:180px;z-index:0;
+  background:linear-gradient(transparent,var(--bg));
+  pointer-events:none;
+}
+.hero-content{
+  width:min(650px,88vw);
+  margin:0 0 clamp(110px,13vh,155px) clamp(22px,5vw,78px);
+  position:relative;
+  z-index:2;
+}
+.eyebrow{
+  margin-bottom:13px;
+  color:#d6d6d6;
+  font-size:.73rem;
+  font-weight:900;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+.eyebrow b{color:#fff}
+.hero h1{
+  margin:0;
+  font-size:clamp(4.2rem,9.8vw,9rem);
+  font-weight:1000;
+  line-height:.74;
+  letter-spacing:-.09em;
+  text-transform:uppercase;
+  transform:skew(-3deg);
+  text-shadow:0 5px 30px rgba(0,0,0,.35);
+}
+.hero-copy{
+  max-width:530px;
+  margin:26px 0 0;
+  color:rgba(255,255,255,.82);
+  font-size:clamp(.92rem,1.2vw,1.08rem);
+  line-height:1.55;
+}
+.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:25px}
+.btn{
+  min-height:45px;
+  border:0;
+  border-radius:5px;
+  padding:0 19px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  cursor:pointer;
+  background:#f4f4ef;
+  color:#08090c;
+  font-size:.76rem;
+  font-weight:950;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  transition:transform .18s ease,background .18s ease;
+}
+.btn:hover{transform:translateY(-2px);background:#fff}
+.btn.secondary{
+  background:rgba(88,91,98,.72);
+  color:#fff;
+  backdrop-filter:blur(8px);
+}
+.play-icon{font-size:1rem}
+
+/* CONTENT */
+.content{
+  position:relative;
+  z-index:5;
+  margin-top:-88px;
+  padding-bottom:70px;
+}
+.rail-section{margin-bottom:56px}
+.section-head{
+  padding:0 clamp(22px,5vw,78px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:16px;
+}
+.section-head h2{
+  margin:0;
+  font-size:clamp(1.15rem,2vw,1.65rem);
+  letter-spacing:-.035em;
+  text-transform:uppercase;
+}
+.arrows{display:flex;gap:7px}
+.arrow{
+  width:37px;height:37px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  background:rgba(17,20,26,.82);
+  display:grid;place-items:center;
+  cursor:pointer;
+  font-size:1.4rem;
+  transition:.18s ease;
+}
+.arrow:hover{background:#fff;color:#000}
+.rail{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(315px,31vw);
+  gap:15px;
+  overflow-x:auto;
+  overscroll-behavior-inline:contain;
+  scroll-snap-type:x proximity;
+  scrollbar-width:none;
+  padding:4px clamp(22px,5vw,78px) 18px;
+}
+.rail::-webkit-scrollbar{display:none}
+.card{
+  scroll-snap-align:start;
+  cursor:pointer;
+  min-width:0;
+}
+.thumb{
+  aspect-ratio:16/9;
+  position:relative;
+  overflow:hidden;
+  border-radius:5px;
+  background:#1b2028;
+  box-shadow:0 10px 35px rgba(0,0,0,.22);
+  transition:transform .23s ease,box-shadow .23s ease;
+}
+.card:hover .thumb{
+  transform:scale(1.035);
+  box-shadow:0 15px 45px rgba(0,0,0,.48);
+}
+.thumb:before{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#27394a,#77584c);
+}
+.thumb-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:0;
+}
+.thumb > *:not(.thumb-img){position:absolute}
+
+.thumb:after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.72),transparent 48%);
+}
+.card-number{
+  position:absolute;left:14px;bottom:12px;z-index:2;
+  font-size:.66rem;font-weight:950;letter-spacing:.09em;
+}
+.card-play{
+  position:absolute;right:12px;bottom:10px;z-index:2;
+  width:31px;height:31px;border-radius:50%;
+  background:#fff;color:#000;display:grid;place-items:center;
+  opacity:0;transform:scale(.85);transition:.2s ease;
+  font-size:.7rem;padding-left:2px;
+}
+.card:hover .card-play{opacity:1;transform:scale(1)}
+.card h3{
+  margin:12px 0 5px;
+  font-size:1rem;
+  letter-spacing:-.02em;
+}
+.card p{
+  margin:0;
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.45;
+  max-width:95%;
+}
+.badge{
+  display:inline-block;
+  margin-left:7px;
+  padding:3px 5px;
+  border:1px solid rgba(255,255,255,.32);
+  border-radius:3px;
+  font-size:.52rem;
+  vertical-align:1px;
+}
+
+/* PROMO */
+.promo{
+  margin:75px clamp(22px,5vw,78px) 0;
+  min-height:315px;
+  border-radius:8px;
+  padding:clamp(30px,5vw,66px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.88),rgba(0,0,0,.22)),
+    linear-gradient(135deg,#313d4a,#704d41 60%,#182530);
+}
+.promo:after{
+  content:"";
+  position:absolute;
+  width:320px;height:320px;border-radius:50%;
+  right:8%;top:-35%;
+  background:rgba(255,255,255,.08);
+  filter:blur(2px);
+}
+.promo h2{margin:0;font-size:clamp(2.3rem,5vw,5rem);line-height:.86;letter-spacing:-.07em;max-width:650px}
+.promo p{max-width:550px;color:#d1d2d5;line-height:1.5;font-size:.9rem}
+
+/* EPISODE DETAIL MODAL */
+.modal{
+  position:fixed;inset:0;z-index:10000;
+  display:none;
+  background:rgba(0,0,0,.88);
+  backdrop-filter:blur(13px);
+  padding:24px;
+  overflow-y:auto;
+}
+.modal.open{display:grid;place-items:center}
+.episode-modal{
+  width:min(940px,96vw);
+  max-height:min(850px,94dvh);
+  display:flex;
+  flex-direction:column;
+  background:#f1eee5;
+  color:#12151b;
+  border-radius:9px;
+  overflow:hidden;
+  box-shadow:0 35px 120px rgba(0,0,0,.68);
+}
+.modal-topbar{
+  min-height:60px;
+  flex:0 0 auto;
+  padding:0 14px;
+  display:grid;
+  grid-template-columns:50px 1fr 94px;
+  align-items:center;
+  border-bottom:1px solid rgba(0,0,0,.12);
+  background:#f1eee5;
+  position:relative;
+  z-index:3;
+}
+.modal-count{
+  text-align:center;
+  font-size:.69rem;
+  font-weight:950;
+  letter-spacing:.105em;
+  text-transform:uppercase;
+}
+.modal-nav,.modal-close{
+  width:38px;height:38px;border:0;
+  background:transparent;color:#11151b;
+  display:grid;place-items:center;
+  cursor:pointer;
+  border-radius:50%;
+  transition:.18s ease;
+}
+.modal-nav:hover,.modal-close:hover{background:rgba(0,0,0,.08)}
+.modal-nav svg,.modal-close svg{width:18px;height:18px}
+.modal-actions{
+  justify-self:end;
+  display:flex;align-items:center;gap:3px;
+}
+.modal-body{
+  overflow-y:auto;
+  overscroll-behavior:contain;
+}
+.modal-image{
+  width:100%;
+  aspect-ratio:16/7.2;
+  min-height:270px;
+  position:relative;
+  background:linear-gradient(135deg,#344b60,#ba7852 62%,#1c2934);
+}
+.modal-image:after{
+  content:"";
+  position:absolute;inset:auto 0 0;height:45%;
+  background:linear-gradient(transparent,rgba(0,0,0,.22));
+}
+.modal-copy{padding:34px clamp(24px,5vw,58px) 44px}
+.modal-scraps{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.modal-scrap{
+  padding:7px 10px 6px;
+  background:#3478c8;
+  color:#fff;
+  font-size:.64rem;
+  line-height:1;
+  font-weight:950;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  transform:rotate(-.7deg);
+}
+.modal-scrap:nth-child(2){
+  background:#d56842;
+  transform:rotate(.55deg);
+}
+.modal-title{
+  margin:0;
+  font-size:clamp(2.3rem,5.2vw,4.8rem);
+  font-weight:1000;
+  line-height:.91;
+  letter-spacing:-.055em;
+  text-transform:uppercase;
+}
+.modal-description{
+  max-width:720px;
+  margin:22px 0 0;
+  color:#40444b;
+  font-size:1rem;
+  line-height:1.65;
+}
+.modal-bottom{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:30px;
+  padding-top:22px;
+  border-top:1px solid rgba(0,0,0,.12);
+}
+.episode-jump{
+  border:0;
+  background:transparent;
+  color:#171a20;
+  padding:0;
+  cursor:pointer;
+  font-weight:900;
+  font-size:.73rem;
+  letter-spacing:.045em;
+  text-transform:uppercase;
+}
+.episode-jump:hover{text-decoration:underline}
+.modal-animate-next{animation:modalNext .24s ease}
+.modal-animate-prev{animation:modalPrev .24s ease}
+@keyframes modalNext{
+  from{opacity:.35;transform:translateX(18px)}
+  to{opacity:1;transform:none}
+}
+@keyframes modalPrev{
+  from{opacity:.35;transform:translateX(-18px)}
+  to{opacity:1;transform:none}
+}
+@media(max-width:760px){
+  .modal{padding:0;display:none}
+  .modal.open{display:block}
+  .episode-modal{
+    width:100%;
+    max-height:none;
+    height:100dvh;
+    border-radius:0;
+  }
+  .modal-topbar{
+    min-height:58px;
+    position:sticky;
+    top:0;
+    grid-template-columns:45px 1fr 88px;
+  }
+  .modal-image{aspect-ratio:16/9;min-height:0}
+  .modal-copy{padding:27px 21px 40px}
+  .modal-title{font-size:clamp(2.45rem,13vw,4rem)}
+  .modal-description{font-size:.93rem}
+
+  :root{--header-h:62px}
+  .site-header{gap:20px;padding:0 18px}
+  .nav{display:none}
+  .header-pill{padding:8px 10px;font-size:.61rem}
+  .hero{min-height:740px;align-items:flex-end}
+  .hero-content{margin:0 20px 125px;width:auto}
+  .hero h1{font-size:clamp(4.2rem,22vw,7rem)}
+  .hero-copy{font-size:.9rem;max-width:92%}
+  .content{margin-top:-82px}
+  .rail{grid-auto-columns:82vw;gap:12px;padding-left:20px;padding-right:20px}
+  .section-head{padding:0 20px}
+  .arrows{display:none}
+  .promo{margin-left:20px;margin-right:20px;min-height:360px}
+  .footer{padding-left:20px;padding-right:20px;flex-direction:column}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="#"><span>NORTH PARK</span></a>
+  <nav class="nav">
+    <a href="#">Home</a>
+    <a href="#episodes">Episodes</a>
+    <a href="#clips">Clips</a>
+    <a href="#about">About</a>
+  </nav>
+  <div class="header-right">
+    <a class="header-pill" href="#episodes">Watch now</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-art"></div>
+    <div class="mountains"></div>
+    <div class="town"></div>
+    <div class="hero-content">
+      <div class="eyebrow"><b>NORTHFLIX</b> &nbsp;Original series</div>
+      <h1>NORTH<br>PARK</h1>
+      <p class="hero-copy">Four kids. One frozen town. Absolutely no lessons learned. New animated nonsense from somewhere suspiciously north of Colorado.</p>
+      <div class="hero-actions">
+        <button class="btn" data-open="0"><span class="play-icon">▶</span> Play EP01</button>
+        <a class="btn secondary" href="#episodes">Browse all</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="content">
+    <section class="rail-section" id="episodes">
+      <div class="section-head">
+        <h2>Episodes</h2>
+        <div class="arrows">
+          <button class="arrow" data-rail="episodesRail" data-dir="-1" aria-label="Scroll left">‹</button>
+          <button class="arrow" data-rail="episodesRail" data-dir="1" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+      <div class="rail" id="episodesRail"></div>
+    </section>
+
+    <section class="rail-section" id="clips">
+      <div class="section-head">
+        <h2>Clips</h2>
+        <div class="arrows">
+          <button class="arrow" data-rail="clipsRail" data-dir="-1" aria-label="Scroll left">‹</button>
+          <button class="arrow" data-rail="clipsRail" data-dir="1" aria-label="Scroll right">›</button>
+        </div>
+      </div>
+      <div class="rail" id="clipsRail"></div>
+    </section>
+
+    <section class="promo" id="about">
+      <h2>NEW STUPIDITY<br>WHENEVER.</h2>
+      <p>NORTH PARK is an entirely fictional parody series. Nobody asked for it, nobody can stop it, and the town council has already denied responsibility.</p>
+      <div><a class="btn" href="#episodes">Start watching</a></div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <span>North Park © 2026</span>
+  <span>Photography: Unsplash · Free to use under the Unsplash License</span>
+</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <article class="episode-modal" id="episodeModal">
+    <header class="modal-topbar">
+      <button class="modal-nav" id="prevEpisode" aria-label="Previous episode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+      </button>
+      <div class="modal-count" id="modalCount">EPISODE 1 OF 6</div>
+      <div class="modal-actions">
+        <button class="modal-nav" id="nextEpisode" aria-label="Next episode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <button class="modal-close" id="closeModal" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="modal-body" id="modalBody">
+      <div class="modal-image" id="modalImage"></div>
+      <div class="modal-copy">
+        <div class="modal-scraps">
+          <span class="modal-scrap" id="modalEpisode">S01E01</span>
+          <span class="modal-scrap" id="modalDate">26 SEP 2026</span>
+        </div>
+        <h2 class="modal-title" id="modalTitle">Welcome to North Park</h2>
+        <p class="modal-description" id="modalDescription"></p>
+        <div class="modal-bottom">
+          <button class="episode-jump" id="bottomPrev">← Previous episode</button>
+          <button class="episode-jump" id="bottomNext">Next episode →</button>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+
+<script>
+const episodes = [
+  ["Welcome to North Park","A perfectly ordinary school day collapses before first period.","https://images.unsplash.com/photo-1743341723052-a58a1f781e24?auto=format&fit=crop&w=1400&q=80","26 SEP 2026"],
+  ["The Snow Day Economy","A cancelled school day accidentally creates a functioning black market. By lunchtime, half the school owes somebody money and the headteacher has somehow become a loan shark.","https://images.unsplash.com/photo-1769788873355-b65eab5deb55?auto=format&fit=crop&w=1400&q=80","3 OCT 2026"],
+  ["Terms and Conditions","Nobody reads them. This turns out to be a problem when the boys agree to several hundred pages of increasingly specific nonsense.","https://images.unsplash.com/photo-1550084281-983b134f8eeb?auto=format&fit=crop&w=1400&q=80","10 OCT 2026"],
+  ["The Great Northern Wi-Fi Outage","The town loses internet access for eleven horrifying minutes, forcing everyone to experience the outside world against their will.","https://images.unsplash.com/photo-1773574696860-9065c09d4275?auto=format&fit=crop&w=1400&q=80","17 OCT 2026"],
+  ["Mum Said No","One parental decision brings the entire local government to its knees and creates the most unnecessary constitutional crisis in North Park history.","https://images.unsplash.com/photo-1674987999828-639513a726cc?auto=format&fit=crop&w=1400&q=80","24 OCT 2026"],
+  ["Definitely Not a Cult","The boys join an after-school club with an unusually expensive uniform, a suspiciously charismatic leader and absolutely no refunds.","https://images.unsplash.com/photo-1517280505364-812954fffdbb?auto=format&fit=crop&w=1400&q=80","31 OCT 2026"]
+];
+
+const clips = [
+  ["Bus Stop Philosophy","https://images.unsplash.com/photo-1517280505364-812954fffdbb?auto=format&fit=crop&w=1400&q=80"],
+  ["Cafeteria Justice","https://images.unsplash.com/photo-1550084281-983b134f8eeb?auto=format&fit=crop&w=1400&q=80"],
+  ["Emergency Assembly","https://images.unsplash.com/photo-1769788873355-b65eab5deb55?auto=format&fit=crop&w=1400&q=80"],
+  ["The Substitute","https://images.unsplash.com/photo-1674987999828-639513a726cc?auto=format&fit=crop&w=1400&q=80"],
+  ["Absolutely Grounded","https://images.unsplash.com/photo-1773574696860-9065c09d4275?auto=format&fit=crop&w=1400&q=80"]
+];
+
+const episodeRail = document.querySelector("#episodesRail");
+episodes.forEach((ep,i)=>{
+  episodeRail.insertAdjacentHTML("beforeend",`
+    <article class="card" data-open="${i}" tabindex="0" role="button" aria-label="Open ${ep[0]}">
+      <div class="thumb"><img class="thumb-img" src="${ep[2]}" alt="" loading="lazy" referrerpolicy="no-referrer">
+        <span class="card-number">EP ${String(i+1).padStart(2,"0")}${i===0?'<span class="badge">NEW</span>':""}</span>
+        <span class="card-play">＋</span>
+      </div>
+      <h3>${ep[0]}</h3>
+      <p>${ep[1]}</p>
+    </article>`);
+});
+
+const clipsRail = document.querySelector("#clipsRail");
+clips.forEach((cl,i)=>{
+  clipsRail.insertAdjacentHTML("beforeend",`
+    <article class="card">
+      <div class="thumb"><img class="thumb-img" src="${cl[1]}" alt="" loading="lazy" referrerpolicy="no-referrer">
+        <span class="card-number">CLIP</span><span class="card-play">▶</span>
+      </div>
+      <h3>${cl[0]}</h3>
+    </article>`);
+});
+
+document.querySelectorAll(".arrow").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    const rail=document.getElementById(btn.dataset.rail);
+    rail.scrollBy({left:rail.clientWidth*.78*Number(btn.dataset.dir),behavior:"smooth"});
+  });
+});
+
+const modal = document.querySelector("#modal");
+const episodeModal = document.querySelector("#episodeModal");
+const modalBody = document.querySelector("#modalBody");
+const modalCount = document.querySelector("#modalCount");
+const modalEpisode = document.querySelector("#modalEpisode");
+const modalDate = document.querySelector("#modalDate");
+const modalTitle = document.querySelector("#modalTitle");
+const modalDescription = document.querySelector("#modalDescription");
+const modalImage = document.querySelector("#modalImage");
+let currentEpisode = 0;
+
+function renderEpisode(index, direction=0){
+  currentEpisode=(index+episodes.length)%episodes.length;
+  const ep=episodes[currentEpisode];
+
+  episodeModal.classList.remove("modal-animate-next","modal-animate-prev");
+  void episodeModal.offsetWidth;
+  if(direction>0) episodeModal.classList.add("modal-animate-next");
+  if(direction<0) episodeModal.classList.add("modal-animate-prev");
+
+  modalCount.textContent=`EPISODE ${currentEpisode+1} OF ${episodes.length}`;
+  modalEpisode.textContent=`S01E${String(currentEpisode+1).padStart(2,"0")}`;
+  modalDate.textContent=ep[3];
+  modalTitle.textContent=ep[0];
+  modalDescription.textContent=ep[1];
+  modalImage.style.backgroundImage=`url("${ep[2]}")`;
+  modalImage.style.backgroundSize="cover";
+  modalImage.style.backgroundPosition="center";
+  modalBody.scrollTop=0;
+}
+
+function openModal(index){
+  renderEpisode(index);
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+}
+function closeModal(){
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+function moveEpisode(dir){ renderEpisode(currentEpisode+dir,dir); }
+
+document.addEventListener("click",e=>{
+  const card=e.target.closest("[data-open]");
+  if(card) openModal(Number(card.dataset.open));
+});
+document.addEventListener("keydown",e=>{
+  const card=e.target.closest?.("[data-open]");
+  if(card && (e.key==="Enter" || e.key===" ")){
+    e.preventDefault();
+    openModal(Number(card.dataset.open));
+    return;
+  }
+  if(!modal.classList.contains("open")) return;
+  if(e.key==="Escape") closeModal();
+  if(e.key==="ArrowLeft") moveEpisode(-1);
+  if(e.key==="ArrowRight") moveEpisode(1);
+});
+document.querySelector("#closeModal").addEventListener("click",closeModal);
+document.querySelector("#prevEpisode").addEventListener("click",()=>moveEpisode(-1));
+document.querySelector("#nextEpisode").addEventListener("click",()=>moveEpisode(1));
+document.querySelector("#bottomPrev").addEventListener("click",()=>moveEpisode(-1));
+document.querySelector("#bottomNext").addEventListener("click",()=>moveEpisode(1));
+modal.addEventListener("click",e=>{if(e.target===modal) closeModal()});
+
+let touchStartX=0, touchStartY=0;
+episodeModal.addEventListener("touchstart",e=>{
+  touchStartX=e.changedTouches[0].clientX;
+  touchStartY=e.changedTouches[0].clientY;
+},{passive:true});
+episodeModal.addEventListener("touchend",e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  const dy=e.changedTouches[0].clientY-touchStartY;
+  if(Math.abs(dx)>65 && Math.abs(dx)>Math.abs(dy)*1.25){
+    moveEpisode(dx<0?1:-1);
+  }
+},{passive:true});
+</script>
+</body>
+</html>
