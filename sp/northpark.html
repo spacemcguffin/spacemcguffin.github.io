@@ -1864,6 +1864,16 @@ a{color:inherit;text-decoration:none}
   background:rgba(205,210,218,.42);
 }
 
+
+/* Keep the text fallback hidden unless the logo's onerror explicitly reveals it */
+.brand .brand-text-fallback[hidden]{
+  display:none !important;
+}
+
+.brand .brand-text-fallback:not([hidden]){
+  display:inline-block;
+}
+
 </style>
 </head>
 <body>
