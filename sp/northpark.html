@@ -43,14 +43,7 @@ a{color:inherit;text-decoration:none;}
 
 /* HEADER */
 .site-header{
-  
-  
-  
-  
-  
-  
-  
-  
+
   background:linear-gradient(to bottom,rgba(0,0,0,.72),transparent);
   transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease,-webkit-backdrop-filter .25s ease;
 }
@@ -63,19 +56,11 @@ a{color:inherit;text-decoration:none;}
   font-size:clamp(1.15rem,2vw,1.65rem);
   font-weight:1000;
   letter-spacing:-.07em;
-  
+
   white-space:nowrap;
 }
 .brand span{display:inline-block;}
-.nav{}
-.nav a{
-  
-  
-  
-  
-  
-  
-}
+
 .nav a:hover{color:#fff;}
 
 /* HERO */
@@ -88,15 +73,7 @@ a{color:inherit;text-decoration:none;}
   align-items:flex-end;
   overflow:hidden;
 }
-.hero-art{
-  
-  
-  
-  
-  
-  
-  
-}
+
 .hero:before{
   content:"";
   position:absolute;inset:0;z-index:-1;
@@ -113,11 +90,10 @@ a{color:inherit;text-decoration:none;}
 .hero-content{
   width:min(700px,88vw);
   margin:0 0 clamp(110px,13vh,155px) clamp(22px,5vw,78px);
-  
-  
+
 }
 .eyebrow{
-  
+
   color:#d6d6d6;
   font-size:.73rem;
   font-weight:900;
@@ -126,16 +102,7 @@ a{color:inherit;text-decoration:none;}
 }
 .eyebrow b{color:#fff;}
 .hero h1{
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
   text-shadow:0 5px 30px rgba(0,0,0,.42);
 }
 .hero-copy{
@@ -151,10 +118,7 @@ a{color:inherit;text-decoration:none;}
   border:0;
   border-radius:5px;
   padding:0 19px;
-  
-  
-  
-  
+
   cursor:pointer;
   background:#f4f4ef;
   color:#08090c;
@@ -170,7 +134,6 @@ a{color:inherit;text-decoration:none;}
   color:#fff;
   backdrop-filter:blur(8px);
 }
-
 
 /* Display/UI typography */
 .brand,
@@ -334,26 +297,12 @@ a{color:inherit;text-decoration:none;}
   background:linear-gradient(0deg,rgba(0,0,0,.72),transparent 48%);
 }
 .card-number{
-  
-  
-  
-  
+
   display:inline-flex;
   align-items:center;
   gap:5px;
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-}
 
+}
 
 .card h3{
   margin:12px 0 5px;
@@ -365,20 +314,18 @@ a{color:inherit;text-decoration:none;}
   color:var(--muted);
   font-size:.78rem;
   line-height:1.45;
-  
+
 }
 
 /* PROMO */
 .promo{
   width:var(--shell);
-  
+
   margin:48px auto 72px;
   position:relative;
   overflow:hidden;
   border-radius:10px;
-  
-  
-  
+
   isolation:isolate;
 }
 
@@ -396,33 +343,29 @@ a{color:inherit;text-decoration:none;}
 }
 .modal.open{display:grid;place-items:center;}
 .episode-modal{
-  
-  
+
   display:flex;
   flex-direction:column;
-  
+
   color:#fff;
-  
+
   overflow:hidden;
-  
+
 }
 .modal-topbar{
-  
+
   flex:0 0 auto;
-  
+
   display:grid;
-  
+
   align-items:center;
-  
+
   position:relative;
   z-index:3;
 }
 .modal-count{
   text-align:center;
-  
-  
-  
-  
+
 }
 .modal-nav,.modal-close{
   width:38px;height:38px;border:0;
@@ -434,22 +377,19 @@ a{color:inherit;text-decoration:none;}
 }
 .modal-nav:hover,.modal-close:hover{background:rgba(255,255,255,.09);}
 .modal-nav svg,.modal-close svg{width:18px;height:18px;}
-.modal-actions{
-  
-  
-}
+
 .modal-body{
   overflow-y:auto;
   overscroll-behavior:contain;
 }
 .modal-image{
   width:100%;
-  
+
   min-height:0;
   position:relative;
   background:#202635;
   background-size:cover;
-  
+
   display:flex;
   align-items:flex-end;
   isolation:isolate;
@@ -459,21 +399,15 @@ a{color:inherit;text-decoration:none;}
   position:absolute;
   z-index:-0;
   inset:0;
-  
+
 }
 .modal-image-title{
   position:relative;
   z-index:2;
   width:100%;
-  
+
 }
-.modal-image-title .modal-title{
-  
-  
-  
-  
-}
-.modal-copy{}
+
 .modal-scraps{display:flex;gap:8px;flex-wrap:wrap;}
 .modal-scrap{
   padding:7px 10px 6px;
@@ -498,21 +432,8 @@ a{color:inherit;text-decoration:none;}
   letter-spacing:-.055em;
   text-transform:uppercase;
 }
-.modal-description{}
-.modal-bottom{}
-.episode-jump{
-  
-  
-  
-  
-  
-  
-  
-  
-  
-}
-.episode-jump:hover{text-decoration:underline;}
 
+.episode-jump:hover{text-decoration:underline;}
 
 @media(max-width:760px){
   :root{--header-h:62px;}
@@ -604,7 +525,7 @@ a{color:inherit;text-decoration:none;}
   .modal-image-title{padding:20px 21px 17px;}
   .modal-image-title .modal-title{
     font-size:clamp(2.2rem,11vw,3.6rem);
-    font-weight:600;
+    font-weight:700;
   }
   .modal-copy{padding:10px 21px 28px;}
   .modal-description{font-size:.93rem;}
@@ -627,11 +548,6 @@ a{color:inherit;text-decoration:none;}
   .arrow svg{width:15px;height:15px;}
 }
 
-.site-header,
-.site-header.is-scrolled{
-  
-}
-
 .modal-nav:disabled,
 .modal-bottom button:disabled,
 .modal-topbar button:disabled{
@@ -640,29 +556,9 @@ a{color:inherit;text-decoration:none;}
   pointer-events:none;
 }
 
-
-.footer-brand{
-  
-  
-  
-  
-  
-}
-
-.footer-credit{
-  
-  
-  
-  
-}
-
-
 .play-icon path{
   fill:currentColor;
 }
-
-
-/* ===== CLEAN COMPONENT OVERRIDES ===== */
 
 /* Hero */
 .hero h1{
@@ -683,13 +579,11 @@ a{color:inherit;text-decoration:none;}
   border-bottom:0;
 }
 
-
 .promo-actions{
   margin-top:22px;
 }
 
 /* Play controls */
-
 
 /* Modal title */
 /* Footer */
@@ -727,7 +621,6 @@ a{color:inherit;text-decoration:none;}
   letter-spacing:.035em;
 }
 
-
 .btn .play-icon{
   width:18px;
   height:18px;
@@ -743,7 +636,6 @@ a{color:inherit;text-decoration:none;}
   justify-content:center;
   gap:8px;
 }
-
 
 .card-play{
   position:absolute;
@@ -793,7 +685,6 @@ a{color:inherit;text-decoration:none;}
   fill:#11141d;
 }
 
-
 @media(max-width:700px){
   .hero{
     min-height:500px;
@@ -802,33 +693,11 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
-.hero-content{
-  
-}
-
-
-.modal-bottom{
-  
-  
-  
-  
-  
-  
-  
-}
-
-
-/* ===== Requested refinements ===== */
-
 /* Pull the complete episode browser inward from the viewport edges. */
 #episodes .section-head,
 #episodes .season-tabs,
 #episodes .rail{
   width:min(1120px,calc(100% - 88px));
-}
-
-#episodes .rail{
-  
 }
 
 /* Modal previous / next controls */
@@ -837,22 +706,20 @@ a{color:inherit;text-decoration:none;}
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  
-  
+
   border-top:1px solid rgba(255,255,255,.10);
 }
 
 .episode-jump{
   appearance:none;
-  
-  
+
   border:1px solid rgba(255,255,255,.15);
   border-radius:999px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:7px;
-  
+
   color:rgba(255,255,255,.88);
   font-family:"Google Sans Flex",Arial,sans-serif;
   font-size:.69rem;
@@ -866,8 +733,7 @@ a{color:inherit;text-decoration:none;}
 }
 
 .episode-jump:hover:not(:disabled){
-  
-  
+
   color:#fff;
   text-decoration:none;
 }
@@ -931,9 +797,6 @@ a{color:inherit;text-decoration:none;}
     font-size:.62rem;
   }
 }
-
-
-/* ===== Modal visual refinement ===== */
 
 /* More breathing room between NORTHFLIX ORIGINAL SERIES and NORTH PARK */
 .eyebrow{
@@ -1048,9 +911,8 @@ a{color:inherit;text-decoration:none;}
   color:#fff;
   font-family:"Google Sans Flex",Arial,sans-serif;
   font-size:clamp(2.55rem,5.6vw,5rem);
-  
+
   line-height:.88;
-  letter-spacing:-.052em;
   text-transform:uppercase;
   text-shadow:0 4px 24px rgba(0,0,0,.6);
 }
@@ -1124,7 +986,6 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
-
 /* Episode card paper label — reference treatment */
 .card-number{
   position:absolute;
@@ -1161,7 +1022,6 @@ a{color:inherit;text-decoration:none;}
   );
   transform:rotate(-1deg);
 }
-
 
 /* ===== Promo with replaceable right-hand artwork ===== */
 .promo{
@@ -1243,7 +1103,6 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
-
 /* Episode card descriptions — maximum two lines */
 .card p{
   display:-webkit-box;
@@ -1254,7 +1113,6 @@ a{color:inherit;text-decoration:none;}
   line-clamp:3;
   text-overflow:ellipsis;
 }
-
 
 /* Larger episode section heading */
 #episodes .section-head h2{
@@ -1298,16 +1156,14 @@ a{color:inherit;text-decoration:none;}
   text-transform:uppercase;
 }
 
-
 /* Top navigation NORTH PARK logo */
 .brand{
   display:flex;
   align-items:center;
-  
+
   transform:none;
   line-height:0;
 }
-
 
 /* Text fallback shown automatically if the NORTH PARK logo fails to load */
 .brand-text-fallback{
@@ -1320,7 +1176,6 @@ a{color:inherit;text-decoration:none;}
   white-space:nowrap;
   transform:skew(-3deg);
 }
-
 
 /* ===== Hero contrast ===== */
 
@@ -1356,7 +1211,6 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
-
 /* Finer, quieter modal scrollbar */
 .episode-modal{
   scrollbar-width:thin;
@@ -1380,7 +1234,6 @@ a{color:inherit;text-decoration:none;}
   background:rgba(205,210,218,.42);
 }
 
-
 /* Keep the text fallback hidden unless the logo's onerror explicitly reveals it */
 .brand .brand-text-fallback[hidden]{
   display:none !important;
@@ -1390,12 +1243,10 @@ a{color:inherit;text-decoration:none;}
   display:inline-block;
 }
 
-
 /* Slightly lighter episode titles inside modals */
 .modal-image-title .modal-title{
   font-weight:800;
 }
-
 
 /* Hero artwork — reinstated */
 .hero-art{
@@ -1410,8 +1261,6 @@ a{color:inherit;text-decoration:none;}
   transform:scale(1.015);
 }
 
-
-/* ===== NAVIGATION — authoritative ===== */
 .site-header{
   height:var(--header-h);
   padding:0 clamp(18px,4vw,64px);
@@ -1566,8 +1415,6 @@ a{color:inherit;text-decoration:none;}
   }
 }
 
-
-/* ===== Episode rail sizing refinement ===== */
 #episodes .rail{
   width:min(1180px,calc(100% - 72px));
   grid-auto-columns:minmax(285px,calc((100% - 30px)/3));
@@ -1581,7 +1428,7 @@ a{color:inherit;text-decoration:none;}
 #episodes .card h3{
     margin-top: 13px;
     margin-bottom: 6px;
-    
+
     text-wrap: balance;
     line-height: 1.2;
     font-family:"South Park", "Google Sans Flex", sans-serif;
@@ -1609,9 +1456,6 @@ a{color:inherit;text-decoration:none;}
   #episodes .card h3{font-size:1.05rem;}
   #episodes .card p{font-size:.82rem;}
 }
-
-
-/* ===== Latest layout refinements ===== */
 
 /* Nudge hero information slightly higher. */
 .hero-content{
