@@ -1131,6 +1131,54 @@ a{
   transform:rotate(-.4deg);
 }
 
+.modal-version-switch{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin:0 0 15px;
+}
+
+.modal-version-switch[hidden]{
+  display:none;
+}
+
+.modal-version-button{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:999px;
+  min-height:31px;
+  padding:0 12px;
+  background:transparent;
+  color:rgba(255,255,255,.68);
+  font-family:"Google Sans Flex",Arial,sans-serif;
+  font-size:.61rem;
+  font-weight:850;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:.16s ease;
+}
+
+.modal-version-button:hover,
+.modal-version-button:focus-visible{
+  color:#fff;
+  border-color:rgba(255,255,255,.38);
+  background:rgba(255,255,255,.07);
+  outline:none;
+}
+
+.modal-version-button.is-active{
+  background:#E8E8E1;
+  border-color:#E8E8E1;
+  color:#202733;
+}
+
+.modal-version-button.remastered.is-active{
+  background:#F2A044;
+  border-color:#F2A044;
+  color:#202733;
+}
+
 .promo{
   width:var(--shell);
   margin:48px auto 72px;
@@ -1733,6 +1781,10 @@ a{
         </div>
       </div>
       <div class="modal-copy">
+        <div class="modal-version-switch" id="modalVersionSwitch" hidden aria-label="Choose episode version">
+          <button class="modal-version-button" id="modalOriginalVersion" type="button" data-modal-version="original">Original</button>
+          <button class="modal-version-button remastered" id="modalRemasteredVersion" type="button" data-modal-version="remastered">Remastered</button>
+        </div>
         <div class="modal-scraps">
           <span class="modal-scrap" id="modalEpisode">S01E01</span>
           <span class="modal-scrap" id="modalDate">26 SEP 2026</span>
@@ -1827,6 +1879,9 @@ const modalCount = document.getElementById("modalCount");
 const modalEpisode = document.getElementById("modalEpisode");
 const modalDate = document.getElementById("modalDate");
 const modalRemastered = document.getElementById("modalRemastered");
+const modalVersionSwitch = document.getElementById("modalVersionSwitch");
+const modalOriginalVersion = document.getElementById("modalOriginalVersion");
+const modalRemasteredVersion = document.getElementById("modalRemasteredVersion");
 const modalTitle = document.getElementById("modalTitle");
 const modalDescription = document.getElementById("modalDescription");
 const modalImage = document.getElementById("modalImage");
@@ -1960,6 +2015,12 @@ function renderModal(){
   const remaster = remasterFor(currentSeason,currentEpisode);
   const showingRemaster = currentVersion === "remastered" && remaster;
 
+  modalVersionSwitch.hidden = !remaster;
+  modalOriginalVersion.classList.toggle("is-active", !showingRemaster);
+  modalRemasteredVersion.classList.toggle("is-active", Boolean(showingRemaster));
+  modalOriginalVersion.setAttribute("aria-pressed", String(!showingRemaster));
+  modalRemasteredVersion.setAttribute("aria-pressed", String(Boolean(showingRemaster)));
+
   modalDate.textContent = showingRemaster ? (remaster.date || episode[3]) : episode[3];
   modalRemastered.hidden = !showingRemaster;
   modalTitle.textContent = episode[0];
@@ -2058,6 +2119,15 @@ document.querySelectorAll(".arrow").forEach(button => {
       left:rail.clientWidth * .78 * Number(button.dataset.dir),
       behavior:"smooth"
     });
+  });
+});
+
+document.querySelectorAll("[data-modal-version]").forEach(button => {
+  button.addEventListener("click",() => {
+    const version = button.dataset.modalVersion;
+    if(version === "remastered" && !remasterFor(currentSeason,currentEpisode)) return;
+    currentVersion = version;
+    renderModal();
   });
 });
 
