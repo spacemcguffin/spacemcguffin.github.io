@@ -107,17 +107,18 @@ a{
 
 .hero-logo{
   display:block;
-  width:min(590px,82vw);
-  max-width:100%;
+  width:clamp(300px,34vw,500px);
+  max-width:78vw;
   height:auto;
+  margin:0 0 22px;
   object-fit:contain;
   object-position:left center;
-  filter:drop-shadow(0 5px 24px rgba(0,0,0,.38));
+  filter:drop-shadow(0 5px 22px rgba(0,0,0,.34));
 }
 
 .hero-copy{
   max-width:680px;
-  margin:16px 0 0;
+  margin:0;
   color:rgba(255,255,255,.82);
   font-size:clamp(.92rem,1.2vw,1.08rem);
   line-height:1.55;
@@ -1360,6 +1361,13 @@ a{
 }
 
 @media (max-width:580px){
+  .hero-logo{
+    width:min(360px,76vw);
+    max-width:76vw;
+    margin-bottom:17px;
+  }
+
+
   .site-header{
     gap:12px;
     padding:0 16px;
@@ -1532,9 +1540,7 @@ a{
 }
 
 @media (max-width:580px){
-  .hero-logo{
-    width:min(500px,88vw);
-  }
+  
 }
 
 </style>
