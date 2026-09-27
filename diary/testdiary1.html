@@ -1897,6 +1897,7 @@ function renderSeasonTabs(){
 function renderEpisodeRail(){
   episodeRail.innerHTML = activeEpisodes().map((episode,index) => `
     <article
+      class="card"
       data-open="${index}"
       tabindex="0"
       role="button"
