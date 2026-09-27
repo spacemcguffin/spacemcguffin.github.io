@@ -379,6 +379,29 @@ a{
   transform:rotate(-.7deg);
 }
 
+.modal-entries-link-row{
+  margin-top:10px;
+}
+.modal-entries-link{
+  display:inline-block;
+  padding:10px 15px;
+  font-size:.82rem;
+  background:#F5B041;
+  color:#000;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform .16s ease, filter .16s ease;
+}
+.modal-entries-link:hover{
+  transform:translateY(-1px) rotate(-1deg);
+  filter:brightness(1.08);
+}
+.modal-entries-link:focus-visible{
+  outline:2px solid #fff;
+  outline-offset:3px;
+}
+
+
 .modal-scrap:nth-child(2){
   background:#466653;
   transform:rotate(.55deg);
@@ -1602,63 +1625,6 @@ a{
 }
 
 
-/* Diary modal archive table */
-
-.diary-archive-description{
-  margin:0 0 20px;
-  color:rgba(255,255,255,.68);
-  font-size:.9rem;
-  line-height:1.55;
-}
-
-.diary-archive{
-  margin-top:24px;
-  border-top:1px solid rgba(255,255,255,.10);
-  padding-top:20px;
-}
-.diary-archive-heading{
-  margin:0 0 14px;
-  font-size:.72rem;
-  font-weight:850;
-  letter-spacing:.11em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,.62);
-}
-.diary-month{
-  margin-top:18px;
-}
-.diary-month:first-of-type{margin-top:0;}
-.diary-month-title{
-  padding:8px 11px;
-  background:linear-gradient(90deg,rgba(90,132,190,.42),rgba(90,132,190,0));
-  color:#fff;
-  font-size:.7rem;
-  font-weight:600;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-.diary-entry-row{
-  display:grid;
-  grid-template-columns:48px minmax(0,1fr);
-  border-bottom:1px solid rgba(255,255,255,.075);
-  color:rgba(255,255,255,.84);
-}
-.diary-entry-number{
-  padding:9px 8px;
-  display:grid;
-  place-items:center;
-  border-right:1px solid rgba(255,255,255,.08);
-  background:rgba(90,132,190,.08);
-  color:rgba(255,255,255,.48);
-  font-size:.69rem;
-  font-weight:700;
-}
-.diary-entry-title{
-  padding:9px 12px;
-  font-size:.82rem;
-  line-height:1.35;
-}
-.diary-entry-row:hover .diary-entry-title{color:#fff;}
 @media(max-width:600px){
   .diary-entry-row{grid-template-columns:42px minmax(0,1fr);}
   .diary-entry-title{font-size:.78rem;padding:9px 10px;}
@@ -1788,8 +1754,10 @@ a{
           <span class="modal-scrap" id="modalEpisode">S01E01</span>
           <span class="modal-scrap" id="modalDate"># ENTRIES</span>
         </div>
+        <div class="modal-entries-link-row">
+          <a class="modal-scrap modal-entries-link" id="modalEntriesLink" href="#" target="_blank" rel="noopener">List of Entries</a>
+        </div>
         <p class="modal-description" id="modalDescription"></p>
-        <div class="diary-archive" id="diaryArchive"></div>
         <div class="modal-bottom">
           <button class="episode-jump" id="bottomPrev" type="button">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1810,45 +1778,6 @@ a{
 </div>
 
 <script>
-
-const diaryDescriptions = {
-  "2008": "Add your 2008 diary description here.",
-  "2009": "Add your 2009 diary description here.",
-  "2010": "Add your 2010 diary description here.",
-  "2011": "Add your 2011 diary description here.",
-  "2012": "Add your 2012 diary description here.",
-  "2021": "Add your 2021 diary description here.",
-  "2022": "Add your 2022 diary description here.",
-  "2023": "Add your 2023 diary description here.",
-  "2024": "Add your 2024 diary description here.",
-  "2025": "Add your 2025 diary description here.",
-  "2026": "A collection of moments, memories and assorted ramblings from 2026."
-};
-
-const diaryEntriesByYear = {
-  "2026": [{"month": "January 2026", "entries": [["1", "everything changes in the end"], ["2", "the light of day"], ["3", "chilled out"], ["4", "trying to change"], ["5", "i've been playing pretend"], ["6", "dead names"], ["7", "a walk in the park"]]}, {"month": "February 2026", "entries": [["1", "farewell 42"], ["2", "hello 33"], ["3", "pandora's box"], ["4", "triggers"], ["5", "A&E"]]}, {"month": "March 2026", "entries": [["1", "never mind the paradox"], ["2", "memes and nukes"], ["3", "wobbly sets"], ["4", "lewis & charlotte"], ["5", "devvo returns"], ["6", "thanks for the memories"], ["7", "hartnell fever"], ["8", "day of the daleks"], ["9", "mullet and the myrka"], ["10", "waiting for bill"], ["11", "back to hogwarts"]]}, {"month": "April 2026", "entries": [["1", "the nightmare begins"], ["2", "fever dream"], ["3", "nine years lost"], ["4", "affairs in order"], ["5", "into the wilderness"], ["6", "lucky dip"], ["7", "child at heart"], ["8", "hazy memories"]]}, {"month": "May 2026", "entries": [["1", "soul and steel"]]}, {"month": "June 2026", "entries": [["1", "waiting time"], ["2", "chavs and goths"], ["3", "doctor who is dead"], ["4", "inferno"], ["5", "and then there were none"], ["6", "solstice"], ["7", "teenage rebel"], ["8", "zoe, amy and gem"], ["9", "hotness prevails"]]}, {"month": "July 2026", "entries": [["1", "slow and steady"], ["2", "preservation"], ["3", "ghosts of time"], ["4", "rhythm and blues"], ["5", "every single day"], ["6", "timelordwannabe"], ["7", "morning matters"], ["8", "boys don't cry"]]}, {"month": "August 2026", "entries": [["1", "reclamation"], ["2", "autumn clearance"], ["3", "save space"], ["4", "sick of summer"], ["5", "eclipse"], ["6", "bring back the weird"], ["7", "eye spy"], ["8", "sweet dream"], ["99", "shift happens (then you die)"], ["10", "on the horizon"]]}, {"month": "September 2026", "entries": [["1", "the final forty"], ["2", "artificial history"], ["3", "back to vice city"], ["4", "fading into autumn"], ["5", "season's grievings"], ["6", "launch night"], ["7", "turbulence"], ["8", "park me tender"]]}]
-};
-
-function renderDiaryArchive(year){
-  const archive = document.getElementById("diaryArchive");
-  if(!archive) return;
-  const months = diaryEntriesByYear[String(year)] || [];
-  if(!months.length){
-    archive.innerHTML = `<p class="diary-archive-description">${diaryDescriptions[String(year)] || ""}</p><div class="diary-archive-heading">Diary entries</div><div class="diary-empty">Entries for ${year} can be added here.</div>`;
-    return;
-  }
-  archive.innerHTML =
-    `<p class="diary-archive-description">${diaryDescriptions[String(year)] || ""}</p><div class="diary-archive-heading">Diary entries</div>` +
-    months.map(group => `
-      <section class="diary-month">
-        <div class="diary-month-title">${group.month}</div>
-        ${group.entries.map(entry => `
-          <div class="diary-entry-row">
-            <div class="diary-entry-number">${entry[0]}</div>
-            <div class="diary-entry-title">${entry[1]}</div>
-          </div>`).join("")}
-      </section>`).join("");
-}
 
 // Main hero artwork crossfade
 const heroImages = [
@@ -1891,6 +1820,21 @@ if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){
   window.setInterval(advanceHero,7000);
 }
 
+// Manually edit the destination for each year's "List of Entries" tab.
+const diaryEntryLinks = {
+  "2008": "#",
+  "2009": "#",
+  "2010": "#",
+  "2011": "#",
+  "2012": "#",
+  "2021": "#",
+  "2022": "#",
+  "2023": "#",
+  "2024": "#",
+  "2025": "#",
+  "2026": "#"
+};
+
 const seasons = {
   1: [
     ["timelordwannabe","","/sp/northpark/images/episode1.png","# ENTRIES","2008"],
@@ -1922,6 +1866,7 @@ const modalBody = document.getElementById("modalBody");
 const modalCount = document.getElementById("modalCount");
 const modalEpisode = document.getElementById("modalEpisode");
 const modalDate = document.getElementById("modalDate");
+const modalEntriesLink = document.getElementById("modalEntriesLink");
 const modalTitle = document.getElementById("modalTitle");
 const modalDescription = document.getElementById("modalDescription");
 const modalImage = document.getElementById("modalImage");
@@ -2048,8 +1993,10 @@ function renderModal(){
   const diaryYear = diaryYearFor(currentSeason,currentEpisode);
   modalCount.textContent = `${diaryYear} DIARY`;
   modalEpisode.textContent = diaryYear;
-  renderDiaryArchive(diaryYear);
   modalDate.textContent = episode[3];
+  if (modalEntriesLink) {
+    modalEntriesLink.href = diaryEntryLinks[String(diaryYear)] || "#";
+  }
 
   modalTitle.textContent = episode[0];
   modalDescription.textContent = episode[1];
