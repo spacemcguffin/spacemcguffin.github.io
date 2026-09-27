@@ -1074,6 +1074,36 @@ a{
   transform:rotate(-1deg);
 }
 
+.card-remastered{
+  display:inline-flex;
+  align-items:center;
+  position:absolute;
+  z-index:3;
+  top:13px;
+  right:13px;
+  padding:7px 10px 6px;
+  background:#F2A044;
+  color:#202733;
+  font-family:"Google Sans Flex",Arial,sans-serif;
+  font-size:.58rem;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:.075em;
+  text-transform:uppercase;
+  box-shadow:0 3px 10px rgba(0,0,0,.20);
+  clip-path:polygon(
+    2% 8%,14% 3%,29% 6%,43% 2%,57% 6%,72% 2%,87% 5%,98% 2%,
+    100% 88%,89% 95%,74% 92%,59% 98%,43% 93%,27% 98%,12% 93%,1% 88%
+  );
+  transform:rotate(1deg);
+}
+
+.modal-scrap.modal-remastered{
+  background:#F2A044;
+  color:#202733;
+  transform:rotate(-.4deg);
+}
+
 .promo{
   width:var(--shell);
   margin:48px auto 72px;
@@ -1679,6 +1709,7 @@ a{
         <div class="modal-scraps">
           <span class="modal-scrap" id="modalEpisode">S01E01</span>
           <span class="modal-scrap" id="modalDate">26 SEP 2026</span>
+          <span class="modal-scrap modal-remastered" id="modalRemastered" hidden>REMASTERED</span>
         </div>
         <p class="modal-description" id="modalDescription"></p>
         <div class="modal-bottom">
@@ -1713,7 +1744,7 @@ const seasons = {
     
     ["Girl Power","One parental decision brings the entire local government to its knees and creates the most unnecessary constitutional crisis in North Park history.","/sp/northpark/images/episode5.png","24 OCT 2026"],
     
-    ["The Boys Are Back in Town","The boys join an after-school club with an unusually expensive uniform, a suspiciously charismatic leader and absolutely no refunds.","/sp/northpark/images/episode6.png","31 OCT 2026"]
+    ["The Boys Are Back in Town","The boys join an after-school club with an unusually expensive uniform, a suspiciously charismatic leader and absolutely no refunds.","/sp/northpark/images/episode6.png","31 OCT 2026",true]
   ],
 
   
@@ -1754,6 +1785,7 @@ const modalBody = document.getElementById("modalBody");
 const modalCount = document.getElementById("modalCount");
 const modalEpisode = document.getElementById("modalEpisode");
 const modalDate = document.getElementById("modalDate");
+const modalRemastered = document.getElementById("modalRemastered");
 const modalTitle = document.getElementById("modalTitle");
 const modalDescription = document.getElementById("modalDescription");
 const modalImage = document.getElementById("modalImage");
@@ -1789,6 +1821,7 @@ function renderEpisodeRail(){
       <div class="thumb">
         <img class="thumb-img" src="${episode[2]}" alt="" loading="lazy" referrerpolicy="no-referrer">
         <span class="card-number">S${String(currentSeason).padStart(2,"0")} · E${String(index + 1).padStart(2,"0")}</span>
+        ${episode[4] === true ? `<span class="card-remastered">Remastered</span>` : ""}
         <span class="card-play" aria-hidden="true">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 5v14M5 12h14"/>
@@ -1878,6 +1911,7 @@ function renderModal(){
   modalCount.textContent = `EPISODE ${currentEpisode + 1} OF ${activeEpisodes().length}`;
   modalEpisode.textContent = `S${String(currentSeason).padStart(2,"0")} · E${String(currentEpisode + 1).padStart(2,"0")}`;
   modalDate.textContent = episode[3];
+  modalRemastered.hidden = episode[4] !== true;
   modalTitle.textContent = episode[0];
   modalDescription.textContent = episode[1];
   modalImage.style.backgroundImage = `url("${episode[2]}")`;
