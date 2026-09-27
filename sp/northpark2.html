@@ -819,10 +819,6 @@ a{color:inherit;text-decoration:none}
   }
 }
 
-
-}
-
-
 .hero-content{
   transform:translateY(-34px);
 }
@@ -1628,6 +1624,52 @@ a{color:inherit;text-decoration:none}
 
   #episodes .card h3{font-size:1.05rem;}
   #episodes .card p{font-size:.82rem;}
+}
+
+
+/* ===== Latest layout refinements ===== */
+
+/* Nudge hero information slightly higher. */
+.hero-content{
+  transform:translateY(-46px);
+}
+
+/* Keep the primary hero play label on one line and give it a little more room. */
+.hero-actions .btn[data-open]{
+  min-width:142px;
+  white-space:nowrap;
+}
+
+/* Align episode rail arrows with the season tabs beneath the Episodes heading. */
+#episodes .section-head{
+  position:relative;
+}
+
+#episodes .section-head .arrows{
+  position:absolute;
+  right:0;
+  top:calc(100% + 9px);
+  z-index:4;
+}
+
+/* Slightly larger episode titles in the season rail. */
+#episodes .card h3{
+  font-size:1.28rem;
+}
+
+/* Balance longer modal episode titles over multiple lines. */
+.modal-image-title .modal-title{
+  text-wrap:balance;
+}
+
+@media(max-width:760px){
+  #episodes .card h3{
+    font-size:1.12rem;
+  }
+
+  #episodes .section-head .arrows{
+    top:calc(100% + 7px);
+  }
 }
 
 </style>
