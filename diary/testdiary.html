@@ -1909,7 +1909,7 @@ function renderSeasonTabs(){
 function renderEpisodeRail(){
   episodeRail.innerHTML = activeEpisodes().map((episode,index) => `
     <article
-      class="card"
+      class="card${["2010","2011","2012"].includes(diaryYearFor(currentSeason,index)) ? " is-missing-diary" : ""}"
       data-open="${index}"
       tabindex="0"
       role="button"
@@ -2020,6 +2020,7 @@ function renderModal(){
   modalTitle.textContent = episode[0];
   modalDescription.textContent = episode[1];
   modalImage.style.backgroundImage = `url("${episode[2]}")`;
+  modalImage.style.filter = ["2010","2011","2012"].includes(String(diaryYear)) ? "grayscale(1)" : "";
   modalBody.scrollTop = 0;
 
   updateNavigation();
