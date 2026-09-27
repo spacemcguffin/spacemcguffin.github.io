@@ -400,6 +400,15 @@ a{
   outline:2px solid #fff;
   outline-offset:3px;
 }
+.modal-entries-link.is-disabled{
+  background:#777b83;
+  color:rgba(255,255,255,.52);
+  cursor:default;
+  pointer-events:none;
+  filter:none;
+  transform:none;
+  opacity:.7;
+}
 
 
 .modal-scrap:nth-child(2){
@@ -1678,7 +1687,7 @@ a{
           <svg class="play-icon" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M8.7 6.15c0-.94 1.04-1.5 1.82-.98l8.15 5.43a1.17 1.17 0 0 1 0 1.95l-8.15 5.43A1.17 1.17 0 0 1 8.7 17V6.15Z"/>
           </svg>
-          <span>Play EP01</span>
+          <span>Current Diary</span>
         </button>
         <a class="btn secondary" href="#episodes">Browse all</a>
       </div>
@@ -1837,20 +1846,20 @@ const diaryEntryLinks = {
 
 const seasons = {
   1: [
-    ["timelordwannabe","","/diary/images/2008.png","623 ENTRIES","2008"],
-    ["timelordwannabe","","/diary/images/2009.png","419+ ENTRIES","2009"],
-    ["2010","","/sp/northpark/images/mainhero1.png","? ENTRIES","2010"],
-    ["2011","","/sp/northpark/images/mainhero1.png","? ENTRIES","2011"],
-    ["2012","","/sp/northpark/images/mainhero1.png","? ENTRIES","2012"]
+    ["timelordwannabe","The original archive: an unruly year of posts, fandom, everyday life and internet-era oversharing.","/diary/images/2008.png","623 ENTRIES","2008"],
+    ["timelordwannabe","Another year from the old web, preserving the small dramas, obsessions and passing thoughts of 2009.","/diary/images/2009.png","419+ ENTRIES","2009"],
+    ["2010","A missing chapter of the archive. The diary itself is not currently available, but the year remains part of the timeline.","/sp/northpark/images/mainhero1.png","? ENTRIES","2010"],
+    ["2011","Another lost stretch of the diary years, represented here even though the original entries are currently unavailable.","/sp/northpark/images/mainhero1.png","? ENTRIES","2011"],
+    ["2012","The final missing year before the long gap in the archive, kept in place as part of the wider diary timeline.","/sp/northpark/images/mainhero1.png","? ENTRIES","2012"]
   ],
 
   2: [
-    ["the wanderer","","/diary/images/2021.png","# ENTRIES","2021"],
-    ["eclectic ephemera","","/diary/images/2022.png","# ENTRIES","2022"],
-    ["northern soul","","/diary/images/2023.png","# ENTRIES","2023"],
-    ["little by little","","/diary/images/2024.png","# ENTRIES","2024"],
-    ["dark disquiet","","/diary/images/2025.png","# ENTRIES","2025"],
-    ["temporal orbit","","/diary/images/2026.png","# ENTRIES","2026"]
+    ["the wanderer","A return to keeping track of things: fragments of daily life, rediscovery and finding a way through 2021.","/diary/images/2021.png","# ENTRIES","2021"],
+    ["eclectic ephemera","A scrapbook year of passing interests, rediscoveries, small moments and whatever happened to stick around.","/diary/images/2022.png","# ENTRIES","2022"],
+    ["northern soul","Life in the north, documented in real time: ordinary days, changing moods, familiar places and new chapters.","/diary/images/2023.png","# ENTRIES","2023"],
+    ["little by little","A year built from small steps, quiet changes and the everyday pieces that gradually became something bigger.","/diary/images/2024.png","# ENTRIES","2024"],
+    ["dark disquiet","A restless year of uncertainty, reflection and trying to find something solid among the noise.","/diary/images/2025.png","# ENTRIES","2025"],
+    ["temporal orbit","The current diary: circling old obsessions, new projects and the strange little details of life in 2026.","/diary/images/2026.png","# ENTRIES","2026"]
   ]
 };
 
@@ -1995,7 +2004,12 @@ function renderModal(){
   modalEpisode.textContent = diaryYear;
   modalDate.textContent = episode[3];
   if (modalEntriesLink) {
-    modalEntriesLink.href = diaryEntryLinks[String(diaryYear)] || "#";
+    const entriesUrl = diaryEntryLinks[String(diaryYear)];
+    const hasEntriesPage = Boolean(entriesUrl);
+    modalEntriesLink.href = hasEntriesPage ? entriesUrl : "#";
+    modalEntriesLink.classList.toggle("is-disabled", !hasEntriesPage);
+    modalEntriesLink.setAttribute("aria-disabled", String(!hasEntriesPage));
+    modalEntriesLink.tabIndex = hasEntriesPage ? 0 : -1;
   }
 
   modalTitle.textContent = episode[0];
@@ -2006,18 +2020,33 @@ function renderModal(){
   updateNavigation();
 }
 
-function openModal(index){
+function modalHashForCurrentYear(){
+  return `#diary-${diaryYearFor(currentSeason,currentEpisode)}`;
+}
+
+function updateModalUrl(replace = false){
+  const hash = modalHashForCurrentYear();
+  if(window.location.hash === hash) return;
+  if(replace) history.replaceState(null,"",hash);
+  else history.pushState(null,"",hash);
+}
+
+function openModal(index,{updateUrl = true, replaceUrl = false} = {}){
   currentEpisode = Math.max(0,Math.min(Number(index),activeEpisodes().length - 1));
   renderModal();
   modal.classList.add("open");
   modal.setAttribute("aria-hidden","false");
   document.body.style.overflow = "hidden";
+  if(updateUrl) updateModalUrl(replaceUrl);
 }
 
-function closeModal(){
+function closeModal({clearUrl = true} = {}){
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden","true");
   document.body.style.overflow = "";
+  if(clearUrl && /^#diary-\d{4}$/.test(window.location.hash)){
+    history.pushState(null,"",window.location.pathname + window.location.search);
+  }
 }
 
 function moveModal(direction){
@@ -2042,6 +2071,7 @@ function moveModal(direction){
     }
 
     renderModal();
+    updateModalUrl();
 
     modalBody.classList.remove("fade-out-next","fade-out-prev");
     modalBody.classList.add(goingNext ? "fade-in-next" : "fade-in-prev");
@@ -2056,6 +2086,32 @@ function moveModal(direction){
 
 renderSeasonTabs();
 renderEpisodeRail();
+
+function openModalFromHash(){
+  const match = window.location.hash.match(/^#diary-(\d{4})$/);
+  if(!match) return false;
+
+  const year = match[1];
+  for(const season of seasonNumbers){
+    const index = seasons[season].findIndex((_,i) => diaryYearFor(season,i) === year);
+    if(index !== -1){
+      currentSeason = season;
+      currentEpisode = index;
+      renderSeasonTabs();
+      renderEpisodeRail();
+      openModal(index,{updateUrl:false});
+      return true;
+    }
+  }
+  return false;
+}
+
+openModalFromHash();
+
+window.addEventListener("popstate",() => {
+  if(openModalFromHash()) return;
+  if(modal.classList.contains("open")) closeModal({clearUrl:false});
+});
 
 seasonTabs.addEventListener("click",event => {
   const tab = event.target.closest("[data-season]");
@@ -2074,8 +2130,13 @@ episodeRail.addEventListener("keydown",event => {
   openModal(Number(card.dataset.open));
 });
 
-document.querySelector(".hero [data-open]")?.addEventListener("click",event => {
-  openModal(Number(event.currentTarget.dataset.open));
+document.querySelector(".hero [data-open]")?.addEventListener("click",() => {
+  const latestSeason = seasonNumbers[seasonNumbers.length - 1];
+  currentSeason = latestSeason;
+  currentEpisode = seasons[latestSeason].length - 1;
+  renderSeasonTabs();
+  renderEpisodeRail();
+  openModal(currentEpisode);
 });
 
 document.querySelectorAll(".arrow").forEach(button => {
