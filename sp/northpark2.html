@@ -107,10 +107,10 @@ a{
 
 .hero-logo{
   display:block;
-  width:clamp(300px,34vw,500px);
-  max-width:78vw;
+  width:clamp(320px,30vw,460px);
+  max-width:72vw;
   height:auto;
-  margin:0 0 22px;
+  margin:0 0 20px;
   object-fit:contain;
   object-position:left center;
   filter:drop-shadow(0 5px 22px rgba(0,0,0,.34));
@@ -447,7 +447,7 @@ a{
 
   .hero-content{
     width:auto;
-    margin:0 20px 125px;
+    margin:0 20px 92px;
   }
 
   .hero h1{
@@ -737,6 +737,11 @@ a{
 }
 
 @media (max-width:700px){
+  .hero-logo{
+    width:min(400px,72vw);
+    max-width:72vw;
+  }
+
   .hero{
     min-height:500px;
     height:68svh;
@@ -1361,13 +1366,6 @@ a{
 }
 
 @media (max-width:580px){
-  .hero-logo{
-    width:min(360px,76vw);
-    max-width:76vw;
-    margin-bottom:17px;
-  }
-
-
   .site-header{
     gap:12px;
     padding:0 16px;
@@ -1482,10 +1480,10 @@ a{
 
 .hero-content{
   width:min(700px,88vw);
-  margin:0 0 clamp(110px,13vh,155px) clamp(22px,5vw,78px);
+  margin:0 0 clamp(92px,11vh,125px) clamp(22px,5vw,78px);
   position:relative;
   z-index:3;
-  transform:translateY(-46px);
+  transform:none;
 }
 
 .hero-actions .btn[data-open]{
@@ -1540,7 +1538,15 @@ a{
 }
 
 @media (max-width:580px){
-  
+  .hero-logo{
+    width:min(350px,74vw);
+    max-width:74vw;
+    margin-bottom:17px;
+  }
+
+  .hero-content{
+    margin-bottom:82px;
+  }
 }
 
 </style>
