@@ -249,13 +249,24 @@ a{
   display:grid;
   place-items:center;
   cursor:pointer;
-  font-size:1.4rem;
+  font-size:1.9rem;
+  font-weight:700;
+  line-height:1;
   transition:.18s ease;
 }
 
-.arrow:hover{
+.arrow:hover:not(:disabled){
   background:#fff;
   color:#000;
+}
+
+.arrow:disabled{
+  opacity:.28;
+  color:rgba(255,255,255,.42);
+  border-color:rgba(255,255,255,.08);
+  background:rgba(17,20,26,.38);
+  cursor:default;
+  pointer-events:none;
 }
 
 .rail{
@@ -431,21 +442,7 @@ a{
 
 @media (max-width:760px){
   :root{
-    --header-h:96px;
-  }
-
-  .site-header{
-    gap:20px;
-    padding:0 18px;
-    border-bottom:0;
-  }
-
-  .site-header.is-scrolled{
-    border-bottom:0;
-  }
-
-  .nav{
-    display:none;
+    --header-h:62px;
   }
 
   .hero{
@@ -453,10 +450,6 @@ a{
     align-items:flex-end;
   }
 
-  .hero-content{
-    width:auto;
-    margin:0 20px 125px;
-  }
 
   .hero-title{
     max-width:100%;
@@ -515,11 +508,6 @@ a{
     padding:0;
   }
 
-  .arrow svg{
-    width:16px;
-    height:16px;
-  }
-
   .promo{
     width:var(--shell);
     margin:44px auto 56px;
@@ -571,13 +559,8 @@ a{
   }
 
   .footer{
-    width:100%;
     margin-top:0;
-    padding:30px 22px 32px;
-    border-top:1px solid rgba(255,255,255,.09);
-    background:#090c12;
     color:rgba(255,255,255,.48);
-    text-align:center;
   }
 }
 
@@ -594,11 +577,6 @@ a{
     width:32px;
     height:32px;
     min-width:32px;
-  }
-
-  .arrow svg{
-    width:15px;
-    height:15px;
   }
 }
 
@@ -1332,7 +1310,6 @@ a{
 }
 
 .site-header{
-  border-bottom:0;
   background:linear-gradient(to bottom,rgba(0,0,0,.72),transparent);
   transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease,-webkit-backdrop-filter .25s ease;
   height:var(--header-h);
@@ -1343,6 +1320,7 @@ a{
   display:flex;
   align-items:center;
   gap:34px;
+  border-bottom:0;
 }
 
 .brand{
@@ -1357,12 +1335,14 @@ a{
   flex:0 0 auto;
 }
 
+/* Keep the diary avatar image while using the North Park header layout. */
 .brand img{
   display:block;
-  width:auto;
-  height:70px;
-  max-width:205px;
-  object-fit:contain;
+  width:54px;
+  height:54px;
+  max-width:none;
+  border-radius:50%;
+  object-fit:cover;
 }
 
 .nav{
@@ -1395,8 +1375,8 @@ a{
   }
 
   .brand img{
+    width:44px;
     height:44px;
-    max-width:170px;
   }
 
   .nav{
@@ -1411,24 +1391,23 @@ a{
 }
 
 @media (max-width:580px){
-  :root{
-    --header-h:96px;
+  .hero{
+    min-height:calc(500px + var(--header-h));
+  }
+
+  .hero-content{
+    transform:none;
+    margin-top:var(--header-h);
   }
 
   .site-header{
     gap:12px;
     padding:0 16px;
-    background:#07090d;
-  }
-
-  /* Reserve real layout space for the fixed header on the smallest screens. */
-  .hero{
-    margin-top:var(--header-h);
   }
 
   .brand img{
+    width:43px;
     height:43px;
-    max-width:165px;
   }
 
   .nav{
@@ -1437,8 +1416,8 @@ a{
 
   .menu-toggle{
     appearance:none;
-    width:48px;
-    height:48px;
+    width:40px;
+    height:40px;
     margin-left:auto;
     padding:0;
     border:1px solid rgba(255,255,255,.18);
@@ -1578,6 +1557,11 @@ a{
 }
 
 @media (max-width:760px){
+  .hero-content{
+    width:auto;
+    margin:0 20px 125px;
+  }
+
   #episodes .card h3{
     font-size:1.12rem;
   }
@@ -1609,14 +1593,7 @@ a{
     text-wrap:balance;
   }
 }
-/* Diary index conversion */
-.brand img{
-  width:54px;
-  height:54px;
-  max-width:none;
-  border-radius:50%;
-  object-fit:cover;
-}
+/* Diary index wordmark */
 .hero-word-lewislc{
   margin:0;
   white-space:nowrap;
@@ -1630,7 +1607,7 @@ a{
 .hero-word-lewislc span:nth-child(7){transform:translateY(-2px) rotate(-2deg);}
 .hero-word-lewislc span:nth-child(8){transform:translateY(1px) rotate(1.5deg);}
 
-@media(max-width:600px){
+@media (max-width:600px){
   .diary-entry-row{grid-template-columns:42px minmax(0,1fr);}
   .diary-entry-title{font-size:.78rem;padding:9px 10px;}
 }
@@ -1641,7 +1618,7 @@ a{
 <body>
 
 <header class="site-header">
-  <a class="brand" href="#" aria-label="North Park home">
+  <a class="brand" href="#" aria-label="Lewis.LC home">
       <img src="https://lewis.lc/diary/images/avatar.png" alt="Lewis.LC">
     </a>
   <nav class="nav">
@@ -2133,15 +2110,40 @@ document.querySelector(".hero [data-open]")?.addEventListener("click",() => {
   openModal(currentEpisode);
 });
 
+function updateRailArrows(rail){
+  if(!rail) return;
+  const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+  const atStart = rail.scrollLeft <= 2;
+  const atEnd = rail.scrollLeft >= maxScroll - 2;
+
+  document.querySelectorAll(`.arrow[data-rail="${rail.id}"]`).forEach(button => {
+    const dir = Number(button.dataset.dir);
+    button.disabled = dir < 0 ? atStart : atEnd;
+    button.setAttribute("aria-disabled", String(button.disabled));
+  });
+}
+
 document.querySelectorAll(".arrow").forEach(button => {
+  const rail = document.getElementById(button.dataset.rail);
+  if(!rail) return;
+
   button.addEventListener("click",() => {
-    const rail = document.getElementById(button.dataset.rail);
-    rail?.scrollBy({
+    rail.scrollBy({
       left:rail.clientWidth * .78 * Number(button.dataset.dir),
       behavior:"smooth"
     });
   });
+
+  rail.addEventListener("scroll",() => updateRailArrows(rail), {passive:true});
+  updateRailArrows(rail);
 });
+
+window.addEventListener("resize",() => {
+  document.querySelectorAll(".rail").forEach(updateRailArrows);
+});
+
+const railArrowObserver = new MutationObserver(() => updateRailArrows(episodeRail));
+railArrowObserver.observe(episodeRail, {childList:true});
 
 closeModalButton.addEventListener("click",closeModal);
 
