@@ -431,7 +431,7 @@ a{
 
 @media (max-width:760px){
   :root{
-    --header-h:62px;
+    --header-h:96px;
   }
 
   .site-header{
@@ -655,10 +655,6 @@ a{
 .hero-word-park span:nth-child(2){transform:translateY(3px) rotate(-2.4deg);}
 .hero-word-park span:nth-child(3){transform:translateY(-2px) rotate(1.3deg);}
 .hero-word-park span:nth-child(4){transform:translateY(1px) rotate(-2deg);}
-
-.site-header, .site-header.is-scrolled{
-  border-bottom:0;
-}
 
 .promo-actions{
   margin-top:22px;
@@ -1336,6 +1332,7 @@ a{
 }
 
 .site-header{
+  border-bottom:0;
   background:linear-gradient(to bottom,rgba(0,0,0,.72),transparent);
   transition:background .25s ease,border-color .25s ease,backdrop-filter .25s ease,-webkit-backdrop-filter .25s ease;
   height:var(--header-h);
@@ -1414,9 +1411,19 @@ a{
 }
 
 @media (max-width:580px){
+  :root{
+    --header-h:96px;
+  }
+
   .site-header{
     gap:12px;
     padding:0 16px;
+    background:#07090d;
+  }
+
+  /* Reserve real layout space for the fixed header on the smallest screens. */
+  .hero{
+    margin-top:var(--header-h);
   }
 
   .brand img{
@@ -1430,8 +1437,8 @@ a{
 
   .menu-toggle{
     appearance:none;
-    width:40px;
-    height:40px;
+    width:48px;
+    height:48px;
     margin-left:auto;
     padding:0;
     border:1px solid rgba(255,255,255,.18);
@@ -1517,9 +1524,6 @@ a{
     grid-auto-columns:min(84vw,365px);
   }
 
-  {
-    font-size:1.05rem;
-  }
 
   #episodes .card p{
     font-size:.82rem;
@@ -1625,15 +1629,12 @@ a{
 .hero-word-lewislc span:nth-child(6){transform:translateY(1px) rotate(1.4deg);}
 .hero-word-lewislc span:nth-child(7){transform:translateY(-2px) rotate(-2deg);}
 .hero-word-lewislc span:nth-child(8){transform:translateY(1px) rotate(1.5deg);}
-@media (max-width:760px){
-  .brand img{width:44px;height:44px;}
-}
-
 
 @media(max-width:600px){
   .diary-entry-row{grid-template-columns:42px minmax(0,1fr);}
   .diary-entry-title{font-size:.78rem;padding:9px 10px;}
 }
+
 
 </style>
 </head>
