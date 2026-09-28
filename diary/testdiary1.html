@@ -10,13 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@6..144,100..1000&display=swap" rel="stylesheet">
 
 <style>
-@font-face {
-  font-family: "South Park";
-  src: url("https://lewis.lc/sp/south%20park.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+
 
 :root{
   --shell:min(1240px,calc(100% - 44px));
@@ -249,8 +243,7 @@ a{
   display:grid;
   place-items:center;
   cursor:pointer;
-  font-size:1.9rem;
-  font-weight:700;
+  font-size:1.4rem;
   line-height:1;
   transition:.18s ease;
 }
@@ -1592,7 +1585,17 @@ a{
     line-height:.92;
     text-wrap:balance;
   }
+
+  .diary-entry-row{
+    grid-template-columns:42px minmax(0,1fr);
+  }
+
+  .diary-entry-title{
+    font-size:.78rem;
+    padding:9px 10px;
+  }
 }
+
 /* Diary index wordmark */
 .hero-word-lewislc{
   margin:0;
@@ -1606,11 +1609,6 @@ a{
 .hero-word-lewislc span:nth-child(6){transform:translateY(1px) rotate(1.4deg);}
 .hero-word-lewislc span:nth-child(7){transform:translateY(-2px) rotate(-2deg);}
 .hero-word-lewislc span:nth-child(8){transform:translateY(1px) rotate(1.5deg);}
-
-@media (max-width:600px){
-  .diary-entry-row{grid-template-columns:42px minmax(0,1fr);}
-  .diary-entry-title{font-size:.78rem;padding:9px 10px;}
-}
 
 
 </style>
