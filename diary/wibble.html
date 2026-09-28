@@ -1589,6 +1589,28 @@ a{
     background:rgba(255,255,255,.07);
   }
 }
+
+/* Mobile hero/header clearance + stronger rail peek */
+@media (max-width:760px){
+  .hero-content{
+    transform:translateY(-18px);
+  }
+
+  #episodes .rail{
+    grid-auto-columns:min(76vw,330px);
+  }
+}
+
+@media (max-width:430px){
+  .hero-content{
+    transform:translateY(-10px);
+  }
+
+  #episodes .rail{
+    grid-auto-columns:76vw;
+  }
+}
+
 </style>
 </head>
 <body>
