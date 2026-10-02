@@ -5272,15 +5272,15 @@ body.modal-open .current-season-scrap {
   flex: 0 0 .25em;
 }
 
-.guide-logo > span:nth-child(1) { transform: rotate(-.38deg) translateY(.3px); }
-.guide-logo > span:nth-child(2) { transform: rotate(.24deg) translateY(-.2px); }
-.guide-logo > span:nth-child(3) { transform: rotate(-.16deg) translateY(.15px); }
-.guide-logo > span:nth-child(4) { transform: rotate(.34deg) translateY(-.25px); }
-.guide-logo > span:nth-child(5) { transform: rotate(-.22deg) translateY(.2px); }
-.guide-logo > span:nth-child(7) { transform: rotate(.28deg) translateY(-.15px); }
-.guide-logo > span:nth-child(8) { transform: rotate(-.31deg) translateY(.25px); }
-.guide-logo > span:nth-child(9) { transform: rotate(.18deg) translateY(-.2px); }
-.guide-logo > span:nth-child(10) { transform: rotate(-.26deg) translateY(.15px); }
+.guide-logo > span:nth-child(1) { transform: translateY(2px) rotate(-3deg); }
+.guide-logo > span:nth-child(2) { transform: translateY(-3px) rotate(1.8deg); }
+.guide-logo > span:nth-child(3) { transform: translateY(1px) rotate(-1.2deg); }
+.guide-logo > span:nth-child(4) { transform: translateY(-2px) rotate(2.5deg); }
+.guide-logo > span:nth-child(5) { transform: translateY(2px) rotate(-1.8deg); }
+.guide-logo > span:nth-child(7) { transform: translateY(-1px) rotate(2.2deg); }
+.guide-logo > span:nth-child(8) { transform: translateY(3px) rotate(-2.4deg); }
+.guide-logo > span:nth-child(9) { transform: translateY(-2px) rotate(1.3deg); }
+.guide-logo > span:nth-child(10) { transform: translateY(1px) rotate(-2deg); }
 
 /* SOUTH PARK logo — slightly more jagged handmade silhouette */
 .guide-logo > span:not(.logo-gap) {
@@ -5293,15 +5293,15 @@ body.modal-open .current-season-scrap {
 }
 
 /* A touch more irregularity than the previous version, still restrained. */
-.guide-logo > span:nth-child(1) { transform: rotate(-.62deg) translateY(.5px); }
-.guide-logo > span:nth-child(2) { transform: rotate(.48deg) translateY(-.35px); }
-.guide-logo > span:nth-child(3) { transform: rotate(-.34deg) translateY(.3px); }
-.guide-logo > span:nth-child(4) { transform: rotate(.58deg) translateY(-.4px); }
-.guide-logo > span:nth-child(5) { transform: rotate(-.44deg) translateY(.4px); }
-.guide-logo > span:nth-child(7) { transform: rotate(.52deg) translateY(-.3px); }
-.guide-logo > span:nth-child(8) { transform: rotate(-.57deg) translateY(.45px); }
-.guide-logo > span:nth-child(9) { transform: rotate(.38deg) translateY(-.35px); }
-.guide-logo > span:nth-child(10) { transform: rotate(-.49deg) translateY(.3px); }
+.guide-logo > span:nth-child(1) { transform: translateY(2px) rotate(-3deg); }
+.guide-logo > span:nth-child(2) { transform: translateY(-3px) rotate(1.8deg); }
+.guide-logo > span:nth-child(3) { transform: translateY(1px) rotate(-1.2deg); }
+.guide-logo > span:nth-child(4) { transform: translateY(-2px) rotate(2.5deg); }
+.guide-logo > span:nth-child(5) { transform: translateY(2px) rotate(-1.8deg); }
+.guide-logo > span:nth-child(7) { transform: translateY(-1px) rotate(2.2deg); }
+.guide-logo > span:nth-child(8) { transform: translateY(3px) rotate(-2.4deg); }
+.guide-logo > span:nth-child(9) { transform: translateY(-2px) rotate(1.3deg); }
+.guide-logo > span:nth-child(10) { transform: translateY(1px) rotate(-2deg); }
 
 /* SOUTH PARK logo — subtle letter jump on reset.
    Uses top/left rather than individual transform properties so it remains
@@ -7632,7 +7632,7 @@ body.modal-open #activeFilters {
             aria-label="Reset South Park episode guide"
             data-tooltip="Reset episode guide"
             data-tooltip-position="right"
-          ><span>S</span><span>O</span><span>U</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></h1>
+          ><span>N</span><span>O</span><span>R</span><span>T</span><span>H</span><span class="logo-gap" aria-hidden="true"></span><span>P</span><span>A</span><span>R</span><span>K</span></h1>
           <div class="guide-subtitle">EPISODE GUIDE</div>
         </div>
 
@@ -8353,17 +8353,6 @@ const episodes = [
   },
 
   {
-    type: "movie",
-    order: 250,
-    title: "South Park: Bigger, Longer & Uncut",
-    date: "30 June 1999",
-    year: 1999,
-    image: "/sp/img/blau.png",
-    description:
-      "When Stan, Kyle, Cartman and Kenny sneak into an R-rated Terrance and Phillip movie, their parents launch a campaign that escalates into war with Canada."
-  },
-
-  {
     season: 3,
     episode: 1,
     title: "Rainforest Shmainforest",
@@ -8553,19 +8542,6 @@ const episodes = [
     description:
       "People from all over the world start to gather outside Jesus' house waiting for a millennium miracle.",
     featured: false
-  },
-
-   
-   {
-    season: 4,
-    episode: 1,
-    title: "TBA",
-    date: "16 September 2026",
-    year: 2026,
-    image: "/sp/img/titlecard.png",
-    description:
-      "TBA.",
-    featured: true
   }
 
 ];
