@@ -115,6 +115,9 @@ header {
 }
 
 .topsearch button {
+    opacity:1;
+    color:var(--text);
+    cursor:default;
     background:var(--subtle);
     border:0;
     border-left:1px solid var(--border);
@@ -197,7 +200,6 @@ h1 {
     font-weight:normal;
     line-height:1.3;
     margin:0 0 8px;
-    border-bottom: 1px solid var(--line);
 }
 
 h2 {
@@ -496,7 +498,7 @@ header .brand {
         margin-left:0;
     }
 }
-</style></head><body><header><a class="brand" href="#top"><span class="mark">SP</span><span><strong>South Park</strong><small>Encyclopaedia</small></span></a><form class="topsearch" id="top-form"><input id="top-query" placeholder="Search South Park Encyclopaedia" aria-label="Search episodes"><button type="submit">Search</button></form><div class="account"><a href="#about">About</a><a href="https://en.wikipedia.org/wiki/List_of_South_Park_episodes" target="_blank" rel="noopener">Source article ↗</a></div></header>
+</style></head><body><header><a class="brand" href="#top"><span class="mark">SP</span><span><strong>South Park</strong><small>Encyclopaedia</small></span></a><div class="topsearch" role="search" aria-label="Search preview"><input id="top-query" placeholder="Search..." aria-label="Search (visual only)" readonly tabindex="-1"><button type="button" disabled>Search</button></div><div class="account"><a href="#about">About</a><a href="https://en.wikipedia.org/wiki/List_of_South_Park_episodes" target="_blank" rel="noopener">Source article ↗</a></div></header>
 <div class="shell" id="top"><aside class="sidebar" id="sidebar"><div class="side-title">Contents <button id="hide-toc">hide</button></div><nav class="toc" id="toc"><a class="toplink" href="#top">(Top)</a><a href="#overview">Series overview</a><button class="toc-episodes-toggle" id="episodes-toggle" aria-expanded="false" aria-controls="toc-seasons"><svg class="toc-chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Episodes</span></button><div id="toc-seasons" hidden><a class="child" href="#season-1">Season 1</a><a class="child" href="#season-2">Season 2</a><a class="child" href="#season-3">Season 3</a><a class="child" href="#season-4">Season 4</a><a class="child" href="#season-5">Season 5</a></div><a href="#about">About this page</a><a href="#references">References and attribution</a></nav></aside>
 <main><h1>List of South Park episodes</h1>
 <p><b><i>South Park</i></b> is an American animated television series created by Trey Parker and Matt Stone. This page presents the first five seasons in an encyclopaedia-style format with sample episode entries.</p><p>The series premiered on Comedy Central on 13 August 1997. Browse the five-season overview or jump to an individual season to explore the episode tables.</p>
@@ -644,8 +646,7 @@ header .brand {
 <script>
 'use strict';
 const $ = id => document.getElementById(id);
-function filterEpisodes(){const q=$('top-query').value.trim().toLowerCase();document.querySelectorAll('.episode-section').forEach(section=>{let matches=0;section.querySelectorAll('tbody tr').forEach(row=>{const hit=!q||row.textContent.toLowerCase().includes(q);row.hidden=!hit;if(hit)matches++});section.hidden=!!q&&!matches});}
-$('top-form').onsubmit=e=>{e.preventDefault();filterEpisodes();location.hash='episodes'};$('episodes-toggle').onclick=()=>{const el=$('toc-seasons');el.hidden=!el.hidden;$('episodes-toggle').setAttribute('aria-expanded',String(!el.hidden));};$('hide-toc').onclick=()=>$('toc').hidden=!$('toc').hidden;
+$('episodes-toggle').onclick=()=>{const el=$('toc-seasons');el.hidden=!el.hidden;$('episodes-toggle').setAttribute('aria-expanded',String(!el.hidden));};$('hide-toc').onclick=()=>$('toc').hidden=!$('toc').hidden;
 // On narrow screens, place Contents between the introduction and series overview.
 const contentsSidebar=document.getElementById('sidebar');
 const articleMain=document.querySelector('.shell > main');
