@@ -1,20 +1,501 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>List of South Park episodes — South Park Encyclopaedia</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#fff;--text:#202122;--muted:#54595d;--border:#a2a9b1;--line:#c8ccd1;--link:#36c;--subtle:#f8f9fa;--head:#eaecf0;--font:15px;--article-width:960px}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--text);font-family:"Inter",Arial,sans-serif;font-size:var(--font);line-height:1.65}a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}button,input{font:inherit}button{cursor:pointer}header{height:70px;display:flex;align-items:center;gap:32px;padding:0 clamp(18px,4vw,64px);border-bottom:1px solid #eaecf0}.brand{display:flex;align-items:center;gap:12px;min-width:230px;color:var(--text)}.brand:hover{text-decoration:none}.mark{height:42px;width:42px;border-radius:50%;background:#293f67;color:#fff;display:grid;place-items:center;font-family:"Inter",Arial,sans-serif;font-size:20px;font-weight:bold}.brand strong{font-family:"Inter",Arial,sans-serif;display:block;font-size:20px;line-height:1.1;font-weight:500}.brand small{display:block;letter-spacing:1.2px;font-size:10px;color:var(--muted);text-transform:uppercase}.topsearch{display:flex;width:min(480px,42vw);height:34px;border:1px solid var(--border)}.topsearch input{border:0;outline:0;min-width:0;flex:1;padding:0 12px}.topsearch button{background:var(--subtle);border:0;border-left:1px solid var(--border);font-weight:bold;padding:0 14px}.account{margin-left:auto;display:flex;gap:15px;font-size:13px;white-space:nowrap}.shell{max-width:1660px;margin:auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:42px;padding:38px clamp(18px,4vw,60px) 80px}.sidebar{font-size:14px;align-self:start;position:sticky;top:20px;max-height:calc(100vh - 35px);overflow:auto}.side-title{display:flex;align-items:center;justify-content:space-between;font-weight:bold;border-bottom:1px solid var(--line);padding:0 0 7px;margin-bottom:10px}.side-title button{border:0;background:none;color:var(--link);font-size:13px;font-weight:normal}.toc a{display:block;padding:4px 0;color:var(--text);line-height:1.4}.toc a:hover,.toc a.active{color:var(--link)}.toc .child{padding-left:18px;font-size:13px}.toc .toplink{color:var(--link)}main{min-width:0;max-width:100%}h1{font-family:"Inter",Arial,sans-serif;font-size:31px;font-weight:normal;line-height:1.3;margin:0 0 8px}h2{font-family:"Inter",Arial,sans-serif;font-size:25px;font-weight:normal;line-height:1.3;border-bottom:1px solid var(--border);padding-bottom:5px;margin:31px 0 10px}h3{font-family:"Inter",Arial,sans-serif;font-size:18px;margin:27px 0 8px}p{margin:8px 0 13px}.muted{color:var(--muted)}.scrolltable{overflow-x:auto;margin:12px 0 22px}.wikitable{border-collapse:collapse;background:var(--subtle);font-size:14px;line-height:1.5;width:auto;min-width:100%}.wikitable th,.wikitable td{border:1px solid var(--border);padding:5px 8px;vertical-align:middle}.wikitable th{background:var(--head);text-align:center;font-weight:bold}.wikitable td{text-align:center}.wikitable td:nth-child(3){text-align:left}.wikitable tr:hover td{background:rgba(150,170,210,.11)}.wikitable a{color:var(--link)}.wikitable .sortkey,.wikitable .reference{display:none}.wikitable .mw-empty-elt{display:none}.wikitable .plainlist ul{list-style:none;margin:0;padding:0}.wikitable .nowrap{white-space:nowrap}#overview-table .wikitable tbody td:nth-child(3){text-align:center}.section-title{scroll-margin-top:15px}.main-article{font-style:italic;font-size:14px;margin:6px 0}.footer{border-top:1px solid var(--line);margin-top:48px;padding-top:15px;color:var(--muted);font-size:13px}.footer p{margin:8px 0}.episode-section[hidden],.wikitable tr[hidden]{display:none!important}#article-content{min-height:160px}sup{line-height:0}sup a{font-size:12px}.mw-cite-backlink,.mw-editsection,.reference-text{font-size:13px}@media(max-width:1150px){.shell{grid-template-columns:175px minmax(0,1fr);gap:28px}.account{display:none}}@media(max-width:760px){header{height:62px;gap:10px;padding:0 14px}.brand{min-width:0}.brand strong{font-size:17px}.brand small{font-size:9px}.mark{width:34px;height:34px;font-size:16px}.topsearch{width:auto;flex:1}.topsearch button{display:none}.shell{display:block;padding:24px 15px 55px}.sidebar{display:none;position:static;max-height:350px;border:1px solid var(--line);padding:12px;margin-bottom:20px}.sidebar.open{display:block}h1{font-size:28px}.wikitable{font-size:13px}.wikitable th,.wikitable td{padding:4px 6px}}@media print{header,.sidebar{display:none!important}.shell{display:block;padding:0}.scrolltable{overflow:visible}a{color:#202122}}
- 
+:root {
+    --bg:#fff;
+    --text:#202122;
+    --muted:#54595d;
+    --border:#a2a9b1;
+    --line:#c8ccd1;
+    --link:#36c;
+    --subtle:#f8f9fa;
+    --head:#eaecf0;
+    --font:15px;
+    --article-width:960px;
+}
+
+* {
+    box-sizing:border-box;
+}
+
+html {
+    scroll-behavior:smooth;
+    scroll-padding-top:28px;
+}
+
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Inter",Arial,sans-serif;
+    font-size:var(--font);
+    line-height:1.65;
+}
+
+a {
+    color:var(--link);
+    text-decoration:none;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
+button,input {
+    font:inherit;
+}
+
+button {
+    cursor:pointer;
+}
+
+header {
+    height:70px;
+    display:flex;
+    align-items:center;
+    gap:32px;
+    padding:0 clamp(18px,4vw,64px);
+    border-bottom:1px solid #eaecf0;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:230px;
+    color:var(--text);
+}
+
+.brand:hover {
+    text-decoration:none;
+}
+
+.mark {
+    height:42px;
+    width:42px;
+    border-radius:50%;
+    background:#293f67;
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-family:"Inter",Arial,sans-serif;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.brand strong {
+    font-family:"Inter",Arial,sans-serif;
+    display:block;
+    font-size:20px;
+    line-height:1.1;
+    font-weight:500;
+}
+
+.brand small {
+    display:block;
+    letter-spacing:1.2px;
+    font-size:10px;
+    color:var(--muted);
+    text-transform:uppercase;
+}
+
+.topsearch {
+    display:flex;
+    width:min(480px,42vw);
+    height:34px;
+    border:1px solid var(--border);
+}
+
+.topsearch input {
+    border:0;
+    outline:0;
+    min-width:0;
+    flex:1;
+    padding:0 12px;
+}
+
+.topsearch button {
+    background:var(--subtle);
+    border:0;
+    border-left:1px solid var(--border);
+    font-weight:bold;
+    padding:0 14px;
+}
+
+.account {
+    margin-left:auto;
+    display:flex;
+    gap:15px;
+    font-size:13px;
+    white-space:nowrap;
+}
+
+.shell {
+    max-width:1660px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:200px minmax(0,1fr);
+    gap:42px;
+    padding:38px clamp(18px,4vw,60px) 80px;
+}
+
+.sidebar {
+    font-size:14px;
+    align-self:start;
+    position:sticky;
+    top:20px;
+    max-height:calc(100vh - 35px);
+    overflow:auto;
+}
+
+.side-title {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-weight:bold;
+    border-bottom:1px solid var(--line);
+    padding:0 0 7px;
+    margin-bottom:10px;
+}
+
+.side-title button {
+    border:0;
+    background:none;
+    color:var(--link);
+    font-size:13px;
+    font-weight:normal;
+}
+
+.toc a {
+    display:block;
+    padding:4px 0;
+    color:var(--text);
+    line-height:1.4;
+}
+
+.toc a:hover,.toc a.active {
+    color:var(--link);
+}
+
+.toc .child {
+    padding-left:18px;
+    font-size:13px;
+}
+
+.toc .toplink {
+    color:var(--link);
+}
+
+main {
+    min-width:0;
+    max-width:100%;
+}
+
+h1 {
+    font-family:"Inter",Arial,sans-serif;
+    font-size:31px;
+    font-weight:normal;
+    line-height:1.3;
+    margin:0 0 8px;
+    border-bottom: 1px solid var(--line);
+}
+
+h2 {
+    font-family:"Inter",Arial,sans-serif;
+    font-size:25px;
+    font-weight:normal;
+    line-height:1.3;
+    border-bottom:1px solid var(--border);
+    padding-bottom:5px;
+    margin:31px 0 10px;
+}
+
+h3 {
+    font-family:"Inter",Arial,sans-serif;
+    font-size:18px;
+    margin:27px 0 8px;
+}
+
+p {
+    margin:8px 0 13px;
+}
+
+.muted {
+    color:var(--muted);
+}
+
+.scrolltable {
+    overflow-x:auto;
+    margin:12px 0 22px;
+}
+
+.wikitable {
+    border-collapse:collapse;
+    background:var(--subtle);
+    font-size:14px;
+    line-height:1.5;
+    width:auto;
+    min-width:100%;
+}
+
+.wikitable th,.wikitable td {
+    border:1px solid var(--border);
+    padding:5px 8px;
+    vertical-align:middle;
+}
+
+.wikitable th {
+    background:var(--head);
+    text-align:center;
+    font-weight:bold;
+}
+
+.wikitable td {
+    text-align:center;
+}
+
+.wikitable td:nth-child(3) {
+    text-align:left;
+}
+
+.wikitable tr:hover td {
+    background:rgba(150,170,210,.11);
+}
+
+.wikitable a {
+    color:var(--link);
+}
+
+.wikitable .sortkey,.wikitable .reference {
+    display:none;
+}
+
+.wikitable .mw-empty-elt {
+    display:none;
+}
+
+.wikitable .plainlist ul {
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+
+.wikitable .nowrap {
+    white-space:nowrap;
+}
+
+#overview-table .wikitable tbody td:nth-child(3) {
+    text-align:center;
+}
+
+.section-title {
+    scroll-margin-top:15px;
+}
+
+.main-article {
+    font-style:italic;
+    font-size:14px;
+    margin:6px 0;
+}
+
+.footer {
+    border-top:1px solid var(--line);
+    margin-top:48px;
+    padding-top:15px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.footer p {
+    margin:8px 0;
+}
+
+.episode-section[hidden],.wikitable tr[hidden] {
+    display:none!important;
+}
+
+#article-content {
+    min-height:160px;
+}
+
+sup {
+    line-height:0;
+}
+
+sup a {
+    font-size:12px;
+}
+
+.mw-cite-backlink,.mw-editsection,.reference-text {
+    font-size:13px;
+}
+
+@media(max-width:1150px) {
+    .shell {
+        grid-template-columns:175px minmax(0,1fr);
+        gap:28px;
+    }
+    .account {
+        display:none;
+    }
+}
+
+@media(max-width:760px) {
+    header {
+        height:62px;
+        gap:10px;
+        padding:0 14px;
+    }
+    .brand {
+        min-width:0;
+    }
+    .brand strong {
+        font-size:17px;
+    }
+    .brand small {
+        font-size:9px;
+    }
+    .mark {
+        width:34px;
+        height:34px;
+        font-size:16px;
+    }
+    .topsearch {
+        width:auto;
+        flex:1;
+    }
+    .topsearch button {
+        display:none;
+    }
+    .shell {
+        display:block;
+        padding:24px 15px 55px;
+    }
+    .sidebar {
+        display:none;
+        position:static;
+        max-height:350px;
+        border:1px solid var(--line);
+        padding:12px;
+        margin-bottom:20px;
+    }
+    .sidebar.open {
+        display:block;
+    }
+    h1 {
+        font-size:28px;
+    }
+    .wikitable {
+        font-size:13px;
+    }
+    .wikitable th,.wikitable td {
+        padding:4px 6px;
+    }
+}
+
+@media print {
+    header,.sidebar {
+        display:none!important;
+    }
+    .shell {
+        display:block;
+        padding:0;
+    }
+    .scrolltable {
+        overflow:visible;
+    }
+    a {
+        color:#202122;
+    }
+}
+
 /* Season indicators, contents navigation and episode numbering */
-header{gap:26px}header .brand{margin-left:0;flex-shrink:0}
-.season-cell{white-space:nowrap;text-align:left!important;min-width:100px;padding:0 10px 0 0!important}
-.season-swatch{display:inline-block;width:12px;height:30px;vertical-align:middle;margin-right:14px;border-right:1px solid rgba(0,0,0,.12)}
-.toc-episodes-toggle{display:flex;align-items:center;gap:5px;width:100%;text-align:left;border:0;background:transparent;color:var(--text);padding:4px 0;line-height:1.4;font-size:inherit}
-.toc-episodes-toggle:hover{color:var(--link)}.toc-chevron{width:14px;height:14px;flex:none;display:block;color:var(--muted);transition:transform .15s ease;transform-origin:center}
-.toc-episodes-toggle[aria-expanded="true"] .toc-chevron{transform:rotate(90deg)}
-#toc-seasons[hidden]{display:none!important}
-.episode-section .wikitable th:first-child{background:#d8dce1}
-.episode-section .wikitable td:first-child{background:#eaecf0;font-weight:400}
-.episode-section .wikitable tr:hover td:first-child{background:#dce1e8}
-@media(max-width:760px){.sidebar{display:block;position:static;max-height:none;overflow:visible;margin:18px 0 22px}.brand{margin-left:0}}
+header {
+    gap:26px;
+}
+
+header .brand {
+    margin-left:0;
+    flex-shrink:0;
+}
+
+.season-cell {
+    white-space:nowrap;
+    text-align:left!important;
+    min-width:100px;
+    padding:0 10px 0 0!important;
+}
+
+.season-swatch {
+    display:inline-block;
+    width:12px;
+    height:30px;
+    vertical-align:middle;
+    margin-right:14px;
+    border-right:1px solid rgba(0,0,0,.12);
+}
+
+.toc-episodes-toggle {
+    display:flex;
+    align-items:center;
+    gap:5px;
+    width:100%;
+    text-align:left;
+    border:0;
+    background:transparent;
+    color:var(--text);
+    padding:4px 0;
+    line-height:1.4;
+    font-size:inherit;
+}
+
+.toc-episodes-toggle:hover {
+    color:var(--link);
+}
+
+.toc-chevron {
+    width:14px;
+    height:14px;
+    flex:none;
+    display:block;
+    color:var(--muted);
+    transition:transform .15s ease;
+    transform-origin:center;
+}
+
+.toc-episodes-toggle[aria-expanded="true"] .toc-chevron {
+    transform:rotate(90deg);
+}
+
+#toc-seasons[hidden] {
+    display:none!important;
+}
+
+.episode-section .wikitable th:first-child {
+    background:#d8dce1;
+}
+
+.episode-section .wikitable td:first-child {
+    background:#eaecf0;
+    font-weight:400;
+}
+
+.episode-section .wikitable tr:hover td:first-child {
+    background:#dce1e8;
+}
+
+@media(max-width:760px) {
+    .sidebar {
+        display:block;
+        position:static;
+        max-height:none;
+        overflow:visible;
+        margin:18px 0 22px;
+    }
+    .brand {
+        margin-left:0;
+    }
+}
 </style></head><body><header><a class="brand" href="#top"><span class="mark">SP</span><span><strong>South Park</strong><small>Encyclopaedia</small></span></a><form class="topsearch" id="top-form"><input id="top-query" placeholder="Search South Park Encyclopaedia" aria-label="Search episodes"><button type="submit">Search</button></form><div class="account"><a href="#about">About</a><a href="https://en.wikipedia.org/wiki/List_of_South_Park_episodes" target="_blank" rel="noopener">Source article ↗</a></div></header>
 <div class="shell" id="top"><aside class="sidebar" id="sidebar"><div class="side-title">Contents <button id="hide-toc">hide</button></div><nav class="toc" id="toc"><a class="toplink" href="#top">(Top)</a><a href="#overview">Series overview</a><button class="toc-episodes-toggle" id="episodes-toggle" aria-expanded="false" aria-controls="toc-seasons"><svg class="toc-chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Episodes</span></button><div id="toc-seasons" hidden><a class="child" href="#season-1">Season 1</a><a class="child" href="#season-2">Season 2</a><a class="child" href="#season-3">Season 3</a><a class="child" href="#season-4">Season 4</a><a class="child" href="#season-5">Season 5</a></div><a href="#about">About this page</a><a href="#references">References and attribution</a></nav></aside>
 <main><h1>List of South Park episodes</h1>
