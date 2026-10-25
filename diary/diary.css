@@ -1,4 +1,7 @@
-    :root {
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&display=swap');
+
+
+:root {
       --page: #f3f0ea;
       --surface: #ffffff;
       --surface-2: #e9e5dd;
@@ -673,14 +676,15 @@ tr:hover {
     .wishlist.active { color: var(--brand); }
 
     h1 {
-      max-width: 790px;
-      margin: 0;
-      font-family: "Google Sans Flex", sans-serif;
-      font-size: clamp(3rem, 6vw, 3.2rem);
-      font-weight: 600;
-      line-height: 1;
-      letter-spacing: -.02em;
-      text-wrap: balance;
+    max-width: 790px;
+    margin: 0;
+    font-family: "Fraunces", serif;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-size: clamp(3rem, 6vw, 3.2rem);
+    font-weight: 450;
+    line-height: 1;
+    letter-spacing: -.02em;
+    text-wrap: balance;
     }
 
     .release-number { 
