@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&display=swap');
+
+
 :root{
     --bg:#fbfaf7;
     --text:#242424;
@@ -206,11 +209,13 @@ p{
 }
 
 .name{
-    font-size:34px;
-    font-weight:600;
-    margin-bottom:4px;
+    font-size: 34px;
+    font-weight: 500;
+    margin-bottom: 4px;
     margin-top: -10px !important;
-	font-family: 'Google Sans Flex', 'Inter', sans-serif;
+    font-family: "Fraunces", serif;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    letter-spacing: -0.06rem;
 }
 
 .tagline{
@@ -267,13 +272,13 @@ p{
 }
 
 .heading h2{
-    color:var(--accent);
-    font-size:14px;
-    font-weight:600;
-    letter-spacing:2px;
-    text-transform: uppercase !important;
-	font-family: 'Google Sans Flex', 'Inter', sans-serif;
-	transform: rotate(-2deg);
+    color: var(--accent);
+    font-size: 20px;
+    font-weight: 500;
+    font-family: "Fraunces", serif;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    letter-spacing: -0.02rem;
+    transform: rotate(-2deg);
 }
 
 .heading::after{
