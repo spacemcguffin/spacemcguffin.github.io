@@ -10594,7 +10594,7 @@ html { scroll-padding-top: var(--header-offset); }
             const title=item.title.toLocaleLowerCase();
             return terms.every(term=>title.includes(term));
           });
-          countLabel.textContent=matches.length+' matching '+(matches.length===1?'episode':'episodes')+' across '+new Set(matches.map(item=>item.year)).size+' '+(new Set(matches.map(item=>item.year)).size===1?'year':'years')+'.';
+          countLabel.textContent=matches.length+' matching '+(matches.length===1?'title':'episodes')+' across '+new Set(matches.map(item=>item.year)).size+' '+(new Set(matches.map(item=>item.year)).size===1?'year':'years')+'.';
           resultBody.innerHTML=matches.map(item=>'<tr><td>'+escapeHtml(item.number)+'</td><td>'+escapeHtml(item.local)+'</td><td style="text-align:left"><a>'+highlightTitle(item.title,terms)+'</a></td><td>'+escapeHtml(item.author)+'</td><td>'+escapeHtml(item.date)+'</td></tr>').join('');
         }
         searchInput.addEventListener('input',updateSearch);
