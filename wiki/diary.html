@@ -9,8 +9,19 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;display=swap" rel="stylesheet"/>
+
+
+
+
+
+
+
+
+
+
+
 <style>
-   :root {
+:root {
       --bg:#fff;
       --text:#202122;
       --muted:#54595d;
@@ -384,14 +395,6 @@
       min-width:30px;
       padding:0 10px 0 0!important;
       }
-      .season-swatch {
-      display:inline-block;
-      width:12px;
-      height:30px;
-      vertical-align:middle;
-      margin-right:14px;
-      border-right:1px solid rgba(0,0,0,.12);
-      }
       .toc-episodes-toggle {
       display:flex;
       align-items:center;
@@ -501,55 +504,25 @@
     padding-right: 3px;
   }
 }
-  </style>
-<style>
-   .episode-section h4 {font-size:15px;font-weight:600;margin:22px 0 7px;scroll-margin-top:24px}
+
+.episode-section h4 {font-size:15px;font-weight:600;margin:22px 0 7px;scroll-margin-top:24px}
 .diary-table {width:100%}
 .diary-table td:nth-child(3) {text-align:left}
 .template-row td {color:#72777d;font-style:italic}
-@media(max-width:760px) {
-  .diary-table th:nth-child(4),.diary-table td:nth-child(4) {display:none}
-  #overview-table .wikitable thead th:nth-child(3),
-  #overview-table .wikitable thead th:nth-child(4),
-  #overview-table .wikitable tbody td:nth-child(3),
-  #overview-table .wikitable tbody td:nth-child(4) {display:none}
+
 }
-  </style>
-<style>
-   /* Hide writing credits and original entry dates on narrow screens. */
+
+/* Hide writing credits and original entry dates on narrow screens. */
 @media (max-width: 760px) {
   .diary-table th:nth-child(4),
   .diary-table td:nth-child(4),
   .diary-table th:nth-child(5),
   .diary-table td:nth-child(5) { display: none; }
 }
-  </style>
-<style>
-   .missing-episodes td {background:#eaecf0!important;color:#54595d;text-align:center!important;font-style:italic;padding:14px 20px!important;line-height:1.65} .diary-table td:nth-child(4),.diary-table td:nth-child(5) {white-space:nowrap;min-width:165px} @media(max-width:760px){.missing-episodes td{display:table-cell!important;white-space:normal!important;min-width:0!important}}
-  </style>
-<style>
-   /* Balanced table column widths (desktop and tablet). */
-@media (min-width: 761px) {
-  .diary-table th:nth-child(1), .diary-table td:nth-child(1),
-  .diary-table th:nth-child(2), .diary-table td:nth-child(2) {
-    width: 78px;
-    min-width: 78px;
-    box-sizing: border-box;
-    white-space: nowrap;
-  }
-  .diary-table th:nth-child(4), .diary-table td:nth-child(4),
-  .diary-table th:nth-child(5), .diary-table td:nth-child(5) {
-    width: 190px;
-    min-width: 190px;
-    box-sizing: border-box;
-    white-space: nowrap;
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-}
-  </style>
-<style>
-   /* Keep episode-number headers neatly on two lines, without overflow. */
+
+.missing-episodes td {background:#eaecf0!important;color:#54595d;text-align:center!important;font-style:italic;padding:14px 20px!important;line-height:1.65} .diary-table td:nth-child(4),.diary-table td:nth-child(5) {white-space:nowrap;min-width:165px} @media(max-width:760px){.missing-episodes td{display:table-cell!important;white-space:normal!important;min-width:0!important}}
+
+/* Keep episode-number headers neatly on two lines, without overflow. */
 .diary-table thead th:nth-child(1),
 .diary-table thead th:nth-child(2) {
   white-space: normal !important;
@@ -558,9 +531,8 @@
   line-height: 1.3;
   text-align: center;
 }
-  </style>
-<style>
-   /* Slightly narrower, matched episode-number and metadata columns. */
+
+/* Slightly narrower, matched episode-number and metadata columns. */
    @media (min-width: 761px) {
      .diary-table th:nth-child(1),
      .diary-table td:nth-child(1),
@@ -583,9 +555,8 @@
        white-space: nowrap;
      }
    }
-  </style>
-<style>
-   /* Keep the missing-archive note fully visible without horizontal scrolling. */
+
+/* Keep the missing-archive note fully visible without horizontal scrolling. */
 #season-3 .missing-episodes td {
   white-space: normal !important;
   overflow-wrap: anywhere;
@@ -601,14 +572,130 @@
 #toc-seasons a {
   font-weight: 400 !important;
 }
-  </style>
+
+#search-results[hidden], #episodes[hidden] { display:none!important; }
+#search-results .wikitable td:first-child { background:#eaecf0; }
+#search-results .wikitable th:first-child { background:#d8dce1; }
+#search-results mark { background:#e5e5e5; color:inherit; border-radius:2px; }
+#search-clear { cursor:pointer; }
+#search-clear:disabled { opacity:.45; cursor:default; }
+@media(max-width:760px) {
+  #search-results .wikitable th:nth-child(4), #search-results .wikitable td:nth-child(4),
+  #search-results .wikitable th:nth-child(5), #search-results .wikitable td:nth-child(5) { display:none; }
+}
+
+/* Keep searching and results together, without the overview in between. */
+
+body.search-active #overview { display:none!important; }
+body.search-active .shell { padding-top:16px; }
+body.search-active main > h1,
+body.search-active main > p { display:none; }
+body.search-active #search-results h2 { margin-top:4px; }
+@media(max-width:760px) {
+  body.search-active .sidebar { display:none!important; }
+  body.search-active .shell { padding-top:12px; }
+}
+
+/* Always-visible site header and accessible mobile search controls. */
+header, body.search-active header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+}
+.topsearch { min-width: 0; }
+#search-clear { display: block; flex: none; white-space: nowrap; }
+@media (max-width: 760px) {
+  header { gap: 8px; }
+  .brand { flex-shrink: 0; gap: 6px; }
+  .topsearch { width: auto; flex: 1 1 0; min-width: 0; }
+  .topsearch input { width: 0; min-width: 0; padding: 0 8px; }
+  .topsearch #search-clear { display: block; padding: 0 9px; font-size: 12px; }
+}
+/* Distinct season colours used only inside episode table header rows. */
+#season-1 .diary-table thead th { background: #40566F; color: #fff; }
+#season-2 .diary-table thead th { background: #936323; color: #fff; }
+#season-3 .diary-table thead th { background: #A65349; color: #fff; }
+#season-4 .diary-table thead th { background: #35745D; color: #fff; }
+#season-5 .diary-table thead th { background: #286C96; color: #fff; }
+#season-6 .diary-table thead th { background: #715393; color: #fff; }
+#season-7 .diary-table thead th { background: #A74870; color: #fff; }
+#season-8 .diary-table thead th { background: #287C82; color: #fff; }
+/* Offset anchor navigation so the persistent header never obscures headings. */
+:root { --header-offset: 76px; }
+html { scroll-padding-top: var(--header-offset); }
+#top, #overview, #episodes, .episode-section, .episode-section h3,
+.episode-section h4, .section-title, #search-results {
+  scroll-margin-top: 0;
+}
+/* Keep the desktop contents sidebar entirely below the sticky header. */
+@media (min-width: 761px) {
+  .sidebar { top: 82px; max-height: calc(100vh - 94px); }
+}
+@media (max-width: 760px) {
+  :root { --header-offset: 68px; }
+}
+/* Month and quarterly headings stay plain; colour belongs to table header cells only. */
+.episode-section h4 { background: transparent; color: inherit; padding: 0; border-radius: 0; }
+
+/* Compact series overview: full-height swatches and centred season numbers. */
+#overview-table .wikitable { width: 100%; table-layout: auto; }
+#overview-table .wikitable th,
+#overview-table .wikitable td { padding: 3px 5px; }
+#overview-table .wikitable th:nth-child(1),
+#overview-table .wikitable td:nth-child(1) { width: 76px; min-width: 76px; }
+#overview-table .wikitable th:nth-child(2),
+#overview-table .wikitable td:nth-child(2),
+#overview-table .wikitable th:nth-child(3),
+#overview-table .wikitable td:nth-child(3) { width: 100px; min-width: 100px; text-align: center; }
+#overview-table .wikitable td.season-cell {
+  position: relative;
+  text-align: center !important;
+  padding: 3px 3px !important;
+}
+#overview-table .season-swatch {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  height: auto;
+  margin: 0;
+  border-right: 1px solid rgba(0,0,0,.12);
+}
+#overview-table .season-cell a { display: inline-block; text-align: center; }
+@media (max-width: 760px) {
+  #overview-table .wikitable thead tr:first-child th:nth-child(3),
+  #overview-table .wikitable tbody td:nth-child(3) { display: table-cell !important; }
+  #overview-table .wikitable thead th:nth-child(4),
+  #overview-table .wikitable thead th:nth-child(5),
+  #overview-table .wikitable tbody td:nth-child(4),
+  #overview-table .wikitable tbody td:nth-child(5) { display: none; }
+  #overview-table .wikitable th:nth-child(1),
+  #overview-table .wikitable td:nth-child(1) { width: 68px; min-width: 68px; }
+  #overview-table .wikitable th:nth-child(2),
+  #overview-table .wikitable td:nth-child(2),
+  #overview-table .wikitable th:nth-child(3),
+  #overview-table .wikitable td:nth-child(3) { width: 90px; min-width: 90px; }
+}
+/* Main section headings. */
+#overview h2,
+#episodes > h2 {
+  font-family: "Fraunces", serif;
+  font-size: 27px;
+  font-weight: 600;
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  line-height: 1.2;
+}
+</style>
 </head>
 <body>
 <header>
 <a class="brand" href="#top"><span class="mark">D</span><span><strong>Diary</strong><small>Episode guide</small></span></a>
 <div aria-label="Search preview" class="topsearch" role="search">
-<input aria-label="Search (visual only)" id="top-query" placeholder="Search..." readonly="" tabindex="-1"/>
-<button disabled="" type="button">Search</button>
+<input aria-label="Search (visual only)" autocomplete="off" id="top-query" placeholder="Search entry titles..."/>
+<button aria-label="Clear search" id="search-clear" type="button">Clear</button>
 </div>
 <div class="account"></div>
 </header>
@@ -635,6 +722,24 @@
 <h1>List of diary episodes</h1>
 <p>Each diary entry is presented as a television-style episode. Seasons 1 and 2 cover 2008–2009; Season 3 records the surviving 2012 entry and missing archive; Season 4 resumes in 2021.</p>
 <p>The episode numbering continues across the archive, with Season 4 beginning at episode 2,138.</p>
+<section aria-live="polite" hidden="" id="search-results">
+<h2>Search results</h2>
+<p class="muted" id="search-count"></p>
+<div class="scrolltable">
+<table class="wikitable diary-table" id="search-table">
+<thead>
+<tr>
+<th>No.<br/>overall</th>
+<th>No. in<br/>season</th>
+<th>Title</th>
+<th>Written by</th>
+<th>Original entry date</th>
+</tr>
+</thead>
+<tbody id="search-rows"></tbody>
+</table>
+</div>
+</section>
 <section id="overview">
 <h2>Series overview</h2>
 <div class="scrolltable" id="overview-table">
@@ -642,6 +747,7 @@
 <thead>
 <tr>
 <th>Season</th>
+<th>Year</th>
 <th>Episodes</th>
 <th>First entry</th>
 <th>Last entry</th>
@@ -649,46 +755,62 @@
 </thead>
 <tbody>
 <tr>
-<td class="season-cell"><span class="season-swatch" style="background:#5b5856"></span><a href="#season-1">1</a></td>
+<td class="season-cell"><span class="season-swatch" style="background:#40566F"></span><a href="#season-1">1</a></td>
+<td>2008</td>
 <td>623</td>
 <td>27 February 2008</td>
 <td>31 December 2008</td>
 </tr>
 <tr>
-<td class="season-cell"><span class="season-swatch" style="background:#e0a82e"></span><a href="#season-2">2</a></td>
+<td class="season-cell"><span class="season-swatch" style="background:#936323"></span><a href="#season-2">2</a></td>
+<td>2009</td>
 <td>419</td>
 <td>1 January 2009</td>
 <td>24 December 2009</td>
 </tr>
 <tr>
-<td class="season-cell"><span class="season-swatch" style="background:#a07780"></span><a href="#season-3">3</a></td>
-<td>1 known; 1,094 missing</td>
-<td>Christmas 2009</td>
+<td class="season-cell"><span class="season-swatch" style="background:#A65349"></span><a href="#season-3">3</a></td>
+<td>2010–2012</td>
+<td>1095</td>
+<td>25 December 2009</td>
 <td>20 February 2012</td>
 </tr>
 <tr>
-<td class="season-cell"><span class="season-swatch" style="background:#879f55"></span><a href="#season-4">4</a></td>
+<td class="season-cell"><span class="season-swatch" style="background:#35745D"></span><a href="#season-4">4</a></td>
+<td>2021</td>
 <td>60</td>
 <td>1 January 2021</td>
 <td>31 December 2021</td>
 </tr>
 <tr>
-<td class="season-cell"><span class="season-swatch" style="background:#668bb0"></span><a href="#season-5">5</a></td>
+<td class="season-cell"><span class="season-swatch" style="background:#286C96"></span><a href="#season-5">5</a></td>
+<td>2022</td>
 <td>47</td>
 <td>1 January 2022</td>
 <td>31 December 2022</td>
 </tr>
 <tr>
-<td class="season-cell"><span class="season-swatch" style="background:#9b83b9"></span><a href="#season-6">6</a></td>
+<td class="season-cell"><span class="season-swatch" style="background:#715393"></span><a href="#season-6">6</a></td>
+<td>2023</td>
 <td>58</td>
 <td>1 January 2023</td>
 <td>31 December 2023</td>
-</tr><tr>
-<td class="season-cell"><span class="season-swatch" style="background:#aa90c4"></span><a href="#season-7">7</a></td>
+</tr>
+<tr>
+<td class="season-cell"><span class="season-swatch" style="background:#A74870"></span><a href="#season-7">7</a></td>
+<td>2024</td>
 <td>53</td>
 <td>1 January 2024</td>
 <td>30 December 2024</td>
-</tr><tr><td class="season-cell"><span class="season-swatch" style="background:#8f9bc6"></span><a href="#season-8">8</a></td><td>50</td><td>5 January 2025</td><td>31 December 2025</td></tr></tbody>
+</tr>
+<tr>
+<td class="season-cell"><span class="season-swatch" style="background:#287C82"></span><a href="#season-8">8</a></td>
+<td>2025</td>
+<td>50</td>
+<td>5 January 2025</td>
+<td>31 December 2025</td>
+</tr>
+</tbody>
 </table>
 </div>
 </section>
@@ -10432,6 +10554,55 @@
         }
         positionContents();
         layoutQuery.addEventListener('change',positionContents);
+        // Live archive search. Match episode titles only; retain metadata in results.
+        const searchInput=$('top-query');
+        const searchClear=$('search-clear');
+        const resultsSection=$('search-results');
+        const episodesSection=$('episodes');
+        const resultBody=$('search-rows');
+        const countLabel=$('search-count');
+        const archiveRows=Array.from(document.querySelectorAll('.episode-section .diary-table tbody tr'))
+          .filter(row=>row.cells.length===5 && /^\d+$/.test(row.cells[0].textContent.trim()))
+          .map(row=>{
+            const cells=Array.from(row.cells);
+            const season=row.closest('.episode-section');
+            const year=(season?.querySelector('h3')?.textContent.match(/\b(?:19|20)\d{2}\b/)||[])[0]||'';
+            return {cells, number:cells[0].textContent.trim(), local:cells[1].textContent.trim(),
+              title:cells[2].textContent.trim(), author:cells[3].textContent.trim(),
+              date:cells[4].textContent.trim(), year};
+          });
+        const escapeHtml=value=>value.replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+        function highlightTitle(title,terms){
+          const lowered=title.toLocaleLowerCase();
+          const spans=[];
+          terms.forEach(term=>{let at=0;while((at=lowered.indexOf(term,at))!==-1){spans.push([at,at+term.length]);at+=term.length;}});
+          spans.sort((a,b)=>a[0]-b[0]);
+          let result='',cursor=0;
+          spans.forEach(([start,end])=>{if(start<cursor)return;result+=escapeHtml(title.slice(cursor,start))+'<mark>'+escapeHtml(title.slice(start,end))+'</mark>';cursor=end;});
+          return result+escapeHtml(title.slice(cursor));
+        }
+        function updateSearch(){
+          const query=searchInput.value.trim().toLocaleLowerCase();
+          const searching=Boolean(query);
+          document.body.classList.toggle('search-active',searching);
+          overviewSection.hidden=searching;
+          searchClear.disabled=!searching;
+          resultsSection.hidden=!searching;
+          episodesSection.hidden=searching;
+          if(!searching){resultBody.replaceChildren();return;}
+          const terms=query.split(/\s+/).filter(Boolean);
+          const matches=archiveRows.filter(item=>{
+            const title=item.title.toLocaleLowerCase();
+            return terms.every(term=>title.includes(term));
+          });
+          countLabel.textContent=matches.length+' matching '+(matches.length===1?'episode':'episodes')+' across '+new Set(matches.map(item=>item.year)).size+' '+(new Set(matches.map(item=>item.year)).size===1?'year':'years')+'.';
+          resultBody.innerHTML=matches.map(item=>'<tr><td>'+escapeHtml(item.number)+'</td><td>'+escapeHtml(item.local)+'</td><td style="text-align:left"><a>'+highlightTitle(item.title,terms)+'</a></td><td>'+escapeHtml(item.author)+'</td><td>'+escapeHtml(item.date)+'</td></tr>').join('');
+        }
+        searchInput.addEventListener('input',updateSearch);
+        searchClear.addEventListener('click',()=>{searchInput.value='';updateSearch();searchInput.focus();});
+        searchInput.addEventListener('keydown',event=>{if(event.key==='Escape'){searchInput.value='';updateSearch();}});
+        updateSearch();
+
   </script>
 </body>
 </html>
