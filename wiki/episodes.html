@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>List of South Park episodes — South Park Encyclopaedia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&display=swap" rel="stylesheet">
+    <style>
+      :root {
+      --bg:#fff;
+      --text:#202122;
+      --muted:#54595d;
+      --border:#a2a9b1;
+      --line:#c8ccd1;
+      --link:#36c;
+      --subtle:#f8f9fa;
+      --head:#eaecf0;
+      --font:15px;
+      --article-width:960px;
+      }
+      * {
+      box-sizing:border-box;
+      }
+      html {
+      scroll-behavior:smooth;
+      scroll-padding-top:28px;
+      }
+      body {
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family:"Inter",Arial,sans-serif;
+      font-size:var(--font);
+      line-height:1.65;
+      }
+      a {
+      color:var(--link);
+      text-decoration:none;
+      }
+      a:hover {
+      text-decoration:underline;
+      }
+      button,input {
+      font:inherit;
+      }
+      button {
+      cursor:pointer;
+      }
+      header {
+      height:70px;
+      display:flex;
+      align-items:center;
+      gap:32px;
+      padding:0 clamp(18px,4vw,64px);
+      border-bottom:1px solid #eaecf0;
+      }
+      .brand {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:230px;
+      color:var(--text);
+      }
+      .brand:hover {
+      text-decoration:none;
+      }
+      .mark {
+      height:42px;
+      width:42px;
+      border-radius:50%;
+      background:#293f67;
+      color:#fff;
+      display:grid;
+      place-items:center;
+      font-family:"Inter",Arial,sans-serif;
+      font-size:20px;
+      font-weight:bold;
+      }
+      .brand strong {
+      font-family: "Fraunces", serif;
+      font-variation-settings: "SOFT" 100, "WONK" 1;
+      font-weight: 400;
+      font-style: italic;
+      display:block;
+      font-size:20px;
+      line-height:1.1;
+      }
+      .brand small {
+      display:block;
+      letter-spacing:1.2px;
+      font-size:10px;
+      color:var(--muted);
+      text-transform:uppercase;
+      }
+      .topsearch {
+      display:flex;
+      width:min(480px,42vw);
+      height:34px;
+      border:1px solid var(--border);
+      }
+      .topsearch input {
+      border:0;
+      outline:0;
+      min-width:0;
+      flex:1;
+      padding:0 12px;
+      }
+      .topsearch button {
+      opacity:1;
+      color:var(--text);
+      cursor:default;
+      background:var(--subtle);
+      border:0;
+      border-left:1px solid var(--border);
+      font-weight:bold;
+      padding:0 14px;
+      }
+      .account {
+      margin-left:auto;
+      display:flex;
+      gap:15px;
+      font-size:13px;
+      white-space:nowrap;
+      }
+      .shell {
+      max-width:1660px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:200px minmax(0,1fr);
+      gap:42px;
+      padding:38px clamp(18px,4vw,60px) 80px;
+      }
+      .sidebar {
+      font-size:14px;
+      align-self:start;
+      position:sticky;
+      top:20px;
+      max-height:calc(100vh - 35px);
+      overflow:auto;
+      }
+      .side-title {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight:bold;
+      border-bottom:1px solid var(--line);
+      padding:0 0 7px;
+      margin-bottom:10px;
+      }
+      .side-title button {
+      border:0;
+      background:none;
+      color:var(--link);
+      font-size:13px;
+      font-weight:normal;
+      }
+      .toc a {
+      display:block;
+      padding:4px 0;
+      color:var(--text);
+      line-height:1.4;
+      }
+      .toc a:hover,.toc a.active {
+      color:var(--link);
+      }
+      .toc .child {
+      padding-left:18px;
+      font-size:13px;
+      }
+      .toc .toplink {
+      color:var(--link);
+      }
+      main {
+      min-width:0;
+      max-width:100%;
+      }
+      h1 {
+      font-family: "Fraunces", serif;
+      font-size:30px;
+      font-weight:400;
+      font-style:italic;
+      line-height:1.5;
+      margin:0 0 8px;
+      border-bottom: 1px solid var(--border);
+      font-variation-settings:
+      "SOFT" 100,
+      "WONK" 1;
+      }
+      h2 {
+      font-family: "Inter", Arial, sans-serif;
+      font-size: 23px;
+      font-weight: 500;
+      line-height: 1;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 5px;
+      margin: 25px 0 10px;
+      }
+      h3 {
+      font-family:"Inter",Arial,sans-serif;
+      font-size:18px;
+      margin:15px 0 8px;
+      }
+      p {
+      margin:8px 0 13px;
+      }
+      .muted {
+      color:var(--muted);
+      }
+      .scrolltable {
+      overflow-x:auto;
+      margin:12px 0 22px;
+      }
+      .wikitable {
+      border-collapse:collapse;
+      background:var(--subtle);
+      font-size:14px;
+      line-height:1.5;
+      width:auto;
+      min-width:100%;
+      }
+      .wikitable th,.wikitable td {
+      border:1px solid var(--border);
+      padding:4px 6px;
+      vertical-align:middle;
+      }
+      .wikitable th {
+      background:var(--head);
+      text-align:center;
+      font-weight:bold;
+      }
+      .wikitable td {
+      text-align:center;
+      }
+      .wikitable td:nth-child(3) {
+      text-align:left;
+      }
+      .wikitable tr:hover td {
+      background:rgba(150,170,210,.11);
+      }
+      .wikitable a {
+      color:var(--link);
+      vertical-align: middle;
+      }
+      .wikitable .sortkey,.wikitable .reference {
+      display:none;
+      }
+      .wikitable .mw-empty-elt {
+      display:none;
+      }
+      .wikitable .plainlist ul {
+      list-style:none;
+      margin:0;
+      padding:0;
+      }
+      .wikitable .nowrap {
+      white-space:nowrap;
+      }
+      #overview-table .wikitable tbody td:nth-child(3) {
+      text-align:center;
+      }
+      .section-title {
+      scroll-margin-top:15px;
+      }
+      .main-article {
+      font-style:italic;
+      font-size:14px;
+      margin:6px 0;
+      }
+      .footer {
+      border-top:1px solid var(--line);
+      margin-top:48px;
+      padding-top:15px;
+      color:var(--muted);
+      font-size:13px;
+      }
+      .footer p {
+      margin:8px 0;
+      }
+      .episode-section[hidden],.wikitable tr[hidden] {
+      display:none!important;
+      }
+      #article-content {
+      min-height:160px;
+      }
+      sup {
+      line-height:0;
+      }
+      sup a {
+      font-size:12px;
+      }
+      .mw-cite-backlink,.mw-editsection,.reference-text {
+      font-size:13px;
+      }
+      @media(max-width:1150px) {
+      .shell {
+      grid-template-columns:175px minmax(0,1fr);
+      gap:28px;
+      }
+      .account {
+      display:none;
+      }
+      }
+      @media(max-width:760px) {
+      header {
+      height:62px;
+      gap:10px;
+      padding:0 14px;
+      }
+      .brand {
+      min-width:0;
+      }
+      .brand strong {
+      font-size:17px;
+      }
+      .brand small {
+      font-size:9px;
+      }
+      .mark {
+      width:34px;
+      height:34px;
+      font-size:16px;
+      }
+      .topsearch {
+      flex:1;
+      }
+      .topsearch button {
+      display:none;
+      }
+      .shell {
+      display:block;
+      padding:24px 15px 55px;
+      }
+      .sidebar {
+      display:none;
+      position:static;
+      max-height:350px;
+      border:1px solid var(--line);
+      padding:12px;
+      margin-bottom:20px;
+      }
+      .sidebar.open {
+      display:block;
+      }
+      h1 {
+      font-size:28px;
+      }
+      .wikitable {
+      font-size:13px;
+      }
+      .wikitable th,.wikitable td {
+      padding:4px 6px;
+      }
+      }
+      @media print {
+      header,.sidebar {
+      display:none!important;
+      }
+      .shell {
+      display:block;
+      padding:0;
+      }
+      .scrolltable {
+      overflow:visible;
+      }
+      a {
+      color:#202122;
+      }
+      }
+      /* Season indicators, contents navigation and episode numbering */
+      header {
+      gap:26px;
+      }
+      header .brand {
+      margin-left:0;
+      flex-shrink:0;
+      }
+      .season-cell {
+      white-space:nowrap;
+      text-align:left!important;
+      min-width:30px;
+      padding:0 10px 0 0!important;
+      }
+      .season-swatch {
+      display:inline-block;
+      width:12px;
+      height:30px;
+      vertical-align:middle;
+      margin-right:14px;
+      border-right:1px solid rgba(0,0,0,.12);
+      }
+      .toc-episodes-toggle {
+      display:flex;
+      align-items:center;
+      gap:5px;
+      width:100%;
+      text-align:left;
+      border:0;
+      background:transparent;
+      color:var(--text);
+      padding:4px 0;
+      line-height:1.4;
+      font-size:inherit;
+      }
+      .toc-episodes-toggle:hover {
+      color:var(--link);
+      }
+      .toc-chevron {
+      width:14px;
+      height:14px;
+      flex:none;
+      display:block;
+      color:var(--muted);
+      transition:transform .15s ease;
+      transform-origin:center;
+      }
+      .toc-episodes-toggle[aria-expanded="true"] .toc-chevron {
+      transform:rotate(90deg);
+      }
+      #toc-seasons[hidden] {
+      display:none!important;
+      }
+      .episode-section .wikitable th:first-child {
+      background:#d8dce1;
+      }
+      .episode-section .wikitable td:first-child {
+      background:#eaecf0;
+      font-weight:400;
+      }
+      .episode-section .wikitable tr:hover td:first-child {
+      background:#dce1e8;
+      }
+      @media(max-width:760px) {
+      .sidebar {
+      display:block;
+      position:static;
+      max-height:none;
+      overflow:visible;
+      margin:18px 0 22px;
+      }
+      .brand {
+      margin-left:0;
+      }
+      }
+      /* Mobile series overview: show only Season and Episodes. */
+      @media (max-width: 760px) {
+        #overview-table .wikitable thead tr:first-child th:nth-child(3),
+        #overview-table .wikitable thead tr:nth-child(2),
+        #overview-table .wikitable tbody td:nth-child(3),
+        #overview-table .wikitable tbody td:nth-child(4) {
+          display: none;
+        }
+      }
+      /* Keep mobile episode tables focused on numbering and titles. */
+      @media (max-width: 760px) {
+      .episode-section .wikitable th:nth-child(4),
+      .episode-section .wikitable td:nth-child(4),
+      .episode-section .wikitable th:nth-child(5),
+      .episode-section .wikitable td:nth-child(5) {
+      display: none;
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="#top">
+        <span class="mark">SP</span>
+        <span>
+          <strong>South Park</strong>
+          <small>Encyclopaedia</small>
+        </span>
+      </a>
+      <div class="topsearch" role="search" aria-label="Search preview">
+        <input id="top-query" placeholder="Search..." aria-label="Search (visual only)" readonly tabindex="-1">
+        <button type="button" disabled>Search</button>
+      </div>
+      <div class="account">
+        <a href="#about">About</a>
+        <a href="https://en.wikipedia.org/wiki/List_of_South_Park_episodes" target="_blank" rel="noopener">Source article ↗</a>
+      </div>
+    </header>
+    <div class="shell" id="top">
+      <aside class="sidebar" id="sidebar">
+        <div class="side-title">Contents <button id="hide-toc">hide</button>
+        </div>
+        <nav class="toc" id="toc">
+          <a class="toplink" href="#top">(Top)</a>
+          <a href="#overview">Series overview</a>
+          <button class="toc-episodes-toggle" id="episodes-toggle" aria-expanded="false" aria-controls="toc-seasons">
+            <svg class="toc-chevron" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" focusable="false">
+              <path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Episodes</span>
+          </button>
+          <div id="toc-seasons" hidden>
+            <a class="child" href="#season-1">Season 1</a>
+            <a class="child" href="#season-2">Season 2</a>
+            <a class="child" href="#season-3">Season 3</a>
+            <a class="child" href="#season-4">Season 4</a>
+            <a class="child" href="#season-5">Season 5</a>
+          </div>
+          <a href="#about">About this page</a>
+          <a href="#references">References and attribution</a>
+        </nav>
+      </aside>
+      <main>
+        <h1>List of South Park episodes</h1>
+        <p>
+          <b>
+            <i>South Park</i>
+          </b> is an American animated television series created by Trey Parker and Matt Stone. This page presents the first five seasons in an encyclopaedia-style format with sample episode entries.</p>
+          <p>The series premiered on Comedy Central on 13 August 1997. Browse the five-season overview or jump to an individual season to explore the episode tables.</p>
+          <section id="overview">
+            <h2>Series overview</h2>
+            <div class="scrolltable" id="overview-table">
+              <table class="wikitable" style="margin:auto">
+                <thead>
+                  <tr>
+                    <th rowspan="2" style="width: 8%;">Season</th>
+                    <th rowspan="2" style="width:10%;">Episodes</th>
+                    <th colspan="2">Originally released</th>
+                  </tr>
+                  <tr>
+                    <th>First released</th>
+                    <th>Last released</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="season-cell">
+                      <span class="season-swatch" style="background:#5b5856" aria-hidden="true">
+                      </span>
+                      <a href="#season-1">1</a>
+                    </td>
+                    <td>13</td>
+                    <td>August 13, 1997</td>
+                    <td>February 25, 1998</td>
+                  </tr>
+                  <tr>
+                    <td class="season-cell">
+                      <span class="season-swatch" style="background:#e0a82e" aria-hidden="true">
+                      </span>
+                      <a href="#season-2">2</a>
+                    </td>
+                    <td>18</td>
+                    <td>April 1, 1998</td>
+                    <td>January 20, 1999</td>
+                  </tr>
+                  <tr>
+                    <td class="season-cell">
+                      <span class="season-swatch" style="background:#7697a0" aria-hidden="true">
+                      </span>
+                      <a href="#season-3">3</a>
+                    </td>
+                    <td>17</td>
+                    <td>April 7, 1999</td>
+                    <td>January 12, 2000</td>
+                  </tr>
+                  <tr>
+                    <td class="season-cell">
+                      <span class="season-swatch" style="background:#a07780" aria-hidden="true">
+                      </span>
+                      <a href="#season-4">4</a>
+                    </td>
+                    <td>17</td>
+                    <td>April 5, 2000</td>
+                    <td>December 20, 2000</td>
+                  </tr>
+                  <tr>
+                    <td class="season-cell">
+                      <span class="season-swatch" style="background:#879f55" aria-hidden="true">
+                      </span>
+                      <a href="#season-5">5</a>
+                    </td>
+                    <td>14</td>
+                    <td>June 20, 2001</td>
+                    <td>December 12, 2001</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+          <section id="episodes">
+            <h2>Episodes</h2>
+            <div id="article-content">
+              <!-- SEASON -->
+              <section class="episode-section" id="season-1">
+                <h3 class="section-title">Season 1 (1997–1998)</h3>
+                <p class="main-article">Main article: <a href="https://en.wikipedia.org/wiki/South_Park_season_1" target="_blank" rel="noopener">South Park season 1</a>
+                </p>
+                <div class="scrolltable">
+                  <table class="wikitable">
+                    <thead>
+                      <tr>
+                        <th style="width:65px">No.<br>overall</th>
+                        <th style="width:65px">No. in<br>season</th>
+                        <th>Title</th>
+                        <th>Written by</th>
+                        <th>Original release date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td style="text-align:left;font-weight:400">“The Strange New Kid”</td>
+                        <td>Trey Parker</td>
+                        <td>August 13, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td style="text-align:left;font-weight:400">“Cartman and the Cursed Lunchbox”</td>
+                        <td>Matt Stone</td>
+                        <td>August 20, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>3</td>
+                        <td style="text-align:left;font-weight:400">“The Big Snowball Conspiracy”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>August 27, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>4</td>
+                        <td style="text-align:left;font-weight:400">“Kenny Goes to Washington”</td>
+                        <td>Jamie Brooks</td>
+                        <td>September 3, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>5</td>
+                        <td style="text-align:left;font-weight:400">“The Haunted School Bus”</td>
+                        <td>Trey Parker</td>
+                        <td>September 10, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>6</td>
+                        <td style="text-align:left;font-weight:400">“The Great Cafeteria Revolt”</td>
+                        <td>Matt Stone</td>
+                        <td>September 17, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>7</td>
+                        <td style="text-align:left;font-weight:400">“Stan’s Terrible Secret”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>September 24, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>8</td>
+                        <td>8</td>
+                        <td style="text-align:left;font-weight:400">“The Mystery of Stark’s Pond”</td>
+                        <td>Jamie Brooks</td>
+                        <td>October 1, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>9</td>
+                        <td>9</td>
+                        <td style="text-align:left;font-weight:400">“Kyle and the Time Machine”</td>
+                        <td>Trey Parker</td>
+                        <td>October 8, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>10</td>
+                        <td>10</td>
+                        <td style="text-align:left;font-weight:400">“The Substitute from Space”</td>
+                        <td>Matt Stone</td>
+                        <td>October 15, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>11</td>
+                        <td>11</td>
+                        <td style="text-align:left;font-weight:400">“Cartman for President”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>October 22, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>12</td>
+                        <td>12</td>
+                        <td style="text-align:left;font-weight:400">“The Night of a Thousand Turkeys”</td>
+                        <td>Jamie Brooks</td>
+                        <td>October 29, 1997</td>
+                      </tr>
+                      <tr>
+                        <td>13</td>
+                        <td>13</td>
+                        <td style="text-align:left;font-weight:400">“A Very Strange Christmas”</td>
+                        <td>Trey Parker</td>
+                        <td>November 5, 1997</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <!-- SEASON -->
+              <section class="episode-section" id="season-2">
+                <h3 class="section-title">Season 2 (1998)</h3>
+                <p class="main-article">Main article: <a href="https://en.wikipedia.org/wiki/South_Park_season_2" target="_blank" rel="noopener">South Park season 2</a>
+                </p>
+                <div class="scrolltable">
+                  <table class="wikitable">
+                    <thead>
+                      <tr>
+                        <th style="width:65px">No.<br>overall</th>
+                        <th style="width:65px">No. in<br>season</th>
+                        <th>Title</th>
+                        <th>Written by</th>
+                        <th>Original release date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>14</td>
+                        <td>1</td>
+                        <td style="text-align:left;font-weight:400">“The Return of the Snow Monster”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>April 1, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>15</td>
+                        <td>2</td>
+                        <td style="text-align:left;font-weight:400">“Chef’s Secret Recipe”</td>
+                        <td>Jamie Brooks</td>
+                        <td>April 8, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>16</td>
+                        <td>3</td>
+                        <td style="text-align:left;font-weight:400">“The Great Bicycle Disaster”</td>
+                        <td>Trey Parker</td>
+                        <td>April 15, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>17</td>
+                        <td>4</td>
+                        <td style="text-align:left;font-weight:400">“A Tale of Two Cartmans”</td>
+                        <td>Matt Stone</td>
+                        <td>April 22, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>18</td>
+                        <td>5</td>
+                        <td style="text-align:left;font-weight:400">“Operation: Lunch Money”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>April 29, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>19</td>
+                        <td>6</td>
+                        <td style="text-align:left;font-weight:400">“The Lost VHS Tape”</td>
+                        <td>Jamie Brooks</td>
+                        <td>May 6, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>20</td>
+                        <td>7</td>
+                        <td style="text-align:left;font-weight:400">“Kenny’s Lucky Day”</td>
+                        <td>Trey Parker</td>
+                        <td>May 13, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>21</td>
+                        <td>8</td>
+                        <td style="text-align:left;font-weight:400">“The Mayor’s New Rules”</td>
+                        <td>Matt Stone</td>
+                        <td>May 20, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>22</td>
+                        <td>9</td>
+                        <td style="text-align:left;font-weight:400">“Aliens at the Bus Stop”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>May 27, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>23</td>
+                        <td>10</td>
+                        <td style="text-align:left;font-weight:400">“The Big Cheese Incident”</td>
+                        <td>Jamie Brooks</td>
+                        <td>June 3, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>24</td>
+                        <td>11</td>
+                        <td style="text-align:left;font-weight:400">“The Underground Club”</td>
+                        <td>Trey Parker</td>
+                        <td>June 10, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>25</td>
+                        <td>12</td>
+                        <td style="text-align:left;font-weight:400">“Cartman Gets Famous Again”</td>
+                        <td>Matt Stone</td>
+                        <td>June 17, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>26</td>
+                        <td>13</td>
+                        <td style="text-align:left;font-weight:400">“The Secret Treehouse”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>June 24, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>27</td>
+                        <td>14</td>
+                        <td style="text-align:left;font-weight:400">“The Principal’s Revenge”</td>
+                        <td>Jamie Brooks</td>
+                        <td>July 1, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>28</td>
+                        <td>15</td>
+                        <td style="text-align:left;font-weight:400">“An Unexpected Field Trip”</td>
+                        <td>Trey Parker</td>
+                        <td>July 8, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>29</td>
+                        <td>16</td>
+                        <td style="text-align:left;font-weight:400">“The Snow Day That Wasn’t”</td>
+                        <td>Matt Stone</td>
+                        <td>July 15, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>30</td>
+                        <td>17</td>
+                        <td style="text-align:left;font-weight:400">“A Very Bad Talent Show”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>July 22, 1998</td>
+                      </tr>
+                      <tr>
+                        <td>31</td>
+                        <td>18</td>
+                        <td style="text-align:left;font-weight:400">“The Last Slice of Pizza”</td>
+                        <td>Jamie Brooks</td>
+                        <td>July 29, 1998</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <!-- SEASON -->
+              <section class="episode-section" id="season-3">
+                <h3 class="section-title">Season 3 (1999)</h3>
+                <p class="main-article">Main article: <a href="https://en.wikipedia.org/wiki/South_Park_season_3" target="_blank" rel="noopener">South Park season 3</a>
+                </p>
+                <div class="scrolltable">
+                  <table class="wikitable">
+                    <thead>
+                      <tr>
+                        <th style="width:65px">No.<br>overall</th>
+                        <th style="width:65px">No. in<br>season</th>
+                        <th>Title</th>
+                        <th>Written by</th>
+                        <th>Original release date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>32</td>
+                        <td>1</td>
+                        <td style="text-align:left;font-weight:400">“The Phantom of the Playground”</td>
+                        <td>Trey Parker</td>
+                        <td>April 1, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>33</td>
+                        <td>2</td>
+                        <td style="text-align:left;font-weight:400">“Kyle’s Double Life”</td>
+                        <td>Matt Stone</td>
+                        <td>April 8, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>34</td>
+                        <td>3</td>
+                        <td style="text-align:left;font-weight:400">“The Great Video Game War”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>April 15, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>35</td>
+                        <td>4</td>
+                        <td style="text-align:left;font-weight:400">“The Curse of the Red Jacket”</td>
+                        <td>Jamie Brooks</td>
+                        <td>April 22, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>36</td>
+                        <td>5</td>
+                        <td style="text-align:left;font-weight:400">“The School Election”</td>
+                        <td>Trey Parker</td>
+                        <td>April 29, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>37</td>
+                        <td>6</td>
+                        <td style="text-align:left;font-weight:400">“Cartman’s New Business”</td>
+                        <td>Matt Stone</td>
+                        <td>May 6, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>38</td>
+                        <td>7</td>
+                        <td style="text-align:left;font-weight:400">“A Monster in the Library”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>May 13, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>39</td>
+                        <td>8</td>
+                        <td style="text-align:left;font-weight:400">“The Secret of the Old Mine”</td>
+                        <td>Jamie Brooks</td>
+                        <td>May 20, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>40</td>
+                        <td>9</td>
+                        <td style="text-align:left;font-weight:400">“Kenny and the Golden Ticket”</td>
+                        <td>Trey Parker</td>
+                        <td>May 27, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>41</td>
+                        <td>10</td>
+                        <td style="text-align:left;font-weight:400">“The Big TV Blackout”</td>
+                        <td>Matt Stone</td>
+                        <td>June 3, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>42</td>
+                        <td>11</td>
+                        <td style="text-align:left;font-weight:400">“Stan Saves the Day”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>June 10, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>43</td>
+                        <td>12</td>
+                        <td style="text-align:left;font-weight:400">“The Worst Birthday Ever”</td>
+                        <td>Jamie Brooks</td>
+                        <td>June 17, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>44</td>
+                        <td>13</td>
+                        <td style="text-align:left;font-weight:400">“The Mystery Guest”</td>
+                        <td>Trey Parker</td>
+                        <td>June 24, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>45</td>
+                        <td>14</td>
+                        <td style="text-align:left;font-weight:400">“The Great Halloween Mix-Up”</td>
+                        <td>Matt Stone</td>
+                        <td>July 1, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>46</td>
+                        <td>15</td>
+                        <td style="text-align:left;font-weight:400">“A Trip to Nowhere”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>July 8, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>47</td>
+                        <td>16</td>
+                        <td style="text-align:left;font-weight:400">“The Battle of the Bands”</td>
+                        <td>Jamie Brooks</td>
+                        <td>July 15, 1999</td>
+                      </tr>
+                      <tr>
+                        <td>48</td>
+                        <td>17</td>
+                        <td style="text-align:left;font-weight:400">“The End of the World (Again)”</td>
+                        <td>Trey Parker</td>
+                        <td>July 22, 1999</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <!-- SEASON -->
+              <section class="episode-section" id="season-4">
+                <h3 class="section-title">Season 4 (2000)</h3>
+                <p class="main-article">Main article: <a href="https://en.wikipedia.org/wiki/South_Park_season_4" target="_blank" rel="noopener">South Park season 4</a>
+                </p>
+                <div class="scrolltable">
+                  <table class="wikitable">
+                    <thead>
+                      <tr>
+                        <th style="width:65px">No.<br>overall</th>
+                        <th style="width:65px">No. in<br>season</th>
+                        <th>Title</th>
+                        <th>Written by</th>
+                        <th>Original release date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>49</td>
+                        <td>1</td>
+                        <td style="text-align:left;font-weight:400">“The New Neighbours”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>April 1, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>50</td>
+                        <td>2</td>
+                        <td style="text-align:left;font-weight:400">“The Lost Treasure Map”</td>
+                        <td>Jamie Brooks</td>
+                        <td>April 8, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>51</td>
+                        <td>3</td>
+                        <td style="text-align:left;font-weight:400">“Cartman’s Brilliant Idea”</td>
+                        <td>Trey Parker</td>
+                        <td>April 15, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>52</td>
+                        <td>4</td>
+                        <td style="text-align:left;font-weight:400">“The Day the Internet Died”</td>
+                        <td>Matt Stone</td>
+                        <td>April 22, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>53</td>
+                        <td>5</td>
+                        <td style="text-align:left;font-weight:400">“A Very Strange Science Fair”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>April 29, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>54</td>
+                        <td>6</td>
+                        <td style="text-align:left;font-weight:400">“Kenny’s Other Life”</td>
+                        <td>Jamie Brooks</td>
+                        <td>May 6, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>55</td>
+                        <td>7</td>
+                        <td style="text-align:left;font-weight:400">“The Secret of Room 12”</td>
+                        <td>Trey Parker</td>
+                        <td>May 13, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>56</td>
+                        <td>8</td>
+                        <td style="text-align:left;font-weight:400">“The Big Mountain Adventure”</td>
+                        <td>Matt Stone</td>
+                        <td>May 20, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>57</td>
+                        <td>9</td>
+                        <td style="text-align:left;font-weight:400">“Kyle Takes Charge”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>May 27, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>58</td>
+                        <td>10</td>
+                        <td style="text-align:left;font-weight:400">“The Mystery of the Missing Mascot”</td>
+                        <td>Jamie Brooks</td>
+                        <td>June 3, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>59</td>
+                        <td>11</td>
+                        <td style="text-align:left;font-weight:400">“The Ultimate Snowball Fight”</td>
+                        <td>Trey Parker</td>
+                        <td>June 10, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>60</td>
+                        <td>12</td>
+                        <td style="text-align:left;font-weight:400">“The Town That Forgot Tuesday”</td>
+                        <td>Matt Stone</td>
+                        <td>June 17, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>61</td>
+                        <td>13</td>
+                        <td style="text-align:left;font-weight:400">“Chef and the Giant Sandwich”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>June 24, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>62</td>
+                        <td>14</td>
+                        <td style="text-align:left;font-weight:400">“The Return of the Substitute”</td>
+                        <td>Jamie Brooks</td>
+                        <td>July 1, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>63</td>
+                        <td>15</td>
+                        <td style="text-align:left;font-weight:400">“The Great Summer Hoax”</td>
+                        <td>Trey Parker</td>
+                        <td>July 8, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>64</td>
+                        <td>16</td>
+                        <td style="text-align:left;font-weight:400">“Cartman’s Final Warning”</td>
+                        <td>Matt Stone</td>
+                        <td>July 15, 2000</td>
+                      </tr>
+                      <tr>
+                        <td>65</td>
+                        <td>17</td>
+                        <td style="text-align:left;font-weight:400">“The Winter Carnival”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>July 22, 2000</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+              <!-- SEASON -->
+              <section class="episode-section" id="season-5">
+                <h3 class="section-title">Season 5 (2001)</h3>
+                <p class="main-article">Main article: <a href="https://en.wikipedia.org/wiki/South_Park_season_5" target="_blank" rel="noopener">South Park season 5</a>
+                </p>
+                <div class="scrolltable">
+                  <table class="wikitable">
+                    <thead>
+                      <tr>
+                        <th style="width:65px">No.<br>overall</th>
+                        <th style="width:65px">No. in<br>season</th>
+                        <th>Title</th>
+                        <th>Written by</th>
+                        <th>Original release date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>66</td>
+                        <td>1</td>
+                        <td style="text-align:left;font-weight:400">“The Great School Lock-In”</td>
+                        <td>Trey Parker</td>
+                        <td>June 20, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>67</td>
+                        <td>2</td>
+                        <td style="text-align:left;font-weight:400">“The New Kid from Denver”</td>
+                        <td>Matt Stone</td>
+                        <td>June 27, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>68</td>
+                        <td>3</td>
+                        <td style="text-align:left;font-weight:400">“Cartman’s Secret Society”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>July 4, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>69</td>
+                        <td>4</td>
+                        <td style="text-align:left;font-weight:400">“The Curse of the School Bell”</td>
+                        <td>Jamie Brooks</td>
+                        <td>July 11, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>70</td>
+                        <td>5</td>
+                        <td style="text-align:left;font-weight:400">“Kenny Wins the Lottery”</td>
+                        <td>Trey Parker</td>
+                        <td>July 18, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>71</td>
+                        <td>6</td>
+                        <td style="text-align:left;font-weight:400">“The Great Pet Show”</td>
+                        <td>Matt Stone</td>
+                        <td>July 25, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>72</td>
+                        <td>7</td>
+                        <td style="text-align:left;font-weight:400">“A Strange Day in South Park”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>August 1, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>73</td>
+                        <td>8</td>
+                        <td style="text-align:left;font-weight:400">“The Secret Underground Tunnel”</td>
+                        <td>Jamie Brooks</td>
+                        <td>August 8, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>74</td>
+                        <td>9</td>
+                        <td style="text-align:left;font-weight:400">“The Case of the Missing Homework”</td>
+                        <td>Trey Parker</td>
+                        <td>August 15, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>75</td>
+                        <td>10</td>
+                        <td style="text-align:left;font-weight:400">“The Wild West Field Trip”</td>
+                        <td>Matt Stone</td>
+                        <td>August 22, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>76</td>
+                        <td>11</td>
+                        <td style="text-align:left;font-weight:400">“Stan’s Big Decision”</td>
+                        <td>Trey Parker and Matt Stone</td>
+                        <td>August 29, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>77</td>
+                        <td>12</td>
+                        <td style="text-align:left;font-weight:400">“The Mystery of the Midnight Train”</td>
+                        <td>Jamie Brooks</td>
+                        <td>September 5, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>78</td>
+                        <td>13</td>
+                        <td style="text-align:left;font-weight:400">“The Ultimate Class Trip”</td>
+                        <td>Trey Parker</td>
+                        <td>September 12, 2001</td>
+                      </tr>
+                      <tr>
+                        <td>79</td>
+                        <td>14</td>
+                        <td style="text-align:left;font-weight:400">“The Last Day of Summer”</td>
+                        <td>Matt Stone</td>
+                        <td>September 19, 2001</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+            </div>
+          </section>
+          <section id="about">
+            <h2>About this page</h2>
+            <p>This independent demonstration reproduces the general layout and table presentation of a Wikipedia-style episode list using replacement branding. It is not affiliated with Wikipedia, Wikimedia, Comedy Central or Paramount.</p>
+            <p>This is a fictional demonstration limited to seasons 1–5. Episode titles, credits, broadcast dates and production codes in the detailed tables are invented sample data, not historical records. The season overview uses real season counts and approximate historical release information for layout demonstration.</p>
+          </section>
+          <section id="references">
+            <h2>References and attribution</h2>
+            <p>The general table structure and season overview were inspired by <a href="https://en.wikipedia.org/wiki/List_of_South_Park_episodes">Wikipedia contributors, “List of South Park episodes”</a>, available under <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution–ShareAlike 4.0</a>. Content is reformatted and displayed in a custom interface; the original article and its revision history provide author attribution and references. Additional conditions may apply to some material.</p>
+            <p>Design is an independent recreation inspired by Wikipedia's Vector interface. The branding and surrounding website code are not Wikipedia assets.</p>
+          </section>
+          <footer class="footer">
+            <p>South Park Encyclopaedia · Independent fan reference</p>
+            <p>Episode table data: <a href="https://en.wikipedia.org/wiki/List_of_South_Park_episodes">Wikipedia contributors</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> · <a href="#top">Return to top ↑</a>
+            </p>
+          </footer>
+        </main>
+      </div>
+      <script>
+        'use strict';
+        const $ = id => document.getElementById(id);
+        $('episodes-toggle').onclick=()=>{const el=$('toc-seasons');el.hidden=!el.hidden;$('episodes-toggle').setAttribute('aria-expanded',String(!el.hidden));};$('hide-toc').onclick=()=>$('toc').hidden=!$('toc').hidden;
+        // On narrow screens, place Contents between the introduction and series overview.
+        const contentsSidebar=document.getElementById('sidebar');
+        const articleMain=document.querySelector('.shell > main');
+        const overviewSection=document.getElementById('overview');
+        const layoutQuery=window.matchMedia('(max-width:760px)');
+        function positionContents(){
+        if(layoutQuery.matches){overviewSection.before(contentsSidebar)}
+        else{articleMain.before(contentsSidebar)}
+        }
+        positionContents();
+        layoutQuery.addEventListener('change',positionContents);
+      </script>
+    </body>
+  </html>
