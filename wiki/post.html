@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Lewis — Wiki</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+    --bg: #fff;
+    --text: #202122;
+    --muted: #54595d;
+    --border: #a2a9b1;
+    --line: #c8ccd1;
+    --link: #2855b1;
+    --subtle: #f8f9fa;
+    --head: #eaecf0;
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 82px;
+}
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.7 "Inter",Arial,sans-serif;
+}
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+button {
+    font: inherit;
+    cursor: pointer;
+}
+header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0 clamp(18px,4vw,64px);
+    border-bottom: 1px solid #eaecf0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+}
+.brand:hover {
+    text-decoration: none;
+}
+.mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #293f67;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+.brand strong {
+    display: block;
+    font: italic 400 20px/1.1 "Fraunces",serif;
+    font-variation-settings: "SOFT" 100,"WONK" 1;
+}
+.brand small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: 42px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.header-links a {
+    color: var(--text);
+}
+.header-links a:hover {
+    color: var(--link);
+}
+.menu-toggle {
+    display: none;
+}
+.infobox {
+    float: right;
+    clear: right;
+    width: 285px;
+    max-width: 42%;
+    margin: 4px 0 18px 24px;
+    border: 1px solid var(--border);
+    background: var(--subtle);
+    padding: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.infobox-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 8px 5px;
+    background: var(--head);
+}
+.infobox-figure {
+    margin: 3px;
+    text-align: center;
+}
+.infobox-image {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    color: var(--muted);
+}
+.infobox figcaption {
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.infobox table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.infobox th,.infobox td {
+    border-top: 1px solid var(--line);
+    padding: 6px 7px;
+    text-align: left;
+    vertical-align: top;
+}
+.infobox th {
+    width: 40%;
+    font-weight: 600;
+}
+.shell {
+    max-width: 1660px;
+    margin: auto;
+    display: grid;
+    gap: 42px;
+    padding: 38px clamp(18px,4vw,60px) 80px;
+}
+.sidebar {
+    align-self: start;
+    position: sticky;
+    top: 90px;
+    max-height: calc(100vh - 105px);
+    overflow: auto;
+    font-size: 14px;
+}
+.side-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+}
+.side-title button {
+    border: 0;
+    background: none;
+    color: var(--link);
+    font-size: 13px;
+    font-weight: 400;
+}
+.toc a {
+    display: block;
+    padding: 4px 0;
+    color: var(--text);
+    line-height: 1.4;
+}
+.toc a:hover,.toc a.active,.toc .toplink {
+    color: var(--link);
+}
+.toc .child {
+    padding-left: 18px;
+    font-size: 13px;
+}
+main {
+    min-width: 0;
+}
+h1 {
+    font-family: "Fraunces",serif;
+    font-size: 30px;
+    font-weight: 400;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100,"WONK" 1;
+    line-height: 1.5;
+    margin: 0 0 14px;
+    border-bottom: 1px solid var(--border);
+}
+h2 {
+    font-family: "Fraunces",serif;
+    font-size: 25px;
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100,"WONK" 1;
+    line-height: 1.25;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin: 28px 0 12px;
+}
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 22px 0 8px;
+}
+h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 18px 0 7px;
+}
+h2,h3,h4,section {
+    scroll-margin-top: 0;
+}
+p {
+    margin: 8px 0 13px;
+}
+main ul,main ol {
+    padding-left: 26px;
+    margin: 8px 0 16px;
+}
+main li {
+    margin: 4px 0;
+}
+.lead {
+    margin-bottom: 22px;
+}
+blockquote {
+    border-left: 3px solid var(--line);
+    padding: 2px 0 2px 16px;
+    margin: 18px 0;
+    color: var(--muted);
+}
+.footer {
+    border-top: 1px solid var(--line);
+    margin-top: 48px;
+    padding-top: 15px;
+    color: var(--muted);
+    font-size: 13px;
+}
+@media (max-width:1150px) {
+    .shell {
+        grid-template-columns: 175px minmax(0,1fr);
+        gap: 28px;
+    }
+}
+@media (max-width:760px) {
+    html {
+        scroll-padding-top: 70px;
+    }
+    header {
+        height: 62px;
+        padding: 0 14px;
+    }
+    .brand strong {
+        font-size: 17px;
+    }
+    .brand small {
+        font-size: 9px;
+    }
+    .mark {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+    .brand {
+        flex-shrink: 0;
+        min-width: 0;
+        gap: 8px;
+    }
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--text);
+        border-radius: 4px;
+    }
+    .menu-toggle svg {
+        width: 22px;
+        height: 22px;
+    }
+    .header-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 14px;
+        left: 14px;
+        margin: 0;
+        padding: 8px 0;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 5px 14px rgba(0,0,0,.09);
+        font-size: 14px;
+        white-space: normal;
+    }
+    .header-links.open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+    .header-links a {
+        display: block;
+        padding: 10px 16px;
+    }
+    .header-links a:hover {
+        background: var(--subtle);
+    }
+    .shell {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 24px 15px 55px;
+    }
+    main {
+        display: contents;
+    }
+    .article-intro {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .article-intro h1 {
+        order: 0;
+    }
+    .article-intro p {
+        order: 1;
+    }
+    .article-intro .infobox {
+        order: 2;
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0 22px;
+    }
+    .sidebar {
+        order: 2;
+        align-self: stretch;
+        width: 100%;
+        position: static;
+        max-height: none;
+        overflow: visible;
+        border: 1px solid var(--line);
+        padding: 12px;
+        margin: 10px 0 22px;
+    }
+    .article-body {
+        order: 3;
+    }
+    .footer {
+        order: 4;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h2,h3,h4,section {
+        scroll-margin-top: 0;
+    }
+}
+@media print {
+    .infobox {
+        float: right;
+    }
+    header,.sidebar {
+        display: none !important;
+    }
+    .shell {
+        display: block;
+        padding: 0;
+    }
+    main {
+        display: block;
+    }
+}
+  
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="#top">
+<span class="mark">LC</span>
+<span><strong>Wiki</strong><small>Article archive</small></span>
+</a>
+<nav aria-label="Main navigation" class="header-links" id="header-links">
+<a href="#">Home</a>
+<a href="#">Articles</a>
+<a href="#">Archive</a>
+<a href="#">About</a>
+</nav>
+<button aria-controls="header-links" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+</button>
+</header>
+<div class="shell" id="top">
+  
+<main>
+<div class="article-intro"><h1>Lewis Christian</h1>
+<aside aria-label="Lewis profile information" class="infobox">
+<div class="infobox-title">Lewis Christian</div>
+<figure class="infobox-figure">
+    <img src="/diary/images/avatar.png" alt="Lewis Christian" class="infobox-image">
+    <figcaption>Image placeholder — replace with a preferred portrait or avatar.</figcaption>
+</figure>
+<table aria-label="Profile facts"><tbody>
+<tr><th scope="row">Also known as</th><td>Lewishh :]</td></tr>
+<tr><th scope="row">Age</th><td>33 (as listed on MySpace profile)</td></tr>
+<tr><th scope="row">Location</th><td>United Kingdom</td></tr>
+<tr><th scope="row">Interests</th><td>Web design, writing, music, nostalgia</td></tr>
+<tr><th scope="row">Website</th><td><a href="https://lewis.lc/">lewis.lc</a></td></tr>
+<tr><th scope="row">Other pages</th><td><a href="https://lewis.lc/profile/">About</a> · <a href="https://lewis.lc/myspace/">MySpace</a></td></tr>
+</tbody></table></aside>
+<p class="lead"><strong>Lewis</strong> is a British personal website creator and diary writer whose online projects explore nostalgia, early social networking and personal web publishing. His website, <a href="https://lewis.lc/">lewis.lc</a>, serves as a place to experiment with HTML and CSS and maintain a catalogue of diary entries.</p>
+<p>Having used the internet for more than two decades, Lewis describes a gradual retreat from public social media towards a quieter, more private online presence. His profile pages combine reflections on that transition with an affection for the web culture of the 2000s.</p></div>
+<div class="article-body">
+<section id="background"><h2>Background</h2>
+<p>Lewis describes himself as an introvert, minimalist and night owl. On his personal profile, he reflects on spending more than twenty years online and becoming increasingly selective about his use of social media. His faux MySpace page presents a deliberately nostalgic, playful version of an earlier internet identity, under the display name <i>Lewishh :]</i>.</p>
+<p>The MySpace-inspired profile lists his location as the United Kingdom and his age as 33. Its humorous details, including an occupation of “Time traveller”, are part of the page's retro presentation.</p></section>
+<section id="online-history"><h2>Online history</h2>
+<h3 id="early-platforms">Early platforms and social media</h3>
+<p>Lewis recalls using a wide range of social platforms and publishing services, including Piczo, Bebo, Blogger, MySpace, Dailybooth, Tumblr, LiveJournal, WordPress, Facebook and Twitter, as well as online forums. He describes the earlier internet as something he misses, while also noting that its pace and culture have changed.</p>
+<p>After years of frequent social media activity, including more than 25,000 tweets, he deleted much of his earlier public online presence during the mid-2010s. He now primarily keeps accounts for browsing and private communication.</p>
+<h3 id="diaries">Diary writing</h3>
+<p>Between 2008 and 2012, Lewis kept an online diary on LiveJournal. Much of the original archive was subsequently lost, although he recovered many of the 2008 and 2009 entry titles using the Wayback Machine. He resumed diary writing in 2021, keeping the newer entries offline and private.</p>
+<p>The diary archive is described on his About page as the one enduring feature of his personal website.</p>
+<h3 id="website">Personal website and web design</h3>
+<p>Lewis uses <a href="https://lewis.lc/">lewis.lc</a> to experiment with HTML, CSS and page layouts. Many of the projects are temporary or exploratory rather than permanent publications. His <a href="https://lewis.lc/myspace/">MySpace-inspired page</a> recreates the visual language of an older social network, complete with interests, blurbs, a friend space, blog previews and period-style comments.</p>
+</section>
+<section id="interests"><h2>Interests</h2>
+<h3 id="music">Music</h3>
+<p>Music is a recurring interest across both profiles. Artists listed include Adam and the Ants, Alestorm, Alex Day, Alex Warren, Alphaville, Chameleon Circuit, Evanescence, Green Day, Henry Moodie, HIM, Linkin Park, My Chemical Romance, Nightwish, Panic! at the Disco, Pet Shop Boys, Rammstein, Sam Fender, The Killers, Tom Grennan and Ville Valo, among many others.</p>
+<p>The faux MySpace profile features “Heartache Every Moment” by HIM, while the About page also lists HIM as the artist being listened to at its last stated update in October 2026.</p>
+<h3 id="screen">Film and television</h3>
+<p>Television interests listed on the MySpace page include <i>Doctor Who</i>, <i>South Park</i>, <i>The Simpsons</i> (particularly seasons 1–10), <i>Taskmaster</i>, <i>EastEnders</i>, <i>Squid Game</i>, <i>Big Brother</i> (series 3–7), <i>Courage the Cowardly Dog</i>, <i>The Powerpuff Girls</i>, <i>Dexter's Laboratory</i>, <i>Knightmare</i> and <i>Eurovision</i>.</p>
+<p>Favourite films listed there include <i>Back to the Future</i>, <i>Psycho</i>, <i>Saw</i>, <i>Batman</i> (1989), <i>Harry Potter and the Goblet of Fire</i>, <i>You Only Live Twice</i> and <i>On Her Majesty's Secret Service</i>.</p>
+<h3 id="games">Games and other interests</h3>
+<p>Games named on the MySpace page include <i>Minecraft</i>, <i>RollerCoaster Tycoon</i>, <i>Planet Coaster</i>, <i>Theme Hospital</i>, <i>Croc</i>, <i>The Simpsons: Hit &amp; Run</i> and <i>Grand Theft Auto: Vice City</i>. Other interests include writing, YouTube, livestreams, web coding and nostalgia for early internet communities.</p>
+</section>
+<section id="preferences"><h2>Personal preferences</h2>
+<p>Lewis's About page describes an appreciation for minimalism, clear night skies, stargazing, the Moon, nature, physical media, black-and-white television, discovering music, and the days of MSN Messenger. It also mentions an interest in space and the universe, amethyst, introspection and spending time at a laptop.</p>
+<p>Dislikes listed on the same page include repetitive noises, large crowds, early mornings, UK heatwaves, TikTok, pineapple on pizza and the cost of living. These are presented as personal preferences rather than comprehensive biographical details.</p>
+</section>
+<section id="sources"><h2>Sources</h2><ol>
+<li><a href="https://lewis.lc/profile/">lewis.lc — About / Profile</a> (page states last updated 25 October 2026).</li>
+<li><a href="https://lewis.lc/myspace/">lewis.lc — MySpace-inspired profile</a> (accessed November 2026).</li>
+</ol></section>
+</div>
+<footer class="footer"><p>Personal profile article · Information drawn from lewis.lc</p></footer>
+</main>
+</div>
+<script>
+  const menuButton = document.getElementById('menu-toggle');
+  const headerLinks = document.getElementById('header-links');
+  function closeMenu() {
+    headerLinks.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation menu');
+  }
+  menuButton.addEventListener('click', () => {
+    const opened = headerLinks.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(opened));
+    menuButton.setAttribute('aria-label', opened ? 'Close navigation menu' : 'Open navigation menu');
+  });
+  headerLinks.addEventListener('click', event => {
+    if (event.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('header')) closeMenu();
+  });
+  const tocButton = document.getElementById('toggle-toc');
+  const toc = document.getElementById('toc');
+  tocButton.addEventListener('click', () => {
+    toc.hidden = !toc.hidden;
+    tocButton.textContent = toc.hidden ? 'show' : 'hide';
+    tocButton.setAttribute('aria-expanded', String(!toc.hidden));
+  });
+</script>
+</body>
+</html>
