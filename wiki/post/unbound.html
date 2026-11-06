@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Bitter and Toast — lewis.lc</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+    --bg: #fff;
+    --text: #202122;
+    --muted: #54595d;
+    --border: #a2a9b1;
+    --line: #c8ccd1;
+    --link: #2855b1;
+    --subtle: #f8f9fa;
+    --head: #eaecf0;
+}
+
+
+    
+::-moz-selection {
+	background: #cfd8e4;
+	text-shadow: none;
+	color:#000000;
+}
+
+::selection {
+	background: #cfd8e4;
+	text-shadow: none;
+	color:#000000;
+} 
+
+
+
+    
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 82px;
+}
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.7 "Inter",Arial,sans-serif;
+}
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+button {
+    font: inherit;
+    cursor: pointer;
+}
+header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 clamp(18px,4vw,64px);
+    border-bottom: 1px solid #eaecf0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+}
+.brand:hover {
+    text-decoration: none;
+}
+.mark {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    background: #293f67;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    }
+.brand strong {
+    color: #293f67;
+    display: block;
+    font: italic 500 16px / 1.1 "Fraunces", serif;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.brand small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: 42px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.header-links a {
+    color: var(--text);
+}
+.header-links a:hover {
+    color: var(--link);
+}
+.menu-toggle {
+    display: none;
+}
+.infobox {
+    float: right;
+    clear: right;
+    width: 300px;
+    max-width: 42%;
+    margin: 4px 0 18px 24px;
+    border: 1px solid var(--border);
+    background: var(--subtle);
+    padding: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.infobox-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 5px 5px;
+    background: var(--head);
+}
+.infobox-figure {
+    margin: 0px;
+    text-align: center;
+}
+.infobox-image {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    color: var(--muted);
+}
+.infobox figcaption {
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.infobox table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.infobox th,.infobox td {
+    border-top: 1px solid var(--line);
+    padding: 6px 7px;
+    text-align: left;
+    vertical-align: top;
+}
+.infobox th {
+    width: 40%;
+    font-weight: 600;
+}
+.shell {
+    max-width: 950px;
+    margin: auto;
+    display: grid;
+    gap: 42px;
+    padding: 25px clamp(18px,4vw,60px) 80px;
+}
+.sidebar {
+    align-self: start;
+    position: sticky;
+    top: 90px;
+    max-height: calc(100vh - 105px);
+    overflow: auto;
+    font-size: 14px;
+}
+.side-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 7px;
+    margin-bottom: 10px;
+}
+.side-title button {
+    border: 0;
+    background: none;
+    color: var(--link);
+    font-size: 13px;
+    font-weight: 400;
+}
+.toc a {
+    display: block;
+    padding: 4px 0;
+    color: var(--text);
+    line-height: 1.4;
+}
+.toc a:hover,.toc a.active,.toc .toplink {
+    color: var(--link);
+}
+.toc .child {
+    padding-left: 18px;
+    font-size: 13px;
+}
+main {
+    min-width: 0;
+}
+h1 {
+    font-family: "Fraunces", serif;
+    font-size: 33px;
+    font-weight: 500;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    line-height: 1.3;
+    margin: 0 0 14px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -0.3px;
+    word-wrap: break-word;
+}
+h2 {
+    font-family: "Fraunces",serif;
+    font-size: 25px;
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100,"WONK" 1;
+    line-height: 1.25;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin: 28px 0 12px;
+}
+h3 {
+    font-family: "Fraunces", serifI;
+    font-size: 18px;
+    font-weight: 600;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    margin: 10px 10px 10px 0px;
+}
+h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 18px 0 7px;
+}
+h2,h3,h4,section {
+    scroll-margin-top: 0;
+}
+p {
+    font-family: 'Inter', sans-serif;
+    margin: 8px 0 13px;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+main ul,main ol {
+    padding-left: 26px;
+    margin: 8px 0 16px;
+}
+main li {
+    margin: 4px 0;
+}
+.lead {
+    margin-bottom: 22px;
+}
+blockquote {
+    border-left: 3px solid var(--line);
+    padding: 2px 0 2px 16px;
+    margin: 18px 0;
+    color: var(--muted);
+}
+.footer {
+    border-top: 1px solid var(--line);
+    margin-top: 48px;
+    padding-top: 15px;
+    color: var(--muted);
+    font-size: 13px;
+}
+@media (max-width:1150px) {
+    .shell {
+        grid-template-columns: 175px minmax(0,1fr);
+        gap: 28px;
+    }
+}
+@media (max-width:760px) {
+    html {
+        scroll-padding-top: 70px;
+    }
+    header {
+        height: 60px;
+        padding: 0 14px;
+    }
+    .brand strong {
+        font-size: 17px;
+    }
+    .brand small {
+        font-size: 9px;
+    }
+    .mark {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    background: #293f67;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    }
+    .brand {
+        flex-shrink: 0;
+        min-width: 0;
+        gap: 8px;
+    }
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--text);
+        border-radius: 4px;
+    }
+    .menu-toggle svg {
+        width: 22px;
+        height: 22px;
+    }
+    .header-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 14px;
+        left: 14px;
+        margin: 0;
+        padding: 8px 0;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 5px 14px rgba(0,0,0,.09);
+        font-size: 14px;
+        white-space: normal;
+    }
+    .header-links.open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+    .header-links a {
+        display: block;
+        padding: 10px 16px;
+    }
+    .header-links a:hover {
+        background: var(--subtle);
+    }
+    .shell {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 20px 10px;
+    }
+    main {
+        display: contents;
+    }
+    .article-intro {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .article-intro h1 {
+        order: 0;
+    }
+    .article-intro p {
+        order: 1;
+    }
+    .article-intro .infobox {
+        order: 2;
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0 5px;
+    }
+    .sidebar {
+        order: 2;
+        align-self: stretch;
+        width: 100%;
+        position: static;
+        max-height: none;
+        overflow: visible;
+        border: 1px solid var(--line);
+        padding: 12px;
+        margin: 10px 0 22px;
+    }
+    .article-body {
+        order: 3;
+    }
+    .footer {
+        order: 4;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h2,h3,h4,section {
+        scroll-margin-top: 0;
+    }
+}
+@media print {
+    .infobox {
+        float: right;
+    }
+    header,.sidebar {
+        display: none !important;
+    }
+    .shell {
+        display: block;
+        padding: 0;
+    }
+    main {
+        display: block;
+    }
+}
+  
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="#top">
+<span class="mark">LC</span>
+<span><strong>lewis.lc</strong><small>Diary Entry</small></span>
+</a>
+<nav aria-label="Main navigation" class="header-links" id="header-links">
+<a href="/">Home</a>
+<a href="/profile">Bio</a>
+<a href="/diary">Diary</a>
+<a href="/myspace">MySpace</a>
+<a href="/livejournal">LiveJournal</a>
+</nav>
+<button aria-controls="header-links" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+</button>
+</header>
+<div class="shell" id="top">
+  
+<main>
+
+  
+<div class="article-intro"><h1>From The Desk of Nerd³ – August 2025 Edition<span style="color:#FF0066;">.</span></h1>
+
+  
+<aside aria-label="Lewis profile information" class="infobox">
+<div class="infobox-title">August 27, 2025</div>
+  
+<figure class="infobox-figure">
+    <img src="/wiki/img/tardiscrew.png" alt="Lewis Christian" class="infobox-image">
+    <figcaption>TARDIS Crew promo image</figcaption>
+</figure>
+<table aria-label="Profile facts"><tbody>
+<tr><th scope="row">Written by</th><td>Nerd³</td></tr>
+<tr><th scope="row">Date</th><td>August 27, 2025</td></tr>
+</tbody></table></aside>
+  
+  
+<div class="article-body">
+    
+<section id="background">
+
+<h3>August 27, 2025</h3>
+  
+
+<p>Boundless is dead.</p>
+
+<p>No, not Unbound. They died already back in March. Boundless, the shuffling corpse of my publisher Unbound, also died this month. I discovered this through a group chat, on my day off, and had to speed into work to recover as much as I could before the doors were finally shuttered at 4:30pm that same day. I was never sent an official statement on the closure.</p>
+
+<p>I’m not surprised, a publishing company that pisses off its authors doesn’t have a huge chance at survival, yet I am once again put into a worse situation. As of right now, a distribution company has 5,343 copies of <i>The Paradox Paradox</i>, 5,062 of which are backer copies. Currently, although I’m hoping to resolve this soon, they will not release these books to me, despite them being my legal property. I believe this is due to a brand-new set of administrators that have turned up, because that's what everyone needs in their life. Having to deal with two separate bankruptcy administrators.</p>
+
+<p>When I do get the books released, whenever that is, I need somewhere for them to go. I’m in conversations with distributors at the moment, but it’s hard to organise without knowing if/when I’ll have the books delivered. Also, I literally cannot afford to ship them. Unbound’s pricing estimate for shipping was £13,000. Today, I performed my own calculations, and it’s looking closer to £38,000. I don’t exactly have that lying around, especially since I was recently not paid for five entire years of work.</p>
+
+<p>So currently there are two plans. Either I crowdfund this amount of money and pray I hit the goal, or I find a distributor that can contact everyone and ask for their shipping costs individually. It sucks that you'll have to pay a little more, but that’s the best I can do to actually get the books into your hands.
+
+<p>Now, this is the point in the post where I have had to select all and hit delete about 10 times this past month. Every time I seem to be on a path, it’s shuttered. Every avenue suddenly dead-ends. Today the UK suspended post to the USA, so the plan I was setting up to distribute the books without storage won’t work, and I may need to find long term storage for some of these books... without it costing me anything. Fuck, right now I don’t even know if these signed copies are <i>actually signed</i>. Yeah, I sent Boundless the signed bookplates, but did they make it into the books, or are they just in a box, on a shelf, stuck forever in an abandoned London office? I literally don't know.</p>
+
+<p>And then, when this is all finally all over, I can start looking for a publisher for this book. Or I’ll self-publish. Or I’ll get an agent who can deal with all this shit for me. 5 – 15% of fuck all is a fair price to pay to never receive another ChatGPT email response.</p>
+
+<p>Still, I do love <i>The Paradox Paradox</i>. It’s everything I wanted it to be and more. The feedback so far has been fantastic, and it seems to be connecting with the people I hoped it would. One day, despite the best efforts of my happily dead publisher, I hope you can all read it.</p>
+
+<p>Until next time.</p>
+
+<p>Daniel xx</p>
+
+<p><b>PS.</b> Also, this entire fiasco has stalled prints completely. Hopefully we’ll be going again soon, but who knows at this point. I’m so sorry for this constant delay.</p>
+
+
+
+
+    
+</section>
+
+
+    
+
+    
+    
+
+    
+</div>
+<footer class="footer"><p>Personal profile article · Information drawn from lewis.lc</p></footer>
+</main>
+</div>
+<script>
+  const menuButton = document.getElementById('menu-toggle');
+  const headerLinks = document.getElementById('header-links');
+  function closeMenu() {
+    headerLinks.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation menu');
+  }
+  menuButton.addEventListener('click', () => {
+    const opened = headerLinks.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(opened));
+    menuButton.setAttribute('aria-label', opened ? 'Close navigation menu' : 'Open navigation menu');
+  });
+  headerLinks.addEventListener('click', event => {
+    if (event.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('header')) closeMenu();
+  });
+  const tocButton = document.getElementById('toggle-toc');
+  const toc = document.getElementById('toc');
+  tocButton.addEventListener('click', () => {
+    toc.hidden = !toc.hidden;
+    tocButton.textContent = toc.hidden ? 'show' : 'hide';
+    tocButton.setAttribute('aria-expanded', String(!toc.hidden));
+  });
+</script>
+</body>
+</html>
