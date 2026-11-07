@@ -57,18 +57,16 @@
     .header-links a:hover { color: var(--link); }
     .menu-toggle { display: none; }
 
+    .shell {
+      max-width: 1320px;
+      margin: auto;
+      padding: 25px clamp(18px, 4vw, 60px) 80px;
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 38px;
+      align-items: start;
+    }
 
-.shell {
-    max-width: 1320px;
-    margin: auto;
-    padding: 25px clamp(18px, 4vw, 60px) 80px;
-    display: grid;
-    grid-template-columns: 230px minmax(0, 1fr);
-    gap: 38px;
-    align-items: start;
-}
-    
-    
     main { min-width: 0; }
     h1, h3 { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1; }
     h1 {
@@ -82,14 +80,12 @@
     .article-body section { scroll-margin-top: 82px; }
     .accent { color: #ff0066; }
 
-
     .article-body img {
       display: block;
       max-width: 100%;
       height: auto;
       object-fit: contain;
     }
-
 
     .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
     .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
@@ -106,7 +102,6 @@
       color: var(--muted);
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: normal;
       text-align: left;
     }
     .archive-year:hover { background: var(--subtle); }
@@ -118,7 +113,15 @@
     .entry-link.active { background:#e8effb; color:var(--link); font-weight:600; }
     .entry-link small { display:block; font-size:11px; color:var(--muted); font-weight:400; }
     .article-meta { color:var(--muted); font-size:12px; margin:-6px 0 14px; }
-    .article-controls { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:12px; margin-top:36px; padding-top:16px; align-items:stretch; }
+    .article-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid #eaecf0;
+      align-items: stretch;
+    }
     .article-controls button { min-width:0; border:0; background:transparent; color:var(--text); padding:12px 0; text-align:left; }
     .article-controls button:hover:not(:disabled) .nav-title { text-decoration:underline; }
     .article-controls button:disabled { opacity:.4; cursor:default; }
@@ -222,7 +225,9 @@ async function loadEntry(path) {
     const match = line.match(/^([A-Za-z]+):\s*(.*)$/);
     if (match) meta[match[1].toLowerCase()] = match[2].trim();
   });
-  if (!meta.title || !/^\d{4}-\d{2}-\d{2}$/.test(meta.date||'')) throw new Error('Missing title or valid date in '+path);
+  if (!meta.title || !/^\d{4}-\d{2}-\d{2}$/.test(meta.date || '')) {
+    throw new Error('Missing title or valid date in ' + path);
+  }
   return { id:slugFromPath(path), title:meta.title, date:meta.date, time:meta.time||'', markdown:parts.join('---').trim() };
 }
 // Format Markdown emphasis in titles safely, without allowing raw HTML.
@@ -358,7 +363,8 @@ window.addEventListener('hashchange',()=>selectEntry(decodeURIComponent(location
  try {
   const results=await Promise.allSettled(entryFiles.map(loadEntry));
   sorted=results.filter(r=>r.status==='fulfilled').map(r=>r.value).sort((a,b)=>b.date.localeCompare(a.date));
-  const errors=results.filter(r=>r.status==='rejected');if(errors.length)console.warn('Some entries failed:',errors.map(e=>e.reason));
+  const errors = results.filter(result => result.status === 'rejected');
+  if (errors.length) console.warn('Some entries failed:', errors.map(result => result.reason));
   if(!sorted.length)throw new Error('No entries could be loaded. Serve this folder through a web server, not file://.');
   // Initially expand only the year containing the entry being displayed.
   // Without a direct link, that is the most recent year in the archive.
