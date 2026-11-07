@@ -102,14 +102,22 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      width: 100%;
       margin: 7px 0;
-      padding: 0 9px;
+      padding: 3px 9px;
+      border: 0;
+      border-radius: 3px;
+      background: transparent;
       color: var(--muted);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: normal;
+      text-align: left;
     }
-    .archive-year svg { width: 12px; height: 12px; flex-shrink: 0; }
+    .archive-year:hover { background: var(--subtle); }
+    .archive-year svg { width: 12px; height: 12px; flex-shrink: 0; transition: transform .2s ease; }
+    .archive-year[aria-expanded="true"] svg { transform: rotate(90deg); }
+    .archive-year-entries[hidden] { display: none; }
     .archive-month { margin: 12px 0 5px; font-weight:700; color:var(--link); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
     .entry-link { display:block; width:100%; text-align:left; border:0; background:transparent; color:var(--text); padding:6px 9px; border-radius:3px; line-height:1.4; font-size:14px; font-weight:600; }
     .entry-link:hover { background:var(--subtle); color:var(--link); }
@@ -201,7 +209,7 @@ const byId = id => document.getElementById(id);
 const dateLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
 const monthLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{month:'long'});
 const slugFromPath = path => path.split('/').pop().replace(/\.md$/,'');
-let sorted = [], selectedId = null;
+let sorted = [], selectedId = null, expandedYear = null;
 
 async function loadEntry(path) {
   const response = await fetch(path);
@@ -236,24 +244,46 @@ function plainTitle(title) {
 function renderList() {
   const list = byId('entry-list'); list.replaceChildren();
   byId('entry-count').textContent = String(sorted.length);
-  let lastYear='';
-  sorted.forEach(entry=>{
-    const year=entry.date.slice(0,4);
-    if(year!==lastYear){
-      const h=document.createElement('div');h.className='archive-year';
-      h.innerHTML='<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
-      h.append(document.createTextNode(year));list.append(h);lastYear=year;
+  let lastYear = '', yearEntries = null;
+  sorted.forEach(entry => {
+    const year = entry.date.slice(0, 4);
+    if (year !== lastYear) {
+      const heading = document.createElement('button');
+      heading.type = 'button';
+      heading.className = 'archive-year';
+      heading.setAttribute('aria-expanded', String(expandedYear === year));
+      heading.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+      heading.append(document.createTextNode(year));
+      yearEntries = document.createElement('div');
+      yearEntries.className = 'archive-year-entries';
+      yearEntries.id = 'archive-entries-' + year;
+      yearEntries.hidden = expandedYear !== year;
+      heading.setAttribute('aria-controls', yearEntries.id);
+      heading.addEventListener('click', () => {
+        expandedYear = expandedYear === year ? null : year;
+        renderList();
+      });
+      list.append(heading, yearEntries);
+      lastYear = year;
     }
-    const button=document.createElement('button');button.type='button';button.className='entry-link'+(entry.id===selectedId?' active':'');
-    const titleSpan=document.createElement('span');titleSpan.innerHTML=formatTitle(entry.title);button.append(titleSpan);
-    const small=document.createElement('small');small.textContent=dateLabel(entry.date);button.append(small);
-    if(entry.id===selectedId)button.setAttribute('aria-current','page');
-    button.addEventListener('click',()=>selectEntry(entry.id,true));list.append(button);
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'entry-link' + (entry.id === selectedId ? ' active' : '');
+    const titleSpan = document.createElement('span');
+    titleSpan.innerHTML = formatTitle(entry.title);
+    button.append(titleSpan);
+    const small = document.createElement('small');
+    small.textContent = dateLabel(entry.date);
+    button.append(small);
+    if (entry.id === selectedId) button.setAttribute('aria-current', 'page');
+    button.addEventListener('click', () => selectEntry(entry.id, true));
+    yearEntries.append(button);
   });
 }
 function selectEntry(id, updateUrl=false) {
   const entry=sorted.find(e=>e.id===id)||sorted[0];if(!entry)return;
   selectedId=entry.id;
+  expandedYear=entry.date.slice(0,4);
   byId('article-title').innerHTML=formatTitle(entry.title);
   const dot=document.createElement('span');dot.className='accent';dot.textContent='.';byId('article-title').append(dot);
   byId('article-meta').textContent=dateLabel(entry.date)+(entry.time?' · '+entry.time:'');
