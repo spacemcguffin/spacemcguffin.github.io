@@ -118,9 +118,9 @@
     .entry-link.active { background:#e8effb; color:var(--link); font-weight:600; }
     .entry-link small { display:block; font-size:11px; color:var(--muted); font-weight:400; }
     .article-meta { color:var(--muted); font-size:12px; margin:-6px 0 14px; }
-    .article-controls { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:12px; margin-top:36px; padding-top:16px; border-top:1px solid var(--line); align-items:stretch; }
-    .article-controls button { min-width:0; border:1px solid var(--line); border-radius:4px; background:var(--subtle); color:var(--text); padding:12px 14px; text-align:left; }
-    .article-controls button:hover:not(:disabled) { border-color:var(--link); background:#f0f4fc; }
+    .article-controls { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:12px; margin-top:36px; padding-top:16px; align-items:stretch; }
+    .article-controls button { min-width:0; border:0; background:transparent; color:var(--text); padding:12px 0; text-align:left; }
+    .article-controls button:hover:not(:disabled) .nav-title { text-decoration:underline; }
     .article-controls button:disabled { opacity:.4; cursor:default; }
     .nav-label { display:block; color:var(--muted); font-size:12px; margin-bottom:4px; }
     .nav-title { display:block; color:var(--link); font-weight:600; overflow-wrap:anywhere; line-height:1.4; }
@@ -137,9 +137,11 @@
       .browse-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; border:1px solid var(--line); background:var(--subtle); padding:9px 12px; margin:12px 0; font-weight:600; }
       .archive-sidebar { display:none; position:static; max-height:320px; overflow:auto; border:1px solid var(--line); padding:12px; margin:0 0 18px; }
       .archive-sidebar.open { display:block; }
-      .article-controls { gap:6px; }
-      .article-controls button { padding:9px 8px; }
-      .article-controls #top-entry { min-width:54px; }
+      .article-controls { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+      .article-controls button { padding: 9px 0; text-align: left; }
+      .article-controls #top-entry { grid-row: 1; min-width: 0; text-align: left; }
+      .article-controls #next-entry { grid-row: 2; text-align: left; }
+      .article-controls #prev-entry { grid-row: 3; text-align: left; }
       html { scroll-padding-top: 70px; }
       .site-header { padding: 0 14px; }
       .brand { flex-shrink: 0; min-width: 0; gap: 8px; }
