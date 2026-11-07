@@ -83,9 +83,7 @@
     .article-body section { scroll-margin-top: 82px; }
     .accent { color: #ff0066; }
     .footer {
-      clear: both; border-top: 1px solid var(--line);
-      margin-top: 48px; padding-top: 15px;
-      color: var(--muted); font-size: 13px;
+      display: none;
     }
 
 
@@ -217,11 +215,10 @@ function plainTitle(title) {
 function renderList() {
   const list = byId('entry-list'); list.replaceChildren();
   byId('entry-count').textContent = String(sorted.length);
-  let lastYear='',lastMonth='';
+  let lastYear='';
   sorted.forEach(entry=>{
-    const year=entry.date.slice(0,4), month=entry.date.slice(0,7);
-    if(year!==lastYear){const h=document.createElement('div');h.className='archive-year';h.textContent=year;list.append(h);lastYear=year;lastMonth='';}
-    if(month!==lastMonth){const h=document.createElement('div');h.className='archive-month';h.textContent=monthLabel(entry.date);list.append(h);lastMonth=month;}
+    const year=entry.date.slice(0,4);
+    if(year!==lastYear){const h=document.createElement('div');h.className='archive-year';h.textContent=year;list.append(h);lastYear=year;}
     const button=document.createElement('button');button.type='button';button.className='entry-link'+(entry.id===selectedId?' active':'');
     const titleSpan=document.createElement('span');titleSpan.innerHTML=formatTitle(entry.title);button.append(titleSpan);
     const small=document.createElement('small');small.textContent=dateLabel(entry.date);button.append(small);
