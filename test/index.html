@@ -128,7 +128,7 @@
     .article-controls button:disabled { opacity:.4; cursor:default; }
     .nav-label { display:block; color:var(--muted); font-size:12px; margin-bottom:4px; }
     .nav-title { display:block; color:var(--link); font-weight:600; overflow-wrap:anywhere; line-height:1.4; }
-    .article-controls #top-entry { text-align:center; align-self:stretch; min-width:76px; }
+    .article-controls #top-entry { text-align:center; min-width:76px; }
     .article-controls #next-entry { text-align:right; }
     .top-chevron { width:14px; height:14px; vertical-align:-2px; margin-left:2px; }
     .double-chevron { width:20px; height:20px; vertical-align:-5px; stroke-width:2.3; }
@@ -140,15 +140,15 @@
     #article { scroll-margin-top: 80px; }
     @media(max-width:900px) and (min-width:761px) { .shell { grid-template-columns:190px minmax(0,1fr); gap:24px; } }
     @media (max-width: 760px) {
-      .shell { display: block; }
+      .shell { display: block; padding: 10px 20px 30px; }
       .browse-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; border:1px solid var(--line); background:var(--subtle); padding:9px 12px; margin:12px 0; font-weight:600; }
       .archive-sidebar { display:none; position:static; max-height:320px; overflow:auto; border:1px solid var(--line); padding:12px; margin:0 0 18px; }
       .archive-sidebar.open { display:block; }
       .article-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-      .article-controls button { padding: 13px 14px; text-align: center; }
+      .article-controls button { padding: 13px 14px; }
       .article-controls #top-entry { grid-column: 1 / -1; grid-row: 1; min-width: 0; text-align: center; }
-      .article-controls #prev-entry { grid-column: 1; grid-row: 2; text-align: center; }
-      .article-controls #next-entry { grid-column: 2; grid-row: 2; text-align: center; }
+      .article-controls #prev-entry { grid-column: 1; grid-row: 2; text-align: left; }
+      .article-controls #next-entry { grid-column: 2; grid-row: 2; text-align: right; }
       html { scroll-padding-top: 70px; }
       .site-header { padding: 0 14px; }
       .brand { flex-shrink: 0; min-width: 0; gap: 8px; }
@@ -171,7 +171,6 @@
       .header-links.open { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
       .header-links a { display: block; padding: 10px 16px; }
       .header-links a:hover { background: var(--subtle); }
-      .shell { padding: 10px 20px 30px; }
       h1 { font-size: 28px; }
       .article-body section { scroll-margin-top: 70px; }
     }
@@ -214,9 +213,14 @@ const entryFiles = [
   'entry/bitter-and-toast.md'
 ];
 const byId = id => document.getElementById(id);
-const dateLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-const slugFromPath = path => path.split('/').pop().replace(/\.md$/,'');
-let sorted = [], selectedId = null, expandedYears = new Set();
+const dateLabel = date => new Date(`${date}T12:00:00`).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric'
+});
+const slugFromPath = path => path.split('/').pop().replace(/\.md$/, '');
+
+let sorted = [];
+let selectedId = null;
+const expandedYears = new Set();
 
 async function loadEntry(path) {
   const response = await fetch(path);
@@ -232,7 +236,13 @@ async function loadEntry(path) {
   if (!meta.title || !/^\d{4}-\d{2}-\d{2}$/.test(meta.date || '')) {
     throw new Error('Missing title or valid date in ' + path);
   }
-  return { id:slugFromPath(path), title:meta.title, date:meta.date, time:meta.time||'', markdown:parts.join('---').trim() };
+  return {
+    id: slugFromPath(path),
+    title: meta.title,
+    date: meta.date,
+    time: meta.time || '',
+    markdown: parts.join('---').trim()
+  };
 }
 // Format Markdown emphasis in titles safely, without allowing raw HTML.
 // Supported: *italic*, **bold**, ***bold italic***, and ~~strikethrough~~.
@@ -345,41 +355,81 @@ function selectEntry(id, updateUrl = false) {
 
   if (updateUrl) history.pushState(null, '', '#' + encodeURIComponent(entry.id));
   if (matchMedia('(max-width:760px)').matches) {
-    byId('archive-sidebar').classList.remove('open');
-    byId('browse-toggle').setAttribute('aria-expanded', 'false');
+    archiveSidebar.classList.remove('open');
+    browseToggle.setAttribute('aria-expanded', 'false');
   }
   if (updateUrl) byId('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-byId('browse-toggle').addEventListener('click',()=>{
- const open=byId('archive-sidebar').classList.toggle('open');byId('browse-toggle').setAttribute('aria-expanded',String(open));
+const browseToggle = byId('browse-toggle');
+const archiveSidebar = byId('archive-sidebar');
+
+browseToggle.addEventListener('click', () => {
+  const open = archiveSidebar.classList.toggle('open');
+  browseToggle.setAttribute('aria-expanded', String(open));
 });
-const menuButton=byId('menu-toggle'),headerLinks=byId('header-links');
-function closeMenu(){headerLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Open navigation menu');}
-menuButton.addEventListener('click',()=>{const open=headerLinks.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');});
-headerLinks.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
-document.addEventListener('click',e=>{if(!e.target.closest('.site-header'))closeMenu();});
+const menuButton = byId('menu-toggle');
+const headerLinks = byId('header-links');
+
+function closeMenu() {
+  headerLinks.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', 'Open navigation menu');
+}
+
+menuButton.addEventListener('click', () => {
+  const open = headerLinks.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+});
+
+headerLinks.addEventListener('click', event => {
+  if (event.target.closest('a')) closeMenu();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') closeMenu();
+});
+document.addEventListener('click', event => {
+  if (!event.target.closest('.site-header')) closeMenu();
+});
 byId('top-entry').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-window.addEventListener('popstate',()=>selectEntry(decodeURIComponent(location.hash.slice(1))));
-window.addEventListener('hashchange',()=>selectEntry(decodeURIComponent(location.hash.slice(1))));
-(async()=>{
- try {
-  const results=await Promise.allSettled(entryFiles.map(loadEntry));
-  sorted=results.filter(r=>r.status==='fulfilled').map(r=>r.value).sort((a,b)=>b.date.localeCompare(a.date));
-  const errors = results.filter(result => result.status === 'rejected');
-  if (errors.length) console.warn('Some entries failed:', errors.map(result => result.reason));
-  if(!sorted.length)throw new Error('No entries could be loaded. Serve this folder through a web server, not file://.');
-  // Initially expand only the year containing the entry being displayed.
-  // Without a direct link, that is the most recent year in the archive.
-  const requestedId = decodeURIComponent(location.hash.slice(1));
-  const initialEntry = sorted.find(entry => entry.id === requestedId) || sorted[0];
-  expandedYears.clear();
-  expandedYears.add(initialEntry.date.slice(0, 4));
-  renderList();
-  selectEntry(initialEntry.id);
- }catch(error){byId('article-title').textContent='Unable to load entries';byId('article-body').textContent=error.message;console.error(error);}
-})();
+function selectFromHash() {
+  selectEntry(decodeURIComponent(location.hash.slice(1)));
+}
+
+window.addEventListener('popstate', selectFromHash);
+window.addEventListener('hashchange', selectFromHash);
+
+async function initialiseArchive() {
+  try {
+    const results = await Promise.allSettled(entryFiles.map(loadEntry));
+    sorted = results
+      .filter(result => result.status === 'fulfilled')
+      .map(result => result.value)
+      .sort((a, b) => b.date.localeCompare(a.date));
+
+    const errors = results.filter(result => result.status === 'rejected');
+    if (errors.length) {
+      console.warn('Some entries failed:', errors.map(result => result.reason));
+    }
+    if (!sorted.length) {
+      throw new Error('No entries could be loaded. Serve this folder through a web server, not file://.');
+    }
+
+    // Open only the selected entry's year initially; other years can be opened independently.
+    const requestedId = decodeURIComponent(location.hash.slice(1));
+    const initialEntry = sorted.find(entry => entry.id === requestedId) || sorted[0];
+    expandedYears.add(initialEntry.date.slice(0, 4));
+    renderList();
+    selectEntry(initialEntry.id);
+  } catch (error) {
+    byId('article-title').textContent = 'Unable to load entries';
+    byId('article-body').textContent = error.message;
+    console.error(error);
+  }
+}
+
+initialiseArchive();
 </script>
 </body>
 </html>
