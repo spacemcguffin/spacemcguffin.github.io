@@ -88,17 +88,23 @@
     }
 
 
+    /* Keep embedded videos within the article column. */
     .article-body iframe,
-.article-body video {
-    display: block;
-    width: 100%;
-    max-width: 100%;
-    aspect-ratio: 16 / 9;
-    height: auto;
-    border: 0;
-}
+    .article-body video {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      border: 0;
+    }
 
-    
+    .article-body iframe {
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+
+    .article-body video {
+      height: auto;
+    }
 
     .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
     .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
