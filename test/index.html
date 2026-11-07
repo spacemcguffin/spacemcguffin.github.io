@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Diary archive — lewis.lc</title>
@@ -58,13 +58,7 @@
     .header-links a:hover { color: var(--link); }
     .menu-toggle { display: none; }
 
-    .shell {
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: 250px minmax(0, 1fr); 
-    }
-
-    
+    .shell { max-width: 1150px; margin: auto; padding: 25px clamp(18px, 4vw, 60px) 80px; }
     main { min-width: 0; }
     h1, h3 { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1; }
     h1 {
@@ -169,9 +163,10 @@
 <script>
 // To add an entry: create a .md file and add its path to this list.
 const entryFiles = [
-  'entry/001.md',
-  'entry/note-to-self.md',
-  'entry/bitter-and-toast.md'
+  'entries/2026/bitter-and-toast.md',
+  'entries/2026/sample-october.md',
+  'entries/2026/sample-september.md',
+  'entries/2026/sample-august.md'
 ];
 const byId = id => document.getElementById(id);
 const dateLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
@@ -193,6 +188,22 @@ async function loadEntry(path) {
   if (!meta.title || !/^\d{4}-\d{2}-\d{2}$/.test(meta.date||'')) throw new Error('Missing title or valid date in '+path);
   return { id:slugFromPath(path), title:meta.title, date:meta.date, time:meta.time||'', markdown:parts.join('---').trim() };
 }
+// Format Markdown emphasis in titles safely, without allowing raw HTML.
+// Supported: *italic*, **bold**, ***bold italic***, and ~~strikethrough~~.
+function formatTitle(title) {
+  const escaped = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return escaped
+    .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/~~(.+?)~~/g, '<del>$1</del>');
+}
+function plainTitle(title) {
+  return title.replace(/\*\*\*(.+?)\*\*\*/g, '$1')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/~~(.+?)~~/g, '$1');
+}
 function renderList() {
   const list = byId('entry-list'); list.replaceChildren();
   byId('entry-count').textContent = String(sorted.length);
@@ -202,7 +213,7 @@ function renderList() {
     if(year!==lastYear){const h=document.createElement('div');h.className='archive-year';h.textContent=year;list.append(h);lastYear=year;lastMonth='';}
     if(month!==lastMonth){const h=document.createElement('div');h.className='archive-month';h.textContent=monthLabel(entry.date);list.append(h);lastMonth=month;}
     const button=document.createElement('button');button.type='button';button.className='entry-link'+(entry.id===selectedId?' active':'');
-    button.textContent=entry.title;
+    const titleSpan=document.createElement('span');titleSpan.innerHTML=formatTitle(entry.title);button.append(titleSpan);
     const small=document.createElement('small');small.textContent=dateLabel(entry.date);button.append(small);
     if(entry.id===selectedId)button.setAttribute('aria-current','page');
     button.addEventListener('click',()=>selectEntry(entry.id,true));list.append(button);
@@ -211,12 +222,12 @@ function renderList() {
 function selectEntry(id, updateUrl=false) {
   const entry=sorted.find(e=>e.id===id)||sorted[0];if(!entry)return;
   selectedId=entry.id;
-  byId('article-title').replaceChildren(document.createTextNode(entry.title));
+  byId('article-title').innerHTML=formatTitle(entry.title);
   const dot=document.createElement('span');dot.className='accent';dot.textContent='.';byId('article-title').append(dot);
   byId('article-meta').textContent=dateLabel(entry.date)+(entry.time?' · '+entry.time:'');
   byId('article-body').innerHTML=marked.parse(entry.markdown);
   byId('article-footer').textContent='Diary entry · '+dateLabel(entry.date);
-  document.title=entry.title+' — lewis.lc';
+  document.title=plainTitle(entry.title)+' — lewis.lc';
   const index=sorted.indexOf(entry),prev=byId('prev-entry'),next=byId('next-entry');
   prev.disabled=index===sorted.length-1;next.disabled=index===0;
   prev.onclick=()=>selectEntry(sorted[index+1].id,true);
