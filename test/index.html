@@ -58,7 +58,18 @@
     .header-links a:hover { color: var(--link); }
     .menu-toggle { display: none; }
 
-    .shell { max-width: 1150px; margin: auto; padding: 25px clamp(18px, 4vw, 60px) 80px; }
+
+.shell {
+    max-width: 1320px;
+    margin: auto;
+    padding: 25px clamp(18px, 4vw, 60px) 80px;
+    display: grid;
+    grid-template-columns: 230px minmax(0, 1fr);
+    gap: 38px;
+    align-items: start;
+}
+    
+    
     main { min-width: 0; }
     h1, h3 { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1; }
     h1 {
