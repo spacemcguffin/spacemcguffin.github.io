@@ -90,7 +90,14 @@
     .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
     .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
     .side-heading button { border:0; background:none; color:var(--link); font-size:12px; }
-    .archive-year { margin: 12px 0 5px; font-weight:700; color:var(--text); }
+    .archive-year {
+      margin: 14px 0;
+      padding: 0 9px;
+      color: var(--link);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
     .archive-month { margin: 12px 0 5px; font-weight:700; color:var(--link); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
     .entry-link { display:block; width:100%; text-align:left; border:0; background:transparent; color:var(--text); padding:6px 9px; border-radius:3px; line-height:1.4; font-size:14px; font-weight:600; }
     .entry-link:hover { background:var(--subtle); color:var(--link); }
@@ -103,6 +110,8 @@
     .article-controls button:last-child { text-align:right; }
     .article-controls button:disabled { color:#92979e; cursor:default; }
     .browse-toggle { display:none; }
+    .browse-toggle svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform .2s ease; }
+    .browse-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
     #article { scroll-margin-top: 80px; }
     @media(max-width:900px) and (min-width:761px) { .shell { grid-template-columns:190px minmax(0,1fr); gap:24px; } }
     @media(max-width:760px) {
@@ -154,7 +163,7 @@
 <button class="menu-toggle" id="menu-toggle" type="button" aria-controls="header-links" aria-expanded="false" aria-label="Open navigation menu"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 </header>
 <div class="shell" id="top">
-<button class="browse-toggle" id="browse-toggle" aria-controls="archive-sidebar" aria-expanded="false">Browse diary entries <span aria-hidden="true">⌄</span></button>
+<button class="browse-toggle" id="browse-toggle" aria-controls="archive-sidebar" aria-expanded="false">Browse diary entries <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
 <aside class="archive-sidebar" id="archive-sidebar" aria-label="Diary entry browser">
 <div class="side-heading"><span>Diary entries</span><span id="entry-count"></span></div>
 <nav id="entry-list" aria-label="Select a diary entry"></nav>
