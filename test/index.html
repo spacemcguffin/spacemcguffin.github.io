@@ -144,11 +144,11 @@
       .browse-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; border:1px solid var(--line); background:var(--subtle); padding:9px 12px; margin:12px 0; font-weight:600; }
       .archive-sidebar { display:none; position:static; max-height:320px; overflow:auto; border:1px solid var(--line); padding:12px; margin:0 0 18px; }
       .archive-sidebar.open { display:block; }
-      .article-controls { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+      .article-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
       .article-controls button { padding: 13px 14px; text-align: center; }
-      .article-controls #top-entry { grid-row: 1; min-width: 0; text-align: center; }
-      .article-controls #next-entry { grid-row: 2; text-align: center; }
-      .article-controls #prev-entry { grid-row: 3; text-align: center; }
+      .article-controls #top-entry { grid-column: 1 / -1; grid-row: 1; min-width: 0; text-align: center; }
+      .article-controls #prev-entry { grid-column: 1; grid-row: 2; text-align: center; }
+      .article-controls #next-entry { grid-column: 2; grid-row: 2; text-align: center; }
       html { scroll-padding-top: 70px; }
       .site-header { padding: 0 14px; }
       .brand { flex-shrink: 0; min-width: 0; gap: 8px; }
