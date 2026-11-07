@@ -209,7 +209,7 @@ const byId = id => document.getElementById(id);
 const dateLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
 const monthLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{month:'long'});
 const slugFromPath = path => path.split('/').pop().replace(/\.md$/,'');
-let sorted = [], selectedId = null, expandedYear = null;
+let sorted = [], selectedId = null, expandedYears = new Set();
 
 async function loadEntry(path) {
   const response = await fetch(path);
@@ -251,16 +251,17 @@ function renderList() {
       const heading = document.createElement('button');
       heading.type = 'button';
       heading.className = 'archive-year';
-      heading.setAttribute('aria-expanded', String(expandedYear === year));
+      heading.setAttribute('aria-expanded', String(expandedYears.has(year)));
       heading.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
       heading.append(document.createTextNode(year));
       yearEntries = document.createElement('div');
       yearEntries.className = 'archive-year-entries';
       yearEntries.id = 'archive-entries-' + year;
-      yearEntries.hidden = expandedYear !== year;
+      yearEntries.hidden = !expandedYears.has(year);
       heading.setAttribute('aria-controls', yearEntries.id);
       heading.addEventListener('click', () => {
-        expandedYear = expandedYear === year ? null : year;
+        if (expandedYears.has(year)) expandedYears.delete(year);
+        else expandedYears.add(year);
         renderList();
       });
       list.append(heading, yearEntries);
@@ -283,7 +284,7 @@ function renderList() {
 function selectEntry(id, updateUrl=false) {
   const entry=sorted.find(e=>e.id===id)||sorted[0];if(!entry)return;
   selectedId=entry.id;
-  expandedYear=entry.date.slice(0,4);
+  expandedYears.add(entry.date.slice(0,4));
   byId('article-title').innerHTML=formatTitle(entry.title);
   const dot=document.createElement('span');dot.className='accent';dot.textContent='.';byId('article-title').append(dot);
   byId('article-meta').textContent=dateLabel(entry.date)+(entry.time?' · '+entry.time:'');
@@ -316,6 +317,7 @@ window.addEventListener('hashchange',()=>selectEntry(decodeURIComponent(location
   sorted=results.filter(r=>r.status==='fulfilled').map(r=>r.value).sort((a,b)=>b.date.localeCompare(a.date));
   const errors=results.filter(r=>r.status==='rejected');if(errors.length)console.warn('Some entries failed:',errors.map(e=>e.reason));
   if(!sorted.length)throw new Error('No entries could be loaded. Serve this folder through a web server, not file://.');
+  expandedYears.add(String(new Date().getFullYear()));
   selectEntry(decodeURIComponent(location.hash.slice(1)));
  }catch(error){byId('article-title').textContent='Unable to load entries';byId('article-body').textContent=error.message;console.error(error);}
 })();
