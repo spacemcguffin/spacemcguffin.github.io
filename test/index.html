@@ -1,1 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diary archive — lewis.lc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&display=swap" rel="stylesheet">
+<style>
+    :root {
+      --bg: #fff;
+      --text: #202122;
+      --muted: #54595d;
+      --border: #a2a9b1;
+      --line: #c8ccd1;
+      --link: #2855b1;
+      --subtle: #f8f9fa;
+      --head: #eaecf0;
+      --navy: #293f67;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    ::selection { background: #cfd8e4; color: #000; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.7 "Inter", Arial, sans-serif; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; cursor: pointer; }
 
+    .site-header {
+      height: 60px; display: flex; align-items: center;
+      padding: 0 clamp(18px, 4vw, 64px);
+      border-bottom: 1px solid #eaecf0;
+      position: sticky; top: 0; z-index: 20; background: #fff;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; color: var(--text); }
+    .brand:hover { text-decoration: none; }
+    .mark {
+      width: 33px; height: 33px; border-radius: 50%;
+      display: grid; place-items: center; background: var(--navy);
+      color: #fff; font-size: 14px; font-weight: 700;
+    }
+    .brand strong {
+      display: block; color: var(--navy);
+      font: italic 500 16px/1.1 "Fraunces", serif;
+      font-variation-settings: "SOFT" 100, "WONK" 1;
+    }
+    .brand small {
+      display: block; font-size: 10px; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .header-links {
+      display: flex; align-items: center; gap: 24px;
+      margin-left: 42px; font-size: 13px; font-weight: 500;
+      white-space: nowrap;
+    }
+    .header-links a { color: var(--text); }
+    .header-links a:hover { color: var(--link); }
+    .menu-toggle { display: none; }
+
+    .shell { max-width: 1150px; margin: auto; padding: 25px clamp(18px, 4vw, 60px) 80px; }
+    main { min-width: 0; }
+    h1, h3 { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1; }
+    h1 {
+      font-size: 33px; font-weight: 500; line-height: 1.3;
+      margin: 0 0 14px; padding-bottom: .6rem;
+      border-bottom: 1px solid var(--border); letter-spacing: -.3px;
+      overflow-wrap: break-word;
+    }
+    h3 { font-size: 18px; font-weight: 600; font-style: italic; margin: 10px 10px 10px 0; }
+    p { margin: 8px 0 13px; line-height: 1.6; font-size: .92rem; }
+    .article-body section { scroll-margin-top: 82px; }
+    .accent { color: #ff0066; }
+    .footer {
+      clear: both; border-top: 1px solid var(--line);
+      margin-top: 48px; padding-top: 15px;
+      color: var(--muted); font-size: 13px;
+    }
+
+
+    .shell { max-width: 1320px; display: grid; grid-template-columns: 230px minmax(0,1fr); gap: 38px; align-items: start; }
+    .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
+    .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
+    .side-heading button { border:0; background:none; color:var(--link); font-size:12px; }
+    .archive-year { margin: 12px 0 5px; font-weight:700; color:var(--text); }
+    .archive-month { margin: 12px 0 5px; font-weight:700; color:var(--link); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+    .entry-link { display:block; width:100%; text-align:left; border:0; background:transparent; color:var(--text); padding:6px 9px; border-radius:3px; line-height:1.4; font-size:14px; font-weight:600; }
+    .entry-link:hover { background:var(--subtle); color:var(--link); }
+    .entry-link.active { background:#e8effb; color:var(--link); font-weight:600; }
+    .entry-link small { display:block; font-size:11px; color:var(--muted); font-weight:400; }
+    .archive-empty { color:var(--muted); font-size:12px; }
+    .article-meta { color:var(--muted); font-size:12px; margin:-6px 0 14px; }
+    .article-controls { clear:both; border-top:1px solid var(--line); padding-top:14px; margin-top:36px; display:flex; justify-content:space-between; gap:12px; }
+    .article-controls button { border:0; background:transparent; color:var(--link); padding:6px 0; text-align:left; }
+    .article-controls button:last-child { text-align:right; }
+    .article-controls button:disabled { color:#92979e; cursor:default; }
+    .browse-toggle { display:none; }
+    #article { scroll-margin-top: 80px; }
+    @media(max-width:900px) and (min-width:761px) { .shell { grid-template-columns:190px minmax(0,1fr); gap:24px; } }
+    @media(max-width:760px) {
+      .shell { display:block; }
+      .browse-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; border:1px solid var(--line); background:var(--subtle); padding:9px 12px; margin:12px 0; font-weight:600; }
+      .archive-sidebar { display:none; position:static; max-height:320px; overflow:auto; border:1px solid var(--line); padding:12px; margin:0 0 18px; }
+      .archive-sidebar.open { display:block; }
+      .article-controls { gap:16px; }
+    }
+    @media print { .archive-sidebar,.browse-toggle,.article-controls {display:none!important;} .shell {display:block;} }
+
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 70px; }
+      .site-header { padding: 0 14px; }
+      .brand { flex-shrink: 0; min-width: 0; gap: 8px; }
+      .brand strong { font-size: 17px; }
+      .brand small { font-size: 9px; }
+      .menu-toggle {
+        display: flex; align-items: center; justify-content: center;
+        margin-left: auto; width: 40px; height: 40px;
+        border: 1px solid var(--line); border-radius: 4px;
+        background: #fff; color: var(--text);
+      }
+      .menu-toggle svg { width: 22px; height: 22px; }
+      .header-links {
+        display: none; position: absolute; top: 100%;
+        right: 14px; left: 14px; margin: 0; padding: 8px 0;
+        background: #fff; border: 1px solid var(--line);
+        box-shadow: 0 5px 14px rgba(0, 0, 0, .09);
+        font-size: 14px; white-space: normal;
+      }
+      .header-links.open { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+      .header-links a { display: block; padding: 10px 16px; }
+      .header-links a:hover { background: var(--subtle); }
+      .shell { padding: 10px 20px 30px; }
+      h1 { font-size: 28px; }
+      .article-body section { scroll-margin-top: 70px; }
+    }
+    @media print {
+      .site-header { display: none; }
+      .shell { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="#top"><span class="mark">LC</span><span><strong>lewis.lc</strong><small>Diary archive</small></span></a>
+<nav class="header-links" id="header-links" aria-label="Main navigation"><a href="/">Home</a><a href="/profile">Bio</a><a href="/diary">Diary</a><a href="/myspace">MySpace</a><a href="/livejournal">LiveJournal</a></nav>
+<button class="menu-toggle" id="menu-toggle" type="button" aria-controls="header-links" aria-expanded="false" aria-label="Open navigation menu"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+</header>
+<div class="shell" id="top">
+<button class="browse-toggle" id="browse-toggle" aria-controls="archive-sidebar" aria-expanded="false">Browse diary entries <span aria-hidden="true">⌄</span></button>
+<aside class="archive-sidebar" id="archive-sidebar" aria-label="Diary entry browser">
+<div class="side-heading"><span>Diary entries</span><span id="entry-count"></span></div>
+<nav id="entry-list" aria-label="Select a diary entry"></nav>
+</aside>
+<main id="article" aria-live="polite">
+<h1 id="article-title"></h1>
+<div class="article-meta" id="article-meta"></div>
+<div class="article-body" id="article-body"></div>
+<nav class="article-controls" aria-label="Entry navigation"><button id="prev-entry" type="button">‹ Previous entry</button><button id="next-entry" type="button">Next entry ›</button></nav>
+<footer class="footer"><p id="article-footer"></p></footer>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+<script>
+// To add an entry: create a .md file and add its path to this list.
+const entryFiles = [
+  'entries/2026/bitter-and-toast.md',
+  'entries/2026/sample-october.md',
+  'entries/2026/sample-september.md',
+  'entries/2026/sample-august.md'
+];
+const byId = id => document.getElementById(id);
+const dateLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+const monthLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{month:'long'});
+const slugFromPath = path => path.split('/').pop().replace(/\.md$/,'');
+let sorted = [], selectedId = null;
+
+async function loadEntry(path) {
+  const response = await fetch(path);
+  if (!response.ok) throw new Error('Could not load '+path+' ('+response.status+')');
+  const raw = (await response.text()).replace(/\r\n/g,'\n');
+  const parts = raw.split(/^---\s*$/m);
+  if (parts.length < 2) throw new Error('Missing --- separator in '+path);
+  const meta = {};
+  parts.shift().trim().split('\n').forEach(line => {
+    const match = line.match(/^([A-Za-z]+):\s*(.*)$/);
+    if (match) meta[match[1].toLowerCase()] = match[2].trim();
+  });
+  if (!meta.title || !/^\d{4}-\d{2}-\d{2}$/.test(meta.date||'')) throw new Error('Missing title or valid date in '+path);
+  return { id:slugFromPath(path), title:meta.title, date:meta.date, time:meta.time||'', markdown:parts.join('---').trim() };
+}
+function renderList() {
+  const list = byId('entry-list'); list.replaceChildren();
+  byId('entry-count').textContent = String(sorted.length);
+  let lastYear='',lastMonth='';
+  sorted.forEach(entry=>{
+    const year=entry.date.slice(0,4), month=entry.date.slice(0,7);
+    if(year!==lastYear){const h=document.createElement('div');h.className='archive-year';h.textContent=year;list.append(h);lastYear=year;lastMonth='';}
+    if(month!==lastMonth){const h=document.createElement('div');h.className='archive-month';h.textContent=monthLabel(entry.date);list.append(h);lastMonth=month;}
+    const button=document.createElement('button');button.type='button';button.className='entry-link'+(entry.id===selectedId?' active':'');
+    button.textContent=entry.title;
+    const small=document.createElement('small');small.textContent=dateLabel(entry.date);button.append(small);
+    if(entry.id===selectedId)button.setAttribute('aria-current','page');
+    button.addEventListener('click',()=>selectEntry(entry.id,true));list.append(button);
+  });
+}
+function selectEntry(id, updateUrl=false) {
+  const entry=sorted.find(e=>e.id===id)||sorted[0];if(!entry)return;
+  selectedId=entry.id;
+  byId('article-title').replaceChildren(document.createTextNode(entry.title));
+  const dot=document.createElement('span');dot.className='accent';dot.textContent='.';byId('article-title').append(dot);
+  byId('article-meta').textContent=dateLabel(entry.date)+(entry.time?' · '+entry.time:'');
+  byId('article-body').innerHTML=marked.parse(entry.markdown);
+  byId('article-footer').textContent='Diary entry · '+dateLabel(entry.date);
+  document.title=entry.title+' — lewis.lc';
+  const index=sorted.indexOf(entry),prev=byId('prev-entry'),next=byId('next-entry');
+  prev.disabled=index===sorted.length-1;next.disabled=index===0;
+  prev.onclick=()=>selectEntry(sorted[index+1].id,true);
+  next.onclick=()=>selectEntry(sorted[index-1].id,true);
+  renderList();
+  if(updateUrl)history.pushState(null,'','#'+encodeURIComponent(entry.id));
+  if(matchMedia('(max-width:760px)').matches){byId('archive-sidebar').classList.remove('open');byId('browse-toggle').setAttribute('aria-expanded','false');}
+  if(updateUrl)byId('article').scrollIntoView({behavior:'smooth',block:'start'});
+}
+byId('browse-toggle').addEventListener('click',()=>{
+ const open=byId('archive-sidebar').classList.toggle('open');byId('browse-toggle').setAttribute('aria-expanded',String(open));
+});
+const menuButton=byId('menu-toggle'),headerLinks=byId('header-links');
+function closeMenu(){headerLinks.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Open navigation menu');}
+menuButton.addEventListener('click',()=>{const open=headerLinks.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Close navigation menu':'Open navigation menu');});
+headerLinks.addEventListener('click',e=>{if(e.target.closest('a'))closeMenu();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu();});
+document.addEventListener('click',e=>{if(!e.target.closest('.site-header'))closeMenu();});
+window.addEventListener('popstate',()=>selectEntry(decodeURIComponent(location.hash.slice(1))));
+window.addEventListener('hashchange',()=>selectEntry(decodeURIComponent(location.hash.slice(1))));
+(async()=>{
+ try {
+  const results=await Promise.allSettled(entryFiles.map(loadEntry));
+  sorted=results.filter(r=>r.status==='fulfilled').map(r=>r.value).sort((a,b)=>b.date.localeCompare(a.date));
+  const errors=results.filter(r=>r.status==='rejected');if(errors.length)console.warn('Some entries failed:',errors.map(e=>e.reason));
+  if(!sorted.length)throw new Error('No entries could be loaded. Serve this folder through a web server, not file://.');
+  selectEntry(decodeURIComponent(location.hash.slice(1)));
+ }catch(error){byId('article-title').textContent='Unable to load entries';byId('article-body').textContent=error.message;console.error(error);}
+})();
+</script>
+</body>
+</html>
