@@ -87,6 +87,19 @@
       object-fit: contain;
     }
 
+
+    .article-body iframe,
+.article-body video {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+}
+
+    
+
     .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
     .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
     .archive-year {
