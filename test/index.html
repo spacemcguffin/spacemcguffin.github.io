@@ -122,7 +122,8 @@
       border-top: 1px solid #eaecf0;
       align-items: stretch;
     }
-    .article-controls button { min-width:0; border:0; background:transparent; color:var(--text); padding:12px 0; text-align:left; }
+    .article-controls button { min-width:0; border:0; border-radius:5px; background:var(--subtle); color:var(--text); padding:12px 14px; text-align:left; transition:background .15s ease; }
+    .article-controls button:hover:not(:disabled) { background:#eef2f7; }
     .article-controls button:hover:not(:disabled) .nav-title { text-decoration:underline; }
     .article-controls button:disabled { opacity:.4; cursor:default; }
     .nav-label { display:block; color:var(--muted); font-size:12px; margin-bottom:4px; }
@@ -130,6 +131,9 @@
     .article-controls #top-entry { text-align:center; align-self:stretch; min-width:76px; }
     .article-controls #next-entry { text-align:right; }
     .top-chevron { width:14px; height:14px; vertical-align:-2px; margin-left:2px; }
+    .double-chevron { width:20px; height:20px; vertical-align:-5px; stroke-width:2.3; }
+    #prev-entry .double-chevron { margin-right:4px; }
+    #next-entry .double-chevron { margin-left:4px; }
     .browse-toggle { display:none; }
     .browse-toggle svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform .2s ease; }
     .browse-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
@@ -141,10 +145,10 @@
       .archive-sidebar { display:none; position:static; max-height:320px; overflow:auto; border:1px solid var(--line); padding:12px; margin:0 0 18px; }
       .archive-sidebar.open { display:block; }
       .article-controls { grid-template-columns: minmax(0, 1fr); gap: 4px; }
-      .article-controls button { padding: 9px 0; text-align: left; }
-      .article-controls #top-entry { grid-row: 1; min-width: 0; text-align: left; }
-      .article-controls #next-entry { grid-row: 2; text-align: left; }
-      .article-controls #prev-entry { grid-row: 3; text-align: left; }
+      .article-controls button { padding: 13px 14px; text-align: center; }
+      .article-controls #top-entry { grid-row: 1; min-width: 0; text-align: center; }
+      .article-controls #next-entry { grid-row: 2; text-align: center; }
+      .article-controls #prev-entry { grid-row: 3; text-align: center; }
       html { scroll-padding-top: 70px; }
       .site-header { padding: 0 14px; }
       .brand { flex-shrink: 0; min-width: 0; gap: 8px; }
@@ -194,9 +198,9 @@
 <div class="article-meta" id="article-meta"></div>
 <div class="article-body" id="article-body"></div>
 <nav class="article-controls" aria-label="Entry navigation">
-  <button id="prev-entry" type="button"><span class="nav-label">‹ Previous</span><span class="nav-title" id="prev-title"></span></button>
+  <button id="prev-entry" type="button"><span class="nav-label"><svg class="double-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m13 6-6 6 6 6M19 6l-6 6 6 6"/></svg> Previous</span><span class="nav-title" id="prev-title"></span></button>
   <button id="top-entry" type="button" aria-label="Back to top"><span class="nav-label">Top <svg class="top-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></span></button>
-  <button id="next-entry" type="button"><span class="nav-label">Next ›</span><span class="nav-title" id="next-title"></span></button>
+  <button id="next-entry" type="button"><span class="nav-label">Next <svg class="double-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 6 6 6-6 6M11 6l6 6-6 6"/></svg></span><span class="nav-title" id="next-title"></span></button>
 </nav>
 </main>
 </div>
