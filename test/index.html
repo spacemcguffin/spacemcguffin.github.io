@@ -155,7 +155,7 @@
 <div class="article-meta" id="article-meta"></div>
 <div class="article-body" id="article-body"></div>
 <nav class="article-controls" aria-label="Entry navigation"><button id="prev-entry" type="button">‹ Previous entry</button><button id="next-entry" type="button">Next entry ›</button></nav>
-
+<footer class="footer"><p id="article-footer"></p></footer>
     </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
@@ -224,7 +224,6 @@ function selectEntry(id, updateUrl=false) {
   const dot=document.createElement('span');dot.className='accent';dot.textContent='.';byId('article-title').append(dot);
   byId('article-meta').textContent=dateLabel(entry.date)+(entry.time?' · '+entry.time:'');
   byId('article-body').innerHTML=marked.parse(entry.markdown);
-  byId('article-footer').textContent='Diary entry · '+dateLabel(entry.date);
   document.title=plainTitle(entry.title)+' — lewis.lc';
   const index=sorted.indexOf(entry),prev=byId('prev-entry'),next=byId('next-entry');
   prev.disabled=index===sorted.length-1;next.disabled=index===0;
