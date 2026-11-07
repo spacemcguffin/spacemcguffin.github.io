@@ -78,7 +78,6 @@
     }
 
 
-    .shell { max-width: 1320px; display: grid; grid-template-columns: 230px minmax(0,1fr); gap: 38px; align-items: start; }
     .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
     .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
     .side-heading button { border:0; background:none; color:var(--link); font-size:12px; }
@@ -163,10 +162,9 @@
 <script>
 // To add an entry: create a .md file and add its path to this list.
 const entryFiles = [
-  'entries/2026/bitter-and-toast.md',
-  'entries/2026/sample-october.md',
-  'entries/2026/sample-september.md',
-  'entries/2026/sample-august.md'
+  'entry/001.md',
+  'entry/note-to-self.md',
+  'entry/bitter-and-toast.md'
 ];
 const byId = id => document.getElementById(id);
 const dateLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
