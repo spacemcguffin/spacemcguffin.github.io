@@ -16,7 +16,6 @@
       --line: #c8ccd1;
       --link: #2855b1;
       --subtle: #f8f9fa;
-      --head: #eaecf0;
       --navy: #293f67;
     }
     *, *::before, *::after { box-sizing: border-box; }
@@ -82,22 +81,18 @@
     p { margin: 8px 0 13px; line-height: 1.6; font-size: .92rem; }
     .article-body section { scroll-margin-top: 82px; }
     .accent { color: #ff0066; }
-    .footer {
-      display: none;
-    }
 
 
     .article-body img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-}
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
 
 
     .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
     .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
-    .side-heading button { border:0; background:none; color:var(--link); font-size:12px; }
     .archive-year {
       display: flex;
       align-items: center;
@@ -118,12 +113,10 @@
     .archive-year svg { width: 12px; height: 12px; flex-shrink: 0; transition: transform .2s ease; }
     .archive-year[aria-expanded="true"] svg { transform: rotate(90deg); }
     .archive-year-entries[hidden] { display: none; }
-    .archive-month { margin: 12px 0 5px; font-weight:700; color:var(--link); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
     .entry-link { display:block; width:100%; text-align:left; border:0; background:transparent; color:var(--text); padding:6px 9px; border-radius:3px; line-height:1.4; font-size:14px; font-weight:600; }
     .entry-link:hover { background:var(--subtle); color:var(--link); }
     .entry-link.active { background:#e8effb; color:var(--link); font-weight:600; }
     .entry-link small { display:block; font-size:11px; color:var(--muted); font-weight:400; }
-    .archive-empty { color:var(--muted); font-size:12px; }
     .article-meta { color:var(--muted); font-size:12px; margin:-6px 0 14px; }
     .article-controls { clear:both; border-top:1px solid var(--line); padding-top:14px; margin-top:36px; display:flex; justify-content:space-between; gap:12px; }
     .article-controls button { border:0; background:transparent; color:var(--link); padding:6px 0; text-align:left; }
@@ -134,16 +127,12 @@
     .browse-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
     #article { scroll-margin-top: 80px; }
     @media(max-width:900px) and (min-width:761px) { .shell { grid-template-columns:190px minmax(0,1fr); gap:24px; } }
-    @media(max-width:760px) {
-      .shell { display:block; }
+    @media (max-width: 760px) {
+      .shell { display: block; }
       .browse-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; border:1px solid var(--line); background:var(--subtle); padding:9px 12px; margin:12px 0; font-weight:600; }
       .archive-sidebar { display:none; position:static; max-height:320px; overflow:auto; border:1px solid var(--line); padding:12px; margin:0 0 18px; }
       .archive-sidebar.open { display:block; }
       .article-controls { gap:16px; }
-    }
-    @media print { .archive-sidebar,.browse-toggle,.article-controls {display:none!important;} .shell {display:block;} }
-
-    @media (max-width: 760px) {
       html { scroll-padding-top: 70px; }
       .site-header { padding: 0 14px; }
       .brand { flex-shrink: 0; min-width: 0; gap: 8px; }
@@ -171,8 +160,8 @@
       .article-body section { scroll-margin-top: 70px; }
     }
     @media print {
-      .site-header { display: none; }
-      .shell { padding: 0; }
+      .site-header, .archive-sidebar, .browse-toggle, .article-controls { display: none !important; }
+      .shell { display: block; padding: 0; }
     }
   </style>
 </head>
@@ -193,7 +182,6 @@
 <div class="article-meta" id="article-meta"></div>
 <div class="article-body" id="article-body"></div>
 <nav class="article-controls" aria-label="Entry navigation"><button id="prev-entry" type="button">‹ Previous entry</button><button id="next-entry" type="button">Next entry ›</button></nav>
-<footer class="footer"><p id="article-footer"></p></footer>
 </main>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
@@ -207,7 +195,6 @@ const entryFiles = [
 ];
 const byId = id => document.getElementById(id);
 const dateLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
-const monthLabel = date => new Date(date+'T12:00:00').toLocaleDateString('en-GB',{month:'long'});
 const slugFromPath = path => path.split('/').pop().replace(/\.md$/,'');
 let sorted = [], selectedId = null, expandedYears = new Set();
 
@@ -241,64 +228,103 @@ function plainTitle(title) {
     .replace(/\*(.+?)\*/g, '$1')
     .replace(/~~(.+?)~~/g, '$1');
 }
+// Build the archive once. Later interactions only update existing elements.
+const yearSections = new Map();
+const entryButtons = new Map();
+
+function setYearExpanded(year, expanded) {
+  const section = yearSections.get(year);
+  if (!section) return;
+  if (expanded) expandedYears.add(year);
+  else expandedYears.delete(year);
+  section.heading.setAttribute('aria-expanded', String(expanded));
+  section.entries.hidden = !expanded;
+}
+
 function renderList() {
-  const list = byId('entry-list'); list.replaceChildren();
+  const list = byId('entry-list');
+  list.replaceChildren();
+  yearSections.clear();
+  entryButtons.clear();
   byId('entry-count').textContent = String(sorted.length);
-  let lastYear = '', yearEntries = null;
-  sorted.forEach(entry => {
+
+  for (const entry of sorted) {
     const year = entry.date.slice(0, 4);
-    if (year !== lastYear) {
+    let section = yearSections.get(year);
+
+    if (!section) {
       const heading = document.createElement('button');
       heading.type = 'button';
       heading.className = 'archive-year';
-      heading.setAttribute('aria-expanded', String(expandedYears.has(year)));
       heading.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
       heading.append(document.createTextNode(year));
-      yearEntries = document.createElement('div');
-      yearEntries.className = 'archive-year-entries';
-      yearEntries.id = 'archive-entries-' + year;
-      yearEntries.hidden = !expandedYears.has(year);
-      heading.setAttribute('aria-controls', yearEntries.id);
-      heading.addEventListener('click', () => {
-        if (expandedYears.has(year)) expandedYears.delete(year);
-        else expandedYears.add(year);
-        renderList();
-      });
-      list.append(heading, yearEntries);
-      lastYear = year;
+
+      const entries = document.createElement('div');
+      entries.className = 'archive-year-entries';
+      entries.id = 'archive-entries-' + year;
+      heading.setAttribute('aria-controls', entries.id);
+      section = { heading, entries };
+      yearSections.set(year, section);
+      list.append(heading, entries);
+      heading.addEventListener('click', () => setYearExpanded(year, !expandedYears.has(year)));
+      setYearExpanded(year, expandedYears.has(year));
     }
+
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'entry-link' + (entry.id === selectedId ? ' active' : '');
+    button.className = 'entry-link';
     const titleSpan = document.createElement('span');
     titleSpan.innerHTML = formatTitle(entry.title);
     button.append(titleSpan);
-    const small = document.createElement('small');
-    small.textContent = dateLabel(entry.date);
-    button.append(small);
-    if (entry.id === selectedId) button.setAttribute('aria-current', 'page');
+    const date = document.createElement('small');
+    date.textContent = dateLabel(entry.date);
+    button.append(date);
     button.addEventListener('click', () => selectEntry(entry.id, true));
-    yearEntries.append(button);
-  });
+    section.entries.append(button);
+    entryButtons.set(entry.id, button);
+  }
 }
-function selectEntry(id, updateUrl=false) {
-  const entry=sorted.find(e=>e.id===id)||sorted[0];if(!entry)return;
-  selectedId=entry.id;
-  expandedYears.add(entry.date.slice(0,4));
-  byId('article-title').innerHTML=formatTitle(entry.title);
-  const dot=document.createElement('span');dot.className='accent';dot.textContent='.';byId('article-title').append(dot);
-  byId('article-meta').textContent=dateLabel(entry.date)+(entry.time?' · '+entry.time:'');
-  byId('article-body').innerHTML=marked.parse(entry.markdown);
-  byId('article-footer').textContent='Diary entry · '+dateLabel(entry.date);
-  document.title=plainTitle(entry.title)+' — lewis.lc';
-  const index=sorted.indexOf(entry),prev=byId('prev-entry'),next=byId('next-entry');
-  prev.disabled=index===sorted.length-1;next.disabled=index===0;
-  prev.onclick=()=>selectEntry(sorted[index+1].id,true);
-  next.onclick=()=>selectEntry(sorted[index-1].id,true);
-  renderList();
-  if(updateUrl)history.pushState(null,'','#'+encodeURIComponent(entry.id));
-  if(matchMedia('(max-width:760px)').matches){byId('archive-sidebar').classList.remove('open');byId('browse-toggle').setAttribute('aria-expanded','false');}
-  if(updateUrl)byId('article').scrollIntoView({behavior:'smooth',block:'start'});
+
+function selectEntry(id, updateUrl = false) {
+  const entry = sorted.find(item => item.id === id) || sorted[0];
+  if (!entry) return;
+
+  if (selectedId && entryButtons.has(selectedId)) {
+    const previousButton = entryButtons.get(selectedId);
+    previousButton.classList.remove('active');
+    previousButton.removeAttribute('aria-current');
+  }
+  selectedId = entry.id;
+  setYearExpanded(entry.date.slice(0, 4), true);
+  const activeButton = entryButtons.get(entry.id);
+  activeButton.classList.add('active');
+  activeButton.setAttribute('aria-current', 'page');
+
+  const heading = byId('article-title');
+  heading.innerHTML = formatTitle(entry.title);
+  const dot = document.createElement('span');
+  dot.className = 'accent';
+  dot.textContent = '.';
+  heading.append(dot);
+
+  byId('article-meta').textContent = dateLabel(entry.date) + (entry.time ? ' · ' + entry.time : '');
+  byId('article-body').innerHTML = marked.parse(entry.markdown);
+  document.title = plainTitle(entry.title) + ' — lewis.lc';
+
+  const index = sorted.indexOf(entry);
+  const prev = byId('prev-entry');
+  const next = byId('next-entry');
+  prev.disabled = index === sorted.length - 1;
+  next.disabled = index === 0;
+  prev.onclick = prev.disabled ? null : () => selectEntry(sorted[index + 1].id, true);
+  next.onclick = next.disabled ? null : () => selectEntry(sorted[index - 1].id, true);
+
+  if (updateUrl) history.pushState(null, '', '#' + encodeURIComponent(entry.id));
+  if (matchMedia('(max-width:760px)').matches) {
+    byId('archive-sidebar').classList.remove('open');
+    byId('browse-toggle').setAttribute('aria-expanded', 'false');
+  }
+  if (updateUrl) byId('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 byId('browse-toggle').addEventListener('click',()=>{
  const open=byId('archive-sidebar').classList.toggle('open');byId('browse-toggle').setAttribute('aria-expanded',String(open));
@@ -317,8 +343,14 @@ window.addEventListener('hashchange',()=>selectEntry(decodeURIComponent(location
   sorted=results.filter(r=>r.status==='fulfilled').map(r=>r.value).sort((a,b)=>b.date.localeCompare(a.date));
   const errors=results.filter(r=>r.status==='rejected');if(errors.length)console.warn('Some entries failed:',errors.map(e=>e.reason));
   if(!sorted.length)throw new Error('No entries could be loaded. Serve this folder through a web server, not file://.');
-  expandedYears.add(String(new Date().getFullYear()));
-  selectEntry(decodeURIComponent(location.hash.slice(1)));
+  // Initially expand only the year containing the entry being displayed.
+  // Without a direct link, that is the most recent year in the archive.
+  const requestedId = decodeURIComponent(location.hash.slice(1));
+  const initialEntry = sorted.find(entry => entry.id === requestedId) || sorted[0];
+  expandedYears.clear();
+  expandedYears.add(initialEntry.date.slice(0, 4));
+  renderList();
+  selectEntry(initialEntry.id);
  }catch(error){byId('article-title').textContent='Unable to load entries';byId('article-body').textContent=error.message;console.error(error);}
 })();
 </script>
