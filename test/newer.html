@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diary archive — lewis.lc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&display=swap" rel="stylesheet">
+<style>
+    :root {
+      --bg: #fff;
+      --text: #202122;
+      --muted: #54595d;
+      --border: #a2a9b1;
+      --line: #c8ccd1;
+      --link: #2855b1;
+      --subtle: #f8f9fa;
+      --navy: #293f67;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    ::selection { background: #cfd8e4; color: #000; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.7 "Inter", Arial, sans-serif; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button { font: inherit; cursor: pointer; }
+
+    .site-header {
+      height: 60px; display: flex; align-items: center;
+      padding: 0 clamp(18px, 4vw, 64px);
+      border-bottom: 1px solid #eaecf0;
+      position: sticky; top: 0; z-index: 20; background: #fff;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; color: var(--text); }
+    .brand:hover { text-decoration: none; }
+    .mark {
+      width: 33px; height: 33px; border-radius: 50%;
+      display: grid; place-items: center; background: var(--navy);
+      color: #fff; font-size: 14px; font-weight: 700;
+    }
+    .brand strong {
+      display: block; color: var(--navy);
+      font: italic 500 16px/1.1 "Fraunces", serif;
+      font-variation-settings: "SOFT" 100, "WONK" 1;
+    }
+    .brand small {
+      display: block; font-size: 10px; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .header-links {
+      display: flex; align-items: center; gap: 24px;
+      margin-left: 42px; font-size: 13px; font-weight: 500;
+      white-space: nowrap;
+    }
+    .header-links a { color: var(--text); }
+    .header-links a:hover { color: var(--link); }
+    .menu-toggle { display: none; }
+
+    .shell {
+      max-width: 1320px;
+      margin: auto;
+      padding: 25px clamp(18px, 4vw, 60px) 80px;
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 38px;
+      align-items: start;
+    }
+
+    main { min-width: 0; }
+    h1, h2, h3 { font-family: "Fraunces", serif; font-variation-settings: "SOFT" 100, "WONK" 1; }
+    h1 {
+      font-size: 33px; font-weight: 500; line-height: 1.3;
+      margin: 0 0 14px; padding-bottom: .6rem;
+      border-bottom: 1px solid var(--border); letter-spacing: -.3px;
+      overflow-wrap: break-word;
+    }
+
+    h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    }
+    
+    h3 { font-size: 18px; font-weight: 600; font-style: italic; margin: 10px 10px 10px 0; }
+    p { margin: 8px 0 13px; line-height: 1.6; font-size: .92rem; }
+    .article-body section { scroll-margin-top: 82px; }
+    .accent { color: #ff0066; }
+
+    .article-body img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+    }
+
+
+    blockquote {
+      border-left: 2px solid #ff0066;
+      padding: 0px 10px 0px 10px;
+      margin-left: 25px;
+      color: var(--muted);
+    }
+
+    /* Keep embedded videos within the article column. */
+    .article-body iframe,
+    .article-body video {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      border: 0;
+    }
+
+    .article-body iframe {
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+
+    .article-body video {
+      height: auto;
+    }
+
+    .archive-sidebar { position: sticky; top: 83px; max-height: calc(100vh - 105px); overflow-y: auto; scrollbar-width: thin; font-size: 13px; }
+    .side-heading { font-weight: 700; border-bottom: 1px solid var(--line); padding-bottom: 8px; margin-bottom: 12px; display:flex; justify-content:space-between; }
+    .archive-year {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 100%;
+      margin: 7px 0;
+      padding: 3px 9px;
+      border: 0;
+      border-radius: 3px;
+      background: transparent;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-align: left;
+    }
+    .archive-year:hover { background: var(--subtle); }
+    .archive-year svg { width: 12px; height: 12px; flex-shrink: 0; transition: transform .2s ease; }
+    .archive-year[aria-expanded="true"] svg { transform: rotate(90deg); }
+    .archive-year-entries {
+      display: grid;
+      grid-template-rows: 1fr;
+      opacity: 1;
+      transition: grid-template-rows .24s ease, opacity .2s ease;
+    }
+    .archive-year-entries.is-collapsed {
+      grid-template-rows: 0fr;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .archive-year-inner { min-height: 0; overflow: hidden; }
+    .archive-year-entries[hidden] { display: none; }
+    .entry-link { display:block; width:100%; text-align:left; border:0; background:transparent; color:var(--text); padding:6px 9px; border-radius:3px; line-height:1.4; font-size:14px; font-weight:600; }
+    .entry-link:hover { background:var(--subtle); color:var(--link); }
+    .entry-link.active { background:#e8effb; color:var(--link); font-weight:600; }
+    .entry-link small { display:block; font-size:11px; color:var(--muted); font-weight:400; }
+    .article-meta { color:var(--muted); font-size:12px; margin:-6px 0 14px; }
+    .article-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      gap: 12px;
+      margin-top: 36px;
+      padding-top: 16px;
+      border-top: 1px solid #eaecf0;
+      align-items: stretch;
+    }
+    .article-controls button { min-width:0; border:0; border-radius:5px; background:var(--subtle); color:var(--text); padding:12px 14px; text-align:left; transition:background .15s ease; }
+    .article-controls button:hover:not(:disabled) { background:#eef2f7; }
+    .article-controls button:hover:not(:disabled) .nav-title { text-decoration:underline; }
+    .article-controls button:disabled { opacity:.4; cursor:default; }
+    .nav-label { display:block; color:var(--muted); font-size:12px; margin-bottom:4px; }
+    .nav-title { display:block; color:var(--link); font-weight:600; overflow-wrap:anywhere; line-height:1.4; }
+    .article-controls #top-entry { text-align:center; min-width:76px; }
+    .article-controls #next-entry { text-align:right; }
+    .top-chevron { width:14px; height:14px; vertical-align:-2px; margin-left:2px; }
+    .double-chevron { width:20px; height:20px; vertical-align:-5px; stroke-width:2.3; }
+    #prev-entry .double-chevron { margin-right:4px; }
+    #next-entry .double-chevron { margin-left:4px; }
+    .browse-toggle { display:none; }
+    .archive-close, .archive-backdrop, .archive-drag-handle { display:none; }
+    .archive-close {
+      border:0; background:transparent; color:var(--muted);
+      padding:8px; cursor:pointer;
+    }
+    .archive-close svg { display:block; width:22px; height:22px; }
+    .browse-toggle svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform .2s ease; }
+    .browse-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+    #article { scroll-margin-top: 80px; }
+    /* Subtle, rounded scrollbar for the desktop archive */
+    @media (min-width: 761px) {
+      .archive-sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: #c8ccd1 transparent;
+        padding-right: 8px;
+      }
+      .archive-sidebar::-webkit-scrollbar { width: 6px; }
+      .archive-sidebar::-webkit-scrollbar-track { background: transparent; }
+      .archive-sidebar::-webkit-scrollbar-thumb {
+        background: #c8ccd1;
+        border-radius: 20px;
+      }
+      .archive-sidebar::-webkit-scrollbar-thumb:hover { background: #a2a9b1; }
+    }
+    @media(max-width:900px) and (min-width:761px) { .shell { grid-template-columns:190px minmax(0,1fr); gap:24px; } }
+    @media (max-width: 760px) {
+      .shell { display: block; padding: 10px 20px 30px; }
+      .browse-toggle { display:flex; width:100%; justify-content:space-between; align-items:center; border:1px solid var(--line); background:var(--subtle); padding:9px 12px; margin:12px 0; font-weight:600; }
+      .archive-backdrop:not([hidden]) {
+        display:block; position:fixed; inset:0; z-index:29;
+        background:rgba(20,27,40,.45);
+      }
+      .archive-sidebar {
+        display:block; position:fixed; z-index:30;
+        left:0; right:0; bottom:0; top:auto;
+        max-height:85dvh; max-height:min(85dvh, 760px);
+        overflow-y:auto; overscroll-behavior:contain;
+        background:#fff; border:1px solid var(--line);
+        border-radius:18px 18px 0 0;
+        padding:30px 20px max(22px, env(safe-area-inset-bottom));
+        margin:0; box-shadow:0 -8px 30px rgba(0,0,0,.12);
+        transform:translateY(105%);
+        visibility:hidden; pointer-events:none;
+        transition:transform .25s ease, visibility .25s ease;
+      }
+      .archive-drag-handle {
+        position:sticky; top:-30px; z-index:2;
+        display:flex; justify-content:center; align-items:flex-start;
+        height:30px; margin:-30px -20px 10px;
+        padding-top:10px; background:#fff;
+        touch-action:none; cursor:grab;
+      }
+      .archive-drag-handle::after {
+        content:""; width:38px; height:4px;
+        border-radius:8px; background:var(--line);
+      }
+      .archive-sidebar.dragging { transition:none; }
+      .archive-sidebar.dragging .archive-drag-handle { cursor:grabbing; }
+      .archive-sidebar.open {
+        visibility:visible; pointer-events:auto; transform:translateY(0);
+      }
+      .archive-close { display:block; position:absolute; top:24px; right:15px; }
+      .side-heading { padding-right:45px; font-size:16px; }
+      .archive-year, .entry-link { min-height:44px; }
+      body.archive-open { overflow:hidden; }
+      .article-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .article-controls button { padding: 13px 14px; }
+      .article-controls #top-entry { grid-column: 1 / -1; grid-row: 1; min-width: 0; text-align: center; }
+      .article-controls #prev-entry { grid-column: 1; grid-row: 2; text-align: left; }
+      .article-controls #next-entry { grid-column: 2; grid-row: 2; text-align: right; }
+      html { scroll-padding-top: 70px; }
+      .site-header { padding: 0 14px; }
+      .brand { flex-shrink: 0; min-width: 0; gap: 8px; }
+      .brand strong { font-size: 17px; }
+      .brand small { font-size: 9px; }
+      .menu-toggle {
+        display: flex; align-items: center; justify-content: center;
+        margin-left: auto; width: 40px; height: 40px;
+        border: 1px solid var(--line); border-radius: 4px;
+        background: #fff; color: var(--text);
+      }
+      .menu-toggle svg { width: 22px; height: 22px; }
+      .header-links {
+        display: none; position: absolute; top: 100%;
+        right: 14px; left: 14px; margin: 0; padding: 8px 0;
+        background: #fff; border: 1px solid var(--line);
+        box-shadow: 0 5px 14px rgba(0, 0, 0, .09);
+        font-size: 14px; white-space: normal;
+      }
+      .header-links.open { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+      .header-links a { display: block; padding: 10px 16px; }
+      .header-links a:hover { background: var(--subtle); }
+      h1 { font-size: 28px; }
+      .article-body section { scroll-margin-top: 70px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .archive-sidebar, .archive-year-entries, .archive-year svg { transition:none; }
+    }
+    @media print {
+      .site-header, .archive-sidebar, .browse-toggle, .article-controls { display: none !important; }
+      .shell { display: block; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+<header class="site-header">
+<a class="brand" href="#top"><span class="mark">LC</span><span><strong>lewis.lc</strong><small>Diary archive</small></span></a>
+<nav class="header-links" id="header-links" aria-label="Main navigation"><a href="/">Home</a><a href="/profile">Bio</a><a href="/diary">Diary</a><a href="/myspace">MySpace</a><a href="/livejournal">LiveJournal</a></nav>
+<button class="menu-toggle" id="menu-toggle" type="button" aria-controls="header-links" aria-expanded="false" aria-label="Open navigation menu"><svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+</header>
+<div class="shell" id="top">
+<button class="browse-toggle" id="browse-toggle" aria-controls="archive-sidebar" aria-expanded="false">Browse diary entries <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button>
+<div class="archive-backdrop" id="archive-backdrop" hidden></div>
+<aside class="archive-sidebar" id="archive-sidebar" aria-label="Diary entry browser">
+<div class="archive-drag-handle" id="archive-drag-handle" role="button" tabindex="0" aria-label="Drag down to close archive"></div>
+<button class="archive-close" id="archive-close" type="button" aria-label="Close diary archive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+<div class="side-heading"><span>Diary entries</span><span id="entry-count"></span></div>
+<nav id="entry-list" aria-label="Select a diary entry"></nav>
+</aside>
+<main id="article" aria-live="polite">
+<h1 id="article-title"></h1>
+<div class="article-meta" id="article-meta"></div>
+<div class="article-body" id="article-body"></div>
+<nav class="article-controls" aria-label="Entry navigation">
+  <button id="prev-entry" type="button"><span class="nav-label"><svg class="double-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m13 6-6 6 6 6M19 6l-6 6 6 6"/></svg> Previous</span><span class="nav-title" id="prev-title"></span></button>
+  <button id="top-entry" type="button" aria-label="Back to top"><span class="nav-label">Top <svg class="top-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></svg></span></button>
+  <button id="next-entry" type="button"><span class="nav-label">Next <svg class="double-chevron" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="m5 6 6 6-6 6M11 6l6 6-6 6"/></svg></span><span class="nav-title" id="next-title"></span></button>
+</nav>
+</main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+<script>
+// To add an entry: create a .md file and add its path to this list.
+const entryFiles = [
+  'entry/010.md',
+  'entry/009.md',
+  'entry/008.md',
+  'entry/007.md',
+  'entry/006.md',
+  'entry/005.md',
+  'entry/004.md',
+  'entry/003.md',
+  'entry/002.md',
+  'entry/love-can-heal.md',
+  'entry/001.md',
+  'entry/bitter-and-toast.md'
+];
+const byId = id => document.getElementById(id);
+const dateLabel = date => new Date(`${date}T12:00:00`).toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'long', year: 'numeric'
+});
+const slugFromPath = path => path.split('/').pop().replace(/\.md$/, '');
+
+let sorted = [];
+let selectedId = null;
+const expandedYears = new Set();
+
+async function loadEntry(path) {
+  const response = await fetch(path);
+  if (!response.ok) throw new Error('Could not load '+path+' ('+response.status+')');
+  const raw = (await response.text()).replace(/\r\n/g,'\n');
+  const parts = raw.split(/^---\s*$/m);
+  if (parts.length < 2) throw new Error('Missing --- separator in '+path);
+  const meta = {};
+  parts.shift().trim().split('\n').forEach(line => {
+    const match = line.match(/^([A-Za-z]+):\s*(.*)$/);
+    if (match) meta[match[1].toLowerCase()] = match[2].trim();
+  });
+  if (!meta.title || !/^\d{4}-\d{2}-\d{2}$/.test(meta.date || '')) {
+    throw new Error('Missing title or valid date in ' + path);
+  }
+  return {
+    id: slugFromPath(path),
+    title: meta.title,
+    date: meta.date,
+    time: meta.time || '',
+    markdown: parts.join('---').trim()
+  };
+}
+// Format Markdown emphasis in titles safely, without allowing raw HTML.
+// Supported: *italic*, **bold**, ***bold italic***, and ~~strikethrough~~.
+function formatTitle(title) {
+  const escaped = title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  return escaped
+    .replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/~~(.+?)~~/g, '<del>$1</del>');
+}
+function plainTitle(title) {
+  return title.replace(/\*\*\*(.+?)\*\*\*/g, '$1')
+    .replace(/\*\*(.+?)\*\*/g, '$1')
+    .replace(/\*(.+?)\*/g, '$1')
+    .replace(/~~(.+?)~~/g, '$1');
+}
+// Build the archive once. Later interactions only update existing elements.
+const yearSections = new Map();
+const entryButtons = new Map();
+
+function setYearExpanded(year, expanded) {
+  const section = yearSections.get(year);
+  if (!section) return;
+  if (expanded) expandedYears.add(year);
+  else expandedYears.delete(year);
+  section.heading.setAttribute('aria-expanded', String(expanded));
+  section.entries.classList.toggle('is-collapsed', !expanded);
+  section.entries.setAttribute('aria-hidden', String(!expanded));
+  if ('inert' in section.entries) section.entries.inert = !expanded;
+}
+
+function renderList() {
+  const list = byId('entry-list');
+  list.replaceChildren();
+  yearSections.clear();
+  entryButtons.clear();
+  byId('entry-count').textContent = String(sorted.length);
+
+  for (const entry of sorted) {
+    const year = entry.date.slice(0, 4);
+    let section = yearSections.get(year);
+
+    if (!section) {
+      const heading = document.createElement('button');
+      heading.type = 'button';
+      heading.className = 'archive-year';
+      heading.innerHTML = '<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>';
+      heading.append(document.createTextNode(year));
+
+      const entries = document.createElement('div');
+      entries.className = 'archive-year-entries';
+      const inner = document.createElement('div');
+      inner.className = 'archive-year-inner';
+      entries.append(inner);
+      entries.id = 'archive-entries-' + year;
+      heading.setAttribute('aria-controls', entries.id);
+      section = { heading, entries };
+      yearSections.set(year, section);
+      list.append(heading, entries);
+      heading.addEventListener('click', () => setYearExpanded(year, !expandedYears.has(year)));
+      setYearExpanded(year, expandedYears.has(year));
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'entry-link';
+    const titleSpan = document.createElement('span');
+    titleSpan.innerHTML = formatTitle(entry.title);
+    button.append(titleSpan);
+    const date = document.createElement('small');
+    date.textContent = dateLabel(entry.date);
+    button.append(date);
+    button.addEventListener('click', () => selectEntry(entry.id, true));
+    section.entries.firstElementChild.append(button);
+    entryButtons.set(entry.id, button);
+  }
+}
+
+function selectEntry(id, updateUrl = false) {
+  const entry = sorted.find(item => item.id === id) || sorted[0];
+  if (!entry) return;
+
+  if (selectedId && entryButtons.has(selectedId)) {
+    const previousButton = entryButtons.get(selectedId);
+    previousButton.classList.remove('active');
+    previousButton.removeAttribute('aria-current');
+  }
+  selectedId = entry.id;
+  setYearExpanded(entry.date.slice(0, 4), true);
+  const activeButton = entryButtons.get(entry.id);
+  activeButton.classList.add('active');
+  activeButton.setAttribute('aria-current', 'page');
+
+  const heading = byId('article-title');
+  heading.innerHTML = formatTitle(entry.title);
+  const dot = document.createElement('span');
+  dot.className = 'accent';
+  dot.textContent = '.';
+  heading.append(dot);
+
+  byId('article-meta').textContent = dateLabel(entry.date) + (entry.time ? ' · ' + entry.time : '');
+  byId('article-body').innerHTML = marked.parse(entry.markdown);
+  document.title = plainTitle(entry.title) + ' — lewis.lc';
+
+  const index = sorted.indexOf(entry);
+  const prev = byId('prev-entry');
+  const next = byId('next-entry');
+  byId('prev-title').innerHTML = index < sorted.length - 1 ? formatTitle(sorted[index + 1].title) : '';
+  byId('next-title').innerHTML = index > 0 ? formatTitle(sorted[index - 1].title) : '';
+  prev.disabled = index === sorted.length - 1;
+  next.disabled = index === 0;
+  prev.onclick = prev.disabled ? null : () => selectEntry(sorted[index + 1].id, true);
+  next.onclick = next.disabled ? null : () => selectEntry(sorted[index - 1].id, true);
+
+  if (updateUrl) history.pushState(null, '', '#' + encodeURIComponent(entry.id));
+  if (matchMedia('(max-width:760px)').matches) {
+    closeArchive();
+  }
+  if (updateUrl) byId('article').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+const browseToggle = byId('browse-toggle');
+const archiveSidebar = byId('archive-sidebar');
+
+const archiveBackdrop = byId('archive-backdrop');
+const archiveClose = byId('archive-close');
+
+function closeArchive() {
+  archiveSidebar.classList.remove('open');
+  archiveBackdrop.hidden = true;
+  document.body.classList.remove('archive-open');
+  browseToggle.setAttribute('aria-expanded', 'false');
+}
+
+function openArchive() {
+  archiveSidebar.classList.add('open');
+  archiveBackdrop.hidden = false;
+  document.body.classList.add('archive-open');
+  browseToggle.setAttribute('aria-expanded', 'true');
+}
+
+browseToggle.addEventListener('click', () => {
+  if (archiveSidebar.classList.contains('open')) closeArchive();
+  else openArchive();
+});
+archiveClose.addEventListener('click', closeArchive);
+archiveBackdrop.addEventListener('click', closeArchive);
+
+// Drag the grey handle downward to dismiss the mobile bottom sheet.
+const dragHandle = byId('archive-drag-handle');
+let dragStartY = null;
+let dragDistance = 0;
+dragHandle.addEventListener('pointerdown', event => {
+  if (!archiveSidebar.classList.contains('open') || event.button !== 0) return;
+  dragStartY = event.clientY;
+  dragDistance = 0;
+  archiveSidebar.classList.add('dragging');
+  dragHandle.setPointerCapture(event.pointerId);
+});
+dragHandle.addEventListener('pointermove', event => {
+  if (dragStartY === null) return;
+  dragDistance = Math.max(0, event.clientY - dragStartY);
+  archiveSidebar.style.transform = `translateY(${dragDistance}px)`;
+});
+function finishArchiveDrag() {
+  if (dragStartY === null) return;
+  const shouldClose = dragDistance > 90;
+  dragStartY = null;
+  dragDistance = 0;
+  archiveSidebar.classList.remove('dragging');
+  archiveSidebar.style.transform = '';
+  if (shouldClose) closeArchive();
+}
+dragHandle.addEventListener('pointerup', finishArchiveDrag);
+dragHandle.addEventListener('pointercancel', finishArchiveDrag);
+dragHandle.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    closeArchive();
+  }
+});
+const menuButton = byId('menu-toggle');
+const headerLinks = byId('header-links');
+
+function closeMenu() {
+  headerLinks.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', 'Open navigation menu');
+}
+
+menuButton.addEventListener('click', () => {
+  const open = headerLinks.classList.toggle('open');
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+});
+
+headerLinks.addEventListener('click', event => {
+  if (event.target.closest('a')) closeMenu();
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') { closeMenu(); closeArchive(); }
+});
+document.addEventListener('click', event => {
+  if (!event.target.closest('.site-header')) closeMenu();
+});
+byId('top-entry').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+function selectFromHash() {
+  selectEntry(decodeURIComponent(location.hash.slice(1)));
+}
+
+window.addEventListener('popstate', selectFromHash);
+window.addEventListener('hashchange', selectFromHash);
+
+async function initialiseArchive() {
+  try {
+    const results = await Promise.allSettled(entryFiles.map(loadEntry));
+    sorted = results
+      .filter(result => result.status === 'fulfilled')
+      .map(result => result.value)
+      .sort((a, b) => b.date.localeCompare(a.date));
+
+    const errors = results.filter(result => result.status === 'rejected');
+    if (errors.length) {
+      console.warn('Some entries failed:', errors.map(result => result.reason));
+    }
+    if (!sorted.length) {
+      throw new Error('No entries could be loaded. Serve this folder through a web server, not file://.');
+    }
+
+    // Open only the selected entry's year initially; other years can be opened independently.
+    const requestedId = decodeURIComponent(location.hash.slice(1));
+    const initialEntry = sorted.find(entry => entry.id === requestedId) || sorted[0];
+    expandedYears.add(initialEntry.date.slice(0, 4));
+    renderList();
+    selectEntry(initialEntry.id);
+  } catch (error) {
+    byId('article-title').textContent = 'Unable to load entries';
+    byId('article-body').textContent = error.message;
+    console.error(error);
+  }
+}
+
+initialiseArchive();
+</script>
+</body>
+</html>
