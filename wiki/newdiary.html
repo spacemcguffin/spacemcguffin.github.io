@@ -109,6 +109,29 @@
       color:var(--muted);
       text-transform:uppercase;
       }
+
+
+
+
+.diagonal {
+  position: relative;
+  display: inline-block;
+}
+
+.diagonal::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  border-top: 1px solid currentColor;
+  transform: rotate(-10deg);
+}
+
+      
+
+
+      
       .topsearch {
       display:flex;
       width:min(480px,42vw);
@@ -1703,7 +1726,7 @@ html { scroll-padding-top: var(--header-offset); }
 </tr></thead><tbody><tr>
 <td>2245</td>
 <td>1</td>
-<td style="text-align:left"><a>old and new</a></td>
+<td style="text-align:left"><span class="diagonal"><a>old and new</a></span></td>
 <td>Lewis Christian</td>
 <td>1 January 2023</td>
 </tr><tr>
