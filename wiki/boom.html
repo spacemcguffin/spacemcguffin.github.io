@@ -410,7 +410,7 @@ blockquote {
 /* Responsive thumbnail archive */
 .archive-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(max(220px, (100% - 10px) / 3), 1fr));
     gap: 5px;
     margin: 10px 0 10px;
 }
