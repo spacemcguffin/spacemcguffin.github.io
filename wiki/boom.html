@@ -472,6 +472,29 @@ blockquote {
     .archive-card, .archive-card img, .archive-card-title { transition: none; }
 }
 
+
+/* YouTube-style thumbnail duration */
+.archive-thumb {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 9px;
+}
+.archive-duration {
+    position: absolute;
+    right: 7px;
+    bottom: 7px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, .82);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: 0;
+    pointer-events: none;
+}
+
 </style>
 </head>
 <body>
@@ -524,18 +547,36 @@ blockquote {
 <p>A collection of saved videos and thumbnails.</p>
 <div class="archive-grid">
   
-    <a class="archive-card" href="#" target="_blank" rel="noopener noreferrer">
-        <img src="/wiki/img/gtathumb1.png" alt="Video thumbnail" loading="lazy">
+    <a class="archive-card" href="#">
+        <span class="archive-thumb">
+
+            <img src="/wiki/img/gtathumb1.png" alt="Video thumbnail" loading="lazy">
+
+            <span class="archive-duration">38:05</span>
+
+        </span>
         <span class="archive-card-content"><span class="archive-card-title">GTA VI with Lewis</span><span class="archive-card-description">First impressions of Leonida.</span></span>
     </a>
   
     <a class="archive-card" href="#" target="_blank" rel="noopener noreferrer">
-        <img src="/wiki/img/gtathumb2.png" alt="Video thumbnail" loading="lazy">
+        <span class="archive-thumb">
+
+            <img src="/wiki/img/gtathumb2.png" alt="Video thumbnail" loading="lazy">
+
+            <span class="archive-duration">12:34</span>
+
+        </span>
         <span class="archive-card-content"><span class="archive-card-title">GTA VI with Lewis (2)</span><span class="archive-card-description">Back in Leonida.</span></span>
     </a>
   
     <a class="archive-card" href="https://www.youtube.com/watch?v=jfKfPfyJRdk" target="_blank" rel="noopener noreferrer">
-        <img src="https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg" alt="Video thumbnail" loading="lazy">
+        <span class="archive-thumb">
+
+            <img src="https://img.youtube.com/vi/jfKfPfyJRdk/hqdefault.jpg" alt="Video thumbnail" loading="lazy">
+
+            <span class="archive-duration">1:02:15</span>
+
+        </span>
         <span class="archive-card-content"><span class="archive-card-title">Example video three</span><span class="archive-card-description">Add as many cards as you like.</span></span>
     </a>
 </div>
