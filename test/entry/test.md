@@ -3,6 +3,9 @@ Date: 2026-11-22
 
 ---
 *2:02pm*. When I woke up, Olli43 was still streaming. I watched til the end, when he called it a day after 27 hours. Just after last night’s entry, I also tuned into watch NerdCubed Dan play the game for a little while. So fun to see him also just dicking around for a bit, to the side of the main campaign. I like that the game has the entire map unlocked from the start – there’s a freedom to the game from the outset, but then progressing through missions unlocks more and more. It’s a good balance.
+
 On a separate note – the other day I decided to trawl through the Wayback Machine archive of my old Twitter. I patiently clicked through individual links and managed to recover some tweets from 2017, 2018, 2019, 2020 and a couple from more recent years. I discarded a few, but spliced the rest into a 2017-2020 diary. Obviously it’s a retroactive diary, and entries are mostly pretty short… but I’m weighing up what to do with it. Do I keep it as its own separate thing? Do I add my ‘Wilderness Years’ diary entries into it (ones I wrote earlier this year, reflecting back)? Do I build a 2010s-era diary using a combination of all of the aforementioned, and maybe even chuck any other stuff in from that time (I can access old *Doctor Who* reviews too, for example)?
+
 I uncovered a lot before, but sort of ignored it all. I don’t have to be precious. Some stuff can remain in the past. But now I’ve found more than just some old reviews, is it worth building a bit of an archive so I have something to reflect my 2010s online? 
+
 I’ve also got some tweets from the 2020s, which I need to go through at some point and decide whether or not to splice them into my 2021+ diaries, or discard them, or what. Hmm.
