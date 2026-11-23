@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Lewis — Wiki</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+:root {
+    --bg: #fff;
+    --text: #202122;
+    --muted: #54595d;
+    --border: #a2a9b1;
+    --line: #c8ccd1;
+    --link: #2855b1;
+    --subtle: #f8f9fa;
+    --head: #eaecf0;
+    --article-width: 960px;
+}
+* {
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 82px;
+}
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.7 "Inter",Arial,sans-serif;
+}
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+button {
+    font: inherit;
+    cursor: pointer;
+}
+header {
+    height: 62px;
+    display: flex;
+    align-items: center;
+    padding: 0 clamp(18px,4vw,64px);
+    border-bottom: 1px solid #eaecf0;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: #fff;
+}
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text);
+}
+.brand:hover {
+    text-decoration: none;
+}
+.mark {
+    width: 33px;
+    height: 33px;
+    border-radius: 100%;
+    display: grid;
+    place-items: center;
+    background: #293f67;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+}
+.brand strong {
+    color: #293f67;
+    display: block;
+    font: italic 500 16px / 1.1 "Fraunces", serif;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+}
+.brand small {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+.header-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: 42px;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.header-links a {
+    color: var(--text);
+}
+.header-links a:hover {
+    color: var(--link);
+}
+.menu-toggle {
+    display: none;
+}
+.infobox {
+    float: right;
+    clear: right;
+    width: 300px;
+    max-width: 42%;
+    margin: 4px 0 18px 24px;
+    border: 1px solid var(--border);
+    background: var(--subtle);
+    padding: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.infobox-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 5px 5px;
+    background: var(--head);
+}
+.infobox-figure {
+    margin: 0px;
+    text-align: center;
+}
+.infobox-image {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    color: var(--muted);
+}
+.infobox figcaption {
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.infobox table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.infobox th,.infobox td {
+    border-top: 1px solid var(--line);
+    padding: 6px 7px;
+    text-align: left;
+    vertical-align: top;
+}
+.infobox th {
+    width: 40%;
+    font-weight: 600;
+}
+.shell {
+    max-width: 1660px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: minmax(0,1fr);
+    gap: 42px;
+    padding: 25px clamp(18px,4vw,60px) 80px;
+}
+
+h1 {
+    font-family: "Fraunces", serif;
+    font-size: 30px;
+    font-weight: 600;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    line-height: 1.5;
+    margin: 0 0 14px;
+    border-bottom: 1px solid var(--border);
+}
+h2 {
+    font-family: "Fraunces",serif;
+    font-size: 25px;
+    font-weight: 500;
+    font-style: italic;
+    font-variation-settings: "SOFT" 100,"WONK" 1;
+    line-height: 1.25;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 6px;
+    margin: 28px 0 12px;
+}
+h3 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 22px 0 8px;
+}
+h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 18px 0 7px;
+}
+h2,h3,h4,section {
+    scroll-margin-top: 0;
+}
+p {
+    margin: 8px 0 13px;
+}
+main ul,main ol {
+    padding-left: 26px;
+    margin: 8px 0 16px;
+}
+main li {
+    margin: 4px 0;
+}
+.lead {
+    margin-bottom: 22px;
+}
+blockquote {
+    border-left: 3px solid var(--line);
+    padding: 2px 0 2px 16px;
+    margin: 18px 0;
+    color: var(--muted);
+}
+.footer {
+    border-top: 1px solid var(--line);
+    margin-top: 48px;
+    padding-top: 15px;
+    color: var(--muted);
+    font-size: 13px;
+}
+@media (max-width:1150px) {
+    .shell {
+        grid-template-columns: minmax(0,1fr);
+        gap: 28px;
+    }
+}
+@media (max-width:760px) {
+    html {
+        scroll-padding-top: 70px;
+    }
+    header {
+        height: 62px;
+        padding: 0 14px;
+    }
+    .brand strong {
+        font-size: 17px;
+    }
+    .brand small {
+        font-size: 9px;
+    }
+    .mark {
+        width: 34px;
+        height: 34px;
+        font-size: 16px;
+    }
+    .brand {
+        flex-shrink: 0;
+        min-width: 0;
+        gap: 8px;
+    }
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--text);
+        border-radius: 4px;
+    }
+    .menu-toggle svg {
+        width: 22px;
+        height: 22px;
+    }
+    .header-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 14px;
+        left: 14px;
+        margin: 0;
+        padding: 8px 0;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 5px 14px rgba(0,0,0,.09);
+        font-size: 14px;
+        white-space: normal;
+    }
+    .header-links.open {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+    .header-links a {
+        display: block;
+        padding: 10px 16px;
+    }
+    .header-links a:hover {
+        background: var(--subtle);
+    }
+    .shell {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 24px 15px 55px;
+    }
+    main {
+        display: contents;
+    }
+    .article-intro {
+        order: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .article-intro h1 {
+        order: 0;
+    }
+    .article-intro p {
+        order: 1;
+    }
+    .article-intro .infobox {
+        order: 2;
+        float: none;
+        width: 100%;
+        max-width: 100%;
+        margin: 10px 0 22px;
+    }
+
+    .article-body {
+        order: 3;
+    }
+    .footer {
+        order: 4;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h2,h3,h4,section {
+        scroll-margin-top: 0;
+    }
+}
+@media print {
+    .infobox {
+        float: right;
+    }
+    header,.sidebar {
+        display: none !important;
+    }
+    .shell {
+        display: block;
+        padding: 0;
+    }
+    main {
+        display: block;
+    }
+}
+  
+
+/* Responsive thumbnail archive */
+.archive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    margin: 10px 0 10px;
+}
+.archive-card {
+    display: block;
+    min-width: 0;
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text);
+    text-decoration: none;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.archive-card:hover, .archive-card:focus-visible {
+    background: var(--subtle);
+    border-color: var(--line);
+    text-decoration: none;
+}
+.archive-card:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+.archive-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 9px;
+    background: var(--subtle);
+    transition: filter .2s ease;
+}
+.archive-card:hover img { filter: brightness(.94); }
+.archive-card-content { display: block; padding: 11px 3px 5px; }
+.archive-card-title {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -.015em;
+    line-height: 1.4;
+    color: var(--text);
+    transition: color .2s ease;
+}
+.archive-card:hover .archive-card-title { color: var(--link); }
+.archive-card-description {
+    display: block;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--muted);
+    font-weight: 500;
+}
+@media (max-width: 520px) {
+    .archive-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .archive-card { padding: 6px; border-radius: 10px; }
+    .archive-card-content { padding: 9px 2px 4px; }
+    .archive-card-title { font-size: 16px; }
+}
+@media (max-width: 360px) {
+    .archive-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .archive-card, .archive-card img, .archive-card-title { transition: none; }
+}
+
+
+/* YouTube-style thumbnail duration */
+.archive-thumb {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 9px;
+}
+.archive-duration {
+    position: absolute;
+    right: 7px;
+    bottom: 7px;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, .82);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: 0;
+    pointer-events: none;
+}
+
+
+.archive-streamed { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+
+/* Archive sorting */
+.archive-toolbar { display: flex; align-items: center; justify-content: flex-start; gap: 10px; margin: 12px 5px 14px; font-size: 13px; color: var(--muted); }
+.archive-toolbar select { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 7px; padding: 7px 30px 7px 10px; cursor: pointer; }
+.archive-toolbar select:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; }
+@media (max-width: 520px) { .archive-toolbar { justify-content: flex-start; } }
+</style>
+</head>
+<body>
+<header>
+<a class="brand" href="#top">
+<span class="mark">LC</span>
+<span><strong>Wiki</strong><small>Article archive</small></span>
+</a>
+<nav aria-label="Main navigation" class="header-links" id="header-links">
+<a href="#">Home</a>
+<a href="#">Articles</a>
+<a href="#">Archive</a>
+<a href="#">About</a>
+</nav>
+<button aria-controls="header-links" aria-expanded="false" aria-label="Open navigation menu" class="menu-toggle" id="menu-toggle" type="button">
+<svg aria-hidden="true" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+</button>
+</header>
+<div class="shell" id="top">
+<main>
+<div class="article-intro"><h1>Lewis Christian</h1></div>
+  
+<div class="article-body">
+
+<!-- Thumbnail archive: set data-streamed (YYYY-MM-DD); add data-type="posted" for podcasts. Other cards default to "Streamed". -->
+<section id="video-archive">
+<p>A collection of saved videos and thumbnails.</p>
+<div class="archive-toolbar"><label for="archive-sort">Sort videos</label><select id="archive-sort" aria-label="Sort videos"><option value="newest">Newest to oldest</option><option value="oldest">Oldest to newest</option></select></div>
+<div class="archive-grid" id="archive-grid">
+
+
+    <a class="archive-card" data-streamed="2026-08-12" href="#">
+        <span class="archive-thumb">
+            <img src="/wiki/img/gtathumb.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">42:27</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">Streaming Again</span>
+          <span class="archive-card-description">Causing chaos in GTA V, and yapping.</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+  
+  
+    <a class="archive-card" data-streamed="2026-08-26" href="#">
+        <span class="archive-thumb">
+            <img src="/wiki/img/gtavcthumb.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">1:08:27</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">Revisiting Vice City</span>
+          <span class="archive-card-description">I poke my head out of the gutter for one freakin' second...</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+
+
+    <a class="archive-card" data-streamed="2026-09-09" href="#">
+        <span class="archive-thumb">
+            <img src="/wiki/img/gtathumb1.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">38:05</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">GTA VI with Lewis</span>
+          <span class="archive-card-description">First impressions of Leonida.</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+  
+    
+
+    
+  
+    <a class="archive-card" data-streamed="2026-09-24" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="archive-thumb">
+            <img src="/wiki/img/gtathumb2.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">12:34</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">GTA VI with Lewis (2)</span>
+          <span class="archive-card-description">Back in Leonida.</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+  
+  
+    <a class="archive-card" data-streamed="2026-10-08" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="archive-thumb">
+            <img src="/wiki/img/gtathumb3.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">1:08:20</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">Lewis in Leonida (GTA VI)</span>
+          <span class="archive-card-description">Exploring the map.</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+
+  
+    <a class="archive-card" data-streamed="2026-10-23" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="archive-thumb">
+            <img src="/wiki/img/gta6.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">1:02:15</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">Lewis in Leonida (GTA VI)</span>
+          <span class="archive-card-description">Can we get a six-star wanted level?</span><span class="archive-streamed" hidden></span></span>
+    </a>
+  
+
+
+    <a class="archive-card" data-streamed="2026-11-04" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="archive-thumb">
+            <img src="/wiki/img/default.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">39:02</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">Just Chatting</span>
+          <span class="archive-card-description">Video archive</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+
+    <a class="archive-card" data-streamed="2026-11-14" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="archive-thumb">
+            <img src="/wiki/img/dwchat1.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">39:02</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">Just Chatting</span>
+          <span class="archive-card-description">Video archive</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+
+    <a class="archive-card" data-streamed="2026-11-20" href="#" target="_blank" rel="noopener noreferrer">
+        <span class="archive-thumb">
+            <img src="/wiki/img/dwchat2.png" alt="Video thumbnail" loading="lazy">
+            <span class="archive-duration">39:02</span>
+        </span>
+        <span class="archive-card-content"><span class="archive-card-title">Just Chatting</span>
+          <span class="archive-card-description">Video archive</span><span class="archive-streamed" hidden></span></span>
+    </a>
+
+
+
+
+
+
+
+
+  
+</div>
+</section>
+
+
+
+  
+</div>
+<footer class="footer"><p>Personal profile article · Information drawn from lewis.lc</p></footer>
+</main>
+</div>
+<script>
+  const menuButton = document.getElementById('menu-toggle');
+  const headerLinks = document.getElementById('header-links');
+  function closeMenu() {
+    headerLinks.classList.remove('open');
+    menuButton.setAttribute('aria-expanded', 'false');
+    menuButton.setAttribute('aria-label', 'Open navigation menu');
+  }
+  menuButton.addEventListener('click', () => {
+    const opened = headerLinks.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(opened));
+    menuButton.setAttribute('aria-label', opened ? 'Close navigation menu' : 'Open navigation menu');
+  });
+  headerLinks.addEventListener('click', event => {
+    if (event.target.closest('a')) closeMenu();
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+  document.addEventListener('click', event => {
+    if (!event.target.closest('header')) closeMenu();
+  });
+
+  // Set data-streamed="YYYY-MM-DD" on each card. Existing dates are fictional examples.
+  // Dates are optional; cards without a valid date show no streamed label.
+  function updateStreamedLabels() {
+    const today = new Date();
+    const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+    document.querySelectorAll('.archive-card').forEach(card => {
+      const raw = card.dataset.streamed;
+      const label = card.querySelector('.archive-streamed');
+      if (!label || !/^\d{4}-\d{2}-\d{2}$/.test(raw || '')) return;
+      const [year, month, day] = raw.split('-').map(Number);
+      const dateUTC = Date.UTC(year, month - 1, day);
+      const date = new Date(dateUTC);
+      if (date.getUTCFullYear() !== year || date.getUTCMonth() !== month - 1 || date.getUTCDate() !== day) return;
+      const days = Math.floor((todayUTC - dateUTC) / 86400000);
+      const rtf = new Intl.RelativeTimeFormat('en-GB', { numeric: 'auto' });
+      let relative;
+      if (Math.abs(days) < 7) relative = rtf.format(-days, 'day');
+      else if (Math.abs(days) < 30) relative = rtf.format(-Math.trunc(days / 7), 'week');
+      else if (Math.abs(days) < 365) relative = rtf.format(-Math.trunc(days / 30), 'month');
+      else relative = rtf.format(-Math.trunc(days / 365), 'year');
+      const action = card.dataset.type === 'posted' ? 'Posted' : 'Streamed';
+      label.textContent = action + ' ' + relative;
+      label.title = new Intl.DateTimeFormat('en-GB', {day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(date);
+      label.setAttribute('aria-label', action + ' ' + label.title);
+      label.hidden = false;
+    });
+  }
+  updateStreamedLabels();
+
+  // Sort chronologically using the stream date; no separate number is required.
+  const archiveGrid = document.getElementById('archive-grid');
+  const archiveSort = document.getElementById('archive-sort');
+  if (archiveGrid && archiveSort) {
+    const cards = [...archiveGrid.querySelectorAll('.archive-card')];
+    function sortArchive() {
+      const direction = archiveSort.value === 'oldest' ? 1 : -1;
+      [...cards].sort((a, b) => direction * (a.dataset.streamed.localeCompare(b.dataset.streamed)))
+        .forEach(card => archiveGrid.appendChild(card));
+    }
+    archiveSort.addEventListener('change', sortArchive);
+    sortArchive(); // Default: newest first.
+  }
+</script>
+</body>
+</html>
