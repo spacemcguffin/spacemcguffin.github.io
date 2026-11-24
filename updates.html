@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Updates 📣</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--bg:#f9f9f9;--bubble:#eff0f1;--ink:#20242b;--muted:#606976;--line:#dfe2e5}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:400 18px/1.5 'DM Sans',sans-serif}main{max-width:800px;margin:auto;padding:20px 36px 48px}h1{font:400 44px/1.2 'Libre Baskerville',Georgia,serif;margin:0 0 32px;letter-spacing:-1.8px}.intro{font-size:20px;color:var(--muted);margin:0 0 24px}.post{margin:0 0 25px;scroll-margin-top:20px}.bubble{background:var(--bubble);border-radius:20px 20px 20px 4px;padding:15px 20px;overflow-wrap:anywhere}.bubble p{margin:0 0 12px;white-space:pre-wrap}.bubble p:last-child{margin-bottom:0}.bubble img{display:block;width:100%;height:auto;border-radius:12px;margin-top:14px}.stamp{display:inline-block;margin:14px 20px 0;color:var(--muted);font-size:13px;text-decoration:none}.stamp:hover{text-decoration:underline}.pagination{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:30px}.pagination a{border:1px solid var(--line);border-radius:6px;padding:8px 11px;text-decoration:none;color:var(--ink);font-size:14px}.pagination a:hover{background:var(--bubble)}.pagination a[aria-current]{background:var(--ink);color:white;border-color:var(--ink)}footer{text-align:center;margin:135px 0 0}.back{display:inline-flex;align-items:center;gap:10px;background:#eeddbf;border:1.5px solid #8b806d;border-radius:10px;padding:9px 15px;box-shadow:0 5px 0 #bbae97,0 7px 0 #d0ceca,inset 0 1px 0 #fff;color:#20242b;text-decoration:none;font-size:14px}.back span{background:#f8f0e2;border-radius:5px;padding:0 5px;font-size:20px;line-height:1.2}.back em{font-style:normal;color:#606976}.back:hover{transform:translateY(1px)}a:focus-visible{outline:2px solid #5279a5;outline-offset:4px}@media(max-width:600px){main{padding:22px 16px 36px}h1{font-size:36px;margin-bottom:24px}.intro{font-size:18px}.bubble{padding:14px 16px}body{font-size:17px}.stamp{margin-left:16px}footer{margin-top:95px}.back{gap:7px;padding:9px 10px;font-size:12px}} 
+ .bubble a{color:inherit;text-decoration:underline;text-underline-offset:3px}.bubble ul,.bubble ol{padding-left:1.5em;margin:0 0 12px}.bubble blockquote{margin:12px 0;padding-left:14px;border-left:3px solid var(--muted)}.bubble pre{overflow:auto;white-space:pre-wrap}.bubble code{font-size:.9em}.bubble > :last-child{margin-bottom:0}
+</style></head><body><main id="top"><header><h1>Updates 📣</h1><p class="intro">Essentially my personal Twitter.</p></header><section id="feed" aria-label="Updates"></section><nav class="pagination" id="pagination" aria-label="Pages"></nav><footer><a class="back" href="#top"><span aria-hidden="true">⬆</span><strong>You’ve reached rock bottom.</strong><em>Back up?</em></a></footer></main>
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.7/dist/purify.min.js"></script>
+<script>
+// Add new posts here. Each post needs a unique id, date and text.
+// Optional: image: 'images/photo.jpg', alt: 'Description of photo'
+const posts = [
+{id:'1',date:'2026-11-23T17:00:00',text:'Apparently, one cup of coffee is **never enough**. ☕'},
+{id:'2',date:'2026-11-22T12:00:00',text:'A few things I’m enjoying lately:\n\n– Late-night films\n– Rediscovering old playlists\n– Having a weekend with absolutely no plans.\n\nMore of this, please.'},
+{id:'3',date:'2026-11-21T12:00:00',text:'There’s something quite satisfying about having your *own little corner of the internet*.'},
+{id:'4',date:'2026-11-20T12:00:00',text:'A quiet afternoon and a good soundtrack.'},
+{id:'5',date:'2026-11-19T12:00:00',text:'I really should start making a list of everything I want to watch.'},
+{id:'6',date:'2026-11-18T12:00:00',text:'The evenings are getting darker far too quickly.'},
+{id:'7',date:'2026-11-17T12:00:00',text:'Sometimes the best plans are no plans at all.'},
+{id:'8',date:'2026-11-16T12:00:00',text:'A little update from my little corner of the web.'},
+{id:'9',date:'2026-11-15T12:00:00',text:'Finally getting around to organising my bookmarks.'},
+{id:'10',date:'2026-11-14T12:00:00',text:'It’s been a good week for music.'},
+{id:'11',date:'2026-11-13T12:00:00',text:'Trying something new with this website.'},
+{id:'12',date:'2026-11-12T12:00:00',text:'Hello, internet. 👋'}
+];
+const perPage=10, feed=document.querySelector('#feed'), nav=document.querySelector('#pagination');
+posts.sort((a,b)=>new Date(b.date)-new Date(a.date));
+const params=new URLSearchParams(location.search), total=Math.max(1,Math.ceil(posts.length/perPage)), single=params.get('post');
+const page=Math.min(total,Math.max(1,parseInt(params.get('page'),10)||1));
+function relative(date){const d=new Date(date), s=Math.floor((Date.now()-d)/1000);if(s>=0&&s<60)return 'Just now';for(const [unit,n] of [['day',86400],['hour',3600],['minute',60]]){if(s>=n&&s<604800){const v=Math.floor(s/n);return `${v} ${unit}${v===1?'':'s'} ago`;}}return d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});}
+function render(p){const article=document.createElement('article');article.className='post';article.id='post-'+p.id;const bubble=document.createElement('div');bubble.className='bubble';if(window.marked&&window.DOMPurify){bubble.innerHTML=DOMPurify.sanitize(marked.parse(p.text,{breaks:true}));}else{p.text.split(/\n\n/).forEach(t=>{const para=document.createElement('p');para.textContent=t;bubble.append(para)});}if(p.image){const img=document.createElement('img');img.src=p.image;img.alt=p.alt||'';img.loading='lazy';bubble.append(img)}const a=document.createElement('a');a.className='stamp';a.href='?post='+encodeURIComponent(p.id);a.title=new Date(p.date).toLocaleString();const time=document.createElement('time');time.dateTime=p.date;time.textContent=relative(p.date);a.append(time);article.append(bubble,a);feed.append(article)}
+function link(label,href,current=false){const a=document.createElement('a');a.textContent=label;a.href=href;if(current)a.setAttribute('aria-current','page');nav.append(a)}
+if(single){const post=posts.find(p=>p.id===single);if(post)render(post);else feed.textContent='Update not found.';link('← All updates','?page=1')}else{posts.slice((page-1)*perPage,page*perPage).forEach(render);if(page>1)link('← Newer','?page='+(page-1));for(let i=1;i<=total;i++){if(i===1||i===total||Math.abs(i-page)<=1)link(i,'?page='+i,i===page);else if(i===page-2||i===page+2){const dots=document.createElement('span');dots.textContent='…';nav.append(dots)}}if(page<total)link('Older →','?page='+(page+1));}
+</script></body></html>
